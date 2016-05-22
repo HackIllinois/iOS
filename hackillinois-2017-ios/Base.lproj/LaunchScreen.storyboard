@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchimage" translatesAutoresizingMaskIntoConstraints="NO" id="a2f-V0-RiH">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="-20" y="0.0" width="640" height="620"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HackIllinois" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4N-iE-8tP">
                                 <rect key="frame" x="170" y="28" width="261" height="57.5"/>
@@ -28,12 +28,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="a2f-V0-RiH" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" id="CMB-i3-4zG"/>
-                            <constraint firstItem="a2f-V0-RiH" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Dmh-Z6-cZU"/>
+                            <constraint firstItem="a2f-V0-RiH" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" constant="20" id="CMB-i3-4zG"/>
+                            <constraint firstItem="a2f-V0-RiH" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="-20" id="Dmh-Z6-cZU"/>
                             <constraint firstItem="T4N-iE-8tP" firstAttribute="centerX" secondItem="a2f-V0-RiH" secondAttribute="centerX" id="QeO-V6-YcY"/>
-                            <constraint firstAttribute="trailing" secondItem="a2f-V0-RiH" secondAttribute="trailing" id="ScI-Yf-Z5A"/>
+                            <constraint firstAttribute="trailing" secondItem="a2f-V0-RiH" secondAttribute="trailing" constant="-20" id="ScI-Yf-Z5A"/>
                             <constraint firstItem="T4N-iE-8tP" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="8" symbolic="YES" id="eDl-J1-lhH"/>
-                            <constraint firstItem="a2f-V0-RiH" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="ej0-e8-t9A"/>
+                            <constraint firstItem="a2f-V0-RiH" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="-20" id="es2-ET-GwT"/>
                         </constraints>
                     </view>
                 </viewController>

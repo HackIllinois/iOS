@@ -17,7 +17,7 @@ enum UserInputState: UInt8 {
     // Add more for different types of errors / more fields
 }
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
     /* Replace these hexidecimal with RGB equivalents */
     let borderColorHex = 0x2c3e50
     
@@ -76,7 +76,7 @@ class ViewController: UIViewController {
             ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
             presentViewController(ac, animated: true, completion: nil)
         } else {
-            /* Handle Login here! */
+            /* MARK: Handle Login here! */
             let username = UsernameTextField.text!
             let password = PasswordTextField.text!
             
@@ -89,6 +89,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        /* MARK: Set status bar to look better with image */
         
         /* Prettier UI Elements */
         LoginButton.layer.cornerRadius = 5
@@ -104,7 +106,6 @@ class ViewController: UIViewController {
         PasswordTextField.alpha = loginElementAlpha
         PasswordTextField.secureTextEntry = true // Password should be hidden
         
-        print(UsernameTextField.text)
     }
 
     override func didReceiveMemoryWarning() {

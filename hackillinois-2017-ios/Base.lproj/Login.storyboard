@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchimage" translatesAutoresizingMaskIntoConstraints="NO" id="cY8-Hq-78E">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="-20" y="0.0" width="640" height="620"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HackIllinois" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Z3-7e-4ZG">
                                 <rect key="frame" x="170" y="28" width="261" height="57.5"/>
@@ -25,7 +25,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvJ-ec-cHF" customClass="LoginView" customModule="hackillinois_2017_ios" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvJ-ec-cHF">
                                 <rect key="frame" x="180" y="150" width="240" height="300"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mhz-Y5-wCk">
@@ -83,9 +83,9 @@
                             <constraint firstItem="cvJ-ec-cHF" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="QXJ-Xp-c5W"/>
                             <constraint firstItem="2Z3-7e-4ZG" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="Uv0-PG-3wH"/>
                             <constraint firstItem="cvJ-ec-cHF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WYi-c7-JgE"/>
-                            <constraint firstItem="cY8-Hq-78E" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="bvS-ao-hev"/>
-                            <constraint firstItem="cY8-Hq-78E" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="lIE-r0-Cpn"/>
-                            <constraint firstAttribute="trailing" secondItem="cY8-Hq-78E" secondAttribute="trailing" id="lZP-3d-h22"/>
+                            <constraint firstItem="cY8-Hq-78E" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" constant="20" id="bvS-ao-hev"/>
+                            <constraint firstItem="cY8-Hq-78E" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="-20" id="lIE-r0-Cpn"/>
+                            <constraint firstAttribute="trailing" secondItem="cY8-Hq-78E" secondAttribute="trailing" constant="-20" id="lZP-3d-h22"/>
                             <constraint firstItem="cY8-Hq-78E" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="s0g-nz-2mB"/>
                         </constraints>
                     </view>
