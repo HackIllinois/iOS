@@ -91,6 +91,7 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         /* MARK: Set status bar to look better with image */
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
         /* Prettier UI Elements */
         LoginButton.layer.cornerRadius = 5
