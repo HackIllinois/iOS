@@ -35,6 +35,7 @@ xcuserdata
 #
 Pods/
 Podfile.lock
+*.xcworkspace
 
 # Carthage
 #
@@ -53,4 +54,5 @@ Carthage/Build
 fastlane/report.xml
 fastlane/screenshots
 
-*.xcworkspace
+# OS X cache files
+*.DS_Store
