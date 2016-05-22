@@ -6,8 +6,10 @@
 //  Copyright © 2016 Shotaro Ikeda. All rights reserved.
 //
 
+import UIKit
 import XCTest
-@testable import hackillinois_2017_ios
+
+
 
 class hackillinois_2017_iosTests: XCTestCase {
     

@@ -23,12 +23,8 @@ class UIColor_fromRGBHex_fromRGBAHex_Tests: XCTestCase {
         super.tearDown()
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
     func testColorConversionRGB() {
+        /* Measure RGB conversion */
         let color = UIColor.init(red: 44.0 / 255, green: 62.0 / 255, blue: 80.0 / 255, alpha: 1.0)
         let colorRGB = UIColor.fromRGBHex(0x2c3e50)
         
@@ -36,17 +32,10 @@ class UIColor_fromRGBHex_fromRGBAHex_Tests: XCTestCase {
     }
     
     func testColorConversionRGBA() {
+        /* Measure RGBA conversion */
         let color = UIColor.init(red: 44.0 / 255, green: 62.0 / 255, blue: 80.0 / 255, alpha: 1.0)
         let colorRGBA = UIColor.fromRGBAHex(0x2c3e50FF)
         
         XCTAssertTrue(color.isEqual(colorRGBA))
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }
