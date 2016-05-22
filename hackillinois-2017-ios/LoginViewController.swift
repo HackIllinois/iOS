@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
     let borderColorHex = 0x2c3e50
     
     /* Replace these floats with alpha values for elements */
-    let loginElementAlpha: CGFloat = 0.8
+    let loginElementAlpha: CGFloat = 0.9
     
     
     /* Variables */
@@ -47,7 +47,10 @@ class LoginViewController: UIViewController {
             }
         }
     }
-
+    
+    /* scrollView to make text input look much smoother */
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     /* Login View Elements */
     @IBOutlet weak var LoginButton: UIButton!
     @IBOutlet weak var UsernameTextField: UITextField!
@@ -86,6 +89,23 @@ class LoginViewController: UIViewController {
         }
     }
     
+    /* Keyboard Handlers */
+    func keyboardWillAppear(notification: NSNotification) {
+        scrollView.scrollEnabled = true
+        
+        var keyboardFrame:CGRect = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
+        keyboardFrame = self.view.convertRect(keyboardFrame, fromView: nil)
+        
+        self.scrollView.contentInset.bottom = keyboardFrame.size.height
+    }
+    
+    func keyboardWillDisappear(notification: NSNotification) {
+        // Only remove inset when keyboard is shown
+        scrollView.scrollEnabled = false
+        self.scrollView.contentInset = UIEdgeInsetsZero
+    }
+    
+    /* View Controller overrides */
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -98,16 +118,34 @@ class LoginViewController: UIViewController {
         LoginButton.clipsToBounds = true
         LoginButton.alpha = loginElementAlpha
         
-        UsernameTextField.layer.borderWidth = 2.5
+        UsernameTextField.layer.borderWidth = 4
+        UsernameTextField.layer.cornerRadius = 5
         UsernameTextField.layer.borderColor = UIColor.fromRGBHex(borderColorHex).CGColor
+        UsernameTextField.borderStyle = .RoundedRect
         UsernameTextField.alpha = loginElementAlpha
         
-        PasswordTextField.layer.borderWidth = 2.5
+        PasswordTextField.layer.borderWidth = 4
+        PasswordTextField.layer.cornerRadius = 5
         PasswordTextField.layer.borderColor = UIColor.fromRGBHex(borderColorHex).CGColor
+        PasswordTextField.borderStyle = .RoundedRect
         PasswordTextField.alpha = loginElementAlpha
         PasswordTextField.secureTextEntry = true // Password should be hidden
         
+        // Add slight padding to the left to make text less awkward
+        let usernamePadding = UIView(frame: CGRectMake(0, 0, 1, PasswordTextField.frame.height))
+        UsernameTextField.leftView = usernamePadding
+        UsernameTextField.leftViewMode = .Always
+        
+        let passwordPadding = UIView(frame: CGRectMake(0, 0, 1, PasswordTextField.frame.height))
+        PasswordTextField.leftView = passwordPadding
+        PasswordTextField.leftViewMode = .Always
+        
+        /* Set Keyboard actions */
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillAppear), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillDisappear), name: UIKeyboardWillHideNotification, object: nil)
+        
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
