@@ -23,6 +23,11 @@
 		E2AC3F881CF21C3600C4F21F /* UIColor+fromRGBHex+fromRGBAHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F851CF21C3600C4F21F /* UIColor+fromRGBHex+fromRGBAHex.swift */; };
 		E2AC3F8E1CF21F3900C4F21F /* UIColor+fromRGBHex+fromRGBAHex_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F8D1CF21F3900C4F21F /* UIColor+fromRGBHex+fromRGBAHex_Tests.swift */; };
 		E2BCA55B1CF36187006AAA8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2BCA55A1CF36187006AAA8B /* Main.storyboard */; };
+		E2BCA5621CF36CDA006AAA8B /* FeedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5611CF36CDA006AAA8B /* FeedCollectionViewController.swift */; };
+		E2BCA5641CF37017006AAA8B /* FeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5631CF37017006AAA8B /* FeedCollectionViewCell.swift */; };
+		E2BCA5661CF372DD006AAA8B /* MainNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5651CF372DD006AAA8B /* MainNavigationViewController.swift */; };
+		E2BCA5681CF37363006AAA8B /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5671CF37363006AAA8B /* MainTabBarViewController.swift */; };
+		E2BCA56A1CF373A1006AAA8B /* MainConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5691CF373A1006AAA8B /* MainConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +73,11 @@
 		E2AC3F851CF21C3600C4F21F /* UIColor+fromRGBHex+fromRGBAHex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+fromRGBHex+fromRGBAHex.swift"; sourceTree = "<group>"; };
 		E2AC3F8D1CF21F3900C4F21F /* UIColor+fromRGBHex+fromRGBAHex_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+fromRGBHex+fromRGBAHex_Tests.swift"; sourceTree = "<group>"; };
 		E2BCA55A1CF36187006AAA8B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		E2BCA5611CF36CDA006AAA8B /* FeedCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewController.swift; sourceTree = "<group>"; };
+		E2BCA5631CF37017006AAA8B /* FeedCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewCell.swift; sourceTree = "<group>"; };
+		E2BCA5651CF372DD006AAA8B /* MainNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationViewController.swift; sourceTree = "<group>"; };
+		E2BCA5671CF37363006AAA8B /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
+		E2BCA5691CF373A1006AAA8B /* MainConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainConstants.swift; sourceTree = "<group>"; };
 		E75AFF8F2A9393CCA4EBF188 /* Pods_hackillinois_2017_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -198,9 +208,22 @@
 		E2BCA5591CF36167006AAA8B /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				E2BCA5691CF373A1006AAA8B /* MainConstants.swift */,
 				E2BCA55A1CF36187006AAA8B /* Main.storyboard */,
+				E2BCA5651CF372DD006AAA8B /* MainNavigationViewController.swift */,
+				E2BCA5671CF37363006AAA8B /* MainTabBarViewController.swift */,
+				E2BCA5601CF36A15006AAA8B /* Feed */,
 			);
 			name = Main;
+			sourceTree = "<group>";
+		};
+		E2BCA5601CF36A15006AAA8B /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				E2BCA5611CF36CDA006AAA8B /* FeedCollectionViewController.swift */,
+				E2BCA5631CF37017006AAA8B /* FeedCollectionViewCell.swift */,
+			);
+			name = Feed;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -469,7 +492,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2BCA56A1CF373A1006AAA8B /* MainConstants.swift in Sources */,
+				E2BCA5661CF372DD006AAA8B /* MainNavigationViewController.swift in Sources */,
+				E2BCA5681CF37363006AAA8B /* MainTabBarViewController.swift in Sources */,
 				E20465D31CF1FAF50054654E /* hackillinois_2017_ios.xcdatamodeld in Sources */,
+				E2BCA5621CF36CDA006AAA8B /* FeedCollectionViewController.swift in Sources */,
+				E2BCA5641CF37017006AAA8B /* FeedCollectionViewCell.swift in Sources */,
 				E20465CD1CF1FAF50054654E /* LoginViewController.swift in Sources */,
 				E2AC3F861CF21C3600C4F21F /* UIColor+fromRGBHex+fromRGBAHex.swift in Sources */,
 				E20465CB1CF1FAF50054654E /* AppDelegate.swift in Sources */,

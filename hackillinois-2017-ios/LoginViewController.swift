@@ -112,12 +112,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             // TODO: Connect to API
             sleep(1) // simulate network response time
             
-            let success = false // find if the login was successful or not
+            let success = true // find if the login was successful or not
             
             dispatch_async(dispatch_get_main_queue()) {
                 if success {
                     // Login was successful
-                    
+                    let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let mainViewController = mainStoryboard.instantiateInitialViewController()
+                    self.presentViewController(mainViewController!, animated: true, completion: nil)
                 } else {
                     // Login was not successful
                     
