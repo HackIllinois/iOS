@@ -8,22 +8,46 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "feedCell"
 
-class FeedCollectionViewController: UICollectionViewController {
-
-    @IBOutlet weak var feedCollection: UICollectionView!
+class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    @IBOutlet weak var feedCollection: UICollectionView!
+    var refreshControl: UIRefreshControl!
+    
+    // Mark - FeedCollectionViewController
+    
+    /* Refresh the feed... */
+    func refresh() {
+        print("refresh")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Register cell classes
-        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
         // Do any additional setup after loading the view.
+        
+        
+        // Layout the view to look more natural
+        feedCollection.contentInset = UIEdgeInsets(top: -20, left: 0, bottom: 20, right: 0)
+        
+        // Set up refresh indicator
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh",
+                                                            attributes: [NSForegroundColorAttributeName: UIColor.fromRGBHex(mainTintColor)])
+        // Set refresh control look
+        refreshControl.tintColor = UIColor.fromRGBHex(mainTintColor)
+        refreshControl.bounds = CGRect(
+            x: refreshControl.bounds.origin.x,
+            y: 50,
+            width: refreshControl.bounds.size.width,
+            height: refreshControl.bounds.size.height)
+        
+        refreshControl.addTarget(self, action: #selector(refresh), forControlEvents: UIControlEvents.ValueChanged)
+        feedCollection.addSubview(refreshControl)
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,23 +66,12 @@ class FeedCollectionViewController: UICollectionViewController {
     */
 
     // MARK: UICollectionViewDataSource
-
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
     }
-
-
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 1
-    }
-
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
     
-        // Configure the cell
-    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("feedCell", forIndexPath: indexPath)
         return cell
     }
 
