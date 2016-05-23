@@ -83,9 +83,59 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             let username = UsernameTextField.text!
             let password = PasswordTextField.text!
             
+            login(username: username, password: password)
+        }
+    }
+    
+    /* Handle Login */
+    func login(username username: String, password: String) {
+        // Hide text
+        LoginButton.setTitle("", forState: .Normal)
+        
+        // create activity indicator to show
+        let loginActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .White)
+        // Set the indicator to be the center of the button
+        loginActivityIndicator.frame = CGRect(
+            x: LoginButton.frame.width / 2 - LoginButton.frame.height / 2,
+            y: 0,
+            width: LoginButton.frame.height,
+            height: LoginButton.frame.height)
+        loginActivityIndicator.startAnimating()
+        LoginButton.addSubview(loginActivityIndicator)
+        
+        // disable UI elements while logging in
+        LoginButton.userInteractionEnabled = false
+        UsernameTextField.userInteractionEnabled = false
+        PasswordTextField.userInteractionEnabled = false
+        
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
             // TODO: Connect to API
+            sleep(1) // simulate network response time
             
+            let success = false // find if the login was successful or not
             
+            dispatch_async(dispatch_get_main_queue()) {
+                if success {
+                    // Login was successful
+                    
+                } else {
+                    // Login was not successful
+                    
+                    // Re-enable user interaction
+                    self.LoginButton.userInteractionEnabled = true
+                    self.UsernameTextField.userInteractionEnabled = true
+                    self.PasswordTextField.userInteractionEnabled = true
+                    // Remove activity indicator
+                    loginActivityIndicator.stopAnimating()
+                    loginActivityIndicator.removeFromSuperview()
+                    // Revert Login button title
+                    self.LoginButton.setTitle("Login", forState: .Normal)
+                    
+                    let loginFailureAlert = UIAlertController(title: "Login Failed", message: "Bad Username / Password", preferredStyle: .Alert)
+                    loginFailureAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    self.presentViewController(loginFailureAlert, animated: true, completion: nil)
+                }
+            }
         }
     }
     
@@ -123,9 +173,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         } else {
             // There is no next text field
             textField.resignFirstResponder()
+            LoginButton.sendActionsForControlEvents(.TouchUpInside) // Fake a button touch as a way to login
         }
         
         return false // Don't insert newlines in textfield
+    }
+    
+    func dismissKeyboard() {
+        // force textfield to resign first responder
+        view.endEditing(true)
+        // Can configure this in keyboardWillDisappear()
     }
     
     /* View Controller overrides */
@@ -167,13 +224,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillAppear), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillDisappear), name: UIKeyboardWillHideNotification, object: nil)
         
+        // Create gesture to recognize when the user taps outside of a textfield to close the keyboard
+        let outsideTapped = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(outsideTapped)
+        
         /* Set the TextField's delegates to the view controller, required to configure behavior of "next" and "go" keys */
         UsernameTextField.delegate = self
         PasswordTextField.delegate = self
     }
     
     deinit {
-        // Destroy all observers 
+        // Destroy all observers
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
