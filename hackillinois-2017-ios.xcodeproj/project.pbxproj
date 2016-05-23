@@ -22,6 +22,7 @@
 		E2AC3F871CF21C3600C4F21F /* UIColor+fromRGBHex+fromRGBAHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F851CF21C3600C4F21F /* UIColor+fromRGBHex+fromRGBAHex.swift */; };
 		E2AC3F881CF21C3600C4F21F /* UIColor+fromRGBHex+fromRGBAHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F851CF21C3600C4F21F /* UIColor+fromRGBHex+fromRGBAHex.swift */; };
 		E2AC3F8E1CF21F3900C4F21F /* UIColor+fromRGBHex+fromRGBAHex_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F8D1CF21F3900C4F21F /* UIColor+fromRGBHex+fromRGBAHex_Tests.swift */; };
+		E2BCA55B1CF36187006AAA8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2BCA55A1CF36187006AAA8B /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		E20465EF1CF1FAF50054654E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2AC3F851CF21C3600C4F21F /* UIColor+fromRGBHex+fromRGBAHex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+fromRGBHex+fromRGBAHex.swift"; sourceTree = "<group>"; };
 		E2AC3F8D1CF21F3900C4F21F /* UIColor+fromRGBHex+fromRGBAHex_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+fromRGBHex+fromRGBAHex_Tests.swift"; sourceTree = "<group>"; };
+		E2BCA55A1CF36187006AAA8B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E75AFF8F2A9393CCA4EBF188 /* Pods_hackillinois_2017_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -147,6 +149,7 @@
 			children = (
 				E2AC3F841CF21BBE00C4F21F /* LanguageExtensions */,
 				E20465CA1CF1FAF50054654E /* AppDelegate.swift */,
+				E2BCA5591CF36167006AAA8B /* Main */,
 				E2AC3F831CF20E4C00C4F21F /* Login */,
 				E20465D41CF1FAF50054654E /* Assets.xcassets */,
 				E20465D61CF1FAF50054654E /* LaunchScreen.storyboard */,
@@ -190,6 +193,14 @@
 				E2AC3F851CF21C3600C4F21F /* UIColor+fromRGBHex+fromRGBAHex.swift */,
 			);
 			name = LanguageExtensions;
+			sourceTree = "<group>";
+		};
+		E2BCA5591CF36167006AAA8B /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				E2BCA55A1CF36187006AAA8B /* Main.storyboard */,
+			);
+			name = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,6 +321,7 @@
 				E20465D81CF1FAF50054654E /* LaunchScreen.storyboard in Resources */,
 				E20465D51CF1FAF50054654E /* Assets.xcassets in Resources */,
 				E20465D01CF1FAF50054654E /* Login.storyboard in Resources */,
+				E2BCA55B1CF36187006AAA8B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
