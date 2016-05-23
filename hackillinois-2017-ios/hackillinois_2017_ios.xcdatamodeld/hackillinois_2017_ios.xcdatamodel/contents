@@ -3,11 +3,12 @@
     <entity name="Feed" representedClassName=".Feed" syncable="YES">
         <attribute name="message" attributeType="String" syncable="YES"/>
         <attribute name="time" attributeType="Date" syncable="YES"/>
-        <relationship name="location" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Location" syncable="YES"/>
+        <relationship name="location" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" syncable="YES"/>
     </entity>
     <entity name="Location" representedClassName=".Location" syncable="YES">
         <attribute name="latitude" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName=".User" syncable="YES">
         <attribute name="barcode" attributeType="String" syncable="YES"/>
@@ -17,6 +18,6 @@
     <elements>
         <element name="Feed" positionX="-63" positionY="-18" width="128" height="90"/>
         <element name="User" positionX="-54" positionY="-9" width="128" height="90"/>
-        <element name="Location" positionX="-27" positionY="36" width="128" height="75"/>
+        <element name="Location" positionX="-27" positionY="36" width="128" height="90"/>
     </elements>
 </model>

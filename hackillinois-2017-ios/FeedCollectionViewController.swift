@@ -21,16 +21,58 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
     var sampleData: [Feed] = []
     
     func initializeSample() {
-        let siebel_lat = 40.1137074
-        let siebel_long = -88.2264893
+        // Temporary Locations
+        let siebel = Location()
+        siebel.name = "siebel"
+        siebel.latitude = 40.1137074
+        siebel.longitude = -88.2264893
+        
+        let eceb = Location()
+        eceb.name = "eceb"
+        eceb.latitude = 40.114828
+        eceb.longitude = -88.228049
+        
+        let union = Location()
+        union.name = "union"
+        union.latitude = 40.109395
+        union.longitude = -88.227181
+        
+        let hacking_start = Feed()
+        hacking_start.message = "Hacking has begun!"
+        hacking_start.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464042073))
+        hacking_start.location = nil
         
         let lunch = Feed()
-        lunch.latitude = siebel_lat
-        lunch.longitude = siebel_long
         lunch.message = "Lunch is served! Please come to ECEB or Siebel for Potbelly's Sandwiches!"
         lunch.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464038763))
+        lunch.location = NSSet(array: [siebel, eceb])
+        
+        let cluehunt_start = Feed()
+        cluehunt_start.message = "Cluehunt has begun!"
+        cluehunt_start.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464040073))
+        cluehunt_start.location = NSSet(array: [siebel, eceb])
         
         let dinner = Feed()
+        dinner.message = "Dinner is going to be served in 10 minutes!"
+        dinner.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464042073))
+        dinner.location = NSSet(array: [siebel, eceb])
+        
+        let career_fair = Feed()
+        career_fair.message = "Career fair is starting at the Union!"
+        career_fair.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464042100))
+        career_fair.location = NSSet(object: union)
+        
+        let dummy = Feed()
+        dummy.message = "Replace me with real things"
+        dummy.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464041800))
+        dummy.location = NSSet(array: [siebel, eceb, union])
+        
+        sampleData = [hacking_start, lunch, cluehunt_start, dinner, career_fair,
+                      dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy]
+        
+        sampleData.sortInPlace({ (feed1, feed2) -> Bool in
+            return feed1.time.compare(feed2.time).rawValue == 0
+        })
     }
     
     // Mark - FeedCollectionViewController
