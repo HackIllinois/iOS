@@ -1,5 +1,5 @@
 //
-//  UIColor+fromRGBHex+fromRGBAHex_Tests1.swift
+//  UIColor+fromHexTests.swift
 //  hackillinois-2017-ios
 //
 //  Created by Shotaro Ikeda on 5/22/16.
