@@ -28,6 +28,10 @@
 		E2BCA5661CF372DD006AAA8B /* MainNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5651CF372DD006AAA8B /* MainNavigationViewController.swift */; };
 		E2BCA5681CF37363006AAA8B /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5671CF37363006AAA8B /* MainTabBarViewController.swift */; };
 		E2BCA56A1CF373A1006AAA8B /* MainConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5691CF373A1006AAA8B /* MainConstants.swift */; };
+		E2BCA5721CF3AA1A006AAA8B /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA56E1CF3AA1A006AAA8B /* Feed+CoreDataProperties.swift */; };
+		E2BCA5731CF3AA1A006AAA8B /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA56F1CF3AA1A006AAA8B /* Feed.swift */; };
+		E2BCA5741CF3AA1A006AAA8B /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5701CF3AA1A006AAA8B /* User+CoreDataProperties.swift */; };
+		E2BCA5751CF3AA1A006AAA8B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5711CF3AA1A006AAA8B /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +82,10 @@
 		E2BCA5651CF372DD006AAA8B /* MainNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationViewController.swift; sourceTree = "<group>"; };
 		E2BCA5671CF37363006AAA8B /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		E2BCA5691CF373A1006AAA8B /* MainConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainConstants.swift; sourceTree = "<group>"; };
+		E2BCA56E1CF3AA1A006AAA8B /* Feed+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E2BCA56F1CF3AA1A006AAA8B /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
+		E2BCA5701CF3AA1A006AAA8B /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E2BCA5711CF3AA1A006AAA8B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E75AFF8F2A9393CCA4EBF188 /* Pods_hackillinois_2017_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -161,6 +169,7 @@
 				E20465CA1CF1FAF50054654E /* AppDelegate.swift */,
 				E2BCA5591CF36167006AAA8B /* Main */,
 				E2AC3F831CF20E4C00C4F21F /* Login */,
+				E2BCA56D1CF3A9F5006AAA8B /* Models */,
 				E20465D41CF1FAF50054654E /* Assets.xcassets */,
 				E20465D61CF1FAF50054654E /* LaunchScreen.storyboard */,
 				E20465D91CF1FAF50054654E /* Info.plist */,
@@ -224,6 +233,17 @@
 				E2BCA5631CF37017006AAA8B /* FeedCollectionViewCell.swift */,
 			);
 			name = Feed;
+			sourceTree = "<group>";
+		};
+		E2BCA56D1CF3A9F5006AAA8B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E2BCA56E1CF3AA1A006AAA8B /* Feed+CoreDataProperties.swift */,
+				E2BCA56F1CF3AA1A006AAA8B /* Feed.swift */,
+				E2BCA5701CF3AA1A006AAA8B /* User+CoreDataProperties.swift */,
+				E2BCA5711CF3AA1A006AAA8B /* User.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -492,11 +512,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2BCA5751CF3AA1A006AAA8B /* User.swift in Sources */,
 				E2BCA56A1CF373A1006AAA8B /* MainConstants.swift in Sources */,
 				E2BCA5661CF372DD006AAA8B /* MainNavigationViewController.swift in Sources */,
+				E2BCA5741CF3AA1A006AAA8B /* User+CoreDataProperties.swift in Sources */,
 				E2BCA5681CF37363006AAA8B /* MainTabBarViewController.swift in Sources */,
 				E20465D31CF1FAF50054654E /* hackillinois_2017_ios.xcdatamodeld in Sources */,
+				E2BCA5731CF3AA1A006AAA8B /* Feed.swift in Sources */,
 				E2BCA5621CF36CDA006AAA8B /* FeedCollectionViewController.swift in Sources */,
+				E2BCA5721CF3AA1A006AAA8B /* Feed+CoreDataProperties.swift in Sources */,
 				E2BCA5641CF37017006AAA8B /* FeedCollectionViewCell.swift in Sources */,
 				E20465CD1CF1FAF50054654E /* LoginViewController.swift in Sources */,
 				E2AC3F861CF21C3600C4F21F /* UIColor+fromRGBHex+fromRGBAHex.swift in Sources */,

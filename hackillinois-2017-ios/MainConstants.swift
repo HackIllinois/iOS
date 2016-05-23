@@ -15,3 +15,4 @@ import Foundation
 
 let mainUIColor = 0x34495e // Color for the TabBar and Navigation Bar
 let mainTintColor = 0xecf0f1 // Tint color use for TabBar
+let timeoutIntervalSeconds: UInt64 = 10 // Timeout interval for network calls, in seconds

@@ -11,6 +11,8 @@ import UIKit
 private let reuseIdentifier = "feedCell"
 
 class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    /* Variables */
+    var refreshCleanUpRequired = false
     
     @IBOutlet weak var feedCollection: UICollectionView!
     var refreshControl: UIRefreshControl!
@@ -20,6 +22,47 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
     /* Refresh the feed... */
     func refresh() {
         print("refresh")
+        
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
+            // Check to see if the method previously failed.
+            if self.refreshCleanUpRequired {
+                self.refreshControl.endRefreshing()
+                // TODO: Different alert to user to wait a bit longer
+                dispatch_async(dispatch_get_main_queue()) {
+                    let ac = UIAlertController(title: "Timeout Error", message: "Please wait a little longer before trying again.", preferredStyle: .Alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    
+                    self.presentViewController(ac, animated: true, completion: nil)
+                }
+                return
+            }
+            
+            // Set timeout so the user isn't stuck with a long running process...
+            var timeout = false
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(timeoutIntervalSeconds * NSEC_PER_SEC)), dispatch_get_main_queue()) {
+                timeout = true
+                self.refreshCleanUpRequired = true
+                
+                // End refresh
+                self.refreshControl.endRefreshing()
+                // Present warning to user
+                let ac = UIAlertController(title: "Network Error", message: "Network connection has timed out. Please check your internet connection and try again later.", preferredStyle: .Alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                
+                self.presentViewController(ac, animated: true, completion: nil)
+                return
+            }
+            
+            // Get information from server
+            sleep(20) // Fake server response
+            print("Post condd")
+            
+            if timeout {
+                // clean up
+                print("clean up")
+                self.refreshCleanUpRequired = false
+            }
+        }
     }
 
     override func viewDidLoad() {
