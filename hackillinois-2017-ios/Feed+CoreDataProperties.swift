@@ -16,6 +16,7 @@ extension Feed {
 
     @NSManaged var time: NSDate
     @NSManaged var message: String
+    @NSManaged var id: NSNumber
     @NSManaged var location: NSSet?
 
 }

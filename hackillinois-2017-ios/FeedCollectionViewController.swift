@@ -13,6 +13,7 @@ private let reuseIdentifier = "feedCell"
 class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     /* Variables */
     var refreshCleanUpRequired = false
+    var dateTimeFormatter: NSDateFormatter!
     
     @IBOutlet weak var feedCollection: UICollectionView!
     var refreshControl: UIRefreshControl!
@@ -131,6 +132,9 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
 
         // Do any additional setup after loading the view.
         
+        // Set the date formatting
+        dateTimeFormatter = NSDateFormatter()
+        dateTimeFormatter.dateFormat = "MMMM dd 'at' h:mm a"
         
         // Layout the view to look more natural
         feedCollection.contentInset = UIEdgeInsets(top: -20, left: 0, bottom: 20, right: 0)
@@ -149,6 +153,10 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         
         refreshControl.addTarget(self, action: #selector(refresh), forControlEvents: UIControlEvents.ValueChanged)
         feedCollection.addSubview(refreshControl)
+        
+        // Initialize Static data
+        initializeSample()
+        feedCollection.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -168,11 +176,15 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
 
     // MARK: UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return sampleData.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("feedCell", forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("feedCell", forIndexPath: indexPath) as! FeedCollectionViewCell
+        let feed = sampleData[indexPath.row]
+        cell.dateTimeLabel.text = dateTimeFormatter.stringFromDate(feed.time)
+        cell.messageLabel.text = feed.message
+        
         return cell
     }
 
