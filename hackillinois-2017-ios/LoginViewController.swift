@@ -17,7 +17,7 @@ enum UserInputState: UInt8 {
     // Add more for different types of errors / more fields
 }
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     /* Replace these hexidecimal with RGB equivalents */
     let borderColorHex = 0x2c3e50
     
@@ -89,20 +89,43 @@ class LoginViewController: UIViewController {
         }
     }
     
-    /* Keyboard Handlers */
+    /* 
+     * Keyboard Handlers
+     */
     func keyboardWillAppear(notification: NSNotification) {
         scrollView.scrollEnabled = true
         
         var keyboardFrame:CGRect = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
         keyboardFrame = self.view.convertRect(keyboardFrame, fromView: nil)
         
-        self.scrollView.contentInset.bottom = keyboardFrame.size.height
+        // Animate the keyboard so it looks a lot less awkward...
+        UIView.animateWithDuration(notification.userInfo![UIKeyboardAnimationDurationUserInfoKey]!.doubleValue, animations: {
+            self.scrollView.contentInset.bottom = keyboardFrame.size.height
+        })
     }
     
     func keyboardWillDisappear(notification: NSNotification) {
         // Only remove inset when keyboard is shown
         scrollView.scrollEnabled = false
-        self.scrollView.contentInset = UIEdgeInsetsZero
+        // Animate the keyboard so it looks a lot less awkward
+        // It seems like this line isn't required for the animation to take place for both
+        UIView.animateWithDuration(notification.userInfo![UIKeyboardAnimationDurationUserInfoKey]!.doubleValue, animations: {
+            self.scrollView.contentInset = UIEdgeInsetsZero
+        })
+    }
+    
+    /* Configure behavior of return key. If you are adding more text fields, set the tags in order of how the user should be inputting them. For this login, username has a tag value of 1 and password has a tag value of 2 */
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        let nextTextFieldTag = textField.tag + 1
+        if let nextTextField = textField.superview?.viewWithTag(nextTextFieldTag) as UIResponder! {
+            // Found next text field to respond to
+            nextTextField.becomeFirstResponder()
+        } else {
+            // There is no next text field
+            textField.resignFirstResponder()
+        }
+        
+        return false // Don't insert newlines in textfield
     }
     
     /* View Controller overrides */
@@ -144,9 +167,17 @@ class LoginViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillAppear), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillDisappear), name: UIKeyboardWillHideNotification, object: nil)
         
+        /* Set the TextField's delegates to the view controller, required to configure behavior of "next" and "go" keys */
+        UsernameTextField.delegate = self
+        PasswordTextField.delegate = self
     }
     
-
+    deinit {
+        // Destroy all observers 
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
