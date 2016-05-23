@@ -1,5 +1,5 @@
 //
-//  Feed+CoreDataProperties.swift
+//  Location+CoreDataProperties.swift
 //  hackillinois-2017-ios
 //
 //  Created by Shotaro Ikeda on 5/23/16.
@@ -12,10 +12,9 @@
 import Foundation
 import CoreData
 
-extension Feed {
+extension Location {
 
-    @NSManaged var time: NSDate
-    @NSManaged var message: String
-    @NSManaged var location: NSOrderedSet?
+    @NSManaged var latitude: NSNumber
+    @NSManaged var longitude: NSNumber
 
 }

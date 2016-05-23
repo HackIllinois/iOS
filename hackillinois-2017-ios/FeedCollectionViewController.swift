@@ -17,6 +17,22 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var feedCollection: UICollectionView!
     var refreshControl: UIRefreshControl!
     
+    // Mark - Sample static data
+    var sampleData: [Feed] = []
+    
+    func initializeSample() {
+        let siebel_lat = 40.1137074
+        let siebel_long = -88.2264893
+        
+        let lunch = Feed()
+        lunch.latitude = siebel_lat
+        lunch.longitude = siebel_long
+        lunch.message = "Lunch is served! Please come to ECEB or Siebel for Potbelly's Sandwiches!"
+        lunch.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464038763))
+        
+        let dinner = Feed()
+    }
+    
     // Mark - FeedCollectionViewController
     
     /* Refresh the feed... */
