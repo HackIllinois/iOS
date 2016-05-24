@@ -201,10 +201,93 @@
                     <view key="view" contentMode="scaleToFill" id="Q1W-c3-A5R">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bqk-ez-rDb" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="164" width="600" height="250"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="xsN-Ad-5jV"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vlE-Qp-N4F">
+                                <rect key="frame" x="0.0" y="414" width="600" height="141.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="locationCell" id="S5t-bw-Vte" customClass="FeedDetailTableViewCell" customModule="hackillinois_2017_ios" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="S5t-bw-Vte" id="OM4-6B-ODF">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_chevron_right_48pt" translatesAutoresizingMaskIntoConstraints="NO" id="st6-mK-ahl">
+                                                    <rect key="frame" x="544" y="6" width="48" height="48"/>
+                                                    <color key="tintColor" red="0.1019607843" green="0.73725490199999999" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="48" id="Mk7-S5-Xxh"/>
+                                                        <constraint firstAttribute="width" constant="48" id="ycH-4M-umr"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Siebel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HaY-Jd-9DM">
+                                                    <rect key="frame" x="150" y="17" width="300" height="26.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="300" id="zJO-V3-RFS"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="HaY-Jd-9DM" firstAttribute="centerX" secondItem="OM4-6B-ODF" secondAttribute="centerX" id="8tW-rR-Ecl"/>
+                                                <constraint firstItem="HaY-Jd-9DM" firstAttribute="centerY" secondItem="OM4-6B-ODF" secondAttribute="centerY" id="AAU-0b-7kF"/>
+                                                <constraint firstItem="st6-mK-ahl" firstAttribute="centerY" secondItem="OM4-6B-ODF" secondAttribute="centerY" id="K2U-Hs-duS"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="st6-mK-ahl" secondAttribute="trailing" id="Tsx-4T-3p1"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="location" destination="HaY-Jd-9DM" id="POE-wv-7OC"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="sG7-5y-UvH" id="czA-lj-UN5"/>
+                                    <outlet property="delegate" destination="sG7-5y-UvH" id="krL-j5-Cde"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVm-kq-EaS">
+                                <rect key="frame" x="0.0" y="64" width="600" height="100"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="qxc-Ti-nqu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.1019607843" green="0.73725490199999999" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="BiY-Gc-0yJ" firstAttribute="top" secondItem="vlE-Qp-N4F" secondAttribute="bottom" id="0gj-1p-4hk"/>
+                            <constraint firstItem="bqk-ez-rDb" firstAttribute="top" secondItem="RVm-kq-EaS" secondAttribute="bottom" id="2JS-2y-dvO"/>
+                            <constraint firstItem="vlE-Qp-N4F" firstAttribute="trailing" secondItem="Q1W-c3-A5R" secondAttribute="trailingMargin" constant="20" id="D9G-LB-bCo"/>
+                            <constraint firstItem="vlE-Qp-N4F" firstAttribute="top" secondItem="bqk-ez-rDb" secondAttribute="bottom" id="ORZ-lH-bmW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="RVm-kq-EaS" secondAttribute="trailing" constant="-20" id="UKj-sc-23R"/>
+                            <constraint firstItem="vlE-Qp-N4F" firstAttribute="leading" secondItem="Q1W-c3-A5R" secondAttribute="leadingMargin" constant="-20" id="dhi-2B-LwS"/>
+                            <constraint firstItem="RVm-kq-EaS" firstAttribute="leading" secondItem="Q1W-c3-A5R" secondAttribute="leadingMargin" constant="-20" id="fCB-Ug-kT6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bqk-ez-rDb" secondAttribute="trailing" constant="-20" id="o1P-QP-es9"/>
+                            <constraint firstItem="RVm-kq-EaS" firstAttribute="top" secondItem="RO0-YL-Kg8" secondAttribute="bottom" id="vsH-J4-yG1"/>
+                            <constraint firstItem="bqk-ez-rDb" firstAttribute="leading" secondItem="Q1W-c3-A5R" secondAttribute="leadingMargin" constant="-20" id="xVE-hE-ckO"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="event" destination="RVm-kq-EaS" id="umW-L4-F7R"/>
+                        <outlet property="locationTable" destination="vlE-Qp-N4F" id="xWm-jM-i7z"/>
+                        <outlet property="map" destination="bqk-ez-rDb" id="FhK-mG-1wg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o9Y-bv-x2y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -212,6 +295,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ic_chevron_right_48pt" width="48" height="48"/>
         <image name="ic_help_outline" width="24" height="24"/>
         <image name="ic_list" width="24" height="24"/>
         <image name="ic_map" width="24" height="24"/>

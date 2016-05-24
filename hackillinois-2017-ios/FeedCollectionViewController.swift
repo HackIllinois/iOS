@@ -266,8 +266,16 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         // Pass the selected object to the new view controller.
         
         if segue.identifier == "feedDetail" {
-            let destination = segue.destinationViewController
+            let destination = segue.destinationViewController as! FeedDetailViewController
+            let feedItem = sampleData[feedCollection.indexPathsForSelectedItems()!.first!.row]
             
+            if let locationArray = feedItem.locations?.allObjects as? [Location]{
+                destination.locationArray = locationArray
+            } else {
+                destination.locationArray = []
+            }
+            
+            destination.message = feedItem.message
         }
     }
 
