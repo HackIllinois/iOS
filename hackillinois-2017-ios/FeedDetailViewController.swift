@@ -8,8 +8,9 @@
 
 import UIKit
 import GoogleMaps
+import CoreLocation
 
-class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
     
     /* UI Elements */
     @IBOutlet weak var event: UILabel!
@@ -19,10 +20,28 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     /* Variables */
     var locationArray: [Location]!
     var message: String!
+    var manager: CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // Ask for Location permissions, if never asked
+        manager = CLLocationManager()
+        manager.delegate = self
+        
+        if CLLocationManager.authorizationStatus() == .NotDetermined {
+            manager.requestWhenInUseAuthorization()
+        } else if !(CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse) && !(CLLocationManager.authorizationStatus() == .AuthorizedAlways) {
+            let ac = UIAlertController(title: "Location Services Disabled", message: "Location services is required to help route paths and show your location.", preferredStyle: .Alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            presentViewController(ac, animated: true, completion: nil)
+        } else {
+            map.myLocationEnabled = true
+            map.settings.myLocationButton = true
+        }
+        
+        // map.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
+        
         // Do any additional setup after loading the view.
         event.text = message
         
@@ -47,7 +66,15 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         }
     }
-
+    
+    /*
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        let myLocation = change![NSKeyValueChangeNewKey] as! CLLocation
+        map.animateToLocation(myLocation.coordinate)
+        map.settings.myLocationButton = true
+    }
+    */
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -58,6 +85,13 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
             Double(locationArray[index].longitude)))
     }
 
+    // Mark - Location Manager Delegate
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if status == .AuthorizedWhenInUse {
+            map.myLocationEnabled = true
+            map.settings.myLocationButton = true
+        }
+    }
     /*
     // MARK: - Navigation
 
