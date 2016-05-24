@@ -19,6 +19,7 @@
 		E20465E31CF1FAF50054654E /* hackillinois_2017_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20465E21CF1FAF50054654E /* hackillinois_2017_iosTests.swift */; };
 		E20465EE1CF1FAF50054654E /* hackillinois_2017_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20465ED1CF1FAF50054654E /* hackillinois_2017_iosUITests.swift */; };
 		E277DD691CF4A79100D7E018 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E277DD681CF4A79100D7E018 /* FeedDetailViewController.swift */; };
+		E277DD6B1CF4AF0400D7E018 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = E277DD6A1CF4AF0400D7E018 /* keys.plist */; };
 		E2AC3F861CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */; };
 		E2AC3F871CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */; };
 		E2AC3F881CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */; };
@@ -78,6 +79,7 @@
 		E20465ED1CF1FAF50054654E /* hackillinois_2017_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hackillinois_2017_iosUITests.swift; sourceTree = "<group>"; };
 		E20465EF1CF1FAF50054654E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E277DD681CF4A79100D7E018 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
+		E277DD6A1CF4AF0400D7E018 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
 		E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+fromHex.swift"; sourceTree = "<group>"; };
 		E2AC3F8D1CF21F3900C4F21F /* UIColor+fromHexTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+fromHexTests.swift"; sourceTree = "<group>"; };
 		E2BCA55A1CF36187006AAA8B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				E20465D61CF1FAF50054654E /* LaunchScreen.storyboard */,
 				E20465D91CF1FAF50054654E /* Info.plist */,
 				E20465D11CF1FAF50054654E /* hackillinois_2017_ios.xcdatamodeld */,
+				E277DD6A1CF4AF0400D7E018 /* keys.plist */,
 			);
 			path = "hackillinois-2017-ios";
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E277DD6B1CF4AF0400D7E018 /* keys.plist in Resources */,
 				E20465D81CF1FAF50054654E /* LaunchScreen.storyboard in Resources */,
 				E20465D51CF1FAF50054654E /* Assets.xcassets in Resources */,
 				E20465D01CF1FAF50054654E /* Login.storyboard in Resources */,
