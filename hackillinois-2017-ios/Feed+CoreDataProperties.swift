@@ -14,9 +14,9 @@ import CoreData
 
 extension Feed {
 
-    @NSManaged var time: NSDate
-    @NSManaged var message: String
     @NSManaged var id: NSNumber
-    @NSManaged var location: NSSet?
+    @NSManaged var message: String
+    @NSManaged var time: NSDate
+    @NSManaged var locations: NSSet?
 
 }

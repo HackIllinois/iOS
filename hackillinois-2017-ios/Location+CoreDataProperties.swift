@@ -17,5 +17,6 @@ extension Location {
     @NSManaged var latitude: NSNumber
     @NSManaged var longitude: NSNumber
     @NSManaged var name: String
+    @NSManaged var feeds: NSSet
 
 }

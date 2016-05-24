@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 private let reuseIdentifier = "feedCell"
 
@@ -15,65 +16,156 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
     var refreshCleanUpRequired = false
     var dateTimeFormatter: NSDateFormatter!
     
+    
+    /* UI elements */
     @IBOutlet weak var feedCollection: UICollectionView!
     var refreshControl: UIRefreshControl!
     
     // Mark - Sample static data
-    var sampleData: [Feed] = []
-    
+    var sampleData: [Feed]!
     func initializeSample() {
         // Temporary Locations
-        let siebel = Location()
-        siebel.name = "siebel"
-        siebel.latitude = 40.1137074
-        siebel.longitude = -88.2264893
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
-        let eceb = Location()
-        eceb.name = "eceb"
-        eceb.latitude = 40.114828
-        eceb.longitude = -88.228049
+        var siebel: Location!
+        // Check if the location exists
+        let siebelFetchRequest = NSFetchRequest(entityName: "Location")
+        siebelFetchRequest.predicate = NSPredicate(format: "name == %@", "siebel")
         
-        let union = Location()
-        union.name = "union"
-        union.latitude = 40.109395
-        union.longitude = -88.227181
+        if let locations = try? appDelegate.managedObjectContext.executeFetchRequest(siebelFetchRequest) as! [Location] {
+            if locations.count > 0 {
+                siebel = locations[0]
+            }
+        }
         
-        let hacking_start = Feed()
-        hacking_start.message = "Hacking has begun!"
-        hacking_start.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464042073))
-        hacking_start.location = nil
+        if siebel == nil {
+            // siebel is missing
+            let siebelEntity = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: appDelegate.managedObjectContext) as! Location
+            siebelEntity.name = "siebel"
+            siebelEntity.latitude = 40.1137074
+            siebelEntity.longitude = -88.2264893
+            siebelEntity.feeds = NSSet()
+            
+            siebel = siebelEntity
+        }
         
-        let lunch = Feed()
+        var eceb: Location!
+        // Check if the location exists
+        let ecebFetchRequest = NSFetchRequest(entityName: "Location")
+        ecebFetchRequest.predicate = NSPredicate(format: "name == %@", "eceb")
+        if let locations = try? appDelegate.managedObjectContext.executeFetchRequest(ecebFetchRequest) as! [Location] {
+            if locations.count > 0 {
+                eceb = locations[0]
+            }
+        }
+        
+        if eceb == nil {
+            // eceb is missing
+            let ecebEntity = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: appDelegate.managedObjectContext) as! Location
+            ecebEntity.name = "eceb"
+            ecebEntity.latitude = 40.114828
+            ecebEntity.longitude = -88.228049
+            ecebEntity.feeds = NSSet()
+            
+            eceb = ecebEntity
+        }
+        
+        var union: Location!
+        // Check if the location exists
+        let unionFetchRequest = NSFetchRequest(entityName: "Location")
+        unionFetchRequest.predicate = NSPredicate(format: "name == %@", "union")
+        
+        if let locations = try? appDelegate.managedObjectContext.executeFetchRequest(unionFetchRequest) as! [Location] {
+            if locations.count > 0 {
+                union = locations[0]
+            }
+        }
+        
+        if union == nil {
+            // union is missing
+            let unionEntity = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: appDelegate.managedObjectContext) as! Location
+            unionEntity.name = "union"
+            unionEntity.latitude = 40.109395
+            unionEntity.longitude = -88.227181
+            unionEntity.feeds = NSSet()
+            
+            union = unionEntity
+        }
+        
+        let hackingStart = NSEntityDescription.insertNewObjectForEntityForName("Feed", inManagedObjectContext: appDelegate.managedObjectContext) as! Feed
+        hackingStart.message = "Hacking has begun!"
+        hackingStart.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464038000))
+        hackingStart.locations = nil
+        hackingStart.id = 1
+        
+        let lunch = NSEntityDescription.insertNewObjectForEntityForName("Feed", inManagedObjectContext: appDelegate.managedObjectContext) as! Feed
         lunch.message = "Lunch is served! Please come to ECEB or Siebel for Potbelly's Sandwiches!"
         lunch.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464038763))
-        lunch.location = NSSet(array: [siebel, eceb])
+        lunch.locations = NSSet(array: [siebel, eceb])
+        lunch.id = 2
         
-        let cluehunt_start = Feed()
-        cluehunt_start.message = "Cluehunt has begun!"
-        cluehunt_start.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464040073))
-        cluehunt_start.location = NSSet(array: [siebel, eceb])
+        let cluehuntStart = NSEntityDescription.insertNewObjectForEntityForName("Feed", inManagedObjectContext: appDelegate.managedObjectContext) as! Feed
+        cluehuntStart.message = "Cluehunt has begun!"
+        cluehuntStart.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464040073))
+        cluehuntStart.locations = NSSet(array: [siebel, eceb])
+        cluehuntStart.id = 3
         
-        let dinner = Feed()
+        let dinner = NSEntityDescription.insertNewObjectForEntityForName("Feed", inManagedObjectContext: appDelegate.managedObjectContext) as! Feed
         dinner.message = "Dinner is going to be served in 10 minutes!"
         dinner.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464042073))
-        dinner.location = NSSet(array: [siebel, eceb])
+        dinner.locations = NSSet(array: [siebel, eceb])
+        dinner.id = 4
         
-        let career_fair = Feed()
-        career_fair.message = "Career fair is starting at the Union!"
-        career_fair.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464042100))
-        career_fair.location = NSSet(object: union)
+        let careerFair = NSEntityDescription.insertNewObjectForEntityForName("Feed", inManagedObjectContext: appDelegate.managedObjectContext) as! Feed
+        careerFair.message = "Career fair is starting at the Union!"
+        careerFair.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464042100))
+        careerFair.locations = NSSet(object: union)
+        careerFair.id = 5
         
-        let dummy = Feed()
-        dummy.message = "Replace me with real things"
-        dummy.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464041800))
-        dummy.location = NSSet(array: [siebel, eceb, union])
+        // Add to the feeds set to protect integrity
+        siebel.feeds = siebel.feeds.setByAddingObjectsFromArray([lunch, cluehuntStart, dinner])
+        eceb.feeds = eceb.feeds.setByAddingObjectsFromArray([lunch, cluehuntStart, dinner])
+        union.feeds = union.feeds.setByAddingObject(careerFair)
         
-        sampleData = [hacking_start, lunch, cluehunt_start, dinner, career_fair,
-                      dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy]
+        // Generate dummy data to simulate scrolling down
+        for n in 0 ..< 7 {
+            let dummy = NSEntityDescription.insertNewObjectForEntityForName("Feed", inManagedObjectContext: appDelegate.managedObjectContext) as! Feed
+            dummy.message = "Replace me with real things"
+            dummy.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464037000 - n*432))
+            dummy.locations = NSSet(array: [siebel, eceb, union])
+            dummy.id = 6 + n
+            
+            siebel.feeds = siebel.feeds.setByAddingObject(dummy)
+            eceb.feeds = eceb.feeds.setByAddingObject(dummy)
+            union.feeds = union.feeds.setByAddingObject(dummy)
+        }
         
-        sampleData.sortInPlace({ (feed1, feed2) -> Bool in
-            return feed1.time.compare(feed2.time).rawValue == 0
-        })
+        save()
+    }
+    
+    func save() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        // Save context
+        do {
+            try appDelegate.managedObjectContext.save()
+        } catch {
+            print("Error occured while saving \(error)")
+        }
+    }
+    
+    func load() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        // Fetch feed data
+        let dataFetchReqeust = NSFetchRequest(entityName: "Feed")
+        let sort = NSSortDescriptor(key: "time", ascending: false)
+        dataFetchReqeust.sortDescriptors = [sort]
+        
+        do {
+            let feedData = try appDelegate.managedObjectContext.executeFetchRequest(dataFetchReqeust) as! [Feed]
+            sampleData = feedData
+        } catch {
+            print("Failed to fetch feed data, critical error: \(error)")
+        }
     }
     
     // Mark - FeedCollectionViewController
@@ -156,6 +248,8 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         
         // Initialize Static data
         initializeSample()
+        // Load objects from core data
+        load()
         feedCollection.reloadData()
     }
 
