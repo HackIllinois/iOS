@@ -4,7 +4,8 @@
 use_frameworks!
 
 target 'hackillinois-2017-ios' do
-
+        source 'https://github.com/CocoaPods/Specs.git'
+        pod 'GoogleMaps'
 end
 
 target 'hackillinois-2017-iosTests' do
