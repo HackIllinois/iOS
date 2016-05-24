@@ -258,15 +258,18 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         // Dispose of any resources that can be recreated.
     }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "feedDetail" {
+            let destination = segue.destinationViewController
+            
+        }
     }
-    */
 
     // MARK: UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -283,6 +286,12 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
     }
 
     // MARK: UICollectionViewDelegate
+    
+    /*
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        performSegueWithIdentifier("feedDetail", sender: sampleData[indexPath.row])
+    }
+    */
 
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking
