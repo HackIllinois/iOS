@@ -23,8 +23,10 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     var message: String!
     var manager: CLLocationManager!
     var routes: [GMSPolyline?] = []
-    var userLocationWasFound: Bool = false
+    var locationSelected: Int = 0
+    var observerAdded: Bool = false
     
+    // Mark: View Controller functions
     override func viewDidLoad() {
         super.viewDidLoad()
         // Add the "Open In..." Button
@@ -42,9 +44,6 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
             presentViewController(ac, animated: true, completion: nil)
         }
         
-        // Add an observer to track updated locations
-        manager.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
-        
         // Do any additional setup after loading the view.
         event.text = message
         
@@ -53,6 +52,13 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
                                                             longitude: centerOfEventLongitude, zoom: 16)
         self.map.camera = location
         
+        // If a location exists, move it to the first available one
+        if !locationArray.isEmpty {
+            let location = locationArray[0]
+            map.animateToLocation(CLLocationCoordinate2DMake(Double(location.latitude), Double(location.longitude)))
+        }
+        
+        // Set up Markers
         for location in self.locationArray {
             let position = CLLocationCoordinate2DMake(Double(location.latitude),
                                                       Double(location.longitude))
@@ -65,19 +71,28 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
             routes.append(nil)
         }
         
-        if !self.locationArray.isEmpty {
-            self.routeTo(0)
-        }
-        
-        if manager.location != nil {
-            // Location is available
-            plotPaths()
-        }
     }
     
     override func viewWillDisappear(animated: Bool) {
-        manager.removeObserver(self, forKeyPath: "myLocation", context: nil)
+        // Remove observer in case (will NOP if it doesn't exist)
+        
+        if observerAdded {
+            map.removeObserver(self, forKeyPath: "myLocation", context: nil)
+        }
+        
         super.viewWillDisappear(animated)
+    }
+    
+    // Find where the map should locate to based off of what the user touches
+    func routeTo(index: Int) {
+        let latitude = Double(locationArray[index].latitude)
+        let longitude = Double(locationArray[index].longitude)
+        
+        map.animateToLocation(CLLocationCoordinate2DMake(latitude, longitude))
+        
+        routes[locationSelected]!.spans = [inactiveStrokeColor]
+        routes[index]!.spans = [activeStrokeColor]
+        locationSelected = index
     }
     
     // Mark: Construct a valid URL for directions
@@ -93,25 +108,6 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         let parameters = "json?\(origin)&\(destination)&\(mode)&\(key)"
         let url = "https://maps.googleapis.com/maps/api/directions/\(parameters)"
         
-        return NSURL(string: url)!
-    }
-    
-    /* Mark: Generate Apple Maps URL */
-    func generateAppleMapsURL(index: Int) -> NSURL {
-        let location = locationArray[index]
-        let daddr = "daddr=\(location.latitude),+\(location.longitude)"
-        let dirflg = "dirflg=w"
-        
-        let url = "http://maps.apple.com/?\(daddr)&\(dirflg)"
-        return NSURL(string: url)!
-    }
-    
-    func generateGoogleMapsURL(index: Int) -> NSURL {
-        let location = locationArray[index]
-        let daddr = "daddr=\(location.latitude),+\(location.longitude)"
-        let directionsmode = "directionsmode=walking"
-        
-        let url = "comgooglemaps://?\(daddr)&\(directionsmode)"
         return NSURL(string: url)!
     }
     
@@ -137,7 +133,6 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
                 }
             }
         }
-        userLocationWasFound = true
     }
     
     /* Handler for opening the map in another application */
@@ -153,6 +148,17 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         presentViewController(externalApplicationSelector, animated: true, completion: nil)
     }
     
+    /* Mark: Generate Google Maps URL */
+    func generateGoogleMapsURL(index: Int) -> NSURL {
+        let location = locationArray[locationSelected]
+        let daddr = "daddr=\(location.latitude),+\(location.longitude)"
+        let directionsmode = "directionsmode=walking"
+        
+        let url = "comgooglemaps://?\(daddr)&\(directionsmode)"
+        return NSURL(string: url)!
+    }
+    
+    
     /* Hander for Google Maps */
     func googleMapsHandler(alertAction: UIAlertAction) {
         var indexSelected: Int
@@ -164,6 +170,16 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let url = generateGoogleMapsURL(indexSelected)
         UIApplication.sharedApplication().openURL(url)
+    }
+    
+    /* Mark: Generate Apple Maps URL */
+    func generateAppleMapsURL(index: Int) -> NSURL {
+        let location = locationArray[locationSelected]
+        let daddr = "daddr=\(location.latitude),+\(location.longitude)"
+        let dirflg = "dirflg=w"
+        
+        let url = "http://maps.apple.com/?\(daddr)&\(dirflg)"
+        return NSURL(string: url)!
     }
     
     /* Handler for Apple Maps */
@@ -182,18 +198,11 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     /* KVO override for when the user first initiates locations */
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         // User location was found
-        if !userLocationWasFound {
-            // Check if the manager's location exists
-            if manager.location != nil {
-                map.myLocationEnabled = true
-                map.settings.myLocationButton = true
-                plotPaths()
-            } else {
-                map.myLocationEnabled = false
-                map.settings.myLocationButton = false
-                userLocationWasFound = false
-            }
-        }
+        plotPaths()
+        
+        // Remove observer (we only need the location once to create initial paths)
+        map.removeObserver(self, forKeyPath: "myLocation")
+        observerAdded = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -201,25 +210,23 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         // Dispose of any resources that can be recreated.
     }
     
-    func routeTo(index: Int) {
-        let latitude = Double(locationArray[index].latitude)
-        let longitude = Double(locationArray[index].longitude)
-        
-        map.animateToLocation(CLLocationCoordinate2DMake(latitude, longitude))
-        
-        if userLocationWasFound {
-            for route in routes {
-                route!.spans = [inactiveStrokeColor]
-            }
-            routes[index]!.spans = [activeStrokeColor]
-        }
-    }
 
     // Mark - Location Manager Delegate
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        // Enable Location for the map when the user allows the application to use the current location
         if status == .AuthorizedWhenInUse {
             map.myLocationEnabled = true
             map.settings.myLocationButton = true
+            
+            // Check if the user location is available
+            if manager.location != nil {
+                // Plot paths if the location is available
+                plotPaths()
+            } else {
+                // Add an observer to track updated locations, if location was not available
+                map.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
+                observerAdded = true
+            }
         }
     }
     /*
@@ -238,6 +245,7 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         routeTo(indexPath.row)
+        locationSelected = indexPath.row
         locationTable.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
