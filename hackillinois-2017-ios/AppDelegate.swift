@@ -14,6 +14,7 @@ import GoogleMaps
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var google_direction_api_key: String!
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -28,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         if let dict = keys {
             GMSServices.provideAPIKey(dict["GOOGLE_MAPS_API_KEY"] as! String)
+            google_direction_api_key = dict["GOOGLE_DIRECTIONS_API_KEY"] as! String
         }
         
         return true

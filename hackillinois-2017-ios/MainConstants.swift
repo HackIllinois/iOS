@@ -12,6 +12,7 @@
  */
 
 import Foundation
+import GoogleMaps
 
 /* UI/UX */
 let mainUIColor = 0x34495e // Color for the TabBar and Navigation Bar
@@ -22,3 +23,7 @@ let timeoutIntervalSeconds: UInt64 = 10 // Timeout interval for network calls, i
 /* Geocoordinates */
 let centerOfEventLatitude: Double = 40.1137074
 let centerOfEventLongitude: Double = -88.2264893
+
+/* Google maps stroke color */
+let activeStrokeColor = GMSStrokeStyle.solidColor(UIColor.redColor())
+let inactiveStrokeColor = GMSStrokeStyle.solidColor(UIColor.grayColor())

@@ -21,10 +21,16 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     var locationArray: [Location]!
     var message: String!
     var manager: CLLocationManager!
+    var routes: [GMSPolyline]!
+    var userDidChangeRoute: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Hide initial route
+        routes = []
+        // Mark that user has not changed the route
+        userDidChangeRoute = false
         // Ask for Location permissions, if never asked
         manager = CLLocationManager()
         manager.delegate = self
@@ -50,21 +56,45 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
                                                             longitude: centerOfEventLongitude, zoom: 16)
         self.map.camera = location
         
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
-            // Drop pins to relevant locations
-            for location in self.locationArray {
-                let position = CLLocationCoordinate2DMake(Double(location.latitude),
-                                                          Double(location.longitude))
-                let marker = GMSMarker(position: position)
-                marker.appearAnimation = kGMSMarkerAnimationPop
-                marker.title = location.name
-                marker.map = self.map
-            }
+        for location in self.locationArray {
+            let position = CLLocationCoordinate2DMake(Double(location.latitude),
+                                                      Double(location.longitude))
+            let marker = GMSMarker(position: position)
+            marker.appearAnimation = kGMSMarkerAnimationPop
+            marker.title = location.name
+            marker.map = self.map
             
-            if !self.locationArray.isEmpty {
-                self.routeTo(0)
+            // Find a path from the user's current location to the event location
+            // Should only work when the user has given permission to access their current location
+            if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse || CLLocationManager.authorizationStatus() == .AuthorizedAlways {
+                dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
+                    let directionData = NSData(contentsOfURL:
+                        self.generateDirectionURL(latitude: Double(location.latitude), longitude: Double(location.longitude)))
+                    
+                }
             }
         }
+        
+        if !self.locationArray.isEmpty {
+            self.routeTo(0)
+            
+            // asynchronous call to keep the User Interface active
+        }
+    }
+    
+    // Mark: Construct a valid URL for directions
+    // Note: Does not check if the user has given permission to access the location, that is done
+    // in the routing function.
+    func generateDirectionURL(latitude latitude: Double, longitude: Double) -> NSURL {
+        let origin = "origin=\(manager.location?.coordinate.latitude),\(manager.location?.coordinate.longitude)"
+        let destination = "destination=\(latitude),\(longitude)"
+        let mode = "mode=walking"
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let key = "key=\(appDelegate.google_direction_api_key)"
+        
+        let parameters = "json?\(origin)&\(destination)&\(mode)&\(key)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
+        let url = "https://maps.googleapis.com/maps/api/directions/\(parameters)"
+        return NSURL(string: url)!
     }
     
     /*
@@ -81,8 +111,11 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func routeTo(index: Int) {
-        map.animateToLocation(CLLocationCoordinate2DMake(Double(locationArray[index].latitude),
-            Double(locationArray[index].longitude)))
+        let latitude = Double(locationArray[index].latitude)
+        let longitude = Double(locationArray[index].longitude)
+        
+        map.animateToLocation(CLLocationCoordinate2DMake(latitude, longitude))
+        
     }
 
     // Mark - Location Manager Delegate
