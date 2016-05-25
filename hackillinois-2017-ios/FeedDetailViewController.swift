@@ -30,7 +30,9 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         // Add the "Open In..." Button
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Open In...", style: .Plain, target: self, action: #selector(openInExternalMapApplication))
+        if !locationArray.isEmpty {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Open In...", style: .Plain, target: self, action: #selector(openInExternalMapApplication))
+        }
         
         // Ask for Location permissions, if never asked
         manager = CLLocationManager()

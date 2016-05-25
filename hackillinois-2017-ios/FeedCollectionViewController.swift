@@ -22,6 +22,7 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
     var refreshControl: UIRefreshControl!
     
     // Mark - Sample static data
+    // TODO: Add tagging feature
     var sampleData: [Feed]!
     func initializeSample() {
         // Temporary Locations
@@ -42,8 +43,8 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
             // siebel is missing
             let siebelEntity = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: appDelegate.managedObjectContext) as! Location
             siebelEntity.name = "siebel"
-            siebelEntity.latitude = 40.1137074
-            siebelEntity.longitude = -88.2264893
+            siebelEntity.latitude = 40.113926
+            siebelEntity.longitude = -88.224916
             siebelEntity.feeds = NSSet()
             
             siebel = siebelEntity
