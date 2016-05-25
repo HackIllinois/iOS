@@ -6,6 +6,7 @@ use_frameworks!
 target 'hackillinois-2017-ios' do
         source 'https://github.com/CocoaPods/Specs.git'
         pod 'GoogleMaps'
+        pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 end
 
 target 'hackillinois-2017-iosTests' do
