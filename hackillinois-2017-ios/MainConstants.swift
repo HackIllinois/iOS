@@ -28,3 +28,6 @@ let centerOfEventLongitude: Double = -88.2264893
 let activeStrokeColor = GMSStyleSpan(style: GMSStrokeStyle.solidColor(UIColor.redColor()))
 let inactiveStrokeColor = GMSStyleSpan(style: GMSStrokeStyle.solidColor(UIColor.grayColor()))
 let strokeWidth: CGFloat = 6.0
+
+/* Hackathon Information */
+let university = "University+of+Illinois+at+Urbana+Champaign" // This will be encoded as an URL, so spaces should be delimited by +'s

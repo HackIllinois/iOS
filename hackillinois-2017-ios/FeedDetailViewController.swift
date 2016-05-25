@@ -27,6 +27,8 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Add the "Open In..." Button
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Open In...", style: .Plain, target: self, action: #selector(openInExternalMapApplication))
         
         // Ask for Location permissions, if never asked
         manager = CLLocationManager()
@@ -94,6 +96,26 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         return NSURL(string: url)!
     }
     
+    /* Mark: Generate Apple Maps URL */
+    func generateAppleMapsURL(index: Int) -> NSURL {
+        let location = locationArray[index]
+        let daddr = "daddr=\(location.latitude),+\(location.longitude)"
+        let dirflg = "dirflg=w"
+        
+        let url = "http://maps.apple.com/?\(daddr)&\(dirflg)"
+        return NSURL(string: url)!
+    }
+    
+    func generateGoogleMapsURL(index: Int) -> NSURL {
+        let location = locationArray[index]
+        let daddr = "daddr=\(location.latitude),+\(location.longitude)"
+        let directionsmode = "directionsmode=walking"
+        
+        let url = "comgooglemaps://?\(daddr)&\(directionsmode)"
+        return NSURL(string: url)!
+    }
+    
+    /* Plot available paths in the map view */
     func plotPaths() {
         for (index, location) in locationArray.enumerate() {
             // Find a path from the user's current location to the event location
@@ -118,6 +140,46 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         userLocationWasFound = true
     }
     
+    /* Handler for opening the map in another application */
+    func openInExternalMapApplication() {
+        // Build the open in dialogue
+        let externalApplicationSelector = UIAlertController(title: "Open in...", message: "Select the application you would like to navigate in.", preferredStyle: .ActionSheet)
+        // Check which map applications are available
+        if UIApplication.sharedApplication().canOpenURL(NSURL(string: "comgooglemaps://")!) {
+            externalApplicationSelector.addAction(UIAlertAction(title: "Google Maps", style: .Default, handler: googleMapsHandler))
+        }
+        externalApplicationSelector.addAction(UIAlertAction(title: "Apple Maps", style: .Default, handler: appleMapsHandler))
+        externalApplicationSelector.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        presentViewController(externalApplicationSelector, animated: true, completion: nil)
+    }
+    
+    /* Hander for Google Maps */
+    func googleMapsHandler(alertAction: UIAlertAction) {
+        var indexSelected: Int
+        if let index = locationTable.indexPathForSelectedRow?.row {
+            indexSelected = index
+        } else {
+            indexSelected = 0
+        }
+        
+        let url = generateGoogleMapsURL(indexSelected)
+        UIApplication.sharedApplication().openURL(url)
+    }
+    
+    /* Handler for Apple Maps */
+    func appleMapsHandler(alertAction: UIAlertAction) {
+        var indexSelected: Int
+        if let index = locationTable.indexPathForSelectedRow?.row {
+            indexSelected = index
+        } else {
+            indexSelected = 0
+        }
+        
+        let url = generateAppleMapsURL(indexSelected)
+        UIApplication.sharedApplication().openURL(url)
+    }
+    
+    /* KVO override for when the user first initiates locations */
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         // User location was found
         if !userLocationWasFound {
