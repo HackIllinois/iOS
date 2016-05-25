@@ -25,5 +25,6 @@ let centerOfEventLatitude: Double = 40.1137074
 let centerOfEventLongitude: Double = -88.2264893
 
 /* Google maps stroke color */
-let activeStrokeColor = GMSStrokeStyle.solidColor(UIColor.redColor())
-let inactiveStrokeColor = GMSStrokeStyle.solidColor(UIColor.grayColor())
+let activeStrokeColor = GMSStyleSpan(style: GMSStrokeStyle.solidColor(UIColor.redColor()))
+let inactiveStrokeColor = GMSStyleSpan(style: GMSStrokeStyle.solidColor(UIColor.grayColor()))
+let strokeWidth: CGFloat = 6.0

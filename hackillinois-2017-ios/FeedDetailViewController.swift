@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMaps
 import CoreLocation
+import SwiftyJSON
 
 class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
     
@@ -21,16 +22,12 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     var locationArray: [Location]!
     var message: String!
     var manager: CLLocationManager!
-    var routes: [GMSPolyline]!
-    var userDidChangeRoute: Bool!
+    var routes: [GMSPolyline?] = []
+    var userLocationWasFound: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Hide initial route
-        routes = []
-        // Mark that user has not changed the route
-        userDidChangeRoute = false
         // Ask for Location permissions, if never asked
         manager = CLLocationManager()
         manager.delegate = self
@@ -41,12 +38,10 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
             let ac = UIAlertController(title: "Location Services Disabled", message: "Location services is required to help route paths and show your location.", preferredStyle: .Alert)
             ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
             presentViewController(ac, animated: true, completion: nil)
-        } else {
-            map.myLocationEnabled = true
-            map.settings.myLocationButton = true
         }
         
-        // map.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
+        // Add an observer to track updated locations
+        manager.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
         
         // Do any additional setup after loading the view.
         event.text = message
@@ -64,46 +59,80 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
             marker.title = location.name
             marker.map = self.map
             
-            // Find a path from the user's current location to the event location
-            // Should only work when the user has given permission to access their current location
-            if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse || CLLocationManager.authorizationStatus() == .AuthorizedAlways {
-                dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
-                    let directionData = NSData(contentsOfURL:
-                        self.generateDirectionURL(latitude: Double(location.latitude), longitude: Double(location.longitude)))
-                    
-                }
-            }
+            // Set up the routes array to have routes be 1 to 1 with the locationArray
+            routes.append(nil)
         }
         
         if !self.locationArray.isEmpty {
             self.routeTo(0)
-            
-            // asynchronous call to keep the User Interface active
         }
+        
+        if manager.location != nil {
+            // Location is available
+            plotPaths()
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        manager.removeObserver(self, forKeyPath: "myLocation", context: nil)
+        super.viewWillDisappear(animated)
     }
     
     // Mark: Construct a valid URL for directions
     // Note: Does not check if the user has given permission to access the location, that is done
     // in the routing function.
     func generateDirectionURL(latitude latitude: Double, longitude: Double) -> NSURL {
-        let origin = "origin=\(manager.location?.coordinate.latitude),\(manager.location?.coordinate.longitude)"
+        let origin = "origin=\(manager.location!.coordinate.latitude),\(manager.location!.coordinate.longitude)"
         let destination = "destination=\(latitude),\(longitude)"
         let mode = "mode=walking"
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let key = "key=\(appDelegate.google_direction_api_key)"
         
-        let parameters = "json?\(origin)&\(destination)&\(mode)&\(key)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
+        let parameters = "json?\(origin)&\(destination)&\(mode)&\(key)"
         let url = "https://maps.googleapis.com/maps/api/directions/\(parameters)"
+        
         return NSURL(string: url)!
     }
     
-    /*
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        let myLocation = change![NSKeyValueChangeNewKey] as! CLLocation
-        map.animateToLocation(myLocation.coordinate)
-        map.settings.myLocationButton = true
+    func plotPaths() {
+        for (index, location) in locationArray.enumerate() {
+            // Find a path from the user's current location to the event location
+            // Should only work when the user has given permission to access their current location
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
+                let directionData = NSData(contentsOfURL:
+                    self.generateDirectionURL(latitude: Double(location.latitude), longitude: Double(location.longitude)))
+                let json = JSON(data: directionData!)
+                let encodedPath = json["routes"][0]["overview_polyline"]["points"].stringValue
+                dispatch_async(dispatch_get_main_queue()) {
+                    // Configure the path
+                    let path = GMSPolyline(path: GMSPath(fromEncodedPath: encodedPath))
+                    path.strokeWidth = strokeWidth
+                    path.spans = [inactiveStrokeColor]
+                    path.map = self.map
+                    
+                    // Add the path to all routes
+                    self.routes[index] = path
+                }
+            }
+        }
+        userLocationWasFound = true
     }
-    */
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        // User location was found
+        if !userLocationWasFound {
+            // Check if the manager's location exists
+            if manager.location != nil {
+                map.myLocationEnabled = true
+                map.settings.myLocationButton = true
+                plotPaths()
+            } else {
+                map.myLocationEnabled = false
+                map.settings.myLocationButton = false
+                userLocationWasFound = false
+            }
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -116,6 +145,12 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         
         map.animateToLocation(CLLocationCoordinate2DMake(latitude, longitude))
         
+        if userLocationWasFound {
+            for route in routes {
+                route!.spans = [inactiveStrokeColor]
+            }
+            routes[index]!.spans = [activeStrokeColor]
+        }
     }
 
     // Mark - Location Manager Delegate
