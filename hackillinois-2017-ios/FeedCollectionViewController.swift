@@ -31,7 +31,7 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         var siebel: Location!
         // Check if the location exists
         let siebelFetchRequest = NSFetchRequest(entityName: "Location")
-        siebelFetchRequest.predicate = NSPredicate(format: "name == %@", "siebel")
+        siebelFetchRequest.predicate = NSPredicate(format: "name == %@", "Siebel")
         
         if let locations = try? appDelegate.managedObjectContext.executeFetchRequest(siebelFetchRequest) as! [Location] {
             if locations.count > 0 {
@@ -42,7 +42,7 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         if siebel == nil {
             // siebel is missing
             let siebelEntity = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: appDelegate.managedObjectContext) as! Location
-            siebelEntity.name = "siebel"
+            siebelEntity.name = "Siebel"
             siebelEntity.latitude = 40.113926
             siebelEntity.longitude = -88.224916
             siebelEntity.feeds = NSSet()
@@ -53,7 +53,7 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         var eceb: Location!
         // Check if the location exists
         let ecebFetchRequest = NSFetchRequest(entityName: "Location")
-        ecebFetchRequest.predicate = NSPredicate(format: "name == %@", "eceb")
+        ecebFetchRequest.predicate = NSPredicate(format: "name == %@", "ECEB")
         if let locations = try? appDelegate.managedObjectContext.executeFetchRequest(ecebFetchRequest) as! [Location] {
             if locations.count > 0 {
                 eceb = locations[0]
@@ -63,7 +63,7 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         if eceb == nil {
             // eceb is missing
             let ecebEntity = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: appDelegate.managedObjectContext) as! Location
-            ecebEntity.name = "eceb"
+            ecebEntity.name = "ECEB"
             ecebEntity.latitude = 40.114828
             ecebEntity.longitude = -88.228049
             ecebEntity.feeds = NSSet()
@@ -74,7 +74,7 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         var union: Location!
         // Check if the location exists
         let unionFetchRequest = NSFetchRequest(entityName: "Location")
-        unionFetchRequest.predicate = NSPredicate(format: "name == %@", "union")
+        unionFetchRequest.predicate = NSPredicate(format: "name == %@", "Illini Union")
         
         if let locations = try? appDelegate.managedObjectContext.executeFetchRequest(unionFetchRequest) as! [Location] {
             if locations.count > 0 {
@@ -85,7 +85,7 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         if union == nil {
             // union is missing
             let unionEntity = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: appDelegate.managedObjectContext) as! Location
-            unionEntity.name = "union"
+            unionEntity.name = "Illini Union"
             unionEntity.latitude = 40.109395
             unionEntity.longitude = -88.227181
             unionEntity.feeds = NSSet()
@@ -173,8 +173,6 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
     
     /* Refresh the feed... */
     func refresh() {
-        print("refresh")
-        
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
             // Check to see if the method previously failed.
             if self.refreshCleanUpRequired {
@@ -207,11 +205,9 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
             
             // Get information from server
             sleep(20) // Fake server response
-            print("Post condd")
             
             if timeout {
                 // clean up
-                print("clean up")
                 self.refreshCleanUpRequired = false
             }
         }
