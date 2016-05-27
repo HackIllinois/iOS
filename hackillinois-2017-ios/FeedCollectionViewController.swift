@@ -65,31 +65,6 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         Helpers.saveContext()
     }
     
-    func save() {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        // Save context
-        do {
-            try appDelegate.managedObjectContext.save()
-        } catch {
-            print("Error occured while saving \(error)")
-        }
-    }
-    
-    func load() {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        // Fetch feed data
-        let dataFetchReqeust = NSFetchRequest(entityName: "Feed")
-        let sort = NSSortDescriptor(key: "time", ascending: false)
-        dataFetchReqeust.sortDescriptors = [sort]
-        
-        do {
-            let feedData = try appDelegate.managedObjectContext.executeFetchRequest(dataFetchReqeust) as! [Feed]
-            sampleData = feedData
-        } catch {
-            print("Failed to fetch feed data, critical error: \(error)")
-        }
-    }
-    
     // Mark - FeedCollectionViewController
     
     /* Refresh the feed... */
@@ -167,7 +142,11 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         // Initialize Static data
         initializeSample()
         // Load objects from core data
-        load()
+        sampleData = Helpers.loadContext(entityName: "Feed", fetchConfiguration: {
+            (fetchRequest: NSFetchRequest) in
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "time", ascending: false)]
+        }) as! [Feed]
+        
         feedCollection.reloadData()
         
         // Create the "sort by..." feature

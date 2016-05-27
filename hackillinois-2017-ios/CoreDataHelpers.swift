@@ -104,4 +104,32 @@ class Helpers {
         }
     }
     
+    /*
+     * Helper function to load a context.
+     * Supply the entity in which you want to load from.
+     *
+     * The fetchConfiguration is a function which will let you configure the request that takes place.
+     * Pass in a function which takes a NSFetchRequest as an argument and returns a void. This NSFetchRequest should be
+     * modified to configure the request to take place.
+     *
+     * Returns a AnyObject? since the entity may not exist
+     */
+    class func loadContext(entityName entityName: String, fetchConfiguration: (NSFetchRequest -> Void)?) -> AnyObject? {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        // Fetch requested data
+        let dataFetchReqeust = NSFetchRequest(entityName: entityName)
+        
+        // Configure the fetch request with user parameters
+        if fetchConfiguration != nil {
+            fetchConfiguration!(dataFetchReqeust)
+        }
+        
+        do {
+            return try appDelegate.managedObjectContext.executeFetchRequest(dataFetchReqeust)
+        } catch {
+            print("Failed to fetch feed data, critical error: \(error)")
+        }
+        
+        return nil
+    }
 }
