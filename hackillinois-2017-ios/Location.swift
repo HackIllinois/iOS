@@ -12,6 +12,19 @@ import CoreData
 
 class Location: NSManagedObject {
 
-// Insert code here to add functionality to your managed object subclass
-
+    /* Convenience updating function */
+    func initialize(latitude: NSNumber, longitude: NSNumber, name: String, feeds: NSSet) {
+        self.latitude = latitude
+        self.longitude = longitude
+        self.name = name
+        self.feeds = feeds
+    }
+    
+    /* Convenience updating function */
+    @nonobjc func initialize(latitude: NSNumber, longitude: NSNumber, name: String, feeds: [Feed]) {
+        self.latitude = latitude
+        self.longitude = longitude
+        self.name = name
+        self.feeds = NSSet(array: feeds)
+    }
 }

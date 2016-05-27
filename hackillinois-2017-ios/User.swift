@@ -12,6 +12,11 @@ import CoreData
 
 class User: NSManagedObject {
 
-// Insert code here to add functionality to your managed object subclass
+    /* Convenience updating function */
+    func initialize(barcode: String, name: String, status: String) {
+        self.barcode = barcode
+        self.name = name
+        self.status = status
+    }
 
 }

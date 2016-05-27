@@ -11,7 +11,16 @@ import CoreData
 
 
 class Tag: NSManagedObject {
-
-// Insert code here to add functionality to your managed object subclass
-
+    
+    /* Convenience update function */
+    func initialize(name: String, feeds: NSSet) {
+        self.feeds = feeds
+        self.name = name
+    }
+    
+    /* Overrides needs nonobjc methods to compile */
+    @nonobjc func initialize(name: String, feeds: [Feed]) {
+        self.name = name
+        self.feeds = NSSet(array: feeds)
+    }
 }

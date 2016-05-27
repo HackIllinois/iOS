@@ -24,130 +24,45 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
     // Mark - Sample static data
     // TODO: Add tagging feature
     var sampleData: [Feed]!
+    
     func initializeSample() {
         // Temporary Locations
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let siebel: Location! = Helpers.createOrFetchLocation(location: "Siebel", locationLatitude: 40.113926, locationLongitude: -88.224916, locationFeeds: nil)
         
-        var siebel: Location!
-        // Check if the location exists
-        let siebelFetchRequest = NSFetchRequest(entityName: "Location")
-        siebelFetchRequest.predicate = NSPredicate(format: "name == %@", "Siebel")
+        let eceb: Location! = Helpers.createOrFetchLocation(location: "ECEB", locationLatitude: 40.114828, locationLongitude: -88.228049, locationFeeds: nil)
         
-        if let locations = try? appDelegate.managedObjectContext.executeFetchRequest(siebelFetchRequest) as! [Location] {
-            if locations.count > 0 {
-                siebel = locations[0]
-            }
-        }
+        let union: Location! = Helpers.createOrFetchLocation(location: "Illini Union", locationLatitude: 40.109395, locationLongitude: -88.227181, locationFeeds: nil)
         
-        if siebel == nil {
-            // siebel is missing
-            let siebelEntity = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: appDelegate.managedObjectContext) as! Location
-            siebelEntity.name = "Siebel"
-            siebelEntity.latitude = 40.113926
-            siebelEntity.longitude = -88.224916
-            siebelEntity.feeds = NSSet()
-            
-            siebel = siebelEntity
-        }
+        // Temporary Tags
+        let tagGeneral = Helpers.createOrFetchTag(tag: "General", feeds: nil)
+        let tagFood = Helpers.createOrFetchTag(tag: "Food", feeds: nil)
+        let tagEvent = Helpers.createOrFetchTag(tag: "Event", feeds: nil)
+        let tagWorkshop = Helpers.createOrFetchTag(tag: "Workshop", feeds: nil)
         
-        var eceb: Location!
-        // Check if the location exists
-        let ecebFetchRequest = NSFetchRequest(entityName: "Location")
-        ecebFetchRequest.predicate = NSPredicate(format: "name == %@", "ECEB")
-        if let locations = try? appDelegate.managedObjectContext.executeFetchRequest(ecebFetchRequest) as! [Location] {
-            if locations.count > 0 {
-                eceb = locations[0]
-            }
-        }
+        // Temporary Events
+        Helpers.createFeed(id: 1, message: "Hacking has begun!",
+                           timestamp: 1464038000, locations: [], tags: [tagGeneral])
         
-        if eceb == nil {
-            // eceb is missing
-            let ecebEntity = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: appDelegate.managedObjectContext) as! Location
-            ecebEntity.name = "ECEB"
-            ecebEntity.latitude = 40.114828
-            ecebEntity.longitude = -88.228049
-            ecebEntity.feeds = NSSet()
-            
-            eceb = ecebEntity
-        }
+        Helpers.createFeed(id: 2, message: "Lunch is served! Please come to ECEB or Siebel for Potbelly's Sandwiches!",
+                           timestamp: 1464038763, locations: [siebel, eceb], tags: [tagFood])
         
-        var union: Location!
-        // Check if the location exists
-        let unionFetchRequest = NSFetchRequest(entityName: "Location")
-        unionFetchRequest.predicate = NSPredicate(format: "name == %@", "Illini Union")
+        Helpers.createFeed(id: 3, message: "Cluehunt has begun!",
+                           timestamp: 1464040073, locations: [siebel, eceb], tags: [tagEvent])
         
-        if let locations = try? appDelegate.managedObjectContext.executeFetchRequest(unionFetchRequest) as! [Location] {
-            if locations.count > 0 {
-                union = locations[0]
-            }
-        }
+        Helpers.createFeed(id: 4, message: "Dinner is will be served in 10 minutes!",
+                           timestamp: 1464042073, locations: [siebel, eceb], tags: [tagFood])
         
-        if union == nil {
-            // union is missing
-            let unionEntity = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: appDelegate.managedObjectContext) as! Location
-            unionEntity.name = "Illini Union"
-            unionEntity.latitude = 40.109395
-            unionEntity.longitude = -88.227181
-            unionEntity.feeds = NSSet()
-            
-            union = unionEntity
-        }
-        
-        let hackingStart = NSEntityDescription.insertNewObjectForEntityForName("Feed", inManagedObjectContext: appDelegate.managedObjectContext) as! Feed
-        hackingStart.message = "Hacking has begun!"
-        hackingStart.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464038000))
-        hackingStart.locations = nil
-        hackingStart.id = 1
-        hackingStart.tag = "General"
-        
-        let lunch = NSEntityDescription.insertNewObjectForEntityForName("Feed", inManagedObjectContext: appDelegate.managedObjectContext) as! Feed
-        lunch.message = "Lunch is served! Please come to ECEB or Siebel for Potbelly's Sandwiches!"
-        lunch.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464038763))
-        lunch.locations = NSSet(array: [siebel, eceb])
-        lunch.id = 2
-        lunch.tag = "Food"
-        
-        let cluehuntStart = NSEntityDescription.insertNewObjectForEntityForName("Feed", inManagedObjectContext: appDelegate.managedObjectContext) as! Feed
-        cluehuntStart.message = "Cluehunt has begun!"
-        cluehuntStart.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464040073))
-        cluehuntStart.locations = NSSet(array: [siebel, eceb])
-        cluehuntStart.id = 3
-        cluehuntStart.tag = "Event"
-        
-        let dinner = NSEntityDescription.insertNewObjectForEntityForName("Feed", inManagedObjectContext: appDelegate.managedObjectContext) as! Feed
-        dinner.message = "Dinner is going to be served in 10 minutes!"
-        dinner.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464042073))
-        dinner.locations = NSSet(array: [siebel, eceb])
-        dinner.id = 4
-        dinner.tag = "Food"
-        
-        let careerFair = NSEntityDescription.insertNewObjectForEntityForName("Feed", inManagedObjectContext: appDelegate.managedObjectContext) as! Feed
-        careerFair.message = "Career fair is starting at the Union!"
-        careerFair.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464042100))
-        careerFair.locations = NSSet(object: union)
-        careerFair.id = 5
-        careerFair.tag = "Event"
-        
-        // Add to the feeds set to protect integrity
-        siebel.feeds = siebel.feeds.setByAddingObjectsFromArray([lunch, cluehuntStart, dinner])
-        eceb.feeds = eceb.feeds.setByAddingObjectsFromArray([lunch, cluehuntStart, dinner])
-        union.feeds = union.feeds.setByAddingObject(careerFair)
+        Helpers.createFeed(id: 5, message: "Career fair is starting at the Union!",
+                           timestamp: 1464042100, locations: [union], tags: [tagEvent])
         
         // Generate dummy data to simulate scrolling down
         for n in 0 ..< 7 {
-            let dummy = NSEntityDescription.insertNewObjectForEntityForName("Feed", inManagedObjectContext: appDelegate.managedObjectContext) as! Feed
-            dummy.message = "Replace me with real things"
-            dummy.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464037000 - n*432))
-            dummy.locations = NSSet(array: [siebel, eceb, union])
-            dummy.id = 6 + n
-            
-            siebel.feeds = siebel.feeds.setByAddingObject(dummy)
-            eceb.feeds = eceb.feeds.setByAddingObject(dummy)
-            union.feeds = union.feeds.setByAddingObject(dummy)
-            dummy.tag = "Workshop"
+            let time = UInt64(1464037000 - n*432)
+            Helpers.createFeed(id: 6 + n, message: "Replace me with real things",
+                               timestamp: time, locations: [siebel, eceb, union], tags: [tagWorkshop])
         }
         
-        save()
+        Helpers.saveContext()
     }
     
     func save() {
@@ -280,7 +195,7 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
             let destination = segue.destinationViewController as! FeedDetailViewController
             let feedItem = sampleData[feedCollection.indexPathsForSelectedItems()!.first!.row]
             
-            if let locationArray = feedItem.locations?.allObjects as? [Location]{
+            if let locationArray = feedItem.locations?.array as? [Location]{
                 destination.locationArray = locationArray
             } else {
                 destination.locationArray = []
