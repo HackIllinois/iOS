@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  hackillinois-2017-ios
 //
-//  Created by Shotaro Ikeda on 5/23/16.
+//  Created by Shotaro Ikeda on 5/27/16.
 //  Copyright © 2016 Shotaro Ikeda. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu

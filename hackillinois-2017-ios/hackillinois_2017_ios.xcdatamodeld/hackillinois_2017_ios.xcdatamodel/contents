@@ -4,7 +4,8 @@
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="message" attributeType="String" syncable="YES"/>
         <attribute name="time" attributeType="Date" syncable="YES"/>
-        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="feeds" inverseEntity="Location" syncable="YES"/>
+        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Location" inverseName="feeds" inverseEntity="Location" syncable="YES"/>
+        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="feeds" inverseEntity="Tag" syncable="YES"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id"/>
@@ -22,14 +23,19 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
+    <entity name="Tag" representedClassName=".Tag" syncable="YES">
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="feeds" toMany="YES" deletionRule="Nullify" destinationEntity="Feed" inverseName="tags" inverseEntity="Feed" syncable="YES"/>
+    </entity>
     <entity name="User" representedClassName=".User" syncable="YES">
         <attribute name="barcode" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="status" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Feed" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="Feed" positionX="-63" positionY="-18" width="128" height="120"/>
         <element name="Location" positionX="-27" positionY="36" width="128" height="105"/>
         <element name="User" positionX="-54" positionY="-9" width="128" height="90"/>
+        <element name="Tag" positionX="-45" positionY="45" width="128" height="75"/>
     </elements>
 </model>

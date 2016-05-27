@@ -1,5 +1,5 @@
 //
-//  Feed+CoreDataProperties.swift
+//  Tag+CoreDataProperties.swift
 //  hackillinois-2017-ios
 //
 //  Created by Shotaro Ikeda on 5/27/16.
@@ -12,12 +12,9 @@
 import Foundation
 import CoreData
 
-extension Feed {
+extension Tag {
 
-    @NSManaged var id: NSNumber
-    @NSManaged var message: String
-    @NSManaged var time: NSDate
-    @NSManaged var locations: NSOrderedSet?
-    @NSManaged var tags: NSSet?
+    @NSManaged var name: String
+    @NSManaged var feeds: NSSet
 
 }

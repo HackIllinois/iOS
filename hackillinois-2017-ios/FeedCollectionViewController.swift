@@ -98,30 +98,35 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         hackingStart.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464038000))
         hackingStart.locations = nil
         hackingStart.id = 1
+        hackingStart.tag = "General"
         
         let lunch = NSEntityDescription.insertNewObjectForEntityForName("Feed", inManagedObjectContext: appDelegate.managedObjectContext) as! Feed
         lunch.message = "Lunch is served! Please come to ECEB or Siebel for Potbelly's Sandwiches!"
         lunch.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464038763))
         lunch.locations = NSSet(array: [siebel, eceb])
         lunch.id = 2
+        lunch.tag = "Food"
         
         let cluehuntStart = NSEntityDescription.insertNewObjectForEntityForName("Feed", inManagedObjectContext: appDelegate.managedObjectContext) as! Feed
         cluehuntStart.message = "Cluehunt has begun!"
         cluehuntStart.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464040073))
         cluehuntStart.locations = NSSet(array: [siebel, eceb])
         cluehuntStart.id = 3
+        cluehuntStart.tag = "Event"
         
         let dinner = NSEntityDescription.insertNewObjectForEntityForName("Feed", inManagedObjectContext: appDelegate.managedObjectContext) as! Feed
         dinner.message = "Dinner is going to be served in 10 minutes!"
         dinner.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464042073))
         dinner.locations = NSSet(array: [siebel, eceb])
         dinner.id = 4
+        dinner.tag = "Food"
         
         let careerFair = NSEntityDescription.insertNewObjectForEntityForName("Feed", inManagedObjectContext: appDelegate.managedObjectContext) as! Feed
         careerFair.message = "Career fair is starting at the Union!"
         careerFair.time = NSDate(timeIntervalSince1970: NSTimeInterval(1464042100))
         careerFair.locations = NSSet(object: union)
         careerFair.id = 5
+        careerFair.tag = "Event"
         
         // Add to the feeds set to protect integrity
         siebel.feeds = siebel.feeds.setByAddingObjectsFromArray([lunch, cluehuntStart, dinner])
@@ -139,6 +144,7 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
             siebel.feeds = siebel.feeds.setByAddingObject(dummy)
             eceb.feeds = eceb.feeds.setByAddingObject(dummy)
             union.feeds = union.feeds.setByAddingObject(dummy)
+            dummy.tag = "Workshop"
         }
         
         save()
@@ -248,6 +254,14 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         // Load objects from core data
         load()
         feedCollection.reloadData()
+        
+        // Create the "sort by..." feature
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sort by...", style: UIBarButtonItemStyle.Done, target: self, action: #selector(showSortBy))
+    }
+
+    func showSortBy() {
+        // Add the tags here...
+        let alert = UIAlertController(title: "Sort by...", message: "Select tag to sort by", preferredStyle: .ActionSheet)
     }
 
     override func didReceiveMemoryWarning() {
