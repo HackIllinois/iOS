@@ -132,4 +132,21 @@ class Helpers {
         
         return nil
     }
+    
+    /*
+     * Helper function to update the last updated time
+     */
+    class func setLatestUpdateTime(time: NSDate) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(time, forKey: "timestamp")
+    }
+    
+    /*
+     * Helper function to obtain the last updated time
+     */
+    class func getLatestUpdateTime() -> NSDate? {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        return defaults.objectForKey("timestamp") as? NSDate
+    }
+ 
 }

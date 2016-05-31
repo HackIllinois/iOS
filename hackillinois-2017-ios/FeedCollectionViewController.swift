@@ -16,7 +16,6 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
     var refreshCleanUpRequired = false
     var dateTimeFormatter: NSDateFormatter!
     
-    
     /* UI elements */
     @IBOutlet weak var feedCollection: UICollectionView!
     var refreshControl: UIRefreshControl!
@@ -24,6 +23,9 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
     /* Fetched results controller for lazy loading of cells */
     var fetchedResultsController: NSFetchedResultsController!
     var commitPredicate: NSPredicate!
+    
+    /* Cache of Tags to quickly generate the "Filter by..." menu */
+    var tags: [Tag]!
     
     // Mark: Loading function for NSFetchedResultsController
     // Not generalized due to very specific quirks to it
@@ -50,6 +52,16 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
     }
     
     func initializeSample() {
+        // Make sure that the time stamp recieved is actually greater than our last updated time
+        let lastUpdated: NSDate? = Helpers.getLatestUpdateTime()
+        if lastUpdated != nil {
+            // Replace with actual timestamp
+            if NSDate(timeIntervalSince1970: 1464042000).compare(lastUpdated!).rawValue <= 0 {
+                print("Already updated")
+                return
+            }
+        }
+        
         // Temporary Locations
         let siebel: Location! = Helpers.createOrFetchLocation(location: "Siebel", locationLatitude: 40.113926, locationLongitude: -88.224916, locationFeeds: nil)
         
@@ -87,12 +99,14 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         }
         
         Helpers.saveContext()
+        Helpers.setLatestUpdateTime(NSDate(timeIntervalSince1970: 1464042100))
     }
     
     // Mark - FeedCollectionViewController
     
     /* Refresh the feed... */
     func refresh() {
+        feedCollection.reloadData()
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
             // Check to see if the method previously failed.
             if self.refreshCleanUpRequired {
@@ -132,12 +146,48 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
             }
         }
     }
+    
+    /* Value to load all tags */
+    /* TODO: Hardcode tags instead? */
+    func loadTags() {
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) { [unowned self] in
+            let tempTags = Helpers.loadContext(entityName: "Tag") {
+                fetch in
+                
+                let sort = NSSortDescriptor(key: "name", ascending: true)
+                fetch.sortDescriptors = [sort]
+            }
+            self.tags = tempTags as! [Tag]
+            // dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0)) {
+            //     self.showSortBy
+            // }
+        }
+    }
+    
+    func showSortBy() {
+        // Add the tags here...
+        let alert = UIAlertController(title: "Sort by...", message: "Select tag to sort by", preferredStyle: .ActionSheet)
+        for tag in tags {
+            alert.addAction(UIAlertAction(title: tag.name, style: .Default, handler: nil))
+        }
+        alert.addAction(UIAlertAction(title: "Default", style: .Default, handler: { [unowned self] action in
+            self.commitPredicate = nil
+            self.feedCollection.reloadData()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        presentViewController(alert, animated: true, completion: nil)
+    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
+        
+        /* Preemptively load tags */
+        loadTags()
 
         // Do any additional setup after loading the view.
         
@@ -169,12 +219,7 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         loadSavedData()
         
         // Create the "sort by..." feature
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sort by...", style: UIBarButtonItemStyle.Done, target: self, action: #selector(showSortBy))
-    }
-
-    func showSortBy() {
-        // Add the tags here...
-        let alert = UIAlertController(title: "Sort by...", message: "Select tag to sort by", preferredStyle: .ActionSheet)
+        navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sort by...", style: UIBarButtonItemStyle.Done, target: self, action: #selector(showSortBy))
     }
 
     override func didReceiveMemoryWarning() {
@@ -209,6 +254,7 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(fetchedResultsController.sections![section].numberOfObjects)
         return fetchedResultsController.sections![section].numberOfObjects
     }
     
