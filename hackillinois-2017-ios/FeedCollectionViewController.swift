@@ -11,7 +11,7 @@ import CoreData
 
 private let reuseIdentifier = "feedCell"
 
-class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, NSFetchedResultsControllerDelegate {
     /* Variables */
     var refreshCleanUpRequired = false
     var dateTimeFormatter: NSDateFormatter!
@@ -21,9 +21,33 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var feedCollection: UICollectionView!
     var refreshControl: UIRefreshControl!
     
-    // Mark - Sample static data
-    // TODO: Add tagging feature
-    var sampleData: [Feed]!
+    /* Fetched results controller for lazy loading of cells */
+    var fetchedResultsController: NSFetchedResultsController!
+    var commitPredicate: NSPredicate!
+    
+    // Mark: Loading function for NSFetchedResultsController
+    // Not generalized due to very specific quirks to it
+    // TODO: find a way to generalize
+    func loadSavedData() {
+        if fetchedResultsController == nil {
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let fetch = NSFetchRequest(entityName: "Feed")
+            let sort = NSSortDescriptor(key: "time", ascending: false)
+            fetch.sortDescriptors = [sort]
+            
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetch, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+            fetchedResultsController.delegate = self
+        }
+        
+        fetchedResultsController.fetchRequest.predicate = commitPredicate
+        
+        do {
+            try fetchedResultsController.performFetch()
+            feedCollection.reloadData()
+        } catch {
+            print("Could not load saved data \(error)")
+        }
+    }
     
     func initializeSample() {
         // Temporary Locations
@@ -142,12 +166,7 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         // Initialize Static data
         initializeSample()
         // Load objects from core data
-        sampleData = Helpers.loadContext(entityName: "Feed", fetchConfiguration: {
-            (fetchRequest: NSFetchRequest) in
-            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "time", ascending: false)]
-        }) as! [Feed]
-        
-        feedCollection.reloadData()
+        loadSavedData()
         
         // Create the "sort by..." feature
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sort by...", style: UIBarButtonItemStyle.Done, target: self, action: #selector(showSortBy))
@@ -172,9 +191,9 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         
         if segue.identifier == "feedDetail" {
             let destination = segue.destinationViewController as! FeedDetailViewController
-            let feedItem = sampleData[feedCollection.indexPathsForSelectedItems()!.first!.row]
+            let feedItem = fetchedResultsController.objectAtIndexPath(feedCollection.indexPathsForSelectedItems()!.first!) as! Feed
             
-            if let locationArray = feedItem.locations?.array as? [Location]{
+            if let locationArray = feedItem.locations?.array as? [Location] {
                 destination.locationArray = locationArray
             } else {
                 destination.locationArray = []
@@ -185,13 +204,17 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
     }
 
     // MARK: UICollectionViewDataSource
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return fetchedResultsController.sections?.count ?? 0
+    }
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sampleData.count
+        return fetchedResultsController.sections![section].numberOfObjects
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("feedCell", forIndexPath: indexPath) as! FeedCollectionViewCell
-        let feed = sampleData[indexPath.row]
+        let feed = fetchedResultsController.objectAtIndexPath(indexPath) as! Feed
         cell.dateTimeLabel.text = dateTimeFormatter.stringFromDate(feed.time)
         cell.messageLabel.text = feed.message
         
