@@ -47,7 +47,7 @@ class Helpers {
      */
     class func createOrFetchTag(tag tagName: String, feeds: [Feed]?) -> Tag {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let fetchRequest = NSFetchRequest(entityName: "tag")
+        let fetchRequest = NSFetchRequest(entityName: "Tag")
         fetchRequest.predicate = NSPredicate(format: "name == %@", tagName)
         
         if let tags = try? appDelegate.managedObjectContext.executeFetchRequest(fetchRequest) {
