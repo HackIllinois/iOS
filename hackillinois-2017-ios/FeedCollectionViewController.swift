@@ -35,6 +35,7 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
             print("Error loading: \(error)")
         }
     }
+    
     // Mark: Loading function for NSFetchedResultsController
     // Not generalized due to very specific quirks to it
     // TODO: find a way to generalize
@@ -152,6 +153,7 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
     /* Value to load all tags */
     /* TODO: Hardcode tags instead? */
     func loadTags() {
+        // Might need to change this to QOS_CLASS_USER_INITIATED, or it might not appear in time
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) { [unowned self] in
             let tempTags = Helpers.loadContext(entityName: "Tag") {
                 fetch in
@@ -160,15 +162,14 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
                 fetch.sortDescriptors = [sort]
             }
             self.tags = tempTags as! [Tag]
-            // dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0)) {
-            //     self.showSortBy
-            // }
         }
     }
     
-    func showSortBy() {
+    // Mark: Show filtering options...
+    func showFilterBy() {
         // Add the tags here...
-        let alert = UIAlertController(title: "Sort by...", message: "Select tag to sort by", preferredStyle: .ActionSheet)
+        let alert = UIAlertController(title: "Filter by...", message: "Select tag to sort by", preferredStyle: .ActionSheet)
+        // Could be slow for many tags...
         for tag in tags {
             alert.addAction(UIAlertAction(title: tag.name, style: .Default, handler: {
                 [unowned self] alert in
@@ -234,7 +235,7 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         loadSavedData()
         
         // Create the "sort by..." feature
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sort by...", style: .Plain, target: self, action: #selector(showSortBy))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sort by...", style: .Plain, target: self, action: #selector(showFilterBy))
         navigationItem.title = "Annoucements"
     }
 
