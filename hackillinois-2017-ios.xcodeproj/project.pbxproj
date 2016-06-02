@@ -40,6 +40,7 @@
 		E2BCA57F1CF3B19E006AAA8B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5791CF3B19E006AAA8B /* User.swift */; };
 		E2BCA5801CF3B19E006AAA8B /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA57A1CF3B19E006AAA8B /* Location+CoreDataProperties.swift */; };
 		E2BCA5811CF3B19E006AAA8B /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA57B1CF3B19E006AAA8B /* Location.swift */; };
+		E2D483331D00D3B100859A67 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D483321D00D3B100859A67 /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		E2BCA5791CF3B19E006AAA8B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E2BCA57A1CF3B19E006AAA8B /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E2BCA57B1CF3B19E006AAA8B /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		E2D483321D00D3B100859A67 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		E75AFF8F2A9393CCA4EBF188 /* Pods_hackillinois_2017_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -243,12 +245,13 @@
 		E2BCA5591CF36167006AAA8B /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				E2BCA5691CF373A1006AAA8B /* MainConstants.swift */,
 				E25377431CF8C485003795E7 /* CoreDataHelpers.swift */,
+				E2BCA5691CF373A1006AAA8B /* MainConstants.swift */,
 				E2BCA55A1CF36187006AAA8B /* Main.storyboard */,
 				E2BCA5651CF372DD006AAA8B /* MainNavigationViewController.swift */,
 				E2BCA5671CF37363006AAA8B /* MainTabBarViewController.swift */,
 				E2BCA5601CF36A15006AAA8B /* Feed */,
+				E2D483311D00D37800859A67 /* Maps */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -276,6 +279,14 @@
 				E2BCA57B1CF3B19E006AAA8B /* Location.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		E2D483311D00D37800859A67 /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+				E2D483321D00D3B100859A67 /* MapViewController.swift */,
+			);
+			name = Maps;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -558,6 +569,7 @@
 				E2BCA5811CF3B19E006AAA8B /* Location.swift in Sources */,
 				E2BCA5621CF36CDA006AAA8B /* FeedCollectionViewController.swift in Sources */,
 				E25377421CF8AB2C003795E7 /* Tag.swift in Sources */,
+				E2D483331D00D3B100859A67 /* MapViewController.swift in Sources */,
 				E2BCA5801CF3B19E006AAA8B /* Location+CoreDataProperties.swift in Sources */,
 				E2BCA57C1CF3B19E006AAA8B /* Feed+CoreDataProperties.swift in Sources */,
 				E2BCA5641CF37017006AAA8B /* FeedCollectionViewCell.swift in Sources */,

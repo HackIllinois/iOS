@@ -17,7 +17,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="O8q-ER-pgb" kind="relationship" relationship="viewControllers" id="UD7-Pj-mKp"/>
-                        <segue destination="qaZ-tF-XKU" kind="relationship" relationship="viewControllers" id="3Nc-OC-cqg"/>
+                        <segue destination="auk-1d-PU8" kind="relationship" relationship="viewControllers" id="3Nc-OC-cqg"/>
                         <segue destination="IIz-Kf-53f" kind="relationship" relationship="viewControllers" id="PHJ-ev-guD"/>
                         <segue destination="S6B-kj-emR" kind="relationship" relationship="viewControllers" id="b0Q-Nk-zg5"/>
                     </connections>
@@ -26,10 +26,10 @@
             </objects>
             <point key="canvasLocation" x="-1092" y="1547"/>
         </scene>
-        <!--Maps-->
+        <!--Map View Controller-->
         <scene sceneID="aal-5c-lxi">
             <objects>
-                <viewController id="qaZ-tF-XKU" sceneMemberID="viewController">
+                <viewController id="qaZ-tF-XKU" customClass="MapViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mgr-C5-5lE"/>
                         <viewControllerLayoutGuide type="bottom" id="bvf-mM-5by"/>
@@ -37,13 +37,28 @@
                     <view key="view" contentMode="scaleToFill" id="ib4-KP-Krk">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vtn-kn-mDg" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Vtn-kn-mDg" firstAttribute="leading" secondItem="ib4-KP-Krk" secondAttribute="leadingMargin" constant="-20" id="6tj-zs-jNU"/>
+                            <constraint firstItem="bvf-mM-5by" firstAttribute="top" secondItem="Vtn-kn-mDg" secondAttribute="bottom" id="DdP-O1-Y0R"/>
+                            <constraint firstItem="Vtn-kn-mDg" firstAttribute="top" secondItem="mgr-C5-5lE" secondAttribute="bottom" id="Iph-bP-pvI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Vtn-kn-mDg" secondAttribute="trailing" constant="-20" id="Qw4-N3-Rn8"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Maps" image="ic_map" id="gW3-u5-oRF"/>
+                    <navigationItem key="navigationItem" id="m5J-TP-VmL"/>
+                    <connections>
+                        <outlet property="map" destination="Vtn-kn-mDg" id="2o0-hm-fFw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wl9-fg-gn8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="674" y="631"/>
+            <point key="canvasLocation" x="1486" y="631"/>
         </scene>
         <!--Profile-->
         <scene sceneID="Nhr-xU-9wA">
@@ -295,6 +310,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QXQ-gD-1S0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="673" y="-131"/>
+        </scene>
+        <!--Maps-->
+        <scene sceneID="xIp-nn-huC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="auk-1d-PU8" customClass="MainNavigationViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Maps" image="ic_map" id="gW3-u5-oRF"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yyE-Rb-fuQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qaZ-tF-XKU" kind="relationship" relationship="rootViewController" id="BN4-Im-RQb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iV2-Et-PSC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="674" y="631"/>
         </scene>
     </scenes>
     <resources>

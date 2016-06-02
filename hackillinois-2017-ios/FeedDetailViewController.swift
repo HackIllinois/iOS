@@ -38,14 +38,6 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         manager = CLLocationManager()
         manager.delegate = self
         
-        if CLLocationManager.authorizationStatus() == .NotDetermined {
-            manager.requestWhenInUseAuthorization()
-        } else if !(CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse) && !(CLLocationManager.authorizationStatus() == .AuthorizedAlways) {
-            let ac = UIAlertController(title: "Location Services Disabled", message: "Location services is required to help route paths and show your location.", preferredStyle: .Alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            presentViewController(ac, animated: true, completion: nil)
-        }
-        
         // Do any additional setup after loading the view.
         event.text = message
         
@@ -71,6 +63,29 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate, UITableVi
             
             // Set up the routes array to have routes be 1 to 1 with the locationArray
             routes.append(nil)
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Check for location permissions
+        switch CLLocationManager.authorizationStatus() {
+        case .NotDetermined:
+            manager.requestWhenInUseAuthorization()
+        case .AuthorizedWhenInUse:
+            // User has given proper permission
+            break
+        default:
+            // Warn the user that the map is used to determine the user's location
+            /* Authorization is invalid */
+            let ac = UIAlertController(title: "Location Services Disabled", message: "Location services are required to show your location on the map and route paths.", preferredStyle: .Alert)
+            ac.addAction(UIAlertAction(title: "Open Settings", style: .Default, handler: {
+                action in
+                UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
+            }))
+            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            presentViewController(ac, animated: true, completion: nil)
         }
         
     }
