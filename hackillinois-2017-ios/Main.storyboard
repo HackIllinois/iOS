@@ -1,26 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bgR-q1-afm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LXI-DR-cWu">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Main Navigation View Controller-->
-        <scene sceneID="P2x-EX-wYc">
-            <objects>
-                <navigationController id="bgR-q1-afm" customClass="MainNavigationViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DM8-2z-2Bx">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="LXI-DR-cWu" kind="relationship" relationship="rootViewController" id="7eq-ga-HUd"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CN2-dt-ecB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1941" y="1547"/>
-        </scene>
         <!--Main Tab Bar View Controller-->
         <scene sceneID="CaQ-aq-biC">
             <objects>
@@ -32,7 +16,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="nho-NB-b6i" kind="relationship" relationship="viewControllers" id="UD7-Pj-mKp"/>
+                        <segue destination="O8q-ER-pgb" kind="relationship" relationship="viewControllers" id="UD7-Pj-mKp"/>
                         <segue destination="qaZ-tF-XKU" kind="relationship" relationship="viewControllers" id="3Nc-OC-cqg"/>
                         <segue destination="IIz-Kf-53f" kind="relationship" relationship="viewControllers" id="PHJ-ev-guD"/>
                         <segue destination="S6B-kj-emR" kind="relationship" relationship="viewControllers" id="b0Q-Nk-zg5"/>
@@ -99,7 +83,7 @@
             </objects>
             <point key="canvasLocation" x="674" y="2107"/>
         </scene>
-        <!--Feed-->
+        <!--Feed Collection View Controller-->
         <scene sceneID="KOO-9v-UHN">
             <objects>
                 <viewController id="nho-NB-b6i" customClass="FeedCollectionViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
@@ -181,14 +165,14 @@
                             <constraint firstItem="8Lt-x6-lzi" firstAttribute="leading" secondItem="Hnw-0U-UHd" secondAttribute="leadingMargin" constant="-20" id="Y1o-mO-evo"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Feed" image="ic_list" id="QEl-cH-2pi"/>
+                    <navigationItem key="navigationItem" id="9x6-ft-woM"/>
                     <connections>
                         <outlet property="feedCollection" destination="8Lt-x6-lzi" id="GKf-bL-Y67"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yod-Gj-Dkk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="673" y="-131"/>
+            <point key="canvasLocation" x="1485" y="-131"/>
         </scene>
         <!--Feed Detail View Controller-->
         <scene sceneID="cLf-xP-owu">
@@ -291,7 +275,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o9Y-bv-x2y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1540" y="-131"/>
+            <point key="canvasLocation" x="2352" y="-131"/>
+        </scene>
+        <!--Feed-->
+        <scene sceneID="BCS-eV-70o">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="O8q-ER-pgb" customClass="MainNavigationViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Feed" image="ic_list" id="QEl-cH-2pi"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xkL-lu-mkh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="nho-NB-b6i" kind="relationship" relationship="rootViewController" id="rCg-6y-Jj2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QXQ-gD-1S0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="673" y="-131"/>
         </scene>
     </scenes>
     <resources>

@@ -16,6 +16,7 @@ class MainNavigationViewController: UINavigationController {
         // Do any additional setup after loading the view.
         navigationBar.barTintColor = UIColor.fromRGBHex(mainUIColor)
         navigationBar.tintColor = UIColor.fromRGBHex(mainTintColor)
+        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.fromRGBHex(mainTintColor)]
     }
 
     override func didReceiveMemoryWarning() {

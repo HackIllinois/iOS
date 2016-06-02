@@ -219,7 +219,8 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         loadSavedData()
         
         // Create the "sort by..." feature
-        navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sort by...", style: UIBarButtonItemStyle.Done, target: self, action: #selector(showSortBy))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sort by...", style: .Plain, target: self, action: #selector(showSortBy))
+        navigationItem.title = "Annoucements"
     }
 
     override func didReceiveMemoryWarning() {
