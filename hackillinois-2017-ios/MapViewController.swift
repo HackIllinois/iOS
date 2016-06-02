@@ -21,13 +21,33 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Do any additional setup after loading the view.
+        
         // Navigation bar
         navigationItem.title = "Map"
         
         manager = CLLocationManager()
         manager.delegate = self
 
-        // Do any additional setup after loading the view.
+        // Create Points for event locations
+        
+        // Siebel
+        let siebel = GMSMarker(position: CLLocationCoordinate2DMake(40.113926, -88.224916))
+        siebel.title = "Thomas Siebel Center for Computer Science"
+        siebel.map = map
+        
+        // ECEB
+        let eceb = GMSMarker(position: CLLocationCoordinate2DMake(40.114828, -88.228049))
+        eceb.title = "Electrical and Computer Engineering Building"
+        eceb.map = map
+        
+        // Illini Union
+        let union = GMSMarker(position: CLLocationCoordinate2DMake(40.109395, -88.227181))
+        union.title = "Illini Union"
+        union.map = map
+        
+        // Adjust map
+        map.camera = GMSCameraPosition.cameraWithLatitude(40.109395, longitude: -88.227581, zoom: 15)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -56,6 +76,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // Mark: CLLocationManagerDelegate
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if status == .AuthorizedWhenInUse {
+            map.myLocationEnabled = true
+            map.settings.myLocationButton = true
+        }
     }
     
 
