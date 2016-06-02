@@ -22,11 +22,19 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
     
     /* Fetched results controller for lazy loading of cells */
     var fetchedResultsController: NSFetchedResultsController!
-    var commitPredicate: NSPredicate!
     
     /* Cache of Tags to quickly generate the "Filter by..." menu */
     var tags: [Tag]!
     
+    // Mark: Fetch function with predicate is already defined
+    func performFetch() {
+        do {
+            try self.fetchedResultsController.performFetch()
+            self.feedCollection.reloadData()
+        } catch {
+            print("Error loading: \(error)")
+        }
+    }
     // Mark: Loading function for NSFetchedResultsController
     // Not generalized due to very specific quirks to it
     // TODO: find a way to generalize
@@ -41,14 +49,8 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
             fetchedResultsController.delegate = self
         }
         
-        fetchedResultsController.fetchRequest.predicate = commitPredicate
-        
-        do {
-            try fetchedResultsController.performFetch()
-            feedCollection.reloadData()
-        } catch {
-            print("Could not load saved data \(error)")
-        }
+        fetchedResultsController.fetchRequest.predicate = nil
+        performFetch()
     }
     
     func initializeSample() {
@@ -168,11 +170,24 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         // Add the tags here...
         let alert = UIAlertController(title: "Sort by...", message: "Select tag to sort by", preferredStyle: .ActionSheet)
         for tag in tags {
-            alert.addAction(UIAlertAction(title: tag.name, style: .Default, handler: nil))
+            alert.addAction(UIAlertAction(title: tag.name, style: .Default, handler: {
+                [unowned self] alert in
+                let predicate = NSPredicate(format: "ANY tags.name CONTAINS[cd] %@", alert.title!)
+                print("querying for \(alert.title!)")
+                self.fetchedResultsController.fetchRequest.predicate = predicate
+                
+                do {
+                    try self.fetchedResultsController.performFetch()
+                    self.feedCollection.reloadData()
+                } catch {
+                    print("Error loading: \(error)")
+                }
+            }))
         }
+        
         alert.addAction(UIAlertAction(title: "Default", style: .Default, handler: { [unowned self] action in
-            self.commitPredicate = nil
-            self.feedCollection.reloadData()
+            self.fetchedResultsController.fetchRequest.predicate = nil
+            self.performFetch()
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
