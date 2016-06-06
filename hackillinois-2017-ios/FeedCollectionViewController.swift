@@ -11,7 +11,7 @@ import CoreData
 
 private let reuseIdentifier = "feedCell"
 
-class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, NSFetchedResultsControllerDelegate {
+class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate {
     /* Variables */
     var refreshCleanUpRequired = false
     var dateTimeFormatter: NSDateFormatter!
@@ -283,9 +283,15 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         
         return cell
     }
-
-    // MARK: UICollectionViewDelegate
     
+    // Mark: UICollectionDelegateFlowLayout
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        // Support multiple devices...
+        let screen = UIScreen.mainScreen().bounds
+        return CGSize(width: screen.width - 60, height: screen.height / 3 - 50)
+    }
+    
+    // MARK: UICollectionViewDelegate
     /*
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         performSegueWithIdentifier("feedDetail", sender: sampleData[indexPath.row])

@@ -24,7 +24,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvJ-ec-cHF">
-                                        <rect key="frame" x="60" y="127.5" width="480" height="300"/>
+                                        <rect key="frame" x="60" y="150" width="480" height="300"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wml-Eo-5NI">
                                                 <rect key="frame" x="115" y="100" width="250" height="40"/>
@@ -83,7 +83,9 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="2Z3-7e-4ZG" firstAttribute="centerX" secondItem="cY8-Hq-78E" secondAttribute="centerX" id="4QG-g4-UN4"/>
+                                    <constraint firstItem="cvJ-ec-cHF" firstAttribute="centerY" secondItem="cY8-Hq-78E" secondAttribute="centerY" id="56k-AK-Rb9"/>
                                     <constraint firstItem="cY8-Hq-78E" firstAttribute="centerY" secondItem="hYk-eL-auk" secondAttribute="centerY" id="Eql-5c-3da"/>
+                                    <constraint firstItem="cvJ-ec-cHF" firstAttribute="top" relation="greaterThanOrEqual" secondItem="2Z3-7e-4ZG" secondAttribute="bottom" constant="50" id="Kpd-S0-GfK"/>
                                     <constraint firstAttribute="bottom" secondItem="cY8-Hq-78E" secondAttribute="bottom" id="PjQ-yo-oNm"/>
                                     <constraint firstItem="2Z3-7e-4ZG" firstAttribute="top" secondItem="hYk-eL-auk" secondAttribute="top" constant="20" id="QmY-EK-X5B"/>
                                     <constraint firstItem="cY8-Hq-78E" firstAttribute="leading" secondItem="hYk-eL-auk" secondAttribute="leading" id="dRD-VE-04C"/>
@@ -91,7 +93,6 @@
                                     <constraint firstAttribute="trailing" secondItem="cY8-Hq-78E" secondAttribute="trailing" id="iki-gg-iOb"/>
                                     <constraint firstItem="cY8-Hq-78E" firstAttribute="top" secondItem="hYk-eL-auk" secondAttribute="top" id="lUx-k0-C5E"/>
                                     <constraint firstItem="cY8-Hq-78E" firstAttribute="centerX" secondItem="hYk-eL-auk" secondAttribute="centerX" id="t6I-xE-2af"/>
-                                    <constraint firstItem="cvJ-ec-cHF" firstAttribute="top" secondItem="2Z3-7e-4ZG" secondAttribute="bottom" priority="750" constant="50" id="uYm-Oc-aiu"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
