@@ -57,13 +57,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, LiquidFloa
         button.dataSource = self
         button.delegate = self
         button.color = UIColor.fromRGBHex(mainUIColor)
+        button.enableShadow = false
         
-        var hue: CGFloat = 0.02
+        var hue: CGFloat = 5.0 / 360.0
         
         for (index, _) in locations.enumerate() {
             let locationCell = LiquidFloatingCell(icon: UIImage(named: "ic_forward_48pt")!)
-            locationCell.color = UIColor(hue: hue, saturation: 0.78, brightness: 0.57, alpha: 1.0)
-            hue += 0.1
+            locationCell.color = UIColor(hue: hue, saturation: 74/100, brightness: 90/100, alpha: 1.0) /* #e74c3c */
+            hue += 0.05
             buttons.append(locationCell)
         }
         map.addSubview(button)
