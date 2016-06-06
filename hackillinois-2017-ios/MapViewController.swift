@@ -18,34 +18,32 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, LiquidFloa
     /* Variables */
     var manager: CLLocationManager!
     // Start off the locations and buttons as empty
-    var locations: [String: CLLocationCoordinate2D]! = [:]
+    var locations: [CLLocationCoordinate2D]! = []
     var buttons: [LiquidFloatingCell]! = []
     
     // Mark: Initilizing locations and where locations are set
     /* Modify this function to change the locations available */
     func initializeLocations() {
         // Create Points for event locations
-        locations["siebel"] = CLLocationCoordinate2DMake(40.113926, -88.224916)
         
-        locations["eceb"] = CLLocationCoordinate2DMake(40.114828, -88.228049)
-        locations["union"] = CLLocationCoordinate2DMake(40.109395, -88.227181)
         
         // Siebel
-        let siebel = GMSMarker(position: locations["siebel"]!)
+        locations.append(CLLocationCoordinate2DMake(40.113926, -88.224916))
+        let siebel = GMSMarker(position: locations[0])
         siebel.title = "Thomas Siebel Center for Computer Science"
         siebel.map = map
         
         // ECEB
-        let eceb = GMSMarker(position: locations["eceb"]!)
+        locations.append(CLLocationCoordinate2DMake(40.114828, -88.228049))
+        let eceb = GMSMarker(position: locations[1])
         eceb.title = "Electrical and Computer Engineering Building"
         eceb.map = map
         
         // Illini Union
-        let union = GMSMarker(position: locations["union"]!)
+        locations.append(CLLocationCoordinate2DMake(40.109395, -88.227181))
+        let union = GMSMarker(position: locations[2])
         union.title = "Illini Union"
         union.map = map
-        
-        print("Map's bounds-- x: \(map.bounds.maxX) y: \(map.bounds.maxY)")
         
         // The rectangle's alignment is hacky due to iOS's autolayout constraints
         // TODO: Find a more dynamic, better alignment
@@ -58,11 +56,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, LiquidFloa
         button.animateStyle = .Up
         button.dataSource = self
         button.delegate = self
+        button.color = UIColor.fromRGBHex(mainUIColor)
         
-        buttons.append(LiquidFloatingCell(icon: UIImage(named: "ic_forward_48pt")!))
-        buttons.append(LiquidFloatingCell(icon: UIImage(named: "ic_forward_48pt")!))
-        buttons.append(LiquidFloatingCell(icon: UIImage(named: "ic_forward_48pt")!))
+        var hue: CGFloat = 0.02
         
+        for (index, _) in locations.enumerate() {
+            let locationCell = LiquidFloatingCell(icon: UIImage(named: "ic_forward_48pt")!)
+            locationCell.color = UIColor(hue: hue, saturation: 0.78, brightness: 0.57, alpha: 1.0)
+            hue += 0.1
+            buttons.append(locationCell)
+        }
         map.addSubview(button)
     }
     
