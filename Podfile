@@ -7,6 +7,8 @@ target 'hackillinois-2017-ios' do
         source 'https://github.com/CocoaPods/Specs.git'
         pod 'GoogleMaps'
         pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
+# Must use swift 2.0 branch for Liquid action buttons
+        pod 'LiquidFloatingActionButton', :git => 'https://github.com/yoavlt/LiquidFloatingActionButton.git', :branch => 'swift-2.0'
 end
 
 target 'hackillinois-2017-iosTests' do

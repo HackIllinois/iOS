@@ -8,15 +8,63 @@
 
 import UIKit
 import GoogleMaps
+import LiquidFloatingActionButton
 
-class MapViewController: UIViewController, CLLocationManagerDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, LiquidFloatingActionButtonDelegate, LiquidFloatingActionButtonDataSource {
 
     /* IB Outlets */
     @IBOutlet weak var map: GMSMapView!
     
     /* Variables */
     var manager: CLLocationManager!
+    // Start off the locations and buttons as empty
+    var locations: [String: CLLocationCoordinate2D]! = [:]
+    var buttons: [LiquidFloatingCell]! = []
     
+    // Mark: Initilizing locations and where locations are set
+    /* Modify this function to change the locations available */
+    func initializeLocations() {
+        // Create Points for event locations
+        locations["siebel"] = CLLocationCoordinate2DMake(40.113926, -88.224916)
+        
+        locations["eceb"] = CLLocationCoordinate2DMake(40.114828, -88.228049)
+        locations["union"] = CLLocationCoordinate2DMake(40.109395, -88.227181)
+        
+        // Siebel
+        let siebel = GMSMarker(position: locations["siebel"]!)
+        siebel.title = "Thomas Siebel Center for Computer Science"
+        siebel.map = map
+        
+        // ECEB
+        let eceb = GMSMarker(position: locations["eceb"]!)
+        eceb.title = "Electrical and Computer Engineering Building"
+        eceb.map = map
+        
+        // Illini Union
+        let union = GMSMarker(position: locations["union"]!)
+        union.title = "Illini Union"
+        union.map = map
+        
+        print("Map's bounds-- x: \(map.bounds.maxX) y: \(map.bounds.maxY)")
+        
+        // The rectangle's alignment is hacky due to iOS's autolayout constraints
+        // TODO: Find a more dynamic, better alignment
+        let screen = UIScreen.mainScreen().bounds
+        
+        // Google's button is 100x100 with 10 point bounds (which is included already)
+        let rect = CGRect(x: screen.width - 50, y: screen.height - self.tabBarController!.tabBar.frame.height - 180, width: 40, height: 40)
+        
+        let button = LiquidFloatingActionButton(frame: rect)
+        button.animateStyle = .Up
+        button.dataSource = self
+        button.delegate = self
+        
+        buttons.append(LiquidFloatingCell(icon: UIImage(named: "ic_forward_48pt")!))
+        buttons.append(LiquidFloatingCell(icon: UIImage(named: "ic_forward_48pt")!))
+        buttons.append(LiquidFloatingCell(icon: UIImage(named: "ic_forward_48pt")!))
+        
+        map.addSubview(button)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,22 +77,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         manager = CLLocationManager()
         manager.delegate = self
 
-        // Create Points for event locations
-        
-        // Siebel
-        let siebel = GMSMarker(position: CLLocationCoordinate2DMake(40.113926, -88.224916))
-        siebel.title = "Thomas Siebel Center for Computer Science"
-        siebel.map = map
-        
-        // ECEB
-        let eceb = GMSMarker(position: CLLocationCoordinate2DMake(40.114828, -88.228049))
-        eceb.title = "Electrical and Computer Engineering Building"
-        eceb.map = map
-        
-        // Illini Union
-        let union = GMSMarker(position: CLLocationCoordinate2DMake(40.109395, -88.227181))
-        union.title = "Illini Union"
-        union.map = map
+        // Initialize Map data
+        initializeLocations()
         
         // Adjust map
         map.camera = GMSCameraPosition.cameraWithLatitude(40.109395, longitude: -88.227581, zoom: 15)
@@ -84,6 +118,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             map.myLocationEnabled = true
             map.settings.myLocationButton = true
         }
+    }
+    
+    // Mark: LiquidFloatingActionButton DataSources
+    func numberOfCells(liquidFloatingActionButton: LiquidFloatingActionButton) -> Int {
+        return buttons.count
+    }
+    
+    func cellForIndex(index: Int) -> LiquidFloatingCell {
+        return buttons[index]
+    }
+    
+    // Mark: LiquidFloatingActionButton Delegates
+    func liquidFloatingActionButton(liquidFloatingActionButton: LiquidFloatingActionButton, didSelectItemAtIndex index: Int) {
+        print("selected \(index)")
+        liquidFloatingActionButton.close()
     }
     
 

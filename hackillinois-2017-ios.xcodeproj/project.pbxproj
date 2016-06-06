@@ -41,6 +41,7 @@
 		E2BCA5801CF3B19E006AAA8B /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA57A1CF3B19E006AAA8B /* Location+CoreDataProperties.swift */; };
 		E2BCA5811CF3B19E006AAA8B /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA57B1CF3B19E006AAA8B /* Location.swift */; };
 		E2D483331D00D3B100859A67 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D483321D00D3B100859A67 /* MapViewController.swift */; };
+		E2F639481D05083300853089 /* CGRect+initWithCenterAt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F639471D05083300853089 /* CGRect+initWithCenterAt.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +105,7 @@
 		E2BCA57A1CF3B19E006AAA8B /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E2BCA57B1CF3B19E006AAA8B /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		E2D483321D00D3B100859A67 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		E2F639471D05083300853089 /* CGRect+initWithCenterAt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+initWithCenterAt.swift"; sourceTree = "<group>"; };
 		E75AFF8F2A9393CCA4EBF188 /* Pods_hackillinois_2017_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -238,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */,
+				E2F639471D05083300853089 /* CGRect+initWithCenterAt.swift */,
 			);
 			name = LanguageExtensions;
 			sourceTree = "<group>";
@@ -571,6 +574,7 @@
 				E25377421CF8AB2C003795E7 /* Tag.swift in Sources */,
 				E2D483331D00D3B100859A67 /* MapViewController.swift in Sources */,
 				E2BCA5801CF3B19E006AAA8B /* Location+CoreDataProperties.swift in Sources */,
+				E2F639481D05083300853089 /* CGRect+initWithCenterAt.swift in Sources */,
 				E2BCA57C1CF3B19E006AAA8B /* Feed+CoreDataProperties.swift in Sources */,
 				E2BCA5641CF37017006AAA8B /* FeedCollectionViewCell.swift in Sources */,
 				E20465CD1CF1FAF50054654E /* LoginViewController.swift in Sources */,
