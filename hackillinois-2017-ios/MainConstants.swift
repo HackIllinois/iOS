@@ -29,7 +29,7 @@ let centerOfEventLongitude: Double = -88.2264893
 // let inactiveStrokeColor = GMSStyleSpan(style: GMSStrokeStyle.solidColor(UIColor.grayColor()))
 let strokeWidth: CGFloat = 6.0
 
-let defaultHeight = 1000.0
+let defaultHeight = 2000.0
 let defaultPitch: CGFloat = 0.0
 let defaultHeading = 0.0
 
