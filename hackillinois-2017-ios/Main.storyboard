@@ -38,22 +38,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vtn-kn-mDg" customClass="GMSMapView">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Zdn-L1-r3l">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Vtn-kn-mDg" firstAttribute="leading" secondItem="ib4-KP-Krk" secondAttribute="leadingMargin" constant="-20" id="6tj-zs-jNU"/>
-                            <constraint firstItem="bvf-mM-5by" firstAttribute="top" secondItem="Vtn-kn-mDg" secondAttribute="bottom" id="DdP-O1-Y0R"/>
-                            <constraint firstItem="Vtn-kn-mDg" firstAttribute="top" secondItem="mgr-C5-5lE" secondAttribute="bottom" id="Iph-bP-pvI"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Vtn-kn-mDg" secondAttribute="trailing" constant="-20" id="Qw4-N3-Rn8"/>
+                            <constraint firstItem="Zdn-L1-r3l" firstAttribute="leading" secondItem="ib4-KP-Krk" secondAttribute="leadingMargin" constant="-20" id="8Yd-yr-kee"/>
+                            <constraint firstItem="Zdn-L1-r3l" firstAttribute="top" secondItem="mgr-C5-5lE" secondAttribute="bottom" id="Ou4-2J-wmx"/>
+                            <constraint firstItem="bvf-mM-5by" firstAttribute="top" secondItem="Zdn-L1-r3l" secondAttribute="bottom" id="nPJ-gc-EIi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Zdn-L1-r3l" secondAttribute="trailing" constant="-20" id="rBz-Vx-OYW"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="m5J-TP-VmL"/>
                     <connections>
-                        <outlet property="map" destination="Vtn-kn-mDg" id="2o0-hm-fFw"/>
+                        <outlet property="map" destination="Zdn-L1-r3l" id="bYU-WC-0VY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wl9-fg-gn8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -138,7 +137,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lunch is served! Please come to ECEB or Siebel for Potbelly's Sandwiches!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5EK-xX-mcA">
-                                                    <rect key="frame" x="8" y="43" width="234" height="64.5"/>
+                                                    <rect key="frame" x="8" y="43" width="234" height="65"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -209,14 +208,14 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vlE-Qp-N4F">
-                                <rect key="frame" x="0.0" y="414" width="600" height="141.5"/>
+                                <rect key="frame" x="0.0" y="414" width="600" height="142"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="locationCell" id="S5t-bw-Vte" customClass="FeedDetailTableViewCell" customModule="hackillinois_2017_ios" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="S5t-bw-Vte" id="OM4-6B-ODF">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_chevron_right_48pt" translatesAutoresizingMaskIntoConstraints="NO" id="st6-mK-ahl">
@@ -228,7 +227,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Siebel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HaY-Jd-9DM">
-                                                    <rect key="frame" x="150" y="17" width="300" height="26.5"/>
+                                                    <rect key="frame" x="150" y="17" width="300" height="27"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="300" id="zJO-V3-RFS"/>
                                                     </constraints>

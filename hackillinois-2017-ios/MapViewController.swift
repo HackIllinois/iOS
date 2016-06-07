@@ -7,18 +7,19 @@
 //
 
 import UIKit
-import GoogleMaps
+// import GoogleMaps
+import MapKit
 import LiquidFloatingActionButton
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, LiquidFloatingActionButtonDelegate, LiquidFloatingActionButtonDataSource {
 
     /* IB Outlets */
-    @IBOutlet weak var map: GMSMapView!
+    @IBOutlet weak var map: MKMapView!
     
     /* Variables */
     var manager: CLLocationManager!
     // Start off the locations and buttons as empty
-    var locations: [CLLocationCoordinate2D]! = []
+    var buildings: [Building]! = []
     var buttons: [LiquidFloatingCell]! = []
     
     // Mark: Initilizing locations and where locations are set
@@ -26,24 +27,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, LiquidFloa
     func initializeLocations() {
         // Create Points for event locations
         
-        
         // Siebel
-        locations.append(CLLocationCoordinate2DMake(40.113926, -88.224916))
-        let siebel = GMSMarker(position: locations[0])
-        siebel.title = "Thomas Siebel Center for Computer Science"
-        siebel.map = map
+        let siebel =
+            Building(title: "Thomas Siebel Center for Computer Science", coordinate: CLLocationCoordinate2DMake(40.113926, -88.224916))
+        buildings.append(siebel)
         
         // ECEB
-        locations.append(CLLocationCoordinate2DMake(40.114828, -88.228049))
-        let eceb = GMSMarker(position: locations[1])
-        eceb.title = "Electrical and Computer Engineering Building"
-        eceb.map = map
+        let eceb =
+            Building(title: "Electrical and Computer Engineering Building", coordinate: CLLocationCoordinate2DMake(40.114828, -88.228049))
+        buildings.append(eceb)
         
         // Illini Union
-        locations.append(CLLocationCoordinate2DMake(40.109395, -88.227181))
-        let union = GMSMarker(position: locations[2])
-        union.title = "Illini Union"
-        union.map = map
+        let union =
+            Building(title: "Illini Union", coordinate: CLLocationCoordinate2DMake(40.109395, -88.227181))
+        buildings.append(union)
+        
+        // Add to Map
+        map.addAnnotations(buildings)
         
         // The rectangle's alignment is hacky due to iOS's autolayout constraints
         // TODO: Find a more dynamic, better alignment
@@ -61,7 +61,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, LiquidFloa
         
         var hue: CGFloat = 5.0 / 360.0
         
-        for (index, _) in locations.enumerate() {
+        for (index, _) in buildings.enumerate() {
             let locationCell = LiquidFloatingCell(icon: UIImage(named: "ic_forward_48pt")!)
             locationCell.color = UIColor(hue: hue, saturation: 74/100, brightness: 90/100, alpha: 1.0) /* #e74c3c */
             hue += 0.05
@@ -83,9 +83,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, LiquidFloa
 
         // Initialize Map data
         initializeLocations()
-        
-        // Adjust map
-        map.camera = GMSCameraPosition.cameraWithLatitude(40.109395, longitude: -88.227581, zoom: 15)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -119,8 +116,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, LiquidFloa
     // Mark: CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status == .AuthorizedWhenInUse {
-            map.myLocationEnabled = true
-            map.settings.myLocationButton = true
+            map.showsUserLocation = true
         }
     }
     
