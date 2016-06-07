@@ -30,7 +30,6 @@
 		E2AC3F8E1CF21F3900C4F21F /* UIColor+fromHexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F8D1CF21F3900C4F21F /* UIColor+fromHexTests.swift */; };
 		E2BCA55B1CF36187006AAA8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2BCA55A1CF36187006AAA8B /* Main.storyboard */; };
 		E2BCA5621CF36CDA006AAA8B /* FeedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5611CF36CDA006AAA8B /* FeedCollectionViewController.swift */; };
-		E2BCA5641CF37017006AAA8B /* FeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5631CF37017006AAA8B /* FeedCollectionViewCell.swift */; };
 		E2BCA5661CF372DD006AAA8B /* MainNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5651CF372DD006AAA8B /* MainNavigationViewController.swift */; };
 		E2BCA5681CF37363006AAA8B /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5671CF37363006AAA8B /* MainTabBarViewController.swift */; };
 		E2BCA56A1CF373A1006AAA8B /* MainConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5691CF373A1006AAA8B /* MainConstants.swift */; };
@@ -43,6 +42,7 @@
 		E2D483331D00D3B100859A67 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D483321D00D3B100859A67 /* MapViewController.swift */; };
 		E2D4F0DD1D06AB7C00646BF8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2D4F0DC1D06AB7C00646BF8 /* MapKit.framework */; };
 		E2D4F0DF1D06AD3F00646BF8 /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4F0DE1D06AD3F00646BF8 /* Building.swift */; };
+		E2D4F0E11D06B28B00646BF8 /* FeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4F0E01D06B28B00646BF8 /* FeedCollectionViewCell.swift */; };
 		E2F639481D05083300853089 /* CGRect+initWithCenterAt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F639471D05083300853089 /* CGRect+initWithCenterAt.swift */; };
 /* End PBXBuildFile section */
 
@@ -96,7 +96,6 @@
 		E2AC3F8D1CF21F3900C4F21F /* UIColor+fromHexTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+fromHexTests.swift"; sourceTree = "<group>"; };
 		E2BCA55A1CF36187006AAA8B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E2BCA5611CF36CDA006AAA8B /* FeedCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewController.swift; sourceTree = "<group>"; };
-		E2BCA5631CF37017006AAA8B /* FeedCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewCell.swift; sourceTree = "<group>"; };
 		E2BCA5651CF372DD006AAA8B /* MainNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationViewController.swift; sourceTree = "<group>"; };
 		E2BCA5671CF37363006AAA8B /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		E2BCA5691CF373A1006AAA8B /* MainConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainConstants.swift; sourceTree = "<group>"; };
@@ -109,6 +108,7 @@
 		E2D483321D00D3B100859A67 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		E2D4F0DC1D06AB7C00646BF8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E2D4F0DE1D06AD3F00646BF8 /* Building.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
+		E2D4F0E01D06B28B00646BF8 /* FeedCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewCell.swift; sourceTree = "<group>"; };
 		E2F639471D05083300853089 /* CGRect+initWithCenterAt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+initWithCenterAt.swift"; sourceTree = "<group>"; };
 		E75AFF8F2A9393CCA4EBF188 /* Pods_hackillinois_2017_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -269,7 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				E2BCA5611CF36CDA006AAA8B /* FeedCollectionViewController.swift */,
-				E2BCA5631CF37017006AAA8B /* FeedCollectionViewCell.swift */,
+				E2D4F0E01D06B28B00646BF8 /* FeedCollectionViewCell.swift */,
 				E277DD6C1CF4B9EC00D7E018 /* FeedDetail */,
 			);
 			name = Feed;
@@ -581,6 +581,7 @@
 				E2BCA57D1CF3B19E006AAA8B /* Feed.swift in Sources */,
 				E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */,
 				E25377411CF8AB2C003795E7 /* Tag+CoreDataProperties.swift in Sources */,
+				E2D4F0E11D06B28B00646BF8 /* FeedCollectionViewCell.swift in Sources */,
 				E2BCA5811CF3B19E006AAA8B /* Location.swift in Sources */,
 				E2BCA5621CF36CDA006AAA8B /* FeedCollectionViewController.swift in Sources */,
 				E25377421CF8AB2C003795E7 /* Tag.swift in Sources */,
@@ -589,7 +590,6 @@
 				E2D4F0DF1D06AD3F00646BF8 /* Building.swift in Sources */,
 				E2F639481D05083300853089 /* CGRect+initWithCenterAt.swift in Sources */,
 				E2BCA57C1CF3B19E006AAA8B /* Feed+CoreDataProperties.swift in Sources */,
-				E2BCA5641CF37017006AAA8B /* FeedCollectionViewCell.swift in Sources */,
 				E20465CD1CF1FAF50054654E /* LoginViewController.swift in Sources */,
 				E2AC3F861CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */,
 				E20465CB1CF1FAF50054654E /* AppDelegate.swift in Sources */,

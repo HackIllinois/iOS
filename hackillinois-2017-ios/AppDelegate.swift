@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
+        /*
         // Parse API Keys from keys.plist file
         var keys: NSDictionary?
         if let path = NSBundle.mainBundle().pathForResource("keys", ofType: "plist") {
@@ -27,10 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             print("keys.plist file could not be found. Please see README.md for information about keys.plist")
         }
+        
         if let dict = keys {
-            GMSServices.provideAPIKey(dict["GOOGLE_MAPS_API_KEY"] as! String)
-            google_direction_api_key = dict["GOOGLE_DIRECTIONS_API_KEY"] as! String
+            // Read keys here
         }
+        */
         
         return true
     }

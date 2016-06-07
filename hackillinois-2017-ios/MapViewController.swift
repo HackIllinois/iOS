@@ -46,7 +46,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, LiquidFloa
         map.addAnnotations(buildings)
         
         // The rectangle's alignment is hacky due to iOS's autolayout constraints
-        // TODO: Find a more dynamic, better alignment
         let screen = UIScreen.mainScreen().bounds
         
         // Google's button is 100x100 with 10 point bounds (which is included already)
@@ -61,7 +60,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, LiquidFloa
         
         var hue: CGFloat = 5.0 / 360.0
         
-        for (index, _) in buildings.enumerate() {
+        for _ in buildings {
             let locationCell = LiquidFloatingCell(icon: UIImage(named: "ic_forward_48pt")!)
             locationCell.color = UIColor(hue: hue, saturation: 74/100, brightness: 90/100, alpha: 1.0) /* #e74c3c */
             hue += 0.05

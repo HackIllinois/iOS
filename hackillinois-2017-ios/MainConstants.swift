@@ -12,7 +12,7 @@
  */
 
 import Foundation
-import GoogleMaps
+import UIKit
 
 /* UI/UX */
 let mainUIColor = 0x34495e // Color for the TabBar and Navigation Bar
@@ -25,9 +25,13 @@ let centerOfEventLatitude: Double = 40.1137074
 let centerOfEventLongitude: Double = -88.2264893
 
 /* Google maps stroke color */
-let activeStrokeColor = GMSStyleSpan(style: GMSStrokeStyle.solidColor(UIColor.redColor()))
-let inactiveStrokeColor = GMSStyleSpan(style: GMSStrokeStyle.solidColor(UIColor.grayColor()))
+// let activeStrokeColor = GMSStyleSpan(style: GMSStrokeStyle.solidColor(UIColor.redColor()))
+// let inactiveStrokeColor = GMSStyleSpan(style: GMSStrokeStyle.solidColor(UIColor.grayColor()))
 let strokeWidth: CGFloat = 6.0
+
+let defaultHeight = 1000.0
+let defaultPitch: CGFloat = 0.0
+let defaultHeading = 0.0
 
 /* Hackathon Information */
 let university = "University+of+Illinois+at+Urbana+Champaign" // This will be encoded as an URL, so spaces should be delimited by +'s

@@ -17,4 +17,11 @@ class Building: NSObject, MKAnnotation {
         self.title = title
         self.coordinate = coordinate
     }
+    
+    /* Convenience initializer to create a Building object from a Location object */
+    init(location: Location) {
+        self.title = location.name
+        self.coordinate =
+            CLLocationCoordinate2DMake(Double(location.latitude), Double(location.longitude))
+    }
 }
