@@ -52,8 +52,6 @@ class FeedDetailViewController: UIViewController, CLLocationManagerDelegate, Liq
             
             // The rectangle's alignment is hacky due to iOS's autolayout constraints
             let screen = UIScreen.mainScreen().bounds
-            
-            // Google's button is 100x100 with 10 point bounds (which is included already)
             let rect = CGRect(x: screen.width - 50, y: screen.height - self.tabBarController!.tabBar.frame.height - 280, width: 40, height: 40)
             
             button = LiquidFloatingActionButton(frame: rect)
@@ -79,6 +77,24 @@ class FeedDetailViewController: UIViewController, CLLocationManagerDelegate, Liq
             self.liquidButtons.append(locationCell)
             return Building(location: $0)
         }))
+        
+        // Add the "My Location" button
+        // Position below where the Liquid Button would appear, regardless of whether it actually shows up or not
+        let screen = UIScreen.mainScreen().bounds
+        let rect = CGRect(x: screen.width - 56, y: screen.height - self.tabBarController!.tabBar.frame.height - 232, width: 52, height: 52)
+        // Configure button
+        let locationButton = UIButton(frame: rect)
+        locationButton.layer.cornerRadius = 52 / 2  // Circular button
+        locationButton.setImage(UIImage(named: "ic_my_location")!, forState: .Normal)
+        locationButton.backgroundColor = UIColor.whiteColor()
+        locationButton.addTarget(self, action: #selector(setCameraToCurrentLocation), forControlEvents: .TouchUpInside)
+        mapView.addSubview(locationButton)
+    }
+    
+    func setCameraToCurrentLocation() {
+        let currentLocation = MKMapCamera(lookingAtCenterCoordinate: (manager.location?.coordinate)!, fromDistance: defaultHeight, pitch: defaultPitch, heading: defaultHeading)
+        mapView.setCamera(currentLocation, animated: true)
+        mapView.selectAnnotation(mapView.userLocation, animated: true)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -102,11 +118,18 @@ class FeedDetailViewController: UIViewController, CLLocationManagerDelegate, Liq
             ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
             presentViewController(ac, animated: true, completion: nil)
         }
-        
     }
     
     /* Handler for opening the map in another application */
     func openInExternalMapApplication() {
+        guard !mapView.selectedAnnotations.isEmpty && mapView.selectedAnnotations[0].isKindOfClass(Building) else {
+            // Check if the location is nil and present an error
+            let ac = UIAlertController(title: "Destination not selected", message: "You must select a location before routing.", preferredStyle: .Alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            self.presentViewController(ac, animated: true, completion: nil)
+            return
+        }
+        
         // Build the open in dialogue
         let externalApplicationSelector = UIAlertController(title: "Open in...", message: "Select the application you would like to navigate in.", preferredStyle: .ActionSheet)
         // Check which map applications are available
@@ -127,7 +150,6 @@ class FeedDetailViewController: UIViewController, CLLocationManagerDelegate, Liq
         let url = "comgooglemaps://?\(daddr)&\(directionsmode)"
         return NSURL(string: url)!
     }
-    
     
     /* Hander for Google Maps */
     func googleMapsHandler(alertAction: UIAlertAction) {
@@ -156,24 +178,12 @@ class FeedDetailViewController: UIViewController, CLLocationManagerDelegate, Liq
         // Dispose of any resources that can be recreated.
     }
     
-    // Mark - Location Manager Delegate
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        // Enable Location for the map when the user allows the application to use the current location
-        if status == .AuthorizedWhenInUse {
-            mapView.showsUserLocation = true
-        }
-    }
-    
-    // Mark - LiquidAction Button Delegate
-    func numberOfCells(liquidFloatingActionButton: LiquidFloatingActionButton) -> Int {
-        return locationArray.count
-    }
-    
-    func cellForIndex(index: Int) -> LiquidFloatingCell {
-        return liquidButtons[index]
-    }
-    
+    // Mark: Routing location from current location to user specified location
     func routeTo(destination destination: CLLocationCoordinate2D) {
+        // Remove current paths
+        self.mapView.removeOverlays(self.mapView.overlays)
+        
+        // Create new request
         let routeRequest = MKDirectionsRequest()
         routeRequest.source = MKMapItem.mapItemForCurrentLocation()
         routeRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: destination, addressDictionary: nil))
@@ -232,13 +242,33 @@ class FeedDetailViewController: UIViewController, CLLocationManagerDelegate, Liq
         }
     }
     
+    // Mark - Location Manager Delegate
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        // Enable Location for the map when the user allows the application to use the current location
+        if status == .AuthorizedWhenInUse {
+            mapView.showsUserLocation = true
+        }
+    }
+    
+    // Mark - LiquidAction Button Delegate
+    func numberOfCells(liquidFloatingActionButton: LiquidFloatingActionButton) -> Int {
+        return locationArray.count
+    }
+    
+    func cellForIndex(index: Int) -> LiquidFloatingCell {
+        return liquidButtons[index]
+    }
+    
+    
     func liquidFloatingActionButton(liquidFloatingActionButton: LiquidFloatingActionButton, didSelectItemAtIndex index: Int) {
-        print("selected: \(index)")
+        let location = locationArray[index]
         locationSelected = index
-        mapView.setCamera(MKMapCamera.from(location: locationArray[index]), animated: true)
-        
+        // Configure MapView to show the location user selected
+        mapView.setCamera(MKMapCamera.from(location: location), animated: true)
+        let annotation = mapView.annotationsInMapRect(MKMapRect(origin: MKMapPointForCoordinate(CLLocationCoordinate2D.from(location: location)), size: MKMapSize(width: 1, height: 1))).first! as! MKAnnotation
+        mapView.selectAnnotation(annotation, animated: true)
         // Route locations
-        routeTo(destination: CLLocationCoordinate2D.from(location: locationArray[index]))
+        routeTo(destination: CLLocationCoordinate2D.from(location: location))
         liquidFloatingActionButton.close()
     }
     
@@ -249,6 +279,22 @@ class FeedDetailViewController: UIViewController, CLLocationManagerDelegate, Liq
         renderer.strokeColor = liquidButtons[locationSelected].color ?? UIColor.fromRGBHex(mainTintColor)
         renderer.lineWidth = strokeWidth
         return renderer
+    }
+    
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        let selectedAnnotation = mapView.selectedAnnotations[0]
+        if selectedAnnotation.isKindOfClass(MKUserLocation) {
+            // Don't do anything if the user location is selected
+            return
+        }
+        
+        // Find index of selected Annotation
+        if let selectedIndex = locationArray.indexOf({ location in
+            return location.latitude == selectedAnnotation.coordinate.latitude && location.longitude == selectedAnnotation.coordinate.longitude
+        }) {
+            locationSelected = selectedIndex
+        }
+        routeTo(destination: selectedAnnotation.coordinate)
     }
     
     /*
