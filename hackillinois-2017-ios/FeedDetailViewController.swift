@@ -63,7 +63,7 @@ class FeedDetailViewController: UIViewController, CLLocationManagerDelegate, Liq
             mapView.addSubview(button)
         } else {
             // Move camera to center of the event
-            mapView.camera = MKMapCamera(lookingAtCenterCoordinate: CLLocationCoordinate2DMake(centerOfEventLatitude, centerOfEventLatitude),
+            mapView.camera = MKMapCamera(lookingAtCenterCoordinate: CLLocationCoordinate2DMake(centerOfEventLatitude, centerOfEventLongitude),
                                          fromDistance: defaultHeight, pitch: defaultPitch, heading: defaultHeading)
         }
         

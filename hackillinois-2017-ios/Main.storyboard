@@ -52,7 +52,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="m5J-TP-VmL"/>
                     <connections>
-                        <outlet property="map" destination="Zdn-L1-r3l" id="bYU-WC-0VY"/>
+                        <outlet property="mapView" destination="Zdn-L1-r3l" id="EGZ-E5-8q3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wl9-fg-gn8" userLabel="First Responder" sceneMemberID="firstResponder"/>
