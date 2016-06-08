@@ -43,6 +43,8 @@
 		E2D4F0DD1D06AB7C00646BF8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2D4F0DC1D06AB7C00646BF8 /* MapKit.framework */; };
 		E2D4F0DF1D06AD3F00646BF8 /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4F0DE1D06AD3F00646BF8 /* Building.swift */; };
 		E2D4F0E11D06B28B00646BF8 /* FeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4F0E01D06B28B00646BF8 /* FeedCollectionViewCell.swift */; };
+		E2D4F0E31D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4F0E21D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift */; };
+		E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4F0E41D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift */; };
 		E2F639481D05083300853089 /* CGRect+initWithCenterAt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F639471D05083300853089 /* CGRect+initWithCenterAt.swift */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +111,8 @@
 		E2D4F0DC1D06AB7C00646BF8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E2D4F0DE1D06AD3F00646BF8 /* Building.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
 		E2D4F0E01D06B28B00646BF8 /* FeedCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewCell.swift; sourceTree = "<group>"; };
+		E2D4F0E21D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+fromLocation.swift"; sourceTree = "<group>"; };
+		E2D4F0E41D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MKMapCamera+initFromLocation.swift"; sourceTree = "<group>"; };
 		E2F639471D05083300853089 /* CGRect+initWithCenterAt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+initWithCenterAt.swift"; sourceTree = "<group>"; };
 		E75AFF8F2A9393CCA4EBF188 /* Pods_hackillinois_2017_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -247,6 +251,8 @@
 			children = (
 				E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */,
 				E2F639471D05083300853089 /* CGRect+initWithCenterAt.swift */,
+				E2D4F0E21D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift */,
+				E2D4F0E41D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift */,
 			);
 			name = LanguageExtensions;
 			sourceTree = "<group>";
@@ -581,6 +587,8 @@
 				E2BCA57D1CF3B19E006AAA8B /* Feed.swift in Sources */,
 				E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */,
 				E25377411CF8AB2C003795E7 /* Tag+CoreDataProperties.swift in Sources */,
+				E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */,
+				E2D4F0E31D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift in Sources */,
 				E2D4F0E11D06B28B00646BF8 /* FeedCollectionViewCell.swift in Sources */,
 				E2BCA5811CF3B19E006AAA8B /* Location.swift in Sources */,
 				E2BCA5621CF36CDA006AAA8B /* FeedCollectionViewController.swift in Sources */,

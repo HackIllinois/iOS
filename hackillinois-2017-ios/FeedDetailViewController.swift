@@ -11,7 +11,7 @@ import CoreLocation
 import LiquidFloatingActionButton
 import MapKit
 
-class FeedDetailViewController: UIViewController, CLLocationManagerDelegate, LiquidFloatingActionButtonDelegate, LiquidFloatingActionButtonDataSource {
+class FeedDetailViewController: UIViewController, CLLocationManagerDelegate, LiquidFloatingActionButtonDelegate, LiquidFloatingActionButtonDataSource, MKMapViewDelegate {
     
     /* UI Elements */
     @IBOutlet weak var event: UILabel!
@@ -20,6 +20,7 @@ class FeedDetailViewController: UIViewController, CLLocationManagerDelegate, Liq
     /* Variables */
     var locationArray: [Location]!
     var liquidButtons: [LiquidFloatingCell] = []
+    var button: LiquidFloatingActionButton!
     var message: String!
     var manager: CLLocationManager!
     var locationSelected = 0
@@ -36,14 +37,16 @@ class FeedDetailViewController: UIViewController, CLLocationManagerDelegate, Liq
         manager = CLLocationManager()
         manager.delegate = self
         
+        // Set up map
+        mapView.delegate = self
+        
         // Do any additional setup after loading the view.
         event.text = message
         
         // If a location exists, move it to the first available one
         if !locationArray.isEmpty {
             let location = locationArray[0]
-            mapView.camera = MKMapCamera(lookingAtCenterCoordinate: CLLocationCoordinate2DMake(Double(location.latitude), Double(location.longitude)),
-                                         fromDistance: defaultHeight, pitch: defaultPitch, heading: defaultHeading)
+            mapView.camera = MKMapCamera.from(location: location)
             
             // Configure the Liquid Button
             
@@ -53,7 +56,7 @@ class FeedDetailViewController: UIViewController, CLLocationManagerDelegate, Liq
             // Google's button is 100x100 with 10 point bounds (which is included already)
             let rect = CGRect(x: screen.width - 50, y: screen.height - self.tabBarController!.tabBar.frame.height - 280, width: 40, height: 40)
             
-            let button = LiquidFloatingActionButton(frame: rect)
+            button = LiquidFloatingActionButton(frame: rect)
             button.animateStyle = .Up
             button.dataSource = self
             button.delegate = self
@@ -170,9 +173,82 @@ class FeedDetailViewController: UIViewController, CLLocationManagerDelegate, Liq
         return liquidButtons[index]
     }
     
+    func routeTo(destination destination: CLLocationCoordinate2D) {
+        let routeRequest = MKDirectionsRequest()
+        routeRequest.source = MKMapItem.mapItemForCurrentLocation()
+        routeRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: destination, addressDictionary: nil))
+        
+        routeRequest.requestsAlternateRoutes = false
+        routeRequest.transportType = .Walking
+        
+        // Draw the button again to have it "fade"
+        // Slignt padding is required to have the circle appear normal: otherwise it will end up clipped
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: button.frame.width+8, height: button.frame.height+8), false, 0) // Add slight padding
+        
+        let context = UIGraphicsGetCurrentContext()
+        CGContextSetFillColorWithColor(context, UIColor.fromRGBHex(mainUIColor).CGColor)
+        CGContextSetLineWidth(context, 0)
+        
+        CGContextAddEllipseInRect(context, CGRect(x: 4, y: 4, width: button.frame.width, height: button.frame.height)) // Add slight padding
+        CGContextDrawPath(context, .FillStroke)
+        
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        let imgView = UIImageView(frame: CGRect(x: button.frame.minX-4, y: button.frame.minY-4, width: button.frame.height+8, height: button.frame.width+8))
+        imgView.image = img
+        mapView.addSubview(imgView)
+        
+        /* Configure activity indicator */
+        let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: imgView.frame.width / 2 - 15, y: imgView.frame.height / 2 - 15, width: 30, height: 30))
+        activityIndicator.startAnimating()
+        activityIndicator.alpha = 0
+        
+        // Add activity indicator to button
+        imgView.addSubview(activityIndicator)
+        
+        // Animate fading in
+        UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseIn,
+                                   animations: { [unowned self] in
+                                    self.button.alpha = 0.0 ; activityIndicator.alpha = 1.0 },
+                                   completion: { [unowned self] _ in
+                                    self.button.hidden = true })
+        
+        // Obtain direction
+        let directions = MKDirections(request: routeRequest)
+        directions.calculateDirectionsWithCompletionHandler() { [unowned self] (response: MKDirectionsResponse?, error: NSError?) in
+            if let routes = response?.routes {
+                self.mapView.addOverlay(routes[0].polyline)
+            } else if let _ = error {
+                print("\(error!)")
+            }
+            
+            // Animate showing button again
+            UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseIn,
+                                       animations: { [unowned self] in
+                                        self.button.alpha = 1.0 ; activityIndicator.alpha = 0.0 },
+                                       completion: { [unowned self] _ in
+                                        self.button.hidden = false; activityIndicator.removeFromSuperview(); imgView.removeFromSuperview() })
+        }
+    }
+    
     func liquidFloatingActionButton(liquidFloatingActionButton: LiquidFloatingActionButton, didSelectItemAtIndex index: Int) {
         print("selected: \(index)")
+        locationSelected = index
+        mapView.setCamera(MKMapCamera.from(location: locationArray[index]), animated: true)
+        
+        // Route locations
+        routeTo(destination: CLLocationCoordinate2D.from(location: locationArray[index]))
         liquidFloatingActionButton.close()
+    }
+    
+    // Mark: Map View Delegate
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+        // Create a renderer
+        let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
+        renderer.strokeColor = liquidButtons[locationSelected].color ?? UIColor.fromRGBHex(mainTintColor)
+        renderer.lineWidth = strokeWidth
+        return renderer
     }
     
     /*
