@@ -31,17 +31,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, LiquidFloa
         
         // Siebel
         let siebel =
-            Building(title: "Thomas Siebel Center for Computer Science", coordinate: CLLocationCoordinate2DMake(40.113926, -88.224916))
+            Building(title: "Thomas Siebel Center for Computer Science", coordinate: CLLocationCoordinate2DMake(40.113926, -88.224916), shortName: "Siebel")
         buildings.append(siebel)
         
         // ECEB
         let eceb =
-            Building(title: "Electrical and Computer Engineering Building", coordinate: CLLocationCoordinate2DMake(40.114828, -88.228049))
+            Building(title: "Electrical and Computer Engineering Building", coordinate: CLLocationCoordinate2DMake(40.114828, -88.228049), shortName: "ECEB")
         buildings.append(eceb)
         
         // Illini Union
         let union =
-            Building(title: "Illini Union", coordinate: CLLocationCoordinate2DMake(40.109395, -88.227181))
+            Building(title: "Illini Union", coordinate: CLLocationCoordinate2DMake(40.109395, -88.227181), shortName: "Union")
         buildings.append(union)
         
         // Add Buildings to the Map
@@ -65,8 +65,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, LiquidFloa
         
         var hue: CGFloat = 5.0 / 360.0
         
-        for _ in buildings {
-            let locationCell = LiquidFloatingCell(icon: UIImage(named: "ic_forward_48pt")!)
+        for building in buildings {
+            let locationCell = CustomLiquidCell(icon: UIImage(named: "ic_forward_48pt")!, name: building.short!)
             locationCell.color = UIColor(hue: hue, saturation: 74/100, brightness: 90/100, alpha: 1.0) /* #e74c3c */
             hue += 0.05
             liquidCellButtons.append(locationCell)

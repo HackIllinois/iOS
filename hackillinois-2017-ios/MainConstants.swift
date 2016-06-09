@@ -15,8 +15,8 @@ import Foundation
 import UIKit
 
 /* UI/UX */
-let mainUIColor = 0x34495e // Color for the TabBar and Navigation Bar
-let mainTintColor = 0xecf0f1 // Tint color use for TabBar
+let mainUIColor = 0x4d483f // Color for the TabBar and Navigation Bar
+let mainTintColor = 0xf4d6be // Tint color use for TabBar
 let timeoutIntervalSeconds: UInt64 = 10 // Timeout interval for network calls, in seconds
 
 

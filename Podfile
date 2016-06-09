@@ -9,6 +9,7 @@ target 'hackillinois-2017-ios' do
 
         # Shameless pug :)
         pod "LiquidFloatingActionButton", :git => "https://github.com/shotaroikeda/LiquidFloatingActionButton"
+        pod "SnapKit"
 end
 
 target 'hackillinois-2017-iosTests' do
