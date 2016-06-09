@@ -12,7 +12,6 @@ import UIKit
 
 /* Provide namespace for helpers */
 class Helpers {
-    
     /* Mark - Helper functions to find location, tag, and create feeds */
     
     /* 

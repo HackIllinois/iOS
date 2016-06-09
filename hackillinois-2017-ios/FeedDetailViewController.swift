@@ -21,6 +21,7 @@ class FeedDetailViewController: UIViewController, CLLocationManagerDelegate, Liq
     var locationArray: [Location]!
     var liquidButtons: [LiquidFloatingCell] = []
     var button: LiquidFloatingActionButton!
+    var locationButton: UIButton!
     var message: String!
     var manager: CLLocationManager!
     var locationSelected = 0
@@ -83,18 +84,40 @@ class FeedDetailViewController: UIViewController, CLLocationManagerDelegate, Liq
         let screen = UIScreen.mainScreen().bounds
         let rect = CGRect(x: screen.width - 56, y: screen.height - self.tabBarController!.tabBar.frame.height - 232, width: 52, height: 52)
         // Configure button
-        let locationButton = UIButton(frame: rect)
+        locationButton = UIButton(frame: rect)
         locationButton.layer.cornerRadius = 52 / 2  // Circular button
-        locationButton.setImage(UIImage(named: "ic_my_location")!, forState: .Normal)
         locationButton.backgroundColor = UIColor.whiteColor()
-        locationButton.addTarget(self, action: #selector(setCameraToCurrentLocation), forControlEvents: .TouchUpInside)
         mapView.addSubview(locationButton)
     }
     
+    // Mark: Location Button Functions
     func setCameraToCurrentLocation() {
         let currentLocation = MKMapCamera(lookingAtCenterCoordinate: (manager.location?.coordinate)!, fromDistance: defaultHeight, pitch: defaultPitch, heading: defaultHeading)
         mapView.setCamera(currentLocation, animated: true)
         mapView.selectAnnotation(mapView.userLocation, animated: true)
+    }
+    
+    func notifyDisabledLocation() {
+        /* Authorization is invalid, so warn user to enable it or the feature will contiue to be disabled */
+        let ac = UIAlertController(title: "Location Services Required", message: "Location services are required to show your location on the map.", preferredStyle: .Alert)
+        ac.addAction(UIAlertAction(title: "Open Settings", style: .Default, handler: {
+            action in
+            UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
+        }))
+        ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        presentViewController(ac, animated: true, completion: nil)
+    }
+    
+    func enableLocationButton() {
+        locationButton.setImage(UIImage(named: "ic_my_location")!, forState: .Normal)
+        locationButton.removeTarget(nil, action: nil, forControlEvents: .TouchUpInside)
+        locationButton.addTarget(self, action: #selector(setCameraToCurrentLocation), forControlEvents: .TouchUpInside)
+    }
+    
+    func disableLocationButton () {
+        locationButton.setImage(UIImage(named: "ic_location_disabled"), forState: .Normal)
+        locationButton.removeTarget(nil, action: nil, forControlEvents: .TouchUpInside)
+        locationButton.addTarget(self, action: #selector(notifyDisabledLocation), forControlEvents: .TouchUpInside)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -104,19 +127,15 @@ class FeedDetailViewController: UIViewController, CLLocationManagerDelegate, Liq
         switch CLLocationManager.authorizationStatus() {
         case .NotDetermined:
             manager.requestWhenInUseAuthorization()
+            disableLocationButton()
         case .AuthorizedWhenInUse:
             // User has given proper permission
+            enableLocationButton()
             break
         default:
             // Warn the user that the map is used to determine the user's location
-            /* Authorization is invalid */
-            let ac = UIAlertController(title: "Location Services Disabled", message: "Location services are required to show your location on the map and route paths.", preferredStyle: .Alert)
-            ac.addAction(UIAlertAction(title: "Open Settings", style: .Default, handler: {
-                action in
-                UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
-            }))
-            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            presentViewController(ac, animated: true, completion: nil)
+            notifyDisabledLocation()
+            disableLocationButton()
         }
     }
     
@@ -180,6 +199,10 @@ class FeedDetailViewController: UIViewController, CLLocationManagerDelegate, Liq
     
     // Mark: Routing location from current location to user specified location
     func routeTo(destination destination: CLLocationCoordinate2D) {
+        guard CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse else {
+            // Cannot route if user didn't authorize
+            return
+        }
         // Remove current paths
         self.mapView.removeOverlays(self.mapView.overlays)
         

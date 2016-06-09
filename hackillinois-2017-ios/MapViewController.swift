@@ -22,6 +22,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, LiquidFloa
     var buildings: [Building]! = []
     var liquidCellButtons: [LiquidFloatingCell]! = []
     var button: LiquidFloatingActionButton!
+    var locationButton: UIButton!
     var locationSelected = 0
     
     // Mark: Initilizing locations and where locations are set
@@ -46,7 +47,52 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, LiquidFloa
         
         // Add Buildings to the Map
         mapView.addAnnotations(buildings)
+    }
+    
+    // Mark: Location Button functions
+    func setCameraToCurrentLocation() {
+        let currentLocation = MKMapCamera(lookingAtCenterCoordinate: (manager.location?.coordinate)!, fromDistance: defaultHeight, pitch: defaultPitch, heading: defaultHeading)
+        mapView.setCamera(currentLocation, animated: true)
+        mapView.selectAnnotation(mapView.userLocation, animated: true)
+    }
+    
+    func notifyDisabledLocation() {
+        /* Authorization is invalid, so warn user to enable it or the feature will contiue to be disabled */
+        let ac = UIAlertController(title: "Location Services Required", message: "Location services are required to show your location on the map.", preferredStyle: .Alert)
+        ac.addAction(UIAlertAction(title: "Open Settings", style: .Default, handler: {
+            action in
+            UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
+        }))
+        ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        presentViewController(ac, animated: true, completion: nil)
+    }
+    
+    func enableLocationButton() {
+        locationButton.setImage(UIImage(named: "ic_my_location")!, forState: .Normal)
+        locationButton.removeTarget(nil, action: nil, forControlEvents: .TouchUpInside)
+        locationButton.addTarget(self, action: #selector(setCameraToCurrentLocation), forControlEvents: .TouchUpInside)
+    }
+    
+    func disableLocationButton () {
+        locationButton.setImage(UIImage(named: "ic_location_disabled"), forState: .Normal)
+        locationButton.removeTarget(nil, action: nil, forControlEvents: .TouchUpInside)
+        locationButton.addTarget(self, action: #selector(notifyDisabledLocation), forControlEvents: .TouchUpInside)
+    }
+    
+    // Mark: View Configuration
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
+        // Do any additional setup after loading the view.
+        
+        // Navigation bar
+        navigationItem.title = "Map"
+        
+        manager = CLLocationManager()
+        manager.delegate = self
+
+        // Initialize Map data
+        initializeLocations()
         // Configure the map -- set default view to center of event
         mapView.camera = MKMapCamera(lookingAtCenterCoordinate: CLLocationCoordinate2DMake(centerOfEventLatitude, centerOfEventLongitude),
                                      fromDistance: defaultHeight, pitch: defaultPitch, heading: defaultHeading)
@@ -77,33 +123,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, LiquidFloa
         // Add "My Location" button
         let locationFrame = CGRect(x: screen.width - 56, y: screen.height - self.tabBarController!.tabBar.frame.height - 132, width: 52, height: 52)
         // Configure button
-        let locationButton = UIButton(frame: locationFrame)
+        locationButton = UIButton(frame: locationFrame)
         locationButton.layer.cornerRadius = 52 / 2  // Circular button
-        locationButton.setImage(UIImage(named: "ic_my_location")!, forState: .Normal)
         locationButton.backgroundColor = UIColor.whiteColor()
-        locationButton.addTarget(self, action: #selector(setCameraToCurrentLocation), forControlEvents: .TouchUpInside)
         mapView.addSubview(locationButton)
-    }
-    
-    func setCameraToCurrentLocation() {
-        let currentLocation = MKMapCamera(lookingAtCenterCoordinate: (manager.location?.coordinate)!, fromDistance: defaultHeight, pitch: defaultPitch, heading: defaultHeading)
-        mapView.setCamera(currentLocation, animated: true)
-        mapView.selectAnnotation(mapView.userLocation, animated: true)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-        
-        // Navigation bar
-        navigationItem.title = "Map"
-        
-        manager = CLLocationManager()
-        manager.delegate = self
-
-        // Initialize Map data
-        initializeLocations()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -113,19 +136,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, LiquidFloa
         switch CLLocationManager.authorizationStatus() {
         case .NotDetermined:
             manager.requestWhenInUseAuthorization()
+            disableLocationButton()
         case .AuthorizedWhenInUse:
             // User has given proper permission
+            enableLocationButton()
             break
         default:
             // Warn the user that the map is used to determine the user's location
-            /* Authorization is invalid */
-            let ac = UIAlertController(title: "Location Services Required", message: "Location services are required to show your location on the map.", preferredStyle: .Alert)
-            ac.addAction(UIAlertAction(title: "Open Settings", style: .Default, handler: {
-                action in
-                UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
-            }))
-            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            presentViewController(ac, animated: true, completion: nil)
+            notifyDisabledLocation()
+            disableLocationButton()
         }
     }
 
@@ -138,6 +157,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, LiquidFloa
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status == .AuthorizedWhenInUse {
             mapView.showsUserLocation = true
+            enableLocationButton()
+        } else {
+            disableLocationButton()
         }
     }
     
@@ -152,6 +174,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, LiquidFloa
     
     // Mark: Routing location from current location to user specified location
     func routeTo(destination destination: CLLocationCoordinate2D) {
+        guard CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse else {
+            // Cannot route if user didn't authorize
+            return
+        }
         // Remove current paths
         self.mapView.removeOverlays(self.mapView.overlays)
         
