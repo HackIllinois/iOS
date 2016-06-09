@@ -16,6 +16,7 @@
         <attribute name="latitude" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="shortName" attributeType="String" syncable="YES"/>
         <relationship name="feeds" toMany="YES" deletionRule="Nullify" destinationEntity="Feed" inverseName="locations" inverseEntity="Feed" syncable="YES"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
@@ -34,8 +35,8 @@
     </entity>
     <elements>
         <element name="Feed" positionX="-63" positionY="-18" width="128" height="120"/>
-        <element name="Location" positionX="-27" positionY="36" width="128" height="105"/>
-        <element name="User" positionX="-54" positionY="-9" width="128" height="90"/>
+        <element name="Location" positionX="-27" positionY="36" width="128" height="120"/>
         <element name="Tag" positionX="-45" positionY="45" width="128" height="75"/>
+        <element name="User" positionX="-54" positionY="-9" width="128" height="90"/>
     </elements>
 </model>

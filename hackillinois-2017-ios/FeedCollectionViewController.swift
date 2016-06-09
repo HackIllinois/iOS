@@ -66,11 +66,11 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         }
         
         // Temporary Locations
-        let siebel: Location! = Helpers.createOrFetchLocation(location: "Siebel", locationLatitude: 40.113926, locationLongitude: -88.224916, locationFeeds: nil)
+        let siebel: Location! = Helpers.createOrFetchLocation(location: "Siebel", abbreviation: "Siebel",locationLatitude: 40.113926, locationLongitude: -88.224916, locationFeeds: nil)
         
-        let eceb: Location! = Helpers.createOrFetchLocation(location: "ECEB", locationLatitude: 40.114828, locationLongitude: -88.228049, locationFeeds: nil)
+        let eceb: Location! = Helpers.createOrFetchLocation(location: "ECEB", abbreviation: "ECEB", locationLatitude: 40.114828, locationLongitude: -88.228049, locationFeeds: nil)
         
-        let union: Location! = Helpers.createOrFetchLocation(location: "Illini Union", locationLatitude: 40.109395, locationLongitude: -88.227181, locationFeeds: nil)
+        let union: Location! = Helpers.createOrFetchLocation(location: "Illini Union", abbreviation: "Union", locationLatitude: 40.109395, locationLongitude: -88.227181, locationFeeds: nil)
         
         // Temporary Tags
         let tagGeneral = Helpers.createOrFetchTag(tag: "General", feeds: nil)

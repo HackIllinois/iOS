@@ -14,18 +14,20 @@ import CoreLocation
 class Location: NSManagedObject {
 
     /* Convenience updating function */
-    func initialize(latitude: NSNumber, longitude: NSNumber, name: String, feeds: NSSet) {
+    func initialize(latitude: NSNumber, longitude: NSNumber, name: String, shortName: String, feeds: NSSet) {
         self.latitude = latitude
         self.longitude = longitude
         self.name = name
+        self.shortName = shortName
         self.feeds = feeds
     }
     
     /* Convenience updating function */
-    @nonobjc func initialize(latitude: NSNumber, longitude: NSNumber, name: String, feeds: [Feed]) {
+    @nonobjc func initialize(latitude: NSNumber, longitude: NSNumber, name: String, shortName: String, feeds: [Feed]) {
         self.latitude = latitude
         self.longitude = longitude
         self.name = name
+        self.shortName = shortName
         self.feeds = NSSet(array: feeds)
     }
 }
