@@ -211,7 +211,6 @@
 		E20465C91CF1FAF50054654E /* hackillinois-2017-ios */ = {
 			isa = PBXGroup;
 			children = (
-				E20465CA1CF1FAF50054654E /* AppDelegate.swift */,
 				E2B6C39E1D0B314200D851F9 /* Application */,
 				E2B6C39C1D0B30F100D851F9 /* Helpers */,
 				E2BCA56D1CF3A9F5006AAA8B /* Models */,
@@ -310,6 +309,7 @@
 		E2B6C39E1D0B314200D851F9 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				E20465CA1CF1FAF50054654E /* AppDelegate.swift */,
 				E20465D61CF1FAF50054654E /* LaunchScreen.storyboard */,
 				E2BCA5591CF36167006AAA8B /* Main */,
 				E2AC3F831CF20E4C00C4F21F /* Login */,
