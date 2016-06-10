@@ -72,7 +72,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" image="ic_person" id="g93-Wu-O9H"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="ic_person_white" id="g93-Wu-O9H"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H67-LH-O0p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -91,7 +91,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="HelpQ" image="ic_help_outline" id="RHf-NN-cUs"/>
+                    <tabBarItem key="tabBarItem" title="HelpQ" image="ic_help_outline_white" id="RHf-NN-cUs"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDZ-or-fWM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -240,7 +240,7 @@
         <scene sceneID="BCS-eV-70o">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="O8q-ER-pgb" customClass="MainNavigationViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Feed" image="ic_list" id="QEl-cH-2pi"/>
+                    <tabBarItem key="tabBarItem" title="Feed" image="ic_list_white" id="QEl-cH-2pi"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xkL-lu-mkh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -259,7 +259,7 @@
         <scene sceneID="xIp-nn-huC">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="auk-1d-PU8" customClass="MainNavigationViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Maps" image="ic_map" id="gW3-u5-oRF"/>
+                    <tabBarItem key="tabBarItem" title="Maps" image="ic_map_white" id="gW3-u5-oRF"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yyE-Rb-fuQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -276,9 +276,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_help_outline" width="24" height="24"/>
-        <image name="ic_list" width="24" height="24"/>
-        <image name="ic_map" width="24" height="24"/>
-        <image name="ic_person" width="24" height="24"/>
+        <image name="ic_help_outline_white" width="24" height="24"/>
+        <image name="ic_list_white" width="24" height="24"/>
+        <image name="ic_map_white" width="24" height="24"/>
+        <image name="ic_person_white" width="24" height="24"/>
     </resources>
 </document>

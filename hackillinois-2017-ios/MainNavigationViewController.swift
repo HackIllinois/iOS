@@ -17,6 +17,8 @@ class MainNavigationViewController: UINavigationController {
         navigationBar.barTintColor = UIColor.fromRGBHex(mainUIColor)
         navigationBar.tintColor = UIColor.fromRGBHex(mainTintColor)
         navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.fromRGBHex(mainTintColor)]
+        
+        tabBarItem.image = tabBarItem.image?.imageWithRenderingMode(.AlwaysOriginal)
     }
 
     override func didReceiveMemoryWarning() {

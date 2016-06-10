@@ -16,6 +16,11 @@ class MainTabBarViewController: UITabBarController {
         // Do any additional setup after loading the view.
         tabBar.tintColor = UIColor.fromRGBHex(mainTintColor)
         tabBar.barTintColor = UIColor.fromRGBHex(mainUIColor)
+        
+        // Set Color of each item
+        for item in tabBar.items! {
+            item.image = item.image!.imageWithRenderingMode(.AlwaysOriginal)
+        }
     }
 
     override func didReceiveMemoryWarning() {
