@@ -26,7 +26,7 @@
         <!--HelpQ-->
         <scene sceneID="LkK-Jz-JJA">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7fO-7h-e9o" customClass="MainNavigationViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7fO-7h-e9o" customClass="EventNavigationViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="HelpQ" image="ic_help_outline_white" id="RHf-NN-cUs"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>

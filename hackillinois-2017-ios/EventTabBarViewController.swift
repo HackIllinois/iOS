@@ -1,5 +1,5 @@
 //
-//  MainNavigationViewController.swift
+//  MainTabBarViewController.swift
 //  hackillinois-2017-ios
 //
 //  Created by Shotaro Ikeda on 5/23/16.
@@ -7,18 +7,30 @@
 //
 
 import UIKit
+import SWRevealViewController
 
-class MainNavigationViewController: UINavigationController {
-
+class EventTabBarViewController: UITabBarController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        navigationBar.barTintColor = UIColor.fromRGBHex(mainUIColor)
-        navigationBar.tintColor = UIColor.fromRGBHex(mainTintColor)
-        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.fromRGBHex(mainTintColor)]
+        tabBar.tintColor = UIColor.fromRGBHex(mainTintColor)
+        tabBar.barTintColor = UIColor.fromRGBHex(mainUIColor)
         
-        tabBarItem.image = tabBarItem.image?.imageWithRenderingMode(.AlwaysOriginal)
+        if self.revealViewController() != nil {
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        // Set Color of each item
+        for item in tabBar.items! {
+            print("Tab")
+            item.image = item.image!.imageWithRenderingMode(.AlwaysOriginal)
+        }
     }
 
     override func didReceiveMemoryWarning() {

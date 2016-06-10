@@ -1,5 +1,5 @@
 //
-//  MainConstants.swift
+//  EventConstants.swift
 //  hackillinois-2017-ios
 //
 //  Created by Shotaro Ikeda on 5/23/16.

@@ -33,11 +33,12 @@
 		E2B6C3951D0B2E8000D851F9 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3941D0B2E8000D851F9 /* Map.storyboard */; };
 		E2B6C3971D0B2ED800D851F9 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3961D0B2ED800D851F9 /* Profile.storyboard */; };
 		E2B6C3991D0B2EF300D851F9 /* HelpQ.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3981D0B2EF300D851F9 /* HelpQ.storyboard */; };
-		E2BCA55B1CF36187006AAA8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2BCA55A1CF36187006AAA8B /* Main.storyboard */; };
+		E2B6C3A21D0B4AC400D851F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3A11D0B4AC400D851F9 /* Main.storyboard */; };
+		E2BCA55B1CF36187006AAA8B /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2BCA55A1CF36187006AAA8B /* Event.storyboard */; };
 		E2BCA5621CF36CDA006AAA8B /* FeedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5611CF36CDA006AAA8B /* FeedCollectionViewController.swift */; };
-		E2BCA5661CF372DD006AAA8B /* MainNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5651CF372DD006AAA8B /* MainNavigationViewController.swift */; };
-		E2BCA5681CF37363006AAA8B /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5671CF37363006AAA8B /* MainTabBarViewController.swift */; };
-		E2BCA56A1CF373A1006AAA8B /* MainConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5691CF373A1006AAA8B /* MainConstants.swift */; };
+		E2BCA5661CF372DD006AAA8B /* EventNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5651CF372DD006AAA8B /* EventNavigationViewController.swift */; };
+		E2BCA5681CF37363006AAA8B /* EventTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5671CF37363006AAA8B /* EventTabBarViewController.swift */; };
+		E2BCA56A1CF373A1006AAA8B /* EventConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5691CF373A1006AAA8B /* EventConstants.swift */; };
 		E2BCA57C1CF3B19E006AAA8B /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5761CF3B19E006AAA8B /* Feed+CoreDataProperties.swift */; };
 		E2BCA57D1CF3B19E006AAA8B /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5771CF3B19E006AAA8B /* Feed.swift */; };
 		E2BCA57E1CF3B19E006AAA8B /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5781CF3B19E006AAA8B /* User+CoreDataProperties.swift */; };
@@ -109,11 +110,12 @@
 		E2B6C3941D0B2E8000D851F9 /* Map.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		E2B6C3961D0B2ED800D851F9 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		E2B6C3981D0B2EF300D851F9 /* HelpQ.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HelpQ.storyboard; sourceTree = "<group>"; };
-		E2BCA55A1CF36187006AAA8B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		E2B6C3A11D0B4AC400D851F9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		E2BCA55A1CF36187006AAA8B /* Event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Event.storyboard; sourceTree = "<group>"; };
 		E2BCA5611CF36CDA006AAA8B /* FeedCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewController.swift; sourceTree = "<group>"; };
-		E2BCA5651CF372DD006AAA8B /* MainNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationViewController.swift; sourceTree = "<group>"; };
-		E2BCA5671CF37363006AAA8B /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
-		E2BCA5691CF373A1006AAA8B /* MainConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainConstants.swift; sourceTree = "<group>"; };
+		E2BCA5651CF372DD006AAA8B /* EventNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventNavigationViewController.swift; sourceTree = "<group>"; };
+		E2BCA5671CF37363006AAA8B /* EventTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTabBarViewController.swift; sourceTree = "<group>"; };
+		E2BCA5691CF373A1006AAA8B /* EventConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventConstants.swift; sourceTree = "<group>"; };
 		E2BCA5761CF3B19E006AAA8B /* Feed+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E2BCA5771CF3B19E006AAA8B /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		E2BCA5781CF3B19E006AAA8B /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -311,25 +313,26 @@
 			children = (
 				E20465CA1CF1FAF50054654E /* AppDelegate.swift */,
 				E20465D61CF1FAF50054654E /* LaunchScreen.storyboard */,
-				E2BCA5591CF36167006AAA8B /* Main */,
+				E2B6C3A11D0B4AC400D851F9 /* Main.storyboard */,
+				E2BCA5591CF36167006AAA8B /* Event */,
 				E2AC3F831CF20E4C00C4F21F /* Login */,
 			);
 			name = Application;
 			sourceTree = "<group>";
 		};
-		E2BCA5591CF36167006AAA8B /* Main */ = {
+		E2BCA5591CF36167006AAA8B /* Event */ = {
 			isa = PBXGroup;
 			children = (
-				E2BCA5691CF373A1006AAA8B /* MainConstants.swift */,
-				E2BCA55A1CF36187006AAA8B /* Main.storyboard */,
-				E2BCA5651CF372DD006AAA8B /* MainNavigationViewController.swift */,
-				E2BCA5671CF37363006AAA8B /* MainTabBarViewController.swift */,
+				E2BCA5691CF373A1006AAA8B /* EventConstants.swift */,
+				E2BCA55A1CF36187006AAA8B /* Event.storyboard */,
+				E2BCA5651CF372DD006AAA8B /* EventNavigationViewController.swift */,
+				E2BCA5671CF37363006AAA8B /* EventTabBarViewController.swift */,
 				E2BCA5601CF36A15006AAA8B /* Feed */,
 				E2D483311D00D37800859A67 /* Maps */,
 				E2B6C39A1D0B30A300D851F9 /* Profile */,
 				E2B6C39B1D0B30CB00D851F9 /* HelpQ */,
 			);
-			name = Main;
+			name = Event;
 			sourceTree = "<group>";
 		};
 		E2BCA5601CF36A15006AAA8B /* Feed */ = {
@@ -498,6 +501,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E277DD6B1CF4AF0400D7E018 /* keys.plist in Resources */,
+				E2B6C3A21D0B4AC400D851F9 /* Main.storyboard in Resources */,
 				E2B6C3951D0B2E8000D851F9 /* Map.storyboard in Resources */,
 				E2B6C3971D0B2ED800D851F9 /* Profile.storyboard in Resources */,
 				E20465D81CF1FAF50054654E /* LaunchScreen.storyboard in Resources */,
@@ -505,7 +509,7 @@
 				E20465D51CF1FAF50054654E /* Assets.xcassets in Resources */,
 				E2B6C3991D0B2EF300D851F9 /* HelpQ.storyboard in Resources */,
 				E20465D01CF1FAF50054654E /* Login.storyboard in Resources */,
-				E2BCA55B1CF36187006AAA8B /* Main.storyboard in Resources */,
+				E2BCA55B1CF36187006AAA8B /* Event.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -654,12 +658,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2BCA57F1CF3B19E006AAA8B /* User.swift in Sources */,
-				E2BCA56A1CF373A1006AAA8B /* MainConstants.swift in Sources */,
-				E2BCA5661CF372DD006AAA8B /* MainNavigationViewController.swift in Sources */,
+				E2BCA56A1CF373A1006AAA8B /* EventConstants.swift in Sources */,
+				E2BCA5661CF372DD006AAA8B /* EventNavigationViewController.swift in Sources */,
 				E2BCA57E1CF3B19E006AAA8B /* User+CoreDataProperties.swift in Sources */,
 				E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */,
 				E2BD82B51D09EA530009DB07 /* GenericMapViewController.swift in Sources */,
-				E2BCA5681CF37363006AAA8B /* MainTabBarViewController.swift in Sources */,
+				E2BCA5681CF37363006AAA8B /* EventTabBarViewController.swift in Sources */,
 				E20465D31CF1FAF50054654E /* hackillinois_2017_ios.xcdatamodeld in Sources */,
 				E2BCA57D1CF3B19E006AAA8B /* Feed.swift in Sources */,
 				E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */,

@@ -41,7 +41,7 @@
         <!--Maps-->
         <scene sceneID="xIp-nn-huC">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="auk-1d-PU8" customClass="MainNavigationViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="auk-1d-PU8" customClass="EventNavigationViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Maps" image="ic_map_white" id="gW3-u5-oRF"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
