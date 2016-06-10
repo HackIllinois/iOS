@@ -11,18 +11,19 @@ import MapKit
 
 class Building: NSObject, MKAnnotation {
     var title: String?
-    var short: String?
+    var shortName: String?
     var coordinate: CLLocationCoordinate2D
     
     init(title: String, coordinate: CLLocationCoordinate2D, shortName: String) {
         self.title = title
-        self.short = shortName
+        self.shortName = shortName
         self.coordinate = coordinate
     }
     
     /* Convenience initializer to create a Building object from a Location object */
     init(location: Location) {
         self.title = location.name
+        self.shortName = location.shortName
         self.coordinate =
             CLLocationCoordinate2DMake(Double(location.latitude), Double(location.longitude))
     }

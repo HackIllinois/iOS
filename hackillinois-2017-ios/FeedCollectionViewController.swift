@@ -255,12 +255,17 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
             let destination = segue.destinationViewController as! FeedDetailViewController
             let feedItem = fetchedResultsController.objectAtIndexPath(feedCollection.indexPathsForSelectedItems()!.first!) as! Feed
             
+            // Set up buildings
+            destination.buildings = []
+            
             if let locationArray = feedItem.locations?.array as? [Location] {
-                destination.locationArray = locationArray
-            } else {
-                destination.locationArray = []
+                for location in locationArray {
+                    let building = Building(location: location)
+                    destination.buildings.append(building)
+                }
             }
             
+            // Set up the message
             destination.message = feedItem.message
         }
     }

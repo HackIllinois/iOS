@@ -39,6 +39,8 @@ class CustomLiquidCell : LiquidFloatingCell {
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 5
         label.textAlignment = .Center
+        label.alpha = 0.0 // Clear labels for smoother transition
+        
         addSubview(label)
         label.snp_makeConstraints { make in
             make.left.equalTo(self).offset(-80)
