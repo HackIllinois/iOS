@@ -18,9 +18,6 @@ enum UserInputState: UInt8 {
 }
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
-    /* Replace these hexidecimal with RGB equivalents */
-    let borderColorHex = 0x2c3e50
-    
     /* Replace these floats with alpha values for elements */
     let loginElementAlpha: CGFloat = 0.9
     
