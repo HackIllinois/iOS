@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="O8q-ER-pgb">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Feed Collection View Controller-->
+        <scene sceneID="KOO-9v-UHN">
+            <objects>
+                <viewController id="nho-NB-b6i" customClass="FeedCollectionViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2YB-za-ryM"/>
+                        <viewControllerLayoutGuide type="bottom" id="eps-uL-0S6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Hnw-0U-UHd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8Lt-x6-lzi">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <color key="backgroundColor" red="0.90980392156862744" green="0.49411764705882355" blue="0.28627450980392155" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="30" minimumInteritemSpacing="20000" id="nbv-GR-rgS">
+                                    <size key="itemSize" width="250" height="150"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="feedCell" id="1KR-gZ-CrT" customClass="FeedCollectionViewCell" customModule="hackillinois_2017_ios" customModuleProvider="target">
+                                        <rect key="frame" x="175" y="64" width="250" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="250" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="May 23, 2016 at 11:59 AM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fzS-SN-kaQ">
+                                                    <rect key="frame" x="8" y="8" width="234" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="Fjf-Ri-WQ0"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lunch is served! Please come to ECEB or Siebel for Potbelly's Sandwiches!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5EK-xX-mcA">
+                                                    <rect key="frame" x="8" y="43" width="234" height="65"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailingMargin" secondItem="fzS-SN-kaQ" secondAttribute="trailing" id="HjD-OE-CRe"/>
+                                            <constraint firstItem="fzS-SN-kaQ" firstAttribute="centerX" secondItem="1KR-gZ-CrT" secondAttribute="centerX" id="Hl7-5y-zlv"/>
+                                            <constraint firstItem="fzS-SN-kaQ" firstAttribute="top" secondItem="1KR-gZ-CrT" secondAttribute="topMargin" id="Ija-ma-KgO"/>
+                                            <constraint firstItem="5EK-xX-mcA" firstAttribute="centerX" secondItem="1KR-gZ-CrT" secondAttribute="centerX" id="MSB-Hf-6FO"/>
+                                            <constraint firstItem="fzS-SN-kaQ" firstAttribute="leading" secondItem="1KR-gZ-CrT" secondAttribute="leadingMargin" id="TK6-7m-upB"/>
+                                            <constraint firstItem="5EK-xX-mcA" firstAttribute="trailing" secondItem="1KR-gZ-CrT" secondAttribute="trailingMargin" id="hw6-f3-Si7"/>
+                                            <constraint firstItem="5EK-xX-mcA" firstAttribute="leading" secondItem="1KR-gZ-CrT" secondAttribute="leadingMargin" id="isH-rG-Bqk"/>
+                                            <constraint firstItem="5EK-xX-mcA" firstAttribute="centerY" secondItem="1KR-gZ-CrT" secondAttribute="centerY" id="sSK-vk-jEu"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="dateTimeLabel" destination="fzS-SN-kaQ" id="dok-pP-v2t"/>
+                                            <outlet property="messageLabel" destination="5EK-xX-mcA" id="O4y-9P-x4j"/>
+                                            <segue destination="sG7-5y-UvH" kind="show" identifier="feedDetail" id="Bez-bn-GIY"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="nho-NB-b6i" id="83P-oo-DQK"/>
+                                    <outlet property="delegate" destination="nho-NB-b6i" id="zhK-ik-6VR"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="eps-uL-0S6" firstAttribute="top" secondItem="8Lt-x6-lzi" secondAttribute="bottom" id="3pX-qv-Jve"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8Lt-x6-lzi" secondAttribute="trailing" constant="-20" id="Byd-ug-713"/>
+                            <constraint firstItem="8Lt-x6-lzi" firstAttribute="top" secondItem="2YB-za-ryM" secondAttribute="bottom" id="Gyr-i5-w4h"/>
+                            <constraint firstItem="8Lt-x6-lzi" firstAttribute="leading" secondItem="Hnw-0U-UHd" secondAttribute="leadingMargin" constant="-20" id="Y1o-mO-evo"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="9x6-ft-woM"/>
+                    <connections>
+                        <outlet property="feedCollection" destination="8Lt-x6-lzi" id="GKf-bL-Y67"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yod-Gj-Dkk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1485" y="-131"/>
+        </scene>
+        <!--Feed Detail View Controller-->
+        <scene sceneID="cLf-xP-owu">
+            <objects>
+                <viewController id="sG7-5y-UvH" customClass="FeedDetailViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RO0-YL-Kg8"/>
+                        <viewControllerLayoutGuide type="bottom" id="BiY-Gc-0yJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Q1W-c3-A5R">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVm-kq-EaS">
+                                <rect key="frame" x="0.0" y="64" width="600" height="100"/>
+                                <color key="backgroundColor" red="0.90980392160000001" green="0.4941176471" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="qxc-Ti-nqu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Jpp-fa-Pmd">
+                                <rect key="frame" x="0.0" y="164" width="600" height="392"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.1019607843" green="0.73725490199999999" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Jpp-fa-Pmd" firstAttribute="leading" secondItem="Q1W-c3-A5R" secondAttribute="leadingMargin" constant="-20" id="2ao-26-MqW"/>
+                            <constraint firstItem="BiY-Gc-0yJ" firstAttribute="top" secondItem="Jpp-fa-Pmd" secondAttribute="bottom" id="DAX-oc-XVi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="RVm-kq-EaS" secondAttribute="trailing" constant="-20" id="UKj-sc-23R"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Jpp-fa-Pmd" secondAttribute="trailing" constant="-20" id="Yfu-NT-6YI"/>
+                            <constraint firstItem="Jpp-fa-Pmd" firstAttribute="top" secondItem="RVm-kq-EaS" secondAttribute="bottom" id="avH-BL-KLc"/>
+                            <constraint firstItem="RVm-kq-EaS" firstAttribute="leading" secondItem="Q1W-c3-A5R" secondAttribute="leadingMargin" constant="-20" id="fCB-Ug-kT6"/>
+                            <constraint firstItem="RVm-kq-EaS" firstAttribute="top" secondItem="RO0-YL-Kg8" secondAttribute="bottom" id="vsH-J4-yG1"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="event" destination="RVm-kq-EaS" id="umW-L4-F7R"/>
+                        <outlet property="mapView" destination="Jpp-fa-Pmd" id="aCS-Hv-ovd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o9Y-bv-x2y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2352" y="-131"/>
+        </scene>
+        <!--Feed-->
+        <scene sceneID="BCS-eV-70o">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="O8q-ER-pgb" customClass="MainNavigationViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Feed" image="ic_list_white" id="QEl-cH-2pi"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xkL-lu-mkh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="nho-NB-b6i" kind="relationship" relationship="rootViewController" id="rCg-6y-Jj2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QXQ-gD-1S0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="673" y="-131"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ic_list_white" width="24" height="24"/>
+    </resources>
+</document>

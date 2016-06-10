@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="auk-1d-PU8">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Map View Controller-->
+        <scene sceneID="aal-5c-lxi">
+            <objects>
+                <viewController id="qaZ-tF-XKU" customClass="MapViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mgr-C5-5lE"/>
+                        <viewControllerLayoutGuide type="bottom" id="bvf-mM-5by"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ib4-KP-Krk">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Zdn-L1-r3l">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Zdn-L1-r3l" firstAttribute="leading" secondItem="ib4-KP-Krk" secondAttribute="leadingMargin" constant="-20" id="8Yd-yr-kee"/>
+                            <constraint firstItem="Zdn-L1-r3l" firstAttribute="top" secondItem="mgr-C5-5lE" secondAttribute="bottom" id="Ou4-2J-wmx"/>
+                            <constraint firstItem="bvf-mM-5by" firstAttribute="top" secondItem="Zdn-L1-r3l" secondAttribute="bottom" id="nPJ-gc-EIi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Zdn-L1-r3l" secondAttribute="trailing" constant="-20" id="rBz-Vx-OYW"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="m5J-TP-VmL"/>
+                    <connections>
+                        <outlet property="mapView" destination="Zdn-L1-r3l" id="EGZ-E5-8q3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wl9-fg-gn8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1486" y="631"/>
+        </scene>
+        <!--Maps-->
+        <scene sceneID="xIp-nn-huC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="auk-1d-PU8" customClass="MainNavigationViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Maps" image="ic_map_white" id="gW3-u5-oRF"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yyE-Rb-fuQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qaZ-tF-XKU" kind="relationship" relationship="rootViewController" id="BN4-Im-RQb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iV2-Et-PSC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="674" y="631"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ic_map_white" width="24" height="24"/>
+    </resources>
+</document>

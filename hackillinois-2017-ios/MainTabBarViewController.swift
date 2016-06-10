@@ -9,16 +9,21 @@
 import UIKit
 
 class MainTabBarViewController: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         tabBar.tintColor = UIColor.fromRGBHex(mainTintColor)
         tabBar.barTintColor = UIColor.fromRGBHex(mainUIColor)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
         
         // Set Color of each item
         for item in tabBar.items! {
+            print("Tab")
             item.image = item.image!.imageWithRenderingMode(.AlwaysOriginal)
         }
     }
