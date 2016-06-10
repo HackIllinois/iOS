@@ -9,7 +9,33 @@
 import UIKit
 import SWRevealViewController
 
-class EventTabBarViewController: UITabBarController {
+class EventTabBarViewController: UITabBarController, SWRevealViewControllerDelegate, UIGestureRecognizerDelegate {
+    
+    var tapRecognitionView: UIView?
+    
+    func handleTap() {
+        // Simulate tap of close button
+        self.revealViewController().revealToggleAnimated(true)
+    }
+    
+    // Mark: SWRevealViewController delegates
+    func revealController(revealController: SWRevealViewController!, didMoveToPosition position: FrontViewPosition) {
+        if position == FrontViewPosition.Right {
+            // Add invisible view to pretend as though interaction was disabled
+            tapRecognitionView = UIView(frame: self.view.frame)
+            // Set up gesture
+            let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+            tap.delegate = self
+            tapRecognitionView?.addGestureRecognizer(tap)
+            
+            // Properly add the view
+            self.view.addSubview(tapRecognitionView!)
+            self.view.bringSubviewToFront(tapRecognitionView!)
+        } else {
+            self.view.userInteractionEnabled = true
+            tapRecognitionView?.removeFromSuperview()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +46,8 @@ class EventTabBarViewController: UITabBarController {
         
         if self.revealViewController() != nil {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+            
+            self.revealViewController().delegate = self
         }
     }
     
@@ -28,7 +56,6 @@ class EventTabBarViewController: UITabBarController {
         
         // Set Color of each item
         for item in tabBar.items! {
-            print("Tab")
             item.image = item.image!.imageWithRenderingMode(.AlwaysOriginal)
         }
     }

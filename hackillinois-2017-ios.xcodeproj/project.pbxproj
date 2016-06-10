@@ -55,6 +55,7 @@
 		E2D4F0E31D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4F0E21D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift */; };
 		E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4F0E41D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift */; };
 		E2F639481D05083300853089 /* CGRect+initWithCenterAt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F639471D05083300853089 /* CGRect+initWithCenterAt.swift */; };
+		E2F957021D0B6EBF003A0881 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F957011D0B6EBF003A0881 /* MenuTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +133,7 @@
 		E2D4F0E21D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+fromLocation.swift"; sourceTree = "<group>"; };
 		E2D4F0E41D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MKMapCamera+initFromLocation.swift"; sourceTree = "<group>"; };
 		E2F639471D05083300853089 /* CGRect+initWithCenterAt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+initWithCenterAt.swift"; sourceTree = "<group>"; };
+		E2F957011D0B6EBF003A0881 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		E75AFF8F2A9393CCA4EBF188 /* Pods_hackillinois_2017_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -314,6 +316,7 @@
 				E20465CA1CF1FAF50054654E /* AppDelegate.swift */,
 				E20465D61CF1FAF50054654E /* LaunchScreen.storyboard */,
 				E2B6C3A11D0B4AC400D851F9 /* Main.storyboard */,
+				E2F957011D0B6EBF003A0881 /* MenuTableViewController.swift */,
 				E2BCA5591CF36167006AAA8B /* Event */,
 				E2AC3F831CF20E4C00C4F21F /* Login */,
 			);
@@ -659,6 +662,7 @@
 			files = (
 				E2BCA57F1CF3B19E006AAA8B /* User.swift in Sources */,
 				E2BCA56A1CF373A1006AAA8B /* EventConstants.swift in Sources */,
+				E2F957021D0B6EBF003A0881 /* MenuTableViewController.swift in Sources */,
 				E2BCA5661CF372DD006AAA8B /* EventNavigationViewController.swift in Sources */,
 				E2BCA57E1CF3B19E006AAA8B /* User+CoreDataProperties.swift in Sources */,
 				E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */,

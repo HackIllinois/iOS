@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SWRevealViewController
 
 class EventNavigationViewController: UINavigationController {
 
@@ -18,14 +19,18 @@ class EventNavigationViewController: UINavigationController {
         navigationBar.tintColor = UIColor.fromRGBHex(mainTintColor)
         navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.fromRGBHex(mainTintColor)]
         
-        tabBarItem.image = tabBarItem.image?.imageWithRenderingMode(.AlwaysOriginal)
+        // Reveal view controller
+        if self.revealViewController() != nil {
+            print("Reveal view controller found")
+            
+            navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_list_white"), style: .Plain, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle))
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation

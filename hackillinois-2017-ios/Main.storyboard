@@ -26,16 +26,22 @@
             </objects>
             <point key="canvasLocation" x="997" y="904"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Menu Table View Controller-->
         <scene sceneID="fZC-5p-lpN">
             <objects>
-                <tableViewController id="Smb-Rq-Vq4" sceneMemberID="viewController">
+                <tableViewController id="Smb-Rq-Vq4" customClass="MenuTableViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="LaB-en-MIM">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.18039215689999999" green="0.35294117650000001" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="separatorColor" red="0.55294117647058827" green="0.71764705882352942" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.1803921568627451" green="0.3529411764705882" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexTrackingBackgroundColor" red="0.18039215689999999" green="0.35294117650000001" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="VuI-eK-RZP">
+                            <rect key="frame" x="0.0" y="240" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
                         <sections>
                             <tableViewSection id="bjD-dT-AWg">
                                 <cells>
