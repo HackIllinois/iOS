@@ -25,6 +25,8 @@
 		E277DD691CF4A79100D7E018 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E277DD681CF4A79100D7E018 /* FeedDetailViewController.swift */; };
 		E277DD6B1CF4AF0400D7E018 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = E277DD6A1CF4AF0400D7E018 /* keys.plist */; };
 		E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E277DD6D1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift */; };
+		E2A085EE1D0C4202002197F9 /* GenericTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085ED1D0C4202002197F9 /* GenericTabBarController.swift */; };
+		E2A085F01D0C42A7002197F9 /* GenericNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085EF1D0C42A7002197F9 /* GenericNavigationController.swift */; };
 		E2AC3F861CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */; };
 		E2AC3F871CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */; };
 		E2AC3F881CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */; };
@@ -36,8 +38,6 @@
 		E2B6C3A21D0B4AC400D851F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3A11D0B4AC400D851F9 /* Main.storyboard */; };
 		E2BCA55B1CF36187006AAA8B /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2BCA55A1CF36187006AAA8B /* Event.storyboard */; };
 		E2BCA5621CF36CDA006AAA8B /* FeedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5611CF36CDA006AAA8B /* FeedCollectionViewController.swift */; };
-		E2BCA5661CF372DD006AAA8B /* EventNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5651CF372DD006AAA8B /* EventNavigationViewController.swift */; };
-		E2BCA5681CF37363006AAA8B /* EventTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5671CF37363006AAA8B /* EventTabBarViewController.swift */; };
 		E2BCA56A1CF373A1006AAA8B /* EventConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5691CF373A1006AAA8B /* EventConstants.swift */; };
 		E2BCA57C1CF3B19E006AAA8B /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5761CF3B19E006AAA8B /* Feed+CoreDataProperties.swift */; };
 		E2BCA57D1CF3B19E006AAA8B /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5771CF3B19E006AAA8B /* Feed.swift */; };
@@ -107,6 +107,8 @@
 		E277DD681CF4A79100D7E018 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
 		E277DD6A1CF4AF0400D7E018 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
 		E277DD6D1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailTableViewCell.swift; sourceTree = "<group>"; };
+		E2A085ED1D0C4202002197F9 /* GenericTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericTabBarController.swift; sourceTree = "<group>"; };
+		E2A085EF1D0C42A7002197F9 /* GenericNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericNavigationController.swift; sourceTree = "<group>"; };
 		E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+fromHex.swift"; sourceTree = "<group>"; };
 		E2AC3F8D1CF21F3900C4F21F /* UIColor+fromHexTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+fromHexTests.swift"; sourceTree = "<group>"; };
 		E2B6C3921D0B2E1200D851F9 /* Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
@@ -116,8 +118,6 @@
 		E2B6C3A11D0B4AC400D851F9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E2BCA55A1CF36187006AAA8B /* Event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Event.storyboard; sourceTree = "<group>"; };
 		E2BCA5611CF36CDA006AAA8B /* FeedCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewController.swift; sourceTree = "<group>"; };
-		E2BCA5651CF372DD006AAA8B /* EventNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventNavigationViewController.swift; sourceTree = "<group>"; };
-		E2BCA5671CF37363006AAA8B /* EventTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTabBarViewController.swift; sourceTree = "<group>"; };
 		E2BCA5691CF373A1006AAA8B /* EventConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventConstants.swift; sourceTree = "<group>"; };
 		E2BCA5761CF3B19E006AAA8B /* Feed+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E2BCA5771CF3B19E006AAA8B /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
@@ -300,7 +300,7 @@
 		E2B6C39C1D0B30F100D851F9 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				E2BD82B31D09EA350009DB07 /* Generic */,
+				E2BD82B31D09EA350009DB07 /* Generics */,
 				E2B6C39D1D0B311000D851F9 /* HelperClasses */,
 				E2AC3F841CF21BBE00C4F21F /* LanguageExtensions */,
 			);
@@ -334,8 +334,6 @@
 			children = (
 				E2BCA5691CF373A1006AAA8B /* EventConstants.swift */,
 				E2BCA55A1CF36187006AAA8B /* Event.storyboard */,
-				E2BCA5651CF372DD006AAA8B /* EventNavigationViewController.swift */,
-				E2BCA5671CF37363006AAA8B /* EventTabBarViewController.swift */,
 				E2BCA5601CF36A15006AAA8B /* Feed */,
 				E2F957031D0BA882003A0881 /* Schedule */,
 				E2D483311D00D37800859A67 /* Maps */,
@@ -370,12 +368,14 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		E2BD82B31D09EA350009DB07 /* Generic */ = {
+		E2BD82B31D09EA350009DB07 /* Generics */ = {
 			isa = PBXGroup;
 			children = (
 				E2BD82B41D09EA530009DB07 /* GenericMapViewController.swift */,
+				E2A085ED1D0C4202002197F9 /* GenericTabBarController.swift */,
+				E2A085EF1D0C42A7002197F9 /* GenericNavigationController.swift */,
 			);
-			name = Generic;
+			name = Generics;
 			sourceTree = "<group>";
 		};
 		E2D483311D00D37800859A67 /* Maps */ = {
@@ -695,11 +695,9 @@
 				E2BCA57F1CF3B19E006AAA8B /* User.swift in Sources */,
 				E2BCA56A1CF373A1006AAA8B /* EventConstants.swift in Sources */,
 				E2F957021D0B6EBF003A0881 /* MenuTableViewController.swift in Sources */,
-				E2BCA5661CF372DD006AAA8B /* EventNavigationViewController.swift in Sources */,
 				E2BCA57E1CF3B19E006AAA8B /* User+CoreDataProperties.swift in Sources */,
 				E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */,
 				E2BD82B51D09EA530009DB07 /* GenericMapViewController.swift in Sources */,
-				E2BCA5681CF37363006AAA8B /* EventTabBarViewController.swift in Sources */,
 				E20465D31CF1FAF50054654E /* hackillinois_2017_ios.xcdatamodeld in Sources */,
 				E2BCA57D1CF3B19E006AAA8B /* Feed.swift in Sources */,
 				E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */,
@@ -712,11 +710,13 @@
 				E25377421CF8AB2C003795E7 /* Tag.swift in Sources */,
 				E25980071D099B0B00AE4939 /* CustomLiquidCell.swift in Sources */,
 				E2D483331D00D3B100859A67 /* MapViewController.swift in Sources */,
+				E2A085F01D0C42A7002197F9 /* GenericNavigationController.swift in Sources */,
 				E2BCA5801CF3B19E006AAA8B /* Location+CoreDataProperties.swift in Sources */,
 				E2D4F0DF1D06AD3F00646BF8 /* Building.swift in Sources */,
 				E2BD82B71D0AFFB90009DB07 /* UIImage+imageWithColor.swift in Sources */,
 				E2F639481D05083300853089 /* CGRect+initWithCenterAt.swift in Sources */,
 				E2BCA57C1CF3B19E006AAA8B /* Feed+CoreDataProperties.swift in Sources */,
+				E2A085EE1D0C4202002197F9 /* GenericTabBarController.swift in Sources */,
 				E20465CD1CF1FAF50054654E /* LoginViewController.swift in Sources */,
 				E2AC3F861CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */,
 				E20465CB1CF1FAF50054654E /* AppDelegate.swift in Sources */,

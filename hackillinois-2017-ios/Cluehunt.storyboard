@@ -42,10 +42,10 @@
             </objects>
             <point key="canvasLocation" x="1803" y="186"/>
         </scene>
-        <!--Event Tab Bar View Controller-->
+        <!--Generic Tab Bar Controller-->
         <scene sceneID="tzw-21-Luo">
             <objects>
-                <tabBarController id="tBa-YZ-H3K" customClass="EventTabBarViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="tBa-YZ-H3K" customClass="GenericTabBarController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="geR-vD-v5b">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -63,7 +63,7 @@
         <!--Clues-->
         <scene sceneID="bG0-8h-bYE">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ABz-6O-EmA" customClass="EventNavigationViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ABz-6O-EmA" customClass="GenericNavigationController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Clues" image="ic_search_white" id="hCe-15-hsD"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="JmN-Y6-8Df">
@@ -82,7 +82,7 @@
         <!--Scores-->
         <scene sceneID="7DI-Vs-XGD">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HlP-mo-eZy" customClass="EventNavigationViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HlP-mo-eZy" customClass="GenericNavigationController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Scores" image="ic_view_list_white" id="kqS-2H-9TQ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="drB-J1-SfQ">

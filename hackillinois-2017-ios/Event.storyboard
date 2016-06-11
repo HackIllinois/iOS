@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Event Tab Bar View Controller-->
+        <!--Generic Tab Bar Controller-->
         <scene sceneID="CaQ-aq-biC">
             <objects>
-                <tabBarController storyboardIdentifier="MainStoryboard" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LXI-DR-cWu" customClass="EventTabBarViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainStoryboard" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LXI-DR-cWu" customClass="GenericTabBarController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="KCV-ZD-8gX"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="awd-Bi-joQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>

@@ -1,16 +1,17 @@
 //
-//  MainTabBarViewController.swift
+//  GenericTabBarController.swift
 //  hackillinois-2017-ios
 //
-//  Created by Shotaro Ikeda on 5/23/16.
+//  Created by Shotaro Ikeda on 6/11/16.
 //  Copyright © 2016 Shotaro Ikeda. All rights reserved.
 //
 
 import UIKit
 import SWRevealViewController
 
-class EventTabBarViewController: UITabBarController, SWRevealViewControllerDelegate, UIGestureRecognizerDelegate {
+class GenericTabBarController: UITabBarController, SWRevealViewControllerDelegate, UIGestureRecognizerDelegate {
     
+    /* View that masks and handles the tap control */
     var tapRecognitionView: UIView?
     
     func handleTap() {
@@ -45,8 +46,8 @@ class EventTabBarViewController: UITabBarController, SWRevealViewControllerDeleg
         tabBar.barTintColor = UIColor.fromRGBHex(mainUIColor)
         
         if self.revealViewController() != nil {
+            // Add swiping gesture and custom closing behavior
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-            
             self.revealViewController().delegate = self
         }
     }
@@ -59,21 +60,4 @@ class EventTabBarViewController: UITabBarController, SWRevealViewControllerDeleg
             item.image = item.image!.imageWithRenderingMode(.AlwaysOriginal)
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

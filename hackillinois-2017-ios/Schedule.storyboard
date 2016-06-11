@@ -26,7 +26,7 @@
         <!--Schedule-->
         <scene sceneID="f5O-w1-ylb">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lmf-Cr-auO" customClass="EventNavigationViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lmf-Cr-auO" customClass="GenericNavigationController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Schedule" image="ic_schedule_white" id="cho-YV-AU8"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>

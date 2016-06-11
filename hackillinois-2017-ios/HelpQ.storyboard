@@ -23,10 +23,10 @@
             </objects>
             <point key="canvasLocation" x="1486" y="2107"/>
         </scene>
-        <!--Event Navigation View Controller-->
+        <!--Generic Navigation Controller-->
         <scene sceneID="LkK-Jz-JJA">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7fO-7h-e9o" customClass="EventNavigationViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7fO-7h-e9o" customClass="GenericNavigationController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qk6-ou-A8T">

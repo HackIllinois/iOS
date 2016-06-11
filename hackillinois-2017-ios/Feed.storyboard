@@ -147,7 +147,7 @@
         <!--Feed-->
         <scene sceneID="BCS-eV-70o">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="O8q-ER-pgb" customClass="EventNavigationViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="O8q-ER-pgb" customClass="GenericNavigationController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Feed" image="ic_list_white" id="QEl-cH-2pi"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
