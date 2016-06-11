@@ -11,7 +11,7 @@ import CoreData
 
 private let reuseIdentifier = "feedCell"
 
-class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate {
+class FeedCollectionViewController: GenericCardViewController, UICollectionViewDataSource,  NSFetchedResultsControllerDelegate {
     /* Variables */
     var refreshCleanUpRequired = false
     var dateTimeFormatter: NSDateFormatter!
@@ -193,7 +193,7 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         presentViewController(alert, animated: true, completion: nil)
     }
 
-
+    // Mark: View configuration
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -208,7 +208,7 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         dateTimeFormatter.dateFormat = "MMMM dd 'at' h:mm a"
         
         // Layout the view to look more natural
-        feedCollection.contentInset = UIEdgeInsets(top: -20, left: 0, bottom: 20, right: 0)
+        feedCollection.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 80, right: 0)
         
         // Set up refresh indicator
         refreshControl = UIRefreshControl()
@@ -231,13 +231,9 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         loadSavedData()
         
         // Create the "sort by..." feature
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sort by...", style: .Plain, target: self, action: #selector(showFilterBy))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_sort")!, style: .Plain, target: self, action: #selector(showFilterBy))
+        
         navigationItem.title = "Annoucements"
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Navigation
@@ -278,53 +274,12 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("feedCell", forIndexPath: indexPath) as! FeedCollectionViewCell
         let feed = fetchedResultsController.objectAtIndexPath(indexPath) as! Feed
+        /* Initialize cell data */
         cell.dateTimeLabel.text = dateTimeFormatter.stringFromDate(feed.time)
         cell.messageLabel.text = feed.message
         
+        configureCell(cell: cell)
+        
         return cell
     }
-    
-    // Mark: UICollectionDelegateFlowLayout
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        // Support multiple devices...
-        let screen = UIScreen.mainScreen().bounds
-        return CGSize(width: screen.width - 60, height: screen.height / 3 - 50)
-    }
-    
-    // MARK: UICollectionViewDelegate
-    /*
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("feedDetail", sender: sampleData[indexPath.row])
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
-    
-    }
-    */
-
 }

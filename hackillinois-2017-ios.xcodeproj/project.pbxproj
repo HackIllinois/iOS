@@ -27,6 +27,14 @@
 		E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E277DD6D1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift */; };
 		E2A085EE1D0C4202002197F9 /* GenericTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085ED1D0C4202002197F9 /* GenericTabBarController.swift */; };
 		E2A085F01D0C42A7002197F9 /* GenericNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085EF1D0C42A7002197F9 /* GenericNavigationController.swift */; };
+		E2A085F21D0C4E43002197F9 /* GenericCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085F11D0C4E43002197F9 /* GenericCardViewController.swift */; };
+		E2A085F41D0C57E7002197F9 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085F31D0C57E7002197F9 /* ScheduleViewController.swift */; };
+		E2A085F61D0C6536002197F9 /* ScheduleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085F51D0C6536002197F9 /* ScheduleCollectionViewCell.swift */; };
+		E2A085FA1D0C6688002197F9 /* DayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085F91D0C6688002197F9 /* DayItem.swift */; };
+		E2A085FF1D0C70BF002197F9 /* GenericDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085FE1D0C70BF002197F9 /* GenericDayViewController.swift */; };
+		E2A086011D0C736B002197F9 /* FridayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A086001D0C736B002197F9 /* FridayViewController.swift */; };
+		E2A086061D0C73B4002197F9 /* SaturdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A086051D0C73B4002197F9 /* SaturdayViewController.swift */; };
+		E2A086081D0C73BE002197F9 /* SundayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A086071D0C73BE002197F9 /* SundayViewController.swift */; };
 		E2AC3F861CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */; };
 		E2AC3F871CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */; };
 		E2AC3F881CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */; };
@@ -109,6 +117,14 @@
 		E277DD6D1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailTableViewCell.swift; sourceTree = "<group>"; };
 		E2A085ED1D0C4202002197F9 /* GenericTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericTabBarController.swift; sourceTree = "<group>"; };
 		E2A085EF1D0C42A7002197F9 /* GenericNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericNavigationController.swift; sourceTree = "<group>"; };
+		E2A085F11D0C4E43002197F9 /* GenericCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericCardViewController.swift; sourceTree = "<group>"; };
+		E2A085F31D0C57E7002197F9 /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
+		E2A085F51D0C6536002197F9 /* ScheduleCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleCollectionViewCell.swift; sourceTree = "<group>"; };
+		E2A085F91D0C6688002197F9 /* DayItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayItem.swift; sourceTree = "<group>"; };
+		E2A085FE1D0C70BF002197F9 /* GenericDayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericDayViewController.swift; sourceTree = "<group>"; };
+		E2A086001D0C736B002197F9 /* FridayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridayViewController.swift; sourceTree = "<group>"; };
+		E2A086051D0C73B4002197F9 /* SaturdayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaturdayViewController.swift; sourceTree = "<group>"; };
+		E2A086071D0C73BE002197F9 /* SundayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SundayViewController.swift; sourceTree = "<group>"; };
 		E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+fromHex.swift"; sourceTree = "<group>"; };
 		E2AC3F8D1CF21F3900C4F21F /* UIColor+fromHexTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+fromHexTests.swift"; sourceTree = "<group>"; };
 		E2B6C3921D0B2E1200D851F9 /* Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
@@ -259,6 +275,39 @@
 			name = FeedDetail;
 			sourceTree = "<group>";
 		};
+		E2A085FB1D0C7069002197F9 /* ScheduleGenerics */ = {
+			isa = PBXGroup;
+			children = (
+				E2A085FE1D0C70BF002197F9 /* GenericDayViewController.swift */,
+				E2A085F51D0C6536002197F9 /* ScheduleCollectionViewCell.swift */,
+			);
+			name = ScheduleGenerics;
+			sourceTree = "<group>";
+		};
+		E2A086021D0C736F002197F9 /* Friday */ = {
+			isa = PBXGroup;
+			children = (
+				E2A086001D0C736B002197F9 /* FridayViewController.swift */,
+			);
+			name = Friday;
+			sourceTree = "<group>";
+		};
+		E2A086031D0C7381002197F9 /* Saturday */ = {
+			isa = PBXGroup;
+			children = (
+				E2A086051D0C73B4002197F9 /* SaturdayViewController.swift */,
+			);
+			name = Saturday;
+			sourceTree = "<group>";
+		};
+		E2A086041D0C7385002197F9 /* Sunday */ = {
+			isa = PBXGroup;
+			children = (
+				E2A086071D0C73BE002197F9 /* SundayViewController.swift */,
+			);
+			name = Sunday;
+			sourceTree = "<group>";
+		};
 		E2AC3F831CF20E4C00C4F21F /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -374,6 +423,7 @@
 				E2BD82B41D09EA530009DB07 /* GenericMapViewController.swift */,
 				E2A085ED1D0C4202002197F9 /* GenericTabBarController.swift */,
 				E2A085EF1D0C42A7002197F9 /* GenericNavigationController.swift */,
+				E2A085F11D0C4E43002197F9 /* GenericCardViewController.swift */,
 			);
 			name = Generics;
 			sourceTree = "<group>";
@@ -391,7 +441,13 @@
 		E2F957031D0BA882003A0881 /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
+				E2A085FB1D0C7069002197F9 /* ScheduleGenerics */,
 				E2F957041D0BA899003A0881 /* Schedule.storyboard */,
+				E2A085F31D0C57E7002197F9 /* ScheduleViewController.swift */,
+				E2A086021D0C736F002197F9 /* Friday */,
+				E2A086031D0C7381002197F9 /* Saturday */,
+				E2A086041D0C7385002197F9 /* Sunday */,
+				E2A085F91D0C6688002197F9 /* DayItem.swift */,
 			);
 			name = Schedule;
 			sourceTree = "<group>";
@@ -692,20 +748,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2A085F21D0C4E43002197F9 /* GenericCardViewController.swift in Sources */,
 				E2BCA57F1CF3B19E006AAA8B /* User.swift in Sources */,
 				E2BCA56A1CF373A1006AAA8B /* EventConstants.swift in Sources */,
+				E2A085F41D0C57E7002197F9 /* ScheduleViewController.swift in Sources */,
 				E2F957021D0B6EBF003A0881 /* MenuTableViewController.swift in Sources */,
 				E2BCA57E1CF3B19E006AAA8B /* User+CoreDataProperties.swift in Sources */,
 				E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */,
+				E2A086011D0C736B002197F9 /* FridayViewController.swift in Sources */,
 				E2BD82B51D09EA530009DB07 /* GenericMapViewController.swift in Sources */,
 				E20465D31CF1FAF50054654E /* hackillinois_2017_ios.xcdatamodeld in Sources */,
 				E2BCA57D1CF3B19E006AAA8B /* Feed.swift in Sources */,
+				E2A085F61D0C6536002197F9 /* ScheduleCollectionViewCell.swift in Sources */,
 				E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */,
 				E25377411CF8AB2C003795E7 /* Tag+CoreDataProperties.swift in Sources */,
 				E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */,
+				E2A086081D0C73BE002197F9 /* SundayViewController.swift in Sources */,
 				E2D4F0E31D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift in Sources */,
 				E2D4F0E11D06B28B00646BF8 /* FeedCollectionViewCell.swift in Sources */,
 				E2BCA5811CF3B19E006AAA8B /* Location.swift in Sources */,
+				E2A085FA1D0C6688002197F9 /* DayItem.swift in Sources */,
 				E2BCA5621CF36CDA006AAA8B /* FeedCollectionViewController.swift in Sources */,
 				E25377421CF8AB2C003795E7 /* Tag.swift in Sources */,
 				E25980071D099B0B00AE4939 /* CustomLiquidCell.swift in Sources */,
@@ -715,6 +777,7 @@
 				E2D4F0DF1D06AD3F00646BF8 /* Building.swift in Sources */,
 				E2BD82B71D0AFFB90009DB07 /* UIImage+imageWithColor.swift in Sources */,
 				E2F639481D05083300853089 /* CGRect+initWithCenterAt.swift in Sources */,
+				E2A086061D0C73B4002197F9 /* SaturdayViewController.swift in Sources */,
 				E2BCA57C1CF3B19E006AAA8B /* Feed+CoreDataProperties.swift in Sources */,
 				E2A085EE1D0C4202002197F9 /* GenericTabBarController.swift in Sources */,
 				E20465CD1CF1FAF50054654E /* LoginViewController.swift in Sources */,
@@ -722,6 +785,7 @@
 				E20465CB1CF1FAF50054654E /* AppDelegate.swift in Sources */,
 				E277DD691CF4A79100D7E018 /* FeedDetailViewController.swift in Sources */,
 				E2BD82B91D0B09D60009DB07 /* LoginConstants.swift in Sources */,
+				E2A085FF1D0C70BF002197F9 /* GenericDayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

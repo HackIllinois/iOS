@@ -153,7 +153,7 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, Liq
             }
             
             // Add the Open In... Dialogue
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Open In...", style: .Plain, target: self, action: #selector(openInExternalMapApplication))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_open_in_new")!, style: .Plain, target: self, action: #selector(openInExternalMapApplication))
         }
         
         // Add "My Location" button

@@ -23,6 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: .Normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.fromRGBHex(mainTintColor)], forState: .Selected)
         
+        UITabBar.appearance().translucent = false
+        
+        UINavigationBar.appearance().translucent = false
         /*
         // Parse API Keys from keys.plist file
         var keys: NSDictionary?
