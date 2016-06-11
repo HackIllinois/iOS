@@ -23,11 +23,10 @@
             </objects>
             <point key="canvasLocation" x="1486" y="2107"/>
         </scene>
-        <!--HelpQ-->
+        <!--Event Navigation View Controller-->
         <scene sceneID="LkK-Jz-JJA">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7fO-7h-e9o" customClass="EventNavigationViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="HelpQ" image="ic_help_outline_white" id="RHf-NN-cUs"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qk6-ou-A8T">
@@ -44,7 +43,4 @@
             <point key="canvasLocation" x="674" y="2107"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="ic_help_outline_white" width="24" height="24"/>
-    </resources>
 </document>

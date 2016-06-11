@@ -24,7 +24,31 @@
                 <viewControllerPlaceholder storyboardName="Event" id="fVG-d4-eua" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L4n-fI-pCI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="997" y="904"/>
+            <point key="canvasLocation" x="1017" y="891"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="8Zq-V9-AQz">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" id="crk-Fv-rbN" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gEA-7C-H3V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1018" y="946"/>
+        </scene>
+        <!--HelpQ-->
+        <scene sceneID="etO-ZG-hKl">
+            <objects>
+                <viewControllerPlaceholder storyboardName="HelpQ" id="XzQ-Cd-j3W" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zee-Hq-seG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1017" y="1003"/>
+        </scene>
+        <!--Cluehunt-->
+        <scene sceneID="w9a-l8-lQs">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Cluehunt" id="mkr-fS-eGq" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hEk-VZ-KO9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1017.5" y="1056"/>
         </scene>
         <!--Menu Table View Controller-->
         <scene sceneID="fZC-5p-lpN">
@@ -107,6 +131,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.18039215689999999" green="0.35294117650000001" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <segue destination="crk-Fv-rbN" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="k3V-WG-orT"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="jen-28-SLL">
                                         <rect key="frame" x="0.0" y="120" width="600" height="60"/>
@@ -137,6 +164,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.18039215689999999" green="0.35294117650000001" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <segue destination="XzQ-Cd-j3W" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="L14-IV-nID"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="HPc-0e-F5Z">
                                         <rect key="frame" x="0.0" y="180" width="600" height="60"/>
@@ -167,6 +197,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.18039215689999999" green="0.35294117650000001" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <segue destination="mkr-fS-eGq" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="Ar7-zE-aXm"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>

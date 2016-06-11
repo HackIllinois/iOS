@@ -60,7 +60,6 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
         if lastUpdated != nil {
             // Replace with actual timestamp
             if NSDate(timeIntervalSince1970: 1464042000).compare(lastUpdated!).rawValue <= 0 {
-                print("Already updated")
                 return
             }
         }
@@ -174,7 +173,6 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
             alert.addAction(UIAlertAction(title: tag.name, style: .Default, handler: {
                 [unowned self] alert in
                 let predicate = NSPredicate(format: "ANY tags.name CONTAINS[cd] %@", alert.title!)
-                print("querying for \(alert.title!)")
                 self.fetchedResultsController.fetchRequest.predicate = predicate
                 
                 do {
@@ -274,7 +272,6 @@ class FeedCollectionViewController: UIViewController, UICollectionViewDelegate, 
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(fetchedResultsController.sections![section].numberOfObjects)
         return fetchedResultsController.sections![section].numberOfObjects
     }
     

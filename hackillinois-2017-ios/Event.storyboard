@@ -16,9 +16,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="aqe-JP-yak" kind="relationship" relationship="viewControllers" id="UD7-Pj-mKp"/>
+                        <segue destination="JGA-wX-dkz" kind="relationship" relationship="viewControllers" id="zLV-Dx-ydQ"/>
                         <segue destination="LMW-B5-kXB" kind="relationship" relationship="viewControllers" id="3Nc-OC-cqg"/>
-                        <segue destination="oxX-jv-f3n" kind="relationship" relationship="viewControllers" id="PHJ-ev-guD"/>
-                        <segue destination="pzS-dl-hc5" kind="relationship" relationship="viewControllers" id="b0Q-Nk-zg5"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kWO-RX-Y3f" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -33,7 +32,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0XK-et-0Xw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-455" y="1167"/>
+            <point key="canvasLocation" x="-469" y="1405"/>
         </scene>
         <!--Map-->
         <scene sceneID="doO-WO-osc">
@@ -43,33 +42,22 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hj5-1V-NfC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-455" y="1243"/>
+            <point key="canvasLocation" x="-469" y="1547"/>
         </scene>
-        <!--Profile-->
-        <scene sceneID="t0d-rh-kei">
+        <!--Schedule-->
+        <scene sceneID="T4z-ZP-BnI">
             <objects>
-                <viewControllerPlaceholder storyboardName="Profile" id="oxX-jv-f3n" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="ic_person_white" id="aNL-L1-gHk"/>
+                <viewControllerPlaceholder storyboardName="Schedule" id="JGA-wX-dkz" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Schedule" image="ic_schedule_white" id="p4l-2W-PP4"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aDM-IO-UMG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pig-Be-PbN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-455" y="1317"/>
-        </scene>
-        <!--HelpQ-->
-        <scene sceneID="ueH-jf-xjV">
-            <objects>
-                <viewControllerPlaceholder storyboardName="HelpQ" id="pzS-dl-hc5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="HelpQ" image="ic_help_outline_white" id="e3m-Eo-woA"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xrZ-fg-KBT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-455" y="1391"/>
+            <point key="canvasLocation" x="-468.5" y="1696"/>
         </scene>
     </scenes>
     <resources>
-        <image name="ic_help_outline_white" width="24" height="24"/>
         <image name="ic_list_white" width="24" height="24"/>
         <image name="ic_map_white" width="24" height="24"/>
-        <image name="ic_person_white" width="24" height="24"/>
+        <image name="ic_schedule_white" width="24" height="24"/>
     </resources>
 </document>

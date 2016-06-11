@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="lmf-Cr-auO">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="HEi-k4-M3T">
+            <objects>
+                <viewController id="gij-vq-tGc" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ru7-Ht-YHx"/>
+                        <viewControllerLayoutGuide type="bottom" id="0i5-HO-gKo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YBq-BP-Cw6">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="fLM-8J-mwk"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1eu-CV-PGF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1310" y="430"/>
+        </scene>
+        <!--Schedule-->
+        <scene sceneID="f5O-w1-ylb">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lmf-Cr-auO" customClass="EventNavigationViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Schedule" image="ic_schedule_white" id="cho-YV-AU8"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="frV-Zf-sco">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gij-vq-tGc" kind="relationship" relationship="rootViewController" id="zg0-OX-3VK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c7x-as-Ycg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="498" y="430"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ic_schedule_white" width="24" height="24"/>
+    </resources>
+</document>

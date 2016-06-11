@@ -56,6 +56,8 @@
 		E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4F0E41D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift */; };
 		E2F639481D05083300853089 /* CGRect+initWithCenterAt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F639471D05083300853089 /* CGRect+initWithCenterAt.swift */; };
 		E2F957021D0B6EBF003A0881 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F957011D0B6EBF003A0881 /* MenuTableViewController.swift */; };
+		E2F957051D0BA899003A0881 /* Schedule.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2F957041D0BA899003A0881 /* Schedule.storyboard */; };
+		E2F957091D0BAA24003A0881 /* Cluehunt.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2F957081D0BAA24003A0881 /* Cluehunt.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +136,8 @@
 		E2D4F0E41D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MKMapCamera+initFromLocation.swift"; sourceTree = "<group>"; };
 		E2F639471D05083300853089 /* CGRect+initWithCenterAt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+initWithCenterAt.swift"; sourceTree = "<group>"; };
 		E2F957011D0B6EBF003A0881 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
+		E2F957041D0BA899003A0881 /* Schedule.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Schedule.storyboard; sourceTree = "<group>"; };
+		E2F957081D0BAA24003A0881 /* Cluehunt.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Cluehunt.storyboard; sourceTree = "<group>"; };
 		E75AFF8F2A9393CCA4EBF188 /* Pods_hackillinois_2017_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -216,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				E2B6C39E1D0B314200D851F9 /* Application */,
+				E2AC3F831CF20E4C00C4F21F /* Login */,
 				E2B6C39C1D0B30F100D851F9 /* Helpers */,
 				E2BCA56D1CF3A9F5006AAA8B /* Models */,
 				E20465D41CF1FAF50054654E /* Assets.xcassets */,
@@ -315,10 +320,11 @@
 			children = (
 				E20465CA1CF1FAF50054654E /* AppDelegate.swift */,
 				E20465D61CF1FAF50054654E /* LaunchScreen.storyboard */,
-				E2B6C3A11D0B4AC400D851F9 /* Main.storyboard */,
-				E2F957011D0B6EBF003A0881 /* MenuTableViewController.swift */,
+				E2F957071D0BA9E8003A0881 /* Main */,
 				E2BCA5591CF36167006AAA8B /* Event */,
-				E2AC3F831CF20E4C00C4F21F /* Login */,
+				E2B6C39A1D0B30A300D851F9 /* Profile */,
+				E2B6C39B1D0B30CB00D851F9 /* HelpQ */,
+				E2F957061D0BA932003A0881 /* Cluehunt */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -331,9 +337,8 @@
 				E2BCA5651CF372DD006AAA8B /* EventNavigationViewController.swift */,
 				E2BCA5671CF37363006AAA8B /* EventTabBarViewController.swift */,
 				E2BCA5601CF36A15006AAA8B /* Feed */,
+				E2F957031D0BA882003A0881 /* Schedule */,
 				E2D483311D00D37800859A67 /* Maps */,
-				E2B6C39A1D0B30A300D851F9 /* Profile */,
-				E2B6C39B1D0B30CB00D851F9 /* HelpQ */,
 			);
 			name = Event;
 			sourceTree = "<group>";
@@ -381,6 +386,31 @@
 				E2D4F0DE1D06AD3F00646BF8 /* Building.swift */,
 			);
 			name = Maps;
+			sourceTree = "<group>";
+		};
+		E2F957031D0BA882003A0881 /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				E2F957041D0BA899003A0881 /* Schedule.storyboard */,
+			);
+			name = Schedule;
+			sourceTree = "<group>";
+		};
+		E2F957061D0BA932003A0881 /* Cluehunt */ = {
+			isa = PBXGroup;
+			children = (
+				E2F957081D0BAA24003A0881 /* Cluehunt.storyboard */,
+			);
+			name = Cluehunt;
+			sourceTree = "<group>";
+		};
+		E2F957071D0BA9E8003A0881 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				E2B6C3A11D0B4AC400D851F9 /* Main.storyboard */,
+				E2F957011D0B6EBF003A0881 /* MenuTableViewController.swift */,
+			);
+			name = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -508,6 +538,8 @@
 				E2B6C3951D0B2E8000D851F9 /* Map.storyboard in Resources */,
 				E2B6C3971D0B2ED800D851F9 /* Profile.storyboard in Resources */,
 				E20465D81CF1FAF50054654E /* LaunchScreen.storyboard in Resources */,
+				E2F957051D0BA899003A0881 /* Schedule.storyboard in Resources */,
+				E2F957091D0BAA24003A0881 /* Cluehunt.storyboard in Resources */,
 				E2B6C3931D0B2E1200D851F9 /* Feed.storyboard in Resources */,
 				E20465D51CF1FAF50054654E /* Assets.xcassets in Resources */,
 				E2B6C3991D0B2EF300D851F9 /* HelpQ.storyboard in Resources */,

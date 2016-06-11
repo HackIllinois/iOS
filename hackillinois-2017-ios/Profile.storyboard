@@ -23,11 +23,10 @@
             </objects>
             <point key="canvasLocation" x="1486" y="1364"/>
         </scene>
-        <!--Profile-->
+        <!--Event Navigation View Controller-->
         <scene sceneID="2bV-cq-CjK">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ebv-0e-niW" customClass="EventNavigationViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="ic_person_white" id="g93-Wu-O9H"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cmv-jz-cAv">
@@ -44,7 +43,4 @@
             <point key="canvasLocation" x="674" y="1364"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="ic_person_white" width="24" height="24"/>
-    </resources>
 </document>
