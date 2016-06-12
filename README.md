@@ -39,11 +39,11 @@ $ git update-index --assume-unchanged hackillinois-2017-ios/keys.plist
 These are the features included in the application.
 
 
-1. [Login Screen](Login Screen)
-2. [Event](Event)
-3. [Profile](Profile)
-4. [HelpQ](HelpQ)
-5. [Cluehunt](Cluehunt)
+1. [Login Screen](#Login Screen)
+2. [Event](#Event)
+3. [Profile](#Profile)
+4. [HelpQ](#HelpQ)
+5. [Cluehunt](#Cluehunt)
 
 ## Login Screen ##
 The default login screen, shown when the user first opens the application.
@@ -106,7 +106,9 @@ For locations, the "abbreviation" is shown on the Maps, while the "name" is show
 		}
 	    ],
 	    "tags": [
-		"name": "General"
+			{
+				"name": "General"
+			}
 	    ]
 	}
     ]
@@ -115,7 +117,7 @@ For locations, the "abbreviation" is shown on the Maps, while the "name" is show
 
 ## Profile ##
 Shows the user's profile, along with a barcode they can use to obtain meals, etc.
-See the [Login's Sample JSON](Login Screen) for the profile JSON.
+See the [Login's Sample JSON](#Login Screen) for the profile JSON.
 
 ## HelpQ ##
 TODO: Add me
@@ -128,12 +130,12 @@ This may change depending on the backend features. Currently this is hosted over
 Most likely with the addition of our own server, this will become outdated.
 
 
-1. [Clues](Clues)
-2. [Scores](Scores)
+1. [Clues](#Clues)
+2. [Scores](#Scores)
 
 #### Sample JSON ####
-The score is stored along with an AntiCheat mechanism.
-
+The score is stored along with a timestamp for an anti-cheat mechanism.
+See the [Scores' Json](#Scores)
 
 
 ### Clues ###
