@@ -7,10 +7,13 @@ The following requirements are required to develop this application.
 
 
 These requirements are the newest at the time of writing.
-	1. Cocoapods 1.0.0
-	2. XCode 7.3.1 (7D1014)
-	3. Apple Swift version 2.2 (swiftlang-703.0.18.8 clang-703.0.31)
-	4. iOS 9.0 or greater
+
+
+1. Cocoapods 1.0.1
+2. XCode 7.3.1 (7D1014)
+3. Apple Swift version 2.2 (swiftlang-703.0.18.8 clang-703.0.31)
+4. iOS 9.0 or greater
+
 
 # Installation #
 
@@ -30,4 +33,165 @@ When contibuting, please remember to ignore future changes to the keys.plist fil
 ``` shell
 $ cd /path/to/github/dir
 $ git update-index --assume-unchanged hackillinois-2017-ios/keys.plist
+```
+
+# Features #
+These are the features included in the application.
+
+
+1. [Login Screen](Login Screen)
+2. [Event](Event)
+3. [Profile](Profile)
+4. [HelpQ](HelpQ)
+5. [Cluehunt](Cluehunt)
+
+## Login Screen ##
+The default login screen, shown when the user first opens the application.
+Setting up the user profile is handled here.
+
+
+#### Sample JSON ####
+
+
+``` json
+{
+    "name": "Shotaro Ikeda",
+    "barcode_number": "00000000000000"
+}
+```
+
+## Event ##
+The 'Event' portion of the application, that handles event logistics such as event annoucments, schedule, and map of the local area
+
+
+1. [Feed][Feed]
+2. [Schedule][Schedule]
+3. [Maps][Maps]
+
+### Feed ###
+The Feed portion, which handles annoucements.
+All the annoucements are displayed here.
+
+#### Sample JSON ####
+Note that since locations and tags are individual items, they can be separate calls.
+For locations, the "abbreviation" is shown on the Maps, while the "name" is shown everywhere else.
+
+
+``` json
+{
+    "timestamp": 1464038000,
+    "annoucements": [
+	{
+	    "id": 1,
+	    "message": "Hacking has begun!",
+	    "timestamp": 1464038000,
+	    "locations": [
+		{
+		    "name": "Siebel",
+		    "abbreviation": "Siebel",
+		    "latitude": 40.113926,
+		    "longitude": -88.224916
+		},
+		{
+		    "name": "Electronic and Computer Engineering Building",
+		    "abbreviation": "ECEB",
+		    "latitude": 40.114828,
+		    "longitude": -88.228049
+		},
+		{
+		    "name": "Illini Union",
+		    "abbreviation": "Union",
+		    "latitude": 40.109395,
+		    "longitude": -88.227181
+		}
+	    ],
+	    "tags": [
+		"name": "General"
+	    ]
+	}
+    ]
+}
+```
+
+## Profile ##
+Shows the user's profile, along with a barcode they can use to obtain meals, etc.
+See the [Login's Sample JSON](Login Screen) for the profile JSON.
+
+## HelpQ ##
+TODO: Add me
+
+## Cluehunt ##
+
+Cluehunt can only played if the user authenticates over GitHub.
+This may change depending on the backend features. Currently this is hosted over Firebase, so there were some comprimises made such as obtaining a server timestamp.
+
+Most likely with the addition of our own server, this will become outdated.
+
+
+1. [Clues](Clues)
+2. [Scores](Scores)
+
+#### Sample JSON ####
+The score is stored along with an AntiCheat mechanism.
+
+
+
+### Clues ###
+Shows all clues for the Cluehunt.
+
+#### Sample JSON ####
+This only shows 2 clues, while the actual version has 10.
+
+
+``` json
+[
+  {
+    "time_released": "1455988931181",
+    "release": 1,
+    "qr_id": "pluto",
+    "loss_per_min": -10,
+    "initial_pts": 9600,
+    "img_url": "https:\/\/copy.com\/SCQEuPK7rsJa2mdf",
+    "img_crop": 0,
+    "hint": "It's a circuit board.",
+    "desc": "None",
+    "clue_name": "pluto",
+    "api_ver": "0.0.1"
+  },
+  {
+    "time_released": "1455988931181",
+    "release": 1,
+    "qr_id": "engineering",
+    "loss_per_min": -10,
+    "initial_pts": 9600,
+    "img_url": "https:\/\/copy.com\/huxfIHrqraueuwOf",
+    "img_crop": 0,
+    "hint": "Go here if you need help at Siebel.",
+    "desc": "None",
+    "clue_name": "engineering",
+    "api_ver": "0.0.1"
+  }
+]
+```
+
+### Scores ###
+Shows the top 20 scores users have for the cluehunt.
+
+#### Sample JSON ####
+This is based off of the user's JSON. The example only shows 1 user, but there will be multiple.
+
+
+``` json
+{
+  "shotaroikeda": {
+    "profile": {
+      "username": "shotaroikeda",
+      "score": 0,
+      "position": 0,
+      "finished_hunt": false,
+      "email": "ikeda2@illinois.edu",
+      "avatarUrl": "https:\/\/avatars.githubusercontent.com\/u\/9062304?v=3"
+    }
+  }
+}
 ```
