@@ -52,12 +52,13 @@ Setting up the user profile is handled here.
 
 
 #### Sample JSON ####
-
+The "roles" are definied by what permissions they have. See the [HelpQ Roles](#helpq-roles) for more details.
 
 ``` json
 {
     "name": "Shotaro Ikeda",
     "barcode_number": "00000000000000"
+	"role": "staff"
 }
 ```
 
@@ -133,6 +134,9 @@ See the [Login's Sample JSON](#login-screen) for the profile JSON.
 ---
 ## HelpQ ##
 TODO: Add me
+
+### HelpQ Roles ###
+TODO: Add what roles do
 
 ---
 ## Cluehunt ##
