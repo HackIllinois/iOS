@@ -45,6 +45,7 @@ These are the features included in the application.
 4. [HelpQ](#helpq)
 5. [Cluehunt](#cluehunt)
 
+---
 ## Login Screen ##
 The default login screen, shown when the user first opens the application.
 Setting up the user profile is handled here.
@@ -60,6 +61,7 @@ Setting up the user profile is handled here.
 }
 ```
 
+---
 ## Event ##
 The 'Event' portion of the application, that handles event logistics such as event annoucments, schedule, and map of the local area
 
@@ -71,14 +73,6 @@ The 'Event' portion of the application, that handles event logistics such as eve
 ### Feed ###
 The Feed portion, which handles annoucements.
 All the annoucements are displayed here.
-
-
-#### Schedule ####
-The Schedule portion at this time of writing is hardcoded.
-An API may be available by the time of release.
-
-#### Maps ####
-The locations are hard coded, similar to how Locations are handed in [Feed](#feed).
 
 
 #### Sample JSON ####
@@ -124,13 +118,23 @@ For locations, the "abbreviation" is shown on the Maps, while the "name" is show
 }
 ```
 
+### Schedule ###
+The Schedule portion at this time of writing is hardcoded.
+An API may be available by the time of release.
+
+### Maps ###
+The locations are hard coded, similar to how Locations are handed in [Feed](#feed).
+
+---
 ## Profile ##
 Shows the user's profile, along with a barcode they can use to obtain meals, etc.
 See the [Login's Sample JSON](#login-screen) for the profile JSON.
 
+---
 ## HelpQ ##
 TODO: Add me
 
+---
 ## Cluehunt ##
 
 Cluehunt can only played if the user authenticates over GitHub.
