@@ -72,6 +72,15 @@ The 'Event' portion of the application, that handles event logistics such as eve
 The Feed portion, which handles annoucements.
 All the annoucements are displayed here.
 
+
+#### Schedule ####
+The Schedule portion at this time of writing is hardcoded.
+An API may be available by the time of release.
+
+#### Maps ####
+The locations are hard coded, similar to how Locations are handed in [Feed](#feed).
+
+
 #### Sample JSON ####
 Note that since locations and tags are individual items, they can be separate calls.
 For locations, the "abbreviation" is shown on the Maps, while the "name" is shown everywhere else.
