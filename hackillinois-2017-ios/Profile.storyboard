@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="Nhr-xU-9wA">
             <objects>
-                <viewController id="IIz-Kf-53f" sceneMemberID="viewController">
+                <viewController id="IIz-Kf-53f" customClass="ProfileViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="p89-cK-vpq"/>
                         <viewControllerLayoutGuide type="bottom" id="nmW-lC-Prf"/>
@@ -17,11 +17,67 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="57V-nn-jEJ">
-                                <rect key="frame" x="180" y="200" width="240" height="200"/>
+                                <rect key="frame" x="180" y="100" width="240" height="400"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rH7-Ep-7bH">
+                                        <rect key="frame" x="140" y="0.0" width="100" height="400"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="400" id="Nyb-8T-f4W"/>
+                                            <constraint firstAttribute="width" constant="100" id="eca-WA-Z9V"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name Middle Name Last Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ktB-qr-PTB">
+                                        <rect key="frame" x="8" y="8" width="124" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="JV6-8Z-S1M"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="University of Illinois at Urbana-Champaign" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jwc-Sz-RkB">
+                                        <rect key="frame" x="8" y="96" width="124" height="61"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="61" id="bBo-c2-1dL"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bachelor of Science Electrical and Computer Engineering" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QZi-Ng-2L9">
+                                        <rect key="frame" x="8" y="165" width="124" height="95"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="95" id="6ol-S7-ex3"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hacker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lx5-zq-2cM">
+                                        <rect key="frame" x="8" y="268" width="124" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="QZi-Ng-2L9" firstAttribute="top" secondItem="Jwc-Sz-RkB" secondAttribute="bottom" constant="8" id="0pL-xt-xqa"/>
+                                    <constraint firstItem="rH7-Ep-7bH" firstAttribute="leading" secondItem="ktB-qr-PTB" secondAttribute="trailing" constant="8" id="AR6-tZ-RBj"/>
                                     <constraint firstAttribute="width" constant="240" id="Jee-PV-KqT"/>
-                                    <constraint firstAttribute="height" constant="200" id="ssx-7a-0Wl"/>
+                                    <constraint firstItem="rH7-Ep-7bH" firstAttribute="leading" secondItem="lx5-zq-2cM" secondAttribute="trailing" constant="8" id="KS6-vg-djU"/>
+                                    <constraint firstItem="lx5-zq-2cM" firstAttribute="leading" secondItem="57V-nn-jEJ" secondAttribute="leading" constant="8" id="OXm-8z-8hu"/>
+                                    <constraint firstItem="ktB-qr-PTB" firstAttribute="leading" secondItem="57V-nn-jEJ" secondAttribute="leading" constant="8" id="PRU-e9-2ty"/>
+                                    <constraint firstItem="rH7-Ep-7bH" firstAttribute="top" secondItem="57V-nn-jEJ" secondAttribute="top" id="UYg-k9-x45"/>
+                                    <constraint firstItem="rH7-Ep-7bH" firstAttribute="leading" secondItem="Jwc-Sz-RkB" secondAttribute="trailing" constant="8" id="W3r-Uu-EZb"/>
+                                    <constraint firstAttribute="trailing" secondItem="rH7-Ep-7bH" secondAttribute="trailing" id="Wmy-hs-2wd"/>
+                                    <constraint firstItem="Jwc-Sz-RkB" firstAttribute="leading" secondItem="57V-nn-jEJ" secondAttribute="leading" constant="8" id="dsL-lw-01m"/>
+                                    <constraint firstItem="rH7-Ep-7bH" firstAttribute="leading" secondItem="QZi-Ng-2L9" secondAttribute="trailing" constant="8" id="hjy-Af-ZiB"/>
+                                    <constraint firstItem="Jwc-Sz-RkB" firstAttribute="top" secondItem="ktB-qr-PTB" secondAttribute="bottom" constant="8" id="m3Q-7Q-VQQ"/>
+                                    <constraint firstItem="QZi-Ng-2L9" firstAttribute="leading" secondItem="57V-nn-jEJ" secondAttribute="leading" constant="8" id="ptV-nI-RtM"/>
+                                    <constraint firstAttribute="height" constant="400" id="ssx-7a-0Wl"/>
+                                    <constraint firstItem="ktB-qr-PTB" firstAttribute="top" secondItem="57V-nn-jEJ" secondAttribute="top" constant="8" id="uZY-t5-ttD"/>
+                                    <constraint firstItem="lx5-zq-2cM" firstAttribute="top" secondItem="QZi-Ng-2L9" secondAttribute="bottom" constant="8" id="zNf-bO-qQb"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -32,6 +88,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="CP1-7C-osb"/>
+                    <connections>
+                        <outlet property="barcodeView" destination="rH7-Ep-7bH" id="Kyi-l7-qdu"/>
+                        <outlet property="majorLabel" destination="QZi-Ng-2L9" id="OaT-NV-zwh"/>
+                        <outlet property="nameLabel" destination="ktB-qr-PTB" id="LbU-hR-was"/>
+                        <outlet property="roleLabel" destination="lx5-zq-2cM" id="5kp-C9-sz6"/>
+                        <outlet property="schoolLabel" destination="Jwc-Sz-RkB" id="z9n-NP-2CU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H67-LH-O0p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

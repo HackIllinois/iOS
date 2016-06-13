@@ -22,6 +22,8 @@
 		E25377421CF8AB2C003795E7 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25377401CF8AB2C003795E7 /* Tag.swift */; };
 		E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25377431CF8C485003795E7 /* CoreDataHelpers.swift */; };
 		E25980071D099B0B00AE4939 /* CustomLiquidCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25980061D099B0B00AE4939 /* CustomLiquidCell.swift */; };
+		E26F44F21D0EF2C100FB4A9F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F44F11D0EF2C100FB4A9F /* ProfileViewController.swift */; };
+		E26F44F41D0EF3C400FB4A9F /* UIImage+generateBarCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F44F31D0EF3C400FB4A9F /* UIImage+generateBarCode.swift */; };
 		E277DD691CF4A79100D7E018 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E277DD681CF4A79100D7E018 /* FeedDetailViewController.swift */; };
 		E277DD6B1CF4AF0400D7E018 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = E277DD6A1CF4AF0400D7E018 /* keys.plist */; };
 		E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E277DD6D1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift */; };
@@ -112,6 +114,8 @@
 		E25377401CF8AB2C003795E7 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		E25377431CF8C485003795E7 /* CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
 		E25980061D099B0B00AE4939 /* CustomLiquidCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLiquidCell.swift; sourceTree = "<group>"; };
+		E26F44F11D0EF2C100FB4A9F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		E26F44F31D0EF3C400FB4A9F /* UIImage+generateBarCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+generateBarCode.swift"; sourceTree = "<group>"; };
 		E277DD681CF4A79100D7E018 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
 		E277DD6A1CF4AF0400D7E018 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
 		E277DD6D1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -326,6 +330,7 @@
 				E2D4F0E21D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift */,
 				E2D4F0E41D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift */,
 				E2BD82B61D0AFFB90009DB07 /* UIImage+imageWithColor.swift */,
+				E26F44F31D0EF3C400FB4A9F /* UIImage+generateBarCode.swift */,
 			);
 			name = LanguageExtensions;
 			sourceTree = "<group>";
@@ -334,6 +339,7 @@
 			isa = PBXGroup;
 			children = (
 				E2B6C3961D0B2ED800D851F9 /* Profile.storyboard */,
+				E26F44F11D0EF2C100FB4A9F /* ProfileViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -763,6 +769,7 @@
 				E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */,
 				E25377411CF8AB2C003795E7 /* Tag+CoreDataProperties.swift in Sources */,
 				E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */,
+				E26F44F41D0EF3C400FB4A9F /* UIImage+generateBarCode.swift in Sources */,
 				E2A086081D0C73BE002197F9 /* SundayViewController.swift in Sources */,
 				E2D4F0E31D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift in Sources */,
 				E2D4F0E11D06B28B00646BF8 /* FeedCollectionViewCell.swift in Sources */,
@@ -784,6 +791,7 @@
 				E2AC3F861CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */,
 				E20465CB1CF1FAF50054654E /* AppDelegate.swift in Sources */,
 				E277DD691CF4A79100D7E018 /* FeedDetailViewController.swift in Sources */,
+				E26F44F21D0EF2C100FB4A9F /* ProfileViewController.swift in Sources */,
 				E2BD82B91D0B09D60009DB07 /* LoginConstants.swift in Sources */,
 				E2A085FF1D0C70BF002197F9 /* GenericDayViewController.swift in Sources */,
 			);

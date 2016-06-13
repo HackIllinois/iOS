@@ -8,7 +8,6 @@
         <!--Friday View Controller-->
         <scene sceneID="IZv-Hg-Gmd">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jvz-TC-MvQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="schedule_day_one" id="RqQ-ls-2rD" customClass="FridayViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Diy-0c-dzO"/>
@@ -91,6 +90,7 @@
                         <outlet property="collection" destination="DLl-17-7eJ" id="wRn-Gq-vF0"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jvz-TC-MvQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2016" y="-318"/>
         </scene>
