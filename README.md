@@ -57,7 +57,9 @@ The "roles" are definied by what permissions they have. See the [HelpQ Roles](#h
 ``` json
 {
     "name": "Shotaro Ikeda",
-    "barcode_number": "00000000000000"
+    "barcode_number": "1234567890",
+	"school": "University of Illinois at Urbana-Champaign",
+	"major": "Bachelor of Science Computer Science",
 	"role": "staff"
 }
 ```
