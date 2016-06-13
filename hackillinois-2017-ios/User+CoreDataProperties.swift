@@ -19,5 +19,6 @@ extension User {
     @NSManaged var major: String
     @NSManaged var barcode: String
     @NSManaged var role: String
+    @NSManaged var barcodeData: NSData
 
 }

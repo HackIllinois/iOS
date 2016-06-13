@@ -22,9 +22,7 @@ class ProfileViewController: UIViewController {
         majorLabel.text = user.major
         roleLabel.text = user.role
         
-        let transform = CGAffineTransformMakeRotation(CGFloat(M_PI / 2.0))
-        let barcodeImage = UIImage.generateBarCode("1234567890")!.CIImage?.imageByApplyingTransform(transform)
-        barcodeView.image = UIImage(CIImage: barcodeImage!)
+        barcodeView.image = UIImage(data: user.barcodeData)
     }
     
     override func viewDidLoad() {

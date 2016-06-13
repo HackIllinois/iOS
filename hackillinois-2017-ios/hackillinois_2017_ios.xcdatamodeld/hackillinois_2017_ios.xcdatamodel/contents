@@ -30,6 +30,7 @@
     </entity>
     <entity name="User" representedClassName=".User" syncable="YES">
         <attribute name="barcode" attributeType="String" syncable="YES"/>
+        <attribute name="barcodeData" attributeType="Binary" syncable="YES"/>
         <attribute name="major" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="role" attributeType="String" syncable="YES"/>
@@ -39,6 +40,6 @@
         <element name="Feed" positionX="-63" positionY="-18" width="128" height="120"/>
         <element name="Location" positionX="-27" positionY="36" width="128" height="120"/>
         <element name="Tag" positionX="-45" positionY="45" width="128" height="75"/>
-        <element name="User" positionX="-54" positionY="-9" width="128" height="120"/>
+        <element name="User" positionX="-54" positionY="-9" width="128" height="135"/>
     </elements>
 </model>

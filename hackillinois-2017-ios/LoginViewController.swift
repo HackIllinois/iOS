@@ -116,12 +116,31 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             let major = "Bachelor of Science Computer Science"
             let role = "Staff"
             let barcode = "1234567890"
+            let barcodeImage = UIImage.generateRotatedBarCode(barcode)
+            // barcodeImage?.size = CGRectMake(0, 0, 100, 400)
+            
+            guard barcodeImage != nil else {
+                fatalError("BarcodeImage is nil")
+            }
+            
+            // redraw to get NSData
+            UIGraphicsBeginImageContext(CGSize(width: 300, height: 1200))
+            barcodeImage?.drawInRect(CGRectMake(0, 0, 300, 1200))
+            let barCodeImage2 = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            let barcodeData = UIImagePNGRepresentation(barCodeImage2)
+            
+            guard barcodeData != nil else {
+                fatalError("BarcodeData is null")
+            }
+            
             
             dispatch_async(dispatch_get_main_queue()) {
                 if success {
                     /* Login was successful */
                     // Store user data
-                    Helpers.storeUser(name: name, school: school, major: major, role: role, barcode: barcode)
+                    Helpers.storeUser(name: name, school: school, major: major, role: role, barcode: barcode, barcodeData: barcodeData!)
                     
                     // Store that user has already logged in
                     let userDefaults = NSUserDefaults.standardUserDefaults()
