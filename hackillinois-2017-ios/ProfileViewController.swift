@@ -16,7 +16,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var roleLabel: UILabel!
     
     func loadProfile() {
-        let user = Helpers.loadContext(entityName: "User", fetchConfiguration: nil) as! User
+        let user = (Helpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]).first! // Only one User logged in
         nameLabel.text = user.name
         schoolLabel.text = user.school
         majorLabel.text = user.major
