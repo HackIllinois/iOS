@@ -16,10 +16,11 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var roleLabel: UILabel!
     
     func loadProfile() {
-        nameLabel.text = "Shotaro Ikeda"
-        schoolLabel.text = "University of Illinois at Urbana-Champaign"
-        majorLabel.text = "Bachelor of Science Computer Science"
-        roleLabel.text = "Staff"
+        let user = Helpers.loadContext(entityName: "User", fetchConfiguration: nil) as! User
+        nameLabel.text = user.name
+        schoolLabel.text = user.school
+        majorLabel.text = user.major
+        roleLabel.text = user.role
         
         let transform = CGAffineTransformMakeRotation(CGFloat(M_PI / 2.0))
         let barcodeImage = UIImage.generateBarCode("1234567890")!.CIImage?.imageByApplyingTransform(transform)
