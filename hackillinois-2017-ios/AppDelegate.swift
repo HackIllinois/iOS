@@ -19,13 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        /* Set color of the tabs */
+        /* Set appearance of UI */
+        // Tab Bar Item Text colors
         UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: .Normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.fromRGBHex(mainTintColor)], forState: .Selected)
         
+        // Have a more consistent view across all views
         UITabBar.appearance().translucent = false
-        
         UINavigationBar.appearance().translucent = false
+        
+        
         /*
         // Parse API Keys from keys.plist file
         var keys: NSDictionary?
@@ -39,6 +42,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Read keys here
         }
         */
+        
+        /* Find out which part of the application to go to */
+        if NSUserDefaults.standardUserDefaults().boolForKey("logged_in_main") {
+            // Already "Logged in"
+            self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+        } else {
+            // Not logged in
+            self.window?.rootViewController = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()
+        }
         
         return true
     }

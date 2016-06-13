@@ -106,14 +106,29 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         PasswordTextField.userInteractionEnabled = false
         
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
-            // TODO: Connect to API
             sleep(1) // simulate network response time
             
             let success = true // find if the login was successful or not
             
+            // TODO: Parse API
+            let name = "Shotaro Ikeda"
+            let school = "University of Illinois at Urbana-Champaign"
+            let major = "Bachelor of Science Computer Science"
+            let role = "Staff"
+            let barcode = "1234567890"
+            
             dispatch_async(dispatch_get_main_queue()) {
                 if success {
-                    // Login was successful
+                    /* Login was successful */
+                    // Store user data
+                    Helpers.storeUser(name: name, school: school, major: major, role: role, barcode: barcode)
+                    
+                    // Store that user has already logged in
+                    let userDefaults = NSUserDefaults.standardUserDefaults()
+                    userDefaults.setBool(true, forKey: "logged_in_main")
+                    userDefaults.synchronize()
+                    
+                    // Present main application
                     let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
                     let mainViewController = mainStoryboard.instantiateInitialViewController()
                     self.presentViewController(mainViewController!, animated: true, completion: nil)
