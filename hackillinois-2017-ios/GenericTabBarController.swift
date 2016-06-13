@@ -10,6 +10,10 @@ import UIKit
 import SWRevealViewController
 
 class GenericTabBarController: UITabBarController, SWRevealViewControllerDelegate, UIGestureRecognizerDelegate {
+    /*
+     * This Controller will handle the Reveal View unless it does not exist.
+     * This way, since the TabBar supersedes the Navigation Controller, it will provide a much better experience.
+     */
     
     /* View that masks and handles the tap control */
     var tapRecognitionView: UIView?
@@ -18,7 +22,7 @@ class GenericTabBarController: UITabBarController, SWRevealViewControllerDelegat
         // Simulate tap of close button
         self.revealViewController().revealToggleAnimated(true)
     }
-    
+ 
     // Mark: SWRevealViewController delegates
     func revealController(revealController: SWRevealViewController!, didMoveToPosition position: FrontViewPosition) {
         if position == FrontViewPosition.Right {
@@ -37,7 +41,7 @@ class GenericTabBarController: UITabBarController, SWRevealViewControllerDelegat
             tapRecognitionView?.removeFromSuperview()
         }
     }
-    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
 

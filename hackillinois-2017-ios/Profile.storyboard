@@ -15,7 +15,21 @@
                     <view key="view" contentMode="scaleToFill" id="GmZ-6M-2xT">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="57V-nn-jEJ">
+                                <rect key="frame" x="180" y="200" width="240" height="200"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="Jee-PV-KqT"/>
+                                    <constraint firstAttribute="height" constant="200" id="ssx-7a-0Wl"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="57V-nn-jEJ" firstAttribute="centerX" secondItem="GmZ-6M-2xT" secondAttribute="centerX" id="Kzd-5e-oOh"/>
+                            <constraint firstItem="57V-nn-jEJ" firstAttribute="centerY" secondItem="GmZ-6M-2xT" secondAttribute="centerY" id="vSS-s5-oOr"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="CP1-7C-osb"/>
                 </viewController>
