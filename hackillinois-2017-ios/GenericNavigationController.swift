@@ -52,10 +52,12 @@ class GenericNavigationController: UINavigationController, SWRevealViewControlle
         
         // Reveal view controller
         if self.revealViewController() != nil {
+            print("Reveal view controller found")
             navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_list_white"), style: .Plain, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle))
             
             if self.tabBarController == nil {
                 // Add swiping gesture and custom closing behavior, since there is no TabBarController to do so
+                print("adding gesture")
                 self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
                 self.revealViewController().delegate = self
             }

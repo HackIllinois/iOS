@@ -37,7 +37,7 @@
         <!--HelpQ-->
         <scene sceneID="etO-ZG-hKl">
             <objects>
-                <viewControllerPlaceholder storyboardName="HelpQ" id="XzQ-Cd-j3W" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="helpq_staff" storyboardName="HelpQ" id="XzQ-Cd-j3W" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zee-Hq-seG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1017" y="1003"/>
@@ -165,7 +165,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.18039215689999999" green="0.35294117650000001" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <segue destination="XzQ-Cd-j3W" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="L14-IV-nID"/>
+                                            <segue destination="XzQ-Cd-j3W" kind="custom" identifier="helpq_segue" customClass="SWRevealViewControllerSeguePushController" id="L14-IV-nID"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="HPc-0e-F5Z">

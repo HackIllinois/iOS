@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SWRevealViewController
 
 class MenuTableViewController: UITableViewController {
     
