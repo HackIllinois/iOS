@@ -18,6 +18,7 @@
 		E20465D81CF1FAF50054654E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20465D61CF1FAF50054654E /* LaunchScreen.storyboard */; };
 		E20465E31CF1FAF50054654E /* hackillinois_2017_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20465E21CF1FAF50054654E /* hackillinois_2017_iosTests.swift */; };
 		E20465EE1CF1FAF50054654E /* hackillinois_2017_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20465ED1CF1FAF50054654E /* hackillinois_2017_iosUITests.swift */; };
+		E236C0491D105BBE0085437D /* HelpQ_Hacker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E236C0481D105BBE0085437D /* HelpQ_Hacker.storyboard */; };
 		E25377411CF8AB2C003795E7 /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E253773F1CF8AB2C003795E7 /* Tag+CoreDataProperties.swift */; };
 		E25377421CF8AB2C003795E7 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25377401CF8AB2C003795E7 /* Tag.swift */; };
 		E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25377431CF8C485003795E7 /* CoreDataHelpers.swift */; };
@@ -44,7 +45,7 @@
 		E2B6C3931D0B2E1200D851F9 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3921D0B2E1200D851F9 /* Feed.storyboard */; };
 		E2B6C3951D0B2E8000D851F9 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3941D0B2E8000D851F9 /* Map.storyboard */; };
 		E2B6C3971D0B2ED800D851F9 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3961D0B2ED800D851F9 /* Profile.storyboard */; };
-		E2B6C3991D0B2EF300D851F9 /* HelpQ.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3981D0B2EF300D851F9 /* HelpQ.storyboard */; };
+		E2B6C3991D0B2EF300D851F9 /* HelpQ_Staff.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3981D0B2EF300D851F9 /* HelpQ_Staff.storyboard */; };
 		E2B6C3A21D0B4AC400D851F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3A11D0B4AC400D851F9 /* Main.storyboard */; };
 		E2BCA55B1CF36187006AAA8B /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2BCA55A1CF36187006AAA8B /* Event.storyboard */; };
 		E2BCA5621CF36CDA006AAA8B /* FeedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5611CF36CDA006AAA8B /* FeedCollectionViewController.swift */; };
@@ -110,6 +111,7 @@
 		E20465E91CF1FAF50054654E /* hackillinois-2017-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hackillinois-2017-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E20465ED1CF1FAF50054654E /* hackillinois_2017_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hackillinois_2017_iosUITests.swift; sourceTree = "<group>"; };
 		E20465EF1CF1FAF50054654E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E236C0481D105BBE0085437D /* HelpQ_Hacker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HelpQ_Hacker.storyboard; sourceTree = "<group>"; };
 		E253773F1CF8AB2C003795E7 /* Tag+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E25377401CF8AB2C003795E7 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		E25377431CF8C485003795E7 /* CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
@@ -134,7 +136,7 @@
 		E2B6C3921D0B2E1200D851F9 /* Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		E2B6C3941D0B2E8000D851F9 /* Map.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		E2B6C3961D0B2ED800D851F9 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
-		E2B6C3981D0B2EF300D851F9 /* HelpQ.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HelpQ.storyboard; sourceTree = "<group>"; };
+		E2B6C3981D0B2EF300D851F9 /* HelpQ_Staff.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HelpQ_Staff.storyboard; sourceTree = "<group>"; };
 		E2B6C3A11D0B4AC400D851F9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E2BCA55A1CF36187006AAA8B /* Event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Event.storyboard; sourceTree = "<group>"; };
 		E2BCA5611CF36CDA006AAA8B /* FeedCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewController.swift; sourceTree = "<group>"; };
@@ -347,7 +349,8 @@
 		E2B6C39B1D0B30CB00D851F9 /* HelpQ */ = {
 			isa = PBXGroup;
 			children = (
-				E2B6C3981D0B2EF300D851F9 /* HelpQ.storyboard */,
+				E2B6C3981D0B2EF300D851F9 /* HelpQ_Staff.storyboard */,
+				E236C0481D105BBE0085437D /* HelpQ_Hacker.storyboard */,
 			);
 			name = HelpQ;
 			sourceTree = "<group>";
@@ -604,7 +607,8 @@
 				E2F957091D0BAA24003A0881 /* Cluehunt.storyboard in Resources */,
 				E2B6C3931D0B2E1200D851F9 /* Feed.storyboard in Resources */,
 				E20465D51CF1FAF50054654E /* Assets.xcassets in Resources */,
-				E2B6C3991D0B2EF300D851F9 /* HelpQ.storyboard in Resources */,
+				E2B6C3991D0B2EF300D851F9 /* HelpQ_Staff.storyboard in Resources */,
+				E236C0491D105BBE0085437D /* HelpQ_Hacker.storyboard in Resources */,
 				E20465D01CF1FAF50054654E /* Login.storyboard in Resources */,
 				E2BCA55B1CF36187006AAA8B /* Event.storyboard in Resources */,
 			);
