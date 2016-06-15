@@ -10,6 +10,7 @@ target 'hackillinois-2017-ios' do
         pod "LiquidFloatingActionButton", :git => "https://github.com/shotaroikeda/LiquidFloatingActionButton"
         pod "SnapKit"
         pod "SWRevealViewController", :git => "https://github.com/John-Lluch/SWRevealViewController"
+        pod "Socket.IO-Client-Swift"
 end
 
 target 'hackillinois-2017-iosTests' do

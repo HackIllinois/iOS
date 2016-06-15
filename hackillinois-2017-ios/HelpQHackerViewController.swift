@@ -120,14 +120,16 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
         
         return header
     }
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "to_chat_view" {
+            let destination = segue.destinationViewController as! HelpQChatViewController
+            let indexPath = helpQCollection.indexPathsForSelectedItems()!.first!
+            let object = items[indexPath.section][indexPath.row]
+            
+            destination.helpqItem = object
+        }
     }
-    */
-
 }

@@ -33,6 +33,7 @@
 		E25980071D099B0B00AE4939 /* CustomLiquidCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25980061D099B0B00AE4939 /* CustomLiquidCell.swift */; };
 		E26F44F21D0EF2C100FB4A9F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F44F11D0EF2C100FB4A9F /* ProfileViewController.swift */; };
 		E26F44F41D0EF3C400FB4A9F /* UIImage+generateBarCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F44F31D0EF3C400FB4A9F /* UIImage+generateBarCode.swift */; };
+		E276C3B51D11C3A400DABD4A /* HelpQChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E276C3B41D11C3A400DABD4A /* HelpQChatViewController.swift */; };
 		E277DD691CF4A79100D7E018 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E277DD681CF4A79100D7E018 /* FeedDetailViewController.swift */; };
 		E277DD6B1CF4AF0400D7E018 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = E277DD6A1CF4AF0400D7E018 /* keys.plist */; };
 		E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E277DD6D1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift */; };
@@ -134,6 +135,7 @@
 		E25980061D099B0B00AE4939 /* CustomLiquidCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLiquidCell.swift; sourceTree = "<group>"; };
 		E26F44F11D0EF2C100FB4A9F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E26F44F31D0EF3C400FB4A9F /* UIImage+generateBarCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+generateBarCode.swift"; sourceTree = "<group>"; };
+		E276C3B41D11C3A400DABD4A /* HelpQChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQChatViewController.swift; sourceTree = "<group>"; };
 		E277DD681CF4A79100D7E018 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
 		E277DD6A1CF4AF0400D7E018 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
 		E277DD6D1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				E236C0481D105BBE0085437D /* HelpQ_Hacker.storyboard */,
+				E276C3B41D11C3A400DABD4A /* HelpQChatViewController.swift */,
 				E236C05C1D109AF50085437D /* HelpQHackerCollectionReusableView.swift */,
 				E236C05A1D10809E0085437D /* HelpQHackerCollectionViewCell.swift */,
 				E236C0561D107F9C0085437D /* HelpQHackerViewController.swift */,
@@ -832,6 +835,7 @@
 				E2D483331D00D3B100859A67 /* MapViewController.swift in Sources */,
 				E236C05D1D109AF50085437D /* HelpQHackerCollectionReusableView.swift in Sources */,
 				E2A085F01D0C42A7002197F9 /* GenericNavigationController.swift in Sources */,
+				E276C3B51D11C3A400DABD4A /* HelpQChatViewController.swift in Sources */,
 				E2BCA5801CF3B19E006AAA8B /* Location+CoreDataProperties.swift in Sources */,
 				E2D4F0DF1D06AD3F00646BF8 /* Building.swift in Sources */,
 				E2BD82B71D0AFFB90009DB07 /* UIImage+imageWithColor.swift in Sources */,
