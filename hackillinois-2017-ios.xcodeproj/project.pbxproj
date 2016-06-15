@@ -24,6 +24,9 @@
 		E236C0551D107DF60085437D /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236C0541D107DF60085437D /* DummyViewController.swift */; };
 		E236C0571D107F9C0085437D /* HelpQHackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236C0561D107F9C0085437D /* HelpQHackerViewController.swift */; };
 		E236C0591D107FA60085437D /* HelpQStaffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236C0581D107FA60085437D /* HelpQStaffViewController.swift */; };
+		E236C05B1D10809E0085437D /* HelpQHackerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236C05A1D10809E0085437D /* HelpQHackerCollectionViewCell.swift */; };
+		E236C05D1D109AF50085437D /* HelpQHackerCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236C05C1D109AF50085437D /* HelpQHackerCollectionReusableView.swift */; };
+		E236C05F1D109E830085437D /* HelpQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236C05E1D109E830085437D /* HelpQ.swift */; };
 		E25377411CF8AB2C003795E7 /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E253773F1CF8AB2C003795E7 /* Tag+CoreDataProperties.swift */; };
 		E25377421CF8AB2C003795E7 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25377401CF8AB2C003795E7 /* Tag.swift */; };
 		E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25377431CF8C485003795E7 /* CoreDataHelpers.swift */; };
@@ -122,6 +125,9 @@
 		E236C0541D107DF60085437D /* DummyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyViewController.swift; sourceTree = "<group>"; };
 		E236C0561D107F9C0085437D /* HelpQHackerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQHackerViewController.swift; sourceTree = "<group>"; };
 		E236C0581D107FA60085437D /* HelpQStaffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQStaffViewController.swift; sourceTree = "<group>"; };
+		E236C05A1D10809E0085437D /* HelpQHackerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQHackerCollectionViewCell.swift; sourceTree = "<group>"; };
+		E236C05C1D109AF50085437D /* HelpQHackerCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQHackerCollectionReusableView.swift; sourceTree = "<group>"; };
+		E236C05E1D109E830085437D /* HelpQ.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQ.swift; sourceTree = "<group>"; };
 		E253773F1CF8AB2C003795E7 /* Tag+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E25377401CF8AB2C003795E7 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		E25377431CF8C485003795E7 /* CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
@@ -294,6 +300,8 @@
 			isa = PBXGroup;
 			children = (
 				E236C0481D105BBE0085437D /* HelpQ_Hacker.storyboard */,
+				E236C05C1D109AF50085437D /* HelpQHackerCollectionReusableView.swift */,
+				E236C05A1D10809E0085437D /* HelpQHackerCollectionViewCell.swift */,
 				E236C0561D107F9C0085437D /* HelpQHackerViewController.swift */,
 			);
 			name = Hackers;
@@ -380,6 +388,7 @@
 				E236C04A1D1060D80085437D /* HelpQ.storyboard */,
 				E236C04E1D1061F80085437D /* HelpQViewController.swift */,
 				E236C0541D107DF60085437D /* DummyViewController.swift */,
+				E236C05E1D109E830085437D /* HelpQ.swift */,
 				E236C04C1D1060DE0085437D /* Staff */,
 				E236C04D1D1060ED0085437D /* Hackers */,
 			);
@@ -812,13 +821,16 @@
 				E26F44F41D0EF3C400FB4A9F /* UIImage+generateBarCode.swift in Sources */,
 				E2A086081D0C73BE002197F9 /* SundayViewController.swift in Sources */,
 				E2D4F0E31D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift in Sources */,
+				E236C05B1D10809E0085437D /* HelpQHackerCollectionViewCell.swift in Sources */,
 				E2D4F0E11D06B28B00646BF8 /* FeedCollectionViewCell.swift in Sources */,
 				E2BCA5811CF3B19E006AAA8B /* Location.swift in Sources */,
 				E2A085FA1D0C6688002197F9 /* DayItem.swift in Sources */,
 				E2BCA5621CF36CDA006AAA8B /* FeedCollectionViewController.swift in Sources */,
 				E25377421CF8AB2C003795E7 /* Tag.swift in Sources */,
 				E25980071D099B0B00AE4939 /* CustomLiquidCell.swift in Sources */,
+				E236C05F1D109E830085437D /* HelpQ.swift in Sources */,
 				E2D483331D00D3B100859A67 /* MapViewController.swift in Sources */,
+				E236C05D1D109AF50085437D /* HelpQHackerCollectionReusableView.swift in Sources */,
 				E2A085F01D0C42A7002197F9 /* GenericNavigationController.swift in Sources */,
 				E2BCA5801CF3B19E006AAA8B /* Location+CoreDataProperties.swift in Sources */,
 				E2D4F0DF1D06AD3F00646BF8 /* Building.swift in Sources */,
