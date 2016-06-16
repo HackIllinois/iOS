@@ -42,4 +42,13 @@ class HelpQSubmissionViewController: GenericInputView {
         super.viewDidLoad()
     }
     
+    override func textViewDidBeginEditing(textView: UITextView) {
+        super.textViewDidBeginEditing(textView)
+        // Scroll to make the cancel + submit buttons visible
+        scrollView.scrollRectToVisible(CGRect(x: 0, y: 450, width: 1, height: 1), animated: true)
+    }
+    
+    override func textViewDidEndEditing(textView: UITextView) {
+        super.textViewDidEndEditing(textView)
+    }
 }
