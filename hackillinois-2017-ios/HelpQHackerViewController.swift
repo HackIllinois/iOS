@@ -64,28 +64,14 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
         item.resolved = false
         item.updateModifiedTime()
         
-        /* Every item after this item should have it's tag moved down */
-        for index in sender.tag+1..<items[Resolution.resolved.rawValue].count {
-            let cell = helpQCollection.cellForItemAtIndexPath(NSIndexPath(forRow: index, inSection: Resolution.resolved.rawValue)) as! HelpQHackerCollectionViewCell
-            cell.resolveButton.tag -= 1
-        }
-        
-        /* Every item in the resolved should be moved up one */
-        for index in 0..<items[Resolution.unresolved.rawValue].count {
-            let cell = helpQCollection.cellForItemAtIndexPath(NSIndexPath(forRow: index, inSection: Resolution.unresolved.rawValue)) as! HelpQHackerCollectionViewCell
-            cell.resolveButton.tag += 1
-        }
-        
         items[Resolution.resolved.rawValue].removeAtIndex(sender.tag)
         items[Resolution.unresolved.rawValue].insert(item, atIndex: 0)
         
         helpQCollection.reloadData()
-        // Get the sender button ready for next
-        sender.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
-        sender.tag = 0
     }
     
     func moveCellFromUnresolvedToResolved(sender: UIButton) {
+        print("Moving cell from unresolved to resolved")
         let item = items[Resolution.unresolved.rawValue][sender.tag]
         item.resolved = true
         item.updateModifiedTime()
@@ -106,9 +92,6 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
         items[Resolution.resolved.rawValue].insert(item, atIndex: 0)
         
         helpQCollection.reloadData()
-        // Get the sender button ready for next
-        sender.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
-        sender.tag = 0
     }
     
     /* UICollectionViewDataSource */
@@ -135,10 +118,12 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
         case Resolution.unresolved.rawValue:
             cell.resolveButton.setTitle("Mark as Resolved", forState: .Normal)
             cell.resolveButton.tag = indexPath.row // way to distingish what button was pressed
+            cell.resolveButton.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
             cell.resolveButton.addTarget(self, action: #selector(moveCellFromUnresolvedToResolved), forControlEvents: .TouchUpInside)
         case Resolution.resolved.rawValue:
             cell.resolveButton.setTitle("Mark as Unresolved", forState: .Normal)
             cell.resolveButton.tag = indexPath.row // way to distingish what button was pressed
+            cell.resolveButton.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
             cell.resolveButton.addTarget(self, action: #selector(moveCellFromResolvedToUnresolved), forControlEvents: .TouchUpInside)
         default:
             break
