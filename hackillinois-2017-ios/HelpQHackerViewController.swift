@@ -20,6 +20,7 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
     /* Data items */
     var items: [[HelpQ]]! = []
     
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -37,11 +38,24 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
         let unresolvedItems = [HelpQ()]
         let resolvedItems: [HelpQ] = []
         items = [unresolvedItems, resolvedItems]
+        
+        /* Add a button up to to allow users to create new tickets */
+        navigationController!.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .Done, target: self, action: #selector(createTicket))
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    /* Navigation Function */
+    func createTicket() {
+        let ticketController = UIStoryboard.init(name: "HelpQ_Hacker", bundle: nil).instantiateViewControllerWithIdentifier("helpq_submit_request") as! HelpQSubmissionViewController
+        ticketController.addToList = { [unowned self] item in
+            self.items[Resolution.unresolved.rawValue].insert(item, atIndex: 0)
+            self.helpQCollection.reloadData()
+        }
+        presentViewController(ticketController, animated: true, completion: nil)
     }
     
     /* Button action */

@@ -56,6 +56,8 @@
 		E2B6C3971D0B2ED800D851F9 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3961D0B2ED800D851F9 /* Profile.storyboard */; };
 		E2B6C3991D0B2EF300D851F9 /* HelpQ_Staff.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3981D0B2EF300D851F9 /* HelpQ_Staff.storyboard */; };
 		E2B6C3A21D0B4AC400D851F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3A11D0B4AC400D851F9 /* Main.storyboard */; };
+		E2BB42C41D132FA8009EF512 /* HelpQSubmissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BB42C31D132FA8009EF512 /* HelpQSubmissionViewController.swift */; };
+		E2BB42C61D133A9A009EF512 /* GenericInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BB42C51D133A9A009EF512 /* GenericInputView.swift */; };
 		E2BCA55B1CF36187006AAA8B /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2BCA55A1CF36187006AAA8B /* Event.storyboard */; };
 		E2BCA5621CF36CDA006AAA8B /* FeedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5611CF36CDA006AAA8B /* FeedCollectionViewController.swift */; };
 		E2BCA56A1CF373A1006AAA8B /* EventConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5691CF373A1006AAA8B /* EventConstants.swift */; };
@@ -156,6 +158,8 @@
 		E2B6C3961D0B2ED800D851F9 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		E2B6C3981D0B2EF300D851F9 /* HelpQ_Staff.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HelpQ_Staff.storyboard; sourceTree = "<group>"; };
 		E2B6C3A11D0B4AC400D851F9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		E2BB42C31D132FA8009EF512 /* HelpQSubmissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQSubmissionViewController.swift; sourceTree = "<group>"; };
+		E2BB42C51D133A9A009EF512 /* GenericInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericInputView.swift; sourceTree = "<group>"; };
 		E2BCA55A1CF36187006AAA8B /* Event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Event.storyboard; sourceTree = "<group>"; };
 		E2BCA5611CF36CDA006AAA8B /* FeedCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewController.swift; sourceTree = "<group>"; };
 		E2BCA5691CF373A1006AAA8B /* EventConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventConstants.swift; sourceTree = "<group>"; };
@@ -302,6 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				E236C0481D105BBE0085437D /* HelpQ_Hacker.storyboard */,
+				E2BB42C31D132FA8009EF512 /* HelpQSubmissionViewController.swift */,
 				E276C3B41D11C3A400DABD4A /* HelpQChatViewController.swift */,
 				E236C05C1D109AF50085437D /* HelpQHackerCollectionReusableView.swift */,
 				E236C05A1D10809E0085437D /* HelpQHackerCollectionViewCell.swift */,
@@ -476,6 +481,7 @@
 				E2A085ED1D0C4202002197F9 /* GenericTabBarController.swift */,
 				E2A085EF1D0C42A7002197F9 /* GenericNavigationController.swift */,
 				E2A085F11D0C4E43002197F9 /* GenericCardViewController.swift */,
+				E2BB42C51D133A9A009EF512 /* GenericInputView.swift */,
 			);
 			name = Generics;
 			sourceTree = "<group>";
@@ -831,6 +837,7 @@
 				E2BCA5621CF36CDA006AAA8B /* FeedCollectionViewController.swift in Sources */,
 				E25377421CF8AB2C003795E7 /* Tag.swift in Sources */,
 				E25980071D099B0B00AE4939 /* CustomLiquidCell.swift in Sources */,
+				E2BB42C61D133A9A009EF512 /* GenericInputView.swift in Sources */,
 				E236C05F1D109E830085437D /* HelpQ.swift in Sources */,
 				E2D483331D00D3B100859A67 /* MapViewController.swift in Sources */,
 				E236C05D1D109AF50085437D /* HelpQHackerCollectionReusableView.swift in Sources */,
@@ -850,6 +857,7 @@
 				E26F44F21D0EF2C100FB4A9F /* ProfileViewController.swift in Sources */,
 				E2BD82B91D0B09D60009DB07 /* LoginConstants.swift in Sources */,
 				E2A085FF1D0C70BF002197F9 /* GenericDayViewController.swift in Sources */,
+				E2BB42C41D132FA8009EF512 /* HelpQSubmissionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
