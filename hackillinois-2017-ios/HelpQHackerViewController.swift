@@ -62,6 +62,7 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
     func moveCellFromResolvedToUnresolved(sender: UIButton) {
         let item = items[Resolution.resolved.rawValue][sender.tag]
         item.resolved = false
+        item.updateModifiedTime()
         
         /* Every item after this item should have it's tag moved down */
         for index in sender.tag+1..<items[Resolution.resolved.rawValue].count {
@@ -87,6 +88,7 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
     func moveCellFromUnresolvedToResolved(sender: UIButton) {
         let item = items[Resolution.unresolved.rawValue][sender.tag]
         item.resolved = true
+        item.updateModifiedTime()
         
         /* Every item after this item should have it's tag moved down */
         for index in sender.tag+1..<items[Resolution.unresolved.rawValue].count {

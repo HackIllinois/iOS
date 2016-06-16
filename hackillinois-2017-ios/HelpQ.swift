@@ -17,6 +17,7 @@ class HelpQ {
     var location: String
     var description: String
     var initiation: NSDate
+    var modified: NSDate
     
     init(technology: String, language: String, location: String, description: String) {
         self.resolved = false
@@ -25,6 +26,7 @@ class HelpQ {
         self.location = location
         self.description = description
         self.initiation = NSDate()
+        self.modified = NSDate()
     }
     
     init(resolved: Bool, technology: String, language: String, location: String, description: String) {
@@ -34,6 +36,7 @@ class HelpQ {
         self.location = location
         self.description = description
         self.initiation = NSDate()
+        self.modified = NSDate()
     }
     
     init() {
@@ -43,5 +46,10 @@ class HelpQ {
         self.location = "1404 Siebel"
         self.description = "Help with asynchronous calls"
         self.initiation = NSDate()
+        self.modified = NSDate()
+    }
+    
+    func updateModifiedTime() {
+        self.modified = NSDate()
     }
 }
