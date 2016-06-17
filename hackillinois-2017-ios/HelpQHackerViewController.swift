@@ -48,7 +48,7 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
     
     /* Navigation Function */
     func createTicket() {
-        let ticketController = UIStoryboard.init(name: "HelpQ_Hacker", bundle: nil).instantiateViewControllerWithIdentifier("helpq_submit_request") as! HelpQSubmissionViewController
+        let ticketController = UIStoryboard.init(name: "HelpQ_Create", bundle: nil).instantiateInitialViewController() as! HelpQSubmissionViewController
         ticketController.addToList = { [unowned self] item in
             self.items[Resolution.unresolved.rawValue].insert(item, atIndex: 0)
             self.helpQCollection.reloadData()

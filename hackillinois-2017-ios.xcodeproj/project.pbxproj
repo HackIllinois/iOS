@@ -18,6 +18,11 @@
 		E20465D81CF1FAF50054654E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20465D61CF1FAF50054654E /* LaunchScreen.storyboard */; };
 		E20465E31CF1FAF50054654E /* hackillinois_2017_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20465E21CF1FAF50054654E /* hackillinois_2017_iosTests.swift */; };
 		E20465EE1CF1FAF50054654E /* hackillinois_2017_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20465ED1CF1FAF50054654E /* hackillinois_2017_iosUITests.swift */; };
+		E22960381D1472FD008F7A31 /* HelpQ_Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E22960371D1472FD008F7A31 /* HelpQ_Chat.storyboard */; };
+		E229603B1D147337008F7A31 /* HelpQ_Create.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E229603A1D147337008F7A31 /* HelpQ_Create.storyboard */; };
+		E229603D1D147C8C008F7A31 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229603C1D147C8C008F7A31 /* Chat.swift */; };
+		E229603F1D147F2A008F7A31 /* OtherChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229603E1D147F2A008F7A31 /* OtherChatTableViewCell.swift */; };
+		E22960411D147F36008F7A31 /* MyChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22960401D147F36008F7A31 /* MyChatTableViewCell.swift */; };
 		E236C0491D105BBE0085437D /* HelpQ_Hacker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E236C0481D105BBE0085437D /* HelpQ_Hacker.storyboard */; };
 		E236C04B1D1060D80085437D /* HelpQ.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E236C04A1D1060D80085437D /* HelpQ.storyboard */; };
 		E236C04F1D1061F80085437D /* HelpQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236C04E1D1061F80085437D /* HelpQViewController.swift */; };
@@ -122,6 +127,11 @@
 		E20465E91CF1FAF50054654E /* hackillinois-2017-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hackillinois-2017-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E20465ED1CF1FAF50054654E /* hackillinois_2017_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hackillinois_2017_iosUITests.swift; sourceTree = "<group>"; };
 		E20465EF1CF1FAF50054654E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E22960371D1472FD008F7A31 /* HelpQ_Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HelpQ_Chat.storyboard; sourceTree = "<group>"; };
+		E229603A1D147337008F7A31 /* HelpQ_Create.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HelpQ_Create.storyboard; sourceTree = "<group>"; };
+		E229603C1D147C8C008F7A31 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		E229603E1D147F2A008F7A31 /* OtherChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherChatTableViewCell.swift; sourceTree = "<group>"; };
+		E22960401D147F36008F7A31 /* MyChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyChatTableViewCell.swift; sourceTree = "<group>"; };
 		E236C0481D105BBE0085437D /* HelpQ_Hacker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HelpQ_Hacker.storyboard; sourceTree = "<group>"; };
 		E236C04A1D1060D80085437D /* HelpQ.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HelpQ.storyboard; sourceTree = "<group>"; };
 		E236C04E1D1061F80085437D /* HelpQViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQViewController.swift; sourceTree = "<group>"; };
@@ -293,6 +303,35 @@
 			path = "hackillinois-2017-iosUITests";
 			sourceTree = "<group>";
 		};
+		E22960361D147289008F7A31 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				E229603C1D147C8C008F7A31 /* Chat.swift */,
+				E22960371D1472FD008F7A31 /* HelpQ_Chat.storyboard */,
+				E22960421D147F55008F7A31 /* ChatCells */,
+				E276C3B41D11C3A400DABD4A /* HelpQChatViewController.swift */,
+			);
+			name = Chat;
+			sourceTree = "<group>";
+		};
+		E22960391D14731D008F7A31 /* HelpQ_Create */ = {
+			isa = PBXGroup;
+			children = (
+				E2BB42C31D132FA8009EF512 /* HelpQSubmissionViewController.swift */,
+				E229603A1D147337008F7A31 /* HelpQ_Create.storyboard */,
+			);
+			name = HelpQ_Create;
+			sourceTree = "<group>";
+		};
+		E22960421D147F55008F7A31 /* ChatCells */ = {
+			isa = PBXGroup;
+			children = (
+				E229603E1D147F2A008F7A31 /* OtherChatTableViewCell.swift */,
+				E22960401D147F36008F7A31 /* MyChatTableViewCell.swift */,
+			);
+			name = ChatCells;
+			sourceTree = "<group>";
+		};
 		E236C04C1D1060DE0085437D /* Staff */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,11 +345,10 @@
 			isa = PBXGroup;
 			children = (
 				E236C0481D105BBE0085437D /* HelpQ_Hacker.storyboard */,
-				E2BB42C31D132FA8009EF512 /* HelpQSubmissionViewController.swift */,
-				E276C3B41D11C3A400DABD4A /* HelpQChatViewController.swift */,
+				E236C0561D107F9C0085437D /* HelpQHackerViewController.swift */,
 				E236C05C1D109AF50085437D /* HelpQHackerCollectionReusableView.swift */,
 				E236C05A1D10809E0085437D /* HelpQHackerCollectionViewCell.swift */,
-				E236C0561D107F9C0085437D /* HelpQHackerViewController.swift */,
+				E22960391D14731D008F7A31 /* HelpQ_Create */,
 			);
 			name = Hackers;
 			sourceTree = "<group>";
@@ -397,6 +435,7 @@
 				E236C04E1D1061F80085437D /* HelpQViewController.swift */,
 				E236C0541D107DF60085437D /* DummyViewController.swift */,
 				E236C05E1D109E830085437D /* HelpQ.swift */,
+				E22960361D147289008F7A31 /* Chat */,
 				E236C04C1D1060DE0085437D /* Staff */,
 				E236C04D1D1060ED0085437D /* Hackers */,
 			);
@@ -649,6 +688,7 @@
 			files = (
 				E277DD6B1CF4AF0400D7E018 /* keys.plist in Resources */,
 				E2B6C3A21D0B4AC400D851F9 /* Main.storyboard in Resources */,
+				E22960381D1472FD008F7A31 /* HelpQ_Chat.storyboard in Resources */,
 				E2B6C3951D0B2E8000D851F9 /* Map.storyboard in Resources */,
 				E2B6C3971D0B2ED800D851F9 /* Profile.storyboard in Resources */,
 				E20465D81CF1FAF50054654E /* LaunchScreen.storyboard in Resources */,
@@ -657,6 +697,7 @@
 				E2B6C3931D0B2E1200D851F9 /* Feed.storyboard in Resources */,
 				E20465D51CF1FAF50054654E /* Assets.xcassets in Resources */,
 				E2B6C3991D0B2EF300D851F9 /* HelpQ_Staff.storyboard in Resources */,
+				E229603B1D147337008F7A31 /* HelpQ_Create.storyboard in Resources */,
 				E236C0491D105BBE0085437D /* HelpQ_Hacker.storyboard in Resources */,
 				E236C04B1D1060D80085437D /* HelpQ.storyboard in Resources */,
 				E20465D01CF1FAF50054654E /* Login.storyboard in Resources */,
@@ -815,6 +856,7 @@
 				E2F957021D0B6EBF003A0881 /* MenuTableViewController.swift in Sources */,
 				E2BCA57E1CF3B19E006AAA8B /* User+CoreDataProperties.swift in Sources */,
 				E236C0591D107FA60085437D /* HelpQStaffViewController.swift in Sources */,
+				E22960411D147F36008F7A31 /* MyChatTableViewCell.swift in Sources */,
 				E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */,
 				E236C0551D107DF60085437D /* DummyViewController.swift in Sources */,
 				E2A086011D0C736B002197F9 /* FridayViewController.swift in Sources */,
@@ -827,6 +869,7 @@
 				E25377411CF8AB2C003795E7 /* Tag+CoreDataProperties.swift in Sources */,
 				E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */,
 				E236C04F1D1061F80085437D /* HelpQViewController.swift in Sources */,
+				E229603D1D147C8C008F7A31 /* Chat.swift in Sources */,
 				E26F44F41D0EF3C400FB4A9F /* UIImage+generateBarCode.swift in Sources */,
 				E2A086081D0C73BE002197F9 /* SundayViewController.swift in Sources */,
 				E2D4F0E31D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift in Sources */,
@@ -843,6 +886,7 @@
 				E236C05D1D109AF50085437D /* HelpQHackerCollectionReusableView.swift in Sources */,
 				E2A085F01D0C42A7002197F9 /* GenericNavigationController.swift in Sources */,
 				E276C3B51D11C3A400DABD4A /* HelpQChatViewController.swift in Sources */,
+				E229603F1D147F2A008F7A31 /* OtherChatTableViewCell.swift in Sources */,
 				E2BCA5801CF3B19E006AAA8B /* Location+CoreDataProperties.swift in Sources */,
 				E2D4F0DF1D06AD3F00646BF8 /* Building.swift in Sources */,
 				E2BD82B71D0AFFB90009DB07 /* UIImage+imageWithColor.swift in Sources */,
