@@ -31,12 +31,8 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
         helpQCollection.dataSource = self
         helpQCollection.delegate = self
         
-        /*
         let unresolvedItems = [HelpQ(), HelpQ(), HelpQ()]
         let resolvedItems = [HelpQ(), HelpQ(), HelpQ(), HelpQ()]
-         */
-        let unresolvedItems = [HelpQ()]
-        let resolvedItems: [HelpQ] = []
         items = [unresolvedItems, resolvedItems]
         
         /* Add a button up to to allow users to create new tickets */
@@ -71,22 +67,9 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
     }
     
     func moveCellFromUnresolvedToResolved(sender: UIButton) {
-        print("Moving cell from unresolved to resolved")
         let item = items[Resolution.unresolved.rawValue][sender.tag]
         item.resolved = true
         item.updateModifiedTime()
-        
-        /* Every item after this item should have it's tag moved down */
-        for index in sender.tag+1..<items[Resolution.unresolved.rawValue].count {
-            let cell = helpQCollection.cellForItemAtIndexPath(NSIndexPath(forRow: index, inSection: Resolution.unresolved.rawValue)) as! HelpQHackerCollectionViewCell
-            cell.resolveButton.tag -= 1
-        }
-        
-        /* Every item in the resolved should be moved up one */
-        for index in 0..<items[Resolution.resolved.rawValue].count {
-            let cell = helpQCollection.cellForItemAtIndexPath(NSIndexPath(forRow: index, inSection: Resolution.resolved.rawValue)) as! HelpQHackerCollectionViewCell
-            cell.resolveButton.tag += 1
-        }
         
         items[Resolution.unresolved.rawValue].removeAtIndex(sender.tag)
         items[Resolution.resolved.rawValue].insert(item, atIndex: 0)
