@@ -31,6 +31,8 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
         helpQCollection.dataSource = self
         helpQCollection.delegate = self
         
+        helpQCollection.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
+        
         let unresolvedItems = [HelpQ(), HelpQ(), HelpQ()]
         let resolvedItems = [HelpQ(), HelpQ(), HelpQ(), HelpQ()]
         items = [unresolvedItems, resolvedItems]

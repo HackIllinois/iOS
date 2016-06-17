@@ -7,7 +7,6 @@
         <!--HelpQ View Controller-->
         <scene sceneID="bQq-0A-14G">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XVw-ab-laa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4il-eg-HaQ" customClass="HelpQViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -20,6 +19,7 @@
                         <segue destination="tK0-Ve-NmE" kind="relationship" relationship="rootViewController" id="W8B-Qz-eH6"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XVw-ab-laa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="674" y="2107"/>
         </scene>

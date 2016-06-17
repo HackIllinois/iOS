@@ -140,17 +140,19 @@
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Language" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ynh-sX-f75">
                                                 <rect key="frame" x="50" y="135" width="500" height="30"/>
+                                                <color key="backgroundColor" red="0.55294117649999996" green="0.71764705880000002" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yu4-16-lI3">
                                                 <rect key="frame" x="50" y="173" width="500" height="30"/>
+                                                <color key="backgroundColor" red="0.55294117649999996" green="0.71764705880000002" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="4" contentMode="scaleToFill" alwaysBounceVertical="YES" text="Description here..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wbH-Ug-FfA">
                                                 <rect key="frame" x="50" y="211" width="500" height="140"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" red="0.55294117649999996" green="0.71764705880000002" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="140" id="FOq-87-ewz"/>
                                                 </constraints>
@@ -160,19 +162,24 @@
                                             </textView>
                                             <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Technology Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YLB-TY-MTF">
                                                 <rect key="frame" x="50" y="97" width="500" height="30"/>
+                                                <color key="backgroundColor" red="0.55294117649999996" green="0.71764705880000002" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4cl-c5-Qyf">
                                                 <rect key="frame" x="306" y="359" width="244" height="30"/>
-                                                <state key="normal" title="Submit"/>
+                                                <state key="normal" title="Submit">
+                                                    <color key="titleColor" red="0.73725490199999999" green="0.20784313730000001" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="submitButtonPressed:" destination="3tc-HQ-wAA" eventType="touchUpInside" id="u3N-Pv-w8w"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egB-Do-NEw">
                                                 <rect key="frame" x="50" y="359" width="244" height="30"/>
-                                                <state key="normal" title="Cancel"/>
+                                                <state key="normal" title="Cancel">
+                                                    <color key="titleColor" red="0.73725490199999999" green="0.20784313730000001" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="cancelButtonPressed:" destination="3tc-HQ-wAA" eventType="touchUpInside" id="lZy-TE-wkC"/>
                                                 </connections>

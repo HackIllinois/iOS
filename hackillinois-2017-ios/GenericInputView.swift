@@ -43,6 +43,8 @@ class GenericInputView: UIViewController, UITextFieldDelegate, UITextViewDelegat
             textView.layer.borderWidth = 4
             textView.layer.cornerRadius = 5
             textView.layer.borderColor = UIColor.fromRGBHex(borderColorHex).CGColor
+            textView.textContainerInset = UIEdgeInsetsMake(5, 2.5, 5, 2.5)
+            textView.textColor = UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22) // Placeholder default color for iOS 9
             textView.delegate = self
         }
         
@@ -123,7 +125,7 @@ class GenericInputView: UIViewController, UITextFieldDelegate, UITextViewDelegat
     func textViewDidEndEditing(textView: UITextView) {
         if textView.text == "" {
             textView.text = "Description here..."
-            textView.textColor = UIColor.lightGrayColor()
+            textView.textColor = UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22)
         }
         textView.resignFirstResponder()
     }
