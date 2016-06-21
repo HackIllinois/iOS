@@ -40,6 +40,8 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
         
         chatView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Bottom)
         chatView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
+        
+        messageField.text = ""
     }
     
     /* label variables */
@@ -119,20 +121,36 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
         var keyboardFrame:CGRect = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
         keyboardFrame = self.view.convertRect(keyboardFrame, fromView: nil)
         
+        self.bottomLayoutConstraint.constant = keyboardFrame.height
         UIView.animateWithDuration(notification.userInfo![UIKeyboardAnimationDurationUserInfoKey]!.doubleValue, animations: {
-            self.bottomLayoutConstraint.constant = keyboardFrame.height
-            }, completion: { _ in
-                // Scroll down
-                let rect = CGRectMake(0, self.chatView.contentSize.height - self.chatView.bounds.size.height, self.chatView.bounds.size.width, self.chatView.bounds.size.height)
-                self.chatView.scrollRectToVisible(rect, animated: true)
+            self.view.layoutIfNeeded() // Animate the constraint
+            self.chatView.setContentOffset(CGPoint(x: 0, y: self.chatView.contentOffset.y + keyboardFrame.height), animated: false)
         })
-        
     }
     
     override func keyboardWillDisappear(notification: NSNotification) {
+        var keyboardFrame:CGRect = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
+        keyboardFrame = self.view.convertRect(keyboardFrame, fromView: nil)
+        
+        let offset = CGPoint(x: 0, y: isCellVisible() ? 0 : chatView.contentOffset.y - keyboardFrame.height) // Only set the offset if the last cell is not visible to avoid clunky animations
+        
+        self.bottomLayoutConstraint.constant = 0
         UIView.animateWithDuration(notification.userInfo![UIKeyboardAnimationDurationUserInfoKey]!.doubleValue, animations: {
-            self.bottomLayoutConstraint.constant = 0
+            self.view.layoutIfNeeded() // Animate constraint
+            self.chatView.setContentOffset(offset, animated: false)
         })
+    }
+    
+    func isCellVisible() -> Bool {
+        if let visibleCells = chatView.indexPathsForVisibleRows {
+            for index in visibleCells {
+                if index == chatItems.count {
+                    return true
+                }
+            }
+        }
+        
+        return false
     }
     
     // Mark: UITableViewDelegates and UITableViewDataSource
