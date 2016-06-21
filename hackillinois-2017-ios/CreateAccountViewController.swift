@@ -25,6 +25,13 @@ class CreateAccountViewController: GenericInputView {
     
     /* Function passed to capture the response data */
     func captureResponse(data: NSData?, response: NSURLResponse?, error: NSError?) {
+        if let responseError = error {
+            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                self.presentError(error: "Error", message: responseError.localizedDescription)
+            }
+            return
+        }
+        
         let json = JSON(data: data!)
         
         print("data received")
@@ -37,9 +44,7 @@ class CreateAccountViewController: GenericInputView {
             self.navigationBar.topItem?.titleView = nil
             // Disable Buttons
             self.navigationBar.topItem?.leftBarButtonItem?.enabled = true
-            self.navigationBar.topItem?.leftBarButtonItem?.tintColor = UIColor.blueColor()
             self.navigationBar.topItem?.rightBarButtonItem?.enabled = true
-            self.navigationBar.topItem?.rightBarButtonItem?.tintColor = UIColor.blueColor()
         }
         
         /* Handle Errors */
@@ -94,12 +99,13 @@ class CreateAccountViewController: GenericInputView {
         navigationBar.topItem?.titleView = activityIndicator
         // Disable Buttons
         navigationBar.topItem?.leftBarButtonItem?.enabled = false
-        navigationBar.topItem?.leftBarButtonItem?.tintColor = UIColor.grayColor()
+        // navigationBar.topItem?.leftBarButtonItem?.tintColor = UIColor.grayColor()
         navigationBar.topItem?.rightBarButtonItem?.enabled = false
-        navigationBar.topItem?.rightBarButtonItem?.tintColor = UIColor.grayColor()
+        // navigationBar.topItem?.rightBarButtonItem?.tintColor = UIColor.grayColor()
         
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
             let payload = JSON(["email": self.usernameField.text!, "password": self.passwordField.text!, "confirmedPassword": self.confirmPasswordField.text!])
+            print(payload)
             HTTPHelpers.createPostRequest(subUrl: "v1/user", jsonPayload: payload, completion: self.captureResponse)
         }
     }
