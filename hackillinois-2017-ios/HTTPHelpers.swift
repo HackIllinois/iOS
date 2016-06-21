@@ -14,6 +14,7 @@ class HTTPHelpers {
     class func createPostRequest(jsonPayload jsonPayload: JSON) -> JSON? {
         /* Load HackIllinois API URL from App Delegate */
         let hackillinois_url = (UIApplication.sharedApplication().delegate as! AppDelegate).HACKILLINOIS_API_URL
+        print(hackillinois_url)
         do {
             /* Create JSON payload */
             let payload = try jsonPayload.rawData()

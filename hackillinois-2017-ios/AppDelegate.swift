@@ -39,7 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let dict = keys {
             // Read keys here
-            HACKILLINOIS_API_URL = dict["HACKILLINOIS_API_URL"]!.stringValue
+            print(dict["HACKILLINOIS_API_URL"]!)
+            HACKILLINOIS_API_URL = dict["HACKILLINOIS_API_URL"]! as! String
         }
         
         /* Find out which part of the application to go to */
