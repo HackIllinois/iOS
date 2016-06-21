@@ -8,6 +8,7 @@
 
 import UIKit
 import SocketIOClientSwift
+import CoreData
 
 class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableViewDataSource {
 
@@ -34,8 +35,11 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
             return
         }
         
-        let newChat = Chat(user: currentUser, message: messageField.text!)
-        chatItems.append(newChat)
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let newChat = NSEntityDescription.insertNewObjectForEntityForName("Chat", inManagedObjectContext: appDelegate.managedObjectContext) as! Chat
+        newChat.initialize(currentUser, message: messageField.text!)
+        chatItems.append(newChat) // Show up on user's end first!
+        helpqItem.pushChatItem(chat: newChat) // Save data and record
         let indexPath = NSIndexPath(forRow: chatItems.count - 1, inSection: 0)
         
         chatView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Bottom)
@@ -47,7 +51,7 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
     /* label variables */
     var helpqItem: HelpQ!
     
-    var chatItems: [Chat]!
+    var chatItems: [Chat]! // uses this array to display data. User interaction is quite normal for chatting, so did not use NSFetchedResultsController
     
     var currentUser: String = "Shotaro Ikeda" // TODO: Set dynamically via Core Data
     
@@ -55,8 +59,24 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
     
     /* Initialize dummy sample item */
     func initializeSample() {
-        chatItems = [Chat(user: "Shotaro Ikeda"), Chat(user: "Maritta Terpin"), Chat(user: "Shotaro Ikeda"),
-        Chat(user: "Shotaro Ikeda"), Chat(user: "Shotaro Ikeda"), Chat(user: "Maritta Terpin"), Chat(user: "Maritta Terpin"), Chat(user: "Shotaro Ikeda")]
+        let arr = helpqItem.chats.array as! [Chat]
+        if arr.isEmpty {
+            /* Populate sample if empty */
+            let chatInsert: (String -> Chat) = { name in
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let chat = NSEntityDescription.insertNewObjectForEntityForName("Chat", inManagedObjectContext: appDelegate.managedObjectContext) as! Chat
+                chat.initialize(name)
+                return chat
+            } // Lambda function used here for quick access (code conversion)
+            
+            chatItems = [chatInsert("Shotaro Ikeda"), chatInsert("Maritta Terpin"), chatInsert("Shotaro Ikeda"),
+                         chatInsert("Shotaro Ikeda"), chatInsert("Shotaro Ikeda"), chatInsert("Maritta Terpin"), chatInsert("Maritta Terpin"), chatInsert("Shotaro Ikeda")]
+            helpqItem.chats = NSOrderedSet(array: chatItems)
+            Helpers.saveContext()
+        } else {
+            chatItems = arr
+        }
+        
         chatView.reloadData()
     }
     
@@ -71,7 +91,7 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
         techLabel.text = helpqItem.technology
         languageLabel.text = helpqItem.language
         
-        if helpqItem.resolved {
+        if helpqItem.resolved.boolValue {
             resolutionLabel.text = "Resolved"
             resolutionLabel.textColor = UIColor.greenColor()
         } else {

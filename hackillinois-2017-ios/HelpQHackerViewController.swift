@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 enum Resolution: Int {
     case unresolved = 0
@@ -16,10 +17,26 @@ enum Resolution: Int {
 class HelpQHackerViewController: GenericCardViewController, UICollectionViewDataSource {
 
     @IBOutlet weak var helpQCollection: UICollectionView!
+    var fetchedResultsController: NSFetchedResultsController!
     
-    /* Data items */
-    var items: [[HelpQ]]! = []
-    
+    /* Core Data Portion */
+    func loadSavedData() {
+        if fetchedResultsController == nil {
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let fetch = NSFetchRequest(entityName: "HelpQ")
+            let sort = NSSortDescriptor(key: "modified", ascending: false)
+            fetch.sortDescriptors = [sort]
+            
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetch, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: "resolved", cacheName: nil)
+        }
+        
+        do {
+            try self.fetchedResultsController.performFetch()
+            self.helpQCollection.reloadData()
+        } catch {
+            print("Error loading \(error)")
+        }
+    }
     
     override func viewDidLoad() {
         
@@ -33,9 +50,11 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
         
         helpQCollection.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
         
+        /*
         let unresolvedItems = [HelpQ(), HelpQ(), HelpQ()]
         let resolvedItems = [HelpQ(), HelpQ(), HelpQ(), HelpQ()]
         items = [unresolvedItems, resolvedItems]
+        */
         
         /* Add a button up to to allow users to create new tickets */
         navigationController!.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .Done, target: self, action: #selector(createTicket))
@@ -49,8 +68,8 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
     /* Navigation Function */
     func createTicket() {
         let ticketController = UIStoryboard.init(name: "HelpQ_Create", bundle: nil).instantiateInitialViewController() as! HelpQSubmissionViewController
-        ticketController.addToList = { [unowned self] item in
-            self.items[Resolution.unresolved.rawValue].insert(item, atIndex: 0)
+        ticketController.addToList = { [unowned self] in
+            Helpers.saveContext()
             self.helpQCollection.reloadData()
         }
         presentViewController(ticketController, animated: true, completion: nil)
@@ -58,40 +77,38 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
     
     /* Button action */
     func moveCellFromResolvedToUnresolved(sender: UIButton) {
-        let item = items[Resolution.resolved.rawValue][sender.tag]
+        let indexPath = NSIndexPath(forRow: sender.tag, inSection: Resolution.resolved.rawValue)
+        let item = fetchedResultsController.objectAtIndexPath(indexPath) as! HelpQ
         item.resolved = false
         item.updateModifiedTime()
         
-        items[Resolution.resolved.rawValue].removeAtIndex(sender.tag)
-        items[Resolution.unresolved.rawValue].insert(item, atIndex: 0)
-        
-        helpQCollection.reloadData()
+        Helpers.saveContext()
+        loadSavedData()
     }
     
     func moveCellFromUnresolvedToResolved(sender: UIButton) {
-        let item = items[Resolution.unresolved.rawValue][sender.tag]
+        let indexPath = NSIndexPath(forRow: sender.tag, inSection: Resolution.unresolved.rawValue)
+        let item = fetchedResultsController.objectAtIndexPath(indexPath) as! HelpQ
         item.resolved = true
         item.updateModifiedTime()
         
-        items[Resolution.unresolved.rawValue].removeAtIndex(sender.tag)
-        items[Resolution.resolved.rawValue].insert(item, atIndex: 0)
-        
-        helpQCollection.reloadData()
+        Helpers.saveContext()
+        loadSavedData()
     }
     
     /* UICollectionViewDataSource */
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return items.count
+        return fetchedResultsController.sections?.count ?? 0
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return items[section].count
+        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = helpQCollection.dequeueReusableCellWithReuseIdentifier("hacker_helpq_cell", forIndexPath: indexPath) as! HelpQHackerCollectionViewCell
         
-        let item = items[indexPath.section][indexPath.row]
+        let item = fetchedResultsController.objectAtIndexPath(indexPath) as! HelpQ
         
         /* Configure cell */
         cell.techLabel.text = item.technology
@@ -140,7 +157,7 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
         if segue.identifier == "to_chat_view" {
             let destination = segue.destinationViewController as! HelpQChatViewController
             let indexPath = helpQCollection.indexPathsForSelectedItems()!.first!
-            let object = items[indexPath.section][indexPath.row]
+            let object = fetchedResultsController.objectAtIndexPath(indexPath) as! HelpQ
             
             destination.helpqItem = object
         }
