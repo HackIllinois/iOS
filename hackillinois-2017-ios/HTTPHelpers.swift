@@ -11,9 +11,9 @@ import SwiftyJSON
 
 /* Contains helpers for HTTP Requests to backend */
 class HTTPHelpers {
-    class func createPostRequest(jsonPayload jsonPayload: JSON) -> JSON? {
+    class func createPostRequest(subUrl url: String, jsonPayload: JSON) -> JSON? {
         /* Load HackIllinois API URL from App Delegate */
-        let hackillinois_url = (UIApplication.sharedApplication().delegate as! AppDelegate).HACKILLINOIS_API_URL
+        let hackillinois_url = (UIApplication.sharedApplication().delegate as! AppDelegate).HACKILLINOIS_API_URL + url
         print(hackillinois_url)
         do {
             /* Create JSON payload */
@@ -26,7 +26,13 @@ class HTTPHelpers {
             
             var jsonReturn: JSON!
             let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
-                print("Response: \(response)")
+                if let httpResponse = response as? NSHTTPURLResponse {
+                    if httpResponse.statusCode == 404 {
+                        print("404 not found")
+                        jsonReturn = nil
+                        return
+                    }
+                }
                 
                 if error != nil {
                     print("Session Error: \(error)")
@@ -34,6 +40,9 @@ class HTTPHelpers {
                 }
                 
                 jsonReturn = JSON(data: data!)
+                /* Debug */
+                print(response)
+                print(jsonReturn)
             }
             
             task.resume()

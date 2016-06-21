@@ -35,15 +35,38 @@ class CreateAccountViewController: GenericInputView {
             return
         }
         
+        if passwordField.text!.utf8.count < 8 {
+            presentError(error: "Password Too Short", message: "Password must be at least 8 characters long")
+            return
+        }
+        
         if !(passwordField.text! == confirmPasswordField.text!) {
             presentError(error: "Password fields do not match", message: "Password Fields do not match please try again.")
             return
         }
         
         /* Activity Indicator */
-        let payload = JSON(["email": usernameField.text!, "password": passwordField.text!, "confirmedPassword": confirmPasswordField.text!])
-        if let data = HTTPHelpers.createPostRequest(jsonPayload: payload) {
-            print(data)
+        
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
+            let payload = JSON(["email": self.usernameField.text!, "password": self.passwordField.text!, "confirmedPassword": self.confirmPasswordField.text!])
+            if let data = HTTPHelpers.createPostRequest(subUrl: "v1/user", jsonPayload: payload) {
+                print(data)
+                if data["error"]["type"].stringValue == "InvalidParameterError" {
+                    print("error detected")
+                    // Email Error
+                    if data["error"]["source"].stringValue == "email" {
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.presentError(error: "Duplicate Email", message: "An account with the email already exists. Please check your email or visit the main website to reset your password")
+                        }
+                    }
+                } else {
+                    print("Request OK")
+                }
+            } else {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.presentError(error: "Service Error", message: "A connection to the server could not be established. Please try again later")
+                }
+            }
         }
     }
     
