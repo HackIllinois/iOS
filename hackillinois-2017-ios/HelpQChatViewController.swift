@@ -40,20 +40,6 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
         
         chatView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Bottom)
         chatView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
-        
-        /*
-        CATransaction.begin()
-        CATransaction.setCompletionBlock({ [unowned self] in
-            self.scrollToLast()
-        })
-        
-        /* Configure end behavior */
-        chatView.beginUpdates()
-        chatView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-        chatView.endUpdates()
-        messageField.text = "" // Clear text
-        CATransaction.commit()
-        */
     }
     
     /* label variables */
@@ -63,7 +49,7 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
     
     var currentUser: String = "Shotaro Ikeda" // TODO: Set dynamically via Core Data
     
-    var heightAtIndexPath = NSMutableDictionary() // Hopefully migitate the scrolling bug
+    var heightAtIndexPath = NSMutableDictionary() // Cache of how large the heights are
     
     /* Initialize dummy sample item */
     func initializeSample() {
@@ -99,9 +85,6 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
         chatView.dataSource = self
         // Initalize sample data
         initializeSample() // reloads data
-        // Configure cells
-        chatView.estimatedRowHeight = 50
-        // chatView.rowHeight = UITableViewAutomaticDimension
         
         chatViewScrollToBottom(delay: 0.1, animated: false) // See the comment in the function
     }
@@ -123,25 +106,6 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
             }
             
         })
-    }
-    
-    /* Better way to animate */
-    func scrollToLast() {
-        guard chatItems.count > 0 else {
-            return
-        }
-        
-        CATransaction.begin()
-        CATransaction.setCompletionBlock({ [unowned self] in
-            // Scroll and animate once completed
-            self.chatView.scrollToRowAtIndexPath(NSIndexPath(forRow: self.chatItems.count - 1 , inSection: 0), atScrollPosition: .Bottom, animated: true)
-        })
-        
-        // scroll down 1 point to have the bubble render first
-        let newContentOffset = CGPointMake(0, chatView.contentOffset.y + 100)
-        chatView.setContentOffset(newContentOffset, animated: false)
-        
-        CATransaction.commit()
     }
     
     /* Mark: Override for TextField Delegate */
@@ -193,20 +157,25 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
         }
     }
     
-    /*
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let height = self.heightAtIndexPath.objectForKey(NSIndexPath) as? CGFloat
-        return height ?? UITableViewAutomaticDimension
+    /* Helper function to calculate height of label */
+    func heightForLabel(withText text: String, font: UIFont, width: CGFloat) -> CGFloat {
+        let label = UILabel(frame: CGRectMake(0, 0, width, CGFloat.max))
+        label.numberOfLines = 0
+        label.lineBreakMode = .ByWordWrapping
+        label.font = font
+        label.text = text
+        label.sizeToFit() // Calculate height
+        
+        return label.bounds.height + 26 // Extra padding or else the string gets truncated....
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let height = self.heightAtIndexPath.objectForKey(indexPath) as? CGFloat
-        return height ?? UITableViewAutomaticDimension
+        if let height = heightAtIndexPath.objectForKey(indexPath) as? CGFloat {
+            return height
+        } else {
+            let height = heightForLabel(withText: chatItems[indexPath.row].message, font: UIFont.systemFontOfSize(17), width: 207.5) // Subtract padding from Width
+            heightAtIndexPath.setObject(height, forKey: indexPath)
+            return height
+        }
     }
-    
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        let height = cell.frame.size.height
-        heightAtIndexPath.setObject(height, forKey: indexPath)
-    }
-    */
 }
