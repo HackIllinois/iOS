@@ -13,7 +13,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var google_direction_api_key: String!
+    var HACKILLINOIS_API_URL: String!
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -29,7 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().translucent = false
         
         
-        /*
         // Parse API Keys from keys.plist file
         var keys: NSDictionary?
         if let path = NSBundle.mainBundle().pathForResource("keys", ofType: "plist") {
@@ -40,8 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let dict = keys {
             // Read keys here
+            HACKILLINOIS_API_URL = dict["HACKILLINOIS_API_URL"]!.stringValue
         }
-        */
         
         /* Find out which part of the application to go to */
         if NSUserDefaults.standardUserDefaults().boolForKey("logged_in_main") {
