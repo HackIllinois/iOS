@@ -28,13 +28,13 @@ class HelpQSubmissionViewController: GenericInputView {
         view.endEditing(true)
         /* Check if all the labels have text */
         
-        Helpers.storeHelpQItem(technology: techLabel.text!, language: languageLabel.text!, location: locationLabel.text!, description: descriptionLabel.text!)
-        addToList()
+        let item = Helpers.createHelpQItem(technology: techLabel.text!, language: languageLabel.text!, location: locationLabel.text!, description: descriptionLabel.text!)
+        addToList(item)
         
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    var addToList: (Void -> Void)!
+    var addToList: (HelpQ -> Void)!
     
     override func viewDidLoad() {
         /* Set superclass variables */

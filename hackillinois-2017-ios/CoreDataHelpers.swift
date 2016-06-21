@@ -104,6 +104,21 @@ class Helpers {
     }
     
     /*
+     * Helper function to save the context
+     * Written to be done on the main thread instead of an asynchronous thread
+     */
+    class func saveContextMainThread() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        if appDelegate.managedObjectContext.hasChanges {
+            do {
+                try appDelegate.managedObjectContext.save()
+            } catch {
+                print("Error while saving \(error)")
+            }
+        }
+    }
+    
+    /*
      * Helper function to load a context.
      * Supply the entity in which you want to load from.
      *
@@ -164,12 +179,12 @@ extension Helpers {
 
 /* Helpers for HelpQ */
 extension Helpers {
-    class func storeHelpQItem(technology technology: String, language: String, location: String, description: String) {
+    class func createHelpQItem(technology technology: String, language: String, location: String, description: String) -> HelpQ {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let helpQ = NSEntityDescription.insertNewObjectForEntityForName("HelpQ", inManagedObjectContext: appDelegate.managedObjectContext) as! HelpQ
         helpQ.initialize(technology, language: language, location: location, description: description)
         
-        self.saveContext()
+        return helpQ
     }
     
     // To store chat items, use HelpQ.pushChatItem

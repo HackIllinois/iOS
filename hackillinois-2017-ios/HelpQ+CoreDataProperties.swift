@@ -14,13 +14,13 @@ import CoreData
 
 extension HelpQ {
 
-    @NSManaged var resolved: NSNumber
-    @NSManaged var technology: String
-    @NSManaged var language: String
-    @NSManaged var location: String
     @NSManaged var desc: String
     @NSManaged var initiation: NSDate
+    @NSManaged var language: String
+    @NSManaged var location: String
     @NSManaged var modified: NSDate
+    @NSManaged var resolved: NSNumber
+    @NSManaged var technology: String
     @NSManaged var chats: NSOrderedSet
 
 }

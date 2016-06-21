@@ -30,21 +30,25 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
     @IBOutlet weak var bottomLayoutConstraint: NSLayoutConstraint!
     
     @IBAction func sendMessage(sender: AnyObject) {
+        /* Simply close the view if user did not input text */
         if messageField.text! == "" {
             view.endEditing(true)
             return
         }
         
+        /* Create a Chat to save to the model + display to the user */
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let newChat = NSEntityDescription.insertNewObjectForEntityForName("Chat", inManagedObjectContext: appDelegate.managedObjectContext) as! Chat
         newChat.initialize(currentUser, message: messageField.text!)
         chatItems.append(newChat) // Show up on user's end first!
         helpqItem.pushChatItem(chat: newChat) // Save data and record
-        let indexPath = NSIndexPath(forRow: chatItems.count - 1, inSection: 0)
         
+        /* Insert row and scroll there */
+        let indexPath = NSIndexPath(forRow: chatItems.count - 1, inSection: 0)
         chatView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Bottom)
         chatView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
         
+        /* Reset text field */
         messageField.text = ""
     }
     
@@ -58,9 +62,11 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
     var heightAtIndexPath = NSMutableDictionary() // Cache of how large the heights are
     
     /* Initialize dummy sample item */
-    func initializeSample() {
+    func loadSavedData() {
         let arr = helpqItem.chats.array as! [Chat]
         if arr.isEmpty {
+            print("Populating Items with sample chat data")
+            // TODO: Remove auto population if empty
             /* Populate sample if empty */
             let chatInsert: (String -> Chat) = { name in
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -99,14 +105,14 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
             resolutionLabel.textColor = UIColor.redColor()
         }
         
-        descriptionLabel.text = helpqItem.description
+        descriptionLabel.text = helpqItem.desc
         
         /* ChatView */
         // Set delegates first
         chatView.delegate = self
         chatView.dataSource = self
         // Initalize sample data
-        initializeSample() // reloads data
+        loadSavedData() // reloads data
         
         chatViewScrollToBottom(delay: 0.1, animated: false) // See the comment in the function
     }

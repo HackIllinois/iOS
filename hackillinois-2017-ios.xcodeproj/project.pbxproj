@@ -20,7 +20,6 @@
 		E20465EE1CF1FAF50054654E /* hackillinois_2017_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20465ED1CF1FAF50054654E /* hackillinois_2017_iosUITests.swift */; };
 		E22960381D1472FD008F7A31 /* HelpQ_Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E22960371D1472FD008F7A31 /* HelpQ_Chat.storyboard */; };
 		E229603B1D147337008F7A31 /* HelpQ_Create.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E229603A1D147337008F7A31 /* HelpQ_Create.storyboard */; };
-		E229603D1D147C8C008F7A31 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229603C1D147C8C008F7A31 /* Chat.swift */; };
 		E229603F1D147F2A008F7A31 /* OtherChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229603E1D147F2A008F7A31 /* OtherChatTableViewCell.swift */; };
 		E22960411D147F36008F7A31 /* MyChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22960401D147F36008F7A31 /* MyChatTableViewCell.swift */; };
 		E236C0491D105BBE0085437D /* HelpQ_Hacker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E236C0481D105BBE0085437D /* HelpQ_Hacker.storyboard */; };
@@ -31,7 +30,6 @@
 		E236C0591D107FA60085437D /* HelpQStaffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236C0581D107FA60085437D /* HelpQStaffViewController.swift */; };
 		E236C05B1D10809E0085437D /* HelpQHackerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236C05A1D10809E0085437D /* HelpQHackerCollectionViewCell.swift */; };
 		E236C05D1D109AF50085437D /* HelpQHackerCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236C05C1D109AF50085437D /* HelpQHackerCollectionReusableView.swift */; };
-		E236C05F1D109E830085437D /* HelpQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236C05E1D109E830085437D /* HelpQ.swift */; };
 		E25377411CF8AB2C003795E7 /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E253773F1CF8AB2C003795E7 /* Tag+CoreDataProperties.swift */; };
 		E25377421CF8AB2C003795E7 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25377401CF8AB2C003795E7 /* Tag.swift */; };
 		E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25377431CF8C485003795E7 /* CoreDataHelpers.swift */; };
@@ -42,6 +40,10 @@
 		E277DD691CF4A79100D7E018 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E277DD681CF4A79100D7E018 /* FeedDetailViewController.swift */; };
 		E277DD6B1CF4AF0400D7E018 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = E277DD6A1CF4AF0400D7E018 /* keys.plist */; };
 		E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E277DD6D1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift */; };
+		E28FB69F1D194951000D062F /* HelpQ+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28FB69B1D194950000D062F /* HelpQ+CoreDataProperties.swift */; };
+		E28FB6A01D194951000D062F /* HelpQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28FB69C1D194950000D062F /* HelpQ.swift */; };
+		E28FB6A11D194951000D062F /* Chat+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28FB69D1D194950000D062F /* Chat+CoreDataProperties.swift */; };
+		E28FB6A21D194951000D062F /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28FB69E1D194951000D062F /* Chat.swift */; };
 		E2A085EE1D0C4202002197F9 /* GenericTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085ED1D0C4202002197F9 /* GenericTabBarController.swift */; };
 		E2A085F01D0C42A7002197F9 /* GenericNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085EF1D0C42A7002197F9 /* GenericNavigationController.swift */; };
 		E2A085F21D0C4E43002197F9 /* GenericCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085F11D0C4E43002197F9 /* GenericCardViewController.swift */; };
@@ -81,8 +83,6 @@
 		E2D4F0E11D06B28B00646BF8 /* FeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4F0E01D06B28B00646BF8 /* FeedCollectionViewCell.swift */; };
 		E2D4F0E31D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4F0E21D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift */; };
 		E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4F0E41D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift */; };
-		E2EBC5871D192A5C009F24CF /* HelpQ+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EBC5851D192A5C009F24CF /* HelpQ+CoreDataProperties.swift */; };
-		E2EBC5881D192A5C009F24CF /* Chat+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EBC5861D192A5C009F24CF /* Chat+CoreDataProperties.swift */; };
 		E2F639481D05083300853089 /* CGRect+initWithCenterAt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F639471D05083300853089 /* CGRect+initWithCenterAt.swift */; };
 		E2F957021D0B6EBF003A0881 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F957011D0B6EBF003A0881 /* MenuTableViewController.swift */; };
 		E2F957051D0BA899003A0881 /* Schedule.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2F957041D0BA899003A0881 /* Schedule.storyboard */; };
@@ -131,7 +131,6 @@
 		E20465EF1CF1FAF50054654E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E22960371D1472FD008F7A31 /* HelpQ_Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HelpQ_Chat.storyboard; sourceTree = "<group>"; };
 		E229603A1D147337008F7A31 /* HelpQ_Create.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HelpQ_Create.storyboard; sourceTree = "<group>"; };
-		E229603C1D147C8C008F7A31 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		E229603E1D147F2A008F7A31 /* OtherChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherChatTableViewCell.swift; sourceTree = "<group>"; };
 		E22960401D147F36008F7A31 /* MyChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyChatTableViewCell.swift; sourceTree = "<group>"; };
 		E236C0481D105BBE0085437D /* HelpQ_Hacker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HelpQ_Hacker.storyboard; sourceTree = "<group>"; };
@@ -142,7 +141,6 @@
 		E236C0581D107FA60085437D /* HelpQStaffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQStaffViewController.swift; sourceTree = "<group>"; };
 		E236C05A1D10809E0085437D /* HelpQHackerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQHackerCollectionViewCell.swift; sourceTree = "<group>"; };
 		E236C05C1D109AF50085437D /* HelpQHackerCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQHackerCollectionReusableView.swift; sourceTree = "<group>"; };
-		E236C05E1D109E830085437D /* HelpQ.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQ.swift; sourceTree = "<group>"; };
 		E253773F1CF8AB2C003795E7 /* Tag+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E25377401CF8AB2C003795E7 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		E25377431CF8C485003795E7 /* CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
@@ -153,6 +151,10 @@
 		E277DD681CF4A79100D7E018 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
 		E277DD6A1CF4AF0400D7E018 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
 		E277DD6D1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailTableViewCell.swift; sourceTree = "<group>"; };
+		E28FB69B1D194950000D062F /* HelpQ+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HelpQ+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E28FB69C1D194950000D062F /* HelpQ.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQ.swift; sourceTree = "<group>"; };
+		E28FB69D1D194950000D062F /* Chat+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Chat+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E28FB69E1D194951000D062F /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		E2A085ED1D0C4202002197F9 /* GenericTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericTabBarController.swift; sourceTree = "<group>"; };
 		E2A085EF1D0C42A7002197F9 /* GenericNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericNavigationController.swift; sourceTree = "<group>"; };
 		E2A085F11D0C4E43002197F9 /* GenericCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericCardViewController.swift; sourceTree = "<group>"; };
@@ -190,8 +192,6 @@
 		E2D4F0E01D06B28B00646BF8 /* FeedCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewCell.swift; sourceTree = "<group>"; };
 		E2D4F0E21D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+fromLocation.swift"; sourceTree = "<group>"; };
 		E2D4F0E41D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MKMapCamera+initFromLocation.swift"; sourceTree = "<group>"; };
-		E2EBC5851D192A5C009F24CF /* HelpQ+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HelpQ+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		E2EBC5861D192A5C009F24CF /* Chat+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Chat+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E2F639471D05083300853089 /* CGRect+initWithCenterAt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+initWithCenterAt.swift"; sourceTree = "<group>"; };
 		E2F957011D0B6EBF003A0881 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		E2F957041D0BA899003A0881 /* Schedule.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Schedule.storyboard; sourceTree = "<group>"; };
@@ -502,10 +502,10 @@
 		E2BCA56D1CF3A9F5006AAA8B /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E2EBC5851D192A5C009F24CF /* HelpQ+CoreDataProperties.swift */,
-				E236C05E1D109E830085437D /* HelpQ.swift */,
-				E2EBC5861D192A5C009F24CF /* Chat+CoreDataProperties.swift */,
-				E229603C1D147C8C008F7A31 /* Chat.swift */,
+				E28FB69B1D194950000D062F /* HelpQ+CoreDataProperties.swift */,
+				E28FB69C1D194950000D062F /* HelpQ.swift */,
+				E28FB69D1D194950000D062F /* Chat+CoreDataProperties.swift */,
+				E28FB69E1D194951000D062F /* Chat.swift */,
 				E20465D11CF1FAF50054654E /* hackillinois_2017_ios.xcdatamodeld */,
 				E253773F1CF8AB2C003795E7 /* Tag+CoreDataProperties.swift */,
 				E25377401CF8AB2C003795E7 /* Tag.swift */,
@@ -869,26 +869,26 @@
 				E2BD82B51D09EA530009DB07 /* GenericMapViewController.swift in Sources */,
 				E20465D31CF1FAF50054654E /* hackillinois_2017_ios.xcdatamodeld in Sources */,
 				E236C0571D107F9C0085437D /* HelpQHackerViewController.swift in Sources */,
+				E28FB6A01D194951000D062F /* HelpQ.swift in Sources */,
 				E2BCA57D1CF3B19E006AAA8B /* Feed.swift in Sources */,
 				E2A085F61D0C6536002197F9 /* ScheduleCollectionViewCell.swift in Sources */,
 				E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */,
 				E25377411CF8AB2C003795E7 /* Tag+CoreDataProperties.swift in Sources */,
+				E28FB69F1D194951000D062F /* HelpQ+CoreDataProperties.swift in Sources */,
 				E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */,
 				E236C04F1D1061F80085437D /* HelpQViewController.swift in Sources */,
-				E229603D1D147C8C008F7A31 /* Chat.swift in Sources */,
 				E26F44F41D0EF3C400FB4A9F /* UIImage+generateBarCode.swift in Sources */,
 				E2A086081D0C73BE002197F9 /* SundayViewController.swift in Sources */,
 				E2D4F0E31D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift in Sources */,
 				E236C05B1D10809E0085437D /* HelpQHackerCollectionViewCell.swift in Sources */,
 				E2D4F0E11D06B28B00646BF8 /* FeedCollectionViewCell.swift in Sources */,
 				E2BCA5811CF3B19E006AAA8B /* Location.swift in Sources */,
-				E2EBC5881D192A5C009F24CF /* Chat+CoreDataProperties.swift in Sources */,
+				E28FB6A21D194951000D062F /* Chat.swift in Sources */,
 				E2A085FA1D0C6688002197F9 /* DayItem.swift in Sources */,
 				E2BCA5621CF36CDA006AAA8B /* FeedCollectionViewController.swift in Sources */,
 				E25377421CF8AB2C003795E7 /* Tag.swift in Sources */,
 				E25980071D099B0B00AE4939 /* CustomLiquidCell.swift in Sources */,
 				E2BB42C61D133A9A009EF512 /* GenericInputView.swift in Sources */,
-				E236C05F1D109E830085437D /* HelpQ.swift in Sources */,
 				E2D483331D00D3B100859A67 /* MapViewController.swift in Sources */,
 				E236C05D1D109AF50085437D /* HelpQHackerCollectionReusableView.swift in Sources */,
 				E2A085F01D0C42A7002197F9 /* GenericNavigationController.swift in Sources */,
@@ -901,12 +901,12 @@
 				E2A086061D0C73B4002197F9 /* SaturdayViewController.swift in Sources */,
 				E2BCA57C1CF3B19E006AAA8B /* Feed+CoreDataProperties.swift in Sources */,
 				E2A085EE1D0C4202002197F9 /* GenericTabBarController.swift in Sources */,
+				E28FB6A11D194951000D062F /* Chat+CoreDataProperties.swift in Sources */,
 				E20465CD1CF1FAF50054654E /* LoginViewController.swift in Sources */,
 				E2AC3F861CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */,
 				E20465CB1CF1FAF50054654E /* AppDelegate.swift in Sources */,
 				E277DD691CF4A79100D7E018 /* FeedDetailViewController.swift in Sources */,
 				E26F44F21D0EF2C100FB4A9F /* ProfileViewController.swift in Sources */,
-				E2EBC5871D192A5C009F24CF /* HelpQ+CoreDataProperties.swift in Sources */,
 				E2BD82B91D0B09D60009DB07 /* LoginConstants.swift in Sources */,
 				E2A085FF1D0C70BF002197F9 /* GenericDayViewController.swift in Sources */,
 				E2BB42C41D132FA8009EF512 /* HelpQSubmissionViewController.swift in Sources */,

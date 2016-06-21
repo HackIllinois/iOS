@@ -2,18 +2,19 @@
 //  HelpQ.swift
 //  hackillinois-2017-ios
 //
-//  Created by Shotaro Ikeda on 6/14/16.
+//  Created by Shotaro Ikeda on 6/21/16.
 //  Copyright © 2016 Shotaro Ikeda. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
-/* Describes one item of HelpQ request */
 
 class HelpQ: NSManagedObject {
+
+// Insert code here to add functionality to your managed object subclass
     func initialize(technology: String, language: String, location: String, description: String) {
-        self.resolved = false
+        self.resolved = NSNumber(bool: false)
         self.technology = technology
         self.language = language
         self.location = location
@@ -24,7 +25,7 @@ class HelpQ: NSManagedObject {
     }
     
     func initialize(resolved: Bool, technology: String, language: String, location: String, description: String, chats: [Chat]) {
-        self.resolved = resolved
+        self.resolved = NSNumber(bool: resolved)
         self.technology = technology
         self.language = language
         self.location = location
@@ -35,7 +36,7 @@ class HelpQ: NSManagedObject {
     }
     
     func initialize() {
-        self.resolved = false
+        self.resolved = NSNumber(bool: false)
         self.technology = "Node JS"
         self.language = "Javascript"
         self.location = "1404 Siebel"
@@ -47,6 +48,7 @@ class HelpQ: NSManagedObject {
     
     func updateModifiedTime() {
         self.modified = NSDate()
+        Helpers.saveContext()
     }
     
     func pushChatItem(chat chat: Chat) {
@@ -57,4 +59,5 @@ class HelpQ: NSManagedObject {
         self.chats = mutableVersion
         Helpers.saveContext() // Save after changing item
     }
+
 }

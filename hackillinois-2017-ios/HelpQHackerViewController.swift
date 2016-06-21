@@ -17,25 +17,51 @@ enum Resolution: Int {
 class HelpQHackerViewController: GenericCardViewController, UICollectionViewDataSource {
 
     @IBOutlet weak var helpQCollection: UICollectionView!
-    var fetchedResultsController: NSFetchedResultsController!
     
-    /* Core Data Portion */
-    func loadSavedData() {
-        if fetchedResultsController == nil {
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            let fetch = NSFetchRequest(entityName: "HelpQ")
-            let sort = NSSortDescriptor(key: "modified", ascending: false)
-            fetch.sortDescriptors = [sort]
-            
-            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetch, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: "resolved", cacheName: nil)
-        }
+    /* Data items */
+    var items: [[HelpQ]]! = []
+    
+    func loadItems() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let unresolvedFetch = NSFetchRequest(entityName: "HelpQ")
+        let sort = NSSortDescriptor(key: "modified", ascending: false)
+        let unresolvedPredicate = NSPredicate(format: "resolved == %@", NSNumber(bool: false))
+        
+        unresolvedFetch.sortDescriptors = [sort]
+        unresolvedFetch.predicate = unresolvedPredicate
+        
+        let resolvedPredicate = NSPredicate(format: "resolved == %@", NSNumber(bool: false))
+        let resolvedFetch = unresolvedFetch.copy() as! NSFetchRequest
+        resolvedFetch.predicate = resolvedPredicate
+        
+        var unresolvedItems: [HelpQ]!
+        var resolvedItems: [HelpQ]!
         
         do {
-            try self.fetchedResultsController.performFetch()
-            self.helpQCollection.reloadData()
+            unresolvedItems = try appDelegate.managedObjectContext.executeFetchRequest(unresolvedFetch) as! [HelpQ]
+            resolvedItems = try appDelegate.managedObjectContext.executeFetchRequest(resolvedFetch) as! [HelpQ]
         } catch {
-            print("Error loading \(error)")
+            print("Error while loading \(error)")
         }
+        
+        /* Create data if it does not exist */
+        // TODO: Remove for final product
+        if unresolvedItems.isEmpty && resolvedItems.isEmpty {
+            print("Creating Dummy Data")
+            let createHelpQLambda: (String, String, String, String) -> HelpQ = { (tech, lang, loc, desc) in
+                let helpQ = NSEntityDescription.insertNewObjectForEntityForName("HelpQ", inManagedObjectContext: appDelegate.managedObjectContext) as! HelpQ
+                helpQ.initialize(tech, language: lang, location: loc, description: desc)
+                return helpQ
+            }
+            
+            unresolvedItems = [createHelpQLambda("Node JS", "Javascript", "Siebel 2202", "Help with Asynchronous Calls"), createHelpQLambda("Memory Allocation/Deallocation", "C++", "Siebel 1404","Help with unknown use after free error"), createHelpQLambda("Threading", "C", "ECEB 2201","Cannot figure out how to multithread my code.")]
+            resolvedItems = [createHelpQLambda("Python", "Python", "Siebel", "How to print with python"), createHelpQLambda("UITableView", "iOS", "Find me around ECEB labs", "Automatic Dimension is creates strange behavior for animations"), createHelpQLambda("Machine Learning", "Python", "Labs at Siebel", "Which model to use?"), createHelpQLambda("MySQL", "Python-Flask", "around 2nd floor DCL", "How do I connect Python to my database?")]
+            Helpers.saveContext()
+        }
+        
+        /* Store data in provided array */
+        items = [unresolvedItems, resolvedItems]
+        helpQCollection.reloadData()
     }
     
     override func viewDidLoad() {
@@ -50,11 +76,8 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
         
         helpQCollection.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
         
-        /*
-        let unresolvedItems = [HelpQ(), HelpQ(), HelpQ()]
-        let resolvedItems = [HelpQ(), HelpQ(), HelpQ(), HelpQ()]
-        items = [unresolvedItems, resolvedItems]
-        */
+        // Load items
+        loadItems()
         
         /* Add a button up to to allow users to create new tickets */
         navigationController!.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .Done, target: self, action: #selector(createTicket))
@@ -68,8 +91,8 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
     /* Navigation Function */
     func createTicket() {
         let ticketController = UIStoryboard.init(name: "HelpQ_Create", bundle: nil).instantiateInitialViewController() as! HelpQSubmissionViewController
-        ticketController.addToList = { [unowned self] in
-            Helpers.saveContext()
+        ticketController.addToList = { [unowned self] item in
+            self.items[Resolution.unresolved.rawValue].insert(item, atIndex: 0)
             self.helpQCollection.reloadData()
         }
         presentViewController(ticketController, animated: true, completion: nil)
@@ -77,42 +100,44 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
     
     /* Button action */
     func moveCellFromResolvedToUnresolved(sender: UIButton) {
-        let indexPath = NSIndexPath(forRow: sender.tag, inSection: Resolution.resolved.rawValue)
-        let item = fetchedResultsController.objectAtIndexPath(indexPath) as! HelpQ
+        let item = items[Resolution.resolved.rawValue][sender.tag]
         item.resolved = false
         item.updateModifiedTime()
         
-        Helpers.saveContext()
-        loadSavedData()
+        items[Resolution.resolved.rawValue].removeAtIndex(sender.tag)
+        items[Resolution.unresolved.rawValue].insert(item, atIndex: 0)
+        
+        helpQCollection.reloadData()
     }
     
     func moveCellFromUnresolvedToResolved(sender: UIButton) {
-        let indexPath = NSIndexPath(forRow: sender.tag, inSection: Resolution.unresolved.rawValue)
-        let item = fetchedResultsController.objectAtIndexPath(indexPath) as! HelpQ
+        let item = items[Resolution.unresolved.rawValue][sender.tag]
         item.resolved = true
         item.updateModifiedTime()
         
-        Helpers.saveContext()
-        loadSavedData()
+        items[Resolution.unresolved.rawValue].removeAtIndex(sender.tag)
+        items[Resolution.resolved.rawValue].insert(item, atIndex: 0)
+        
+        helpQCollection.reloadData()
     }
     
     /* UICollectionViewDataSource */
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return fetchedResultsController.sections?.count ?? 0
+        return items.count
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        return items[section].count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = helpQCollection.dequeueReusableCellWithReuseIdentifier("hacker_helpq_cell", forIndexPath: indexPath) as! HelpQHackerCollectionViewCell
         
-        let item = fetchedResultsController.objectAtIndexPath(indexPath) as! HelpQ
+        let item = items[indexPath.section][indexPath.row]
         
         /* Configure cell */
         cell.techLabel.text = item.technology
-        cell.descriptionLabel.text = item.description
+        cell.descriptionLabel.text = item.desc
         configureCell(cell: cell)
         
         /* Section specific configuration */
@@ -157,7 +182,7 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
         if segue.identifier == "to_chat_view" {
             let destination = segue.destinationViewController as! HelpQChatViewController
             let indexPath = helpQCollection.indexPathsForSelectedItems()!.first!
-            let object = fetchedResultsController.objectAtIndexPath(indexPath) as! HelpQ
+            let object = items[indexPath.section][indexPath.row]
             
             destination.helpqItem = object
         }
