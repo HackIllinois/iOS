@@ -24,13 +24,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HackIllinois" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Z3-7e-4ZG">
-                                        <rect key="frame" x="170" y="20" width="261" height="57.5"/>
+                                        <rect key="frame" x="170" y="20" width="261" height="55"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvJ-ec-cHF">
-                                        <rect key="frame" x="60" y="150" width="480" height="300"/>
+                                        <rect key="frame" x="60" y="125" width="480" height="350"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wml-Eo-5NI">
                                                 <rect key="frame" x="115" y="100" width="250" height="40"/>
@@ -42,8 +42,18 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" keyboardAppearance="alert" returnKeyType="go" secureTextEntry="YES"/>
                                             </textField>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mhz-Y5-wCk">
+                                                <rect key="frame" x="115" y="35" width="250" height="40"/>
+                                                <color key="backgroundColor" red="0.44705882349999998" green="0.43921568630000002" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="250" id="7qn-vL-r5s"/>
+                                                    <constraint firstAttribute="height" constant="40" id="jgs-I3-jZw"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" keyboardAppearance="alert" returnKeyType="next"/>
+                                            </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXB-So-CHs">
-                                                <rect key="frame" x="115" y="224" width="250" height="41"/>
+                                                <rect key="frame" x="115" y="209" width="250" height="41"/>
                                                 <color key="backgroundColor" red="0.73725490196078436" green="0.20784313725490194" blue="0.25490196078431371" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="250" id="uG9-4g-Gth"/>
@@ -56,25 +66,32 @@
                                                     <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="edl-yL-AN7"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mhz-Y5-wCk">
-                                                <rect key="frame" x="115" y="35" width="250" height="40"/>
-                                                <color key="backgroundColor" red="0.44705882349999998" green="0.43921568630000002" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fit-MY-gyy">
+                                                <rect key="frame" x="115" y="258" width="250" height="41"/>
+                                                <color key="backgroundColor" red="0.73725490199999999" green="0.20784313730000001" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="250" id="7qn-vL-r5s"/>
-                                                    <constraint firstAttribute="height" constant="40" id="jgs-I3-jZw"/>
+                                                    <constraint firstAttribute="width" constant="250" id="kdx-aX-7Nw"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" keyboardAppearance="alert" returnKeyType="next"/>
-                                            </textField>
+                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                <state key="normal" title="Create Account">
+                                                    <color key="titleColor" red="0.91372549020000005" green="0.8862745098" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="createAccountButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zEt-JA-a0j"/>
+                                                    <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="E9f-va-eMa"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="300" id="C2R-Vu-yyl"/>
+                                            <constraint firstItem="Fit-MY-gyy" firstAttribute="centerX" secondItem="cvJ-ec-cHF" secondAttribute="centerX" id="6fT-kd-AtK"/>
+                                            <constraint firstAttribute="height" constant="350" id="C2R-Vu-yyl"/>
                                             <constraint firstItem="xXB-So-CHs" firstAttribute="top" relation="greaterThanOrEqual" secondItem="wml-Eo-5NI" secondAttribute="bottom" priority="250" constant="20" id="CGe-ix-m7X"/>
                                             <constraint firstItem="xXB-So-CHs" firstAttribute="centerX" secondItem="cvJ-ec-cHF" secondAttribute="centerX" id="GC5-CK-lru"/>
                                             <constraint firstItem="wml-Eo-5NI" firstAttribute="top" secondItem="mhz-Y5-wCk" secondAttribute="bottom" constant="25" id="Mrx-PP-kZ3"/>
-                                            <constraint firstAttribute="bottom" secondItem="xXB-So-CHs" secondAttribute="bottom" constant="35" id="QEM-fQ-eCX"/>
                                             <constraint firstItem="wml-Eo-5NI" firstAttribute="centerX" secondItem="cvJ-ec-cHF" secondAttribute="centerX" id="TTh-uI-cZv"/>
+                                            <constraint firstItem="Fit-MY-gyy" firstAttribute="top" secondItem="xXB-So-CHs" secondAttribute="bottom" constant="8" id="XBd-67-7LW"/>
+                                            <constraint firstAttribute="bottom" secondItem="Fit-MY-gyy" secondAttribute="bottom" constant="51" id="YOR-PN-JXs"/>
                                             <constraint firstItem="mhz-Y5-wCk" firstAttribute="top" secondItem="cvJ-ec-cHF" secondAttribute="top" constant="35" id="bD5-y2-Ufw"/>
                                             <constraint firstItem="mhz-Y5-wCk" firstAttribute="centerX" secondItem="cvJ-ec-cHF" secondAttribute="centerX" id="ifR-Rf-BkV"/>
                                             <constraint firstAttribute="width" constant="480" id="wKY-8x-8bR"/>
@@ -108,6 +125,7 @@
                         <outlet property="LoginButton" destination="xXB-So-CHs" id="Z0z-NS-gqU"/>
                         <outlet property="PasswordTextField" destination="wml-Eo-5NI" id="2rp-hM-zNq"/>
                         <outlet property="UsernameTextField" destination="mhz-Y5-wCk" id="c1Q-lr-PFI"/>
+                        <outlet property="createAccountButton" destination="Fit-MY-gyy" id="gMA-EM-YUd"/>
                         <outlet property="scrollView" destination="hYk-eL-auk" id="DBa-Hq-T1a"/>
                     </connections>
                 </viewController>

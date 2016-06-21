@@ -84,6 +84,13 @@ class LoginViewController: GenericInputView {
         }
     }
     
+    /* Create Account */
+    @IBOutlet weak var createAccountButton: UIButton!
+    
+    @IBAction func createAccountButtonPressed(sender: AnyObject) {
+        
+    }
+    
     /* Handle Login */
     func login(username username: String, password: String) {
         // Hide text
@@ -204,6 +211,10 @@ class LoginViewController: GenericInputView {
         LoginButton.layer.cornerRadius = 5
         LoginButton.clipsToBounds = true
         LoginButton.alpha = loginElementAlpha
+        
+        createAccountButton.layer.cornerRadius = 5
+        createAccountButton.clipsToBounds = true
+        createAccountButton.alpha = loginElementAlpha
         
         /* Configure portions that the super class did not configure */
         UsernameTextField.alpha = loginElementAlpha
