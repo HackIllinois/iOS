@@ -81,6 +81,8 @@
 		E2D4F0E11D06B28B00646BF8 /* FeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4F0E01D06B28B00646BF8 /* FeedCollectionViewCell.swift */; };
 		E2D4F0E31D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4F0E21D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift */; };
 		E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4F0E41D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift */; };
+		E2EBC5871D192A5C009F24CF /* HelpQ+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EBC5851D192A5C009F24CF /* HelpQ+CoreDataProperties.swift */; };
+		E2EBC5881D192A5C009F24CF /* Chat+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EBC5861D192A5C009F24CF /* Chat+CoreDataProperties.swift */; };
 		E2F639481D05083300853089 /* CGRect+initWithCenterAt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F639471D05083300853089 /* CGRect+initWithCenterAt.swift */; };
 		E2F957021D0B6EBF003A0881 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F957011D0B6EBF003A0881 /* MenuTableViewController.swift */; };
 		E2F957051D0BA899003A0881 /* Schedule.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2F957041D0BA899003A0881 /* Schedule.storyboard */; };
@@ -188,6 +190,8 @@
 		E2D4F0E01D06B28B00646BF8 /* FeedCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewCell.swift; sourceTree = "<group>"; };
 		E2D4F0E21D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+fromLocation.swift"; sourceTree = "<group>"; };
 		E2D4F0E41D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MKMapCamera+initFromLocation.swift"; sourceTree = "<group>"; };
+		E2EBC5851D192A5C009F24CF /* HelpQ+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HelpQ+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E2EBC5861D192A5C009F24CF /* Chat+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Chat+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E2F639471D05083300853089 /* CGRect+initWithCenterAt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+initWithCenterAt.swift"; sourceTree = "<group>"; };
 		E2F957011D0B6EBF003A0881 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		E2F957041D0BA899003A0881 /* Schedule.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Schedule.storyboard; sourceTree = "<group>"; };
@@ -306,7 +310,6 @@
 		E22960361D147289008F7A31 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				E229603C1D147C8C008F7A31 /* Chat.swift */,
 				E22960371D1472FD008F7A31 /* HelpQ_Chat.storyboard */,
 				E22960421D147F55008F7A31 /* ChatCells */,
 				E276C3B41D11C3A400DABD4A /* HelpQChatViewController.swift */,
@@ -434,7 +437,6 @@
 				E236C04A1D1060D80085437D /* HelpQ.storyboard */,
 				E236C04E1D1061F80085437D /* HelpQViewController.swift */,
 				E236C0541D107DF60085437D /* DummyViewController.swift */,
-				E236C05E1D109E830085437D /* HelpQ.swift */,
 				E22960361D147289008F7A31 /* Chat */,
 				E236C04C1D1060DE0085437D /* Staff */,
 				E236C04D1D1060ED0085437D /* Hackers */,
@@ -500,6 +502,10 @@
 		E2BCA56D1CF3A9F5006AAA8B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E2EBC5851D192A5C009F24CF /* HelpQ+CoreDataProperties.swift */,
+				E236C05E1D109E830085437D /* HelpQ.swift */,
+				E2EBC5861D192A5C009F24CF /* Chat+CoreDataProperties.swift */,
+				E229603C1D147C8C008F7A31 /* Chat.swift */,
 				E20465D11CF1FAF50054654E /* hackillinois_2017_ios.xcdatamodeld */,
 				E253773F1CF8AB2C003795E7 /* Tag+CoreDataProperties.swift */,
 				E25377401CF8AB2C003795E7 /* Tag.swift */,
@@ -876,6 +882,7 @@
 				E236C05B1D10809E0085437D /* HelpQHackerCollectionViewCell.swift in Sources */,
 				E2D4F0E11D06B28B00646BF8 /* FeedCollectionViewCell.swift in Sources */,
 				E2BCA5811CF3B19E006AAA8B /* Location.swift in Sources */,
+				E2EBC5881D192A5C009F24CF /* Chat+CoreDataProperties.swift in Sources */,
 				E2A085FA1D0C6688002197F9 /* DayItem.swift in Sources */,
 				E2BCA5621CF36CDA006AAA8B /* FeedCollectionViewController.swift in Sources */,
 				E25377421CF8AB2C003795E7 /* Tag.swift in Sources */,
@@ -899,6 +906,7 @@
 				E20465CB1CF1FAF50054654E /* AppDelegate.swift in Sources */,
 				E277DD691CF4A79100D7E018 /* FeedDetailViewController.swift in Sources */,
 				E26F44F21D0EF2C100FB4A9F /* ProfileViewController.swift in Sources */,
+				E2EBC5871D192A5C009F24CF /* HelpQ+CoreDataProperties.swift in Sources */,
 				E2BD82B91D0B09D60009DB07 /* LoginConstants.swift in Sources */,
 				E2A085FF1D0C70BF002197F9 /* GenericDayViewController.swift in Sources */,
 				E2BB42C41D132FA8009EF512 /* HelpQSubmissionViewController.swift in Sources */,

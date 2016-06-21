@@ -9,10 +9,6 @@
 import Foundation
 
 class Chat {
-    var user: String // User that typed the Chat message
-    var message: String // Message content
-    var time: NSDate // When the user typed the message
-    
     init() {
         user = "Shotaro Ikeda"
         message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque venenatis mattis molestie. Ut vestibulum eget lorem convallis molestie. Nunc ultrices, justo mollis lobortis lacinia, quam orci aliquet nisi, lobortis vestibulum ex sapien et magna. Nulla feugiat id elit non dictum. Integer scelerisque malesuada suscipit. "

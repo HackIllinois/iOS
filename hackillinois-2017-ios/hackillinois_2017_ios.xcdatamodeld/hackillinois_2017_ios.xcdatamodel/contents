@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Automatic">
+    <entity name="Chat" representedClassName=".Chat" syncable="YES">
+        <attribute name="message" attributeType="String" syncable="YES"/>
+        <attribute name="time" attributeType="Date" syncable="YES"/>
+        <attribute name="user" attributeType="String" syncable="YES"/>
+        <relationship name="helpQ" maxCount="1" deletionRule="Nullify" destinationEntity="HelpQ" inverseName="chats" inverseEntity="HelpQ" syncable="YES"/>
+    </entity>
     <entity name="Feed" representedClassName=".Feed" syncable="YES">
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="message" attributeType="String" syncable="YES"/>
@@ -11,6 +17,16 @@
                 <constraint value="id"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
+    </entity>
+    <entity name="HelpQ" representedClassName=".HelpQ" syncable="YES">
+        <attribute name="desc" attributeType="String" syncable="YES"/>
+        <attribute name="initiation" attributeType="Date" syncable="YES"/>
+        <attribute name="language" attributeType="String" syncable="YES"/>
+        <attribute name="location" attributeType="String" syncable="YES"/>
+        <attribute name="modified" attributeType="Date" syncable="YES"/>
+        <attribute name="resolved" attributeType="Boolean" syncable="YES"/>
+        <attribute name="technology" attributeType="String" syncable="YES"/>
+        <relationship name="chats" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Chat" inverseName="helpQ" inverseEntity="Chat" syncable="YES"/>
     </entity>
     <entity name="Location" representedClassName=".Location" syncable="YES">
         <attribute name="latitude" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -41,5 +57,7 @@
         <element name="Location" positionX="-27" positionY="36" width="128" height="120"/>
         <element name="Tag" positionX="-45" positionY="45" width="128" height="75"/>
         <element name="User" positionX="-54" positionY="-9" width="128" height="135"/>
+        <element name="Chat" positionX="-45" positionY="54" width="128" height="105"/>
+        <element name="HelpQ" positionX="-36" positionY="63" width="128" height="165"/>
     </elements>
 </model>
