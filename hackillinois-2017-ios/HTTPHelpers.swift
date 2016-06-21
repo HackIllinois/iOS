@@ -11,10 +11,10 @@ import SwiftyJSON
 
 /* Contains helpers for HTTP Requests to backend */
 class HTTPHelpers {
-    class func createPostRequest(subUrl url: String, jsonPayload: JSON) -> JSON? {
+    class func createPostRequest(subUrl url: String, jsonPayload: JSON, completion: (NSData?, NSURLResponse?, NSError?) -> Void) {
         /* Load HackIllinois API URL from App Delegate */
         let hackillinois_url = (UIApplication.sharedApplication().delegate as! AppDelegate).HACKILLINOIS_API_URL + url
-        print(hackillinois_url)
+        print("Fetching data from: \(hackillinois_url))")
         do {
             /* Create JSON payload */
             let payload = try jsonPayload.rawData()
@@ -24,12 +24,10 @@ class HTTPHelpers {
             request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
             request.HTTPBody = payload
             
-            var jsonReturn: JSON!
             let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
                 if let httpResponse = response as? NSHTTPURLResponse {
                     if httpResponse.statusCode == 404 {
                         print("404 not found")
-                        jsonReturn = nil
                         return
                     }
                 }
@@ -39,19 +37,13 @@ class HTTPHelpers {
                     return
                 }
                 
-                jsonReturn = JSON(data: data!)
-                /* Debug */
-                print(response)
-                print(jsonReturn)
+                completion(data, response, error)
             }
             
             task.resume()
-            return jsonReturn
         } catch {
             print("Failed to encode JSON to NSData")
             print(error)
         }
-        
-        return nil
     }
 }

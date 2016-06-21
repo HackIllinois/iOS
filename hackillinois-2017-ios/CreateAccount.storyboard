@@ -120,6 +120,7 @@
                     </view>
                     <connections>
                         <outlet property="confirmPasswordField" destination="0AS-Dr-Cwz" id="n3S-Jg-fYz"/>
+                        <outlet property="navigationBar" destination="BhM-Gc-DcV" id="2KI-Bt-k6E"/>
                         <outlet property="passwordField" destination="Rr9-zP-iNb" id="tar-OM-6gw"/>
                         <outlet property="scrollView" destination="cdy-1z-iGU" id="3qE-f0-UeT"/>
                         <outlet property="usernameField" destination="amq-aU-RbP" id="pD2-Nt-aDB"/>

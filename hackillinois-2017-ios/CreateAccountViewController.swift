@@ -10,9 +10,12 @@ import UIKit
 import SwiftyJSON
 
 class CreateAccountViewController: GenericInputView {
+    /* Navigation */
+    @IBOutlet weak var navigationBar: UINavigationBar!
 
     /* Button presses */
     @IBAction func cancelButtonPressed(sender: AnyObject) {
+        self.view.endEditing(true)
         /* Confirm user if they want to actually cancel */
         let ac = UIAlertController(title: "Cancel Creating Account?", message: "Are you sure you would like to cancel creating your account? All changes will be lost.", preferredStyle: .Alert)
         ac.addAction(UIAlertAction(title: "OK", style: .Destructive, handler: { [unowned self] _ in self.dismissViewControllerAnimated(true, completion: nil) }))
@@ -20,8 +23,47 @@ class CreateAccountViewController: GenericInputView {
         presentViewController(ac, animated: true, completion: nil)
     }
     
+    /* Function passed to capture the response data */
+    func captureResponse(data: NSData?, response: NSURLResponse?, error: NSError?) {
+        let json = JSON(data: data!)
+        
+        print("data received")
+        print(json)
+        
+        /* Restore Navigation Bar to regular status */
+        dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+            // Title bar configuration
+            self.navigationBar.topItem?.title = "Create Account"
+            self.navigationBar.topItem?.titleView = nil
+            // Disable Buttons
+            self.navigationBar.topItem?.leftBarButtonItem?.enabled = true
+            self.navigationBar.topItem?.leftBarButtonItem?.tintColor = UIColor.blueColor()
+            self.navigationBar.topItem?.rightBarButtonItem?.enabled = true
+            self.navigationBar.topItem?.rightBarButtonItem?.tintColor = UIColor.blueColor()
+        }
+        
+        /* Handle Errors */
+        if !json["error"].isEmpty {
+            print("error detected")
+            if json["error"]["type"].stringValue == "InvalidParameterError" && json["error"]["source"].stringValue == "email" {
+                dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                    self.presentError(error: "Duplicate Email", message: "An account with the email already exists. Please check your email or visit the main website to reset your password")
+                }
+            } else {
+                dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                    self.presentError(error: json["error"]["title"].stringValue, message: json["error"]["message"].stringValue)
+                }
+            }
+            return
+        } else {
+            /* Error free -- parse data */
+            print("data integrity passed!")
+        }
+    }
+    
     @IBAction func doneButtonPressed(sender: AnyObject) {
         /* Check to see if everything is working */
+        self.view.endEditing(true)
         
         // Check all fields for input
         if usernameField.text == "" || passwordField.text == "" || confirmPasswordField.text == "" {
@@ -46,27 +88,19 @@ class CreateAccountViewController: GenericInputView {
         }
         
         /* Activity Indicator */
+        let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        activityIndicator.startAnimating()
+        navigationBar.topItem?.title = ""
+        navigationBar.topItem?.titleView = activityIndicator
+        // Disable Buttons
+        navigationBar.topItem?.leftBarButtonItem?.enabled = false
+        navigationBar.topItem?.leftBarButtonItem?.tintColor = UIColor.grayColor()
+        navigationBar.topItem?.rightBarButtonItem?.enabled = false
+        navigationBar.topItem?.rightBarButtonItem?.tintColor = UIColor.grayColor()
         
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
             let payload = JSON(["email": self.usernameField.text!, "password": self.passwordField.text!, "confirmedPassword": self.confirmPasswordField.text!])
-            if let data = HTTPHelpers.createPostRequest(subUrl: "v1/user", jsonPayload: payload) {
-                print(data)
-                if data["error"]["type"].stringValue == "InvalidParameterError" {
-                    print("error detected")
-                    // Email Error
-                    if data["error"]["source"].stringValue == "email" {
-                        dispatch_async(dispatch_get_main_queue()) {
-                            self.presentError(error: "Duplicate Email", message: "An account with the email already exists. Please check your email or visit the main website to reset your password")
-                        }
-                    }
-                } else {
-                    print("Request OK")
-                }
-            } else {
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.presentError(error: "Service Error", message: "A connection to the server could not be established. Please try again later")
-                }
-            }
+            HTTPHelpers.createPostRequest(subUrl: "v1/user", jsonPayload: payload, completion: self.captureResponse)
         }
     }
     
