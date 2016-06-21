@@ -7,11 +7,12 @@
 //
 
 import Foundation
+import CoreData
 
 /* Describes one item of HelpQ request */
 
-class HelpQ {
-    init(technology: String, language: String, location: String, description: String) {
+class HelpQ: NSManagedObject {
+    func initialize(technology: String, language: String, location: String, description: String) {
         self.resolved = false
         self.technology = technology
         self.language = language
@@ -19,9 +20,10 @@ class HelpQ {
         self.desc = description
         self.initiation = NSDate()
         self.modified = NSDate()
+        self.chats = NSOrderedSet()
     }
     
-    init(resolved: Bool, technology: String, language: String, location: String, description: String) {
+    func initialize(resolved: Bool, technology: String, language: String, location: String, description: String, chats: [Chat]) {
         self.resolved = resolved
         self.technology = technology
         self.language = language
@@ -29,9 +31,10 @@ class HelpQ {
         self.desc = description
         self.initiation = NSDate()
         self.modified = NSDate()
+        self.chats = NSOrderedSet(array: chats)
     }
     
-    init() {
+    func initialize() {
         self.resolved = false
         self.technology = "Node JS"
         self.language = "Javascript"
@@ -39,9 +42,19 @@ class HelpQ {
         self.desc = "Help with asynchronous calls"
         self.initiation = NSDate()
         self.modified = NSDate()
+        self.chats = NSOrderedSet()
     }
     
     func updateModifiedTime() {
         self.modified = NSDate()
+    }
+    
+    func pushChatItem(chat chat: Chat) {
+        chat.helpQ = self // Set this object as the head
+        
+        let mutableVersion = self.chats.mutableCopy() as! NSMutableOrderedSet
+        mutableVersion.addObject(chat)
+        self.chats = mutableVersion
+        Helpers.saveContext() // Save after changing item
     }
 }

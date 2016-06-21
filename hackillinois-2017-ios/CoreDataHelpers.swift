@@ -161,3 +161,16 @@ extension Helpers {
         self.saveContext()
     }
 }
+
+/* Helpers for HelpQ */
+extension Helpers {
+    class func storeHelpQItem(technology technology: String, language: String, location: String, description: String) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let helpQ = NSEntityDescription.insertNewObjectForEntityForName("HelpQ", inManagedObjectContext: appDelegate.managedObjectContext) as! HelpQ
+        helpQ.initialize(technology, language: language, location: location, description: description)
+        
+        self.saveContext()
+    }
+    
+    // To store chat items, use HelpQ.pushChatItem
+}

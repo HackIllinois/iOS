@@ -21,6 +21,6 @@ extension HelpQ {
     @NSManaged var desc: String
     @NSManaged var initiation: NSDate
     @NSManaged var modified: NSDate
-    @NSManaged var chats: NSMutableArray
+    @NSManaged var chats: NSOrderedSet
 
 }
