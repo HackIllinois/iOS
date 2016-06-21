@@ -78,7 +78,6 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="createAccountButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zEt-JA-a0j"/>
-                                                    <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="E9f-va-eMa"/>
                                                 </connections>
                                             </button>
                                         </subviews>

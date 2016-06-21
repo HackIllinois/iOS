@@ -88,7 +88,8 @@ class LoginViewController: GenericInputView {
     @IBOutlet weak var createAccountButton: UIButton!
     
     @IBAction func createAccountButtonPressed(sender: AnyObject) {
-        
+        let controller = UIStoryboard(name: "CreateAccount", bundle: nil).instantiateInitialViewController()!
+        presentViewController(controller, animated: true, completion: nil)
     }
     
     /* Handle Login */
