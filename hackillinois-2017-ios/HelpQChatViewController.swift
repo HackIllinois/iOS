@@ -38,6 +38,10 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
         chatItems.append(newChat)
         let indexPath = NSIndexPath(forRow: chatItems.count - 1, inSection: 0)
         
+        chatView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Bottom)
+        chatView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
+        
+        /*
         CATransaction.begin()
         CATransaction.setCompletionBlock({ [unowned self] in
             self.scrollToLast()
@@ -49,6 +53,7 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
         chatView.endUpdates()
         messageField.text = "" // Clear text
         CATransaction.commit()
+        */
     }
     
     /* label variables */
@@ -57,6 +62,8 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
     var chatItems: [Chat]!
     
     var currentUser: String = "Shotaro Ikeda" // TODO: Set dynamically via Core Data
+    
+    var heightAtIndexPath = NSMutableDictionary() // Hopefully migitate the scrolling bug
     
     /* Initialize dummy sample item */
     func initializeSample() {
@@ -94,7 +101,7 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
         initializeSample() // reloads data
         // Configure cells
         chatView.estimatedRowHeight = 50
-        chatView.rowHeight = UITableViewAutomaticDimension
+        // chatView.rowHeight = UITableViewAutomaticDimension
         
         chatViewScrollToBottom(delay: 0.1, animated: false) // See the comment in the function
     }
@@ -125,12 +132,10 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
         }
         
         CATransaction.begin()
-        /*
         CATransaction.setCompletionBlock({ [unowned self] in
             // Scroll and animate once completed
             self.chatView.scrollToRowAtIndexPath(NSIndexPath(forRow: self.chatItems.count - 1 , inSection: 0), atScrollPosition: .Bottom, animated: true)
         })
-        */
         
         // scroll down 1 point to have the bubble render first
         let newContentOffset = CGPointMake(0, chatView.contentOffset.y + 100)
@@ -188,7 +193,20 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
         }
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+    /*
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let height = self.heightAtIndexPath.objectForKey(NSIndexPath) as? CGFloat
+        return height ?? UITableViewAutomaticDimension
     }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let height = self.heightAtIndexPath.objectForKey(indexPath) as? CGFloat
+        return height ?? UITableViewAutomaticDimension
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        let height = cell.frame.size.height
+        heightAtIndexPath.setObject(height, forKey: indexPath)
+    }
+    */
 }
