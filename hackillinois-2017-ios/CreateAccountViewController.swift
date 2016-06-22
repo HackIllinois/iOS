@@ -17,9 +17,9 @@ class CreateAccountViewController: GenericInputView {
     @IBAction func cancelButtonPressed(sender: AnyObject) {
         self.view.endEditing(true)
         /* Confirm user if they want to actually cancel */
-        let ac = UIAlertController(title: "Cancel Creating Account?", message: "Are you sure you would like to cancel creating your account? All changes will be lost.", preferredStyle: .Alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .Destructive, handler: { [unowned self] _ in self.dismissViewControllerAnimated(true, completion: nil) }))
-        ac.addAction(UIAlertAction(title: "Undo", style: .Cancel, handler: nil))
+        let ac = UIAlertController(title: "Changes Will Be Lost", message: "Are you sure you would like to go back to the login page? All text inputs will be lost.", preferredStyle: .Alert)
+        ac.addAction(UIAlertAction(title: "Continue", style: .Destructive, handler: { [unowned self] _ in self.dismissViewControllerAnimated(true, completion: nil) }))
+        ac.addAction(UIAlertAction(title: "Stay", style: .Cancel, handler: nil))
         presentViewController(ac, animated: true, completion: nil)
     }
     

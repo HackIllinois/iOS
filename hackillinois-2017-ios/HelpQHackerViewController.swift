@@ -80,14 +80,9 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
         loadItems()
         
         /* Add a button up to to allow users to create new tickets */
-        navigationController!.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .Done, target: self, action: #selector(createTicket))
+        navigationController!.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_create"), style: .Done, target: self, action: #selector(createTicket))
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     /* Navigation Function */
     func createTicket() {
         let ticketController = UIStoryboard.init(name: "HelpQ_Create", bundle: nil).instantiateInitialViewController() as! HelpQSubmissionViewController
