@@ -88,11 +88,65 @@ class LoginViewController: GenericInputView {
     @IBOutlet weak var createAccountButton: UIButton!
     
     @IBAction func createAccountButtonPressed(sender: AnyObject) {
-        let controller = UIStoryboard(name: "CreateAccount", bundle: nil).instantiateInitialViewController()!
+        let controller = UIStoryboard(name: "CreateAccount", bundle: nil).instantiateInitialViewController()! as! CreateAccountViewController
+        controller.processUserData = processUserData // Capture login function in a different view, so this view will be the one to actually process it
         presentViewController(controller, animated: true, completion: nil)
     }
     
     /* Handle Login */
+    func processUserData(success: Bool, name: String, school: String, major: String, role: String, barcode: String, completion: (Void -> Void)?) {
+        if !success {
+            /* Stay on current login view if not sucessful */
+            print("For some reason the login was not successful")
+            // Re-enable user interaction
+            self.LoginButton.userInteractionEnabled = true
+            self.UsernameTextField.userInteractionEnabled = true
+            self.PasswordTextField.userInteractionEnabled = true
+            // Run Completion code if it exists
+            completion?()
+            // Revert Login button title
+            self.LoginButton.setTitle("Login", forState: .Normal)
+            
+            let loginFailureAlert = UIAlertController(title: "Login Failed", message: "Bad Username / Password", preferredStyle: .Alert)
+            loginFailureAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            self.presentViewController(loginFailureAlert, animated: true, completion: nil)
+            return
+        }
+        
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
+            // Generate content asynchronously
+            /* Generate barcode image */
+            let barcodeImage = UIImage.generateRotatedBarCode(barcode)
+            // redraw to get NSData
+            UIGraphicsBeginImageContext(CGSize(width: 300, height: 1200))
+            barcodeImage?.drawInRect(CGRectMake(0, 0, 300, 1200))
+            let barCodeImage2 = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            let barcodeData = UIImagePNGRepresentation(barCodeImage2)
+            
+            guard barcodeData != nil else {
+                fatalError("BarcodeData is null")
+            }
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                /* Login was successful */
+                // Store user data
+                Helpers.storeUser(name: name, school: school, major: major, role: role, barcode: barcode, barcodeData: barcodeData!)
+                
+                // Store that user has already logged in
+                let userDefaults = NSUserDefaults.standardUserDefaults()
+                userDefaults.setBool(true, forKey: "logged_in_main")
+                userDefaults.synchronize()
+                
+                // Present main application
+                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let mainViewController = mainStoryboard.instantiateInitialViewController()
+                self.presentViewController(mainViewController!, animated: true, completion: nil)
+            }
+        }
+    }
+    
     func login(username username: String, password: String) {
         // Hide text
         LoginButton.setTitle("", forState: .Normal)
@@ -124,58 +178,11 @@ class LoginViewController: GenericInputView {
             let major = "Bachelor of Science Computer Science"
             let role = "Staff"
             let barcode = "1234567890"
-            let barcodeImage = UIImage.generateRotatedBarCode(barcode)
-            // barcodeImage?.size = CGRectMake(0, 0, 100, 400)
             
-            guard barcodeImage != nil else {
-                fatalError("BarcodeImage is nil")
-            }
-            
-            // redraw to get NSData
-            UIGraphicsBeginImageContext(CGSize(width: 300, height: 1200))
-            barcodeImage?.drawInRect(CGRectMake(0, 0, 300, 1200))
-            let barCodeImage2 = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            
-            let barcodeData = UIImagePNGRepresentation(barCodeImage2)
-            
-            guard barcodeData != nil else {
-                fatalError("BarcodeData is null")
-            }
-            
-            
-            dispatch_async(dispatch_get_main_queue()) {
-                if success {
-                    /* Login was successful */
-                    // Store user data
-                    Helpers.storeUser(name: name, school: school, major: major, role: role, barcode: barcode, barcodeData: barcodeData!)
-                    
-                    // Store that user has already logged in
-                    let userDefaults = NSUserDefaults.standardUserDefaults()
-                    userDefaults.setBool(true, forKey: "logged_in_main")
-                    userDefaults.synchronize()
-                    
-                    // Present main application
-                    let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    let mainViewController = mainStoryboard.instantiateInitialViewController()
-                    self.presentViewController(mainViewController!, animated: true, completion: nil)
-                } else {
-                    // Login was not successful
-                    
-                    // Re-enable user interaction
-                    self.LoginButton.userInteractionEnabled = true
-                    self.UsernameTextField.userInteractionEnabled = true
-                    self.PasswordTextField.userInteractionEnabled = true
-                    // Remove activity indicator
-                    loginActivityIndicator.stopAnimating()
-                    loginActivityIndicator.removeFromSuperview()
-                    // Revert Login button title
-                    self.LoginButton.setTitle("Login", forState: .Normal)
-                    
-                    let loginFailureAlert = UIAlertController(title: "Login Failed", message: "Bad Username / Password", preferredStyle: .Alert)
-                    loginFailureAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                    self.presentViewController(loginFailureAlert, animated: true, completion: nil)
-                }
+            self.processUserData(success, name: name, school: school, major: major, role: role, barcode: barcode) {
+                // Remove activity indicator
+                loginActivityIndicator.stopAnimating()
+                loginActivityIndicator.removeFromSuperview()
             }
         }
     }

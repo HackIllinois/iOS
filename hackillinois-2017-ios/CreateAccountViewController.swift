@@ -23,6 +23,10 @@ class CreateAccountViewController: GenericInputView {
         presentViewController(ac, animated: true, completion: nil)
     }
     
+    /* Super view function to process logins */
+    var processUserData: ((Bool, String, String, String, String, String, (Void -> Void)?) -> Void)!
+    // This must be set when presenting the view controller.
+    
     /* Function passed to capture the response data */
     func captureResponse(data: NSData?, response: NSURLResponse?, error: NSError?) {
         if let responseError = error {
@@ -64,6 +68,17 @@ class CreateAccountViewController: GenericInputView {
             /* Error free -- parse data */
             print("data integrity passed!")
             // TODO: Parse data, add User, etc.
+            let name = "Shotaro Ikeda"
+            let school = "University of Illinois at Urbana-Champaign"
+            let major = "Bachelor of Science Computer Science"
+            let role = "Staff"
+            let barcode = "1234567890"
+            
+            let lambda: (Void -> Void) =  { [unowned self] in
+                self.processUserData(true, name, school, major, role, barcode, nil)
+            }
+            
+            dismissViewControllerAnimated(true, completion: lambda)
         }
     }
     
