@@ -128,7 +128,7 @@ class CreateAccountViewController: GenericInputView {
         */
         
         // Mimic data processing
-        dispatch_after(1 * NSEC_PER_SEC, dispatch_get_main_queue()) { [unowned self] in
+        dispatch_after(1 * USEC_PER_SEC, dispatch_get_main_queue()) { [unowned self] in
             // Assume success for static
             let name = "Shotaro Ikeda"
             let school = "University of Illinois at Urbana-Champaign"
