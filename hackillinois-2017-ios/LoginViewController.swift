@@ -94,7 +94,7 @@ class LoginViewController: GenericInputView {
     }
     
     /* Handle Login */
-    func processUserData(success: Bool, name: String, school: String, major: String, role: String, barcode: String, completion: (Void -> Void)?) {
+    func processUserData(success: Bool, name: String, school: String, major: String, role: String, barcode: String, auth: String, completion: (Void -> Void)?) {
         if !success {
             /* Stay on current login view if not sucessful */
             print("For some reason the login was not successful")
@@ -132,7 +132,7 @@ class LoginViewController: GenericInputView {
             dispatch_async(dispatch_get_main_queue()) {
                 /* Login was successful */
                 // Store user data
-                Helpers.storeUser(name: name, school: school, major: major, role: role, barcode: barcode, barcodeData: barcodeData!)
+                Helpers.storeUser(name: name, school: school, major: major, role: role, barcode: barcode, barcodeData: barcodeData!, auth: auth)
                 
                 // Store that user has already logged in
                 let userDefaults = NSUserDefaults.standardUserDefaults()
