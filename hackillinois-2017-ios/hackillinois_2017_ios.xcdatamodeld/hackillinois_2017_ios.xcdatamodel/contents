@@ -21,8 +21,10 @@
     <entity name="HelpQ" representedClassName=".HelpQ" syncable="YES">
         <attribute name="desc" attributeType="String" syncable="YES"/>
         <attribute name="initiation" attributeType="Date" syncable="YES"/>
+        <attribute name="isHelping" attributeType="Boolean" syncable="YES"/>
         <attribute name="language" attributeType="String" syncable="YES"/>
         <attribute name="location" attributeType="String" syncable="YES"/>
+        <attribute name="mentor" attributeType="String" syncable="YES"/>
         <attribute name="modified" attributeType="Date" syncable="YES"/>
         <attribute name="resolved" attributeType="Boolean" syncable="YES"/>
         <attribute name="technology" attributeType="String" syncable="YES"/>
@@ -57,7 +59,7 @@
     <elements>
         <element name="Chat" positionX="-45" positionY="54" width="128" height="105"/>
         <element name="Feed" positionX="-63" positionY="-18" width="128" height="120"/>
-        <element name="HelpQ" positionX="-36" positionY="63" width="128" height="165"/>
+        <element name="HelpQ" positionX="-36" positionY="63" width="128" height="195"/>
         <element name="Location" positionX="-27" positionY="36" width="128" height="120"/>
         <element name="Tag" positionX="-45" positionY="45" width="128" height="75"/>
         <element name="User" positionX="-54" positionY="-9" width="128" height="165"/>

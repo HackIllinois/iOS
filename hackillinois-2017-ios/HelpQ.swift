@@ -22,6 +22,8 @@ class HelpQ: NSManagedObject {
         self.initiation = NSDate()
         self.modified = NSDate()
         self.chats = NSOrderedSet()
+        self.isHelping = NSNumber(bool: false)
+        self.mentor = ""
     }
     
     func initialize(resolved: Bool, technology: String, language: String, location: String, description: String, chats: [Chat]) {
@@ -33,6 +35,8 @@ class HelpQ: NSManagedObject {
         self.initiation = NSDate()
         self.modified = NSDate()
         self.chats = NSOrderedSet(array: chats)
+        self.isHelping = NSNumber(bool: false)
+        self.mentor = ""
     }
     
     func initialize() {
@@ -44,6 +48,14 @@ class HelpQ: NSManagedObject {
         self.initiation = NSDate()
         self.modified = NSDate()
         self.chats = NSOrderedSet()
+        self.isHelping = NSNumber(bool: false)
+        self.mentor = ""
+    }
+    
+    func assignMentor(mentor mentor: String, helpStatus: Bool) {
+        self.isHelping = NSNumber(bool: helpStatus)
+        self.mentor = mentor
+        Helpers.saveContext()
     }
     
     func updateModifiedTime() {
