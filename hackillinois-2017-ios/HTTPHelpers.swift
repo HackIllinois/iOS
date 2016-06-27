@@ -14,7 +14,7 @@ class HTTPHelpers {
     /*
      * Higher order function used to help facilitate consistency between how request process is handled.
      */
-    class func createRequest(subUrl url: String, jsonPayload: JSON, requestConfiguration: (NSMutableURLRequest -> Void), completion: (NSData?, NSURLResponse?, NSError?)) {
+    class func createRequest(subUrl url: String, jsonPayload: JSON, requestConfiguration: (NSMutableURLRequest -> Void), completion: (NSData?, NSURLResponse?, NSError?) -> Void) {
         /* Load HackIllinois API URL from App Delegate */
         let hackillinois_url = (UIApplication.sharedApplication().delegate as! AppDelegate).HACKILLINOIS_API_URL + url
         print("Fetching data from: \(hackillinois_url))")
@@ -26,15 +26,9 @@ class HTTPHelpers {
             requestConfiguration(request)
             request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
             request.HTTPBody = payload
+            print("request: \(request)")
             
             let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
-                if let httpResponse = response as? NSHTTPURLResponse {
-                    if httpResponse.statusCode == 404 {
-                        print("404 not found")
-                        return
-                    }
-                }
-                
                 if error != nil {
                     print("Session Error: \(error)")
                     return
@@ -56,7 +50,7 @@ class HTTPHelpers {
      * For GET requests, see createGetRequest
      */
     class func createPostRequest(subUrl url: String, jsonPayload: JSON, completion: (NSData?, NSURLResponse?, NSError?) -> Void) {
-        createRequest(url: url, jsonPayload: jsonPayload, { $0.HTTPMethod = "POST" }, completion)
+        createRequest(subUrl: url, jsonPayload: jsonPayload, requestConfiguration: { $0.HTTPMethod = "POST" }, completion: completion)
     }
     
     /*
@@ -65,6 +59,6 @@ class HTTPHelpers {
      * For POST requests, see createPostRequest
      */
     class func createGetRequest(subUrl url: String, jsonPayload: JSON, completion: (NSData?, NSURLResponse?, NSError?) -> Void) {
-        createRequest(url: url, jsonPayload: jsonPayload, { $0.HTTPMethod = "GET" }, completion)
+        createRequest(subUrl: url, jsonPayload: jsonPayload, requestConfiguration: { $0.HTTPMethod = "GET" }, completion: completion)
     }
 }

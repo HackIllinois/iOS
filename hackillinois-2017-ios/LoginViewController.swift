@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 // An enumeration to keep track of the
 // current user input state
@@ -96,20 +97,21 @@ class LoginViewController: GenericInputView {
     /* Handle Login */
     func processUserData(success: Bool, name: String, school: String, major: String, role: String, barcode: String, auth: String, completion: (Void -> Void)?) {
         if !success {
-            /* Stay on current login view if not sucessful */
-            print("For some reason the login was not successful")
-            // Re-enable user interaction
-            self.LoginButton.userInteractionEnabled = true
-            self.UsernameTextField.userInteractionEnabled = true
-            self.PasswordTextField.userInteractionEnabled = true
-            // Run Completion code if it exists
-            completion?()
-            // Revert Login button title
-            self.LoginButton.setTitle("Login", forState: .Normal)
+            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                /* Stay on current login view if not sucessful */
+                
+                // Re-enable user interaction
+                self.LoginButton.userInteractionEnabled = true
+                self.createAccountButton.userInteractionEnabled = true
+                UIView.animateWithDuration(0.2, animations: { self.createAccountButton.alpha = 1.0 })
+                self.UsernameTextField.userInteractionEnabled = true
+                self.PasswordTextField.userInteractionEnabled = true
+                // Run Completion code if it exists
+                completion?()
+                // Revert Login button title
+                self.LoginButton.setTitle("Login", forState: .Normal)
+            }
             
-            let loginFailureAlert = UIAlertController(title: "Login Failed", message: "Bad Username / Password", preferredStyle: .Alert)
-            loginFailureAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            self.presentViewController(loginFailureAlert, animated: true, completion: nil)
             return
         }
         
@@ -147,12 +149,55 @@ class LoginViewController: GenericInputView {
         }
     }
     
+    /* Activity Indicator for processing information */
+    var loginActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .White) // Reusable
+    
+    func processResponse(data: NSData?, response: NSURLResponse?, error: NSError?) {
+        var responseData = JSON(data: data!)
+        /* Check for any errors */
+        var success = true // find if the login was successful or not
+        
+        if !responseData["error"].isEmpty {
+            // Handle NotFoundError
+            if responseData["error"]["type"].stringValue == "NotFoundError" {
+                dispatch_async(dispatch_get_main_queue()) {
+                    let ac = UIAlertController(title: "Could Not Find User", message: "A user with the specified email could not be found. Please try again", preferredStyle: .Alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    self.presentViewController(ac, animated: true, completion: nil)
+                }
+            } else {
+                // Handle other unsupported errors
+                dispatch_async(dispatch_get_main_queue()) {
+                    let ac = UIAlertController(title: responseData["error"]["title"].string!, message: responseData["error"]["message"].string!, preferredStyle: .Alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    self.presentViewController(ac, animated: true, completion: nil)
+                }
+            }
+            success = false // Success failed
+        }
+        
+        /* Response from API */
+        let auth: String = responseData["data"]["auth"].stringValue
+        
+        // TODO: Parse API
+        let name = "Shotaro Ikeda"
+        let school = "University of Illinois at Urbana-Champaign"
+        let major = "Bachelor of Science Computer Science"
+        let role = "Staff"
+        let barcode = "1234567890"
+        
+        self.processUserData(success, name: name, school: school, major: major, role: role, barcode: barcode, auth: auth) {
+            // Remove activity indicator
+            self.loginActivityIndicator.stopAnimating()
+            self.loginActivityIndicator.removeFromSuperview()
+        }
+    }
+    
     func login(username username: String, password: String) {
         // Hide text
         LoginButton.setTitle("", forState: .Normal)
+        UIView.animateWithDuration(0.2, animations: { self.createAccountButton.alpha = 0.0 })
         
-        // create activity indicator to show
-        let loginActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .White)
         // Set the indicator to be the center of the button
         loginActivityIndicator.frame = CGRect(
             x: LoginButton.frame.width / 2 - LoginButton.frame.height / 2,
@@ -164,26 +209,13 @@ class LoginViewController: GenericInputView {
         
         // disable UI elements while logging in
         LoginButton.userInteractionEnabled = false
+        createAccountButton.userInteractionEnabled = false
         UsernameTextField.userInteractionEnabled = false
         PasswordTextField.userInteractionEnabled = false
         
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
-            sleep(1) // simulate network response time
-            
-            let success = true // find if the login was successful or not
-            
-            // TODO: Parse API
-            let name = "Shotaro Ikeda"
-            let school = "University of Illinois at Urbana-Champaign"
-            let major = "Bachelor of Science Computer Science"
-            let role = "Staff"
-            let barcode = "1234567890"
-            
-            self.processUserData(success, name: name, school: school, major: major, role: role, barcode: barcode) {
-                // Remove activity indicator
-                loginActivityIndicator.stopAnimating()
-                loginActivityIndicator.removeFromSuperview()
-            }
+            let payload: JSON = JSON(["email": username, "password": password])
+            HTTPHelpers.createPostRequest(subUrl: "v1/auth", jsonPayload: payload, completion: self.processResponse)
         }
     }
     
