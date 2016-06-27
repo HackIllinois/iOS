@@ -26,7 +26,6 @@ class HTTPHelpers {
             requestConfiguration(request)
             request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
             request.HTTPBody = payload
-            print("request: \(request)")
             
             let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
                 if error != nil {

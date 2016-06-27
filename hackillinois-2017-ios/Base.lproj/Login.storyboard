@@ -23,12 +23,6 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginImage" translatesAutoresizingMaskIntoConstraints="NO" id="cY8-Hq-78E">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HackIllinois" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Z3-7e-4ZG">
-                                        <rect key="frame" x="170" y="20" width="261" height="55"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvJ-ec-cHF">
                                         <rect key="frame" x="60" y="125" width="480" height="350"/>
                                         <subviews>
@@ -96,12 +90,18 @@
                                             <constraint firstAttribute="width" constant="480" id="wKY-8x-8bR"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HackIllinois" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Z3-7e-4ZG">
+                                        <rect key="frame" x="170" y="20" width="261" height="57.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="2Z3-7e-4ZG" firstAttribute="centerX" secondItem="cY8-Hq-78E" secondAttribute="centerX" id="4QG-g4-UN4"/>
                                     <constraint firstItem="cvJ-ec-cHF" firstAttribute="centerY" secondItem="cY8-Hq-78E" secondAttribute="centerY" id="56k-AK-Rb9"/>
                                     <constraint firstItem="cY8-Hq-78E" firstAttribute="centerY" secondItem="hYk-eL-auk" secondAttribute="centerY" id="Eql-5c-3da"/>
-                                    <constraint firstItem="cvJ-ec-cHF" firstAttribute="top" relation="greaterThanOrEqual" secondItem="2Z3-7e-4ZG" secondAttribute="bottom" constant="50" id="Kpd-S0-GfK"/>
+                                    <constraint firstItem="cvJ-ec-cHF" firstAttribute="top" relation="greaterThanOrEqual" secondItem="2Z3-7e-4ZG" secondAttribute="bottom" constant="20" id="Kpd-S0-GfK"/>
                                     <constraint firstAttribute="bottom" secondItem="cY8-Hq-78E" secondAttribute="bottom" id="PjQ-yo-oNm"/>
                                     <constraint firstItem="2Z3-7e-4ZG" firstAttribute="top" secondItem="hYk-eL-auk" secondAttribute="top" constant="20" id="QmY-EK-X5B"/>
                                     <constraint firstItem="cY8-Hq-78E" firstAttribute="leading" secondItem="hYk-eL-auk" secondAttribute="leading" id="dRD-VE-04C"/>
