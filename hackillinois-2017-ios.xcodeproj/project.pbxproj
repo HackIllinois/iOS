@@ -33,6 +33,8 @@
 		E236C0591D107FA60085437D /* HelpQStaffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236C0581D107FA60085437D /* HelpQStaffViewController.swift */; };
 		E236C05B1D10809E0085437D /* HelpQHackerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236C05A1D10809E0085437D /* HelpQHackerCollectionViewCell.swift */; };
 		E236C05D1D109AF50085437D /* HelpQHackerCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236C05C1D109AF50085437D /* HelpQHackerCollectionReusableView.swift */; };
+		E237913F1D21B4FE0020618E /* HelpQStaffCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E237913E1D21B4FE0020618E /* HelpQStaffCollectionViewCell.swift */; };
+		E23791411D21C4870020618E /* ReferencedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23791401D21C4870020618E /* ReferencedButton.swift */; };
 		E25377411CF8AB2C003795E7 /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E253773F1CF8AB2C003795E7 /* Tag+CoreDataProperties.swift */; };
 		E25377421CF8AB2C003795E7 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25377401CF8AB2C003795E7 /* Tag.swift */; };
 		E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25377431CF8C485003795E7 /* CoreDataHelpers.swift */; };
@@ -147,6 +149,8 @@
 		E236C0581D107FA60085437D /* HelpQStaffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQStaffViewController.swift; sourceTree = "<group>"; };
 		E236C05A1D10809E0085437D /* HelpQHackerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQHackerCollectionViewCell.swift; sourceTree = "<group>"; };
 		E236C05C1D109AF50085437D /* HelpQHackerCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQHackerCollectionReusableView.swift; sourceTree = "<group>"; };
+		E237913E1D21B4FE0020618E /* HelpQStaffCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQStaffCollectionViewCell.swift; sourceTree = "<group>"; };
+		E23791401D21C4870020618E /* ReferencedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferencedButton.swift; sourceTree = "<group>"; };
 		E253773F1CF8AB2C003795E7 /* Tag+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E25377401CF8AB2C003795E7 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		E25377431CF8C485003795E7 /* CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
@@ -355,6 +359,7 @@
 			children = (
 				E2B6C3981D0B2EF300D851F9 /* HelpQ_Staff.storyboard */,
 				E236C0581D107FA60085437D /* HelpQStaffViewController.swift */,
+				E237913E1D21B4FE0020618E /* HelpQStaffCollectionViewCell.swift */,
 			);
 			name = Staff;
 			sourceTree = "<group>";
@@ -463,6 +468,7 @@
 		E2B6C39C1D0B30F100D851F9 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				E2D1853A1D21CA1F00CA4816 /* Custom UI */,
 				E2BD82B31D09EA350009DB07 /* Generics */,
 				E2B6C39D1D0B311000D851F9 /* HelperClasses */,
 				E2AC3F841CF21BBE00C4F21F /* LanguageExtensions */,
@@ -546,6 +552,14 @@
 				E2BB42C51D133A9A009EF512 /* GenericInputView.swift */,
 			);
 			name = Generics;
+			sourceTree = "<group>";
+		};
+		E2D1853A1D21CA1F00CA4816 /* Custom UI */ = {
+			isa = PBXGroup;
+			children = (
+				E23791401D21C4870020618E /* ReferencedButton.swift */,
+			);
+			name = "Custom UI";
 			sourceTree = "<group>";
 		};
 		E2D483311D00D37800859A67 /* Maps */ = {
@@ -891,6 +905,7 @@
 				E2BCA57D1CF3B19E006AAA8B /* Feed.swift in Sources */,
 				E2A085F61D0C6536002197F9 /* ScheduleCollectionViewCell.swift in Sources */,
 				E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */,
+				E237913F1D21B4FE0020618E /* HelpQStaffCollectionViewCell.swift in Sources */,
 				E25377411CF8AB2C003795E7 /* Tag+CoreDataProperties.swift in Sources */,
 				E28FB69F1D194951000D062F /* HelpQ+CoreDataProperties.swift in Sources */,
 				E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */,
@@ -913,6 +928,7 @@
 				E236C05D1D109AF50085437D /* HelpQHackerCollectionReusableView.swift in Sources */,
 				E2A085F01D0C42A7002197F9 /* GenericNavigationController.swift in Sources */,
 				E276C3B51D11C3A400DABD4A /* HelpQChatViewController.swift in Sources */,
+				E23791411D21C4870020618E /* ReferencedButton.swift in Sources */,
 				E229603F1D147F2A008F7A31 /* OtherChatTableViewCell.swift in Sources */,
 				E2BCA5801CF3B19E006AAA8B /* Location+CoreDataProperties.swift in Sources */,
 				E2D4F0DF1D06AD3F00646BF8 /* Building.swift in Sources */,
