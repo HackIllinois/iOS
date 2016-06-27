@@ -24,7 +24,7 @@ class CreateAccountViewController: GenericInputView {
     }
     
     /* Super view function to process logins */
-    var processUserData: ((Bool, String, String, String, String, String, (Void -> Void)?) -> Void)!
+    var processUserData: ((Bool, String, String, String, String, String, String, (Void -> Void)?) -> Void)!
     // This must be set when presenting the view controller.
     
     /* Function passed to capture the response data */
@@ -67,6 +67,10 @@ class CreateAccountViewController: GenericInputView {
         } else {
             /* Error free -- parse data */
             print("data integrity passed!")
+            
+            let auth: String = json["data"]["auth"].string!
+            print(auth)
+            
             // TODO: Parse data, add User, etc.
             let name = "Shotaro Ikeda"
             let school = "University of Illinois at Urbana-Champaign"
@@ -75,7 +79,7 @@ class CreateAccountViewController: GenericInputView {
             let barcode = "1234567890"
             
             let lambda: (Void -> Void) =  { [unowned self] in
-                self.processUserData(true, name, school, major, role, barcode, nil)
+                self.processUserData(true, name, school, major, role, barcode, auth, nil)
             }
             
             dismissViewControllerAnimated(true, completion: lambda)
@@ -135,9 +139,10 @@ class CreateAccountViewController: GenericInputView {
             let major = "Bachelor of Science Computer Science"
             let role = "Staff"
             let barcode = "1234567890"
+            let auth = "dummy auth data here"
             
             let lambda: (Void -> Void) =  { [unowned self] in
-                self.processUserData(true, name, school, major, role, barcode, nil)
+                self.processUserData(true, name, school, major, role, barcode, auth, nil)
             }
             
             self.dismissViewControllerAnimated(true, completion: lambda)
