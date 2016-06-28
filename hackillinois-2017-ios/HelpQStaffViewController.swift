@@ -39,6 +39,31 @@ class HelpQStaffViewController: GenericCardViewController, NSFetchedResultsContr
         }
     }
     
+    func populateSampleData() {
+        print("Creating Dummy Data")
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let createHelpQLambda: (String, String, String, String) -> HelpQ = { (tech, lang, loc, desc) in
+            let helpQ = NSEntityDescription.insertNewObjectForEntityForName("HelpQ", inManagedObjectContext: appDelegate.managedObjectContext) as! HelpQ
+            helpQ.initialize(tech, language: lang, location: loc, description: desc)
+            return helpQ
+        }
+        
+        createHelpQLambda("Node JS", "Javascript", "Siebel 2202", "Help with Asynchronous Calls")
+        createHelpQLambda("Memory Allocation/Deallocation", "C++", "Siebel 1404","Help with unknown use after free error")
+        createHelpQLambda("Threading", "C", "ECEB 2201","Cannot figure out how to multithread my code.")
+        createHelpQLambda("Python", "Python", "Siebel", "How to print with python")
+        createHelpQLambda("UITableView", "iOS", "Find me around ECEB labs", "Automatic Dimension is creates strange behavior for animations")
+        createHelpQLambda("Machine Learning", "Python", "Labs at Siebel", "Which model to use?")
+        createHelpQLambda("MySQL", "Python-Flask", "around 2nd floor DCL", "How do I connect Python to my database?")
+        
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
+            Helpers.saveContextMainThread()
+            dispatch_async(dispatch_get_main_queue()) {
+                self.helpQCollection.reloadData()
+            }
+        }
+    }
+    
     // Mark: UIViewController Functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +76,11 @@ class HelpQStaffViewController: GenericCardViewController, NSFetchedResultsContr
         fetchedResultsController.delegate = self
         helpQCollection.dataSource = self
         helpQCollection.delegate = self
+        
+        /* Remove for production */
+        if fetchedResultsController.fetchedObjects?.count == 0 {
+            populateSampleData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
