@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="S6B-kj-emR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="1Rf-el-w3m">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--HelpQ Staff View Controller-->
+        <!--My Items-->
+        <scene sceneID="cFs-uA-D2h">
+            <objects>
+                <viewController id="cAS-rW-7cf" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MLH-xB-8fW"/>
+                        <viewControllerLayoutGuide type="bottom" id="k8a-tN-HbQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UB2-SV-B6e">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="My Items" image="ic_live_help" id="G1t-5I-Vx9"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NVu-jH-3Cl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2288" y="1728"/>
+        </scene>
+        <!--Queue-->
         <scene sceneID="IiV-3Y-UBF">
             <objects>
                 <viewController id="S6B-kj-emR" customClass="HelpQStaffViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="C7t-vd-IKo">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="531"/>
                                 <color key="backgroundColor" red="0.90980392160000001" green="0.4941176471" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="30" minimumInteritemSpacing="20000" id="sTr-Nn-QUv">
@@ -41,7 +60,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="fIe-lH-X14"/>
                                                         <constraint firstAttribute="width" constant="136" id="kP9-EW-fkF"/>
                                                     </constraints>
-                                                    <state key="normal" title="Help User"/>
+                                                    <state key="normal" title="Stop Helping User"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="technology label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PJC-Mk-g71">
                                                     <rect key="frame" x="8" y="43" width="234" height="29"/>
@@ -111,6 +130,7 @@
                             <constraint firstItem="C7t-vd-IKo" firstAttribute="top" secondItem="0Ec-4W-JUQ" secondAttribute="bottom" id="nY8-il-ofc"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Queue" image="ic_queue" id="z9h-3m-DkP"/>
                     <navigationItem key="navigationItem" id="qaC-Sh-Rcw"/>
                     <connections>
                         <outlet property="helpQCollection" destination="C7t-vd-IKo" id="888-by-7vg"/>
@@ -118,7 +138,29 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDZ-or-fWM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="2288" y="2459"/>
+        </scene>
+        <!--Generic Tab Bar Controller-->
+        <scene sceneID="sZH-zh-kWb">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="1Rf-el-w3m" customClass="GenericTabBarController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="GTb-9K-AH7">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="cAS-rW-7cf" kind="relationship" relationship="viewControllers" id="pVZ-l4-wMq"/>
+                        <segue destination="S6B-kj-emR" kind="relationship" relationship="viewControllers" id="fpT-sj-7Kp"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F66-Um-iko" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
             <point key="canvasLocation" x="1486" y="2107"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ic_live_help" width="24" height="24"/>
+        <image name="ic_queue" width="24" height="24"/>
+    </resources>
 </document>

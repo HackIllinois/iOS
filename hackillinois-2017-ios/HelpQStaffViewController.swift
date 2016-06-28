@@ -13,6 +13,9 @@ class HelpQStaffViewController: GenericCardViewController, NSFetchedResultsContr
 
     @IBOutlet weak var helpQCollection: UICollectionView!
     
+    /* User Information */
+    var user: User = (Helpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User])[0]
+    
     /* Core Data components */
     var fetchedResultsController: NSFetchedResultsController!
     var fetchPredicate: NSPredicate!
@@ -22,9 +25,10 @@ class HelpQStaffViewController: GenericCardViewController, NSFetchedResultsContr
         if fetchedResultsController == nil {
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let fetch = NSFetchRequest(entityName: "HelpQ")
+            let languageSort = NSSortDescriptor(key: "language", ascending: false)
             let inChargeSort = NSSortDescriptor(key: "isHelping", ascending: false)
             let modifiedSort = NSSortDescriptor(key: "modified", ascending: false)
-            fetch.sortDescriptors = [inChargeSort, modifiedSort]
+            fetch.sortDescriptors = [inChargeSort, languageSort, modifiedSort]
             
             fetchedResultsController = NSFetchedResultsController(fetchRequest: fetch, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: "language", cacheName: nil)
         }
@@ -91,8 +95,15 @@ class HelpQStaffViewController: GenericCardViewController, NSFetchedResultsContr
     // Mark: Button Handler
     func cellButtonPressed(sender: ReferencedButton) {
         let helpQItem = sender.referenceObject as! HelpQ
-        // TODO: set mentor as me
-        helpQItem.assignMentor(mentor: "me", helpStatus: true)
+        helpQItem.assignMentor(mentor: user.name, helpStatus: true)
+        helpQItem.isHelping = NSNumber(bool: !helpQItem.isHelping.boolValue)
+        
+        /* Configure button */
+        if helpQItem.isHelping.boolValue {
+            sender.setTitle("Stop Helping User", forState: .Normal)
+        } else {
+            sender.setTitle("Help User", forState: .Normal)
+        }
     }
     
     // Mark: UICollectionViewDelegate
@@ -113,6 +124,13 @@ class HelpQStaffViewController: GenericCardViewController, NSFetchedResultsContr
         cell.techLabel.text = helpQItem.technology
         cell.descLabel.text = helpQItem.desc
         cell.helpButton.referenceObject = helpQItem // Add a reference to the object in order to modify it
+        
+        // Set the button title depending on the status
+        if helpQItem.isHelping.boolValue {
+            cell.helpButton.setTitle("Stop Helping User", forState: .Normal)
+        } else {
+            cell.helpButton.setTitle("Help User", forState: .Normal)
+        }
         cell.helpButton.addTarget(self, action: #selector(cellButtonPressed), forControlEvents: .TouchUpInside)
         
         return cell
@@ -122,15 +140,13 @@ class HelpQStaffViewController: GenericCardViewController, NSFetchedResultsContr
         let header = helpQCollection.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "staff_helpq_header", forIndexPath: indexPath) as! HelpQHackerCollectionReusableView
         
         let helpQItem = fetchedResultsController.objectAtIndexPath(indexPath) as! HelpQ
-        
-        // Split between ones that person is currently helping and the rest
-        if helpQItem.isHelping.boolValue {
-            header.titleLabel.text = "Current Items"
-        } else {
-            header.titleLabel.text = helpQItem.language
-        }
+        header.titleLabel.text = helpQItem.language
         
         return header
+    }
+    
+    func controller(controller: NSFetchedResultsController, sectionIndexTitleForSectionName sectionName: String) -> String? {
+        
     }
 
     /*
