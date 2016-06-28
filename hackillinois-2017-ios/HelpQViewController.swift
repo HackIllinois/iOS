@@ -8,10 +8,10 @@
 
 import UIKit
 import SWRevealViewController
+import CoreData
 
 class HelpQViewController: GenericNavigationController {
 
-    let role = "Hacker"
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,6 +20,7 @@ class HelpQViewController: GenericNavigationController {
         navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_list_white"), style: .Plain, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle))
          */
         // Do any additional setup after loading the view.
+        
         
         /*
         if role == "Hacker" {

@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--HelpQ View Controller-->
+        <!--Generic Navigation Controller-->
         <scene sceneID="bQq-0A-14G">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4il-eg-HaQ" customClass="HelpQViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4il-eg-HaQ" customClass="GenericNavigationController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BQX-NJ-GgQ">
