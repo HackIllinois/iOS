@@ -1,0 +1,4 @@
+[submodule "api-2017"]
+	path = api-2017
+	url = https://github.com/HackIllinois/api-2017.git
+        branch = feature/basics
