@@ -44,12 +44,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         /* Find out which part of the application to go to */
-        if NSUserDefaults.standardUserDefaults().boolForKey("logged_in_main") {
-            // Already "Logged in"
-            self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
-        } else {
-            // Not logged in
+        let user = Helpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]
+        
+        if user.isEmpty {
+            print("First launch, no user found")
             self.window?.rootViewController = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()
+        } else if user[0].expireTime.compare(NSDate()) == .OrderedAscending {
+            print("User already logged in before")
+            // TODO: Check if this method crashes
+            let loginView: LoginViewController = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController() as! LoginViewController
+            loginView.UsernameTextField.text = user[0].email // Initialize it with user's email
+            self.window?.rootViewController = loginView
+        } else {
+            // Login not necessary
+            self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
         }
         
         return true
