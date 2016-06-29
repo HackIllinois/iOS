@@ -119,11 +119,6 @@ class LoginViewController: GenericInputView {
                 // Store user data
                 Helpers.storeUser(name: name, email: email, school: school, major: major, role: role, barcode: barcode, barcodeData: barcodeData!, auth: auth, initTime: initTime, expirationTime: expirationTime, userID: userID)
                 
-                // Store that user has already logged in
-                let userDefaults = NSUserDefaults.standardUserDefaults()
-                userDefaults.setBool(true, forKey: "logged_in_main")
-                userDefaults.synchronize()
-                
                 // Present main application
                 let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let mainViewController = mainStoryboard.instantiateInitialViewController()
