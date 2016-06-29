@@ -59,3 +59,6 @@ fastlane/screenshots
 
 # Custom script to run database (NEVER commit)
 server_start.sh
+
+# api repository for this branch only
+api-2017
