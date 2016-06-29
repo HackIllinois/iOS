@@ -11,6 +11,7 @@ target 'hackillinois-2017-ios' do
         pod "SnapKit"
         pod "SWRevealViewController", :git => "https://github.com/John-Lluch/SWRevealViewController"
         pod "Socket.IO-Client-Swift"
+        pod "JWTDecode"
 end
 
 target 'hackillinois-2017-iosTests' do
