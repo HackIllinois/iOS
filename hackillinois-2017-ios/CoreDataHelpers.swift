@@ -167,11 +167,11 @@ class Helpers {
 
 /* Helpers for User Profile */
 extension Helpers {
-    class func storeUser(name name: String, school: String, major: String, role: String, barcode: String, barcodeData: NSData, auth: String) {
+    class func storeUser(name name: String, email: String, school: String, major: String, role: String, barcode: String, barcodeData: NSData, auth: String, initTime: NSDate, expirationTime: NSDate, userID: NSNumber) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let user = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: appDelegate.managedObjectContext) as! User
-        user.initialize(name: name, school: school, major: major, role: role, barcode: barcode, barcodeData: barcodeData, token: auth, modifiedTime: NSDate())
+        user.initialize(name: name, email: email, school: school, major: major, role: role, barcode: barcode, barcodeData: barcodeData, token: auth, initTime: initTime, expirationTime: expirationTime, userID: userID)
         
         self.saveContext()
     }
