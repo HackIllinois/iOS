@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import JWTDecode
 
 class CreateAccountViewController: GenericInputView {
     /* Navigation */
@@ -24,7 +25,7 @@ class CreateAccountViewController: GenericInputView {
     }
     
     /* Super view function to process logins */
-    var processUserData: ((Bool, String, String, String, String, String, String, (Void -> Void)?) -> Void)!
+    var processUserData: ((name: String, email: String, school: String, major: String, role: String, barcode: String, auth: String, initTime: NSDate, expirationTime: NSDate, userID: NSNumber) -> Void)!
     // This must be set when presenting the view controller.
     
     /* Function passed to capture the response data */
@@ -37,9 +38,6 @@ class CreateAccountViewController: GenericInputView {
         }
         
         let json = JSON(data: data!)
-        
-        print("data received")
-        print(json)
         
         /* Restore Navigation Bar to regular status */
         dispatch_async(dispatch_get_main_queue()) { [unowned self] in
@@ -65,24 +63,36 @@ class CreateAccountViewController: GenericInputView {
             }
             return
         } else {
-            /* Error free -- parse data */
-            print("data integrity passed!")
-            
+            /* Response from API */
             let auth: String = json["data"]["auth"].string!
-            print(auth)
+            let jwt: JWT = try! decode(auth)
+            
+            // Calls that are dynamic in this version of API
+            let userID: NSNumber = NSNumber(integer: jwt.body["sub"]!.integerValue)
+            let role = String(jwt.body["role"]!)
+            let email = String(jwt.body["email"]!)
+            let initTime : NSDate = jwt.issuedAt!
+            let expTime: NSDate = jwt.expiresAt!
+            
+            print("Role: \(role)")
+            print("UserID: \(userID)")
+            print("Registration Email: \(email)")
+            print("Initialization Time: \(initTime)")
+            print("Expiration Time: \(expTime)")
             
             // TODO: Parse data, add User, etc.
             let name = "Shotaro Ikeda"
             let school = "University of Illinois at Urbana-Champaign"
             let major = "Bachelor of Science Computer Science"
-            let role = "Staff"
             let barcode = "1234567890"
             
             let lambda: (Void -> Void) =  { [unowned self] in
-                self.processUserData(true, name, school, major, role, barcode, auth, nil)
+                self.processUserData(name: name, email: email, school: school, major: major, role: role, barcode: barcode, auth: auth, initTime: initTime, expirationTime: expTime, userID: userID)
             }
             
-            dismissViewControllerAnimated(true, completion: lambda)
+            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                self.dismissViewControllerAnimated(true, completion: lambda)
+            }
         }
     }
     
@@ -133,16 +143,22 @@ class CreateAccountViewController: GenericInputView {
         /*
         // Mimic data processing
         dispatch_after(1 * USEC_PER_SEC, dispatch_get_main_queue()) { [unowned self] in
-            // Assume success for static
+            let auth: String = "auth dummy data"
+            let userID: NSNumber = NSNumber(integer: 1)
+            let role = "HACKER"
+            let email = "shotaro.ikeda@hackillinois.org"
+            let initTime : NSDate = NSDate()
+            let expTime: NSDate = NSDate(timeIntervalSinceNow: Double(5 * USEC_PER_SEC * 60)) // Expires in 5 minutes for testing purposes
+            
+            // TODO: Parse API
             let name = "Shotaro Ikeda"
             let school = "University of Illinois at Urbana-Champaign"
             let major = "Bachelor of Science Computer Science"
             let role = "Staff"
             let barcode = "1234567890"
-            let auth = "dummy auth data here"
-            
+         
             let lambda: (Void -> Void) =  { [unowned self] in
-                self.processUserData(true, name, school, major, role, barcode, auth, nil)
+                self.processUserData(name: name, email: email, school: school, major: major, role: role, barcode: barcode, auth: auth, initTime: initTime, expirationTime: expTime, userID: userID)
             }
             
             self.dismissViewControllerAnimated(true, completion: lambda)
