@@ -123,14 +123,14 @@ class CreateAccountViewController: GenericInputView {
         navigationBar.topItem?.rightBarButtonItem?.enabled = false
         // navigationBar.topItem?.rightBarButtonItem?.tintColor = UIColor.grayColor()
         
-        /*// MARK: Code to be used in actual connection with backend
+        // MARK: Code to be used in actual connection with backend
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
             let payload = JSON(["email": self.usernameField.text!, "password": self.passwordField.text!, "confirmedPassword": self.confirmPasswordField.text!])
             print(payload)
             HTTPHelpers.createPostRequest(subUrl: "v1/user", jsonPayload: payload, completion: self.captureResponse)
         }
-        */
-        
+ 
+        /*
         // Mimic data processing
         dispatch_after(1 * USEC_PER_SEC, dispatch_get_main_queue()) { [unowned self] in
             // Assume success for static
@@ -147,6 +147,7 @@ class CreateAccountViewController: GenericInputView {
             
             self.dismissViewControllerAnimated(true, completion: lambda)
         }
+        */
     }
     
     /* Text Fields */

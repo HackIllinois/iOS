@@ -214,13 +214,12 @@ class LoginViewController: GenericInputView {
         PasswordTextField.userInteractionEnabled = false
         
         // Send request to server
-        /*
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
             let payload: JSON = JSON(["email": username, "password": password])
             HTTPHelpers.createPostRequest(subUrl: "v1/auth", jsonPayload: payload, completion: self.processResponse)
         }
-        */
-        
+ 
+        /*
         /* Mark: Fake server response -- Remove an uncomment code above to run */
         dispatch_after(1 * USEC_PER_SEC, dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
             /* Response from API */
@@ -238,6 +237,7 @@ class LoginViewController: GenericInputView {
                 self.loginActivityIndicator.removeFromSuperview()
             }
         }
+        */
     }
     
     /* Override textfieldshould return */
