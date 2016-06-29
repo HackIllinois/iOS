@@ -134,13 +134,14 @@ class CreateAccountViewController: GenericInputView {
         // navigationBar.topItem?.rightBarButtonItem?.tintColor = UIColor.grayColor()
         
         // MARK: Code to be used in actual connection with backend
+        /*
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
             let payload = JSON(["email": self.usernameField.text!, "password": self.passwordField.text!, "confirmedPassword": self.confirmPasswordField.text!])
             print(payload)
             HTTPHelpers.createPostRequest(subUrl: "v1/user", jsonPayload: payload, completion: self.captureResponse)
         }
+        */
  
-        /*
         // Mimic data processing
         dispatch_after(1 * USEC_PER_SEC, dispatch_get_main_queue()) { [unowned self] in
             let auth: String = "auth dummy data"
@@ -148,13 +149,12 @@ class CreateAccountViewController: GenericInputView {
             let role = "HACKER"
             let email = "shotaro.ikeda@hackillinois.org"
             let initTime : NSDate = NSDate()
-            let expTime: NSDate = NSDate(timeIntervalSinceNow: Double(5 * USEC_PER_SEC * 60)) // Expires in 5 minutes for testing purposes
+            let expTime: NSDate = NSDate(timeIntervalSinceNow: Double(5 * 60)) // Expires in 5 minutes for testing purposes
             
             // TODO: Parse API
             let name = "Shotaro Ikeda"
             let school = "University of Illinois at Urbana-Champaign"
             let major = "Bachelor of Science Computer Science"
-            let role = "Staff"
             let barcode = "1234567890"
          
             let lambda: (Void -> Void) =  { [unowned self] in
@@ -163,7 +163,6 @@ class CreateAccountViewController: GenericInputView {
             
             self.dismissViewControllerAnimated(true, completion: lambda)
         }
-        */
     }
     
     /* Text Fields */

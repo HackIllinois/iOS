@@ -47,6 +47,8 @@ class LoginViewController: GenericInputView {
         }
     }
     
+    var initialEmail: String?
+    
     /* scrollView to make text input look much smoother */
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -219,13 +221,15 @@ class LoginViewController: GenericInputView {
         UsernameTextField.userInteractionEnabled = false
         PasswordTextField.userInteractionEnabled = false
         
+        /* MARK: For api branch */
+        /*
         // Send request to server
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
             let payload: JSON = JSON(["email": username, "password": password])
             HTTPHelpers.createPostRequest(subUrl: "v1/auth", jsonPayload: payload, completion: self.processResponse)
         }
+        */
         
-        /*
         /* Mark: Fake server response -- Remove an uncomment code above to run */
         dispatch_after(1 * USEC_PER_SEC, dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
             /* Response from API */
@@ -234,21 +238,15 @@ class LoginViewController: GenericInputView {
             let role = "HACKER"
             let email = "shotaro.ikeda@hackillinois.org"
             let initTime : NSDate = NSDate()
-            let expTime: NSDate = NSDate(timeIntervalSinceNow: Double(5 * USEC_PER_SEC * 60)) // Expires in 5 minutes for testing purposes
+            let expTime: NSDate = NSDate(timeIntervalSinceNow: Double(5 * 60)) // Expires in 5 minutes for testing purposes
             
             // TODO: Parse API
             let name = "Shotaro Ikeda"
             let school = "University of Illinois at Urbana-Champaign"
             let major = "Bachelor of Science Computer Science"
-            let role = "Staff"
             let barcode = "1234567890"
-            self.processUserData(true, name: name, school: school, major: major, role: role, barcode: barcode, auth: auth) {
-                // Remove activity indicator
-                self.loginActivityIndicator.stopAnimating()
-                self.loginActivityIndicator.removeFromSuperview()
-            }
+            self.processUserData(name: name, email: email, school: school, major: major, role: role, barcode: barcode, auth: auth, initTime: initTime, expirationTime: expTime, userID: userID)
         }
-        */
     }
     
     /* Override textfieldshould return */
@@ -290,6 +288,7 @@ class LoginViewController: GenericInputView {
         
         /* Configure portions that the super class did not configure */
         UsernameTextField.alpha = loginElementAlpha
+        UsernameTextField.text = initialEmail
         
         PasswordTextField.alpha = loginElementAlpha
         PasswordTextField.secureTextEntry = true // Password should be hidden
