@@ -144,10 +144,6 @@ class HelpQStaffViewController: GenericCardViewController, NSFetchedResultsContr
         
         return header
     }
-    
-    func controller(controller: NSFetchedResultsController, sectionIndexTitleForSectionName sectionName: String) -> String? {
-        
-    }
 
     /*
     // MARK: - Navigation
