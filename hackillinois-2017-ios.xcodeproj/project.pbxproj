@@ -35,6 +35,8 @@
 		E236C05D1D109AF50085437D /* HelpQHackerCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236C05C1D109AF50085437D /* HelpQHackerCollectionReusableView.swift */; };
 		E237913F1D21B4FE0020618E /* HelpQStaffCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E237913E1D21B4FE0020618E /* HelpQStaffCollectionViewCell.swift */; };
 		E23791411D21C4870020618E /* ReferencedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23791401D21C4870020618E /* ReferencedButton.swift */; };
+		E23EBD621D25BBA100D0E42F /* HelpQStaffItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23EBD611D25BBA100D0E42F /* HelpQStaffItemsViewController.swift */; };
+		E23EBD641D25BFDC00D0E42F /* HelpQStaffItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23EBD631D25BFDC00D0E42F /* HelpQStaffItemCollectionViewCell.swift */; };
 		E25377411CF8AB2C003795E7 /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E253773F1CF8AB2C003795E7 /* Tag+CoreDataProperties.swift */; };
 		E25377421CF8AB2C003795E7 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25377401CF8AB2C003795E7 /* Tag.swift */; };
 		E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25377431CF8C485003795E7 /* CoreDataHelpers.swift */; };
@@ -151,6 +153,8 @@
 		E236C05C1D109AF50085437D /* HelpQHackerCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQHackerCollectionReusableView.swift; sourceTree = "<group>"; };
 		E237913E1D21B4FE0020618E /* HelpQStaffCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQStaffCollectionViewCell.swift; sourceTree = "<group>"; };
 		E23791401D21C4870020618E /* ReferencedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferencedButton.swift; sourceTree = "<group>"; };
+		E23EBD611D25BBA100D0E42F /* HelpQStaffItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQStaffItemsViewController.swift; sourceTree = "<group>"; };
+		E23EBD631D25BFDC00D0E42F /* HelpQStaffItemCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQStaffItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		E253773F1CF8AB2C003795E7 /* Tag+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E25377401CF8AB2C003795E7 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		E25377431CF8C485003795E7 /* CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
@@ -358,6 +362,8 @@
 			isa = PBXGroup;
 			children = (
 				E2B6C3981D0B2EF300D851F9 /* HelpQ_Staff.storyboard */,
+				E23EBD631D25BFDC00D0E42F /* HelpQStaffItemCollectionViewCell.swift */,
+				E23EBD611D25BBA100D0E42F /* HelpQStaffItemsViewController.swift */,
 				E236C0581D107FA60085437D /* HelpQStaffViewController.swift */,
 				E237913E1D21B4FE0020618E /* HelpQStaffCollectionViewCell.swift */,
 			);
@@ -899,6 +905,7 @@
 				E236C0551D107DF60085437D /* DummyViewController.swift in Sources */,
 				E2A086011D0C736B002197F9 /* FridayViewController.swift in Sources */,
 				E2BD82B51D09EA530009DB07 /* GenericMapViewController.swift in Sources */,
+				E23EBD641D25BFDC00D0E42F /* HelpQStaffItemCollectionViewCell.swift in Sources */,
 				E20465D31CF1FAF50054654E /* hackillinois_2017_ios.xcdatamodeld in Sources */,
 				E236C0571D107F9C0085437D /* HelpQHackerViewController.swift in Sources */,
 				E28FB6A01D194951000D062F /* HelpQ.swift in Sources */,
@@ -908,6 +915,7 @@
 				E237913F1D21B4FE0020618E /* HelpQStaffCollectionViewCell.swift in Sources */,
 				E25377411CF8AB2C003795E7 /* Tag+CoreDataProperties.swift in Sources */,
 				E28FB69F1D194951000D062F /* HelpQ+CoreDataProperties.swift in Sources */,
+				E23EBD621D25BBA100D0E42F /* HelpQStaffItemsViewController.swift in Sources */,
 				E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */,
 				E236C04F1D1061F80085437D /* HelpQViewController.swift in Sources */,
 				E26F44F41D0EF3C400FB4A9F /* UIImage+generateBarCode.swift in Sources */,

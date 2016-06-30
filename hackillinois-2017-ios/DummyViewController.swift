@@ -17,7 +17,7 @@ import UIKit
 class DummyViewController: UIViewController {
     
     // TODO: Dynamic roles based off of login data.
-    var role = "Staff"
+    var role = "STAFF"
 
     /*
      * Fetch Role
@@ -36,10 +36,10 @@ class DummyViewController: UIViewController {
         // fetchRole()
         
         // Roles with simple error checking
-        if role == "Hacker" {
+        if role == "HACKER" {
             let viewController = UIStoryboard(name: "HelpQ_Hacker", bundle: nil).instantiateInitialViewController()
             self.navigationController?.setViewControllers([viewController!], animated: false)
-        } else if role == "Staff" {
+        } else if role == "STAFF" {
             let viewController = UIStoryboard(name: "HelpQ_Staff", bundle: nil).instantiateInitialViewController()
             self.navigationController?.setViewControllers([viewController!], animated: false)
         } else {
