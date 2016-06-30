@@ -111,7 +111,7 @@
                             <constraint firstItem="Kgy-96-zLw" firstAttribute="top" secondItem="MLH-xB-8fW" secondAttribute="bottom" id="f9t-fr-kaq"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="My Items" image="ic_live_help" id="G1t-5I-Vx9"/>
+                    <tabBarItem key="tabBarItem" title="My Items" image="ic_live_help_white" id="G1t-5I-Vx9"/>
                     <connections>
                         <outlet property="collectionView" destination="Kgy-96-zLw" id="KZX-Im-1Yi"/>
                     </connections>
@@ -226,7 +226,7 @@
                             <constraint firstItem="C7t-vd-IKo" firstAttribute="top" secondItem="0Ec-4W-JUQ" secondAttribute="bottom" id="nY8-il-ofc"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Queue" image="ic_queue" id="z9h-3m-DkP"/>
+                    <tabBarItem key="tabBarItem" title="Queue" image="ic_queue_white" id="z9h-3m-DkP"/>
                     <navigationItem key="navigationItem" id="qaC-Sh-Rcw"/>
                     <connections>
                         <outlet property="helpQCollection" destination="C7t-vd-IKo" id="888-by-7vg"/>
@@ -256,7 +256,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_live_help" width="24" height="24"/>
-        <image name="ic_queue" width="24" height="24"/>
+        <image name="ic_live_help_white" width="24" height="24"/>
+        <image name="ic_queue_white" width="24" height="24"/>
     </resources>
 </document>
