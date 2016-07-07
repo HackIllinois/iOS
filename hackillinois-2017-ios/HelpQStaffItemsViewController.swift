@@ -16,6 +16,10 @@ class HelpQStaffItemsViewController: GenericCardViewController, NSFetchedResults
     /* Core Data */
     var fetchedResultsController: NSFetchedResultsController!
     
+    /* User Data */
+    var user: User!
+    
+    /* Mark: CoreData Functions */
     func loadSavedData() {
         if fetchedResultsController == nil {
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -41,12 +45,23 @@ class HelpQStaffItemsViewController: GenericCardViewController, NSFetchedResults
             print("Error loading items: \(error)")
         }
     }
+    
+    func loadUserData() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let fetchRequest = NSFetchRequest(entityName: "User")
+        do {
+            try user = (appDelegate.managedObjectContext.executeFetchRequest(fetchRequest) as! [User]).first!
+        } catch {
+            print("Error while loading user data \(error)")
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         loadSavedData()
+        loadUserData()
         
         // The other view populates the data items. There is a good chance that we will have duplicates if we populate them in this view
         
@@ -57,6 +72,28 @@ class HelpQStaffItemsViewController: GenericCardViewController, NSFetchedResults
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    /* Mark: UIButtonAction */
+    func helpButtonPressed(sender: UIButton) {
+        print("Button pressed")
+        let sender: ReferencedButton = sender as! ReferencedButton
+        let helpQItem: HelpQ = sender.referenceObject as! HelpQ
+        
+        if helpQItem.isHelping.boolValue {
+            // User stopped helping
+            helpQItem.mentor = ""
+        } else {
+            // User started to help
+            helpQItem.mentor = user.name
+        }
+        
+        // TODO: Update current item with whatever is on the database
+        
+        helpQItem.isHelping = NSNumber(bool: !helpQItem.isHelping.boolValue)
+        
+        Helpers.saveContextMainThread()
+        loadSavedData()
     }
     
     
@@ -71,13 +108,17 @@ class HelpQStaffItemsViewController: GenericCardViewController, NSFetchedResults
     
     /* Mark UICollectionViewDelegate */
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("", forIndexPath: indexPath) as! HelpQStaffItemCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("staff_helpq_cell", forIndexPath: indexPath) as! HelpQStaffItemCollectionViewCell
         let helpQItem = fetchedResultsController.objectAtIndexPath(indexPath) as! HelpQ
         
         // Configure Cell
         cell.techLabel.text = helpQItem.technology
         cell.descLabel.text = helpQItem.desc
         
+        // Help Button
+        print("Loading cell...")
+        cell.helpButton.referenceObject = helpQItem
+        cell.helpButton.addTarget(self, action: #selector(helpButtonPressed), forControlEvents: .TouchUpInside)
         if helpQItem.isHelping.boolValue {
             cell.helpButton.setTitle("Stop Helping User", forState: .Normal)
         } else {

@@ -55,7 +55,6 @@ class HelpQ: NSManagedObject {
     func assignMentor(mentor mentor: String, helpStatus: Bool) {
         self.isHelping = NSNumber(bool: helpStatus)
         self.mentor = mentor
-        Helpers.saveContext()
     }
     
     func updateModifiedTime() {
