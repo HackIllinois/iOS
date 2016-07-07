@@ -37,6 +37,8 @@
 		E23791411D21C4870020618E /* ReferencedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23791401D21C4870020618E /* ReferencedButton.swift */; };
 		E23EBD621D25BBA100D0E42F /* HelpQStaffItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23EBD611D25BBA100D0E42F /* HelpQStaffItemsViewController.swift */; };
 		E23EBD641D25BFDC00D0E42F /* HelpQStaffItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23EBD631D25BFDC00D0E42F /* HelpQStaffItemCollectionViewCell.swift */; };
+		E249977F1D2E7F6100402374 /* HelpQ_Staff_My_Items.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E249977E1D2E7F6100402374 /* HelpQ_Staff_My_Items.storyboard */; };
+		E24997811D2E7F9D00402374 /* HelpQ_Staff_Queue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E24997801D2E7F9D00402374 /* HelpQ_Staff_Queue.storyboard */; };
 		E25377411CF8AB2C003795E7 /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E253773F1CF8AB2C003795E7 /* Tag+CoreDataProperties.swift */; };
 		E25377421CF8AB2C003795E7 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25377401CF8AB2C003795E7 /* Tag.swift */; };
 		E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25377431CF8C485003795E7 /* CoreDataHelpers.swift */; };
@@ -155,6 +157,8 @@
 		E23791401D21C4870020618E /* ReferencedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferencedButton.swift; sourceTree = "<group>"; };
 		E23EBD611D25BBA100D0E42F /* HelpQStaffItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQStaffItemsViewController.swift; sourceTree = "<group>"; };
 		E23EBD631D25BFDC00D0E42F /* HelpQStaffItemCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQStaffItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		E249977E1D2E7F6100402374 /* HelpQ_Staff_My_Items.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HelpQ_Staff_My_Items.storyboard; sourceTree = "<group>"; };
+		E24997801D2E7F9D00402374 /* HelpQ_Staff_Queue.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HelpQ_Staff_Queue.storyboard; sourceTree = "<group>"; };
 		E253773F1CF8AB2C003795E7 /* Tag+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E25377401CF8AB2C003795E7 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		E25377431CF8C485003795E7 /* CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
@@ -362,10 +366,8 @@
 			isa = PBXGroup;
 			children = (
 				E2B6C3981D0B2EF300D851F9 /* HelpQ_Staff.storyboard */,
-				E23EBD631D25BFDC00D0E42F /* HelpQStaffItemCollectionViewCell.swift */,
-				E23EBD611D25BBA100D0E42F /* HelpQStaffItemsViewController.swift */,
-				E236C0581D107FA60085437D /* HelpQStaffViewController.swift */,
-				E237913E1D21B4FE0020618E /* HelpQStaffCollectionViewCell.swift */,
+				E249977C1D2E7F0600402374 /* MyItems */,
+				E249977D1D2E7F1200402374 /* Queue */,
 			);
 			name = Staff;
 			sourceTree = "<group>";
@@ -380,6 +382,26 @@
 				E22960391D14731D008F7A31 /* HelpQ_Create */,
 			);
 			name = Hackers;
+			sourceTree = "<group>";
+		};
+		E249977C1D2E7F0600402374 /* MyItems */ = {
+			isa = PBXGroup;
+			children = (
+				E249977E1D2E7F6100402374 /* HelpQ_Staff_My_Items.storyboard */,
+				E23EBD611D25BBA100D0E42F /* HelpQStaffItemsViewController.swift */,
+				E23EBD631D25BFDC00D0E42F /* HelpQStaffItemCollectionViewCell.swift */,
+			);
+			name = MyItems;
+			sourceTree = "<group>";
+		};
+		E249977D1D2E7F1200402374 /* Queue */ = {
+			isa = PBXGroup;
+			children = (
+				E24997801D2E7F9D00402374 /* HelpQ_Staff_Queue.storyboard */,
+				E236C0581D107FA60085437D /* HelpQStaffViewController.swift */,
+				E237913E1D21B4FE0020618E /* HelpQStaffCollectionViewCell.swift */,
+			);
+			name = Queue;
 			sourceTree = "<group>";
 		};
 		E277DD6C1CF4B9EC00D7E018 /* FeedDetail */ = {
@@ -730,6 +752,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E277DD6B1CF4AF0400D7E018 /* keys.plist in Resources */,
+				E249977F1D2E7F6100402374 /* HelpQ_Staff_My_Items.storyboard in Resources */,
 				E2B6C3A21D0B4AC400D851F9 /* Main.storyboard in Resources */,
 				E22960381D1472FD008F7A31 /* HelpQ_Chat.storyboard in Resources */,
 				E2B6C3951D0B2E8000D851F9 /* Map.storyboard in Resources */,
@@ -743,6 +766,7 @@
 				E2B6C3991D0B2EF300D851F9 /* HelpQ_Staff.storyboard in Resources */,
 				E229603B1D147337008F7A31 /* HelpQ_Create.storyboard in Resources */,
 				E236C0491D105BBE0085437D /* HelpQ_Hacker.storyboard in Resources */,
+				E24997811D2E7F9D00402374 /* HelpQ_Staff_Queue.storyboard in Resources */,
 				E236C04B1D1060D80085437D /* HelpQ.storyboard in Resources */,
 				E20465D01CF1FAF50054654E /* Login.storyboard in Resources */,
 				E2BCA55B1CF36187006AAA8B /* Event.storyboard in Resources */,

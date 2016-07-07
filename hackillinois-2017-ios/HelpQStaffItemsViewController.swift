@@ -55,6 +55,21 @@ class HelpQStaffItemsViewController: GenericCardViewController, NSFetchedResults
             print("Error while loading user data \(error)")
         }
     }
+    
+    func saveAndReload() {
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
+            Helpers.saveContextMainThread()
+            dispatch_async(dispatch_get_main_queue()) {
+                self.loadSavedData()
+            }
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        // Need to reload here since the data components may have changed in other views
+        super.viewDidAppear(animated)
+        loadSavedData()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,9 +106,6 @@ class HelpQStaffItemsViewController: GenericCardViewController, NSFetchedResults
         // TODO: Update current item with whatever is on the database
         
         helpQItem.isHelping = NSNumber(bool: !helpQItem.isHelping.boolValue)
-        
-        Helpers.saveContextMainThread()
-        loadSavedData()
     }
     
     
@@ -111,12 +123,13 @@ class HelpQStaffItemsViewController: GenericCardViewController, NSFetchedResults
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("staff_helpq_cell", forIndexPath: indexPath) as! HelpQStaffItemCollectionViewCell
         let helpQItem = fetchedResultsController.objectAtIndexPath(indexPath) as! HelpQ
         
+        configureCell(cell: cell)
+        
         // Configure Cell
         cell.techLabel.text = helpQItem.technology
         cell.descLabel.text = helpQItem.desc
         
         // Help Button
-        print("Loading cell...")
         cell.helpButton.referenceObject = helpQItem
         cell.helpButton.addTarget(self, action: #selector(helpButtonPressed), forControlEvents: .TouchUpInside)
         if helpQItem.isHelping.boolValue {
