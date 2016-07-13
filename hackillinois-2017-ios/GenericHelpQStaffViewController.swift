@@ -1,31 +1,26 @@
 //
-//  HelpQStaffViewController.swift
+//  GenericHelpQStaffViewController.swift
 //  hackillinois-2017-ios
 //
-//  Created by Shotaro Ikeda on 6/14/16.
+//  Created by Shotaro Ikeda on 7/13/16.
 //  Copyright © 2016 Shotaro Ikeda. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class HelpQStaffViewController: GenericHelpQStaffViewController {
+class GenericHelpQStaffViewController: GenericCardViewController, NSFetchedResultsControllerDelegate, UICollectionViewDataSource {
 
-    @IBOutlet weak var helpQCollection: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
-    /*
     /* User Information */
     var user: User = (Helpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User])[0]
-    */
     
-    /*
     /* Core Data components */
     var fetchedResultsController: NSFetchedResultsController!
     var fetchPredicate: NSPredicate!
-    */
     
     /* Core Data functions */
-    /*
     func loadSavedData() {
         if fetchedResultsController == nil {
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -42,14 +37,12 @@ class HelpQStaffViewController: GenericHelpQStaffViewController {
         
         do {
             try self.fetchedResultsController.performFetch()
-            self.helpQCollection.reloadData()
+            self.collectionView.reloadData()
         } catch {
             print("Error loading: \(error)")
         }
     }
-    */
     
-    /*
     func saveAndReload() {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
             Helpers.saveContextMainThread()
@@ -58,9 +51,8 @@ class HelpQStaffViewController: GenericHelpQStaffViewController {
             }
         }
     }
-    */
     
-    /*
+    /* MARK: Population of sample data */
     func populateSampleData() {
         print("Creating Dummy Data")
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -81,12 +73,28 @@ class HelpQStaffViewController: GenericHelpQStaffViewController {
         
         saveAndReload()
     }
-    */
     
     // Mark: UIViewController Functions
     override func viewDidLoad() {
-        collectionView = helpQCollection
+        guard collectionView != nil else {
+            fatalError("You must set the collection view before calling the super classes' viewDidLoad function")
+        }
+        
         super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+        fetchPredicate = nil
+        loadSavedData()
+        
+        // Set delegates
+        fetchedResultsController.delegate = self
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+        /* Remove for production */
+        if fetchedResultsController.fetchedObjects?.count == 0 {
+            populateSampleData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -94,7 +102,6 @@ class HelpQStaffViewController: GenericHelpQStaffViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    /*
     // Mark: Button Handler
     func cellButtonPressed(sender: ReferencedButton) {
         let helpQItem = sender.referenceObject as! HelpQ
@@ -140,18 +147,7 @@ class HelpQStaffViewController: GenericHelpQStaffViewController {
         
         return cell
     }
-    */
     
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        let header = helpQCollection.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "staff_helpq_header", forIndexPath: indexPath) as! HelpQHackerCollectionReusableView
-        
-        let helpQItem = fetchedResultsController.objectAtIndexPath(indexPath) as! HelpQ
-        header.titleLabel.text = helpQItem.language
-        
-        return header
-    }
- 
-
     /*
     // MARK: - Navigation
 

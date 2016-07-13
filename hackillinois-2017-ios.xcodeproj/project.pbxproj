@@ -46,6 +46,7 @@
 		E26F44F21D0EF2C100FB4A9F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F44F11D0EF2C100FB4A9F /* ProfileViewController.swift */; };
 		E26F44F41D0EF3C400FB4A9F /* UIImage+generateBarCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F44F31D0EF3C400FB4A9F /* UIImage+generateBarCode.swift */; };
 		E276C3B51D11C3A400DABD4A /* HelpQChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E276C3B41D11C3A400DABD4A /* HelpQChatViewController.swift */; };
+		E27755531D36B7F600E7A379 /* GenericHelpQStaffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27755521D36B7F600E7A379 /* GenericHelpQStaffViewController.swift */; };
 		E277DD691CF4A79100D7E018 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E277DD681CF4A79100D7E018 /* FeedDetailViewController.swift */; };
 		E277DD6B1CF4AF0400D7E018 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = E277DD6A1CF4AF0400D7E018 /* keys.plist */; };
 		E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E277DD6D1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift */; };
@@ -166,6 +167,7 @@
 		E26F44F11D0EF2C100FB4A9F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E26F44F31D0EF3C400FB4A9F /* UIImage+generateBarCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+generateBarCode.swift"; sourceTree = "<group>"; };
 		E276C3B41D11C3A400DABD4A /* HelpQChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQChatViewController.swift; sourceTree = "<group>"; };
+		E27755521D36B7F600E7A379 /* GenericHelpQStaffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericHelpQStaffViewController.swift; sourceTree = "<group>"; };
 		E277DD681CF4A79100D7E018 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
 		E277DD6A1CF4AF0400D7E018 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
 		E277DD6D1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -573,6 +575,7 @@
 		E2BD82B31D09EA350009DB07 /* Generics */ = {
 			isa = PBXGroup;
 			children = (
+				E27755521D36B7F600E7A379 /* GenericHelpQStaffViewController.swift */,
 				E2BD82B41D09EA530009DB07 /* GenericMapViewController.swift */,
 				E2A085ED1D0C4202002197F9 /* GenericTabBarController.swift */,
 				E2A085EF1D0C42A7002197F9 /* GenericNavigationController.swift */,
@@ -931,6 +934,7 @@
 				E2BD82B51D09EA530009DB07 /* GenericMapViewController.swift in Sources */,
 				E23EBD641D25BFDC00D0E42F /* HelpQStaffItemCollectionViewCell.swift in Sources */,
 				E20465D31CF1FAF50054654E /* hackillinois_2017_ios.xcdatamodeld in Sources */,
+				E27755531D36B7F600E7A379 /* GenericHelpQStaffViewController.swift in Sources */,
 				E236C0571D107F9C0085437D /* HelpQHackerViewController.swift in Sources */,
 				E28FB6A01D194951000D062F /* HelpQ.swift in Sources */,
 				E2BCA57D1CF3B19E006AAA8B /* Feed.swift in Sources */,

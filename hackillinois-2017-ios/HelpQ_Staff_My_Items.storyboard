@@ -114,7 +114,7 @@
                     <tabBarItem key="tabBarItem" title="My Items" image="ic_live_help_white" id="G1t-5I-Vx9"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="collectionView" destination="Kgy-96-zLw" id="KZX-Im-1Yi"/>
+                        <outlet property="itemCollectionView" destination="Kgy-96-zLw" id="PkC-oB-8oQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NVu-jH-3Cl" userLabel="First Responder" sceneMemberID="firstResponder"/>

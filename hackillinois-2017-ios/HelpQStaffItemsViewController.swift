@@ -9,18 +9,12 @@
 import UIKit
 import CoreData
 
-class HelpQStaffItemsViewController: GenericCardViewController, NSFetchedResultsControllerDelegate, UICollectionViewDataSource {
+class HelpQStaffItemsViewController: GenericHelpQStaffViewController {
     /* UI Items */
-    @IBOutlet weak var collectionView: UICollectionView!
-    
-    /* Core Data */
-    var fetchedResultsController: NSFetchedResultsController!
-    
-    /* User Data */
-    var user: User!
+    @IBOutlet weak var itemCollectionView: UICollectionView!
     
     /* Mark: CoreData Functions */
-    func loadSavedData() {
+    override func loadSavedData() {
         if fetchedResultsController == nil {
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let fetchRequest = NSFetchRequest(entityName: "HelpQ")
@@ -40,28 +34,9 @@ class HelpQStaffItemsViewController: GenericCardViewController, NSFetchedResults
         
         do {
             try fetchedResultsController.performFetch()
-            collectionView.reloadData()
+            itemCollectionView.reloadData()
         } catch {
             print("Error loading items: \(error)")
-        }
-    }
-    
-    func loadUserData() {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let fetchRequest = NSFetchRequest(entityName: "User")
-        do {
-            try user = (appDelegate.managedObjectContext.executeFetchRequest(fetchRequest) as! [User]).first!
-        } catch {
-            print("Error while loading user data \(error)")
-        }
-    }
-    
-    func saveAndReload() {
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
-            Helpers.saveContextMainThread()
-            dispatch_async(dispatch_get_main_queue()) {
-                self.loadSavedData()
-            }
         }
     }
     
@@ -72,16 +47,13 @@ class HelpQStaffItemsViewController: GenericCardViewController, NSFetchedResults
     }
 
     override func viewDidLoad() {
+        /* Set super classes' collectionView */
+        collectionView = itemCollectionView
+        
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         loadSavedData()
-        loadUserData()
-        
-        // The other view populates the data items. There is a good chance that we will have duplicates if we populate them in this view
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -104,23 +76,13 @@ class HelpQStaffItemsViewController: GenericCardViewController, NSFetchedResults
         }
         
         // TODO: Update current item with whatever is on the database
-        
         helpQItem.isHelping = NSNumber(bool: !helpQItem.isHelping.boolValue)
-    }
-    
-    
-    /* Mark: UICollectionViewDataSource */
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
-    }
-    
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return fetchedResultsController.sections?.count ?? 0
+        saveAndReload()
     }
     
     /* Mark UICollectionViewDelegate */
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("staff_helpq_cell", forIndexPath: indexPath) as! HelpQStaffItemCollectionViewCell
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = itemCollectionView.dequeueReusableCellWithReuseIdentifier("staff_helpq_cell", forIndexPath: indexPath) as! HelpQStaffItemCollectionViewCell
         let helpQItem = fetchedResultsController.objectAtIndexPath(indexPath) as! HelpQ
         
         configureCell(cell: cell)
