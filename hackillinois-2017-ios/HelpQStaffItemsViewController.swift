@@ -39,26 +39,11 @@ class HelpQStaffItemsViewController: GenericHelpQStaffViewController {
             print("Error loading items: \(error)")
         }
     }
-    
-    override func viewDidAppear(animated: Bool) {
-        // Need to reload here since the data components may have changed in other views
-        super.viewDidAppear(animated)
-        loadSavedData()
-    }
 
     override func viewDidLoad() {
         /* Set super classes' collectionView */
         collectionView = itemCollectionView
-        
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        loadSavedData()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     /* Mark: UIButtonAction */

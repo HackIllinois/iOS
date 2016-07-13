@@ -22,25 +22,7 @@ class GenericHelpQStaffViewController: GenericCardViewController, NSFetchedResul
     
     /* Core Data functions */
     func loadSavedData() {
-        if fetchedResultsController == nil {
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            let fetch = NSFetchRequest(entityName: "HelpQ")
-            let languageSort = NSSortDescriptor(key: "language", ascending: false)
-            let inChargeSort = NSSortDescriptor(key: "isHelping", ascending: false)
-            let modifiedSort = NSSortDescriptor(key: "modified", ascending: false)
-            fetch.sortDescriptors = [inChargeSort, languageSort, modifiedSort]
-            
-            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetch, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: "language", cacheName: nil)
-        }
-        
-        fetchedResultsController.fetchRequest.predicate = fetchPredicate
-        
-        do {
-            try self.fetchedResultsController.performFetch()
-            self.collectionView.reloadData()
-        } catch {
-            print("Error loading: \(error)")
-        }
+        fatalError("Super classes loadSavedData was called, child class must override loadSavedData.")
     }
     
     func saveAndReload() {
@@ -74,6 +56,13 @@ class GenericHelpQStaffViewController: GenericCardViewController, NSFetchedResul
         saveAndReload()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        // Using fetchedResultsController makes it so we need to fetch modified data everytime user wants to 
+        // see the view
+        super.viewDidAppear(animated)
+        loadSavedData()
+    }
+    
     // Mark: UIViewController Functions
     override func viewDidLoad() {
         guard collectionView != nil else {
@@ -96,12 +85,8 @@ class GenericHelpQStaffViewController: GenericCardViewController, NSFetchedResul
             populateSampleData()
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
+    /*
     // Mark: Button Handler
     func cellButtonPressed(sender: ReferencedButton) {
         let helpQItem = sender.referenceObject as! HelpQ
@@ -117,6 +102,7 @@ class GenericHelpQStaffViewController: GenericCardViewController, NSFetchedResul
         
         saveAndReload()
     }
+    */
     
     // Mark: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -127,25 +113,9 @@ class GenericHelpQStaffViewController: GenericCardViewController, NSFetchedResul
         return fetchedResultsController.sections?.count ?? 0
     }
     
+    // Mark: Dummy UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("staff_helpq_cell", forIndexPath: indexPath) as! HelpQStaffCollectionViewCell
-        configureCell(cell: cell)
-        
-        let helpQItem: HelpQ = fetchedResultsController.objectAtIndexPath(indexPath) as! HelpQ
-        /* Configure cell with object parameters */
-        cell.techLabel.text = helpQItem.technology
-        cell.descLabel.text = helpQItem.desc
-        cell.helpButton.referenceObject = helpQItem // Add a reference to the object in order to modify it
-        
-        // Set the button title depending on the status
-        if helpQItem.isHelping.boolValue {
-            cell.helpButton.setTitle("Stop Helping User", forState: .Normal)
-        } else {
-            cell.helpButton.setTitle("Help User", forState: .Normal)
-        }
-        cell.helpButton.addTarget(self, action: #selector(cellButtonPressed), forControlEvents: .TouchUpInside)
-        
-        return cell
+        fatalError("Super classes cellForItemAtIndexPath was called, child classes must override this method.")
     }
     
     /*
