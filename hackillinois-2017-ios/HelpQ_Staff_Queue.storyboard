@@ -79,6 +79,7 @@
                                             <outlet property="descLabel" destination="Giu-b8-p3A" id="Hjj-Xg-SjA"/>
                                             <outlet property="helpButton" destination="ZPb-tp-8g9" id="9IH-Yu-zvf"/>
                                             <outlet property="techLabel" destination="PJC-Mk-g71" id="ICx-pW-K0P"/>
+                                            <segue destination="ba2-a2-aWO" kind="show" identifier="to_helpq_chat" id="rMl-SM-KpA"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -121,6 +122,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDZ-or-fWM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2288" y="2459"/>
+        </scene>
+        <!--HelpQ_Chat-->
+        <scene sceneID="3pg-Cz-R3p">
+            <objects>
+                <viewControllerPlaceholder storyboardName="HelpQ_Chat" id="ba2-a2-aWO" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wb1-0Q-Lqo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3018.5" y="2459"/>
         </scene>
     </scenes>
     <resources>

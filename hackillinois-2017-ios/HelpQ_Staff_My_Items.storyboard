@@ -43,18 +43,18 @@
                                                     </constraints>
                                                     <state key="normal" title="Stop Helping User"/>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="technology label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6G0-Vv-LMf">
-                                                    <rect key="frame" x="8" y="43" width="234" height="29"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rDn-YX-4P3">
                                                     <rect key="frame" x="8" y="72" width="234" height="70"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="70" id="Nn8-BF-YM0"/>
                                                     </constraints>
                                                     <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis dolor magna. Ut eget rutrum sapien. Donec dapibus vitae nibh dapibus sollicitudin. </string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="technology label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6G0-Vv-LMf">
+                                                    <rect key="frame" x="8" y="43" width="234" height="29"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -79,6 +79,7 @@
                                             <outlet property="descLabel" destination="rDn-YX-4P3" id="UBs-ra-Kxv"/>
                                             <outlet property="helpButton" destination="26L-q8-Vnt" id="lcR-w9-f9S"/>
                                             <outlet property="techLabel" destination="6G0-Vv-LMf" id="1zH-mc-pFT"/>
+                                            <segue destination="jap-NK-8b9" kind="show" identifier="to_helpq_chat" id="fam-Bb-l52"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -120,6 +121,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NVu-jH-3Cl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2288" y="1728"/>
+        </scene>
+        <!--HelpQ_Chat-->
+        <scene sceneID="hTZ-PX-nYN">
+            <objects>
+                <viewControllerPlaceholder storyboardName="HelpQ_Chat" id="jap-NK-8b9" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7o1-hI-ZO1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2916.5" y="1728"/>
         </scene>
     </scenes>
     <resources>

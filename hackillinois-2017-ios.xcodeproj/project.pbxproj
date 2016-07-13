@@ -340,8 +340,8 @@
 			isa = PBXGroup;
 			children = (
 				E22960371D1472FD008F7A31 /* HelpQ_Chat.storyboard */,
-				E22960421D147F55008F7A31 /* ChatCells */,
 				E276C3B41D11C3A400DABD4A /* HelpQChatViewController.swift */,
+				E22960421D147F55008F7A31 /* ChatCells */,
 			);
 			name = Chat;
 			sourceTree = "<group>";

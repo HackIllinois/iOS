@@ -88,14 +88,17 @@ class HelpQStaffViewController: GenericHelpQStaffViewController  {
         return header
     }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "to_helpq_chat" {
+            let destinationViewController: HelpQChatViewController = segue.destinationViewController as! HelpQChatViewController
+            let indexPath: NSIndexPath? = helpQCollection.indexPathsForSelectedItems()?.first
+            destinationViewController.helpqItem = fetchedResultsController.objectAtIndexPath(indexPath!) as! HelpQ
+        }
     }
-    */
 
 }
