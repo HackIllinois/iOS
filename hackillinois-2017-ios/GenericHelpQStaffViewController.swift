@@ -84,6 +84,9 @@ class GenericHelpQStaffViewController: GenericCardViewController, NSFetchedResul
         if fetchedResultsController.fetchedObjects?.count == 0 {
             populateSampleData()
         }
+        
+        /* Configure collectionView for consistency */
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
     }
     
     /*
