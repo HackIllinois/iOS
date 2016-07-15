@@ -17,4 +17,11 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         barcodeView.image = UIImage(data: user.barcodeData)
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "profile_segue" {
+            let profileTable: ProfileTableViewController = segue.destinationViewController as! ProfileTableViewController
+            profileTable.user = user
+        }
+    }
 }

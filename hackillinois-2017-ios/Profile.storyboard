@@ -8,7 +8,6 @@
         <!--Profile View Controller-->
         <scene sceneID="Nhr-xU-9wA">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="H67-LH-O0p" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="IIz-Kf-53f" customClass="ProfileViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="p89-cK-vpq"/>
@@ -21,7 +20,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jao-oz-ndK">
                                 <rect key="frame" x="0.0" y="64" width="525" height="487"/>
                                 <connections>
-                                    <segue destination="cbr-1O-J8e" kind="embed" id="L7B-dx-KiQ"/>
+                                    <segue destination="cbr-1O-J8e" kind="embed" identifier="profile_segue" id="L7B-dx-KiQ"/>
                                 </connections>
                             </containerView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8tN-O7-WUD">
@@ -47,14 +46,15 @@
                         <outlet property="barcodeView" destination="8tN-O7-WUD" id="IUn-q7-4cC"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H67-LH-O0p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1486" y="1364"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Profile Table View Controller-->
         <scene sceneID="qlb-b3-VWh">
             <objects>
-                <tableViewController id="cbr-1O-J8e" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="XJc-n6-8DP">
+                <tableViewController id="cbr-1O-J8e" customClass="ProfileTableViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="XJc-n6-8DP">
                         <rect key="frame" x="0.0" y="0.0" width="525" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -309,6 +309,21 @@
                             <outlet property="delegate" destination="cbr-1O-J8e" id="CO9-Lb-hEx"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="dietLabel" destination="rLG-uw-Hqj" id="w4B-Mx-6Xp"/>
+                        <outlet property="domainLabel" destination="tPo-pW-aIj" id="oOS-fJ-aM1"/>
+                        <outlet property="githubButton" destination="Vxm-Zh-qeU" id="Npz-sw-oOB"/>
+                        <outlet property="gradCell" destination="Yyd-i0-cqn" id="qcc-WE-CAg"/>
+                        <outlet property="gradLabel" destination="3dt-ya-F3Y" id="8sH-LX-9HN"/>
+                        <outlet property="linkedinButton" destination="ggR-38-ibX" id="s0G-hV-R6r"/>
+                        <outlet property="majorCell" destination="nFc-dH-Gak" id="1sz-Pc-4cy"/>
+                        <outlet property="majorLabel" destination="Nli-WT-EGI" id="pjM-Ft-cwY"/>
+                        <outlet property="nameLabel" destination="0uZ-6X-yFG" id="Kz9-gk-vpO"/>
+                        <outlet property="resumeButton" destination="8UW-Dl-pjq" id="DBR-Qy-SLJ"/>
+                        <outlet property="socialMediaCell1" destination="nBe-Ai-mnh" id="tCO-aO-9nP"/>
+                        <outlet property="socialMediaCell2" destination="hMZ-Dd-wm8" id="S8A-0s-gkq"/>
+                        <outlet property="websiteButton" destination="R5g-ip-hjs" id="k8K-Zp-dZW"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gSG-at-JP7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

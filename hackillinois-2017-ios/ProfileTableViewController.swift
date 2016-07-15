@@ -9,7 +9,63 @@
 import UIKit
 
 class ProfileTableViewController: UITableViewController {
+    
+    /* User Data - Set before Controller loads via segue */
+    var user: User!
+    
+    /* Name */
+    @IBOutlet weak var nameLabel: UILabel!
 
+    /* Organization or School */
+    @IBOutlet weak var domainLabel: UILabel!
+    
+    @IBOutlet weak var gradCell: UITableViewCell!
+    @IBOutlet weak var gradLabel: UILabel!
+    
+    @IBOutlet weak var majorCell: UITableViewCell!
+    @IBOutlet weak var majorLabel: UILabel!
+    
+    @IBOutlet weak var dietLabel: UILabel!
+    
+    /* Professional */
+    @IBOutlet weak var socialMediaCell1: UITableViewCell!
+    @IBOutlet weak var resumeButton: UIButton!
+    @IBOutlet weak var linkedinButton: UIButton!
+    
+    @IBOutlet weak var socialMediaCell2: UITableViewCell!
+    @IBOutlet weak var githubButton: UIButton!
+    @IBOutlet weak var websiteButton: UIButton!
+    
+    /* Set up functions */
+    func configureLabels() {
+        /* Make font fit to label */
+        nameLabel.adjustsFontSizeToFitWidth = true
+        domainLabel.adjustsFontSizeToFitWidth = true
+        gradLabel.adjustsFontSizeToFitWidth = true
+        majorLabel.adjustsFontSizeToFitWidth = true 
+        dietLabel.adjustsFontSizeToFitWidth = true
+    }
+    
+    func userDataToLabel() {
+        nameLabel.text = user.name
+        domainLabel.text = user.school
+        gradLabel.text = "May 2018"
+        majorLabel.text = user.major
+        dietLabel.text = "No restrictions"
+    }
+    
+    func addButtonTargets() {
+        /*
+         * Add button actions to open corresponding items here
+         */
+        
+        // TODO:
+        // open resume
+        // open linkedin
+        // open github
+        // open website
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,8 +74,12 @@ class ProfileTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        configureLabels()
+        userDataToLabel()
+        addButtonTargets()
     }
 
+    /*
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -36,6 +96,7 @@ class ProfileTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return 0
     }
+    */
 
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

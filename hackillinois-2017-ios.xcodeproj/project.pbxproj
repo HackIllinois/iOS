@@ -50,6 +50,7 @@
 		E277DD691CF4A79100D7E018 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E277DD681CF4A79100D7E018 /* FeedDetailViewController.swift */; };
 		E277DD6B1CF4AF0400D7E018 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = E277DD6A1CF4AF0400D7E018 /* keys.plist */; };
 		E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E277DD6D1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift */; };
+		E28753B11D392C6800E63A5F /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28753B01D392C6800E63A5F /* ProfileTableViewController.swift */; };
 		E28FB69F1D194951000D062F /* HelpQ+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28FB69B1D194950000D062F /* HelpQ+CoreDataProperties.swift */; };
 		E28FB6A01D194951000D062F /* HelpQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28FB69C1D194950000D062F /* HelpQ.swift */; };
 		E28FB6A11D194951000D062F /* Chat+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28FB69D1D194950000D062F /* Chat+CoreDataProperties.swift */; };
@@ -171,6 +172,7 @@
 		E277DD681CF4A79100D7E018 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
 		E277DD6A1CF4AF0400D7E018 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
 		E277DD6D1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailTableViewCell.swift; sourceTree = "<group>"; };
+		E28753B01D392C6800E63A5F /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		E28FB69B1D194950000D062F /* HelpQ+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HelpQ+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E28FB69C1D194950000D062F /* HelpQ.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQ.swift; sourceTree = "<group>"; };
 		E28FB69D1D194950000D062F /* Chat+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Chat+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -478,6 +480,7 @@
 			children = (
 				E2B6C3961D0B2ED800D851F9 /* Profile.storyboard */,
 				E26F44F11D0EF2C100FB4A9F /* ProfileViewController.swift */,
+				E28753B01D392C6800E63A5F /* ProfileTableViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -920,6 +923,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E28753B11D392C6800E63A5F /* ProfileTableViewController.swift in Sources */,
 				E2A085F21D0C4E43002197F9 /* GenericCardViewController.swift in Sources */,
 				E2BCA57F1CF3B19E006AAA8B /* User.swift in Sources */,
 				E2BCA56A1CF373A1006AAA8B /* EventConstants.swift in Sources */,
