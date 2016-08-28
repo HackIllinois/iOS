@@ -127,6 +127,7 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, Liq
         
         // The rectangle's alignment is hacky due to iOS's autolayout constraints
         let screen = UIScreen.mainScreen().bounds
+        
         let rect = CGRect(x: screen.width - 50, y: screen.height - self.tabBarController!.tabBar.frame.height - 180, width: 40, height: 40)
         
         // Only add the routing options if there are existing elements in buildings

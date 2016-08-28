@@ -16,15 +16,14 @@ extension UIImage {
     }
     */
     
-    class func generateRotatedBarCode(string: String) -> UIImage? {
+    class func generateBarCode(string: String) -> UIImage? {
         let data = string.dataUsingEncoding(NSASCIIStringEncoding)
         
         if let filter = CIFilter(name: "CICode128BarcodeGenerator") {
             filter.setValue(data, forKey: "inputMessage")
             let transform = CGAffineTransformMakeScale(3, 3)
-            let rotate = CGAffineTransformMakeRotation(CGFloat(M_PI / 2))
             
-            if let output = filter.outputImage?.imageByApplyingTransform(transform).imageByApplyingTransform(rotate) {
+            if let output = filter.outputImage?.imageByApplyingTransform(transform) {
                 return UIImage(CIImage: output)
             }
         }

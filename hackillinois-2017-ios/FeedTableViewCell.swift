@@ -1,5 +1,5 @@
 //
-//  FeedCollectionViewCell.swift
+//  FeedTableViewCell.swift
 //  hackillinois-2017-ios
 //
 //  Created by Shotaro Ikeda on 5/23/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FeedCollectionViewCell: UICollectionViewCell {
+class FeedTableViewCell: UITableViewCell {
     @IBOutlet weak var dateTimeLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
 }

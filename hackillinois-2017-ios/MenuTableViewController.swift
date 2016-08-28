@@ -11,7 +11,9 @@ import SWRevealViewController
 
 class MenuTableViewController: UITableViewController {
     
+    @IBOutlet weak var barcodeView: UIImageView!
     var selectedIndexPath: NSIndexPath!
+    var user: User = (Helpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]).first!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +25,7 @@ class MenuTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         selectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
         tableView.selectRowAtIndexPath(selectedIndexPath, animated: false, scrollPosition: .None)
+        barcodeView.image = UIImage(data: user.barcodeData)
     }
     
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {

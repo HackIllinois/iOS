@@ -103,10 +103,10 @@ class LoginViewController: GenericInputView {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
             // Generate content asynchronously
             /* Generate barcode image */
-            let barcodeImage = UIImage.generateRotatedBarCode(barcode)
+            let barcodeImage = UIImage.generateBarCode(barcode)
             // redraw to get NSData
-            UIGraphicsBeginImageContext(CGSize(width: 300, height: 1200))
-            barcodeImage?.drawInRect(CGRectMake(0, 0, 300, 1200))
+            UIGraphicsBeginImageContext(CGSize(width: 1200, height: 300))
+            barcodeImage?.drawInRect(CGRectMake(0, 0, 1200, 300))
             let barCodeImage2 = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             
@@ -225,6 +225,13 @@ class LoginViewController: GenericInputView {
         /*
         // Send request to server
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
+            /* Remove all previous users */
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            for user in (Helpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]) {
+                appDelegate.managedObjectContext.deleteObject(user)
+            }
+         
             let payload: JSON = JSON(["email": username, "password": password])
             HTTPHelpers.createPostRequest(subUrl: "v1/auth", jsonPayload: payload, completion: self.processResponse)
         }
@@ -232,6 +239,12 @@ class LoginViewController: GenericInputView {
         
         /* Mark: Fake server response -- Remove an uncomment code above to run */
         dispatch_after(1 * USEC_PER_SEC, dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
+            /* Remove all previous users */
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            for user in (Helpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]) {
+                appDelegate.managedObjectContext.deleteObject(user)
+            }
             /* Response from API */
             let auth: String = "auth dummy data"
             let userID: NSNumber = NSNumber(integer: 1)

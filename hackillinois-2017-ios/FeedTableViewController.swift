@@ -1,5 +1,5 @@
 //
-//  FeedCollectionViewController.swift
+//  FeedTableViewController.swift
 //  hackillinois-2017-ios
 //
 //  Created by Shotaro Ikeda on 5/23/16.
@@ -11,14 +11,13 @@ import CoreData
 
 private let reuseIdentifier = "feedCell"
 
-class FeedCollectionViewController: GenericCardViewController, UICollectionViewDataSource,  NSFetchedResultsControllerDelegate {
+class FeedTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     /* Variables */
     var refreshCleanUpRequired = false
     var dateTimeFormatter: NSDateFormatter!
     
     /* UI elements */
-    @IBOutlet weak var feedCollection: UICollectionView!
-    var refreshControl: UIRefreshControl!
+    @IBOutlet weak var feedTable: UITableView!
     
     /* Fetched results controller for lazy loading of cells */
     var fetchedResultsController: NSFetchedResultsController!
@@ -30,7 +29,7 @@ class FeedCollectionViewController: GenericCardViewController, UICollectionViewD
     func performFetch() {
         do {
             try self.fetchedResultsController.performFetch()
-            self.feedCollection.reloadData()
+            self.feedTable.reloadData()
         } catch {
             print("Error loading: \(error)")
         }
@@ -108,11 +107,11 @@ class FeedCollectionViewController: GenericCardViewController, UICollectionViewD
     
     /* Refresh the feed... */
     func refresh() {
-        feedCollection.reloadData()
+        feedTable.reloadData()
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
             // Check to see if the method previously failed.
             if self.refreshCleanUpRequired {
-                self.refreshControl.endRefreshing()
+                self.refreshControl!.endRefreshing()
                 // TODO: Different alert to user to wait a bit longer
                 dispatch_async(dispatch_get_main_queue()) {
                     let ac = UIAlertController(title: "Timeout Error", message: "Please wait a little longer before trying again.", preferredStyle: .Alert)
@@ -130,7 +129,7 @@ class FeedCollectionViewController: GenericCardViewController, UICollectionViewD
                 self.refreshCleanUpRequired = true
                 
                 // End refresh
-                self.refreshControl.endRefreshing()
+                self.refreshControl!.endRefreshing()
                 // Present warning to user
                 let ac = UIAlertController(title: "Network Error", message: "Network connection has timed out. Please check your internet connection and try again later.", preferredStyle: .Alert)
                 ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
@@ -177,7 +176,7 @@ class FeedCollectionViewController: GenericCardViewController, UICollectionViewD
                 
                 do {
                     try self.fetchedResultsController.performFetch()
-                    self.feedCollection.reloadData()
+                    self.feedTable.reloadData()
                 } catch {
                     print("Error loading: \(error)")
                 }
@@ -207,23 +206,19 @@ class FeedCollectionViewController: GenericCardViewController, UICollectionViewD
         dateTimeFormatter = NSDateFormatter()
         dateTimeFormatter.dateFormat = "MMMM dd 'at' h:mm a"
         
-        // Layout the view to look more natural
-        feedCollection.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 80, right: 0)
-        
         // Set up refresh indicator
-        refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh",
+        // refreshControl = UIRefreshControl()
+        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh",
                                                             attributes: [NSForegroundColorAttributeName: UIColor.fromRGBHex(mainTintColor)])
         // Set refresh control look
-        refreshControl.tintColor = UIColor.fromRGBHex(mainTintColor)
-        refreshControl.bounds = CGRect(
-            x: refreshControl.bounds.origin.x,
+        refreshControl?.tintColor = UIColor.fromRGBHex(mainTintColor)
+        refreshControl?.bounds = CGRect(
+            x: refreshControl!.bounds.origin.x,
             y: 50,
-            width: refreshControl.bounds.size.width,
-            height: refreshControl.bounds.size.height)
+            width: refreshControl!.bounds.size.width,
+            height: refreshControl!.bounds.size.height)
         
-        refreshControl.addTarget(self, action: #selector(refresh), forControlEvents: UIControlEvents.ValueChanged)
-        feedCollection.addSubview(refreshControl)
+        refreshControl?.addTarget(self, action: #selector(refresh), forControlEvents: UIControlEvents.ValueChanged)
         
         // Initialize Static data
         initializeSample()
@@ -245,7 +240,7 @@ class FeedCollectionViewController: GenericCardViewController, UICollectionViewD
         
         if segue.identifier == "feedDetail" {
             let destination = segue.destinationViewController as! FeedDetailViewController
-            let feedItem = fetchedResultsController.objectAtIndexPath(feedCollection.indexPathsForSelectedItems()!.first!) as! Feed
+            let feedItem = fetchedResultsController.objectAtIndexPath(feedTable.indexPathForSelectedRow!) as! Feed
             
             // Set up buildings
             destination.buildings = []
@@ -261,25 +256,23 @@ class FeedCollectionViewController: GenericCardViewController, UICollectionViewD
             destination.message = feedItem.message
         }
     }
-
-    // MARK: UICollectionViewDataSource
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("event_cell") as! FeedTableViewCell
+        let item = fetchedResultsController.objectAtIndexPath(indexPath) as! Feed
+        
+        cell.messageLabel.text = item.message
+        cell.dateTimeLabel.text = dateTimeFormatter.stringFromDate(item.time)
+        
+        return cell
+    }
+    
+    // MARK: UITableViewDataSource
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return fetchedResultsController.sections?.count ?? 0
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fetchedResultsController.sections![section].numberOfObjects
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("feedCell", forIndexPath: indexPath) as! FeedCollectionViewCell
-        let feed = fetchedResultsController.objectAtIndexPath(indexPath) as! Feed
-        /* Initialize cell data */
-        cell.dateTimeLabel.text = dateTimeFormatter.stringFromDate(feed.time)
-        cell.messageLabel.text = feed.message
-        
-        configureCell(cell: cell)
-        
-        return cell
     }
 }

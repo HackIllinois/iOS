@@ -9,14 +9,7 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-    @IBOutlet weak var barcodeView: UIImageView!
-    
-    var user: User = (Helpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]).first! 
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        barcodeView.image = UIImage(data: user.barcodeData)
-    }
+    var user: User = (Helpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]).first!
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "profile_segue" {

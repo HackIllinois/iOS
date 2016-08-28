@@ -1,5 +1,5 @@
 //
-//  ScheduleCollectionViewCell.swift
+//  ScheduleCell.swift
 //  hackillinois-2017-ios
 //
 //  Created by Shotaro Ikeda on 6/11/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ScheduleCollectionViewCell: UICollectionViewCell {
+class ScheduleCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var location: UILabel!
     @IBOutlet weak var time: UILabel!

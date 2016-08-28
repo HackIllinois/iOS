@@ -9,10 +9,7 @@
 import UIKit
 
 class SaturdayViewController: GenericDayViewController {
-    @IBOutlet weak var collection: UICollectionView!
-    
     override func viewDidLoad() {
-        collectionView = collection
         
         for n in 0..<10 {
             let item = DayItem(name: "Saturday Event \(n)", location: "REPLACE ME", time: "MM:DD PM")

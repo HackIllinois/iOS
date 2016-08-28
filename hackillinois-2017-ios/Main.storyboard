@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="7vg-EB-vs0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="7vg-EB-vs0">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -61,11 +61,6 @@
                         <color key="separatorColor" red="0.55294117647058827" green="0.71764705882352942" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.1803921568627451" green="0.3529411764705882" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexTrackingBackgroundColor" red="0.18039215689999999" green="0.35294117650000001" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="VuI-eK-RZP">
-                            <rect key="frame" x="0.0" y="240" width="600" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        </view>
                         <sections>
                             <tableViewSection id="bjD-dT-AWg">
                                 <cells>
@@ -201,6 +196,28 @@
                                             <segue destination="mkr-fS-eGq" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="Ar7-zE-aXm"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="150" id="NRr-IW-Ahm">
+                                        <rect key="frame" x="0.0" y="240" width="600" height="150"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NRr-IW-Ahm" id="4Gk-zA-xuF">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="149.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="85P-2o-8sa">
+                                                    <rect key="frame" x="28" y="40" width="484" height="70"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="70" id="ZRl-1t-ZGt"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="85P-2o-8sa" secondAttribute="trailing" constant="80" id="8KP-mY-6H9"/>
+                                                <constraint firstItem="85P-2o-8sa" firstAttribute="leading" secondItem="4Gk-zA-xuF" secondAttribute="leadingMargin" constant="20" id="Vbh-pH-q4b"/>
+                                                <constraint firstItem="85P-2o-8sa" firstAttribute="centerY" secondItem="4Gk-zA-xuF" secondAttribute="centerY" id="h8d-13-BpB"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.18039215689999999" green="0.35294117650000001" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -209,6 +226,9 @@
                             <outlet property="delegate" destination="Smb-Rq-Vq4" id="yR3-vm-eQp"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="barcodeView" destination="85P-2o-8sa" id="y1K-8k-JE9"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fGa-fn-7dU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
