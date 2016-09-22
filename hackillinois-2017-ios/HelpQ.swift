@@ -14,7 +14,7 @@ class HelpQ: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
     func initialize(technology: String, language: String, location: String, description: String) {
-        self.resolved = NSNumber(bool: false)
+        self.resolved = NSNumber(value: false)
         self.technology = technology
         self.language = language
         self.location = location
@@ -22,12 +22,12 @@ class HelpQ: NSManagedObject {
         self.initiation = NSDate()
         self.modified = NSDate()
         self.chats = NSOrderedSet()
-        self.isHelping = NSNumber(bool: false)
+        self.isHelping = NSNumber(value: false)
         self.mentor = ""
     }
     
     func initialize(resolved: Bool, technology: String, language: String, location: String, description: String, chats: [Chat]) {
-        self.resolved = NSNumber(bool: resolved)
+        self.resolved = NSNumber(value: resolved)
         self.technology = technology
         self.language = language
         self.location = location
@@ -35,12 +35,12 @@ class HelpQ: NSManagedObject {
         self.initiation = NSDate()
         self.modified = NSDate()
         self.chats = NSOrderedSet(array: chats)
-        self.isHelping = NSNumber(bool: false)
+        self.isHelping = NSNumber(value: false)
         self.mentor = ""
     }
     
     func initialize() {
-        self.resolved = NSNumber(bool: false)
+        self.resolved = NSNumber(value: false)
         self.technology = "Node JS"
         self.language = "Javascript"
         self.location = "1404 Siebel"
@@ -48,12 +48,12 @@ class HelpQ: NSManagedObject {
         self.initiation = NSDate()
         self.modified = NSDate()
         self.chats = NSOrderedSet()
-        self.isHelping = NSNumber(bool: false)
+        self.isHelping = NSNumber(value: false)
         self.mentor = ""
     }
     
-    func assignMentor(mentor mentor: String, helpStatus: Bool) {
-        self.isHelping = NSNumber(bool: helpStatus)
+    func assignMentor(mentor: String, helpStatus: Bool) {
+        self.isHelping = NSNumber(value: helpStatus)
         self.mentor = mentor
     }
     
@@ -62,11 +62,11 @@ class HelpQ: NSManagedObject {
         Helpers.saveContext()
     }
     
-    func pushChatItem(chat chat: Chat) {
+    func pushChatItem(chat: Chat) {
         chat.helpQ = self // Set this object as the head
         
         let mutableVersion = self.chats.mutableCopy() as! NSMutableOrderedSet
-        mutableVersion.addObject(chat)
+        mutableVersion.add(chat)
         self.chats = mutableVersion
         Helpers.saveContext() // Save after changing item
     }

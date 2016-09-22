@@ -19,22 +19,23 @@ class Helpers {
      * Finds the location entity if it exists, otherwise returns a new entity representing a location object
      */
     class func createOrFetchLocation(location locationName: String, abbreviation shortName: String, locationLatitude latitude: NSNumber, locationLongitude longitude: NSNumber, locationFeeds feeds: [Feed]?) -> Location {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let fetchRequest = NSFetchRequest(entityName: "Location")
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let fetchRequest: NSFetchRequest<[NSManagedObject]> = NSFetchRequest(entityName: "Location")
         fetchRequest.predicate = NSPredicate(format: "name == %@", locationName)
         
-        if let locations = try? appDelegate.managedObjectContext.executeFetchRequest(fetchRequest) {
+        if let locations = try? appDelegate.managedObjectContext.execute(fetchRequest as NSPersistentStoreRequest) as! [Location]{
             if locations.count > 0 {
                 return locations[0] as! Location
             }
         }
         
         /* Was not found */
-        let location = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: appDelegate.managedObjectContext) as! Location
+        let location = NSEntityDescription.insertNewObject(forEntityName: "Location", into: appDelegate.managedObjectContext) as! Location
         if feeds == nil {
-            location.initialize(latitude, longitude: longitude, name: locationName, shortName: shortName, feeds: NSSet())
+            location.initialize(latitude: latitude, longitude: longitude, name: locationName, shortName: shortName, feeds: NSSet())
         } else {
-            location.initialize(latitude, longitude: longitude, name: locationName, shortName: shortName, feeds: feeds!)
+            location.initialize(latitude: latitude, longitude: longitude, name: locationName, shortName: shortName, feeds: feeds!)
         }
         
         return location
@@ -45,7 +46,7 @@ class Helpers {
      * Finds the tag entity if it exists, otherwise returns a new entity representing a location object
      */
     class func createOrFetchTag(tag tagName: String, feeds: [Feed]?) -> Tag {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let fetchRequest = NSFetchRequest(entityName: "Tag")
         fetchRequest.predicate = NSPredicate(format: "name == %@", tagName)
         
@@ -56,12 +57,12 @@ class Helpers {
         }
         
         /* Was not found */
-        let tag = NSEntityDescription.insertNewObjectForEntityForName("Tag", inManagedObjectContext: appDelegate.managedObjectContext) as! Tag
+        let tag = NSEntityDescription.insertNewObject(forEntityName: "Tag", into: appDelegate.managedObjectContext) as! Tag
         
         if feeds == nil {
-            tag.initialize(tagName, feeds: NSSet())
+            tag.initialize(name: tagName, feeds: NSSet())
         } else {
-            tag.initialize(tagName, feeds: feeds!)
+            tag.initialize(name: tagName, feeds: feeds!)
         }
         
         return tag
@@ -78,11 +79,11 @@ class Helpers {
      * locations and tags seems required, you can insert an empty array/list if it doesn't exist (done in order to have the
      * user have to make an intention not to have any locations or tags
      */
-    class func createFeed(id id: NSNumber, message: String, timestamp: UInt64, locations: [Location], tags: [Tag]) -> Feed {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    class func createFeed(id: NSNumber, message: String, timestamp: UInt64, locations: [Location], tags: [Tag]) -> Feed {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
-        let feed = NSEntityDescription.insertNewObjectForEntityForName("Feed", inManagedObjectContext: appDelegate.managedObjectContext) as! Feed
-        feed.initialize(id, message: message, time: NSDate(timeIntervalSince1970: NSTimeInterval(timestamp)), locations: locations, tags: tags)
+        let feed = NSEntityDescription.insertNewObject(forEntityName: "Feed", into: appDelegate.managedObjectContext) as! Feed
+        feed.initialize(id: id, message: message, time: NSDate(timeIntervalSince1970: TimeInterval(timestamp)), locations: locations, tags: tags)
         return feed
     }
     
@@ -91,8 +92,8 @@ class Helpers {
      * Written to be asynchronous and nonobstructive (high priority) to prevent the main UI from freezing when it occurs
      */
     class func saveContext() {
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        DispatchQueue.global(qos: .userInitiated).async() {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             if appDelegate.managedObjectContext.hasChanges {
                 do {
                     try appDelegate.managedObjectContext.save()
@@ -108,7 +109,7 @@ class Helpers {
      * Written to be done on the main thread instead of an asynchronous thread
      */
     class func saveContextMainThread() {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if appDelegate.managedObjectContext.hasChanges {
             do {
                 try appDelegate.managedObjectContext.save()
@@ -128,10 +129,10 @@ class Helpers {
      *
      * Returns a AnyObject? since the entity may not exist
      */
-    class func loadContext(entityName entityName: String, fetchConfiguration: (NSFetchRequest -> Void)?) -> AnyObject? {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    class func loadContext(entityName: String, fetchConfiguration: ((NSFetchRequest<NSManagedObject>) -> Void)?) -> Any? {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         // Fetch requested data
-        let dataFetchReqeust = NSFetchRequest(entityName: entityName)
+        let dataFetchReqeust: NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: entityName)
         
         // Configure the fetch request with user parameters
         if fetchConfiguration != nil {
@@ -139,7 +140,7 @@ class Helpers {
         }
         
         do {
-            return try appDelegate.managedObjectContext.executeFetchRequest(dataFetchReqeust)
+            return try appDelegate.managedObjectContext.execute(dataFetchReqeust as! NSFetchRequest<NSFetchRequestResult>)
         } catch {
             print("Failed to fetch feed data, critical error: \(error)")
         }
@@ -151,24 +152,24 @@ class Helpers {
      * Helper function to update the last updated time
      */
     class func setLatestUpdateTime(time: NSDate) {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(time, forKey: "timestamp")
+        let defaults = UserDefaults.standard
+        defaults.set(time, forKey: "timestamp")
     }
     
     /*
      * Helper function to obtain the last updated time
      */
     class func getLatestUpdateTime() -> NSDate? {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        return defaults.objectForKey("timestamp") as? NSDate
+        let defaults = UserDefaults.standard
+        return defaults.object(forKey: "timestamp") as? NSDate
     }
  
 }
 
 /* Helpers for User Profile */
 extension Helpers {
-    class func storeUser(name name: String, email: String, school: String, major: String, role: String, barcode: String, barcodeData: NSData, auth: String, initTime: NSDate, expirationTime: NSDate, userID: NSNumber) {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    class func storeUser(name: String, email: String, school: String, major: String, role: String, barcode: String, barcodeData: NSData, auth: String, initTime: NSDate, expirationTime: NSDate, userID: NSNumber) {
+        let appDelegate = UIApplication.shared().delegate as! AppDelegate
         
         let user = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: appDelegate.managedObjectContext) as! User
         user.initialize(name: name, email: email, school: school, major: major, role: role, barcode: barcode, barcodeData: barcodeData, token: auth, initTime: initTime, expirationTime: expirationTime, userID: userID)
@@ -179,9 +180,9 @@ extension Helpers {
 
 /* Helpers for HelpQ */
 extension Helpers {
-    class func createHelpQItem(technology technology: String, language: String, location: String, description: String) -> HelpQ {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let helpQ = NSEntityDescription.insertNewObjectForEntityForName("HelpQ", inManagedObjectContext: appDelegate.managedObjectContext) as! HelpQ
+    class func createHelpQItem(technology: String, language: String, location: String, description: String) -> HelpQ {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let helpQ = NSEntityDescription.insertNewObject(forEntityName: "HelpQ", into: appDelegate.managedObjectContext) as! HelpQ
         helpQ.initialize(technology, language: language, location: location, description: description)
         
         return helpQ

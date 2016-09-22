@@ -210,7 +210,7 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, Liq
     }
     
     // Mark: Routing location from current location to user specified location
-    func routeTo(destination destination: CLLocationCoordinate2D) {
+    func routeTo(destination: CLLocationCoordinate2D) {
         guard CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse else {
             // Cannot route if user didn't authorize
             return

@@ -18,11 +18,11 @@ enum DayOfWeek: Int {
 class SchedulePageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     private lazy var scheduleViewControllers: [UIViewController] = {
-        return [self.getScheduleController("one"), self.getScheduleController("two"), self.getScheduleController("three")]
+        return [self.getScheduleController(name: "one"), self.getScheduleController(name: "two"), self.getScheduleController(name: "three")]
     }()
     
     func getScheduleController(name: String) -> UIViewController {
-        return UIStoryboard(name: "Schedule", bundle: nil).instantiateViewControllerWithIdentifier("schedule_day_\(name)")
+        return UIStoryboard(name: "Schedule", bundle: nil).instantiateViewController(withIdentifier: "schedule_day_\(name)")
     }
     
     // Views created to correct the color
@@ -43,9 +43,9 @@ class SchedulePageViewController: UIPageViewController, UIPageViewControllerData
     
     func alertScrollable() {
         // Alert to the user that the view is now scrollable
-        let ac = UIAlertController(title: "Hint", message: "You can swipe left/right to view other days' schedule.", preferredStyle: .Alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-        presentViewController(ac, animated: true, completion: nil)
+        let ac = UIAlertController(title: "Hint", message: "You can swipe left/right to view other days' schedule.", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(ac, animated: true, completion: nil)
     }
 
     override func viewDidLoad() {

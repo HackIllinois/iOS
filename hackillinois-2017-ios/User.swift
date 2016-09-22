@@ -13,7 +13,7 @@ import CoreData
 class User: NSManagedObject {
 
     /* Convenience updating function */
-    func initialize(name name: String, email: String, school: String, major: String, role: String, barcode: String, barcodeData: NSData, token: String, initTime: NSDate, expirationTime: NSDate, userID: NSNumber) {
+    func initialize(name: String, email: String, school: String, major: String, role: String, barcode: String, barcodeData: NSData, token: String, initTime: NSDate, expirationTime: NSDate, userID: NSNumber) {
         self.barcode = barcode
         self.barcodeData = barcodeData
         self.major = major
