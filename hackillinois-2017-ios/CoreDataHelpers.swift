@@ -11,7 +11,7 @@ import CoreData
 import UIKit
 
 /* Provide namespace for helpers */
-class Helpers {
+class CoreDataHelpers {
     /* Mark - Helper functions to find location, tag, and create feeds */
     
     /* 
@@ -21,12 +21,12 @@ class Helpers {
     class func createOrFetchLocation(location locationName: String, abbreviation shortName: String, locationLatitude latitude: NSNumber, locationLongitude longitude: NSNumber, locationFeeds feeds: [Feed]?) -> Location {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let fetchRequest: NSFetchRequest<[NSManagedObject]> = NSFetchRequest(entityName: "Location")
+        let fetchRequest = NSFetchRequest<Location>(entityName: "Location")
         fetchRequest.predicate = NSPredicate(format: "name == %@", locationName)
         
-        if let locations = try? appDelegate.managedObjectContext.execute(fetchRequest as NSPersistentStoreRequest) as! [Location]{
+        if let locations = try? appDelegate.managedObjectContext.fetch(fetchRequest) {
             if locations.count > 0 {
-                return locations[0] as! Location
+                return locations[0]
             }
         }
         
@@ -47,12 +47,12 @@ class Helpers {
      */
     class func createOrFetchTag(tag tagName: String, feeds: [Feed]?) -> Tag {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let fetchRequest = NSFetchRequest(entityName: "Tag")
+        let fetchRequest = NSFetchRequest<Tag>(entityName: "Tag")
         fetchRequest.predicate = NSPredicate(format: "name == %@", tagName)
         
-        if let tags = try? appDelegate.managedObjectContext.executeFetchRequest(fetchRequest) {
+        if let tags = try? appDelegate.managedObjectContext.fetch(fetchRequest) {
             if tags.count > 0 {
-                return tags[0] as! Tag
+                return tags[0]
             }
         }
         
@@ -83,7 +83,7 @@ class Helpers {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         let feed = NSEntityDescription.insertNewObject(forEntityName: "Feed", into: appDelegate.managedObjectContext) as! Feed
-        feed.initialize(id: id, message: message, time: NSDate(timeIntervalSince1970: TimeInterval(timestamp)), locations: locations, tags: tags)
+        feed.initialize(id: id, message: message, time: Date(timeIntervalSince1970: TimeInterval(timestamp)), locations: locations, tags: tags)
         return feed
     }
     
@@ -129,18 +129,16 @@ class Helpers {
      *
      * Returns a AnyObject? since the entity may not exist
      */
-    class func loadContext(entityName: String, fetchConfiguration: ((NSFetchRequest<NSManagedObject>) -> Void)?) -> Any? {
+    class func loadContext(entityName: String, fetchConfiguration: ((NSFetchRequest<NSManagedObject>) -> Void)?) -> [NSManagedObject]? {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         // Fetch requested data
-        let dataFetchReqeust: NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: entityName)
+        let dataFetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
         
         // Configure the fetch request with user parameters
-        if fetchConfiguration != nil {
-            fetchConfiguration!(dataFetchReqeust)
-        }
+        fetchConfiguration?(dataFetchRequest)
         
         do {
-            return try appDelegate.managedObjectContext.execute(dataFetchReqeust as! NSFetchRequest<NSFetchRequestResult>)
+            return try appDelegate.managedObjectContext.fetch(dataFetchRequest)
         } catch {
             print("Failed to fetch feed data, critical error: \(error)")
         }
@@ -151,7 +149,7 @@ class Helpers {
     /*
      * Helper function to update the last updated time
      */
-    class func setLatestUpdateTime(time: NSDate) {
+    class func setLatestUpdateTime(_ time: Date) {
         let defaults = UserDefaults.standard
         defaults.set(time, forKey: "timestamp")
     }
@@ -159,19 +157,19 @@ class Helpers {
     /*
      * Helper function to obtain the last updated time
      */
-    class func getLatestUpdateTime() -> NSDate? {
+    class func getLatestUpdateTime() -> Date? {
         let defaults = UserDefaults.standard
-        return defaults.object(forKey: "timestamp") as? NSDate
+        return defaults.object(forKey: "timestamp") as? NSDate as Date?
     }
  
 }
 
 /* Helpers for User Profile */
-extension Helpers {
-    class func storeUser(name: String, email: String, school: String, major: String, role: String, barcode: String, barcodeData: NSData, auth: String, initTime: NSDate, expirationTime: NSDate, userID: NSNumber) {
-        let appDelegate = UIApplication.shared().delegate as! AppDelegate
+extension CoreDataHelpers {
+    class func storeUser(name: String, email: String, school: String, major: String, role: String, barcode: String, barcodeData: Data, auth: String, initTime: Date, expirationTime: Date, userID: NSNumber) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
-        let user = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: appDelegate.managedObjectContext) as! User
+        let user = NSEntityDescription.insertNewObject(forEntityName: "User", into: appDelegate.managedObjectContext) as! User
         user.initialize(name: name, email: email, school: school, major: major, role: role, barcode: barcode, barcodeData: barcodeData, token: auth, initTime: initTime, expirationTime: expirationTime, userID: userID)
         
         self.saveContext()
@@ -179,11 +177,11 @@ extension Helpers {
 }
 
 /* Helpers for HelpQ */
-extension Helpers {
+extension CoreDataHelpers {
     class func createHelpQItem(technology: String, language: String, location: String, description: String) -> HelpQ {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let helpQ = NSEntityDescription.insertNewObject(forEntityName: "HelpQ", into: appDelegate.managedObjectContext) as! HelpQ
-        helpQ.initialize(technology, language: language, location: location, description: description)
+        helpQ.initialize(technology: technology, language: language, location: location, description: description)
         
         return helpQ
     }

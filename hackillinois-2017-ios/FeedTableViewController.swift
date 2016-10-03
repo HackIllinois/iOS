@@ -14,13 +14,13 @@ private let reuseIdentifier = "feedCell"
 class FeedTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     /* Variables */
     var refreshCleanUpRequired = false
-    var dateTimeFormatter: NSDateFormatter!
+    var dateTimeFormatter: DateFormatter!
     
     /* UI elements */
     @IBOutlet weak var feedTable: UITableView!
     
     /* Fetched results controller for lazy loading of cells */
-    var fetchedResultsController: NSFetchedResultsController!
+    var fetchedResultsController: NSFetchedResultsController<Feed>!
     
     /* Cache of Tags to quickly generate the "Filter by..." menu */
     var tags: [Tag]!
@@ -40,12 +40,12 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
     // TODO: find a way to generalize
     func loadSavedData() {
         if fetchedResultsController == nil {
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            let fetch = NSFetchRequest(entityName: "Feed")
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let fetch = NSFetchRequest<Feed>(entityName: "Feed")
             let sort = NSSortDescriptor(key: "time", ascending: false)
             fetch.sortDescriptors = [sort]
             
-            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetch, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+            fetchedResultsController = NSFetchedResultsController<Feed>(fetchRequest: fetch, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
             fetchedResultsController.delegate = self
         }
         
@@ -55,52 +55,52 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
     
     func initializeSample() {
         // Make sure that the time stamp recieved is actually greater than our last updated time
-        let lastUpdated: NSDate? = Helpers.getLatestUpdateTime()
+        let lastUpdated: Date? = CoreDataHelpers.getLatestUpdateTime() as Date?
         if lastUpdated != nil {
             // Replace with actual timestamp
-            if NSDate(timeIntervalSince1970: 1464042000).compare(lastUpdated!).rawValue <= 0 {
+            if Date(timeIntervalSince1970: 1464042000).compare(lastUpdated!).rawValue <= 0 {
                 return
             }
         }
         
         // Temporary Locations
-        let siebel: Location! = Helpers.createOrFetchLocation(location: "Siebel", abbreviation: "Siebel",locationLatitude: 40.113926, locationLongitude: -88.224916, locationFeeds: nil)
+        let siebel: Location! = CoreDataHelpers.createOrFetchLocation(location: "Siebel", abbreviation: "Siebel",locationLatitude: 40.113926, locationLongitude: -88.224916, locationFeeds: nil)
         
-        let eceb: Location! = Helpers.createOrFetchLocation(location: "ECEB", abbreviation: "ECEB", locationLatitude: 40.114828, locationLongitude: -88.228049, locationFeeds: nil)
+        let eceb: Location! = CoreDataHelpers.createOrFetchLocation(location: "ECEB", abbreviation: "ECEB", locationLatitude: 40.114828, locationLongitude: -88.228049, locationFeeds: nil)
         
-        let union: Location! = Helpers.createOrFetchLocation(location: "Illini Union", abbreviation: "Union", locationLatitude: 40.109395, locationLongitude: -88.227181, locationFeeds: nil)
+        let union: Location! = CoreDataHelpers.createOrFetchLocation(location: "Illini Union", abbreviation: "Union", locationLatitude: 40.109395, locationLongitude: -88.227181, locationFeeds: nil)
         
         // Temporary Tags
-        let tagGeneral = Helpers.createOrFetchTag(tag: "General", feeds: nil)
-        let tagFood = Helpers.createOrFetchTag(tag: "Food", feeds: nil)
-        let tagEvent = Helpers.createOrFetchTag(tag: "Event", feeds: nil)
-        let tagWorkshop = Helpers.createOrFetchTag(tag: "Workshop", feeds: nil)
+        let tagGeneral = CoreDataHelpers.createOrFetchTag(tag: "General", feeds: nil)
+        let tagFood = CoreDataHelpers.createOrFetchTag(tag: "Food", feeds: nil)
+        let tagEvent = CoreDataHelpers.createOrFetchTag(tag: "Event", feeds: nil)
+        let tagWorkshop = CoreDataHelpers.createOrFetchTag(tag: "Workshop", feeds: nil)
         
         // Temporary Events
-        Helpers.createFeed(id: 1, message: "Hacking has begun!",
+        let _ = CoreDataHelpers.createFeed(id: 1, message: "Hacking has begun!",
                            timestamp: 1464038000, locations: [], tags: [tagGeneral])
         
-        Helpers.createFeed(id: 2, message: "Lunch is served! Please come to ECEB or Siebel for Potbelly's Sandwiches!",
+        _ = CoreDataHelpers.createFeed(id: 2, message: "Lunch is served! Please come to ECEB or Siebel for Potbelly's Sandwiches!",
                            timestamp: 1464038763, locations: [siebel, eceb], tags: [tagFood])
         
-        Helpers.createFeed(id: 3, message: "Cluehunt has begun!",
+        _ = CoreDataHelpers.createFeed(id: 3, message: "Cluehunt has begun!",
                            timestamp: 1464040073, locations: [siebel, eceb], tags: [tagEvent])
         
-        Helpers.createFeed(id: 4, message: "Dinner is will be served in 10 minutes!",
+        _ = CoreDataHelpers.createFeed(id: 4, message: "Dinner is will be served in 10 minutes!",
                            timestamp: 1464042073, locations: [siebel, eceb], tags: [tagFood])
         
-        Helpers.createFeed(id: 5, message: "Career fair is starting at the Union!",
+        _ = CoreDataHelpers.createFeed(id: 5, message: "Career fair is starting at the Union!",
                            timestamp: 1464042100, locations: [union], tags: [tagEvent])
         
         // Generate dummy data to simulate scrolling down
         for n in 0 ..< 7 {
             let time = UInt64(1464037000 - n*432)
-            Helpers.createFeed(id: 6 + n, message: "Replace me with real things",
+            let _ = CoreDataHelpers.createFeed(id: NSNumber(value: 6 + n), message: "Replace me with real things",
                                timestamp: time, locations: [siebel, eceb, union], tags: [tagWorkshop])
         }
         
-        Helpers.saveContext()
-        Helpers.setLatestUpdateTime(NSDate(timeIntervalSince1970: 1464042100))
+        CoreDataHelpers.saveContext()
+        CoreDataHelpers.setLatestUpdateTime(Date(timeIntervalSince1970: 1464042100))
     }
     
     // Mark - FeedCollectionViewController
@@ -108,33 +108,33 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
     /* Refresh the feed... */
     func refresh() {
         feedTable.reloadData()
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async { [unowned self] in
             // Check to see if the method previously failed.
             if self.refreshCleanUpRequired {
                 self.refreshControl!.endRefreshing()
                 // TODO: Different alert to user to wait a bit longer
-                dispatch_async(dispatch_get_main_queue()) {
-                    let ac = UIAlertController(title: "Timeout Error", message: "Please wait a little longer before trying again.", preferredStyle: .Alert)
-                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                DispatchQueue.main.async {
+                    let ac = UIAlertController(title: "Timeout Error", message: "Please wait a little longer before trying again.", preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                     
-                    self.presentViewController(ac, animated: true, completion: nil)
+                    self.present(ac, animated: true, completion: nil)
                 }
                 return
             }
             
             // Set timeout so the user isn't stuck with a long running process...
             var timeout = false
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(timeoutIntervalSeconds * NSEC_PER_SEC)), dispatch_get_main_queue()) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(timeoutIntervalSeconds * NSEC_PER_SEC)) / Double(NSEC_PER_SEC)) {
                 timeout = true
                 self.refreshCleanUpRequired = true
                 
                 // End refresh
                 self.refreshControl!.endRefreshing()
                 // Present warning to user
-                let ac = UIAlertController(title: "Network Error", message: "Network connection has timed out. Please check your internet connection and try again later.", preferredStyle: .Alert)
-                ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                let ac = UIAlertController(title: "Network Error", message: "Network connection has timed out. Please check your internet connection and try again later.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 
-                self.presentViewController(ac, animated: true, completion: nil)
+                self.present(ac, animated: true, completion: nil)
                 return
             }
             
@@ -152,8 +152,8 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
     /* TODO: Hardcode tags instead? */
     func loadTags() {
         // Might need to change this to QOS_CLASS_USER_INITIATED, or it might not appear in time
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) { [unowned self] in
-            let tempTags = Helpers.loadContext(entityName: "Tag") {
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.utility).async { [unowned self] in
+            let tempTags = CoreDataHelpers.loadContext(entityName: "Tag") {
                 fetch in
                 
                 let sort = NSSortDescriptor(key: "name", ascending: true)
@@ -166,10 +166,10 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
     // Mark: Show filtering options...
     func showFilterBy() {
         // Add the tags here...
-        let alert = UIAlertController(title: "Filter by...", message: "Select tag to sort by", preferredStyle: .ActionSheet)
+        let alert = UIAlertController(title: "Filter by...", message: "Select tag to sort by", preferredStyle: .actionSheet)
         // Could be slow for many tags...
         for tag in tags {
-            alert.addAction(UIAlertAction(title: tag.name, style: .Default, handler: {
+            alert.addAction(UIAlertAction(title: tag.name, style: .default, handler: {
                 [unowned self] alert in
                 let predicate = NSPredicate(format: "ANY tags.name CONTAINS[cd] %@", alert.title!)
                 self.fetchedResultsController.fetchRequest.predicate = predicate
@@ -183,13 +183,13 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
             }))
         }
         
-        alert.addAction(UIAlertAction(title: "Default", style: .Default, handler: { [unowned self] action in
+        alert.addAction(UIAlertAction(title: "Default", style: .default, handler: { [unowned self] action in
             self.fetchedResultsController.fetchRequest.predicate = nil
             self.performFetch()
         }))
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-        presentViewController(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 
     // Mark: View configuration
@@ -203,7 +203,7 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
         // Do any additional setup after loading the view.
         
         // Set the date formatting
-        dateTimeFormatter = NSDateFormatter()
+        dateTimeFormatter = DateFormatter()
         dateTimeFormatter.dateFormat = "MMMM dd 'at' h:mm a"
         
         // Set up refresh indicator
@@ -218,7 +218,7 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
             width: refreshControl!.bounds.size.width,
             height: refreshControl!.bounds.size.height)
         
-        refreshControl?.addTarget(self, action: #selector(refresh), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl?.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
         
         // Initialize Static data
         initializeSample()
@@ -226,7 +226,7 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
         loadSavedData()
         
         // Create the "sort by..." feature
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_sort")!, style: .Plain, target: self, action: #selector(showFilterBy))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_sort")!, style: .plain, target: self, action: #selector(showFilterBy))
         
         navigationItem.title = "Annoucements"
     }
@@ -234,13 +234,13 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
         
         if segue.identifier == "feedDetail" {
-            let destination = segue.destinationViewController as! FeedDetailViewController
-            let feedItem = fetchedResultsController.objectAtIndexPath(feedTable.indexPathForSelectedRow!) as! Feed
+            let destination = segue.destination as! FeedDetailViewController
+            let feedItem = fetchedResultsController.object(at: feedTable.indexPathForSelectedRow!) 
             
             // Set up buildings
             destination.buildings = []
@@ -257,22 +257,22 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("event_cell") as! FeedTableViewCell
-        let item = fetchedResultsController.objectAtIndexPath(indexPath) as! Feed
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "event_cell") as! FeedTableViewCell
+        let item = fetchedResultsController.object(at: indexPath) 
         
         cell.messageLabel.text = item.message
-        cell.dateTimeLabel.text = dateTimeFormatter.stringFromDate(item.time)
+        cell.dateTimeLabel.text = dateTimeFormatter.string(from: item.time)
         
         return cell
     }
     
     // MARK: UITableViewDataSource
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return fetchedResultsController.sections?.count ?? 0
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fetchedResultsController.sections![section].numberOfObjects
     }
 }

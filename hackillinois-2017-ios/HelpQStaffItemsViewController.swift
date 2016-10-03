@@ -16,8 +16,8 @@ class HelpQStaffItemsViewController: GenericHelpQStaffViewController {
     /* Mark: CoreData Functions */
     override func loadSavedData() {
         if fetchedResultsController == nil {
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            let fetchRequest = NSFetchRequest(entityName: "HelpQ")
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let fetchRequest = NSFetchRequest<HelpQ>(entityName: "HelpQ")
             
             // Sort by resolved, then by modified time
             let resolvedSort = NSSortDescriptor(key: "resolved", ascending: false)
@@ -25,10 +25,10 @@ class HelpQStaffItemsViewController: GenericHelpQStaffViewController {
             fetchRequest.sortDescriptors = [resolvedSort, modifiedSort]
             
             // Only show items that the user is helping
-            let predicate = NSPredicate(format: "isHelping == %@", true)
+            let predicate = NSPredicate(format: "isHelping == %@", true as CVarArg)
             fetchRequest.predicate = predicate
             
-            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: "resolved", cacheName: nil)
+            fetchedResultsController = NSFetchedResultsController<HelpQ>(fetchRequest: fetchRequest, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: "resolved", cacheName: nil)
             fetchedResultsController.delegate = self
         }
         
@@ -47,7 +47,7 @@ class HelpQStaffItemsViewController: GenericHelpQStaffViewController {
     }
     
     /* Mark: UIButtonAction */
-    func helpButtonPressed(sender: UIButton) {
+    func helpButtonPressed(_ sender: UIButton) {
         print("Button pressed")
         let sender: ReferencedButton = sender as! ReferencedButton
         let helpQItem: HelpQ = sender.referenceObject as! HelpQ
@@ -61,16 +61,16 @@ class HelpQStaffItemsViewController: GenericHelpQStaffViewController {
         }
         
         // TODO: Update current item with whatever is on the database
-        helpQItem.isHelping = NSNumber(bool: !helpQItem.isHelping.boolValue)
+        helpQItem.isHelping = NSNumber(value: !helpQItem.isHelping.boolValue as Bool)
         saveAndReload()
     }
     
     /* Mark UICollectionViewDelegate */
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = itemCollectionView.dequeueReusableCellWithReuseIdentifier("staff_helpq_cell", forIndexPath: indexPath) as! HelpQStaffItemCollectionViewCell
-        let helpQItem = fetchedResultsController.objectAtIndexPath(indexPath) as! HelpQ
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = itemCollectionView.dequeueReusableCell(withReuseIdentifier: "staff_helpq_cell", for: indexPath) as! HelpQStaffItemCollectionViewCell
+        let helpQItem = fetchedResultsController.object(at: indexPath) 
         
-        configureCell(cell: cell)
+        configureCell(cell)
         
         // Configure Cell
         cell.techLabel.text = helpQItem.technology
@@ -78,19 +78,19 @@ class HelpQStaffItemsViewController: GenericHelpQStaffViewController {
         
         // Help Button
         cell.helpButton.referenceObject = helpQItem
-        cell.helpButton.addTarget(self, action: #selector(helpButtonPressed), forControlEvents: .TouchUpInside)
+        cell.helpButton.addTarget(self, action: #selector(helpButtonPressed), for: .touchUpInside)
         if helpQItem.isHelping.boolValue {
-            cell.helpButton.setTitle("Stop Helping User", forState: .Normal)
+            cell.helpButton.setTitle("Stop Helping User", for: UIControlState())
         } else {
-            cell.helpButton.setTitle("Help User", forState: .Normal)
+            cell.helpButton.setTitle("Help User", for: UIControlState())
         }
         
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        let helpQItem = fetchedResultsController.objectAtIndexPath(indexPath) as! HelpQ
-        let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "staff_helpq_header", forIndexPath: indexPath) as! HelpQHackerCollectionReusableView
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: IndexPath) -> UICollectionReusableView {
+        let helpQItem = fetchedResultsController.object(at: indexPath) 
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "staff_helpq_header", for: indexPath) as! HelpQHackerCollectionReusableView
         if helpQItem.resolved.boolValue {
             header.titleLabel.text = "Items Complete"
         } else {
@@ -103,11 +103,11 @@ class HelpQStaffItemsViewController: GenericHelpQStaffViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "to_helpq_chat" {
-            let destinationViewController: HelpQChatViewController = segue.destinationViewController as! HelpQChatViewController
-            let indexPath: NSIndexPath? = itemCollectionView.indexPathsForSelectedItems()?.first
-            destinationViewController.helpqItem = fetchedResultsController.objectAtIndexPath(indexPath!) as! HelpQ
+            let destinationViewController: HelpQChatViewController = segue.destination as! HelpQChatViewController
+            let indexPath: IndexPath? = itemCollectionView.indexPathsForSelectedItems?.first
+            destinationViewController.helpqItem = fetchedResultsController.object(at: indexPath!)
         }
     }
 

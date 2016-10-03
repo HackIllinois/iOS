@@ -20,12 +20,12 @@ class GenericNavigationController: UINavigationController, SWRevealViewControlle
     
     func handleTap() {
         // Simulate tap of close button
-        self.revealViewController().revealToggleAnimated(true)
+        self.revealViewController().revealToggle(animated: true)
     }
     
     // Mark: SWRevealViewController delegates
-    func revealController(revealController: SWRevealViewController!, didMoveToPosition position: FrontViewPosition) {
-        if position == FrontViewPosition.Right {
+    func revealController(_ revealController: SWRevealViewController!, didMoveTo position: FrontViewPosition) {
+        if position == FrontViewPosition.right {
             // Add invisible view to pretend as though interaction was disabled
             tapRecognitionView = UIView(frame: self.view.frame)
             // Set up gesture
@@ -35,9 +35,9 @@ class GenericNavigationController: UINavigationController, SWRevealViewControlle
             
             // Properly add the view
             self.view.addSubview(tapRecognitionView!)
-            self.view.bringSubviewToFront(tapRecognitionView!)
+            self.view.bringSubview(toFront: tapRecognitionView!)
         } else {
-            self.view.userInteractionEnabled = true
+            self.view.isUserInteractionEnabled = true
             tapRecognitionView?.removeFromSuperview()
         }
     }
@@ -52,7 +52,7 @@ class GenericNavigationController: UINavigationController, SWRevealViewControlle
         
         // Reveal view controller
         if self.revealViewController() != nil {
-            navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_list_white"), style: .Plain, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle))
+            navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_list_white"), style: .plain, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)))
             
             if self.tabBarController == nil {
                 // Add swiping gesture and custom closing behavior, since there is no TabBarController to do so

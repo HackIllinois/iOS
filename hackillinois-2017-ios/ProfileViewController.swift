@@ -9,11 +9,11 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-    var user: User = (Helpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]).first!
+    var user: User = (CoreDataHelpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]).first!
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "profile_segue" {
-            let profileTable: ProfileTableViewController = segue.destinationViewController as! ProfileTableViewController
+            let profileTable: ProfileTableViewController = segue.destination as! ProfileTableViewController
             profileTable.user = user
         }
     }

@@ -20,12 +20,12 @@ class GenericTabBarController: UITabBarController, SWRevealViewControllerDelegat
     
     func handleTap() {
         // Simulate tap of close button
-        self.revealViewController().revealToggleAnimated(true)
+        self.revealViewController().revealToggle(animated: true)
     }
  
     // Mark: SWRevealViewController delegates
-    func revealController(revealController: SWRevealViewController!, didMoveToPosition position: FrontViewPosition) {
-        if position == FrontViewPosition.Right {
+    func revealController(_ revealController: SWRevealViewController!, didMoveTo position: FrontViewPosition) {
+        if position == FrontViewPosition.right {
             // Add invisible view to pretend as though interaction was disabled
             tapRecognitionView = UIView(frame: self.view.frame)
             // Set up gesture
@@ -35,9 +35,9 @@ class GenericTabBarController: UITabBarController, SWRevealViewControllerDelegat
             
             // Properly add the view
             self.view.addSubview(tapRecognitionView!)
-            self.view.bringSubviewToFront(tapRecognitionView!)
+            self.view.bringSubview(toFront: tapRecognitionView!)
         } else {
-            self.view.userInteractionEnabled = true
+            self.view.isUserInteractionEnabled = true
             tapRecognitionView?.removeFromSuperview()
         }
     }
@@ -56,12 +56,12 @@ class GenericTabBarController: UITabBarController, SWRevealViewControllerDelegat
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         // Set Color of each item
         for item in tabBar.items! {
-            item.image = item.image!.imageWithRenderingMode(.AlwaysOriginal)
+            item.image = item.image!.withRenderingMode(.alwaysOriginal)
         }
     }
 }

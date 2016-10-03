@@ -19,22 +19,22 @@ class HelpQSubmissionViewController: GenericInputView {
     @IBOutlet weak var scrollView: UIScrollView!
     
     /* Button Actions */
-    @IBAction func cancelButtonPressed(sender: AnyObject) {
+    @IBAction func cancelButtonPressed(_ sender: AnyObject) {
         view.endEditing(true)
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func submitButtonPressed(sender: AnyObject) {
+    @IBAction func submitButtonPressed(_ sender: AnyObject) {
         view.endEditing(true)
         /* Check if all the labels have text */
         
-        let item = Helpers.createHelpQItem(technology: techLabel.text!, language: languageLabel.text!, location: locationLabel.text!, description: descriptionLabel.text!)
+        let item = CoreDataHelpers.createHelpQItem(technology: techLabel.text!, language: languageLabel.text!, location: locationLabel.text!, description: descriptionLabel.text!)
         addToList(item)
         
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
-    var addToList: (HelpQ -> Void)!
+    var addToList: ((HelpQ) -> Void)!
     
     override func viewDidLoad() {
         /* Set superclass variables */
@@ -45,13 +45,13 @@ class HelpQSubmissionViewController: GenericInputView {
         super.viewDidLoad()
     }
     
-    override func textViewDidBeginEditing(textView: UITextView) {
+    override func textViewDidBeginEditing(_ textView: UITextView) {
         super.textViewDidBeginEditing(textView)
         // Scroll to make the cancel + submit buttons visible
         scrollView.scrollRectToVisible(CGRect(x: 0, y: 450, width: 1, height: 1), animated: true)
     }
     
-    override func textViewDidEndEditing(textView: UITextView) {
+    override func textViewDidEndEditing(_ textView: UITextView) {
         super.textViewDidEndEditing(textView)
     }
 }

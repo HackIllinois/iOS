@@ -28,7 +28,7 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
     @IBOutlet weak var sendButton: UIButton! // Send button for the user to send the message contained in messageField.text
     @IBOutlet weak var bottomLayoutConstraint: NSLayoutConstraint!
     
-    @IBAction func sendMessage(sender: AnyObject) {
+    @IBAction func sendMessage(_ sender: AnyObject) {
         /* Simply close the view if user did not input text */
         if messageField.text! == "" {
             view.endEditing(true)
@@ -77,7 +77,7 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
             chatItems = [chatInsert("Shotaro Ikeda"), chatInsert("Maritta Terpin"), chatInsert("Shotaro Ikeda"),
                          chatInsert("Shotaro Ikeda"), chatInsert("Shotaro Ikeda"), chatInsert("Maritta Terpin"), chatInsert("Maritta Terpin"), chatInsert("Shotaro Ikeda")]
             helpqItem.chats = NSOrderedSet(array: chatItems)
-            Helpers.saveContext()
+            CoreDataHelpers.saveContext()
         } else {
             chatItems = arr
         }
@@ -113,12 +113,12 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
         // Initalize sample data
         loadSavedData() // reloads data
         
-        chatViewScrollToBottom(delay: 0.1, animated: false) // See the comment in the function
+        chatViewScrollToBottom(0.1, animated: false) // See the comment in the function
     }
     
     
     /* Scrolls table view to the bottom. Turns out attempting to move the tableView in viewDidLoad / viewDidAppear would not work at all */
-    func chatViewScrollToBottom(delay: Double, animated: Bool) {
+    func chatViewScrollToBottom(_ delay: Double, animated: Bool) {
         
         let delay = delay * Double(NSEC_PER_SEC)
         let time =  DispatchTime(uptimeNanoseconds: DispatchTime.now().uptimeNanoseconds + UInt64(delay))
@@ -135,14 +135,14 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
     }
     
     /* Mark: Override for TextField Delegate */
-    override func textFieldShouldReturn(textField: UITextField) -> Bool {
-        sendMessage(sender: textField)
+    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        sendMessage(textField)
         return false
     }
     
     /* Need to override the keyboard functions, or else it will crash. (scroll is nil) */
-    override func keyboardWillAppear(notification: NSNotification) {
-        var keyboardFrame:CGRect = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+    override func keyboardWillAppear(_ notification: Notification) {
+        var keyboardFrame:CGRect = ((notification as NSNotification).userInfo?[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
         
         self.bottomLayoutConstraint.constant = keyboardFrame.height
@@ -152,8 +152,8 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
         })
     }
     
-    override func keyboardWillDisappear(notification: NSNotification) {
-        var keyboardFrame:CGRect = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+    override func keyboardWillDisappear(_ notification: Notification) {
+        var keyboardFrame:CGRect = ((notification as NSNotification).userInfo?[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
         
         let offset = CGPoint(x: 0, y: isCellVisible() ? 0 : chatView.contentOffset.y - keyboardFrame.height) // Only set the offset if the last cell is not visible to avoid clunky animations
@@ -168,7 +168,7 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
     func isCellVisible() -> Bool {
         if let visibleCells = chatView.indexPathsForVisibleRows {
             for index in visibleCells {
-                if index.row == chatItems.count {
+                if (index as NSIndexPath).row == chatItems.count {
                     return true
                 }
             }
@@ -182,7 +182,7 @@ class HelpQChatViewController: GenericInputView, UITableViewDelegate, UITableVie
         return chatItems.count
     }
     
-    private func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    internal func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     

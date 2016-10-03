@@ -10,18 +10,18 @@ import UIKit
 import SWRevealViewController
 
 enum DayOfWeek: Int {
-    case Friday = 0
-    case Saturday
-    case Sunday
+    case friday = 0
+    case saturday
+    case sunday
 }
 
 class SchedulePageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
-    private lazy var scheduleViewControllers: [UIViewController] = {
-        return [self.getScheduleController(name: "one"), self.getScheduleController(name: "two"), self.getScheduleController(name: "three")]
+    fileprivate lazy var scheduleViewControllers: [UIViewController] = {
+        return [self.getScheduleController("one"), self.getScheduleController("two"), self.getScheduleController("three")]
     }()
     
-    func getScheduleController(name: String) -> UIViewController {
+    func getScheduleController(_ name: String) -> UIViewController {
         return UIStoryboard(name: "Schedule", bundle: nil).instantiateViewController(withIdentifier: "schedule_day_\(name)")
     }
     
@@ -52,30 +52,30 @@ class SchedulePageViewController: UIPageViewController, UIPageViewControllerData
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        view.bounds = CGRectInset(view.frame, 0, 40)
+        view.bounds = view.frame.insetBy(dx: 0, dy: 40)
         self.dataSource = self
         self.delegate = self
         
         // Load initial view controller
         if let firstViewController = scheduleViewControllers.first {
-            setViewControllers([firstViewController], direction: .Forward, animated: true, completion: nil)
+            setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
             self.navigationItem.title = "Friday"
         }
         
         isAnimating = false
         
         // Add instructions to indicate that user can scroll
-        navigationController!.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_info_outline"), style: .Done, target: self, action: #selector(alertScrollable))
+        navigationController!.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_info_outline"), style: .done, target: self, action: #selector(alertScrollable))
     }
     
     // Mark: UIPageViewControllerDataSource
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         // Prevent scrolling when animating is occuring
         if isAnimating {
             return nil
         }
         
-        let previousIndex = scheduleViewControllers.indexOf(viewController)! - 1
+        let previousIndex = scheduleViewControllers.index(of: viewController)! - 1
         
         guard previousIndex >= 0 && previousIndex < scheduleViewControllers.count else {
             return nil
@@ -84,13 +84,13 @@ class SchedulePageViewController: UIPageViewController, UIPageViewControllerData
         return scheduleViewControllers[previousIndex]
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         // Prevent scrolling when animating is occuring
         if isAnimating {
             return nil
         }
         
-        let nextIndex = scheduleViewControllers.indexOf(viewController)! + 1
+        let nextIndex = scheduleViewControllers.index(of: viewController)! + 1
         
         guard nextIndex >= 0 && nextIndex < scheduleViewControllers.count else {
             return nil
@@ -99,7 +99,7 @@ class SchedulePageViewController: UIPageViewController, UIPageViewControllerData
         return scheduleViewControllers[nextIndex]
     }
     
-    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool)
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool)
     {
         if (finished || completed) {
             isAnimating = false
@@ -110,12 +110,12 @@ class SchedulePageViewController: UIPageViewController, UIPageViewControllerData
         }
         
         if let controller = pageViewController.viewControllers?[0] {
-            switch scheduleViewControllers.indexOf(controller)! {
-            case DayOfWeek.Friday.rawValue:
+            switch scheduleViewControllers.index(of: controller)! {
+            case DayOfWeek.friday.rawValue:
                 self.navigationItem.title = "Friday"
-            case DayOfWeek.Saturday.rawValue:
+            case DayOfWeek.saturday.rawValue:
                 self.navigationItem.title = "Saturday"
-            case DayOfWeek.Sunday.rawValue:
+            case DayOfWeek.sunday.rawValue:
                 self.navigationItem.title = "Sunday"
             default:
                 // Index is invalid
@@ -124,7 +124,7 @@ class SchedulePageViewController: UIPageViewController, UIPageViewControllerData
         }
     }
     
-    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         isAnimating = true
         
     }

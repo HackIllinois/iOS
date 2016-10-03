@@ -20,9 +20,9 @@ class GenericDayViewController: UITableViewController {
     }
     
     // Mark: UITableViewController
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("day_cell") as! ScheduleCell
-        let dayItem = dayItems[indexPath.row]
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "day_cell") as! ScheduleCell
+        let dayItem = dayItems[(indexPath as NSIndexPath).row]
         /* Initialize Cell */
         cell.title.text = dayItem.name
         cell.location.text = dayItem.location
@@ -31,7 +31,7 @@ class GenericDayViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dayItems.count
     }
 }

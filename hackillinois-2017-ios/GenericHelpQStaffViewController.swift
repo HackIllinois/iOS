@@ -14,10 +14,10 @@ class GenericHelpQStaffViewController: GenericCardViewController, NSFetchedResul
     @IBOutlet weak var collectionView: UICollectionView!
     
     /* User Information */
-    var user: User = (Helpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User])[0]
+    var user: User = (CoreDataHelpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User])[0]
     
     /* Core Data components */
-    var fetchedResultsController: NSFetchedResultsController!
+    var fetchedResultsController: NSFetchedResultsController<HelpQ>!
     var fetchPredicate: NSPredicate!
     
     /* Core Data functions */
@@ -26,9 +26,9 @@ class GenericHelpQStaffViewController: GenericCardViewController, NSFetchedResul
     }
     
     func saveAndReload() {
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
-            Helpers.saveContextMainThread()
-            dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async { [unowned self] in
+            CoreDataHelpers.saveContextMainThread()
+            DispatchQueue.main.async {
                 self.loadSavedData()
             }
         }
@@ -37,26 +37,26 @@ class GenericHelpQStaffViewController: GenericCardViewController, NSFetchedResul
     /* MARK: Population of sample data */
     func populateSampleData() {
         print("Creating Dummy Data")
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let createHelpQLambda: (String, String, String, String) -> HelpQ = { (tech, lang, loc, desc) in
-            let helpQ = NSEntityDescription.insertNewObjectForEntityForName("HelpQ", inManagedObjectContext: appDelegate.managedObjectContext) as! HelpQ
-            helpQ.initialize(tech, language: lang, location: loc, description: desc)
+            let helpQ = NSEntityDescription.insertNewObject(forEntityName: "HelpQ", into: appDelegate.managedObjectContext) as! HelpQ
+            helpQ.initialize(technology: tech, language: lang, location: loc, description: desc)
             return helpQ
         }
         
         let h1 = createHelpQLambda("Node JS", "Javascript", "Siebel 2202", "Help with Asynchronous Calls")
-        h1.isHelping = NSNumber(bool: true)
-        createHelpQLambda("Memory Allocation/Deallocation", "C++", "Siebel 1404","Help with unknown use after free error")
-        createHelpQLambda("Threading", "C", "ECEB 2201","Cannot figure out how to multithread my code.")
-        createHelpQLambda("Python", "Python", "Siebel", "How to print with python")
-        createHelpQLambda("UITableView", "iOS", "Find me around ECEB labs", "Automatic Dimension is creates strange behavior for animations")
-        createHelpQLambda("Machine Learning", "Python", "Labs at Siebel", "Which model to use?")
-        createHelpQLambda("MySQL", "Python-Flask", "around 2nd floor DCL", "How do I connect Python to my database?")
+        h1.isHelping = NSNumber(value: true as Bool)
+        let _ = createHelpQLambda("Memory Allocation/Deallocation", "C++", "Siebel 1404","Help with unknown use after free error")
+        _ = createHelpQLambda("Threading", "C", "ECEB 2201","Cannot figure out how to multithread my code.")
+        _ = createHelpQLambda("Python", "Python", "Siebel", "How to print with python")
+        _ = createHelpQLambda("UITableView", "iOS", "Find me around ECEB labs", "Automatic Dimension is creates strange behavior for animations")
+        _ = createHelpQLambda("Machine Learning", "Python", "Labs at Siebel", "Which model to use?")
+        _ = createHelpQLambda("MySQL", "Python-Flask", "around 2nd floor DCL", "How do I connect Python to my database?")
         
         saveAndReload()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         // Using fetchedResultsController makes it so we need to fetch modified data everytime user wants to 
         // see the view
         super.viewDidAppear(animated)
@@ -108,16 +108,16 @@ class GenericHelpQStaffViewController: GenericCardViewController, NSFetchedResul
     */
     
     // Mark: UICollectionViewDelegate
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return fetchedResultsController.sections?.count ?? 0
     }
     
     // Mark: Dummy UICollectionViewDataSource
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         fatalError("Super classes cellForItemAtIndexPath was called, child classes must override this method.")
     }
     

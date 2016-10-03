@@ -13,7 +13,7 @@ class MenuTableViewController: UITableViewController {
     
     @IBOutlet weak var barcodeView: UIImageView!
     var selectedIndexPath: IndexPath!
-    var user: User = (Helpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]).first!
+    var user: User = (CoreDataHelpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]).first!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,11 +24,11 @@ class MenuTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         selectedIndexPath = IndexPath(row: 0, section: 0)
-        tableView.selectRowAtIndexPath(selectedIndexPath, animated: false, scrollPosition: .none)
+        tableView.selectRow(at: selectedIndexPath, animated: false, scrollPosition: .none)
         barcodeView.image = UIImage(data: user.barcodeData as Data)
     }
     
-    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         if indexPath == selectedIndexPath {
             // Hide the table view instead
             self.revealViewController().revealToggle(animated: true)

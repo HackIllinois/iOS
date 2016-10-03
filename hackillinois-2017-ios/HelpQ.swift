@@ -19,8 +19,8 @@ class HelpQ: NSManagedObject {
         self.language = language
         self.location = location
         self.desc = description
-        self.initiation = NSDate()
-        self.modified = NSDate()
+        self.initiation = Date()
+        self.modified = Date()
         self.chats = NSOrderedSet()
         self.isHelping = NSNumber(value: false)
         self.mentor = ""
@@ -32,8 +32,8 @@ class HelpQ: NSManagedObject {
         self.language = language
         self.location = location
         self.desc = description
-        self.initiation = NSDate()
-        self.modified = NSDate()
+        self.initiation = Date()
+        self.modified = Date()
         self.chats = NSOrderedSet(array: chats)
         self.isHelping = NSNumber(value: false)
         self.mentor = ""
@@ -45,8 +45,8 @@ class HelpQ: NSManagedObject {
         self.language = "Javascript"
         self.location = "1404 Siebel"
         self.desc = "Help with asynchronous calls"
-        self.initiation = NSDate()
-        self.modified = NSDate()
+        self.initiation = Date()
+        self.modified = Date()
         self.chats = NSOrderedSet()
         self.isHelping = NSNumber(value: false)
         self.mentor = ""
@@ -58,8 +58,8 @@ class HelpQ: NSManagedObject {
     }
     
     func updateModifiedTime() {
-        self.modified = NSDate()
-        Helpers.saveContext()
+        self.modified = Date()
+        CoreDataHelpers.saveContext()
     }
     
     func pushChatItem(chat: Chat) {
@@ -68,7 +68,7 @@ class HelpQ: NSManagedObject {
         let mutableVersion = self.chats.mutableCopy() as! NSMutableOrderedSet
         mutableVersion.add(chat)
         self.chats = mutableVersion
-        Helpers.saveContext() // Save after changing item
+        CoreDataHelpers.saveContext() // Save after changing item
     }
 
 }

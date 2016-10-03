@@ -23,7 +23,7 @@ class DummyViewController: UIViewController {
      * Fetch Role
      */
     func fetchRole() {
-        let user: [User] = Helpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]
+        let user: [User] = CoreDataHelpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]
         role = user[0].role
     }
     

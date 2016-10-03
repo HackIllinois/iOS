@@ -22,24 +22,24 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
     var items: [[HelpQ]]! = []
     
     func loadItems() {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let unresolvedFetch = NSFetchRequest(entityName: "HelpQ")
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let unresolvedFetch = NSFetchRequest<HelpQ>(entityName: "HelpQ")
         let sort = NSSortDescriptor(key: "modified", ascending: false)
-        let unresolvedPredicate = NSPredicate(format: "resolved == %@", NSNumber(bool: false))
+        let unresolvedPredicate = NSPredicate(format: "resolved == %@", NSNumber(value: false as Bool))
         
         unresolvedFetch.sortDescriptors = [sort]
         unresolvedFetch.predicate = unresolvedPredicate
         
-        let resolvedPredicate = NSPredicate(format: "resolved == %@", NSNumber(bool: false))
-        let resolvedFetch = unresolvedFetch.copy() as! NSFetchRequest
+        let resolvedPredicate = NSPredicate(format: "resolved == %@", NSNumber(value: false as Bool))
+        let resolvedFetch = unresolvedFetch.copy() as! NSFetchRequest<HelpQ>
         resolvedFetch.predicate = resolvedPredicate
         
         var unresolvedItems: [HelpQ]!
         var resolvedItems: [HelpQ]!
         
         do {
-            unresolvedItems = try appDelegate.managedObjectContext.executeFetchRequest(unresolvedFetch) as! [HelpQ]
-            resolvedItems = try appDelegate.managedObjectContext.executeFetchRequest(resolvedFetch) as! [HelpQ]
+            unresolvedItems = try appDelegate.managedObjectContext.fetch(unresolvedFetch)
+            resolvedItems = try appDelegate.managedObjectContext.fetch(resolvedFetch) 
         } catch {
             print("Error while loading \(error)")
         }
@@ -49,14 +49,14 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
         if unresolvedItems.isEmpty && resolvedItems.isEmpty {
             print("Creating Dummy Data")
             let createHelpQLambda: (String, String, String, String) -> HelpQ = { (tech, lang, loc, desc) in
-                let helpQ = NSEntityDescription.insertNewObjectForEntityForName("HelpQ", inManagedObjectContext: appDelegate.managedObjectContext) as! HelpQ
-                helpQ.initialize(tech, language: lang, location: loc, description: desc)
+                let helpQ = NSEntityDescription.insertNewObject(forEntityName: "HelpQ", into: appDelegate.managedObjectContext) as! HelpQ
+                helpQ.initialize(technology: tech, language: lang, location: loc, description: desc)
                 return helpQ
             }
             
             unresolvedItems = [createHelpQLambda("Node JS", "Javascript", "Siebel 2202", "Help with Asynchronous Calls"), createHelpQLambda("Memory Allocation/Deallocation", "C++", "Siebel 1404","Help with unknown use after free error"), createHelpQLambda("Threading", "C", "ECEB 2201","Cannot figure out how to multithread my code.")]
             resolvedItems = [createHelpQLambda("Python", "Python", "Siebel", "How to print with python"), createHelpQLambda("UITableView", "iOS", "Find me around ECEB labs", "Automatic Dimension is creates strange behavior for animations"), createHelpQLambda("Machine Learning", "Python", "Labs at Siebel", "Which model to use?"), createHelpQLambda("MySQL", "Python-Flask", "around 2nd floor DCL", "How do I connect Python to my database?")]
-            Helpers.saveContext()
+            CoreDataHelpers.saveContext()
         }
         
         /* Store data in provided array */
@@ -80,73 +80,73 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
         loadItems()
         
         /* Add a button up to to allow users to create new tickets */
-        navigationController!.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_create"), style: .Done, target: self, action: #selector(createTicket))
+        navigationController!.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_create"), style: .done, target: self, action: #selector(createTicket))
     }
 
     /* Navigation Function */
     func createTicket() {
         let ticketController = UIStoryboard.init(name: "HelpQ_Create", bundle: nil).instantiateInitialViewController() as! HelpQSubmissionViewController
         ticketController.addToList = { [unowned self] item in
-            self.items[Resolution.unresolved.rawValue].insert(item, atIndex: 0)
+            self.items[Resolution.unresolved.rawValue].insert(item, at: 0)
             self.helpQCollection.reloadData()
         }
-        presentViewController(ticketController, animated: true, completion: nil)
+        present(ticketController, animated: true, completion: nil)
     }
     
     /* Button action */
-    func moveCellFromResolvedToUnresolved(sender: UIButton) {
+    func moveCellFromResolvedToUnresolved(_ sender: UIButton) {
         let item = items[Resolution.resolved.rawValue][sender.tag]
         item.resolved = false
         item.updateModifiedTime()
         
-        items[Resolution.resolved.rawValue].removeAtIndex(sender.tag)
-        items[Resolution.unresolved.rawValue].insert(item, atIndex: 0)
+        items[Resolution.resolved.rawValue].remove(at: sender.tag)
+        items[Resolution.unresolved.rawValue].insert(item, at: 0)
         
         helpQCollection.reloadData()
     }
     
-    func moveCellFromUnresolvedToResolved(sender: UIButton) {
+    func moveCellFromUnresolvedToResolved(_ sender: UIButton) {
         let item = items[Resolution.unresolved.rawValue][sender.tag]
         item.resolved = true
         item.updateModifiedTime()
         
-        items[Resolution.unresolved.rawValue].removeAtIndex(sender.tag)
-        items[Resolution.resolved.rawValue].insert(item, atIndex: 0)
+        items[Resolution.unresolved.rawValue].remove(at: sender.tag)
+        items[Resolution.resolved.rawValue].insert(item, at: 0)
         
         helpQCollection.reloadData()
     }
     
     /* UICollectionViewDataSource */
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return items.count
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items[section].count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = helpQCollection.dequeueReusableCellWithReuseIdentifier("hacker_helpq_cell", forIndexPath: indexPath) as! HelpQHackerCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = helpQCollection.dequeueReusableCell(withReuseIdentifier: "hacker_helpq_cell", for: indexPath) as! HelpQHackerCollectionViewCell
         
-        let item = items[indexPath.section][indexPath.row]
+        let item = items[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
         
         /* Configure cell */
         cell.techLabel.text = item.technology
         cell.descriptionLabel.text = item.desc
-        configureCell(cell: cell)
+        configureCell(cell)
         
         /* Section specific configuration */
-        switch indexPath.section {
+        switch (indexPath as NSIndexPath).section {
         case Resolution.unresolved.rawValue:
-            cell.resolveButton.setTitle("Mark as Resolved", forState: .Normal)
-            cell.resolveButton.tag = indexPath.row // way to distingish what button was pressed
-            cell.resolveButton.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
-            cell.resolveButton.addTarget(self, action: #selector(moveCellFromUnresolvedToResolved), forControlEvents: .TouchUpInside)
+            cell.resolveButton.setTitle("Mark as Resolved", for: UIControlState())
+            cell.resolveButton.tag = (indexPath as NSIndexPath).row // way to distingish what button was pressed
+            cell.resolveButton.removeTarget(nil, action: nil, for: .allEvents)
+            cell.resolveButton.addTarget(self, action: #selector(moveCellFromUnresolvedToResolved), for: .touchUpInside)
         case Resolution.resolved.rawValue:
-            cell.resolveButton.setTitle("Mark as Unresolved", forState: .Normal)
-            cell.resolveButton.tag = indexPath.row // way to distingish what button was pressed
-            cell.resolveButton.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
-            cell.resolveButton.addTarget(self, action: #selector(moveCellFromResolvedToUnresolved), forControlEvents: .TouchUpInside)
+            cell.resolveButton.setTitle("Mark as Unresolved", for: UIControlState())
+            cell.resolveButton.tag = (indexPath as NSIndexPath).row // way to distingish what button was pressed
+            cell.resolveButton.removeTarget(nil, action: nil, for: .allEvents)
+            cell.resolveButton.addTarget(self, action: #selector(moveCellFromResolvedToUnresolved), for: .touchUpInside)
         default:
             break
         }
@@ -154,12 +154,12 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
         return cell
     }
 
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        let header = helpQCollection.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "hacker_helpq_unresolved_header", forIndexPath: indexPath) as! HelpQHackerCollectionReusableView
+        let header = helpQCollection.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "hacker_helpq_unresolved_header", for: indexPath) as! HelpQHackerCollectionReusableView
         
         /* Section specific configuration */
-        switch indexPath.section {
+        switch (indexPath as NSIndexPath).section {
         case Resolution.unresolved.rawValue:
             header.titleLabel.text = "Unresolved"
         case Resolution.resolved.rawValue:
@@ -173,11 +173,11 @@ class HelpQHackerViewController: GenericCardViewController, UICollectionViewData
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "to_chat_view" {
-            let destination = segue.destinationViewController as! HelpQChatViewController
-            let indexPath = helpQCollection.indexPathsForSelectedItems()!.first!
-            let object = items[indexPath.section][indexPath.row]
+            let destination = segue.destination as! HelpQChatViewController
+            let indexPath = helpQCollection.indexPathsForSelectedItems!.first!
+            let object = items[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
             
             destination.helpqItem = object
         }

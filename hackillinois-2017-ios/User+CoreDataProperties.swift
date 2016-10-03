@@ -15,14 +15,14 @@ import CoreData
 extension User {
 
     @NSManaged var barcode: String
-    @NSManaged var barcodeData: NSData
+    @NSManaged var barcodeData: Data
     @NSManaged var major: String
-    @NSManaged var initTime: NSDate
+    @NSManaged var initTime: Date
     @NSManaged var name: String
     @NSManaged var role: String
     @NSManaged var school: String
     @NSManaged var token: String
-    @NSManaged var expireTime: NSDate
+    @NSManaged var expireTime: Date
     @NSManaged var email: String
     @NSManaged var userID: NSNumber
 

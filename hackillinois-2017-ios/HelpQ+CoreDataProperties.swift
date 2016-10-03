@@ -15,11 +15,11 @@ import CoreData
 extension HelpQ {
 
     @NSManaged var desc: String
-    @NSManaged var initiation: NSDate
+    @NSManaged var initiation: Date
     @NSManaged var isHelping: NSNumber
     @NSManaged var language: String
     @NSManaged var location: String
-    @NSManaged var modified: NSDate
+    @NSManaged var modified: Date
     @NSManaged var resolved: NSNumber
     @NSManaged var technology: String
     @NSManaged var mentor: String

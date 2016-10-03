@@ -15,7 +15,7 @@ class CreateAccountViewController: GenericInputView {
     @IBOutlet weak var navigationBar: UINavigationBar!
 
     /* Button presses */
-    @IBAction func cancelButtonPressed(sender: AnyObject) {
+    @IBAction func cancelButtonPressed(_ sender: AnyObject) {
         self.view.endEditing(true)
         /* Confirm user if they want to actually cancel */
         let ac = UIAlertController(title: "Changes Will Be Lost", message: "Are you sure you would like to go back to the login page? All text inputs will be lost.", preferredStyle: .alert)
@@ -28,11 +28,11 @@ class CreateAccountViewController: GenericInputView {
     /* For future swift 3 stuff (I bet you this will become fixed back to 2.2) 
     var processUserData: (_ name: String, _ email: String, _ school: String, _ major: String, _ role: String, _ barcode: String, _ auth: String, _ initTime: NSDate, _ expirationTime: NSDate, _ userID: NSNumber) -> Void!
     */
-    var processUserData: ((String, String, String, String, String, String, String, NSDate, NSDate, NSNumber) -> Void)!
+    var processUserData: ((String, String, String, String, String, String, String, Date, Date, NSNumber) -> Void)!
     // This must be set when presenting the view controller.
     
     /* Function passed to capture the response data */
-    func captureResponse(data: NSData?, response: URLResponse?, error: NSError?) {
+    func captureResponse(_ data: Data?, response: URLResponse?, error: NSError?) {
         if let responseError = error {
             DispatchQueue.main.async() { [unowned self] in
                 self.presentError(error: "Error", message: responseError.localizedDescription)
@@ -74,8 +74,8 @@ class CreateAccountViewController: GenericInputView {
             let userID: NSNumber = NSNumber(value: jwt.body["sub"]!.integerValue)
             let role = String(describing: jwt.body["role"]!)
             let email = String(describing: jwt.body["email"]!)
-            let initTime : NSDate = jwt.issuedAt!
-            let expTime: NSDate = jwt.expiresAt!
+            let initTime : Date = jwt.issuedAt! as Date
+            let expTime: Date = jwt.expiresAt! as Date
             
             print("Role: \(role)")
             print("UserID: \(userID)")
@@ -99,7 +99,7 @@ class CreateAccountViewController: GenericInputView {
         }
     }
     
-    @IBAction func doneButtonPressed(sender: AnyObject) {
+    @IBAction func doneButtonPressed(_ sender: AnyObject) {
         /* Check to see if everything is working */
         self.view.endEditing(true)
         
@@ -109,7 +109,7 @@ class CreateAccountViewController: GenericInputView {
             return
         }
         
-        if !stringIsEmail(email: usernameField.text!) {
+        if !stringIsEmail(usernameField.text!) {
             // Username is not an email
             presentError(error: "Invalid Email", message: "Inputted Email is not valid")
             return
@@ -162,7 +162,7 @@ class CreateAccountViewController: GenericInputView {
             let barcode = "1234567890"
          
             let lambda: ((Void) -> Void) =  { [unowned self] in
-                self.processUserData(name, email, school, major, role, barcode, auth, initTime, expTime, userID)
+                self.processUserData(name, email, school, major, role, barcode, auth, initTime as Date, expTime as Date, userID)
             }
             
             self.dismiss(animated: true, completion: lambda)
@@ -185,7 +185,7 @@ class CreateAccountViewController: GenericInputView {
         present(ac, animated: true, completion: nil)
     }
     
-    func stringIsEmail(email: String) -> Bool {
+    func stringIsEmail(_ email: String) -> Bool {
         let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
         return emailPredicate.evaluate(with: email)
