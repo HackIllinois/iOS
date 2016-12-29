@@ -80,6 +80,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="s0m-yL-Lfw"/>
+                    <connections>
+                        <outlet property="timerLabel" destination="zxQ-fj-g8Z" id="Ont-hB-OBC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8tG-FV-xSX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
