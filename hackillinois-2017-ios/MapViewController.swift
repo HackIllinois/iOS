@@ -11,8 +11,26 @@ import UIKit
 import MapKit
 import LiquidFloatingActionButton
 
-class MapViewController: GenericMapViewController {
+class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var mapControl: UISegmentedControl!
+    
+    @IBAction func mapControlChange(_ sender: Any) {
+        if(mapControl.selectedSegmentIndex == -1){
+            return
+        }
+        
+        let building = buildings[mapControl.selectedSegmentIndex]
+        
+        locationSelected = mapControl.selectedSegmentIndex
+        // Configure MapView to show the location user selected
+        map.setCamera(MKMapCamera.from(building: building), animated: true)
+        let annotation = map.annotations(in: MKMapRect(origin: MKMapPointForCoordinate(building.coordinate), size: MKMapSize(width: 1, height: 1))).first! as! MKAnnotation
+        map.selectAnnotation(annotation, animated: true)
+        // Route locations
+        routeTo(building.coordinate)
+
+    }
     
     // Mark: Initializing locations and where locations are set
     /* Modify this function to change the locations available */
@@ -21,12 +39,12 @@ class MapViewController: GenericMapViewController {
         
         // Siebel
         let siebel =
-            Building(title: "Thomas Siebel Center for Computer Science", coordinate: CLLocationCoordinate2DMake(40.113926, -88.224916), shortName: "Siebel")
+            Building(title: "Siebel Center", coordinate: CLLocationCoordinate2DMake(40.113926, -88.224916), shortName: "Siebel")
         buildings.append(siebel)
         
         // ECEB
         let eceb =
-            Building(title: "Electrical and Computer Engineering Building", coordinate: CLLocationCoordinate2DMake(40.114828, -88.228049), shortName: "ECEB")
+            Building(title: "ECEB", coordinate: CLLocationCoordinate2DMake(40.114828, -88.228049), shortName: "ECEB")
         buildings.append(eceb)
         
         // Illini Union
@@ -42,5 +60,20 @@ class MapViewController: GenericMapViewController {
         
         /* Call superclass's constructor after configuration */
         super.viewDidLoad()
+        
+        mapControl.selectedSegmentIndex = UISegmentedControlNoSegment
+        let tapMap = UIPanGestureRecognizer(target: self, action: #selector(MapViewController.didDragMap(gestureRecognizer:)))
+        tapMap.delegate = self
+        map.addGestureRecognizer(tapMap)
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    func didDragMap(gestureRecognizer: UIGestureRecognizer) {
+        if (gestureRecognizer.state == UIGestureRecognizerState.began) {
+            mapControl.selectedSegmentIndex = UISegmentedControlNoSegment
+        }
     }
 }

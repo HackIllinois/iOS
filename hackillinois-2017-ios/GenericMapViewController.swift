@@ -8,10 +8,9 @@
 
 import UIKit
 import CoreLocation
-import LiquidFloatingActionButton
 import MapKit
 
-class GenericMapViewController: UIViewController, CLLocationManagerDelegate, LiquidFloatingActionButtonDelegate, LiquidFloatingActionButtonDataSource, MKMapViewDelegate {
+class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     /* IB Outlets */
     weak var map: MKMapView!
     
@@ -19,8 +18,6 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, Liq
     var manager: CLLocationManager!
     // Start off the locations and buttons as empty
     var buildings: [Building]! = []
-    var liquidCellButtons: [LiquidFloatingCell]! = []
-    var button: LiquidFloatingActionButton!
     var locationButton: UIButton!
     var locationSelected = 0
     
@@ -132,14 +129,6 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, Liq
         
         // Only add the routing options if there are existing elements in buildings
         if !buildings.isEmpty {
-            button = LiquidFloatingActionButton(frame: rect)
-            button.animateStyle = .up
-            button.dataSource = self
-            button.delegate = self
-            button.color = UIColor.fromRGBHex(mainUIColor)
-            button.enableShadow = false
-            map.addSubview(button)
-            
             var hue: CGFloat = 5.0 / 360.0
             
             for building in buildings {
@@ -147,7 +136,6 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, Liq
                 let locationCell = CustomLiquidCell(icon: UIImage(named: "ic_forward_48pt")!, name: building.shortName!)
                 locationCell.color = UIColor(hue: hue, saturation: 74/100, brightness: 90/100, alpha: 1.0) /* #e74c3c */
                 hue += 0.05
-                liquidCellButtons.append(locationCell)
                 
                 // Create annotations
                 map.addAnnotation(building)
@@ -200,15 +188,6 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, Liq
         }
     }
     
-    // Mark: LiquidFloatingActionButton DataSources
-    func numberOfCells(_ liquidFloatingActionButton: LiquidFloatingActionButton) -> Int {
-        return liquidCellButtons.count
-    }
-    
-    func cellForIndex(_ index: Int) -> LiquidFloatingCell {
-        return liquidCellButtons[index]
-    }
-    
     // Mark: Routing location from current location to user specified location
     func routeTo(_ destination: CLLocationCoordinate2D) {
         guard CLLocationManager.authorizationStatus() == .authorizedWhenInUse else {
@@ -228,73 +207,25 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, Liq
         
         // Draw the button again to have it "fade"
         // Slignt padding is required to have the circle appear normal: otherwise it will end up clipped
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: button.frame.width+8, height: button.frame.height+8), false, 0) // Add slight padding
         
         let context = UIGraphicsGetCurrentContext()
         context?.setFillColor(UIColor.fromRGBHex(mainUIColor).cgColor)
         context?.setLineWidth(0)
         
-        context?.addEllipse(in: CGRect(x: 4, y: 4, width: button.frame.width, height: button.frame.height)) // Add slight padding
         context?.drawPath(using: .fillStroke)
         
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        let imgView = UIImageView(frame: CGRect(x: button.frame.minX-4, y: button.frame.minY-4, width: button.frame.height+8, height: button.frame.width+8))
-        imgView.image = img
-        map.addSubview(imgView)
         
         /* Configure activity indicator */
-        let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: imgView.frame.width / 2 - 15, y: imgView.frame.height / 2 - 15, width: 30, height: 30))
-        activityIndicator.startAnimating()
-        activityIndicator.alpha = 0
-        
-        // Add activity indicator to button
-        imgView.addSubview(activityIndicator)
-        
-        // Animate fading in
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn,
-                                   animations: { [unowned self] in
-                                    self.button.alpha = 0.0 ; activityIndicator.alpha = 1.0 },
-                                   completion: { [unowned self] _ in
-                                    self.button.isHidden = true })
-        
-        // Obtain direction
-        let directions = MKDirections(request: routeRequest)
-        directions.calculate(completionHandler: { (response, error) in
-            if let routes = response?.routes {
-                self.map.add(routes[0].polyline)
-            } else if let _ = error {
-                print("\(error!)")
-            }
-            
-            // Animate showing button again
-            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn,
-                                       animations: { [unowned self] in
-                                        self.button.alpha = 1.0 ; activityIndicator.alpha = 0.0 },
-                                       completion: { [unowned self] _ in
-                                        self.button.isHidden = false; activityIndicator.removeFromSuperview(); imgView.removeFromSuperview() })
-        })
     }
     
-    // Mark: LiquidFloatingActionButton Delegates
-    func liquidFloatingActionButton(_ liquidFloatingActionButton: LiquidFloatingActionButton, didSelectItemAtIndex index: Int) {
-        let building = buildings[index]
-        locationSelected = index
-        // Configure MapView to show the location user selected
-        map.setCamera(MKMapCamera.from(building: building), animated: true)
-        let annotation = map.annotations(in: MKMapRect(origin: MKMapPointForCoordinate(building.coordinate), size: MKMapSize(width: 1, height: 1))).first! as! MKAnnotation
-        map.selectAnnotation(annotation, animated: true)
-        // Route locations
-        routeTo(building.coordinate)
-        liquidFloatingActionButton.close()
-    }
     
     // Mark: Map View Delegate
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         // Create a renderer
         let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
-        renderer.strokeColor = liquidCellButtons[locationSelected].color ?? UIColor.fromRGBHex(mainTintColor)
         renderer.lineWidth = strokeWidth
         return renderer
     }

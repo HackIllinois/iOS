@@ -31,9 +31,6 @@ class FeedDetailViewController: GenericMapViewController {
         if !buildings.isEmpty {
             let building = buildings[0]
             mapView.camera = MKMapCamera.from(building: building)
-            
-            // Move the LiquidButton down
-            button.layer.position.y -= 100
         }
         
         // Move the location button down

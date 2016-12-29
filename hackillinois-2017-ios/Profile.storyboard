@@ -45,8 +45,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="tLM-M0-JCL">
-                                <rect key="frame" x="19" y="82" width="337" height="408"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="tLM-M0-JCL">
+                                <rect key="frame" x="19" y="132" width="337" height="403"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="kj0-gv-3HE">
                                         <rect key="frame" x="0.0" y="0.0" width="337" height="328"/>
@@ -95,7 +95,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="aLg-cr-4nU">
-                                        <rect key="frame" x="38.5" y="358" width="260" height="50"/>
+                                        <rect key="frame" x="38.5" y="353" width="260" height="50"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_chevron_right_48pt" translatesAutoresizingMaskIntoConstraints="NO" id="LES-sL-Hs6">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -137,8 +137,8 @@
                         <constraints>
                             <constraint firstItem="tLM-M0-JCL" firstAttribute="centerX" secondItem="RRb-QC-eFc" secondAttribute="centerX" id="CJa-yi-fXg"/>
                             <constraint firstItem="tLM-M0-JCL" firstAttribute="leading" secondItem="RRb-QC-eFc" secondAttribute="leadingMargin" constant="3" id="GRW-E7-I54"/>
+                            <constraint firstItem="tLM-M0-JCL" firstAttribute="centerY" secondItem="RRb-QC-eFc" secondAttribute="centerY" id="KK2-0C-cxu"/>
                             <constraint firstAttribute="trailingMargin" secondItem="tLM-M0-JCL" secondAttribute="trailing" constant="3" id="P49-Dt-FVP"/>
-                            <constraint firstItem="tLM-M0-JCL" firstAttribute="top" secondItem="UNW-XN-XuM" secondAttribute="bottom" constant="18" id="Vem-M5-k5V"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="bh2-9d-tvE"/>
