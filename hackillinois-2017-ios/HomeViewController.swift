@@ -15,9 +15,9 @@ class HomeViewController: UIViewController {
     var mTimer = Timer()
     
     //TODO: Find actual start unix time of event
-    let eventStartUnixTime: Double = 1487937827
-    let currentUnixTime: Double = NSDate().timeIntervalSince1970
-    var timeRemaining: Double = 0.0
+    let eventStartUnixTime: Int = 1487937827
+    let currentUnixTime: Int = Int(NSDate().timeIntervalSince1970)
+    var timeRemaining: Int = 0
     var secondsLeft: Int = 0
     var minutesLeft: Int = 0
     var hoursLeft: Int = 0
@@ -35,6 +35,11 @@ class HomeViewController: UIViewController {
         
         
         mTimer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(HomeViewController.updateCounter), userInfo: nil, repeats: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,23 +64,21 @@ class HomeViewController: UIViewController {
     }
     
     func getTimeRemainingString(hoursLeft: Int, minutesLeft: Int, secondsLeft: Int) -> String{
-        let secondsString = secondsLeft < 10 ? "0" + String(secondsLeft) : String(secondsLeft)
-        let minutesString = minutesLeft < 10 ? "0" + String(minutesLeft) : String(minutesLeft)
-        return "" + String(hoursLeft) + ":" + minutesString + ":" + secondsString
+        return String(format:"%02i:%02i:%02i", hoursLeft, minutesLeft, secondsLeft)
     }
     
-    func getHours(timeInSeconds: Double) -> Int{
-        let hour = (timeInSeconds / Double(3600))
-        return Int(hour)
+    func getHours(timeInSeconds: Int) -> Int{
+        let hour = (timeInSeconds / 3600)
+        return hour
     }
 
-    func getMinutes(timeInSeconds: Double) -> Int{
-        let minute = ((timeInSeconds.remainder(dividingBy: 3600.0)) / Double(60))
-        return Int(minute)
+    func getMinutes(timeInSeconds: Int) -> Int{
+        let minute = ((timeInSeconds % 3600) / (60))
+        return minute
     }
     
-    func getSeconds(timeInSeconds: Double) -> Int{
-        let second = ((timeInSeconds.remainder(dividingBy: 3600.0)).remainder(dividingBy: 60.0))
+    func getSeconds(timeInSeconds: Int) -> Int{
+        let second = (timeInSeconds % 60)
         return Int(second)
     }
 }
