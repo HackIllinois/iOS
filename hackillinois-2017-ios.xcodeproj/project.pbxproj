@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		17BC6B394A0A310CDEA1DF7B /* Pods_hackillinois_2017_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75AFF8F2A9393CCA4EBF188 /* Pods_hackillinois_2017_ios.framework */; };
 		58E75F2152E19BCECDC115D1 /* Pods_hackillinois_2017_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0E70C5ECC7AC1B705813BB /* Pods_hackillinois_2017_iosUITests.framework */; };
+		A50F29251E14D55500878652 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A50F29241E14D55500878652 /* Home.storyboard */; };
 		AE232CBD3115F1DA5DF9B870 /* Pods_hackillinois_2017_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D8C9C142AB0677D17C63CBA /* Pods_hackillinois_2017_iosTests.framework */; };
 		E20465CB1CF1FAF50054654E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20465CA1CF1FAF50054654E /* AppDelegate.swift */; };
 		E20465CD1CF1FAF50054654E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20465CC1CF1FAF50054654E /* LoginViewController.swift */; };
@@ -102,6 +103,7 @@
 		21E83B55CF6C52BC833901F1 /* Pods-hackillinois-2017-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosTests/Pods-hackillinois-2017-iosTests.release.xcconfig"; sourceTree = "<group>"; };
 		23C934AE70C4AC43F1D884BE /* Pods-hackillinois-2017-iosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosTests/Pods-hackillinois-2017-iosTests.debug.xcconfig"; sourceTree = "<group>"; };
 		567F67E08A10E7527EE39217 /* Pods-hackillinois-2017-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		A50F29241E14D55500878652 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		D3D05678487C3E4F7496D710 /* Pods-hackillinois-2017-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E20465C71CF1FAF50054654E /* hackillinois-2017-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hackillinois-2017-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E20465CA1CF1FAF50054654E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -204,6 +206,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A50F29231E14D53B00878652 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				A50F29241E14D55500878652 /* Home.storyboard */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
 		CA06EADA945D6ED53652FAFE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -404,7 +414,9 @@
 			children = (
 				E2BCA5691CF373A1006AAA8B /* EventConstants.swift */,
 				E2BCA55A1CF36187006AAA8B /* Event.storyboard */,
+				A50F29231E14D53B00878652 /* Home */,
 				E2BCA5601CF36A15006AAA8B /* Feed */,
+				E2B6C39A1D0B30A300D851F9 /* Profile */,
 				E2F957031D0BA882003A0881 /* Schedule */,
 				E2D483311D00D37800859A67 /* Maps */,
 			);
@@ -466,7 +478,6 @@
 		E2D483311D00D37800859A67 /* Maps */ = {
 			isa = PBXGroup;
 			children = (
-				E2B6C39A1D0B30A300D851F9 /* Profile */,
 				E2B6C3941D0B2E8000D851F9 /* Map.storyboard */,
 				E2D483321D00D3B100859A67 /* MapViewController.swift */,
 				E2D4F0DE1D06AD3F00646BF8 /* Building.swift */,
@@ -613,6 +624,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E277DD6B1CF4AF0400D7E018 /* keys.plist in Resources */,
+				A50F29251E14D55500878652 /* Home.storyboard in Resources */,
 				E2B6C3951D0B2E8000D851F9 /* Map.storyboard in Resources */,
 				E2B6C3971D0B2ED800D851F9 /* Profile.storyboard in Resources */,
 				E20465D81CF1FAF50054654E /* LaunchScreen.storyboard in Resources */,

@@ -19,6 +19,7 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
+                        <segue destination="6n0-en-rAb" kind="relationship" relationship="viewControllers" id="zXa-ka-R9I"/>
                         <segue destination="JGA-wX-dkz" kind="relationship" relationship="viewControllers" id="zLV-Dx-ydQ"/>
                         <segue destination="LMW-B5-kXB" kind="relationship" relationship="viewControllers" id="3Nc-OC-cqg"/>
                         <segue destination="aqe-JP-yak" kind="relationship" relationship="viewControllers" id="UD7-Pj-mKp"/>
@@ -29,11 +30,21 @@
             </objects>
             <point key="canvasLocation" x="-1092" y="1547"/>
         </scene>
+        <!--Home-->
+        <scene sceneID="bLk-RF-JtX">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Home" id="6n0-en-rAb" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="ic_home_white" id="DHM-7m-kxH"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OEP-WJ-PbW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-467" y="1365"/>
+        </scene>
         <!--Feed-->
         <scene sceneID="4lN-yv-nhe">
             <objects>
                 <viewControllerPlaceholder storyboardName="Feed" id="aqe-JP-yak" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Feed" image="ic_list_white" id="H58-ts-a3W"/>
+                    <tabBarItem key="tabBarItem" title="Notifications" image="ic_list_white" id="H58-ts-a3W"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0XK-et-0Xw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -71,6 +82,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ic_home_white" width="24" height="24"/>
         <image name="ic_list_white" width="24" height="24"/>
         <image name="ic_map_white" width="24" height="24"/>
         <image name="ic_person_white" width="24" height="24"/>

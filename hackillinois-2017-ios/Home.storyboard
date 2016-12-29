@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gah-u1-v8Z">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Home-->
+        <scene sceneID="73a-Zl-u4E">
+            <objects>
+                <viewController id="81Q-mU-pS5" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iDf-0E-79X"/>
+                        <viewControllerLayoutGuide type="bottom" id="qbu-IZ-SMw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="W3N-Ca-brh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izr-nf-JCZ">
+                                <rect key="frame" x="165" y="323" width="46" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Izr-nf-JCZ" firstAttribute="centerY" secondItem="W3N-Ca-brh" secondAttribute="centerY" id="md7-JS-V15"/>
+                            <constraint firstItem="Izr-nf-JCZ" firstAttribute="centerX" secondItem="W3N-Ca-brh" secondAttribute="centerX" id="mtU-1x-aMS"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Home" id="s0m-yL-Lfw"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8tG-FV-xSX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1148" y="-146.17691154422789"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="WbM-5X-Cle">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gah-u1-v8Z" customClass="GenericNavigationController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="ic_home_white" id="mMW-Ot-cAH"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RF7-ax-iNl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="81Q-mU-pS5" kind="relationship" relationship="rootViewController" id="t20-d3-Vkt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QiU-Dz-UeM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="208.80000000000001" y="-146.17691154422789"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ic_home_white" width="24" height="24"/>
+    </resources>
+</document>
