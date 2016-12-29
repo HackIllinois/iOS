@@ -11,7 +11,7 @@
         <!--Home-->
         <scene sceneID="73a-Zl-u4E">
             <objects>
-                <viewController id="81Q-mU-pS5" sceneMemberID="viewController">
+                <viewController id="81Q-mU-pS5" customClass="HomeViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iDf-0E-79X"/>
                         <viewControllerLayoutGuide type="bottom" id="qbu-IZ-SMw"/>
@@ -20,17 +20,63 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izr-nf-JCZ">
-                                <rect key="frame" x="165" y="323" width="46" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hZj-aC-bAp">
+                                <rect key="frame" x="70" y="99" width="235" height="88.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hacking Starts In..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h20-PX-aPM">
+                                        <rect key="frame" x="0.0" y="0.0" width="235" height="31.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:03:30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zxQ-fj-g8Z">
+                                        <rect key="frame" x="55.5" y="51.5" width="124.5" height="37"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="h20-PX-aPM" firstAttribute="top" secondItem="hZj-aC-bAp" secondAttribute="top" id="Zci-0r-3Go"/>
+                                    <constraint firstAttribute="trailing" secondItem="h20-PX-aPM" secondAttribute="trailing" id="hay-z9-8eV"/>
+                                    <constraint firstItem="h20-PX-aPM" firstAttribute="leading" secondItem="hZj-aC-bAp" secondAttribute="leading" id="rJT-Qm-aL6"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="viK-Ze-zlH">
+                                <rect key="frame" x="89" y="257.5" width="198" height="127"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Happening Now" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ags-Ix-OR2">
+                                        <rect key="frame" x="0.0" y="0.0" width="198" height="31.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check-in Begins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z1o-8x-4V9">
+                                        <rect key="frame" x="21.5" y="51.5" width="155.5" height="25.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rxv-Ja-PDX">
+                                        <rect key="frame" x="1.5" y="97" width="195" height="30"/>
+                                        <state key="normal" title="East Entrance, Siebel Center"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Slp-g0-rVs">
+                                <rect key="frame" x="70" y="523" width="235" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="Open Barcode for Scanning"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Izr-nf-JCZ" firstAttribute="centerY" secondItem="W3N-Ca-brh" secondAttribute="centerY" id="md7-JS-V15"/>
-                            <constraint firstItem="Izr-nf-JCZ" firstAttribute="centerX" secondItem="W3N-Ca-brh" secondAttribute="centerX" id="mtU-1x-aMS"/>
+                            <constraint firstItem="viK-Ze-zlH" firstAttribute="centerX" secondItem="W3N-Ca-brh" secondAttribute="centerX" id="2jG-8j-see"/>
+                            <constraint firstItem="Slp-g0-rVs" firstAttribute="centerX" secondItem="W3N-Ca-brh" secondAttribute="centerX" id="KtH-Cr-sF5"/>
+                            <constraint firstItem="qbu-IZ-SMw" firstAttribute="top" secondItem="Slp-g0-rVs" secondAttribute="bottom" constant="60" id="PZO-qx-4KG"/>
+                            <constraint firstItem="hZj-aC-bAp" firstAttribute="centerX" secondItem="W3N-Ca-brh" secondAttribute="centerX" id="Y2X-7O-cxI"/>
+                            <constraint firstItem="hZj-aC-bAp" firstAttribute="top" secondItem="iDf-0E-79X" secondAttribute="bottom" constant="35" id="pJw-bE-pgA"/>
+                            <constraint firstItem="viK-Ze-zlH" firstAttribute="top" secondItem="hZj-aC-bAp" secondAttribute="bottom" constant="70" id="v8O-nq-HgL"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="s0m-yL-Lfw"/>
