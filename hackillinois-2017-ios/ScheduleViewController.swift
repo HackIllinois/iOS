@@ -30,16 +30,7 @@ class SchedulePageViewController: UIPageViewController, UIPageViewControllerData
     var tabBarMask: UIView!
     
     // Animation Flag to prevent too many views from begin pushed onto the stack
-    var isAnimating: Bool = true {
-        didSet {
-            // Make sure gestures cannot happen
-            if isAnimating {
-                self.tabBarController?.view.removeGestureRecognizer(self.revealViewController().panGestureRecognizer())
-            } else {
-                self.tabBarController?.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-            }
-        }
-    }
+    var isAnimating: Bool = true
     
     func alertScrollable() {
         // Alert to the user that the view is now scrollable
@@ -63,9 +54,6 @@ class SchedulePageViewController: UIPageViewController, UIPageViewControllerData
         }
         
         isAnimating = false
-        
-        // Add instructions to indicate that user can scroll
-        navigationController!.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_info_outline"), style: .done, target: self, action: #selector(alertScrollable))
     }
     
     // Mark: UIPageViewControllerDataSource

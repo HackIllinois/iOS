@@ -122,7 +122,7 @@ class LoginViewController: GenericInputView {
                 CoreDataHelpers.storeUser(name: name, email: email, school: school, major: major, role: role, barcode: barcode, barcodeData: barcodeData!, auth: auth, initTime: initTime, expirationTime: expirationTime, userID: userID)
                 
                 // Present main application
-                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let mainStoryboard = UIStoryboard(name: "Event", bundle: nil)
                 let mainViewController = mainStoryboard.instantiateInitialViewController()
                 self.present(mainViewController!, animated: true, completion: nil)
             }

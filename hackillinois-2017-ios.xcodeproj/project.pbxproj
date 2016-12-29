@@ -21,31 +21,13 @@
 		E224BFF01D19B7D30098AA8D /* CreateAccount.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E224BFEF1D19B7D30098AA8D /* CreateAccount.storyboard */; };
 		E224BFF21D19BB7F0098AA8D /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224BFF11D19BB7F0098AA8D /* CreateAccountViewController.swift */; };
 		E224BFF41D19CCA60098AA8D /* HTTPHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224BFF31D19CCA60098AA8D /* HTTPHelpers.swift */; };
-		E22960381D1472FD008F7A31 /* HelpQ_Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E22960371D1472FD008F7A31 /* HelpQ_Chat.storyboard */; };
-		E229603B1D147337008F7A31 /* HelpQ_Create.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E229603A1D147337008F7A31 /* HelpQ_Create.storyboard */; };
-		E229603F1D147F2A008F7A31 /* OtherChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229603E1D147F2A008F7A31 /* OtherChatTableViewCell.swift */; };
-		E22960411D147F36008F7A31 /* MyChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22960401D147F36008F7A31 /* MyChatTableViewCell.swift */; };
-		E236C0491D105BBE0085437D /* HelpQ_Hacker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E236C0481D105BBE0085437D /* HelpQ_Hacker.storyboard */; };
-		E236C04B1D1060D80085437D /* HelpQ.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E236C04A1D1060D80085437D /* HelpQ.storyboard */; };
-		E236C04F1D1061F80085437D /* HelpQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236C04E1D1061F80085437D /* HelpQViewController.swift */; };
-		E236C0551D107DF60085437D /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236C0541D107DF60085437D /* DummyViewController.swift */; };
-		E236C0571D107F9C0085437D /* HelpQHackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236C0561D107F9C0085437D /* HelpQHackerViewController.swift */; };
-		E236C0591D107FA60085437D /* HelpQStaffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236C0581D107FA60085437D /* HelpQStaffViewController.swift */; };
-		E236C05B1D10809E0085437D /* HelpQHackerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236C05A1D10809E0085437D /* HelpQHackerCollectionViewCell.swift */; };
-		E236C05D1D109AF50085437D /* HelpQHackerCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236C05C1D109AF50085437D /* HelpQHackerCollectionReusableView.swift */; };
-		E237913F1D21B4FE0020618E /* HelpQStaffCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E237913E1D21B4FE0020618E /* HelpQStaffCollectionViewCell.swift */; };
 		E23791411D21C4870020618E /* ReferencedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23791401D21C4870020618E /* ReferencedButton.swift */; };
-		E23EBD621D25BBA100D0E42F /* HelpQStaffItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23EBD611D25BBA100D0E42F /* HelpQStaffItemsViewController.swift */; };
-		E23EBD641D25BFDC00D0E42F /* HelpQStaffItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23EBD631D25BFDC00D0E42F /* HelpQStaffItemCollectionViewCell.swift */; };
-		E249977F1D2E7F6100402374 /* HelpQ_Staff_My_Items.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E249977E1D2E7F6100402374 /* HelpQ_Staff_My_Items.storyboard */; };
-		E24997811D2E7F9D00402374 /* HelpQ_Staff_Queue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E24997801D2E7F9D00402374 /* HelpQ_Staff_Queue.storyboard */; };
 		E25377411CF8AB2C003795E7 /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E253773F1CF8AB2C003795E7 /* Tag+CoreDataProperties.swift */; };
 		E25377421CF8AB2C003795E7 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25377401CF8AB2C003795E7 /* Tag.swift */; };
 		E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25377431CF8C485003795E7 /* CoreDataHelpers.swift */; };
 		E25980071D099B0B00AE4939 /* CustomLiquidCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25980061D099B0B00AE4939 /* CustomLiquidCell.swift */; };
 		E26F44F21D0EF2C100FB4A9F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F44F11D0EF2C100FB4A9F /* ProfileViewController.swift */; };
 		E26F44F41D0EF3C400FB4A9F /* UIImage+generateBarCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F44F31D0EF3C400FB4A9F /* UIImage+generateBarCode.swift */; };
-		E276C3B51D11C3A400DABD4A /* HelpQChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E276C3B41D11C3A400DABD4A /* HelpQChatViewController.swift */; };
 		E27755531D36B7F600E7A379 /* GenericHelpQStaffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27755521D36B7F600E7A379 /* GenericHelpQStaffViewController.swift */; };
 		E277DD691CF4A79100D7E018 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E277DD681CF4A79100D7E018 /* FeedDetailViewController.swift */; };
 		E277DD6B1CF4AF0400D7E018 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = E277DD6A1CF4AF0400D7E018 /* keys.plist */; };
@@ -72,9 +54,6 @@
 		E2B6C3931D0B2E1200D851F9 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3921D0B2E1200D851F9 /* Feed.storyboard */; };
 		E2B6C3951D0B2E8000D851F9 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3941D0B2E8000D851F9 /* Map.storyboard */; };
 		E2B6C3971D0B2ED800D851F9 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3961D0B2ED800D851F9 /* Profile.storyboard */; };
-		E2B6C3991D0B2EF300D851F9 /* HelpQ_Staff.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3981D0B2EF300D851F9 /* HelpQ_Staff.storyboard */; };
-		E2B6C3A21D0B4AC400D851F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3A11D0B4AC400D851F9 /* Main.storyboard */; };
-		E2BB42C41D132FA8009EF512 /* HelpQSubmissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BB42C31D132FA8009EF512 /* HelpQSubmissionViewController.swift */; };
 		E2BB42C61D133A9A009EF512 /* GenericInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BB42C51D133A9A009EF512 /* GenericInputView.swift */; };
 		E2BCA55B1CF36187006AAA8B /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2BCA55A1CF36187006AAA8B /* Event.storyboard */; };
 		E2BCA5621CF36CDA006AAA8B /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5611CF36CDA006AAA8B /* FeedTableViewController.swift */; };
@@ -95,9 +74,7 @@
 		E2D4F0E31D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4F0E21D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift */; };
 		E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4F0E41D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift */; };
 		E2F639481D05083300853089 /* CGRect+initWithCenterAt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F639471D05083300853089 /* CGRect+initWithCenterAt.swift */; };
-		E2F957021D0B6EBF003A0881 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F957011D0B6EBF003A0881 /* MenuTableViewController.swift */; };
 		E2F957051D0BA899003A0881 /* Schedule.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2F957041D0BA899003A0881 /* Schedule.storyboard */; };
-		E2F957091D0BAA24003A0881 /* Cluehunt.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2F957081D0BAA24003A0881 /* Cluehunt.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,31 +120,13 @@
 		E224BFEF1D19B7D30098AA8D /* CreateAccount.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateAccount.storyboard; sourceTree = "<group>"; };
 		E224BFF11D19BB7F0098AA8D /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		E224BFF31D19CCA60098AA8D /* HTTPHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHelpers.swift; sourceTree = "<group>"; };
-		E22960371D1472FD008F7A31 /* HelpQ_Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HelpQ_Chat.storyboard; sourceTree = "<group>"; };
-		E229603A1D147337008F7A31 /* HelpQ_Create.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HelpQ_Create.storyboard; sourceTree = "<group>"; };
-		E229603E1D147F2A008F7A31 /* OtherChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherChatTableViewCell.swift; sourceTree = "<group>"; };
-		E22960401D147F36008F7A31 /* MyChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyChatTableViewCell.swift; sourceTree = "<group>"; };
-		E236C0481D105BBE0085437D /* HelpQ_Hacker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HelpQ_Hacker.storyboard; sourceTree = "<group>"; };
-		E236C04A1D1060D80085437D /* HelpQ.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HelpQ.storyboard; sourceTree = "<group>"; };
-		E236C04E1D1061F80085437D /* HelpQViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQViewController.swift; sourceTree = "<group>"; };
-		E236C0541D107DF60085437D /* DummyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyViewController.swift; sourceTree = "<group>"; };
-		E236C0561D107F9C0085437D /* HelpQHackerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQHackerViewController.swift; sourceTree = "<group>"; };
-		E236C0581D107FA60085437D /* HelpQStaffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQStaffViewController.swift; sourceTree = "<group>"; };
-		E236C05A1D10809E0085437D /* HelpQHackerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQHackerCollectionViewCell.swift; sourceTree = "<group>"; };
-		E236C05C1D109AF50085437D /* HelpQHackerCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQHackerCollectionReusableView.swift; sourceTree = "<group>"; };
-		E237913E1D21B4FE0020618E /* HelpQStaffCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQStaffCollectionViewCell.swift; sourceTree = "<group>"; };
 		E23791401D21C4870020618E /* ReferencedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferencedButton.swift; sourceTree = "<group>"; };
-		E23EBD611D25BBA100D0E42F /* HelpQStaffItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQStaffItemsViewController.swift; sourceTree = "<group>"; };
-		E23EBD631D25BFDC00D0E42F /* HelpQStaffItemCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQStaffItemCollectionViewCell.swift; sourceTree = "<group>"; };
-		E249977E1D2E7F6100402374 /* HelpQ_Staff_My_Items.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HelpQ_Staff_My_Items.storyboard; sourceTree = "<group>"; };
-		E24997801D2E7F9D00402374 /* HelpQ_Staff_Queue.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HelpQ_Staff_Queue.storyboard; sourceTree = "<group>"; };
 		E253773F1CF8AB2C003795E7 /* Tag+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E25377401CF8AB2C003795E7 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		E25377431CF8C485003795E7 /* CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
 		E25980061D099B0B00AE4939 /* CustomLiquidCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLiquidCell.swift; sourceTree = "<group>"; };
 		E26F44F11D0EF2C100FB4A9F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E26F44F31D0EF3C400FB4A9F /* UIImage+generateBarCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+generateBarCode.swift"; sourceTree = "<group>"; };
-		E276C3B41D11C3A400DABD4A /* HelpQChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQChatViewController.swift; sourceTree = "<group>"; };
 		E27755521D36B7F600E7A379 /* GenericHelpQStaffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericHelpQStaffViewController.swift; sourceTree = "<group>"; };
 		E277DD681CF4A79100D7E018 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
 		E277DD6A1CF4AF0400D7E018 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
@@ -192,9 +151,6 @@
 		E2B6C3921D0B2E1200D851F9 /* Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		E2B6C3941D0B2E8000D851F9 /* Map.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		E2B6C3961D0B2ED800D851F9 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
-		E2B6C3981D0B2EF300D851F9 /* HelpQ_Staff.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HelpQ_Staff.storyboard; sourceTree = "<group>"; };
-		E2B6C3A11D0B4AC400D851F9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		E2BB42C31D132FA8009EF512 /* HelpQSubmissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQSubmissionViewController.swift; sourceTree = "<group>"; };
 		E2BB42C51D133A9A009EF512 /* GenericInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericInputView.swift; sourceTree = "<group>"; };
 		E2BCA55A1CF36187006AAA8B /* Event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Event.storyboard; sourceTree = "<group>"; };
 		E2BCA5611CF36CDA006AAA8B /* FeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
@@ -215,9 +171,7 @@
 		E2D4F0E21D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+fromLocation.swift"; sourceTree = "<group>"; };
 		E2D4F0E41D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MKMapCamera+initFromLocation.swift"; sourceTree = "<group>"; };
 		E2F639471D05083300853089 /* CGRect+initWithCenterAt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+initWithCenterAt.swift"; sourceTree = "<group>"; };
-		E2F957011D0B6EBF003A0881 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		E2F957041D0BA899003A0881 /* Schedule.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Schedule.storyboard; sourceTree = "<group>"; };
-		E2F957081D0BAA24003A0881 /* Cluehunt.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Cluehunt.storyboard; sourceTree = "<group>"; };
 		E75AFF8F2A9393CCA4EBF188 /* Pods_hackillinois_2017_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -338,76 +292,6 @@
 			name = "Create Account";
 			sourceTree = "<group>";
 		};
-		E22960361D147289008F7A31 /* Chat */ = {
-			isa = PBXGroup;
-			children = (
-				E22960371D1472FD008F7A31 /* HelpQ_Chat.storyboard */,
-				E276C3B41D11C3A400DABD4A /* HelpQChatViewController.swift */,
-				E22960421D147F55008F7A31 /* ChatCells */,
-			);
-			name = Chat;
-			sourceTree = "<group>";
-		};
-		E22960391D14731D008F7A31 /* HelpQ_Create */ = {
-			isa = PBXGroup;
-			children = (
-				E2BB42C31D132FA8009EF512 /* HelpQSubmissionViewController.swift */,
-				E229603A1D147337008F7A31 /* HelpQ_Create.storyboard */,
-			);
-			name = HelpQ_Create;
-			sourceTree = "<group>";
-		};
-		E22960421D147F55008F7A31 /* ChatCells */ = {
-			isa = PBXGroup;
-			children = (
-				E229603E1D147F2A008F7A31 /* OtherChatTableViewCell.swift */,
-				E22960401D147F36008F7A31 /* MyChatTableViewCell.swift */,
-			);
-			name = ChatCells;
-			sourceTree = "<group>";
-		};
-		E236C04C1D1060DE0085437D /* Staff */ = {
-			isa = PBXGroup;
-			children = (
-				E2B6C3981D0B2EF300D851F9 /* HelpQ_Staff.storyboard */,
-				E249977C1D2E7F0600402374 /* MyItems */,
-				E249977D1D2E7F1200402374 /* Queue */,
-			);
-			name = Staff;
-			sourceTree = "<group>";
-		};
-		E236C04D1D1060ED0085437D /* Hackers */ = {
-			isa = PBXGroup;
-			children = (
-				E236C0481D105BBE0085437D /* HelpQ_Hacker.storyboard */,
-				E236C0561D107F9C0085437D /* HelpQHackerViewController.swift */,
-				E236C05C1D109AF50085437D /* HelpQHackerCollectionReusableView.swift */,
-				E236C05A1D10809E0085437D /* HelpQHackerCollectionViewCell.swift */,
-				E22960391D14731D008F7A31 /* HelpQ_Create */,
-			);
-			name = Hackers;
-			sourceTree = "<group>";
-		};
-		E249977C1D2E7F0600402374 /* MyItems */ = {
-			isa = PBXGroup;
-			children = (
-				E249977E1D2E7F6100402374 /* HelpQ_Staff_My_Items.storyboard */,
-				E23EBD611D25BBA100D0E42F /* HelpQStaffItemsViewController.swift */,
-				E23EBD631D25BFDC00D0E42F /* HelpQStaffItemCollectionViewCell.swift */,
-			);
-			name = MyItems;
-			sourceTree = "<group>";
-		};
-		E249977D1D2E7F1200402374 /* Queue */ = {
-			isa = PBXGroup;
-			children = (
-				E24997801D2E7F9D00402374 /* HelpQ_Staff_Queue.storyboard */,
-				E236C0581D107FA60085437D /* HelpQStaffViewController.swift */,
-				E237913E1D21B4FE0020618E /* HelpQStaffCollectionViewCell.swift */,
-			);
-			name = Queue;
-			sourceTree = "<group>";
-		};
 		E277DD6C1CF4B9EC00D7E018 /* FeedDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -485,19 +369,6 @@
 			name = Profile;
 			sourceTree = "<group>";
 		};
-		E2B6C39B1D0B30CB00D851F9 /* HelpQ */ = {
-			isa = PBXGroup;
-			children = (
-				E236C04A1D1060D80085437D /* HelpQ.storyboard */,
-				E236C04E1D1061F80085437D /* HelpQViewController.swift */,
-				E236C0541D107DF60085437D /* DummyViewController.swift */,
-				E22960361D147289008F7A31 /* Chat */,
-				E236C04C1D1060DE0085437D /* Staff */,
-				E236C04D1D1060ED0085437D /* Hackers */,
-			);
-			name = HelpQ;
-			sourceTree = "<group>";
-		};
 		E2B6C39C1D0B30F100D851F9 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -523,11 +394,7 @@
 			children = (
 				E20465CA1CF1FAF50054654E /* AppDelegate.swift */,
 				E20465D61CF1FAF50054654E /* LaunchScreen.storyboard */,
-				E2F957071D0BA9E8003A0881 /* Main */,
 				E2BCA5591CF36167006AAA8B /* Event */,
-				E2B6C39A1D0B30A300D851F9 /* Profile */,
-				E2B6C39B1D0B30CB00D851F9 /* HelpQ */,
-				E2F957061D0BA932003A0881 /* Cluehunt */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -599,6 +466,7 @@
 		E2D483311D00D37800859A67 /* Maps */ = {
 			isa = PBXGroup;
 			children = (
+				E2B6C39A1D0B30A300D851F9 /* Profile */,
 				E2B6C3941D0B2E8000D851F9 /* Map.storyboard */,
 				E2D483321D00D3B100859A67 /* MapViewController.swift */,
 				E2D4F0DE1D06AD3F00646BF8 /* Building.swift */,
@@ -618,23 +486,6 @@
 				E2A085F91D0C6688002197F9 /* DayItem.swift */,
 			);
 			name = Schedule;
-			sourceTree = "<group>";
-		};
-		E2F957061D0BA932003A0881 /* Cluehunt */ = {
-			isa = PBXGroup;
-			children = (
-				E2F957081D0BAA24003A0881 /* Cluehunt.storyboard */,
-			);
-			name = Cluehunt;
-			sourceTree = "<group>";
-		};
-		E2F957071D0BA9E8003A0881 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				E2B6C3A11D0B4AC400D851F9 /* Main.storyboard */,
-				E2F957011D0B6EBF003A0881 /* MenuTableViewController.swift */,
-			);
-			name = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -709,7 +560,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Shotaro Ikeda";
 				TargetAttributes = {
 					E20465C61CF1FAF50054654E = {
@@ -762,22 +613,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E277DD6B1CF4AF0400D7E018 /* keys.plist in Resources */,
-				E249977F1D2E7F6100402374 /* HelpQ_Staff_My_Items.storyboard in Resources */,
-				E2B6C3A21D0B4AC400D851F9 /* Main.storyboard in Resources */,
-				E22960381D1472FD008F7A31 /* HelpQ_Chat.storyboard in Resources */,
 				E2B6C3951D0B2E8000D851F9 /* Map.storyboard in Resources */,
 				E2B6C3971D0B2ED800D851F9 /* Profile.storyboard in Resources */,
 				E20465D81CF1FAF50054654E /* LaunchScreen.storyboard in Resources */,
 				E2F957051D0BA899003A0881 /* Schedule.storyboard in Resources */,
 				E224BFF01D19B7D30098AA8D /* CreateAccount.storyboard in Resources */,
-				E2F957091D0BAA24003A0881 /* Cluehunt.storyboard in Resources */,
 				E2B6C3931D0B2E1200D851F9 /* Feed.storyboard in Resources */,
 				E20465D51CF1FAF50054654E /* Assets.xcassets in Resources */,
-				E2B6C3991D0B2EF300D851F9 /* HelpQ_Staff.storyboard in Resources */,
-				E229603B1D147337008F7A31 /* HelpQ_Create.storyboard in Resources */,
-				E236C0491D105BBE0085437D /* HelpQ_Hacker.storyboard in Resources */,
-				E24997811D2E7F9D00402374 /* HelpQ_Staff_Queue.storyboard in Resources */,
-				E236C04B1D1060D80085437D /* HelpQ.storyboard in Resources */,
 				E20465D01CF1FAF50054654E /* Login.storyboard in Resources */,
 				E2BCA55B1CF36187006AAA8B /* Event.storyboard in Resources */,
 			);
@@ -947,32 +789,22 @@
 				E2BCA57F1CF3B19E006AAA8B /* User.swift in Sources */,
 				E2BCA56A1CF373A1006AAA8B /* EventConstants.swift in Sources */,
 				E2A085F41D0C57E7002197F9 /* ScheduleViewController.swift in Sources */,
-				E2F957021D0B6EBF003A0881 /* MenuTableViewController.swift in Sources */,
 				E2BCA57E1CF3B19E006AAA8B /* User+CoreDataProperties.swift in Sources */,
-				E236C0591D107FA60085437D /* HelpQStaffViewController.swift in Sources */,
-				E22960411D147F36008F7A31 /* MyChatTableViewCell.swift in Sources */,
 				E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */,
-				E236C0551D107DF60085437D /* DummyViewController.swift in Sources */,
 				E2A086011D0C736B002197F9 /* FridayTableViewController.swift in Sources */,
 				E2BD82B51D09EA530009DB07 /* GenericMapViewController.swift in Sources */,
-				E23EBD641D25BFDC00D0E42F /* HelpQStaffItemCollectionViewCell.swift in Sources */,
 				E20465D31CF1FAF50054654E /* hackillinois_2017_ios.xcdatamodeld in Sources */,
 				E27755531D36B7F600E7A379 /* GenericHelpQStaffViewController.swift in Sources */,
-				E236C0571D107F9C0085437D /* HelpQHackerViewController.swift in Sources */,
 				E28FB6A01D194951000D062F /* HelpQ.swift in Sources */,
 				E2BCA57D1CF3B19E006AAA8B /* Feed.swift in Sources */,
 				E2A085F61D0C6536002197F9 /* ScheduleCell.swift in Sources */,
 				E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */,
-				E237913F1D21B4FE0020618E /* HelpQStaffCollectionViewCell.swift in Sources */,
 				E25377411CF8AB2C003795E7 /* Tag+CoreDataProperties.swift in Sources */,
 				E28FB69F1D194951000D062F /* HelpQ+CoreDataProperties.swift in Sources */,
-				E23EBD621D25BBA100D0E42F /* HelpQStaffItemsViewController.swift in Sources */,
 				E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */,
-				E236C04F1D1061F80085437D /* HelpQViewController.swift in Sources */,
 				E26F44F41D0EF3C400FB4A9F /* UIImage+generateBarCode.swift in Sources */,
 				E2A086081D0C73BE002197F9 /* SundayTableViewController.swift in Sources */,
 				E2D4F0E31D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift in Sources */,
-				E236C05B1D10809E0085437D /* HelpQHackerCollectionViewCell.swift in Sources */,
 				E2D4F0E11D06B28B00646BF8 /* FeedTableViewCell.swift in Sources */,
 				E2BCA5811CF3B19E006AAA8B /* Location.swift in Sources */,
 				E224BFF21D19BB7F0098AA8D /* CreateAccountViewController.swift in Sources */,
@@ -984,11 +816,8 @@
 				E25980071D099B0B00AE4939 /* CustomLiquidCell.swift in Sources */,
 				E2BB42C61D133A9A009EF512 /* GenericInputView.swift in Sources */,
 				E2D483331D00D3B100859A67 /* MapViewController.swift in Sources */,
-				E236C05D1D109AF50085437D /* HelpQHackerCollectionReusableView.swift in Sources */,
 				E2A085F01D0C42A7002197F9 /* GenericNavigationController.swift in Sources */,
-				E276C3B51D11C3A400DABD4A /* HelpQChatViewController.swift in Sources */,
 				E23791411D21C4870020618E /* ReferencedButton.swift in Sources */,
-				E229603F1D147F2A008F7A31 /* OtherChatTableViewCell.swift in Sources */,
 				E2BCA5801CF3B19E006AAA8B /* Location+CoreDataProperties.swift in Sources */,
 				E2D4F0DF1D06AD3F00646BF8 /* Building.swift in Sources */,
 				E2BD82B71D0AFFB90009DB07 /* UIImage+imageWithColor.swift in Sources */,
@@ -1004,7 +833,6 @@
 				E26F44F21D0EF2C100FB4A9F /* ProfileViewController.swift in Sources */,
 				E2BD82B91D0B09D60009DB07 /* LoginConstants.swift in Sources */,
 				E2A085FF1D0C70BF002197F9 /* GenericDayViewController.swift in Sources */,
-				E2BB42C41D132FA8009EF512 /* HelpQSubmissionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1101,7 +929,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1143,7 +971,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

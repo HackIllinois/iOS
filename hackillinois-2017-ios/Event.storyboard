@@ -1,7 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LXI-DR-cWu">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="LXI-DR-cWu">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Generic Tab Bar Controller-->
@@ -12,12 +16,13 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" id="awd-Bi-joQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="aqe-JP-yak" kind="relationship" relationship="viewControllers" id="UD7-Pj-mKp"/>
                         <segue destination="JGA-wX-dkz" kind="relationship" relationship="viewControllers" id="zLV-Dx-ydQ"/>
                         <segue destination="LMW-B5-kXB" kind="relationship" relationship="viewControllers" id="3Nc-OC-cqg"/>
+                        <segue destination="aqe-JP-yak" kind="relationship" relationship="viewControllers" id="UD7-Pj-mKp"/>
+                        <segue destination="RTa-Ln-wAG" kind="relationship" relationship="viewControllers" id="TE3-kX-g90"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kWO-RX-Y3f" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -52,12 +57,23 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pig-Be-PbN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-468.5" y="1696"/>
+            <point key="canvasLocation" x="-470" y="1663"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="GD7-2A-gbg">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" id="RTa-Ln-wAG" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" image="ic_person_white" id="5hR-zr-ciu"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VPk-mG-FmL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-470" y="1781"/>
         </scene>
     </scenes>
     <resources>
         <image name="ic_list_white" width="24" height="24"/>
         <image name="ic_map_white" width="24" height="24"/>
+        <image name="ic_person_white" width="24" height="24"/>
         <image name="ic_schedule_white" width="24" height="24"/>
     </resources>
 </document>
