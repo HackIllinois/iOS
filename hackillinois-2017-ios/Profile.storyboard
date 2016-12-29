@@ -36,7 +36,7 @@
         <!--Profile-->
         <scene sceneID="Uiq-ck-kQ3">
             <objects>
-                <viewController id="lXU-Pi-X86" sceneMemberID="viewController">
+                <viewController id="lXU-Pi-X86" customClass="ProfileViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UNW-XN-XuM"/>
                         <viewControllerLayoutGuide type="bottom" id="jiW-MC-oXS"/>
@@ -52,7 +52,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="337" height="328"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="IGa-8n-2Ni">
-                                                <rect key="frame" x="93.5" y="0.0" width="150" height="201.5"/>
+                                                <rect key="frame" x="93.5" y="0.0" width="150" height="150"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qrcode" translatesAutoresizingMaskIntoConstraints="NO" id="5Hg-Jz-3Fl">
                                                         <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
@@ -61,31 +61,31 @@
                                                             <constraint firstAttribute="height" constant="150" id="jqb-cv-NDE"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elon Musk" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ftl-im-rRc">
-                                                        <rect key="frame" x="0.0" y="170" width="150" height="31.5"/>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ax0-ry-NhS">
+                                                <rect key="frame" x="0.0" y="172" width="337" height="156"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thomas Jay Yu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ftl-im-rRc">
+                                                        <rect key="frame" x="76.5" y="0.0" width="184.5" height="31.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ax0-ry-NhS">
-                                                <rect key="frame" x="0.0" y="223.5" width="337" height="104.5"/>
-                                                <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="University of Illinois at Urbana Champaign" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9D-fC-RKe">
-                                                        <rect key="frame" x="0.0" y="0.0" width="337" height="21.5"/>
+                                                        <rect key="frame" x="0.0" y="51.5" width="337" height="21.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BS Computer Science" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ezh-xa-L5a">
-                                                        <rect key="frame" x="80" y="41.5" width="177" height="21.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BS Computer Science" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="ezh-xa-L5a">
+                                                        <rect key="frame" x="80" y="93" width="177" height="21.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Dietary Restrictions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85H-Gj-iDv">
-                                                        <rect key="frame" x="75.5" y="83" width="186.5" height="21.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Dietary Restrictions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="85H-Gj-iDv">
+                                                        <rect key="frame" x="75.5" y="134.5" width="186.5" height="21.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -142,6 +142,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="bh2-9d-tvE"/>
+                    <connections>
+                        <outlet property="button1" destination="LES-sL-Hs6" id="zzA-uk-rnD"/>
+                        <outlet property="button2" destination="c9w-6W-cjp" id="VaT-e6-dGc"/>
+                        <outlet property="button3" destination="5Yh-7S-Nye" id="9xM-8M-Ol0"/>
+                        <outlet property="button4" destination="L0L-1D-kwi" id="Epv-Zt-S7s"/>
+                        <outlet property="dietLabel" destination="85H-Gj-iDv" id="HRo-XS-fZ9"/>
+                        <outlet property="majorLabel" destination="ezh-xa-L5a" id="Gme-eL-HEe"/>
+                        <outlet property="nameLabel" destination="Ftl-im-rRc" id="88f-iR-27m"/>
+                        <outlet property="schoolLabel" destination="y9D-fC-RKe" id="kkp-wQ-7Au"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UzL-DG-Q6L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

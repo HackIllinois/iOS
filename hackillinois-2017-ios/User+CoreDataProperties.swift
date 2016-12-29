@@ -25,5 +25,6 @@ extension User {
     @NSManaged var expireTime: Date
     @NSManaged var email: String
     @NSManaged var userID: NSNumber
+    @NSManaged var diet: String
 
 }

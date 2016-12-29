@@ -88,17 +88,8 @@ class LoginViewController: GenericInputView {
         }
     }
     
-    /* Create Account */
-    @IBOutlet weak var createAccountButton: UIButton!
-    
-    @IBAction func createAccountButtonPressed(_ sender: AnyObject) {
-        let controller = UIStoryboard(name: "CreateAccount", bundle: nil).instantiateInitialViewController()! as! CreateAccountViewController
-        controller.processUserData = processUserData // Capture login function in a different view, so this view will be the one to actually process it
-        present(controller, animated: true, completion: nil)
-    }
-    
     /* Handle Login */
-    func processUserData(name: String, email: String, school: String, major: String, role: String, barcode: String, auth: String, initTime: Date, expirationTime: Date, userID: NSNumber) {
+    func processUserData(name: String, email: String, school: String, major: String, role: String, barcode: String, auth: String, initTime: Date, expirationTime: Date, userID: NSNumber, diet: String) {
     
         DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async { [unowned self] in
             // Generate content asynchronously
@@ -119,7 +110,7 @@ class LoginViewController: GenericInputView {
             DispatchQueue.main.async {
                 /* Login was successful */
                 // Store user data
-                CoreDataHelpers.storeUser(name: name, email: email, school: school, major: major, role: role, barcode: barcode, barcodeData: barcodeData!, auth: auth, initTime: initTime, expirationTime: expirationTime, userID: userID)
+                CoreDataHelpers.storeUser(name: name, email: email, school: school, major: major, role: role, barcode: barcode, barcodeData: barcodeData!, auth: auth, initTime: initTime, expirationTime: expirationTime, userID: userID, diet: diet)
                 
                 // Present main application
                 let mainStoryboard = UIStoryboard(name: "Event", bundle: nil)
@@ -152,8 +143,6 @@ class LoginViewController: GenericInputView {
             
             // Re-enable user interaction
             self.LoginButton.isUserInteractionEnabled = true
-            self.createAccountButton.isUserInteractionEnabled = true
-            UIView.animate(withDuration: 0.2, animations: { self.createAccountButton.alpha = 1.0 })
             self.UsernameTextField.isUserInteractionEnabled = true
             self.PasswordTextField.isUserInteractionEnabled = true
             // Revert Login button title
@@ -197,15 +186,15 @@ class LoginViewController: GenericInputView {
         let school = "University of Illinois at Urbana-Champaign"
         let major = "Bachelor of Science Computer Science"
         let barcode = "1234567890"
+        let diet = "No restrictions"
         
-        self.processUserData(name: name, email: email, school: school, major: major, role: role, barcode: barcode, auth: auth, initTime: initTime, expirationTime: expTime, userID: userID)
+        self.processUserData(name: name, email: email, school: school, major: major, role: role, barcode: barcode, auth: auth, initTime: initTime, expirationTime: expTime, userID: userID, diet: diet)
     }
     
     func login(username: String, password: String) {
         // Hide text
         LoginButton.setTitle("", for: UIControlState())
-        UIView.animate(withDuration: 0.2, animations: { self.createAccountButton.alpha = 0.0 })
-        
+
         // Set the indicator to be the center of the button
         loginActivityIndicator.frame = CGRect(
             x: LoginButton.frame.width / 2 - LoginButton.frame.height / 2,
@@ -217,7 +206,6 @@ class LoginViewController: GenericInputView {
         
         // disable UI elements while logging in
         LoginButton.isUserInteractionEnabled = false
-        createAccountButton.isUserInteractionEnabled = false
         UsernameTextField.isUserInteractionEnabled = false
         PasswordTextField.isUserInteractionEnabled = false
         
@@ -253,13 +241,14 @@ class LoginViewController: GenericInputView {
             let email = "shotaro.ikeda@hackillinois.org"
             let initTime : Date = Date()
             let expTime: Date = Date(timeIntervalSinceNow: Double(5 * 60)) // Expires in 5 minutes for testing purposes
+            let diet = "No restrictions"
             
             // TODO: Parse API
             let name = "Shotaro Ikeda"
             let school = "University of Illinois at Urbana-Champaign"
             let major = "Bachelor of Science Computer Science"
             let barcode = "1234567890"
-            self.processUserData(name: name, email: email, school: school, major: major, role: role, barcode: barcode, auth: auth, initTime: initTime, expirationTime: expTime, userID: userID)
+            self.processUserData(name: name, email: email, school: school, major: major, role: role, barcode: barcode, auth: auth, initTime: initTime, expirationTime: expTime, userID: userID, diet: diet)
         }
     }
     
@@ -296,9 +285,6 @@ class LoginViewController: GenericInputView {
         LoginButton.clipsToBounds = true
         LoginButton.alpha = loginElementAlpha
         
-        createAccountButton.layer.cornerRadius = 5
-        createAccountButton.clipsToBounds = true
-        createAccountButton.alpha = loginElementAlpha
         
         /* Configure portions that the super class did not configure */
         UsernameTextField.alpha = loginElementAlpha

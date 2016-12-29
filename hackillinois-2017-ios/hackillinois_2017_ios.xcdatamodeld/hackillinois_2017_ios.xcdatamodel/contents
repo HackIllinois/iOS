@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Automatic">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16C68" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Chat" representedClassName=".Chat" syncable="YES">
         <attribute name="message" attributeType="String" syncable="YES"/>
-        <attribute name="time" attributeType="Date" syncable="YES"/>
+        <attribute name="time" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="user" attributeType="String" syncable="YES"/>
         <relationship name="helpQ" maxCount="1" deletionRule="Nullify" destinationEntity="HelpQ" inverseName="chats" inverseEntity="HelpQ" syncable="YES"/>
     </entity>
     <entity name="Feed" representedClassName=".Feed" syncable="YES">
-        <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="message" attributeType="String" syncable="YES"/>
-        <attribute name="time" attributeType="Date" syncable="YES"/>
+        <attribute name="time" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Location" inverseName="feeds" inverseEntity="Location" syncable="YES"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="feeds" inverseEntity="Tag" syncable="YES"/>
         <uniquenessConstraints>
@@ -20,19 +20,19 @@
     </entity>
     <entity name="HelpQ" representedClassName=".HelpQ" syncable="YES">
         <attribute name="desc" attributeType="String" syncable="YES"/>
-        <attribute name="initiation" attributeType="Date" syncable="YES"/>
-        <attribute name="isHelping" attributeType="Boolean" syncable="YES"/>
+        <attribute name="initiation" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="isHelping" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="language" attributeType="String" syncable="YES"/>
         <attribute name="location" attributeType="String" syncable="YES"/>
         <attribute name="mentor" attributeType="String" syncable="YES"/>
-        <attribute name="modified" attributeType="Date" syncable="YES"/>
-        <attribute name="resolved" attributeType="Boolean" syncable="YES"/>
+        <attribute name="modified" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="resolved" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="technology" attributeType="String" syncable="YES"/>
         <relationship name="chats" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Chat" inverseName="helpQ" inverseEntity="Chat" syncable="YES"/>
     </entity>
     <entity name="Location" representedClassName=".Location" syncable="YES">
-        <attribute name="latitude" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="longitude" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="latitude" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="longitude" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="shortName" attributeType="String" syncable="YES"/>
         <relationship name="feeds" toMany="YES" deletionRule="Nullify" destinationEntity="Feed" inverseName="locations" inverseEntity="Feed" syncable="YES"/>
@@ -49,15 +49,16 @@
     <entity name="User" representedClassName=".User" syncable="YES">
         <attribute name="barcode" attributeType="String" syncable="YES"/>
         <attribute name="barcodeData" attributeType="Binary" syncable="YES"/>
+        <attribute name="diet" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="email" attributeType="String" syncable="YES"/>
-        <attribute name="expireTime" attributeType="Date" syncable="YES"/>
-        <attribute name="initTime" attributeType="Date" syncable="YES"/>
+        <attribute name="expireTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="initTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="major" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="role" attributeType="String" syncable="YES"/>
         <attribute name="school" attributeType="String" syncable="YES"/>
         <attribute name="token" attributeType="String" syncable="YES"/>
-        <attribute name="userID" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="userID" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <elements>
         <element name="Chat" positionX="-45" positionY="54" width="128" height="105"/>
@@ -65,6 +66,6 @@
         <element name="HelpQ" positionX="-36" positionY="63" width="128" height="195"/>
         <element name="Location" positionX="-27" positionY="36" width="128" height="120"/>
         <element name="Tag" positionX="-45" positionY="45" width="128" height="75"/>
-        <element name="User" positionX="-54" positionY="-9" width="128" height="210"/>
+        <element name="User" positionX="-54" positionY="-9" width="128" height="225"/>
     </elements>
 </model>

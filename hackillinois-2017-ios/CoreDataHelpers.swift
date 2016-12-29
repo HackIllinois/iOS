@@ -166,11 +166,11 @@ class CoreDataHelpers {
 
 /* Helpers for User Profile */
 extension CoreDataHelpers {
-    class func storeUser(name: String, email: String, school: String, major: String, role: String, barcode: String, barcodeData: Data, auth: String, initTime: Date, expirationTime: Date, userID: NSNumber) {
+    class func storeUser(name: String, email: String, school: String, major: String, role: String, barcode: String, barcodeData: Data, auth: String, initTime: Date, expirationTime: Date, userID: NSNumber, diet: String) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         let user = NSEntityDescription.insertNewObject(forEntityName: "User", into: appDelegate.managedObjectContext) as! User
-        user.initialize(name: name, email: email, school: school, major: major, role: role, barcode: barcode, barcodeData: barcodeData, token: auth, initTime: initTime, expirationTime: expirationTime, userID: userID)
+        user.initialize(name: name, email: email, school: school, major: major, role: role, barcode: barcode, barcodeData: barcodeData, token: auth, initTime: initTime, expirationTime: expirationTime, userID: userID, diet: diet)
         
         self.saveContext()
     }
