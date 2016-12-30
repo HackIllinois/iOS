@@ -8,12 +8,13 @@
 
 import UIKit
 
-class ScheduleViewController: UIViewController {
+class ScheduleViewController: UIViewController, UIToolbarDelegate {
     
     @IBOutlet weak var dayControl: UISegmentedControl!
     @IBOutlet weak var sundayView: UIView!
     @IBOutlet weak var saturdayView: UIView!
     @IBOutlet weak var fridayView: UIView!
+    @IBOutlet weak var toolbar: UIToolbar!
 
     @IBAction func daySelected(_ sender: Any) {
         if dayControl.selectedSegmentIndex == 0 {
@@ -41,6 +42,8 @@ class ScheduleViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        toolbar.delegate = self
+        self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,5 +51,8 @@ class ScheduleViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return UIBarPosition.topAttached
+    }
 
 }

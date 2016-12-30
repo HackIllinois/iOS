@@ -46,9 +46,9 @@ class GenericNavigationController: UINavigationController, SWRevealViewControlle
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        navigationBar.barTintColor = UIColor.fromRGBHex(mainUIColor)
-        navigationBar.tintColor = UIColor.fromRGBHex(mainTintColor)
-        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.fromRGBHex(mainTintColor)]
+        //navigationBar.barTintColor = UIColor.fromRGBHex(mainUIColor)
+        //navigationBar.tintColor = UIColor.fromRGBHex(mainTintColor)
+        //navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.fromRGBHex(mainTintColor)]
         
         // Reveal view controller
         if self.revealViewController() != nil {

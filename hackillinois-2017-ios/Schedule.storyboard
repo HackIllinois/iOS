@@ -14,7 +14,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="schedule_day_one" id="UbS-yn-cmO" customClass="FridayTableViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" id="mje-0d-dwr">
-                        <rect key="frame" x="0.0" y="0.0" width="355" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="355" height="510"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
@@ -106,51 +106,62 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iah-Io-TzC">
-                                <rect key="frame" x="10" y="99" width="355" height="519"/>
+                                <rect key="frame" x="10" y="108" width="355" height="510"/>
                                 <connections>
                                     <segue destination="UbS-yn-cmO" kind="embed" id="ThY-gP-8H1"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nki-Hv-fmV">
-                                <rect key="frame" x="10" y="99" width="355" height="519"/>
+                                <rect key="frame" x="10" y="108" width="355" height="510"/>
                                 <connections>
                                     <segue destination="bNW-F3-czs" kind="embed" id="inG-uT-BLN"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wI7-t3-PDj">
-                                <rect key="frame" x="10" y="99" width="355" height="519"/>
+                                <rect key="frame" x="10" y="108" width="355" height="510"/>
                                 <connections>
                                     <segue destination="673-mT-F9l" kind="embed" id="IXH-He-tYV"/>
                                 </connections>
                             </containerView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="foD-wI-E4V">
-                                <rect key="frame" x="84.5" y="64" width="206" height="29"/>
-                                <segments>
-                                    <segment title="Friday"/>
-                                    <segment title="Saturday"/>
-                                    <segment title="Sunday"/>
-                                </segments>
-                                <connections>
-                                    <action selector="daySelected:" destination="gjM-CD-h7u" eventType="valueChanged" id="U3f-h9-5Yy"/>
-                                </connections>
-                            </segmentedControl>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mhh-pt-tUb">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem width="30" style="plain" systemItem="flexibleSpace" id="pCf-YO-NRv"/>
+                                    <barButtonItem width="320" style="plain" id="4OU-WS-buy">
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" segmentControlStyle="bar" selectedSegmentIndex="0" id="foD-wI-E4V">
+                                            <rect key="frame" x="27" y="8" width="320" height="29"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="Friday"/>
+                                                <segment title="Saturday"/>
+                                                <segment title="Sunday"/>
+                                            </segments>
+                                            <connections>
+                                                <action selector="daySelected:" destination="gjM-CD-h7u" eventType="valueChanged" id="U3f-h9-5Yy"/>
+                                            </connections>
+                                        </segmentedControl>
+                                    </barButtonItem>
+                                    <barButtonItem width="30" style="plain" systemItem="flexibleSpace" id="Zqy-Ug-EGR"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="K4K-GX-OxN" firstAttribute="top" secondItem="nki-Hv-fmV" secondAttribute="bottom" id="5RQ-bR-R9U"/>
-                            <constraint firstItem="foD-wI-E4V" firstAttribute="top" secondItem="vNa-9u-sVK" secondAttribute="bottom" id="6je-Vd-bfU"/>
                             <constraint firstItem="K4K-GX-OxN" firstAttribute="top" secondItem="wI7-t3-PDj" secondAttribute="bottom" id="COC-s4-Rp5"/>
-                            <constraint firstItem="foD-wI-E4V" firstAttribute="centerX" secondItem="sn0-9D-XIu" secondAttribute="centerX" id="FFx-sS-Vkd"/>
+                            <constraint firstItem="Mhh-pt-tUb" firstAttribute="top" secondItem="vNa-9u-sVK" secondAttribute="bottom" id="Hhy-2d-q7J"/>
                             <constraint firstItem="K4K-GX-OxN" firstAttribute="top" secondItem="Iah-Io-TzC" secondAttribute="bottom" id="KVE-bO-m0E"/>
                             <constraint firstAttribute="trailing" secondItem="Iah-Io-TzC" secondAttribute="trailing" constant="10" id="Mvd-9B-nbF"/>
+                            <constraint firstItem="Mhh-pt-tUb" firstAttribute="leading" secondItem="sn0-9D-XIu" secondAttribute="leading" id="NfB-Y9-3E7"/>
                             <constraint firstAttribute="trailing" secondItem="wI7-t3-PDj" secondAttribute="trailing" constant="10" id="RUc-t1-BeW"/>
                             <constraint firstItem="nki-Hv-fmV" firstAttribute="leading" secondItem="sn0-9D-XIu" secondAttribute="leading" constant="10" id="eQa-tU-bcH"/>
                             <constraint firstItem="wI7-t3-PDj" firstAttribute="leading" secondItem="sn0-9D-XIu" secondAttribute="leading" constant="10" id="hbI-Nh-Kob"/>
-                            <constraint firstItem="nki-Hv-fmV" firstAttribute="top" secondItem="vNa-9u-sVK" secondAttribute="bottom" constant="35" id="kq0-qo-oBK"/>
+                            <constraint firstItem="nki-Hv-fmV" firstAttribute="top" secondItem="vNa-9u-sVK" secondAttribute="bottom" constant="44" id="kq0-qo-oBK"/>
                             <constraint firstItem="Iah-Io-TzC" firstAttribute="leading" secondItem="sn0-9D-XIu" secondAttribute="leading" constant="10" id="mzL-1V-d0F"/>
-                            <constraint firstItem="wI7-t3-PDj" firstAttribute="top" secondItem="vNa-9u-sVK" secondAttribute="bottom" constant="35" id="vnQ-Lo-XaF"/>
+                            <constraint firstAttribute="trailing" secondItem="Mhh-pt-tUb" secondAttribute="trailing" id="u2U-fN-Uq6"/>
+                            <constraint firstItem="wI7-t3-PDj" firstAttribute="top" secondItem="vNa-9u-sVK" secondAttribute="bottom" constant="44" id="vnQ-Lo-XaF"/>
                             <constraint firstAttribute="trailing" secondItem="nki-Hv-fmV" secondAttribute="trailing" constant="10" id="wJx-gu-sdT"/>
-                            <constraint firstItem="Iah-Io-TzC" firstAttribute="top" secondItem="vNa-9u-sVK" secondAttribute="bottom" constant="35" id="x95-l8-VGa"/>
+                            <constraint firstItem="Iah-Io-TzC" firstAttribute="top" secondItem="vNa-9u-sVK" secondAttribute="bottom" constant="44" id="x95-l8-VGa"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Schedule" id="KKD-qW-tBQ"/>
@@ -159,6 +170,7 @@
                         <outlet property="fridayView" destination="Iah-Io-TzC" id="vYA-xI-afs"/>
                         <outlet property="saturdayView" destination="nki-Hv-fmV" id="WKX-Zy-8tZ"/>
                         <outlet property="sundayView" destination="wI7-t3-PDj" id="JC6-Xy-zFZ"/>
+                        <outlet property="toolbar" destination="Mhh-pt-tUb" id="Vmc-Wd-Ist"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ext-ZD-ZWG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -170,7 +182,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="schedule_day_two" id="bNW-F3-czs" customClass="SaturdayViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" id="RtO-rr-mKZ">
-                        <rect key="frame" x="0.0" y="0.0" width="355" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="355" height="510"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
@@ -234,7 +246,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="schedule_day_three" id="673-mT-F9l" customClass="SundayViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" id="p23-jR-naD">
-                        <rect key="frame" x="0.0" y="0.0" width="355" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="355" height="510"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
