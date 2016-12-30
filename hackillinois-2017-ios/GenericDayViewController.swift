@@ -27,6 +27,8 @@ class GenericDayViewController: UITableViewController {
         cell.title.text = dayItem.name
         cell.location.text = dayItem.location
         cell.time.text = dayItem.time
+        cell.separatorInset = UIEdgeInsets.zero
+
         
         return cell
     }

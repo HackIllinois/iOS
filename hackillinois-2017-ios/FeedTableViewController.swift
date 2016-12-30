@@ -77,10 +77,10 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
         let tagWorkshop = CoreDataHelpers.createOrFetchTag(tag: "Workshop", feeds: nil)
         
         // Temporary Events
-        let _ = CoreDataHelpers.createFeed(id: 1, message: "Hacking has begun!",
+        let _ = CoreDataHelpers.createFeed(id: 1, message: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
                            timestamp: 1464038000, locations: [], tags: [tagGeneral])
         
-        _ = CoreDataHelpers.createFeed(id: 2, message: "Lunch is served! Please come to ECEB or Siebel for Potbelly's Sandwiches!",
+        _ = CoreDataHelpers.createFeed(id: 2, message: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
                            timestamp: 1464038763, locations: [siebel, eceb], tags: [tagFood])
         
         _ = CoreDataHelpers.createFeed(id: 3, message: "Cluehunt has begun!",
@@ -95,7 +95,7 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
         // Generate dummy data to simulate scrolling down
         for n in 0 ..< 7 {
             let time = UInt64(1464037000 - n*432)
-            let _ = CoreDataHelpers.createFeed(id: NSNumber(value: 6 + n), message: "Replace me with real things",
+            let _ = CoreDataHelpers.createFeed(id: NSNumber(value: 6 + n), message: "Cool look these cells are now dynamically size. This means that the more text there is per notification, the larger the cell gets!",
                                timestamp: time, locations: [siebel, eceb, union], tags: [tagWorkshop])
         }
         
@@ -195,6 +195,9 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
     // Mark: View configuration
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 340
+
 
         // Uncomment the following line to preserve selection between presentations
         /* Preemptively load tags */
@@ -227,8 +230,6 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
         
         // Create the "sort by..." feature
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_sort")!, style: .plain, target: self, action: #selector(showFilterBy))
-        
-        navigationItem.title = "Annoucements"
     }
 
     // MARK: - Navigation
@@ -263,6 +264,7 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
         
         cell.messageLabel.text = item.message
         cell.dateTimeLabel.text = dateTimeFormatter.string(from: item.time)
+        cell.separatorInset = UIEdgeInsets.zero
         
         return cell
     }
