@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Map-->
+        <!--Maps-->
         <scene sceneID="aal-5c-lxi">
             <objects>
                 <viewController id="qaZ-tF-XKU" customClass="MapViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
@@ -22,38 +22,47 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Zdn-L1-r3l">
-                                <rect key="frame" x="-4" y="64" width="383" height="554"/>
+                                <rect key="frame" x="-4" y="108" width="383" height="510"/>
                             </mapView>
-                            <segmentedControl opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="LhV-jx-QDe">
-                                <rect key="frame" x="87.5" y="84" width="200" height="29"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="aCm-as-HXs"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="Siebel"/>
-                                    <segment title="ECEB"/>
-                                    <segment title="Union"/>
-                                </segments>
-                                <connections>
-                                    <action selector="mapControlChange:" destination="qaZ-tF-XKU" eventType="valueChanged" id="Fcf-9R-g13"/>
-                                </connections>
-                            </segmentedControl>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y6d-bR-Zhl">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="djU-VD-iUx"/>
+                                    <barButtonItem width="320" style="plain" id="qYl-A6-snl">
+                                        <segmentedControl key="customView" opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" id="LhV-jx-QDe">
+                                            <rect key="frame" x="27" y="8" width="320" height="29"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <segments>
+                                                <segment title="Siebel"/>
+                                                <segment title="ECEB"/>
+                                                <segment title="Union"/>
+                                            </segments>
+                                            <connections>
+                                                <action selector="mapControlChange:" destination="qaZ-tF-XKU" eventType="valueChanged" id="Fcf-9R-g13"/>
+                                            </connections>
+                                        </segmentedControl>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="QMG-Oc-x4V"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="y6d-bR-Zhl" secondAttribute="trailing" id="1RJ-W5-hrb"/>
                             <constraint firstItem="Zdn-L1-r3l" firstAttribute="leading" secondItem="ib4-KP-Krk" secondAttribute="leadingMargin" constant="-20" id="8Yd-yr-kee"/>
-                            <constraint firstItem="Zdn-L1-r3l" firstAttribute="top" secondItem="mgr-C5-5lE" secondAttribute="bottom" id="Ou4-2J-wmx"/>
-                            <constraint firstItem="LhV-jx-QDe" firstAttribute="top" secondItem="mgr-C5-5lE" secondAttribute="bottom" constant="20" id="a9k-Ra-v9G"/>
+                            <constraint firstItem="y6d-bR-Zhl" firstAttribute="top" secondItem="mgr-C5-5lE" secondAttribute="bottom" id="BhI-Bo-zsL"/>
+                            <constraint firstItem="y6d-bR-Zhl" firstAttribute="leading" secondItem="ib4-KP-Krk" secondAttribute="leading" id="IAg-yX-YKu"/>
+                            <constraint firstItem="Zdn-L1-r3l" firstAttribute="top" secondItem="mgr-C5-5lE" secondAttribute="bottom" constant="44" id="Ou4-2J-wmx"/>
                             <constraint firstItem="bvf-mM-5by" firstAttribute="top" secondItem="Zdn-L1-r3l" secondAttribute="bottom" id="nPJ-gc-EIi"/>
-                            <constraint firstItem="LhV-jx-QDe" firstAttribute="centerX" secondItem="ib4-KP-Krk" secondAttribute="centerX" id="qvE-Ak-fwq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Zdn-L1-r3l" secondAttribute="trailing" constant="-20" id="rBz-Vx-OYW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Map" id="m5J-TP-VmL"/>
+                    <navigationItem key="navigationItem" title="Maps" id="m5J-TP-VmL"/>
                     <connections>
                         <outlet property="mapControl" destination="LhV-jx-QDe" id="FW4-gj-GPZ"/>
                         <outlet property="mapView" destination="Zdn-L1-r3l" id="EGZ-E5-8q3"/>
+                        <outlet property="toolbar" destination="y6d-bR-Zhl" id="Mi3-xP-seU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wl9-fg-gn8" userLabel="First Responder" sceneMemberID="firstResponder"/>

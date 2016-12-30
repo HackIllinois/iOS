@@ -11,9 +11,10 @@ import UIKit
 import MapKit
 import LiquidFloatingActionButton
 
-class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate {
+class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, UIToolbarDelegate  {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var mapControl: UISegmentedControl!
+    @IBOutlet weak var toolbar: UIToolbar!
     
     @IBAction func mapControlChange(_ sender: Any) {
         if(mapControl.selectedSegmentIndex == -1){
@@ -60,6 +61,9 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate {
         
         /* Call superclass's constructor after configuration */
         super.viewDidLoad()
+        self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+        toolbar.delegate = self
+        
         
         mapControl.selectedSegmentIndex = UISegmentedControlNoSegment
         let tapMap = UIPanGestureRecognizer(target: self, action: #selector(MapViewController.didDragMap(gestureRecognizer:)))
@@ -76,4 +80,9 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate {
             mapControl.selectedSegmentIndex = UISegmentedControlNoSegment
         }
     }
+    
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return UIBarPosition.topAttached
+    }
+
 }
