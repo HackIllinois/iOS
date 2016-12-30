@@ -22,7 +22,7 @@ class GenericNavigationController: UINavigationController, SWRevealViewControlle
         // Simulate tap of close button
         self.revealViewController().revealToggle(animated: true)
     }
-    
+
     // Mark: SWRevealViewController delegates
     func revealController(_ revealController: SWRevealViewController!, didMoveTo position: FrontViewPosition) {
         if position == FrontViewPosition.right {
@@ -49,6 +49,8 @@ class GenericNavigationController: UINavigationController, SWRevealViewControlle
         //navigationBar.barTintColor = UIColor.fromRGBHex(mainUIColor)
         //navigationBar.tintColor = UIColor.fromRGBHex(mainTintColor)
         //navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.fromRGBHex(mainTintColor)]
+        
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.default;
         
         // Reveal view controller
         if self.revealViewController() != nil {

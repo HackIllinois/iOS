@@ -278,7 +278,7 @@ class LoginViewController: GenericInputView {
         // Do any additional setup after loading the view, typically from a nib.
         
         /* MARK: Set status bar to look better with image */
-        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+        //UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         
         /* Prettier UI Elements */
         LoginButton.layer.cornerRadius = 5

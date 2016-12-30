@@ -126,7 +126,7 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mhh-pt-tUb">
                                 <rect key="frame" x="0.0" y="64" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem width="30" style="plain" systemItem="flexibleSpace" id="pCf-YO-NRv"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="pCf-YO-NRv"/>
                                     <barButtonItem width="320" style="plain" id="4OU-WS-buy">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" segmentControlStyle="bar" selectedSegmentIndex="0" id="foD-wI-E4V">
                                             <rect key="frame" x="27" y="8" width="320" height="29"/>
@@ -141,7 +141,7 @@
                                             </connections>
                                         </segmentedControl>
                                     </barButtonItem>
-                                    <barButtonItem width="30" style="plain" systemItem="flexibleSpace" id="Zqy-Ug-EGR"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Zqy-Ug-EGR"/>
                                 </items>
                             </toolbar>
                         </subviews>
