@@ -23,12 +23,11 @@ class GenericDayViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "day_cell") as! ScheduleCell
         let dayItem = dayItems[(indexPath as NSIndexPath).row]
+        
         /* Initialize Cell */
         cell.title.text = dayItem.name
-        cell.location.text = dayItem.location
         cell.time.text = dayItem.time
-        cell.separatorInset = UIEdgeInsets.zero
-
+        self.tableView.separatorInset = UIEdgeInsetsMake(0, 12, 0, 12);
         
         return cell
     }

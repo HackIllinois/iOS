@@ -40,7 +40,6 @@
 		E2A085EE1D0C4202002197F9 /* GenericTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085ED1D0C4202002197F9 /* GenericTabBarController.swift */; };
 		E2A085F01D0C42A7002197F9 /* GenericNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085EF1D0C42A7002197F9 /* GenericNavigationController.swift */; };
 		E2A085F21D0C4E43002197F9 /* GenericCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085F11D0C4E43002197F9 /* GenericCardViewController.swift */; };
-		E2A085F41D0C57E7002197F9 /* ScheduleViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085F31D0C57E7002197F9 /* ScheduleViewController2.swift */; };
 		E2A085F61D0C6536002197F9 /* ScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085F51D0C6536002197F9 /* ScheduleCell.swift */; };
 		E2A085FA1D0C6688002197F9 /* DayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085F91D0C6688002197F9 /* DayItem.swift */; };
 		E2A085FF1D0C70BF002197F9 /* GenericDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085FE1D0C70BF002197F9 /* GenericDayViewController.swift */; };
@@ -139,7 +138,6 @@
 		E2A085ED1D0C4202002197F9 /* GenericTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericTabBarController.swift; sourceTree = "<group>"; };
 		E2A085EF1D0C42A7002197F9 /* GenericNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericNavigationController.swift; sourceTree = "<group>"; };
 		E2A085F11D0C4E43002197F9 /* GenericCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericCardViewController.swift; sourceTree = "<group>"; };
-		E2A085F31D0C57E7002197F9 /* ScheduleViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController2.swift; sourceTree = "<group>"; };
 		E2A085F51D0C6536002197F9 /* ScheduleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleCell.swift; sourceTree = "<group>"; };
 		E2A085F91D0C6688002197F9 /* DayItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayItem.swift; sourceTree = "<group>"; };
 		E2A085FE1D0C70BF002197F9 /* GenericDayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericDayViewController.swift; sourceTree = "<group>"; };
@@ -478,7 +476,6 @@
 			children = (
 				E2A085FB1D0C7069002197F9 /* ScheduleGenerics */,
 				E2F957041D0BA899003A0881 /* Schedule.storyboard */,
-				E2A085F31D0C57E7002197F9 /* ScheduleViewController2.swift */,
 				A54825B01E160C6C00E35C71 /* ScheduleViewController.swift */,
 				E2A086021D0C736F002197F9 /* Friday */,
 				E2A086031D0C7381002197F9 /* Saturday */,
@@ -788,7 +785,6 @@
 				E2A085F21D0C4E43002197F9 /* GenericCardViewController.swift in Sources */,
 				E2BCA57F1CF3B19E006AAA8B /* User.swift in Sources */,
 				E2BCA56A1CF373A1006AAA8B /* EventConstants.swift in Sources */,
-				E2A085F41D0C57E7002197F9 /* ScheduleViewController2.swift in Sources */,
 				E2BCA57E1CF3B19E006AAA8B /* User+CoreDataProperties.swift in Sources */,
 				E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */,
 				E2A086011D0C736B002197F9 /* FridayTableViewController.swift in Sources */,

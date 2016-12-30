@@ -146,7 +146,7 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         }
         
         // Add "My Location" button
-        let locationFrame = CGRect(x: screen.width - 56, y: screen.height - self.tabBarController!.tabBar.frame.height - 132, width: 52, height: 52)
+        let locationFrame = CGRect(x: screen.width - 56, y: screen.height - self.tabBarController!.tabBar.frame.height - 168, width: 52, height: 52)
         // Configure button
         locationButton = UIButton(frame: locationFrame)
         locationButton.layer.cornerRadius = 52 / 2  // Circular button

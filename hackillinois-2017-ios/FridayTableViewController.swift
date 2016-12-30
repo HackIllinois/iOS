@@ -17,6 +17,7 @@ class FridayTableViewController: GenericDayViewController {
         }
         
         super.viewDidLoad()
-        self.tableView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0);
+        self.tableView.contentInset = UIEdgeInsetsMake(-57, 0, 0, -57);
+        self.tableView.separatorInset = UIEdgeInsetsMake(0, 12, 0, 12);
     }
 }
