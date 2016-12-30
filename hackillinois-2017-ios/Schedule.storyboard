@@ -14,31 +14,31 @@
             <objects>
                 <tableViewController storyboardIdentifier="schedule_day_one" id="UbS-yn-cmO" customClass="FridayTableViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" id="mje-0d-dwr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="355" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="day_cell" id="IXi-p9-C3W" customClass="ScheduleCell" customModule="hackillinois_2017_ios" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="28" width="355" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IXi-p9-C3W" id="Bf1-yM-vHy">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="355" height="99"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nZu-QH-jlY">
-                                            <rect key="frame" x="8" y="39" width="584" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nZu-QH-jlY">
+                                            <rect key="frame" x="8" y="39" width="339" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="day time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aaR-Ym-nkk">
-                                            <rect key="frame" x="8" y="70" width="584" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="day time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aaR-Ym-nkk">
+                                            <rect key="frame" x="8" y="70" width="339" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Oc-jJ-yTH">
-                                            <rect key="frame" x="8" y="8" width="584" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Oc-jJ-yTH">
+                                            <rect key="frame" x="8" y="8" width="339" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -71,7 +71,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z4C-KO-n5K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1976" y="-244"/>
+            <point key="canvasLocation" x="2266" y="-83"/>
         </scene>
         <!--Schedule-->
         <scene sceneID="f5O-w1-ylb">
@@ -86,54 +86,115 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="zdP-ld-B4Z" kind="relationship" relationship="rootViewController" id="Mmj-Bz-YVF"/>
+                        <segue destination="gjM-CD-h7u" kind="relationship" relationship="rootViewController" id="AJC-JB-qSw"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c7x-as-Ycg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="498" y="430"/>
         </scene>
-        <!--Schedule Page View Controller-->
-        <scene sceneID="go9-Jq-QUn">
+        <!--Schedule-->
+        <scene sceneID="x3R-3U-TgZ">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="zdP-ld-B4Z" customClass="SchedulePageViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
-                    <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" id="JUt-vF-Yfz"/>
-                </pageViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NV3-hx-f4W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="gjM-CD-h7u" customClass="ScheduleViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vNa-9u-sVK"/>
+                        <viewControllerLayoutGuide type="bottom" id="K4K-GX-OxN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sn0-9D-XIu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iah-Io-TzC">
+                                <rect key="frame" x="10" y="99" width="355" height="519"/>
+                                <connections>
+                                    <segue destination="UbS-yn-cmO" kind="embed" id="ThY-gP-8H1"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nki-Hv-fmV">
+                                <rect key="frame" x="10" y="99" width="355" height="519"/>
+                                <connections>
+                                    <segue destination="bNW-F3-czs" kind="embed" id="inG-uT-BLN"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wI7-t3-PDj">
+                                <rect key="frame" x="10" y="99" width="355" height="519"/>
+                                <connections>
+                                    <segue destination="673-mT-F9l" kind="embed" id="IXH-He-tYV"/>
+                                </connections>
+                            </containerView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="foD-wI-E4V">
+                                <rect key="frame" x="84.5" y="64" width="206" height="29"/>
+                                <segments>
+                                    <segment title="Friday"/>
+                                    <segment title="Saturday"/>
+                                    <segment title="Sunday"/>
+                                </segments>
+                                <connections>
+                                    <action selector="daySelected:" destination="gjM-CD-h7u" eventType="valueChanged" id="U3f-h9-5Yy"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="K4K-GX-OxN" firstAttribute="top" secondItem="nki-Hv-fmV" secondAttribute="bottom" id="5RQ-bR-R9U"/>
+                            <constraint firstItem="foD-wI-E4V" firstAttribute="top" secondItem="vNa-9u-sVK" secondAttribute="bottom" id="6je-Vd-bfU"/>
+                            <constraint firstItem="K4K-GX-OxN" firstAttribute="top" secondItem="wI7-t3-PDj" secondAttribute="bottom" id="COC-s4-Rp5"/>
+                            <constraint firstItem="foD-wI-E4V" firstAttribute="centerX" secondItem="sn0-9D-XIu" secondAttribute="centerX" id="FFx-sS-Vkd"/>
+                            <constraint firstItem="K4K-GX-OxN" firstAttribute="top" secondItem="Iah-Io-TzC" secondAttribute="bottom" id="KVE-bO-m0E"/>
+                            <constraint firstAttribute="trailing" secondItem="Iah-Io-TzC" secondAttribute="trailing" constant="10" id="Mvd-9B-nbF"/>
+                            <constraint firstAttribute="trailing" secondItem="wI7-t3-PDj" secondAttribute="trailing" constant="10" id="RUc-t1-BeW"/>
+                            <constraint firstItem="nki-Hv-fmV" firstAttribute="leading" secondItem="sn0-9D-XIu" secondAttribute="leading" constant="10" id="eQa-tU-bcH"/>
+                            <constraint firstItem="wI7-t3-PDj" firstAttribute="leading" secondItem="sn0-9D-XIu" secondAttribute="leading" constant="10" id="hbI-Nh-Kob"/>
+                            <constraint firstItem="nki-Hv-fmV" firstAttribute="top" secondItem="vNa-9u-sVK" secondAttribute="bottom" constant="35" id="kq0-qo-oBK"/>
+                            <constraint firstItem="Iah-Io-TzC" firstAttribute="leading" secondItem="sn0-9D-XIu" secondAttribute="leading" constant="10" id="mzL-1V-d0F"/>
+                            <constraint firstItem="wI7-t3-PDj" firstAttribute="top" secondItem="vNa-9u-sVK" secondAttribute="bottom" constant="35" id="vnQ-Lo-XaF"/>
+                            <constraint firstAttribute="trailing" secondItem="nki-Hv-fmV" secondAttribute="trailing" constant="10" id="wJx-gu-sdT"/>
+                            <constraint firstItem="Iah-Io-TzC" firstAttribute="top" secondItem="vNa-9u-sVK" secondAttribute="bottom" constant="35" id="x95-l8-VGa"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Schedule" id="KKD-qW-tBQ"/>
+                    <connections>
+                        <outlet property="dayControl" destination="foD-wI-E4V" id="Ylm-ec-lLa"/>
+                        <outlet property="fridayView" destination="Iah-Io-TzC" id="vYA-xI-afs"/>
+                        <outlet property="saturdayView" destination="nki-Hv-fmV" id="WKX-Zy-8tZ"/>
+                        <outlet property="sundayView" destination="wI7-t3-PDj" id="JC6-Xy-zFZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ext-ZD-ZWG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1221" y="430"/>
+            <point key="canvasLocation" x="1288.8" y="448.42578710644682"/>
         </scene>
         <!--Saturday View Controller-->
         <scene sceneID="dck-3A-TRb">
             <objects>
                 <tableViewController storyboardIdentifier="schedule_day_two" id="bNW-F3-czs" customClass="SaturdayViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" id="RtO-rr-mKZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="355" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="day_cell" id="yJE-eC-dYm" customClass="ScheduleCell" customModule="hackillinois_2017_ios" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="28" width="355" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yJE-eC-dYm" id="qvw-Rs-zRC">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="355" height="99"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jao-oV-I8Z">
-                                            <rect key="frame" x="8" y="39" width="584" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jao-oV-I8Z">
+                                            <rect key="frame" x="8" y="39" width="339" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="day time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQY-EF-ySu">
-                                            <rect key="frame" x="8" y="70" width="584" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="day time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQY-EF-ySu">
+                                            <rect key="frame" x="8" y="70" width="339" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGh-ae-P6h">
-                                            <rect key="frame" x="8" y="8" width="584" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGh-ae-P6h">
+                                            <rect key="frame" x="8" y="8" width="339" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -166,38 +227,38 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BCZ-Vx-4cW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1976" y="430"/>
+            <point key="canvasLocation" x="2343" y="499"/>
         </scene>
         <!--Sunday View Controller-->
         <scene sceneID="dmj-kf-th6">
             <objects>
                 <tableViewController storyboardIdentifier="schedule_day_three" id="673-mT-F9l" customClass="SundayViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" id="p23-jR-naD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="355" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="day_cell" id="tbb-hw-Yaq" customClass="ScheduleCell" customModule="hackillinois_2017_ios" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="28" width="355" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tbb-hw-Yaq" id="Nl0-iT-CYn">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="355" height="99"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfq-3w-pP1">
-                                            <rect key="frame" x="8" y="39" width="584" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfq-3w-pP1">
+                                            <rect key="frame" x="8" y="39" width="339" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="day time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hb-ZE-u9D">
-                                            <rect key="frame" x="8" y="70" width="584" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="day time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hb-ZE-u9D">
+                                            <rect key="frame" x="8" y="70" width="339" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xvb-ms-F70">
-                                            <rect key="frame" x="8" y="8" width="584" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xvb-ms-F70">
+                                            <rect key="frame" x="8" y="8" width="339" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -230,7 +291,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P63-Eg-0tm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1976" y="1102"/>
+            <point key="canvasLocation" x="2394" y="1025"/>
         </scene>
     </scenes>
     <resources>
