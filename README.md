@@ -4,7 +4,7 @@ Official iOS application for HackIllinois. Please read this README before contin
 
 # Branch Information #
 
-You are currently on the static branch. In this branch, front-end only development occurs (no dependencies to backend). If you would like to test / develop features related to the backend, please switch to the corresponding api branch.
+This branch is supposed to contain the released version of applications. Currently this hosts a more updated version of 0.3.0-beta.
 
 # Requirements #
 The following requirements are required to develop this application.
