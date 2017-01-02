@@ -12,10 +12,4 @@ class ScheduleCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var descriptionButton: UIButton!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        self.separatorInset = UIEdgeInsetsMake(0, 12, 0, 12);
-    }
 }

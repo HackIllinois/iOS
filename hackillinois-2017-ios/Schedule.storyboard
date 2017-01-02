@@ -134,7 +134,7 @@
         <!--Schedule-->
         <scene sceneID="x3R-3U-TgZ">
             <objects>
-                <viewController id="gjM-CD-h7u" customClass="ScheduleViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="gjM-CD-h7u" customClass="ScheduleViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vNa-9u-sVK"/>
                         <viewControllerLayoutGuide type="bottom" id="K4K-GX-OxN"/>
@@ -167,7 +167,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="pCf-YO-NRv"/>
                                     <barButtonItem width="300" style="plain" id="4OU-WS-buy">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" segmentControlStyle="bar" selectedSegmentIndex="0" id="foD-wI-E4V">
-                                            <rect key="frame" x="37" y="8" width="300" height="29"/>
+                                            <rect key="frame" x="37" y="7.5" width="300" height="29"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Friday"/>

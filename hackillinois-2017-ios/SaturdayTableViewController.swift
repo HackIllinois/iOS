@@ -17,7 +17,5 @@ class SaturdayViewController: GenericDayViewController {
         }
         
         super.viewDidLoad()
-        self.tableView.contentInset = UIEdgeInsetsMake(7, 0, 0, 0);
-
     }
 }
