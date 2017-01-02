@@ -14,14 +14,10 @@ class GenericDayViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.contentInset = UIEdgeInsetsMake(7, 0, 0, 0);
         
         /* Reload data */
         self.tableView.reloadData()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.tableView.contentInset = UIEdgeInsetsMake(7, 0, 0, 0);
     }
     
     // Mark: UITableViewController
