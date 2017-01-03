@@ -28,7 +28,8 @@ class GenericDayViewController: UITableViewController {
         /* Initialize Cell */
         cell.title.text = dayItem.name
         cell.time.text = dayItem.time
-        
+        cell.selectionStyle = .none
+                
         return cell
     }
     

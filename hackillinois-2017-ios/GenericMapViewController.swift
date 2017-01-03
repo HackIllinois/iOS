@@ -124,9 +124,7 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         
         // The rectangle's alignment is hacky due to iOS's autolayout constraints
         let screen = UIScreen.main.bounds
-        
-        let rect = CGRect(x: screen.width - 50, y: screen.height - self.tabBarController!.tabBar.frame.height - 180, width: 40, height: 40)
-        
+                
         // Only add the routing options if there are existing elements in buildings
         if !buildings.isEmpty {
             var hue: CGFloat = 5.0 / 360.0
@@ -203,22 +201,28 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         routeRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: destination, addressDictionary: nil))
         
         routeRequest.requestsAlternateRoutes = false
-        routeRequest.transportType = .walking
+        routeRequest.transportType = .any
         
         // Draw the button again to have it "fade"
         // Slignt padding is required to have the circle appear normal: otherwise it will end up clipped
-        
         let context = UIGraphicsGetCurrentContext()
         context?.setFillColor(UIColor.fromRGBHex(mainUIColor).cgColor)
         context?.setLineWidth(0)
         
+        context?.addEllipse(in: CGRect(x: 4, y: 4, width: locationButton.frame.width, height: locationButton.frame.height)) // Add slight padding
         context?.drawPath(using: .fillStroke)
         
-        let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        
-        /* Configure activity indicator */
+        // Obtain direction
+        let directions = MKDirections(request: routeRequest)
+        directions.calculate(completionHandler: { (response, error) in
+            if let routes = response?.routes {
+                self.map.add(routes[0].polyline)
+            } else if let _ = error {
+                print("\(error!)")
+            }
+        })
     }
     
     
@@ -227,6 +231,7 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         // Create a renderer
         let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
         renderer.lineWidth = strokeWidth
+        renderer.strokeColor = UIColor.blue;
         return renderer
     }
     

@@ -95,7 +95,9 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="actualContent" destination="Ohd-uK-ton" id="KZ4-YJ-FOk"/>
                                     <outlet property="descriptionButton" destination="Xdd-8Y-uzF" id="9iI-3m-zbe"/>
+                                    <outlet property="reminderButton" destination="Ohd-uK-ton" id="vZf-Fg-Rff"/>
                                     <outlet property="time" destination="aaR-Ym-nkk" id="UXa-5D-7Id"/>
                                     <outlet property="title" destination="0Oc-jJ-yTH" id="dgN-Xo-9gD"/>
                                 </connections>
