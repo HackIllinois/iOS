@@ -69,6 +69,8 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         let tapMap = UIPanGestureRecognizer(target: self, action: #selector(MapViewController.didDragMap(gestureRecognizer:)))
         tapMap.delegate = self
         map.addGestureRecognizer(tapMap)
+        
+        addBottomSheetView()
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -83,6 +85,17 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {
         return UIBarPosition.topAttached
+    }
+    
+    func addBottomSheetView() {
+        let bottomSheet = BottomMapViewController()
+        self.addChildViewController(bottomSheet)
+        self.view.addSubview(bottomSheet.view)
+        bottomSheet.didMove(toParentViewController: self)
+        
+        let height = view.frame.height
+        let width  = view.frame.width
+        bottomSheet.view.frame = CGRect(x:0, y:self.map.frame.maxY, width:width, height:height)
     }
 
 }
