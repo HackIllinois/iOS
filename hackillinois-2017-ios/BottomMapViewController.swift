@@ -17,6 +17,8 @@ class BottomMapViewController: UIViewController {
 
         let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(BottomMapViewController.panGesture))
         view.addGestureRecognizer(gesture)
+        
+        roundViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,7 +30,7 @@ class BottomMapViewController: UIViewController {
         super.viewDidAppear(animated)
         UIView.animate(withDuration: 0.3) { [weak self] in
             let frame = self?.view.frame
-            let yComponent = UIScreen.main.bounds.height - 200
+            let yComponent = UIScreen.main.bounds.height - 150
             self?.view.frame = CGRect(x:0, y:yComponent, width:frame!.width, height:
                 frame!.height)
         }
@@ -58,5 +60,10 @@ class BottomMapViewController: UIViewController {
         bluredView.frame = UIScreen.main.bounds
         
         view.insertSubview(bluredView, at: 0)
+    }
+    
+    func roundViews() {
+        view.layer.cornerRadius = 5
+        view.clipsToBounds = true
     }
 }

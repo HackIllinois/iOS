@@ -13,5 +13,6 @@ class ScheduleCell: UITableViewCell {
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var descriptionButton: UIButton!
     @IBOutlet weak var actualContent: UIView!
-    @IBOutlet weak var reminderButton: UIView!
+    @IBOutlet weak var reminderButton: UIButton!
+    
 }

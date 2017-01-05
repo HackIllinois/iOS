@@ -27,9 +27,15 @@ class GenericDayViewController: UITableViewController {
         
         /* Initialize Cell */
         cell.title.text = dayItem.name
+        
         cell.time.text = dayItem.time
         cell.selectionStyle = .none
-                
+        
+        let reminderImage = UIImage(named: "reminder")
+        let tintedImage = reminderImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        cell.reminderButton.setImage(tintedImage, for: .normal)
+        cell.reminderButton.tintColor = UIColor.blue
+        
         return cell
     }
     

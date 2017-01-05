@@ -31,17 +31,16 @@
                                                     <rect key="frame" x="8" y="8" width="335" height="182.5"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="bottom" spacing="42" translatesAutoresizingMaskIntoConstraints="NO" id="Y5s-QY-hCd">
-                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="34"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aaR-Ym-nkk">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="40.5" height="34"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="40.5" height="30"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flQ-7B-Nyw">
-                                                                    <rect key="frame" x="244" y="0.0" width="91" height="34"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flQ-7B-Nyw">
+                                                                    <rect key="frame" x="258" y="0.0" width="77" height="30"/>
                                                                     <state key="normal" title="Remind Me"/>
                                                                 </button>
                                                             </subviews>
@@ -55,7 +54,7 @@
                                                             </constraints>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Oc-jJ-yTH">
-                                                            <rect key="frame" x="0.0" y="34" width="335" height="114.5"/>
+                                                            <rect key="frame" x="0.0" y="30" width="335" height="118.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -97,7 +96,7 @@
                                 <connections>
                                     <outlet property="actualContent" destination="Ohd-uK-ton" id="KZ4-YJ-FOk"/>
                                     <outlet property="descriptionButton" destination="Xdd-8Y-uzF" id="9iI-3m-zbe"/>
-                                    <outlet property="reminderButton" destination="Ohd-uK-ton" id="vZf-Fg-Rff"/>
+                                    <outlet property="reminderButton" destination="flQ-7B-Nyw" id="OQR-jy-qwM"/>
                                     <outlet property="time" destination="aaR-Ym-nkk" id="UXa-5D-7Id"/>
                                     <outlet property="title" destination="0Oc-jJ-yTH" id="dgN-Xo-9gD"/>
                                 </connections>
@@ -240,20 +239,19 @@
                                                     <rect key="frame" x="8" y="8" width="335" height="182.5"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a9n-VR-AMd">
-                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="34"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQY-EF-ySu">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="235" height="34"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="215" height="30"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDM-4z-UYe">
-                                                                    <rect key="frame" x="235" y="0.0" width="100" height="34"/>
+                                                                    <rect key="frame" x="215" y="0.0" width="120" height="30"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="100" id="8mE-AP-y8z"/>
+                                                                        <constraint firstAttribute="width" constant="120" id="8mE-AP-y8z"/>
                                                                     </constraints>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                     <state key="normal" title="Remind Me"/>
                                                                 </button>
                                                             </subviews>
@@ -267,7 +265,7 @@
                                                             </constraints>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Event Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGh-ae-P6h">
-                                                            <rect key="frame" x="0.0" y="34" width="335" height="114.5"/>
+                                                            <rect key="frame" x="0.0" y="30" width="335" height="118.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -309,6 +307,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
+                                    <outlet property="reminderButton" destination="aDM-4z-UYe" id="jQi-Lo-z7c"/>
                                     <outlet property="time" destination="wQY-EF-ySu" id="trI-6L-MWg"/>
                                     <outlet property="title" destination="bGh-ae-P6h" id="J1X-er-Bii"/>
                                 </connections>
@@ -347,23 +346,22 @@
                                                     <rect key="frame" x="8" y="8" width="335" height="182"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BdM-ob-Noq">
-                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="34"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="day time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hb-ZE-u9D">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="244" height="34"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="258" height="30"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N37-ZD-3ai">
-                                                                    <rect key="frame" x="244" y="0.0" width="91" height="34"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                                    <rect key="frame" x="258" y="0.0" width="77" height="30"/>
                                                                     <state key="normal" title="Remind me"/>
                                                                 </button>
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xvb-ms-F70">
-                                                            <rect key="frame" x="0.0" y="34" width="335" height="114"/>
+                                                            <rect key="frame" x="0.0" y="30" width="335" height="118"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -404,6 +402,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
+                                    <outlet property="reminderButton" destination="N37-ZD-3ai" id="zPd-Aa-Gxg"/>
                                     <outlet property="time" destination="0hb-ZE-u9D" id="BP5-zE-8e3"/>
                                     <outlet property="title" destination="Xvb-ms-F70" id="1So-rB-BGD"/>
                                 </connections>
