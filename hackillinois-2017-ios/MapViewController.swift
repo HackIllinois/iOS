@@ -70,7 +70,7 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         tapMap.delegate = self
         map.addGestureRecognizer(tapMap)
         
-        //addBottomSheetView()
+        addBottomSheetView()
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
