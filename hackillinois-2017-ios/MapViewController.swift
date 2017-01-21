@@ -64,7 +64,6 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         toolbar.delegate = self
         
-        
         mapControl.selectedSegmentIndex = UISegmentedControlNoSegment
         let tapMap = UIPanGestureRecognizer(target: self, action: #selector(MapViewController.didDragMap(gestureRecognizer:)))
         tapMap.delegate = self
@@ -88,14 +87,17 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
     }
     
     func addBottomSheetView() {
-        let bottomSheet = BottomMapViewController()
-        self.addChildViewController(bottomSheet)
-        self.view.addSubview(bottomSheet.view)
-        bottomSheet.didMove(toParentViewController: self)
+        let bottomSheet = self.storyboard?.instantiateViewController(withIdentifier: "BottomView")
+        bottomSheet?.view.backgroundColor = UIColor.clear
+        bottomSheet?.modalPresentationStyle = .overCurrentContext
+        self.addChildViewController(bottomSheet!)
+        
+        self.view.addSubview((bottomSheet?.view)!)
+        bottomSheet?.didMove(toParentViewController: self)
         
         let height = view.frame.height
         let width  = view.frame.width
-        bottomSheet.view.frame = CGRect(x:0, y:self.view.frame.maxY, width:width, height:height)
+        bottomSheet?.view.frame = CGRect(x:0, y:self.view.frame.maxY, width:width, height:height)
     }
 
 }

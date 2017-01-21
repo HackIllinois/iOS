@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="auk-1d-PU8">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="auk-1d-PU8">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -8,6 +8,14 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Brandon_med.otf">
+            <string>BrandonGrotesque-Medium</string>
+        </array>
+        <array key="Brandon_reg.otf">
+            <string>BrandonGrotesque-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Maps-->
         <scene sceneID="aal-5c-lxi">
@@ -30,7 +38,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="djU-VD-iUx"/>
                                     <barButtonItem width="300" style="plain" id="qYl-A6-snl">
                                         <segmentedControl key="customView" opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" id="LhV-jx-QDe">
-                                            <rect key="frame" x="37" y="7.5" width="300" height="29"/>
+                                            <rect key="frame" x="37" y="8" width="300" height="29"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <segments>
@@ -69,6 +77,200 @@
             </objects>
             <point key="canvasLocation" x="1485.5999999999999" y="630.13493253373315"/>
         </scene>
+        <!--Bottom View Controller-->
+        <scene sceneID="tOw-1j-0pY">
+            <objects>
+                <viewController storyboardIdentifier="BottomView" id="hoJ-Yo-Kz2" customClass="BottomViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iAN-gJ-8an"/>
+                        <viewControllerLayoutGuide type="bottom" id="HVx-9D-qVN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="q1g-4w-cby">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZbP-aJ-MKr">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zcc-G3-79H">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="627"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ojo-OF-fy7">
+                                                <rect key="frame" x="169" y="6" width="37" height="5"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="5" id="Pyy-Rn-C1w"/>
+                                                    <constraint firstAttribute="width" constant="37" id="ddd-ll-uJ3"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thomas Siebel Center" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BuL-AG-fvg">
+                                                <rect key="frame" x="15" y="17" width="220" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="220" id="cXn-Bg-o0B"/>
+                                                    <constraint firstAttribute="height" constant="34" id="ztV-NS-I5f"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="24"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qNm-Ig-Rzw">
+                                                <rect key="frame" x="336" y="17" width="24" height="24"/>
+                                                <color key="backgroundColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="0.5" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="24" id="38A-XU-XyR"/>
+                                                    <constraint firstAttribute="width" constant="24" id="50i-Oy-D1u"/>
+                                                </constraints>
+                                                <state key="normal" title="Button" image="cancel"/>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9 min - 0.4 mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="73J-NS-7RW">
+                                                <rect key="frame" x="34.5" y="52" width="125.5" height="26"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="125.3" id="Cs7-gz-9Ri"/>
+                                                    <constraint firstAttribute="height" constant="26" id="aUu-im-OIk"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="18"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q9h-wF-ld4">
+                                                <rect key="frame" x="14" y="98" width="129" height="90"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="129" id="BcM-UR-uhQ"/>
+                                                    <constraint firstAttribute="height" constant="90" id="gco-lb-fnb"/>
+                                                </constraints>
+                                                <string key="text">Thomas Siebel Center
+201 N Goodwin Ave
+Urbana, IL 61801
+United States</string>
+                                                <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ES3-Cd-Ef1">
+                                                <rect key="frame" x="233.5" y="98" width="127" height="80"/>
+                                                <color key="backgroundColor" red="0.0078431372550000003" green="0.47450980390000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="127" id="Iw7-Ed-UEh"/>
+                                                    <constraint firstAttribute="height" constant="80" id="sJx-F7-BpN"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="18"/>
+                                                <state key="normal" title="Indoor Map">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                            </button>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="70" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="D1x-9C-zgl">
+                                                <rect key="frame" x="0.0" y="203" width="375" height="424"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="direction_cell" rowHeight="70" id="cme-MU-CJk" customClass="BottomViewTableViewCell" customModule="hackillinois_2017_ios" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="1" width="375" height="70"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cme-MU-CJk" id="dIs-Ka-neD">
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200 feet" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uD7-CB-YJz">
+                                                                    <rect key="frame" x="94" y="8" width="72" height="22.5"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="72" id="xlp-Y0-nNC"/>
+                                                                        <constraint firstAttribute="height" constant="22.5" id="znX-2p-oI6"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="20"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Take a right on W Stoughton St" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="suD-Vx-fcb">
+                                                                    <rect key="frame" x="94" y="32" width="245.5" height="28.5"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="245.5" id="4FD-kB-gPS"/>
+                                                                        <constraint firstAttribute="height" constant="28.5" id="r2Z-4V-2XV"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="20"/>
+                                                                    <color key="textColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_sort" translatesAutoresizingMaskIntoConstraints="NO" id="ftc-l6-fF0">
+                                                                    <rect key="frame" x="32" y="14.5" width="41" height="41"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="41" id="GUq-cH-TVU"/>
+                                                                        <constraint firstAttribute="width" constant="41" id="UhT-Dm-r6f"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="leadingMargin" secondItem="ftc-l6-fF0" secondAttribute="leading" constant="-23.5" id="Vdj-XQ-xzd"/>
+                                                                <constraint firstItem="uD7-CB-YJz" firstAttribute="leading" secondItem="ftc-l6-fF0" secondAttribute="trailing" constant="21" id="WuJ-hs-8i1"/>
+                                                                <constraint firstItem="ftc-l6-fF0" firstAttribute="centerY" secondItem="dIs-Ka-neD" secondAttribute="centerY" id="Xug-SV-X5k"/>
+                                                                <constraint firstItem="uD7-CB-YJz" firstAttribute="top" secondItem="dIs-Ka-neD" secondAttribute="topMargin" id="d96-aG-O8J"/>
+                                                                <constraint firstItem="suD-Vx-fcb" firstAttribute="leading" secondItem="ftc-l6-fF0" secondAttribute="trailing" constant="21" id="kPT-Za-jq3"/>
+                                                                <constraint firstItem="suD-Vx-fcb" firstAttribute="top" secondItem="uD7-CB-YJz" secondAttribute="bottom" constant="1.5" id="kbx-rh-Gug"/>
+                                                            </constraints>
+                                                        </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="dirImage" destination="ftc-l6-fF0" id="WQ7-OF-trU"/>
+                                                            <outlet property="directionLabel" destination="suD-Vx-fcb" id="Ron-LC-EkM"/>
+                                                            <outlet property="distanceLabel" destination="uD7-CB-YJz" id="JRY-yt-hZO"/>
+                                                        </connections>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="hoJ-Yo-Kz2" id="j8V-L0-3Wq"/>
+                                                    <outlet property="delegate" destination="hoJ-Yo-Kz2" id="j5q-bs-rST"/>
+                                                </connections>
+                                            </tableView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="0.5" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="375" id="23g-ow-8PQ"/>
+                                            <constraint firstItem="Ojo-OF-fy7" firstAttribute="centerX" secondItem="Zcc-G3-79H" secondAttribute="centerX" id="5mN-ef-mCQ"/>
+                                            <constraint firstItem="qNm-Ig-Rzw" firstAttribute="top" secondItem="Zcc-G3-79H" secondAttribute="top" constant="17" id="Av6-FL-W5w"/>
+                                            <constraint firstItem="73J-NS-7RW" firstAttribute="top" secondItem="BuL-AG-fvg" secondAttribute="bottom" constant="1" id="D3j-Z3-qp9"/>
+                                            <constraint firstAttribute="trailing" secondItem="ES3-Cd-Ef1" secondAttribute="trailing" constant="14.5" id="FHl-De-hPa"/>
+                                            <constraint firstItem="D1x-9C-zgl" firstAttribute="top" secondItem="q9h-wF-ld4" secondAttribute="bottom" constant="15" id="Ffr-bq-ojv"/>
+                                            <constraint firstItem="q9h-wF-ld4" firstAttribute="leading" secondItem="Zcc-G3-79H" secondAttribute="leading" constant="14" id="Qlq-wq-JxC"/>
+                                            <constraint firstItem="BuL-AG-fvg" firstAttribute="leading" secondItem="Zcc-G3-79H" secondAttribute="leading" constant="15" id="Rmu-eJ-qPn"/>
+                                            <constraint firstItem="D1x-9C-zgl" firstAttribute="leading" secondItem="Zcc-G3-79H" secondAttribute="leading" id="W65-86-UkO"/>
+                                            <constraint firstItem="q9h-wF-ld4" firstAttribute="top" secondItem="73J-NS-7RW" secondAttribute="bottom" constant="20" id="YOm-6t-HP1"/>
+                                            <constraint firstItem="ES3-Cd-Ef1" firstAttribute="top" secondItem="73J-NS-7RW" secondAttribute="bottom" constant="20" id="Yp6-wC-2KC"/>
+                                            <constraint firstAttribute="trailing" secondItem="qNm-Ig-Rzw" secondAttribute="trailing" constant="15" id="dVJ-Bs-XeW"/>
+                                            <constraint firstAttribute="height" constant="627" id="fMo-1j-duv"/>
+                                            <constraint firstItem="BuL-AG-fvg" firstAttribute="top" secondItem="Zcc-G3-79H" secondAttribute="top" constant="17" id="iFf-Ro-W6u"/>
+                                            <constraint firstItem="Ojo-OF-fy7" firstAttribute="top" secondItem="Zcc-G3-79H" secondAttribute="top" constant="6" id="mlv-hS-HnV"/>
+                                            <constraint firstAttribute="trailing" secondItem="D1x-9C-zgl" secondAttribute="trailing" id="nDb-Xc-Qw7"/>
+                                            <constraint firstItem="73J-NS-7RW" firstAttribute="leading" secondItem="Zcc-G3-79H" secondAttribute="leading" constant="34.5" id="pqr-f6-Qqh"/>
+                                            <constraint firstAttribute="bottom" secondItem="D1x-9C-zgl" secondAttribute="bottom" id="xfw-fu-1eK"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Zcc-G3-79H" firstAttribute="leading" secondItem="ZbP-aJ-MKr" secondAttribute="leading" id="5WD-jY-Gzd"/>
+                                    <constraint firstItem="Zcc-G3-79H" firstAttribute="top" secondItem="ZbP-aJ-MKr" secondAttribute="top" id="Ayh-HL-wSg"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZbP-aJ-MKr" firstAttribute="top" secondItem="q1g-4w-cby" secondAttribute="top" id="2V8-cw-ojL"/>
+                            <constraint firstAttribute="trailing" secondItem="ZbP-aJ-MKr" secondAttribute="trailing" id="445-kT-dIj"/>
+                            <constraint firstItem="ZbP-aJ-MKr" firstAttribute="leading" secondItem="q1g-4w-cby" secondAttribute="leading" id="fRy-Fp-osW"/>
+                            <constraint firstItem="HVx-9D-qVN" firstAttribute="top" secondItem="ZbP-aJ-MKr" secondAttribute="bottom" id="tlK-It-CWK"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="addressLabel" destination="q9h-wF-ld4" id="WK5-zs-M5z"/>
+                        <outlet property="closeButton" destination="qNm-Ig-Rzw" id="OQD-HV-sF8"/>
+                        <outlet property="directionTableView" destination="D1x-9C-zgl" id="o9Q-1b-5b7"/>
+                        <outlet property="distanceLabel" destination="73J-NS-7RW" id="kgJ-ZO-erI"/>
+                        <outlet property="indoorMap" destination="ES3-Cd-Ef1" id="VQ0-90-ByJ"/>
+                        <outlet property="nameLabel" destination="BuL-AG-fvg" id="BDH-sD-shT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nir-sE-uES" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1485.5999999999999" y="1369.5652173913045"/>
+        </scene>
         <!--Maps-->
         <scene sceneID="xIp-nn-huC">
             <objects>
@@ -76,7 +278,7 @@
                     <tabBarItem key="tabBarItem" title="Maps" image="ic_map_white" id="gW3-u5-oRF"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yyE-Rb-fuQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yyE-Rb-fuQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -91,6 +293,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="cancel" width="30" height="30"/>
         <image name="ic_map_white" width="24" height="24"/>
+        <image name="ic_sort" width="24" height="24"/>
     </resources>
 </document>

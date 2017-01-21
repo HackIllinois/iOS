@@ -9,7 +9,6 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-
     
     @IBOutlet weak var timerLabel: UILabel!
     var mTimer = Timer()
