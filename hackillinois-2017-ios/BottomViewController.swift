@@ -32,7 +32,7 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // prepareBackgroundView()
+        prepareBackgroundView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -54,16 +54,31 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func panGesture(recognizer: UIPanGestureRecognizer) {
         let translation = recognizer.translation(in: self.view)
         let y = self.view.frame.minY
-        self.view.frame = CGRect(x:0, y:y + translation.y, width:view.frame.width, height:view.frame.height)
+        let y_prime = y+translation.y
+        let y_min = (self.navigationController?.navigationBar.frame.size.height)! + 20
+        let y_max = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 17
+        print("y_prime: \(y_prime)")
+        print("y_min: \(y_min)")
+        print("y_max: \(y_max)")
+        if y_prime > y_max {
+            self.view.frame = CGRect(x:0, y:y_max,
+                                     width:view.frame.width, height:view.frame.height)
+        } else if y_prime < y_min {
+            self.view.frame = CGRect(x:0, y:y_min,
+                                     width:view.frame.width, height:view.frame.height)
+        } else {
+            self.view.frame = CGRect(x:0, y:y_prime,
+                                     width:view.frame.width, height:view.frame.height)
+        }
         recognizer.setTranslation(CGPoint.zero, in: self.view)
     }
     
     func prepareBackgroundView(){
-        let blurEffect = UIBlurEffect(style: .dark)
+        let blurEffect = UIBlurEffect(style: .light)
         let bluredView = UIVisualEffectView(effect: blurEffect)
-        // bluredView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        bluredView.frame = UIScreen.main.bounds
-        view.addSubview(bluredView)
+        bluredView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        bluredView.frame = view.bounds
+        view.insertSubview(bluredView, at: 0)
     }
     
     func roundViews() {
@@ -80,7 +95,7 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = directionTableView.dequeueReusableCell(withIdentifier: "direction_cell", for: indexPath) as! BottomViewTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "direction_cell", for: indexPath) as! BottomViewTableViewCell
         return cell as UITableViewCell
     }
     

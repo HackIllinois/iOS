@@ -17,7 +17,7 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
     @IBOutlet weak var toolbar: UIToolbar!
     
     @IBAction func mapControlChange(_ sender: Any) {
-        if(mapControl.selectedSegmentIndex == -1){
+        if(mapControl.selectedSegmentIndex == -1) {
             return
         }
         
@@ -72,6 +72,10 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         addBottomSheetView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
@@ -95,8 +99,8 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         self.view.addSubview((bottomSheet?.view)!)
         bottomSheet?.didMove(toParentViewController: self)
         
-        let height = view.frame.height
-        let width  = view.frame.width
+        let height = UIScreen.main.bounds.size.height
+        let width  = UIScreen.main.bounds.size.width
         bottomSheet?.view.frame = CGRect(x:0, y:self.view.frame.maxY, width:width, height:height)
     }
 

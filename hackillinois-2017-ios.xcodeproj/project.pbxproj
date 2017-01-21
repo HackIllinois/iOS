@@ -8,9 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		17BC6B394A0A310CDEA1DF7B /* Pods_hackillinois_2017_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75AFF8F2A9393CCA4EBF188 /* Pods_hackillinois_2017_ios.framework */; };
-		24371FFE1E32779000B1C7C5 /* Brandon Grotesque in Resources */ = {isa = PBXBuildFile; fileRef = 24371FFD1E32779000B1C7C5 /* Brandon Grotesque */; };
 		243720021E32CEDD00B1C7C5 /* BottomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243720011E32CEDD00B1C7C5 /* BottomViewController.swift */; };
 		243720041E32D4D100B1C7C5 /* BottomViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243720031E32D4D100B1C7C5 /* BottomViewTableViewCell.swift */; };
+		24794C621E340DFB0016F8D4 /* Brandon_bld_it.otf in Resources */ = {isa = PBXBuildFile; fileRef = 24794C561E340DE80016F8D4 /* Brandon_bld_it.otf */; };
+		24794C631E340DFB0016F8D4 /* Brandon_bld.otf in Resources */ = {isa = PBXBuildFile; fileRef = 24794C571E340DE80016F8D4 /* Brandon_bld.otf */; };
+		24794C641E340DFB0016F8D4 /* Brandon_blk_it.otf in Resources */ = {isa = PBXBuildFile; fileRef = 24794C581E340DE80016F8D4 /* Brandon_blk_it.otf */; };
+		24794C651E340DFB0016F8D4 /* Brandon_blk.otf in Resources */ = {isa = PBXBuildFile; fileRef = 24794C591E340DE80016F8D4 /* Brandon_blk.otf */; };
+		24794C661E340DFB0016F8D4 /* Brandon_light_it.otf in Resources */ = {isa = PBXBuildFile; fileRef = 24794C5A1E340DE80016F8D4 /* Brandon_light_it.otf */; };
+		24794C671E340DFB0016F8D4 /* Brandon_light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 24794C5B1E340DE80016F8D4 /* Brandon_light.otf */; };
+		24794C681E340DFB0016F8D4 /* Brandon_med_it.otf in Resources */ = {isa = PBXBuildFile; fileRef = 24794C5C1E340DE80016F8D4 /* Brandon_med_it.otf */; };
+		24794C691E340DFB0016F8D4 /* Brandon_med.otf in Resources */ = {isa = PBXBuildFile; fileRef = 24794C5D1E340DE80016F8D4 /* Brandon_med.otf */; };
+		24794C6A1E340DFB0016F8D4 /* Brandon_reg_it.otf in Resources */ = {isa = PBXBuildFile; fileRef = 24794C5E1E340DE80016F8D4 /* Brandon_reg_it.otf */; };
+		24794C6B1E340DFB0016F8D4 /* Brandon_reg.otf in Resources */ = {isa = PBXBuildFile; fileRef = 24794C5F1E340DE80016F8D4 /* Brandon_reg.otf */; };
+		24794C6C1E340DFB0016F8D4 /* Brandon_thin_it.otf in Resources */ = {isa = PBXBuildFile; fileRef = 24794C601E340DE80016F8D4 /* Brandon_thin_it.otf */; };
+		24794C6D1E340DFB0016F8D4 /* Brandon_thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 24794C611E340DE80016F8D4 /* Brandon_thin.otf */; };
 		58E75F2152E19BCECDC115D1 /* Pods_hackillinois_2017_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0E70C5ECC7AC1B705813BB /* Pods_hackillinois_2017_iosUITests.framework */; };
 		A50876741E1C79130095F399 /* BottomMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50876731E1C79130095F399 /* BottomMapViewController.swift */; };
 		A50876781E1C921C0095F399 /* BottomMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50876771E1C921C0095F399 /* BottomMapViewController.xib */; };
@@ -105,9 +116,20 @@
 		1D5246D3021D962B3E962D3F /* Pods-hackillinois-2017-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-ios/Pods-hackillinois-2017-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		21E83B55CF6C52BC833901F1 /* Pods-hackillinois-2017-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosTests/Pods-hackillinois-2017-iosTests.release.xcconfig"; sourceTree = "<group>"; };
 		23C934AE70C4AC43F1D884BE /* Pods-hackillinois-2017-iosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosTests/Pods-hackillinois-2017-iosTests.debug.xcconfig"; sourceTree = "<group>"; };
-		24371FFD1E32779000B1C7C5 /* Brandon Grotesque */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Brandon Grotesque"; sourceTree = "<group>"; };
 		243720011E32CEDD00B1C7C5 /* BottomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomViewController.swift; sourceTree = "<group>"; };
 		243720031E32D4D100B1C7C5 /* BottomViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomViewTableViewCell.swift; sourceTree = "<group>"; };
+		24794C561E340DE80016F8D4 /* Brandon_bld_it.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_bld_it.otf; sourceTree = "<group>"; };
+		24794C571E340DE80016F8D4 /* Brandon_bld.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_bld.otf; sourceTree = "<group>"; };
+		24794C581E340DE80016F8D4 /* Brandon_blk_it.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_blk_it.otf; sourceTree = "<group>"; };
+		24794C591E340DE80016F8D4 /* Brandon_blk.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_blk.otf; sourceTree = "<group>"; };
+		24794C5A1E340DE80016F8D4 /* Brandon_light_it.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_light_it.otf; sourceTree = "<group>"; };
+		24794C5B1E340DE80016F8D4 /* Brandon_light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_light.otf; sourceTree = "<group>"; };
+		24794C5C1E340DE80016F8D4 /* Brandon_med_it.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_med_it.otf; sourceTree = "<group>"; };
+		24794C5D1E340DE80016F8D4 /* Brandon_med.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_med.otf; sourceTree = "<group>"; };
+		24794C5E1E340DE80016F8D4 /* Brandon_reg_it.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_reg_it.otf; sourceTree = "<group>"; };
+		24794C5F1E340DE80016F8D4 /* Brandon_reg.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_reg.otf; sourceTree = "<group>"; };
+		24794C601E340DE80016F8D4 /* Brandon_thin_it.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_thin_it.otf; sourceTree = "<group>"; };
+		24794C611E340DE80016F8D4 /* Brandon_thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_thin.otf; sourceTree = "<group>"; };
 		567F67E08A10E7527EE39217 /* Pods-hackillinois-2017-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A50876731E1C79130095F399 /* BottomMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomMapViewController.swift; sourceTree = "<group>"; };
 		A50876771E1C921C0095F399 /* BottomMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomMapViewController.xib; sourceTree = "<group>"; };
@@ -215,7 +237,18 @@
 		24371FFC1E32777E00B1C7C5 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				24371FFD1E32779000B1C7C5 /* Brandon Grotesque */,
+				24794C561E340DE80016F8D4 /* Brandon_bld_it.otf */,
+				24794C571E340DE80016F8D4 /* Brandon_bld.otf */,
+				24794C581E340DE80016F8D4 /* Brandon_blk_it.otf */,
+				24794C591E340DE80016F8D4 /* Brandon_blk.otf */,
+				24794C5A1E340DE80016F8D4 /* Brandon_light_it.otf */,
+				24794C5B1E340DE80016F8D4 /* Brandon_light.otf */,
+				24794C5C1E340DE80016F8D4 /* Brandon_med_it.otf */,
+				24794C5D1E340DE80016F8D4 /* Brandon_med.otf */,
+				24794C5E1E340DE80016F8D4 /* Brandon_reg_it.otf */,
+				24794C5F1E340DE80016F8D4 /* Brandon_reg.otf */,
+				24794C601E340DE80016F8D4 /* Brandon_thin_it.otf */,
+				24794C611E340DE80016F8D4 /* Brandon_thin.otf */,
 			);
 			name = Fonts;
 			sourceTree = "<group>";
@@ -633,6 +666,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24794C621E340DFB0016F8D4 /* Brandon_bld_it.otf in Resources */,
+				24794C631E340DFB0016F8D4 /* Brandon_bld.otf in Resources */,
+				24794C641E340DFB0016F8D4 /* Brandon_blk_it.otf in Resources */,
+				24794C651E340DFB0016F8D4 /* Brandon_blk.otf in Resources */,
+				24794C661E340DFB0016F8D4 /* Brandon_light_it.otf in Resources */,
+				24794C671E340DFB0016F8D4 /* Brandon_light.otf in Resources */,
+				24794C681E340DFB0016F8D4 /* Brandon_med_it.otf in Resources */,
+				24794C691E340DFB0016F8D4 /* Brandon_med.otf in Resources */,
+				24794C6A1E340DFB0016F8D4 /* Brandon_reg_it.otf in Resources */,
+				24794C6B1E340DFB0016F8D4 /* Brandon_reg.otf in Resources */,
+				24794C6C1E340DFB0016F8D4 /* Brandon_thin_it.otf in Resources */,
+				24794C6D1E340DFB0016F8D4 /* Brandon_thin.otf in Resources */,
 				E277DD6B1CF4AF0400D7E018 /* keys.plist in Resources */,
 				A50F29251E14D55500878652 /* Home.storyboard in Resources */,
 				E2B6C3951D0B2E8000D851F9 /* Map.storyboard in Resources */,
@@ -640,7 +685,6 @@
 				E20465D81CF1FAF50054654E /* LaunchScreen.storyboard in Resources */,
 				A50876781E1C921C0095F399 /* BottomMapViewController.xib in Resources */,
 				E2F957051D0BA899003A0881 /* Schedule.storyboard in Resources */,
-				24371FFE1E32779000B1C7C5 /* Brandon Grotesque in Resources */,
 				E2B6C3931D0B2E1200D851F9 /* Feed.storyboard in Resources */,
 				E20465D51CF1FAF50054654E /* Assets.xcassets in Resources */,
 				E20465D01CF1FAF50054654E /* Login.storyboard in Resources */,
