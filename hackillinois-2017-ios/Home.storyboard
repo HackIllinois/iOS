@@ -28,6 +28,13 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="317" id="Lcj-13-5JI"/>
                                 </constraints>
+                                <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BmW-bm-RMl">
+                                    <rect key="frame" x="0.0" y="366" width="317" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mainCell" rowHeight="294" id="RBQ-rr-gxm" customClass="mainCell" customModule="hackillinois_2017_ios" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="317" height="294"/>
@@ -70,6 +77,14 @@
                                             <outlet property="timerLabel" destination="zxQ-fj-g8Z" id="muL-Hk-hXj"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="standardCell" id="eLz-KX-yZa" customClass="standardCell" customModule="hackillinois_2017_ios" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="322" width="317" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eLz-KX-yZa" id="Enh-gC-DQr">
+                                            <rect key="frame" x="0.0" y="0.0" width="317" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -83,8 +98,6 @@
                     <navigationItem key="navigationItem" title="Home" id="DjD-Vp-dk8" userLabel="home"/>
                     <connections>
                         <outlet property="checkInTableView" destination="U6F-LB-sgn" id="mdb-i1-B82"/>
-                        <outlet property="startsInLabel" destination="h20-PX-aPM" id="KeO-gW-fja"/>
-                        <outlet property="timerLabel" destination="zxQ-fj-g8Z" id="Ont-hB-OBC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8tG-FV-xSX" userLabel="First Responder" sceneMemberID="firstResponder"/>
