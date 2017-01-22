@@ -23,7 +23,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.fromRGBHex(mainUIColor);
-//        UIApplication.shared.statusBarStyle = .lightContent;
+        UIApplication.shared.statusBarStyle = .lightContent;
 //        this is where this goes? maybe??
 //        // Initialize Static data
 //        initializeSample()
@@ -51,7 +51,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
          // first cell should always be the main cell
 //        if (indexPath.row == 0) {
         if (true) { // currently if true for compiler sakes
-            let cell = tableView.dequeueReusableCell(withIdentifier: "standardCell", for: indexPath) as! standardCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath) as! mainCell
             return cell as UITableViewCell
         }
         // else check the data in the events array and call the correct cell class?
