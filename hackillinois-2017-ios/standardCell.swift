@@ -8,4 +8,5 @@
 import UIKit
 
 class standardCell: UITableViewCell {
+    @IBOutlet weak var timpstampLabel: UILabel!
 }
