@@ -2,21 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Brandon_bld_it.otf</string>
-		<string>Brandon_bld.otf</string>
-		<string>Brandon_blk_it.otf</string>
-		<string>Brandon_blk.otf</string>
-		<string>Brandon_light_it.otf</string>
-		<string>Brandon_light.otf</string>
-		<string>Brandon_med_it.otf</string>
-		<string>Brandon_med.otf</string>
-		<string>Brandon_reg_it.otf</string>
-		<string>Brandon_reg.otf</string>
-		<string>Brandon_thin_it.otf</string>
-		<string>Brandon_thin.otf</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDocumentTypes</key>
@@ -62,7 +47,22 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app will use your location to guide you through HackIllinois&apos; various events and primary locations.</string>
+	<string>This app will use your location to guide you through HackIllinois' various events and primary locations.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Brandon_bld_it.otf</string>
+		<string>Brandon_bld.otf</string>
+		<string>Brandon_blk_it.otf</string>
+		<string>Brandon_blk.otf</string>
+		<string>Brandon_light_it.otf</string>
+		<string>Brandon_light.otf</string>
+		<string>Brandon_med_it.otf</string>
+		<string>Brandon_med.otf</string>
+		<string>Brandon_reg_it.otf</string>
+		<string>Brandon_reg.otf</string>
+		<string>Brandon_thin_it.otf</string>
+		<string>Brandon_thin.otf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

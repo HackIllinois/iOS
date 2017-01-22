@@ -22,6 +22,9 @@
 		24794C6B1E340DFB0016F8D4 /* Brandon_reg.otf in Resources */ = {isa = PBXBuildFile; fileRef = 24794C5F1E340DE80016F8D4 /* Brandon_reg.otf */; };
 		24794C6C1E340DFB0016F8D4 /* Brandon_thin_it.otf in Resources */ = {isa = PBXBuildFile; fileRef = 24794C601E340DE80016F8D4 /* Brandon_thin_it.otf */; };
 		24794C6D1E340DFB0016F8D4 /* Brandon_thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 24794C611E340DE80016F8D4 /* Brandon_thin.otf */; };
+		24794C6F1E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */; };
+		24794C701E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */; };
+		24794C711E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */; };
 		58E75F2152E19BCECDC115D1 /* Pods_hackillinois_2017_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0E70C5ECC7AC1B705813BB /* Pods_hackillinois_2017_iosUITests.framework */; };
 		A50876741E1C79130095F399 /* BottomMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50876731E1C79130095F399 /* BottomMapViewController.swift */; };
 		A50876781E1C921C0095F399 /* BottomMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50876771E1C921C0095F399 /* BottomMapViewController.xib */; };
@@ -130,6 +133,7 @@
 		24794C5F1E340DE80016F8D4 /* Brandon_reg.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_reg.otf; sourceTree = "<group>"; };
 		24794C601E340DE80016F8D4 /* Brandon_thin_it.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_thin_it.otf; sourceTree = "<group>"; };
 		24794C611E340DE80016F8D4 /* Brandon_thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_thin.otf; sourceTree = "<group>"; };
+		24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+ColorConstants.swift"; sourceTree = "<group>"; };
 		567F67E08A10E7527EE39217 /* Pods-hackillinois-2017-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A50876731E1C79130095F399 /* BottomMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomMapViewController.swift; sourceTree = "<group>"; };
 		A50876771E1C921C0095F399 /* BottomMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomMapViewController.xib; sourceTree = "<group>"; };
@@ -404,6 +408,7 @@
 				E2D4F0E41D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift */,
 				E2BD82B61D0AFFB90009DB07 /* UIImage+imageWithColor.swift */,
 				E26F44F31D0EF3C400FB4A9F /* UIImage+generateBarCode.swift */,
+				24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */,
 			);
 			name = LanguageExtensions;
 			sourceTree = "<group>";
@@ -618,7 +623,7 @@
 				TargetAttributes = {
 					E20465C61CF1FAF50054654E = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 4389KU2L8Z;
+						DevelopmentTeam = EJGXLSZ763;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -866,6 +871,7 @@
 				E2BCA57D1CF3B19E006AAA8B /* Feed.swift in Sources */,
 				A54825B11E160C6C00E35C71 /* ScheduleViewController.swift in Sources */,
 				E2A085F61D0C6536002197F9 /* ScheduleCell.swift in Sources */,
+				24794C6F1E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */,
 				E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */,
 				E25377411CF8AB2C003795E7 /* Tag+CoreDataProperties.swift in Sources */,
 				E28FB69F1D194951000D062F /* HelpQ+CoreDataProperties.swift in Sources */,
@@ -912,6 +918,7 @@
 				E2AC3F8E1CF21F3900C4F21F /* UIColor+fromHexTests.swift in Sources */,
 				E20465E31CF1FAF50054654E /* hackillinois_2017_iosTests.swift in Sources */,
 				E2AC3F871CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */,
+				24794C701E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -921,6 +928,7 @@
 			files = (
 				E20465EE1CF1FAF50054654E /* hackillinois_2017_iosUITests.swift in Sources */,
 				E2AC3F881CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */,
+				24794C711E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1059,11 +1067,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 4389KU2L8Z;
+				DEVELOPMENT_TEAM = EJGXLSZ763;
 				INFOPLIST_FILE = "hackillinois-2017-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "me.tommypacker.iphone-2017";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.hackillinois-2017.ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
@@ -1079,11 +1087,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 4389KU2L8Z;
+				DEVELOPMENT_TEAM = EJGXLSZ763;
 				INFOPLIST_FILE = "hackillinois-2017-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "me.tommypacker.iphone-2017";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.hackillinois-2017.ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
