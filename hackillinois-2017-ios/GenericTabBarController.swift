@@ -46,8 +46,8 @@ class GenericTabBarController: UITabBarController, SWRevealViewControllerDelegat
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        //tabBar.tintColor = UIColor.fromRGBHex(mainTintColor)
-        //tabBar.barTintColor = UIColor.fromRGBHex(mainUIColor)
+        tabBar.tintColor = UIColor.fromRGBHex(mainTintColor)
+        tabBar.barTintColor = UIColor.fromRGBHex(mainUIColor)
         
         if self.revealViewController() != nil {
             // Add swiping gesture and custom closing behavior

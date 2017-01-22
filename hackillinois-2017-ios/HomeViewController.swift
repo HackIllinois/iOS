@@ -7,38 +7,31 @@
 //
 
 import UIKit
+import CoreData
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate  {
     
-    @IBOutlet weak var timerLabel: UILabel!
-    var mTimer = Timer()
     
-    //TODO: Find actual start unix time of event
-    let eventStartUnixTime: Int = 1487937827
-    let currentUnixTime: Int = Int(NSDate().timeIntervalSince1970)
-    var timeRemaining: Int = 0
-    var secondsLeft: Int = 0
-    var minutesLeft: Int = 0
-    var hoursLeft: Int = 0
+//    and so this gets loaded with data that I can then access??
+//     Fetched results controller for lazy loading of cells
+//    var fetchedResultsController: NSFetchedResultsController<Feed>!
+    var events = [Feed]()
     
+    @IBOutlet weak var checkInTableView: UITableView!
+//    @IBOutlet weak var startsInLabel: UILabel!
+//    @IBOutlet weak var timerLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        self.timeRemaining = eventStartUnixTime - currentUnixTime
-        secondsLeft = getSeconds(timeInSeconds: timeRemaining)
-        minutesLeft = getMinutes(timeInSeconds: timeRemaining)
-        hoursLeft = getHours(timeInSeconds: timeRemaining)
-        
-        timerLabel.text = getTimeRemainingString(hoursLeft: hoursLeft, minutesLeft: minutesLeft, secondsLeft: secondsLeft)
-        
-        
-        mTimer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(HomeViewController.updateCounter), userInfo: nil, repeats: true)
+        self.view.backgroundColor = UIColor.fromRGBHex(mainUIColor);
+        UIApplication.shared.statusBarStyle = .lightContent;
+//        this is where this goes? maybe??
+//        // Initialize Static data
+//        initializeSample()
+//        // Load objects from core data
+//        loadSavedData()
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,38 +39,21 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    func updateCounter() {
-        if(secondsLeft == 0){
-            secondsLeft = 59
-            minutesLeft -= 1
-        }else{
-            secondsLeft -= 1
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+         // first cell should always be the main cell
+//        if (indexPath.row == 0) {
+        if (true) { // currently if true for compiler sakes
+            let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath) as! mainCell
+            return cell as UITableViewCell
         }
-        
-        if(minutesLeft == 0){
-            minutesLeft = 59
-            hoursLeft -= 1
-        }
-        timerLabel.text = getTimeRemainingString(hoursLeft: hoursLeft, minutesLeft: minutesLeft, secondsLeft: secondsLeft)
-    }
-    
-    func getTimeRemainingString(hoursLeft: Int, minutesLeft: Int, secondsLeft: Int) -> String{
-        return String(format:"%02i:%02i:%02i", hoursLeft, minutesLeft, secondsLeft)
-    }
-    
-    func getHours(timeInSeconds: Int) -> Int{
-        let hour = (timeInSeconds / 3600)
-        return hour
-    }
-
-    func getMinutes(timeInSeconds: Int) -> Int{
-        let minute = ((timeInSeconds % 3600) / (60))
-        return minute
-    }
-    
-    func getSeconds(timeInSeconds: Int) -> Int{
-        let second = (timeInSeconds % 60)
-        return Int(second)
+        // else check the data in the events array and call the correct cell class?
     }
 }
