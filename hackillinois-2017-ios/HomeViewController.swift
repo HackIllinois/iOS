@@ -8,9 +8,12 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+
     
-    @IBOutlet weak var timerLabel: UILabel!
+//    @IBOutlet weak var checkInTableView: UITableView!
+//    @IBOutlet weak var startsInLabel: UILabel!
+//    @IBOutlet weak var timerLabel: UILabel!
     var mTimer = Timer()
     
     //TODO: Find actual start unix time of event
@@ -23,6 +26,8 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.fromRGBHex(mainUIColor);
+//        UIApplication.shared.statusBarStyle = .lightContent;
         
         
         self.timeRemaining = eventStartUnixTime - currentUnixTime
@@ -31,10 +36,19 @@ class HomeViewController: UIViewController {
         hoursLeft = getHours(timeInSeconds: timeRemaining)
         
         timerLabel.text = getTimeRemainingString(hoursLeft: hoursLeft, minutesLeft: minutesLeft, secondsLeft: secondsLeft)
+        timerLabel.font = UIFont(name: "Avenir-Light", size: 50);
+        timerLabel.textColor = UIColor.fromRGBHex(textHighlightColor);
+        
+        startsInLabel.font = UIFont(name: "Avenir-Light", size: 20);
+        startsInLabel.textColor = UIColor.fromRGBHex(pseudoWhiteColor);
         
         
         mTimer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(HomeViewController.updateCounter), userInfo: nil, repeats: true)
+        
     }
+    
+
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -63,7 +77,7 @@ class HomeViewController: UIViewController {
     }
     
     func getTimeRemainingString(hoursLeft: Int, minutesLeft: Int, secondsLeft: Int) -> String{
-        return String(format:"%02i:%02i:%02i", hoursLeft, minutesLeft, secondsLeft)
+        return String(format:"%02i  %02i  %02i", hoursLeft, minutesLeft, secondsLeft)
     }
     
     func getHours(timeInSeconds: Int) -> Int{
@@ -79,5 +93,23 @@ class HomeViewController: UIViewController {
     func getSeconds(timeInSeconds: Int) -> Int{
         let second = (timeInSeconds % 60)
         return Int(second)
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        if indexPath.row == 0 {
+        if true {
+            let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "mainCell")
+            //set the data here
+            cell.
+            return cell
+        }
     }
 }
