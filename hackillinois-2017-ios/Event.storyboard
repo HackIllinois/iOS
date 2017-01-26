@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="LXI-DR-cWu">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="LXI-DR-cWu">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -34,7 +34,7 @@
         <scene sceneID="bLk-RF-JtX">
             <objects>
                 <viewControllerPlaceholder storyboardName="Home" id="6n0-en-rAb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="ic_home_white" id="DHM-7m-kxH"/>
+                    <tabBarItem key="tabBarItem" title="" image="home_off" selectedImage="home_on" id="DHM-7m-kxH"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OEP-WJ-PbW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -44,7 +44,7 @@
         <scene sceneID="4lN-yv-nhe">
             <objects>
                 <viewControllerPlaceholder storyboardName="Feed" id="aqe-JP-yak" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Notifications" image="ic_list_white" id="H58-ts-a3W"/>
+                    <tabBarItem key="tabBarItem" title="" image="notification_off" selectedImage="notification_on" id="H58-ts-a3W"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0XK-et-0Xw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -54,7 +54,7 @@
         <scene sceneID="doO-WO-osc">
             <objects>
                 <viewControllerPlaceholder storyboardName="Map" id="LMW-B5-kXB" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Maps" image="ic_map_white" id="vxo-m8-qnh"/>
+                    <tabBarItem key="tabBarItem" title="" image="maps_off" selectedImage="maps_on" id="vxo-m8-qnh"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hj5-1V-NfC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -64,7 +64,7 @@
         <scene sceneID="T4z-ZP-BnI">
             <objects>
                 <viewControllerPlaceholder storyboardName="Schedule" id="JGA-wX-dkz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Schedule" image="ic_schedule_white" id="p4l-2W-PP4"/>
+                    <tabBarItem key="tabBarItem" title="" image="schedule_off" selectedImage="schedule_on" id="p4l-2W-PP4"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pig-Be-PbN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -82,10 +82,14 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_home_white" width="24" height="24"/>
-        <image name="ic_list_white" width="24" height="24"/>
-        <image name="ic_map_white" width="24" height="24"/>
+        <image name="home_off" width="17" height="24"/>
+        <image name="home_on" width="17" height="24"/>
         <image name="ic_person_white" width="24" height="24"/>
-        <image name="ic_schedule_white" width="24" height="24"/>
+        <image name="maps_off" width="24" height="24"/>
+        <image name="maps_on" width="24" height="24"/>
+        <image name="notification_off" width="20" height="24"/>
+        <image name="notification_on" width="20" height="24"/>
+        <image name="schedule_off" width="24" height="24"/>
+        <image name="schedule_on" width="24" height="24"/>
     </resources>
 </document>

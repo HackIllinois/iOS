@@ -21,8 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         /* Set appearance of UI */
         // Tab Bar Item Text colors
+        /*
         UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.fromRGBHex(mainTintColor)], for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.fromRGBHex(mainTintColor)], for: .selected)\
+        */
         
         // Have a more consistent view across all views
         UITabBar.appearance().isTranslucent = false

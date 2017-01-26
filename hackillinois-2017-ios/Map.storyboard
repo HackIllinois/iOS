@@ -313,11 +313,11 @@ United States</string>
             </objects>
             <point key="canvasLocation" x="1485.5999999999999" y="1369.5652173913045"/>
         </scene>
-        <!--Maps-->
+        <!--Generic Navigation Controller-->
         <scene sceneID="xIp-nn-huC">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="auk-1d-PU8" customClass="GenericNavigationController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Maps" image="ic_map_white" id="gW3-u5-oRF"/>
+                    <tabBarItem key="tabBarItem" title="" image="maps_off" selectedImage="maps_on" id="gW3-u5-oRF"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yyE-Rb-fuQ">
@@ -336,7 +336,8 @@ United States</string>
     </scenes>
     <resources>
         <image name="cancel" width="30" height="30"/>
-        <image name="ic_map_white" width="24" height="24"/>
         <image name="ic_sort" width="24" height="24"/>
+        <image name="maps_off" width="24" height="24"/>
+        <image name="maps_on" width="24" height="24"/>
     </resources>
 </document>
