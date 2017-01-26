@@ -25,6 +25,11 @@
 		24794C6F1E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */; };
 		24794C701E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */; };
 		24794C711E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */; };
+		398219DE1E345F4E00C5D0DF /* mainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219D91E345F4E00C5D0DF /* mainCell.swift */; };
+		398219DF1E345F4E00C5D0DF /* noQRCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219DA1E345F4E00C5D0DF /* noQRCodeCell.swift */; };
+		398219E01E345F4E00C5D0DF /* standardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219DB1E345F4E00C5D0DF /* standardCell.swift */; };
+		398219E11E345F4E00C5D0DF /* twoLocationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219DC1E345F4E00C5D0DF /* twoLocationsCell.swift */; };
+		398219E21E345F4E00C5D0DF /* twoLocationsNoQRCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219DD1E345F4E00C5D0DF /* twoLocationsNoQRCodeCell.swift */; };
 		58E75F2152E19BCECDC115D1 /* Pods_hackillinois_2017_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0E70C5ECC7AC1B705813BB /* Pods_hackillinois_2017_iosUITests.framework */; };
 		A50876741E1C79130095F399 /* BottomMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50876731E1C79130095F399 /* BottomMapViewController.swift */; };
 		A50876781E1C921C0095F399 /* BottomMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50876771E1C921C0095F399 /* BottomMapViewController.xib */; };
@@ -134,6 +139,11 @@
 		24794C601E340DE80016F8D4 /* Brandon_thin_it.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_thin_it.otf; sourceTree = "<group>"; };
 		24794C611E340DE80016F8D4 /* Brandon_thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_thin.otf; sourceTree = "<group>"; };
 		24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+ColorConstants.swift"; sourceTree = "<group>"; };
+		398219D91E345F4E00C5D0DF /* mainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCell.swift; sourceTree = "<group>"; };
+		398219DA1E345F4E00C5D0DF /* noQRCodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = noQRCodeCell.swift; sourceTree = "<group>"; };
+		398219DB1E345F4E00C5D0DF /* standardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = standardCell.swift; sourceTree = "<group>"; };
+		398219DC1E345F4E00C5D0DF /* twoLocationsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = twoLocationsCell.swift; sourceTree = "<group>"; };
+		398219DD1E345F4E00C5D0DF /* twoLocationsNoQRCodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = twoLocationsNoQRCodeCell.swift; sourceTree = "<group>"; };
 		567F67E08A10E7527EE39217 /* Pods-hackillinois-2017-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A50876731E1C79130095F399 /* BottomMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomMapViewController.swift; sourceTree = "<group>"; };
 		A50876771E1C921C0095F399 /* BottomMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomMapViewController.xib; sourceTree = "<group>"; };
@@ -257,9 +267,22 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
+		398219D81E345F2800C5D0DF /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				398219DC1E345F4E00C5D0DF /* twoLocationsCell.swift */,
+				398219D91E345F4E00C5D0DF /* mainCell.swift */,
+				398219DA1E345F4E00C5D0DF /* noQRCodeCell.swift */,
+				398219DB1E345F4E00C5D0DF /* standardCell.swift */,
+				398219DD1E345F4E00C5D0DF /* twoLocationsNoQRCodeCell.swift */,
+			);
+			name = CustomCells;
+			sourceTree = "<group>";
+		};
 		A50F29231E14D53B00878652 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				398219D81E345F2800C5D0DF /* CustomCells */,
 				A50F29241E14D55500878652 /* Home.storyboard */,
 				A50F29261E14DC3600878652 /* HomeViewController.swift */,
 			);
@@ -861,17 +884,21 @@
 				E2BCA56A1CF373A1006AAA8B /* EventConstants.swift in Sources */,
 				E2BCA57E1CF3B19E006AAA8B /* User+CoreDataProperties.swift in Sources */,
 				E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */,
+				398219DF1E345F4E00C5D0DF /* noQRCodeCell.swift in Sources */,
 				E2A086011D0C736B002197F9 /* FridayTableViewController.swift in Sources */,
+				398219DE1E345F4E00C5D0DF /* mainCell.swift in Sources */,
 				E2BD82B51D09EA530009DB07 /* GenericMapViewController.swift in Sources */,
 				243720021E32CEDD00B1C7C5 /* BottomViewController.swift in Sources */,
 				E20465D31CF1FAF50054654E /* hackillinois_2017_ios.xcdatamodeld in Sources */,
 				E27755531D36B7F600E7A379 /* GenericHelpQStaffViewController.swift in Sources */,
 				E28FB6A01D194951000D062F /* HelpQ.swift in Sources */,
 				A50876741E1C79130095F399 /* BottomMapViewController.swift in Sources */,
+				398219E01E345F4E00C5D0DF /* standardCell.swift in Sources */,
 				E2BCA57D1CF3B19E006AAA8B /* Feed.swift in Sources */,
 				A54825B11E160C6C00E35C71 /* ScheduleViewController.swift in Sources */,
 				E2A085F61D0C6536002197F9 /* ScheduleCell.swift in Sources */,
 				24794C6F1E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */,
+				398219E21E345F4E00C5D0DF /* twoLocationsNoQRCodeCell.swift in Sources */,
 				E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */,
 				E25377411CF8AB2C003795E7 /* Tag+CoreDataProperties.swift in Sources */,
 				E28FB69F1D194951000D062F /* HelpQ+CoreDataProperties.swift in Sources */,
@@ -884,6 +911,7 @@
 				E28FB6A21D194951000D062F /* Chat.swift in Sources */,
 				A50F29271E14DC3600878652 /* HomeViewController.swift in Sources */,
 				E2A085FA1D0C6688002197F9 /* DayItem.swift in Sources */,
+				398219E11E345F4E00C5D0DF /* twoLocationsCell.swift in Sources */,
 				E224BFF41D19CCA60098AA8D /* HTTPHelpers.swift in Sources */,
 				E2BCA5621CF36CDA006AAA8B /* FeedTableViewController.swift in Sources */,
 				E25377421CF8AB2C003795E7 /* Tag.swift in Sources */,
