@@ -9,4 +9,7 @@
 import UIKit
 
 class twoLocationsCell: UITableViewCell {
+    @IBOutlet weak var checkInTimeLabel: UILabel!
+    @IBOutlet weak var firstLocationLabel: UILabel!
+    @IBOutlet weak var secondLocationCell: UILabel!
 }

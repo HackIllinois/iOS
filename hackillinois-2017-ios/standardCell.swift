@@ -8,5 +8,8 @@
 import UIKit
 
 class standardCell: UITableViewCell {
-    @IBOutlet weak var timpstampLabel: UILabel!
+
+    @IBOutlet weak var checkInTimeLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var qrCodeButton: UIButton!
 }

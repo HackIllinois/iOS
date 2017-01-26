@@ -270,10 +270,10 @@
 		398219D81E345F2800C5D0DF /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
+				398219DC1E345F4E00C5D0DF /* twoLocationsCell.swift */,
 				398219D91E345F4E00C5D0DF /* mainCell.swift */,
 				398219DA1E345F4E00C5D0DF /* noQRCodeCell.swift */,
 				398219DB1E345F4E00C5D0DF /* standardCell.swift */,
-				398219DC1E345F4E00C5D0DF /* twoLocationsCell.swift */,
 				398219DD1E345F4E00C5D0DF /* twoLocationsNoQRCodeCell.swift */,
 			);
 			name = CustomCells;
