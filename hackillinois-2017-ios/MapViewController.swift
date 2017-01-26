@@ -92,8 +92,8 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
     
     func addBottomSheetView() {
         let bottomSheet = self.storyboard?.instantiateViewController(withIdentifier: "BottomView")
-        bottomSheet?.view.backgroundColor = UIColor.clear
-        bottomSheet?.modalPresentationStyle = .overCurrentContext
+        // bottomSheet?.view.backgroundColor = UIColor.clear
+        // bottomSheet?.modalPresentationStyle = .overCurrentContext
         self.addChildViewController(bottomSheet!)
         
         self.view.addSubview((bottomSheet?.view)!)

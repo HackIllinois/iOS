@@ -125,19 +125,20 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         indoorMapButtonSmall.layer.cornerRadius = 6
         
         directionButton.layer.cornerRadius = 6
-        directionButton.layer.borderColor = UIColor(red: 2.0/255, green: 121.0/255.0, blue: 255/255, alpha: 1.0).cgColor
-        directionButton.layer.borderWidth = 1
+        directionButton.layer.borderColor = UIColor.hiaSeafoamBlue.cgColor
+        directionButton.layer.borderWidth = 2
         indoorMap.layer.cornerRadius = 6
         
         directionButton.addTarget(self, action: #selector(self.directionTappped), for: .touchDown)
         
-        view.backgroundColor = UIColor.clear
-        view.isOpaque = false
+        let layerView = view.viewWithTag(10)
+        layerView?.layer.borderWidth = 2
+        layerView?.layer.cornerRadius = 2
+        layerView?.layer.borderColor = UIColor.hiaDarkSlateBlueTwo.cgColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        prepareBackgroundView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -258,12 +259,16 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         view.clipsToBounds = true
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Nothing yet
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
