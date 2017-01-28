@@ -12,6 +12,9 @@ import MapKit
 import LiquidFloatingActionButton
 
 class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, UIToolbarDelegate  {
+    
+    var bottomSheet : BottomViewController!
+    
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var mapControl: UISegmentedControl!
     @IBOutlet weak var toolbar: UIToolbar!
@@ -29,8 +32,10 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         let annotation = map.annotations(in: MKMapRect(origin: MKMapPointForCoordinate(building.coordinate), size: MKMapSize(width: 1, height: 1))).first! as! MKAnnotation
         map.selectAnnotation(annotation, animated: true)
         // Route locations
-        routeTo(building.coordinate)
-
+        routeTo(building.coordinate, completion: { (route: MKRoute?) in
+            self.bottomSheet.directions = route
+            self.bottomSheet.reloadNavTable()
+        })
     }
     
     // Mark: Initializing locations and where locations are set
@@ -91,17 +96,17 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
     }
     
     func addBottomSheetView() {
-        let bottomSheet = self.storyboard?.instantiateViewController(withIdentifier: "BottomView")
+        self.bottomSheet = self.storyboard?.instantiateViewController(withIdentifier: "BottomView") as! BottomViewController
         // bottomSheet?.view.backgroundColor = UIColor.clear
         // bottomSheet?.modalPresentationStyle = .overCurrentContext
         self.addChildViewController(bottomSheet!)
         
         self.view.addSubview((bottomSheet?.view)!)
-        bottomSheet?.didMove(toParentViewController: self)
+        self.bottomSheet?.didMove(toParentViewController: self)
         
         let height = UIScreen.main.bounds.size.height
         let width  = UIScreen.main.bounds.size.width
-        bottomSheet?.view.frame = CGRect(x:0, y:self.view.frame.maxY, width:width, height:height)
+        self.bottomSheet?.view.frame = CGRect(x:0, y:self.view.frame.maxY, width:width, height:height)
     }
 
 }

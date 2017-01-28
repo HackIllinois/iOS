@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import MapKit
 
 class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    var directions: MKRoute?
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     
     @IBOutlet weak var indoorMap: UIButton!
@@ -22,9 +26,29 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet var indoorMapHeight: NSLayoutConstraint!
     @IBOutlet var indoorMapWidth: NSLayoutConstraint!
     
+    @IBOutlet weak var navigationTable: UITableView!
+    
     var gesture : UIPanGestureRecognizer? = nil
     var directionShown = false
     var lastSeenTranslation : CGFloat = 0.0
+    
+    func reloadNavTable() {
+        navigationTable.reloadData()
+        print(directions?.distance)
+        print(directions?.expectedTravelTime)
+        if let directions = directions {
+            let miles = directions.distance * 0.00063694
+            distanceLabel.text = "\(String(format: "%.1f", miles)) mi" // TODO: change to actual miles
+            timeLabel.text = "\(Int(round(directions.expectedTravelTime / 60))) min"
+            addressLabel.text = "No Valid Address FIX ME"
+            nameLabel.text = "Test Dir"
+        } else {
+            distanceLabel.text = "" // TODO: change to actual miles
+            timeLabel.text = ""
+            addressLabel.text = "No Valid Address FIX ME"
+            nameLabel.text = ""
+        }
+    }
     
     func scrollView(y_crd: CGFloat, dur: Double) {
         self.view.removeGestureRecognizer(gesture!)
@@ -135,6 +159,9 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         layerView?.layer.borderWidth = 2
         layerView?.layer.cornerRadius = 2
         layerView?.layer.borderColor = UIColor.hiaDarkSlateBlueTwo.cgColor
+        
+        navigationTable.rowHeight = UITableViewAutomaticDimension
+        navigationTable.estimatedRowHeight = 140
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -254,6 +281,14 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         view.insertSubview(bluredView, at: 0)
     }
     
+    func roundToNearestTenth(number: Double) -> Int {
+        if Int(number / 100) == 0 {
+            return Int(round(number/10)) * 10
+        }
+        
+        return Int(round(number / 100)) * 100
+    }
+    
     func roundViews() {
         view.layer.cornerRadius = 5
         view.clipsToBounds = true
@@ -268,11 +303,14 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return directions?.steps.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "direction_cell", for: indexPath) as! BottomViewTableViewCell
+        let feet = floor(((directions?.steps[indexPath.row].distance)! * 3.28084))
+        cell.distanceLabel.text = "\(roundToNearestTenth(number: feet)) feet"
+        cell.directionLabel.text = directions?.steps[indexPath.row].instructions
         return cell as UITableViewCell
     }
     

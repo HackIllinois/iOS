@@ -122,10 +122,9 @@
                                                 </constraints>
                                                 <state key="normal" title="Button" image="cancel"/>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9 min - 0.4 mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Psp-cd-nDt">
-                                                <rect key="frame" x="35" y="52" width="125" height="26"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9 min" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Psp-cd-nDt">
+                                                <rect key="frame" x="35" y="52" width="40.5" height="26"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="125.3" id="MJr-St-ELB"/>
                                                     <constraint firstAttribute="height" constant="26" id="lHP-aQ-yis"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="18"/>
@@ -157,7 +156,7 @@ United States</string>
                                                     <color key="titleColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                             </button>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="72" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="YAC-3c-Krt">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="72" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="YAC-3c-Krt">
                                                 <rect key="frame" x="0.0" y="203" width="375" height="344"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -171,15 +170,12 @@ United States</string>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Take a right on W Stoughton St" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64z-Pl-efg">
                                                                     <rect key="frame" x="74" y="45.5" width="278.5" height="29"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="28.5" id="KRb-q6-h4H"/>
-                                                                    </constraints>
                                                                     <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="20"/>
                                                                     <color key="textColor" red="0.71764705882352942" green="0.74509803921568629" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_sort" translatesAutoresizingMaskIntoConstraints="NO" id="MdZ-JX-55a">
-                                                                    <rect key="frame" x="20.5" y="25.5" width="41" height="41"/>
+                                                                    <rect key="frame" x="20.5" y="23.5" width="41" height="41"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="41" id="iQg-vk-oSj"/>
                                                                         <constraint firstAttribute="height" constant="41" id="q5m-w2-F7O"/>
@@ -193,10 +189,10 @@ United States</string>
                                                                     </constraints>
                                                                 </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200 feet" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="et9-Ep-Hzq">
-                                                                    <rect key="frame" x="74" y="21" width="72" height="23"/>
+                                                                    <rect key="frame" x="74" y="21" width="200" height="23"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="22.5" id="Yaf-aW-a4h"/>
-                                                                        <constraint firstAttribute="width" constant="72" id="gFp-o8-gaC"/>
+                                                                        <constraint firstAttribute="width" constant="200" id="gFp-o8-gaC"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="20"/>
                                                                     <color key="textColor" red="0.96078431372549022" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
@@ -205,15 +201,16 @@ United States</string>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="IFr-e9-gC4" firstAttribute="leading" secondItem="ghZ-vB-kVM" secondAttribute="leadingMargin" constant="7" id="OIv-uX-maY"/>
-                                                                <constraint firstItem="MdZ-JX-55a" firstAttribute="top" secondItem="IFr-e9-gC4" secondAttribute="bottom" constant="14.5" id="OYc-4R-UUR"/>
                                                                 <constraint firstItem="64z-Pl-efg" firstAttribute="top" secondItem="et9-Ep-Hzq" secondAttribute="bottom" constant="1.5" id="TcY-0r-YsF"/>
                                                                 <constraint firstItem="et9-Ep-Hzq" firstAttribute="top" secondItem="IFr-e9-gC4" secondAttribute="bottom" constant="10" id="U1u-Vo-RLK"/>
                                                                 <constraint firstAttribute="trailingMargin" secondItem="IFr-e9-gC4" secondAttribute="trailing" constant="7" id="VI3-oH-TBn"/>
                                                                 <constraint firstAttribute="trailingMargin" secondItem="64z-Pl-efg" secondAttribute="trailing" constant="14.5" id="dn2-0s-hGK"/>
                                                                 <constraint firstAttribute="leadingMargin" secondItem="MdZ-JX-55a" secondAttribute="leading" constant="-12.5" id="gFi-19-dFf"/>
+                                                                <constraint firstAttribute="bottom" secondItem="64z-Pl-efg" secondAttribute="bottom" constant="-2.5" id="mKI-PA-NdY"/>
                                                                 <constraint firstAttribute="topMargin" secondItem="IFr-e9-gC4" secondAttribute="top" constant="-1" id="n9p-Yh-aqb"/>
                                                                 <constraint firstItem="64z-Pl-efg" firstAttribute="leading" secondItem="MdZ-JX-55a" secondAttribute="trailing" constant="12.5" id="py1-04-kwB"/>
                                                                 <constraint firstItem="et9-Ep-Hzq" firstAttribute="leading" secondItem="MdZ-JX-55a" secondAttribute="trailing" constant="12.5" id="qoL-ID-JuW"/>
+                                                                <constraint firstItem="MdZ-JX-55a" firstAttribute="centerY" secondItem="ghZ-vB-kVM" secondAttribute="centerY" constant="8" id="yV3-C9-sk3"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -252,6 +249,15 @@ United States</string>
                                                     <color key="titleColor" red="0.96078431372549022" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.4 mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oFe-g2-7lg">
+                                                <rect key="frame" x="80" y="52" width="100" height="26"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="bbB-uS-Rru"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="18"/>
+                                                <color key="textColor" red="0.50196078431372548" green="0.5607843137254902" blue="0.76862745098039209" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" red="0.078431372549019607" green="0.14117647058823529" blue="0.25882352941176467" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -261,8 +267,10 @@ United States</string>
                                             <constraint firstItem="xoo-AR-cUe" firstAttribute="leading" secondItem="kZ7-9u-Bff" secondAttribute="leading" constant="15" id="J9G-2X-f94"/>
                                             <constraint firstAttribute="trailing" secondItem="YAC-3c-Krt" secondAttribute="trailing" id="K1m-Ih-5RE"/>
                                             <constraint firstItem="Hxw-vl-DNG" firstAttribute="top" secondItem="Psp-cd-nDt" secondAttribute="bottom" constant="20" id="MTw-CK-kFi"/>
+                                            <constraint firstItem="oFe-g2-7lg" firstAttribute="leading" secondItem="Psp-cd-nDt" secondAttribute="trailing" constant="4.5" id="MYz-Q4-JdB"/>
                                             <constraint firstItem="TlY-Mg-C6s" firstAttribute="top" secondItem="kZ7-9u-Bff" secondAttribute="top" constant="17" id="Nai-Dw-I3g"/>
                                             <constraint firstItem="YAC-3c-Krt" firstAttribute="top" secondItem="N3Z-bn-ZWy" secondAttribute="bottom" constant="15" id="Nuy-da-vcY"/>
+                                            <constraint firstItem="oFe-g2-7lg" firstAttribute="top" secondItem="xoo-AR-cUe" secondAttribute="bottom" constant="1" id="P64-hJ-aUj"/>
                                             <constraint firstItem="rfV-VN-uvi" firstAttribute="top" secondItem="Psp-cd-nDt" secondAttribute="bottom" constant="20" id="PyT-2Z-elt"/>
                                             <constraint firstAttribute="trailing" secondItem="GvV-PG-vmK" secondAttribute="trailing" constant="14" id="QAe-e7-0si"/>
                                             <constraint firstItem="rfV-VN-uvi" firstAttribute="leading" secondItem="kZ7-9u-Bff" secondAttribute="leading" constant="14" id="Uh7-yx-9yT"/>
@@ -301,12 +309,14 @@ United States</string>
                         <outlet property="addressLabel" destination="N3Z-bn-ZWy" id="iz4-4m-L2b"/>
                         <outlet property="closeButton" destination="TlY-Mg-C6s" id="KeB-nu-y7O"/>
                         <outlet property="directionButton" destination="rfV-VN-uvi" id="lXd-GK-3ya"/>
-                        <outlet property="distanceLabel" destination="Psp-cd-nDt" id="ssF-Gr-m7g"/>
+                        <outlet property="distanceLabel" destination="oFe-g2-7lg" id="9rI-qa-jXo"/>
                         <outlet property="indoorMap" destination="GvV-PG-vmK" id="drz-M8-r6v"/>
                         <outlet property="indoorMapButtonSmall" destination="Hxw-vl-DNG" id="fLw-Wz-Lt0"/>
                         <outlet property="indoorMapHeight" destination="QCU-3L-6wu" id="1y4-wg-SvN"/>
                         <outlet property="indoorMapWidth" destination="0Sw-S6-jL5" id="oxg-cL-nM1"/>
                         <outlet property="nameLabel" destination="xoo-AR-cUe" id="QCU-lb-jQM"/>
+                        <outlet property="navigationTable" destination="YAC-3c-Krt" id="ZuD-s0-6nV"/>
+                        <outlet property="timeLabel" destination="Psp-cd-nDt" id="6Z5-oL-Mb2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nir-sE-uES" userLabel="First Responder" sceneMemberID="firstResponder"/>
