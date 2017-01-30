@@ -623,7 +623,7 @@
 				TargetAttributes = {
 					E20465C61CF1FAF50054654E = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = EJGXLSZ763;
+						DevelopmentTeam = 8VNQTQM2L6;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -1068,11 +1068,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = EJGXLSZ763;
+				DEVELOPMENT_TEAM = 8VNQTQM2L6;
 				INFOPLIST_FILE = "hackillinois-2017-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "me.hackillinois-2017.ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "acm.hackillinois-2017.ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1090,11 +1090,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = EJGXLSZ763;
+				DEVELOPMENT_TEAM = 8VNQTQM2L6;
 				INFOPLIST_FILE = "hackillinois-2017-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "me.hackillinois-2017.ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "acm.hackillinois-2017.ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;

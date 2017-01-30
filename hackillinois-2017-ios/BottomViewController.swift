@@ -32,6 +32,12 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var navigationTable: UITableView!
     
+    /* Variables used to determine splits */
+    var y_min : CGFloat!
+    var y_max : CGFloat!
+    var y_button_h : CGFloat!
+    var y_mid: CGFloat!
+    
     var globalCloseHandler: ((Void) -> Void)?
     var gesture : UIPanGestureRecognizer? = nil
     var directionShown = false
@@ -65,24 +71,20 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func scrollToButtons() {
         /* Scrolls up to where the buttons should show */
-        let y_crd = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 163
-        scrollView(y_crd: y_crd, dur: 0.2)
+        scrollView(y_crd: y_button_h, dur: 0.2)
     }
     
     func scrollToBar() {
         /* Scrolls down to the "hidden" state */
-        let y_crd = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 80
-        scrollView(y_crd: y_crd, dur: 0.2)
+        scrollView(y_crd: y_max, dur: 0.2)
     }
     
     func scrollToTop() {
-        let y_crd = (self.navigationController?.navigationBar.frame.size.height)! + 25
-        scrollView(y_crd: y_crd, dur: 0.2)
+        scrollView(y_crd: y_min, dur: 0.2)
     }
     
     func scrollToTopSlow() {
-        let y_crd = (self.navigationController?.navigationBar.frame.size.height)! + 25
-        scrollView(y_crd: y_crd, dur: 0.4)
+        scrollView(y_crd: y_min, dur: 0.4)
     }
     
     func showDirection() {
@@ -165,6 +167,12 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         navigationTable.rowHeight = UITableViewAutomaticDimension
         navigationTable.estimatedRowHeight = 140
+        
+        /* Set up limits */
+        y_min = (self.navigationController?.navigationBar.frame.size.height)! + 25
+        y_max = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 125
+        y_button_h = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 198
+        y_mid = (self.navigationController?.navigationBar.frame.size.height)! + 45
     }
     
     func popOutView() {
@@ -191,30 +199,8 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        /*
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            let frame = self?.view.frame
-            let yComponent = UIScreen.main.bounds.size.height-(self?.tabBarController?.tabBar.frame.size.height)! - 163
-            self?.view.frame = CGRect(x:0, y:yComponent, width:frame!.width, height:
-                frame!.height)
-        }
-        */
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     func middleToTop() {
         let y = self.view.frame.minY
-        let y_max = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 80
         
         if y < y_max-177 {
             scrollToTop()
@@ -227,9 +213,8 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func topToMiddle() {
         let y = self.view.frame.minY
-        let y_crd = (self.navigationController?.navigationBar.frame.size.height)! + 45
         
-        if y > y_crd {
+        if y > y_mid {
             scrollToButtons()
             hideDirection()
         } else {
@@ -240,7 +225,6 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func middleToBottom() {
         let y = self.view.frame.minY
-        let y_max = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 80
         
         if y > y_max-55 {
             scrollToBar()
@@ -253,7 +237,6 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func bottomToMiddle() {
         let y = self.view.frame.minY
-        let y_max = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 80
         
         if y < y_max-25 {
             scrollToButtons()
@@ -268,9 +251,6 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let translation = recognizer.translation(in: self.view)
         let y = self.view.frame.minY
         let y_prime = y+translation.y
-        let y_min = (self.navigationController?.navigationBar.frame.size.height)! + 25
-        let y_max = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 80
-        let y_button_h = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 163
         if recognizer.state == UIGestureRecognizerState.ended {
             /* Interpolate location and scroll */
             if y < y_button_h && lastSeenTranslation < 0 {
