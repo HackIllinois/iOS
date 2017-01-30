@@ -269,11 +269,12 @@ class LoginViewController: GenericInputView {
     
     /* View Controller overrides */
     override func viewDidLoad() {
+        
         /* Set super class requirements */
         scroll = scrollView
         textFields = [UsernameTextField, PasswordTextField]
         textViews = []
-        
+ 
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -285,13 +286,23 @@ class LoginViewController: GenericInputView {
         LoginButton.clipsToBounds = true
         LoginButton.alpha = loginElementAlpha
         
-        
         /* Configure portions that the super class did not configure */
         UsernameTextField.alpha = loginElementAlpha
         UsernameTextField.text = initialEmail
         
         PasswordTextField.alpha = loginElementAlpha
         PasswordTextField.isSecureTextEntry = true // Password should be hidden
+ 
+        
+        let gradient = CAGradientLayer()
+        let colorTop = UIColor(red: 20/255, green: 36/255, blue: 66/255, alpha: 1.0)
+        let colorBottom = UIColor(red: 28/255, green: 50/255, blue: 90/255, alpha: 1.0)
+        gradient.colors = [ colorTop.cgColor, colorBottom.cgColor ]
+        gradient.locations = [ 0.0, 1.0 ]
+        gradient.frame = view.bounds
+        self.view.layer.insertSublayer(gradient, at: 0)
+ 
+        
     }
     
     override func didReceiveMemoryWarning() {
