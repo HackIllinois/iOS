@@ -23,6 +23,7 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBAction func closeButtonPressed(_ sender: Any) {
         self.hideView(animate: true)
+        self.globalCloseHandler?()
     }
     @IBOutlet weak var indoorMapButtonSmall: UIButton!
     
@@ -31,21 +32,19 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var navigationTable: UITableView!
     
-    
+    var globalCloseHandler: ((Void) -> Void)?
     var gesture : UIPanGestureRecognizer? = nil
     var directionShown = false
     var lastSeenTranslation : CGFloat = 0.0
     
-    func reloadNavTable() {
+    func reloadNavTable(address: String, name: String) {
         navigationTable.reloadData()
-        print(directions?.distance)
-        print(directions?.expectedTravelTime)
         if let directions = directions {
             let miles = directions.distance * 0.00063694
             distanceLabel.text = "\(String(format: "%.1f", miles)) mi" // TODO: change to actual miles
             timeLabel.text = "\(Int(round(directions.expectedTravelTime / 60))) min"
-            addressLabel.text = "No Valid Address FIX ME"
-            nameLabel.text = "Test Dir"
+            addressLabel.text = address
+            nameLabel.text = name
         } else {
             distanceLabel.text = "" // TODO: change to actual miles
             timeLabel.text = ""

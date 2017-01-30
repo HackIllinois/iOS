@@ -127,13 +127,13 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
                 
         // Only add the routing options if there are existing elements in buildings
         if !buildings.isEmpty {
-            var hue: CGFloat = 5.0 / 360.0
+            // var hue: CGFloat = 5.0 / 360.0
             
             for building in buildings {
                 // Create liquid cells
-                let locationCell = CustomLiquidCell(icon: UIImage(named: "ic_forward_48pt")!, name: building.shortName!)
-                locationCell.color = UIColor(hue: hue, saturation: 74/100, brightness: 90/100, alpha: 1.0) /* #e74c3c */
-                hue += 0.05
+                // let locationCell = CustomLiquidCell(icon: UIImage(named: "ic_forward_48pt")!, name: building.shortName!)
+                // locationCell.color = UIColor(hue: hue, saturation: 74/100, brightness: 90/100, alpha: 1.0) /* #e74c3c */
+                // hue += 0.05
                 
                 // Create annotations
                 map.addAnnotation(building)
