@@ -9,6 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Brandon_bld.otf">
+            <string>BrandonGrotesque-Bold</string>
+        </array>
         <array key="Brandon_med.otf">
             <string>BrandonGrotesque-Medium</string>
         </array>
@@ -32,45 +35,82 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Zdn-L1-r3l">
                                 <rect key="frame" x="-4" y="108" width="383" height="510"/>
                             </mapView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y6d-bR-Zhl">
-                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="djU-VD-iUx"/>
-                                    <barButtonItem width="300" style="plain" id="qYl-A6-snl">
-                                        <segmentedControl key="customView" opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" id="LhV-jx-QDe">
-                                            <rect key="frame" x="37" y="8" width="300" height="29"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <segments>
-                                                <segment title="Siebel"/>
-                                                <segment title="ECEB"/>
-                                                <segment title="Union"/>
-                                            </segments>
-                                            <connections>
-                                                <action selector="mapControlChange:" destination="qaZ-tF-XKU" eventType="valueChanged" id="Fcf-9R-g13"/>
-                                            </connections>
-                                        </segmentedControl>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="QMG-Oc-x4V"/>
-                                </items>
-                            </toolbar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQW-zv-Tkt">
+                                <rect key="frame" x="-4" y="64" width="383" height="44"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DCL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcc-7f-Bkw">
+                                        <rect key="frame" x="16" y="5.5" width="87" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21.5" id="5jo-80-AdJ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="BrandonGrotesque-Bold" family="Brandon Grotesque" pointSize="15"/>
+                                        <color key="textColor" red="0.50196078431372548" green="0.5607843137254902" blue="0.76862745098039209" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Siebel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUT-NC-Dgy">
+                                        <rect key="frame" x="104" y="5.5" width="87" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21.5" id="n3T-Yx-eq9"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="BrandonGrotesque-Bold" family="Brandon Grotesque" pointSize="15"/>
+                                        <color key="textColor" red="0.50196078430000002" green="0.56078431370000004" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ECEB" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7R-mr-9Pf">
+                                        <rect key="frame" x="192" y="5.5" width="87" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21.5" id="hmk-pJ-osD"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="BrandonGrotesque-Bold" family="Brandon Grotesque" pointSize="15"/>
+                                        <color key="textColor" red="0.50196078430000002" green="0.56078431370000004" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Union" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7X5-nc-jCt">
+                                        <rect key="frame" x="280" y="5.5" width="87" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21.5" id="ttH-La-Pnu"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="BrandonGrotesque-Bold" family="Brandon Grotesque" pointSize="15"/>
+                                        <color key="textColor" red="0.50196078430000002" green="0.56078431370000004" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.10980392156862745" green="0.19607843137254902" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="wcc-7f-Bkw" firstAttribute="top" secondItem="fQW-zv-Tkt" secondAttribute="top" constant="5.5" id="3re-bn-rgV"/>
+                                    <constraint firstItem="D7R-mr-9Pf" firstAttribute="width" secondItem="eUT-NC-Dgy" secondAttribute="width" id="4MW-oO-kP1"/>
+                                    <constraint firstItem="D7R-mr-9Pf" firstAttribute="leading" secondItem="eUT-NC-Dgy" secondAttribute="trailing" constant="1" id="MlJ-hk-Zd6"/>
+                                    <constraint firstItem="D7R-mr-9Pf" firstAttribute="top" secondItem="fQW-zv-Tkt" secondAttribute="top" constant="5.5" id="PEy-Sk-bUK"/>
+                                    <constraint firstItem="7X5-nc-jCt" firstAttribute="top" secondItem="fQW-zv-Tkt" secondAttribute="top" constant="5.5" id="RvE-DR-lso"/>
+                                    <constraint firstItem="eUT-NC-Dgy" firstAttribute="width" secondItem="wcc-7f-Bkw" secondAttribute="width" id="UBc-S3-sRt"/>
+                                    <constraint firstItem="eUT-NC-Dgy" firstAttribute="leading" secondItem="wcc-7f-Bkw" secondAttribute="trailing" constant="1" id="YsW-mh-suq"/>
+                                    <constraint firstItem="wcc-7f-Bkw" firstAttribute="leading" secondItem="fQW-zv-Tkt" secondAttribute="leading" constant="16" id="cEp-nE-hWH"/>
+                                    <constraint firstItem="7X5-nc-jCt" firstAttribute="leading" secondItem="D7R-mr-9Pf" secondAttribute="trailing" constant="1" id="eoh-yc-gOc"/>
+                                    <constraint firstAttribute="trailing" secondItem="7X5-nc-jCt" secondAttribute="trailing" constant="16" id="gAY-UD-6Dd"/>
+                                    <constraint firstItem="eUT-NC-Dgy" firstAttribute="top" secondItem="fQW-zv-Tkt" secondAttribute="top" constant="5.5" id="o8c-YJ-Fi0"/>
+                                    <constraint firstItem="7X5-nc-jCt" firstAttribute="width" secondItem="D7R-mr-9Pf" secondAttribute="width" id="wLr-dz-Zyi"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="y6d-bR-Zhl" secondAttribute="trailing" id="1RJ-W5-hrb"/>
                             <constraint firstItem="Zdn-L1-r3l" firstAttribute="leading" secondItem="ib4-KP-Krk" secondAttribute="leadingMargin" constant="-20" id="8Yd-yr-kee"/>
-                            <constraint firstItem="y6d-bR-Zhl" firstAttribute="top" secondItem="mgr-C5-5lE" secondAttribute="bottom" id="BhI-Bo-zsL"/>
-                            <constraint firstItem="y6d-bR-Zhl" firstAttribute="leading" secondItem="ib4-KP-Krk" secondAttribute="leading" id="IAg-yX-YKu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fQW-zv-Tkt" secondAttribute="trailing" constant="-20" id="Ifa-xA-Bcm"/>
+                            <constraint firstItem="fQW-zv-Tkt" firstAttribute="top" secondItem="mgr-C5-5lE" secondAttribute="bottom" id="Lr5-X6-bM4"/>
                             <constraint firstItem="Zdn-L1-r3l" firstAttribute="top" secondItem="mgr-C5-5lE" secondAttribute="bottom" constant="44" id="Ou4-2J-wmx"/>
+                            <constraint firstItem="Zdn-L1-r3l" firstAttribute="top" secondItem="fQW-zv-Tkt" secondAttribute="bottom" id="TxT-k6-CC9"/>
+                            <constraint firstItem="fQW-zv-Tkt" firstAttribute="leading" secondItem="ib4-KP-Krk" secondAttribute="leadingMargin" constant="-20" id="n4d-GB-nXZ"/>
                             <constraint firstItem="bvf-mM-5by" firstAttribute="top" secondItem="Zdn-L1-r3l" secondAttribute="bottom" id="nPJ-gc-EIi"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Zdn-L1-r3l" secondAttribute="trailing" constant="-20" id="rBz-Vx-OYW"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Maps" id="m5J-TP-VmL"/>
                     <connections>
-                        <outlet property="mapControl" destination="LhV-jx-QDe" id="FW4-gj-GPZ"/>
+                        <outlet property="dclLabel" destination="wcc-7f-Bkw" id="4mF-S7-L5Z"/>
+                        <outlet property="ecebLabel" destination="D7R-mr-9Pf" id="J4w-IS-dWt"/>
                         <outlet property="mapView" destination="Zdn-L1-r3l" id="EGZ-E5-8q3"/>
-                        <outlet property="toolbar" destination="y6d-bR-Zhl" id="Mi3-xP-seU"/>
+                        <outlet property="siebelLabel" destination="eUT-NC-Dgy" id="De6-n5-mM8"/>
+                        <outlet property="unionLabel" destination="7X5-nc-jCt" id="ylu-dx-lIu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wl9-fg-gn8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -115,15 +155,18 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TlY-Mg-C6s">
                                                 <rect key="frame" x="336" y="17" width="24" height="24"/>
-                                                <color key="backgroundColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="0.5" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="EFL-T7-OX9"/>
                                                     <constraint firstAttribute="width" constant="24" id="IPN-Wo-yrw"/>
                                                 </constraints>
-                                                <state key="normal" title="Button" image="cancel"/>
+                                                <state key="normal" title="Button" image="close"/>
+                                                <connections>
+                                                    <action selector="closeButtonPressed:" destination="hoJ-Yo-Kz2" eventType="touchUpInside" id="NK4-8n-3YU"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9 min" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Psp-cd-nDt">
-                                                <rect key="frame" x="35" y="52" width="40.5" height="26"/>
+                                                <rect key="frame" x="35" y="52" width="41" height="26"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="26" id="lHP-aQ-yis"/>
                                                 </constraints>
@@ -238,7 +281,7 @@ United States</string>
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hxw-vl-DNG">
-                                                <rect key="frame" x="233.5" y="98" width="127.5" height="80"/>
+                                                <rect key="frame" x="234" y="98" width="127" height="80"/>
                                                 <color key="backgroundColor" red="0.36470588235294116" green="0.78431372549019607" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="127" id="2BL-6k-5ve"/>
@@ -250,7 +293,7 @@ United States</string>
                                                 </state>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.4 mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oFe-g2-7lg">
-                                                <rect key="frame" x="80" y="52" width="100" height="26"/>
+                                                <rect key="frame" x="81" y="52" width="100" height="26"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="bbB-uS-Rru"/>
                                                 </constraints>
@@ -258,10 +301,18 @@ United States</string>
                                                 <color key="textColor" red="0.50196078431372548" green="0.5607843137254902" blue="0.76862745098039209" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="walking" translatesAutoresizingMaskIntoConstraints="NO" id="gWn-dS-q5H">
+                                                <rect key="frame" x="15" y="55" width="12" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20.5" id="nxZ-nZ-wBT"/>
+                                                    <constraint firstAttribute="width" constant="12" id="uGe-Hk-Z78"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.078431372549019607" green="0.14117647058823529" blue="0.25882352941176467" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="GvV-PG-vmK" firstAttribute="width" secondItem="rfV-VN-uvi" secondAttribute="width" id="0Sw-S6-jL5"/>
+                                            <constraint firstItem="gWn-dS-q5H" firstAttribute="leading" secondItem="kZ7-9u-Bff" secondAttribute="leading" constant="15" id="2Ed-2t-Wgy"/>
                                             <constraint firstAttribute="trailing" secondItem="Hxw-vl-DNG" secondAttribute="trailing" constant="14.5" id="BeM-rS-mWg"/>
                                             <constraint firstItem="Psp-cd-nDt" firstAttribute="top" secondItem="xoo-AR-cUe" secondAttribute="bottom" constant="1" id="INx-gw-6ub"/>
                                             <constraint firstItem="xoo-AR-cUe" firstAttribute="leading" secondItem="kZ7-9u-Bff" secondAttribute="leading" constant="15" id="J9G-2X-f94"/>
@@ -270,6 +321,7 @@ United States</string>
                                             <constraint firstItem="oFe-g2-7lg" firstAttribute="leading" secondItem="Psp-cd-nDt" secondAttribute="trailing" constant="4.5" id="MYz-Q4-JdB"/>
                                             <constraint firstItem="TlY-Mg-C6s" firstAttribute="top" secondItem="kZ7-9u-Bff" secondAttribute="top" constant="17" id="Nai-Dw-I3g"/>
                                             <constraint firstItem="YAC-3c-Krt" firstAttribute="top" secondItem="N3Z-bn-ZWy" secondAttribute="bottom" constant="15" id="Nuy-da-vcY"/>
+                                            <constraint firstItem="gWn-dS-q5H" firstAttribute="top" secondItem="xoo-AR-cUe" secondAttribute="bottom" constant="4" id="ORn-Kp-k2c"/>
                                             <constraint firstItem="oFe-g2-7lg" firstAttribute="top" secondItem="xoo-AR-cUe" secondAttribute="bottom" constant="1" id="P64-hJ-aUj"/>
                                             <constraint firstItem="rfV-VN-uvi" firstAttribute="top" secondItem="Psp-cd-nDt" secondAttribute="bottom" constant="20" id="PyT-2Z-elt"/>
                                             <constraint firstAttribute="trailing" secondItem="GvV-PG-vmK" secondAttribute="trailing" constant="14" id="QAe-e7-0si"/>
@@ -345,9 +397,10 @@ United States</string>
         </scene>
     </scenes>
     <resources>
-        <image name="cancel" width="30" height="30"/>
+        <image name="close" width="25" height="24"/>
         <image name="ic_sort" width="24" height="24"/>
         <image name="maps_off" width="24" height="24"/>
         <image name="maps_on" width="24" height="24"/>
+        <image name="walking" width="12" height="21"/>
     </resources>
 </document>

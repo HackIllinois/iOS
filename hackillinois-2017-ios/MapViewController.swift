@@ -16,9 +16,14 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
     var bottomSheet : BottomViewController!
     
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var mapControl: UISegmentedControl!
-    @IBOutlet weak var toolbar: UIToolbar!
     
+    @IBOutlet weak var dclLabel: UILabel!
+    @IBOutlet weak var unionLabel: UILabel!
+    @IBOutlet weak var ecebLabel: UILabel!
+    @IBOutlet weak var siebelLabel: UILabel!
+    
+    var labelPressed: Int = 0
+    /*
     @IBAction func mapControlChange(_ sender: Any) {
         if(mapControl.selectedSegmentIndex == -1) {
             return
@@ -36,7 +41,10 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
             self.bottomSheet.directions = route
             self.bottomSheet.reloadNavTable()
         })
+        
+        bottomSheet.scrollToBar()
     }
+    */
     
     // Mark: Initializing locations and where locations are set
     /* Modify this function to change the locations available */
@@ -67,14 +75,115 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         /* Call superclass's constructor after configuration */
         super.viewDidLoad()
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
-        toolbar.delegate = self
         
-        mapControl.selectedSegmentIndex = UISegmentedControlNoSegment
+        // mapControl.selectedSegmentIndex = UISegmentedControlNoSegment
         let tapMap = UIPanGestureRecognizer(target: self, action: #selector(MapViewController.didDragMap(gestureRecognizer:)))
         tapMap.delegate = self
         map.addGestureRecognizer(tapMap)
         
         addBottomSheetView()
+        
+        initTouches()
+    }
+    
+    func initTouches() {
+        let dclTouch = UITapGestureRecognizer(target: self, action: #selector(dclLabelTouched))
+        dclTouch.numberOfTapsRequired = 1
+        dclLabel.addGestureRecognizer(dclTouch)
+        dclLabel.isUserInteractionEnabled = true
+        
+        let siebelTouch = UITapGestureRecognizer(target: self, action: #selector(siebelLabelTouched))
+        siebelTouch.numberOfTapsRequired = 1
+        siebelLabel.addGestureRecognizer(siebelTouch)
+        siebelLabel.isUserInteractionEnabled = true
+        
+        let ecebTouch = UITapGestureRecognizer(target: self, action: #selector(ecebLabelTouched))
+        ecebTouch.numberOfTapsRequired = 1
+        ecebLabel.addGestureRecognizer(ecebTouch)
+        ecebLabel.isUserInteractionEnabled = true
+        
+        let unionTouch = UITapGestureRecognizer(target: self, action: #selector(unionLabelTouched))
+        unionTouch.numberOfTapsRequired = 1
+        unionLabel.addGestureRecognizer(unionTouch)
+        unionLabel.isUserInteractionEnabled = true
+        
+        dclLabel.layer.shadowRadius = 4.0
+        dclLabel.layer.shadowColor = UIColor.hiaSeafoamBlue.cgColor
+        dclLabel.layer.shouldRasterize = true
+        
+        siebelLabel.layer.shadowRadius = 4.0
+        siebelLabel.layer.shadowColor = UIColor.hiaSeafoamBlue.cgColor
+        siebelLabel.layer.shouldRasterize = true
+        
+        ecebLabel.layer.shadowRadius = 4.0
+        ecebLabel.layer.shadowColor = UIColor.hiaSeafoamBlue.cgColor
+        ecebLabel.layer.shouldRasterize = true
+        
+        unionLabel.layer.shadowRadius = 4.0
+        unionLabel.layer.shadowColor = UIColor.hiaSeafoamBlue.cgColor
+        unionLabel.layer.shouldRasterize = true
+    }
+    
+    func clearLabel(labelNumber: Int) {
+        switch labelNumber {
+        case 1:
+            dclLabel.layer.shadowOpacity = 0
+            dclLabel.textColor = UIColor.hiaFadedBlue
+            break
+        case 2:
+            siebelLabel.layer.shadowOpacity = 0
+            siebelLabel.textColor = UIColor.hiaFadedBlue
+            break
+        case 3:
+            ecebLabel.layer.shadowOpacity = 0
+            ecebLabel.textColor = UIColor.hiaFadedBlue
+            break
+        case 4:
+            unionLabel.layer.shadowOpacity = 0
+            unionLabel.textColor = UIColor.hiaFadedBlue
+            break
+        case 5:
+            // RESET ALL
+            dclLabel.layer.shadowOpacity = 0
+            siebelLabel.layer.shadowOpacity = 0
+            unionLabel.layer.shadowOpacity = 0
+            ecebLabel.layer.shadowOpacity = 0
+            dclLabel.textColor = UIColor.hiaFadedBlue
+            siebelLabel.textColor = UIColor.hiaFadedBlue
+            ecebLabel.textColor = UIColor.hiaFadedBlue
+            unionLabel.textColor = UIColor.hiaFadedBlue
+            labelPressed = 0
+        default:
+            break
+        }
+    }
+    
+    func dclLabelTouched() {
+        clearLabel(labelNumber: labelPressed)
+        dclLabel.layer.shadowOpacity = 1
+        dclLabel.textColor = UIColor.hiaSeafoamBlue
+        labelPressed = 1
+    }
+    
+    func siebelLabelTouched() {
+        clearLabel(labelNumber: labelPressed)
+        siebelLabel.layer.shadowOpacity = 1
+        siebelLabel.textColor = UIColor.hiaSeafoamBlue
+        labelPressed = 2
+    }
+    
+    func ecebLabelTouched() {
+        clearLabel(labelNumber: labelPressed)
+        ecebLabel.layer.shadowOpacity = 1
+        ecebLabel.textColor = UIColor.hiaSeafoamBlue
+        labelPressed = 3
+    }
+    
+    func unionLabelTouched() {
+        clearLabel(labelNumber: labelPressed)
+        unionLabel.layer.shadowOpacity = 1
+        unionLabel.textColor = UIColor.hiaSeafoamBlue
+        labelPressed = 4
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,7 +196,7 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
     
     func didDragMap(gestureRecognizer: UIGestureRecognizer) {
         if (gestureRecognizer.state == UIGestureRecognizerState.began) {
-            mapControl.selectedSegmentIndex = UISegmentedControlNoSegment
+            // mapControl.selectedSegmentIndex = UISegmentedControlNoSegment
         }
     }
     
@@ -107,6 +216,8 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         let height = UIScreen.main.bounds.size.height
         let width  = UIScreen.main.bounds.size.width
         self.bottomSheet?.view.frame = CGRect(x:0, y:self.view.frame.maxY, width:width, height:height)
+        
+        bottomSheet.hideView(animate: false)
     }
 
 }

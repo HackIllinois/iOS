@@ -21,12 +21,16 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var directionButton: UIButton!
     
+    @IBAction func closeButtonPressed(_ sender: Any) {
+        self.hideView(animate: true)
+    }
     @IBOutlet weak var indoorMapButtonSmall: UIButton!
     
     @IBOutlet var indoorMapHeight: NSLayoutConstraint!
     @IBOutlet var indoorMapWidth: NSLayoutConstraint!
     
     @IBOutlet weak var navigationTable: UITableView!
+    
     
     var gesture : UIPanGestureRecognizer? = nil
     var directionShown = false
@@ -164,18 +168,44 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         navigationTable.estimatedRowHeight = 140
     }
     
+    func popOutView() {
+        addressLabel.isHidden = true
+        addressLabel.alpha = 0.0
+        indoorMapButtonSmall.isHidden = true
+        indoorMapButtonSmall.alpha = 0.0
+        
+        // Button stuff
+        directionButton.isHidden = false
+        directionButton.alpha = 1.0
+        indoorMap.isHidden = false
+        indoorMap.alpha = 1.0
+        
+        scrollToBar()
+    }
+    
+    func hideView(animate: Bool) {
+        let y_crd = UIScreen.main.bounds.size.height
+        if animate {
+            scrollView(y_crd: y_crd, dur: 0.5)
+        } else {
+            scrollView(y_crd: y_crd, dur: 0)
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        /*
         UIView.animate(withDuration: 0.3) { [weak self] in
             let frame = self?.view.frame
             let yComponent = UIScreen.main.bounds.size.height-(self?.tabBarController?.tabBar.frame.size.height)! - 163
             self?.view.frame = CGRect(x:0, y:yComponent, width:frame!.width, height:
                 frame!.height)
         }
+        */
     }
     
     override func didReceiveMemoryWarning() {
