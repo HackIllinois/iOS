@@ -22,7 +22,7 @@ enum UserInputState: UInt8 {
 class LoginViewController: GenericInputView {
     /* Replace these floats with alpha values for elements */
     let loginElementAlpha: CGFloat = 0.9
-    
+    var scrollViewIsScrolled = false
     
     /* Variables */
     var loginErrorMessage: String? = "You must enter a username and password before logging in."
@@ -298,11 +298,15 @@ class LoginViewController: GenericInputView {
         let colorTop = UIColor(red: 20/255, green: 36/255, blue: 66/255, alpha: 1.0)
         let colorBottom = UIColor(red: 28/255, green: 50/255, blue: 90/255, alpha: 1.0)
         gradient.colors = [ colorTop.cgColor, colorBottom.cgColor ]
-        gradient.locations = [ 0.0, 1.0 ]
+        gradient.locations = [ 1.0, 0.0 ]
         gradient.frame = view.bounds
         self.view.layer.insertSublayer(gradient, at: 0)
  
-        
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     override func didReceiveMemoryWarning() {
