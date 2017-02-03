@@ -295,10 +295,10 @@ class LoginViewController: GenericInputView {
  
         
         let gradient = CAGradientLayer()
-        let colorTop = UIColor(red: 20/255, green: 36/255, blue: 66/255, alpha: 1.0)
-        let colorBottom = UIColor(red: 28/255, green: 50/255, blue: 90/255, alpha: 1.0)
+        let colorBottom = UIColor(red: 20/255, green: 36/255, blue: 66/255, alpha: 1.0)
+        let colorTop = UIColor(red: 28/255, green: 50/255, blue: 90/255, alpha: 1.0)
         gradient.colors = [ colorTop.cgColor, colorBottom.cgColor ]
-        gradient.locations = [ 1.0, 0.0 ]
+        gradient.locations = [ 0.0, 1.0 ]
         gradient.frame = view.bounds
         self.view.layer.insertSublayer(gradient, at: 0)
  
