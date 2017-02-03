@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ebv-0e-niW">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E144f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ebv-0e-niW">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -8,6 +8,14 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Brandon_med.otf">
+            <string>BrandonGrotesque-Medium</string>
+        </array>
+        <array key="Brandon_reg.otf">
+            <string>BrandonGrotesque-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Generic Navigation Controller-->
         <scene sceneID="2bV-cq-CjK">
@@ -46,13 +54,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="tLM-M0-JCL">
-                                <rect key="frame" x="19" y="132" width="337" height="403"/>
+                                <rect key="frame" x="19" y="-14.5" width="337" height="697"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="kj0-gv-3HE">
-                                        <rect key="frame" x="0.0" y="0.0" width="337" height="328"/>
+                                        <rect key="frame" x="75.5" y="0.0" width="186.5" height="255.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="IGa-8n-2Ni">
-                                                <rect key="frame" x="93.5" y="0.0" width="150" height="150"/>
+                                                <rect key="frame" x="18" y="0.0" width="150" height="150"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qrcode" translatesAutoresizingMaskIntoConstraints="NO" id="5Hg-Jz-3Fl">
                                                         <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
@@ -64,30 +72,18 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ax0-ry-NhS">
-                                                <rect key="frame" x="0.0" y="172" width="337" height="156"/>
+                                                <rect key="frame" x="0.0" y="172" width="186.5" height="83.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thomas Jay Yu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ftl-im-rRc">
-                                                        <rect key="frame" x="76.5" y="0.0" width="184.5" height="31.5"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="University of Illinois at Urbana Champaign" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9D-fC-RKe">
-                                                        <rect key="frame" x="0.0" y="51.5" width="337" height="21.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BS Computer Science" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="ezh-xa-L5a">
-                                                        <rect key="frame" x="80" y="93" width="177" height="21.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brandon Grotesque" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ftl-im-rRc">
+                                                        <rect key="frame" x="1" y="0.0" width="184.5" height="34.5"/>
+                                                        <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="24"/>
+                                                        <color key="textColor" red="0.96078431372549022" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="highlightedColor" red="0.96078431372549022" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Dietary Restrictions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="85H-Gj-iDv">
-                                                        <rect key="frame" x="75.5" y="134.5" width="186.5" height="21.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                        <nil key="textColor"/>
+                                                        <rect key="frame" x="0.0" y="54.5" width="186.5" height="29"/>
+                                                        <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="20"/>
+                                                        <color key="textColor" red="0.94117647058823528" green="0.51764705882352935" blue="0.38431372549019605" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -95,36 +91,90 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="aLg-cr-4nU">
-                                        <rect key="frame" x="38.5" y="353" width="260" height="50"/>
+                                        <rect key="frame" x="73.5" y="280.5" width="190" height="50"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_chevron_right_48pt" translatesAutoresizingMaskIntoConstraints="NO" id="LES-sL-Hs6">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="github" translatesAutoresizingMaskIntoConstraints="NO" id="c9w-6W-cjp">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="50" id="RC7-mI-jt3"/>
-                                                    <constraint firstAttribute="height" constant="50" id="zlh-rQ-U8t"/>
-                                                </constraints>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_chevron_right_48pt" translatesAutoresizingMaskIntoConstraints="NO" id="c9w-6W-cjp">
-                                                <rect key="frame" x="70" y="0.0" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="MgS-JI-F7z"/>
                                                     <constraint firstAttribute="height" constant="50" id="dcG-o7-GF8"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_chevron_right_48pt" translatesAutoresizingMaskIntoConstraints="NO" id="5Yh-7S-Nye">
-                                                <rect key="frame" x="140" y="0.0" width="50" height="50"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="resume" translatesAutoresizingMaskIntoConstraints="NO" id="5Yh-7S-Nye">
+                                                <rect key="frame" x="70" y="0.0" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="VKz-yE-Shk"/>
                                                     <constraint firstAttribute="width" constant="50" id="hdz-iF-YCe"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_chevron_right_48pt" translatesAutoresizingMaskIntoConstraints="NO" id="L0L-1D-kwi">
-                                                <rect key="frame" x="210" y="0.0" width="50" height="50"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="linkedin" translatesAutoresizingMaskIntoConstraints="NO" id="L0L-1D-kwi">
+                                                <rect key="frame" x="140" y="0.0" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="VTX-N2-7Xi"/>
                                                     <constraint firstAttribute="width" constant="50" id="fbs-Ej-dbL"/>
                                                 </constraints>
                                             </imageView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="eTF-T9-77o">
+                                        <rect key="frame" x="23" y="355.5" width="291.5" height="341.5"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lj2-94-w3X">
+                                                <rect key="frame" x="0.0" y="0.0" width="291.5" height="341.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="University" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9V7-Wh-Eiw">
+                                                        <rect key="frame" x="0.0" y="0.0" width="95.5" height="34.5"/>
+                                                        <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="24"/>
+                                                        <color key="textColor" red="0.71764705880000002" green="0.74509803919999995" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="highlightedColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="zwi-Ih-Sbq">
+                                                        <rect key="frame" x="0.0" y="54.5" width="291.5" height="69"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="University of Illinois at Urbana-Champaign" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n81-bG-WwJ">
+                                                                <rect key="frame" x="0.0" y="0.0" width="291.5" height="69"/>
+                                                                <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="24"/>
+                                                                <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="highlightedColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Major" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fci-o1-vKQ">
+                                                        <rect key="frame" x="0.0" y="143.5" width="55.5" height="34.5"/>
+                                                        <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="24"/>
+                                                        <color key="textColor" red="0.71764705882352942" green="0.74509803921568629" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="highlightedColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="k8Y-Se-hOx">
+                                                        <rect key="frame" x="0.0" y="198" width="208.5" height="34.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BS Computer Science" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYC-BP-vKG">
+                                                                <rect key="frame" x="0.0" y="0.0" width="208.5" height="34.5"/>
+                                                                <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="24"/>
+                                                                <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="highlightedColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Year of Graduation" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EoN-x4-9Wx">
+                                                        <rect key="frame" x="0.0" y="252.5" width="175.5" height="34.5"/>
+                                                        <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="24"/>
+                                                        <color key="textColor" red="0.71764705880000002" green="0.74509803919999995" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="highlightedColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0wv-vM-QJf">
+                                                        <rect key="frame" x="0.0" y="307" width="49.5" height="34.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tUb-Do-x1i">
+                                                                <rect key="frame" x="0.0" y="0.0" width="49.5" height="34.5"/>
+                                                                <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="24"/>
+                                                                <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="highlightedColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -133,7 +183,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.10980392160000001" green="0.1960784314" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="tLM-M0-JCL" firstAttribute="centerX" secondItem="RRb-QC-eFc" secondAttribute="centerX" id="CJa-yi-fXg"/>
                             <constraint firstItem="tLM-M0-JCL" firstAttribute="leading" secondItem="RRb-QC-eFc" secondAttribute="leadingMargin" constant="3" id="GRW-E7-I54"/>
@@ -143,14 +193,14 @@
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="bh2-9d-tvE"/>
                     <connections>
-                        <outlet property="button1" destination="LES-sL-Hs6" id="zzA-uk-rnD"/>
-                        <outlet property="button2" destination="c9w-6W-cjp" id="VaT-e6-dGc"/>
-                        <outlet property="button3" destination="5Yh-7S-Nye" id="9xM-8M-Ol0"/>
+                        <outlet property="button1" destination="c9w-6W-cjp" id="3WT-p5-QKO"/>
+                        <outlet property="button2" destination="5Yh-7S-Nye" id="mw4-AA-8Zs"/>
+                        <outlet property="button3" destination="L0L-1D-kwi" id="uaz-vs-WTW"/>
                         <outlet property="button4" destination="L0L-1D-kwi" id="Epv-Zt-S7s"/>
                         <outlet property="dietLabel" destination="85H-Gj-iDv" id="HRo-XS-fZ9"/>
-                        <outlet property="majorLabel" destination="ezh-xa-L5a" id="Gme-eL-HEe"/>
+                        <outlet property="majorLabel" destination="bYC-BP-vKG" id="Q5N-BE-d5n"/>
                         <outlet property="nameLabel" destination="Ftl-im-rRc" id="88f-iR-27m"/>
-                        <outlet property="schoolLabel" destination="y9D-fC-RKe" id="kkp-wQ-7Au"/>
+                        <outlet property="schoolLabel" destination="n81-bG-WwJ" id="KAa-m7-l3C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UzL-DG-Q6L" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -159,9 +209,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_chevron_right_48pt" width="48" height="48"/>
+        <image name="github" width="48" height="48"/>
+        <image name="linkedin" width="48" height="48"/>
         <image name="profile_off" width="24" height="24"/>
         <image name="profile_on" width="24" height="24"/>
         <image name="qrcode" width="250" height="250"/>
+        <image name="resume" width="48" height="48"/>
     </resources>
 </document>
