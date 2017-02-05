@@ -31,6 +31,19 @@ class ProfileViewController: UIViewController {
         majorLabel.text = user.major
         dietLabel.text = user.diet
         
+        let gradient = CAGradientLayer()
+        let colorBottom = UIColor(red: 20/255, green: 36/255, blue: 66/255, alpha: 1.0)
+        let colorTop = UIColor(red: 28/255, green: 50/255, blue: 90/255, alpha: 1.0)
+        gradient.colors = [ colorTop.cgColor, colorBottom.cgColor ]
+        gradient.locations = [ 0.0, 1.0 ]
+        gradient.frame = view.bounds
+        self.view.layer.insertSublayer(gradient, at: 0)
+        
+        self.navigationController?.navigationBar.barTintColor = colorTop
+        
+        let tabColor = UIColor(red: 28/255, green: 50/255, blue: 90/255, alpha: 1.0)
+        UITabBar.appearance().barTintColor = tabColor
+        
         setGestureRecognizers()
     }
     
@@ -65,9 +78,8 @@ class ProfileViewController: UIViewController {
             UIApplication.shared.openURL(NSURL(string:link) as! URL)
         }
     }
-    
     func button1Tapped(){
-        openLink(link: "https://reddit.com")
+        openLink(link: "https://github.com")
     }
     
     func button2Tapped(){
@@ -75,12 +87,10 @@ class ProfileViewController: UIViewController {
     }
     
     func button3Tapped(){
-        print("Button 3")
-    }
-    
-    func button4Tapped(){
         openLink(link: "https://linkedin.com")
     }
-    
+    func button4Tapped(){
+        print("Needs to be removed")
+    }
     
 }

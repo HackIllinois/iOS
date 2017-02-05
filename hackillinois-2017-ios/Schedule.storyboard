@@ -112,11 +112,11 @@
             </objects>
             <point key="canvasLocation" x="2264.8000000000002" y="-83.658170914542737"/>
         </scene>
-        <!--Schedule-->
+        <!--Generic Navigation Controller-->
         <scene sceneID="f5O-w1-ylb">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lmf-Cr-auO" customClass="GenericNavigationController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Schedule" image="ic_schedule_white" id="cho-YV-AU8"/>
+                    <tabBarItem key="tabBarItem" title="" image="schedule_off" selectedImage="schedule_on" id="cho-YV-AU8"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="frV-Zf-sco">
@@ -420,6 +420,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_schedule_white" width="24" height="24"/>
+        <image name="schedule_off" width="24" height="24"/>
+        <image name="schedule_on" width="24" height="24"/>
     </resources>
 </document>

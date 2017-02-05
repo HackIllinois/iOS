@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>HackIllinois</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -30,7 +32,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>0.1.0b</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>comgooglemaps</string>
@@ -47,7 +49,7 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app will use your location to guide you through HackIllinois' various events and primary locations.</string>
+	<string>This app will use your location to guide you through HackIllinois&apos; various events and primary locations.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Brandon_bld_it.otf</string>
@@ -62,6 +64,20 @@
 		<string>Brandon_reg.otf</string>
 		<string>Brandon_thin_it.otf</string>
 		<string>Brandon_thin.otf</string>
+		<string>Gotham-Black.otf</string>
+		<string>Gotham-BlackItalic.otf</string>
+		<string>Gotham-Bolf.otf</string>
+		<string>Gotham-BoldItalic.otf</string>
+		<string>Gotham-Light.otf</string>
+		<string>Gotham-LightItalic.otf</string>
+		<string>Gotham-Medium.otf</string>
+		<string>Gotham-MediumItalic.otf</string>
+		<string>Gotham-Thin.otf</string>
+		<string>Gotham-ThinItalic.otf</string>
+		<string>Gotham-Ultra.otf</string>
+		<string>Gotham-UltraItalic.otf</string>
+		<string>Gotham-XLight.otf</string>
+		<string>Gotham-XLightItalic.otf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

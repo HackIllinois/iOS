@@ -7,24 +7,57 @@
 //
 
 import UIKit
+import MapKit
 
 class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    var directions: MKRoute?
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     
     @IBOutlet weak var indoorMap: UIButton!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var directionButton: UIButton!
     
+    @IBAction func closeButtonPressed(_ sender: Any) {
+        self.hideView(animate: true)
+        self.globalCloseHandler?()
+    }
     @IBOutlet weak var indoorMapButtonSmall: UIButton!
     
     @IBOutlet var indoorMapHeight: NSLayoutConstraint!
     @IBOutlet var indoorMapWidth: NSLayoutConstraint!
     
+    @IBOutlet weak var navigationTable: UITableView!
+    
+    /* Variables used to determine splits */
+    var y_min : CGFloat!
+    var y_max : CGFloat!
+    var y_button_h : CGFloat!
+    var y_mid: CGFloat!
+    
+    var globalCloseHandler: ((Void) -> Void)?
     var gesture : UIPanGestureRecognizer? = nil
     var directionShown = false
     var lastSeenTranslation : CGFloat = 0.0
+    
+    func reloadNavTable(address: String, name: String) {
+        navigationTable.reloadData()
+        if let directions = directions {
+            let miles = directions.distance * 0.00063694
+            distanceLabel.text = "\(String(format: "%.1f", miles)) mi" // TODO: change to actual miles
+            timeLabel.text = "\(Int(round(directions.expectedTravelTime / 60))) min"
+            addressLabel.text = address
+            nameLabel.text = name
+        } else {
+            distanceLabel.text = "" // TODO: change to actual miles
+            timeLabel.text = ""
+            addressLabel.text = "No Valid Address FIX ME"
+            nameLabel.text = ""
+        }
+    }
     
     func scrollView(y_crd: CGFloat, dur: Double) {
         self.view.removeGestureRecognizer(gesture!)
@@ -38,24 +71,20 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func scrollToButtons() {
         /* Scrolls up to where the buttons should show */
-        let y_crd = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 163
-        scrollView(y_crd: y_crd, dur: 0.2)
+        scrollView(y_crd: y_button_h, dur: 0.2)
     }
     
     func scrollToBar() {
         /* Scrolls down to the "hidden" state */
-        let y_crd = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 80
-        scrollView(y_crd: y_crd, dur: 0.2)
+        scrollView(y_crd: y_max, dur: 0.2)
     }
     
     func scrollToTop() {
-        let y_crd = (self.navigationController?.navigationBar.frame.size.height)! + 25
-        scrollView(y_crd: y_crd, dur: 0.2)
+        scrollView(y_crd: y_min, dur: 0.2)
     }
     
     func scrollToTopSlow() {
-        let y_crd = (self.navigationController?.navigationBar.frame.size.height)! + 25
-        scrollView(y_crd: y_crd, dur: 0.4)
+        scrollView(y_crd: y_min, dur: 0.4)
     }
     
     func showDirection() {
@@ -125,39 +154,53 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         indoorMapButtonSmall.layer.cornerRadius = 6
         
         directionButton.layer.cornerRadius = 6
-        directionButton.layer.borderColor = UIColor(red: 2.0/255, green: 121.0/255.0, blue: 255/255, alpha: 1.0).cgColor
-        directionButton.layer.borderWidth = 1
+        directionButton.layer.borderColor = UIColor.hiaSeafoamBlue.cgColor
+        directionButton.layer.borderWidth = 2
         indoorMap.layer.cornerRadius = 6
         
         directionButton.addTarget(self, action: #selector(self.directionTappped), for: .touchDown)
         
-        view.backgroundColor = UIColor.clear
-        view.isOpaque = false
+        let layerView = view.viewWithTag(10)
+        layerView?.layer.borderWidth = 2
+        layerView?.layer.cornerRadius = 2
+        layerView?.layer.borderColor = UIColor.hiaDarkSlateBlueTwo.cgColor
+        
+        navigationTable.rowHeight = UITableViewAutomaticDimension
+        navigationTable.estimatedRowHeight = 140
+        
+        /* Set up limits */
+        y_min = (self.navigationController?.navigationBar.frame.size.height)! + 25
+        y_max = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 125
+        y_button_h = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 198
+        y_mid = (self.navigationController?.navigationBar.frame.size.height)! + 45
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        prepareBackgroundView()
+    func popOutView() {
+        addressLabel.isHidden = true
+        addressLabel.alpha = 0.0
+        indoorMapButtonSmall.isHidden = true
+        indoorMapButtonSmall.alpha = 0.0
+        
+        // Button stuff
+        directionButton.isHidden = false
+        directionButton.alpha = 1.0
+        indoorMap.isHidden = false
+        indoorMap.alpha = 1.0
+        
+        scrollToBar()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            let frame = self?.view.frame
-            let yComponent = UIScreen.main.bounds.size.height-(self?.tabBarController?.tabBar.frame.size.height)! - 163
-            self?.view.frame = CGRect(x:0, y:yComponent, width:frame!.width, height:
-                frame!.height)
+    func hideView(animate: Bool) {
+        let y_crd = UIScreen.main.bounds.size.height
+        if animate {
+            scrollView(y_crd: y_crd, dur: 0.5)
+        } else {
+            scrollView(y_crd: y_crd, dur: 0)
         }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func middleToTop() {
         let y = self.view.frame.minY
-        let y_max = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 80
         
         if y < y_max-177 {
             scrollToTop()
@@ -170,9 +213,8 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func topToMiddle() {
         let y = self.view.frame.minY
-        let y_crd = (self.navigationController?.navigationBar.frame.size.height)! + 45
         
-        if y > y_crd {
+        if y > y_mid {
             scrollToButtons()
             hideDirection()
         } else {
@@ -183,7 +225,6 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func middleToBottom() {
         let y = self.view.frame.minY
-        let y_max = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 80
         
         if y > y_max-55 {
             scrollToBar()
@@ -196,7 +237,6 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func bottomToMiddle() {
         let y = self.view.frame.minY
-        let y_max = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 80
         
         if y < y_max-25 {
             scrollToButtons()
@@ -211,9 +251,6 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let translation = recognizer.translation(in: self.view)
         let y = self.view.frame.minY
         let y_prime = y+translation.y
-        let y_min = (self.navigationController?.navigationBar.frame.size.height)! + 25
-        let y_max = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 80
-        let y_button_h = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 163
         if recognizer.state == UIGestureRecognizerState.ended {
             /* Interpolate location and scroll */
             if y < y_button_h && lastSeenTranslation < 0 {
@@ -253,9 +290,21 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         view.insertSubview(bluredView, at: 0)
     }
     
+    func roundToNearestTenth(number: Double) -> Int {
+        if Int(number / 100) == 0 {
+            return Int(round(number/10)) * 10
+        }
+        
+        return Int(round(number / 100)) * 100
+    }
+    
     func roundViews() {
         view.layer.cornerRadius = 5
         view.clipsToBounds = true
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -263,11 +312,14 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return directions?.steps.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "direction_cell", for: indexPath) as! BottomViewTableViewCell
+        let feet = floor(((directions?.steps[indexPath.row].distance)! * 3.28084))
+        cell.distanceLabel.text = "\(roundToNearestTenth(number: feet)) feet"
+        cell.directionLabel.text = directions?.steps[indexPath.row].instructions
         return cell as UITableViewCell
     }
     

@@ -36,18 +36,20 @@ class GenericInputView: UIViewController, UITextFieldDelegate, UITextViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("ViewDidLoad")
         
         /* Configure each textview */
         for textView in textViews {
             textView.layer.borderWidth = 4
-            textView.layer.borderWidth = 4
+//            textView.layer.borderWidth = 4
             textView.layer.cornerRadius = 5
-            textView.layer.borderColor = UIColor.fromRGBHex(borderColorHex).cgColor
+//            textView.layer.borderColor = UIColor.fromRGBHex(borderColorHex).cgColor
             textView.textContainerInset = UIEdgeInsetsMake(5, 2.5, 5, 2.5)
-            textView.textColor = UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22) // Placeholder default color for iOS 9
+//            textView.textColor = UIColor(red: 28/255, green: 50/255, blue: 90/255, alpha: 1) // Placeholder default color for iOS 9
             textView.delegate = self
         }
-        
+
+        /* THIS IS HERE A SECOND TIME FOR SOME REASON???
         /* Configure each textField */
         for textField in textFields {
             // Add padding to the left side
@@ -65,6 +67,7 @@ class GenericInputView: UIViewController, UITextFieldDelegate, UITextViewDelegat
             // Set delegate as self
             textField.delegate = self
         }
+        */
     }
     
     /*
@@ -73,23 +76,32 @@ class GenericInputView: UIViewController, UITextFieldDelegate, UITextViewDelegat
     func keyboardWillAppear(_ notification: Notification) {
         scroll.isScrollEnabled = true
         
+        print("KeyboardWillAppear")
+        
         var keyboardFrame:CGRect = ((notification as NSNotification).userInfo?[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
         
         // Animate the keyboard so it looks a lot less awkward...
-        UIView.animate(withDuration: ((notification as NSNotification).userInfo![UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue, animations: {
-            self.scroll.contentInset.bottom = keyboardFrame.size.height
+        UIView.animate(withDuration: 3.0, animations: {
+            self.scroll.contentInset.bottom = keyboardFrame.size.height + 175 // This needs to be changed to not be a hardcoded value, and should change based on which text field is selected
         })
+//        UIView.animate(withDuration: ((notification as NSNotification).userInfo![UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue, animations: {
+//            self.scroll.contentInset.bottom = keyboardFrame.size.height + 175
+//        })
     }
     
     func keyboardWillDisappear(_ notification: Notification) {
+        print("KeyboardWillDisappear")
         // Only remove inset when keyboard is shown
         scroll.isScrollEnabled = false
         // Animate the keyboard so it looks a lot less awkward
         // It seems like this line isn't required for the animation to take place for both
-        UIView.animate(withDuration: ((notification as NSNotification).userInfo![UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue, animations: {
+        UIView.animate(withDuration: 3.0, animations: {
             self.scroll.contentInset = UIEdgeInsets.zero
         })
+//        UIView.animate(withDuration: ((notification as NSNotification).userInfo![UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue, animations: {
+//            self.scroll.contentInset = UIEdgeInsets.zero
+//        })
     }
     
     // Mark: UITextFieldDelegate

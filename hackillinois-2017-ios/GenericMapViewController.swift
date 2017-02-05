@@ -127,13 +127,13 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
                 
         // Only add the routing options if there are existing elements in buildings
         if !buildings.isEmpty {
-            var hue: CGFloat = 5.0 / 360.0
+            // var hue: CGFloat = 5.0 / 360.0
             
             for building in buildings {
                 // Create liquid cells
-                let locationCell = CustomLiquidCell(icon: UIImage(named: "ic_forward_48pt")!, name: building.shortName!)
-                locationCell.color = UIColor(hue: hue, saturation: 74/100, brightness: 90/100, alpha: 1.0) /* #e74c3c */
-                hue += 0.05
+                // let locationCell = CustomLiquidCell(icon: UIImage(named: "ic_forward_48pt")!, name: building.shortName!)
+                // locationCell.color = UIColor(hue: hue, saturation: 74/100, brightness: 90/100, alpha: 1.0) /* #e74c3c */
+                // hue += 0.05
                 
                 // Create annotations
                 map.addAnnotation(building)
@@ -187,7 +187,7 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
     }
     
     // Mark: Routing location from current location to user specified location
-    func routeTo(_ destination: CLLocationCoordinate2D) {
+    func routeTo(_ destination: CLLocationCoordinate2D, completion: ((MKRoute?) -> Void)?) {
         guard CLLocationManager.authorizationStatus() == .authorizedWhenInUse else {
             // Cannot route if user didn't authorize
             return
@@ -201,7 +201,7 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         routeRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: destination, addressDictionary: nil))
         
         routeRequest.requestsAlternateRoutes = false
-        routeRequest.transportType = .any
+        routeRequest.transportType = .walking
         
         // Draw the button again to have it "fade"
         // Slignt padding is required to have the circle appear normal: otherwise it will end up clipped
@@ -218,7 +218,9 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         let directions = MKDirections(request: routeRequest)
         directions.calculate(completionHandler: { (response, error) in
             if let routes = response?.routes {
-                self.map.add(routes[0].polyline)
+                let quickestRoute = routes.sorted(by: { $0.expectedTravelTime < $1.expectedTravelTime })
+                self.map.add(quickestRoute[0].polyline)
+                completion?(quickestRoute[0])
             } else if let _ = error {
                 print("\(error!)")
             }
@@ -247,7 +249,7 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         if let selectedIndex = buildings.index(where: sorter) {
             locationSelected = selectedIndex
         }
-        routeTo(selectedAnnotation.coordinate)
+        routeTo(selectedAnnotation.coordinate, completion: nil)
     }
     
 

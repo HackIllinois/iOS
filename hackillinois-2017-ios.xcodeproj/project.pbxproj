@@ -25,6 +25,30 @@
 		24794C6F1E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */; };
 		24794C701E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */; };
 		24794C711E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */; };
+		390A8DE41E3AA90200018855 /* Gotham-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DD41E3AA90200018855 /* Gotham-Black.otf */; };
+		390A8DE51E3AA90200018855 /* Gotham-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DD51E3AA90200018855 /* Gotham-BlackItalic.otf */; };
+		390A8DE61E3AA90200018855 /* Gotham-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DD61E3AA90200018855 /* Gotham-Bold.otf */; };
+		390A8DE71E3AA90200018855 /* Gotham-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DD71E3AA90200018855 /* Gotham-BoldItalic.otf */; };
+		390A8DE81E3AA90200018855 /* Gotham-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DD81E3AA90200018855 /* Gotham-Book.otf */; };
+		390A8DE91E3AA90200018855 /* Gotham-BookItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DD91E3AA90200018855 /* Gotham-BookItalic.otf */; };
+		390A8DEA1E3AA90200018855 /* Gotham-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DDA1E3AA90200018855 /* Gotham-Light.otf */; };
+		390A8DEB1E3AA90200018855 /* Gotham-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DDB1E3AA90200018855 /* Gotham-LightItalic.otf */; };
+		390A8DEC1E3AA90200018855 /* Gotham-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DDC1E3AA90200018855 /* Gotham-Medium.otf */; };
+		390A8DED1E3AA90200018855 /* Gotham-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DDD1E3AA90200018855 /* Gotham-MediumItalic.otf */; };
+		390A8DEE1E3AA90200018855 /* Gotham-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DDE1E3AA90200018855 /* Gotham-Thin.otf */; };
+		390A8DEF1E3AA90200018855 /* Gotham-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DDF1E3AA90200018855 /* Gotham-ThinItalic.otf */; };
+		390A8DF01E3AA90200018855 /* Gotham-Ultra.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DE01E3AA90200018855 /* Gotham-Ultra.otf */; };
+		390A8DF11E3AA90200018855 /* Gotham-UltraItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DE11E3AA90200018855 /* Gotham-UltraItalic.otf */; };
+		390A8DF21E3AA90200018855 /* Gotham-XLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DE21E3AA90200018855 /* Gotham-XLight.otf */; };
+		390A8DF31E3AA90200018855 /* Gotham-XLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DE31E3AA90200018855 /* Gotham-XLightItalic.otf */; };
+		390A8DF71E3C6A6300018855 /* Rectangle_Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8DF61E3C6A6300018855 /* Rectangle_Helper.swift */; };
+		390A8DF91E44115900018855 /* threeLocationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8DF81E44115900018855 /* threeLocationsCell.swift */; };
+		390A8DFB1E4428C800018855 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8DFA1E4428C800018855 /* HomeTableViewController.swift */; };
+		390A8DFD1E45219300018855 /* threeLocationsNoQRCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8DFC1E45219300018855 /* threeLocationsNoQRCodeCell.swift */; };
+		390A8DFF1E46683600018855 /* mainCellBeforeHackathonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8DFE1E46683600018855 /* mainCellBeforeHackathonCell.swift */; };
+		390A8E011E466A4700018855 /* mainCellBeforeHacking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8E001E466A4700018855 /* mainCellBeforeHacking.swift */; };
+		390A8E031E4671DB00018855 /* mainCellAfterHackathon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8E021E4671DB00018855 /* mainCellAfterHackathon.swift */; };
+		390A8E051E467BB800018855 /* noEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8E041E467BB800018855 /* noEventCell.swift */; };
 		398219DE1E345F4E00C5D0DF /* mainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219D91E345F4E00C5D0DF /* mainCell.swift */; };
 		398219DF1E345F4E00C5D0DF /* noQRCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219DA1E345F4E00C5D0DF /* noQRCodeCell.swift */; };
 		398219E01E345F4E00C5D0DF /* standardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219DB1E345F4E00C5D0DF /* standardCell.swift */; };
@@ -139,6 +163,30 @@
 		24794C601E340DE80016F8D4 /* Brandon_thin_it.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_thin_it.otf; sourceTree = "<group>"; };
 		24794C611E340DE80016F8D4 /* Brandon_thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_thin.otf; sourceTree = "<group>"; };
 		24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+ColorConstants.swift"; sourceTree = "<group>"; };
+		390A8DD41E3AA90200018855 /* Gotham-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Black.otf"; sourceTree = "<group>"; };
+		390A8DD51E3AA90200018855 /* Gotham-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-BlackItalic.otf"; sourceTree = "<group>"; };
+		390A8DD61E3AA90200018855 /* Gotham-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Bold.otf"; sourceTree = "<group>"; };
+		390A8DD71E3AA90200018855 /* Gotham-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-BoldItalic.otf"; sourceTree = "<group>"; };
+		390A8DD81E3AA90200018855 /* Gotham-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Book.otf"; sourceTree = "<group>"; };
+		390A8DD91E3AA90200018855 /* Gotham-BookItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-BookItalic.otf"; sourceTree = "<group>"; };
+		390A8DDA1E3AA90200018855 /* Gotham-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Light.otf"; sourceTree = "<group>"; };
+		390A8DDB1E3AA90200018855 /* Gotham-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-LightItalic.otf"; sourceTree = "<group>"; };
+		390A8DDC1E3AA90200018855 /* Gotham-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Medium.otf"; sourceTree = "<group>"; };
+		390A8DDD1E3AA90200018855 /* Gotham-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-MediumItalic.otf"; sourceTree = "<group>"; };
+		390A8DDE1E3AA90200018855 /* Gotham-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Thin.otf"; sourceTree = "<group>"; };
+		390A8DDF1E3AA90200018855 /* Gotham-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-ThinItalic.otf"; sourceTree = "<group>"; };
+		390A8DE01E3AA90200018855 /* Gotham-Ultra.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Ultra.otf"; sourceTree = "<group>"; };
+		390A8DE11E3AA90200018855 /* Gotham-UltraItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-UltraItalic.otf"; sourceTree = "<group>"; };
+		390A8DE21E3AA90200018855 /* Gotham-XLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-XLight.otf"; sourceTree = "<group>"; };
+		390A8DE31E3AA90200018855 /* Gotham-XLightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-XLightItalic.otf"; sourceTree = "<group>"; };
+		390A8DF61E3C6A6300018855 /* Rectangle_Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rectangle_Helper.swift; sourceTree = "<group>"; };
+		390A8DF81E44115900018855 /* threeLocationsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = threeLocationsCell.swift; sourceTree = "<group>"; };
+		390A8DFA1E4428C800018855 /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
+		390A8DFC1E45219300018855 /* threeLocationsNoQRCodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = threeLocationsNoQRCodeCell.swift; sourceTree = "<group>"; };
+		390A8DFE1E46683600018855 /* mainCellBeforeHackathonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCellBeforeHackathonCell.swift; sourceTree = "<group>"; };
+		390A8E001E466A4700018855 /* mainCellBeforeHacking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCellBeforeHacking.swift; sourceTree = "<group>"; };
+		390A8E021E4671DB00018855 /* mainCellAfterHackathon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCellAfterHackathon.swift; sourceTree = "<group>"; };
+		390A8E041E467BB800018855 /* noEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = noEventCell.swift; sourceTree = "<group>"; };
 		398219D91E345F4E00C5D0DF /* mainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCell.swift; sourceTree = "<group>"; };
 		398219DA1E345F4E00C5D0DF /* noQRCodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = noQRCodeCell.swift; sourceTree = "<group>"; };
 		398219DB1E345F4E00C5D0DF /* standardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = standardCell.swift; sourceTree = "<group>"; };
@@ -251,6 +299,22 @@
 		24371FFC1E32777E00B1C7C5 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				390A8DD41E3AA90200018855 /* Gotham-Black.otf */,
+				390A8DD51E3AA90200018855 /* Gotham-BlackItalic.otf */,
+				390A8DD61E3AA90200018855 /* Gotham-Bold.otf */,
+				390A8DD71E3AA90200018855 /* Gotham-BoldItalic.otf */,
+				390A8DD81E3AA90200018855 /* Gotham-Book.otf */,
+				390A8DD91E3AA90200018855 /* Gotham-BookItalic.otf */,
+				390A8DDA1E3AA90200018855 /* Gotham-Light.otf */,
+				390A8DDB1E3AA90200018855 /* Gotham-LightItalic.otf */,
+				390A8DDC1E3AA90200018855 /* Gotham-Medium.otf */,
+				390A8DDD1E3AA90200018855 /* Gotham-MediumItalic.otf */,
+				390A8DDE1E3AA90200018855 /* Gotham-Thin.otf */,
+				390A8DDF1E3AA90200018855 /* Gotham-ThinItalic.otf */,
+				390A8DE01E3AA90200018855 /* Gotham-Ultra.otf */,
+				390A8DE11E3AA90200018855 /* Gotham-UltraItalic.otf */,
+				390A8DE21E3AA90200018855 /* Gotham-XLight.otf */,
+				390A8DE31E3AA90200018855 /* Gotham-XLightItalic.otf */,
 				24794C561E340DE80016F8D4 /* Brandon_bld_it.otf */,
 				24794C571E340DE80016F8D4 /* Brandon_bld.otf */,
 				24794C581E340DE80016F8D4 /* Brandon_blk_it.otf */,
@@ -275,6 +339,14 @@
 				398219DA1E345F4E00C5D0DF /* noQRCodeCell.swift */,
 				398219DB1E345F4E00C5D0DF /* standardCell.swift */,
 				398219DD1E345F4E00C5D0DF /* twoLocationsNoQRCodeCell.swift */,
+				390A8DF61E3C6A6300018855 /* Rectangle_Helper.swift */,
+				390A8DF81E44115900018855 /* threeLocationsCell.swift */,
+				390A8DFA1E4428C800018855 /* HomeTableViewController.swift */,
+				390A8DFC1E45219300018855 /* threeLocationsNoQRCodeCell.swift */,
+				390A8DFE1E46683600018855 /* mainCellBeforeHackathonCell.swift */,
+				390A8E001E466A4700018855 /* mainCellBeforeHacking.swift */,
+				390A8E021E4671DB00018855 /* mainCellAfterHackathon.swift */,
+				390A8E041E467BB800018855 /* noEventCell.swift */,
 			);
 			name = CustomCells;
 			sourceTree = "<group>";
@@ -646,8 +718,7 @@
 				TargetAttributes = {
 					E20465C61CF1FAF50054654E = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = EJGXLSZ763;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -695,27 +766,43 @@
 			buildActionMask = 2147483647;
 			files = (
 				24794C621E340DFB0016F8D4 /* Brandon_bld_it.otf in Resources */,
+				390A8DE41E3AA90200018855 /* Gotham-Black.otf in Resources */,
+				390A8DF31E3AA90200018855 /* Gotham-XLightItalic.otf in Resources */,
 				24794C631E340DFB0016F8D4 /* Brandon_bld.otf in Resources */,
 				24794C641E340DFB0016F8D4 /* Brandon_blk_it.otf in Resources */,
+				390A8DE61E3AA90200018855 /* Gotham-Bold.otf in Resources */,
 				24794C651E340DFB0016F8D4 /* Brandon_blk.otf in Resources */,
 				24794C661E340DFB0016F8D4 /* Brandon_light_it.otf in Resources */,
+				390A8DE51E3AA90200018855 /* Gotham-BlackItalic.otf in Resources */,
 				24794C671E340DFB0016F8D4 /* Brandon_light.otf in Resources */,
 				24794C681E340DFB0016F8D4 /* Brandon_med_it.otf in Resources */,
 				24794C691E340DFB0016F8D4 /* Brandon_med.otf in Resources */,
 				24794C6A1E340DFB0016F8D4 /* Brandon_reg_it.otf in Resources */,
 				24794C6B1E340DFB0016F8D4 /* Brandon_reg.otf in Resources */,
 				24794C6C1E340DFB0016F8D4 /* Brandon_thin_it.otf in Resources */,
+				390A8DEA1E3AA90200018855 /* Gotham-Light.otf in Resources */,
+				390A8DEF1E3AA90200018855 /* Gotham-ThinItalic.otf in Resources */,
 				24794C6D1E340DFB0016F8D4 /* Brandon_thin.otf in Resources */,
+				390A8DE91E3AA90200018855 /* Gotham-BookItalic.otf in Resources */,
 				E277DD6B1CF4AF0400D7E018 /* keys.plist in Resources */,
 				A50F29251E14D55500878652 /* Home.storyboard in Resources */,
 				E2B6C3951D0B2E8000D851F9 /* Map.storyboard in Resources */,
 				E2B6C3971D0B2ED800D851F9 /* Profile.storyboard in Resources */,
 				E20465D81CF1FAF50054654E /* LaunchScreen.storyboard in Resources */,
+				390A8DEC1E3AA90200018855 /* Gotham-Medium.otf in Resources */,
+				390A8DF11E3AA90200018855 /* Gotham-UltraItalic.otf in Resources */,
+				390A8DF21E3AA90200018855 /* Gotham-XLight.otf in Resources */,
 				A50876781E1C921C0095F399 /* BottomMapViewController.xib in Resources */,
 				E2F957051D0BA899003A0881 /* Schedule.storyboard in Resources */,
 				E2B6C3931D0B2E1200D851F9 /* Feed.storyboard in Resources */,
 				E20465D51CF1FAF50054654E /* Assets.xcassets in Resources */,
+				390A8DEB1E3AA90200018855 /* Gotham-LightItalic.otf in Resources */,
+				390A8DEE1E3AA90200018855 /* Gotham-Thin.otf in Resources */,
+				390A8DED1E3AA90200018855 /* Gotham-MediumItalic.otf in Resources */,
 				E20465D01CF1FAF50054654E /* Login.storyboard in Resources */,
+				390A8DF01E3AA90200018855 /* Gotham-Ultra.otf in Resources */,
+				390A8DE71E3AA90200018855 /* Gotham-BoldItalic.otf in Resources */,
+				390A8DE81E3AA90200018855 /* Gotham-Book.otf in Resources */,
 				E2BCA55B1CF36187006AAA8B /* Event.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -882,6 +969,7 @@
 				E2A085F21D0C4E43002197F9 /* GenericCardViewController.swift in Sources */,
 				E2BCA57F1CF3B19E006AAA8B /* User.swift in Sources */,
 				E2BCA56A1CF373A1006AAA8B /* EventConstants.swift in Sources */,
+				390A8DF91E44115900018855 /* threeLocationsCell.swift in Sources */,
 				E2BCA57E1CF3B19E006AAA8B /* User+CoreDataProperties.swift in Sources */,
 				E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */,
 				398219DF1E345F4E00C5D0DF /* noQRCodeCell.swift in Sources */,
@@ -902,11 +990,14 @@
 				E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */,
 				E25377411CF8AB2C003795E7 /* Tag+CoreDataProperties.swift in Sources */,
 				E28FB69F1D194951000D062F /* HelpQ+CoreDataProperties.swift in Sources */,
+				390A8DFB1E4428C800018855 /* HomeTableViewController.swift in Sources */,
 				E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */,
 				E26F44F41D0EF3C400FB4A9F /* UIImage+generateBarCode.swift in Sources */,
+				390A8DF71E3C6A6300018855 /* Rectangle_Helper.swift in Sources */,
 				E2A086081D0C73BE002197F9 /* SundayTableViewController.swift in Sources */,
 				E2D4F0E31D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift in Sources */,
 				E2D4F0E11D06B28B00646BF8 /* FeedTableViewCell.swift in Sources */,
+				390A8E031E4671DB00018855 /* mainCellAfterHackathon.swift in Sources */,
 				E2BCA5811CF3B19E006AAA8B /* Location.swift in Sources */,
 				E28FB6A21D194951000D062F /* Chat.swift in Sources */,
 				A50F29271E14DC3600878652 /* HomeViewController.swift in Sources */,
@@ -914,7 +1005,9 @@
 				398219E11E345F4E00C5D0DF /* twoLocationsCell.swift in Sources */,
 				E224BFF41D19CCA60098AA8D /* HTTPHelpers.swift in Sources */,
 				E2BCA5621CF36CDA006AAA8B /* FeedTableViewController.swift in Sources */,
+				390A8E011E466A4700018855 /* mainCellBeforeHacking.swift in Sources */,
 				E25377421CF8AB2C003795E7 /* Tag.swift in Sources */,
+				390A8DFD1E45219300018855 /* threeLocationsNoQRCodeCell.swift in Sources */,
 				E25980071D099B0B00AE4939 /* CustomLiquidCell.swift in Sources */,
 				E2BB42C61D133A9A009EF512 /* GenericInputView.swift in Sources */,
 				E2D483331D00D3B100859A67 /* MapViewController.swift in Sources */,
@@ -925,9 +1018,11 @@
 				E2D4F0DF1D06AD3F00646BF8 /* Building.swift in Sources */,
 				E2BD82B71D0AFFB90009DB07 /* UIImage+imageWithColor.swift in Sources */,
 				E2F639481D05083300853089 /* CGRect+initWithCenterAt.swift in Sources */,
+				390A8E051E467BB800018855 /* noEventCell.swift in Sources */,
 				E2A086061D0C73B4002197F9 /* SaturdayTableViewController.swift in Sources */,
 				E2BCA57C1CF3B19E006AAA8B /* Feed+CoreDataProperties.swift in Sources */,
 				E2A085EE1D0C4202002197F9 /* GenericTabBarController.swift in Sources */,
+				390A8DFF1E46683600018855 /* mainCellBeforeHackathonCell.swift in Sources */,
 				E28FB6A11D194951000D062F /* Chat+CoreDataProperties.swift in Sources */,
 				E20465CD1CF1FAF50054654E /* LoginViewController.swift in Sources */,
 				E2AC3F861CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */,
@@ -1093,15 +1188,17 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = EJGXLSZ763;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "hackillinois-2017-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "me.hackillinois-2017.ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "acm.hackillinois-2017.ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1113,13 +1210,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = EJGXLSZ763;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "hackillinois-2017-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "me.hackillinois-2017.ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "acm.hackillinois-2017.ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;

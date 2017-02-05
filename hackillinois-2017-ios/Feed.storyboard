@@ -144,11 +144,11 @@
             </objects>
             <point key="canvasLocation" x="2352" y="-131"/>
         </scene>
-        <!--Notifications-->
+        <!--Generic Navigation Controller-->
         <scene sceneID="BCS-eV-70o">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="O8q-ER-pgb" customClass="GenericNavigationController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Notifications" image="ic_list_white" id="QEl-cH-2pi"/>
+                    <tabBarItem key="tabBarItem" title="" image="notification_off" selectedImage="notification_on" id="QEl-cH-2pi"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xkL-lu-mkh">
@@ -166,6 +166,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_list_white" width="24" height="24"/>
+        <image name="notification_off" width="20" height="24"/>
+        <image name="notification_on" width="20" height="24"/>
     </resources>
 </document>

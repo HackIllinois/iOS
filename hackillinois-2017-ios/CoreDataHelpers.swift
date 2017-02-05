@@ -18,7 +18,7 @@ class CoreDataHelpers {
      * Helper function to find or create location 
      * Finds the location entity if it exists, otherwise returns a new entity representing a location object
      */
-    class func createOrFetchLocation(location locationName: String, abbreviation shortName: String, locationLatitude latitude: NSNumber, locationLongitude longitude: NSNumber, locationFeeds feeds: [Feed]?) -> Location {
+    class func createOrFetchLocation(location locationName: String, abbreviation shortName: String, locationLatitude latitude: NSNumber, locationLongitude longitude: NSNumber, address: String, locationFeeds feeds: [Feed]?) -> Location {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let fetchRequest = NSFetchRequest<Location>(entityName: "Location")
@@ -33,9 +33,9 @@ class CoreDataHelpers {
         /* Was not found */
         let location = NSEntityDescription.insertNewObject(forEntityName: "Location", into: appDelegate.managedObjectContext) as! Location
         if feeds == nil {
-            location.initialize(latitude: latitude, longitude: longitude, name: locationName, shortName: shortName, feeds: NSSet())
+            location.initialize(latitude: latitude, longitude: longitude, name: locationName, shortName: shortName, address: address, feeds: [])
         } else {
-            location.initialize(latitude: latitude, longitude: longitude, name: locationName, shortName: shortName, feeds: feeds!)
+            location.initialize(latitude: latitude, longitude: longitude, name: locationName, shortName: shortName, address: address, feeds: feeds!)
         }
         
         return location

@@ -63,12 +63,14 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
             }
         }
         
-        // Temporary Locations
-        let siebel: Location! = CoreDataHelpers.createOrFetchLocation(location: "Siebel", abbreviation: "Siebel",locationLatitude: 40.113926, locationLongitude: -88.224916, locationFeeds: nil)
+        // I guess they are permanent locations now
+        let siebel: Location! = CoreDataHelpers.createOrFetchLocation(location: "Thomas M. Siebel Center", abbreviation: "Siebel",locationLatitude: 40.113926, locationLongitude: -88.224916, address: "Thomas M. Siebel Center\n201 N Goodwin Ave\nUrbana, IL 61801\nUnited States", locationFeeds: nil)
         
-        let eceb: Location! = CoreDataHelpers.createOrFetchLocation(location: "ECEB", abbreviation: "ECEB", locationLatitude: 40.114828, locationLongitude: -88.228049, locationFeeds: nil)
+        let eceb: Location! = CoreDataHelpers.createOrFetchLocation(location: "Electrical Computer Engineering Building", abbreviation: "ECEB", locationLatitude: 40.114828, locationLongitude: -88.228049, address: "Electrical Computer Engineering Building\n306 N Wright St\nUrbana, IL 61801\nUnited States",locationFeeds: nil)
         
-        let union: Location! = CoreDataHelpers.createOrFetchLocation(location: "Illini Union", abbreviation: "Union", locationLatitude: 40.109395, locationLongitude: -88.227181, locationFeeds: nil)
+        let union: Location! = CoreDataHelpers.createOrFetchLocation(location: "Illini Union", abbreviation: "Union", locationLatitude: 40.109395, locationLongitude: -88.227181, address: "Illini Union\n1401 W Green St\nUrbana, IL 61801\nUnited States", locationFeeds: nil)
+        
+        let _ = CoreDataHelpers.createOrFetchLocation(location: "Digital Computer Laboratory", abbreviation: "DCL", locationLatitude: 40.113140, locationLongitude: -88.226589, address: "Digital Computer Laboratory\n1304 W Springfield Ave\nUrbana, IL 61801\nUnited States", locationFeeds: nil)
         
         // Temporary Tags
         let tagGeneral = CoreDataHelpers.createOrFetchTag(tag: "General", feeds: nil)

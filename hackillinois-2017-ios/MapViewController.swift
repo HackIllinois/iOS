@@ -12,46 +12,39 @@ import MapKit
 import LiquidFloatingActionButton
 
 class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, UIToolbarDelegate  {
-    @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var mapControl: UISegmentedControl!
-    @IBOutlet weak var toolbar: UIToolbar!
     
-    @IBAction func mapControlChange(_ sender: Any) {
-        if(mapControl.selectedSegmentIndex == -1) {
-            return
-        }
-        
-        let building = buildings[mapControl.selectedSegmentIndex]
-        
-        locationSelected = mapControl.selectedSegmentIndex
-        // Configure MapView to show the location user selected
-        map.setCamera(MKMapCamera.from(building: building), animated: true)
-        let annotation = map.annotations(in: MKMapRect(origin: MKMapPointForCoordinate(building.coordinate), size: MKMapSize(width: 1, height: 1))).first! as! MKAnnotation
-        map.selectAnnotation(annotation, animated: true)
-        // Route locations
-        routeTo(building.coordinate)
-
+    var bottomSheet : BottomViewController!
+    
+    @IBOutlet weak var mapView: MKMapView!
+    
+    @IBOutlet weak var dclLabel: UILabel!
+    @IBOutlet weak var unionLabel: UILabel!
+    @IBOutlet weak var ecebLabel: UILabel!
+    @IBOutlet weak var siebelLabel: UILabel!
+    
+    var labelPressed: Int = 0
+    
+    func closeCleanUp() {
+        self.map.removeOverlays(self.map.overlays)
+        self.map.deselectAnnotation(self.map.selectedAnnotations[0], animated: true)
+        self.clearLabel(labelNumber: 5)
     }
     
     // Mark: Initializing locations and where locations are set
     /* Modify this function to change the locations available */
     func initializeLocations() {
         // Create Points for event locations
+        let dcl: Location! = CoreDataHelpers.createOrFetchLocation(location: "Digital Computer Laboratory", abbreviation: "DCL", locationLatitude: 40.113140, locationLongitude: -88.226589, address: "Digital Computer Laboratory\n1304 W Springfield Ave\nUrbana, IL 61801\nUnited States", locationFeeds: nil)
+        buildings.append(Building(location: dcl))
         
-        // Siebel
-        let siebel =
-            Building(title: "Siebel Center", coordinate: CLLocationCoordinate2DMake(40.113926, -88.224916), shortName: "Siebel")
-        buildings.append(siebel)
+        let siebel: Location! = CoreDataHelpers.createOrFetchLocation(location: "Thomas M. Siebel Center", abbreviation: "Siebel",locationLatitude: 40.113926, locationLongitude: -88.224916, address: "Thomas M. Siebel Center\n201 N Goodwin Ave\nUrbana, IL 61801\nUnited States", locationFeeds: nil)
+        buildings.append(Building(location: siebel))
         
-        // ECEB
-        let eceb =
-            Building(title: "ECEB", coordinate: CLLocationCoordinate2DMake(40.114828, -88.228049), shortName: "ECEB")
-        buildings.append(eceb)
+        let eceb: Location! = CoreDataHelpers.createOrFetchLocation(location: "Electrical Computer Engineering Building", abbreviation: "ECEB", locationLatitude: 40.114828, locationLongitude: -88.228049, address: "Electrical Computer Engineering Building\n306 N Wright St\nUrbana, IL 61801\nUnited States",locationFeeds: nil)
+        buildings.append(Building(location: eceb))
         
-        // Illini Union
-        let union =
-            Building(title: "Illini Union", coordinate: CLLocationCoordinate2DMake(40.109395, -88.227181), shortName: "Union")
-        buildings.append(union)
+        let union: Location! = CoreDataHelpers.createOrFetchLocation(location: "Illini Union", abbreviation: "Union", locationLatitude: 40.109395, locationLongitude: -88.227181, address: "Illini Union\n1401 W Green St\nUrbana, IL 61801\nUnited States", locationFeeds: nil)
+        buildings.append(Building(location: union))
     }
     
     override func viewDidLoad() {
@@ -62,14 +55,110 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         /* Call superclass's constructor after configuration */
         super.viewDidLoad()
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
-        toolbar.delegate = self
         
-        mapControl.selectedSegmentIndex = UISegmentedControlNoSegment
+        // mapControl.selectedSegmentIndex = UISegmentedControlNoSegment
         let tapMap = UIPanGestureRecognizer(target: self, action: #selector(MapViewController.didDragMap(gestureRecognizer:)))
         tapMap.delegate = self
         map.addGestureRecognizer(tapMap)
         
         addBottomSheetView()
+        
+        initTouches()
+    }
+    
+    func initTouches() {
+        let dclTouch = UITapGestureRecognizer(target: self, action: #selector(dclLabelTouched))
+        dclTouch.numberOfTapsRequired = 1
+        dclLabel.addGestureRecognizer(dclTouch)
+        dclLabel.isUserInteractionEnabled = true
+        
+        let siebelTouch = UITapGestureRecognizer(target: self, action: #selector(siebelLabelTouched))
+        siebelTouch.numberOfTapsRequired = 1
+        siebelLabel.addGestureRecognizer(siebelTouch)
+        siebelLabel.isUserInteractionEnabled = true
+        
+        let ecebTouch = UITapGestureRecognizer(target: self, action: #selector(ecebLabelTouched))
+        ecebTouch.numberOfTapsRequired = 1
+        ecebLabel.addGestureRecognizer(ecebTouch)
+        ecebLabel.isUserInteractionEnabled = true
+        
+        let unionTouch = UITapGestureRecognizer(target: self, action: #selector(unionLabelTouched))
+        unionTouch.numberOfTapsRequired = 1
+        unionLabel.addGestureRecognizer(unionTouch)
+        unionLabel.isUserInteractionEnabled = true
+    }
+    
+    func clearLabel(labelNumber: Int) {
+        switch labelNumber {
+        case 1:
+            dclLabel.textColor = UIColor.hiaFadedBlue
+            break
+        case 2:
+            siebelLabel.textColor = UIColor.hiaFadedBlue
+            break
+        case 3:
+            ecebLabel.textColor = UIColor.hiaFadedBlue
+            break
+        case 4:
+            unionLabel.textColor = UIColor.hiaFadedBlue
+            break
+        case 5:
+            // RESET ALL
+            dclLabel.textColor = UIColor.hiaFadedBlue
+            siebelLabel.textColor = UIColor.hiaFadedBlue
+            ecebLabel.textColor = UIColor.hiaFadedBlue
+            unionLabel.textColor = UIColor.hiaFadedBlue
+            labelPressed = 0
+        default:
+            break
+        }
+    }
+    
+    func dclLabelTouched() {
+        clearLabel(labelNumber: labelPressed)
+        dclLabel.textColor = UIColor.hiaSeafoamBlue
+        labelPressed = 1
+        
+        loadAddress()
+    }
+    
+    func siebelLabelTouched() {
+        clearLabel(labelNumber: labelPressed)
+        siebelLabel.textColor = UIColor.hiaSeafoamBlue
+        labelPressed = 2
+        
+        loadAddress()
+    }
+    
+    func ecebLabelTouched() {
+        clearLabel(labelNumber: labelPressed)
+        ecebLabel.textColor = UIColor.hiaSeafoamBlue
+        labelPressed = 3
+        
+        loadAddress()
+    }
+    
+    func unionLabelTouched() {
+        clearLabel(labelNumber: labelPressed)
+        unionLabel.textColor = UIColor.hiaSeafoamBlue
+        labelPressed = 4
+        
+        loadAddress()
+    }
+    
+    func loadAddress() {
+        let building = buildings[labelPressed-1]
+        
+        // Configure MapView to show the location user selected
+        map.setCamera(MKMapCamera.from(building: building), animated: true)
+        let annotation = map.annotations(in: MKMapRect(origin: MKMapPointForCoordinate(building.coordinate), size: MKMapSize(width: 1, height: 1))).first! as! MKAnnotation
+        map.selectAnnotation(annotation, animated: true)
+        // Route locations
+        routeTo(building.coordinate, completion: { (route: MKRoute?) in
+            self.bottomSheet.directions = route
+            self.bottomSheet.reloadNavTable(address: building.address ?? "", name: building.longName ?? "")
+            self.bottomSheet.scrollToBar()
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,7 +171,7 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
     
     func didDragMap(gestureRecognizer: UIGestureRecognizer) {
         if (gestureRecognizer.state == UIGestureRecognizerState.began) {
-            mapControl.selectedSegmentIndex = UISegmentedControlNoSegment
+            // mapControl.selectedSegmentIndex = UISegmentedControlNoSegment
         }
     }
     
@@ -91,17 +180,59 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
     }
     
     func addBottomSheetView() {
-        let bottomSheet = self.storyboard?.instantiateViewController(withIdentifier: "BottomView")
-        bottomSheet?.view.backgroundColor = UIColor.clear
-        bottomSheet?.modalPresentationStyle = .overCurrentContext
+        self.bottomSheet = self.storyboard?.instantiateViewController(withIdentifier: "BottomView") as! BottomViewController
+        // bottomSheet?.view.backgroundColor = UIColor.clear
+        // bottomSheet?.modalPresentationStyle = .overCurrentContext
         self.addChildViewController(bottomSheet!)
         
         self.view.addSubview((bottomSheet?.view)!)
-        bottomSheet?.didMove(toParentViewController: self)
+        self.bottomSheet?.didMove(toParentViewController: self)
         
         let height = UIScreen.main.bounds.size.height
         let width  = UIScreen.main.bounds.size.width
-        bottomSheet?.view.frame = CGRect(x:0, y:self.view.frame.maxY, width:width, height:height)
+        self.bottomSheet?.view.frame = CGRect(x:0, y:self.view.frame.maxY, width:width, height:height)
+        
+        bottomSheet.hideView(animate: false)
+        
+        bottomSheet.globalCloseHandler = closeCleanUp
     }
 
+    override func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let selectedAnnotation = mapView.selectedAnnotations[0]
+        if selectedAnnotation.isKind(of: MKUserLocation.self) {
+            // Don't do anything if the user location is selected
+            return
+        }
+        
+        // Find index of selected Annotation
+        let sorter: ((Building) -> Bool) = { $0.coordinate == selectedAnnotation.coordinate }
+        if let selectedIndex = buildings.index(where: sorter) {
+            print(selectedIndex)
+            let building = buildings[selectedIndex]
+            routeTo(building.coordinate, completion: { (route: MKRoute?) in
+                self.bottomSheet.directions = route
+                self.bottomSheet.reloadNavTable(address: building.address ?? "", name: building.longName ?? "")
+                self.bottomSheet.scrollToBar()
+            })
+            // Set appropriate selection for cleanup later
+            clearLabel(labelNumber: 5) // Clear everything
+            switch Int(selectedIndex) {
+            case 0:
+                dclLabel.textColor = UIColor.hiaSeafoamBlue
+                break
+            case 1:
+                siebelLabel.textColor = UIColor.hiaSeafoamBlue
+                break
+            case 2:
+                ecebLabel.textColor = UIColor.hiaSeafoamBlue
+                break
+            case 3:
+                unionLabel.textColor = UIColor.hiaSeafoamBlue
+                break
+            default:
+                break
+            }
+            labelPressed = Int(selectedIndex)+1
+        }
+    }
 }
