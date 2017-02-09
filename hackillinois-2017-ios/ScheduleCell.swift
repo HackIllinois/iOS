@@ -63,7 +63,7 @@ class ScheduleCell: UITableViewCell {
     // Set cell content
     func setEventContent(title: String, time: String, description: String) {
         self.title.text = title
-        self.time.text = title
+        self.time.text = time
         self.descriptionButton.setTitle(description, for: .normal)
     }
     

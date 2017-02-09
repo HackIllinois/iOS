@@ -62,16 +62,16 @@
                                                             <rect key="frame" x="8" y="8" width="331" height="182"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="bottom" spacing="42" translatesAutoresizingMaskIntoConstraints="NO" id="Y5s-QY-hCd">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="331" height="38"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="331" height="33"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aaR-Ym-nkk">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="44" height="33"/>
                                                                             <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="20"/>
                                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flQ-7B-Nyw">
-                                                                            <rect key="frame" x="262" y="0.0" width="69" height="38"/>
+                                                                            <rect key="frame" x="253" y="0.0" width="78" height="33"/>
                                                                             <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="18"/>
                                                                             <state key="normal" title="Reminder"/>
                                                                         </button>
@@ -86,13 +86,13 @@
                                                                     </constraints>
                                                                 </stackView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Oc-jJ-yTH">
-                                                                    <rect key="frame" x="0.0" y="38" width="331" height="106"/>
+                                                                    <rect key="frame" x="0.0" y="33" width="331" height="116"/>
                                                                     <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="20"/>
                                                                     <color key="textColor" red="0.71764705882352942" green="0.74509803921568629" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xdd-8Y-uzF">
-                                                                    <rect key="frame" x="0.0" y="144" width="331" height="38"/>
+                                                                    <rect key="frame" x="0.0" y="149" width="331" height="33"/>
                                                                     <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="18"/>
                                                                     <state key="normal" title="Room #, Building Name &gt;">
                                                                         <color key="titleColor" red="0.36470588235294116" green="0.78431372549019607" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -162,7 +162,7 @@
                     <tabBarItem key="tabBarItem" title="" image="schedule_off" selectedImage="schedule_on" id="cho-YV-AU8"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="frV-Zf-sco">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="frV-Zf-sco">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.078431372550000003" green="0.14117647059999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -553,16 +553,16 @@
                                                             <rect key="frame" x="8" y="8" width="331" height="182"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="bottom" spacing="42" translatesAutoresizingMaskIntoConstraints="NO" id="vCH-5b-lsa">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="331" height="38"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="331" height="33"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kFD-h1-fGW">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="44" height="33"/>
                                                                             <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="20"/>
                                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VKp-zL-ntQ">
-                                                                            <rect key="frame" x="262" y="0.0" width="69" height="38"/>
+                                                                            <rect key="frame" x="253" y="0.0" width="78" height="33"/>
                                                                             <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="18"/>
                                                                             <state key="normal" title="Reminder"/>
                                                                         </button>
@@ -577,13 +577,13 @@
                                                                     </constraints>
                                                                 </stackView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ddd-nU-0L6">
-                                                                    <rect key="frame" x="0.0" y="38" width="331" height="106"/>
+                                                                    <rect key="frame" x="0.0" y="33" width="331" height="116"/>
                                                                     <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="20"/>
                                                                     <color key="textColor" red="0.71764705880000002" green="0.74509803919999995" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="von-eu-AHe">
-                                                                    <rect key="frame" x="0.0" y="144" width="331" height="38"/>
+                                                                    <rect key="frame" x="0.0" y="149" width="331" height="33"/>
                                                                     <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="18"/>
                                                                     <state key="normal" title="Room #, Building Name &gt;">
                                                                         <color key="titleColor" red="0.36470588240000001" green="0.7843137255" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -731,7 +731,7 @@
                                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TrJ-yO-YSd">
+                                                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TrJ-yO-YSd">
                                                                             <rect key="frame" x="265" y="0.0" width="66" height="38"/>
                                                                             <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="17"/>
                                                                             <state key="normal" title="Reminder">

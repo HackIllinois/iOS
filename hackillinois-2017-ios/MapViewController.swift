@@ -86,24 +86,52 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         unionTouch.numberOfTapsRequired = 1
         unionLabel.addGestureRecognizer(unionTouch)
         unionLabel.isUserInteractionEnabled = true
+        
+        dclLabel.layer.shadowRadius = 4.0
+        dclLabel.layer.shadowColor = UIColor.hiaSeafoamBlue.cgColor
+        dclLabel.layer.shouldRasterize = true
+        dclLabel.layer.shadowOffset = CGSize(width: 0, height: 0)
+        
+        siebelLabel.layer.shadowRadius = 4.0
+        siebelLabel.layer.shadowColor = UIColor.hiaSeafoamBlue.cgColor
+        siebelLabel.layer.shouldRasterize = true
+        siebelLabel.layer.shadowOffset = CGSize(width: 0, height: 0)
+        
+        ecebLabel.layer.shadowRadius = 4.0
+        ecebLabel.layer.shadowColor = UIColor.hiaSeafoamBlue.cgColor
+        ecebLabel.layer.shouldRasterize = true
+        ecebLabel.layer.shadowOffset = CGSize(width: 0, height: 0)
+        
+        unionLabel.layer.shadowRadius = 4.0
+        unionLabel.layer.shadowColor = UIColor.hiaSeafoamBlue.cgColor
+        unionLabel.layer.shouldRasterize = true
+        unionLabel.layer.shadowOffset = CGSize(width: 0, height: 0)
     }
     
     func clearLabel(labelNumber: Int) {
         switch labelNumber {
         case 1:
+            dclLabel.layer.shadowOpacity = 0
             dclLabel.textColor = UIColor.hiaFadedBlue
             break
         case 2:
+            siebelLabel.layer.shadowOpacity = 0
             siebelLabel.textColor = UIColor.hiaFadedBlue
             break
         case 3:
+            ecebLabel.layer.shadowOpacity = 0
             ecebLabel.textColor = UIColor.hiaFadedBlue
             break
         case 4:
+            unionLabel.layer.shadowOpacity = 0
             unionLabel.textColor = UIColor.hiaFadedBlue
             break
         case 5:
             // RESET ALL
+            dclLabel.layer.shadowOpacity = 0
+            siebelLabel.layer.shadowOpacity = 0
+            unionLabel.layer.shadowOpacity = 0
+            ecebLabel.layer.shadowOpacity = 0
             dclLabel.textColor = UIColor.hiaFadedBlue
             siebelLabel.textColor = UIColor.hiaFadedBlue
             ecebLabel.textColor = UIColor.hiaFadedBlue
@@ -116,34 +144,30 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
     
     func dclLabelTouched() {
         clearLabel(labelNumber: labelPressed)
+        dclLabel.layer.shadowOpacity = 1
         dclLabel.textColor = UIColor.hiaSeafoamBlue
         labelPressed = 1
-        
-        loadAddress()
     }
     
     func siebelLabelTouched() {
         clearLabel(labelNumber: labelPressed)
+        siebelLabel.layer.shadowOpacity = 1
         siebelLabel.textColor = UIColor.hiaSeafoamBlue
         labelPressed = 2
-        
-        loadAddress()
     }
     
     func ecebLabelTouched() {
         clearLabel(labelNumber: labelPressed)
+        ecebLabel.layer.shadowOpacity = 1
         ecebLabel.textColor = UIColor.hiaSeafoamBlue
         labelPressed = 3
-        
-        loadAddress()
     }
     
     func unionLabelTouched() {
         clearLabel(labelNumber: labelPressed)
+        unionLabel.layer.shadowOpacity = 1
         unionLabel.textColor = UIColor.hiaSeafoamBlue
         labelPressed = 4
-        
-        loadAddress()
     }
     
     func loadAddress() {
