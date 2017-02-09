@@ -55,11 +55,14 @@
 		398219E11E345F4E00C5D0DF /* twoLocationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219DC1E345F4E00C5D0DF /* twoLocationsCell.swift */; };
 		398219E21E345F4E00C5D0DF /* twoLocationsNoQRCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219DD1E345F4E00C5D0DF /* twoLocationsNoQRCodeCell.swift */; };
 		58E75F2152E19BCECDC115D1 /* Pods_hackillinois_2017_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0E70C5ECC7AC1B705813BB /* Pods_hackillinois_2017_iosUITests.framework */; };
+		65A5954A1E4B167700AC74C4 /* ScheduleDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A595491E4B167700AC74C4 /* ScheduleDescriptionViewController.swift */; };
+		65D7C9A01E468B5100E03103 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D7C99F1E468B5100E03103 /* ScheduleViewController.swift */; };
+		65D7C9A21E46B14D00E03103 /* GenericTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D7C9A11E46B14D00E03103 /* GenericTabController.swift */; };
 		A50876741E1C79130095F399 /* BottomMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50876731E1C79130095F399 /* BottomMapViewController.swift */; };
 		A50876781E1C921C0095F399 /* BottomMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50876771E1C921C0095F399 /* BottomMapViewController.xib */; };
 		A50F29251E14D55500878652 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A50F29241E14D55500878652 /* Home.storyboard */; };
 		A50F29271E14DC3600878652 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F29261E14DC3600878652 /* HomeViewController.swift */; };
-		A54825B11E160C6C00E35C71 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54825B01E160C6C00E35C71 /* ScheduleViewController.swift */; };
+		A54825B11E160C6C00E35C71 /* SchedulePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54825B01E160C6C00E35C71 /* SchedulePageViewController.swift */; };
 		AE232CBD3115F1DA5DF9B870 /* Pods_hackillinois_2017_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D8C9C142AB0677D17C63CBA /* Pods_hackillinois_2017_iosTests.framework */; };
 		E20465CB1CF1FAF50054654E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20465CA1CF1FAF50054654E /* AppDelegate.swift */; };
 		E20465CD1CF1FAF50054654E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20465CC1CF1FAF50054654E /* LoginViewController.swift */; };
@@ -90,10 +93,10 @@
 		E2A085F21D0C4E43002197F9 /* GenericCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085F11D0C4E43002197F9 /* GenericCardViewController.swift */; };
 		E2A085F61D0C6536002197F9 /* ScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085F51D0C6536002197F9 /* ScheduleCell.swift */; };
 		E2A085FA1D0C6688002197F9 /* DayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085F91D0C6688002197F9 /* DayItem.swift */; };
-		E2A085FF1D0C70BF002197F9 /* GenericDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085FE1D0C70BF002197F9 /* GenericDayViewController.swift */; };
-		E2A086011D0C736B002197F9 /* FridayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A086001D0C736B002197F9 /* FridayTableViewController.swift */; };
-		E2A086061D0C73B4002197F9 /* SaturdayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A086051D0C73B4002197F9 /* SaturdayTableViewController.swift */; };
-		E2A086081D0C73BE002197F9 /* SundayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A086071D0C73BE002197F9 /* SundayTableViewController.swift */; };
+		E2A085FF1D0C70BF002197F9 /* ScheduleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085FE1D0C70BF002197F9 /* ScheduleTableViewController.swift */; };
+		E2A086011D0C736B002197F9 /* FridayTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A086001D0C736B002197F9 /* FridayTabController.swift */; };
+		E2A086061D0C73B4002197F9 /* SaturdayTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A086051D0C73B4002197F9 /* SaturdayTabController.swift */; };
+		E2A086081D0C73BE002197F9 /* SundayTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A086071D0C73BE002197F9 /* SundayTabController.swift */; };
 		E2AC3F861CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */; };
 		E2AC3F871CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */; };
 		E2AC3F881CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */; };
@@ -193,11 +196,14 @@
 		398219DC1E345F4E00C5D0DF /* twoLocationsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = twoLocationsCell.swift; sourceTree = "<group>"; };
 		398219DD1E345F4E00C5D0DF /* twoLocationsNoQRCodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = twoLocationsNoQRCodeCell.swift; sourceTree = "<group>"; };
 		567F67E08A10E7527EE39217 /* Pods-hackillinois-2017-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		65A595491E4B167700AC74C4 /* ScheduleDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleDescriptionViewController.swift; sourceTree = "<group>"; };
+		65D7C99F1E468B5100E03103 /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
+		65D7C9A11E46B14D00E03103 /* GenericTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericTabController.swift; sourceTree = "<group>"; };
 		A50876731E1C79130095F399 /* BottomMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomMapViewController.swift; sourceTree = "<group>"; };
 		A50876771E1C921C0095F399 /* BottomMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomMapViewController.xib; sourceTree = "<group>"; };
 		A50F29241E14D55500878652 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		A50F29261E14DC3600878652 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		A54825B01E160C6C00E35C71 /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
+		A54825B01E160C6C00E35C71 /* SchedulePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchedulePageViewController.swift; sourceTree = "<group>"; };
 		D3D05678487C3E4F7496D710 /* Pods-hackillinois-2017-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E20465C71CF1FAF50054654E /* hackillinois-2017-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hackillinois-2017-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E20465CA1CF1FAF50054654E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -234,10 +240,10 @@
 		E2A085F11D0C4E43002197F9 /* GenericCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericCardViewController.swift; sourceTree = "<group>"; };
 		E2A085F51D0C6536002197F9 /* ScheduleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleCell.swift; sourceTree = "<group>"; };
 		E2A085F91D0C6688002197F9 /* DayItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayItem.swift; sourceTree = "<group>"; };
-		E2A085FE1D0C70BF002197F9 /* GenericDayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericDayViewController.swift; sourceTree = "<group>"; };
-		E2A086001D0C736B002197F9 /* FridayTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridayTableViewController.swift; sourceTree = "<group>"; };
-		E2A086051D0C73B4002197F9 /* SaturdayTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaturdayTableViewController.swift; sourceTree = "<group>"; };
-		E2A086071D0C73BE002197F9 /* SundayTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SundayTableViewController.swift; sourceTree = "<group>"; };
+		E2A085FE1D0C70BF002197F9 /* ScheduleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewController.swift; sourceTree = "<group>"; };
+		E2A086001D0C736B002197F9 /* FridayTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridayTabController.swift; sourceTree = "<group>"; };
+		E2A086051D0C73B4002197F9 /* SaturdayTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaturdayTabController.swift; sourceTree = "<group>"; };
+		E2A086071D0C73BE002197F9 /* SundayTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SundayTabController.swift; sourceTree = "<group>"; };
 		E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+fromHex.swift"; sourceTree = "<group>"; };
 		E2AC3F8D1CF21F3900C4F21F /* UIColor+fromHexTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+fromHexTests.swift"; sourceTree = "<group>"; };
 		E2B6C3921D0B2E1200D851F9 /* Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
@@ -454,8 +460,8 @@
 		E2A085FB1D0C7069002197F9 /* ScheduleGenerics */ = {
 			isa = PBXGroup;
 			children = (
-				E2A085FE1D0C70BF002197F9 /* GenericDayViewController.swift */,
 				E2A085F51D0C6536002197F9 /* ScheduleCell.swift */,
+				65D7C9A11E46B14D00E03103 /* GenericTabController.swift */,
 			);
 			name = ScheduleGenerics;
 			sourceTree = "<group>";
@@ -463,7 +469,7 @@
 		E2A086021D0C736F002197F9 /* Friday */ = {
 			isa = PBXGroup;
 			children = (
-				E2A086001D0C736B002197F9 /* FridayTableViewController.swift */,
+				E2A086001D0C736B002197F9 /* FridayTabController.swift */,
 			);
 			name = Friday;
 			sourceTree = "<group>";
@@ -471,7 +477,7 @@
 		E2A086031D0C7381002197F9 /* Saturday */ = {
 			isa = PBXGroup;
 			children = (
-				E2A086051D0C73B4002197F9 /* SaturdayTableViewController.swift */,
+				E2A086051D0C73B4002197F9 /* SaturdayTabController.swift */,
 			);
 			name = Saturday;
 			sourceTree = "<group>";
@@ -479,7 +485,7 @@
 		E2A086041D0C7385002197F9 /* Sunday */ = {
 			isa = PBXGroup;
 			children = (
-				E2A086071D0C73BE002197F9 /* SundayTableViewController.swift */,
+				E2A086071D0C73BE002197F9 /* SundayTabController.swift */,
 			);
 			name = Sunday;
 			sourceTree = "<group>";
@@ -632,7 +638,10 @@
 			children = (
 				E2A085FB1D0C7069002197F9 /* ScheduleGenerics */,
 				E2F957041D0BA899003A0881 /* Schedule.storyboard */,
-				A54825B01E160C6C00E35C71 /* ScheduleViewController.swift */,
+				65D7C99F1E468B5100E03103 /* ScheduleViewController.swift */,
+				A54825B01E160C6C00E35C71 /* SchedulePageViewController.swift */,
+				E2A085FE1D0C70BF002197F9 /* ScheduleTableViewController.swift */,
+				65A595491E4B167700AC74C4 /* ScheduleDescriptionViewController.swift */,
 				E2A086021D0C736F002197F9 /* Friday */,
 				E2A086031D0C7381002197F9 /* Saturday */,
 				E2A086041D0C7385002197F9 /* Sunday */,
@@ -718,6 +727,7 @@
 				TargetAttributes = {
 					E20465C61CF1FAF50054654E = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 8VNQTQM2L6;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -975,6 +985,8 @@
 				398219DF1E345F4E00C5D0DF /* noQRCodeCell.swift in Sources */,
 				E2A086011D0C736B002197F9 /* FridayTableViewController.swift in Sources */,
 				398219DE1E345F4E00C5D0DF /* mainCell.swift in Sources */,
+				E2A086011D0C736B002197F9 /* FridayTabController.swift in Sources */,
+				65D7C9A21E46B14D00E03103 /* GenericTabController.swift in Sources */,
 				E2BD82B51D09EA530009DB07 /* GenericMapViewController.swift in Sources */,
 				243720021E32CEDD00B1C7C5 /* BottomViewController.swift in Sources */,
 				E20465D31CF1FAF50054654E /* hackillinois_2017_ios.xcdatamodeld in Sources */,
@@ -983,18 +995,20 @@
 				A50876741E1C79130095F399 /* BottomMapViewController.swift in Sources */,
 				398219E01E345F4E00C5D0DF /* standardCell.swift in Sources */,
 				E2BCA57D1CF3B19E006AAA8B /* Feed.swift in Sources */,
-				A54825B11E160C6C00E35C71 /* ScheduleViewController.swift in Sources */,
+				A54825B11E160C6C00E35C71 /* SchedulePageViewController.swift in Sources */,
 				E2A085F61D0C6536002197F9 /* ScheduleCell.swift in Sources */,
 				24794C6F1E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */,
 				398219E21E345F4E00C5D0DF /* twoLocationsNoQRCodeCell.swift in Sources */,
 				E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */,
 				E25377411CF8AB2C003795E7 /* Tag+CoreDataProperties.swift in Sources */,
+				65A5954A1E4B167700AC74C4 /* ScheduleDescriptionViewController.swift in Sources */,
 				E28FB69F1D194951000D062F /* HelpQ+CoreDataProperties.swift in Sources */,
 				390A8DFB1E4428C800018855 /* HomeTableViewController.swift in Sources */,
 				E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */,
 				E26F44F41D0EF3C400FB4A9F /* UIImage+generateBarCode.swift in Sources */,
 				390A8DF71E3C6A6300018855 /* Rectangle_Helper.swift in Sources */,
 				E2A086081D0C73BE002197F9 /* SundayTableViewController.swift in Sources */,
+				E2A086081D0C73BE002197F9 /* SundayTabController.swift in Sources */,
 				E2D4F0E31D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift in Sources */,
 				E2D4F0E11D06B28B00646BF8 /* FeedTableViewCell.swift in Sources */,
 				390A8E031E4671DB00018855 /* mainCellAfterHackathon.swift in Sources */,
@@ -1016,10 +1030,12 @@
 				E23791411D21C4870020618E /* ReferencedButton.swift in Sources */,
 				E2BCA5801CF3B19E006AAA8B /* Location+CoreDataProperties.swift in Sources */,
 				E2D4F0DF1D06AD3F00646BF8 /* Building.swift in Sources */,
+				65D7C9A01E468B5100E03103 /* ScheduleViewController.swift in Sources */,
 				E2BD82B71D0AFFB90009DB07 /* UIImage+imageWithColor.swift in Sources */,
 				E2F639481D05083300853089 /* CGRect+initWithCenterAt.swift in Sources */,
 				390A8E051E467BB800018855 /* noEventCell.swift in Sources */,
 				E2A086061D0C73B4002197F9 /* SaturdayTableViewController.swift in Sources */,
+				E2A086061D0C73B4002197F9 /* SaturdayTabController.swift in Sources */,
 				E2BCA57C1CF3B19E006AAA8B /* Feed+CoreDataProperties.swift in Sources */,
 				E2A085EE1D0C4202002197F9 /* GenericTabBarController.swift in Sources */,
 				390A8DFF1E46683600018855 /* mainCellBeforeHackathonCell.swift in Sources */,
@@ -1030,7 +1046,7 @@
 				E277DD691CF4A79100D7E018 /* FeedDetailViewController.swift in Sources */,
 				E26F44F21D0EF2C100FB4A9F /* ProfileViewController.swift in Sources */,
 				E2BD82B91D0B09D60009DB07 /* LoginConstants.swift in Sources */,
-				E2A085FF1D0C70BF002197F9 /* GenericDayViewController.swift in Sources */,
+				E2A085FF1D0C70BF002197F9 /* ScheduleTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1191,7 +1207,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8VNQTQM2L6;
 				INFOPLIST_FILE = "hackillinois-2017-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1213,7 +1229,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8VNQTQM2L6;
 				INFOPLIST_FILE = "hackillinois-2017-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
