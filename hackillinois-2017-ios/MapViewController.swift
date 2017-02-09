@@ -147,6 +147,8 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         dclLabel.layer.shadowOpacity = 1
         dclLabel.textColor = UIColor.hiaSeafoamBlue
         labelPressed = 1
+        
+        loadAddress()
     }
     
     func siebelLabelTouched() {
@@ -154,6 +156,8 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         siebelLabel.layer.shadowOpacity = 1
         siebelLabel.textColor = UIColor.hiaSeafoamBlue
         labelPressed = 2
+        
+        loadAddress()
     }
     
     func ecebLabelTouched() {
@@ -161,6 +165,8 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         ecebLabel.layer.shadowOpacity = 1
         ecebLabel.textColor = UIColor.hiaSeafoamBlue
         labelPressed = 3
+        
+        loadAddress()
     }
     
     func unionLabelTouched() {
@@ -168,6 +174,8 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         unionLabel.layer.shadowOpacity = 1
         unionLabel.textColor = UIColor.hiaSeafoamBlue
         labelPressed = 4
+        
+        loadAddress()
     }
     
     func loadAddress() {
