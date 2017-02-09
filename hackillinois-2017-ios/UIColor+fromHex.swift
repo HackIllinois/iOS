@@ -17,7 +17,7 @@ extension UIColor {
         let r = CGFloat(number >> 16) / 255
         let g = CGFloat((number >> 8) & 0xFF) / 255
         let b = CGFloat(number & 0xFF) / 255
-     
+        
         return UIColor.init(red: r, green: g, blue: b, alpha: 1)
     }
     

@@ -11,10 +11,6 @@ import UIKit
 class mainCell: UITableViewCell {
     
 
-    
-    @IBOutlet weak var happeningNowLabel: UILabel!
-    @IBOutlet weak var startsInLabel: UILabel!
-    
 
     @IBOutlet weak var hoursLabel: UILabel!
     @IBOutlet weak var minutesLabel: UILabel!
@@ -23,7 +19,7 @@ class mainCell: UITableViewCell {
     var mTimer = Timer()
     
     //TODO: Find actual start unix time of event
-    let eventStartUnixTime: Int = 1486255690
+    let eventStartUnixTime: Int = 1486741109
     var timeRemaining: Int = 0
     var secondsLeft: Int = 0
     var minutesLeft: Int = 0

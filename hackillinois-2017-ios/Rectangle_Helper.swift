@@ -16,7 +16,7 @@ func drawBorderRectangle(size: CGSize) -> UIImage {
     let context = UIGraphicsGetCurrentContext();
     
     context!.setStrokeColor(UIColor.fromRGBHex(duskyBlueColor).cgColor)
-    context!.setLineWidth(2.0)
+    context!.setLineWidth(4.0)
     let borderRect = CGRect(origin: CGPoint.zero, size: CGSize.init(width: size.width, height: size.height))
     let path = UIBezierPath(roundedRect: borderRect, byRoundingCorners: [UIRectCorner.topLeft , UIRectCorner.bottomLeft, UIRectCorner.topRight, UIRectCorner.bottomRight], cornerRadii: CGSize(width:5.0, height:5.0))
     path.close();

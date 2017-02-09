@@ -23,5 +23,5 @@ class noEventCell: UITableViewCell {
         let image = drawBorderRectangle(size: imageSize);
         imageView.image = image;
     }
-
+    
 }
