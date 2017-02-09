@@ -92,6 +92,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let eventDetails = storyboard?.instantiateViewController(withIdentifier: "EventDetails") as? EventDetailsViewController {
+            navigationController?.pushViewController(eventDetails, animated: true)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          // first cell should always be the main cell
         if (indexPath.row == 0) {
