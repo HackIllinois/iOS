@@ -48,8 +48,8 @@
 		390A8DFF1E46683600018855 /* mainCellBeforeHackathonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8DFE1E46683600018855 /* mainCellBeforeHackathonCell.swift */; };
 		390A8E011E466A4700018855 /* mainCellBeforeHacking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8E001E466A4700018855 /* mainCellBeforeHacking.swift */; };
 		390A8E031E4671DB00018855 /* mainCellAfterHackathon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8E021E4671DB00018855 /* mainCellAfterHackathon.swift */; };
-		390A8E051E467BB800018855 /* noEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8E041E467BB800018855 /* noEventCell.swift */; };
-		392321F91E4C3F99003731AA /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392321F81E4C3F99003731AA /* EventDetailsViewController.swift */; };
+		392321F31E4C17C2003731AA /* noEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392321F21E4C17C2003731AA /* noEventCell.swift */; };
+		3947F9501E4C452E00FF4AF4 /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3947F94F1E4C452E00FF4AF4 /* EventDetailsViewController.swift */; };
 		398219DE1E345F4E00C5D0DF /* mainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219D91E345F4E00C5D0DF /* mainCell.swift */; };
 		398219DF1E345F4E00C5D0DF /* noQRCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219DA1E345F4E00C5D0DF /* noQRCodeCell.swift */; };
 		398219E01E345F4E00C5D0DF /* standardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219DB1E345F4E00C5D0DF /* standardCell.swift */; };
@@ -183,8 +183,8 @@
 		390A8DFE1E46683600018855 /* mainCellBeforeHackathonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCellBeforeHackathonCell.swift; sourceTree = "<group>"; };
 		390A8E001E466A4700018855 /* mainCellBeforeHacking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCellBeforeHacking.swift; sourceTree = "<group>"; };
 		390A8E021E4671DB00018855 /* mainCellAfterHackathon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCellAfterHackathon.swift; sourceTree = "<group>"; };
-		390A8E041E467BB800018855 /* noEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = noEventCell.swift; sourceTree = "<group>"; };
-		392321F81E4C3F99003731AA /* EventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
+		392321F21E4C17C2003731AA /* noEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = noEventCell.swift; sourceTree = "<group>"; };
+		3947F94F1E4C452E00FF4AF4 /* EventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
 		398219D91E345F4E00C5D0DF /* mainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCell.swift; sourceTree = "<group>"; };
 		398219DA1E345F4E00C5D0DF /* noQRCodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = noQRCodeCell.swift; sourceTree = "<group>"; };
 		398219DB1E345F4E00C5D0DF /* standardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = standardCell.swift; sourceTree = "<group>"; };
@@ -328,6 +328,7 @@
 		398219D81E345F2800C5D0DF /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
+				3947F94F1E4C452E00FF4AF4 /* EventDetailsViewController.swift */,
 				398219DC1E345F4E00C5D0DF /* twoLocationsCell.swift */,
 				398219D91E345F4E00C5D0DF /* mainCell.swift */,
 				398219DA1E345F4E00C5D0DF /* noQRCodeCell.swift */,
@@ -340,7 +341,7 @@
 				390A8DFE1E46683600018855 /* mainCellBeforeHackathonCell.swift */,
 				390A8E001E466A4700018855 /* mainCellBeforeHacking.swift */,
 				390A8E021E4671DB00018855 /* mainCellAfterHackathon.swift */,
-				390A8E041E467BB800018855 /* noEventCell.swift */,
+				392321F21E4C17C2003731AA /* noEventCell.swift */,
 			);
 			name = CustomCells;
 			sourceTree = "<group>";
@@ -348,7 +349,6 @@
 		A50F29231E14D53B00878652 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				392321F81E4C3F99003731AA /* EventDetailsViewController.swift */,
 				398219D81E345F2800C5D0DF /* CustomCells */,
 				A50F29241E14D55500878652 /* Home.storyboard */,
 				A50F29261E14DC3600878652 /* HomeViewController.swift */,
@@ -983,6 +983,7 @@
 				390A8DFB1E4428C800018855 /* HomeTableViewController.swift in Sources */,
 				E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */,
 				E26F44F41D0EF3C400FB4A9F /* UIImage+generateBarCode.swift in Sources */,
+				3947F9501E4C452E00FF4AF4 /* EventDetailsViewController.swift in Sources */,
 				390A8DF71E3C6A6300018855 /* Rectangle_Helper.swift in Sources */,
 				E2D4F0E31D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift in Sources */,
 				E2D4F0E11D06B28B00646BF8 /* FeedTableViewCell.swift in Sources */,
@@ -997,7 +998,6 @@
 				390A8E011E466A4700018855 /* mainCellBeforeHacking.swift in Sources */,
 				E25377421CF8AB2C003795E7 /* Tag.swift in Sources */,
 				390A8DFD1E45219300018855 /* threeLocationsNoQRCodeCell.swift in Sources */,
-				392321F91E4C3F99003731AA /* EventDetailsViewController.swift in Sources */,
 				E25980071D099B0B00AE4939 /* CustomLiquidCell.swift in Sources */,
 				E2BB42C61D133A9A009EF512 /* GenericInputView.swift in Sources */,
 				E2D483331D00D3B100859A67 /* MapViewController.swift in Sources */,
@@ -1008,7 +1008,7 @@
 				E2D4F0DF1D06AD3F00646BF8 /* Building.swift in Sources */,
 				E2BD82B71D0AFFB90009DB07 /* UIImage+imageWithColor.swift in Sources */,
 				E2F639481D05083300853089 /* CGRect+initWithCenterAt.swift in Sources */,
-				390A8E051E467BB800018855 /* noEventCell.swift in Sources */,
+				392321F31E4C17C2003731AA /* noEventCell.swift in Sources */,
 				E2BCA57C1CF3B19E006AAA8B /* Feed+CoreDataProperties.swift in Sources */,
 				E2A085EE1D0C4202002197F9 /* GenericTabBarController.swift in Sources */,
 				390A8DFF1E46683600018855 /* mainCellBeforeHackathonCell.swift in Sources */,
