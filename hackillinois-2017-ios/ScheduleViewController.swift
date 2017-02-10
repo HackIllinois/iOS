@@ -121,6 +121,7 @@ class ScheduleViewController: UIViewController {
         tabButton.bottomBar.layer.shadowColor = lightsUpColor.cgColor
         tabButton.bottomBar.layer.shadowRadius = 4
         tabButton.bottomBar.layer.shadowOpacity = 1
+        tabButton.bottomBar.layer.shouldRasterize = true
         tabButton.bottomBar.layer.shadowOffset = CGSize(width: 0, height: 0)
         
     }

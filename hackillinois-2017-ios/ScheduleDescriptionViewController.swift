@@ -9,12 +9,16 @@
 import UIKit
 
 class ScheduleDescriptionViewController: UIViewController {
+    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var imageHeight: NSLayoutConstraint!
     
     var descriptionStr: String = ""
     var titleStr: String = ""
-    var selectedWeekday: String = ""
+    var dayItem: DayItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,9 +46,21 @@ class ScheduleDescriptionViewController: UIViewController {
         //self.navigationController?.navigationBar.topItem?.title = selectedWeekday
         self.navigationController?.navigationBar.tintColor = UIColor(red: 93.0/255.0, green: 200.0/255.0, blue: 219.9/255.0, alpha: 1.0)
 
-        // Init text
-        titleLabel.text = titleStr
-        descriptionLabel.text = descriptionStr
+        // Init content
+        timeLabel.text = dayItem?.time
+        titleLabel.text = dayItem?.name
+        locationLabel.text = dayItem?.location
+        descriptionLabel.text = dayItem?.descriptionStr
+        
+        let data = NSData(contentsOf: NSURL(string: "https://cs.illinois.edu/sites/default/files/images/banners/hackillinois2017.png")! as URL)
+        if let data = data {
+            let dummyImage = UIImage(data: data as Data)
+            let dummyWidth = dummyImage?.size.width
+            let dummyHeight = dummyImage?.size.height
+            image.image = dummyImage
+            imageHeight.constant = (image.frame.width + 30) / dummyWidth! * dummyHeight!
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {

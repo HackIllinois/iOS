@@ -24,11 +24,14 @@ class ScheduleCell: UITableViewCell {
     var titleStr: String
     var timeStr: String
     var descriptionStr: String
+    var tableCall: (_ location_id: Int) -> Void
+    var props: DayItem?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         self.titleStr = ""
         self.timeStr = ""
         self.descriptionStr = ""
+        self.tableCall = { _ in }
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     
@@ -36,7 +39,14 @@ class ScheduleCell: UITableViewCell {
         self.titleStr = ""
         self.timeStr = ""
         self.descriptionStr = ""
+        self.tableCall = { _ in }
         super.init(coder: aDecoder)
+    }
+    
+    @IBAction func locationOnClick(_ sender: UIButton) {
+        if let props = props {
+            tableCall(props.location_id)
+        }
     }
     
     func cellInit(){
@@ -62,9 +72,11 @@ class ScheduleCell: UITableViewCell {
     
     // Set cell content
     func setEventContent(title: String, time: String, description: String) {
-        self.title.text = title
-        self.time.text = time
-        self.descriptionButton.setTitle(description, for: .normal)
+        if let props = props {
+            self.title.text = props.name
+            self.time.text = props.time
+            self.descriptionButton.setTitle(props.location, for: .normal)
+        }
     }
     
     func setHappening(_ isHappening: Bool) {
