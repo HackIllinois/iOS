@@ -50,6 +50,10 @@
 		390A8E031E4671DB00018855 /* mainCellAfterHackathon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8E021E4671DB00018855 /* mainCellAfterHackathon.swift */; };
 		392321F31E4C17C2003731AA /* noEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392321F21E4C17C2003731AA /* noEventCell.swift */; };
 		3947F9501E4C452E00FF4AF4 /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3947F94F1E4C452E00FF4AF4 /* EventDetailsViewController.swift */; };
+		3947F9521E4C471100FF4AF4 /* SchedulePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3947F9511E4C471100FF4AF4 /* SchedulePageViewController.swift */; };
+		3947F9541E4C472000FF4AF4 /* GenericTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3947F9531E4C472000FF4AF4 /* GenericTabController.swift */; };
+		3947F9561E4C473000FF4AF4 /* ScheduleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3947F9551E4C473000FF4AF4 /* ScheduleTableViewController.swift */; };
+		3947F9581E4C473F00FF4AF4 /* ScheduleDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3947F9571E4C473F00FF4AF4 /* ScheduleDescriptionViewController.swift */; };
 		398219DE1E345F4E00C5D0DF /* mainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219D91E345F4E00C5D0DF /* mainCell.swift */; };
 		398219DF1E345F4E00C5D0DF /* noQRCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219DA1E345F4E00C5D0DF /* noQRCodeCell.swift */; };
 		398219E01E345F4E00C5D0DF /* standardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219DB1E345F4E00C5D0DF /* standardCell.swift */; };
@@ -185,6 +189,10 @@
 		390A8E021E4671DB00018855 /* mainCellAfterHackathon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCellAfterHackathon.swift; sourceTree = "<group>"; };
 		392321F21E4C17C2003731AA /* noEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = noEventCell.swift; sourceTree = "<group>"; };
 		3947F94F1E4C452E00FF4AF4 /* EventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
+		3947F9511E4C471100FF4AF4 /* SchedulePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchedulePageViewController.swift; sourceTree = "<group>"; };
+		3947F9531E4C472000FF4AF4 /* GenericTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericTabController.swift; sourceTree = "<group>"; };
+		3947F9551E4C473000FF4AF4 /* ScheduleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewController.swift; sourceTree = "<group>"; };
+		3947F9571E4C473F00FF4AF4 /* ScheduleDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleDescriptionViewController.swift; sourceTree = "<group>"; };
 		398219D91E345F4E00C5D0DF /* mainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCell.swift; sourceTree = "<group>"; };
 		398219DA1E345F4E00C5D0DF /* noQRCodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = noQRCodeCell.swift; sourceTree = "<group>"; };
 		398219DB1E345F4E00C5D0DF /* standardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = standardCell.swift; sourceTree = "<group>"; };
@@ -449,6 +457,10 @@
 		E2A085FB1D0C7069002197F9 /* ScheduleGenerics */ = {
 			isa = PBXGroup;
 			children = (
+				3947F9571E4C473F00FF4AF4 /* ScheduleDescriptionViewController.swift */,
+				3947F9551E4C473000FF4AF4 /* ScheduleTableViewController.swift */,
+				3947F9531E4C472000FF4AF4 /* GenericTabController.swift */,
+				3947F9511E4C471100FF4AF4 /* SchedulePageViewController.swift */,
 				E2A085F51D0C6536002197F9 /* ScheduleCell.swift */,
 			);
 			name = ScheduleGenerics;
@@ -976,6 +988,7 @@
 				A54825B11E160C6C00E35C71 /* ScheduleViewController.swift in Sources */,
 				E2A085F61D0C6536002197F9 /* ScheduleCell.swift in Sources */,
 				24794C6F1E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */,
+				3947F9521E4C471100FF4AF4 /* SchedulePageViewController.swift in Sources */,
 				398219E21E345F4E00C5D0DF /* twoLocationsNoQRCodeCell.swift in Sources */,
 				E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */,
 				E25377411CF8AB2C003795E7 /* Tag+CoreDataProperties.swift in Sources */,
@@ -1001,12 +1014,14 @@
 				E25980071D099B0B00AE4939 /* CustomLiquidCell.swift in Sources */,
 				E2BB42C61D133A9A009EF512 /* GenericInputView.swift in Sources */,
 				E2D483331D00D3B100859A67 /* MapViewController.swift in Sources */,
+				3947F9541E4C472000FF4AF4 /* GenericTabController.swift in Sources */,
 				243720041E32D4D100B1C7C5 /* BottomViewTableViewCell.swift in Sources */,
 				E2A085F01D0C42A7002197F9 /* GenericNavigationController.swift in Sources */,
 				E23791411D21C4870020618E /* ReferencedButton.swift in Sources */,
 				E2BCA5801CF3B19E006AAA8B /* Location+CoreDataProperties.swift in Sources */,
 				E2D4F0DF1D06AD3F00646BF8 /* Building.swift in Sources */,
 				E2BD82B71D0AFFB90009DB07 /* UIImage+imageWithColor.swift in Sources */,
+				3947F9581E4C473F00FF4AF4 /* ScheduleDescriptionViewController.swift in Sources */,
 				E2F639481D05083300853089 /* CGRect+initWithCenterAt.swift in Sources */,
 				392321F31E4C17C2003731AA /* noEventCell.swift in Sources */,
 				E2BCA57C1CF3B19E006AAA8B /* Feed+CoreDataProperties.swift in Sources */,
@@ -1016,6 +1031,7 @@
 				E20465CD1CF1FAF50054654E /* LoginViewController.swift in Sources */,
 				E2AC3F861CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */,
 				E20465CB1CF1FAF50054654E /* AppDelegate.swift in Sources */,
+				3947F9561E4C473000FF4AF4 /* ScheduleTableViewController.swift in Sources */,
 				E277DD691CF4A79100D7E018 /* FeedDetailViewController.swift in Sources */,
 				E26F44F21D0EF2C100FB4A9F /* ProfileViewController.swift in Sources */,
 				E2BD82B91D0B09D60009DB07 /* LoginConstants.swift in Sources */,

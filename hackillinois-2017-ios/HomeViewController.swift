@@ -12,9 +12,9 @@ import CoreData
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     let hackathonBeginTime = 0;
-    let hackingBeginTime = 999999999999;
-    let hackingEndTime = 999999999999999;
-    let hackathonEndTime = 9999999999999999;
+    let hackingBeginTime = 0;
+    let hackingEndTime = 0;
+    let hackathonEndTime = 0;
     var currentTimeForTable = 9999999999999999;
     
     var events : [Feed] = [];
@@ -34,7 +34,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         checkInTableView.delegate = self
         checkInTableView.dataSource = self
         
-        checkInTableView.allowsSelection = false;
         checkInTableView.separatorStyle = .none;
         checkInTableView.backgroundColor = UIColor.clear
         checkInTableView.showsVerticalScrollIndicator = false;
@@ -80,7 +79,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let eventDetails = storyboard?.instantiateViewController(withIdentifier: "EventDetails") as? EventDetailsViewController {
+        let storyboard: UIStoryboard = UIStoryboard(name: "Home", bundle: nil)
+        if let eventDetails = storyboard.instantiateViewController(withIdentifier: "EventDetails") as? EventDetailsViewController {
             navigationController?.pushViewController(eventDetails, animated: true)
         }
     }
