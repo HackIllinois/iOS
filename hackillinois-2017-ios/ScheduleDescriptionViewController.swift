@@ -52,15 +52,26 @@ class ScheduleDescriptionViewController: UIViewController {
         locationLabel.text = dayItem?.location
         descriptionLabel.text = dayItem?.descriptionStr
         
-        let data = NSData(contentsOf: NSURL(string: "https://cs.illinois.edu/sites/default/files/images/banners/hackillinois2017.png")! as URL)
-        if let data = data {
-            let dummyImage = UIImage(data: data as Data)
-            let dummyWidth = dummyImage?.size.width
-            let dummyHeight = dummyImage?.size.height
-            image.image = dummyImage
-            imageHeight.constant = (image.frame.width + 30) / dummyWidth! * dummyHeight!
+        if let imageUrl = dayItem?.imageUrl {
+            let data = NSData(contentsOf: NSURL(string: imageUrl)! as URL)
+            if let data = data {
+                let dummyImage = UIImage(data: data as Data)
+                let dummyWidth = dummyImage?.size.width
+                let dummyHeight = dummyImage?.size.height
+                image.image = dummyImage
+                image.isUserInteractionEnabled = true
+                imageHeight.constant = (image.frame.width + 30) / dummyWidth! * dummyHeight!
+            }
         }
-        
+    }
+    
+    @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
+        print("Image tapped")
+        if let imageUrl = dayItem?.imageUrl {
+            let vc = ScheduleDetailsImageViewController()
+            vc.imageUrl = imageUrl
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     override func didReceiveMemoryWarning() {

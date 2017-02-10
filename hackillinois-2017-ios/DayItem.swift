@@ -15,6 +15,7 @@ class DayItem: NSObject {
     var descriptionStr: String
     var highlighted: Bool
     var location_id: Int
+    var imageUrl: String?
     
     override init() {
         name = "Event Name Here"
@@ -32,5 +33,6 @@ class DayItem: NSObject {
         self.descriptionStr = description
         self.highlighted = highlighted
         self.location_id = location_id
+        self.imageUrl = "https://cs.illinois.edu/sites/default/files/images/banners/hackillinois2017.png"
     }
 }

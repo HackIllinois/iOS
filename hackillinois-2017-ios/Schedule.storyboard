@@ -422,10 +422,10 @@
             </objects>
             <point key="canvasLocation" x="1729" y="2036"/>
         </scene>
-        <!--Details-->
+        <!--Event Details-->
         <scene sceneID="g7i-fy-1Lp">
             <objects>
-                <viewController storyboardIdentifier="ScheduleDescription" title="Details" id="h5H-KA-Zhw" customClass="ScheduleDescriptionViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScheduleDescription" title="Event Details" id="h5H-KA-Zhw" customClass="ScheduleDescriptionViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dcc-7L-pgx"/>
                         <viewControllerLayoutGuide type="bottom" id="P21-CZ-bph"/>
@@ -467,9 +467,16 @@
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FQz-OC-7v0">
                                                 <rect key="frame" x="15" y="165" width="345" height="300"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
+                                                </accessibility>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="300" id="R0z-je-aPC"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="P4c-Y2-ynQ" appends="YES" id="6lG-Ga-26E"/>
+                                                </connections>
                                             </imageView>
                                         </subviews>
                                         <constraints>
@@ -520,6 +527,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z8M-Hk-02e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="P4c-Y2-ynQ">
+                    <connections>
+                        <action selector="imageTapped:" destination="h5H-KA-Zhw" id="rwM-vD-kOc"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2821.5999999999999" y="2034.3328335832086"/>
         </scene>
