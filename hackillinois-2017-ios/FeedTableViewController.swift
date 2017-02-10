@@ -79,25 +79,25 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
         let tagWorkshop = CoreDataHelpers.createOrFetchTag(tag: "Workshop", feeds: nil)
         
         // Temporary Events
-        let _ = CoreDataHelpers.createFeed(id: 1, message: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
+        let _ = CoreDataHelpers.createOrFetchFeed(id: 1, message: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
                            timestamp: 1464038000, locations: [], tags: [tagGeneral])
         
-        _ = CoreDataHelpers.createFeed(id: 2, message: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
+        _ = CoreDataHelpers.createOrFetchFeed(id: 2, message: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
                            timestamp: 1464038763, locations: [siebel, eceb], tags: [tagFood])
         
-        _ = CoreDataHelpers.createFeed(id: 3, message: "Cluehunt has begun!",
+        _ = CoreDataHelpers.createOrFetchFeed(id: 3, message: "Cluehunt has begun!",
                            timestamp: 1464040073, locations: [siebel, eceb], tags: [tagEvent])
         
-        _ = CoreDataHelpers.createFeed(id: 4, message: "Dinner is will be served in 10 minutes!",
+        _ = CoreDataHelpers.createOrFetchFeed(id: 4, message: "Dinner is will be served in 10 minutes!",
                            timestamp: 1464042073, locations: [siebel, eceb], tags: [tagFood])
         
-        _ = CoreDataHelpers.createFeed(id: 5, message: "Career fair is starting at the Union!",
+        _ = CoreDataHelpers.createOrFetchFeed(id: 5, message: "Career fair is starting at the Union!",
                            timestamp: 1464042100, locations: [union], tags: [tagEvent])
         
         // Generate dummy data to simulate scrolling down
         for n in 0 ..< 7 {
             let time = UInt64(1464037000 - n*432)
-            let _ = CoreDataHelpers.createFeed(id: NSNumber(value: 6 + n), message: "Cool look these cells are now dynamically size. This means that the more text there is per notification, the larger the cell gets!",
+            let _ = CoreDataHelpers.createOrFetchFeed(id: NSNumber(value: 6 + n), message: "Cool look these cells are now dynamically size. This means that the more text there is per notification, the larger the cell gets!",
                                timestamp: time, locations: [siebel, eceb, union], tags: [tagWorkshop])
         }
         
