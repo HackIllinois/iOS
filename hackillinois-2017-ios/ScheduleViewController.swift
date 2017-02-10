@@ -1,131 +1,139 @@
 //
-//  SchedulePageViewController.swift
+//  ScheduleControllerView.swift
 //  hackillinois-2017-ios
 //
-//  Created by Shotaro Ikeda on 6/11/16.
-//  Copyright © 2016 Shotaro Ikeda. All rights reserved.
+//  Created by Derek Leung on 2017/2/4.
+//  Copyright © 2017年 Shotaro Ikeda. All rights reserved.
 //
 
 import UIKit
-import SWRevealViewController
 
-enum DayOfWeek: Int {
-    case Friday = 0
-    case Saturday
-    case Sunday
-}
-
-class SchedulePageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+class ScheduleViewController: UIViewController {
+    private var pageView: SchedulePageViewController!
     
-    private lazy var scheduleViewControllers: [UIViewController] = {
-        return [self.getScheduleController("one"), self.getScheduleController("two"), self.getScheduleController("three")]
-    }()
-    
-    func getScheduleController(name: String) -> UIViewController {
-        return UIStoryboard(name: "Schedule", bundle: nil).instantiateViewControllerWithIdentifier("schedule_day_\(name)")
+    struct TabButton {
+        var label: UILabel
+        var bottomBar: UIView
     }
     
-    // Views created to correct the color
-    var navigationMask: UIView!
-    var tabBarMask: UIView!
+    @IBOutlet weak var fridayTabButtonLabel: UILabel!
+    @IBOutlet weak var fridayTabButtonBottomBar: UIView!
     
-    // Animation Flag to prevent too many views from begin pushed onto the stack
-    var isAnimating: Bool = true {
-        didSet {
-            // Make sure gestures cannot happen
-            if isAnimating {
-                self.tabBarController?.view.removeGestureRecognizer(self.revealViewController().panGestureRecognizer())
-            } else {
-                self.tabBarController?.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-            }
-        }
-    }
+    @IBOutlet weak var saturdayTabButtonLabel: UILabel!
+    @IBOutlet weak var saturdayTabButtonBottomBar: UIView!
     
-    func alertScrollable() {
-        // Alert to the user that the view is now scrollable
-        let ac = UIAlertController(title: "Hint", message: "You can swipe left/right to view other days' schedule.", preferredStyle: .Alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-        presentViewController(ac, animated: true, completion: nil)
-    }
+    @IBOutlet weak var sundayTabButtonLabel: UILabel!
+    @IBOutlet weak var sundayTabButtonBottomBar: UIView!
 
+    var tabButtons = [TabButton]()
+    let lightsOutColor = UIColor(red: 128.0/255.0, green: 143.0/255, blue: 196.0/255.0, alpha: 1)
+    let lightsUpColor = UIColor(red: 93.0/255.0, green: 200.0/255, blue: 219.0/255.0, alpha: 1)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-        view.bounds = CGRectInset(view.frame, 0, 40)
-        self.dataSource = self
-        self.delegate = self
+        // Set up buttons array
+        tabButtons = [
+                TabButton(label: fridayTabButtonLabel, bottomBar: fridayTabButtonBottomBar),
+                TabButton(label: saturdayTabButtonLabel, bottomBar: saturdayTabButtonBottomBar),
+                TabButton(label: sundayTabButtonLabel, bottomBar: sundayTabButtonBottomBar)
+        ]
         
-        // Load initial view controller
-        if let firstViewController = scheduleViewControllers.first {
-            setViewControllers([firstViewController], direction: .Forward, animated: true, completion: nil)
-            self.navigationItem.title = "Friday"
+        // Turn lights off for all tabs
+        for i in 0...2 {
+            lightsOut(forTab: i)
         }
         
-        isAnimating = false
+        // Listen for pageTurnedEvent from the SchedulePageViewController
+        pageView.registerPageTurnedEventListener(listener: { (from: Int, to: Int) in
+            self.lightsOut(forTab: from)
+            self.lightsUp(forTab: to)
+        })
         
-        // Add instructions to indicate that user can scroll
-        navigationController!.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_info_outline"), style: .Done, target: self, action: #selector(alertScrollable))
+        // Select first tab
+        changeTab(to: 0)
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
-    // Mark: UIPageViewControllerDataSource
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        // Prevent scrolling when animating is occuring
-        if isAnimating {
-            return nil
-        }
-        
-        let previousIndex = scheduleViewControllers.indexOf(viewController)! - 1
-        
-        guard previousIndex >= 0 && previousIndex < scheduleViewControllers.count else {
-            return nil
-        }
-        
-        return scheduleViewControllers[previousIndex]
-    }
-    
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        // Prevent scrolling when animating is occuring
-        if isAnimating {
-            return nil
-        }
-        
-        let nextIndex = scheduleViewControllers.indexOf(viewController)! + 1
-        
-        guard nextIndex >= 0 && nextIndex < scheduleViewControllers.count else {
-            return nil
-        }
-        
-        return scheduleViewControllers[nextIndex]
-    }
-    
-    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool)
-    {
-        if (finished || completed) {
-            isAnimating = false
-        }
-        
-        if (!completed) {
-            return
-        }
-        
-        if let controller = pageViewController.viewControllers?[0] {
-            switch scheduleViewControllers.indexOf(controller)! {
-            case DayOfWeek.Friday.rawValue:
-                self.navigationItem.title = "Friday"
-            case DayOfWeek.Saturday.rawValue:
-                self.navigationItem.title = "Saturday"
-            case DayOfWeek.Sunday.rawValue:
-                self.navigationItem.title = "Sunday"
-            default:
-                // Index is invalid
-                return
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Store embeded page view for later uses
+        if let vc = segue.destination as? SchedulePageViewController {
+            if segue.identifier == "PageViewSegue" {
+                pageView = vc
             }
         }
     }
     
-    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
-        isAnimating = true
+    // Really hope we have stylesheets like CSS here for this purpose!
+    // De-highlights tab label
+    func lightsOut(forTab: Int) {
+        // Not elegant but whatever
+        if ( !( 0 <= forTab && forTab <= 2 ) ) { return }
+        
+        let tabButton = tabButtons[forTab]
+        
+        tabButton.label.textColor = lightsOutColor
+        tabButton.bottomBar.backgroundColor = UIColor.clear
+        tabButton.label.layer.shadowColor = UIColor.clear.cgColor
+        tabButton.label.layer.shadowRadius = 0
+        tabButton.label.layer.shadowOpacity = 0
+        tabButton.bottomBar.layer.shadowColor = UIColor.clear.cgColor
+        tabButton.bottomBar.layer.shadowRadius = 0
+        tabButton.bottomBar.layer.shadowOpacity = 0
+    }
+    
+    // Highlights tab label
+    func lightsUp(forTab: Int) {
+        // Not elegant but whatever
+        if ( !( 0 <= forTab && forTab <= 2 ) ) { return }
+        
+        let tabButton = tabButtons[forTab]
+        
+        tabButton.label.textColor = lightsUpColor
+        tabButton.bottomBar.backgroundColor = lightsUpColor
+        tabButton.label.layer.shadowColor = lightsUpColor.cgColor
+        tabButton.label.layer.shadowRadius = 4
+        tabButton.label.layer.shadowOpacity = 1
+        tabButton.label.layer.shadowOffset = CGSize(width: 0, height: 0)
+        tabButton.bottomBar.layer.shadowColor = lightsUpColor.cgColor
+        tabButton.bottomBar.layer.shadowRadius = 4
+        tabButton.bottomBar.layer.shadowOpacity = 1
+        tabButton.bottomBar.layer.shadowOffset = CGSize(width: 0, height: 0)
         
     }
+    
+    // Changes tab
+    func changeTab(to: Int) {
+        //lightsOut(forTab: pageView.pageIndex)
+        pageView.turnPage(to: to, withAnimation: true)
+        //lightsUp(forTab: pageView.pageIndex)
+    }
+    
+    // Tap listeners
+    @IBAction func handleFridayTap(_ sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            print("Friday!")
+            changeTab(to: 0)
+        }
+    }
+    
+    @IBAction func handleSaturdayTap(_ sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            print("Saturday!")
+            changeTab(to: 1)
+        }
+    }
+    
+    @IBAction func handleSundayTap(_ sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            print("Sunday!")
+            changeTab(to: 2)
+        }
+    }
+    
+
 }

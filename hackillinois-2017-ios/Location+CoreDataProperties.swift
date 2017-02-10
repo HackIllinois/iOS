@@ -19,5 +19,6 @@ extension Location {
     @NSManaged var name: String
     @NSManaged var shortName: String
     @NSManaged var feeds: NSSet
+    @NSManaged var address: String
 
 }

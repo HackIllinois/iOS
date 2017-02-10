@@ -13,7 +13,7 @@ import CoreData
 class Feed: NSManagedObject {
 
     /* Convenience update function */
-    func initialize(id: NSNumber, message: String, time: NSDate, locations: NSOrderedSet?, tags: NSSet?) {
+    func initialize(id: NSNumber, message: String, time: Date, locations: NSOrderedSet?, tags: NSSet?) {
         self.id = id
         self.message = message
         self.time = time
@@ -23,7 +23,7 @@ class Feed: NSManagedObject {
     
     /* Overrides needs nonobjc methods to compile */
     /* If tags and locations already exist, this method will add this feed to the corresponding location and tag */
-    @nonobjc func initialize(id: NSNumber, message: String, time: NSDate, locations: [Location], tags: [Tag]) {
+    @nonobjc func initialize(id: NSNumber, message: String, time: Date, locations: [Location], tags: [Tag]) {
         self.id = id
         self.message = message
         self.time = time
@@ -31,11 +31,11 @@ class Feed: NSManagedObject {
         self.tags = NSSet(array: tags)
         
         for location in locations {
-            location.feeds = location.feeds.setByAddingObject(self)
+            location.feeds = location.feeds.adding(self) as NSSet
         }
         
         for tag in tags {
-            tag.feeds = tag.feeds.setByAddingObject(self)
+            tag.feeds = tag.feeds.adding(self) as NSSet
         }
     }
 }

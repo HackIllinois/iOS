@@ -2,13 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>HackIllinois</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -35,7 +32,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>0.1.0b</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>comgooglemaps</string>
@@ -46,8 +43,42 @@
 	<array>
 		<string>MKDirectionsModePedestrian</string>
 	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app will use your location to guide you through HackIllinois&apos; various events and primary locations.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Brandon_bld_it.otf</string>
+		<string>Brandon_bld.otf</string>
+		<string>Brandon_blk_it.otf</string>
+		<string>Brandon_blk.otf</string>
+		<string>Brandon_light_it.otf</string>
+		<string>Brandon_light.otf</string>
+		<string>Brandon_med_it.otf</string>
+		<string>Brandon_med.otf</string>
+		<string>Brandon_reg_it.otf</string>
+		<string>Brandon_reg.otf</string>
+		<string>Brandon_thin_it.otf</string>
+		<string>Brandon_thin.otf</string>
+		<string>Gotham-Black.otf</string>
+		<string>Gotham-BlackItalic.otf</string>
+		<string>Gotham-Bolf.otf</string>
+		<string>Gotham-BoldItalic.otf</string>
+		<string>Gotham-Light.otf</string>
+		<string>Gotham-LightItalic.otf</string>
+		<string>Gotham-Medium.otf</string>
+		<string>Gotham-MediumItalic.otf</string>
+		<string>Gotham-Thin.otf</string>
+		<string>Gotham-ThinItalic.otf</string>
+		<string>Gotham-Ultra.otf</string>
+		<string>Gotham-UltraItalic.otf</string>
+		<string>Gotham-XLight.otf</string>
+		<string>Gotham-XLightItalic.otf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -57,7 +88,7 @@
 		<string>armv7</string>
 	</array>
 	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleLightContent</string>
+	<string>UIStatusBarStyleDefault</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

@@ -3,6 +3,7 @@
 Official iOS application for HackIllinois. Please read this README before continuing.
 
 # Branch Information #
+
 This branch is supposed to contain the released version of applications. Currently this hosts a more updated version of 0.3.0-beta.
 
 # Requirements #

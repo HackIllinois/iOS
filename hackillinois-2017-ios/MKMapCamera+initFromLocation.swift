@@ -15,15 +15,15 @@ extension MKMapCamera {
      * Convenience function to create a MKMapCamera centered at a Location 
      * Some constants are pulled from MainConstants.swift
      */
-    class func from(location location: Location) -> MKMapCamera {
-        return MKMapCamera(lookingAtCenterCoordinate: CLLocationCoordinate2D.from(location: location), fromDistance: defaultHeight, pitch: defaultPitch, heading: defaultHeading)
+    class func from(location: Location) -> MKMapCamera {
+        return MKMapCamera(lookingAtCenter: CLLocationCoordinate2D.from(location: location), fromDistance: defaultHeight, pitch: defaultPitch, heading: defaultHeading)
     }
     
     /* 
      * Convenience function to create a MKMapCamera centered at a Building
      * Some constants are pulled from MainConstants.swift
      */
-    class func from(building building: Building) -> MKMapCamera {
-        return MKMapCamera(lookingAtCenterCoordinate: building.coordinate, fromDistance: defaultHeight, pitch: defaultPitch, heading: defaultHeading)
+    class func from(building: Building) -> MKMapCamera {
+        return MKMapCamera(lookingAtCenter: building.coordinate, fromDistance: defaultHeight, pitch: defaultPitch, heading: defaultHeading)
     }
 }

@@ -15,86 +15,98 @@ class GenericInputView: UIViewController, UITextFieldDelegate, UITextViewDelegat
     
     var outsideTapped: UITapGestureRecognizer!
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         /* Set Keyboard actions */
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillAppear), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillDisappear), name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         // Create gesture to recognize when the user taps outside of a textfield to close the keyboard
         outsideTapped = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(outsideTapped)
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         view.removeGestureRecognizer(outsideTapped)
         super.viewWillDisappear(true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("ViewDidLoad")
         
         /* Configure each textview */
         for textView in textViews {
             textView.layer.borderWidth = 4
-            textView.layer.borderWidth = 4
+//            textView.layer.borderWidth = 4
             textView.layer.cornerRadius = 5
-            textView.layer.borderColor = UIColor.fromRGBHex(borderColorHex).CGColor
+//            textView.layer.borderColor = UIColor.fromRGBHex(borderColorHex).cgColor
             textView.textContainerInset = UIEdgeInsetsMake(5, 2.5, 5, 2.5)
-            textView.textColor = UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22) // Placeholder default color for iOS 9
+//            textView.textColor = UIColor(red: 28/255, green: 50/255, blue: 90/255, alpha: 1) // Placeholder default color for iOS 9
             textView.delegate = self
         }
-        
+
+        /* THIS IS HERE A SECOND TIME FOR SOME REASON???
         /* Configure each textField */
         for textField in textFields {
             // Add padding to the left side
-            let inputTextPadding = UIView(frame: CGRectMake(0, 0, 1, textField.frame.height))
+            let inputTextPadding = UIView(frame: CGRect(x: 0, y: 0, width: 1, height: textField.frame.height))
             textField.leftView = inputTextPadding
-            textField.leftViewMode = .Always
+            textField.leftViewMode = .always
             
             // Set Better UI Elements
             textField.layer.borderWidth = 4
             textField.layer.borderWidth = 4
             textField.layer.cornerRadius = 5
-            textField.layer.borderColor = UIColor.fromRGBHex(borderColorHex).CGColor
-            textField.borderStyle = .RoundedRect
+            textField.layer.borderColor = UIColor.fromRGBHex(borderColorHex).cgColor
+            textField.borderStyle = .roundedRect
             
             // Set delegate as self
             textField.delegate = self
         }
+        */
     }
     
     /*
      * Keyboard Handlers
      */
-    func keyboardWillAppear(notification: NSNotification) {
-        scroll.scrollEnabled = true
+    func keyboardWillAppear(_ notification: Notification) {
+        scroll.isScrollEnabled = true
         
-        var keyboardFrame:CGRect = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
-        keyboardFrame = self.view.convertRect(keyboardFrame, fromView: nil)
+        print("KeyboardWillAppear")
+        
+        var keyboardFrame:CGRect = ((notification as NSNotification).userInfo?[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
         
         // Animate the keyboard so it looks a lot less awkward...
-        UIView.animateWithDuration(notification.userInfo![UIKeyboardAnimationDurationUserInfoKey]!.doubleValue, animations: {
-            self.scroll.contentInset.bottom = keyboardFrame.size.height
+        UIView.animate(withDuration: 3.0, animations: {
+            self.scroll.contentInset.bottom = keyboardFrame.size.height + 175 // This needs to be changed to not be a hardcoded value, and should change based on which text field is selected
         })
+//        UIView.animate(withDuration: ((notification as NSNotification).userInfo![UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue, animations: {
+//            self.scroll.contentInset.bottom = keyboardFrame.size.height + 175
+//        })
     }
     
-    func keyboardWillDisappear(notification: NSNotification) {
+    func keyboardWillDisappear(_ notification: Notification) {
+        print("KeyboardWillDisappear")
         // Only remove inset when keyboard is shown
-        scroll.scrollEnabled = false
+        scroll.isScrollEnabled = false
         // Animate the keyboard so it looks a lot less awkward
         // It seems like this line isn't required for the animation to take place for both
-        UIView.animateWithDuration(notification.userInfo![UIKeyboardAnimationDurationUserInfoKey]!.doubleValue, animations: {
-            self.scroll.contentInset = UIEdgeInsetsZero
+        UIView.animate(withDuration: 3.0, animations: {
+            self.scroll.contentInset = UIEdgeInsets.zero
         })
+//        UIView.animate(withDuration: ((notification as NSNotification).userInfo![UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue, animations: {
+//            self.scroll.contentInset = UIEdgeInsets.zero
+//        })
     }
     
     // Mark: UITextFieldDelegate
     /* Configure behavior of return key. If you are adding more text fields, set the tags in order of how the user should be inputting them. For this login, username has a tag value of 1 and password has a tag value of 2 */
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let nextTextFieldTag = textField.tag + 1
         if let nextTextField = textField.superview?.viewWithTag(nextTextFieldTag) as UIResponder! {
             // Found next text field to respond to
@@ -114,15 +126,15 @@ class GenericInputView: UIViewController, UITextFieldDelegate, UITextViewDelegat
     }
     
     // Mark: UITextVieDelegate
-    func textViewDidBeginEditing(textView: UITextView) {
+    func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == "Description here..." {
             textView.text = ""
-            textView.textColor = UIColor.blackColor()
+            textView.textColor = UIColor.black
         }
         textView.becomeFirstResponder()
     }
     
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text == "" {
             textView.text = "Description here..."
             textView.textColor = UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22)

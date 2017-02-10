@@ -15,7 +15,7 @@ public func ==(left: CLLocationCoordinate2D, right: CLLocationCoordinate2D) -> B
 
 extension CLLocationCoordinate2D {
     /* Convenience function to create a CLLocation from a Location object */
-    static func from(location location: Location) -> CLLocationCoordinate2D {
+    static func from(location: Location) -> CLLocationCoordinate2D {
         return CLLocationCoordinate2DMake(Double(location.latitude), Double(location.longitude))
     }
 }

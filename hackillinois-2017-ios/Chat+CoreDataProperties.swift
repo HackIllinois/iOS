@@ -15,7 +15,7 @@ import CoreData
 extension Chat {
 
     @NSManaged var message: String
-    @NSManaged var time: NSDate
+    @NSManaged var time: Date
     @NSManaged var user: String
     @NSManaged var helpQ: HelpQ
 

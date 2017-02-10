@@ -6,11 +6,9 @@ use_frameworks!
 target 'hackillinois-2017-ios' do
         source 'https://github.com/CocoaPods/Specs.git'
 
-        pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
-        pod "LiquidFloatingActionButton", :git => "https://github.com/shotaroikeda/LiquidFloatingActionButton"
+        pod 'SwiftyJSON', :git => 'https://github.com/jeneumeier/SwiftyJSON.git', :branch=> 'swift3-gm'
         pod "SnapKit"
-        pod "SWRevealViewController", :git => "https://github.com/John-Lluch/SWRevealViewController"
-        pod "Socket.IO-Client-Swift"
+        pod "JWTDecode", :git => "https://github.com/auth0/JWTDecode.swift.git", :branch => 'feature-swift-3'
 end
 
 target 'hackillinois-2017-iosTests' do
