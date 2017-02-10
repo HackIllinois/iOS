@@ -65,7 +65,6 @@
 		58E75F2152E19BCECDC115D1 /* Pods_hackillinois_2017_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0E70C5ECC7AC1B705813BB /* Pods_hackillinois_2017_iosUITests.framework */; };
 		A50876741E1C79130095F399 /* BottomMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50876731E1C79130095F399 /* BottomMapViewController.swift */; };
 		A50876781E1C921C0095F399 /* BottomMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50876771E1C921C0095F399 /* BottomMapViewController.xib */; };
-		A50F29251E14D55500878652 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A50F29241E14D55500878652 /* Home.storyboard */; };
 		A50F29271E14DC3600878652 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F29261E14DC3600878652 /* HomeViewController.swift */; };
 		A54825B11E160C6C00E35C71 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54825B01E160C6C00E35C71 /* ScheduleViewController.swift */; };
 		AE232CBD3115F1DA5DF9B870 /* Pods_hackillinois_2017_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D8C9C142AB0677D17C63CBA /* Pods_hackillinois_2017_iosTests.framework */; };
@@ -93,8 +92,6 @@
 		E28FB6A01D194951000D062F /* HelpQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28FB69C1D194950000D062F /* HelpQ.swift */; };
 		E28FB6A11D194951000D062F /* Chat+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28FB69D1D194950000D062F /* Chat+CoreDataProperties.swift */; };
 		E28FB6A21D194951000D062F /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28FB69E1D194951000D062F /* Chat.swift */; };
-		E2A085EE1D0C4202002197F9 /* GenericTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085ED1D0C4202002197F9 /* GenericTabBarController.swift */; };
-		E2A085F01D0C42A7002197F9 /* GenericNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085EF1D0C42A7002197F9 /* GenericNavigationController.swift */; };
 		E2A085F21D0C4E43002197F9 /* GenericCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085F11D0C4E43002197F9 /* GenericCardViewController.swift */; };
 		E2A085F61D0C6536002197F9 /* ScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085F51D0C6536002197F9 /* ScheduleCell.swift */; };
 		E2A085FA1D0C6688002197F9 /* DayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A085F91D0C6688002197F9 /* DayItem.swift */; };
@@ -102,9 +99,6 @@
 		E2AC3F871CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */; };
 		E2AC3F881CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */; };
 		E2AC3F8E1CF21F3900C4F21F /* UIColor+fromHexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F8D1CF21F3900C4F21F /* UIColor+fromHexTests.swift */; };
-		E2B6C3931D0B2E1200D851F9 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3921D0B2E1200D851F9 /* Feed.storyboard */; };
-		E2B6C3951D0B2E8000D851F9 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3941D0B2E8000D851F9 /* Map.storyboard */; };
-		E2B6C3971D0B2ED800D851F9 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3961D0B2ED800D851F9 /* Profile.storyboard */; };
 		E2BB42C61D133A9A009EF512 /* GenericInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BB42C51D133A9A009EF512 /* GenericInputView.swift */; };
 		E2BCA55B1CF36187006AAA8B /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2BCA55A1CF36187006AAA8B /* Event.storyboard */; };
 		E2BCA5621CF36CDA006AAA8B /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5611CF36CDA006AAA8B /* FeedTableViewController.swift */; };
@@ -207,7 +201,6 @@
 		567F67E08A10E7527EE39217 /* Pods-hackillinois-2017-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A50876731E1C79130095F399 /* BottomMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomMapViewController.swift; sourceTree = "<group>"; };
 		A50876771E1C921C0095F399 /* BottomMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomMapViewController.xib; sourceTree = "<group>"; };
-		A50F29241E14D55500878652 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		A50F29261E14DC3600878652 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A54825B01E160C6C00E35C71 /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
 		D3D05678487C3E4F7496D710 /* Pods-hackillinois-2017-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -241,16 +234,11 @@
 		E28FB69C1D194950000D062F /* HelpQ.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQ.swift; sourceTree = "<group>"; };
 		E28FB69D1D194950000D062F /* Chat+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Chat+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E28FB69E1D194951000D062F /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
-		E2A085ED1D0C4202002197F9 /* GenericTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericTabBarController.swift; sourceTree = "<group>"; };
-		E2A085EF1D0C42A7002197F9 /* GenericNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericNavigationController.swift; sourceTree = "<group>"; };
 		E2A085F11D0C4E43002197F9 /* GenericCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericCardViewController.swift; sourceTree = "<group>"; };
 		E2A085F51D0C6536002197F9 /* ScheduleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleCell.swift; sourceTree = "<group>"; };
 		E2A085F91D0C6688002197F9 /* DayItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayItem.swift; sourceTree = "<group>"; };
 		E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+fromHex.swift"; sourceTree = "<group>"; };
 		E2AC3F8D1CF21F3900C4F21F /* UIColor+fromHexTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+fromHexTests.swift"; sourceTree = "<group>"; };
-		E2B6C3921D0B2E1200D851F9 /* Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
-		E2B6C3941D0B2E8000D851F9 /* Map.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
-		E2B6C3961D0B2ED800D851F9 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		E2BB42C51D133A9A009EF512 /* GenericInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericInputView.swift; sourceTree = "<group>"; };
 		E2BCA55A1CF36187006AAA8B /* Event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Event.storyboard; sourceTree = "<group>"; };
 		E2BCA5611CF36CDA006AAA8B /* FeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
@@ -364,7 +352,6 @@
 			isa = PBXGroup;
 			children = (
 				398219D81E345F2800C5D0DF /* CustomCells */,
-				A50F29241E14D55500878652 /* Home.storyboard */,
 				A50F29261E14DC3600878652 /* HomeViewController.swift */,
 			);
 			name = Home;
@@ -523,7 +510,6 @@
 		E2B6C39A1D0B30A300D851F9 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				E2B6C3961D0B2ED800D851F9 /* Profile.storyboard */,
 				E26F44F11D0EF2C100FB4A9F /* ProfileViewController.swift */,
 			);
 			name = Profile;
@@ -576,7 +562,6 @@
 		E2BCA5601CF36A15006AAA8B /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				E2B6C3921D0B2E1200D851F9 /* Feed.storyboard */,
 				E2BCA5611CF36CDA006AAA8B /* FeedTableViewController.swift */,
 				E2D4F0E01D06B28B00646BF8 /* FeedTableViewCell.swift */,
 				E277DD6C1CF4B9EC00D7E018 /* FeedDetail */,
@@ -609,8 +594,6 @@
 			children = (
 				E27755521D36B7F600E7A379 /* GenericHelpQStaffViewController.swift */,
 				E2BD82B41D09EA530009DB07 /* GenericMapViewController.swift */,
-				E2A085ED1D0C4202002197F9 /* GenericTabBarController.swift */,
-				E2A085EF1D0C42A7002197F9 /* GenericNavigationController.swift */,
 				E2A085F11D0C4E43002197F9 /* GenericCardViewController.swift */,
 				E2BB42C51D133A9A009EF512 /* GenericInputView.swift */,
 			);
@@ -628,7 +611,6 @@
 		E2D483311D00D37800859A67 /* Maps */ = {
 			isa = PBXGroup;
 			children = (
-				E2B6C3941D0B2E8000D851F9 /* Map.storyboard */,
 				243720031E32D4D100B1C7C5 /* BottomViewTableViewCell.swift */,
 				243720011E32CEDD00B1C7C5 /* BottomViewController.swift */,
 				E2D483321D00D3B100859A67 /* MapViewController.swift */,
@@ -797,16 +779,12 @@
 				24794C6D1E340DFB0016F8D4 /* Brandon_thin.otf in Resources */,
 				390A8DE91E3AA90200018855 /* Gotham-BookItalic.otf in Resources */,
 				E277DD6B1CF4AF0400D7E018 /* keys.plist in Resources */,
-				A50F29251E14D55500878652 /* Home.storyboard in Resources */,
-				E2B6C3951D0B2E8000D851F9 /* Map.storyboard in Resources */,
-				E2B6C3971D0B2ED800D851F9 /* Profile.storyboard in Resources */,
 				E20465D81CF1FAF50054654E /* LaunchScreen.storyboard in Resources */,
 				390A8DEC1E3AA90200018855 /* Gotham-Medium.otf in Resources */,
 				390A8DF11E3AA90200018855 /* Gotham-UltraItalic.otf in Resources */,
 				390A8DF21E3AA90200018855 /* Gotham-XLight.otf in Resources */,
 				A50876781E1C921C0095F399 /* BottomMapViewController.xib in Resources */,
 				E2F957051D0BA899003A0881 /* Schedule.storyboard in Resources */,
-				E2B6C3931D0B2E1200D851F9 /* Feed.storyboard in Resources */,
 				E20465D51CF1FAF50054654E /* Assets.xcassets in Resources */,
 				390A8DEB1E3AA90200018855 /* Gotham-LightItalic.otf in Resources */,
 				390A8DEE1E3AA90200018855 /* Gotham-Thin.otf in Resources */,
@@ -1027,7 +1005,6 @@
 				E2D483331D00D3B100859A67 /* MapViewController.swift in Sources */,
 				3947F9541E4C472000FF4AF4 /* GenericTabController.swift in Sources */,
 				243720041E32D4D100B1C7C5 /* BottomViewTableViewCell.swift in Sources */,
-				E2A085F01D0C42A7002197F9 /* GenericNavigationController.swift in Sources */,
 				E23791411D21C4870020618E /* ReferencedButton.swift in Sources */,
 				E2BCA5801CF3B19E006AAA8B /* Location+CoreDataProperties.swift in Sources */,
 				E2D4F0DF1D06AD3F00646BF8 /* Building.swift in Sources */,
@@ -1037,7 +1014,6 @@
 				E2F639481D05083300853089 /* CGRect+initWithCenterAt.swift in Sources */,
 				392321F31E4C17C2003731AA /* noEventCell.swift in Sources */,
 				E2BCA57C1CF3B19E006AAA8B /* Feed+CoreDataProperties.swift in Sources */,
-				E2A085EE1D0C4202002197F9 /* GenericTabBarController.swift in Sources */,
 				390A8DFF1E46683600018855 /* mainCellBeforeHackathonCell.swift in Sources */,
 				E28FB6A11D194951000D062F /* Chat+CoreDataProperties.swift in Sources */,
 				E20465CD1CF1FAF50054654E /* LoginViewController.swift in Sources */,

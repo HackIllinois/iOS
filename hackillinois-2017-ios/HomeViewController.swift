@@ -26,7 +26,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         currentTimeForTable = Int(NSDate().timeIntervalSince1970)
-        UIApplication.shared.statusBarStyle = .lightContent
         
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
         backgroundImage.image = UIImage(named: "backgroundImage")
@@ -42,15 +41,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         checkInTableView.sectionFooterHeight = 0.0
         initializeSample()
         loadSavedData()
-    }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
