@@ -1,4 +1,4 @@
-//
+		//
 //  GenericNavigationController.swift
 //  hackillinois-2017-ios
 //
@@ -46,11 +46,10 @@ class GenericNavigationController: UINavigationController, SWRevealViewControlle
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        //navigationBar.barTintColor = UIColor.fromRGBHex(mainUIColor)
-        //navigationBar.tintColor = UIColor.fromRGBHex(mainTintColor)
-        //navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.fromRGBHex(mainTintColor)]
-        
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.default;
+        navigationBar.barTintColor = UIColor.fromRGBHex(mainUIColor)
+        navigationBar.tintColor = UIColor.fromRGBHex(mainTintColor)
+        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.fromRGBHex(pseudoWhiteColor)]
+    
         
         // Reveal view controller
         if self.revealViewController() != nil {
