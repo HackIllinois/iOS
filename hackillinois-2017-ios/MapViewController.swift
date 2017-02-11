@@ -7,9 +7,7 @@
 //
 
 import UIKit
-// import GoogleMaps
 import MapKit
-import LiquidFloatingActionButton
 
 class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, UIToolbarDelegate  {
     

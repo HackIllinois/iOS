@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreLocation
-import LiquidFloatingActionButton
 import MapKit
 
 class FeedDetailViewController: GenericMapViewController {
