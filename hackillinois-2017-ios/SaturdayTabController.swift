@@ -40,7 +40,7 @@ class SaturdayTabController: GenericTabController {
                 name: "Saturday Event \(n)",
                 location: location_names[Int(location_id)],
                 time: "MM:DD PM",
-                description: "Description here. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. ",
+                description: "This event does not contain images.",
                 highlighted: arc4random_uniform(2) == 0,
                 location_id: Int(location_id) + 1
             )

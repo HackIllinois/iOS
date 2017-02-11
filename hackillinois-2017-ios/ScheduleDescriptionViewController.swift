@@ -16,9 +16,8 @@ class ScheduleDescriptionViewController: UIViewController {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var imageHeight: NSLayoutConstraint!
     
-    var descriptionStr: String = ""
-    var titleStr: String = ""
     var dayItem: DayItem?
+    var imageData: Data?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +42,6 @@ class ScheduleDescriptionViewController: UIViewController {
         }
         
         // Set up back button
-        //self.navigationController?.navigationBar.topItem?.title = selectedWeekday
         self.navigationController?.navigationBar.tintColor = UIColor(red: 93.0/255.0, green: 200.0/255.0, blue: 219.9/255.0, alpha: 1.0)
 
         // Init content
@@ -53,23 +51,32 @@ class ScheduleDescriptionViewController: UIViewController {
         descriptionLabel.text = dayItem?.descriptionStr
         
         if let imageUrl = dayItem?.imageUrl {
-            let data = NSData(contentsOf: NSURL(string: imageUrl)! as URL)
-            if let data = data {
-                let dummyImage = UIImage(data: data as Data)
-                let dummyWidth = dummyImage?.size.width
-                let dummyHeight = dummyImage?.size.height
-                image.image = dummyImage
-                image.isUserInteractionEnabled = true
-                imageHeight.constant = (image.frame.width + 30) / dummyWidth! * dummyHeight!
-            }
+            // load image in background thread
+            performSelector(inBackground: #selector(loadImage), with: imageUrl)
         }
     }
     
+    func loadImage(imageUrl: String) {
+        let data = NSData(contentsOf: NSURL(string: imageUrl)! as URL)
+        if let data = data {
+            imageData = data as Data
+            
+            performSelector(onMainThread: #selector(setImage), with: data as Data, waitUntilDone: false)
+        }
+    }
+    
+    func setImage(imageData: Data) {
+        let dummyImage = UIImage(data: imageData)
+        let dummyWidth = dummyImage?.size.width
+        let dummyHeight = dummyImage?.size.height
+        image.image = dummyImage
+        image.isUserInteractionEnabled = true
+        imageHeight.constant = (image.frame.width + 30) / dummyWidth! * dummyHeight!
+    }
+    
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
-        print("Image tapped")
-        if let imageUrl = dayItem?.imageUrl {
-            let vc = ScheduleDetailsImageViewController()
-            vc.imageUrl = imageUrl
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "ScheduleDescriptionImageView") as? ScheduleDetailsImageViewController {
+            vc.imageData = imageData
             navigationController?.pushViewController(vc, animated: true)
         }
     }

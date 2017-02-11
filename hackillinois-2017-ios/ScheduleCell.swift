@@ -52,9 +52,9 @@ class ScheduleCell: UITableViewCell {
     func cellInit(){
         self.selectionStyle = .none
         
-        let leftArrow = UIImage(named: "ic_chevron_right_48pt")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-        descriptionButton.setImage(leftArrow, for: .normal)
-        descriptionButton.tintColor = descriptionButton.titleColor(for: .normal)
+        //let leftArrow = UIImage(named: "ic_chevron_right_48pt")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        //descriptionButton.setImage(leftArrow, for: .normal)
+        //descriptionButton.tintColor = descriptionButton.titleColor(for: .normal)
         
         let reminderImage = UIImage(named: "reminder")
         let tintedImage = reminderImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)

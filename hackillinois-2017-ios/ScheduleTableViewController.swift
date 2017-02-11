@@ -21,13 +21,10 @@ class ScheduleTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // hack
+        // create padding
         self.tableView.contentInset = UIEdgeInsetsMake(12, 0, 12, 0);
         
-        // more hack
-        tableTopBorder.backgroundColor = highlightedCellBackgroundColor
-        
-        // even more hack
+        // create rounded corners
         self.view.layoutIfNeeded()
         roundCorners(view: tableTopBorder, corners: [.topLeft, .topRight], radius: tableTopBorder.frame.height)
     }

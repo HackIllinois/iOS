@@ -9,23 +9,31 @@
 import UIKit
 import WebKit
 
-class ScheduleDetailsImageViewController: UIViewController {
-    var webView: WKWebView!
-    var imageUrl: String = ""
+class ScheduleDetailsImageViewController: UIViewController, UIScrollViewDelegate {
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var imageView: UIImageView!
     
-    override func loadView() {
-        webView = WKWebView()
-        view = webView
-    }
-    
+    var imageData: Data?    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         
-        // Not safe!
-        //webView.loadHTMLString("<img src='" + imageUrl + "'>", baseURL: nil)
-        webView.load(URLRequest(url: NSURL(string: imageUrl)! as URL))
+        // Set up background gradient
+        let gradient = CAGradientLayer()
+        let colorBottom = UIColor(red: 20/255, green: 36/255, blue: 66/255, alpha: 1.0)
+        let colorTop = UIColor(red: 28/255, green: 50/255, blue: 90/255, alpha: 1.0)
+        gradient.colors = [ colorTop.cgColor, colorBottom.cgColor ]
+        gradient.locations = [ 0.0, 1.0 ]
+        gradient.frame = view.bounds
+        self.view.layer.insertSublayer(gradient, at: 0)
+
+        
+        if let data = imageData {
+            // load image data
+            scrollView.delegate = self
+            
+            imageView.image = UIImage(data: data)
+            imageView.clipsToBounds = false
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,7 +41,10 @@ class ScheduleDetailsImageViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.imageView
+    }
+    
     /*
     // MARK: - Navigation
 

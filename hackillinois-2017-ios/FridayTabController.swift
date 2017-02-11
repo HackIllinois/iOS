@@ -25,7 +25,7 @@ class FridayTabController: GenericTabController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let sampleDescStr = String(repeating: "This is a long description.\n", count: 30)
+        let sampleDescStr = String(repeating: "This event contains a clickable image.\n", count: 10)
         
         // Friday
         for n in 0..<10 {
@@ -36,6 +36,11 @@ class FridayTabController: GenericTabController {
                 "ECEB",
                 "Union"
             ]
+            let sampleImages = [
+                ["title": "Siebel Center", "url": "https://cs.illinois.edu/sites/default/files/images/banners/banner_whycs.png"],
+                ["title": "HackIllinois", "url": "https://cs.illinois.edu/sites/default/files/images/banners/hackillinois2017.png"]
+            ]
+
             
             let item = DayItem(
                 name: "Friday Event \(n)",
@@ -45,6 +50,9 @@ class FridayTabController: GenericTabController {
                 highlighted: arc4random_uniform(2) == 0,
                 location_id: Int(location_id) + 1
             )
+            let randomImageIndex = Int(arc4random_uniform(UInt32(sampleImages.count)))
+            item.imageTitle = sampleImages[randomImageIndex]["title"]
+            item.imageUrl = sampleImages[randomImageIndex]["url"]
             tableView.dayItems.append(item)
         }
         
