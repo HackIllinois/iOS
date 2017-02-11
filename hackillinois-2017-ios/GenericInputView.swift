@@ -48,26 +48,36 @@ class GenericInputView: UIViewController, UITextFieldDelegate, UITextViewDelegat
 //            textView.textColor = UIColor(red: 28/255, green: 50/255, blue: 90/255, alpha: 1) // Placeholder default color for iOS 9
             textView.delegate = self
         }
+        
+//        textFields[0].tag = 0
+//        textFields[1].tag = 1
+        
+        
+        
 
-        /* THIS IS HERE A SECOND TIME FOR SOME REASON???
+
         /* Configure each textField */
         for textField in textFields {
             // Add padding to the left side
-            let inputTextPadding = UIView(frame: CGRect(x: 0, y: 0, width: 1, height: textField.frame.height))
-            textField.leftView = inputTextPadding
-            textField.leftViewMode = .always
+//            let inputTextPadding = UIView(frame: CGRect(x: 0, y: 0, width: 1, height: textField.frame.height))
+//            textField.leftView = inputTextPadding
+//            textField.leftViewMode = .always
             
             // Set Better UI Elements
-            textField.layer.borderWidth = 4
-            textField.layer.borderWidth = 4
-            textField.layer.cornerRadius = 5
-            textField.layer.borderColor = UIColor.fromRGBHex(borderColorHex).cgColor
-            textField.borderStyle = .roundedRect
+//            textField.layer.borderWidth = 4
+//            textField.layer.borderWidth = 4
+//            textField.layer.cornerRadius = 5
+//            textField.layer.borderColor = UIColor.fromRGBHex(borderColorHex).cgColor
+//            textField.borderStyle = .roundedRect
             
             // Set delegate as self
             textField.delegate = self
         }
-        */
+//        textFields[0].returnKeyType = .next
+//        textFields[1].returnKeyType = .done
+//        print("textFields[0]: \(textFields[0].tag)")
+//        print("textFields[1]: \(textFields[1].tag)")
+
     }
     
     /*
@@ -97,7 +107,7 @@ class GenericInputView: UIViewController, UITextFieldDelegate, UITextViewDelegat
         // Animate the keyboard so it looks a lot less awkward
         // It seems like this line isn't required for the animation to take place for both
         UIView.animate(withDuration: 3.0, animations: {
-            self.scroll.contentInset = UIEdgeInsets.zero
+            self.scroll.contentInset.bottom = -175
         })
 //        UIView.animate(withDuration: ((notification as NSNotification).userInfo![UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue, animations: {
 //            self.scroll.contentInset = UIEdgeInsets.zero
@@ -105,10 +115,13 @@ class GenericInputView: UIViewController, UITextFieldDelegate, UITextViewDelegat
     }
     
     // Mark: UITextFieldDelegate
-    /* Configure behavior of return key. If you are adding more text fields, set the tags in order of how the user should be inputting them. For this login, username has a tag value of 1 and password has a tag value of 2 */
+    /* Configure behavior of return key. If you are adding more text fields, set the tags in order of how the user should be inputting them. For this login, username has a tag value of 0 and password has a tag value of 1 */
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("tag is \(textField.tag)")
+        
         let nextTextFieldTag = textField.tag + 1
         if let nextTextField = textField.superview?.viewWithTag(nextTextFieldTag) as UIResponder! {
+            print("found next responder")
             // Found next text field to respond to
             nextTextField.becomeFirstResponder()
         } else {
@@ -125,8 +138,9 @@ class GenericInputView: UIViewController, UITextFieldDelegate, UITextViewDelegat
         // Can configure this in keyboardWillDisappear()
     }
     
-    // Mark: UITextVieDelegate
+    // Mark: UITextViewDelegate
     func textViewDidBeginEditing(_ textView: UITextView) {
+        print("textViewDidBeginEditing")
         if textView.text == "Description here..." {
             textView.text = ""
             textView.textColor = UIColor.black
@@ -135,13 +149,14 @@ class GenericInputView: UIViewController, UITextFieldDelegate, UITextViewDelegat
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        print("textViewDidEndEditing")
         if textView.text == "" {
             textView.text = "Description here..."
             textView.textColor = UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22)
         }
+        
         textView.resignFirstResponder()
     }
-    
     deinit {
     }
 }

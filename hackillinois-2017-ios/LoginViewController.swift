@@ -270,6 +270,8 @@ class LoginViewController: GenericInputView {
     /* View Controller overrides */
     override func viewDidLoad() {
         
+        UIApplication.shared.statusBarStyle = .lightContent
+        
         /* Set super class requirements */
         scroll = scrollView
         textFields = [UsernameTextField, PasswordTextField]
