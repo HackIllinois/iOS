@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A3A1B2F1E4E45EB00EA2100 /* ProfileViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A1B2E1E4E45EB00EA2100 /* ProfileViewCell.swift */; };
+		0A53966D1E4E67FC007F6450 /* InsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A53966C1E4E67FC007F6450 /* InsetLabel.swift */; };
 		17BC6B394A0A310CDEA1DF7B /* Pods_hackillinois_2017_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75AFF8F2A9393CCA4EBF188 /* Pods_hackillinois_2017_ios.framework */; };
 		243720021E32CEDD00B1C7C5 /* BottomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243720011E32CEDD00B1C7C5 /* BottomViewController.swift */; };
 		243720041E32D4D100B1C7C5 /* BottomViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243720031E32D4D100B1C7C5 /* BottomViewTableViewCell.swift */; };
@@ -34,7 +36,7 @@
 		AE232CBD3115F1DA5DF9B870 /* Pods_hackillinois_2017_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D8C9C142AB0677D17C63CBA /* Pods_hackillinois_2017_iosTests.framework */; };
 		E20465CB1CF1FAF50054654E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20465CA1CF1FAF50054654E /* AppDelegate.swift */; };
 		E20465CD1CF1FAF50054654E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20465CC1CF1FAF50054654E /* LoginViewController.swift */; };
-		E20465D01CF1FAF50054654E /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20465CE1CF1FAF50054654E /* Login.storyboard */; };
+		E20465D01CF1FAF50054654E /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20465CE1CF1FAF50054654E /* Login.storyboard */; settings = {ASSET_TAGS = (1, ); }; };
 		E20465D31CF1FAF50054654E /* hackillinois_2017_ios.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E20465D11CF1FAF50054654E /* hackillinois_2017_ios.xcdatamodeld */; };
 		E20465D51CF1FAF50054654E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E20465D41CF1FAF50054654E /* Assets.xcassets */; };
 		E20465D81CF1FAF50054654E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20465D61CF1FAF50054654E /* LaunchScreen.storyboard */; };
@@ -114,6 +116,8 @@
 
 /* Begin PBXFileReference section */
 		08F70C4B7B92575DEC15EFAE /* Pods-hackillinois-2017-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-ios/Pods-hackillinois-2017-ios.release.xcconfig"; sourceTree = "<group>"; };
+		0A3A1B2E1E4E45EB00EA2100 /* ProfileViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewCell.swift; sourceTree = "<group>"; };
+		0A53966C1E4E67FC007F6450 /* InsetLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsetLabel.swift; sourceTree = "<group>"; };
 		0D8C9C142AB0677D17C63CBA /* Pods_hackillinois_2017_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F0E70C5ECC7AC1B705813BB /* Pods_hackillinois_2017_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D5246D3021D962B3E962D3F /* Pods-hackillinois-2017-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-ios/Pods-hackillinois-2017-ios.debug.xcconfig"; sourceTree = "<group>"; };
@@ -238,6 +242,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A53966E1E4E6AA5007F6450 /* Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				0A53966C1E4E67FC007F6450 /* InsetLabel.swift */,
+			);
+			name = Subclasses;
+			sourceTree = "<group>";
+		};
 		24371FFC1E32777E00B1C7C5 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -416,6 +428,7 @@
 		E2B6C39A1D0B30A300D851F9 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				0A3A1B2E1E4E45EB00EA2100 /* ProfileViewCell.swift */,
 				E2B6C3961D0B2ED800D851F9 /* Profile.storyboard */,
 				E26F44F11D0EF2C100FB4A9F /* ProfileViewController.swift */,
 			);
@@ -425,6 +438,7 @@
 		E2B6C39C1D0B30F100D851F9 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0A53966E1E4E6AA5007F6450 /* Subclasses */,
 				E2D1853A1D21CA1F00CA4816 /* Custom UI */,
 				E2BD82B31D09EA350009DB07 /* Generics */,
 				E2B6C39D1D0B311000D851F9 /* HelperClasses */,
@@ -617,12 +631,17 @@
 		E20465BF1CF1FAF50054654E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					0,
+					1,
+				);
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Shotaro Ikeda";
 				TargetAttributes = {
 					E20465C61CF1FAF50054654E = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = QWSA5WNQS4;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -883,6 +902,7 @@
 				E28FB6A21D194951000D062F /* Chat.swift in Sources */,
 				A50F29271E14DC3600878652 /* HomeViewController.swift in Sources */,
 				E2A085FA1D0C6688002197F9 /* DayItem.swift in Sources */,
+				0A53966D1E4E67FC007F6450 /* InsetLabel.swift in Sources */,
 				E224BFF41D19CCA60098AA8D /* HTTPHelpers.swift in Sources */,
 				E2BCA5621CF36CDA006AAA8B /* FeedTableViewController.swift in Sources */,
 				E25377421CF8AB2C003795E7 /* Tag.swift in Sources */,
@@ -905,6 +925,7 @@
 				E20465CB1CF1FAF50054654E /* AppDelegate.swift in Sources */,
 				E277DD691CF4A79100D7E018 /* FeedDetailViewController.swift in Sources */,
 				E26F44F21D0EF2C100FB4A9F /* ProfileViewController.swift in Sources */,
+				0A3A1B2F1E4E45EB00EA2100 /* ProfileViewCell.swift in Sources */,
 				E2BD82B91D0B09D60009DB07 /* LoginConstants.swift in Sources */,
 				E2A085FF1D0C70BF002197F9 /* GenericDayViewController.swift in Sources */,
 			);
@@ -1067,11 +1088,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = QWSA5WNQS4;
 				INFOPLIST_FILE = "hackillinois-2017-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "acm.hackillinois-2017.ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "acm.hackillinois-2017.ios-kevin";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1089,11 +1110,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = QWSA5WNQS4;
 				INFOPLIST_FILE = "hackillinois-2017-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "acm.hackillinois-2017.ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "acm.hackillinois-2017.ios-kevin";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
