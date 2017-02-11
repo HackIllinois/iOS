@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E144f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12106.1" systemVersion="16E144f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12074.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -29,26 +29,26 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvJ-ec-cHF">
-                                        <rect key="frame" x="0.0" y="340" width="375" height="327"/>
+                                        <rect key="frame" x="0.0" y="290" width="375" height="327"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="wml-Eo-5NI">
+                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="wml-Eo-5NI">
                                                 <rect key="frame" x="62" y="81" width="250" height="46"/>
                                                 <color key="backgroundColor" red="0.30659854412078857" green="0.37590044736862183" blue="0.57916110754013062" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="E04-og-sSM"/>
                                                     <constraint firstAttribute="width" constant="250" id="kMY-Pa-B8R"/>
                                                 </constraints>
-                                                <color key="textColor" red="0.10980392156862745" green="0.19607843137254902" blue="0.3529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="24"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" keyboardAppearance="alert" returnKeyType="go" secureTextEntry="YES"/>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="mhz-Y5-wCk">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="mhz-Y5-wCk">
                                                 <rect key="frame" x="62" y="9" width="250" height="46"/>
                                                 <color key="backgroundColor" red="0.30588235294117649" green="0.37647058823529411" blue="0.58039215686274503" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="rdQ-AJ-CBn"/>
                                                 </constraints>
-                                                <color key="textColor" red="0.078431372549019607" green="0.19607843137254902" blue="0.3529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="24"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" keyboardAppearance="alert" returnKeyType="next"/>
                                             </textField>
@@ -98,7 +98,7 @@
                                         </constraints>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Hack Illinois Logo" translatesAutoresizingMaskIntoConstraints="NO" id="MYV-TP-8Sd">
-                                        <rect key="frame" x="103" y="122" width="169" height="168"/>
+                                        <rect key="frame" x="103" y="72" width="169" height="168"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="167.59999999999999" id="2Fc-u8-UkP"/>
                                             <constraint firstAttribute="width" constant="169.19999999999999" id="791-XM-bSo"/>
@@ -111,8 +111,7 @@
                                     <constraint firstAttribute="trailing" secondItem="cvJ-ec-cHF" secondAttribute="trailing" id="CpW-je-7Y3"/>
                                     <constraint firstItem="MYV-TP-8Sd" firstAttribute="centerX" secondItem="hYk-eL-auk" secondAttribute="centerX" id="EOM-7Y-wib"/>
                                     <constraint firstItem="cvJ-ec-cHF" firstAttribute="leading" secondItem="hYk-eL-auk" secondAttribute="leading" id="EzW-DH-F07"/>
-                                    <constraint firstItem="cvJ-ec-cHF" firstAttribute="top" relation="greaterThanOrEqual" secondItem="MYV-TP-8Sd" secondAttribute="bottom" constant="50" id="T2R-4c-gqI"/>
-                                    <constraint firstItem="MYV-TP-8Sd" firstAttribute="top" secondItem="hYk-eL-auk" secondAttribute="top" constant="122" id="bOi-9Z-SLp"/>
+                                    <constraint firstItem="MYV-TP-8Sd" firstAttribute="top" secondItem="hYk-eL-auk" secondAttribute="top" constant="72" id="bOi-9Z-SLp"/>
                                     <constraint firstItem="MYV-TP-8Sd" firstAttribute="centerX" secondItem="cvJ-ec-cHF" secondAttribute="centerX" id="vxA-OA-H9H"/>
                                     <constraint firstAttribute="bottom" secondItem="cvJ-ec-cHF" secondAttribute="bottom" id="wAV-6b-P0w"/>
                                 </constraints>
