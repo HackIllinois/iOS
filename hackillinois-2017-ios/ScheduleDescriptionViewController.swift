@@ -53,19 +53,22 @@ class ScheduleDescriptionViewController: UIViewController {
         if let imageUrl = dayItem?.imageUrl {
             // load image in background thread
             performSelector(inBackground: #selector(loadImage), with: imageUrl)
+        } else if let imageData = dayItem?.imageData {
+            // load image by data
+            setImage(imageData: imageData)
         }
     }
     
     func loadImage(imageUrl: String) {
         let data = NSData(contentsOf: NSURL(string: imageUrl)! as URL)
         if let data = data {
-            imageData = data as Data
-            
             performSelector(onMainThread: #selector(setImage), with: data as Data, waitUntilDone: false)
         }
     }
     
     func setImage(imageData: Data) {
+        self.imageData = imageData as Data
+        
         let dummyImage = UIImage(data: imageData)
         let dummyWidth = dummyImage?.size.width
         let dummyHeight = dummyImage?.size.height

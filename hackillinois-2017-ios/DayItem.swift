@@ -17,6 +17,7 @@ class DayItem: NSObject {
     var location_id: Int
     var imageUrl: String?
     var imageTitle: String?
+    var imageData: Data?
     
     override init() {
         name = "Event Name Here"
@@ -33,10 +34,15 @@ class DayItem: NSObject {
         self.time = time
         self.descriptionStr = description
         self.highlighted = highlighted
-        self.location_id = location_id    }
+        self.location_id = location_id
+    }
     
-    func setImage(title: String, url: String){
+    func setImage(title: String, url: String) {
         self.imageUrl = url
         self.imageTitle = title
+    }
+    
+    func setImage(title: String, data: Data) {
+        self.imageData = data
     }
 }
