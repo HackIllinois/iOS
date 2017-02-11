@@ -308,20 +308,20 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D3t-5P-ATd" userLabel="Cell Border">
                                                     <rect key="frame" x="2" y="0.0" width="347" height="198"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="y6x-mo-iON">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="y6x-mo-iON">
                                                             <rect key="frame" x="8" y="8" width="331" height="182"/>
                                                             <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="bottom" spacing="42" translatesAutoresizingMaskIntoConstraints="NO" id="Imh-wX-J0B">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="331" height="50"/>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="Imh-wX-J0B">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="331" height="83"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kEW-Su-lmm">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="38" height="50"/>
-                                                                            <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="20"/>
-                                                                            <color key="textColor" red="0.94117647058823528" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="th9-Z1-KcU">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="165.5" height="83"/>
+                                                                            <fontDescription key="fontDescription" name="BrandonGrotesque-Bold" family="Brandon Grotesque" pointSize="20"/>
+                                                                            <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TrJ-yO-YSd">
-                                                                            <rect key="frame" x="265" y="0.0" width="66" height="50"/>
+                                                                            <rect key="frame" x="265" y="0.0" width="66" height="83"/>
                                                                             <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="17"/>
                                                                             <state key="normal" title="Reminder">
                                                                                 <color key="titleColor" red="0.50196078431372548" green="0.5607843137254902" blue="0.76862745098039209" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -331,15 +331,15 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="trailing" secondItem="TrJ-yO-YSd" secondAttribute="trailing" id="0if-PJ-vza"/>
                                                                         <constraint firstItem="TrJ-yO-YSd" firstAttribute="top" secondItem="Imh-wX-J0B" secondAttribute="top" id="2Kz-4x-HKZ"/>
-                                                                        <constraint firstItem="kEW-Su-lmm" firstAttribute="top" secondItem="Imh-wX-J0B" secondAttribute="top" id="Cpi-uB-7wy"/>
+                                                                        <constraint firstItem="th9-Z1-KcU" firstAttribute="leading" secondItem="Imh-wX-J0B" secondAttribute="leading" id="6Rn-sU-WMh"/>
+                                                                        <constraint firstItem="th9-Z1-KcU" firstAttribute="top" secondItem="Imh-wX-J0B" secondAttribute="top" id="9mD-tS-B8L"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="th9-Z1-KcU" secondAttribute="bottom" id="H81-bx-3Mq"/>
                                                                         <constraint firstAttribute="bottom" secondItem="TrJ-yO-YSd" secondAttribute="bottom" id="Lu8-QK-kLT"/>
-                                                                        <constraint firstItem="kEW-Su-lmm" firstAttribute="leading" secondItem="Imh-wX-J0B" secondAttribute="leading" id="WzA-ie-o3e"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="kEW-Su-lmm" secondAttribute="bottom" id="lcd-oI-GPT"/>
                                                                     </constraints>
                                                                 </stackView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="th9-Z1-KcU">
-                                                                    <rect key="frame" x="0.0" y="50" width="331" height="82"/>
-                                                                    <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="20"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kEW-Su-lmm">
+                                                                    <rect key="frame" x="0.0" y="93" width="331" height="29"/>
+                                                                    <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="20"/>
                                                                     <color key="textColor" red="0.71764705880000002" green="0.74509803919999995" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -379,13 +379,11 @@
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="Imh-wX-J0B" firstAttribute="top" secondItem="y6x-mo-iON" secondAttribute="top" id="1pq-C4-LpR"/>
-                                                                <constraint firstItem="th9-Z1-KcU" firstAttribute="top" secondItem="Imh-wX-J0B" secondAttribute="bottom" id="A74-vt-ZtR"/>
                                                                 <constraint firstItem="uKi-Rn-ggV" firstAttribute="leading" secondItem="y6x-mo-iON" secondAttribute="leading" id="Cei-WP-WxW"/>
                                                                 <constraint firstItem="Imh-wX-J0B" firstAttribute="leading" secondItem="y6x-mo-iON" secondAttribute="leading" id="KVk-OZ-xCA"/>
                                                                 <constraint firstAttribute="bottom" secondItem="uKi-Rn-ggV" secondAttribute="bottom" id="b1z-dH-dge"/>
-                                                                <constraint firstItem="th9-Z1-KcU" firstAttribute="centerY" secondItem="y6x-mo-iON" secondAttribute="centerY" id="ewF-8N-Zr7"/>
+                                                                <constraint firstItem="kEW-Su-lmm" firstAttribute="leading" secondItem="y6x-mo-iON" secondAttribute="leading" id="ite-OH-jf6"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Imh-wX-J0B" secondAttribute="trailing" id="svQ-zI-pVn"/>
-                                                                <constraint firstItem="th9-Z1-KcU" firstAttribute="leading" secondItem="y6x-mo-iON" secondAttribute="leading" id="xow-5i-p0b"/>
                                                             </constraints>
                                                         </stackView>
                                                     </subviews>
@@ -456,16 +454,16 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="daW-jz-chF" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4:30 pm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TdE-eE-1gT">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Schedule Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u4g-Xa-sJI">
                                                 <rect key="frame" x="15" y="15" width="345" height="29"/>
                                                 <fontDescription key="fontDescription" name="BrandonGrotesque-Bold" family="Brandon Grotesque" pointSize="20"/>
                                                 <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Schedule Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u4g-Xa-sJI">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4:30 pm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TdE-eE-1gT">
                                                 <rect key="frame" x="15" y="49" width="345" height="29"/>
-                                                <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="20"/>
-                                                <color key="textColor" red="0.50196078430000002" green="0.56078431370000004" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="20"/>
+                                                <color key="textColor" red="0.71764705880000002" green="0.74509803919999995" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Schedule Location" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUr-12-HVU">
@@ -496,22 +494,22 @@
                                             </imageView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="TdE-eE-1gT" firstAttribute="top" secondItem="daW-jz-chF" secondAttribute="top" constant="15" id="8FU-K4-4yd"/>
+                                            <constraint firstItem="TdE-eE-1gT" firstAttribute="top" secondItem="u4g-Xa-sJI" secondAttribute="bottom" constant="5" id="0EO-uj-h7R"/>
                                             <constraint firstAttribute="trailing" secondItem="N4P-iC-bLe" secondAttribute="trailing" constant="15" id="9is-NK-DX6"/>
                                             <constraint firstAttribute="trailing" secondItem="FQz-OC-7v0" secondAttribute="trailing" constant="15" id="DCi-er-auP"/>
+                                            <constraint firstItem="u4g-Xa-sJI" firstAttribute="top" secondItem="daW-jz-chF" secondAttribute="top" constant="15" id="KvI-01-p08"/>
                                             <constraint firstItem="N4P-iC-bLe" firstAttribute="top" secondItem="hUr-12-HVU" secondAttribute="bottom" constant="15" id="ViM-S1-Eh7"/>
                                             <constraint firstItem="TdE-eE-1gT" firstAttribute="leading" secondItem="daW-jz-chF" secondAttribute="leading" constant="15" id="Vmp-KG-NUp"/>
                                             <constraint firstAttribute="trailing" secondItem="hUr-12-HVU" secondAttribute="trailing" constant="15" id="ZnQ-BR-IMq"/>
                                             <constraint firstItem="u4g-Xa-sJI" firstAttribute="leading" secondItem="daW-jz-chF" secondAttribute="leading" constant="15" id="a4O-o9-EFj"/>
+                                            <constraint firstItem="hUr-12-HVU" firstAttribute="top" secondItem="TdE-eE-1gT" secondAttribute="bottom" constant="5" id="cNk-dB-Sqh"/>
                                             <constraint firstItem="N4P-iC-bLe" firstAttribute="leading" secondItem="daW-jz-chF" secondAttribute="leading" constant="15" id="e6q-oc-ENP"/>
                                             <constraint firstItem="FQz-OC-7v0" firstAttribute="leading" secondItem="daW-jz-chF" secondAttribute="leading" constant="15" id="eXm-BI-2YP"/>
                                             <constraint firstAttribute="trailing" secondItem="TdE-eE-1gT" secondAttribute="trailing" constant="15" id="j5a-Pd-LZ3"/>
-                                            <constraint firstItem="hUr-12-HVU" firstAttribute="top" secondItem="u4g-Xa-sJI" secondAttribute="bottom" constant="5" id="mB2-Vh-hvZ"/>
                                             <constraint firstItem="hUr-12-HVU" firstAttribute="leading" secondItem="daW-jz-chF" secondAttribute="leading" constant="15" id="neu-oX-7bO"/>
                                             <constraint firstAttribute="bottom" secondItem="FQz-OC-7v0" secondAttribute="bottom" constant="15" id="rJw-rW-Wac"/>
                                             <constraint firstItem="FQz-OC-7v0" firstAttribute="top" secondItem="N4P-iC-bLe" secondAttribute="bottom" constant="15" id="sbN-NU-wfc"/>
                                             <constraint firstAttribute="trailing" secondItem="u4g-Xa-sJI" secondAttribute="trailing" constant="15" id="uCm-3x-Mwd"/>
-                                            <constraint firstItem="u4g-Xa-sJI" firstAttribute="top" secondItem="TdE-eE-1gT" secondAttribute="bottom" constant="5" id="xqc-VT-hcn"/>
                                         </constraints>
                                     </view>
                                 </subviews>
