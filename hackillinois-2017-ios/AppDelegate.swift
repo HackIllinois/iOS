@@ -15,83 +15,84 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var HACKILLINOIS_API_URL: String!
 
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-    private func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.isTranslucent = false
+        navigationBarAppearace.tintColor = UIColor.white
+        navigationBarAppearace.barTintColor = UIColor.hiaDarkSlateBlue
+        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+
+        let tabBarAppearace = UITabBar.appearance()
+        tabBarAppearace.isTranslucent = false
+        tabBarAppearace.tintColor = UIColor.white
+        tabBarAppearace.barTintColor = UIColor.hiaDarkSlateBlue
+
+        UIApplication.shared.statusBarStyle = .lightContent
         
-        /* Set appearance of UI */
-        // Tab Bar Item Text colors
-        /*
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.fromRGBHex(mainTintColor)], for: .selected)\
-        */
-        
-        // Have a more consistent view across all views
-        UITabBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().isTranslucent = false
-        
-        
-        // Parse API Keys from keys.plist file
-        var keys: NSDictionary?
-        if let path = Bundle.main.path(forResource: "keys", ofType: "plist") {
-            keys = NSDictionary(contentsOfFile: path)
-        } else {
-            print("keys.plist file could not be found. Please see README.md for information about keys.plist")
-        }
-        
-        if let dict = keys {
-            // Read keys here
-            print(dict["HACKILLINOIS_API_URL"]!)
-            HACKILLINOIS_API_URL = dict["HACKILLINOIS_API_URL"]! as! String
-        }
-        
-        /* Find out which part of the application to go to */
-        let user = CoreDataHelpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]
-        if !user.isEmpty {
-            print("User set to expire: \(user[0].expireTime)")
-            print("Current: \(NSDate())")
-        }
-        
-        if user.isEmpty {
-            print("First launch, no user found")
-            self.window?.rootViewController = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()
-        } else if user[0].expireTime.compare(Date()) == .orderedAscending {
-            print("User already logged in before")
-            // TODO: Check if this method crashes
-            let loginView: LoginViewController = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController() as! LoginViewController
-            loginView.initialEmail = user[0].email // Initialize it with user's email
-            self.window?.rootViewController = loginView
-        } else {
-            // Login not necessary
-            self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
-        }
+        //
+        //        // Parse API Keys from keys.plist file
+        //        var keys: NSDictionary?
+        //        if let path = Bundle.main.path(forResource: "keys", ofType: "plist") {
+        //            keys = NSDictionary(contentsOfFile: path)
+        //        } else {
+        //            print("keys.plist file could not be found. Please see README.md for information about keys.plist")
+        //        }
+        //
+        //        if let dict = keys {
+        //            // Read keys here
+        //            print(dict["HACKILLINOIS_API_URL"]!)
+        //            HACKILLINOIS_API_URL = dict["HACKILLINOIS_API_URL"]! as! String
+        //        }
+        //
+        //        /* Find out which part of the application to go to */
+        //        let user = CoreDataHelpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]
+        //        if !user.isEmpty {
+        //            print("User set to expire: \(user[0].expireTime)")
+        //            print("Current: \(NSDate())")
+        //        }
+        //
+        //        if user.isEmpty {
+        //            print("First launch, no user found")
+        //            self.window?.rootViewController = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()
+        //        } else if user[0].expireTime.compare(Date()) == .orderedAscending {
+        //            print("User already logged in before")
+        //            // TODO: Check if this method crashes
+        //            let loginView: LoginViewController = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController() as! LoginViewController
+        //            loginView.initialEmail = user[0].email // Initialize it with user's email
+        //            self.window?.rootViewController = loginView
+        //        } else {
+        //            // Login not necessary
+        //            self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+        //        }
+        //
         
         return true
     }
-
-    private func applicationWillResignActive(application: UIApplication) {
+    
+    func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
-
-    private func applicationDidEnterBackground(application: UIApplication) {
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
-
-    private func applicationWillEnterForeground(application: UIApplication) {
-        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     }
-
-    private func applicationDidBecomeActive(application: UIApplication) {
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
-
-    private func applicationWillTerminate(application: UIApplication) {
+    
+    func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
+    
 
     // MARK: - Core Data stack
 

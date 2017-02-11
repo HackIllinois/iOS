@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W8K-0w-ncT" id="Yrs-uF-OGo">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="5iN-13-ygn">
@@ -99,6 +99,7 @@
         <!--Feed Detail View Controller-->
         <scene sceneID="cLf-xP-owu">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o9Y-bv-x2y" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="sG7-5y-UvH" customClass="FeedDetailViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RO0-YL-Kg8"/>
@@ -140,7 +141,6 @@
                         <outlet property="mapView" destination="Jpp-fa-Pmd" id="aCS-Hv-ovd"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="o9Y-bv-x2y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2352" y="-131"/>
         </scene>

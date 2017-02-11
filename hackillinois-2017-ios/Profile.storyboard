@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E144f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ebv-0e-niW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ebv-0e-niW">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -20,7 +20,7 @@
         <!--Generic Navigation Controller-->
         <scene sceneID="2bV-cq-CjK">
             <objects>
-                <navigationController storyboardIdentifier="Profile" automaticallyAdjustsScrollViewInsets="NO" id="Ebv-0e-niW" customClass="GenericNavigationController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ebv-0e-niW" customClass="GenericNavigationController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="profile_off" selectedImage="profile_on" id="lTe-0J-ZeA"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -44,7 +44,7 @@
         <!--Profile-->
         <scene sceneID="Uiq-ck-kQ3">
             <objects>
-                <viewController id="lXU-Pi-X86" customClass="ProfileViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="profileView" id="lXU-Pi-X86" customClass="ProfileViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tTL-Mv-EqF"/>
                         <viewControllerLayoutGuide type="bottom" id="qhb-oO-AY7"/>
