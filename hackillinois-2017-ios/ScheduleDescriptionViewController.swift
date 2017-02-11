@@ -74,7 +74,9 @@ class ScheduleDescriptionViewController: UIViewController {
         let dummyHeight = dummyImage?.size.height
         image.image = dummyImage
         image.isUserInteractionEnabled = true
-        imageHeight.constant = (image.frame.width + 30) / dummyWidth! * dummyHeight!
+        
+        self.view.layoutIfNeeded()
+        imageHeight.constant = (image.frame.width) / dummyWidth! * dummyHeight!
     }
     
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
