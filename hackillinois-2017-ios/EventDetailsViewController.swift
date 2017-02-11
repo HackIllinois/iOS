@@ -9,6 +9,7 @@
 import UIKit
 
 class EventDetailsViewController: UIViewController {
+    var eventDetails:Feed;
     override func viewDidLoad() {
         super.viewDidLoad();
     }

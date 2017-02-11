@@ -51,6 +51,9 @@
 		390A8DFF1E46683600018855 /* mainCellBeforeHackathonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8DFE1E46683600018855 /* mainCellBeforeHackathonCell.swift */; };
 		390A8E011E466A4700018855 /* mainCellBeforeHacking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8E001E466A4700018855 /* mainCellBeforeHacking.swift */; };
 		390A8E031E4671DB00018855 /* mainCellAfterHackathon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8E021E4671DB00018855 /* mainCellAfterHackathon.swift */; };
+		390CFC511E4F96AF00DC6F3A /* EventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390CFC501E4F96AF00DC6F3A /* EventData.swift */; };
+		390CFC761E4FB9D800DC6F3A /* Feed+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390CFC741E4FB9D800DC6F3A /* Feed+CoreDataClass.swift */; };
+		390CFC771E4FB9D800DC6F3A /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390CFC751E4FB9D800DC6F3A /* Feed+CoreDataProperties.swift */; };
 		392321F31E4C17C2003731AA /* noEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392321F21E4C17C2003731AA /* noEventCell.swift */; };
 		3947F9501E4C452E00FF4AF4 /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3947F94F1E4C452E00FF4AF4 /* EventDetailsViewController.swift */; };
 		3947F9521E4C471100FF4AF4 /* SchedulePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3947F9511E4C471100FF4AF4 /* SchedulePageViewController.swift */; };
@@ -106,8 +109,6 @@
 		E2BCA55B1CF36187006AAA8B /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2BCA55A1CF36187006AAA8B /* Event.storyboard */; };
 		E2BCA5621CF36CDA006AAA8B /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5611CF36CDA006AAA8B /* FeedTableViewController.swift */; };
 		E2BCA56A1CF373A1006AAA8B /* EventConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5691CF373A1006AAA8B /* EventConstants.swift */; };
-		E2BCA57C1CF3B19E006AAA8B /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5761CF3B19E006AAA8B /* Feed+CoreDataProperties.swift */; };
-		E2BCA57D1CF3B19E006AAA8B /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5771CF3B19E006AAA8B /* Feed.swift */; };
 		E2BCA57E1CF3B19E006AAA8B /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5781CF3B19E006AAA8B /* User+CoreDataProperties.swift */; };
 		E2BCA57F1CF3B19E006AAA8B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5791CF3B19E006AAA8B /* User.swift */; };
 		E2BCA5801CF3B19E006AAA8B /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA57A1CF3B19E006AAA8B /* Location+CoreDataProperties.swift */; };
@@ -190,6 +191,9 @@
 		390A8DFE1E46683600018855 /* mainCellBeforeHackathonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCellBeforeHackathonCell.swift; sourceTree = "<group>"; };
 		390A8E001E466A4700018855 /* mainCellBeforeHacking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCellBeforeHacking.swift; sourceTree = "<group>"; };
 		390A8E021E4671DB00018855 /* mainCellAfterHackathon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCellAfterHackathon.swift; sourceTree = "<group>"; };
+		390CFC501E4F96AF00DC6F3A /* EventData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventData.swift; sourceTree = "<group>"; };
+		390CFC741E4FB9D800DC6F3A /* Feed+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataClass.swift"; sourceTree = "<group>"; };
+		390CFC751E4FB9D800DC6F3A /* Feed+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		392321F21E4C17C2003731AA /* noEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = noEventCell.swift; sourceTree = "<group>"; };
 		3947F94F1E4C452E00FF4AF4 /* EventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
 		3947F9511E4C471100FF4AF4 /* SchedulePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchedulePageViewController.swift; sourceTree = "<group>"; };
@@ -249,8 +253,6 @@
 		E2BCA55A1CF36187006AAA8B /* Event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Event.storyboard; sourceTree = "<group>"; };
 		E2BCA5611CF36CDA006AAA8B /* FeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		E2BCA5691CF373A1006AAA8B /* EventConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventConstants.swift; sourceTree = "<group>"; };
-		E2BCA5761CF3B19E006AAA8B /* Feed+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		E2BCA5771CF3B19E006AAA8B /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		E2BCA5781CF3B19E006AAA8B /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E2BCA5791CF3B19E006AAA8B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E2BCA57A1CF3B19E006AAA8B /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -360,6 +362,7 @@
 				398219D81E345F2800C5D0DF /* CustomCells */,
 				A50F29241E14D55500878652 /* Home.storyboard */,
 				A50F29261E14DC3600878652 /* HomeViewController.swift */,
+				390CFC501E4F96AF00DC6F3A /* EventData.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -580,6 +583,8 @@
 		E2BCA56D1CF3A9F5006AAA8B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				390CFC741E4FB9D800DC6F3A /* Feed+CoreDataClass.swift */,
+				390CFC751E4FB9D800DC6F3A /* Feed+CoreDataProperties.swift */,
 				E28FB69B1D194950000D062F /* HelpQ+CoreDataProperties.swift */,
 				E28FB69C1D194950000D062F /* HelpQ.swift */,
 				E28FB69D1D194950000D062F /* Chat+CoreDataProperties.swift */,
@@ -587,8 +592,6 @@
 				E20465D11CF1FAF50054654E /* hackillinois_2017_ios.xcdatamodeld */,
 				E253773F1CF8AB2C003795E7 /* Tag+CoreDataProperties.swift */,
 				E25377401CF8AB2C003795E7 /* Tag.swift */,
-				E2BCA5761CF3B19E006AAA8B /* Feed+CoreDataProperties.swift */,
-				E2BCA5771CF3B19E006AAA8B /* Feed.swift */,
 				E2BCA5781CF3B19E006AAA8B /* User+CoreDataProperties.swift */,
 				E2BCA5791CF3B19E006AAA8B /* User.swift */,
 				E2BCA57A1CF3B19E006AAA8B /* Location+CoreDataProperties.swift */,
@@ -979,12 +982,12 @@
 				398219DE1E345F4E00C5D0DF /* mainCell.swift in Sources */,
 				E2BD82B51D09EA530009DB07 /* GenericMapViewController.swift in Sources */,
 				243720021E32CEDD00B1C7C5 /* BottomViewController.swift in Sources */,
+				390CFC511E4F96AF00DC6F3A /* EventData.swift in Sources */,
 				E20465D31CF1FAF50054654E /* hackillinois_2017_ios.xcdatamodeld in Sources */,
 				E27755531D36B7F600E7A379 /* GenericHelpQStaffViewController.swift in Sources */,
 				E28FB6A01D194951000D062F /* HelpQ.swift in Sources */,
 				A50876741E1C79130095F399 /* BottomMapViewController.swift in Sources */,
 				398219E01E345F4E00C5D0DF /* standardCell.swift in Sources */,
-				E2BCA57D1CF3B19E006AAA8B /* Feed.swift in Sources */,
 				A54825B11E160C6C00E35C71 /* ScheduleViewController.swift in Sources */,
 				E2A085F61D0C6536002197F9 /* ScheduleCell.swift in Sources */,
 				24794C6F1E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */,
@@ -1008,10 +1011,12 @@
 				24632D171E4D58EA00E7A746 /* FridayTabController.swift in Sources */,
 				398219E11E345F4E00C5D0DF /* twoLocationsCell.swift in Sources */,
 				E224BFF41D19CCA60098AA8D /* HTTPHelpers.swift in Sources */,
+				390CFC761E4FB9D800DC6F3A /* Feed+CoreDataClass.swift in Sources */,
 				E2BCA5621CF36CDA006AAA8B /* FeedTableViewController.swift in Sources */,
 				24632D191E4D58EA00E7A746 /* SundayTabController.swift in Sources */,
 				390A8E011E466A4700018855 /* mainCellBeforeHacking.swift in Sources */,
 				E25377421CF8AB2C003795E7 /* Tag.swift in Sources */,
+				390CFC771E4FB9D800DC6F3A /* Feed+CoreDataProperties.swift in Sources */,
 				390A8DFD1E45219300018855 /* threeLocationsNoQRCodeCell.swift in Sources */,
 				E2BB42C61D133A9A009EF512 /* GenericInputView.swift in Sources */,
 				E2D483331D00D3B100859A67 /* MapViewController.swift in Sources */,
@@ -1025,7 +1030,6 @@
 				24632D181E4D58EA00E7A746 /* SaturdayTabController.swift in Sources */,
 				E2F639481D05083300853089 /* CGRect+initWithCenterAt.swift in Sources */,
 				392321F31E4C17C2003731AA /* noEventCell.swift in Sources */,
-				E2BCA57C1CF3B19E006AAA8B /* Feed+CoreDataProperties.swift in Sources */,
 				390A8DFF1E46683600018855 /* mainCellBeforeHackathonCell.swift in Sources */,
 				E28FB6A11D194951000D062F /* Chat+CoreDataProperties.swift in Sources */,
 				E20465CD1CF1FAF50054654E /* LoginViewController.swift in Sources */,
@@ -1202,6 +1206,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "acm.hackillinois-2017.ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "hackillinois-2017-ios/hackillinois-2017-ios-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1224,6 +1229,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "acm.hackillinois-2017.ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "hackillinois-2017-ios/hackillinois-2017-ios-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

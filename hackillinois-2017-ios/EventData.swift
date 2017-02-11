@@ -7,3 +7,8 @@
 //
 
 import Foundation
+class EventData {
+    var name:String = "";
+    var location:Array<String> = [];
+    var description:String = "";
+}

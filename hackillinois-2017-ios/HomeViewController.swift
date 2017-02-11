@@ -21,6 +21,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var events : [Feed] = []
     
     
+    
     @IBOutlet weak var checkInTableView: UITableView!
     
     override func viewDidLoad() {
@@ -82,6 +83,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard: UIStoryboard = UIStoryboard(name: "Home", bundle: nil)
         if let eventDetails = storyboard.instantiateViewController(withIdentifier: "EventDetails") as? EventDetailsViewController {
+            eventDetails.eventDetails = events[indexPath.row - 1];
             navigationController?.pushViewController(eventDetails, animated: true)
         }
     }
