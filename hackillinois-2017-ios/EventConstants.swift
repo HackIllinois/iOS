@@ -21,7 +21,8 @@ let mainUIColor = 0x142442
 let mainTintColor = 0x1c325a
 let textHighlightColor = 0x5dc8db //cyan highlight text color
 let pseudoWhiteColor = 0xf5fafc
-let duskyBlueColor = 0x4e6094;
+let duskyBlueColor = 0x4e6094
+let dateTimeColor = 0x808fc4
 
 let timeoutIntervalSeconds: UInt64 = 10 // Timeout interval for network calls, in seconds
 

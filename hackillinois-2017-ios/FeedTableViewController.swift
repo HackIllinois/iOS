@@ -219,11 +219,17 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
         refreshControl?.tintColor = UIColor.fromRGBHex(mainTintColor)
         refreshControl?.bounds = CGRect(
             x: refreshControl!.bounds.origin.x,
-            y: 50,
+            y: refreshControl!.bounds.origin.y,
             width: refreshControl!.bounds.size.width,
             height: refreshControl!.bounds.size.height)
         
         refreshControl?.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = UIImage(named: "backgroundImage")
+        tableView.insertSubview(backgroundImage, at: 0)
+        
+        //tableView.backgroundColor = UIColor.clear
         
         // Initialize Static data
         initializeSample()
@@ -231,7 +237,7 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
         loadSavedData()
         
         // Create the "sort by..." feature
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_sort")!, style: .plain, target: self, action: #selector(showFilterBy))
+        //navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_sort")!, style: .plain, target: self, action: #selector(showFilterBy))
     }
 
     // MARK: - Navigation
@@ -265,7 +271,9 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
         let item = fetchedResultsController.object(at: indexPath) 
         
         cell.messageLabel.text = item.message
+        cell.messageLabel.textColor = UIColor.fromRGBHex(pseudoWhiteColor)
         cell.dateTimeLabel.text = dateTimeFormatter.string(from: item.time)
+        cell.dateTimeLabel.textColor = UIColor.fromRGBHex(dateTimeColor)
         cell.separatorInset = UIEdgeInsets.zero
         
         return cell
