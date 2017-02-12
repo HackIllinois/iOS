@@ -48,7 +48,7 @@ class ScheduleDescriptionViewController: UIViewController {
         // Init content
         timeLabel.text = dayItem?.time
         titleLabel.text = dayItem?.name
-        locationLabel.text = dayItem?.locations.map { $0.location_name }.joined(separator: ", ")
+        locationLabel.text = dayItem?.locations.map { $0.location_name }.joined(separator: "\n")
         descriptionLabel.text = dayItem?.descriptionStr
         
         if let imageUrl = dayItem?.imageUrl {

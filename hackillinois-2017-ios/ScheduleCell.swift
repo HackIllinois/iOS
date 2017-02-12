@@ -43,12 +43,15 @@ class ScheduleCell: UITableViewCell {
     var tableCall: (_ location_id: Int) -> Void
     var props: DayItem?
     
+    let CELL_HEIGHT: CGFloat = 30.0
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         self.titleStr = ""
         self.timeStr = ""
         self.descriptionStr = ""
         self.tableCall = { _ in }
-        super.init(style: style, reuseIdentifier: reuseIdentifier)    }
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
     
     required init?(coder aDecoder: NSCoder) {
         self.titleStr = ""
@@ -104,8 +107,8 @@ class ScheduleCell: UITableViewCell {
             for (i, location) in props.locations.enumerated() {
                 self.locationButtons[i].button.setTitle(location.location_name, for: .normal)
             }
-            for i in stride(from: props.locations.count, through: 2, by: 1) {
-                self.locationButtons[i].constraint.constant = -5
+            for i in 0...2 {
+                self.locationButtons[i].constraint.constant = i < props.locations.count ? CELL_HEIGHT : 0.0
             }
             
         }

@@ -51,13 +51,14 @@ class FridayTabController: GenericTabController {
             
             let location_num = Int(arc4random_uniform(3))
             var locations = [DayItemLocation]()
-            for i in 0...location_num {
+            for _ in 0...location_num {
                 let location_id = Int(arc4random_uniform(4))
                 locations.append(
                     DayItemLocation(id: location_id + 1, name: location_names[location_id])
                 )
             }
             item.locations = locations
+            item.name += " " + String(location_num + 1)
             
             //let randomImageIndex = Int(arc4random_uniform(UInt32(sampleImages.count)))
             //item.imageTitle = sampleImages[randomImageIndex]["title"]
