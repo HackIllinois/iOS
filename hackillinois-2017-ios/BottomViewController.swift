@@ -24,6 +24,7 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func closeButtonPressed(_ sender: Any) {
         self.hideView(animate: true)
         self.globalCloseHandler?()
+        hideDirection()
     }
     @IBOutlet weak var indoorMapButtonSmall: UIButton!
     
@@ -167,7 +168,6 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         navigationTable.rowHeight = UITableViewAutomaticDimension
         navigationTable.estimatedRowHeight = 140
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -179,14 +179,9 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         y_max = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 125 - y_delta
         y_button_h = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 198 - y_delta
         y_mid = (self.navigationController?.navigationBar.frame.size.height)! + 45 - y_delta
-        
-        print("y_min: \(y_min)")
-        print("y_max: \(y_max)")
-        print("y_button_h: \(y_button_h)")
-        print("y_mid: \(y_mid)")
-        print("size: \(self.view.frame)")
     }
     
+        
     func popOutView() {
         addressLabel.isHidden = true
         addressLabel.alpha = 0.0
@@ -198,8 +193,6 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         directionButton.alpha = 1.0
         indoorMap.isHidden = false
         indoorMap.alpha = 1.0
-        
-        scrollToBar()
     }
     
     func hideView(animate: Bool) {

@@ -159,20 +159,6 @@
                                         <color key="textColor" red="0.96078431372549022" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N3Z-bn-ZWy">
-                                        <rect key="frame" x="14" y="133" width="169" height="110"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="110" id="OZr-Xf-M1G"/>
-                                            <constraint firstAttribute="width" constant="169" id="Xal-mj-j1m"/>
-                                        </constraints>
-                                        <string key="text">Thomas Siebel Center
-201 N Goodwin Ave
-Urbana, IL 61801
-United States</string>
-                                        <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="15"/>
-                                        <color key="textColor" red="0.71764705882352942" green="0.74509803921568629" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GvV-PG-vmK">
                                         <rect key="frame" x="194" y="133" width="167" height="50"/>
                                         <color key="backgroundColor" red="0.36470588235294116" green="0.78431372549019607" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -185,7 +171,7 @@ United States</string>
                                         </state>
                                     </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="72" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="YAC-3c-Krt">
-                                        <rect key="frame" x="0.0" y="258" width="375" height="289"/>
+                                        <rect key="frame" x="0.0" y="249" width="375" height="298"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <prototypes>
@@ -256,7 +242,7 @@ United States</string>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rfV-VN-uvi">
                                         <rect key="frame" x="14" y="133" width="167" height="50"/>
-                                        <color key="backgroundColor" red="0.078431372549019607" green="0.14117647058823529" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="YBe-q9-Fif"/>
                                         </constraints>
@@ -305,6 +291,20 @@ United States</string>
                                             <action selector="closeButtonPressed:" destination="hoJ-Yo-Kz2" eventType="touchUpInside" id="NK4-8n-3YU"/>
                                         </connections>
                                     </button>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N3Z-bn-ZWy">
+                                        <rect key="frame" x="15" y="119" width="169" height="110"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="110" id="OZr-Xf-M1G"/>
+                                            <constraint firstAttribute="width" constant="169" id="Xal-mj-j1m"/>
+                                        </constraints>
+                                        <string key="text">Thomas Siebel Center
+201 N Goodwin Ave
+Urbana, IL 61801
+United States</string>
+                                        <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="15"/>
+                                        <color key="textColor" red="0.71764705882352942" green="0.74509803921568629" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.078431372549019607" green="0.14117647058823529" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -318,7 +318,7 @@ United States</string>
                                     <constraint firstItem="Hxw-vl-DNG" firstAttribute="top" secondItem="Psp-cd-nDt" secondAttribute="bottom" constant="20" id="MTw-CK-kFi"/>
                                     <constraint firstItem="oFe-g2-7lg" firstAttribute="leading" secondItem="Psp-cd-nDt" secondAttribute="trailing" constant="4.5" id="MYz-Q4-JdB"/>
                                     <constraint firstItem="TlY-Mg-C6s" firstAttribute="top" secondItem="kZ7-9u-Bff" secondAttribute="top" id="Nai-Dw-I3g"/>
-                                    <constraint firstItem="YAC-3c-Krt" firstAttribute="top" secondItem="N3Z-bn-ZWy" secondAttribute="bottom" constant="15" id="Nuy-da-vcY"/>
+                                    <constraint firstItem="YAC-3c-Krt" firstAttribute="top" secondItem="N3Z-bn-ZWy" secondAttribute="bottom" constant="20" id="Nuy-da-vcY"/>
                                     <constraint firstItem="gWn-dS-q5H" firstAttribute="top" secondItem="xoo-AR-cUe" secondAttribute="bottom" constant="4" id="ORn-Kp-k2c"/>
                                     <constraint firstItem="oFe-g2-7lg" firstAttribute="top" secondItem="xoo-AR-cUe" secondAttribute="bottom" constant="1" id="P64-hJ-aUj"/>
                                     <constraint firstItem="rfV-VN-uvi" firstAttribute="top" secondItem="Psp-cd-nDt" secondAttribute="bottom" constant="20" id="PyT-2Z-elt"/>
@@ -326,7 +326,7 @@ United States</string>
                                     <constraint firstItem="rfV-VN-uvi" firstAttribute="leading" secondItem="kZ7-9u-Bff" secondAttribute="leading" constant="14" id="Uh7-yx-9yT"/>
                                     <constraint firstItem="YAC-3c-Krt" firstAttribute="leading" secondItem="kZ7-9u-Bff" secondAttribute="leading" id="XUZ-q6-SLV"/>
                                     <constraint firstItem="SWk-jV-Mtt" firstAttribute="centerX" secondItem="kZ7-9u-Bff" secondAttribute="centerX" id="YAu-Zu-d28"/>
-                                    <constraint firstItem="N3Z-bn-ZWy" firstAttribute="leading" secondItem="kZ7-9u-Bff" secondAttribute="leading" constant="14" id="YOw-1K-7in"/>
+                                    <constraint firstItem="N3Z-bn-ZWy" firstAttribute="leading" secondItem="kZ7-9u-Bff" secondAttribute="leading" constant="15" id="YOw-1K-7in"/>
                                     <constraint firstAttribute="bottom" secondItem="YAC-3c-Krt" secondAttribute="bottom" constant="100" id="eSb-6M-HN3"/>
                                     <constraint firstItem="GvV-PG-vmK" firstAttribute="top" secondItem="Psp-cd-nDt" secondAttribute="bottom" constant="20" id="hVq-wc-vV0"/>
                                     <constraint firstItem="xoo-AR-cUe" firstAttribute="top" secondItem="kZ7-9u-Bff" secondAttribute="top" constant="17" id="jhT-6Q-gRQ"/>
@@ -334,7 +334,7 @@ United States</string>
                                     <constraint firstAttribute="trailing" secondItem="TlY-Mg-C6s" secondAttribute="trailing" id="nNX-A5-CqN"/>
                                     <constraint firstItem="GvV-PG-vmK" firstAttribute="leading" relation="lessThanOrEqual" secondItem="rfV-VN-uvi" secondAttribute="trailing" constant="13" id="sEw-hO-hVw"/>
                                     <constraint firstItem="Psp-cd-nDt" firstAttribute="leading" secondItem="kZ7-9u-Bff" secondAttribute="leading" constant="34.5" id="unB-oE-I1L"/>
-                                    <constraint firstItem="N3Z-bn-ZWy" firstAttribute="top" secondItem="Psp-cd-nDt" secondAttribute="bottom" constant="20" id="ylZ-ky-Ut7"/>
+                                    <constraint firstItem="N3Z-bn-ZWy" firstAttribute="top" secondItem="Psp-cd-nDt" secondAttribute="bottom" constant="6" id="ylZ-ky-Ut7"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -371,7 +371,7 @@ United States</string>
                     <tabBarItem key="tabBarItem" title="" image="maps_off" selectedImage="maps_on" id="gW3-u5-oRF"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yyE-Rb-fuQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yyE-Rb-fuQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

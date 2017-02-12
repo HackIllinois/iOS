@@ -185,7 +185,7 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         routeTo(building.coordinate, completion: { (route: MKRoute?) in
             self.bottomSheet.directions = route
             self.bottomSheet.reloadNavTable(address: building.address ?? "", name: building.longName ?? "")
-            self.bottomSheet.scrollToBar()
+            self.bottomSheet.scrollToButtons()
         })
     }
     
@@ -239,12 +239,11 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         // Find index of selected Annotation
         let sorter: ((Building) -> Bool) = { $0.coordinate == selectedAnnotation.coordinate }
         if let selectedIndex = buildings.index(where: sorter) {
-            print(selectedIndex)
             let building = buildings[selectedIndex]
             routeTo(building.coordinate, completion: { (route: MKRoute?) in
                 self.bottomSheet.directions = route
                 self.bottomSheet.reloadNavTable(address: building.address ?? "", name: building.longName ?? "")
-                self.bottomSheet.scrollToBar()
+                self.bottomSheet.scrollToButtons()
             })
             // Set appropriate selection for cleanup later
             clearLabel(labelNumber: 5) // Clear everything
