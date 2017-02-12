@@ -10,17 +10,10 @@ import UIKit
 import CoreData
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
-    // TODO: Initialized to actual unix times for event status.
-    let hackathonBeginTime = 0      //Change Me!
-    let hackingBeginTime = 0        //Change Me!
-    let hackingEndTime = Int(NSDate().timeIntervalSince1970) + 1000          //Change Me!
-    let hackathonEndTime = Int(NSDate().timeIntervalSince1970) + 1000        //Change Me!
-    var currentTimeForTable = 0     //Change Me!
-          //Change Me!                           
-    var events : [Feed] = []
-    let dateFormatter = DateFormatter()
     
+    @IBOutlet weak var checkInTableView: UITableView!
+    var currentTimeForTable = 0     //Change Me!
+          //Change Me!
     let MAIN_CELL_HEIGHT = 332
     let STANDARD_CELL_HEIGHT = 179
     let TWO_LOCATIONS_CELL_HEIGHT = 215
@@ -28,9 +21,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     let NO_EVENT_CELL_HEIGHT = 120
     let MAIN_CELL_AFTER_HACKATHON_HEIGHT = 437
     
-    
-    
-    @IBOutlet weak var checkInTableView: UITableView!
+    var events : [Feed] = []
+    let dateFormatter = DateFormatter()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +47,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         checkInTableView.showsVerticalScrollIndicator = false
         checkInTableView.sectionHeaderHeight = 0.0
         checkInTableView.sectionFooterHeight = 0.0
+        checkInTableView.alwaysBounceVertical = false
         
         // DateFormatter is an expensive class so load it once and reuse it
         dateFormatter.locale = Locale(identifier: "en_US")
@@ -83,9 +77,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(currentTimeForTable < hackathonBeginTime) {
+        if(currentTimeForTable < HACKATHON_BEGIN_TIME) {
             return 2 // one for main cell before hackathon and one for no event cell
-        } else if(currentTimeForTable > hackathonBeginTime && currentTimeForTable < hackathonEndTime) {
+        } else if(currentTimeForTable > HACKATHON_BEGIN_TIME && currentTimeForTable < HACKATHON_END_TIME) {
             return events.count + 1 // number of events and the main cell
         }
         return 1 // otherwise just return the main cell
@@ -93,12 +87,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if(indexPath.row == 0) {
-            if(currentTimeForTable > hackathonEndTime) {
+            if(currentTimeForTable > HACKATHON_END_TIME) {
                 return CGFloat(MAIN_CELL_AFTER_HACKATHON_HEIGHT)
             }
             return CGFloat(MAIN_CELL_HEIGHT)
         }
-        else if(indexPath.row == 1 && currentTimeForTable < hackathonBeginTime) {
+        else if(indexPath.row == 1 && currentTimeForTable < HACKATHON_BEGIN_TIME) {
             return CGFloat(NO_EVENT_CELL_HEIGHT)
         } else if(events[indexPath.row - 1].locations?.count == 1) {
             return CGFloat(STANDARD_CELL_HEIGHT)
@@ -121,12 +115,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
          // first cell should always be the main cell
         if (indexPath.row == 0) {
-            if(currentTimeForTable < hackathonBeginTime) { // if the hackathon has not started yet
+            if(currentTimeForTable < HACKATHON_BEGIN_TIME) { // if the hackathon has not started yet
                 let cell = tableView.dequeueReusableCell(withIdentifier: "mainCellBeforeHackathonCell", for: indexPath)
                 cell.backgroundColor = UIColor.clear
                 cell.isUserInteractionEnabled = false;
                 return cell
-            } else if (currentTimeForTable > hackathonBeginTime && currentTimeForTable < hackingBeginTime) { // if the hackathon has started but hacking has not
+            } else if (currentTimeForTable > HACKATHON_BEGIN_TIME && currentTimeForTable < HACKING_BEGIN_TIME) { // if the hackathon has started but hacking has not
                 let cell = tableView.dequeueReusableCell(withIdentifier: "mainCellBeforeHacking", for: indexPath) as! mainCellBeforeHacking
                 cell.backgroundColor = UIColor.clear
                 cell.selectionStyle = .none
@@ -134,7 +128,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
                 // initalize the timer label as current time and decrement by 1 second every second
                 let currentUnixTime: Int = Int(NSDate().timeIntervalSince1970)
-                cell.timeRemaining = cell.eventStartUnixTime - currentUnixTime
+                cell.timeRemaining = HACKING_BEGIN_TIME - currentUnixTime
                 cell.secondsLeft = cell.getSeconds(timeInSeconds: cell.timeRemaining)
                 cell.minutesLeft = cell.getMinutes(timeInSeconds: cell.timeRemaining)
                 cell.hoursLeft = cell.getHours(timeInSeconds: cell.timeRemaining)
@@ -145,7 +139,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.timeStart()
         
                 return cell
-            } else if (currentTimeForTable > hackathonEndTime) { // if the hackathon has ended
+            } else if (currentTimeForTable > HACKATHON_END_TIME) { // if the hackathon has ended
                 let cell = tableView.dequeueReusableCell(withIdentifier: "mainCellAfterHackathon", for: indexPath)
                 cell.isUserInteractionEnabled = false;
                 cell.backgroundColor = UIColor.clear
@@ -158,7 +152,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             
                 // initalize the timer label as current time and decrement by 1 second every second
                 let currentUnixTime: Int = Int(NSDate().timeIntervalSince1970)
-                cell.timeRemaining = cell.eventStartUnixTime - currentUnixTime
+                cell.timeRemaining = HACKING_END_TIME - currentUnixTime
                 cell.secondsLeft = cell.getSeconds(timeInSeconds: cell.timeRemaining)
                 cell.minutesLeft = cell.getMinutes(timeInSeconds: cell.timeRemaining)
                 cell.hoursLeft = cell.getHours(timeInSeconds: cell.timeRemaining)
@@ -170,7 +164,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
                 return cell
             }
-        } else if(indexPath.row == 1 && currentTimeForTable < hackathonBeginTime) { // if hackathon has not started yet
+        } else if(indexPath.row == 1 && currentTimeForTable < HACKATHON_BEGIN_TIME) { // if hackathon has not started yet
             let cell = tableView.dequeueReusableCell(withIdentifier: "noEventCell", for: indexPath) as! noEventCell
             cell.isUserInteractionEnabled = false;
             cell.backgroundColor = UIColor.clear

@@ -10,16 +10,12 @@ import UIKit
 
 class mainCell: UITableViewCell {
     
-
-
     @IBOutlet weak var hoursLabel: UILabel!
     @IBOutlet weak var minutesLabel: UILabel!
     @IBOutlet weak var secondsLabel: UILabel!
     
     var mTimer = Timer()
     
-    //TODO: Find actual start unix time of event
-    let eventStartUnixTime: Int = 1486927800
     var timeRemaining: Int = 0
     var secondsLeft: Int = 0
     var minutesLeft: Int = 0
@@ -28,17 +24,18 @@ class mainCell: UITableViewCell {
     override func prepareForReuse() {
         mTimer.invalidate();
         mTimer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(mainCell.updateCounter), userInfo: nil, repeats: true);
-        
     }
     override func awakeFromNib() {
         super.awakeFromNib()
 
     }
-
+    
+    /* call the updateCounter function every second */
     func timeStart(){
         mTimer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(mainCell.updateCounter), userInfo: nil, repeats: true)
     }
     
+    /* decrement seceonds by one and make sure the timer does not overflow */
     func updateCounter() {
         if(secondsLeft == 0){
             secondsLeft = 59
@@ -54,10 +51,6 @@ class mainCell: UITableViewCell {
         hoursLabel.text = hoursLeft.description;
         minutesLabel.text = minutesLeft.description;
         secondsLabel.text = secondsLeft.description;
-    }
-    
-    func getTimeRemainingString(hoursLeft: Int, minutesLeft: Int, secondsLeft: Int) -> String{
-        return String(format:" %02i   %02i   %02i", hoursLeft, minutesLeft, secondsLeft)
     }
     
     func getHours(timeInSeconds: Int) -> Int{

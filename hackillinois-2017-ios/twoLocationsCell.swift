@@ -14,8 +14,10 @@ class twoLocationsCell: UITableViewCell {
     @IBOutlet weak var firstLocationLabel: UILabel!
     @IBOutlet weak var secondLocationLabel: UILabel!
     @IBOutlet weak var qrCodeButton: UIButton!
+    
     let ROW_HEIGHT = 215
     let BUFFER_BETWEEN_CELLS = 15
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         let imageSize = CGSize(width: 317,height: ROW_HEIGHT - BUFFER_BETWEEN_CELLS);
