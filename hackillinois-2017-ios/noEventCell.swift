@@ -14,9 +14,9 @@ class noEventCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        // draws border rectangle
         let imageSize = CGSize(width: 317,height: ROW_HEIGHT);
         let imageView = UIImageView(frame: CGRect(origin: (self.imageView?.bounds.origin)!, size: imageSize));
-        
         self.contentView.addSubview(imageView);
         let image = drawBorderRectangle(size: imageSize);
         imageView.image = image;

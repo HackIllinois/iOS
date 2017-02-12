@@ -21,6 +21,7 @@ class mainCell: UITableViewCell {
     var minutesLeft: Int = 0
     var hoursLeft: Int = 0
     
+    /* if timer is not invalidated the count down clock will go down by two seconds every second */
     override func prepareForReuse() {
         mTimer.invalidate();
         mTimer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(mainCell.updateCounter), userInfo: nil, repeats: true);

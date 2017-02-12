@@ -25,7 +25,6 @@ class mainCellBeforeHacking: UITableViewCell {
     override func prepareForReuse() {
         mTimer.invalidate();
         mTimer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(mainCell.updateCounter), userInfo: nil, repeats: true);
-        
     }
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -15,12 +15,15 @@ class threeLocationsCell: UITableViewCell {
     @IBOutlet weak var thirdLocationLabel: UILabel!
     @IBOutlet weak var qrCodeButton: UIButton!
     
+    let TABLE_VIEW_WIDTH = 317
     let ROW_HEIGHT = 251
     let BUFFER_BETWEEN_CELLS = 15
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        let imageSize = CGSize(width: 317,height: ROW_HEIGHT - BUFFER_BETWEEN_CELLS);
+        
+        // draws border rectangle
+        let imageSize = CGSize(width: TABLE_VIEW_WIDTH ,height: ROW_HEIGHT - BUFFER_BETWEEN_CELLS);
         let imageView = UIImageView(frame: CGRect(origin: (self.imageView?.bounds.origin)!, size: imageSize));
         self.contentView.addSubview(imageView);
         let image = drawBorderRectangle(size: imageSize);
