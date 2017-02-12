@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gah-u1-v8Z">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gah-u1-v8Z">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -672,11 +672,11 @@
             </objects>
             <point key="canvasLocation" x="1762" y="-146"/>
         </scene>
-        <!--Home-->
+        <!--Generic Navigation Controller-->
         <scene sceneID="WbM-5X-Cle">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gah-u1-v8Z" customClass="GenericNavigationController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="ic_home_white" id="mMW-Ot-cAH"/>
+                    <tabBarItem key="tabBarItem" title="" image="home_off" selectedImage="home_on" id="mMW-Ot-cAH"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="RF7-ax-iNl">
@@ -694,8 +694,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="home_off" width="17" height="24"/>
+        <image name="home_on" width="17" height="24"/>
         <image name="ic_gps" width="13" height="19"/>
         <image name="ic_group_4" width="152" height="138"/>
-        <image name="ic_home_white" width="24" height="24"/>
     </resources>
 </document>
