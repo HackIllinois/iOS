@@ -146,8 +146,9 @@ class CoreDataHelpers {
         return defaults.object(forKey: "timestamp") as? NSDate as Date?
     }
     
+    /* fetch the newest JSON data from the server */
     class func updateEventsFeed() {
-        
+        // MARK: change the APIURL to the real one
         let eventsAPIURL = "http://13.90.146.188:8080/v1/events"
         Alamofire.request(eventsAPIURL)
             .responseJSON { response in
@@ -158,13 +159,11 @@ class CoreDataHelpers {
                     }
                 }
         }
-        print ("Updated")
-        
     }
     
+    /* initializes Feed object from JSON */
     class func configure(feedJSON: JSON) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.managedObjectContext
         let id = feedJSON["id"].numberValue
         let name = feedJSON["name"].stringValue
         let shortName = feedJSON["shortName"].stringValue
@@ -177,7 +176,7 @@ class CoreDataHelpers {
         let locations = feedJSON["locations"]
         var tempLocations:[Location] = []
         for location in locations {
-            var locationObject = NSEntityDescription.insertNewObject(forEntityName: "Location", into: appDelegate.managedObjectContext) as! Location
+            let locationObject = NSEntityDescription.insertNewObject(forEntityName: "Location", into: appDelegate.managedObjectContext) as! Location
             let id = location.1["id"].int16Value
             let latitude = location.1["latitude"].floatValue
             let longitude = location.1["longitude"].floatValue
@@ -190,9 +189,11 @@ class CoreDataHelpers {
         CoreDataHelpers.saveContext()
     }
     
+    /* converts date string to date object */
     class func stringToDate(date: String) -> Date
     {
-        //        2016-06-19T00:01:00.000Z this is what we get
+        // the format below is the javascript simple date format
+        // the Z represents GMT timezone (+0)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!

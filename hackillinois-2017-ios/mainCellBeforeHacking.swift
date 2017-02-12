@@ -10,15 +10,6 @@ import UIKit
 
 class mainCellBeforeHacking: UITableViewCell {
     
-    
-    
-//    @IBOutlet weak var happeningNowLabel: UILabel!
-//    @IBOutlet weak var startsInLabel: UILabel!
-//    
-//    
-//    @IBOutlet weak var hoursLabel: UILabel!
-//    @IBOutlet weak var minutesLabel: UILabel!
-//    @IBOutlet weak var secondsLabel: UILabel!
     @IBOutlet weak var hoursLabel: UILabel!
     @IBOutlet weak var minutesLabel: UILabel!
     @IBOutlet weak var secondsLabel: UILabel!

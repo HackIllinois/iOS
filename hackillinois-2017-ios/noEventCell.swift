@@ -9,15 +9,15 @@
 import UIKit
 
 class noEventCell: UITableViewCell {
+    let ROW_HEIGHT = 120
+    // no buffer between cell needed because no event cell will not be followed by other cells
     override func awakeFromNib() {
         super.awakeFromNib()
         
         
         
-        let imageSize = CGSize(width: 317,height: 120);
+        let imageSize = CGSize(width: 317,height: ROW_HEIGHT);
         let imageView = UIImageView(frame: CGRect(origin: (self.imageView?.bounds.origin)!, size: imageSize));
-        //        let imageSize = CGSize(width: 100, height: 50);
-        //        let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 100, y: 100), size: imageSize));
         
         self.contentView.addSubview(imageView);
         let image = drawBorderRectangle(size: imageSize);

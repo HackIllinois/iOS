@@ -48,9 +48,7 @@
 		390A8DF31E3AA90200018855 /* Gotham-XLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DE31E3AA90200018855 /* Gotham-XLightItalic.otf */; };
 		390A8DF71E3C6A6300018855 /* RectangleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8DF61E3C6A6300018855 /* RectangleHelper.swift */; };
 		390A8DF91E44115900018855 /* threeLocationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8DF81E44115900018855 /* threeLocationsCell.swift */; };
-		390A8DFF1E46683600018855 /* mainCellBeforeHackathonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8DFE1E46683600018855 /* mainCellBeforeHackathonCell.swift */; };
 		390A8E011E466A4700018855 /* mainCellBeforeHacking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8E001E466A4700018855 /* mainCellBeforeHacking.swift */; };
-		390A8E031E4671DB00018855 /* mainCellAfterHackathon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8E021E4671DB00018855 /* mainCellAfterHackathon.swift */; };
 		390CFC761E4FB9D800DC6F3A /* Feed+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390CFC741E4FB9D800DC6F3A /* Feed+CoreDataClass.swift */; };
 		390CFC771E4FB9D800DC6F3A /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390CFC751E4FB9D800DC6F3A /* Feed+CoreDataProperties.swift */; };
 		392321F31E4C17C2003731AA /* noEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392321F21E4C17C2003731AA /* noEventCell.swift */; };
@@ -185,9 +183,7 @@
 		390A8DE31E3AA90200018855 /* Gotham-XLightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-XLightItalic.otf"; sourceTree = "<group>"; };
 		390A8DF61E3C6A6300018855 /* RectangleHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectangleHelper.swift; sourceTree = "<group>"; };
 		390A8DF81E44115900018855 /* threeLocationsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = threeLocationsCell.swift; sourceTree = "<group>"; };
-		390A8DFE1E46683600018855 /* mainCellBeforeHackathonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCellBeforeHackathonCell.swift; sourceTree = "<group>"; };
 		390A8E001E466A4700018855 /* mainCellBeforeHacking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCellBeforeHacking.swift; sourceTree = "<group>"; };
-		390A8E021E4671DB00018855 /* mainCellAfterHackathon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCellAfterHackathon.swift; sourceTree = "<group>"; };
 		390CFC741E4FB9D800DC6F3A /* Feed+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataClass.swift"; sourceTree = "<group>"; };
 		390CFC751E4FB9D800DC6F3A /* Feed+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		392321F21E4C17C2003731AA /* noEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = noEventCell.swift; sourceTree = "<group>"; };
@@ -343,10 +339,8 @@
 			isa = PBXGroup;
 			children = (
 				392321F21E4C17C2003731AA /* noEventCell.swift */,
-				390A8DFE1E46683600018855 /* mainCellBeforeHackathonCell.swift */,
 				390A8E001E466A4700018855 /* mainCellBeforeHacking.swift */,
 				398219D91E345F4E00C5D0DF /* mainCell.swift */,
-				390A8E021E4671DB00018855 /* mainCellAfterHackathon.swift */,
 				398219DB1E345F4E00C5D0DF /* standardCell.swift */,
 				398219DC1E345F4E00C5D0DF /* twoLocationsCell.swift */,
 				390A8DF81E44115900018855 /* threeLocationsCell.swift */,
@@ -1007,7 +1001,6 @@
 				655227D91E4DD18000DD88D7 /* ScheduleDetailsImageViewController.swift in Sources */,
 				E2D4F0E31D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift in Sources */,
 				E2D4F0E11D06B28B00646BF8 /* FeedTableViewCell.swift in Sources */,
-				390A8E031E4671DB00018855 /* mainCellAfterHackathon.swift in Sources */,
 				E2BCA5811CF3B19E006AAA8B /* Location.swift in Sources */,
 				E28FB6A21D194951000D062F /* Chat.swift in Sources */,
 				A50F29271E14DC3600878652 /* HomeViewController.swift in Sources */,
@@ -1034,7 +1027,6 @@
 				24632D181E4D58EA00E7A746 /* SaturdayTabController.swift in Sources */,
 				E2F639481D05083300853089 /* CGRect+initWithCenterAt.swift in Sources */,
 				392321F31E4C17C2003731AA /* noEventCell.swift in Sources */,
-				390A8DFF1E46683600018855 /* mainCellBeforeHackathonCell.swift in Sources */,
 				E28FB6A11D194951000D062F /* Chat+CoreDataProperties.swift in Sources */,
 				E20465CD1CF1FAF50054654E /* LoginViewController.swift in Sources */,
 				E2AC3F861CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */,
