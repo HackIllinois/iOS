@@ -265,7 +265,9 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
         let item = fetchedResultsController.object(at: indexPath) 
         
         cell.messageLabel.text = item.message
+        cell.messageLabel.textColor = UIColor.fromRGBHex(pseudoWhiteColor)
         cell.dateTimeLabel.text = dateTimeFormatter.string(from: item.time)
+        cell.dateTimeLabel.textColor = UIColor.fromRGBHex(dateTimeColor)
         cell.separatorInset = UIEdgeInsets.zero
         
         return cell
