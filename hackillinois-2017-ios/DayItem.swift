@@ -10,31 +10,30 @@ import Foundation
 
 class DayItem: NSObject {
     var name: String
-    var location: String
     var time: String
     var descriptionStr: String
     var highlighted: Bool
-    var location_id: Int
+    var locations = [DayItemLocation]()
     var imageUrl: String?
     var imageTitle: String?
-    var imageData: Data?
+    var imageFileName: String?
     
     override init() {
         name = "Event Name Here"
-        location = "Location Here"
         time = "HH:MM DD"
         descriptionStr = "Description Here"
         highlighted = false
-        location_id = 0
     }
     
-    init(name: String, location : String, time: String, description: String, highlighted: Bool, location_id: Int) {
+    init(name: String, time: String, description: String, highlighted: Bool, locations: [DayItemLocation]) {
+        // Note: locations.count should be <= 3
+        assert(locations.count <= 3)
+        
         self.name = name
-        self.location = location
         self.time = time
         self.descriptionStr = description
         self.highlighted = highlighted
-        self.location_id = location_id
+        self.locations = locations
     }
     
     func setImage(title: String, url: String) {
@@ -42,7 +41,7 @@ class DayItem: NSObject {
         self.imageTitle = title
     }
     
-    func setImage(title: String, data: Data) {
-        self.imageData = data
+    func setImage(title: String, fileName: String) {
+        self.imageFileName = fileName
     }
 }

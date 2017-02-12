@@ -26,6 +26,7 @@
 		24794C701E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */; };
 		24794C711E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */; };
 		58E75F2152E19BCECDC115D1 /* Pods_hackillinois_2017_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0E70C5ECC7AC1B705813BB /* Pods_hackillinois_2017_iosUITests.framework */; };
+		653304F51E4FF83C00E881F8 /* DayItemLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653304F41E4FF83C00E881F8 /* DayItemLocation.swift */; };
 		655227D91E4DD18000DD88D7 /* ScheduleDetailsImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655227D81E4DD18000DD88D7 /* ScheduleDetailsImageViewController.swift */; };
 		65A5954A1E4B167700AC74C4 /* ScheduleDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A595491E4B167700AC74C4 /* ScheduleDescriptionViewController.swift */; };
 		65D7C9A01E468B5100E03103 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D7C99F1E468B5100E03103 /* ScheduleViewController.swift */; };
@@ -139,6 +140,7 @@
 		24794C611E340DE80016F8D4 /* Brandon_thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_thin.otf; sourceTree = "<group>"; };
 		24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+ColorConstants.swift"; sourceTree = "<group>"; };
 		567F67E08A10E7527EE39217 /* Pods-hackillinois-2017-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		653304F41E4FF83C00E881F8 /* DayItemLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayItemLocation.swift; sourceTree = "<group>"; };
 		655227D81E4DD18000DD88D7 /* ScheduleDetailsImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleDetailsImageViewController.swift; sourceTree = "<group>"; };
 		65A595491E4B167700AC74C4 /* ScheduleDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleDescriptionViewController.swift; sourceTree = "<group>"; };
 		65D7C99F1E468B5100E03103 /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
@@ -554,6 +556,7 @@
 				E2A086031D0C7381002197F9 /* Saturday */,
 				E2A086041D0C7385002197F9 /* Sunday */,
 				E2A085F91D0C6688002197F9 /* DayItem.swift */,
+				653304F41E4FF83C00E881F8 /* DayItemLocation.swift */,
 			);
 			name = Schedule;
 			sourceTree = "<group>";
@@ -906,6 +909,7 @@
 				E2BB42C61D133A9A009EF512 /* GenericInputView.swift in Sources */,
 				E2D483331D00D3B100859A67 /* MapViewController.swift in Sources */,
 				243720041E32D4D100B1C7C5 /* BottomViewTableViewCell.swift in Sources */,
+				653304F51E4FF83C00E881F8 /* DayItemLocation.swift in Sources */,
 				E2A085F01D0C42A7002197F9 /* GenericNavigationController.swift in Sources */,
 				E23791411D21C4870020618E /* ReferencedButton.swift in Sources */,
 				E2BCA5801CF3B19E006AAA8B /* Location+CoreDataProperties.swift in Sources */,

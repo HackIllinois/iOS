@@ -15,6 +15,7 @@ class ScheduleDescriptionViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var imageHeight: NSLayoutConstraint!
+    @IBOutlet weak var imageAspectRatio: NSLayoutConstraint!
     
     var dayItem: DayItem?
     var imageData: Data?
@@ -47,15 +48,17 @@ class ScheduleDescriptionViewController: UIViewController {
         // Init content
         timeLabel.text = dayItem?.time
         titleLabel.text = dayItem?.name
-        locationLabel.text = dayItem?.location
+        locationLabel.text = dayItem?.locations.map { $0.location_name }.joined(separator: ", ")
         descriptionLabel.text = dayItem?.descriptionStr
         
         if let imageUrl = dayItem?.imageUrl {
             // load image in background thread
             performSelector(inBackground: #selector(loadImage), with: imageUrl)
-        } else if let imageData = dayItem?.imageData {
+        } else if let imageFileName = dayItem?.imageFileName {
             // load image by data
-            setImage(imageData: imageData)
+            if let image = UIImage(named: imageFileName) {
+                setImage(imageData: UIImagePNGRepresentation(image)!)
+            }
         }
     }
     
@@ -75,8 +78,10 @@ class ScheduleDescriptionViewController: UIViewController {
         image.image = dummyImage
         image.isUserInteractionEnabled = true
         
-        self.view.layoutIfNeeded()
-        imageHeight.constant = (image.frame.width) / dummyWidth! * dummyHeight!
+        //self.view.layoutIfNeeded()
+        //imageHeight.constant = (image.frame.width) / dummyWidth! * dummyHeight!
+        imageAspectRatio.constant = dummyWidth! / dummyHeight!
+        image.updateConstraints()
     }
     
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {

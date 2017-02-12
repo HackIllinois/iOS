@@ -29,7 +29,6 @@ class FridayTabController: GenericTabController {
         
         // Friday
         for n in 0..<10 {
-            let location_id = arc4random_uniform(4)
             let location_names = [
                 "DCL",
                 "Siebel",
@@ -44,16 +43,26 @@ class FridayTabController: GenericTabController {
             
             let item = DayItem(
                 name: "Friday Event \(n)",
-                location: location_names[Int(location_id)],
                 time: "MM:DD PM",
                 description: sampleDescStr,
                 highlighted: arc4random_uniform(2) == 0,
-                location_id: Int(location_id) + 1
+                locations: []
             )
+            
+            let location_num = Int(arc4random_uniform(3))
+            var locations = [DayItemLocation]()
+            for i in 0...location_num {
+                let location_id = Int(arc4random_uniform(4))
+                locations.append(
+                    DayItemLocation(id: location_id + 1, name: location_names[location_id])
+                )
+            }
+            item.locations = locations
+            
             //let randomImageIndex = Int(arc4random_uniform(UInt32(sampleImages.count)))
             //item.imageTitle = sampleImages[randomImageIndex]["title"]
             //item.imageUrl = sampleImages[randomImageIndex]["url"]
-            item.setImage(title: "Test Image", data: UIImagePNGRepresentation(#imageLiteral(resourceName: "test_img"))!)
+            item.setImage(title: "Test Image", fileName: "test_img")
             tableView.dayItems.append(item)
         }
         

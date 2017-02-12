@@ -28,7 +28,7 @@ class SaturdayTabController: GenericTabController {
         // Saturday
 
         for n in 0..<10 {
-            let location_id = arc4random_uniform(4)
+            let location_id = Int(arc4random_uniform(4))
             let location_names = [
                 "DCL",
                 "Siebel",
@@ -38,11 +38,12 @@ class SaturdayTabController: GenericTabController {
             
             let item = DayItem(
                 name: "Saturday Event \(n)",
-                location: location_names[Int(location_id)],
                 time: "MM:DD PM",
                 description: "This event does not contain images.",
                 highlighted: arc4random_uniform(2) == 0,
-                location_id: Int(location_id) + 1
+                locations: [
+                    DayItemLocation(id: location_id + 1, name: location_names[location_id])
+                ]
             )
             tableView.dayItems.append(item)
         }

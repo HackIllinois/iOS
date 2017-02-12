@@ -27,6 +27,9 @@ class ScheduleTableViewController: UITableViewController {
         // create rounded corners
         self.view.layoutIfNeeded()
         roundCorners(view: tableTopBorder, corners: [.topLeft, .topRight], radius: tableTopBorder.frame.height)
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 300
     }
     
     func openLocation(_ location_id: Int) {

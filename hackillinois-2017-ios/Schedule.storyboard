@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -295,33 +296,33 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="day_cell" rowHeight="200" id="6AS-GM-bJ7" customClass="ScheduleCell" customModule="hackillinois_2017_ios" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="30" width="375" height="200"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="day_cell" rowHeight="210" id="6AS-GM-bJ7" customClass="ScheduleCell" customModule="hackillinois_2017_ios" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="30" width="375" height="210"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6AS-GM-bJ7" id="74h-AW-6Mi">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jp2-cr-udf">
-                                            <rect key="frame" x="12" y="0.0" width="351" height="200"/>
+                                            <rect key="frame" x="12" y="0.0" width="351" height="210"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D3t-5P-ATd" userLabel="Cell Border">
-                                                    <rect key="frame" x="2" y="0.0" width="347" height="198"/>
+                                                    <rect key="frame" x="2" y="0.0" width="347" height="208"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="y6x-mo-iON">
-                                                            <rect key="frame" x="8" y="8" width="331" height="182"/>
+                                                            <rect key="frame" x="8" y="8" width="331" height="192"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="Imh-wX-J0B">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="331" height="83"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="331" height="43"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="th9-Z1-KcU">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="165.5" height="83"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="165.5" height="43"/>
                                                                             <fontDescription key="fontDescription" name="BrandonGrotesque-Bold" family="Brandon Grotesque" pointSize="20"/>
                                                                             <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TrJ-yO-YSd">
-                                                                            <rect key="frame" x="265" y="0.0" width="66" height="83"/>
+                                                                            <rect key="frame" x="265" y="0.0" width="66" height="43"/>
                                                                             <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="17"/>
                                                                             <state key="normal" title="Reminder">
                                                                                 <color key="titleColor" red="0.50196078431372548" green="0.5607843137254902" blue="0.76862745098039209" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -338,51 +339,137 @@
                                                                     </constraints>
                                                                 </stackView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kEW-Su-lmm">
-                                                                    <rect key="frame" x="0.0" y="93" width="331" height="29"/>
+                                                                    <rect key="frame" x="0.0" y="53" width="331" height="29"/>
                                                                     <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="20"/>
                                                                     <color key="textColor" red="0.71764705880000002" green="0.74509803919999995" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uKi-Rn-ggV" userLabel="Location Button">
-                                                                    <rect key="frame" x="0.0" y="132" width="331" height="50"/>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1eI-f6-doI">
+                                                                    <rect key="frame" x="0.0" y="92" width="331" height="100"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gps" translatesAutoresizingMaskIntoConstraints="NO" id="qDd-rw-mKJ">
-                                                                            <rect key="frame" x="0.0" y="31" width="13" height="19"/>
-                                                                        </imageView>
-                                                                        <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkm-St-LYe">
-                                                                            <rect key="frame" x="20.5" y="21.5" width="169" height="38"/>
-                                                                            <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="18"/>
-                                                                            <state key="normal" title="Room #, Building Name">
-                                                                                <color key="titleColor" red="0.36470588240000001" green="0.7843137255" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                            </state>
-                                                                            <state key="highlighted">
-                                                                                <color key="titleColor" red="0.36470588235294116" green="0.78431372549019607" blue="0.85882352941176465" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                            </state>
-                                                                            <connections>
-                                                                                <action selector="locationOnClick:" destination="6AS-GM-bJ7" eventType="touchUpInside" id="zB7-RS-GId"/>
-                                                                            </connections>
-                                                                        </button>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Event location arrow ios" translatesAutoresizingMaskIntoConstraints="NO" id="dV6-51-SOS">
-                                                                            <rect key="frame" x="197" y="33" width="7" height="15"/>
-                                                                        </imageView>
+                                                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KH5-ex-whK" userLabel="Location Button #1">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="331" height="30"/>
+                                                                            <subviews>
+                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gps" translatesAutoresizingMaskIntoConstraints="NO" id="BYx-HT-JVw">
+                                                                                    <rect key="frame" x="0.0" y="11" width="13" height="19"/>
+                                                                                </imageView>
+                                                                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DjK-TI-2NR">
+                                                                                    <rect key="frame" x="20.5" y="1.5" width="169" height="38"/>
+                                                                                    <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="18"/>
+                                                                                    <state key="normal" title="Room #, Building Name">
+                                                                                        <color key="titleColor" red="0.36470588240000001" green="0.7843137255" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    </state>
+                                                                                    <state key="highlighted">
+                                                                                        <color key="titleColor" red="0.36470588240000001" green="0.7843137255" blue="0.85882352939999995" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    </state>
+                                                                                    <connections>
+                                                                                        <action selector="locationOnClick:" destination="6AS-GM-bJ7" eventType="touchUpInside" id="FbT-1m-CcN"/>
+                                                                                    </connections>
+                                                                                </button>
+                                                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Event location arrow ios" translatesAutoresizingMaskIntoConstraints="NO" id="xNp-cj-VgN">
+                                                                                    <rect key="frame" x="197" y="13" width="7" height="15"/>
+                                                                                </imageView>
+                                                                            </subviews>
+                                                                            <gestureRecognizers/>
+                                                                            <constraints>
+                                                                                <constraint firstItem="BYx-HT-JVw" firstAttribute="leading" secondItem="KH5-ex-whK" secondAttribute="leading" id="3cG-ay-iXR"/>
+                                                                                <constraint firstItem="xNp-cj-VgN" firstAttribute="centerY" secondItem="DjK-TI-2NR" secondAttribute="centerY" id="DgW-cl-G5i"/>
+                                                                                <constraint firstItem="xNp-cj-VgN" firstAttribute="leading" secondItem="DjK-TI-2NR" secondAttribute="trailing" constant="7.5" id="HOg-cS-sWy"/>
+                                                                                <constraint firstAttribute="height" constant="30" id="TJB-W9-663"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="BYx-HT-JVw" secondAttribute="bottom" id="dsg-bX-BIW"/>
+                                                                                <constraint firstItem="DjK-TI-2NR" firstAttribute="centerY" secondItem="BYx-HT-JVw" secondAttribute="centerY" id="gml-Ly-fnk"/>
+                                                                                <constraint firstItem="DjK-TI-2NR" firstAttribute="leading" secondItem="BYx-HT-JVw" secondAttribute="trailing" constant="7.5" id="oOl-lX-Y1W"/>
+                                                                            </constraints>
+                                                                        </view>
+                                                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8B7-rF-68P" userLabel="Location Button #2">
+                                                                            <rect key="frame" x="0.0" y="35" width="331" height="30"/>
+                                                                            <subviews>
+                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gps" translatesAutoresizingMaskIntoConstraints="NO" id="3qx-9q-spu">
+                                                                                    <rect key="frame" x="0.0" y="11" width="13" height="19"/>
+                                                                                </imageView>
+                                                                                <button opaque="NO" tag="1" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aA4-gH-oBa">
+                                                                                    <rect key="frame" x="20.5" y="1.5" width="169" height="38"/>
+                                                                                    <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="18"/>
+                                                                                    <state key="normal" title="Room #, Building Name">
+                                                                                        <color key="titleColor" red="0.36470588240000001" green="0.7843137255" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    </state>
+                                                                                    <state key="highlighted">
+                                                                                        <color key="titleColor" red="0.36470588240000001" green="0.7843137255" blue="0.85882352939999995" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    </state>
+                                                                                    <connections>
+                                                                                        <action selector="locationOnClick:" destination="6AS-GM-bJ7" eventType="touchUpInside" id="O5n-my-P8q"/>
+                                                                                    </connections>
+                                                                                </button>
+                                                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Event location arrow ios" translatesAutoresizingMaskIntoConstraints="NO" id="aWN-zQ-ryU">
+                                                                                    <rect key="frame" x="197" y="13" width="7" height="15"/>
+                                                                                </imageView>
+                                                                            </subviews>
+                                                                            <gestureRecognizers/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="bottom" secondItem="3qx-9q-spu" secondAttribute="bottom" id="18Z-zo-IeO"/>
+                                                                                <constraint firstItem="3qx-9q-spu" firstAttribute="leading" secondItem="8B7-rF-68P" secondAttribute="leading" id="1nb-EW-sls"/>
+                                                                                <constraint firstItem="aWN-zQ-ryU" firstAttribute="leading" secondItem="aA4-gH-oBa" secondAttribute="trailing" constant="7.5" id="20T-bF-mqc"/>
+                                                                                <constraint firstItem="aA4-gH-oBa" firstAttribute="leading" secondItem="3qx-9q-spu" secondAttribute="trailing" constant="7.5" id="UoC-Ss-MwX"/>
+                                                                                <constraint firstItem="aA4-gH-oBa" firstAttribute="centerY" secondItem="3qx-9q-spu" secondAttribute="centerY" id="iN8-ix-v9Y"/>
+                                                                                <constraint firstAttribute="height" constant="30" id="kEw-9O-AAf"/>
+                                                                                <constraint firstItem="aWN-zQ-ryU" firstAttribute="centerY" secondItem="aA4-gH-oBa" secondAttribute="centerY" id="wCs-U1-xQb"/>
+                                                                            </constraints>
+                                                                        </view>
+                                                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uKi-Rn-ggV" userLabel="Location Button #3">
+                                                                            <rect key="frame" x="0.0" y="70" width="331" height="30"/>
+                                                                            <subviews>
+                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gps" translatesAutoresizingMaskIntoConstraints="NO" id="qDd-rw-mKJ">
+                                                                                    <rect key="frame" x="0.0" y="11" width="13" height="19"/>
+                                                                                </imageView>
+                                                                                <button opaque="NO" tag="2" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkm-St-LYe">
+                                                                                    <rect key="frame" x="20.5" y="1.5" width="169" height="38"/>
+                                                                                    <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="18"/>
+                                                                                    <state key="normal" title="Room #, Building Name">
+                                                                                        <color key="titleColor" red="0.36470588240000001" green="0.7843137255" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    </state>
+                                                                                    <state key="highlighted">
+                                                                                        <color key="titleColor" red="0.36470588235294116" green="0.78431372549019607" blue="0.85882352941176465" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    </state>
+                                                                                    <connections>
+                                                                                        <action selector="locationOnClick:" destination="6AS-GM-bJ7" eventType="touchUpInside" id="PLZ-md-Tg3"/>
+                                                                                    </connections>
+                                                                                </button>
+                                                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Event location arrow ios" translatesAutoresizingMaskIntoConstraints="NO" id="dV6-51-SOS">
+                                                                                    <rect key="frame" x="197" y="13" width="7" height="15"/>
+                                                                                </imageView>
+                                                                            </subviews>
+                                                                            <gestureRecognizers/>
+                                                                            <constraints>
+                                                                                <constraint firstItem="qDd-rw-mKJ" firstAttribute="leading" secondItem="uKi-Rn-ggV" secondAttribute="leading" id="6K4-51-KE5"/>
+                                                                                <constraint firstItem="dV6-51-SOS" firstAttribute="leading" secondItem="fkm-St-LYe" secondAttribute="trailing" constant="7.5" id="86o-Fa-DKr"/>
+                                                                                <constraint firstAttribute="height" constant="30" id="GQ7-eb-oce"/>
+                                                                                <constraint firstItem="fkm-St-LYe" firstAttribute="centerY" secondItem="qDd-rw-mKJ" secondAttribute="centerY" id="HfX-z8-hOQ"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="qDd-rw-mKJ" secondAttribute="bottom" id="KFz-YO-3sv"/>
+                                                                                <constraint firstItem="fkm-St-LYe" firstAttribute="leading" secondItem="qDd-rw-mKJ" secondAttribute="trailing" constant="7.5" id="tE1-6x-AQX"/>
+                                                                                <constraint firstItem="dV6-51-SOS" firstAttribute="centerY" secondItem="fkm-St-LYe" secondAttribute="centerY" id="uoK-b7-iqp"/>
+                                                                            </constraints>
+                                                                        </view>
                                                                     </subviews>
-                                                                    <gestureRecognizers/>
                                                                     <constraints>
-                                                                        <constraint firstItem="dV6-51-SOS" firstAttribute="leading" secondItem="fkm-St-LYe" secondAttribute="trailing" constant="7.5" id="86o-Fa-DKr"/>
-                                                                        <constraint firstItem="fkm-St-LYe" firstAttribute="centerY" secondItem="qDd-rw-mKJ" secondAttribute="centerY" id="HfX-z8-hOQ"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="qDd-rw-mKJ" secondAttribute="bottom" id="LeP-1n-GPf"/>
-                                                                        <constraint firstItem="qDd-rw-mKJ" firstAttribute="leading" secondItem="uKi-Rn-ggV" secondAttribute="leading" id="Og3-yP-lEY"/>
-                                                                        <constraint firstItem="fkm-St-LYe" firstAttribute="leading" secondItem="qDd-rw-mKJ" secondAttribute="trailing" constant="7.5" id="tE1-6x-AQX"/>
-                                                                        <constraint firstItem="dV6-51-SOS" firstAttribute="centerY" secondItem="fkm-St-LYe" secondAttribute="centerY" id="uoK-b7-iqp"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="8B7-rF-68P" secondAttribute="trailing" id="BoN-U6-1vi"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="KH5-ex-whK" secondAttribute="trailing" id="EUL-Jt-rIl"/>
+                                                                        <constraint firstItem="uKi-Rn-ggV" firstAttribute="leading" secondItem="1eI-f6-doI" secondAttribute="leading" id="JkS-Xn-FCX"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="uKi-Rn-ggV" secondAttribute="bottom" id="LQd-Db-jDB"/>
+                                                                        <constraint firstItem="KH5-ex-whK" firstAttribute="top" secondItem="1eI-f6-doI" secondAttribute="top" id="Ts2-5t-tHI"/>
+                                                                        <constraint firstItem="uKi-Rn-ggV" firstAttribute="top" secondItem="8B7-rF-68P" secondAttribute="bottom" constant="5" id="UY4-ae-RWC"/>
+                                                                        <constraint firstItem="KH5-ex-whK" firstAttribute="leading" secondItem="1eI-f6-doI" secondAttribute="leading" id="WxG-Ik-3fj"/>
+                                                                        <constraint firstItem="8B7-rF-68P" firstAttribute="leading" secondItem="1eI-f6-doI" secondAttribute="leading" id="dKr-kV-Obb"/>
+                                                                        <constraint firstItem="8B7-rF-68P" firstAttribute="top" secondItem="KH5-ex-whK" secondAttribute="bottom" constant="5" id="k8u-pJ-7H2"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="uKi-Rn-ggV" secondAttribute="trailing" id="yMU-aq-Tjs"/>
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="Imh-wX-J0B" firstAttribute="top" secondItem="y6x-mo-iON" secondAttribute="top" id="1pq-C4-LpR"/>
-                                                                <constraint firstItem="uKi-Rn-ggV" firstAttribute="leading" secondItem="y6x-mo-iON" secondAttribute="leading" id="Cei-WP-WxW"/>
+                                                                <constraint firstItem="1eI-f6-doI" firstAttribute="leading" secondItem="y6x-mo-iON" secondAttribute="leading" id="IR0-iN-fXR"/>
                                                                 <constraint firstItem="Imh-wX-J0B" firstAttribute="leading" secondItem="y6x-mo-iON" secondAttribute="leading" id="KVk-OZ-xCA"/>
-                                                                <constraint firstAttribute="bottom" secondItem="uKi-Rn-ggV" secondAttribute="bottom" id="b1z-dH-dge"/>
                                                                 <constraint firstItem="kEW-Su-lmm" firstAttribute="leading" secondItem="y6x-mo-iON" secondAttribute="leading" id="ite-OH-jf6"/>
+                                                                <constraint firstAttribute="bottom" secondItem="1eI-f6-doI" secondAttribute="bottom" id="pMd-7z-A8k"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Imh-wX-J0B" secondAttribute="trailing" id="svQ-zI-pVn"/>
                                                             </constraints>
                                                         </stackView>
@@ -416,7 +503,15 @@
                                     <outlet property="actualContent" destination="jp2-cr-udf" id="QCU-Yp-oeF"/>
                                     <outlet property="cellBorder" destination="jp2-cr-udf" id="2DW-Qb-xjg"/>
                                     <outlet property="cellContent" destination="D3t-5P-ATd" id="XL6-fK-vjn"/>
-                                    <outlet property="descriptionButton" destination="fkm-St-LYe" id="UK9-BN-AIX"/>
+                                    <outlet property="location1" destination="KH5-ex-whK" id="AGp-M0-rZa"/>
+                                    <outlet property="location1Height" destination="TJB-W9-663" id="1QE-83-QEk"/>
+                                    <outlet property="location2" destination="8B7-rF-68P" id="STb-hT-eMU"/>
+                                    <outlet property="location2Height" destination="kEw-9O-AAf" id="AZ1-Wc-hkd"/>
+                                    <outlet property="location3" destination="uKi-Rn-ggV" id="rRF-fS-92E"/>
+                                    <outlet property="location3Height" destination="GQ7-eb-oce" id="fvv-c0-QtT"/>
+                                    <outlet property="locationButton1" destination="DjK-TI-2NR" id="ZDY-jp-TYr"/>
+                                    <outlet property="locationButton2" destination="aA4-gH-oBa" id="Siu-C9-bWC"/>
+                                    <outlet property="locationButton3" destination="fkm-St-LYe" id="FSc-w2-XYp"/>
                                     <outlet property="reminderButton" destination="TrJ-yO-YSd" id="cF7-dU-AVF"/>
                                     <outlet property="time" destination="kEW-Su-lmm" id="zdD-YT-KsW"/>
                                     <outlet property="title" destination="th9-Z1-KcU" id="BhH-5C-Ro9"/>
@@ -434,7 +529,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="syY-yn-Imm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1729" y="2036"/>
+            <point key="canvasLocation" x="1728.8" y="2035.2323838080961"/>
         </scene>
         <!--Event Details-->
         <scene sceneID="g7i-fy-1Lp">
@@ -480,13 +575,12 @@
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FQz-OC-7v0">
                                                 <rect key="frame" x="15" y="165" width="345" height="0.0"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                                                 </accessibility>
                                                 <gestureRecognizers/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" id="R0z-je-aPC"/>
+                                                    <constraint firstAttribute="width" secondItem="FQz-OC-7v0" secondAttribute="height" multiplier="1e+10" id="w8H-ib-iNW"/>
                                                 </constraints>
                                                 <connections>
                                                     <outletCollection property="gestureRecognizers" destination="P4c-Y2-ynQ" appends="YES" id="6lG-Ga-26E"/>
@@ -534,7 +628,7 @@
                     <connections>
                         <outlet property="descriptionLabel" destination="N4P-iC-bLe" id="7dm-9W-0bR"/>
                         <outlet property="image" destination="FQz-OC-7v0" id="sl0-T5-QUD"/>
-                        <outlet property="imageHeight" destination="R0z-je-aPC" id="eQK-l4-Hd2"/>
+                        <outlet property="imageAspectRatio" destination="w8H-ib-iNW" id="MPI-IW-dty"/>
                         <outlet property="locationLabel" destination="hUr-12-HVU" id="bMT-dJ-CaG"/>
                         <outlet property="timeLabel" destination="TdE-eE-1gT" id="YhG-At-xgs"/>
                         <outlet property="titleLabel" destination="u4g-Xa-sJI" id="obG-2K-H7g"/>
