@@ -8,6 +8,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Brandon_bld.otf">
+            <string>BrandonGrotesque-Bold</string>
+        </array>
         <array key="Brandon_light.otf">
             <string>BrandonGrotesque-Light</string>
         </array>
@@ -49,25 +52,25 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Happening Now" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ags-Ix-OR2">
-                                                    <rect key="frame" x="62.5" y="281" width="192" height="26"/>
+                                                    <rect key="frame" x="63" y="281" width="192" height="26"/>
                                                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="24"/>
                                                     <color key="textColor" red="0.96078431372549022" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HackIllinois begins on" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h20-PX-aPM">
-                                                    <rect key="frame" x="29.5" y="15" width="258" height="26"/>
+                                                    <rect key="frame" x="30" y="15" width="258" height="26"/>
                                                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="24"/>
                                                     <color key="textColor" red="0.96078431372549022" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="February" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ely-dZ-bUw">
-                                                    <rect key="frame" x="126.5" y="67" width="64" height="26"/>
+                                                    <rect key="frame" x="127" y="67" width="64" height="26"/>
                                                     <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="18"/>
                                                     <color key="textColor" red="0.36470588240000001" green="0.7843137255" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friday @ 4:00 pm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ucv-Is-4t4">
-                                                    <rect key="frame" x="91.5" y="179" width="135" height="26"/>
+                                                    <rect key="frame" x="91" y="179" width="135" height="26"/>
                                                     <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="18"/>
                                                     <color key="textColor" red="0.36470588240000001" green="0.7843137255" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -105,13 +108,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Happening Now" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aC8-mh-ytH">
-                                                    <rect key="frame" x="63" y="281.5" width="192" height="26"/>
+                                                    <rect key="frame" x="62.5" y="281.5" width="192" height="26"/>
                                                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="24"/>
                                                     <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hacking Starts In..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="720-pI-gDh">
-                                                    <rect key="frame" x="48" y="15" width="221" height="26"/>
+                                                    <rect key="frame" x="48.5" y="15" width="221" height="26"/>
                                                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="24"/>
                                                     <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -135,7 +138,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@ Friday 9:00 pm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H1Q-t7-fPN">
-                                                    <rect key="frame" x="92" y="191.5" width="134" height="26"/>
+                                                    <rect key="frame" x="91.5" y="191.5" width="134" height="26"/>
                                                     <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="18"/>
                                                     <color key="textColor" red="0.36470588240000001" green="0.7843137255" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -206,13 +209,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Happening Now" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rck-vG-a7w">
-                                                    <rect key="frame" x="63" y="281.5" width="192" height="26"/>
+                                                    <rect key="frame" x="62.5" y="281.5" width="192" height="26"/>
                                                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="24"/>
                                                     <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Project Submission in..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92d-hK-XRZ">
-                                                    <rect key="frame" x="22" y="15" width="273.5" height="26"/>
+                                                    <rect key="frame" x="22.5" y="15" width="273.5" height="26"/>
                                                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="24"/>
                                                     <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -236,7 +239,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@ Friday 9:00 pm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRw-Vm-9gB">
-                                                    <rect key="frame" x="92" y="191.5" width="134" height="26"/>
+                                                    <rect key="frame" x="91.5" y="191.5" width="134" height="26"/>
                                                     <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="18"/>
                                                     <color key="textColor" red="0.36470588240000001" green="0.7843137255" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -654,24 +657,6 @@
             </objects>
             <point key="canvasLocation" x="1148" y="-146.17691154422789"/>
         </scene>
-        <!--Event Details View Controller-->
-        <scene sceneID="Qii-69-4Sh">
-            <objects>
-                <viewController storyboardIdentifier="EventDetails" id="d6m-QD-JDF" customClass="EventDetailsViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="8An-CJ-xK1"/>
-                        <viewControllerLayoutGuide type="bottom" id="8uT-oC-MCv"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="KTx-kb-K6c">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BHU-7B-60y" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1762" y="-146"/>
-        </scene>
         <!--Home-->
         <scene sceneID="WbM-5X-Cle">
             <objects>
@@ -691,6 +676,118 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QiU-Dz-UeM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="208.80000000000001" y="-146.17691154422789"/>
+        </scene>
+        <!--Event Details-->
+        <scene sceneID="RIN-xO-SOH">
+            <objects>
+                <viewController storyboardIdentifier="EventDetailsView" title="Event Details" id="xFb-Y6-T05" customClass="EventDetailsViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="W15-4C-Odd"/>
+                        <viewControllerLayoutGuide type="bottom" id="MZs-97-CMQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Icx-h1-ngf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G5W-Qj-wRH">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1HO-T3-BBB" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Schedule Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3H7-7Z-boN">
+                                                <rect key="frame" x="15" y="15" width="345" height="29"/>
+                                                <fontDescription key="fontDescription" name="BrandonGrotesque-Bold" family="Brandon Grotesque" pointSize="20"/>
+                                                <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4:30 pm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zff-RD-7jW">
+                                                <rect key="frame" x="15" y="49" width="345" height="29"/>
+                                                <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="20"/>
+                                                <color key="textColor" red="0.71764705880000002" green="0.74509803919999995" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Schedule Location" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="59E-T6-CQa">
+                                                <rect key="frame" x="15" y="83" width="345" height="26"/>
+                                                <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="18"/>
+                                                <color key="textColor" red="0.36470588240000001" green="0.7843137255" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Schedule Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BgP-wM-1Hd">
+                                                <rect key="frame" x="15" y="124" width="345" height="26"/>
+                                                <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="18"/>
+                                                <color key="textColor" red="0.94117647059999998" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dG0-qa-HFo">
+                                                <rect key="frame" x="15" y="165" width="345" height="0.0"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
+                                                </accessibility>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" id="TkI-Rc-SrF"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="JQC-bg-KAN" appends="YES" id="6LC-MI-y55"/>
+                                                </connections>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="Zff-RD-7jW" firstAttribute="leading" secondItem="1HO-T3-BBB" secondAttribute="leading" constant="15" id="CZq-nK-5n9"/>
+                                            <constraint firstItem="3H7-7Z-boN" firstAttribute="leading" secondItem="1HO-T3-BBB" secondAttribute="leading" constant="15" id="D9X-JW-MpN"/>
+                                            <constraint firstItem="dG0-qa-HFo" firstAttribute="leading" secondItem="1HO-T3-BBB" secondAttribute="leading" constant="15" id="Ix3-UP-d7A"/>
+                                            <constraint firstAttribute="bottom" secondItem="dG0-qa-HFo" secondAttribute="bottom" constant="15" id="Jbi-wx-sxH"/>
+                                            <constraint firstItem="59E-T6-CQa" firstAttribute="leading" secondItem="1HO-T3-BBB" secondAttribute="leading" constant="15" id="Mqu-EM-ESP"/>
+                                            <constraint firstItem="BgP-wM-1Hd" firstAttribute="top" secondItem="59E-T6-CQa" secondAttribute="bottom" constant="15" id="Qaf-iV-cTI"/>
+                                            <constraint firstItem="dG0-qa-HFo" firstAttribute="top" secondItem="BgP-wM-1Hd" secondAttribute="bottom" constant="15" id="R0Y-jT-LVj"/>
+                                            <constraint firstAttribute="trailing" secondItem="BgP-wM-1Hd" secondAttribute="trailing" constant="15" id="TGE-wZ-Vrc"/>
+                                            <constraint firstItem="59E-T6-CQa" firstAttribute="top" secondItem="Zff-RD-7jW" secondAttribute="bottom" constant="5" id="ZI5-uw-J0G"/>
+                                            <constraint firstItem="Zff-RD-7jW" firstAttribute="top" secondItem="3H7-7Z-boN" secondAttribute="bottom" constant="5" id="mvV-q6-f3H"/>
+                                            <constraint firstItem="3H7-7Z-boN" firstAttribute="top" secondItem="1HO-T3-BBB" secondAttribute="top" constant="15" id="nLE-mV-aAp"/>
+                                            <constraint firstAttribute="trailing" secondItem="dG0-qa-HFo" secondAttribute="trailing" constant="15" id="nYX-4A-q00"/>
+                                            <constraint firstAttribute="trailing" secondItem="59E-T6-CQa" secondAttribute="trailing" constant="15" id="pFH-CB-bOu"/>
+                                            <constraint firstAttribute="trailing" secondItem="3H7-7Z-boN" secondAttribute="trailing" constant="15" id="qhG-Np-7gr"/>
+                                            <constraint firstItem="BgP-wM-1Hd" firstAttribute="leading" secondItem="1HO-T3-BBB" secondAttribute="leading" constant="15" id="vJ6-W3-3OL"/>
+                                            <constraint firstAttribute="trailing" secondItem="Zff-RD-7jW" secondAttribute="trailing" constant="15" id="yEp-QS-HiF"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="1HO-T3-BBB" firstAttribute="leading" secondItem="G5W-Qj-wRH" secondAttribute="leading" id="d6T-Vy-U1W"/>
+                                    <constraint firstAttribute="bottom" secondItem="1HO-T3-BBB" secondAttribute="bottom" id="gaT-QJ-1XD"/>
+                                    <constraint firstAttribute="trailing" secondItem="1HO-T3-BBB" secondAttribute="trailing" id="pzs-GB-ybr"/>
+                                    <constraint firstItem="1HO-T3-BBB" firstAttribute="top" secondItem="G5W-Qj-wRH" secondAttribute="top" id="zQ4-8m-mMd"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.078431372550000003" green="0.14117647059999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="1HO-T3-BBB" firstAttribute="width" secondItem="Icx-h1-ngf" secondAttribute="width" id="GIc-0c-nar"/>
+                            <constraint firstItem="G5W-Qj-wRH" firstAttribute="leading" secondItem="Icx-h1-ngf" secondAttribute="leading" id="Hkp-Gp-X3U"/>
+                            <constraint firstItem="G5W-Qj-wRH" firstAttribute="height" secondItem="Icx-h1-ngf" secondAttribute="height" id="dQR-wr-pB4"/>
+                            <constraint firstItem="G5W-Qj-wRH" firstAttribute="width" secondItem="Icx-h1-ngf" secondAttribute="width" id="lbB-P2-Ail"/>
+                            <constraint firstItem="G5W-Qj-wRH" firstAttribute="top" secondItem="Icx-h1-ngf" secondAttribute="top" id="lwp-WR-JE8"/>
+                            <constraint firstItem="1HO-T3-BBB" firstAttribute="height" secondItem="Icx-h1-ngf" secondAttribute="height" priority="250" id="xmB-LX-gbn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="eventDescriptionLabel" destination="BgP-wM-1Hd" id="URy-eM-X3n"/>
+                        <outlet property="eventImageView" destination="dG0-qa-HFo" id="qzL-YU-2nI"/>
+                        <outlet property="eventLocationLabel" destination="59E-T6-CQa" id="UUs-80-A4e"/>
+                        <outlet property="eventStartTime" destination="Zff-RD-7jW" id="Znz-cX-cJH"/>
+                        <outlet property="eventTitleLabel" destination="3H7-7Z-boN" id="A1u-SC-mSC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1lb-mb-hOG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="JQC-bg-KAN">
+                    <connections>
+                        <action selector="imageTapped:" destination="xFb-Y6-T05" id="k4v-2k-TF0"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="2801" y="-97"/>
         </scene>
     </scenes>
     <resources>

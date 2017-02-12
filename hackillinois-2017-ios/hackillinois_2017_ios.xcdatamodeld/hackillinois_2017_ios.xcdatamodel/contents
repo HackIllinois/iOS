@@ -8,13 +8,13 @@
     </entity>
     <entity name="Feed" representedClassName=".Feed" syncable="YES">
         <attribute name="description_" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="endTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="qrCode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="shortName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="startTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="updated" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="updated_" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Location" inverseName="feeds" inverseEntity="Location" syncable="YES"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="feeds" inverseEntity="Tag" syncable="YES"/>
         <uniquenessConstraints>
@@ -68,7 +68,7 @@
     </entity>
     <elements>
         <element name="Chat" positionX="151" positionY="99" width="128" height="105"/>
-        <element name="Feed" positionX="-29" positionY="270" width="128" height="193"/>
+        <element name="Feed" positionX="-29" positionY="270" width="128" height="195"/>
         <element name="HelpQ" positionX="-36" positionY="57" width="128" height="195"/>
         <element name="Location" positionX="135" positionY="243" width="128" height="135"/>
         <element name="Tag" positionX="153" positionY="393" width="128" height="75"/>

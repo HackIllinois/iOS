@@ -79,7 +79,7 @@ class CoreDataHelpers {
      * locations and tags seems required, you can insert an empty array/list if it doesn't exist (done in order to have the
      * user have to make an intention not to have any locations or tags
      */
-    class func createOrFetchFeed(id: NSNumber, message: String, timestamp: UInt64, locations: [Location], tags: [Tag]) -> Feed {
+    class func createOrFetchFeed(id: NSNumber, description: String, startTime: Date, endTime: Date, updated: Date, qrCode: NSNumber, shortName: String, name: String, locations: [Location], tags: [Tag]) -> Feed {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let fetchRequest = NSFetchRequest<Feed>(entityName: "Feed")
         fetchRequest.predicate = NSPredicate(format: "id == %@", id)
@@ -91,7 +91,8 @@ class CoreDataHelpers {
         }
         
         let feed = NSEntityDescription.insertNewObject(forEntityName: "Feed", into: appDelegate.managedObjectContext) as! Feed
-        feed.initialize(id: id, message: message, time: Date(timeIntervalSince1970: TimeInterval(timestamp)), locations: locations, tags: tags)
+//        feed.initialize(id: id, message: message, time: Date(timeIntervalSince1970: TimeInterval(timestamp)), locations: locations, tags: tags)
+        feed.initialize(id: id, description: description, startTime: startTime, endTime: endTime, updated: updated, qrCode: qrCode, shortName: shortName, name: name, locations: locations, tags: tags)
         return feed
     }
     

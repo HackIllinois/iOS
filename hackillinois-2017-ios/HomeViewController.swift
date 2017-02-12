@@ -82,7 +82,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard: UIStoryboard = UIStoryboard(name: "Home", bundle: nil)
-        if let eventDetails = storyboard.instantiateViewController(withIdentifier: "EventDetails") as? EventDetailsViewController {
+        if let eventDetails = storyboard.instantiateViewController(withIdentifier: "EventDetailsView") as? EventDetailsViewController {
             eventDetails.eventDetails = events[indexPath.row - 1];
             navigationController?.pushViewController(eventDetails, animated: true)
         }
@@ -94,11 +94,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             if(currentTimeForTable < hackathonBeginTime) { // if the hackathon has not started yet
                 let cell = tableView.dequeueReusableCell(withIdentifier: "mainCellBeforeHackathonCell", for: indexPath) as! mainCellBeforeHackathonCell
                 cell.backgroundColor = UIColor.clear
+                cell.isUserInteractionEnabled = false;
                 return cell
             } else if (currentTimeForTable > hackathonBeginTime && currentTimeForTable < hackingBeginTime) { // if the hackathon has started but hacking has not
                 let cell = tableView.dequeueReusableCell(withIdentifier: "mainCellBeforeHacking", for: indexPath) as! mainCellBeforeHacking
                  let currentUnixTime: Int = Int(NSDate().timeIntervalSince1970)
                 cell.selectionStyle = .none
+                cell.isUserInteractionEnabled = false;
                 cell.timeRemaining = cell.eventStartUnixTime - currentUnixTime
                 cell.secondsLeft = cell.getSeconds(timeInSeconds: cell.timeRemaining)
                 cell.minutesLeft = cell.getMinutes(timeInSeconds: cell.timeRemaining)
@@ -113,12 +115,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 return cell
             } else if (currentTimeForTable > hackathonEndTime) { // if the hackathon has ended
                 let cell = tableView.dequeueReusableCell(withIdentifier: "mainCellAfterHackathon", for: indexPath) as! mainCellAfterHackathon
+                cell.isUserInteractionEnabled = false;
                 cell.backgroundColor = UIColor.clear
                 return cell
             } // otherwise we're hacking currently
             let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath) as! mainCell
             let currentUnixTime: Int = Int(NSDate().timeIntervalSince1970)
             cell.selectionStyle = .none
+            cell.isUserInteractionEnabled = false;
             cell.timeRemaining = cell.eventStartUnixTime - currentUnixTime
             cell.secondsLeft = cell.getSeconds(timeInSeconds: cell.timeRemaining)
             cell.minutesLeft = cell.getMinutes(timeInSeconds: cell.timeRemaining)
@@ -132,6 +136,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             return cell
         } else if(indexPath.row == 1 && currentTimeForTable < hackathonBeginTime) { // if hackathon has not started yet
             let cell = tableView.dequeueReusableCell(withIdentifier: "noEventCell", for: indexPath) as! noEventCell
+            cell.isUserInteractionEnabled = false;
             cell.backgroundColor = UIColor.clear
             return cell
         } else if (events[indexPath.row - 1].locations?.count == 1){ // we're hacking so show events
@@ -143,7 +148,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             dateFormatter.dateFormat = "hh:mm a"
             dateFormatter.amSymbol = "am"
             dateFormatter.pmSymbol = "pm"
-            cell.checkInTimeLabel.text = dateFormatter.string(from: events[indexPath.row - 1].time)
+            cell.checkInTimeLabel.text = dateFormatter.string(from: events[indexPath.row].startTime!)
             
             let tempLocations = events[indexPath.row - 1].locations!.value(forKey: "name")
             cell.locationLabel.text = (tempLocations as AnyObject).firstObject as! String?
@@ -162,7 +167,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             dateFormatter.dateFormat = "hh:mm a"
             dateFormatter.amSymbol = "am"
             dateFormatter.pmSymbol = "pm"
-            cell.checkInTimeLabel.text = dateFormatter.string(from: events[indexPath.row - 1].time)
+            cell.checkInTimeLabel.text = dateFormatter.string(from: events[indexPath.row - 1].startTime!)
             
             let tempLocations = events[indexPath.row - 1].locations!.value(forKey: "name")
             cell.firstLocationLabel.text = (tempLocations as AnyObject).object(at: 0) as? String
@@ -184,7 +189,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             dateFormatter.amSymbol = "am"
             dateFormatter.pmSymbol = "pm"
         print(events)
-            cell.checkInTimeLabel.text = dateFormatter.string(from: events[indexPath.row - 1].time)
+            cell.checkInTimeLabel.text = dateFormatter.string(from: events[indexPath.row - 1].startTime!)
         
             let tempLocations = events[indexPath.row - 1].locations!.value(forKey: "name")
             cell.firstLocationLabel.text = (tempLocations as AnyObject).object(at: 0) as? String
@@ -218,8 +223,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let fetchRequest = NSFetchRequest<Feed>(entityName: "Feed")
         
-        fetchRequest.predicate = NSPredicate(format: "time > %@", NSDate())
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "time", ascending: true)]
+        fetchRequest.predicate = NSPredicate(format: "startTime > %@", NSDate())
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startTime", ascending: true)]
         
 
         
@@ -241,11 +246,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let union: Location! = CoreDataHelpers.createOrFetchLocation(location: "Illini Union", abbreviation: "Union", locationLatitude: 40.109395, locationLongitude: -88.227181, address: "Illini Union\n1401 W Green St\nUrbana, IL 61801\nUnited States", locationFeeds: nil)
         
         let tagEvent = CoreDataHelpers.createOrFetchTag(tag: "Event", feeds: nil)
+        let date = Date(timeIntervalSince1970: 1487107800)
 
-        _ = CoreDataHelpers.createOrFetchFeed(id: 422, message: "test", timestamp: 1486741209 , locations: [siebel], tags: [tagEvent])
-        _ = CoreDataHelpers.createOrFetchFeed(id: 423, message: "test", timestamp: 1486741109 , locations: [siebel, eceb], tags: [tagEvent])
-        _ = CoreDataHelpers.createOrFetchFeed(id: 424, message: "test", timestamp: 1486711109 , locations: [siebel, eceb, union], tags: [tagEvent])
-        _ = CoreDataHelpers.createOrFetchFeed(id: 425, message: "test", timestamp: 1486741123 , locations: [siebel], tags: [tagEvent])
+        _ = CoreDataHelpers.createOrFetchFeed(id: 421, description: "test", startTime: date, endTime: date, updated: date, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel], tags: [tagEvent])
+        
+        _ = CoreDataHelpers.createOrFetchFeed(id: 422, description: "test", startTime: date, endTime: date, updated: date, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel, union], tags: [tagEvent])
+        _ = CoreDataHelpers.createOrFetchFeed(id: 423, description: "test", startTime: date, endTime: date, updated: date, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel, eceb, union], tags: [tagEvent])
+        _ = CoreDataHelpers.createOrFetchFeed(id: 424, description: "test", startTime: date, endTime: date, updated: date, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel, eceb], tags: [tagEvent])
         
         // CoreDataHelpers.saveContext()
     }
