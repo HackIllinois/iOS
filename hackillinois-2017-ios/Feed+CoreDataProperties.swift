@@ -25,6 +25,6 @@ extension Feed {
     @NSManaged var name: String?
     @NSManaged var id: NSNumber?
     @NSManaged var locations: NSOrderedSet?
-    @NSManaged var tags: NSSet?
+    @NSManaged var tag: String?
 
 }

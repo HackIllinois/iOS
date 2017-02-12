@@ -14,9 +14,9 @@
         <attribute name="qrCode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="shortName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updated_" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Location" inverseName="feeds" inverseEntity="Location" syncable="YES"/>
-        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="feeds" inverseEntity="Tag" syncable="YES"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id"/>
@@ -36,7 +36,7 @@
         <relationship name="chats" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Chat" inverseName="helpQ" inverseEntity="Chat" syncable="YES"/>
     </entity>
     <entity name="Location" representedClassName=".Location" syncable="YES">
-        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="latitude" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="longitude" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
@@ -47,10 +47,6 @@
                 <constraint value="name"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
-    </entity>
-    <entity name="Tag" representedClassName=".Tag" syncable="YES">
-        <attribute name="name" attributeType="String" syncable="YES"/>
-        <relationship name="feeds" toMany="YES" deletionRule="Nullify" destinationEntity="Feed" inverseName="tags" inverseEntity="Feed" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName=".User" syncable="YES">
         <attribute name="barcode" attributeType="String" syncable="YES"/>
@@ -68,10 +64,9 @@
     </entity>
     <elements>
         <element name="Chat" positionX="151" positionY="99" width="128" height="105"/>
-        <element name="Feed" positionX="-29" positionY="270" width="128" height="195"/>
+        <element name="Feed" positionX="-29" positionY="270" width="128" height="30"/>
         <element name="HelpQ" positionX="-36" positionY="57" width="128" height="195"/>
         <element name="Location" positionX="135" positionY="243" width="128" height="135"/>
-        <element name="Tag" positionX="153" positionY="393" width="128" height="75"/>
         <element name="User" positionX="313" positionY="90" width="128" height="225"/>
     </elements>
 </model>
