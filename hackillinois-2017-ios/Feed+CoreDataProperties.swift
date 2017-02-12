@@ -2,22 +2,29 @@
 //  Feed+CoreDataProperties.swift
 //  hackillinois-2017-ios
 //
-//  Created by Shotaro Ikeda on 5/27/16.
-//  Copyright © 2016 Shotaro Ikeda. All rights reserved.
-//
-//  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
-//  to delete and recreate this implementation file for your updated model.
+//  Created by Minhyuk Park on 11/02/2017.
+//  Copyright © 2017 Shotaro Ikeda. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
+
 extension Feed {
 
-    @NSManaged var id: NSNumber
-    @NSManaged var message: String
-    @NSManaged var time: Date
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Feed> {
+        return NSFetchRequest<Feed>(entityName: "Feed");
+    }
+
+    @NSManaged var endTime: Date?
+    @NSManaged var startTime: Date?
+    @NSManaged var updated_: Date?
+    @NSManaged var description_: String?
+    @NSManaged var qrCode: NSNumber?
+    @NSManaged var shortName: String?
+    @NSManaged var name: String?
+    @NSManaged var id: NSNumber?
     @NSManaged var locations: NSOrderedSet?
-    @NSManaged var tags: NSSet?
+    @NSManaged var tag: String?
 
 }

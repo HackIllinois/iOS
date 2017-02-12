@@ -8,12 +8,26 @@
 
 import UIKit
 import CoreData
+import Alamofire
+import SwiftyJSON
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var HACKILLINOIS_API_URL: String!
+    var mTimer = Timer()
+    var funcList: [((Void) -> Void)] = []
+    
+    
+    
+    func iterateFunctions() {
+        CoreDataHelpers.updateEventsFeed()
+        for foo in funcList {
+            foo()
+        }
+    }
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
@@ -29,6 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarAppearace.barTintColor = UIColor.hiaDarkSlateBlue
 
         UIApplication.shared.statusBarStyle = .lightContent
+        
+        mTimer = Timer.scheduledTimer(timeInterval: 10, target:self, selector: #selector(self.iterateFunctions), userInfo: nil, repeats: true)
         
         //
         //        // Parse API Keys from keys.plist file

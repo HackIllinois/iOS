@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+/* draws a border rectangle */
 func drawBorderRectangle(size: CGSize) -> UIImage {
     let opaque = false;
     let scale: CGFloat = 0;
@@ -16,9 +17,9 @@ func drawBorderRectangle(size: CGSize) -> UIImage {
     let context = UIGraphicsGetCurrentContext();
     
     context!.setStrokeColor(UIColor.fromRGBHex(duskyBlueColor).cgColor)
-    context!.setLineWidth(4.0)
     let borderRect = CGRect(origin: CGPoint.zero, size: CGSize.init(width: size.width, height: size.height))
     let path = UIBezierPath(roundedRect: borderRect, byRoundingCorners: [UIRectCorner.topLeft , UIRectCorner.bottomLeft, UIRectCorner.topRight, UIRectCorner.bottomRight], cornerRadii: CGSize(width:5.0, height:5.0))
+    path.lineWidth = 2.0
     path.close();
     path.stroke()
     
@@ -27,6 +28,8 @@ func drawBorderRectangle(size: CGSize) -> UIImage {
     UIGraphicsEndImageContext();
     return image!;
 }
+
+/* rounds the bottow two corners of a UIButton */
 extension UIButton{
     func roundedButton(){
         let maskPath = UIBezierPath(roundedRect: self.bounds,

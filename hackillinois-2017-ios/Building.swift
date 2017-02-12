@@ -28,6 +28,5 @@ class Building: NSObject, MKAnnotation {
         self.longName = location.name
         self.coordinate =
             CLLocationCoordinate2DMake(Double(location.latitude), Double(location.longitude))
-        self.address = location.address
     }
 }
