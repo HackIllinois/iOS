@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let tabBarAppearace = UITabBar.appearance()
         tabBarAppearace.isTranslucent = false
-        tabBarAppearace.tintColor = UIColor.white
+        tabBarAppearace.tintColor = UIColor.hiaLightPeriwinkle
         tabBarAppearace.barTintColor = UIColor.hiaDarkSlateBlue
 
         UIApplication.shared.statusBarStyle = .lightContent

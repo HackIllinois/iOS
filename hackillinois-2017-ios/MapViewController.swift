@@ -59,8 +59,6 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         tapMap.delegate = self
         map.addGestureRecognizer(tapMap)
         
-        addBottomSheetView()
-        
         initTouches()
         
         
@@ -197,12 +195,16 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         routeTo(building.coordinate, completion: { (route: MKRoute?) in
             self.bottomSheet.directions = route
             self.bottomSheet.reloadNavTable(address: building.address ?? "", name: building.longName ?? "")
-            self.bottomSheet.scrollToBar()
+            self.bottomSheet.scrollToButtons()
         })
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if bottomSheet == nil {
+            addBottomSheetView()
+        }
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -247,12 +249,11 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         // Find index of selected Annotation
         let sorter: ((Building) -> Bool) = { $0.coordinate == selectedAnnotation.coordinate }
         if let selectedIndex = buildings.index(where: sorter) {
-            print(selectedIndex)
             let building = buildings[selectedIndex]
             routeTo(building.coordinate, completion: { (route: MKRoute?) in
                 self.bottomSheet.directions = route
                 self.bottomSheet.reloadNavTable(address: building.address ?? "", name: building.longName ?? "")
-                self.bottomSheet.scrollToBar()
+                self.bottomSheet.scrollToButtons()
             })
             // Set appropriate selection for cleanup later
             clearLabel(labelNumber: 5) // Clear everything

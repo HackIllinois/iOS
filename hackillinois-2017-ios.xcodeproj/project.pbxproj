@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A3A1B2F1E4E45EB00EA2100 /* ProfileViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A1B2E1E4E45EB00EA2100 /* ProfileViewCell.swift */; };
 		0A53966D1E4E67FC007F6450 /* InsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A53966C1E4E67FC007F6450 /* InsetLabel.swift */; };
-		17BC6B394A0A310CDEA1DF7B /* Pods_hackillinois_2017_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75AFF8F2A9393CCA4EBF188 /* Pods_hackillinois_2017_ios.framework */; };
+		1189F0B3155F8EC3E55068B1 /* Pods_hackillinois_2017_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA90F4FC4B2D90FC25772B31 /* Pods_hackillinois_2017_ios.framework */; };
 		243720021E32CEDD00B1C7C5 /* BottomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243720011E32CEDD00B1C7C5 /* BottomViewController.swift */; };
 		243720041E32D4D100B1C7C5 /* BottomViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243720031E32D4D100B1C7C5 /* BottomViewTableViewCell.swift */; };
 		24632D171E4D58EA00E7A746 /* FridayTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24632D141E4D58EA00E7A746 /* FridayTabController.swift */; };
@@ -30,6 +30,8 @@
 		24794C6F1E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */; };
 		24794C701E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */; };
 		24794C711E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */; };
+		24F0CA7E1E5049AF005664F3 /* GenericTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0CA7D1E5049AF005664F3 /* GenericTabBarController.swift */; };
+		24F103FB1E503E00006701B7 /* GenericNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F103FA1E503E00006701B7 /* GenericNavigationController.swift */; };
 		390A8DE41E3AA90200018855 /* Gotham-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DD41E3AA90200018855 /* Gotham-Black.otf */; };
 		390A8DE51E3AA90200018855 /* Gotham-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DD51E3AA90200018855 /* Gotham-BlackItalic.otf */; };
 		390A8DE61E3AA90200018855 /* Gotham-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DD61E3AA90200018855 /* Gotham-Bold.otf */; };
@@ -68,7 +70,7 @@
 		A50F29251E14D55500878652 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A50F29241E14D55500878652 /* Home.storyboard */; };
 		A50F29271E14DC3600878652 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F29261E14DC3600878652 /* HomeViewController.swift */; };
 		A54825B11E160C6C00E35C71 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54825B01E160C6C00E35C71 /* ScheduleViewController.swift */; };
-		AE232CBD3115F1DA5DF9B870 /* Pods_hackillinois_2017_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D8C9C142AB0677D17C63CBA /* Pods_hackillinois_2017_iosTests.framework */; };
+		BE7D155CC9A3324558E7EE76 /* Pods_hackillinois_2017_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 785754266918AE642E0ECE0A /* Pods_hackillinois_2017_iosUITests.framework */; };
 		E20465CB1CF1FAF50054654E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20465CA1CF1FAF50054654E /* AppDelegate.swift */; };
 		E20465CD1CF1FAF50054654E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20465CC1CF1FAF50054654E /* LoginViewController.swift */; };
 		E20465D01CF1FAF50054654E /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20465CE1CF1FAF50054654E /* Login.storyboard */; settings = {ASSET_TAGS = (1, ); }; };
@@ -139,14 +141,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		08F70C4B7B92575DEC15EFAE /* Pods-hackillinois-2017-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-ios/Pods-hackillinois-2017-ios.release.xcconfig"; sourceTree = "<group>"; };
 		0A3A1B2E1E4E45EB00EA2100 /* ProfileViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewCell.swift; sourceTree = "<group>"; };
 		0A53966C1E4E67FC007F6450 /* InsetLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsetLabel.swift; sourceTree = "<group>"; };
-		0D8C9C142AB0677D17C63CBA /* Pods_hackillinois_2017_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0F0E70C5ECC7AC1B705813BB /* Pods_hackillinois_2017_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1D5246D3021D962B3E962D3F /* Pods-hackillinois-2017-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-ios/Pods-hackillinois-2017-ios.debug.xcconfig"; sourceTree = "<group>"; };
-		21E83B55CF6C52BC833901F1 /* Pods-hackillinois-2017-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosTests/Pods-hackillinois-2017-iosTests.release.xcconfig"; sourceTree = "<group>"; };
-		23C934AE70C4AC43F1D884BE /* Pods-hackillinois-2017-iosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosTests/Pods-hackillinois-2017-iosTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1D81231F845B92D001F870CF /* Pods_hackillinois_2017_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		243720011E32CEDD00B1C7C5 /* BottomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomViewController.swift; sourceTree = "<group>"; };
 		243720031E32D4D100B1C7C5 /* BottomViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomViewTableViewCell.swift; sourceTree = "<group>"; };
 		24632D141E4D58EA00E7A746 /* FridayTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridayTabController.swift; sourceTree = "<group>"; };
@@ -165,6 +162,8 @@
 		24794C601E340DE80016F8D4 /* Brandon_thin_it.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_thin_it.otf; sourceTree = "<group>"; };
 		24794C611E340DE80016F8D4 /* Brandon_thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_thin.otf; sourceTree = "<group>"; };
 		24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+ColorConstants.swift"; sourceTree = "<group>"; };
+		24F0CA7D1E5049AF005664F3 /* GenericTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericTabBarController.swift; sourceTree = "<group>"; };
+		24F103FA1E503E00006701B7 /* GenericNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericNavigationController.swift; sourceTree = "<group>"; };
 		390A8DD41E3AA90200018855 /* Gotham-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Black.otf"; sourceTree = "<group>"; };
 		390A8DD51E3AA90200018855 /* Gotham-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-BlackItalic.otf"; sourceTree = "<group>"; };
 		390A8DD61E3AA90200018855 /* Gotham-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Bold.otf"; sourceTree = "<group>"; };
@@ -191,7 +190,6 @@
 		3947F9511E4C471100FF4AF4 /* SchedulePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchedulePageViewController.swift; sourceTree = "<group>"; };
 		3947F9531E4C472000FF4AF4 /* GenericTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericTabController.swift; sourceTree = "<group>"; };
 		3947F9551E4C473000FF4AF4 /* ScheduleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewController.swift; sourceTree = "<group>"; };
-		3947F9571E4C473F00FF4AF4 /* ScheduleDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleDescriptionViewController.swift; sourceTree = "<group>"; };
 		398219D91E345F4E00C5D0DF /* mainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCell.swift; sourceTree = "<group>"; };
 		398219DB1E345F4E00C5D0DF /* standardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = standardCell.swift; sourceTree = "<group>"; };
 		398219DC1E345F4E00C5D0DF /* twoLocationsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = twoLocationsCell.swift; sourceTree = "<group>"; };
@@ -200,12 +198,18 @@
 		655227D81E4DD18000DD88D7 /* ScheduleDetailsImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleDetailsImageViewController.swift; sourceTree = "<group>"; };
 		65A595491E4B167700AC74C4 /* ScheduleDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleDescriptionViewController.swift; sourceTree = "<group>"; };
 		65D7C99F1E468B5100E03103 /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
+		47920D85F8009FF07EE9103F /* Pods-hackillinois-2017-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
+		68DCF4EDFB9677B0A1F913D1 /* Pods-hackillinois-2017-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		785754266918AE642E0ECE0A /* Pods_hackillinois_2017_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8129EE3A0E443CB2D6225BCC /* Pods-hackillinois-2017-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosTests/Pods-hackillinois-2017-iosTests.release.xcconfig"; sourceTree = "<group>"; };
+		84F5EB4C4B79A8D329F8F0CA /* Pods-hackillinois-2017-iosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosTests/Pods-hackillinois-2017-iosTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A169511EE2A1D4EC00E72311 /* Pods-hackillinois-2017-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-ios/Pods-hackillinois-2017-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		A50876731E1C79130095F399 /* BottomMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomMapViewController.swift; sourceTree = "<group>"; };
 		A50876771E1C921C0095F399 /* BottomMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomMapViewController.xib; sourceTree = "<group>"; };
 		A50F29241E14D55500878652 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		A50F29261E14DC3600878652 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		A54825B01E160C6C00E35C71 /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
-		D3D05678487C3E4F7496D710 /* Pods-hackillinois-2017-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
+		AD6BE824EEB8AEE06C13EE8B /* Pods-hackillinois-2017-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-ios/Pods-hackillinois-2017-ios.release.xcconfig"; sourceTree = "<group>"; };
+		DA90F4FC4B2D90FC25772B31 /* Pods_hackillinois_2017_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E20465C71CF1FAF50054654E /* hackillinois-2017-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hackillinois-2017-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E20465CA1CF1FAF50054654E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E20465CC1CF1FAF50054654E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -260,7 +264,6 @@
 		E2D4F0E41D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MKMapCamera+initFromLocation.swift"; sourceTree = "<group>"; };
 		E2F639471D05083300853089 /* CGRect+initWithCenterAt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+initWithCenterAt.swift"; sourceTree = "<group>"; };
 		E2F957041D0BA899003A0881 /* Schedule.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Schedule.storyboard; sourceTree = "<group>"; };
-		E75AFF8F2A9393CCA4EBF188 /* Pods_hackillinois_2017_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,7 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2D4F0DD1D06AB7C00646BF8 /* MapKit.framework in Frameworks */,
-				17BC6B394A0A310CDEA1DF7B /* Pods_hackillinois_2017_ios.framework in Frameworks */,
+				1189F0B3155F8EC3E55068B1 /* Pods_hackillinois_2017_ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +280,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE232CBD3115F1DA5DF9B870 /* Pods_hackillinois_2017_iosTests.framework in Frameworks */,
+				7420348A8E40EE0EBC8DBEA4 /* Pods_hackillinois_2017_iosTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,7 +288,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				58E75F2152E19BCECDC115D1 /* Pods_hackillinois_2017_iosUITests.framework in Frameworks */,
+				BE7D155CC9A3324558E7EE76 /* Pods_hackillinois_2017_iosUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +351,19 @@
 			name = CustomCells;
 			sourceTree = "<group>";
 		};
+		4961923C46A6AB6568EBC26E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A169511EE2A1D4EC00E72311 /* Pods-hackillinois-2017-ios.debug.xcconfig */,
+				AD6BE824EEB8AEE06C13EE8B /* Pods-hackillinois-2017-ios.release.xcconfig */,
+				84F5EB4C4B79A8D329F8F0CA /* Pods-hackillinois-2017-iosTests.debug.xcconfig */,
+				8129EE3A0E443CB2D6225BCC /* Pods-hackillinois-2017-iosTests.release.xcconfig */,
+				68DCF4EDFB9677B0A1F913D1 /* Pods-hackillinois-2017-iosUITests.debug.xcconfig */,
+				47920D85F8009FF07EE9103F /* Pods-hackillinois-2017-iosUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		A50F29231E14D53B00878652 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,26 +375,13 @@
 			name = Home;
 			sourceTree = "<group>";
 		};
-		CA06EADA945D6ED53652FAFE /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				1D5246D3021D962B3E962D3F /* Pods-hackillinois-2017-ios.debug.xcconfig */,
-				08F70C4B7B92575DEC15EFAE /* Pods-hackillinois-2017-ios.release.xcconfig */,
-				23C934AE70C4AC43F1D884BE /* Pods-hackillinois-2017-iosTests.debug.xcconfig */,
-				21E83B55CF6C52BC833901F1 /* Pods-hackillinois-2017-iosTests.release.xcconfig */,
-				567F67E08A10E7527EE39217 /* Pods-hackillinois-2017-iosUITests.debug.xcconfig */,
-				D3D05678487C3E4F7496D710 /* Pods-hackillinois-2017-iosUITests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		D00BC4FDB277043FD74E853D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				E2D4F0DC1D06AB7C00646BF8 /* MapKit.framework */,
-				E75AFF8F2A9393CCA4EBF188 /* Pods_hackillinois_2017_ios.framework */,
-				0D8C9C142AB0677D17C63CBA /* Pods_hackillinois_2017_iosTests.framework */,
-				0F0E70C5ECC7AC1B705813BB /* Pods_hackillinois_2017_iosUITests.framework */,
+				DA90F4FC4B2D90FC25772B31 /* Pods_hackillinois_2017_ios.framework */,
+				1D81231F845B92D001F870CF /* Pods_hackillinois_2017_iosTests.framework */,
+				785754266918AE642E0ECE0A /* Pods_hackillinois_2017_iosUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -390,8 +393,8 @@
 				E20465E11CF1FAF50054654E /* hackillinois-2017-iosTests */,
 				E20465EC1CF1FAF50054654E /* hackillinois-2017-iosUITests */,
 				E20465C81CF1FAF50054654E /* Products */,
-				CA06EADA945D6ED53652FAFE /* Pods */,
 				D00BC4FDB277043FD74E853D /* Frameworks */,
+				4961923C46A6AB6568EBC26E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -597,6 +600,8 @@
 			isa = PBXGroup;
 			children = (
 				E27755521D36B7F600E7A379 /* GenericHelpQStaffViewController.swift */,
+				24F103FA1E503E00006701B7 /* GenericNavigationController.swift */,
+				24F0CA7D1E5049AF005664F3 /* GenericTabBarController.swift */,
 				E2BD82B41D09EA530009DB07 /* GenericMapViewController.swift */,
 				E2A085F11D0C4E43002197F9 /* GenericCardViewController.swift */,
 				E2BB42C51D133A9A009EF512 /* GenericInputView.swift */,
@@ -651,12 +656,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E20465F21CF1FAF50054654E /* Build configuration list for PBXNativeTarget "hackillinois-2017-ios" */;
 			buildPhases = (
-				E6A87C2E0E12CA0D08D66696 /* [CP] Check Pods Manifest.lock */,
+				F7536F5117043E27B7C72F70 /* [CP] Check Pods Manifest.lock */,
 				E20465C31CF1FAF50054654E /* Sources */,
 				E20465C41CF1FAF50054654E /* Frameworks */,
 				E20465C51CF1FAF50054654E /* Resources */,
-				83EB5F78E3860C1FD118996E /* [CP] Embed Pods Frameworks */,
-				A2D2578D01EB376EDB8ED990 /* [CP] Copy Pods Resources */,
+				54047AE9F1C43C841BC299A5 /* [CP] Embed Pods Frameworks */,
+				2D5FFE69D76C1C0866C34893 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -671,12 +676,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E20465F51CF1FAF50054654E /* Build configuration list for PBXNativeTarget "hackillinois-2017-iosTests" */;
 			buildPhases = (
-				5034F99CAA70B3AFB0A9A4A7 /* [CP] Check Pods Manifest.lock */,
+				A683D7EB75304B3EC50BB118 /* [CP] Check Pods Manifest.lock */,
 				E20465DA1CF1FAF50054654E /* Sources */,
 				E20465DB1CF1FAF50054654E /* Frameworks */,
 				E20465DC1CF1FAF50054654E /* Resources */,
-				A921E2EE2C3FF2EFAF1B0D02 /* [CP] Embed Pods Frameworks */,
-				3ED98036D84519E807F44E72 /* [CP] Copy Pods Resources */,
+				3889944483D9A357499A1607 /* [CP] Embed Pods Frameworks */,
+				E8D2E4351988E3D2791165EE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -692,12 +697,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E20465F81CF1FAF50054654E /* Build configuration list for PBXNativeTarget "hackillinois-2017-iosUITests" */;
 			buildPhases = (
-				CB9C028327A29779AB13C084 /* [CP] Check Pods Manifest.lock */,
+				CD69FC3B2B8128488CB1116A /* [CP] Check Pods Manifest.lock */,
 				E20465E51CF1FAF50054654E /* Sources */,
 				E20465E61CF1FAF50054654E /* Frameworks */,
 				E20465E71CF1FAF50054654E /* Resources */,
-				0DE812DD5614FA5F56817C17 /* [CP] Copy Pods Resources */,
-				489F3A64FD552FF340B8A1D6 /* [CP] Embed Pods Frameworks */,
+				DE1374E198C18CFB75275453 /* [CP] Embed Pods Frameworks */,
+				6ACA902C24765BE08402AC55 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -725,7 +730,7 @@
 				TargetAttributes = {
 					E20465C61CF1FAF50054654E = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = QWSA5WNQS4;
+						DevelopmentTeam = 8VNQTQM2L6;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -832,82 +837,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0DE812DD5614FA5F56817C17 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3ED98036D84519E807F44E72 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-hackillinois-2017-iosTests/Pods-hackillinois-2017-iosTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		489F3A64FD552FF340B8A1D6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5034F99CAA70B3AFB0A9A4A7 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		83EB5F78E3860C1FD118996E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-hackillinois-2017-ios/Pods-hackillinois-2017-ios-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A2D2578D01EB376EDB8ED990 /* [CP] Copy Pods Resources */ = {
+		2D5FFE69D76C1C0866C34893 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -922,7 +852,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-hackillinois-2017-ios/Pods-hackillinois-2017-ios-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A921E2EE2C3FF2EFAF1B0D02 /* [CP] Embed Pods Frameworks */ = {
+		3889944483D9A357499A1607 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -937,7 +867,37 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-hackillinois-2017-iosTests/Pods-hackillinois-2017-iosTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CB9C028327A29779AB13C084 /* [CP] Check Pods Manifest.lock */ = {
+		54047AE9F1C43C841BC299A5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-hackillinois-2017-ios/Pods-hackillinois-2017-ios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6ACA902C24765BE08402AC55 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A683D7EB75304B3EC50BB118 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -952,7 +912,52 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		E6A87C2E0E12CA0D08D66696 /* [CP] Check Pods Manifest.lock */ = {
+		CD69FC3B2B8128488CB1116A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DE1374E198C18CFB75275453 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E8D2E4351988E3D2791165EE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-hackillinois-2017-iosTests/Pods-hackillinois-2017-iosTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F7536F5117043E27B7C72F70 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -986,12 +991,15 @@
 				E20465D31CF1FAF50054654E /* hackillinois_2017_ios.xcdatamodeld in Sources */,
 				E27755531D36B7F600E7A379 /* GenericHelpQStaffViewController.swift in Sources */,
 				E28FB6A01D194951000D062F /* HelpQ.swift in Sources */,
+				24F0CA7E1E5049AF005664F3 /* GenericTabBarController.swift in Sources */,
 				A50876741E1C79130095F399 /* BottomMapViewController.swift in Sources */,
 				398219E01E345F4E00C5D0DF /* standardCell.swift in Sources */,
 				A54825B11E160C6C00E35C71 /* ScheduleViewController.swift in Sources */,
 				E2A085F61D0C6536002197F9 /* ScheduleCell.swift in Sources */,
 				24794C6F1E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */,
 				3947F9521E4C471100FF4AF4 /* SchedulePageViewController.swift in Sources */,
+				398219E21E345F4E00C5D0DF /* twoLocationsNoQRCodeCell.swift in Sources */,
+				24F103FB1E503E00006701B7 /* GenericNavigationController.swift in Sources */,
 				E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */,
 				E28FB69F1D194951000D062F /* HelpQ+CoreDataProperties.swift in Sources */,
 				E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */,
@@ -1189,18 +1197,18 @@
 		};
 		E20465F31CF1FAF50054654E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1D5246D3021D962B3E962D3F /* Pods-hackillinois-2017-ios.debug.xcconfig */;
+			baseConfigurationReference = A169511EE2A1D4EC00E72311 /* Pods-hackillinois-2017-ios.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = QWSA5WNQS4;
+				DEVELOPMENT_TEAM = 8VNQTQM2L6;
 				INFOPLIST_FILE = "hackillinois-2017-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "acm.hackillinois-2017.ios-kevin";
+				PRODUCT_BUNDLE_IDENTIFIER = "acm.hackillinois-2017.ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_INSTALL_OBJC_HEADER = NO;
@@ -1213,18 +1221,18 @@
 		};
 		E20465F41CF1FAF50054654E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F70C4B7B92575DEC15EFAE /* Pods-hackillinois-2017-ios.release.xcconfig */;
+			baseConfigurationReference = AD6BE824EEB8AEE06C13EE8B /* Pods-hackillinois-2017-ios.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = QWSA5WNQS4;
+				DEVELOPMENT_TEAM = 8VNQTQM2L6;
 				INFOPLIST_FILE = "hackillinois-2017-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "acm.hackillinois-2017.ios-kevin";
+				PRODUCT_BUNDLE_IDENTIFIER = "acm.hackillinois-2017.ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_INSTALL_OBJC_HEADER = NO;
@@ -1236,7 +1244,7 @@
 		};
 		E20465F61CF1FAF50054654E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 23C934AE70C4AC43F1D884BE /* Pods-hackillinois-2017-iosTests.debug.xcconfig */;
+			baseConfigurationReference = 84F5EB4C4B79A8D329F8F0CA /* Pods-hackillinois-2017-iosTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "hackillinois-2017-iosTests/Info.plist";
@@ -1250,7 +1258,7 @@
 		};
 		E20465F71CF1FAF50054654E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21E83B55CF6C52BC833901F1 /* Pods-hackillinois-2017-iosTests.release.xcconfig */;
+			baseConfigurationReference = 8129EE3A0E443CB2D6225BCC /* Pods-hackillinois-2017-iosTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "hackillinois-2017-iosTests/Info.plist";
@@ -1264,7 +1272,7 @@
 		};
 		E20465F91CF1FAF50054654E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 567F67E08A10E7527EE39217 /* Pods-hackillinois-2017-iosUITests.debug.xcconfig */;
+			baseConfigurationReference = 68DCF4EDFB9677B0A1F913D1 /* Pods-hackillinois-2017-iosUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = "hackillinois-2017-iosUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1277,7 +1285,7 @@
 		};
 		E20465FA1CF1FAF50054654E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D3D05678487C3E4F7496D710 /* Pods-hackillinois-2017-iosUITests.release.xcconfig */;
+			baseConfigurationReference = 47920D85F8009FF07EE9103F /* Pods-hackillinois-2017-iosUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = "hackillinois-2017-iosUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
