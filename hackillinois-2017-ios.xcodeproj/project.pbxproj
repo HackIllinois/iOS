@@ -46,10 +46,8 @@
 		390A8DF11E3AA90200018855 /* Gotham-UltraItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DE11E3AA90200018855 /* Gotham-UltraItalic.otf */; };
 		390A8DF21E3AA90200018855 /* Gotham-XLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DE21E3AA90200018855 /* Gotham-XLight.otf */; };
 		390A8DF31E3AA90200018855 /* Gotham-XLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DE31E3AA90200018855 /* Gotham-XLightItalic.otf */; };
-		390A8DF71E3C6A6300018855 /* Rectangle_Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8DF61E3C6A6300018855 /* Rectangle_Helper.swift */; };
+		390A8DF71E3C6A6300018855 /* RectangleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8DF61E3C6A6300018855 /* RectangleHelper.swift */; };
 		390A8DF91E44115900018855 /* threeLocationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8DF81E44115900018855 /* threeLocationsCell.swift */; };
-		390A8DFB1E4428C800018855 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8DFA1E4428C800018855 /* HomeTableViewController.swift */; };
-		390A8DFD1E45219300018855 /* threeLocationsNoQRCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8DFC1E45219300018855 /* threeLocationsNoQRCodeCell.swift */; };
 		390A8DFF1E46683600018855 /* mainCellBeforeHackathonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8DFE1E46683600018855 /* mainCellBeforeHackathonCell.swift */; };
 		390A8E011E466A4700018855 /* mainCellBeforeHacking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8E001E466A4700018855 /* mainCellBeforeHacking.swift */; };
 		390A8E031E4671DB00018855 /* mainCellAfterHackathon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A8E021E4671DB00018855 /* mainCellAfterHackathon.swift */; };
@@ -62,16 +60,11 @@
 		3947F9561E4C473000FF4AF4 /* ScheduleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3947F9551E4C473000FF4AF4 /* ScheduleTableViewController.swift */; };
 		3947F9581E4C473F00FF4AF4 /* ScheduleDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3947F9571E4C473F00FF4AF4 /* ScheduleDescriptionViewController.swift */; };
 		398219DE1E345F4E00C5D0DF /* mainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219D91E345F4E00C5D0DF /* mainCell.swift */; };
-		398219DF1E345F4E00C5D0DF /* noQRCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219DA1E345F4E00C5D0DF /* noQRCodeCell.swift */; };
 		398219E01E345F4E00C5D0DF /* standardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219DB1E345F4E00C5D0DF /* standardCell.swift */; };
 		398219E11E345F4E00C5D0DF /* twoLocationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219DC1E345F4E00C5D0DF /* twoLocationsCell.swift */; };
-		398219E21E345F4E00C5D0DF /* twoLocationsNoQRCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219DD1E345F4E00C5D0DF /* twoLocationsNoQRCodeCell.swift */; };
 		58E75F2152E19BCECDC115D1 /* Pods_hackillinois_2017_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0E70C5ECC7AC1B705813BB /* Pods_hackillinois_2017_iosUITests.framework */; };
 		653304F51E4FF83C00E881F8 /* DayItemLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653304F41E4FF83C00E881F8 /* DayItemLocation.swift */; };
 		655227D91E4DD18000DD88D7 /* ScheduleDetailsImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655227D81E4DD18000DD88D7 /* ScheduleDetailsImageViewController.swift */; };
-		65A5954A1E4B167700AC74C4 /* ScheduleDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A595491E4B167700AC74C4 /* ScheduleDescriptionViewController.swift */; };
-		65D7C9A01E468B5100E03103 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D7C99F1E468B5100E03103 /* ScheduleViewController.swift */; };
-		65D7C9A21E46B14D00E03103 /* GenericTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D7C9A11E46B14D00E03103 /* GenericTabController.swift */; };
 		A50876741E1C79130095F399 /* BottomMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50876731E1C79130095F399 /* BottomMapViewController.swift */; };
 		A50876781E1C921C0095F399 /* BottomMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50876771E1C921C0095F399 /* BottomMapViewController.xib */; };
 		A50F29251E14D55500878652 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A50F29241E14D55500878652 /* Home.storyboard */; };
@@ -190,10 +183,8 @@
 		390A8DE11E3AA90200018855 /* Gotham-UltraItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-UltraItalic.otf"; sourceTree = "<group>"; };
 		390A8DE21E3AA90200018855 /* Gotham-XLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-XLight.otf"; sourceTree = "<group>"; };
 		390A8DE31E3AA90200018855 /* Gotham-XLightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-XLightItalic.otf"; sourceTree = "<group>"; };
-		390A8DF61E3C6A6300018855 /* Rectangle_Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rectangle_Helper.swift; sourceTree = "<group>"; };
+		390A8DF61E3C6A6300018855 /* RectangleHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectangleHelper.swift; sourceTree = "<group>"; };
 		390A8DF81E44115900018855 /* threeLocationsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = threeLocationsCell.swift; sourceTree = "<group>"; };
-		390A8DFA1E4428C800018855 /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
-		390A8DFC1E45219300018855 /* threeLocationsNoQRCodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = threeLocationsNoQRCodeCell.swift; sourceTree = "<group>"; };
 		390A8DFE1E46683600018855 /* mainCellBeforeHackathonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCellBeforeHackathonCell.swift; sourceTree = "<group>"; };
 		390A8E001E466A4700018855 /* mainCellBeforeHacking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCellBeforeHacking.swift; sourceTree = "<group>"; };
 		390A8E021E4671DB00018855 /* mainCellAfterHackathon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCellAfterHackathon.swift; sourceTree = "<group>"; };
@@ -206,16 +197,13 @@
 		3947F9551E4C473000FF4AF4 /* ScheduleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewController.swift; sourceTree = "<group>"; };
 		3947F9571E4C473F00FF4AF4 /* ScheduleDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleDescriptionViewController.swift; sourceTree = "<group>"; };
 		398219D91E345F4E00C5D0DF /* mainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCell.swift; sourceTree = "<group>"; };
-		398219DA1E345F4E00C5D0DF /* noQRCodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = noQRCodeCell.swift; sourceTree = "<group>"; };
 		398219DB1E345F4E00C5D0DF /* standardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = standardCell.swift; sourceTree = "<group>"; };
 		398219DC1E345F4E00C5D0DF /* twoLocationsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = twoLocationsCell.swift; sourceTree = "<group>"; };
-		398219DD1E345F4E00C5D0DF /* twoLocationsNoQRCodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = twoLocationsNoQRCodeCell.swift; sourceTree = "<group>"; };
 		567F67E08A10E7527EE39217 /* Pods-hackillinois-2017-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		653304F41E4FF83C00E881F8 /* DayItemLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayItemLocation.swift; sourceTree = "<group>"; };
 		655227D81E4DD18000DD88D7 /* ScheduleDetailsImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleDetailsImageViewController.swift; sourceTree = "<group>"; };
 		65A595491E4B167700AC74C4 /* ScheduleDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleDescriptionViewController.swift; sourceTree = "<group>"; };
 		65D7C99F1E468B5100E03103 /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
-		65D7C9A11E46B14D00E03103 /* GenericTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericTabController.swift; sourceTree = "<group>"; };
 		A50876731E1C79130095F399 /* BottomMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomMapViewController.swift; sourceTree = "<group>"; };
 		A50876771E1C921C0095F399 /* BottomMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomMapViewController.xib; sourceTree = "<group>"; };
 		A50F29241E14D55500878652 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -354,20 +342,14 @@
 		398219D81E345F2800C5D0DF /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
-				3947F94F1E4C452E00FF4AF4 /* EventDetailsViewController.swift */,
-				398219DC1E345F4E00C5D0DF /* twoLocationsCell.swift */,
-				398219D91E345F4E00C5D0DF /* mainCell.swift */,
-				398219DA1E345F4E00C5D0DF /* noQRCodeCell.swift */,
-				398219DB1E345F4E00C5D0DF /* standardCell.swift */,
-				398219DD1E345F4E00C5D0DF /* twoLocationsNoQRCodeCell.swift */,
-				390A8DF61E3C6A6300018855 /* Rectangle_Helper.swift */,
-				390A8DF81E44115900018855 /* threeLocationsCell.swift */,
-				390A8DFA1E4428C800018855 /* HomeTableViewController.swift */,
-				390A8DFC1E45219300018855 /* threeLocationsNoQRCodeCell.swift */,
+				392321F21E4C17C2003731AA /* noEventCell.swift */,
 				390A8DFE1E46683600018855 /* mainCellBeforeHackathonCell.swift */,
 				390A8E001E466A4700018855 /* mainCellBeforeHacking.swift */,
+				398219D91E345F4E00C5D0DF /* mainCell.swift */,
 				390A8E021E4671DB00018855 /* mainCellAfterHackathon.swift */,
-				392321F21E4C17C2003731AA /* noEventCell.swift */,
+				398219DB1E345F4E00C5D0DF /* standardCell.swift */,
+				398219DC1E345F4E00C5D0DF /* twoLocationsCell.swift */,
+				390A8DF81E44115900018855 /* threeLocationsCell.swift */,
 			);
 			name = CustomCells;
 			sourceTree = "<group>";
@@ -378,6 +360,7 @@
 				398219D81E345F2800C5D0DF /* CustomCells */,
 				A50F29241E14D55500878652 /* Home.storyboard */,
 				A50F29261E14DC3600878652 /* HomeViewController.swift */,
+				3947F94F1E4C452E00FF4AF4 /* EventDetailsViewController.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -487,8 +470,6 @@
 			isa = PBXGroup;
 			children = (
 				24632D141E4D58EA00E7A746 /* FridayTabController.swift */,
-				24632D151E4D58EA00E7A746 /* SaturdayTabController.swift */,
-				24632D161E4D58EA00E7A746 /* SundayTabController.swift */,
 			);
 			name = Friday;
 			sourceTree = "<group>";
@@ -496,6 +477,7 @@
 		E2A086031D0C7381002197F9 /* Saturday */ = {
 			isa = PBXGroup;
 			children = (
+				24632D151E4D58EA00E7A746 /* SaturdayTabController.swift */,
 			);
 			name = Saturday;
 			sourceTree = "<group>";
@@ -503,6 +485,7 @@
 		E2A086041D0C7385002197F9 /* Sunday */ = {
 			isa = PBXGroup;
 			children = (
+				24632D161E4D58EA00E7A746 /* SundayTabController.swift */,
 			);
 			name = Sunday;
 			sourceTree = "<group>";
@@ -557,6 +540,7 @@
 			isa = PBXGroup;
 			children = (
 				E25377431CF8C485003795E7 /* CoreDataHelpers.swift */,
+				390A8DF61E3C6A6300018855 /* RectangleHelper.swift */,
 				E224BFF31D19CCA60098AA8D /* HTTPHelpers.swift */,
 			);
 			name = HelperClasses;
@@ -654,8 +638,7 @@
 				E2A085FB1D0C7069002197F9 /* ScheduleGenerics */,
 				E2F957041D0BA899003A0881 /* Schedule.storyboard */,
 				65D7C99F1E468B5100E03103 /* ScheduleViewController.swift */,
-				A54825B01E160C6C00E35C71 /* SchedulePageViewController.swift */,
-				E2A085FE1D0C70BF002197F9 /* ScheduleTableViewController.swift */,
+				A54825B01E160C6C00E35C71 /* ScheduleViewController.swift */,
 				65A595491E4B167700AC74C4 /* ScheduleDescriptionViewController.swift */,
 				655227D81E4DD18000DD88D7 /* ScheduleDetailsImageViewController.swift */,
 				E2A086021D0C736F002197F9 /* Friday */,
@@ -1003,7 +986,6 @@
 				390A8DF91E44115900018855 /* threeLocationsCell.swift in Sources */,
 				E2BCA57E1CF3B19E006AAA8B /* User+CoreDataProperties.swift in Sources */,
 				E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */,
-				398219DF1E345F4E00C5D0DF /* noQRCodeCell.swift in Sources */,
 				398219DE1E345F4E00C5D0DF /* mainCell.swift in Sources */,
 				E2BD82B51D09EA530009DB07 /* GenericMapViewController.swift in Sources */,
 				243720021E32CEDD00B1C7C5 /* BottomViewController.swift in Sources */,
@@ -1016,15 +998,12 @@
 				E2A085F61D0C6536002197F9 /* ScheduleCell.swift in Sources */,
 				24794C6F1E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */,
 				3947F9521E4C471100FF4AF4 /* SchedulePageViewController.swift in Sources */,
-				398219E21E345F4E00C5D0DF /* twoLocationsNoQRCodeCell.swift in Sources */,
 				E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */,
 				E28FB69F1D194951000D062F /* HelpQ+CoreDataProperties.swift in Sources */,
-				390A8DFB1E4428C800018855 /* HomeTableViewController.swift in Sources */,
 				E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */,
 				E26F44F41D0EF3C400FB4A9F /* UIImage+generateBarCode.swift in Sources */,
 				3947F9501E4C452E00FF4AF4 /* EventDetailsViewController.swift in Sources */,
-				390A8DF71E3C6A6300018855 /* Rectangle_Helper.swift in Sources */,
-				E2A086081D0C73BE002197F9 /* SundayTabController.swift in Sources */,
+				390A8DF71E3C6A6300018855 /* RectangleHelper.swift in Sources */,
 				655227D91E4DD18000DD88D7 /* ScheduleDetailsImageViewController.swift in Sources */,
 				E2D4F0E31D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift in Sources */,
 				E2D4F0E11D06B28B00646BF8 /* FeedTableViewCell.swift in Sources */,
@@ -1042,13 +1021,11 @@
 				24632D191E4D58EA00E7A746 /* SundayTabController.swift in Sources */,
 				390A8E011E466A4700018855 /* mainCellBeforeHacking.swift in Sources */,
 				390CFC771E4FB9D800DC6F3A /* Feed+CoreDataProperties.swift in Sources */,
-				390A8DFD1E45219300018855 /* threeLocationsNoQRCodeCell.swift in Sources */,
 				E2BB42C61D133A9A009EF512 /* GenericInputView.swift in Sources */,
 				E2D483331D00D3B100859A67 /* MapViewController.swift in Sources */,
 				3947F9541E4C472000FF4AF4 /* GenericTabController.swift in Sources */,
 				243720041E32D4D100B1C7C5 /* BottomViewTableViewCell.swift in Sources */,
 				653304F51E4FF83C00E881F8 /* DayItemLocation.swift in Sources */,
-				E2A085F01D0C42A7002197F9 /* GenericNavigationController.swift in Sources */,
 				E23791411D21C4870020618E /* ReferencedButton.swift in Sources */,
 				E2BCA5801CF3B19E006AAA8B /* Location+CoreDataProperties.swift in Sources */,
 				E2D4F0DF1D06AD3F00646BF8 /* Building.swift in Sources */,

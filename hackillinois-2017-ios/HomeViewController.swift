@@ -98,6 +98,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
          // first cell should always be the main cell
         if (indexPath.row == 0) {
             if(currentTimeForTable < hackathonBeginTime) { // if the hackathon has not started yet
@@ -107,7 +108,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 return cell
             } else if (currentTimeForTable > hackathonBeginTime && currentTimeForTable < hackingBeginTime) { // if the hackathon has started but hacking has not
                 let cell = tableView.dequeueReusableCell(withIdentifier: "mainCellBeforeHacking", for: indexPath) as! mainCellBeforeHacking
-                 let currentUnixTime: Int = Int(NSDate().timeIntervalSince1970)
+                let currentUnixTime: Int = Int(NSDate().timeIntervalSince1970)
                 cell.selectionStyle = .none
                 cell.isUserInteractionEnabled = false;
                 cell.timeRemaining = cell.eventStartUnixTime - currentUnixTime
@@ -158,9 +159,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             dateFormatter.amSymbol = "am"
             dateFormatter.pmSymbol = "pm"
             cell.checkInTimeLabel.text = dateFormatter.string(from: events[indexPath.row - 1].startTime!)
-            
+            let pressGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.locationClicked(_:)))
             let tempLocations = events[indexPath.row - 1].locations!.value(forKey: "name")
+            cell.locationLabel.isUserInteractionEnabled = true
             cell.locationLabel.text = (tempLocations as AnyObject).firstObject as! String?
+            cell.locationLabel.addGestureRecognizer(pressGestureRecognizer)
 
             cell.backgroundColor = UIColor.clear
             cell.qrCodeButton.backgroundColor = UIColor.fromRGBHex(duskyBlueColor)
@@ -177,10 +180,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             dateFormatter.amSymbol = "am"
             dateFormatter.pmSymbol = "pm"
             cell.checkInTimeLabel.text = dateFormatter.string(from: events[indexPath.row - 1].startTime!)
-            
+            let firstPressGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.locationClicked(_:)))
+            let secondPressGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.locationClicked(_:)))
             let tempLocations = events[indexPath.row - 1].locations!.value(forKey: "name")
             cell.firstLocationLabel.text = (tempLocations as AnyObject).object(at: 0) as? String
             cell.secondLocationLabel.text = (tempLocations as AnyObject).object(at: 1) as? String
+            
+            cell.firstLocationLabel.addGestureRecognizer(firstPressGestureRecognizer)
+            cell.secondLocationLabel.addGestureRecognizer(secondPressGestureRecognizer)
+            
+            cell.firstLocationLabel.isUserInteractionEnabled = true
+            cell.secondLocationLabel.isUserInteractionEnabled = true
 
             cell.backgroundColor = UIColor.clear
             cell.qrCodeButton.backgroundColor = UIColor.fromRGBHex(duskyBlueColor)
@@ -199,11 +209,23 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             dateFormatter.pmSymbol = "pm"
         print(events)
             cell.checkInTimeLabel.text = dateFormatter.string(from: events[indexPath.row - 1].startTime!)
-        
+            let firstPressGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.locationClicked(_:)))
+            let secondPressGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.locationClicked(_:)))
+            let thirdPressGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.locationClicked(_:)))
             let tempLocations = events[indexPath.row - 1].locations!.value(forKey: "name")
             cell.firstLocationLabel.text = (tempLocations as AnyObject).object(at: 0) as? String
             cell.secondLocationLabel.text = (tempLocations as AnyObject).object(at: 1) as? String
             cell.thirdLocationLabel.text = (tempLocations as AnyObject).object(at: 2) as? String
+        
+        
+
+            cell.firstLocationLabel.addGestureRecognizer(firstPressGestureRecognizer)
+            cell.secondLocationLabel.addGestureRecognizer(secondPressGestureRecognizer)
+            cell.thirdLocationLabel.addGestureRecognizer(thirdPressGestureRecognizer)
+        
+            cell.firstLocationLabel.isUserInteractionEnabled = true
+            cell.secondLocationLabel.isUserInteractionEnabled = true
+            cell.thirdLocationLabel.isUserInteractionEnabled = true
         
             cell.backgroundColor = UIColor.clear
             cell.qrCodeButton.backgroundColor = UIColor.fromRGBHex(duskyBlueColor)
@@ -217,8 +239,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tabBarController?.selectedIndex = 3
     }
     
-    func locationClicked() {
-        self.tabBarController?.selectedIndex = 2
+    func locationClicked(_ sender: UITapGestureRecognizer) {
+        openLocation((sender.view as! UILabel).text!)
     }
     
     func goToProfile(){
@@ -263,6 +285,28 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         _ = CoreDataHelpers.createOrFetchFeed(id: 424, description: "test", startTime: date, endTime: date, updated: date, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel, eceb], tag: "EVENT")
         
          CoreDataHelpers.saveContext()
+    }
+    
+    func openLocation(_ location_name: String) {
+        let locations: [String:Int] = [
+            "Thomas M. Siebel Center" : 2,
+            "Siebel" : 2,
+            "Thomas Siebel Center" : 2,
+            "ECEB" : 3,
+            "Electrical Computer Engineering Building" : 3,
+            "Union" : 4,
+            "Illini Union" : 4,
+            "DCL" : 1,
+            "Digital Computer Laboratory": 1
+        ]
+        let location_id = locations[location_name]
+        print ("location click triggered")
+        if let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "Map") as? MapViewController {
+            vc.labelPressed = location_id!
+            navigationController?.navigationBar.tintColor = UIColor(red: 93.0/255.0, green: 200.0/255.0, blue: 219.0/255.0, alpha: 1.0)
+            navigationController?.navigationBar.backgroundColor = UIColor(red: 28.0/255.0, green: 50.0/255.0, blue: 90.0/255.0, alpha: 1.0)
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
 
