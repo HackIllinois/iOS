@@ -58,18 +58,18 @@
 		3947F9521E4C471100FF4AF4 /* SchedulePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3947F9511E4C471100FF4AF4 /* SchedulePageViewController.swift */; };
 		3947F9541E4C472000FF4AF4 /* GenericTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3947F9531E4C472000FF4AF4 /* GenericTabController.swift */; };
 		3947F9561E4C473000FF4AF4 /* ScheduleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3947F9551E4C473000FF4AF4 /* ScheduleTableViewController.swift */; };
-		3947F9581E4C473F00FF4AF4 /* ScheduleDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3947F9571E4C473F00FF4AF4 /* ScheduleDescriptionViewController.swift */; };
+		3947F9581E4C473F00FF4AF4 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		398219DE1E345F4E00C5D0DF /* mainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219D91E345F4E00C5D0DF /* mainCell.swift */; };
 		398219E01E345F4E00C5D0DF /* standardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219DB1E345F4E00C5D0DF /* standardCell.swift */; };
 		398219E11E345F4E00C5D0DF /* twoLocationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398219DC1E345F4E00C5D0DF /* twoLocationsCell.swift */; };
-		58E75F2152E19BCECDC115D1 /* Pods_hackillinois_2017_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0E70C5ECC7AC1B705813BB /* Pods_hackillinois_2017_iosUITests.framework */; };
 		653304F51E4FF83C00E881F8 /* DayItemLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653304F41E4FF83C00E881F8 /* DayItemLocation.swift */; };
 		655227D91E4DD18000DD88D7 /* ScheduleDetailsImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655227D81E4DD18000DD88D7 /* ScheduleDetailsImageViewController.swift */; };
+		8C5C00859531EAD43E9F04C7 /* Pods_hackillinois_2017_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D81231F845B92D001F870CF /* Pods_hackillinois_2017_iosTests.framework */; };
 		A50876741E1C79130095F399 /* BottomMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50876731E1C79130095F399 /* BottomMapViewController.swift */; };
 		A50876781E1C921C0095F399 /* BottomMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50876771E1C921C0095F399 /* BottomMapViewController.xib */; };
 		A50F29251E14D55500878652 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A50F29241E14D55500878652 /* Home.storyboard */; };
 		A50F29271E14DC3600878652 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F29261E14DC3600878652 /* HomeViewController.swift */; };
-		A54825B11E160C6C00E35C71 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54825B01E160C6C00E35C71 /* ScheduleViewController.swift */; };
+		A54825B11E160C6C00E35C71 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		BE7D155CC9A3324558E7EE76 /* Pods_hackillinois_2017_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 785754266918AE642E0ECE0A /* Pods_hackillinois_2017_iosUITests.framework */; };
 		E20465CB1CF1FAF50054654E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20465CA1CF1FAF50054654E /* AppDelegate.swift */; };
 		E20465CD1CF1FAF50054654E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20465CC1CF1FAF50054654E /* LoginViewController.swift */; };
@@ -193,12 +193,11 @@
 		398219D91E345F4E00C5D0DF /* mainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCell.swift; sourceTree = "<group>"; };
 		398219DB1E345F4E00C5D0DF /* standardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = standardCell.swift; sourceTree = "<group>"; };
 		398219DC1E345F4E00C5D0DF /* twoLocationsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = twoLocationsCell.swift; sourceTree = "<group>"; };
-		567F67E08A10E7527EE39217 /* Pods-hackillinois-2017-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		47920D85F8009FF07EE9103F /* Pods-hackillinois-2017-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
 		653304F41E4FF83C00E881F8 /* DayItemLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayItemLocation.swift; sourceTree = "<group>"; };
 		655227D81E4DD18000DD88D7 /* ScheduleDetailsImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleDetailsImageViewController.swift; sourceTree = "<group>"; };
 		65A595491E4B167700AC74C4 /* ScheduleDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleDescriptionViewController.swift; sourceTree = "<group>"; };
 		65D7C99F1E468B5100E03103 /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
-		47920D85F8009FF07EE9103F /* Pods-hackillinois-2017-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
 		68DCF4EDFB9677B0A1F913D1 /* Pods-hackillinois-2017-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		785754266918AE642E0ECE0A /* Pods_hackillinois_2017_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8129EE3A0E443CB2D6225BCC /* Pods-hackillinois-2017-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosTests/Pods-hackillinois-2017-iosTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -280,7 +279,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7420348A8E40EE0EBC8DBEA4 /* Pods_hackillinois_2017_iosTests.framework in Frameworks */,
+				8C5C00859531EAD43E9F04C7 /* Pods_hackillinois_2017_iosTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,7 +453,6 @@
 		E2A085FB1D0C7069002197F9 /* ScheduleGenerics */ = {
 			isa = PBXGroup;
 			children = (
-				3947F9571E4C473F00FF4AF4 /* ScheduleDescriptionViewController.swift */,
 				3947F9551E4C473000FF4AF4 /* ScheduleTableViewController.swift */,
 				3947F9531E4C472000FF4AF4 /* GenericTabController.swift */,
 				3947F9511E4C471100FF4AF4 /* SchedulePageViewController.swift */,
@@ -637,7 +635,6 @@
 				E2A085FB1D0C7069002197F9 /* ScheduleGenerics */,
 				E2F957041D0BA899003A0881 /* Schedule.storyboard */,
 				65D7C99F1E468B5100E03103 /* ScheduleViewController.swift */,
-				A54825B01E160C6C00E35C71 /* ScheduleViewController.swift */,
 				65A595491E4B167700AC74C4 /* ScheduleDescriptionViewController.swift */,
 				655227D81E4DD18000DD88D7 /* ScheduleDetailsImageViewController.swift */,
 				E2A086021D0C736F002197F9 /* Friday */,
@@ -994,11 +991,10 @@
 				24F0CA7E1E5049AF005664F3 /* GenericTabBarController.swift in Sources */,
 				A50876741E1C79130095F399 /* BottomMapViewController.swift in Sources */,
 				398219E01E345F4E00C5D0DF /* standardCell.swift in Sources */,
-				A54825B11E160C6C00E35C71 /* ScheduleViewController.swift in Sources */,
+				A54825B11E160C6C00E35C71 /* BuildFile in Sources */,
 				E2A085F61D0C6536002197F9 /* ScheduleCell.swift in Sources */,
 				24794C6F1E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */,
 				3947F9521E4C471100FF4AF4 /* SchedulePageViewController.swift in Sources */,
-				398219E21E345F4E00C5D0DF /* twoLocationsNoQRCodeCell.swift in Sources */,
 				24F103FB1E503E00006701B7 /* GenericNavigationController.swift in Sources */,
 				E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */,
 				E28FB69F1D194951000D062F /* HelpQ+CoreDataProperties.swift in Sources */,
@@ -1031,7 +1027,7 @@
 				E2BCA5801CF3B19E006AAA8B /* Location+CoreDataProperties.swift in Sources */,
 				E2D4F0DF1D06AD3F00646BF8 /* Building.swift in Sources */,
 				E2BD82B71D0AFFB90009DB07 /* UIImage+imageWithColor.swift in Sources */,
-				3947F9581E4C473F00FF4AF4 /* ScheduleDescriptionViewController.swift in Sources */,
+				3947F9581E4C473F00FF4AF4 /* BuildFile in Sources */,
 				24632D181E4D58EA00E7A746 /* SaturdayTabController.swift in Sources */,
 				E2F639481D05083300853089 /* CGRect+initWithCenterAt.swift in Sources */,
 				392321F31E4C17C2003731AA /* noEventCell.swift in Sources */,
