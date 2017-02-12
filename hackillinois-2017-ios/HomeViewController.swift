@@ -26,6 +26,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.funcList.append(self.loadSavedData)
+        
         currentTimeForTable = Int(NSDate().timeIntervalSince1970)
         UIApplication.shared.statusBarStyle = .lightContent
         
@@ -42,9 +45,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         checkInTableView.sectionHeaderHeight = 0.0
         checkInTableView.sectionFooterHeight = 0.0
         initializeSample()
+        
         loadSavedData()
+        
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.funcList.removeAll()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -148,7 +157,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             dateFormatter.dateFormat = "hh:mm a"
             dateFormatter.amSymbol = "am"
             dateFormatter.pmSymbol = "pm"
-            cell.checkInTimeLabel.text = dateFormatter.string(from: events[indexPath.row].startTime!)
+            cell.checkInTimeLabel.text = dateFormatter.string(from: events[indexPath.row - 1].startTime!)
             
             let tempLocations = events[indexPath.row - 1].locations!.value(forKey: "name")
             cell.locationLabel.text = (tempLocations as AnyObject).firstObject as! String?
@@ -233,7 +242,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             events = []
         }
-        
+        print ("updated")
         checkInTableView.reloadData()
     }
     
@@ -254,7 +263,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         _ = CoreDataHelpers.createOrFetchFeed(id: 423, description: "test", startTime: date, endTime: date, updated: date, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel, eceb, union], tags: [tagEvent])
         _ = CoreDataHelpers.createOrFetchFeed(id: 424, description: "test", startTime: date, endTime: date, updated: date, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel, eceb], tags: [tagEvent])
         
-        // CoreDataHelpers.saveContext()
+         CoreDataHelpers.saveContext()
     }
     
 

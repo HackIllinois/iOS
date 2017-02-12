@@ -9,7 +9,8 @@
 /* This file contains helper functions for CoreData operations */
 import CoreData
 import UIKit
-
+import Alamofire
+import SwiftyJSON
 /* Provide namespace for helpers */
 class CoreDataHelpers {
     /* Mark - Helper functions to find location, tag, and create feeds */
@@ -170,7 +171,48 @@ class CoreDataHelpers {
         let defaults = UserDefaults.standard
         return defaults.object(forKey: "timestamp") as? NSDate as Date?
     }
- 
+    
+    class func updateEventsFeed() {
+        
+        let eventsAPIURL = "http://13.90.146.188:8080/"
+        Alamofire.request(eventsAPIURL)
+            .responseJSON { response in
+                if let jsonValue = response.result.value {
+                    let json = JSON(jsonValue)
+                    for feedJSON in json["data"].arrayValue {
+                        CoreDataHelpers.configure(feedJSON: feedJSON);
+                    }
+                }
+        }
+        print ("Updated")
+        
+    }
+    
+    class func configure(feedJSON: JSON) {
+        let id = feedJSON["id"].numberValue
+        let name = feedJSON["name"].stringValue
+        let shortName = feedJSON["shortName"].stringValue
+        let qrCode = feedJSON["qrcode"].numberValue
+        let description = feedJSON["description"].stringValue
+        let updated = stringToDate(date: feedJSON["updated"].stringValue)
+        let startTime = stringToDate(date: feedJSON["startTime"].stringValue)
+        let endTime = stringToDate(date: feedJSON["endTime"].stringValue)
+        let tags = feedJSON["tag"].arrayObject as! [Tag]
+        let locations = feedJSON["locations"].arrayObject as! [Location]
+        CoreDataHelpers.createOrFetchFeed(id: id, description: description, startTime: startTime, endTime: endTime, updated: updated, qrCode: qrCode, shortName: shortName, name: name, locations: locations, tags: tags)
+        CoreDataHelpers.saveContext()
+    }
+    
+    class func stringToDate(date: String) -> Date
+    {
+        //        2016-06-19T00:01:00.000Z this is what we get
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
+        let dateObject = dateFormatter.date(from: date)
+        return dateObject!
+    }
+     
 }
 
 /* Helpers for User Profile */
