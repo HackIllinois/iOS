@@ -17,15 +17,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var HACKILLINOIS_API_URL: String!
     var mTimer = Timer()
-    var funcList: [((Void) -> Void)] = []
+    var funcList = [String: ((Void) -> Void)]()
     
     
     
     func iterateFunctions() {
         CoreDataHelpers.updateEventsFeed()
-        for foo in funcList {
-            foo()
+        for (_, callback) in funcList {
+            callback()
         }
+    }
+    
+    func setInterval(key: String, callback: @escaping ((Void) -> Void)) {
+        print("Delegate: Set interval for key \(key)")
+        self.funcList[key] = callback
+    }
+    
+    func clearIntereval(key: String) {
+        print("Delegate: Cleared interval for key \(key)")
+        self.funcList[key] = nil
     }
     
 

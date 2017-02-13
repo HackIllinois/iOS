@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ScheduleTableViewController: UITableViewController {
     @IBOutlet weak var tableTopBorder: UIView!
@@ -30,6 +31,7 @@ class ScheduleTableViewController: UITableViewController {
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 300
+        
     }
     
     func openLocation(_ location_id: Int) {

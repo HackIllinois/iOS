@@ -36,6 +36,30 @@ class DayItem: NSObject {
         self.locations = locations
     }
     
+    init(feed: Feed) {
+        var timeStr = ""
+        if let time = feed.startTime {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "hh:mm"
+            timeStr = dateFormatter.string(from: time)
+        }
+        
+        self.name = feed.name ?? ""
+        self.time = timeStr
+        self.descriptionStr = feed.description_ ?? ""
+        self.highlighted = false // TODO
+        self.locations = []
+        
+        if let locations = feed.locations {
+            for location in locations {
+                let location = location as! Location
+                self.locations.append(
+                    DayItemLocation(id: Int(location.id) + 1, name: location.shortName)
+                )
+            }
+        }
+    }
+    
     func setImage(title: String, url: String) {
         self.imageUrl = url
         self.imageTitle = title

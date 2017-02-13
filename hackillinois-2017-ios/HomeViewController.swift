@@ -27,9 +27,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         // the funcList holds the refresh function of this instance so that appdelegate can refresh the tableview and fetch new data
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.funcList.append(self.loadSavedData)
         
         currentTimeForTable = Int(NSDate().timeIntervalSince1970)
         UIApplication.shared.statusBarStyle = .lightContent
@@ -56,7 +53,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         dateFormatter.pmSymbol = "pm"
         
         // This creates dummy data
-        initializeSample()
+        //initializeSample()
         
         loadSavedData()
         
@@ -65,11 +62,16 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidDisappear(_ animated: Bool) {
         // remove the functions that were added such as those that refresh the tableview and fetch new data
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.funcList.removeAll()
+        let _ = appDelegate.clearIntereval(key: "HomeViewController")
+        print("HomeView popped")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // the funcList holds the refresh function of this instance so that appdelegate can refresh the tableview and fetch new data
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.setInterval(key: "HomeViewController", callback: self.loadSavedData)
     }
     
     override func didReceiveMemoryWarning() {
@@ -265,6 +267,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     /* loads saved data from the SQL storage on local device and not the web */
     func loadSavedData(){
+        print ("load saved data called")
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let fetchRequest = NSFetchRequest<Feed>(entityName: "Feed")
         

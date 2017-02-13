@@ -215,7 +215,7 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
         refreshControl?.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
         
         // Initialize Static data
-        initializeSample()
+        //initializeSample()
         // Load objects from core data
         loadSavedData()
         

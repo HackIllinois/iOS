@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class FridayTabController: GenericTabController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -25,6 +26,7 @@ class FridayTabController: GenericTabController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /*
         let sampleDescStr = String(repeating: "This event contains a clickable image.\n", count: 10)
         
         // Friday
@@ -35,11 +37,6 @@ class FridayTabController: GenericTabController {
                 "ECEB",
                 "Union"
             ]
-            /* let sampleImages = [
-                ["title": "Siebel Center", "url": "https://cs.illinois.edu/sites/default/files/images/banners/banner_whycs.png"],
-                ["title": "HackIllinois", "url": "https://cs.illinois.edu/sites/default/files/images/banners/hackillinois2017.png"]
-            ] */
-
             
             let item = DayItem(
                 name: "Friday Event \(n)",
@@ -68,5 +65,48 @@ class FridayTabController: GenericTabController {
         }
         
         reloadTableData()
+        */
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // set up interval refresh
+        self.registerReloadFunction()
+        self.updateTable()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.unregisterReloadFunction()
+    }
+    
+    
+    func registerReloadFunction() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.setInterval(key: "FridayTabController", callback: self.updateTable)
+    }
+    
+    func unregisterReloadFunction() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let _ = appDelegate.clearIntereval(key: "FridayTabController")
+    }
+    
+    
+    func updateTable() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let fetchRequest = NSFetchRequest<Feed>(entityName: "Feed")
+        
+        fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "startTime", ascending: true)
+        ]
+        
+        print("Updating table...")
+        if let feedArr = try? appDelegate.managedObjectContext.fetch(fetchRequest) {
+            self.tableView.dayItems = feedArr.map({ (feed) -> DayItem in
+                DayItem(feed: feed)
+            })
+        } else {
+            self.tableView.dayItems = []
+        }
+        self.reloadTableData()
+    }
+
 }

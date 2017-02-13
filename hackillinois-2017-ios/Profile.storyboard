@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ebv-0e-niW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ebv-0e-niW">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -24,7 +24,7 @@
                     <tabBarItem key="tabBarItem" title="" image="profile_off" selectedImage="profile_on" id="lTe-0J-ZeA"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cmv-jz-cAv">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cmv-jz-cAv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -69,23 +69,23 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="s53-wq-X82">
-                                                    <rect key="frame" x="81.5" y="13.5" width="211.5" height="245.5"/>
+                                                    <rect key="frame" x="94" y="7.5" width="186.5" height="257.5"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qrcode" translatesAutoresizingMaskIntoConstraints="NO" id="MWu-qB-r86">
-                                                            <rect key="frame" x="31" y="0.0" width="150" height="150"/>
+                                                            <rect key="frame" x="18.5" y="0.0" width="150" height="150"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="150" id="GLo-Q2-hsV"/>
                                                                 <constraint firstAttribute="height" constant="150" id="v4m-Pk-Eh5"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brandon Grotesque" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pAr-YJ-ehz">
-                                                            <rect key="frame" x="0.0" y="172" width="211.5" height="28"/>
+                                                            <rect key="frame" x="1" y="172" width="184.5" height="34.5"/>
                                                             <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="24"/>
                                                             <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="highlightedColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Dietary Restrictions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="YMR-nJ-XE3">
-                                                            <rect key="frame" x="3" y="222" width="206" height="23.5"/>
+                                                            <rect key="frame" x="0.0" y="228.5" width="186.5" height="29"/>
                                                             <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="20"/>
                                                             <color key="textColor" red="0.94117647059999998" green="0.51764705879999995" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -160,53 +160,61 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="wT2-Vi-epf">
-                                                    <rect key="frame" x="12" y="6" width="351" height="307.5"/>
+                                                    <rect key="frame" x="12" y="6" width="351" height="342"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="U0X-Jj-7yR">
-                                                            <rect key="frame" x="0.0" y="0.0" width="291.5" height="105.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="351" height="105.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="University" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kqt-vP-H2V">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="291.5" height="34.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="351" height="34.5"/>
                                                                     <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="24"/>
                                                                     <color key="textColor" red="0.71764705880000002" green="0.74509803919999995" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="highlightedColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="University of Illinois at Urbana-Champaign" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="enV-cV-LkK" customClass="InsetLabel" customModule="hackillinois_2017_ios" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="36.5" width="291.5" height="69"/>
+                                                                    <rect key="frame" x="0.0" y="36.5" width="351" height="69"/>
                                                                     <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="24"/>
                                                                     <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="highlightedColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </label>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="enV-cV-LkK" firstAttribute="leading" secondItem="U0X-Jj-7yR" secondAttribute="leading" id="JRz-xf-DN0"/>
+                                                                <constraint firstAttribute="trailing" secondItem="enV-cV-LkK" secondAttribute="trailing" id="wTI-ld-oWe"/>
+                                                            </constraints>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="kxE-M3-NO9">
-                                                            <rect key="frame" x="0.0" y="135.5" width="208.5" height="71"/>
+                                                            <rect key="frame" x="0.0" y="135.5" width="351" height="105.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Major" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VhL-LZ-upG">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="208.5" height="34.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="351" height="34.5"/>
                                                                     <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="24"/>
                                                                     <color key="textColor" red="0.71764705880000002" green="0.74509803919999995" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="highlightedColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BS Computer Science" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DSq-Zu-aqO" customClass="InsetLabel" customModule="hackillinois_2017_ios" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="36.5" width="208.5" height="34.5"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bachelor of Science Computer Science" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DSq-Zu-aqO" customClass="InsetLabel" customModule="hackillinois_2017_ios" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="36.5" width="351" height="69"/>
                                                                     <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="24"/>
                                                                     <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="highlightedColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </label>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="DSq-Zu-aqO" secondAttribute="trailing" id="xQr-LE-oDE"/>
+                                                                <constraint firstItem="DSq-Zu-aqO" firstAttribute="leading" secondItem="kxE-M3-NO9" secondAttribute="leading" id="ycq-Jp-uW6"/>
+                                                            </constraints>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="VI7-jb-ChS">
-                                                            <rect key="frame" x="0.0" y="236.5" width="175.5" height="71"/>
+                                                            <rect key="frame" x="0.0" y="271" width="351" height="71"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Year of Graduation" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSY-f4-ecC">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="175.5" height="34.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="351" height="34.5"/>
                                                                     <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="24"/>
                                                                     <color key="textColor" red="0.71764705880000002" green="0.74509803919999995" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="highlightedColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTZ-9c-Ysm" customClass="InsetLabel" customModule="hackillinois_2017_ios" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="36.5" width="175.5" height="34.5"/>
+                                                                    <rect key="frame" x="0.0" y="36.5" width="351" height="34.5"/>
                                                                     <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="24"/>
                                                                     <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="highlightedColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -214,6 +222,14 @@
                                                             </subviews>
                                                         </stackView>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="U0X-Jj-7yR" firstAttribute="leading" secondItem="wT2-Vi-epf" secondAttribute="leading" id="Gi4-Ng-hmq"/>
+                                                        <constraint firstAttribute="trailing" secondItem="kxE-M3-NO9" secondAttribute="trailing" id="Jme-fN-soX"/>
+                                                        <constraint firstItem="VI7-jb-ChS" firstAttribute="leading" secondItem="wT2-Vi-epf" secondAttribute="leading" id="P0J-Ok-NND"/>
+                                                        <constraint firstAttribute="trailing" secondItem="U0X-Jj-7yR" secondAttribute="trailing" id="cMv-UZ-pLf"/>
+                                                        <constraint firstItem="kxE-M3-NO9" firstAttribute="leading" secondItem="wT2-Vi-epf" secondAttribute="leading" id="jKQ-kb-2dq"/>
+                                                        <constraint firstAttribute="trailing" secondItem="VI7-jb-ChS" secondAttribute="trailing" id="pl1-0s-zkw"/>
+                                                    </constraints>
                                                 </stackView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

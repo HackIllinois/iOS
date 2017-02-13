@@ -148,6 +148,7 @@ class CoreDataHelpers {
     
     /* fetch the newest JSON data from the server */
     class func updateEventsFeed() {
+        print ("update events feed called")
         // MARK: change the APIURL to the real one
         let eventsAPIURL = "http://13.90.146.188:8080/v1/events"
         Alamofire.request(eventsAPIURL)
