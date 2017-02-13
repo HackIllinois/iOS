@@ -158,11 +158,14 @@ class LoginViewController: GenericInputView {
     
     func processResponse(_ data: Data?, response: URLResponse?, error: NSError?) {
         var responseData = JSON(data: data!)
+        print(responseData)
         /* Check for any errors */
         if !responseData["error"].isEmpty {
             processError(responseData)
             return // Attemping to decode the jwt actually makes it crash
         }
+        
+        
         
         /* Response from API */
         let auth: String = responseData["data"]["auth"].stringValue
@@ -182,11 +185,13 @@ class LoginViewController: GenericInputView {
         print("Expiration Time: \(expTime)")
         
         // TODO: Parse API
+        
         let name = "Shotaro Ikeda"
         let school = "University of Illinois at Urbana-Champaign"
         let major = "Bachelor of Science Computer Science"
         let barcode = "1234567890"
         let diet = "No restrictions"
+        
         
         self.processUserData(name: name, email: email, school: school, major: major, role: role, barcode: barcode, auth: auth, initTime: initTime, expirationTime: expTime, userID: userID, diet: diet)
     }
@@ -210,6 +215,18 @@ class LoginViewController: GenericInputView {
         PasswordTextField.isUserInteractionEnabled = false
         
         /* MARK: For api branch */
+        DispatchQueue.global(qos: .userInitiated).async {
+            /* Remove all previous users */
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            
+            for user in (CoreDataHelpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]) {
+                appDelegate.managedObjectContext.delete(user)
+            }
+            
+            let payload: JSON = JSON(["email": username, "password": password])
+            HTTPHelpers.createPostRequest(subUrl: "v1/auth", jsonPayload: payload, completion: self.processResponse)
+            
+        }
         /*
         // Send request to server
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
@@ -226,7 +243,7 @@ class LoginViewController: GenericInputView {
         */
         
         /* Mark: Fake server response -- Remove an uncomment code above to run */
-        
+        /*
         DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 1 * USEC_PER_SEC)) { [unowned self] in
             /* Remove all previous users */
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -250,6 +267,7 @@ class LoginViewController: GenericInputView {
             let barcode = "1234567890"
             self.processUserData(name: name, email: email, school: school, major: major, role: role, barcode: barcode, auth: auth, initTime: initTime, expirationTime: expTime, userID: userID, diet: diet)
         }
+        */
     }
     
     /* Override textfieldshould return */

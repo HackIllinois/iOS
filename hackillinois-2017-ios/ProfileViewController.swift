@@ -122,10 +122,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.majorLabel.layer.cornerRadius = 5
             cell.majorLabel.layer.borderColor = UIColor(red: 78/255, green: 96/255, blue: 148/255, alpha: 1.0).cgColor
             
-            cell.yearLabel.text = "2019"
-            cell.yearLabel.layer.borderWidth = 2.0
-            cell.yearLabel.layer.cornerRadius = 5
-            cell.yearLabel.layer.borderColor = UIColor(red: 78/255, green: 96/255, blue: 148/255, alpha: 1.0).cgColor
+//            cell.yearLabel.text = "2019"
+//            cell.yearLabel.layer.borderWidth = 2.0
+//            cell.yearLabel.layer.cornerRadius = 5
+//            cell.yearLabel.layer.borderColor = UIColor(red: 78/255, green: 96/255, blue: 148/255, alpha: 1.0).cgColor
             
             
  

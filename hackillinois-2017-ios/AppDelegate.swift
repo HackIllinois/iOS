@@ -30,42 +30,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UIApplication.shared.statusBarStyle = .lightContent
         
-        //
-        //        // Parse API Keys from keys.plist file
-        //        var keys: NSDictionary?
-        //        if let path = Bundle.main.path(forResource: "keys", ofType: "plist") {
-        //            keys = NSDictionary(contentsOfFile: path)
-        //        } else {
-        //            print("keys.plist file could not be found. Please see README.md for information about keys.plist")
-        //        }
-        //
-        //        if let dict = keys {
-        //            // Read keys here
-        //            print(dict["HACKILLINOIS_API_URL"]!)
-        //            HACKILLINOIS_API_URL = dict["HACKILLINOIS_API_URL"]! as! String
-        //        }
-        //
-        //        /* Find out which part of the application to go to */
-        //        let user = CoreDataHelpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]
-        //        if !user.isEmpty {
-        //            print("User set to expire: \(user[0].expireTime)")
-        //            print("Current: \(NSDate())")
-        //        }
-        //
-        //        if user.isEmpty {
-        //            print("First launch, no user found")
-        //            self.window?.rootViewController = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()
-        //        } else if user[0].expireTime.compare(Date()) == .orderedAscending {
-        //            print("User already logged in before")
-        //            // TODO: Check if this method crashes
-        //            let loginView: LoginViewController = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController() as! LoginViewController
-        //            loginView.initialEmail = user[0].email // Initialize it with user's email
-        //            self.window?.rootViewController = loginView
-        //        } else {
-        //            // Login not necessary
-        //            self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
-        //        }
-        //
+        
+                // Parse API Keys from keys.plist file
+                var keys: NSDictionary?
+                if let path = Bundle.main.path(forResource: "keys", ofType: "plist") {
+                    keys = NSDictionary(contentsOfFile: path)
+                } else {
+                    print("keys.plist file could not be found. Please see README.md for information about keys.plist")
+                }
+        
+                if let dict = keys {
+                    // Read keys here
+                    print(dict["HACKILLINOIS_API_URL"]!)
+                    HACKILLINOIS_API_URL = dict["HACKILLINOIS_API_URL"]! as! String
+                }
+        
+                /* Find out which part of the application to go to */
+                let user = CoreDataHelpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]
+                if !user.isEmpty {
+                    print("User set to expire: \(user[0].expireTime)")
+                    print("Current: \(NSDate())")
+                }
+        
+                if user.isEmpty {
+                    print("First launch, no user found")
+                    self.window?.rootViewController = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()
+                } else if user[0].expireTime.compare(Date()) == .orderedAscending {
+                    print("User already logged in before")
+                    // TODO: Check if this method crashes
+                    let loginView: LoginViewController = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController() as! LoginViewController
+                    loginView.initialEmail = user[0].email // Initialize it with user's email
+                    self.window?.rootViewController = loginView
+                } else {
+                    // Login not necessary
+                    self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+                }
+        
         
         return true
     }
