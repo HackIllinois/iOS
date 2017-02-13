@@ -152,6 +152,7 @@
 		1D81231F845B92D001F870CF /* Pods_hackillinois_2017_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		243720011E32CEDD00B1C7C5 /* BottomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomViewController.swift; sourceTree = "<group>"; };
 		243720031E32D4D100B1C7C5 /* BottomViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomViewTableViewCell.swift; sourceTree = "<group>"; };
+		2453E8C41E511C8600BC5A9C /* hackillinois-2017-ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "hackillinois-2017-ios.entitlements"; sourceTree = "<group>"; };
 		24632D141E4D58EA00E7A746 /* FridayTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridayTabController.swift; sourceTree = "<group>"; };
 		24632D151E4D58EA00E7A746 /* SaturdayTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaturdayTabController.swift; sourceTree = "<group>"; };
 		24632D161E4D58EA00E7A746 /* SundayTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SundayTabController.swift; sourceTree = "<group>"; };
@@ -429,6 +430,7 @@
 		E20465C91CF1FAF50054654E /* hackillinois-2017-ios */ = {
 			isa = PBXGroup;
 			children = (
+				2453E8C41E511C8600BC5A9C /* hackillinois-2017-ios.entitlements */,
 				24371FFC1E32777E00B1C7C5 /* Fonts */,
 				E2B6C39E1D0B314200D851F9 /* Application */,
 				E2AC3F831CF20E4C00C4F21F /* Login */,
@@ -749,7 +751,13 @@
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -1222,6 +1230,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "hackillinois-2017-ios/hackillinois-2017-ios.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8VNQTQM2L6;
@@ -1244,6 +1253,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "hackillinois-2017-ios/hackillinois-2017-ios.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8VNQTQM2L6;
