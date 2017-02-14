@@ -100,9 +100,16 @@ class FridayTabController: GenericTabController {
         
         print("Updating table...")
         if let feedArr = try? appDelegate.managedObjectContext.fetch(fetchRequest) {
-            self.tableView.dayItems = feedArr.map({ (feed) -> DayItem in
+            let items = feedArr.map({ (feed) -> DayItem in
                 DayItem(feed: feed)
+            }).filter({ (item) -> Bool in
+                item.dayOfWeek == 6 // friday
             })
+            
+            self.tableView.dayItems = (items as NSArray).sortedArray(using: [
+                NSSortDescriptor(key: "highlighted", ascending: false),
+                NSSortDescriptor(key: "timestamp", ascending: true)
+            ]) as! [DayItem]
         } else {
             self.tableView.dayItems = []
         }

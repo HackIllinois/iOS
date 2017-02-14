@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class SaturdayTabController: GenericTabController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -24,30 +25,55 @@ class SaturdayTabController: GenericTabController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Saturday
-
-        for n in 0..<10 {
-            let location_id = Int(arc4random_uniform(4))
-            let location_names = [
-                "DCL",
-                "Siebel",
-                "ECEB",
-                "Union"
-            ]
-            
-            let item = DayItem(
-                name: "Saturday Event \(n)",
-                time: "MM:DD PM",
-                description: "This event does not contain images.",
-                highlighted: arc4random_uniform(2) == 0,
-                locations: [
-                    DayItemLocation(id: location_id + 1, name: location_names[location_id])
-                ]
-            )
-            tableView.dayItems.append(item)
-        }
-        
-        reloadTableData()
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // set up interval refresh
+        self.registerReloadFunction()
+        self.updateTable()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.unregisterReloadFunction()
+    }
+    
+    
+    func registerReloadFunction() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.setInterval(key: "FridayTabController", callback: self.updateTable)
+    }
+    
+    func unregisterReloadFunction() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let _ = appDelegate.clearIntereval(key: "FridayTabController")
+    }
+    
+    
+    func updateTable() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let fetchRequest = NSFetchRequest<Feed>(entityName: "Feed")
+        
+        fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "startTime", ascending: true)
+        ]
+        
+        print("Updating table...")
+        if let feedArr = try? appDelegate.managedObjectContext.fetch(fetchRequest) {
+            var items = feedArr.map({ (feed) -> DayItem in
+                DayItem(feed: feed)
+            }).filter({ (item) -> Bool in
+                item.dayOfWeek == 7 // saturday
+            })
+            
+            self.tableView.dayItems = (items as NSArray).sortedArray(using: [
+                NSSortDescriptor(key: "highlighted", ascending: false),
+                NSSortDescriptor(key: "timestamp", ascending: true)
+                ]) as! [DayItem]
+        } else {
+            self.tableView.dayItems = []
+        }
+        self.reloadTableData()
+    }
+
 }

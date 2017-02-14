@@ -17,6 +17,8 @@ class DayItem: NSObject {
     var imageUrl: String?
     var imageTitle: String?
     var imageFileName: String?
+    var timestamp: TimeInterval = 0
+    var dayOfWeek: Int = 0
     
     override init() {
         name = "Event Name Here"
@@ -40,13 +42,19 @@ class DayItem: NSObject {
         var timeStr = ""
         let time = feed.startTime
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm"
+        dateFormatter.dateFormat = "h:mm a"
         timeStr = dateFormatter.string(from: time)
         
         self.name = feed.name 
         self.time = timeStr
+        self.timestamp = feed.startTime.timeIntervalSince1970
         self.descriptionStr = feed.description_ 
-        self.highlighted = false // TODO
+        self.highlighted = DayItem.isTimeBetween(first: feed.startTime, second: feed.endTime)
+        
+        let calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
+        let components = calendar.components(.weekday, from: feed.startTime)
+        self.dayOfWeek = components.weekday!
+        
         self.locations = []
         
         let locations = feed.locations
@@ -65,5 +73,12 @@ class DayItem: NSObject {
     
     func setImage(title: String, fileName: String) {
         self.imageFileName = fileName
+    }
+    
+    static func isTimeBetween(first: Date, second: Date) -> Bool {
+        let current = Date()
+        return current.compare(first) == .orderedDescending &&
+            current.compare(second) == .orderedAscending
+        
     }
 }
