@@ -24,7 +24,7 @@ class EventDetailsViewController: UIViewController {
     
     /* programmatically inflate the event details view */
     func initialize() {
-        let tempLocations = eventDetails?.locations!.value(forKey: "name")
+        let tempLocations = eventDetails?.locations.value(forKey: "name")
 
         let dateFormatter = DateFormatter();
         dateFormatter.locale = Locale(identifier: "en_US")
@@ -45,7 +45,7 @@ class EventDetailsViewController: UIViewController {
         
         // populate the rest
         eventTitleLabel.text = eventDetails?.name;
-        eventStartTime.text = dateFormatter.string(from: (eventDetails?.startTime!)!)
+        eventStartTime.text = dateFormatter.string(from: (eventDetails?.startTime)!)
         eventLocationLabel.text = locationText
         eventDescriptionLabel.text = eventDetails?.description_;
     }

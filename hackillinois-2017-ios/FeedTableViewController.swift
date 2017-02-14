@@ -237,7 +237,7 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
             // Set up buildings
             destination.buildings = []
             
-            if let locationArray = feedItem.locations?.array as? [Location] {
+            if let locationArray = feedItem.locations.array as? [Location] {
                 for location in locationArray {
                     let building = Building(location: location)
                     destination.buildings.append(building)
@@ -254,7 +254,7 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
         let item = fetchedResultsController.object(at: indexPath) 
         
 //        cell.messageLabel.text = item.message // MARK: what is this supposed to be
-        cell.dateTimeLabel.text = dateTimeFormatter.string(from: item.startTime!)
+        cell.dateTimeLabel.text = dateTimeFormatter.string(from: item.startTime)
         cell.separatorInset = UIEdgeInsets.zero
         
         return cell

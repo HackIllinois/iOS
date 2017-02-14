@@ -160,6 +160,7 @@ class CoreDataHelpers {
                     }
                 }
         }
+        CoreDataHelpers.saveContext()
     }
     
     /* initializes Feed object from JSON */
@@ -186,8 +187,8 @@ class CoreDataHelpers {
             locationObject.initialize(id: id, latitude: latitude, longitude: longitude, name: shortName, shortName: name, feeds: [])
             tempLocations.append(locationObject)
         }
-        CoreDataHelpers.createOrFetchFeed(id: id, description: description, startTime: startTime, endTime: endTime, updated: updated, qrCode: qrCode, shortName: shortName, name: name, locations: tempLocations, tag: tag)
-        CoreDataHelpers.saveContext()
+        let l = CoreDataHelpers.createOrFetchFeed(id: id, description: description, startTime: startTime, endTime: endTime, updated: updated, qrCode: qrCode, shortName: shortName, name: name, locations: tempLocations, tag: tag)
+        print(l)
     }
     
     /* converts date string to date object */
@@ -197,7 +198,7 @@ class CoreDataHelpers {
         // the Z represents GMT timezone (+0)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
+        dateFormatter.timeZone = NSTimeZone(name: "CST") as TimeZone!
         let dateObject = dateFormatter.date(from: date)
         return dateObject!
     }

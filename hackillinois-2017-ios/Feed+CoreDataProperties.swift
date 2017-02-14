@@ -16,15 +16,15 @@ extension Feed {
         return NSFetchRequest<Feed>(entityName: "Feed");
     }
 
-    @NSManaged var endTime: Date?
-    @NSManaged var startTime: Date?
-    @NSManaged var updated_: Date?
-    @NSManaged var description_: String?
-    @NSManaged var qrCode: NSNumber?
-    @NSManaged var shortName: String?
-    @NSManaged var name: String?
-    @NSManaged var id: NSNumber?
-    @NSManaged var locations: NSOrderedSet?
-    @NSManaged var tag: String?
+    @NSManaged var endTime: Date
+    @NSManaged var startTime: Date
+    @NSManaged var updated_: Date
+    @NSManaged var description_: String
+    @NSManaged var qrCode: NSNumber
+    @NSManaged var shortName: String
+    @NSManaged var name: String
+    @NSManaged var id: NSNumber
+    @NSManaged var locations: NSOrderedSet
+    @NSManaged var tag: String
 
 }

@@ -20,7 +20,7 @@ public class Feed: NSManagedObject {
         self.qrCode = qrCode;
         self.shortName = shortName;
         self.name = name;
-        self.locations = locations;
+        self.locations = locations!;
         self.tag = tags;
     }
     

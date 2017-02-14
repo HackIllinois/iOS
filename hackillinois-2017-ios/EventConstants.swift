@@ -44,7 +44,7 @@ let university = "University+of+Illinois+at+Urbana+Champaign" // This will be en
 
 /* Hackathon timestamps */
 // TODO: Initialized to actual unix times for event status.
-let HACKATHON_BEGIN_TIME = 0                                          //Change Me!
-let HACKING_BEGIN_TIME = Int(NSDate().timeIntervalSince1970) + 1000     //Change Me!
-let HACKING_END_TIME = Int(NSDate().timeIntervalSince1970) + 1000         //Change Me!
-let HACKATHON_END_TIME = Int(NSDate().timeIntervalSince1970) + 1000         //Change Me!
+var HACKATHON_BEGIN_TIME = 0                    //Change Me!
+var HACKING_BEGIN_TIME = 0     //Change Me!
+var HACKING_END_TIME = 0       //Change Me!
+var HACKATHON_END_TIME = 0      //Change Me!

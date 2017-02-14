@@ -38,20 +38,24 @@ class mainCell: UITableViewCell {
     
     /* decrement seceonds by one and make sure the timer does not overflow */
     func updateCounter() {
-        if(secondsLeft == 0){
-            secondsLeft = 59
-            minutesLeft -= 1
-        }else{
-            secondsLeft -= 1
+        if(secondsLeft == 1 && minutesLeft == 0 && hoursLeft == 0) {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.funcList["HomeViewRefresh"]!()
+        }else {
+            if(secondsLeft == 0){
+                secondsLeft = 59
+                minutesLeft -= 1
+            }else{
+                secondsLeft -= 1
+            }
+            if(minutesLeft == 0){
+                minutesLeft = 59
+                hoursLeft -= 1
+            }
+            hoursLabel.text = hoursLeft.description;
+            minutesLabel.text = minutesLeft.description;
+            secondsLabel.text = secondsLeft.description;
         }
-        
-        if(minutesLeft == 0){
-            minutesLeft = 59
-            hoursLeft -= 1
-        }
-        hoursLabel.text = hoursLeft.description;
-        minutesLabel.text = minutesLeft.description;
-        secondsLabel.text = secondsLeft.description;
     }
     
     func getHours(timeInSeconds: Int) -> Int{

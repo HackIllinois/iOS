@@ -38,11 +38,10 @@ class DayItem: NSObject {
     
     init(feed: Feed) {
         var timeStr = ""
-        if let time = feed.startTime {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "hh:mm"
-            timeStr = dateFormatter.string(from: time)
-        }
+        let time = feed.startTime
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm"
+        timeStr = dateFormatter.string(from: time)
         
         self.name = feed.name ?? ""
         self.time = timeStr
@@ -50,13 +49,12 @@ class DayItem: NSObject {
         self.highlighted = false // TODO
         self.locations = []
         
-        if let locations = feed.locations {
-            for location in locations {
-                let location = location as! Location
-                self.locations.append(
-                    DayItemLocation(id: Int(location.id) + 1, name: location.shortName)
-                )
-            }
+        let locations = feed.locations
+        for location in locations {
+            let location = location as! Location
+            self.locations.append(
+                DayItemLocation(id: Int(location.id) + 1, name: location.shortName)
+            )
         }
     }
     
