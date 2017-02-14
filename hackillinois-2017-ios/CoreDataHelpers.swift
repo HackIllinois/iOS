@@ -64,9 +64,9 @@ class CoreDataHelpers {
                 return feed[0]
             }
         }
-        
+            
         let feed = NSEntityDescription.insertNewObject(forEntityName: "Feed", into: appDelegate.managedObjectContext) as! Feed
-//        feed.initialize(id: id, message: message, time: Date(timeIntervalSince1970: TimeInterval(timestamp)), locations: locations, tags: tags)
+            //        feed.initialize(id: id, message: message, time: Date(timeIntervalSince1970: TimeInterval(timestamp)), locations: locations, tags: tags)
         feed.initialize(id: id, description: description, startTime: startTime, endTime: endTime, updated: updated, qrCode: qrCode, shortName: shortName, name: name, locations: locations, tag: tag)
         return feed
     }

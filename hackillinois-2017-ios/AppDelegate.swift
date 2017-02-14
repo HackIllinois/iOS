@@ -23,9 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func iterateFunctions() {
         CoreDataHelpers.updateEventsFeed()
-        loadHackathonTimes()
+        DispatchQueue.global(qos: .background).async {
+            self.loadHackathonTimes()
+        }
         for (_, callback) in funcList {
-            callback()
+            DispatchQueue.global(qos: .background).async {
+                callback()
+            }
         }
     }
     
