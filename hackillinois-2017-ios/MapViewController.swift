@@ -194,6 +194,7 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
     
     func loadAddress() {
         let building = buildings[labelPressed-1]
+        let selected_location_id = labelPressed
         
         // Configure MapView to show the location user selected
         map.setCamera(MKMapCamera.from(building: building), animated: true)
@@ -202,7 +203,7 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         // Route locations
         routeTo(building.coordinate, completion: { (route: MKRoute?) in
             self.bottomSheet.directions = route
-            self.bottomSheet.reloadNavTable(address: building.address ?? "", name: building.longName ?? "")
+            self.bottomSheet.reloadNavTable(address: building.address ?? "", name: building.longName ?? "", location_id: selected_location_id)
             self.bottomSheet.scrollToButtons()
         })
     }
@@ -260,7 +261,7 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
             let building = buildings[selectedIndex]
             routeTo(building.coordinate, completion: { (route: MKRoute?) in
                 self.bottomSheet.directions = route
-                self.bottomSheet.reloadNavTable(address: building.address ?? "", name: building.longName ?? "")
+                self.bottomSheet.reloadNavTable(address: building.address ?? "", name: building.longName ?? "", location_id: selectedIndex + 1)
                 self.bottomSheet.scrollToButtons()
             })
             // Set appropriate selection for cleanup later

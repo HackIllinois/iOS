@@ -44,8 +44,13 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var directionShown = false
     var lastSeenTranslation : CGFloat = 0.0
     
-    func reloadNavTable(address: String, name: String) {
+    var selected_location_id = 0
+    
+    func reloadNavTable(address: String, name: String, location_id: Int) {
         navigationTable.reloadData()
+        
+        selected_location_id = location_id
+        
         if let directions = directions {
             let miles = directions.distance * 0.00063694
             distanceLabel.text = "\(String(format: "%.1f", miles)) mi" // TODO: change to actual miles
@@ -96,8 +101,8 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.indoorMap.alpha = 0.0
                 }, completion: { (finished: Bool) -> Void in
                     self.directionButton.isHidden = true
-                    //self.indoorMap.isHidden = true
-                    //self.indoorMapButtonSmall.isHidden = false
+                    self.indoorMap.isHidden = true
+                    self.indoorMapButtonSmall.isHidden = false
                     self.addressLabel.isHidden = false
                     UIView.animate(withDuration: 0.2, animations: {
                         self.indoorMapButtonSmall.alpha = 1.0
@@ -115,10 +120,10 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.addressLabel.alpha = 0.0
                 /* Hide the direction button and the indoor map button */
                 }, completion: { (finished: Bool) -> Void in
-                    //self.indoorMapButtonSmall.isHidden = true
+                    self.indoorMapButtonSmall.isHidden = true
                     self.addressLabel.isHidden = true
                     self.directionButton.isHidden = false
-                    //self.indoorMap.isHidden = false
+                    self.indoorMap.isHidden = false
                     UIView.animate(withDuration: 0.2, animations: {
                         self.directionButton.alpha = 1.0
                         self.indoorMap.alpha = 1.0
@@ -149,7 +154,7 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Button stuff
         directionButton.isHidden = false
         directionButton.alpha = 1.0
-        //indoorMap.isHidden = false
+        indoorMap.isHidden = false
         indoorMap.alpha = 1.0
         
         indoorMapButtonSmall.layer.cornerRadius = 6
@@ -191,7 +196,7 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Button stuff
         directionButton.isHidden = false
         directionButton.alpha = 1.0
-        //indoorMap.isHidden = false
+        indoorMap.isHidden = false
         indoorMap.alpha = 1.0
     }
     
@@ -346,10 +351,16 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell as UITableViewCell
     }
     
-//    func performSegue(withIdentifier identifier: String, sender: Any?) {
+    /*
+    override func performSegue(withIdentifier identifier: String, sender: Any?) {
         // Initiate view controller
         // Configuring
-//        self.showDetailViewController(<#T##vc: UIViewController##UIViewController#>, sender: self)
-//    }
+        //self.showDetailViewController(<#T##vc: UIViewController##UIViewController#>, sender: self)
+    }*/
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! MapViewIndoorMapsTableViewController
+        vc.location_id = selected_location_id
+    }
     
 }

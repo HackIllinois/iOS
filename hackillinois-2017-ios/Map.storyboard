@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -115,7 +116,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wl9-fg-gn8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1485.5999999999999" y="630.13493253373315"/>
+            <point key="canvasLocation" x="1486" y="630"/>
         </scene>
         <!--Bottom View Controller-->
         <scene sceneID="tOw-1j-0pY">
@@ -170,7 +171,7 @@
                                             <color key="titleColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="YC0-vK-O1b" kind="showDetail" id="B2d-ft-x5M"/>
+                                            <segue destination="YC0-vK-O1b" kind="show" id="B2d-ft-x5M"/>
                                         </connections>
                                     </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="72" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="YAC-3c-Krt">
@@ -266,7 +267,7 @@
                                             <color key="titleColor" red="0.96078431372549022" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="YC0-vK-O1b" kind="showDetail" id="eev-el-ohj"/>
+                                            <segue destination="YC0-vK-O1b" kind="show" id="eev-el-ohj"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.4 mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oFe-g2-7lg">
@@ -370,21 +371,37 @@ United States</string>
             </objects>
             <point key="canvasLocation" x="1485.5999999999999" y="1369.5652173913045"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Map View Indoor Maps Table View Controller-->
         <scene sceneID="X0t-kf-mWT">
             <objects>
-                <tableViewController id="YC0-vK-O1b" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="f7g-ub-Eyh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <tableViewController id="YC0-vK-O1b" customClass="MapViewIndoorMapsTableViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="f7g-ub-Eyh">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="K1d-Vm-RHx">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="image" id="K1d-Vm-RHx">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K1d-Vm-RHx" id="iFT-ZU-71b">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W28-Ky-fyv">
+                                            <rect key="frame" x="2" y="2" width="371" height="371"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="W28-Ky-fyv" secondAttribute="height" identifier="ratio" id="7iO-sN-gQi"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="W28-Ky-fyv" firstAttribute="centerY" secondItem="iFT-ZU-71b" secondAttribute="centerY" id="4z6-1A-NQ0"/>
+                                        <constraint firstItem="W28-Ky-fyv" firstAttribute="leading" secondItem="iFT-ZU-71b" secondAttribute="leading" constant="2" id="GlP-fr-yqB"/>
+                                        <constraint firstItem="W28-Ky-fyv" firstAttribute="top" secondItem="iFT-ZU-71b" secondAttribute="top" constant="2" id="On4-1V-28D"/>
+                                        <constraint firstAttribute="bottom" secondItem="W28-Ky-fyv" secondAttribute="bottom" constant="2" id="aIB-Zn-AYX"/>
+                                        <constraint firstItem="W28-Ky-fyv" firstAttribute="centerX" secondItem="iFT-ZU-71b" secondAttribute="centerX" id="vZy-KD-YnR"/>
+                                        <constraint firstAttribute="trailing" secondItem="W28-Ky-fyv" secondAttribute="trailing" constant="2" id="xqB-9C-SAe"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -393,6 +410,7 @@ United States</string>
                             <outlet property="delegate" destination="YC0-vK-O1b" id="XS5-VQ-FJs"/>
                         </connections>
                     </tableView>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uwJ-Bc-64r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -427,6 +445,6 @@ United States</string>
         <image name="walking" width="12" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="B2d-ft-x5M"/>
+        <segue reference="eev-el-ohj"/>
     </inferredMetricsTieBreakers>
 </document>
