@@ -96,8 +96,8 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.indoorMap.alpha = 0.0
                 }, completion: { (finished: Bool) -> Void in
                     self.directionButton.isHidden = true
-                    self.indoorMap.isHidden = true
-                    self.indoorMapButtonSmall.isHidden = false
+                    //self.indoorMap.isHidden = true
+                    //self.indoorMapButtonSmall.isHidden = false
                     self.addressLabel.isHidden = false
                     UIView.animate(withDuration: 0.2, animations: {
                         self.indoorMapButtonSmall.alpha = 1.0
@@ -115,10 +115,10 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.addressLabel.alpha = 0.0
                 /* Hide the direction button and the indoor map button */
                 }, completion: { (finished: Bool) -> Void in
-                    self.indoorMapButtonSmall.isHidden = true
+                    //self.indoorMapButtonSmall.isHidden = true
                     self.addressLabel.isHidden = true
                     self.directionButton.isHidden = false
-                    self.indoorMap.isHidden = false
+                    //self.indoorMap.isHidden = false
                     UIView.animate(withDuration: 0.2, animations: {
                         self.directionButton.alpha = 1.0
                         self.indoorMap.alpha = 1.0
@@ -149,7 +149,7 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Button stuff
         directionButton.isHidden = false
         directionButton.alpha = 1.0
-        indoorMap.isHidden = false
+        //indoorMap.isHidden = false
         indoorMap.alpha = 1.0
         
         indoorMapButtonSmall.layer.cornerRadius = 6
@@ -191,7 +191,7 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Button stuff
         directionButton.isHidden = false
         directionButton.alpha = 1.0
-        indoorMap.isHidden = false
+        //indoorMap.isHidden = false
         indoorMap.alpha = 1.0
     }
     
