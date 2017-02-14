@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ScheduleTableViewController: UITableViewController {
     @IBOutlet weak var tableTopBorder: UIView!
@@ -21,15 +22,25 @@ class ScheduleTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // hack
+        // create padding
         self.tableView.contentInset = UIEdgeInsetsMake(12, 0, 12, 0);
         
-        // more hack
-        tableTopBorder.backgroundColor = highlightedCellBackgroundColor
-        
-        // even more hack
+        // create rounded corners
         self.view.layoutIfNeeded()
         roundCorners(view: tableTopBorder, corners: [.topLeft, .topRight], radius: tableTopBorder.frame.height)
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 300
+        
+    }
+    
+    func openLocation(_ location_id: Int) {
+        if let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "Map") as? MapViewController {
+            vc.labelPressed = location_id
+            navigationController?.navigationBar.tintColor = UIColor(red: 93.0/255.0, green: 200.0/255.0, blue: 219.0/255.0, alpha: 1.0)
+            navigationController?.navigationBar.backgroundColor = UIColor(red: 28.0/255.0, green: 50.0/255.0, blue: 90.0/255.0, alpha: 1.0)
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     // Mark: UITableViewController
@@ -39,10 +50,12 @@ class ScheduleTableViewController: UITableViewController {
         
         /* Initialize Cell */
         cell.cellInit()
+        cell.props = dayItems[indexPath.row]
         cell.setEventContent(title: dayItem.name, time: dayItem.time, description: "Woot woot")
         cell.setHappening(dayItem.highlighted)
         
-                
+        cell.tableCall = openLocation
+        
         return cell
     }
     
@@ -52,9 +65,7 @@ class ScheduleTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "ScheduleDescription") as? ScheduleDescriptionViewController {
-            vc.titleStr = dayItems[indexPath.row].name
-            vc.descriptionStr = dayItems[indexPath.row].descriptionStr
-            vc.selectedWeekday = ["Friday", "Saturday", "Sunday"][dayIndex]
+            vc.dayItem = dayItems[indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
         }
     }

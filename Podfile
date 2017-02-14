@@ -9,6 +9,7 @@ target 'hackillinois-2017-ios' do
         pod 'SwiftyJSON', :git => 'https://github.com/jeneumeier/SwiftyJSON.git', :branch=> 'swift3-gm'
         pod "SnapKit"
         pod "JWTDecode", :git => "https://github.com/auth0/JWTDecode.swift.git", :branch => 'feature-swift-3'
+        pod 'Alamofire', '~> 4.3'
 end
 
 target 'hackillinois-2017-iosTests' do

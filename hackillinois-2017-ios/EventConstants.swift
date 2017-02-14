@@ -42,3 +42,10 @@ let defaultHeading = 0.0
 
 /* Hackathon Information */
 let university = "University+of+Illinois+at+Urbana+Champaign" // This will be encoded as an URL, so spaces should be delimited by +'s
+
+/* Hackathon timestamps */
+// pulled from the api and initialized
+var HACKATHON_BEGIN_TIME = 0
+var HACKING_BEGIN_TIME = 0
+var HACKING_END_TIME = 0
+var HACKATHON_END_TIME = 0

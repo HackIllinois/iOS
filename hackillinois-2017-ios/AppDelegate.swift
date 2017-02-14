@@ -8,15 +8,61 @@
 
 import UIKit
 import CoreData
+import Alamofire
+import SwiftyJSON
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var HACKILLINOIS_API_URL: String!
+    var mTimer = Timer()
+    var funcList = [String: ((Void) -> Void)]()
+    
+    
+    
+    func iterateFunctions() {
+        CoreDataHelpers.updateEventsFeed()
+        loadHackathonTimes()
+        for (_, callback) in funcList {
+            callback()
+        }
+    }
+    
+    func setInterval(key: String, callback: @escaping ((Void) -> Void)) {
+        print("Delegate: Set interval for key \(key)")
+        self.funcList[key] = callback
+    }
+    
+    func clearIntereval(key: String) {
+        print("Delegate: Cleared interval for key \(key)")
+        self.funcList[key] = nil
+    }
+    
+    func loadHackathonTimes(){
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let fetchRequest = NSFetchRequest<Feed>(entityName: "Feed")
+        
+        // load only events that are upcoming
+        fetchRequest.predicate = NSPredicate(format: "tag == %@", "HACKATHON")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startTime", ascending: true)]
+        
+        if let feedArr = try? appDelegate.managedObjectContext.fetch(fetchRequest) {
+            let hackathonTimes = feedArr
+            if(hackathonTimes.count == 4) {
+                print(hackathonTimes[0].description_)
+                print(hackathonTimes[1].description_)
+                print(hackathonTimes[2].description_)
+                print(hackathonTimes[3].description_)
+                HACKATHON_BEGIN_TIME = Int((hackathonTimes[0].startTime.timeIntervalSinceNow))
+                HACKING_BEGIN_TIME = Int((hackathonTimes[1].startTime.timeIntervalSinceNow))
+                HACKING_END_TIME  = Int((hackathonTimes[2].startTime.timeIntervalSinceNow)) + 86400
+                HACKATHON_END_TIME = Int((hackathonTimes[3].startTime.timeIntervalSinceNow)) + 86400
+            }
+        }
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
         let navigationBarAppearace = UINavigationBar.appearance()
         navigationBarAppearace.isTranslucent = false
         navigationBarAppearace.tintColor = UIColor.white
@@ -29,6 +75,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarAppearace.barTintColor = UIColor.hiaDarkSlateBlue
 
         UIApplication.shared.statusBarStyle = .lightContent
+        
+        mTimer = Timer.scheduledTimer(timeInterval: 10, target:self, selector: #selector(self.iterateFunctions), userInfo: nil, repeats: true)
         
         //
         //        // Parse API Keys from keys.plist file
