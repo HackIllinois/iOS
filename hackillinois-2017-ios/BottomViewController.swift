@@ -346,10 +346,10 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell as UITableViewCell
     }
     
-    func performSegue(withIdentifier identifier: String, sender: Any?) {
+//    func performSegue(withIdentifier identifier: String, sender: Any?) {
         // Initiate view controller
         // Configuring
-        self.showDetailViewController(<#T##vc: UIViewController##UIViewController#>, sender: self)
-    }
+//        self.showDetailViewController(<#T##vc: UIViewController##UIViewController#>, sender: self)
+//    }
     
 }
