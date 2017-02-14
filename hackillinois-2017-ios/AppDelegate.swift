@@ -71,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationBarAppearace = UINavigationBar.appearance()
         navigationBarAppearace.isTranslucent = false
         navigationBarAppearace.tintColor = UIColor.white
-        navigationBarAppearace.barTintColor = UIColor.hiaDarkSlateBlue
+        navigationBarAppearace.barTintColor = UIColor(red: 93.0/255.0, green: 200.0/255.0, blue: 219.0/255.0, alpha: 1.0)
         navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
 
         let tabBarAppearace = UITabBar.appearance()
