@@ -224,7 +224,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.qrCodeButton.roundedButton()
             cell.qrCodeButton.addTarget(self, action: #selector(HomeViewController.buttonClicked), for: .touchUpInside)
             return cell
-        } else if(events.count > 0) {
+        } else if((events.count > 0 && events[indexPath.row - 1].locations.count == 3)) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "threeLocationsCell", for: indexPath) as! threeLocationsCell
             cell.backgroundColor = UIColor.clear
             cell.selectionStyle = .none
