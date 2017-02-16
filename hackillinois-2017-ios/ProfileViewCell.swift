@@ -14,7 +14,7 @@ class ProfileViewCell: UITableViewCell {
     @IBOutlet weak var schoolLabel: UILabel!
     @IBOutlet weak var majorLabel: UILabel!
     @IBOutlet weak var dietLabel: UILabel!
-    @IBOutlet weak var yearLabel: UILabel!
+//    @IBOutlet weak var yearLabel: UILabel!
     
     @IBOutlet weak var button1: UIImageView!
     @IBOutlet weak var button2: UIImageView!

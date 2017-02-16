@@ -18,6 +18,8 @@ class HTTPHelpers {
         /* Load HackIllinois API URL from App Delegate */
         print("url: \(url)")
         let hackillinois_url = (UIApplication.shared.delegate as! AppDelegate).HACKILLINOIS_API_URL + url
+        let delegate = (UIApplication.shared.delegate as! AppDelegate)
+        print(delegate.HACKILLINOIS_API_URL)
         print("Fetching data from: \(hackillinois_url)")
         do {
             /* Create JSON payload */

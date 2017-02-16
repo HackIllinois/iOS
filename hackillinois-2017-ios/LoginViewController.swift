@@ -156,12 +156,15 @@ class LoginViewController: GenericInputView {
     func processResponse(_ data: Data?, response: URLResponse?, error: NSError?) {
         var responseData = JSON(data: data!)
         
+        print(responseData)
         /* Check for any errors */
         if (responseData["error"]).isEmpty {
             processError(responseData)
             return // Attemping to decode the jwt actually makes it crash
         }
         print("reached here!!!!!!")
+        
+        
         
         
         
@@ -228,6 +231,35 @@ class LoginViewController: GenericInputView {
             
         }
         /*
+        // Send request to server
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
+            /* Remove all previous users */
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            for user in (Helpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]) {
+                appDelegate.managedObjectContext.deleteObject(user)
+            }
+         
+            let payload: JSON = JSON(["email": username, "password": password])
+            HTTPHelpers.createPostRequest(subUrl: "v1/auth", jsonPayload: payload, completion: self.processResponse)
+        }
+        */
+        
+        /* Mark: Fake server response -- Remove an uncomment code above to run */
+        /*
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 1 * USEC_PER_SEC)) { [unowned self] in
+            /* Remove all previous users */
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            
+            for user in (CoreDataHelpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]) {
+                appDelegate.managedObjectContext.delete(user)
+            }
+            
+            let payload: JSON = JSON(["email": username, "password": password])
+            HTTPHelpers.createPostRequest(subUrl: "v1/auth", jsonPayload: payload, completion: self.processResponse)
+            
+        }
+        /*
          // Send request to server
          dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
          /* Remove all previous users */
@@ -268,6 +300,8 @@ class LoginViewController: GenericInputView {
          self.processUserData(name: name, email: email, school: school, major: major, role: role, barcode: barcode, auth: auth, initTime: initTime, expirationTime: expTime, userID: userID, diet: diet)
          }
          */
+
+        */
     }
     
     /* Override textfieldshould return */

@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UIApplication.shared.statusBarStyle = .lightContent
         
-        
+
         // Parse API Keys from keys.plist file
         var keys: NSDictionary?
         if let path = Bundle.main.path(forResource: "keys", ofType: "plist") {
@@ -64,8 +64,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             // Login not necessary
             self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
-                }
-        
+        }
+
         
         return true
     }
