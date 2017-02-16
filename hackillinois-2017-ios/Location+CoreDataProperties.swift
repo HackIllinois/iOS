@@ -14,11 +14,11 @@ import CoreData
 
 extension Location {
 
-    @NSManaged var latitude: NSNumber
-    @NSManaged var longitude: NSNumber
+    @NSManaged var latitude: Float
+    @NSManaged var longitude: Float
     @NSManaged var name: String
     @NSManaged var shortName: String
     @NSManaged var feeds: NSSet
-    @NSManaged var address: String
+    @NSManaged var id: Int16
 
 }

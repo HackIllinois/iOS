@@ -21,7 +21,8 @@ let mainUIColor = 0x142442
 let mainTintColor = 0x1c325a
 let textHighlightColor = 0x5dc8db //cyan highlight text color
 let pseudoWhiteColor = 0xf5fafc
-let duskyBlueColor = 0x4e6094;
+let duskyBlueColor = 0x4e6094
+let dateTimeColor = 0x808fc4
 
 let timeoutIntervalSeconds: UInt64 = 10 // Timeout interval for network calls, in seconds
 
@@ -41,3 +42,10 @@ let defaultHeading = 0.0
 
 /* Hackathon Information */
 let university = "University+of+Illinois+at+Urbana+Champaign" // This will be encoded as an URL, so spaces should be delimited by +'s
+
+/* Hackathon timestamps */
+// pulled from the api and initialized
+var HACKATHON_BEGIN_TIME = 0
+var HACKING_BEGIN_TIME = 0
+var HACKING_END_TIME = 0
+var HACKATHON_END_TIME = 0

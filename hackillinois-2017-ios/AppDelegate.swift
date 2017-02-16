@@ -8,29 +8,79 @@
 
 import UIKit
 import CoreData
+import Alamofire
+import SwiftyJSON
+import OneSignal
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var HACKILLINOIS_API_URL: String!
+    var mTimer = Timer()
+    var funcList = [String: ((Void) -> Void)]()
+    
+    
+    
+    func iterateFunctions() {
+        CoreDataHelpers.updateEventsFeed()
+        DispatchQueue.global(qos: .background).async {
+            self.loadHackathonTimes()
+        }
+        for (_, callback) in funcList {
+            DispatchQueue.global(qos: .background).async {
+                callback()
+            }
+        }
+    }
+    
+    func setInterval(key: String, callback: @escaping ((Void) -> Void)) {
+        print("Delegate: Set interval for key \(key)")
+        self.funcList[key] = callback
+    }
+    
+    func clearIntereval(key: String) {
+        print("Delegate: Cleared interval for key \(key)")
+        self.funcList[key] = nil
+    }
+    
+    func loadHackathonTimes(){
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let fetchRequest = NSFetchRequest<Feed>(entityName: "Feed")
+        
+        // load only events that are upcoming
+        fetchRequest.predicate = NSPredicate(format: "tag == %@", "HACKATHON")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startTime", ascending: true)]
+        
+        if let feedArr = try? appDelegate.managedObjectContext.fetch(fetchRequest) {
+            let hackathonTimes = feedArr
+            if(hackathonTimes.count == 4) {
+                print(hackathonTimes[0].description_)
+                print(hackathonTimes[1].description_)
+                print(hackathonTimes[2].description_)
+                print(hackathonTimes[3].description_)
+                HACKATHON_BEGIN_TIME = Int((hackathonTimes[0].startTime.timeIntervalSinceNow))
+                HACKING_BEGIN_TIME = Int((hackathonTimes[1].startTime.timeIntervalSinceNow))
+                HACKING_END_TIME  = Int((hackathonTimes[2].startTime.timeIntervalSinceNow)) + 86400
+                HACKATHON_END_TIME = Int((hackathonTimes[3].startTime.timeIntervalSinceNow)) + 86400
+            }
+        }
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
         let navigationBarAppearace = UINavigationBar.appearance()
         navigationBarAppearace.isTranslucent = false
         navigationBarAppearace.tintColor = UIColor.white
-        navigationBarAppearace.barTintColor = UIColor.hiaDarkSlateBlue
+        navigationBarAppearace.barTintColor = UIColor(red: 93.0/255.0, green: 200.0/255.0, blue: 219.0/255.0, alpha: 1.0)
         navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
 
         let tabBarAppearace = UITabBar.appearance()
         tabBarAppearace.isTranslucent = false
-        tabBarAppearace.tintColor = UIColor.white
+        tabBarAppearace.tintColor = UIColor.hiaLightPeriwinkle
         tabBarAppearace.barTintColor = UIColor.hiaDarkSlateBlue
 
         UIApplication.shared.statusBarStyle = .lightContent
         
-
         // Parse API Keys from keys.plist file
         var keys: NSDictionary?
         if let path = Bundle.main.path(forResource: "keys", ofType: "plist") {
@@ -66,6 +116,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController = UIStoryboard(name: "Event", bundle: nil).instantiateInitialViewController()
         }
 
+        mTimer = Timer.scheduledTimer(timeInterval: 10, target:self, selector: #selector(self.iterateFunctions), userInfo: nil, repeats: true)
+        
+        OneSignal.initWithLaunchOptions(launchOptions, appId: "0cc1d341-2731-446b-a667-1d8fc1a06d88", handleNotificationReceived: { (notification) in
+            print("Received Notification - \(notification?.payload.notificationID)")
+        }, handleNotificationAction: { (result) in
+            let payload: OSNotificationPayload? = result?.notification.payload
+            
+            var fullMessage: String? = payload?.body
+            if payload?.additionalData != nil {
+                var additionalData: [AnyHashable: Any]? = payload?.additionalData
+                if additionalData!["actionSelected"] != nil {
+                    fullMessage = fullMessage! + "\nPressed ButtonId:\(additionalData!["actionSelected"])"
+                }
+            }
+            
+            print(fullMessage)
+        }, settings: [kOSSettingsKeyAutoPrompt: true, kOSSettingsKeyInFocusDisplayOption: false])
         
         return true
     }

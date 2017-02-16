@@ -24,6 +24,7 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func closeButtonPressed(_ sender: Any) {
         self.hideView(animate: true)
         self.globalCloseHandler?()
+        hideDirection()
     }
     @IBOutlet weak var indoorMapButtonSmall: UIButton!
     
@@ -43,8 +44,13 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var directionShown = false
     var lastSeenTranslation : CGFloat = 0.0
     
-    func reloadNavTable(address: String, name: String) {
+    var selected_location_id = 0
+    
+    func reloadNavTable(address: String, name: String, location_id: Int) {
         navigationTable.reloadData()
+        
+        selected_location_id = location_id
+        
         if let directions = directions {
             let miles = directions.distance * 0.00063694
             distanceLabel.text = "\(String(format: "%.1f", miles)) mi" // TODO: change to actual miles
@@ -167,14 +173,20 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         navigationTable.rowHeight = UITableViewAutomaticDimension
         navigationTable.estimatedRowHeight = 140
-        
-        /* Set up limits */
-        y_min = (self.navigationController?.navigationBar.frame.size.height)! + 25
-        y_max = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 125
-        y_button_h = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 198
-        y_mid = (self.navigationController?.navigationBar.frame.size.height)! + 45
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        /* Set up limits */
+        let y_delta = (self.navigationController?.navigationBar.frame.size.height)! + 25
+        y_min = 0
+        y_max = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 125 - y_delta
+        y_button_h = UIScreen.main.bounds.size.height-(self.tabBarController?.tabBar.frame.size.height)! - 198 - y_delta
+        y_mid = (self.navigationController?.navigationBar.frame.size.height)! + 45 - y_delta
+    }
+    
+        
     func popOutView() {
         addressLabel.isHidden = true
         addressLabel.alpha = 0.0
@@ -186,8 +198,6 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         directionButton.alpha = 1.0
         indoorMap.isHidden = false
         indoorMap.alpha = 1.0
-        
-        scrollToBar()
     }
     
     func hideView(animate: Bool) {
@@ -320,7 +330,37 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let feet = floor(((directions?.steps[indexPath.row].distance)! * 3.28084))
         cell.distanceLabel.text = "\(roundToNearestTenth(number: feet)) feet"
         cell.directionLabel.text = directions?.steps[indexPath.row].instructions
+        
+        let dir: String = cell.directionLabel.text!.lowercased()
+        
+        if dir.range(of: "left") != nil {
+            cell.dirImage.image = UIImage(named: "dir_left")!
+            return cell
+        }
+        
+        if dir.range(of: "right") != nil {
+            cell.dirImage.image = UIImage(named: "dir_right")!
+            return cell
+        }
+        
+        if dir.range(of: "proceed") != nil || dir.range(of: "ahead") != nil {
+            cell.dirImage.image = UIImage(named: "dir_forward")!
+            return cell
+        }
+        
         return cell as UITableViewCell
+    }
+    
+    /*
+    override func performSegue(withIdentifier identifier: String, sender: Any?) {
+        // Initiate view controller
+        // Configuring
+        //self.showDetailViewController(<#T##vc: UIViewController##UIViewController#>, sender: self)
+    }*/
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! MapViewIndoorMapsTableViewController
+        vc.location_id = selected_location_id
     }
     
 }

@@ -121,6 +121,7 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         map.camera = MKMapCamera(lookingAtCenter: CLLocationCoordinate2DMake(centerOfEventLatitude, centerOfEventLongitude),
                                      fromDistance: defaultHeight, pitch: defaultPitch, heading: defaultHeading)
         map.delegate = self
+        map.tintColor = UIColor.hiaSeafoamBlue
         
         // The rectangle's alignment is hacky due to iOS's autolayout constraints
         let screen = UIScreen.main.bounds
@@ -140,7 +141,7 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
             }
             
             // Add the Open In... Dialogue
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_open_in_new")!, style: .plain, target: self, action: #selector(openInExternalMapApplication))
+            // navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_open_in_new")!, style: .plain, target: self, action: #selector(openInExternalMapApplication))
         }
         
         // Add "My Location" button
@@ -192,9 +193,6 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
             // Cannot route if user didn't authorize
             return
         }
-        // Remove current paths
-        self.map.removeOverlays(self.map.overlays)
-        
         // Create new request
         let routeRequest = MKDirectionsRequest()
         routeRequest.source = MKMapItem.forCurrentLocation()
@@ -203,22 +201,27 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         routeRequest.requestsAlternateRoutes = false
         routeRequest.transportType = .walking
         
+        
         // Draw the button again to have it "fade"
         // Slignt padding is required to have the circle appear normal: otherwise it will end up clipped
+        /*
         let context = UIGraphicsGetCurrentContext()
-        context?.setFillColor(UIColor.fromRGBHex(mainUIColor).cgColor)
+        context?.setFillColor(UIColor.hiaSeafoamBlue.cgColor)
         context?.setLineWidth(0)
         
         context?.addEllipse(in: CGRect(x: 4, y: 4, width: locationButton.frame.width, height: locationButton.frame.height)) // Add slight padding
         context?.drawPath(using: .fillStroke)
         
         UIGraphicsEndImageContext()
+        */
         
         // Obtain direction
         let directions = MKDirections(request: routeRequest)
         directions.calculate(completionHandler: { (response, error) in
             if let routes = response?.routes {
                 let quickestRoute = routes.sorted(by: { $0.expectedTravelTime < $1.expectedTravelTime })
+                // Remove current paths
+                self.map.removeOverlays(self.map.overlays)
                 self.map.add(quickestRoute[0].polyline)
                 completion?(quickestRoute[0])
             } else if let _ = error {
@@ -233,7 +236,7 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         // Create a renderer
         let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
         renderer.lineWidth = strokeWidth
-        renderer.strokeColor = UIColor.blue;
+        renderer.strokeColor = UIColor.hiaSeafoamBlue // line color
         return renderer
     }
     
@@ -252,7 +255,16 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         routeTo(selectedAnnotation.coordinate, completion: nil)
     }
     
-
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
+        }
+        
+        let annotation_view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+        annotation_view.pinTintColor = UIColor.hiaLipstick
+        annotation_view.canShowCallout = true
+        return annotation_view
+    }
     /*
     // MARK: - Navigation
 

@@ -11,12 +11,28 @@ import UIKit
 class ScheduleCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var time: UILabel!
-    @IBOutlet weak var descriptionButton: UIButton!
     @IBOutlet weak var actualContent: UIView!
     @IBOutlet weak var reminderButton: UIButton!
 
     @IBOutlet weak var cellContent: UIView!
     @IBOutlet weak var cellBorder: UIView!
+    @IBOutlet weak var location1: UIView!
+    @IBOutlet weak var locationButton1: UIButton!
+    @IBOutlet weak var location1Height: NSLayoutConstraint!
+    @IBOutlet weak var location2: UIView!
+    @IBOutlet weak var locationButton2: UIButton!
+    @IBOutlet weak var location2Height: NSLayoutConstraint!
+    @IBOutlet weak var location3: UIView!
+    @IBOutlet weak var locationButton3: UIButton!
+    @IBOutlet weak var location3Height: NSLayoutConstraint!
+    
+    
+    struct LocationButton {
+        var container: UIView
+        var button: UIButton
+        var constraint: NSLayoutConstraint
+    }
+    var locationButtons = [LocationButton]()
     
     let highlightedCellBackgroundColor = UIColor(red: 45.0/255.0, green: 70.0/255.0, blue: 115.0/255.0, alpha: 1.0)
     let dehighlightedCellBackgroundColor = UIColor(red: 20.0/255.0, green: 36.0/255.0, blue: 66.0/255.0, alpha: 1.0)
@@ -24,11 +40,16 @@ class ScheduleCell: UITableViewCell {
     var titleStr: String
     var timeStr: String
     var descriptionStr: String
+    var tableCall: (_ location_id: Int) -> Void
+    var props: DayItem?
+    
+    let CELL_HEIGHT: CGFloat = 30.0
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         self.titleStr = ""
         self.timeStr = ""
         self.descriptionStr = ""
+        self.tableCall = { _ in }
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     
@@ -36,15 +57,31 @@ class ScheduleCell: UITableViewCell {
         self.titleStr = ""
         self.timeStr = ""
         self.descriptionStr = ""
+        self.tableCall = { _ in }
         super.init(coder: aDecoder)
+    }
+    
+    func initValues() {
+        // location button
+        self.locationButtons = [
+            LocationButton(container: location1, button: locationButton1, constraint: location1Height),
+            LocationButton(container: location2, button: locationButton2, constraint: location2Height),
+            LocationButton(container: location3, button: locationButton3, constraint: location3Height)
+        ]
+    }
+    
+    @IBAction func locationOnClick(_ sender: UIButton) {
+        if let props = props {
+            tableCall(props.locations[sender.tag].location_id)
+        }
     }
     
     func cellInit(){
         self.selectionStyle = .none
         
-        let leftArrow = UIImage(named: "ic_chevron_right_48pt")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-        descriptionButton.setImage(leftArrow, for: .normal)
-        descriptionButton.tintColor = descriptionButton.titleColor(for: .normal)
+        //let leftArrow = UIImage(named: "ic_chevron_right_48pt")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        //descriptionButton.setImage(leftArrow, for: .normal)
+        //descriptionButton.tintColor = descriptionButton.titleColor(for: .normal)
         
         let reminderImage = UIImage(named: "reminder")
         let tintedImage = reminderImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
@@ -62,9 +99,19 @@ class ScheduleCell: UITableViewCell {
     
     // Set cell content
     func setEventContent(title: String, time: String, description: String) {
-        self.title.text = title
-        self.time.text = time
-        self.descriptionButton.setTitle(description, for: .normal)
+        initValues()
+        if let props = props {
+            self.title.text = props.name
+            self.time.text = props.time
+            
+            for (i, location) in props.locations.enumerated() {
+                self.locationButtons[i].button.setTitle(location.location_name, for: .normal)
+            }
+            for i in 0...2 {
+                self.locationButtons[i].constraint.constant = i < props.locations.count ? CELL_HEIGHT : 0.0
+            }
+            
+        }
     }
     
     func setHappening(_ isHappening: Bool) {

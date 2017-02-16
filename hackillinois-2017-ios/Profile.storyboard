@@ -178,6 +178,10 @@
                                                                     <color key="highlightedColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </label>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="enV-cV-LkK" firstAttribute="leading" secondItem="U0X-Jj-7yR" secondAttribute="leading" id="JRz-xf-DN0"/>
+                                                                <constraint firstAttribute="trailing" secondItem="enV-cV-LkK" secondAttribute="trailing" id="wTI-ld-oWe"/>
+                                                            </constraints>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="kxE-M3-NO9">
                                                             <rect key="frame" x="0.0" y="135.5" width="351" height="105.5"/>
