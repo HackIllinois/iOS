@@ -22,7 +22,6 @@ enum UserInputState: UInt8 {
 class LoginViewController: GenericInputView {
     /* Replace these floats with alpha values for elements */
     let loginElementAlpha: CGFloat = 0.9
-    var scrollViewIsScrolled = false
     
     /* Variables */
     var loginErrorMessage: String? = "You must enter a username and password before logging in."
@@ -48,9 +47,6 @@ class LoginViewController: GenericInputView {
     }
     
     var initialEmail: String?
-    
-    /* scrollView to make text input look much smoother */
-    @IBOutlet weak var scrollView: UIScrollView!
     
     /* Login View Elements */
     @IBOutlet weak var LoginButton: UIButton!
@@ -90,7 +86,7 @@ class LoginViewController: GenericInputView {
     
     /* Handle Login */
     func processUserData(name: String, email: String, school: String, major: String, role: String, barcode: String, auth: String, initTime: Date, expirationTime: Date, userID: NSNumber, diet: String) {
-    
+        
         DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async { [unowned self] in
             // Generate content asynchronously
             /* Generate barcode image */
@@ -128,14 +124,15 @@ class LoginViewController: GenericInputView {
                 ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.present(ac, animated: true, completion: nil)
             }
-        } else {
-            // Handle other unsupported errors
-            DispatchQueue.main.async {
-                let ac = UIAlertController(title: responseData["error"]["title"].string!, message: responseData["error"]["message"].string!, preferredStyle: .alert)
-                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self.present(ac, animated: true, completion: nil)
-            }
         }
+//      else {
+//            // Handle other unsupported errors
+//            DispatchQueue.main.async {
+//                let ac = UIAlertController(title: responseData["error"]["title"].string!, message: responseData["error"]["message"].string!, preferredStyle: .alert)
+//                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//                self.present(ac, animated: true, completion: nil)
+//            }
+//        }
         
         // Restore to original view
         DispatchQueue.main.async { [unowned self] in
@@ -158,14 +155,20 @@ class LoginViewController: GenericInputView {
     
     func processResponse(_ data: Data?, response: URLResponse?, error: NSError?) {
         var responseData = JSON(data: data!)
+        
         /* Check for any errors */
-        if !responseData["error"].isEmpty {
+        if (responseData["error"]).isEmpty {
             processError(responseData)
             return // Attemping to decode the jwt actually makes it crash
         }
+        print("reached here!!!!!!")
+        
+        
         
         /* Response from API */
         let auth: String = responseData["data"]["auth"].stringValue
+        print(responseData)
+        print("AUTH: \(auth)")
         let jwt: JWT = try! decode(jwt: auth)
         
         // Calls that are dynamic in this version of API
@@ -182,11 +185,13 @@ class LoginViewController: GenericInputView {
         print("Expiration Time: \(expTime)")
         
         // TODO: Parse API
+        
         let name = "Shotaro Ikeda"
         let school = "University of Illinois at Urbana-Champaign"
         let major = "Bachelor of Science Computer Science"
         let barcode = "1234567890"
         let diet = "No restrictions"
+        
         
         self.processUserData(name: name, email: email, school: school, major: major, role: role, barcode: barcode, auth: auth, initTime: initTime, expirationTime: expTime, userID: userID, diet: diet)
     }
@@ -194,7 +199,7 @@ class LoginViewController: GenericInputView {
     func login(username: String, password: String) {
         // Hide text
         LoginButton.setTitle("", for: UIControlState())
-
+        
         // Set the indicator to be the center of the button
         loginActivityIndicator.frame = CGRect(
             x: LoginButton.frame.width / 2 - LoginButton.frame.height / 2,
@@ -210,46 +215,59 @@ class LoginViewController: GenericInputView {
         PasswordTextField.isUserInteractionEnabled = false
         
         /* MARK: For api branch */
-        /*
-        // Send request to server
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
-            /* Remove all previous users */
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            
-            for user in (Helpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]) {
-                appDelegate.managedObjectContext.deleteObject(user)
-            }
-         
-            let payload: JSON = JSON(["email": username, "password": password])
-            HTTPHelpers.createPostRequest(subUrl: "v1/auth", jsonPayload: payload, completion: self.processResponse)
-        }
-        */
-        
-        /* Mark: Fake server response -- Remove an uncomment code above to run */
-        
-        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 1 * USEC_PER_SEC)) { [unowned self] in
+        DispatchQueue.global(qos: .userInitiated).async {
             /* Remove all previous users */
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
             for user in (CoreDataHelpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]) {
                 appDelegate.managedObjectContext.delete(user)
             }
-            /* Response from API */
-            let auth: String = "auth dummy data"
-            let userID: NSNumber = NSNumber(value: 1 as Int)
-            let role = "HACKER"
-            let email = "shotaro.ikeda@hackillinois.org"
-            let initTime : Date = Date()
-            let expTime: Date = Date(timeIntervalSinceNow: Double(5 * 60)) // Expires in 5 minutes for testing purposes
-            let diet = "No restrictions"
             
-            // TODO: Parse API
-            let name = "Shotaro Ikeda"
-            let school = "University of Illinois at Urbana-Champaign"
-            let major = "Bachelor of Science Computer Science"
-            let barcode = "1234567890"
-            self.processUserData(name: name, email: email, school: school, major: major, role: role, barcode: barcode, auth: auth, initTime: initTime, expirationTime: expTime, userID: userID, diet: diet)
+            let payload: JSON = JSON(["email": username, "password": password])
+            HTTPHelpers.createPostRequest(subUrl: "v1/auth", jsonPayload: payload, completion: self.processResponse)
+            
         }
+        /*
+         // Send request to server
+         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
+         /* Remove all previous users */
+         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+         
+         for user in (Helpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]) {
+         appDelegate.managedObjectContext.deleteObject(user)
+         }
+         
+         let payload: JSON = JSON(["email": username, "password": password])
+         HTTPHelpers.createPostRequest(subUrl: "v1/auth", jsonPayload: payload, completion: self.processResponse)
+         }
+         */
+        
+        /* Mark: Fake server response -- Remove an uncomment code above to run */
+        /*
+         DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 1 * USEC_PER_SEC)) { [unowned self] in
+         /* Remove all previous users */
+         let appDelegate = UIApplication.shared.delegate as! AppDelegate
+         
+         for user in (CoreDataHelpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]) {
+         appDelegate.managedObjectContext.delete(user)
+         }
+         /* Response from API */
+         let auth: String = "auth dummy data"
+         let userID: NSNumber = NSNumber(value: 1 as Int)
+         let role = "HACKER"
+         let email = "shotaro.ikeda@hackillinois.org"
+         let initTime : Date = Date()
+         let expTime: Date = Date(timeIntervalSinceNow: Double(5 * 60)) // Expires in 5 minutes for testing purposes
+         let diet = "No restrictions"
+         
+         // TODO: Parse API
+         let name = "Shotaro Ikeda"
+         let school = "University of Illinois at Urbana-Champaign"
+         let major = "Bachelor of Science Computer Science"
+         let barcode = "1234567890"
+         self.processUserData(name: name, email: email, school: school, major: major, role: role, barcode: barcode, auth: auth, initTime: initTime, expirationTime: expTime, userID: userID, diet: diet)
+         }
+         */
     }
     
     /* Override textfieldshould return */
@@ -273,7 +291,6 @@ class LoginViewController: GenericInputView {
         UIApplication.shared.statusBarStyle = .lightContent
         
         /* Set super class requirements */
-        scroll = scrollView
         textFields = [UsernameTextField, PasswordTextField]
         textViews = []
  

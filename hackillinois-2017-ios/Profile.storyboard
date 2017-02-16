@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ebv-0e-niW">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12106.1" systemVersion="16E144f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ebv-0e-niW">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12074.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -50,11 +50,11 @@
                         <viewControllerLayoutGuide type="bottom" id="qhb-oO-AY7"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="DpU-WN-IpQ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pK2-gJ-0Gw">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <color key="sectionIndexColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -62,30 +62,30 @@
                                 <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell1" rowHeight="273" id="SLm-OF-Yxn" customClass="ProfileViewCell" customModule="hackillinois_2017_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="273"/>
+                                        <rect key="frame" x="0.0" y="28" width="320" height="273"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SLm-OF-Yxn" id="6m5-L2-CZD">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="272"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="272.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="s53-wq-X82">
-                                                    <rect key="frame" x="81.5" y="13.5" width="211.5" height="245.5"/>
+                                                    <rect key="frame" x="67" y="7.5" width="186.5" height="257.5"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qrcode" translatesAutoresizingMaskIntoConstraints="NO" id="MWu-qB-r86">
-                                                            <rect key="frame" x="31" y="0.0" width="150" height="150"/>
+                                                            <rect key="frame" x="18.5" y="0.0" width="150" height="150"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="150" id="GLo-Q2-hsV"/>
                                                                 <constraint firstAttribute="height" constant="150" id="v4m-Pk-Eh5"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brandon Grotesque" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pAr-YJ-ehz">
-                                                            <rect key="frame" x="0.0" y="172" width="211.5" height="28"/>
+                                                            <rect key="frame" x="1" y="172" width="184.5" height="34.5"/>
                                                             <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="24"/>
                                                             <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="highlightedColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Dietary Restrictions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="YMR-nJ-XE3">
-                                                            <rect key="frame" x="3" y="222" width="206" height="23.5"/>
+                                                            <rect key="frame" x="0.0" y="228.5" width="186.5" height="29"/>
                                                             <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="20"/>
                                                             <color key="textColor" red="0.94117647059999998" green="0.51764705879999995" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -106,14 +106,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell2" rowHeight="82" id="Fss-Jx-kvL" customClass="ProfileViewCell" customModule="hackillinois_2017_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="301" width="375" height="82"/>
+                                        <rect key="frame" x="0.0" y="301" width="320" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Fss-Jx-kvL" id="SOa-dU-Hkx">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="81"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="81.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="52" translatesAutoresizingMaskIntoConstraints="NO" id="Pux-QO-xlA">
-                                                    <rect key="frame" x="60" y="15" width="254" height="50"/>
+                                                    <rect key="frame" x="33" y="15" width="254" height="50"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="github" translatesAutoresizingMaskIntoConstraints="NO" id="eB3-w7-jRc">
                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -153,14 +153,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell3" rowHeight="415" id="TrR-jZ-d7R" customClass="ProfileViewCell" customModule="hackillinois_2017_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="383" width="375" height="415"/>
+                                        <rect key="frame" x="0.0" y="383" width="320" height="415"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TrR-jZ-d7R" id="yQe-ae-Bkl">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="414"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="414.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="wT2-Vi-epf">
-                                                    <rect key="frame" x="12" y="6" width="351" height="307.5"/>
+                                                    <rect key="frame" x="12" y="6" width="296" height="307.5"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="U0X-Jj-7yR">
                                                             <rect key="frame" x="0.0" y="0.0" width="291.5" height="105.5"/>

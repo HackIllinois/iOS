@@ -11,7 +11,12 @@ import UIKit
 class GenericInputView: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     var textViews: [UITextView]!
     var textFields: [UITextField]!
-    var scroll: UIScrollView!
+    
+    @IBOutlet var topConstraint: NSLayoutConstraint?
+    @IBOutlet var bottomConstraint: NSLayoutConstraint?
+    @IBOutlet var logo: UIImageView?
+    
+    var originalConstraint: CGFloat!
     
     var outsideTapped: UITapGestureRecognizer!
     
@@ -37,6 +42,7 @@ class GenericInputView: UIViewController, UITextFieldDelegate, UITextViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         print("ViewDidLoad")
+        originalConstraint = bottomConstraint?.constant
         
         /* Configure each textview */
         for textView in textViews {
@@ -84,35 +90,48 @@ class GenericInputView: UIViewController, UITextFieldDelegate, UITextViewDelegat
      * Keyboard Handlers
      */
     func keyboardWillAppear(_ notification: Notification) {
-        scroll.isScrollEnabled = true
         
         print("KeyboardWillAppear")
         
-        var keyboardFrame:CGRect = ((notification as NSNotification).userInfo?[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+        guard let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double,
+            let curveValue = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? Int,
+            let curve = UIViewAnimationCurve(rawValue: curveValue),
+            let keyboardFrameValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue else { return }
         
-        // Animate the keyboard so it looks a lot less awkward...
-        UIView.animate(withDuration: 3.0, animations: {
-            self.scroll.contentInset.bottom = keyboardFrame.size.height + 175 // This needs to be changed to not be a hardcoded value, and should change based on which text field is selected
-        })
-//        UIView.animate(withDuration: ((notification as NSNotification).userInfo![UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue, animations: {
-//            self.scroll.contentInset.bottom = keyboardFrame.size.height + 175
-//        })
+        let keyboardFrame = keyboardFrameValue.cgRectValue
+        
+        view.layoutIfNeeded()
+        bottomConstraint?.constant = keyboardFrame.height + 25
+        logo?.alpha = 0
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(duration)
+        UIView.setAnimationCurve(curve)
+        
+        view.layoutIfNeeded()
+
+        UIView.commitAnimations()
     }
     
     func keyboardWillDisappear(_ notification: Notification) {
         print("KeyboardWillDisappear")
-        // Only remove inset when keyboard is shown
-        scroll.isScrollEnabled = false
-        // Animate the keyboard so it looks a lot less awkward
-        // It seems like this line isn't required for the animation to take place for both
-        UIView.animate(withDuration: 3.0, animations: {
-            self.scroll.contentInset.bottom = -175
-        })
-//        UIView.animate(withDuration: ((notification as NSNotification).userInfo![UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue, animations: {
-//            self.scroll.contentInset = UIEdgeInsets.zero
-//        })
-    }
+        guard let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double,
+            let curveValue = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? Int,
+            let curve = UIViewAnimationCurve(rawValue: curveValue) else { return }
+        
+        view.layoutIfNeeded()
+        bottomConstraint?.constant = originalConstraint
+        logo?.alpha = 1
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(duration)
+        UIView.setAnimationCurve(curve)
+        
+        view.layoutIfNeeded()
+
+        
+        UIView.commitAnimations()
+    
+        
+        }
     
     // Mark: UITextFieldDelegate
     /* Configure behavior of return key. If you are adding more text fields, set the tags in order of how the user should be inputting them. For this login, username has a tag value of 0 and password has a tag value of 1 */
