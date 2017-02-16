@@ -174,9 +174,13 @@ class LoginViewController: GenericInputView {
         print("AUTH: \(auth)")
         let jwt: JWT = try! decode(jwt: auth)
         
+        
+        
         // Calls that are dynamic in this version of API
+        print("JWT: \(jwt)")
+        
         let userID: NSNumber = NSNumber(value: jwt.body["sub"]!.integerValue)
-        let role = String(describing: jwt.body["role"]!)
+        let role = String(describing: jwt.body["roles"]!)
         let email = String(describing: jwt.body["email"]!)
         let initTime : Date = jwt.issuedAt! as Date
         let expTime: Date = jwt.expiresAt! as Date

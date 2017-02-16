@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController = loginView
         } else {
             // Login not necessary
-            self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+            self.window?.rootViewController = UIStoryboard(name: "Event", bundle: nil).instantiateInitialViewController()
         }
 
         
