@@ -125,14 +125,14 @@ class LoginViewController: GenericInputView {
                 self.present(ac, animated: true, completion: nil)
             }
         }
-//      else {
-//            // Handle other unsupported errors
-//            DispatchQueue.main.async {
-//                let ac = UIAlertController(title: responseData["error"]["title"].string!, message: responseData["error"]["message"].string!, preferredStyle: .alert)
-//                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//                self.present(ac, animated: true, completion: nil)
-//            }
-//        }
+      else {
+            // Handle other unsupported errors
+            DispatchQueue.main.async {
+                let ac = UIAlertController(title: responseData["error"]["title"].string!, message: responseData["error"]["message"].string!, preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(ac, animated: true, completion: nil)
+            }
+        }
         
         // Restore to original view
         DispatchQueue.main.async { [unowned self] in

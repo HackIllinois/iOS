@@ -17,7 +17,6 @@ class GenericNavigationController: UINavigationController {
         navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.hiaPaleGrey]
         navigationBar.alpha = 1
         navigationBar.isTranslucent = false
-        
         self.navigationController?.navigationBar.barStyle = UIBarStyle.default;
         
     }

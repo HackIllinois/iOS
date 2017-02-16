@@ -65,28 +65,18 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     // numberOfRowsInSection
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("in numberOfRowsInSection ... returning 3")
         return 3
     }
     
     // heightForRowAtIndexPath
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        print("in numberOfRowsInSection ... returning 3")
-        
         let row = indexPath.row
         if (row == 0) {
-            
             return 273
-            
         } else if(row == 1) {
-            
             return 82
-            
         } else {
-            
             return 415
-            
         }
     }
     
@@ -109,7 +99,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             
             
         } else {
-            
             cell = tableView.dequeueReusableCell(withIdentifier: "cell3", for:  indexPath as IndexPath) as! ProfileViewCell
             
             cell.schoolLabel.text = user.school
@@ -126,10 +115,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 //            cell.yearLabel.layer.borderWidth = 2.0
 //            cell.yearLabel.layer.cornerRadius = 5
 //            cell.yearLabel.layer.borderColor = UIColor(red: 78/255, green: 96/255, blue: 148/255, alpha: 1.0).cgColor
-            
-            
- 
-            
         }
         
         cell.selectionStyle = .none
