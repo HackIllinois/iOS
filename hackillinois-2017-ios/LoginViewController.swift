@@ -143,33 +143,27 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func getUserInfoSuccess(json: JSON) {
-        print(json)
         let data = json["data"]
-        let name = "\(data["firstName"]) \(data["lastName"])"
-        let email = usernameTextField.text!
-        let school = String(describing: data["school"])
-        let major = String(describing: data["major"])
-        let barcode = "1234567890" // CHANGE THIS
+        let name = data["firstName"].stringValue + data["lastName"].stringValue
+        let email = usernameTextField.text ?? ""
+        let school = data["school"].stringValue
+        let major = data["major"].stringValue
+        let barcode = "1234567890" // TODO: CHANGE THIS
         let role = "ROLE"
-        let userID = data["userId"] as! NSNumber
-        var diet = String(describing: data["diet"])
+        let userID = data["userId"].intValue as NSNumber
+        var diet = data["diet"].stringValue
         if diet == "NONE" {
             diet = "No dietary restrictions"
         }
-        let auth = APIManager.shared.auth_key
-//        let initTime = jwt.issuedAt! as Date
-//        let expTime = jwt.expiresAt! as Date
-        let initTime: Date = Date()
-        let expirationTime: Date = Date()
-        processUserData(name: name, email: email, school: school, major: major, role: role, barcode: barcode, auth: auth!, initTime: initTime, expirationTime: expirationTime, userID: userID, diet: diet)
-        
+        let initTime = Date()
+        let expirationTime = Date()
+        processUserData(name: name, email: email, school: school, major: major, role: role, barcode: barcode, auth: APIManager.shared.auth_key!, initTime: initTime, expirationTime: expirationTime, userID: userID, diet: diet)
     }
     
     func getUserInfoFailure(error: Error) {
         presentActiveFormUI()
         presentErrorLabel(text: "Unknown Error")
     }
-
 
     @IBAction func ibLocalValidateLoginFields() {
         localValidateLoginFields()
@@ -247,7 +241,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 
     // MARK: - junk
-    /* Handle Login */
     func processUserData(name: String, email: String, school: String, major: String, role: String, barcode: String, auth: String, initTime: Date, expirationTime: Date, userID: NSNumber, diet: String) {
         
         DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async { [unowned self] in
@@ -277,87 +270,5 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 self.present(mainViewController!, animated: true, completion: nil)
             }
         }
-    }
-    
-    func processError(_ responseData: JSON) {
-        // Handle NotFoundError
-        if responseData["error"]["type"].stringValue == "NotFoundError" {
-            DispatchQueue.main.async {
-                let ac = UIAlertController(title: "Could Not Find User", message: "A user with the specified email could not be found. Please try again", preferredStyle: .alert)
-                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self.present(ac, animated: true, completion: nil)
-            }
-        }
-      else {
-            // Handle other unsupported errors
-            DispatchQueue.main.async {
-                let ac = UIAlertController(title: responseData["error"]["title"].string!, message: responseData["error"]["message"].string!, preferredStyle: .alert)
-                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self.present(ac, animated: true, completion: nil)
-            }
-        }
-        
-        // Restore to original view
-        DispatchQueue.main.async { [unowned self] in
-            /* Stay on current login view if not sucessful */
-            
-            // Re-enable user interaction
-            self.loginButton.isUserInteractionEnabled = true
-            self.usernameTextField.isUserInteractionEnabled = true
-            self.passwordTextField.isUserInteractionEnabled = true
-            // Revert Login button title
-            self.loginButton.setTitle("Login", for: UIControlState())
-            self.loginActivityIndicator.stopAnimating()
-            self.loginActivityIndicator.removeFromSuperview()
-        }
-    }
-    
-    
-    func processResponse(_ data: Data?, response: URLResponse?, error: NSError?) {
-        var responseData = JSON(data: data!)
-        
-        print(responseData)
-        /* Check for any errors */
-        if (responseData["error"]).isEmpty {
-            processError(responseData)
-            return // Attemping to decode the jwt actually makes it crash
-        }
-        print("reached here!!!!!!")
-        
-        
-        
-        /* Response from API */
-        let auth: String = responseData["data"]["auth"].stringValue
-        print(responseData)
-        print("AUTH: \(auth)")
-        let jwt: JWT = try! decode(jwt: auth)
-        
-        
-        
-        // Calls that are dynamic in this version of API
-        print("JWT: \(jwt)")
-        
-        let userID: NSNumber = NSNumber(value: jwt.body["sub"]!.integerValue)
-        let role = String(describing: jwt.body["roles"]!)
-        let email = String(describing: jwt.body["email"]!)
-        let initTime = jwt.issuedAt! as Date
-        let expTime = jwt.expiresAt! as Date
-        
-        print("Role: \(role)")
-        print("UserID: \(userID)")
-        print("Registration Email: \(email)")
-        print("Initialization Time: \(initTime)")
-        print("Expiration Time: \(expTime)")
-        
-        // TODO: Parse API
-        
-        let name = "Shotaro Ikeda"
-        let school = "University of Illinois at Urbana-Champaign"
-        let major = "Bachelor of Science Computer Science"
-        let barcode = "1234567890"
-        let diet = "No restrictions"
-        
-        
-        self.processUserData(name: name, email: email, school: school, major: major, role: role, barcode: barcode, auth: auth, initTime: initTime, expirationTime: expTime, userID: userID, diet: diet)
     }
 }
