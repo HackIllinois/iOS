@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12106.1" systemVersion="16E154a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_0" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E154a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12074.1"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <array key="Brandon_med.otf">
             <string>BrandonGrotesque-Medium</string>
+        </array>
+        <array key="Brandon_reg.otf">
+            <string>BrandonGrotesque-Regular</string>
         </array>
     </customFonts>
     <scenes>
@@ -23,47 +25,27 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="DRB-wy-DbD">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="pai-Sm-hyQ" appends="YES" id="XHH-hD-86l"/>
+                                </connections>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="odB-g0-H8D">
-                                <rect key="frame" x="0.0" y="40" width="320" height="508"/>
+                                <rect key="frame" x="0.0" y="103" width="375" height="461"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXB-So-CHs">
-                                        <rect key="frame" x="35" y="391" width="250" height="46"/>
-                                        <color key="backgroundColor" red="0.71764705882352942" green="0.74509803921568629" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Hack Illinois Logo" translatesAutoresizingMaskIntoConstraints="NO" id="MYV-TP-8Sd">
+                                        <rect key="frame" x="104" y="16" width="168" height="170"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="46" id="F8b-S1-j0a"/>
-                                            <constraint firstAttribute="width" constant="250" id="gbN-5i-pvv"/>
-                                            <constraint firstAttribute="width" constant="250" id="kgE-wS-bvm"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="24"/>
-                                        <state key="normal" title="Log in">
-                                            <color key="titleColor" red="0.078431372549019607" green="0.14117647058823529" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="edl-yL-AN7"/>
-                                        </connections>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Hack Illinois Logo" translatesAutoresizingMaskIntoConstraints="NO" id="MYV-TP-8Sd">
-                                        <rect key="frame" x="73.5" y="0.0" width="173" height="174"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="MYV-TP-8Sd" secondAttribute="height" multiplier="168:169" id="BcX-kR-Kp8"/>
+                                            <constraint firstAttribute="height" constant="170" id="x39-Lc-ki6"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="wml-Eo-5NI">
-                                        <rect key="frame" x="35" y="315" width="250" height="46"/>
-                                        <color key="backgroundColor" red="0.30588235289999999" green="0.37647058820000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="250" id="kMY-Pa-B8R"/>
-                                            <constraint firstAttribute="height" constant="46" id="xjz-r5-dAx"/>
-                                        </constraints>
-                                        <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="24"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" keyboardAppearance="alert" returnKeyType="go" secureTextEntry="YES"/>
-                                    </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="mhz-Y5-wCk">
-                                        <rect key="frame" x="35" y="249" width="250" height="46"/>
+                                        <rect key="frame" x="63" y="252" width="250" height="46"/>
                                         <color key="backgroundColor" red="0.30588235294117649" green="0.37647058823529411" blue="0.58039215686274503" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="46" id="0Xo-We-EY7"/>
@@ -72,63 +54,116 @@
                                         <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="24"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" keyboardAppearance="alert" returnKeyType="next"/>
+                                        <connections>
+                                            <action selector="ibLocalValidateLoginFields" destination="BYZ-38-t0r" eventType="editingChanged" id="xnq-vW-rLr"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="4EB-90-rXG"/>
+                                        </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0t-wK-Tgb">
-                                        <rect key="frame" x="97.5" y="462" width="125" height="46"/>
-                                        <color key="backgroundColor" red="0.71764705880000002" green="0.74509803919999995" blue="0.86274509799999999" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="wml-Eo-5NI">
+                                        <rect key="frame" x="63" y="323" width="250" height="46"/>
+                                        <color key="backgroundColor" red="0.30588235289999999" green="0.37647058820000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="46" id="CVX-Cm-FU3"/>
+                                            <constraint firstAttribute="width" constant="250" id="kMY-Pa-B8R"/>
+                                            <constraint firstAttribute="height" constant="46" id="xjz-r5-dAx"/>
+                                        </constraints>
+                                        <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="24"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" keyboardAppearance="alert" returnKeyType="go" secureTextEntry="YES"/>
+                                        <connections>
+                                            <action selector="ibLocalValidateLoginFields" destination="BYZ-38-t0r" eventType="editingChanged" id="KYE-Jm-fej"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="qlq-lR-xk2"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXB-So-CHs">
+                                        <rect key="frame" x="63" y="399" width="250" height="46"/>
+                                        <color key="backgroundColor" red="0.71764705882352942" green="0.74509803921568629" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="46" id="F8b-S1-j0a"/>
+                                            <constraint firstAttribute="width" constant="250" id="kgE-wS-bvm"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="BrandonGrotesque-Medium" family="Brandon Grotesque" pointSize="24"/>
-                                        <state key="normal" title="Join as Guest">
-                                            <color key="titleColor" red="0.96078431372549022" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Log in">
+                                            <color key="titleColor" red="0.078431372549019607" green="0.14117647058823529" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XZ1-aR-ERM"/>
+                                            <action selector="attemptLogin" destination="BYZ-38-t0r" eventType="touchUpInside" id="yrm-jy-17K"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incorrect E-mail or Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w66-nJ-78f">
+                                        <rect key="frame" x="75" y="208" width="225" height="29"/>
+                                        <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="20"/>
+                                        <color key="textColor" red="0.91764705882352937" green="0.20000000000000001" blue="0.41960784313725491" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="d0t-wK-Tgb" secondAttribute="bottom" id="0jc-IT-POz"/>
-                                    <constraint firstItem="MYV-TP-8Sd" firstAttribute="top" secondItem="odB-g0-H8D" secondAttribute="top" id="9Zg-Gl-GXV"/>
-                                    <constraint firstItem="d0t-wK-Tgb" firstAttribute="top" secondItem="xXB-So-CHs" secondAttribute="bottom" constant="25" id="9se-g1-zqp"/>
-                                    <constraint firstItem="mhz-Y5-wCk" firstAttribute="centerX" secondItem="odB-g0-H8D" secondAttribute="centerX" id="G9h-pB-AoH"/>
-                                    <constraint firstItem="MYV-TP-8Sd" firstAttribute="centerX" secondItem="odB-g0-H8D" secondAttribute="centerX" id="Ibf-vA-dHR"/>
-                                    <constraint firstItem="xXB-So-CHs" firstAttribute="centerX" secondItem="odB-g0-H8D" secondAttribute="centerX" id="LxR-Bu-JJu"/>
-                                    <constraint firstItem="xXB-So-CHs" firstAttribute="top" secondItem="wml-Eo-5NI" secondAttribute="bottom" constant="30" id="ahm-Ke-8WU"/>
-                                    <constraint firstItem="d0t-wK-Tgb" firstAttribute="centerX" secondItem="odB-g0-H8D" secondAttribute="centerX" id="bSZ-Dn-98d"/>
-                                    <constraint firstItem="wml-Eo-5NI" firstAttribute="centerX" secondItem="odB-g0-H8D" secondAttribute="centerX" id="fNl-dT-iQb"/>
-                                    <constraint firstItem="mhz-Y5-wCk" firstAttribute="top" secondItem="MYV-TP-8Sd" secondAttribute="bottom" constant="75" id="jfO-YA-alW"/>
-                                    <constraint firstItem="wml-Eo-5NI" firstAttribute="top" secondItem="mhz-Y5-wCk" secondAttribute="bottom" constant="20" id="rqs-gl-3nX"/>
-                                    <constraint firstAttribute="height" constant="508" id="sSF-qD-8cG"/>
-                                    <constraint firstAttribute="width" constant="320" id="yJH-Gi-G9z"/>
+                                    <constraint firstItem="w66-nJ-78f" firstAttribute="top" secondItem="MYV-TP-8Sd" secondAttribute="bottom" constant="21.5" id="0vk-Qy-k3o"/>
+                                    <constraint firstAttribute="bottom" secondItem="xXB-So-CHs" secondAttribute="bottom" constant="16" id="FwN-C1-r8Z"/>
+                                    <constraint firstItem="MYV-TP-8Sd" firstAttribute="top" secondItem="odB-g0-H8D" secondAttribute="top" constant="16" id="IJo-6f-ycb"/>
+                                    <constraint firstItem="MYV-TP-8Sd" firstAttribute="centerX" secondItem="odB-g0-H8D" secondAttribute="centerX" id="K2O-oF-LBy"/>
+                                    <constraint firstItem="mhz-Y5-wCk" firstAttribute="centerX" secondItem="odB-g0-H8D" secondAttribute="centerX" id="PCc-UJ-Qu0"/>
+                                    <constraint firstItem="wml-Eo-5NI" firstAttribute="centerX" secondItem="odB-g0-H8D" secondAttribute="centerX" id="V75-rN-7Xm"/>
+                                    <constraint firstItem="xXB-So-CHs" firstAttribute="centerX" secondItem="odB-g0-H8D" secondAttribute="centerX" id="d0y-q9-EmW"/>
+                                    <constraint firstItem="w66-nJ-78f" firstAttribute="centerX" secondItem="odB-g0-H8D" secondAttribute="centerX" id="jCk-GN-3hn"/>
+                                    <constraint firstItem="wml-Eo-5NI" firstAttribute="top" secondItem="mhz-Y5-wCk" secondAttribute="bottom" constant="25" id="rTD-6w-pki"/>
+                                    <constraint firstItem="xXB-So-CHs" firstAttribute="top" secondItem="wml-Eo-5NI" secondAttribute="bottom" constant="30" id="vFs-sd-m4D"/>
+                                    <constraint firstItem="mhz-Y5-wCk" firstAttribute="top" secondItem="w66-nJ-78f" secondAttribute="bottom" constant="15" id="wcq-bQ-DXR"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="BVL-S3-tbD" appends="YES" id="cJp-a3-1rF"/>
+                                </connections>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="odB-g0-H8D" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="GnR-UJ-kdU"/>
-                            <constraint firstAttribute="trailing" secondItem="odB-g0-H8D" secondAttribute="trailing" id="LEU-0y-mGb"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="odB-g0-H8D" secondAttribute="bottom" constant="20" id="RiB-Jh-pyU"/>
-                            <constraint firstItem="odB-g0-H8D" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="wyz-2R-l8b"/>
+                            <constraint firstItem="DRB-wy-DbD" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="3VP-tI-el5"/>
+                            <constraint firstItem="DRB-wy-DbD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="3VT-jF-W5c"/>
+                            <constraint firstAttribute="trailing" secondItem="DRB-wy-DbD" secondAttribute="trailing" id="6qA-JB-TZY"/>
+                            <constraint firstAttribute="bottom" secondItem="odB-g0-H8D" secondAttribute="bottom" id="MGd-g5-dOA"/>
+                            <constraint firstAttribute="trailing" secondItem="odB-g0-H8D" secondAttribute="trailing" id="U6y-SE-GW8"/>
+                            <constraint firstAttribute="bottom" secondItem="DRB-wy-DbD" secondAttribute="bottom" id="gEt-xO-Ppg"/>
+                            <constraint firstItem="odB-g0-H8D" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="gxY-No-5Uz"/>
+                            <constraint firstItem="odB-g0-H8D" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="jn7-lR-uRR"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="MGd-g5-dOA"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
-                        <outlet property="LoginButton" destination="xXB-So-CHs" id="Z0z-NS-gqU"/>
-                        <outlet property="PasswordTextField" destination="wml-Eo-5NI" id="2rp-hM-zNq"/>
-                        <outlet property="UsernameTextField" destination="mhz-Y5-wCk" id="c1Q-lr-PFI"/>
-                        <outlet property="bottomConstraint" destination="RiB-Jh-pyU" id="bLP-Ys-foe"/>
+                        <outlet property="containerBottomConstraint" destination="MGd-g5-dOA" id="SBV-n9-k3O"/>
+                        <outlet property="containerCenterYConstraint" destination="jn7-lR-uRR" id="wlZ-0U-piJ"/>
+                        <outlet property="errorLabel" destination="w66-nJ-78f" id="xDz-Va-xDM"/>
+                        <outlet property="loginButton" destination="xXB-So-CHs" id="m71-6Q-Uov"/>
                         <outlet property="logo" destination="MYV-TP-8Sd" id="iFr-Wj-ihz"/>
-                        <outlet property="topConstraint" destination="wyz-2R-l8b" id="XKs-L7-mcS"/>
+                        <outlet property="passwordTextField" destination="wml-Eo-5NI" id="WpZ-K9-eb3"/>
+                        <outlet property="usernameTextField" destination="mhz-Y5-wCk" id="NT2-Cu-ae3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="pai-Sm-hyQ">
+                    <connections>
+                        <action selector="dismissKeyboard" destination="BYZ-38-t0r" id="1fw-s2-AeK"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="BVL-S3-tbD">
+                    <connections>
+                        <action selector="dismissKeyboard" destination="BYZ-38-t0r" id="BGS-yc-zVf"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="405" y="348.59154929577466"/>
+            <point key="canvasLocation" x="404" y="348.57571214392806"/>
         </scene>
     </scenes>
     <resources>
         <image name="Hack Illinois Logo" width="168" height="170"/>
+        <image name="background" width="375" height="667"/>
     </resources>
 </document>

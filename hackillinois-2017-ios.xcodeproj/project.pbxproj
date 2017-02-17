@@ -81,6 +81,7 @@
 		65609DF11E5684F8001DBB86 /* indoor_cf_2_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DF01E5684F8001DBB86 /* indoor_cf_2_1.png */; };
 		65609DF31E56850F001DBB86 /* indoor_cf_3_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DF21E56850F001DBB86 /* indoor_cf_3_1.png */; };
 		65609DF61E568533001DBB86 /* indoor_5_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DF51E568533001DBB86 /* indoor_5_1.png */; };
+		95F8C14C1E56ACD80012AC03 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F8C14B1E56ACD80012AC03 /* APIManager.swift */; };
 		A50876741E1C79130095F399 /* BottomMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50876731E1C79130095F399 /* BottomMapViewController.swift */; };
 		A50876781E1C921C0095F399 /* BottomMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50876771E1C921C0095F399 /* BottomMapViewController.xib */; };
 		A54825B11E160C6C00E35C71 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54825B01E160C6C00E35C71 /* ScheduleViewController.swift */; };
@@ -128,7 +129,6 @@
 		E2BCA5811CF3B19E006AAA8B /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA57B1CF3B19E006AAA8B /* Location.swift */; };
 		E2BD82B51D09EA530009DB07 /* GenericMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BD82B41D09EA530009DB07 /* GenericMapViewController.swift */; };
 		E2BD82B71D0AFFB90009DB07 /* UIImage+imageWithColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BD82B61D0AFFB90009DB07 /* UIImage+imageWithColor.swift */; };
-		E2BD82B91D0B09D60009DB07 /* LoginConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BD82B81D0B09D60009DB07 /* LoginConstants.swift */; };
 		E2D483331D00D3B100859A67 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D483321D00D3B100859A67 /* MapViewController.swift */; };
 		E2D4F0DD1D06AB7C00646BF8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2D4F0DC1D06AB7C00646BF8 /* MapKit.framework */; };
 		E2D4F0DF1D06AD3F00646BF8 /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4F0DE1D06AD3F00646BF8 /* Building.swift */; };
@@ -235,6 +235,7 @@
 		65609DF21E56850F001DBB86 /* indoor_cf_3_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_cf_3_1.png; sourceTree = "<group>"; };
 		65609DF51E568533001DBB86 /* indoor_5_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_5_1.png; sourceTree = "<group>"; };
 		87EDFBB5348C18385995BBC2 /* Pods-hackillinois-2017-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosTests/Pods-hackillinois-2017-iosTests.release.xcconfig"; sourceTree = "<group>"; };
+		95F8C14B1E56ACD80012AC03 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		A50876731E1C79130095F399 /* BottomMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomMapViewController.swift; sourceTree = "<group>"; };
 		A50876771E1C921C0095F399 /* BottomMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomMapViewController.xib; sourceTree = "<group>"; };
 		A54825B01E160C6C00E35C71 /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
@@ -286,7 +287,6 @@
 		E2BCA57B1CF3B19E006AAA8B /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		E2BD82B41D09EA530009DB07 /* GenericMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericMapViewController.swift; sourceTree = "<group>"; };
 		E2BD82B61D0AFFB90009DB07 /* UIImage+imageWithColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+imageWithColor.swift"; sourceTree = "<group>"; };
-		E2BD82B81D0B09D60009DB07 /* LoginConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginConstants.swift; sourceTree = "<group>"; };
 		E2D483321D00D3B100859A67 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		E2D4F0DC1D06AB7C00646BF8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E2D4F0DE1D06AD3F00646BF8 /* Building.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
@@ -597,7 +597,6 @@
 			isa = PBXGroup;
 			children = (
 				E20465CE1CF1FAF50054654E /* Login.storyboard */,
-				E2BD82B81D0B09D60009DB07 /* LoginConstants.swift */,
 				E20465CC1CF1FAF50054654E /* LoginViewController.swift */,
 			);
 			name = Login;
@@ -645,6 +644,7 @@
 				E25377431CF8C485003795E7 /* CoreDataHelpers.swift */,
 				390A8DF61E3C6A6300018855 /* RectangleHelper.swift */,
 				E224BFF31D19CCA60098AA8D /* HTTPHelpers.swift */,
+				95F8C14B1E56ACD80012AC03 /* APIManager.swift */,
 			);
 			name = HelperClasses;
 			sourceTree = "<group>";
@@ -1166,9 +1166,9 @@
 				3947F9561E4C473000FF4AF4 /* ScheduleTableViewController.swift in Sources */,
 				E277DD691CF4A79100D7E018 /* FeedDetailViewController.swift in Sources */,
 				E26F44F21D0EF2C100FB4A9F /* ProfileViewController.swift in Sources */,
+				95F8C14C1E56ACD80012AC03 /* APIManager.swift in Sources */,
 				39666E4B1E52924500A507DF /* threeLocationsCell.swift in Sources */,
 				0A3A1B2F1E4E45EB00EA2100 /* ProfileViewCell.swift in Sources */,
-				E2BD82B91D0B09D60009DB07 /* LoginConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

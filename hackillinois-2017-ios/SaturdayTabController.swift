@@ -60,7 +60,7 @@ class SaturdayTabController: GenericTabController {
         
         print("Updating table...")
         if let feedArr = try? appDelegate.managedObjectContext.fetch(fetchRequest) {
-            var items = feedArr.map({ (feed) -> DayItem in
+            let items = feedArr.map({ (feed) -> DayItem in
                 DayItem(feed: feed)
             }).filter({ (item) -> Bool in
                 item.dayOfWeek == 7 // saturday

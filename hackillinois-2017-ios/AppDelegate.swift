@@ -81,59 +81,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UIApplication.shared.statusBarStyle = .lightContent
         
-        // Parse API Keys from keys.plist file
-        var keys: NSDictionary?
-        if let path = Bundle.main.path(forResource: "keys", ofType: "plist") {
-            keys = NSDictionary(contentsOfFile: path)
-        } else {
-            print("keys.plist file could not be found. Please see README.md for information about keys.plist")
-        }
-
-        if let dict = keys {
-            // Read keys here
-            print(dict["HACKILLINOIS_API_URL"]!)
-            HACKILLINOIS_API_URL = dict["HACKILLINOIS_API_URL"]! as! String
-        }
-
-        /* Find out which part of the application to go to */
-        let user = CoreDataHelpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]
-        if !user.isEmpty {
-            print("User set to expire: \(user[0].expireTime)")
-            print("Current: \(NSDate())")
-        }
-
-        if user.isEmpty {
-            print("First launch, no user found")
-            self.window?.rootViewController = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()
-        } else if user[0].expireTime.compare(Date()) == .orderedAscending {
-            print("User already logged in before")
-            // TODO: Check if this method crashes
-            let loginView: LoginViewController = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController() as! LoginViewController
-            loginView.initialEmail = user[0].email // Initialize it with user's email
-            self.window?.rootViewController = loginView
-        } else {
-            // Login not necessary
-            self.window?.rootViewController = UIStoryboard(name: "Event", bundle: nil).instantiateInitialViewController()
-        }
-
-        mTimer = Timer.scheduledTimer(timeInterval: 10, target:self, selector: #selector(self.iterateFunctions), userInfo: nil, repeats: true)
-        
-        OneSignal.initWithLaunchOptions(launchOptions, appId: "0cc1d341-2731-446b-a667-1d8fc1a06d88", handleNotificationReceived: { (notification) in
-            print("Received Notification - \(notification?.payload.notificationID)")
-        }, handleNotificationAction: { (result) in
-            let payload: OSNotificationPayload? = result?.notification.payload
-            
-            var fullMessage: String? = payload?.body
-            if payload?.additionalData != nil {
-                var additionalData: [AnyHashable: Any]? = payload?.additionalData
-                if additionalData!["actionSelected"] != nil {
-                    fullMessage = fullMessage! + "\nPressed ButtonId:\(additionalData!["actionSelected"])"
-                }
-            }
-            
-            print(fullMessage)
-        }, settings: [kOSSettingsKeyAutoPrompt: true, kOSSettingsKeyInFocusDisplayOption: false])
-        
+//        // Parse API Keys from keys.plist file
+//        var keys: NSDictionary?
+//        if let path = Bundle.main.path(forResource: "keys", ofType: "plist") {
+//            keys = NSDictionary(contentsOfFile: path)
+//        } else {
+//            print("keys.plist file could not be found. Please see README.md for information about keys.plist")
+//        }
+//
+//        if let dict = keys {
+//            // Read keys here
+//            print(dict["HACKILLINOIS_API_URL"]!)
+//            HACKILLINOIS_API_URL = dict["HACKILLINOIS_API_URL"]! as! String
+//        }
+//
+//        /* Find out which part of the application to go to */
+//        let user = CoreDataHelpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]
+//        if !user.isEmpty {
+//            print("User set to expire: \(user[0].expireTime)")
+//            print("Current: \(NSDate())")
+//        }
+//
+//        if user.isEmpty {
+//            print("First launch, no user found")
+//            self.window?.rootViewController = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()
+//        } else if user[0].expireTime.compare(Date()) == .orderedAscending {
+//            print("User already logged in before")
+//            // TODO: Check if this method crashes
+//            let loginView: LoginViewController = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController() as! LoginViewController
+//            loginView.initialEmail = user[0].email // Initialize it with user's email
+//            self.window?.rootViewController = loginView
+//        } else {
+//            // Login not necessary
+//            self.window?.rootViewController = UIStoryboard(name: "Event", bundle: nil).instantiateInitialViewController()
+//        }
+//
+//        mTimer = Timer.scheduledTimer(timeInterval: 10, target:self, selector: #selector(self.iterateFunctions), userInfo: nil, repeats: true)
+//        
+//        OneSignal.initWithLaunchOptions(launchOptions, appId: "0cc1d341-2731-446b-a667-1d8fc1a06d88", handleNotificationReceived: { (notification) in
+//            print("Received Notification - \(notification?.payload.notificationID)")
+//        }, handleNotificationAction: { (result) in
+//            let payload: OSNotificationPayload? = result?.notification.payload
+//            
+//            var fullMessage: String? = payload?.body
+//            if payload?.additionalData != nil {
+//                var additionalData: [AnyHashable: Any]? = payload?.additionalData
+//                if additionalData!["actionSelected"] != nil {
+//                    fullMessage = fullMessage! + "\nPressed ButtonId:\(additionalData!["actionSelected"])"
+//                }
+//            }
+//            
+//            print(fullMessage ?? "")
+//        }, settings: [kOSSettingsKeyAutoPrompt: true, kOSSettingsKeyInFocusDisplayOption: false])
+//        
         return true
     }
     
