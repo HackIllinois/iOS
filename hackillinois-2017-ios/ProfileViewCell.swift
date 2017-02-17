@@ -10,6 +10,7 @@ import UIKit
 
 class ProfileViewCell: UITableViewCell {
 
+    @IBOutlet weak var qrCodeImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var schoolLabel: UILabel!
     @IBOutlet weak var majorLabel: UILabel!

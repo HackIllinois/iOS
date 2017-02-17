@@ -64,6 +64,21 @@ class DayItem: NSObject {
                 DayItemLocation(id: Int(location.id) + 1, name: location.shortName)
             )
         }
+        
+        // parse event name
+        if self.name.range(of: "kenny gym", options: .caseInsensitive) != nil {
+            self.imageFileName = "indoor_5_1.png"
+        } else if self.name.range(of: "career fair", options: .caseInsensitive) != nil {
+            for location in self.locations {
+                if location.location_name.range(of: "Siebel", options: .caseInsensitive) != nil {
+                    self.imageFileName = "indoor_cf_2_1.png"
+                } else if location.location_name.range(of: "ECEB", options: .caseInsensitive) != nil ||
+                    location.location_name.range(of: "Electrical and Computer Engineering Building", options: .caseInsensitive) != nil ||
+                    location.location_name.range(of: "ECE Building", options: .caseInsensitive) != nil {
+                    self.imageFileName = "indoor_cf_3_1.png"
+                }
+            }
+        }
     }
     
     func setImage(title: String, url: String) {

@@ -15,50 +15,13 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var tableView: UITableView!
     
     
-//    @IBOutlet weak var nameLabel: UILabel!
-//    @IBOutlet weak var schoolLabel: UILabel!
-//    @IBOutlet weak var majorLabel: UILabel!
-//    @IBOutlet weak var dietLabel: UILabel!
-//    
-//    @IBOutlet weak var button1: UIImageView!
-//    @IBOutlet weak var button2: UIImageView!
-//    @IBOutlet weak var button3: UIImageView!
-//    @IBOutlet weak var button4: UIImageView!
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        UIApplication.shared.statusBarStyle = .lightContent
-        
-//        nameLabel.text = user.name
-//        schoolLabel.text = user.school
-//        majorLabel.text = user.major
-//        dietLabel.text = user.diet
-        
-        let gradient = CAGradientLayer()
-        let colorBottom = UIColor(red: 20/255, green: 36/255, blue: 66/255, alpha: 1.0)
-        let colorTop = UIColor(red: 28/255, green: 50/255, blue: 90/255, alpha: 1.0)
-        gradient.colors = [ colorTop.cgColor, colorBottom.cgColor ]
-        gradient.locations = [ 0.0, 1.0 ]
-        gradient.frame = view.bounds
-        self.view.layer.insertSublayer(gradient, at: 0)
-//        self.tableView.layer.insertSublayer(gradient, at: 0)
-        
-//        self.navigationController?.navigationBar.barTintColor = colorTop
-        
-//        let tabColor = UIColor(red: 28/255, green: 50/255, blue: 90/255, alpha: 1.0)    
-//        UITabBar.appearance().barTintColor = tabColor
-        
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = UIColor.clear
-        tableView.showsVerticalScrollIndicator = false
+
         tableView.sectionHeaderHeight = 0.0
         tableView.sectionFooterHeight = 0.0
-        tableView.dataSource = self
-        tableView.delegate = self
         
-//        setGestureRecognizers()
+        
     }
     
     // MARK: TableView - Configure the UITableView
@@ -89,6 +52,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         if (row == 0) {
             
             cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for:  indexPath as IndexPath) as! ProfileViewCell
+            cell.qrCodeImageView.image = QRCodeGenerator.shared.qrcodeImage
             cell.nameLabel.text = user.name
             cell.dietLabel.text = user.diet
             
@@ -137,12 +101,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.button3.isUserInteractionEnabled = true
         cell.button3.addGestureRecognizer(tapButton3)
         
-        //        let tapButton4 = UITapGestureRecognizer(target: self, action: #selector(ProfileViewCell.button4Tapped))
-        //
-        //        tapButton4.numberOfTapsRequired = 1
-        //        button4.isUserInteractionEnabled = true
-        //        button4.addGestureRecognizer(tapButton4)
-        
     }
     
     func openLink(link: String){
@@ -165,7 +123,4 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     func button3Tapped(){
         openLink(link: "https://linkedin.com")
     }
-    //    func button4Tapped(){
-    //        print("Needs to be removed")
-    //    }
 }
