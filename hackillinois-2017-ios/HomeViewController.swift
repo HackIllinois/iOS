@@ -11,6 +11,8 @@ import CoreData
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    
+    // MARK: - ENUMS
     enum HackathonStatus {
         case beforeHackathon
         case beforeHacking
@@ -33,8 +35,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    // MARK: - IBOutlets
     @IBOutlet weak var checkInTableView: UITableView!
     
+    
+    // MARK: - Global Variables
     var events = [Feed]()
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -44,7 +49,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         formatter.pmSymbol = "pm"
         return formatter
     }()
-
+    
+    // MARK: - ViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,6 +87,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.didReceiveMemoryWarning()
     }
     
+    
+    // MARK: - TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch HackathonStatus.current.0 {
         case .beforeHackathon:
@@ -105,151 +113,62 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if (indexPath.row == 0) {
+        switch indexPath.row {
+        case 0:
             
             switch HackathonStatus.current.0 {
                 
             case .beforeHackathon:
-                return tableView.dequeueReusableCell(withIdentifier: "mainCellBeforeHackathon", for: indexPath)
+                return tableView.dequeueReusableCell(withIdentifier: "beforeHackathon", for: indexPath)
                 
             case .beforeHacking:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "mainCellBe", for: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "beforeOrDuringHacking", for: indexPath)
                 if let cell = cell as? mainCell {
                     // initalize the timer label as current time and decrement by 1 second every second
-                    cell.timeRemaining = HACKING_BEGIN_TIME -
-                    cell.secondsLeft = cell.getSeconds(timeInSeconds: cell.timeRemaining)
-                    cell.minutesLeft = cell.getMinutes(timeInSeconds: cell.timeRemaining)
-                    cell.hoursLeft = cell.getHours(timeInSeconds: cell.timeRemaining)
-                    cell.hoursLabel.text = cell.hoursLeft.description
-                    cell.minutesLabel.text = cell.minutesLeft.description
-                    cell.secondsLabel.text = cell.secondsLeft.description
-                    cell.mTimer.invalidate()
+                    cell.timeRemaining = HACKING_BEGIN_TIME - HackathonStatus.current.1
                     cell.timeStart()
                 }
                 return cell
                 
+                
             case .duringHacking:
-                return tableView.dequeueReusableCell(withIdentifier: "mainCellAfterHackathon", for: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "beforeOrDuringHacking", for: indexPath)
+                if let cell = cell as? mainCell {
+                    // initalize the timer label as current time and decrement by 1 second every second
+                    cell.timeStart()
+                }
+                return cell
+                
                 
             case .afterHackathon:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath)
                 
                 if let cell = cell as? mainCell {
                     // initalize the timer label as current time and decrement by 1 second every second
-                    cell.timeRemaining = HACKING_END_TIME - HackathonStatus.current.1
-                    cell.secondsLeft = cell.getSeconds(timeInSeconds: cell.timeRemaining)
-                    cell.minutesLeft = cell.getMinutes(timeInSeconds: cell.timeRemaining)
-                    cell.hoursLeft = cell.getHours(timeInSeconds: cell.timeRemaining)
-                    cell.hoursLabel.text = cell.hoursLeft.description
-                    cell.minutesLabel.text = cell.minutesLeft.description
-                    cell.secondsLabel.text = cell.secondsLeft.description
-                    cell.mTimer.invalidate()
                     cell.timeStart()
                 }
                 return cell
+                
+                
             }
-        }
-        
-        
-        
-        
-        
-        else if(indexPath.row == 1) {
-            switch hackathonStatus {
-            case .beforeHacking:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "noEventCell", for: indexPath)
-            }
+           
             
-            
+        default:
+            // THIS IS FOR EVENT CELLS
+            let cell = tableView.dequeueReusableCell(withIdentifier: "standardCell", for: indexPath)
             if let cell = cell as? mainCell {
-                
+                cell.eventLabel?.text = events[indexPath.row - 1].name
+                cell.checkinTimeLabel?.text = dateFormatter.string(from: events[indexPath.row - 1].startTime)
+//                cell.qrCodeButton.roundedButton()
             }
-            return cell
-        }
-    
-    
-    
-    
-    else if (events.count > 0 && events[indexPath.row - 1].locations.count == 1){ // we're hacking so show events
-            let cell = tableView.dequeueReusableCell(withIdentifier: "standardCell", for: indexPath) as! mainCell
-            cell.checkInTimeLabel.text = dateFormatter.string(from: events[indexPath.row - 1].startTime)
-            // location clicked should go to maps view
-            let pressGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.locationClicked(_:)))
-            let tempLocations = events[indexPath.row - 1].locations.value(forKey: "name")
-            cell.locationLabel.isUserInteractionEnabled = true
-            cell.locationLabel.text = (tempLocations as AnyObject).firstObject as! String?
-            cell.locationLabel.addGestureRecognizer(pressGestureRecognizer)
-            // button clicked should go to profile page
-            cell.qrCodeButton.backgroundColor = UIColor.fromRGBHex(duskyBlueColor)
-            cell.qrCodeButton.roundedButton()
-            cell.qrCodeButton.addTarget(self, action: #selector(HomeViewController.buttonClicked), for: .touchUpInside)
-            
-            return cell
-            
-        }
-        
-        
-        
-        
-        else if (events.count > 0 && events[indexPath.row - 1].locations.count == 2){
-            let cell = tableView.dequeueReusableCell(withIdentifier: "twoLocationsCell", for: indexPath)
-            if let cell = cell as? mainCell {
-                cell.checkInTimeLabel.text = dateFormatter.string(from: events[indexPath.row - 1].startTime)
-                // location clicked should go to maps view
-                // each label gets its own gesture recognizer
-                let firstPressGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.locationClicked(_:)))
-                let secondPressGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.locationClicked(_:)))
-                let tempLocations = events[indexPath.row - 1].locations.value(forKey: "name")
-                cell.firstLocationLabel.text = (tempLocations as AnyObject).object(at: 0) as? String
-                cell.secondLocationLabel.text = (tempLocations as AnyObject).object(at: 1) as? String
-                cell.firstLocationLabel.addGestureRecognizer(firstPressGestureRecognizer)
-                cell.secondLocationLabel.addGestureRecognizer(secondPressGestureRecognizer)
-                cell.firstLocationLabel.isUserInteractionEnabled = true
-                cell.secondLocationLabel.isUserInteractionEnabled = true
-                // button clicked should go to profile page
-                cell.qrCodeButton.addTarget(self, action: #selector(HomeViewController.buttonClicked), for: .touchUpInside)
-            }
-            
-            return cell
-        }
-        
-        
-        
-        
-        else if((events.count > 0 && events[indexPath.row - 1].locations.count == 3)) {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "threeLocationsCell", for: indexPath)
-            if let cell as? mainCell {
-                cell.checkInTimeLabel.text = dateFormatter.string(from: events[indexPath.row - 1].startTime)
-                
-                // location clicked should go to maps view
-                // each label gets its own gesture recognizer
-                let firstPressGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.locationClicked(_:)))
-                let secondPressGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.locationClicked(_:)))
-                let thirdPressGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.locationClicked(_:)))
-                let tempLocations = events[indexPath.row - 1].locations.value(forKey: "name")
-                
-                cell.firstLocationLabel.text = (tempLocations as AnyObject).object(at: 0) as? String
-                cell.secondLocationLabel.text = (tempLocations as AnyObject).object(at: 1) as? String
-                cell.thirdLocationLabel.text = (tempLocations as AnyObject).object(at: 2) as? String
-                
-                cell.firstLocationLabel.addGestureRecognizer(firstPressGestureRecognizer)
-                cell.secondLocationLabel.addGestureRecognizer(secondPressGestureRecognizer)
-                cell.thirdLocationLabel.addGestureRecognizer(thirdPressGestureRecognizer)
-                
-                cell.firstLocationLabel.isUserInteractionEnabled = true
-                cell.secondLocationLabel.isUserInteractionEnabled = true
-                cell.thirdLocationLabel.isUserInteractionEnabled = true
-                
-                // button clicked should go to profile page
-                cell.qrCodeButton.backgroundColor = UIColor.fromRGBHex(duskyBlueColor)
-                cell.qrCodeButton.roundedButton()
-                cell.qrCodeButton.addTarget(self, action: #selector(HomeViewController.buttonClicked), for: .touchUpInside)
-
-            }
-        
             return cell
         }
     }
+    
+    
+    
+    
+    
     
     /* called when qr code button is clicked */
     func buttonClicked() {
@@ -281,7 +200,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func refreshTableView() {
-        print ("refresh table view called")
         self.checkInTableView.performSelector(onMainThread: #selector(UICollectionView.reloadData), with: nil, waitUntilDone: true)
     }
     
