@@ -79,24 +79,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if(indexPath.row == 0) {
-//            if(currentTimeForTable > HACKING_END_TIME) {
-//                return CGFloat(MAIN_CELL_AFTER_HACKATHON_HEIGHT)
-//            }
-//            return CGFloat(MAIN_CELL_HEIGHT)
-//        }
-//        else if(indexPath.row == 1 && currentTimeForTable < HACKATHON_BEGIN_TIME) {
-//            return CGFloat(NO_EVENT_CELL_HEIGHT)
-//        } else if(events[indexPath.row - 1].locations.count == 1) {
-//            return CGFloat(STANDARD_CELL_HEIGHT)
-//        } else if(events[indexPath.row - 1].locations.count == 2) {
-//            return CGFloat(TWO_LOCATIONS_CELL_HEIGHT)
-//        } else {
-//            return CGFloat(THREE_LOCATIONS_CELL_HEIGHT)
-//        }
-//    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard: UIStoryboard = UIStoryboard(name: "Home", bundle: nil)
         if let eventDetails = storyboard.instantiateViewController(withIdentifier: "EventDetailsView") as? EventDetailsViewController {

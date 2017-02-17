@@ -59,11 +59,7 @@
 		39666E461E52924500A507DF /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39666E3E1E52924500A507DF /* Home.storyboard */; };
 		39666E471E52924500A507DF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39666E3F1E52924500A507DF /* HomeViewController.swift */; };
 		39666E481E52924500A507DF /* mainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39666E401E52924500A507DF /* mainCell.swift */; };
-		39666E491E52924500A507DF /* mainCellBeforeHacking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39666E411E52924500A507DF /* mainCellBeforeHacking.swift */; };
-		39666E4A1E52924500A507DF /* standardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39666E421E52924500A507DF /* standardCell.swift */; };
-		39666E4B1E52924500A507DF /* threeLocationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39666E431E52924500A507DF /* threeLocationsCell.swift */; };
-		39666E4C1E52924500A507DF /* twoLocationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39666E441E52924500A507DF /* twoLocationsCell.swift */; };
-		39666E4E1E52926E00A507DF /* noEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39666E4D1E52926E00A507DF /* noEventCell.swift */; };
+		39666E4A1E52924500A507DF /* HomeTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39666E421E52924500A507DF /* HomeTableViewCells.swift */; };
 		652DD8C01E52E75B0039EC1A /* MapViewIndoorMapsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652DD8BF1E52E75A0039EC1A /* MapViewIndoorMapsTableViewController.swift */; };
 		652DD8D31E52F2B00039EC1A /* indoor_2_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 652DD8C91E52F2B00039EC1A /* indoor_2_0.png */; };
 		652DD8D41E52F2B00039EC1A /* indoor_2_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 652DD8CA1E52F2B00039EC1A /* indoor_2_1.png */; };
@@ -210,11 +206,7 @@
 		39666E3E1E52924500A507DF /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		39666E3F1E52924500A507DF /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		39666E401E52924500A507DF /* mainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = mainCell.swift; path = "hackillinois-2017-ios/mainCell.swift"; sourceTree = "<group>"; };
-		39666E411E52924500A507DF /* mainCellBeforeHacking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = mainCellBeforeHacking.swift; path = "hackillinois-2017-ios/mainCellBeforeHacking.swift"; sourceTree = "<group>"; };
-		39666E421E52924500A507DF /* standardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = standardCell.swift; path = "hackillinois-2017-ios/standardCell.swift"; sourceTree = "<group>"; };
-		39666E431E52924500A507DF /* threeLocationsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = threeLocationsCell.swift; path = "hackillinois-2017-ios/threeLocationsCell.swift"; sourceTree = "<group>"; };
-		39666E441E52924500A507DF /* twoLocationsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = twoLocationsCell.swift; path = "hackillinois-2017-ios/twoLocationsCell.swift"; sourceTree = "<group>"; };
-		39666E4D1E52926E00A507DF /* noEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = noEventCell.swift; path = "hackillinois-2017-ios/noEventCell.swift"; sourceTree = "<group>"; };
+		39666E421E52924500A507DF /* HomeTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCells.swift; sourceTree = "<group>"; };
 		4D6852BE4A56CD5A38E04F5D /* Pods_hackillinois_2017_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		560EF696FA6BAE0FDD693BC5 /* Pods-hackillinois-2017-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-ios/Pods-hackillinois-2017-ios.release.xcconfig"; sourceTree = "<group>"; };
 		652DD8BF1E52E75A0039EC1A /* MapViewIndoorMapsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewIndoorMapsTableViewController.swift; sourceTree = "<group>"; };
@@ -382,12 +374,7 @@
 		398219D81E345F2800C5D0DF /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
-				39666E4D1E52926E00A507DF /* noEventCell.swift */,
-				39666E411E52924500A507DF /* mainCellBeforeHacking.swift */,
 				39666E401E52924500A507DF /* mainCell.swift */,
-				39666E421E52924500A507DF /* standardCell.swift */,
-				39666E431E52924500A507DF /* threeLocationsCell.swift */,
-				39666E441E52924500A507DF /* twoLocationsCell.swift */,
 			);
 			name = CustomCells;
 			path = ..;
@@ -470,6 +457,7 @@
 		A50F29231E14D53B00878652 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				39666E421E52924500A507DF /* HomeTableViewCells.swift */,
 				398219D81E345F2800C5D0DF /* CustomCells */,
 				39666E3D1E52924500A507DF /* EventDetailsViewController.swift */,
 				39666E3F1E52924500A507DF /* HomeViewController.swift */,
@@ -1109,15 +1097,12 @@
 				E2BCA56A1CF373A1006AAA8B /* EventConstants.swift in Sources */,
 				E2BCA57E1CF3B19E006AAA8B /* User+CoreDataProperties.swift in Sources */,
 				E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */,
-				39666E4E1E52926E00A507DF /* noEventCell.swift in Sources */,
-				39666E491E52924500A507DF /* mainCellBeforeHacking.swift in Sources */,
 				E2BD82B51D09EA530009DB07 /* GenericMapViewController.swift in Sources */,
 				243720021E32CEDD00B1C7C5 /* BottomViewController.swift in Sources */,
 				E20465D31CF1FAF50054654E /* hackillinois_2017_ios.xcdatamodeld in Sources */,
 				E27755531D36B7F600E7A379 /* GenericHelpQStaffViewController.swift in Sources */,
 				E28FB6A01D194951000D062F /* HelpQ.swift in Sources */,
 				24F0CA7E1E5049AF005664F3 /* GenericTabBarController.swift in Sources */,
-				39666E4C1E52924500A507DF /* twoLocationsCell.swift in Sources */,
 				A50876741E1C79130095F399 /* BottomMapViewController.swift in Sources */,
 				A54825B11E160C6C00E35C71 /* ScheduleViewController.swift in Sources */,
 				652DD8C01E52E75B0039EC1A /* MapViewIndoorMapsTableViewController.swift in Sources */,
@@ -1144,7 +1129,7 @@
 				390CFC761E4FB9D800DC6F3A /* Feed+CoreDataClass.swift in Sources */,
 				E2BCA5621CF36CDA006AAA8B /* FeedTableViewController.swift in Sources */,
 				24632D191E4D58EA00E7A746 /* SundayTabController.swift in Sources */,
-				39666E4A1E52924500A507DF /* standardCell.swift in Sources */,
+				39666E4A1E52924500A507DF /* HomeTableViewCells.swift in Sources */,
 				39666E451E52924500A507DF /* EventDetailsViewController.swift in Sources */,
 				390CFC771E4FB9D800DC6F3A /* Feed+CoreDataProperties.swift in Sources */,
 				E2BB42C61D133A9A009EF512 /* GenericInputView.swift in Sources */,
@@ -1167,7 +1152,6 @@
 				E277DD691CF4A79100D7E018 /* FeedDetailViewController.swift in Sources */,
 				E26F44F21D0EF2C100FB4A9F /* ProfileViewController.swift in Sources */,
 				95F8C14C1E56ACD80012AC03 /* APIManager.swift in Sources */,
-				39666E4B1E52924500A507DF /* threeLocationsCell.swift in Sources */,
 				0A3A1B2F1E4E45EB00EA2100 /* ProfileViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
