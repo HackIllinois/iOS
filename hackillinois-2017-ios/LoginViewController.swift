@@ -10,80 +10,222 @@ import UIKit
 import SwiftyJSON
 import JWTDecode
 
-// An enumeration to keep track of the
-// current user input state
-enum UserInputState: UInt8 {
-    case nothingEntered = 0
-    case usernameEntered = 1
-    case passwordEntered = 2
-    // Add more for different types of errors / more fields
-}
 
-class LoginViewController: GenericInputView {
-    /* Replace these floats with alpha values for elements */
-    let loginElementAlpha: CGFloat = 0.9
+class LoginViewController: UIViewController, UITextFieldDelegate {
+
+    var loginActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white) // Reusable
     
-    /* Variables */
-    var loginErrorMessage: String? = "You must enter a username and password before logging in."
-    var userInputState = UserInputState.nothingEntered.rawValue {
-        didSet {
-            // Verbose user interface by comparing raw values.
-            switch userInputState {
-            case UserInputState.nothingEntered.rawValue:
-                self.loginErrorMessage = "You must enter a username and password before logging in."
-                
-            case UserInputState.usernameEntered.rawValue:
-                self.loginErrorMessage = "You must enter a password before logging in."
-                
-            case UserInputState.passwordEntered.rawValue:
-                self.loginErrorMessage = "You must enter a username before logging in."
-                
-            default:
-                // Default only should apply when 
-                // both username and password fields are entered
-                self.loginErrorMessage = nil
-            }
+    // MARK: - IBOutlet
+    @IBOutlet weak var errorLabel: UILabel!
+    
+    @IBOutlet weak var loginButton: UIButton!
+    
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    
+    @IBOutlet weak var logo: UIImageView!
+    
+    @IBOutlet var containerBottomConstraint: NSLayoutConstraint!
+    @IBOutlet var containerCenterYConstraint: NSLayoutConstraint!
+    
+    // MARK: - UIViewController
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        usernameTextField.text = "ios@hackillinois.org"
+        passwordTextField.text = "testtest"
+        
+        loginActivityIndicator.startAnimating()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    // MARK: - Keyboard
+    func keyboardWillAppear(_ notification: Notification) {
+        guard let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double,
+            let curveValue = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? Int,
+            let curve = UIViewAnimationCurve(rawValue: curveValue),
+            let keyboardFrameValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue else { return }
+        
+        let keyboardFrame = keyboardFrameValue.cgRectValue
+        
+        view.layoutIfNeeded()
+        
+        // UIAutoLayoutEngine Animations
+        containerCenterYConstraint.isActive = false
+        containerBottomConstraint.constant = keyboardFrame.height
+        containerBottomConstraint.isActive = true
+
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(duration)
+        UIView.setAnimationCurve(curve)
+        logo.alpha = 0
+        view.layoutIfNeeded()
+        UIView.commitAnimations()
+    }
+    
+    func keyboardWillDisappear(_ notification: Notification) {
+        guard let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double,
+            let curveValue = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? Int,
+            let curve = UIViewAnimationCurve(rawValue: curveValue) else { return }
+        
+        view.layoutIfNeeded()
+        // UIAutoLayoutEngine Animations
+        containerBottomConstraint.isActive = false
+        containerBottomConstraint.constant = 0
+        containerCenterYConstraint.isActive = true
+
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(duration)
+        UIView.setAnimationCurve(curve)
+        logo.alpha = 1
+        view.layoutIfNeeded()
+        UIView.commitAnimations()
+    }
+    
+    @IBAction func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    // MARK: - UITextFieldDelegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case usernameTextField:
+            passwordTextField.becomeFirstResponder()
+        case passwordTextField:
+            attemptLogin()
+        default:
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.resignFirstResponder()
+        textField.layoutIfNeeded()
+    }
+
+    // MARK: - Login Logic
+    @IBAction func attemptLogin() {
+        guard let (username, password) = localValidateLoginFields() else { return }
+        
+        presentBusyFormUI()
+        
+        APIManager.shared.getAuthKey(username: username, password: password, success: getAuthKeySuccess, failure: getAuthKeyFailure)
+    }
+    
+    func getAuthKeySuccess(json: JSON) {
+        if let error = json["error"]["message"].string {
+            presentErrorLabel(text: error)
+        } else if let key = json["data"]["auth"].string {
+            APIManager.shared.setAuthKey(key)
+            APIManager.shared.getUserInfo(success: getUserInfoSuccess, failure: getUserInfoFailure)
+        } else {
+            presentActiveFormUI()
         }
     }
     
-    var initialEmail: String?
+    func getAuthKeyFailure(error: Error) {
+        presentActiveFormUI()
+        presentErrorLabel(text: "Unknown Error")
+    }
     
-    /* Login View Elements */
-    @IBOutlet weak var LoginButton: UIButton!
-    @IBOutlet weak var UsernameTextField: UITextField!
-    @IBOutlet weak var PasswordTextField: UITextField!
+    func getUserInfoSuccess(json: JSON) {
+        
+    }
     
-    /* Login View Element Handlers */
-    @IBAction func loginButtonPressed(_ sender: AnyObject) {
-        /* Check if the user has inputted all field via bitmasking */
-        // Check username
-        if UsernameTextField.text! == "" {
-            userInputState = userInputState & ~UserInputState.usernameEntered.rawValue
-        } else {
-            userInputState = userInputState | UserInputState.usernameEntered.rawValue
+    func getUserInfoFailure(error: Error) {
+        presentActiveFormUI()
+        presentErrorLabel(text: "Unknown Error")
+    }
+
+
+    @IBAction func ibLocalValidateLoginFields() {
+        localValidateLoginFields()
+    }
+    
+    @discardableResult
+    func localValidateLoginFields() -> (username: String, password: String)? {
+        guard let username = usernameTextField.text, username != "" else {
+            presentErrorLabel(text: "Empty Username")
+            return nil
         }
         
-        // Check password
-        if PasswordTextField.text! == "" {
-            userInputState = userInputState & ~UserInputState.passwordEntered.rawValue
-        } else {
-            userInputState = userInputState | UserInputState.passwordEntered.rawValue
+        guard let password = passwordTextField.text, password != "" else {
+            presentErrorLabel(text: "Empty Password")
+            return nil
         }
         
-        // Check to see if there is an error message, ie the user is missing some information in the field
-        if let errorMessage = loginErrorMessage {
-            let ac = UIAlertController(title: "Login Error", message: errorMessage, preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(ac, animated: true, completion: nil)
-        } else {
-            /* MARK: Handle Login here! */
-            let username = UsernameTextField.text!
-            let password = PasswordTextField.text!
-            
-            login(username: username, password: password)
+        let passwordLength = password.characters.count
+        
+        guard passwordLength >= 8  else  {
+            presentErrorLabel(text: "Password too short")
+            return nil
+        }
+        
+        guard passwordLength <= 50  else  {
+            presentErrorLabel(text: "Password too long")
+            return nil
+        }
+
+        hideErrorLabel()
+        
+        return (username, password)
+    }
+    
+    
+    // MARK: - Login UI
+    func presentErrorLabel(text: String) {
+        errorLabel.text = text
+        UIView.animate(withDuration: 0.25) { [weak self] in
+            self?.errorLabel.alpha = 1
         }
     }
     
+    func hideErrorLabel() {
+        UIView.animate(withDuration: 0.25) { [weak self] in
+            self?.errorLabel.alpha = 0
+        }
+    }
+    
+    func presentActiveFormUI() {
+        loginActivityIndicator.removeFromSuperview()
+
+        loginButton.setTitle("Log in", for: .normal)
+
+        loginButton.isEnabled = true
+        usernameTextField.isEnabled = true
+        passwordTextField.isEnabled = true
+    }
+    
+    func presentBusyFormUI() {
+        loginButton.setTitle("", for: .normal)
+        
+        loginActivityIndicator.frame = CGRect(
+            x: loginButton.frame.width / 2 - loginButton.frame.height / 2,
+            y: 0,
+            width: loginButton.frame.height,
+            height: loginButton.frame.height)
+        loginButton.addSubview(loginActivityIndicator)
+        
+        
+        // disable UI elements while logging in
+        loginButton.isEnabled = false
+        usernameTextField.isEnabled = false
+        passwordTextField.isEnabled = false
+    }
+
+    // MARK: - junk
     /* Handle Login */
     func processUserData(name: String, email: String, school: String, major: String, role: String, barcode: String, auth: String, initTime: Date, expirationTime: Date, userID: NSNumber, diet: String) {
         
@@ -139,18 +281,16 @@ class LoginViewController: GenericInputView {
             /* Stay on current login view if not sucessful */
             
             // Re-enable user interaction
-            self.LoginButton.isUserInteractionEnabled = true
-            self.UsernameTextField.isUserInteractionEnabled = true
-            self.PasswordTextField.isUserInteractionEnabled = true
+            self.loginButton.isUserInteractionEnabled = true
+            self.usernameTextField.isUserInteractionEnabled = true
+            self.passwordTextField.isUserInteractionEnabled = true
             // Revert Login button title
-            self.LoginButton.setTitle("Login", for: UIControlState())
+            self.loginButton.setTitle("Login", for: UIControlState())
             self.loginActivityIndicator.stopAnimating()
             self.loginActivityIndicator.removeFromSuperview()
         }
     }
     
-    /* Activity Indicator for processing information */
-    var loginActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white) // Reusable
     
     func processResponse(_ data: Data?, response: URLResponse?, error: NSError?) {
         var responseData = JSON(data: data!)
@@ -162,8 +302,6 @@ class LoginViewController: GenericInputView {
             return // Attemping to decode the jwt actually makes it crash
         }
         print("reached here!!!!!!")
-        
-        
         
         
         
@@ -181,8 +319,8 @@ class LoginViewController: GenericInputView {
         let userID: NSNumber = NSNumber(value: jwt.body["sub"]!.integerValue)
         let role = String(describing: jwt.body["roles"]!)
         let email = String(describing: jwt.body["email"]!)
-        let initTime : Date = jwt.issuedAt! as Date
-        let expTime: Date = jwt.expiresAt! as Date
+        let initTime = jwt.issuedAt! as Date
+        let expTime = jwt.expiresAt! as Date
         
         print("Role: \(role)")
         print("UserID: \(userID)")
@@ -200,173 +338,5 @@ class LoginViewController: GenericInputView {
         
         
         self.processUserData(name: name, email: email, school: school, major: major, role: role, barcode: barcode, auth: auth, initTime: initTime, expirationTime: expTime, userID: userID, diet: diet)
-    }
-    
-    func login(username: String, password: String) {
-        // Hide text
-        LoginButton.setTitle("", for: UIControlState())
-        
-        // Set the indicator to be the center of the button
-        loginActivityIndicator.frame = CGRect(
-            x: LoginButton.frame.width / 2 - LoginButton.frame.height / 2,
-            y: 0,
-            width: LoginButton.frame.height,
-            height: LoginButton.frame.height)
-        loginActivityIndicator.startAnimating()
-        LoginButton.addSubview(loginActivityIndicator)
-        
-        // disable UI elements while logging in
-        LoginButton.isUserInteractionEnabled = false
-        UsernameTextField.isUserInteractionEnabled = false
-        PasswordTextField.isUserInteractionEnabled = false
-        
-        /* MARK: For api branch */
-        DispatchQueue.global(qos: .userInitiated).async {
-            /* Remove all previous users */
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            
-            for user in (CoreDataHelpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]) {
-                appDelegate.managedObjectContext.delete(user)
-            }
-            
-            let payload: JSON = JSON(["email": username, "password": password])
-            HTTPHelpers.createPostRequest(subUrl: "v1/auth", jsonPayload: payload, completion: self.processResponse)
-            
-        }
-        /*
-        // Send request to server
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
-            /* Remove all previous users */
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            
-            for user in (Helpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]) {
-                appDelegate.managedObjectContext.deleteObject(user)
-            }
-         
-            let payload: JSON = JSON(["email": username, "password": password])
-            HTTPHelpers.createPostRequest(subUrl: "v1/auth", jsonPayload: payload, completion: self.processResponse)
-        }
-        */
-        
-        /* Mark: Fake server response -- Remove an uncomment code above to run */
-        /*
-        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 1 * USEC_PER_SEC)) { [unowned self] in
-            /* Remove all previous users */
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            
-            for user in (CoreDataHelpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]) {
-                appDelegate.managedObjectContext.delete(user)
-            }
-            
-            let payload: JSON = JSON(["email": username, "password": password])
-            HTTPHelpers.createPostRequest(subUrl: "v1/auth", jsonPayload: payload, completion: self.processResponse)
-            
-        }
-        /*
-         // Send request to server
-         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
-         /* Remove all previous users */
-         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-         
-         for user in (Helpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]) {
-         appDelegate.managedObjectContext.deleteObject(user)
-         }
-         
-         let payload: JSON = JSON(["email": username, "password": password])
-         HTTPHelpers.createPostRequest(subUrl: "v1/auth", jsonPayload: payload, completion: self.processResponse)
-         }
-         */
-        
-        /* Mark: Fake server response -- Remove an uncomment code above to run */
-        /*
-         DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 1 * USEC_PER_SEC)) { [unowned self] in
-         /* Remove all previous users */
-         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-         
-         for user in (CoreDataHelpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]) {
-         appDelegate.managedObjectContext.delete(user)
-         }
-         /* Response from API */
-         let auth: String = "auth dummy data"
-         let userID: NSNumber = NSNumber(value: 1 as Int)
-         let role = "HACKER"
-         let email = "shotaro.ikeda@hackillinois.org"
-         let initTime : Date = Date()
-         let expTime: Date = Date(timeIntervalSinceNow: Double(5 * 60)) // Expires in 5 minutes for testing purposes
-         let diet = "No restrictions"
-         
-         // TODO: Parse API
-         let name = "Shotaro Ikeda"
-         let school = "University of Illinois at Urbana-Champaign"
-         let major = "Bachelor of Science Computer Science"
-         let barcode = "1234567890"
-         self.processUserData(name: name, email: email, school: school, major: major, role: role, barcode: barcode, auth: auth, initTime: initTime, expirationTime: expTime, userID: userID, diet: diet)
-         }
-         */
-
-        */
-    }
-    
-    /* Override textfieldshould return */
-    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let nextTextFieldTag = textField.tag + 1
-        if let nextTextField = textField.superview?.viewWithTag(nextTextFieldTag) as UIResponder! {
-            // Found next text field to respond to
-            nextTextField.becomeFirstResponder()
-        } else {
-            // There is no next text field
-            textField.resignFirstResponder()
-            LoginButton.sendActions(for: .touchUpInside) // Fake a button touch as a way to login
-        }
-        
-        return false // Don't insert newlines in textfield
-    }
-    
-    /* View Controller overrides */
-    override func viewDidLoad() {
-        
-        UIApplication.shared.statusBarStyle = .lightContent
-        
-        /* Set super class requirements */
-        textFields = [UsernameTextField, PasswordTextField]
-        textViews = []
- 
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        /* MARK: Set status bar to look better with image */
-        //UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
-        
-        /* Prettier UI Elements */
-        LoginButton.layer.cornerRadius = 5
-        LoginButton.clipsToBounds = true
-        LoginButton.alpha = loginElementAlpha
-        
-        /* Configure portions that the super class did not configure */
-        UsernameTextField.alpha = loginElementAlpha
-        UsernameTextField.text = initialEmail
-        
-        PasswordTextField.alpha = loginElementAlpha
-        PasswordTextField.isSecureTextEntry = true // Password should be hidden
- 
-        
-        let gradient = CAGradientLayer()
-        let colorBottom = UIColor(red: 20/255, green: 36/255, blue: 66/255, alpha: 1.0)
-        let colorTop = UIColor(red: 28/255, green: 50/255, blue: 90/255, alpha: 1.0)
-        gradient.colors = [ colorTop.cgColor, colorBottom.cgColor ]
-        gradient.locations = [ 0.0, 1.0 ]
-        gradient.frame = view.bounds
-        self.view.layer.insertSublayer(gradient, at: 0)
- 
-    }
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
