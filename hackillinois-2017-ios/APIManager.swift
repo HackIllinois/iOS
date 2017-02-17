@@ -15,6 +15,7 @@ class APIManager {
     
     private let HACKILLINOIS_API_URL = "https://api.hackillinois.org/"
     private var auth_header: [String: String]?
+    var auth_key: String?
     
     private init() {
         
@@ -22,10 +23,14 @@ class APIManager {
     
     func setAuthKey(_ key: String) {
         auth_header = ["Authorization": key]
+        auth_key = key
     }
+    
+    
     
     func deleteAuthKey() {
         auth_header = nil
+        auth_key = nil
     }
     
     func getAuthKey(username: String, password: String, success: ((JSON) -> Void)?, failure: ((Error) -> Void)?) {

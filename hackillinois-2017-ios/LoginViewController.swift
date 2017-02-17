@@ -141,6 +141,25 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func getUserInfoSuccess(json: JSON) {
+        print(json)
+        let data = json["data"]
+        let name = "\(data["firstName"]) \(data["lastName"])"
+        let email = usernameTextField.text!
+        let school = String(describing: data["school"])
+        let major = String(describing: data["major"])
+        let barcode = "1234567890" // CHANGE THIS
+        let role = "ROLE"
+        let userID = data["userId"] as! NSNumber
+        var diet = String(describing: data["diet"])
+        if diet == "NONE" {
+            diet = "No dietary restrictions"
+        }
+        let auth = APIManager.shared.auth_key
+//        let initTime = jwt.issuedAt! as Date
+//        let expTime = jwt.expiresAt! as Date
+        let initTime: Date = Date()
+        let expirationTime: Date = Date()
+        processUserData(name: name, email: email, school: school, major: major, role: role, barcode: barcode, auth: auth!, initTime: initTime, expirationTime: expirationTime, userID: userID, diet: diet)
         
     }
     
