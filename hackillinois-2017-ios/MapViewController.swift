@@ -117,7 +117,11 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         unionLabel.layer.shouldRasterize = true
         unionLabel.layer.shadowOffset = CGSize(width: 0, height: 0)
         
-        [{ _ in }, dclLabelTouched, siebelLabelTouched, ecebLabelTouched, unionLabelTouched][labelPressed]()
+        if labelPressed >= 4 {
+            UIAlertView(title: "Location id error", message: "Location id \(labelPressed) is not a valid id.", delegate: nil, cancelButtonTitle: "OK").show()
+        } else {
+            [{ _ in }, dclLabelTouched, siebelLabelTouched, ecebLabelTouched, unionLabelTouched][labelPressed]()
+        }
     }
     
     func clearLabel(labelNumber: Int) {

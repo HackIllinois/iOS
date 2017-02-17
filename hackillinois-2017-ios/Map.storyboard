@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12106.1" systemVersion="16E154a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="auk-1d-PU8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="auk-1d-PU8">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12074.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -388,7 +388,7 @@ United States</string>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W28-Ky-fyv">
-                                            <rect key="frame" x="2" y="2" width="371" height="371"/>
+                                            <rect key="frame" x="2" y="45" width="371" height="371"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="W28-Ky-fyv" secondAttribute="height" identifier="ratio" id="7iO-sN-gQi"/>
                                             </constraints>
@@ -397,8 +397,8 @@ United States</string>
                                     <constraints>
                                         <constraint firstItem="W28-Ky-fyv" firstAttribute="centerY" secondItem="iFT-ZU-71b" secondAttribute="centerY" id="4z6-1A-NQ0"/>
                                         <constraint firstItem="W28-Ky-fyv" firstAttribute="leading" secondItem="iFT-ZU-71b" secondAttribute="leading" constant="2" id="GlP-fr-yqB"/>
-                                        <constraint firstItem="W28-Ky-fyv" firstAttribute="top" secondItem="iFT-ZU-71b" secondAttribute="top" constant="2" id="On4-1V-28D"/>
-                                        <constraint firstAttribute="bottom" secondItem="W28-Ky-fyv" secondAttribute="bottom" constant="2" id="aIB-Zn-AYX"/>
+                                        <constraint firstItem="W28-Ky-fyv" firstAttribute="top" secondItem="iFT-ZU-71b" secondAttribute="top" constant="45" id="On4-1V-28D"/>
+                                        <constraint firstAttribute="bottom" secondItem="W28-Ky-fyv" secondAttribute="bottom" constant="45" id="aIB-Zn-AYX"/>
                                         <constraint firstItem="W28-Ky-fyv" firstAttribute="centerX" secondItem="iFT-ZU-71b" secondAttribute="centerX" id="vZy-KD-YnR"/>
                                         <constraint firstAttribute="trailing" secondItem="W28-Ky-fyv" secondAttribute="trailing" constant="2" id="xqB-9C-SAe"/>
                                     </constraints>
@@ -425,7 +425,7 @@ United States</string>
                     </tabBarItem>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yyE-Rb-fuQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yyE-Rb-fuQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
