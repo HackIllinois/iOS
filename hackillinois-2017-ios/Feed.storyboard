@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12106.1" systemVersion="16E154a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="O8q-ER-pgb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E154a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="O8q-ER-pgb">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12074.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Brandon_bld.otf">
-            <string>BrandonGrotesque-Bold</string>
+        <array key="Brandon_light.otf">
+            <string>BrandonGrotesque-Light</string>
         </array>
         <array key="Brandon_reg.otf">
             <string>BrandonGrotesque-Regular</string>
@@ -21,63 +21,58 @@
         <scene sceneID="317-so-WwI">
             <objects>
                 <tableViewController id="57y-AO-1z8" customClass="FeedTableViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" id="Dxe-3y-LRX">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" id="Dxe-3y-LRX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.10980392156862745" green="0.19607843137254902" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="separatorColor" red="0.1764705882352941" green="0.27450980392156865" blue="0.45098039215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="event_cell" id="W8K-0w-ncT" customClass="FeedTableViewCell" customModule="hackillinois_2017_ios" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W8K-0w-ncT" id="Yrs-uF-OGo">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="5iN-13-ygn">
-                                            <rect key="frame" x="12" y="12" width="351" height="76"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DD MMMM at HH:MM:SS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqn-rm-Ody">
-                                                    <rect key="frame" x="0.0" y="0.0" width="351" height="18"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="18" id="RC9-ti-EVx"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="BrandonGrotesque-Bold" family="Brandon Grotesque" pointSize="18"/>
-                                                    <color key="textColor" red="0.50196078431372548" green="0.5607843137254902" blue="0.76862745098039209" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Testing this shit" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gV-fP-azD">
-                                                    <rect key="frame" x="0.0" y="23" width="351" height="53"/>
-                                                    <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="18"/>
-                                                    <color key="textColor" red="0.96078431372549022" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" red="0.078431372549019607" green="0.14117647058823529" blue="0.25882352941176467" alpha="1" colorSpace="calibratedRGB"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JkG-Bb-CbG">
+                                            <rect key="frame" x="322.5" y="15" width="37.5" height="18"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="1gV-fP-azD" secondAttribute="trailing" id="I8f-sP-Nxh"/>
-                                                <constraint firstItem="1gV-fP-azD" firstAttribute="leading" secondItem="5iN-13-ygn" secondAttribute="leading" id="O4H-1v-fD6"/>
-                                                <constraint firstAttribute="trailing" secondItem="1gV-fP-azD" secondAttribute="trailing" id="QBK-ul-0oK"/>
-                                                <constraint firstItem="1gV-fP-azD" firstAttribute="top" secondItem="zqn-rm-Ody" secondAttribute="bottom" constant="5" id="QNU-S1-34Z"/>
-                                                <constraint firstItem="zqn-rm-Ody" firstAttribute="leading" secondItem="5iN-13-ygn" secondAttribute="leading" id="QbT-Mx-Vv5"/>
-                                                <constraint firstAttribute="trailing" secondItem="zqn-rm-Ody" secondAttribute="trailing" id="YcV-lZ-8vO"/>
-                                                <constraint firstAttribute="bottom" secondItem="1gV-fP-azD" secondAttribute="bottom" id="hCX-Yw-Wqe"/>
-                                                <constraint firstItem="1gV-fP-azD" firstAttribute="leading" secondItem="5iN-13-ygn" secondAttribute="leading" id="jDA-eJ-8TC"/>
+                                                <constraint firstAttribute="height" constant="18" id="Mm2-gh-Mru"/>
                                             </constraints>
-                                        </stackView>
+                                            <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="18"/>
+                                            <color key="textColor" red="0.50196078431372548" green="0.5607843137254902" blue="0.76862745098039209" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nvo-2h-tLx">
+                                            <rect key="frame" x="15" y="41" width="345" height="43.5"/>
+                                            <fontDescription key="fontDescription" name="BrandonGrotesque-Light" family="Brandon Grotesque" pointSize="18"/>
+                                            <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUB-Sl-2RU">
+                                            <rect key="frame" x="15" y="15" width="292.5" height="18"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="18" id="8f3-wj-36x"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="18"/>
+                                            <color key="textColor" red="0.71764705882352942" green="0.74509803921568629" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" red="0.078431372550000003" green="0.14117647059999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstItem="5iN-13-ygn" firstAttribute="leading" secondItem="Yrs-uF-OGo" secondAttribute="leading" constant="12" id="7rt-RQ-zRd"/>
-                                        <constraint firstAttribute="trailing" secondItem="5iN-13-ygn" secondAttribute="trailing" constant="12" id="WFq-kg-YOi"/>
-                                        <constraint firstItem="5iN-13-ygn" firstAttribute="top" secondItem="Yrs-uF-OGo" secondAttribute="top" constant="12" id="lLZ-gb-oln"/>
-                                        <constraint firstAttribute="bottom" secondItem="5iN-13-ygn" secondAttribute="bottom" constant="12" id="vrK-be-f6M"/>
+                                        <constraint firstItem="WUB-Sl-2RU" firstAttribute="leading" secondItem="Yrs-uF-OGo" secondAttribute="leading" constant="15" id="2o7-3V-b04"/>
+                                        <constraint firstAttribute="trailing" secondItem="nvo-2h-tLx" secondAttribute="trailing" constant="15" id="3cH-Pq-2CC"/>
+                                        <constraint firstItem="JkG-Bb-CbG" firstAttribute="leading" secondItem="WUB-Sl-2RU" secondAttribute="trailing" constant="15" id="405-N9-srm"/>
+                                        <constraint firstItem="nvo-2h-tLx" firstAttribute="top" secondItem="WUB-Sl-2RU" secondAttribute="bottom" constant="8" id="7PW-Sl-M4y"/>
+                                        <constraint firstAttribute="bottom" secondItem="nvo-2h-tLx" secondAttribute="bottom" constant="15" id="L1a-IC-YnP"/>
+                                        <constraint firstItem="WUB-Sl-2RU" firstAttribute="top" secondItem="Yrs-uF-OGo" secondAttribute="top" constant="15" id="ORf-fu-TQt"/>
+                                        <constraint firstItem="JkG-Bb-CbG" firstAttribute="top" secondItem="Yrs-uF-OGo" secondAttribute="top" constant="15" id="aan-Ch-eXZ"/>
+                                        <constraint firstAttribute="trailing" secondItem="JkG-Bb-CbG" secondAttribute="trailing" constant="15" id="cpG-Kr-WiG"/>
+                                        <constraint firstItem="nvo-2h-tLx" firstAttribute="leading" secondItem="Yrs-uF-OGo" secondAttribute="leading" constant="15" id="nMb-yC-9sq"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="dateTimeLabel" destination="zqn-rm-Ody" id="xLd-hb-ijB"/>
-                                    <outlet property="messageLabel" destination="1gV-fP-azD" id="HWi-9t-IVc"/>
-                                    <segue destination="sG7-5y-UvH" kind="show" identifier="feedDetail" id="tpd-dp-Sqy"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
