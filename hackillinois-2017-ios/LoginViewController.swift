@@ -144,7 +144,6 @@ class LoginViewController: GenericInputView {
             self.PasswordTextField.isUserInteractionEnabled = true
             // Revert Login button title
             self.LoginButton.setTitle("Login", for: UIControlState())
-            
             self.loginActivityIndicator.stopAnimating()
             self.loginActivityIndicator.removeFromSuperview()
         }

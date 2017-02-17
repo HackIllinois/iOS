@@ -46,7 +46,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Hack Illinois Logo" translatesAutoresizingMaskIntoConstraints="NO" id="MYV-TP-8Sd">
-                                        <rect key="frame" x="75.5" y="0.0" width="169" height="170"/>
+                                        <rect key="frame" x="73.5" y="0.0" width="173" height="174"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="MYV-TP-8Sd" secondAttribute="height" multiplier="168:169" id="BcX-kR-Kp8"/>
                                         </constraints>
@@ -99,7 +99,7 @@
                                     <constraint firstItem="xXB-So-CHs" firstAttribute="top" secondItem="wml-Eo-5NI" secondAttribute="bottom" constant="30" id="ahm-Ke-8WU"/>
                                     <constraint firstItem="d0t-wK-Tgb" firstAttribute="centerX" secondItem="odB-g0-H8D" secondAttribute="centerX" id="bSZ-Dn-98d"/>
                                     <constraint firstItem="wml-Eo-5NI" firstAttribute="centerX" secondItem="odB-g0-H8D" secondAttribute="centerX" id="fNl-dT-iQb"/>
-                                    <constraint firstItem="mhz-Y5-wCk" firstAttribute="top" secondItem="MYV-TP-8Sd" secondAttribute="bottom" constant="79" id="jfO-YA-alW"/>
+                                    <constraint firstItem="mhz-Y5-wCk" firstAttribute="top" secondItem="MYV-TP-8Sd" secondAttribute="bottom" constant="75" id="jfO-YA-alW"/>
                                     <constraint firstItem="wml-Eo-5NI" firstAttribute="top" secondItem="mhz-Y5-wCk" secondAttribute="bottom" constant="20" id="rqs-gl-3nX"/>
                                     <constraint firstAttribute="height" constant="508" id="sSF-qD-8cG"/>
                                     <constraint firstAttribute="width" constant="320" id="yJH-Gi-G9z"/>
