@@ -45,7 +45,6 @@ class APIManager {
         performRequest(endpoint: "v1/registration/attendee", method: .get, parameters: nil, headers: auth_header, success: success, failure: failure)
     }
     
-    
     private func performRequest(endpoint: String, method: HTTPMethod, parameters: [String: Any]?, headers: [String: String]? = nil, success: ((JSON) -> Void)?, failure: ((Error) -> Void)?) {
         let url = HACKILLINOIS_API_URL + endpoint
         Alamofire.request(url, method: method, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (reponse) in
@@ -61,8 +60,5 @@ class APIManager {
             }
         }
     }
-    
-    
-    
     
 }

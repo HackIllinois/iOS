@@ -11,25 +11,25 @@ import CoreData
 
 private let reuseIdentifier = "feedCell"
 
-class FeedTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class FeedTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
     /* Variables */
     var refreshCleanUpRequired = false
     var dateTimeFormatter: DateFormatter!
     
     /* UI elements */
-    @IBOutlet weak var feedTable: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     
     /* Fetched results controller for lazy loading of cells */
     var fetchedResultsController: NSFetchedResultsController<Feed>!
     
     /* Cache of Tags to quickly generate the "Filter by..." menu */
-    var tags: [String] = []
+    var tags = [String]()
     
     // Mark: Fetch function with predicate is already defined
     func performFetch() {
         do {
             try self.fetchedResultsController.performFetch()
-            self.feedTable.reloadData()
+            self.tableView.reloadData()
         } catch {
             print("Error loading: \(error)")
         }
@@ -99,11 +99,11 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
     
     /* Refresh the feed... */
     func refresh() {
-        feedTable.reloadData()
+        tableView.reloadData()
         DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async { [unowned self] in
             // Check to see if the method previously failed.
             if self.refreshCleanUpRequired {
-                self.refreshControl!.endRefreshing()
+//                self.refreshControl!.endRefreshing()
                 // TODO: Different alert to user to wait a bit longer
                 DispatchQueue.main.async {
                     let ac = UIAlertController(title: "Timeout Error", message: "Please wait a little longer before trying again.", preferredStyle: .alert)
@@ -121,7 +121,7 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
                 self.refreshCleanUpRequired = true
                 
                 // End refresh
-                self.refreshControl!.endRefreshing()
+//                self.refreshControl!.endRefreshing()
                 // Present warning to user
                 let ac = UIAlertController(title: "Network Error", message: "Network connection has timed out. Please check your internet connection and try again later.", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -144,18 +144,15 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
     /* TODO: Hardcode tags instead? */
     func loadTags() {
         // Might need to change this to QOS_CLASS_USER_INITIATED, or it might not appear in time
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.utility).async { [unowned self] in
-            let tempFeed = CoreDataHelpers.loadContext(entityName: "Feed") {
-                fetch in
-            }
-            for feed in tempFeed! {
-                self.tags.append(feed.value(forKeyPath: "tag") as! String)
-            }
+        let tempFeed = CoreDataHelpers.loadContext(entityName: "Feed", fetchConfiguration: nil) as! [Feed]
+        for feed in tempFeed {
+            
+            tags.append(feed.tag)
         }
     }
     
     // Mark: Show filtering options...
-    func showFilterBy() {
+    @IBAction func showFilterBy() {
         // Add the tags here...
         let alert = UIAlertController(title: "Filter by...", message: "Select tag to sort by", preferredStyle: .actionSheet)
         // Could be slow for many tags...
@@ -167,7 +164,7 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
                 
                 do {
                     try self.fetchedResultsController.performFetch()
-                    self.feedTable.reloadData()
+                    self.tableView.reloadData()
                 } catch {
                     print("Error loading: \(error)")
                 }
@@ -187,40 +184,31 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 340
-
-
+        tableView.estimatedRowHeight = 100
+        
+        tableView.delaysContentTouches = false
+        
         // Uncomment the following line to preserve selection between presentations
         /* Preemptively load tags */
         loadTags()
 
-        // Do any additional setup after loading the view.
         
-        // Set the date formatting
-        dateTimeFormatter = DateFormatter()
-        dateTimeFormatter.dateFormat = "MMMM dd 'at' h:mm a"
+//        // Set up refresh indicator
+//        // refreshControl = UIRefreshControl()
+//        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh",
+//                                                            attributes: [NSForegroundColorAttributeName: UIColor.fromRGBHex(mainTintColor)])
+//        // Set refresh control look
+//        refreshControl?.tintColor = UIColor.fromRGBHex(mainTintColor)
+//        refreshControl?.bounds = CGRect(
+//            x: refreshControl!.bounds.origin.x,
+//            y: 50,
+//            width: refreshControl!.bounds.size.width,
+//            height: refreshControl!.bounds.size.height)
+//        
+//        refreshControl?.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
         
-        // Set up refresh indicator
-        // refreshControl = UIRefreshControl()
-        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh",
-                                                            attributes: [NSForegroundColorAttributeName: UIColor.fromRGBHex(mainTintColor)])
-        // Set refresh control look
-        refreshControl?.tintColor = UIColor.fromRGBHex(mainTintColor)
-        refreshControl?.bounds = CGRect(
-            x: refreshControl!.bounds.origin.x,
-            y: 50,
-            width: refreshControl!.bounds.size.width,
-            height: refreshControl!.bounds.size.height)
-        
-        refreshControl?.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
-        
-        // Initialize Static data
-        //initializeSample()
         // Load objects from core data
         loadSavedData()
-        
-        // Create the "sort by..." feature
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_sort")!, style: .plain, target: self, action: #selector(showFilterBy))
     }
 
     // MARK: - Navigation
@@ -232,7 +220,7 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
         
         if segue.identifier == "feedDetail" {
             let destination = segue.destination as! FeedDetailViewController
-            let feedItem = fetchedResultsController.object(at: feedTable.indexPathForSelectedRow!) 
+            let feedItem = fetchedResultsController.object(at: tableView.indexPathForSelectedRow!)
             
             // Set up buildings
             destination.buildings = []
@@ -243,29 +231,33 @@ class FeedTableViewController: UITableViewController, NSFetchedResultsController
                     destination.buildings.append(building)
                 }
             }
-            
-            // Set up the message
-//            destination.message = feedItem.message // MARK: what is this supposed to be
         }
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "event_cell") as! FeedTableViewCell
-        let item = fetchedResultsController.object(at: indexPath) 
+    // MARK: UITableViewDataSource
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let item = fetchedResultsController.object(at: indexPath)
+
+        let identifier = item.locations.count > 0 ? "FeedTableViewLocationsCell" : "FeedTableViewCell"
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         
-//        cell.messageLabel.text = item.message // MARK: what is this supposed to be
-        cell.dateTimeLabel.text = dateTimeFormatter.string(from: item.startTime)
-        cell.separatorInset = UIEdgeInsets.zero
+        if let cell = cell as? FeedTableViewCell {
+            cell.titleLabel.text = item.shortName.uppercased()
+            cell.detailLabel.text = item.description_
+            cell.timeLabel.text = HLDateFormatter.shared.humanReadableTimeSince(date: item.startTime)
+            
+            cell.locations = ((item.locations.array as? [Location])?.map { return $0.name }) ?? []
+            cell.layoutIfNeeded()
+        }
         
         return cell
     }
     
-    // MARK: UITableViewDataSource
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return fetchedResultsController.sections?.count ?? 0
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedResultsController.sections![section].numberOfObjects
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
 }

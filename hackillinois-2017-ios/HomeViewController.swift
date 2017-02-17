@@ -166,10 +166,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-    
-    
-    
-    
     /* called when qr code button is clicked */
     func buttonClicked() {
         let profilePageIndex = 3

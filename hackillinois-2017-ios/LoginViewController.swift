@@ -8,8 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import JWTDecode
-
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
 
@@ -45,7 +43,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
-    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
