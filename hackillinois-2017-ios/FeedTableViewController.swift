@@ -186,8 +186,7 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         
-        tableView.delaysContentTouches = false
-        
+
         // Uncomment the following line to preserve selection between presentations
         /* Preemptively load tags */
         loadTags()
@@ -207,6 +206,7 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
 //        
 //        refreshControl?.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
         
+        initializeSample()
         // Load objects from core data
         loadSavedData()
     }

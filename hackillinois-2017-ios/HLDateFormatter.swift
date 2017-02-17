@@ -28,7 +28,7 @@ class HLDateFormatter {
     }
     
     func humanReadableTimeSince(date: Date) -> String {
-        let timeSince = date.timeIntervalSinceNow
+        let timeSince = abs(date.timeIntervalSinceNow)
         
         if timeSince < 60  {
             return "a few seconds ago"
