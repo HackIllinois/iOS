@@ -45,7 +45,7 @@ let university = "University+of+Illinois+at+Urbana+Champaign" // This will be en
 
 /* Hackathon timestamps */
 // pulled from the api and initialized
-var HACKATHON_BEGIN_TIME = 0
-var HACKING_BEGIN_TIME = 0
-var HACKING_END_TIME = 0
-var HACKATHON_END_TIME = 0
+var HACKATHON_BEGIN_TIME:TimeInterval = 0
+var HACKING_BEGIN_TIME:TimeInterval = 0
+var HACKING_END_TIME:TimeInterval = 0
+var HACKATHON_END_TIME:TimeInterval = 0

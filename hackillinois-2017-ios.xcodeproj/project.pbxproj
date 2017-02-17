@@ -60,7 +60,7 @@
 		39666E451E52924500A507DF /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39666E3D1E52924500A507DF /* EventDetailsViewController.swift */; };
 		39666E461E52924500A507DF /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39666E3E1E52924500A507DF /* Home.storyboard */; };
 		39666E471E52924500A507DF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39666E3F1E52924500A507DF /* HomeViewController.swift */; };
-		39666E481E52924500A507DF /* mainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39666E401E52924500A507DF /* mainCell.swift */; };
+		39666E481E52924500A507DF /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39666E401E52924500A507DF /* HomeViewCell.swift */; };
 		39666E4A1E52924500A507DF /* HomeTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39666E421E52924500A507DF /* HomeTableViewCells.swift */; };
 		652DD8C01E52E75B0039EC1A /* MapViewIndoorMapsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652DD8BF1E52E75A0039EC1A /* MapViewIndoorMapsTableViewController.swift */; };
 		652DD8D31E52F2B00039EC1A /* indoor_2_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 652DD8C91E52F2B00039EC1A /* indoor_2_0.png */; };
@@ -216,7 +216,7 @@
 		39666E3D1E52924500A507DF /* EventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
 		39666E3E1E52924500A507DF /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		39666E3F1E52924500A507DF /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		39666E401E52924500A507DF /* mainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = mainCell.swift; path = "hackillinois-2017-ios/mainCell.swift"; sourceTree = "<group>"; };
+		39666E401E52924500A507DF /* HomeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
 		39666E421E52924500A507DF /* HomeTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCells.swift; sourceTree = "<group>"; };
 		4D6852BE4A56CD5A38E04F5D /* Pods_hackillinois_2017_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		560EF696FA6BAE0FDD693BC5 /* Pods-hackillinois-2017-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-ios/Pods-hackillinois-2017-ios.release.xcconfig"; sourceTree = "<group>"; };
@@ -398,15 +398,6 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
-		398219D81E345F2800C5D0DF /* CustomCells */ = {
-			isa = PBXGroup;
-			children = (
-				39666E401E52924500A507DF /* mainCell.swift */,
-			);
-			name = CustomCells;
-			path = ..;
-			sourceTree = "<group>";
-		};
 		4961923C46A6AB6568EBC26E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -507,7 +498,7 @@
 			children = (
 				39666E421E52924500A507DF /* HomeTableViewCells.swift */,
 				0A8E5C0B1E56DED6002344CC /* HomeTableViewCell.xib */,
-				398219D81E345F2800C5D0DF /* CustomCells */,
+				39666E401E52924500A507DF /* HomeViewCell.swift */,
 				39666E3D1E52924500A507DF /* EventDetailsViewController.swift */,
 				39666E3F1E52924500A507DF /* HomeViewController.swift */,
 				39666E3E1E52924500A507DF /* Home.storyboard */,
@@ -1182,7 +1173,7 @@
 				E2A085FA1D0C6688002197F9 /* DayItem.swift in Sources */,
 				0A53966D1E4E67FC007F6450 /* InsetLabel.swift in Sources */,
 				24632D171E4D58EA00E7A746 /* FridayTabController.swift in Sources */,
-				39666E481E52924500A507DF /* mainCell.swift in Sources */,
+				39666E481E52924500A507DF /* HomeViewCell.swift in Sources */,
 				E224BFF41D19CCA60098AA8D /* HTTPHelpers.swift in Sources */,
 				390CFC761E4FB9D800DC6F3A /* Feed+CoreDataClass.swift in Sources */,
 				E2BCA5621CF36CDA006AAA8B /* FeedTableViewController.swift in Sources */,

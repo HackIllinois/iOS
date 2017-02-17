@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import QRCode
 import UIKit
 
 class QRCodeGenerator {
