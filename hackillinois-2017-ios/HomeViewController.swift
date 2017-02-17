@@ -12,50 +12,37 @@ import CoreData
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var checkInTableView: UITableView!
-    var currentTimeForTable = Int(NSDate().timeIntervalSince1970);//Change Me!
-          //Change Me!
-    let MAIN_CELL_HEIGHT = 332
-    let STANDARD_CELL_HEIGHT = 179
-    let TWO_LOCATIONS_CELL_HEIGHT = 215
-    let THREE_LOCATIONS_CELL_HEIGHT = 251
-    let NO_EVENT_CELL_HEIGHT = 120
+    var currentTimeForTable = Int(NSDate().timeIntervalSince1970)
+    
+    let MAIN_CELL_HEIGHT                 = 332
+    let STANDARD_CELL_HEIGHT             = 179
+    let TWO_LOCATIONS_CELL_HEIGHT        = 215
+    let THREE_LOCATIONS_CELL_HEIGHT      = 251
+    let NO_EVENT_CELL_HEIGHT             = 120
     let MAIN_CELL_AFTER_HACKATHON_HEIGHT = 437
     
-    var events : [Feed] = []
-    let dateFormatter = DateFormatter()
+    var events = [Feed]()
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US")
+        formatter.dateFormat = "hh:mm a"
+        formatter.amSymbol = "am"
+        formatter.pmSymbol = "pm"
+        return formatter
+    }()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         print (HACKATHON_BEGIN_TIME)
         
-        
-        UIApplication.shared.statusBarStyle = .lightContent
-        
-         // important to remember that the background image is not a plain color but a gradient
-        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-        backgroundImage.image = UIImage(named: "backgroundImage")
-        self.view.insertSubview(backgroundImage, at: 0)
-        
-        checkInTableView.delegate = self
-        checkInTableView.dataSource = self
-        
-        checkInTableView.separatorStyle = .none
-        checkInTableView.backgroundColor = UIColor.clear
-        checkInTableView.showsVerticalScrollIndicator = false
         checkInTableView.sectionHeaderHeight = 0.0
         checkInTableView.sectionFooterHeight = 0.0
-        checkInTableView.alwaysBounceVertical = false
         
-        // DateFormatter is an expensive class so load it once and reuse it
-        dateFormatter.locale = Locale(identifier: "en_US")
-        dateFormatter.dateFormat = "hh:mm a"
-        dateFormatter.amSymbol = "am"
-        dateFormatter.pmSymbol = "pm"
+        checkInTableView.rowHeight = UITableViewAutomaticDimension
+        checkInTableView.estimatedRowHeight = 200
         
         // This creates dummy data
-//        initializeSample()
         loadSavedData()
         
     }
@@ -72,8 +59,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewWillAppear(animated)
         // the funcList holds the refresh function of this instance so that appdelegate can refresh the tableview and fetch new data
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.setInterval(key: "HomeViewController", callback: self.loadSavedData)
-        appDelegate.setInterval(key: "HomeViewRefresh", callback: self.refreshTableView)
+        appDelegate.setInterval(key: "HomeViewController", callback: loadSavedData)
+        appDelegate.setInterval(key: "HomeViewRefresh", callback: refreshTableView)
 
 
     }
@@ -91,23 +78,24 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return 1 // otherwise just return the goodbye cell
         
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if(indexPath.row == 0) {
-            if(currentTimeForTable > HACKING_END_TIME) {
-                return CGFloat(MAIN_CELL_AFTER_HACKATHON_HEIGHT)
-            }
-            return CGFloat(MAIN_CELL_HEIGHT)
-        }
-        else if(indexPath.row == 1 && currentTimeForTable < HACKATHON_BEGIN_TIME) {
-            return CGFloat(NO_EVENT_CELL_HEIGHT)
-        } else if(events[indexPath.row - 1].locations.count == 1) {
-            return CGFloat(STANDARD_CELL_HEIGHT)
-        } else if(events[indexPath.row - 1].locations.count == 2) {
-            return CGFloat(TWO_LOCATIONS_CELL_HEIGHT)
-        } else {
-            return CGFloat(THREE_LOCATIONS_CELL_HEIGHT)
-        }
-    }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if(indexPath.row == 0) {
+//            if(currentTimeForTable > HACKING_END_TIME) {
+//                return CGFloat(MAIN_CELL_AFTER_HACKATHON_HEIGHT)
+//            }
+//            return CGFloat(MAIN_CELL_HEIGHT)
+//        }
+//        else if(indexPath.row == 1 && currentTimeForTable < HACKATHON_BEGIN_TIME) {
+//            return CGFloat(NO_EVENT_CELL_HEIGHT)
+//        } else if(events[indexPath.row - 1].locations.count == 1) {
+//            return CGFloat(STANDARD_CELL_HEIGHT)
+//        } else if(events[indexPath.row - 1].locations.count == 2) {
+//            return CGFloat(TWO_LOCATIONS_CELL_HEIGHT)
+//        } else {
+//            return CGFloat(THREE_LOCATIONS_CELL_HEIGHT)
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard: UIStoryboard = UIStoryboard(name: "Home", bundle: nil)
@@ -335,8 +323,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let location_id = locations[location_name]
         if let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "Map") as? MapViewController {
             vc.labelPressed = location_id!
-            navigationController?.navigationBar.tintColor = UIColor(red: 93.0/255.0, green: 200.0/255.0, blue: 219.0/255.0, alpha: 1.0)
-            navigationController?.navigationBar.backgroundColor = UIColor(red: 28.0/255.0, green: 50.0/255.0, blue: 90.0/255.0, alpha: 1.0)
             navigationController?.pushViewController(vc, animated: true)
         }
     }

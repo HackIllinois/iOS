@@ -15,6 +15,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     var loginActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white) // Reusable
     
+    var initialEmail: String?
+    
     // MARK: - IBOutlet
     @IBOutlet weak var errorLabel: UILabel!
     
@@ -32,7 +34,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        usernameTextField.text = "ios@hackillinois.org"
+        usernameTextField.text = initialEmail ?? "ios@hackillinois.org"
         passwordTextField.text = "testtest"
         
         loginActivityIndicator.startAnimating()

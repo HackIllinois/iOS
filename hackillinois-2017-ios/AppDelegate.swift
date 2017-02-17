@@ -16,11 +16,7 @@ import OneSignal
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var HACKILLINOIS_API_URL: String!
-    var mTimer = Timer()
     var funcList = [String: ((Void) -> Void)]()
-    
-    
     
     func iterateFunctions() {
         CoreDataHelpers.updateEventsFeed()
@@ -68,83 +64,69 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let navigationBarAppearace = UINavigationBar.appearance()
-        navigationBarAppearace.isTranslucent = false
-        navigationBarAppearace.tintColor = UIColor.white
-        navigationBarAppearace.barTintColor = UIColor(red: 93.0/255.0, green: 200.0/255.0, blue: 219.0/255.0, alpha: 1.0)
-        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        let navigationBarAppearance = UINavigationBar.appearance()
+        navigationBarAppearance.isTranslucent = false
+        navigationBarAppearance.tintColor = UIColor.white
+        navigationBarAppearance.barTintColor = UIColor(red: 93.0/255.0, green: 200.0/255.0, blue: 219.0/255.0, alpha: 1.0)
+        navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
 
-        let tabBarAppearace = UITabBar.appearance()
-        tabBarAppearace.isTranslucent = false
-        tabBarAppearace.tintColor = UIColor.hiaLightPeriwinkle
-        tabBarAppearace.barTintColor = UIColor.hiaDarkSlateBlue
+        let tabBarAppearance = UITabBar.appearance()
+        tabBarAppearance.isTranslucent = false
+        tabBarAppearance.tintColor = UIColor.hiaLightPeriwinkle
+        tabBarAppearance.barTintColor = UIColor.hiaDarkSlateBlue
 
         UIApplication.shared.statusBarStyle = .lightContent
         
-//        // Parse API Keys from keys.plist file
-//        var keys: NSDictionary?
-//        if let path = Bundle.main.path(forResource: "keys", ofType: "plist") {
-//            keys = NSDictionary(contentsOfFile: path)
-//        } else {
-//            print("keys.plist file could not be found. Please see README.md for information about keys.plist")
-//        }
-//
-//        if let dict = keys {
-//            // Read keys here
-//            print(dict["HACKILLINOIS_API_URL"]!)
-//            HACKILLINOIS_API_URL = dict["HACKILLINOIS_API_URL"]! as! String
-//        }
-//
-//        /* Find out which part of the application to go to */
-//        let user = CoreDataHelpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]
-//        if !user.isEmpty {
-//            print("User set to expire: \(user[0].expireTime)")
-//            print("Current: \(NSDate())")
-//        }
-//
-//        if user.isEmpty {
-//            print("First launch, no user found")
-//            self.window?.rootViewController = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()
-//        } else if user[0].expireTime.compare(Date()) == .orderedAscending {
-//            print("User already logged in before")
-//            // TODO: Check if this method crashes
-//            let loginView: LoginViewController = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController() as! LoginViewController
-//            loginView.initialEmail = user[0].email // Initialize it with user's email
-//            self.window?.rootViewController = loginView
-//        } else {
-//            // Login not necessary
-//            self.window?.rootViewController = UIStoryboard(name: "Event", bundle: nil).instantiateInitialViewController()
-//        }
-//
-//        mTimer = Timer.scheduledTimer(timeInterval: 10, target:self, selector: #selector(self.iterateFunctions), userInfo: nil, repeats: true)
-//        
-//        OneSignal.initWithLaunchOptions(launchOptions, appId: "0cc1d341-2731-446b-a667-1d8fc1a06d88", handleNotificationReceived: { (notification) in
-//            print("Received Notification - \(notification?.payload.notificationID)")
-//        }, handleNotificationAction: { (result) in
-//            let payload: OSNotificationPayload? = result?.notification.payload
-//            
-//            var fullMessage: String? = payload?.body
-//            if payload?.additionalData != nil {
-//                var additionalData: [AnyHashable: Any]? = payload?.additionalData
-//                if additionalData!["actionSelected"] != nil {
-//                    fullMessage = fullMessage! + "\nPressed ButtonId:\(additionalData!["actionSelected"])"
-//                }
-//            }
-//            
-//            print(fullMessage ?? "")
-//        }, settings: [kOSSettingsKeyAutoPrompt: true, kOSSettingsKeyInFocusDisplayOption: false])
-//        
+
+        /* Find out which part of the application to go to */
+        let user = CoreDataHelpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]
+        if !user.isEmpty {
+            print("User set to expire: \(user[0].expireTime)")
+            print("Current: \(NSDate())")
+        }
+
+        if user.isEmpty {
+            
+        } else if user[0].expireTime.compare(Date()) == .orderedAscending {
+            if let loginView = window?.rootViewController as? LoginViewController {
+                loginView.initialEmail = user[0].email
+            }
+        } else {
+            // Login not necessary
+            window?.rootViewController = UIStoryboard(name: "Event", bundle: nil).instantiateInitialViewController()
+        }
+
+//        mTimer = Timer.scheduledTimer(timeInterval: 10, target:self, selector: #selector(iterateFunctions), userInfo: nil, repeats: true)
+        
+        OneSignal.initWithLaunchOptions(launchOptions, appId: "0cc1d341-2731-446b-a667-1d8fc1a06d88", handleNotificationReceived: { (notification) in
+            print("Received Notification - \(notification?.payload.notificationID)")
+        }, handleNotificationAction: { (result) in
+            let payload: OSNotificationPayload? = result?.notification.payload
+            
+            var fullMessage: String? = payload?.body
+            if payload?.additionalData != nil {
+                var additionalData: [AnyHashable: Any]? = payload?.additionalData
+                if additionalData!["actionSelected"] != nil {
+                    fullMessage = fullMessage! + "\nPressed ButtonId:\(additionalData!["actionSelected"])"
+                }
+            }
+            
+            print(fullMessage ?? "")
+        }, settings: [kOSSettingsKeyAutoPrompt: true, kOSSettingsKeyInFocusDisplayOption: false])
+        
         return true
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+        self.saveContext()
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        self.saveContext()
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -162,7 +144,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 
     // MARK: - Core Data stack
-
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "me.hackillinois.hackillinois_2017_ios" in the application's documents Application Support directory.
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -211,7 +192,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
 
     // MARK: - Core Data Saving support
-
     func saveContext () {
         if managedObjectContext.hasChanges {
             do {
