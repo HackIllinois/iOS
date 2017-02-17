@@ -87,6 +87,7 @@
 		95CD1AAD1E56E89700D75807 /* qrspec.c in Sources */ = {isa = PBXBuildFile; fileRef = 95CD1AA31E56E89700D75807 /* qrspec.c */; };
 		95CD1AAE1E56E89700D75807 /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = 95CD1AA51E56E89700D75807 /* rscode.c */; };
 		95CD1AAF1E56E89700D75807 /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = 95CD1AA71E56E89700D75807 /* split.c */; };
+		95CD1AB21E5704F800D75807 /* HLDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CD1AB11E5704F800D75807 /* HLDateFormatter.swift */; };
 		95F8C14C1E56ACD80012AC03 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F8C14B1E56ACD80012AC03 /* APIManager.swift */; };
 		A50876741E1C79130095F399 /* BottomMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50876731E1C79130095F399 /* BottomMapViewController.swift */; };
 		A50876781E1C921C0095F399 /* BottomMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50876771E1C921C0095F399 /* BottomMapViewController.xib */; };
@@ -255,6 +256,7 @@
 		95CD1AA61E56E89700D75807 /* rscode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rscode.h; sourceTree = "<group>"; };
 		95CD1AA71E56E89700D75807 /* split.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = split.c; sourceTree = "<group>"; };
 		95CD1AA81E56E89700D75807 /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
+		95CD1AB11E5704F800D75807 /* HLDateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HLDateFormatter.swift; sourceTree = "<group>"; };
 		95F8C14B1E56ACD80012AC03 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		A50876731E1C79130095F399 /* BottomMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomMapViewController.swift; sourceTree = "<group>"; };
 		A50876771E1C921C0095F399 /* BottomMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomMapViewController.xib; sourceTree = "<group>"; };
@@ -686,6 +688,7 @@
 				95CD1A981E56E80B00D75807 /* UIImage+MDQRCode.h */,
 				95CD1A991E56E80B00D75807 /* UIImage+MDQRCode.m */,
 				95CD1AB01E56E89B00D75807 /* qrcode */,
+				95CD1AB11E5704F800D75807 /* HLDateFormatter.swift */,
 			);
 			name = HelperClasses;
 			sourceTree = "<group>";
@@ -1152,6 +1155,7 @@
 				95CD1AAA1E56E89700D75807 /* mask.c in Sources */,
 				E2BCA57E1CF3B19E006AAA8B /* User+CoreDataProperties.swift in Sources */,
 				E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */,
+				95CD1AB21E5704F800D75807 /* HLDateFormatter.swift in Sources */,
 				E2BD82B51D09EA530009DB07 /* GenericMapViewController.swift in Sources */,
 				243720021E32CEDD00B1C7C5 /* BottomViewController.swift in Sources */,
 				E20465D31CF1FAF50054654E /* hackillinois_2017_ios.xcdatamodeld in Sources */,

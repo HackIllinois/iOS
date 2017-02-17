@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class HomeTableViewMainCellButton: UIStackView {
+class HomeTableViewMainCellButton: UIView {
     @IBOutlet weak var button: UIButton!
 }
 
