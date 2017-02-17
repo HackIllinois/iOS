@@ -65,11 +65,6 @@
 		39666E4C1E52924500A507DF /* twoLocationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39666E441E52924500A507DF /* twoLocationsCell.swift */; };
 		39666E4E1E52926E00A507DF /* noEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39666E4D1E52926E00A507DF /* noEventCell.swift */; };
 		652DD8C01E52E75B0039EC1A /* MapViewIndoorMapsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652DD8BF1E52E75A0039EC1A /* MapViewIndoorMapsTableViewController.swift */; };
-		652DD8CE1E52F2B00039EC1A /* indoor_3_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 652DD8C31E52F2B00039EC1A /* indoor_3_5.png */; };
-		652DD8CF1E52F2B00039EC1A /* indoor_3_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 652DD8C41E52F2B00039EC1A /* indoor_3_1.png */; };
-		652DD8D01E52F2B00039EC1A /* indoor_3_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 652DD8C51E52F2B00039EC1A /* indoor_3_4.png */; };
-		652DD8D11E52F2B00039EC1A /* indoor_3_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 652DD8C61E52F2B00039EC1A /* indoor_3_2.png */; };
-		652DD8D21E52F2B00039EC1A /* indoor_3_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 652DD8C71E52F2B00039EC1A /* indoor_3_3.png */; };
 		652DD8D31E52F2B00039EC1A /* indoor_2_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 652DD8C91E52F2B00039EC1A /* indoor_2_0.png */; };
 		652DD8D41E52F2B00039EC1A /* indoor_2_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 652DD8CA1E52F2B00039EC1A /* indoor_2_1.png */; };
 		652DD8D51E52F2B00039EC1A /* indoor_2_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 652DD8CB1E52F2B00039EC1A /* indoor_2_4.png */; };
@@ -79,6 +74,13 @@
 		6544EE461E52FE3F00065A60 /* indoor_1_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6544EE451E52FE3F00065A60 /* indoor_1_1.png */; };
 		6544EE491E52FE5600065A60 /* indoor_4_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6544EE481E52FE5600065A60 /* indoor_4_1.png */; };
 		655227D91E4DD18000DD88D7 /* ScheduleDetailsImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655227D81E4DD18000DD88D7 /* ScheduleDetailsImageViewController.swift */; };
+		65609DEC1E568468001DBB86 /* indoor_3_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DE81E568468001DBB86 /* indoor_3_1.png */; };
+		65609DED1E568468001DBB86 /* indoor_3_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DE91E568468001DBB86 /* indoor_3_2.png */; };
+		65609DEE1E568468001DBB86 /* indoor_3_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DEA1E568468001DBB86 /* indoor_3_3.png */; };
+		65609DEF1E568468001DBB86 /* indoor_3_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DEB1E568468001DBB86 /* indoor_3_4.png */; };
+		65609DF11E5684F8001DBB86 /* indoor_cf_2_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DF01E5684F8001DBB86 /* indoor_cf_2_1.png */; };
+		65609DF31E56850F001DBB86 /* indoor_cf_3_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DF21E56850F001DBB86 /* indoor_cf_3_1.png */; };
+		65609DF61E568533001DBB86 /* indoor_5_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DF51E568533001DBB86 /* indoor_5_1.png */; };
 		A50876741E1C79130095F399 /* BottomMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50876731E1C79130095F399 /* BottomMapViewController.swift */; };
 		A50876781E1C921C0095F399 /* BottomMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50876771E1C921C0095F399 /* BottomMapViewController.xib */; };
 		A54825B11E160C6C00E35C71 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54825B01E160C6C00E35C71 /* ScheduleViewController.swift */; };
@@ -216,11 +218,6 @@
 		4D6852BE4A56CD5A38E04F5D /* Pods_hackillinois_2017_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		560EF696FA6BAE0FDD693BC5 /* Pods-hackillinois-2017-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-ios/Pods-hackillinois-2017-ios.release.xcconfig"; sourceTree = "<group>"; };
 		652DD8BF1E52E75A0039EC1A /* MapViewIndoorMapsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewIndoorMapsTableViewController.swift; sourceTree = "<group>"; };
-		652DD8C31E52F2B00039EC1A /* indoor_3_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_3_5.png; sourceTree = "<group>"; };
-		652DD8C41E52F2B00039EC1A /* indoor_3_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_3_1.png; sourceTree = "<group>"; };
-		652DD8C51E52F2B00039EC1A /* indoor_3_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_3_4.png; sourceTree = "<group>"; };
-		652DD8C61E52F2B00039EC1A /* indoor_3_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_3_2.png; sourceTree = "<group>"; };
-		652DD8C71E52F2B00039EC1A /* indoor_3_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_3_3.png; sourceTree = "<group>"; };
 		652DD8C91E52F2B00039EC1A /* indoor_2_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_2_0.png; sourceTree = "<group>"; };
 		652DD8CA1E52F2B00039EC1A /* indoor_2_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_2_1.png; sourceTree = "<group>"; };
 		652DD8CB1E52F2B00039EC1A /* indoor_2_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_2_4.png; sourceTree = "<group>"; };
@@ -230,6 +227,13 @@
 		6544EE451E52FE3F00065A60 /* indoor_1_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_1_1.png; sourceTree = "<group>"; };
 		6544EE481E52FE5600065A60 /* indoor_4_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_4_1.png; sourceTree = "<group>"; };
 		655227D81E4DD18000DD88D7 /* ScheduleDetailsImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleDetailsImageViewController.swift; sourceTree = "<group>"; };
+		65609DE81E568468001DBB86 /* indoor_3_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_3_1.png; sourceTree = "<group>"; };
+		65609DE91E568468001DBB86 /* indoor_3_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_3_2.png; sourceTree = "<group>"; };
+		65609DEA1E568468001DBB86 /* indoor_3_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_3_3.png; sourceTree = "<group>"; };
+		65609DEB1E568468001DBB86 /* indoor_3_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_3_4.png; sourceTree = "<group>"; };
+		65609DF01E5684F8001DBB86 /* indoor_cf_2_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_cf_2_1.png; sourceTree = "<group>"; };
+		65609DF21E56850F001DBB86 /* indoor_cf_3_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_cf_3_1.png; sourceTree = "<group>"; };
+		65609DF51E568533001DBB86 /* indoor_5_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_5_1.png; sourceTree = "<group>"; };
 		87EDFBB5348C18385995BBC2 /* Pods-hackillinois-2017-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosTests/Pods-hackillinois-2017-iosTests.release.xcconfig"; sourceTree = "<group>"; };
 		A50876731E1C79130095F399 /* BottomMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomMapViewController.swift; sourceTree = "<group>"; };
 		A50876771E1C921C0095F399 /* BottomMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomMapViewController.xib; sourceTree = "<group>"; };
@@ -405,6 +409,7 @@
 		652DD8C11E52F2700039EC1A /* Indoor_maps */ = {
 			isa = PBXGroup;
 			children = (
+				65609DF41E56851F001DBB86 /* kenny_gym */,
 				6544EE471E52FE4E00065A60 /* union */,
 				6544EE441E52FE3800065A60 /* dcl */,
 				652DD8C21E52F2B00039EC1A /* eceb */,
@@ -416,11 +421,11 @@
 		652DD8C21E52F2B00039EC1A /* eceb */ = {
 			isa = PBXGroup;
 			children = (
-				652DD8C31E52F2B00039EC1A /* indoor_3_5.png */,
-				652DD8C41E52F2B00039EC1A /* indoor_3_1.png */,
-				652DD8C51E52F2B00039EC1A /* indoor_3_4.png */,
-				652DD8C61E52F2B00039EC1A /* indoor_3_2.png */,
-				652DD8C71E52F2B00039EC1A /* indoor_3_3.png */,
+				65609DE81E568468001DBB86 /* indoor_3_1.png */,
+				65609DE91E568468001DBB86 /* indoor_3_2.png */,
+				65609DEA1E568468001DBB86 /* indoor_3_3.png */,
+				65609DEB1E568468001DBB86 /* indoor_3_4.png */,
+				65609DF21E56850F001DBB86 /* indoor_cf_3_1.png */,
 			);
 			path = eceb;
 			sourceTree = "<group>";
@@ -433,6 +438,7 @@
 				652DD8CB1E52F2B00039EC1A /* indoor_2_4.png */,
 				652DD8CC1E52F2B00039EC1A /* indoor_2_2.png */,
 				652DD8CD1E52F2B00039EC1A /* indoor_2_3.png */,
+				65609DF01E5684F8001DBB86 /* indoor_cf_2_1.png */,
 			);
 			path = siebel;
 			sourceTree = "<group>";
@@ -451,6 +457,14 @@
 				6544EE481E52FE5600065A60 /* indoor_4_1.png */,
 			);
 			name = union;
+			sourceTree = "<group>";
+		};
+		65609DF41E56851F001DBB86 /* kenny_gym */ = {
+			isa = PBXGroup;
+			children = (
+				65609DF51E568533001DBB86 /* indoor_5_1.png */,
+			);
+			name = kenny_gym;
 			sourceTree = "<group>";
 		};
 		A50F29231E14D53B00878652 /* Home */ = {
@@ -875,10 +889,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65609DF61E568533001DBB86 /* indoor_5_1.png in Resources */,
 				24794C621E340DFB0016F8D4 /* Brandon_bld_it.otf in Resources */,
 				652DD8D41E52F2B00039EC1A /* indoor_2_1.png in Resources */,
 				652DD8D51E52F2B00039EC1A /* indoor_2_4.png in Resources */,
-				652DD8D21E52F2B00039EC1A /* indoor_3_3.png in Resources */,
 				390A8DE41E3AA90200018855 /* Gotham-Black.otf in Resources */,
 				390A8DF31E3AA90200018855 /* Gotham-XLightItalic.otf in Resources */,
 				24794C631E340DFB0016F8D4 /* Brandon_bld.otf in Resources */,
@@ -891,6 +905,8 @@
 				390A8DE51E3AA90200018855 /* Gotham-BlackItalic.otf in Resources */,
 				24794C671E340DFB0016F8D4 /* Brandon_light.otf in Resources */,
 				24794C681E340DFB0016F8D4 /* Brandon_med_it.otf in Resources */,
+				65609DEF1E568468001DBB86 /* indoor_3_4.png in Resources */,
+				65609DED1E568468001DBB86 /* indoor_3_2.png in Resources */,
 				24794C691E340DFB0016F8D4 /* Brandon_med.otf in Resources */,
 				24794C6A1E340DFB0016F8D4 /* Brandon_reg_it.otf in Resources */,
 				24794C6B1E340DFB0016F8D4 /* Brandon_reg.otf in Resources */,
@@ -898,9 +914,8 @@
 				24794C6C1E340DFB0016F8D4 /* Brandon_thin_it.otf in Resources */,
 				390A8DEA1E3AA90200018855 /* Gotham-Light.otf in Resources */,
 				390A8DEF1E3AA90200018855 /* Gotham-ThinItalic.otf in Resources */,
-				652DD8D01E52F2B00039EC1A /* indoor_3_4.png in Resources */,
+				65609DF11E5684F8001DBB86 /* indoor_cf_2_1.png in Resources */,
 				24794C6D1E340DFB0016F8D4 /* Brandon_thin.otf in Resources */,
-				652DD8D11E52F2B00039EC1A /* indoor_3_2.png in Resources */,
 				390A8DE91E3AA90200018855 /* Gotham-BookItalic.otf in Resources */,
 				E277DD6B1CF4AF0400D7E018 /* keys.plist in Resources */,
 				E2B6C3951D0B2E8000D851F9 /* Map.storyboard in Resources */,
@@ -914,6 +929,8 @@
 				E2F957051D0BA899003A0881 /* Schedule.storyboard in Resources */,
 				E2B6C3931D0B2E1200D851F9 /* Feed.storyboard in Resources */,
 				E20465D51CF1FAF50054654E /* Assets.xcassets in Resources */,
+				65609DEE1E568468001DBB86 /* indoor_3_3.png in Resources */,
+				65609DF31E56850F001DBB86 /* indoor_cf_3_1.png in Resources */,
 				39666E461E52924500A507DF /* Home.storyboard in Resources */,
 				390A8DEB1E3AA90200018855 /* Gotham-LightItalic.otf in Resources */,
 				390A8DEE1E3AA90200018855 /* Gotham-Thin.otf in Resources */,
@@ -921,11 +938,10 @@
 				390A8DED1E3AA90200018855 /* Gotham-MediumItalic.otf in Resources */,
 				E20465D01CF1FAF50054654E /* Login.storyboard in Resources */,
 				390A8DF01E3AA90200018855 /* Gotham-Ultra.otf in Resources */,
-				652DD8CF1E52F2B00039EC1A /* indoor_3_1.png in Resources */,
 				390A8DE71E3AA90200018855 /* Gotham-BoldItalic.otf in Resources */,
+				65609DEC1E568468001DBB86 /* indoor_3_1.png in Resources */,
 				390A8DE81E3AA90200018855 /* Gotham-Book.otf in Resources */,
 				E2BCA55B1CF36187006AAA8B /* Event.storyboard in Resources */,
-				652DD8CE1E52F2B00039EC1A /* indoor_3_5.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
