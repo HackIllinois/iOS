@@ -9,18 +9,10 @@
 import UIKit
 
 class InsetLabel: UILabel {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
     
     
-    let topInset = CGFloat(7.5)
-    let bottomInset = CGFloat(7.5)
+    let topInset = CGFloat(9)
+    let bottomInset = CGFloat(9)
     let leftInset = CGFloat(14.5)
     let rightInset = CGFloat(14.5)
     

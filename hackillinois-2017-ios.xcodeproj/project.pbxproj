@@ -10,6 +10,7 @@
 		0A3A1B2F1E4E45EB00EA2100 /* ProfileViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A1B2E1E4E45EB00EA2100 /* ProfileViewCell.swift */; };
 		0A53966D1E4E67FC007F6450 /* InsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A53966C1E4E67FC007F6450 /* InsetLabel.swift */; };
 		0A8E5C0A1E56DD60002344CC /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E5C091E56DD60002344CC /* QRCodeGenerator.swift */; };
+		0A8E5C0C1E56DED6002344CC /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8E5C0B1E56DED6002344CC /* HomeTableViewCell.xib */; };
 		1189F0B3155F8EC3E55068B1 /* Pods_hackillinois_2017_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA90F4FC4B2D90FC25772B31 /* Pods_hackillinois_2017_ios.framework */; };
 		243720021E32CEDD00B1C7C5 /* BottomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243720011E32CEDD00B1C7C5 /* BottomViewController.swift */; };
 		243720041E32D4D100B1C7C5 /* BottomViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243720031E32D4D100B1C7C5 /* BottomViewTableViewCell.swift */; };
@@ -157,6 +158,7 @@
 		0A3A1B2E1E4E45EB00EA2100 /* ProfileViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewCell.swift; sourceTree = "<group>"; };
 		0A53966C1E4E67FC007F6450 /* InsetLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsetLabel.swift; sourceTree = "<group>"; };
 		0A8E5C091E56DD60002344CC /* QRCodeGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
+		0A8E5C0B1E56DED6002344CC /* HomeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
 		1D81231F845B92D001F870CF /* Pods_hackillinois_2017_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		243720011E32CEDD00B1C7C5 /* BottomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomViewController.swift; sourceTree = "<group>"; };
 		243720031E32D4D100B1C7C5 /* BottomViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomViewTableViewCell.swift; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 			isa = PBXGroup;
 			children = (
 				39666E421E52924500A507DF /* HomeTableViewCells.swift */,
+				0A8E5C0B1E56DED6002344CC /* HomeTableViewCell.xib */,
 				398219D81E345F2800C5D0DF /* CustomCells */,
 				39666E3D1E52924500A507DF /* EventDetailsViewController.swift */,
 				39666E3F1E52924500A507DF /* HomeViewController.swift */,
@@ -917,6 +920,7 @@
 				E2F957051D0BA899003A0881 /* Schedule.storyboard in Resources */,
 				E2B6C3931D0B2E1200D851F9 /* Feed.storyboard in Resources */,
 				E20465D51CF1FAF50054654E /* Assets.xcassets in Resources */,
+				0A8E5C0C1E56DED6002344CC /* HomeTableViewCell.xib in Resources */,
 				65609DEE1E568468001DBB86 /* indoor_3_3.png in Resources */,
 				65609DF31E56850F001DBB86 /* indoor_cf_3_1.png in Resources */,
 				39666E461E52924500A507DF /* Home.storyboard in Resources */,

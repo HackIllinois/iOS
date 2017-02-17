@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12106.1" systemVersion="16E154a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12074.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Brandon_reg.otf">
+            <string>BrandonGrotesque-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DYV-re-s6x" customClass="HomeTableViewMainCellButton" customModule="hackillinois_2017_ios" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="79" height="26"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_gps" translatesAutoresizingMaskIntoConstraints="NO" id="1Q8-g1-ya3">
+                    <rect key="frame" x="0.0" y="3.5" width="13" height="19"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="18.5" id="VVi-4O-3CC"/>
+                        <constraint firstAttribute="width" constant="12.9" id="YZq-Vp-cSj"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eP3-pb-Fzo">
+                    <rect key="frame" x="21" y="0.0" width="45" height="26"/>
+                    <fontDescription key="fontDescription" name="BrandonGrotesque-Regular" family="Brandon Grotesque" pointSize="18"/>
+                    <state key="normal" title="Label">
+                        <color key="titleColor" red="0.36470588240000001" green="0.7843137255" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_gps_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="EXf-kd-jpu">
+                    <rect key="frame" x="74" y="6.5" width="5" height="13"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="12.5" id="05e-sn-ccA"/>
+                        <constraint firstAttribute="width" constant="4.5" id="yKJ-vf-eM5"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="height" constant="26" id="Feq-JT-e0n"/>
+            </constraints>
+        </stackView>
+    </objects>
+    <resources>
+        <image name="ic_gps" width="13" height="19"/>
+        <image name="ic_gps_arrow" width="7" height="15"/>
+    </resources>
+</document>
