@@ -17,15 +17,12 @@ class QRCodeGenerator {
         
     }
     
-    var id: NSNumber?
-    
-    var qrcodeImage: UIImage {
-        if qrcodeImage == nil {
-            _qrcodeImage = generateQRCode()
+    var id: NSNumber? {
+        didSet {
+            qrcodeImage = generateQRCode()
         }
-        return _qrcodeImage!
     }
-    private var _qrcodeImage: UIImage?
+    private(set) var qrcodeImage: UIImage?
     
     func generateQRCode() -> UIImage {
         let data = NSData(bytes: &id, length: MemoryLayout<NSNumber>.size)
