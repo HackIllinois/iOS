@@ -242,33 +242,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     // MARK: - junk
     func processUserData(name: String, email: String, school: String, major: String, role: String, barcode: String, auth: String, initTime: Date, expirationTime: Date, userID: NSNumber, diet: String) {
+        QRCodeGenerator.shared.id = userID
+        // Store user data
+        CoreDataHelpers.storeUser(name: name, email: email, school: school, major: major, role: role, barcode: barcode, barcodeData: Data(), auth: auth, initTime: initTime, expirationTime: expirationTime, userID: userID, diet: diet)
         
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async { [unowned self] in
-            // Generate content asynchronously
-            /* Generate barcode image */
-            let barcodeImage = UIImage.generateBarCode(barcode)
-            // redraw to get NSData
-            UIGraphicsBeginImageContext(CGSize(width: 1200, height: 300))
-            barcodeImage?.draw(in: CGRect(x: 0, y: 0, width: 1200, height: 300))
-            let barCodeImage2 = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            
-            let barcodeData = UIImagePNGRepresentation(barCodeImage2!)
-            
-            guard barcodeData != nil else {
-                fatalError("BarcodeData is null")
-            }
-            
-            DispatchQueue.main.async {
-                /* Login was successful */
-                // Store user data
-                CoreDataHelpers.storeUser(name: name, email: email, school: school, major: major, role: role, barcode: barcode, barcodeData: barcodeData!, auth: auth, initTime: initTime, expirationTime: expirationTime, userID: userID, diet: diet)
-                
-                // Present main application
-                let mainStoryboard = UIStoryboard(name: "Event", bundle: nil)
-                let mainViewController = mainStoryboard.instantiateInitialViewController()
-                self.present(mainViewController!, animated: true, completion: nil)
-            }
-        }
+        // Present main application
+        let mainStoryboard = UIStoryboard(name: "Event", bundle: nil)
+        let mainViewController = mainStoryboard.instantiateInitialViewController()
+        present(mainViewController!, animated: true, completion: nil)
     }
 }

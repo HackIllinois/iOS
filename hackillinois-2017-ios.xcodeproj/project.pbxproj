@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A3A1B2F1E4E45EB00EA2100 /* ProfileViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A1B2E1E4E45EB00EA2100 /* ProfileViewCell.swift */; };
 		0A53966D1E4E67FC007F6450 /* InsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A53966C1E4E67FC007F6450 /* InsetLabel.swift */; };
+		0A8E5C081E56D8F2002344CC /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E5C071E56D8F2002344CC /* QRCodeGenerator.swift */; };
 		1189F0B3155F8EC3E55068B1 /* Pods_hackillinois_2017_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA90F4FC4B2D90FC25772B31 /* Pods_hackillinois_2017_ios.framework */; };
 		243720021E32CEDD00B1C7C5 /* BottomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243720011E32CEDD00B1C7C5 /* BottomViewController.swift */; };
 		243720041E32D4D100B1C7C5 /* BottomViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243720031E32D4D100B1C7C5 /* BottomViewTableViewCell.swift */; };
@@ -100,7 +101,6 @@
 		E23791411D21C4870020618E /* ReferencedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23791401D21C4870020618E /* ReferencedButton.swift */; };
 		E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25377431CF8C485003795E7 /* CoreDataHelpers.swift */; };
 		E26F44F21D0EF2C100FB4A9F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F44F11D0EF2C100FB4A9F /* ProfileViewController.swift */; };
-		E26F44F41D0EF3C400FB4A9F /* UIImage+generateBarCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F44F31D0EF3C400FB4A9F /* UIImage+generateBarCode.swift */; };
 		E27755531D36B7F600E7A379 /* GenericHelpQStaffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27755521D36B7F600E7A379 /* GenericHelpQStaffViewController.swift */; };
 		E277DD691CF4A79100D7E018 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E277DD681CF4A79100D7E018 /* FeedDetailViewController.swift */; };
 		E277DD6B1CF4AF0400D7E018 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = E277DD6A1CF4AF0400D7E018 /* keys.plist */; };
@@ -160,6 +160,7 @@
 		00335164D918AC0A662BBC94 /* Pods-hackillinois-2017-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-ios/Pods-hackillinois-2017-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		0A3A1B2E1E4E45EB00EA2100 /* ProfileViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewCell.swift; sourceTree = "<group>"; };
 		0A53966C1E4E67FC007F6450 /* InsetLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsetLabel.swift; sourceTree = "<group>"; };
+		0A8E5C071E56D8F2002344CC /* QRCodeGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QRCodeGenerator.swift; path = ../../../../Desktop/QRCodeGenerator.swift; sourceTree = "<group>"; };
 		1D81231F845B92D001F870CF /* Pods_hackillinois_2017_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		243720011E32CEDD00B1C7C5 /* BottomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomViewController.swift; sourceTree = "<group>"; };
 		243720031E32D4D100B1C7C5 /* BottomViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomViewTableViewCell.swift; sourceTree = "<group>"; };
@@ -260,7 +261,6 @@
 		E23791401D21C4870020618E /* ReferencedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferencedButton.swift; sourceTree = "<group>"; };
 		E25377431CF8C485003795E7 /* CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
 		E26F44F11D0EF2C100FB4A9F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		E26F44F31D0EF3C400FB4A9F /* UIImage+generateBarCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+generateBarCode.swift"; sourceTree = "<group>"; };
 		E27755521D36B7F600E7A379 /* GenericHelpQStaffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericHelpQStaffViewController.swift; sourceTree = "<group>"; };
 		E277DD681CF4A79100D7E018 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
 		E277DD6A1CF4AF0400D7E018 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
@@ -610,7 +610,6 @@
 				E2D4F0E21D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift */,
 				E2D4F0E41D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift */,
 				E2BD82B61D0AFFB90009DB07 /* UIImage+imageWithColor.swift */,
-				E26F44F31D0EF3C400FB4A9F /* UIImage+generateBarCode.swift */,
 				24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */,
 			);
 			name = LanguageExtensions;
@@ -641,6 +640,7 @@
 		E2B6C39D1D0B311000D851F9 /* HelperClasses */ = {
 			isa = PBXGroup;
 			children = (
+				0A8E5C071E56D8F2002344CC /* QRCodeGenerator.swift */,
 				E25377431CF8C485003795E7 /* CoreDataHelpers.swift */,
 				390A8DF61E3C6A6300018855 /* RectangleHelper.swift */,
 				E224BFF31D19CCA60098AA8D /* HTTPHelpers.swift */,
@@ -1128,7 +1128,6 @@
 				E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */,
 				E28FB69F1D194951000D062F /* HelpQ+CoreDataProperties.swift in Sources */,
 				E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */,
-				E26F44F41D0EF3C400FB4A9F /* UIImage+generateBarCode.swift in Sources */,
 				390A8DF71E3C6A6300018855 /* RectangleHelper.swift in Sources */,
 				655227D91E4DD18000DD88D7 /* ScheduleDetailsImageViewController.swift in Sources */,
 				E2D4F0E31D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift in Sources */,
@@ -1153,6 +1152,7 @@
 				243720041E32D4D100B1C7C5 /* BottomViewTableViewCell.swift in Sources */,
 				653304F51E4FF83C00E881F8 /* DayItemLocation.swift in Sources */,
 				E23791411D21C4870020618E /* ReferencedButton.swift in Sources */,
+				0A8E5C081E56D8F2002344CC /* QRCodeGenerator.swift in Sources */,
 				E2BCA5801CF3B19E006AAA8B /* Location+CoreDataProperties.swift in Sources */,
 				E2D4F0DF1D06AD3F00646BF8 /* Building.swift in Sources */,
 				E2BD82B71D0AFFB90009DB07 /* UIImage+imageWithColor.swift in Sources */,
