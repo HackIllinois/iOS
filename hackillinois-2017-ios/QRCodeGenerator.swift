@@ -7,32 +7,18 @@
 //
 
 import Foundation
-import CoreImage
+import QRCode
 import UIKit
 
 class QRCodeGenerator {
     static let shared = QRCodeGenerator()
     
-    private init() {
-        
-    }
+    private init() { }
     
     var id: NSNumber? {
         didSet {
-            qrcodeImage = generateQRCode()
+            qrcodeImage = UIImage.mdQRCode(for: "\(id ?? 0)", size: 600, fill: UIColor.hiaSeafoamBlue)
         }
     }
     private(set) var qrcodeImage: UIImage?
-    
-    func generateQRCode() -> UIImage {
-        let data = NSData(bytes: &id, length: MemoryLayout<NSNumber>.size)
-        
-        let filter = CIFilter(name: "CIQRCodeGenerator")
-        
-        filter?.setValue(data, forKey: "inputMessage")
-        filter?.setValue("Q", forKey: "inputCorrectionLevel")
-        
-        return UIImage(ciImage: (filter?.outputImage)!)
-    }
-    
 }

@@ -215,6 +215,10 @@ extension CoreDataHelpers {
         
         self.saveContext()
     }
+    
+    class func getUser() -> User {
+        return (loadContext(entityName: "User", fetchConfiguration: nil) as! [User]).first!
+    }
 }
 
 /* Helpers for HelpQ */

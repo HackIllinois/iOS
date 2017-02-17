@@ -9,6 +9,10 @@
 import UIKit
 
 class FeedTableViewCell: UITableViewCell {
-    @IBOutlet weak var dateTimeLabel: UILabel!
-    @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    
+    @IBOutlet weak var detailLabel: UILabel!
+
+    
 }

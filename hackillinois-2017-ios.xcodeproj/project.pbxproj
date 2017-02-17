@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A3A1B2F1E4E45EB00EA2100 /* ProfileViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A1B2E1E4E45EB00EA2100 /* ProfileViewCell.swift */; };
+		0A3A1B2F1E4E45EB00EA2100 /* ProfileTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A1B2E1E4E45EB00EA2100 /* ProfileTableViewCells.swift */; };
 		0A53966D1E4E67FC007F6450 /* InsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A53966C1E4E67FC007F6450 /* InsetLabel.swift */; };
 		0A8E5C0A1E56DD60002344CC /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E5C091E56DD60002344CC /* QRCodeGenerator.swift */; };
 		1189F0B3155F8EC3E55068B1 /* Pods_hackillinois_2017_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA90F4FC4B2D90FC25772B31 /* Pods_hackillinois_2017_ios.framework */; };
@@ -78,6 +78,14 @@
 		65609DF11E5684F8001DBB86 /* indoor_cf_2_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DF01E5684F8001DBB86 /* indoor_cf_2_1.png */; };
 		65609DF31E56850F001DBB86 /* indoor_cf_3_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DF21E56850F001DBB86 /* indoor_cf_3_1.png */; };
 		65609DF61E568533001DBB86 /* indoor_5_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DF51E568533001DBB86 /* indoor_5_1.png */; };
+		95CD1A9A1E56E80B00D75807 /* UIImage+MDQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CD1A991E56E80B00D75807 /* UIImage+MDQRCode.m */; };
+		95CD1AA91E56E89700D75807 /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = 95CD1A9B1E56E89700D75807 /* bitstream.c */; };
+		95CD1AAA1E56E89700D75807 /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = 95CD1A9D1E56E89700D75807 /* mask.c */; };
+		95CD1AAB1E56E89700D75807 /* qrencode.c in Sources */ = {isa = PBXBuildFile; fileRef = 95CD1A9F1E56E89700D75807 /* qrencode.c */; };
+		95CD1AAC1E56E89700D75807 /* qrinput.c in Sources */ = {isa = PBXBuildFile; fileRef = 95CD1AA11E56E89700D75807 /* qrinput.c */; };
+		95CD1AAD1E56E89700D75807 /* qrspec.c in Sources */ = {isa = PBXBuildFile; fileRef = 95CD1AA31E56E89700D75807 /* qrspec.c */; };
+		95CD1AAE1E56E89700D75807 /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = 95CD1AA51E56E89700D75807 /* rscode.c */; };
+		95CD1AAF1E56E89700D75807 /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = 95CD1AA71E56E89700D75807 /* split.c */; };
 		95F8C14C1E56ACD80012AC03 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F8C14B1E56ACD80012AC03 /* APIManager.swift */; };
 		A50876741E1C79130095F399 /* BottomMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50876731E1C79130095F399 /* BottomMapViewController.swift */; };
 		A50876781E1C921C0095F399 /* BottomMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50876771E1C921C0095F399 /* BottomMapViewController.xib */; };
@@ -154,7 +162,7 @@
 
 /* Begin PBXFileReference section */
 		00335164D918AC0A662BBC94 /* Pods-hackillinois-2017-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-ios/Pods-hackillinois-2017-ios.debug.xcconfig"; sourceTree = "<group>"; };
-		0A3A1B2E1E4E45EB00EA2100 /* ProfileViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewCell.swift; sourceTree = "<group>"; };
+		0A3A1B2E1E4E45EB00EA2100 /* ProfileTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCells.swift; sourceTree = "<group>"; };
 		0A53966C1E4E67FC007F6450 /* InsetLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsetLabel.swift; sourceTree = "<group>"; };
 		0A8E5C091E56DD60002344CC /* QRCodeGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
 		1D81231F845B92D001F870CF /* Pods_hackillinois_2017_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -228,6 +236,23 @@
 		65609DF21E56850F001DBB86 /* indoor_cf_3_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_cf_3_1.png; sourceTree = "<group>"; };
 		65609DF51E568533001DBB86 /* indoor_5_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_5_1.png; sourceTree = "<group>"; };
 		87EDFBB5348C18385995BBC2 /* Pods-hackillinois-2017-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosTests/Pods-hackillinois-2017-iosTests.release.xcconfig"; sourceTree = "<group>"; };
+		95CD1A971E56E80A00D75807 /* hackillinois-2017-ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "hackillinois-2017-ios-Bridging-Header.h"; sourceTree = "<group>"; };
+		95CD1A981E56E80B00D75807 /* UIImage+MDQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MDQRCode.h"; sourceTree = "<group>"; };
+		95CD1A991E56E80B00D75807 /* UIImage+MDQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MDQRCode.m"; sourceTree = "<group>"; };
+		95CD1A9B1E56E89700D75807 /* bitstream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bitstream.c; sourceTree = "<group>"; };
+		95CD1A9C1E56E89700D75807 /* bitstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bitstream.h; sourceTree = "<group>"; };
+		95CD1A9D1E56E89700D75807 /* mask.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mask.c; sourceTree = "<group>"; };
+		95CD1A9E1E56E89700D75807 /* mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mask.h; sourceTree = "<group>"; };
+		95CD1A9F1E56E89700D75807 /* qrencode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrencode.c; sourceTree = "<group>"; };
+		95CD1AA01E56E89700D75807 /* qrencode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrencode.h; sourceTree = "<group>"; };
+		95CD1AA11E56E89700D75807 /* qrinput.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrinput.c; sourceTree = "<group>"; };
+		95CD1AA21E56E89700D75807 /* qrinput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrinput.h; sourceTree = "<group>"; };
+		95CD1AA31E56E89700D75807 /* qrspec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrspec.c; sourceTree = "<group>"; };
+		95CD1AA41E56E89700D75807 /* qrspec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrspec.h; sourceTree = "<group>"; };
+		95CD1AA51E56E89700D75807 /* rscode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rscode.c; sourceTree = "<group>"; };
+		95CD1AA61E56E89700D75807 /* rscode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rscode.h; sourceTree = "<group>"; };
+		95CD1AA71E56E89700D75807 /* split.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = split.c; sourceTree = "<group>"; };
+		95CD1AA81E56E89700D75807 /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
 		95F8C14B1E56ACD80012AC03 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		A50876731E1C79130095F399 /* BottomMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomMapViewController.swift; sourceTree = "<group>"; };
 		A50876771E1C921C0095F399 /* BottomMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomMapViewController.xib; sourceTree = "<group>"; };
@@ -454,6 +479,27 @@
 			name = kenny_gym;
 			sourceTree = "<group>";
 		};
+		95CD1AB01E56E89B00D75807 /* qrcode */ = {
+			isa = PBXGroup;
+			children = (
+				95CD1A9B1E56E89700D75807 /* bitstream.c */,
+				95CD1A9C1E56E89700D75807 /* bitstream.h */,
+				95CD1A9D1E56E89700D75807 /* mask.c */,
+				95CD1A9E1E56E89700D75807 /* mask.h */,
+				95CD1A9F1E56E89700D75807 /* qrencode.c */,
+				95CD1AA01E56E89700D75807 /* qrencode.h */,
+				95CD1AA11E56E89700D75807 /* qrinput.c */,
+				95CD1AA21E56E89700D75807 /* qrinput.h */,
+				95CD1AA31E56E89700D75807 /* qrspec.c */,
+				95CD1AA41E56E89700D75807 /* qrspec.h */,
+				95CD1AA51E56E89700D75807 /* rscode.c */,
+				95CD1AA61E56E89700D75807 /* rscode.h */,
+				95CD1AA71E56E89700D75807 /* split.c */,
+				95CD1AA81E56E89700D75807 /* split.h */,
+			);
+			name = qrcode;
+			sourceTree = "<group>";
+		};
 		A50F29231E14D53B00878652 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -503,6 +549,7 @@
 		E20465C91CF1FAF50054654E /* hackillinois-2017-ios */ = {
 			isa = PBXGroup;
 			children = (
+				95CD1A971E56E80A00D75807 /* hackillinois-2017-ios-Bridging-Header.h */,
 				652DD8C11E52F2700039EC1A /* Indoor_maps */,
 				2453E8C41E511C8600BC5A9C /* hackillinois-2017-ios.entitlements */,
 				24371FFC1E32777E00B1C7C5 /* Fonts */,
@@ -606,7 +653,7 @@
 		E2B6C39A1D0B30A300D851F9 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				0A3A1B2E1E4E45EB00EA2100 /* ProfileViewCell.swift */,
+				0A3A1B2E1E4E45EB00EA2100 /* ProfileTableViewCells.swift */,
 				E2B6C3961D0B2ED800D851F9 /* Profile.storyboard */,
 				E26F44F11D0EF2C100FB4A9F /* ProfileViewController.swift */,
 			);
@@ -633,6 +680,9 @@
 				390A8DF61E3C6A6300018855 /* RectangleHelper.swift */,
 				E224BFF31D19CCA60098AA8D /* HTTPHelpers.swift */,
 				95F8C14B1E56ACD80012AC03 /* APIManager.swift */,
+				95CD1A981E56E80B00D75807 /* UIImage+MDQRCode.h */,
+				95CD1A991E56E80B00D75807 /* UIImage+MDQRCode.m */,
+				95CD1AB01E56E89B00D75807 /* qrcode */,
 			);
 			name = HelperClasses;
 			sourceTree = "<group>";
@@ -1095,6 +1145,7 @@
 				E2A085F21D0C4E43002197F9 /* GenericCardViewController.swift in Sources */,
 				E2BCA57F1CF3B19E006AAA8B /* User.swift in Sources */,
 				E2BCA56A1CF373A1006AAA8B /* EventConstants.swift in Sources */,
+				95CD1AAA1E56E89700D75807 /* mask.c in Sources */,
 				E2BCA57E1CF3B19E006AAA8B /* User+CoreDataProperties.swift in Sources */,
 				E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */,
 				E2BD82B51D09EA530009DB07 /* GenericMapViewController.swift in Sources */,
@@ -1108,14 +1159,18 @@
 				652DD8C01E52E75B0039EC1A /* MapViewIndoorMapsTableViewController.swift in Sources */,
 				E2A085F61D0C6536002197F9 /* ScheduleCell.swift in Sources */,
 				24794C6F1E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */,
+				95CD1AAB1E56E89700D75807 /* qrencode.c in Sources */,
 				3947F9521E4C471100FF4AF4 /* SchedulePageViewController.swift in Sources */,
 				24F103FB1E503E00006701B7 /* GenericNavigationController.swift in Sources */,
+				95CD1A9A1E56E80B00D75807 /* UIImage+MDQRCode.m in Sources */,
+				95CD1AAE1E56E89700D75807 /* rscode.c in Sources */,
 				E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */,
 				E28FB69F1D194951000D062F /* HelpQ+CoreDataProperties.swift in Sources */,
 				E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */,
 				390A8DF71E3C6A6300018855 /* RectangleHelper.swift in Sources */,
 				655227D91E4DD18000DD88D7 /* ScheduleDetailsImageViewController.swift in Sources */,
 				E2D4F0E31D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift in Sources */,
+				95CD1AAD1E56E89700D75807 /* qrspec.c in Sources */,
 				E2D4F0E11D06B28B00646BF8 /* FeedTableViewCell.swift in Sources */,
 				39666E471E52924500A507DF /* HomeViewController.swift in Sources */,
 				E2BCA5811CF3B19E006AAA8B /* Location.swift in Sources */,
@@ -1142,7 +1197,10 @@
 				0A8E5C0A1E56DD60002344CC /* QRCodeGenerator.swift in Sources */,
 				E2BD82B71D0AFFB90009DB07 /* UIImage+imageWithColor.swift in Sources */,
 				3947F9581E4C473F00FF4AF4 /* ScheduleDescriptionViewController.swift in Sources */,
+				95CD1AAC1E56E89700D75807 /* qrinput.c in Sources */,
 				24632D181E4D58EA00E7A746 /* SaturdayTabController.swift in Sources */,
+				95CD1AAF1E56E89700D75807 /* split.c in Sources */,
+				95CD1AA91E56E89700D75807 /* bitstream.c in Sources */,
 				E2F639481D05083300853089 /* CGRect+initWithCenterAt.swift in Sources */,
 				E28FB6A11D194951000D062F /* Chat+CoreDataProperties.swift in Sources */,
 				E20465CD1CF1FAF50054654E /* LoginViewController.swift in Sources */,
@@ -1152,7 +1210,7 @@
 				E277DD691CF4A79100D7E018 /* FeedDetailViewController.swift in Sources */,
 				E26F44F21D0EF2C100FB4A9F /* ProfileViewController.swift in Sources */,
 				95F8C14C1E56ACD80012AC03 /* APIManager.swift in Sources */,
-				0A3A1B2F1E4E45EB00EA2100 /* ProfileViewCell.swift in Sources */,
+				0A3A1B2F1E4E45EB00EA2100 /* ProfileTableViewCells.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1322,6 +1380,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "e9d1c831-7804-46ae-9edb-37589a231b0a";
 				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "hackillinois-2017-ios/hackillinois-2017-ios-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1347,6 +1406,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "e9d1c831-7804-46ae-9edb-37589a231b0a";
 				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "hackillinois-2017-ios/hackillinois-2017-ios-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
