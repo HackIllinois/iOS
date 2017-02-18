@@ -44,7 +44,6 @@
                 </imageView>
             </subviews>
             <constraints>
-                <constraint firstAttribute="height" constant="26" id="AqQ-2L-EJT"/>
                 <constraint firstItem="EXf-kd-jpu" firstAttribute="leading" secondItem="eP3-pb-Fzo" secondAttribute="trailing" constant="8" id="B7o-Zj-EtV"/>
                 <constraint firstItem="1Q8-g1-ya3" firstAttribute="leading" secondItem="0hK-To-jJW" secondAttribute="leading" id="Bfz-as-fhr"/>
                 <constraint firstItem="eP3-pb-Fzo" firstAttribute="top" secondItem="0hK-To-jJW" secondAttribute="top" id="DFd-Dy-20o"/>
