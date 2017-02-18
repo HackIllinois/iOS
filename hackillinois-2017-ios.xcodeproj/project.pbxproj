@@ -80,6 +80,7 @@
 		65609DF31E56850F001DBB86 /* indoor_cf_3_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DF21E56850F001DBB86 /* indoor_cf_3_1.png */; };
 		65609DF61E568533001DBB86 /* indoor_5_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DF51E568533001DBB86 /* indoor_5_1.png */; };
 		9560A9AB1E58269900D488EE /* LocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9560A9AA1E58269900D488EE /* LocationButton.swift */; };
+		9593E2E81E58D8B0003EFB8B /* LocationButtonContainerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9593E2E71E58D8B0003EFB8B /* LocationButtonContainerTableViewCell.swift */; };
 		95CD1A9A1E56E80B00D75807 /* UIImage+MDQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CD1A991E56E80B00D75807 /* UIImage+MDQRCode.m */; };
 		95CD1AA91E56E89700D75807 /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = 95CD1A9B1E56E89700D75807 /* bitstream.c */; };
 		95CD1AAA1E56E89700D75807 /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = 95CD1A9D1E56E89700D75807 /* mask.c */; };
@@ -241,6 +242,7 @@
 		65609DF51E568533001DBB86 /* indoor_5_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_5_1.png; sourceTree = "<group>"; };
 		87EDFBB5348C18385995BBC2 /* Pods-hackillinois-2017-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosTests/Pods-hackillinois-2017-iosTests.release.xcconfig"; sourceTree = "<group>"; };
 		9560A9AA1E58269900D488EE /* LocationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationButton.swift; sourceTree = "<group>"; };
+		9593E2E71E58D8B0003EFB8B /* LocationButtonContainerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationButtonContainerTableViewCell.swift; sourceTree = "<group>"; };
 		95CD1A971E56E80A00D75807 /* hackillinois-2017-ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "hackillinois-2017-ios-Bridging-Header.h"; sourceTree = "<group>"; };
 		95CD1A981E56E80B00D75807 /* UIImage+MDQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MDQRCode.h"; sourceTree = "<group>"; };
 		95CD1A991E56E80B00D75807 /* UIImage+MDQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MDQRCode.m"; sourceTree = "<group>"; };
@@ -757,6 +759,7 @@
 				9560A9AA1E58269900D488EE /* LocationButton.swift */,
 				0A8E5C0B1E56DED6002344CC /* LocationButton.xib */,
 				E23791401D21C4870020618E /* ReferencedButton.swift */,
+				9593E2E71E58D8B0003EFB8B /* LocationButtonContainerTableViewCell.swift */,
 			);
 			name = "Custom UI";
 			sourceTree = "<group>";
@@ -1159,6 +1162,7 @@
 				A50876741E1C79130095F399 /* BottomMapViewController.swift in Sources */,
 				A54825B11E160C6C00E35C71 /* ScheduleViewController.swift in Sources */,
 				652DD8C01E52E75B0039EC1A /* MapViewIndoorMapsTableViewController.swift in Sources */,
+				9593E2E81E58D8B0003EFB8B /* LocationButtonContainerTableViewCell.swift in Sources */,
 				E2A085F61D0C6536002197F9 /* ScheduleCell.swift in Sources */,
 				24794C6F1E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */,
 				95CD1AAB1E56E89700D75807 /* qrencode.c in Sources */,
