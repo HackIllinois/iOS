@@ -11,7 +11,7 @@ import MapKit
 
 class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, UIToolbarDelegate  {
     
-    var bottomSheet : BottomViewController!
+    var bottomSheet: BottomViewController!
     
     @IBOutlet weak var mapView: MKMapView!
     

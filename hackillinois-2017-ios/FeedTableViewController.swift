@@ -11,7 +11,7 @@ import CoreData
 
 private let reuseIdentifier = "feedCell"
 
-class FeedTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
+class FeedTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, LocationButtonContainerDelegate {
     /* Variables */
     var refreshCleanUpRequired = false
     var dateTimeFormatter: DateFormatter!
@@ -81,14 +81,14 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         
         _ = CoreDataHelpers.createOrFetchFeed(id: 3, description: "clue hunt", startTime: date, endTime: date, updated: date, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel, union], tag: "EVENT")
         
-        _ = CoreDataHelpers.createOrFetchFeed(id: 1, description: "Dinner gonna be rdy in 10", startTime: date, endTime: date, updated: date, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel, union], tag: "EVENT")
+        _ = CoreDataHelpers.createOrFetchFeed(id: 1, description: "Dinner gonna be rdy in 10", startTime: date, endTime: date, updated: date, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel, union], tag: "XD")
         
-        _ = CoreDataHelpers.createOrFetchFeed(id: 1, description: "career fair in the union", startTime: date, endTime: date, updated: date, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel, union], tag: "EVENT")
+        _ = CoreDataHelpers.createOrFetchFeed(id: 1, description: "career fair in the union", startTime: date, endTime: date, updated: date, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel, union], tag: "XD")
         
         // Generate dummy data to simulate scrolling down
         for n in 0 ..< 7 {
             let time = Date(timeIntervalSince1970: (TimeInterval(1464037000 - n*432)))
-            let _ = CoreDataHelpers.createOrFetchFeed(id: NSNumber(value: 6 + n), description: "Cool look these cells are now dynamically size. This means that the more text there is per notification, the larger the cell gets!", startTime: time, endTime: time, updated: time, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel, eceb, union], tag: "EVENT")
+            let _ = CoreDataHelpers.createOrFetchFeed(id: NSNumber(value: 10 + n), description: "Cool look these cells are now dynamically size. This means that the more text there is per notification, the larger the cell gets!", startTime: time, endTime: time, updated: time, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel, eceb, union], tag: "XD")
         }
         
         CoreDataHelpers.saveContext()
@@ -143,11 +143,11 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
     /* Value to load all tags */
     /* TODO: Hardcode tags instead? */
     func loadTags() {
-        // Might need to change this to QOS_CLASS_USER_INITIATED, or it might not appear in time
         let tempFeed = CoreDataHelpers.loadContext(entityName: "Feed", fetchConfiguration: nil) as! [Feed]
         for feed in tempFeed {
-            
-            tags.append(feed.tag)
+            if !tags.contains(feed.tag) {
+                tags.append(feed.tag)
+            }
         }
     }
     
@@ -159,7 +159,7 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         for tag in tags {
             alert.addAction(UIAlertAction(title: tag, style: .default, handler: {
                 [unowned self] alert in
-                let predicate = NSPredicate(format: "ANY tags.name CONTAINS[cd] %@", alert.title!)
+                let predicate = NSPredicate(format: "tag == %@", tag)
                 self.fetchedResultsController.fetchRequest.predicate = predicate
                 
                 do {
@@ -242,11 +242,14 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         
         if let cell = cell as? FeedTableViewCell {
+            cell.delegate = self
+            cell.indexPath = indexPath
+            
             cell.titleLabel.text = item.shortName.uppercased()
             cell.detailLabel.text = item.description_
             cell.timeLabel.text = HLDateFormatter.shared.humanReadableTimeSince(date: item.startTime)
             
-            cell.locations = ((item.locations.array as? [Location])?.map { return $0.name }) ?? []
+            cell.locations = item.locations.array as! [Location]
             cell.layoutIfNeeded()
         }
         
@@ -260,4 +263,12 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
+    
+    // MARK: - LocationButtonContainerDelegate
+    func locationButtonTapped(location: Location) {
+        print("did select location \(location.name): (\(location.latitude), \(location.longitude))")
+        
+    }
+    
+    
 }

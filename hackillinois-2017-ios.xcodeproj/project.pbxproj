@@ -10,7 +10,7 @@
 		0A3A1B2F1E4E45EB00EA2100 /* ProfileTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A1B2E1E4E45EB00EA2100 /* ProfileTableViewCells.swift */; };
 		0A53966D1E4E67FC007F6450 /* InsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A53966C1E4E67FC007F6450 /* InsetLabel.swift */; };
 		0A8E5C0A1E56DD60002344CC /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E5C091E56DD60002344CC /* QRCodeGenerator.swift */; };
-		0A8E5C0C1E56DED6002344CC /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8E5C0B1E56DED6002344CC /* HomeTableViewCell.xib */; };
+		0A8E5C0C1E56DED6002344CC /* LocationButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8E5C0B1E56DED6002344CC /* LocationButton.xib */; };
 		1189F0B3155F8EC3E55068B1 /* Pods_hackillinois_2017_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA90F4FC4B2D90FC25772B31 /* Pods_hackillinois_2017_ios.framework */; };
 		243720021E32CEDD00B1C7C5 /* BottomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243720011E32CEDD00B1C7C5 /* BottomViewController.swift */; };
 		243720041E32D4D100B1C7C5 /* BottomViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243720031E32D4D100B1C7C5 /* BottomViewTableViewCell.swift */; };
@@ -79,6 +79,7 @@
 		65609DF11E5684F8001DBB86 /* indoor_cf_2_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DF01E5684F8001DBB86 /* indoor_cf_2_1.png */; };
 		65609DF31E56850F001DBB86 /* indoor_cf_3_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DF21E56850F001DBB86 /* indoor_cf_3_1.png */; };
 		65609DF61E568533001DBB86 /* indoor_5_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DF51E568533001DBB86 /* indoor_5_1.png */; };
+		9560A9AB1E58269900D488EE /* LocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9560A9AA1E58269900D488EE /* LocationButton.swift */; };
 		95CD1A9A1E56E80B00D75807 /* UIImage+MDQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CD1A991E56E80B00D75807 /* UIImage+MDQRCode.m */; };
 		95CD1AA91E56E89700D75807 /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = 95CD1A9B1E56E89700D75807 /* bitstream.c */; };
 		95CD1AAA1E56E89700D75807 /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = 95CD1A9D1E56E89700D75807 /* mask.c */; };
@@ -167,7 +168,7 @@
 		0A3A1B2E1E4E45EB00EA2100 /* ProfileTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCells.swift; sourceTree = "<group>"; };
 		0A53966C1E4E67FC007F6450 /* InsetLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsetLabel.swift; sourceTree = "<group>"; };
 		0A8E5C091E56DD60002344CC /* QRCodeGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
-		0A8E5C0B1E56DED6002344CC /* HomeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
+		0A8E5C0B1E56DED6002344CC /* LocationButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationButton.xib; sourceTree = "<group>"; };
 		1D81231F845B92D001F870CF /* Pods_hackillinois_2017_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		243720011E32CEDD00B1C7C5 /* BottomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomViewController.swift; sourceTree = "<group>"; };
 		243720031E32D4D100B1C7C5 /* BottomViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomViewTableViewCell.swift; sourceTree = "<group>"; };
@@ -239,6 +240,7 @@
 		65609DF21E56850F001DBB86 /* indoor_cf_3_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_cf_3_1.png; sourceTree = "<group>"; };
 		65609DF51E568533001DBB86 /* indoor_5_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_5_1.png; sourceTree = "<group>"; };
 		87EDFBB5348C18385995BBC2 /* Pods-hackillinois-2017-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosTests/Pods-hackillinois-2017-iosTests.release.xcconfig"; sourceTree = "<group>"; };
+		9560A9AA1E58269900D488EE /* LocationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationButton.swift; sourceTree = "<group>"; };
 		95CD1A971E56E80A00D75807 /* hackillinois-2017-ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "hackillinois-2017-ios-Bridging-Header.h"; sourceTree = "<group>"; };
 		95CD1A981E56E80B00D75807 /* UIImage+MDQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MDQRCode.h"; sourceTree = "<group>"; };
 		95CD1A991E56E80B00D75807 /* UIImage+MDQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MDQRCode.m"; sourceTree = "<group>"; };
@@ -499,7 +501,6 @@
 			isa = PBXGroup;
 			children = (
 				39666E421E52924500A507DF /* HomeTableViewCells.swift */,
-				0A8E5C0B1E56DED6002344CC /* HomeTableViewCell.xib */,
 				39666E401E52924500A507DF /* HomeViewCell.swift */,
 				39666E3D1E52924500A507DF /* EventDetailsViewController.swift */,
 				39666E3F1E52924500A507DF /* HomeViewController.swift */,
@@ -753,6 +754,8 @@
 		E2D1853A1D21CA1F00CA4816 /* Custom UI */ = {
 			isa = PBXGroup;
 			children = (
+				9560A9AA1E58269900D488EE /* LocationButton.swift */,
+				0A8E5C0B1E56DED6002344CC /* LocationButton.xib */,
 				E23791401D21C4870020618E /* ReferencedButton.swift */,
 			);
 			name = "Custom UI";
@@ -964,7 +967,7 @@
 				E2F957051D0BA899003A0881 /* Schedule.storyboard in Resources */,
 				E2B6C3931D0B2E1200D851F9 /* Feed.storyboard in Resources */,
 				E20465D51CF1FAF50054654E /* Assets.xcassets in Resources */,
-				0A8E5C0C1E56DED6002344CC /* HomeTableViewCell.xib in Resources */,
+				0A8E5C0C1E56DED6002344CC /* LocationButton.xib in Resources */,
 				65609DEE1E568468001DBB86 /* indoor_3_3.png in Resources */,
 				65609DF31E56850F001DBB86 /* indoor_cf_3_1.png in Resources */,
 				39666E461E52924500A507DF /* Home.storyboard in Resources */,
@@ -1169,6 +1172,7 @@
 				390A8DF71E3C6A6300018855 /* RectangleHelper.swift in Sources */,
 				655227D91E4DD18000DD88D7 /* ScheduleDetailsImageViewController.swift in Sources */,
 				E2D4F0E31D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift in Sources */,
+				9560A9AB1E58269900D488EE /* LocationButton.swift in Sources */,
 				95CD1AAD1E56E89700D75807 /* qrspec.c in Sources */,
 				E2D4F0E11D06B28B00646BF8 /* FeedTableViewCell.swift in Sources */,
 				39666E471E52924500A507DF /* HomeViewController.swift in Sources */,
