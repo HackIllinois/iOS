@@ -114,36 +114,45 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return UITableViewCell()
         switch indexPath.row {
+        
+        /*****
+           *      This is for the top cell => Regardless of which part of the event we are in,
+           *      the cell will contain status information regarding the hackathon
+           *      ie. "Hacking begins in xx Hours xx Minutes xx seconds"
+           *      or "Submit Projects in xx Hours xx Minutes xx seconds"
+         *****/
         case 0:
             
             switch HackathonStatus.current.0 {
                 
             case .beforeHackathon:
-                return tableView.dequeueReusableCell(withIdentifier: "beforeHackathon", for: indexPath)
+                return tableView.dequeueReusableCell(withIdentifier: "beforeHackathonCell", for: indexPath)
                 
             case .beforeHacking:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "beforeOrDuringHacking", for: indexPath)
-                if let cell = cell as? mainCell {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "beforeOrDuringHackingCell", for: indexPath)
+                if let cell = cell as? HomeTableViewCell {
                     // initalize the timer label as current time and decrement by 1 second every second
                     cell.timeRemaining = HACKING_BEGIN_TIME - HackathonStatus.current.1
+                    cell.statusLabel?.text = "Hacking Starts in..."
                     cell.timeStart()
                 }
                 return cell
                 
                 
             case .duringHacking:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "beforeOrDuringHacking", for: indexPath)
-                if let cell = cell as? mainCell {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "beforeOrDuringHackingCell", for: indexPath)
+                if let cell = cell as? HomeTableViewCell {
                     // initalize the timer label as current time and decrement by 1 second every second
+                    cell.statusLabel?.text = "Submit Projects in..."
                     cell.timeStart()
                 }
                 return cell
                 
                 
             case .afterHackathon:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "afterHackathonCell", for: indexPath)
                 
-                if let cell = cell as? mainCell {
+                if let cell = cell as? HomeTableViewCell {
                     // initalize the timer label as current time and decrement by 1 second every second
                     cell.timeStart()
                 }
@@ -152,14 +161,19 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
             }
            
-            
+       /*****
+          *      The default case will be used for all other cards
+          *      These cards will contain information about the events with two separate options
+          *      events that have qr code scanning and events that do not
+        *****/
         default:
-            // THIS IS FOR EVENT CELLS
-            let cell = tableView.dequeueReusableCell(withIdentifier: "standardCell", for: indexPath)
-            if let cell = cell as? mainCell {
-                cell.eventLabel?.text = events[indexPath.row - 1].name
-                cell.checkinTimeLabel?.text = dateFormatter.string(from: events[indexPath.row - 1].startTime)
-//                cell.qrCodeButton.roundedButton()
+            // check api for qr code
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "standardEventCell", for: indexPath)
+            if let cell = cell as? HomeTableViewMainCell {
+                cell.titleLabel?.text = events[indexPath.row - 1].name
+                cell.timeLabel?.text = dateFormatter.string(from: events[indexPath.row - 1].startTime)
+                cell.qrCodeButton?.roundedButton()
             }
             return cell
         }

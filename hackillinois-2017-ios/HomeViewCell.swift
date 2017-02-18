@@ -24,11 +24,7 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var checkinTimeLabel: UILabel?
     
     
-    //MARK: - IBActions
     
-    @IBAction func qrCodeButton(_ sender: Any) {
-        // TODO: Popup view controller to show QR Code
-    }
     
     
     

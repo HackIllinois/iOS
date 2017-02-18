@@ -116,6 +116,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     // MARK: - Login Logic
     @IBAction func attemptLogin() {
+        
         guard let (username, password) = localValidateLoginFields() else { return }
         
         presentBusyFormUI()
