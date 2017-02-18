@@ -8,15 +8,19 @@
 
 import UIKit
 
-class mainCell: UITableViewCell {
+class HomeTableViewCell: UITableViewCell {
     
     // MARK: - IBOutlets
     @IBOutlet weak var statusLabel: UILabel?
+    
     @IBOutlet weak var hoursLabel: UILabel?
     @IBOutlet weak var minutesLabel: UILabel?
     @IBOutlet weak var secondsLabel: UILabel?
+    
     @IBOutlet weak var startTimeLabel: UILabel?
+    
     @IBOutlet weak var eventLabel: UILabel?
+    
     @IBOutlet weak var checkinTimeLabel: UILabel?
     
     
@@ -42,7 +46,7 @@ class mainCell: UITableViewCell {
     
     /* call the updateCounter function every second */
     func timeStart(){
-        mTimer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(mainCell.updateCounter), userInfo: nil, repeats: true)
+        mTimer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
     }
     
     /* decrement seceonds by one and make sure the timer does not overflow */
