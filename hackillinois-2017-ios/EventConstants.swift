@@ -45,7 +45,30 @@ let university = "University+of+Illinois+at+Urbana+Champaign" // This will be en
 
 /* Hackathon timestamps */
 // pulled from the api and initialized
-var HACKATHON_BEGIN_TIME:TimeInterval = 0
-var HACKING_BEGIN_TIME:TimeInterval = 0
-var HACKING_END_TIME:TimeInterval = 0
-var HACKATHON_END_TIME:TimeInterval = 0
+var HACKATHON_BEGIN_TIME = TimeInterval()
+var HACKING_BEGIN_TIME = TimeInterval()
+var HACKING_END_TIME = TimeInterval()
+var HACKATHON_END_TIME = TimeInterval()
+
+//func setTimes() {
+//    
+//    HACKATHON_BEGIN_TIME.year = 2017
+//    HACKATHON_BEGIN_TIME.month = 2
+//    HACKATHON_BEGIN_TIME.day = 24
+//    HACKATHON_BEGIN_TIME.hour = 18
+//    
+//    HACKING_BEGIN_TIME.year = 2017
+//    HACKING_BEGIN_TIME.month = 2
+//    HACKING_BEGIN_TIME.day = 24
+//    HACKING_BEGIN_TIME.hour = 22
+//    
+//    HACKING_END_TIME.year = 2017
+//    HACKING_END_TIME.month = 2
+//    HACKING_END_TIME.day = 24
+//    HACKING_END_TIME.hour = 22
+//    
+//    HACKATHON_END_TIME.year = 2017
+//    HACKATHON_END_TIME.month = 2
+//    HACKATHON_END_TIME.day = 24
+//    HACKATHON_END_TIME.hour = 22
+//}

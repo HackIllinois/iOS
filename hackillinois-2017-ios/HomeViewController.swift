@@ -48,7 +48,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         formatter.amSymbol = "am"
         formatter.pmSymbol = "pm"
         return formatter
-    }()
+    } ()
     
     // MARK: - ViewController
     override func viewDidLoad() {
@@ -58,7 +58,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         checkInTableView.sectionFooterHeight = 0.0
         
         checkInTableView.rowHeight = UITableViewAutomaticDimension
-        checkInTableView.estimatedRowHeight = 200
+        checkInTableView.estimatedRowHeight = 450
         
         // This creates dummy data
         loadSavedData()
@@ -112,7 +112,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+//        return UITableViewCell()
+        var cell: UITableViewCell
         switch indexPath.row {
         
         /*****
@@ -126,40 +127,36 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             switch HackathonStatus.current.0 {
                 
             case .beforeHackathon:
-                return tableView.dequeueReusableCell(withIdentifier: "beforeHackathonCell", for: indexPath)
+                cell = tableView.dequeueReusableCell(withIdentifier: "beforeHackathonCell", for: indexPath)
                 
             case .beforeHacking:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "beforeOrDuringHackingCell", for: indexPath)
+                cell = tableView.dequeueReusableCell(withIdentifier: "beforeOrDuringHackingCell", for: indexPath)
                 if let cell = cell as? HomeTableViewCell {
                     // initalize the timer label as current time and decrement by 1 second every second
                     cell.timeRemaining = HACKING_BEGIN_TIME - HackathonStatus.current.1
                     cell.statusLabel?.text = "Hacking Starts in..."
                     cell.timeStart()
                 }
-                return cell
                 
                 
             case .duringHacking:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "beforeOrDuringHackingCell", for: indexPath)
+                cell = tableView.dequeueReusableCell(withIdentifier: "beforeOrDuringHackingCell", for: indexPath)
                 if let cell = cell as? HomeTableViewCell {
                     // initalize the timer label as current time and decrement by 1 second every second
                     cell.statusLabel?.text = "Submit Projects in..."
                     cell.timeStart()
                 }
-                return cell
                 
                 
             case .afterHackathon:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "afterHackathonCell", for: indexPath)
+                cell = tableView.dequeueReusableCell(withIdentifier: "afterHackathonCell", for: indexPath)
                 
                 if let cell = cell as? HomeTableViewCell {
                     // initalize the timer label as current time and decrement by 1 second every second
                     cell.timeStart()
                 }
-                return cell
-                
-                
             }
+            print("REUSE ID: \(cell.reuseIdentifier)")
            
        /*****
           *      The default case will be used for all other cards
@@ -169,14 +166,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         default:
             // check api for qr code
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "standardEventCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "standardEventCell", for: indexPath)
             if let cell = cell as? HomeTableViewMainCell {
                 cell.titleLabel?.text = events[indexPath.row - 1].name
                 cell.timeLabel?.text = dateFormatter.string(from: events[indexPath.row - 1].startTime)
                 cell.qrCodeButton?.roundedButton()
             }
-            return cell
         }
+        return cell
     }
     
     
@@ -193,7 +190,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     /* loads saved data from the SQL storage on local device and not the web */
     func loadSavedData(){
-        print ("load saved data called")
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let fetchRequest = NSFetchRequest<Feed>(entityName: "Feed")
         

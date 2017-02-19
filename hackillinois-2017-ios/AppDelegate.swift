@@ -55,6 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print(hackathonTimes[1].description_)
                 print(hackathonTimes[2].description_)
                 print(hackathonTimes[3].description_)
+                
                 HACKATHON_BEGIN_TIME = hackathonTimes[0].startTime.timeIntervalSinceNow
                 HACKING_BEGIN_TIME = hackathonTimes[1].startTime.timeIntervalSinceNow
                 HACKING_END_TIME  = hackathonTimes[2].startTime.timeIntervalSinceNow + 86400
