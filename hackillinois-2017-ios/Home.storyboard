@@ -193,6 +193,7 @@
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="317" id="BEA-ef-2mk"/>
+                                                        <constraint firstAttribute="height" constant="97" id="lx1-qp-j7W"/>
                                                     </constraints>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@ Friday 9:00 pm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRw-Vm-9gB">
@@ -209,25 +210,27 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Happening Now" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rck-vG-a7w">
-                                                    <rect key="frame" x="92" y="292" width="192" height="26"/>
+                                                    <rect key="frame" x="8" y="292" width="359" height="26"/>
                                                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="24"/>
                                                     <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="rck-vG-a7w" secondAttribute="trailing" id="8Z4-ps-SV4"/>
                                                 <constraint firstItem="hRw-Vm-9gB" firstAttribute="centerX" secondItem="XNB-oq-Dc4" secondAttribute="centerX" id="ABJ-og-YJ6"/>
                                                 <constraint firstItem="ZcG-Y8-IhT" firstAttribute="leading" secondItem="XNB-oq-Dc4" secondAttribute="leadingMargin" constant="29" id="Cye-Dh-djt"/>
                                                 <constraint firstItem="92d-hK-XRZ" firstAttribute="top" secondItem="XNB-oq-Dc4" secondAttribute="topMargin" constant="12" id="HYs-3P-yza"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="rck-vG-a7w" secondAttribute="bottom" constant="14" id="QbV-BD-FSI"/>
                                                 <constraint firstItem="ZcG-Y8-IhT" firstAttribute="top" secondItem="hRw-Vm-9gB" secondAttribute="bottom" constant="33" id="QsH-Ol-Pba"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="ZcG-Y8-IhT" secondAttribute="trailing" constant="29" id="UgP-Do-Tfg"/>
                                                 <constraint firstItem="rtA-cK-lrE" firstAttribute="centerX" secondItem="XNB-oq-Dc4" secondAttribute="centerX" id="YoV-bA-LDp"/>
-                                                <constraint firstItem="rck-vG-a7w" firstAttribute="centerX" secondItem="XNB-oq-Dc4" secondAttribute="centerX" id="Zrk-CT-sYr"/>
                                                 <constraint firstItem="rck-vG-a7w" firstAttribute="top" secondItem="ZcG-Y8-IhT" secondAttribute="bottom" constant="30" id="dq2-pP-zBK"/>
                                                 <constraint firstItem="rtA-cK-lrE" firstAttribute="top" secondItem="92d-hK-XRZ" secondAttribute="bottom" constant="37.5" id="in9-gy-CJL"/>
                                                 <constraint firstItem="92d-hK-XRZ" firstAttribute="centerX" secondItem="XNB-oq-Dc4" secondAttribute="centerX" id="iss-o8-bPK"/>
                                                 <constraint firstItem="ZcG-Y8-IhT" firstAttribute="centerX" secondItem="XNB-oq-Dc4" secondAttribute="centerX" id="qrv-fO-2jJ"/>
                                                 <constraint firstItem="hRw-Vm-9gB" firstAttribute="top" secondItem="rtA-cK-lrE" secondAttribute="bottom" constant="22" id="vf3-7P-ZkN"/>
+                                                <constraint firstItem="rck-vG-a7w" firstAttribute="leading" secondItem="XNB-oq-Dc4" secondAttribute="leadingMargin" id="wKm-GI-lNT"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -297,11 +300,11 @@
                                             <outlet property="verticalStackView" destination="aET-no-04H" id="pQ4-Ef-i68"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="qrEventCell" rowHeight="158" id="Q77-cQ-bJv" customClass="HomeTableViewMainCell" customModule="hackillinois_2017_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="923" width="375" height="158"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="qrEventCell" rowHeight="165" id="Q77-cQ-bJv" customClass="HomeTableViewMainCell" customModule="hackillinois_2017_ios" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="923" width="375" height="165"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Q77-cQ-bJv" id="K7f-Wy-tYp">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="158"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="165"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ter-67-dzk">
@@ -330,8 +333,8 @@
                                                         <constraint firstAttribute="height" constant="62" id="ec7-Ae-sgN"/>
                                                     </constraints>
                                                 </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BOD-Wm-BB0">
-                                                    <rect key="frame" x="15" y="121" width="345" height="37"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BOD-Wm-BB0">
+                                                    <rect key="frame" x="15" y="120" width="345" height="37"/>
                                                     <color key="backgroundColor" red="0.36470588235294116" green="0.78431372549019607" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="37" id="g0G-7B-AFq"/>
@@ -350,14 +353,15 @@
                                                         <action selector="qrCodeButton:" destination="Q77-cQ-bJv" eventType="touchUpInside" id="n1D-cI-Wkl"/>
                                                     </connections>
                                                 </button>
-                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YZf-mz-RFK">
-                                                    <rect key="frame" x="15" y="87" width="345" height="26"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YZf-mz-RFK">
+                                                    <rect key="frame" x="15" y="86" width="345" height="26"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="26" id="6Fe-zh-ccl"/>
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="BOD-Wm-BB0" secondAttribute="bottom" constant="8" id="F7B-YZ-UDz"/>
                                                 <constraint firstAttribute="trailing" secondItem="YZf-mz-RFK" secondAttribute="trailing" constant="15" id="PId-G7-qfp"/>
                                                 <constraint firstItem="BOD-Wm-BB0" firstAttribute="leading" secondItem="K7f-Wy-tYp" secondAttribute="leading" constant="15" id="Qni-cs-Gia"/>
                                                 <constraint firstItem="BOD-Wm-BB0" firstAttribute="top" secondItem="YZf-mz-RFK" secondAttribute="bottom" constant="8" id="RIM-uF-KcC"/>
@@ -379,7 +383,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="afterHackathonCell" rowHeight="437" id="qci-5O-y1z" userLabel="afterHackathon">
-                                        <rect key="frame" x="0.0" y="1081" width="375" height="437"/>
+                                        <rect key="frame" x="0.0" y="1088" width="375" height="437"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qci-5O-y1z" id="qiv-vM-PEL">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="437"/>
