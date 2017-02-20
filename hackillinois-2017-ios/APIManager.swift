@@ -48,7 +48,7 @@ class APIManager {
     private func performRequest(endpoint: String, method: HTTPMethod, parameters: [String: Any]?, headers: [String: String]? = nil, success: ((JSON) -> Void)?, failure: ((Error) -> Void)?) {
         let url = HACKILLINOIS_API_URL + endpoint
         Alamofire.request(url, method: method, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (reponse) in
-            print(reponse)
+//            print(reponse)
             
             if reponse.result.isSuccess {
                 let json = JSON(reponse.result.value!)

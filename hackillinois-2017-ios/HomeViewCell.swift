@@ -47,10 +47,17 @@ class HomeTableViewCell: UITableViewCell {
     
     /* decrement seceonds by one and make sure the timer does not overflow */
     func updateCounter() {
+        let hrs = timeRemaining / 3600
+        let min = (timeRemaining / 60).truncatingRemainder(dividingBy: 60)
+        let sec = timeRemaining.truncatingRemainder(dividingBy: 60)
         
-//        hoursLabel.text =
-//        minutesLabel.text =
-//        secondsLabel.text =
+        print("HRS: \(hrs)")
+        
+        hoursLabel?.text = String(format: "%.0f", floor(hrs))
+        minutesLabel?.text = String(format: "%.0f", floor(min))
+        secondsLabel?.text = String(format: "%.0f", floor(sec))
+        
+        timeRemaining = timeRemaining - 1.0
     }
     
     

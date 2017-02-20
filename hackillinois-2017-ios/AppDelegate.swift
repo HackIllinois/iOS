@@ -29,40 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
-    func setInterval(key: String, callback: @escaping ((Void) -> Void)) {
-        print("Delegate: Set interval for key \(key)")
-        self.funcList[key] = callback
-    }
-    
-    func clearIntereval(key: String) {
-        print("Delegate: Cleared interval for key \(key)")
-        self.funcList[key] = nil
-    }
-    
-    func loadHackathonTimes(){
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let fetchRequest = NSFetchRequest<Feed>(entityName: "Feed")
-        
-        // load only events that are upcoming
-        fetchRequest.predicate = NSPredicate(format: "tag == %@", "HACKATHON")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startTime", ascending: true)]
-        
-        if let feedArr = try? appDelegate.managedObjectContext.fetch(fetchRequest) {
-            let hackathonTimes = feedArr
-            if(hackathonTimes.count == 4) {
-                print(hackathonTimes[0].description_)
-                print(hackathonTimes[1].description_)
-                print(hackathonTimes[2].description_)
-                print(hackathonTimes[3].description_)
-                
-                HACKATHON_BEGIN_TIME = hackathonTimes[0].startTime.timeIntervalSinceNow
-                HACKING_BEGIN_TIME = hackathonTimes[1].startTime.timeIntervalSinceNow
-                HACKING_END_TIME  = hackathonTimes[2].startTime.timeIntervalSinceNow + 86400
-                HACKATHON_END_TIME = hackathonTimes[3].startTime.timeIntervalSinceNow + 86400
-            }
-        }
-    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let navigationBarAppearance = UINavigationBar.appearance()
@@ -114,6 +80,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             print(fullMessage ?? "")
         }, settings: [kOSSettingsKeyAutoPrompt: true, kOSSettingsKeyInFocusDisplayOption: false])
+        
+        print("REACHED HERE")
+        loadHackathonTimes()
         
         return true
     }
@@ -205,6 +174,64 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 abort()
             }
         }
+    }
+    
+    // MARK: - Helper Functions
+    func setInterval(key: String, callback: @escaping ((Void) -> Void)) {
+        print("Delegate: Set interval for key \(key)")
+        self.funcList[key] = callback
+    }
+    
+    func clearIntereval(key: String) {
+        print("Delegate: Cleared interval for key \(key)")
+        self.funcList[key] = nil
+    }
+    
+    func loadHackathonTimes(){
+        print("LOADING HACKATHONTIMES")
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let fetchRequest = NSFetchRequest<Feed>(entityName: "Feed")
+        
+        // load only events that are upcoming
+        fetchRequest.predicate = NSPredicate(format: "tag == %@", "HACKATHON")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startTime", ascending: true)]
+        
+        HACKATHON_BEGIN_TIME = Date(timeIntervalSince1970: 1487973600)
+        HACKING_BEGIN_TIME = Date(timeIntervalSince1970: 1487995200)
+        HACKING_END_TIME = Date(timeIntervalSince1970: 1488124800)
+        HACKATHON_END_TIME = Date(timeIntervalSince1970: 1488146400)
+        
+        print("HACKATHON_BEGIN_TIME: \(HACKATHON_BEGIN_TIME)")
+        print("HACKING_BEGIN_TIME: \(HACKING_BEGIN_TIME)")
+        print("HACKING_END_TIME: \(HACKING_END_TIME)")
+        print("HACKATHON_END_TIME: \(HACKATHON_END_TIME)")
+        
+//        if let feedArr = try? appDelegate.managedObjectContext.fetch(fetchRequest) {
+//            print("FETCHED")
+//            print("FEEDARR: \(feedArr)")
+//            let hackathonTimes = feedArr
+//            if(hackathonTimes.count == 4) {
+//                print("description0: \(hackathonTimes[0].description_)")
+//                print("description1: \(hackathonTimes[1].description_)")
+//                print("description2: \(hackathonTimes[2].description_)")
+//                print("description3: \(hackathonTimes[3].description_)")
+//                
+//                HACKATHON_BEGIN_TIME = hackathonTimes[0].startTime.timeIntervalSinceNow
+//                HACKING_BEGIN_TIME = hackathonTimes[1].startTime.timeIntervalSinceNow
+//                HACKING_END_TIME  = hackathonTimes[2].startTime.timeIntervalSinceNow + 86400
+//                HACKATHON_END_TIME = hackathonTimes[3].startTime.timeIntervalSinceNow + 86400
+//                
+//                print("HACKATHON_BEGIN_TIME: \(HACKATHON_BEGIN_TIME)")
+//                print("HACKING_BEGIN_TIME: \(HACKING_BEGIN_TIME)")
+//                print("HACKING_END_TIME: \(HACKING_END_TIME)")
+//                print("HACKATHON_END_TIME: \(HACKATHON_END_TIME)")
+//            }
+//            else {
+//                // Hardcode the times in
+//                
+//                
+//            }
+//        }
     }
 
 }
