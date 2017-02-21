@@ -390,7 +390,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="5xn-gy-Aq9">
-                                                    <rect key="frame" x="52" y="37.5" width="272" height="364"/>
+                                                    <rect key="frame" x="52" y="36.5" width="272" height="364"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thanks for Attending!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e23-W8-6Um">
                                                             <rect key="frame" x="0.0" y="0.0" width="272" height="46"/>
