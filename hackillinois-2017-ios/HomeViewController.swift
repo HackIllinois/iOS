@@ -2,325 +2,235 @@
 //  HomeViewController.swift
 //  hackillinois-2017-ios
 //
-//  Created by Tommy Yu on 12/28/16.
+//  Created by Rauhul Varma on 12/28/16.
 //  Copyright © 2016 Shotaro Ikeda. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, QRButtonDelegate, LocationButtonContainerDelegate {
     
-    @IBOutlet weak var checkInTableView: UITableView!
-    var currentTimeForTable = Int(NSDate().timeIntervalSince1970);//Change Me!
-          //Change Me!
-    let MAIN_CELL_HEIGHT = 332
-    let STANDARD_CELL_HEIGHT = 179
-    let TWO_LOCATIONS_CELL_HEIGHT = 215
-    let THREE_LOCATIONS_CELL_HEIGHT = 251
-    let NO_EVENT_CELL_HEIGHT = 120
-    let MAIN_CELL_AFTER_HACKATHON_HEIGHT = 437
+    // MARK: - Enums
+    enum HackathonStatus {
+        case beforeHackathon
+        case beforeHacking
+        case duringHacking
+        case afterHackathon
+        
+        static var current: HackathonStatus {
+            let time = Date()
+            return .beforeHacking
+            if time < HACKATHON_BEGIN_TIME {
+                return .beforeHackathon
+            } else if time < HACKING_BEGIN_TIME {
+                return .beforeHacking
+            } else if time < HACKING_END_TIME {
+                return .duringHacking
+            } else {
+                return .afterHackathon
+            }
+        }
+    }
     
-    var events : [Feed] = []
-    let dateFormatter = DateFormatter()
-
+    // MARK: - IBOutlets
+    @IBOutlet weak var homeTableView: UITableView!
     
+    // MARK: - UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print (HACKATHON_BEGIN_TIME)
+        homeTableView.rowHeight = UITableViewAutomaticDimension
+        homeTableView.estimatedRowHeight = 200
         
-        
-        UIApplication.shared.statusBarStyle = .lightContent
-        
-         // important to remember that the background image is not a plain color but a gradient
-        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-        backgroundImage.image = UIImage(named: "backgroundImage")
-        self.view.insertSubview(backgroundImage, at: 0)
-        
-        checkInTableView.delegate = self
-        checkInTableView.dataSource = self
-        
-        checkInTableView.separatorStyle = .none
-        checkInTableView.backgroundColor = UIColor.clear
-        checkInTableView.showsVerticalScrollIndicator = false
-        checkInTableView.sectionHeaderHeight = 0.0
-        checkInTableView.sectionFooterHeight = 0.0
-        checkInTableView.alwaysBounceVertical = false
-        
-        // DateFormatter is an expensive class so load it once and reuse it
-        dateFormatter.locale = Locale(identifier: "en_US")
-        dateFormatter.dateFormat = "hh:mm a"
-        dateFormatter.amSymbol = "am"
-        dateFormatter.pmSymbol = "pm"
-        
-        // This creates dummy data
-//        initializeSample()
-        loadSavedData()
-        
+        fetch()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        // remove the functions that were added such as those that refresh the tableview and fetch new data
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let _ = appDelegate.clearIntereval(key: "HomeViewController")
-        let _ = appDelegate.clearIntereval(key: "HomeViewRefresh")
-        print("HomeView popped")
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if let eventDetailsVC = segue.destination as? EventDetailsViewController,
+           let indexPath = sender as? IndexPath {
+            let offsetIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section);
+            eventDetailsVC.event = fetchedResultsController.object(at: offsetIndexPath)
+        }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        // the funcList holds the refresh function of this instance so that appdelegate can refresh the tableview and fetch new data
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.setInterval(key: "HomeViewController", callback: self.loadSavedData)
-        appDelegate.setInterval(key: "HomeViewRefresh", callback: self.refreshTableView)
-
-
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    // MARK: - UITableViewDataSource
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return fetchedResultsController.sections?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(currentTimeForTable < HACKATHON_BEGIN_TIME) {
-            return 2 // one for main cell before hackathon and one for no event cell
-        } else if(currentTimeForTable > HACKATHON_BEGIN_TIME && currentTimeForTable < HACKING_END_TIME) {
-            return events.count + 1 // number of events and the main cell
-        }
-        return 1 // otherwise just return the goodbye cell
+        let events = fetchedResultsController.sections?[section].numberOfObjects ?? 0
         
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if(indexPath.row == 0) {
-            if(currentTimeForTable > HACKING_END_TIME) {
-                return CGFloat(MAIN_CELL_AFTER_HACKATHON_HEIGHT)
-            }
-            return CGFloat(MAIN_CELL_HEIGHT)
-        }
-        else if(indexPath.row == 1 && currentTimeForTable < HACKATHON_BEGIN_TIME) {
-            return CGFloat(NO_EVENT_CELL_HEIGHT)
-        } else if(events[indexPath.row - 1].locations.count == 1) {
-            return CGFloat(STANDARD_CELL_HEIGHT)
-        } else if(events[indexPath.row - 1].locations.count == 2) {
-            return CGFloat(TWO_LOCATIONS_CELL_HEIGHT)
-        } else {
-            return CGFloat(THREE_LOCATIONS_CELL_HEIGHT)
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard: UIStoryboard = UIStoryboard(name: "Home", bundle: nil)
-        if let eventDetails = storyboard.instantiateViewController(withIdentifier: "EventDetailsView") as? EventDetailsViewController {
-            eventDetails.eventDetails = events[indexPath.row - 1];
-            navigationController?.pushViewController(eventDetails, animated: true)
+        switch HackathonStatus.current {
+        case .beforeHackathon, .afterHackathon:
+            return 1
+        case .beforeHacking, .duringHacking:
+            return events + 1
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         // first cell should always be the main cell
-        currentTimeForTable = Int(NSDate().timeIntervalSince1970)
-        print(currentTimeForTable)
-        print (events)
-        print ("table view called with index path " + String(indexPath.row))
-        if (indexPath.row == 0) {
-            if(currentTimeForTable < HACKATHON_BEGIN_TIME) { // if the hackathon has not started yet
-                let cell = tableView.dequeueReusableCell(withIdentifier: "mainCellBeforeHackathonCell", for: indexPath)
-                cell.backgroundColor = UIColor.clear
-                cell.isUserInteractionEnabled = false;
-                return cell
-            } else if (currentTimeForTable  > HACKATHON_BEGIN_TIME && currentTimeForTable < HACKING_BEGIN_TIME) { // if the hackathon has started but hacking has not
-                let cell = tableView.dequeueReusableCell(withIdentifier: "mainCellBeforeHacking", for: indexPath) as! mainCellBeforeHacking
-                cell.backgroundColor = UIColor.clear
-                cell.selectionStyle = .none
-                cell.isUserInteractionEnabled = false;
-                
-                // initalize the timer label as current time and decrement by 1 second every second
-                cell.timeRemaining = HACKING_BEGIN_TIME - currentTimeForTable
-                cell.secondsLeft = cell.getSeconds(timeInSeconds: cell.timeRemaining)
-                cell.minutesLeft = cell.getMinutes(timeInSeconds: cell.timeRemaining)
-                cell.hoursLeft = cell.getHours(timeInSeconds: cell.timeRemaining)
-                cell.hoursLabel.text = cell.hoursLeft.description
-                cell.minutesLabel.text = cell.minutesLeft.description
-                cell.secondsLabel.text = cell.secondsLeft.description
-                cell.mTimer.invalidate()
-                cell.timeStart()
+        switch indexPath.row {
         
-                return cell
-            } else if (currentTimeForTable > HACKING_END_TIME) { // if the hackathon has ended
-                let cell = tableView.dequeueReusableCell(withIdentifier: "mainCellAfterHackathon", for: indexPath)
-                cell.isUserInteractionEnabled = false;
-                cell.backgroundColor = UIColor.clear
-                return cell
-            } else {// otherwise we're hacking currently
-                let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath) as! mainCell
-                cell.selectionStyle = .none
-                cell.backgroundColor = UIColor.clear
-                cell.isUserInteractionEnabled = false;
+        /*****
+         *      This is for the top cell => Regardless of which part of the event we are in,
+         *      the cell will contain status information regarding the hackathon
+         *      ie. "Hacking begins in xx Hours xx Minutes xx seconds"
+         *      or "Submit Projects in xx Hours xx Minutes xx seconds"
+         *****/
+        case 0:
             
-                // initalize the timer label as current time and decrement by 1 second every second
-                cell.timeRemaining = HACKING_END_TIME - currentTimeForTable
-                cell.secondsLeft = cell.getSeconds(timeInSeconds: cell.timeRemaining)
-                cell.minutesLeft = cell.getMinutes(timeInSeconds: cell.timeRemaining)
-                cell.hoursLeft = cell.getHours(timeInSeconds: cell.timeRemaining)
-                cell.hoursLabel.text = cell.hoursLeft.description
-                cell.minutesLabel.text = cell.minutesLeft.description
-                cell.secondsLabel.text = cell.secondsLeft.description
-                cell.mTimer.invalidate()
-                cell.timeStart()
+            switch HackathonStatus.current {
                 
+            case .beforeHackathon:
+                return tableView.dequeueReusableCell(withIdentifier: "beforeHackathonCell", for: indexPath)
+                
+            case .beforeHacking:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "beforeOrDuringHackingCell", for: indexPath)
+                if let cell = cell as? HomeTableViewTitleCell {
+                    cell.titleLabel?.text = "Hacking Starts in..."
+                    cell.detailTimeLabel?.text = "@ Friday 10:00 pm"
+                    cell.endTime = HACKING_BEGIN_TIME
+                    cell.timeStart()
+                }
                 return cell
+                
+            case .duringHacking:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "beforeOrDuringHackingCell", for: indexPath)
+                if let cell = cell as? HomeTableViewTitleCell {
+                    cell.titleLabel?.text = "Submit Projects in..."
+                    cell.detailTimeLabel?.text = "@ Sunday 10:00 am"
+                    cell.endTime = HACKING_END_TIME
+                    cell.timeStart()
+                }
+                return cell
+                
+            case .afterHackathon:
+                return tableView.dequeueReusableCell(withIdentifier: "afterHackathonCell", for: indexPath)
             }
-        } else if(indexPath.row == 1 && currentTimeForTable < HACKATHON_BEGIN_TIME) { // if hackathon has not started yet
-            let cell = tableView.dequeueReusableCell(withIdentifier: "noEventCell", for: indexPath) as! noEventCell
-            cell.isUserInteractionEnabled = false;
-            cell.backgroundColor = UIColor.clear
-            return cell
-        } else if (events.count > 0 && events[indexPath.row - 1].locations.count == 1){ // we're hacking so show events
-            let cell = tableView.dequeueReusableCell(withIdentifier: "standardCell", for: indexPath) as! standardCell
-            cell.selectionStyle = .none
-            cell.backgroundColor = UIColor.clear
             
-            cell.checkInTimeLabel.text = dateFormatter.string(from: events[indexPath.row - 1].startTime)
-            
-            // location clicked should go to maps view
-            let pressGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.locationClicked(_:)))
-            let tempLocations = events[indexPath.row - 1].locations.value(forKey: "name")
-            
-            cell.locationLabel.isUserInteractionEnabled = true
-            cell.locationLabel.text = (tempLocations as AnyObject).firstObject as! String?
-            cell.locationLabel.addGestureRecognizer(pressGestureRecognizer)
+        /*****
+         *      The default case will be used for all other cards
+         *      These cards will contain information about the events with two separate options
+         *      events that have qr code scanning and events that do not
+         *****/
+        default:
+            // check api for qr code
+            let offsetIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section);
+            let event = fetchedResultsController.object(at: offsetIndexPath)
 
-            // button clicked should go to profile page
-            cell.qrCodeButton.backgroundColor = UIColor.fromRGBHex(duskyBlueColor)
-            cell.qrCodeButton.roundedButton()
-            cell.qrCodeButton.addTarget(self, action: #selector(HomeViewController.buttonClicked), for: .touchUpInside)
+            let identifier = event.locations.count > 0 ? "HomeTableViewLocationsEventCell" : "HomeTableViewEventCell"
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
             
-            return cell
-        } else if (events.count > 0 && events[indexPath.row - 1].locations.count == 2){
-            let cell = tableView.dequeueReusableCell(withIdentifier: "twoLocationsCell", for: indexPath) as! twoLocationsCell
-            cell.backgroundColor = UIColor.clear
-            cell.selectionStyle = .none
-            
-            cell.checkInTimeLabel.text = dateFormatter.string(from: events[indexPath.row - 1].startTime)
-            
-            // location clicked should go to maps view
-            // each label gets its own gesture recognizer
-            let firstPressGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.locationClicked(_:)))
-            let secondPressGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.locationClicked(_:)))
-            let tempLocations = events[indexPath.row - 1].locations.value(forKey: "name")
-            
-            cell.firstLocationLabel.text = (tempLocations as AnyObject).object(at: 0) as? String
-            cell.secondLocationLabel.text = (tempLocations as AnyObject).object(at: 1) as? String
-            
-            cell.firstLocationLabel.addGestureRecognizer(firstPressGestureRecognizer)
-            cell.secondLocationLabel.addGestureRecognizer(secondPressGestureRecognizer)
-            
-            cell.firstLocationLabel.isUserInteractionEnabled = true
-            cell.secondLocationLabel.isUserInteractionEnabled = true
+            if let cell = cell as? HomeTableViewEventCell {
+                cell.delegate = self
+                cell.qrButtonDelegate = self
 
-            // button clicked should go to profile page
-            cell.qrCodeButton.backgroundColor = UIColor.fromRGBHex(duskyBlueColor)
-            cell.qrCodeButton.roundedButton()
-            cell.qrCodeButton.addTarget(self, action: #selector(HomeViewController.buttonClicked), for: .touchUpInside)
-            return cell
-        } else if((events.count > 0 && events[indexPath.row - 1].locations.count == 3)) {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "threeLocationsCell", for: indexPath) as! threeLocationsCell
-            cell.backgroundColor = UIColor.clear
-            cell.selectionStyle = .none
-        
-            cell.checkInTimeLabel.text = dateFormatter.string(from: events[indexPath.row - 1].startTime)
-        
-            // location clicked should go to maps view
-            // each label gets its own gesture recognizer
-            let firstPressGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.locationClicked(_:)))
-            let secondPressGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.locationClicked(_:)))
-            let thirdPressGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.locationClicked(_:)))
-            let tempLocations = events[indexPath.row - 1].locations.value(forKey: "name")
-        
-            cell.firstLocationLabel.text = (tempLocations as AnyObject).object(at: 0) as? String
-            cell.secondLocationLabel.text = (tempLocations as AnyObject).object(at: 1) as? String
-            cell.thirdLocationLabel.text = (tempLocations as AnyObject).object(at: 2) as? String
-    
-            cell.firstLocationLabel.addGestureRecognizer(firstPressGestureRecognizer)
-            cell.secondLocationLabel.addGestureRecognizer(secondPressGestureRecognizer)
-            cell.thirdLocationLabel.addGestureRecognizer(thirdPressGestureRecognizer)
+                cell.titleLabel?.text = event.name
+                cell.timeLabel?.text = HLDateFormatter.shared.string(from: event.startTime)
+                
+                cell.locations = event.locations.array as! [Location]
+                cell.layoutIfNeeded()
+            }
             
-            cell.firstLocationLabel.isUserInteractionEnabled = true
-            cell.secondLocationLabel.isUserInteractionEnabled = true
-            cell.thirdLocationLabel.isUserInteractionEnabled = true
-        
-            // button clicked should go to profile page
-            cell.qrCodeButton.backgroundColor = UIColor.fromRGBHex(duskyBlueColor)
-            cell.qrCodeButton.roundedButton()
-            cell.qrCodeButton.addTarget(self, action: #selector(HomeViewController.buttonClicked), for: .touchUpInside)
             return cell
         }
-        // ideally we should never get here
-        let cell = tableView.dequeueReusableCell(withIdentifier: "noEventCell", for: indexPath) as! noEventCell
-        cell.isUserInteractionEnabled = false;
-        cell.backgroundColor = UIColor.clear
-        return cell
     }
     
-    /* called when qr code button is clicked */
-    func buttonClicked() {
-        let profilePageIndex = 3
-        self.tabBarController?.selectedIndex = profilePageIndex
+    // MARK: - UITableViewDelegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "showEventDetails", sender: indexPath)
     }
-    
-    /* called when location label is clicked */
-    func locationClicked(_ sender: UITapGestureRecognizer) {
-        openLocation((sender.view as! UILabel).text!)
-    }
-    
-    /* loads saved data from the SQL storage on local device and not the web */
-    func loadSavedData(){
-        print ("load saved data called")
+
+    // MARK: - NSFetchedResultsControllerDelegate
+    lazy var fetchedResultsController: NSFetchedResultsController<Feed> = {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
         let fetchRequest = NSFetchRequest<Feed>(entityName: "Feed")
-        
-        // load only events that are upcoming
-        fetchRequest.predicate = NSPredicate(format: "startTime > %@", NSDate())
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startTime", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startTime", ascending: false)]
+        fetchRequest.includesSubentities = false
+        fetchRequest.predicate = NSPredicate(format: "tag == %@", "EVENT")
 
-        if let feedArr = try? appDelegate.managedObjectContext.fetch(fetchRequest) {
-            events = feedArr
-        } else {
-            events = []
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        frc.delegate = self
+        return frc
+    }()
+
+    func fetch() {
+        do {
+            try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            assertionFailure("Failed to preform fetch operation, error: \(error)")
         }
-        checkInTableView.reloadData()
+        homeTableView.reloadData()
     }
 
-    func refreshTableView() {
-        print ("refresh table view called")
-        self.checkInTableView.performSelector(onMainThread: #selector(UICollectionView.reloadData), with: nil, waitUntilDone: true)
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        homeTableView.beginUpdates()
     }
-    
-    // initializing dummy data
-    func initializeSample(){
-        
-        let siebel: Location! = CoreDataHelpers.createOrFetchLocation(idNum: 1, location: "Thomas M. Siebel Center", abbreviation: "Siebel",locationLatitude: 40.113926, locationLongitude: -88.224916, locationFeeds: nil)
-        
-        let eceb: Location! = CoreDataHelpers.createOrFetchLocation(idNum: 2, location: "Electrical Computer Engineering Building", abbreviation: "ECEB", locationLatitude: 40.114828, locationLongitude: -88.228049, locationFeeds: nil)
-        
-        let union: Location! = CoreDataHelpers.createOrFetchLocation(idNum: 3, location: "Illini Union", abbreviation: "Union", locationLatitude: 40.109395, locationLongitude: -88.227181, locationFeeds: nil)
-        
-        let date = Date(timeIntervalSince1970: 1487107800)
 
-        _ = CoreDataHelpers.createOrFetchFeed(id: 421, description: "test", startTime: date, endTime: date, updated: date, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel], tag: "EVENT")
-        
-        _ = CoreDataHelpers.createOrFetchFeed(id: 422, description: "test", startTime: date, endTime: date, updated: date, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel, union], tag: "EVENT")
-        _ = CoreDataHelpers.createOrFetchFeed(id: 423, description: "test", startTime: date, endTime: date, updated: date, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel, eceb, union], tag: "EVENT")
-        _ = CoreDataHelpers.createOrFetchFeed(id: 424, description: "test", startTime: date, endTime: date, updated: date, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel, eceb], tag: "EVENT")
-        
-         CoreDataHelpers.saveContext()
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        guard HackathonStatus.current == .beforeHacking || HackathonStatus.current == .duringHacking else { return }
+        switch type {
+        case .insert:
+            guard let insertIndexPath = newIndexPath else { return }
+            homeTableView.insertRows(at: [insertIndexPath], with: .fade)
+        case .delete:
+            guard let deleteIndexPath = indexPath else { return }
+            homeTableView.deleteRows(at: [deleteIndexPath], with: .fade)
+        case .update:
+            guard let updateIndexPath = indexPath, let cell = homeTableView.cellForRow(at: updateIndexPath) else { return }
+            let offsetIndexPath = IndexPath(row: updateIndexPath.row - 1, section: updateIndexPath.section);
+            let event = fetchedResultsController.object(at: offsetIndexPath)
+
+            if let cell = cell as? HomeTableViewEventCell {
+                cell.titleLabel?.text = event.name
+                cell.timeLabel?.text = HLDateFormatter.shared.string(from: event.startTime)
+                
+                cell.locations = event.locations.array as! [Location]
+                cell.layoutIfNeeded()
+            }
+
+            homeTableView.reloadRows(at: [updateIndexPath], with: .fade)
+        case .move:
+            guard let fromIndexPath = indexPath, let toIndexPath = newIndexPath else { return }
+            homeTableView.insertRows(at: [toIndexPath],   with: .fade)
+            homeTableView.deleteRows(at: [fromIndexPath], with: .fade)
+        }
+
     }
     
-    /* opens the appropriate map view according to the location text */
-    func openLocation(_ location_name: String) {
-        // dictionary that correlates the name of the location to location id used by maps view
-        let locations: [String:Int] = [
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        guard HackathonStatus.current == .beforeHacking || HackathonStatus.current == .duringHacking else { return }
+        switch type {
+        case .insert:
+            homeTableView.insertSections([sectionIndex], with: .fade)
+        case .delete:
+            homeTableView.deleteSections([sectionIndex], with: .fade)
+        case .update:
+            homeTableView.reloadSections([sectionIndex], with: .fade)
+        case .move:
+            break
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        homeTableView.endUpdates()
+    }
+
+    
+    // MARK: - QRButtonDelegate
+    func didTapQRButton() {
+        performSegue(withIdentifier: "showQRCode", sender: nil)
+    }
+    
+    // MARK: - LocationButtonContainerDelegate
+    func locationButtonTapped(location: Location) {
+        let locations: [String: Int] = [
             "DCL" : 1,
             "Digital Computer Laboratory": 1,
             "Thomas M. Siebel Center" : 2,
@@ -329,18 +239,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             "ECEB" : 3,
             "Electrical Computer Engineering Building" : 3,
             "Union" : 4,
-            "Illini Union" : 4
-
-        ]
-        let location_id = locations[location_name]
+            "Illini Union" : 4]
+        
+        let location_id = locations[location.name]
         if let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "Map") as? MapViewController {
             vc.labelPressed = location_id!
-            navigationController?.navigationBar.tintColor = UIColor(red: 93.0/255.0, green: 200.0/255.0, blue: 219.0/255.0, alpha: 1.0)
-            navigationController?.navigationBar.backgroundColor = UIColor(red: 28.0/255.0, green: 50.0/255.0, blue: 90.0/255.0, alpha: 1.0)
             navigationController?.pushViewController(vc, animated: true)
         }
+
     }
-    
-
-
 }

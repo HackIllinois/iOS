@@ -7,18 +7,4 @@
 //
 import UIKit
 
-class GenericNavigationController: UINavigationController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-        navigationBar.barTintColor = UIColor.hiaDarkSlateBlue
-        navigationBar.tintColor = UIColor.hiaDarkSlateBlue
-        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.hiaPaleGrey]
-        navigationBar.alpha = 1
-        navigationBar.isTranslucent = false
-        
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.default;
-        
-    }
-}
+class GenericNavigationController: UINavigationController { }

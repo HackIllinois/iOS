@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>HACKILLINOIS_API_URL</key>
-	<string>http://localhost:8080/</string>
+	<string>https://api.hackillinois.org/</string>
 </dict>
 </plist>

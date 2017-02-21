@@ -10,177 +10,78 @@ import UIKit
 
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var user: User = (CoreDataHelpers.loadContext(entityName: "User", fetchConfiguration: nil) as! [User]).first!
+    enum ProfileTableViewCells: String {
+        case QRCode      = "ProfileTableViewQRCell"
+        case NameDiet    = "ProfileTableViewNameDietCell"
+        case Links       = "ProfileTableViewLinksCell"
+        case Information = "ProfileTableViewInformationCell"
+    }
+    
+    var user: User {
+        return CoreDataHelpers.getUser()
+    }
     
     @IBOutlet weak var tableView: UITableView!
     
-    
-//    @IBOutlet weak var nameLabel: UILabel!
-//    @IBOutlet weak var schoolLabel: UILabel!
-//    @IBOutlet weak var majorLabel: UILabel!
-//    @IBOutlet weak var dietLabel: UILabel!
-//    
-//    @IBOutlet weak var button1: UIImageView!
-//    @IBOutlet weak var button2: UIImageView!
-//    @IBOutlet weak var button3: UIImageView!
-//    @IBOutlet weak var button4: UIImageView!
-    
-    
+    // MARK: - UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        UIApplication.shared.statusBarStyle = .lightContent
-        
-//        nameLabel.text = user.name
-//        schoolLabel.text = user.school
-//        majorLabel.text = user.major
-//        dietLabel.text = user.diet
-        
-        let gradient = CAGradientLayer()
-        let colorBottom = UIColor(red: 20/255, green: 36/255, blue: 66/255, alpha: 1.0)
-        let colorTop = UIColor(red: 28/255, green: 50/255, blue: 90/255, alpha: 1.0)
-        gradient.colors = [ colorTop.cgColor, colorBottom.cgColor ]
-        gradient.locations = [ 0.0, 1.0 ]
-        gradient.frame = view.bounds
-        self.view.layer.insertSublayer(gradient, at: 0)
-//        self.tableView.layer.insertSublayer(gradient, at: 0)
-        
-//        self.navigationController?.navigationBar.barTintColor = colorTop
-        
-//        let tabColor = UIColor(red: 28/255, green: 50/255, blue: 90/255, alpha: 1.0)    
-//        UITabBar.appearance().barTintColor = tabColor
-        
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = UIColor.clear
-        tableView.showsVerticalScrollIndicator = false
-        tableView.sectionHeaderHeight = 0.0
-        tableView.sectionFooterHeight = 0.0
-        tableView.dataSource = self
-        tableView.delegate = self
-        
-//        setGestureRecognizers()
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100
     }
     
-    // MARK: TableView - Configure the UITableView
     
-    // numberOfRowsInSection
+    // MARK: UITableViewDataSource
+    var datasource: [ProfileTableViewCells] = [
+        .QRCode,
+        .NameDiet,
+        .Links,
+        .Information,
+        .Information
+    ]
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return datasource.count > 0 ? 1 : 0
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("in numberOfRowsInSection ... returning 3")
-        return 3
+        return datasource.count
     }
-    
-    // heightForRowAtIndexPath
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        print("in numberOfRowsInSection ... returning 3")
-        
-        let row = indexPath.row
-        if (row == 0) {
-            
-            return 273
-            
-        } else if(row == 1) {
-            
-            return 82
-            
-        } else {
-            
-            return 415
-            
-        }
-    }
-    
-    // configure cell
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: datasource[indexPath.row].rawValue, for: indexPath)
         
-        var cell: ProfileViewCell
-        let row = indexPath.row
-        
-        if (row == 0) {
+        switch indexPath.row {
+        case 0:
+            guard let cell = cell as? ProfileTableViewQRCell else { break }
+            cell.qrCode.image = QRCodeGenerator.shared.qrcodeImage
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for:  indexPath as IndexPath) as! ProfileViewCell
+        case 1:
+            guard let cell = cell as? ProfileTableViewNameDietCell else { break }
             cell.nameLabel.text = user.name
             cell.dietLabel.text = user.diet
             
-        } else if(row == 1) {
+        case 2:
+            guard let cell = cell as? ProfileTableViewLinksCell else { break }
+            // TODO: get these
+            cell.githubLink = "https://github.com"
+            cell.resumeLink = "https://google.com"
+            cell.linkedinLink = "https://linkedin.com"
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "cell2", for:  indexPath as IndexPath) as! ProfileViewCell
-            setGestureRecognizers(cell: cell)
+        case 3:
+            guard let cell = cell as? ProfileTableViewInformationCell else { break }
+            cell.titleLabel.text = "University"
+            cell.detailLabel.text = user.school
             
-            
-        } else {
-            
-            cell = tableView.dequeueReusableCell(withIdentifier: "cell3", for:  indexPath as IndexPath) as! ProfileViewCell
-            
-            cell.schoolLabel.text = user.school
-            cell.schoolLabel.layer.borderWidth = 2.0
-            cell.schoolLabel.layer.cornerRadius = 5
-            cell.schoolLabel.layer.borderColor = UIColor(red: 78/255, green: 96/255, blue: 148/255, alpha: 1.0).cgColor
-            
-            cell.majorLabel.text = user.major
-            cell.majorLabel.layer.borderWidth = 2.0
-            cell.majorLabel.layer.cornerRadius = 5
-            cell.majorLabel.layer.borderColor = UIColor(red: 78/255, green: 96/255, blue: 148/255, alpha: 1.0).cgColor
-            
-            cell.yearLabel.text = "2019"
-            cell.yearLabel.layer.borderWidth = 2.0
-            cell.yearLabel.layer.cornerRadius = 5
-            cell.yearLabel.layer.borderColor = UIColor(red: 78/255, green: 96/255, blue: 148/255, alpha: 1.0).cgColor
-            
-            
- 
-            
+        case 4:
+            guard let cell = cell as? ProfileTableViewInformationCell else { break }
+            cell.titleLabel.text = "Major"
+            cell.detailLabel.text = user.major
+
+        default:
+            break
         }
         
-        cell.selectionStyle = .none
         return cell
     }
-    
-    func setGestureRecognizers(cell: ProfileViewCell){
-        let tapButton1 = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.button1Tapped))
-        tapButton1.numberOfTapsRequired = 1
-        cell.button1.isUserInteractionEnabled = true
-        cell.button1.addGestureRecognizer(tapButton1)
-        
-        let tapButton2 = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.button2Tapped))
-        tapButton2.numberOfTapsRequired = 1
-        cell.button2.isUserInteractionEnabled = true
-        cell.button2.addGestureRecognizer(tapButton2)
-        
-        let tapButton3 = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.button3Tapped))
-        tapButton3.numberOfTapsRequired = 1
-        cell.button3.isUserInteractionEnabled = true
-        cell.button3.addGestureRecognizer(tapButton3)
-        
-        //        let tapButton4 = UITapGestureRecognizer(target: self, action: #selector(ProfileViewCell.button4Tapped))
-        //
-        //        tapButton4.numberOfTapsRequired = 1
-        //        button4.isUserInteractionEnabled = true
-        //        button4.addGestureRecognizer(tapButton4)
-        
-    }
-    
-    func openLink(link: String){
-        if #available(iOS 10.0, *) {
-            UIApplication.shared.open(NSURL(string:link) as! URL, options: [:], completionHandler: nil)
-        } else {
-            // Fallback on earlier versions
-            UIApplication.shared.openURL(NSURL(string:link) as! URL)
-        }
-    }
-    
-    func button1Tapped(){
-        openLink(link: "https://github.com")
-    }
-    
-    func button2Tapped(){
-        print("Button 2")
-    }
-    
-    func button3Tapped(){
-        openLink(link: "https://linkedin.com")
-    }
-    //    func button4Tapped(){
-    //        print("Needs to be removed")
-    //    }
 }

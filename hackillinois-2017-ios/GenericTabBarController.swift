@@ -28,6 +28,7 @@ class GenericTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,6 +37,8 @@ class GenericTabBarController: UITabBarController {
         // Set Color of each item
         for item in tabBar.items! {
             item.image = item.image!.withRenderingMode(.alwaysOriginal)
+            item.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
         }
+        
     }
 }

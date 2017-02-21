@@ -388,7 +388,7 @@ United States</string>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W28-Ky-fyv">
-                                            <rect key="frame" x="2" y="2" width="371" height="371"/>
+                                            <rect key="frame" x="2" y="45" width="371" height="371"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="W28-Ky-fyv" secondAttribute="height" identifier="ratio" id="7iO-sN-gQi"/>
                                             </constraints>
@@ -397,8 +397,8 @@ United States</string>
                                     <constraints>
                                         <constraint firstItem="W28-Ky-fyv" firstAttribute="centerY" secondItem="iFT-ZU-71b" secondAttribute="centerY" id="4z6-1A-NQ0"/>
                                         <constraint firstItem="W28-Ky-fyv" firstAttribute="leading" secondItem="iFT-ZU-71b" secondAttribute="leading" constant="2" id="GlP-fr-yqB"/>
-                                        <constraint firstItem="W28-Ky-fyv" firstAttribute="top" secondItem="iFT-ZU-71b" secondAttribute="top" constant="2" id="On4-1V-28D"/>
-                                        <constraint firstAttribute="bottom" secondItem="W28-Ky-fyv" secondAttribute="bottom" constant="2" id="aIB-Zn-AYX"/>
+                                        <constraint firstItem="W28-Ky-fyv" firstAttribute="top" secondItem="iFT-ZU-71b" secondAttribute="top" constant="45" id="On4-1V-28D"/>
+                                        <constraint firstAttribute="bottom" secondItem="W28-Ky-fyv" secondAttribute="bottom" constant="45" id="aIB-Zn-AYX"/>
                                         <constraint firstItem="W28-Ky-fyv" firstAttribute="centerX" secondItem="iFT-ZU-71b" secondAttribute="centerX" id="vZy-KD-YnR"/>
                                         <constraint firstAttribute="trailing" secondItem="W28-Ky-fyv" secondAttribute="trailing" constant="2" id="xqB-9C-SAe"/>
                                     </constraints>
@@ -420,7 +420,9 @@ United States</string>
         <scene sceneID="xIp-nn-huC">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="auk-1d-PU8" customClass="GenericNavigationController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="maps_off" selectedImage="maps_on" id="gW3-u5-oRF"/>
+                    <tabBarItem key="tabBarItem" title="" image="maps_off" selectedImage="maps_on" id="gW3-u5-oRF">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yyE-Rb-fuQ">
