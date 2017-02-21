@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="auk-1d-PU8">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="auk-1d-PU8">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,7 +24,7 @@
         <!--Maps-->
         <scene sceneID="aal-5c-lxi">
             <objects>
-                <viewController id="qaZ-tF-XKU" customClass="MapViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Map" id="qaZ-tF-XKU" customClass="MapViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mgr-C5-5lE"/>
                         <viewControllerLayoutGuide type="bottom" id="bvf-mM-5by"/>
@@ -115,7 +116,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wl9-fg-gn8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1485.5999999999999" y="630.13493253373315"/>
+            <point key="canvasLocation" x="1486" y="630"/>
         </scene>
         <!--Bottom View Controller-->
         <scene sceneID="tOw-1j-0pY">
@@ -159,7 +160,7 @@
                                         <color key="textColor" red="0.96078431372549022" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GvV-PG-vmK">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GvV-PG-vmK">
                                         <rect key="frame" x="194" y="133" width="167" height="50"/>
                                         <color key="backgroundColor" red="0.36470588235294116" green="0.78431372549019607" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -169,6 +170,9 @@
                                         <state key="normal" title="Indoor Map">
                                             <color key="titleColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="YC0-vK-O1b" kind="show" id="B2d-ft-x5M"/>
+                                        </connections>
                                     </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="72" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="YAC-3c-Krt">
                                         <rect key="frame" x="0.0" y="249" width="375" height="298"/>
@@ -251,7 +255,7 @@
                                             <color key="titleColor" red="0.3529411764705882" green="0.78431372549019607" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hxw-vl-DNG">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hxw-vl-DNG">
                                         <rect key="frame" x="234" y="133" width="127" height="80"/>
                                         <color key="backgroundColor" red="0.36470588235294116" green="0.78431372549019607" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -262,6 +266,9 @@
                                         <state key="normal" title="Indoor Map">
                                             <color key="titleColor" red="0.96078431372549022" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="YC0-vK-O1b" kind="show" id="eev-el-ohj"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.4 mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oFe-g2-7lg">
                                         <rect key="frame" x="80.5" y="87" width="100" height="26"/>
@@ -364,14 +371,61 @@ United States</string>
             </objects>
             <point key="canvasLocation" x="1485.5999999999999" y="1369.5652173913045"/>
         </scene>
+        <!--Map View Indoor Maps Table View Controller-->
+        <scene sceneID="X0t-kf-mWT">
+            <objects>
+                <tableViewController id="YC0-vK-O1b" customClass="MapViewIndoorMapsTableViewController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="f7g-ub-Eyh">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="image" id="K1d-Vm-RHx">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K1d-Vm-RHx" id="iFT-ZU-71b">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W28-Ky-fyv">
+                                            <rect key="frame" x="2" y="45" width="371" height="371"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="W28-Ky-fyv" secondAttribute="height" identifier="ratio" id="7iO-sN-gQi"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="W28-Ky-fyv" firstAttribute="centerY" secondItem="iFT-ZU-71b" secondAttribute="centerY" id="4z6-1A-NQ0"/>
+                                        <constraint firstItem="W28-Ky-fyv" firstAttribute="leading" secondItem="iFT-ZU-71b" secondAttribute="leading" constant="2" id="GlP-fr-yqB"/>
+                                        <constraint firstItem="W28-Ky-fyv" firstAttribute="top" secondItem="iFT-ZU-71b" secondAttribute="top" constant="45" id="On4-1V-28D"/>
+                                        <constraint firstAttribute="bottom" secondItem="W28-Ky-fyv" secondAttribute="bottom" constant="45" id="aIB-Zn-AYX"/>
+                                        <constraint firstItem="W28-Ky-fyv" firstAttribute="centerX" secondItem="iFT-ZU-71b" secondAttribute="centerX" id="vZy-KD-YnR"/>
+                                        <constraint firstAttribute="trailing" secondItem="W28-Ky-fyv" secondAttribute="trailing" constant="2" id="xqB-9C-SAe"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="YC0-vK-O1b" id="w3g-2T-xB6"/>
+                            <outlet property="delegate" destination="YC0-vK-O1b" id="XS5-VQ-FJs"/>
+                        </connections>
+                    </tableView>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uwJ-Bc-64r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2401" y="1370"/>
+        </scene>
         <!--Generic Navigation Controller-->
         <scene sceneID="xIp-nn-huC">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="auk-1d-PU8" customClass="GenericNavigationController" customModule="hackillinois_2017_ios" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="maps_off" selectedImage="maps_on" id="gW3-u5-oRF"/>
+                    <tabBarItem key="tabBarItem" title="" image="maps_off" selectedImage="maps_on" id="gW3-u5-oRF">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yyE-Rb-fuQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yyE-Rb-fuQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -392,4 +446,7 @@ United States</string>
         <image name="maps_on" width="24" height="24"/>
         <image name="walking" width="12" height="21"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="eev-el-ohj"/>
+    </inferredMetricsTieBreakers>
 </document>

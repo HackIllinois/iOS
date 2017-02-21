@@ -11,7 +11,7 @@ import MapKit
 
 class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, UIToolbarDelegate  {
     
-    var bottomSheet : BottomViewController!
+    var bottomSheet: BottomViewController!
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -32,16 +32,16 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
     /* Modify this function to change the locations available */
     func initializeLocations() {
         // Create Points for event locations
-        let dcl: Location! = CoreDataHelpers.createOrFetchLocation(location: "Digital Computer Laboratory", abbreviation: "DCL", locationLatitude: 40.113140, locationLongitude: -88.226589, address: "Digital Computer Laboratory\n1304 W Springfield Ave\nUrbana, IL 61801\nUnited States", locationFeeds: nil)
+        let dcl: Location! = CoreDataHelpers.createOrFetchLocation(idNum: 4, location: "Digital Computer Laboratory", abbreviation: "DCL", locationLatitude: 40.113140, locationLongitude: -88.226589, locationFeeds: nil)
         buildings.append(Building(location: dcl))
         
-        let siebel: Location! = CoreDataHelpers.createOrFetchLocation(location: "Thomas M. Siebel Center", abbreviation: "Siebel",locationLatitude: 40.113926, locationLongitude: -88.224916, address: "Thomas M. Siebel Center\n201 N Goodwin Ave\nUrbana, IL 61801\nUnited States", locationFeeds: nil)
+        let siebel: Location! = CoreDataHelpers.createOrFetchLocation(idNum: 1, location: "Thomas M. Siebel Center", abbreviation: "Siebel",locationLatitude: 40.113926, locationLongitude: -88.224916, locationFeeds: nil)
         buildings.append(Building(location: siebel))
         
-        let eceb: Location! = CoreDataHelpers.createOrFetchLocation(location: "Electrical Computer Engineering Building", abbreviation: "ECEB", locationLatitude: 40.114828, locationLongitude: -88.228049, address: "Electrical Computer Engineering Building\n306 N Wright St\nUrbana, IL 61801\nUnited States",locationFeeds: nil)
+        let eceb: Location! = CoreDataHelpers.createOrFetchLocation(idNum: 2, location: "Electrical Computer Engineering Building", abbreviation: "ECEB", locationLatitude: 40.114828, locationLongitude: -88.228049, locationFeeds: nil)
         buildings.append(Building(location: eceb))
         
-        let union: Location! = CoreDataHelpers.createOrFetchLocation(location: "Illini Union", abbreviation: "Union", locationLatitude: 40.109395, locationLongitude: -88.227181, address: "Illini Union\n1401 W Green St\nUrbana, IL 61801\nUnited States", locationFeeds: nil)
+        let union: Location! = CoreDataHelpers.createOrFetchLocation(idNum: 3, location: "Illini Union", abbreviation: "Union", locationLatitude: 40.109395, locationLongitude: -88.227181, locationFeeds: nil)
         buildings.append(Building(location: union))
     }
     
@@ -60,6 +60,16 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         map.addGestureRecognizer(tapMap)
         
         initTouches()
+        
+        // Set up background gradient
+        let gradient = CAGradientLayer()
+        let colorBottom = UIColor(red: 20/255, green: 36/255, blue: 66/255, alpha: 1.0)
+        let colorTop = UIColor(red: 28/255, green: 50/255, blue: 90/255, alpha: 1.0)
+        gradient.colors = [ colorTop.cgColor, colorBottom.cgColor ]
+        gradient.locations = [ 0.0, 1.0 ]
+        gradient.frame = view.bounds
+        self.view.layer.insertSublayer(gradient, at: 0)
+        
     }
     
     func initTouches() {
@@ -84,54 +94,65 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         unionLabel.isUserInteractionEnabled = true
         
         dclLabel.layer.shadowRadius = 4.0
+        dclLabel.layer.shadowOpacity = 0
         dclLabel.layer.shadowColor = UIColor.hiaSeafoamBlue.cgColor
         dclLabel.layer.shouldRasterize = true
         dclLabel.layer.shadowOffset = CGSize(width: 0, height: 0)
         
         siebelLabel.layer.shadowRadius = 4.0
+        siebelLabel.layer.shadowOpacity = 0
         siebelLabel.layer.shadowColor = UIColor.hiaSeafoamBlue.cgColor
         siebelLabel.layer.shouldRasterize = true
         siebelLabel.layer.shadowOffset = CGSize(width: 0, height: 0)
         
         ecebLabel.layer.shadowRadius = 4.0
+        ecebLabel.layer.shadowOpacity = 0
         ecebLabel.layer.shadowColor = UIColor.hiaSeafoamBlue.cgColor
         ecebLabel.layer.shouldRasterize = true
         ecebLabel.layer.shadowOffset = CGSize(width: 0, height: 0)
         
         unionLabel.layer.shadowRadius = 4.0
+        unionLabel.layer.shadowOpacity = 0
         unionLabel.layer.shadowColor = UIColor.hiaSeafoamBlue.cgColor
         unionLabel.layer.shouldRasterize = true
         unionLabel.layer.shadowOffset = CGSize(width: 0, height: 0)
+        
+        if labelPressed >= 4 {
+            UIAlertView(title: "Location id error", message: "Location id \(labelPressed) is not a valid id.", delegate: nil, cancelButtonTitle: "OK").show()
+        } else {
+            [{ _ in }, dclLabelTouched, siebelLabelTouched, ecebLabelTouched, unionLabelTouched][labelPressed]()
+        }
     }
     
     func clearLabel(labelNumber: Int) {
         switch labelNumber {
         case 1:
-            dclLabel.layer.shadowOpacity = 0
             dclLabel.textColor = UIColor.hiaFadedBlue
+            dclLabel.layer.shadowOpacity = 0
             break
         case 2:
-            siebelLabel.layer.shadowOpacity = 0
             siebelLabel.textColor = UIColor.hiaFadedBlue
+            siebelLabel.layer.shadowOpacity = 0
             break
         case 3:
-            ecebLabel.layer.shadowOpacity = 0
             ecebLabel.textColor = UIColor.hiaFadedBlue
+            ecebLabel.layer.shadowOpacity = 0
             break
         case 4:
-            unionLabel.layer.shadowOpacity = 0
             unionLabel.textColor = UIColor.hiaFadedBlue
+            unionLabel.layer.shadowOpacity = 0
             break
         case 5:
+            print("reset")
             // RESET ALL
-            dclLabel.layer.shadowOpacity = 0
-            siebelLabel.layer.shadowOpacity = 0
-            unionLabel.layer.shadowOpacity = 0
-            ecebLabel.layer.shadowOpacity = 0
             dclLabel.textColor = UIColor.hiaFadedBlue
             siebelLabel.textColor = UIColor.hiaFadedBlue
             ecebLabel.textColor = UIColor.hiaFadedBlue
             unionLabel.textColor = UIColor.hiaFadedBlue
+            dclLabel.layer.shadowOpacity = 0
+            siebelLabel.layer.shadowOpacity = 0
+            ecebLabel.layer.shadowOpacity = 0
+            unionLabel.layer.shadowOpacity = 0
             labelPressed = 0
         default:
             break
@@ -140,6 +161,7 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
     
     func dclLabelTouched() {
         clearLabel(labelNumber: labelPressed)
+        print("DCL")
         dclLabel.layer.shadowOpacity = 1
         dclLabel.textColor = UIColor.hiaSeafoamBlue
         labelPressed = 1
@@ -176,6 +198,7 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
     
     func loadAddress() {
         let building = buildings[labelPressed-1]
+        let selected_location_id = labelPressed
         
         // Configure MapView to show the location user selected
         map.setCamera(MKMapCamera.from(building: building), animated: true)
@@ -184,7 +207,7 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         // Route locations
         routeTo(building.coordinate, completion: { (route: MKRoute?) in
             self.bottomSheet.directions = route
-            self.bottomSheet.reloadNavTable(address: building.address ?? "", name: building.longName ?? "")
+            self.bottomSheet.reloadNavTable(address: building.address ?? "", name: building.longName ?? "", location_id: selected_location_id)
             self.bottomSheet.scrollToButtons()
         })
     }
@@ -242,7 +265,7 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
             let building = buildings[selectedIndex]
             routeTo(building.coordinate, completion: { (route: MKRoute?) in
                 self.bottomSheet.directions = route
-                self.bottomSheet.reloadNavTable(address: building.address ?? "", name: building.longName ?? "")
+                self.bottomSheet.reloadNavTable(address: building.address ?? "", name: building.longName ?? "", location_id: selectedIndex + 1)
                 self.bottomSheet.scrollToButtons()
             })
             // Set appropriate selection for cleanup later
@@ -250,15 +273,19 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
             switch Int(selectedIndex) {
             case 0:
                 dclLabel.textColor = UIColor.hiaSeafoamBlue
+                dclLabel.layer.shadowOpacity = 1
                 break
             case 1:
                 siebelLabel.textColor = UIColor.hiaSeafoamBlue
+                siebelLabel.layer.shadowOpacity = 1
                 break
             case 2:
                 ecebLabel.textColor = UIColor.hiaSeafoamBlue
+                ecebLabel.layer.shadowOpacity = 1
                 break
             case 3:
                 unionLabel.textColor = UIColor.hiaSeafoamBlue
+                unionLabel.layer.shadowOpacity = 1
                 break
             default:
                 break

@@ -16,13 +16,13 @@ class HTTPHelpers {
      */
     class func createRequest(subUrl url: String, jsonPayload: JSON, requestConfiguration: ((NSMutableURLRequest) -> Void), completion: @escaping (Data?, URLResponse?, NSError?) -> Void) {
         /* Load HackIllinois API URL from App Delegate */
-        let hackillinois_url = (UIApplication.shared.delegate as! AppDelegate).HACKILLINOIS_API_URL + url
-        print("Fetching data from: \(hackillinois_url))")
+        print("url: \(url)")
+        assertionFailure()
         do {
             /* Create JSON payload */
             let payload = try jsonPayload.rawData()
             /* Create and configure request */
-            let request = NSMutableURLRequest(url: URL(string: hackillinois_url)!)
+            let request = NSMutableURLRequest(url: URL(string: "lol")!)
             requestConfiguration(request)
             request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
             request.httpBody = payload

@@ -44,8 +44,13 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var directionShown = false
     var lastSeenTranslation : CGFloat = 0.0
     
-    func reloadNavTable(address: String, name: String) {
+    var selected_location_id = 0
+    
+    func reloadNavTable(address: String, name: String, location_id: Int) {
         navigationTable.reloadData()
+        
+        selected_location_id = location_id
+        
         if let directions = directions {
             let miles = directions.distance * 0.00063694
             distanceLabel.text = "\(String(format: "%.1f", miles)) mi" // TODO: change to actual miles
@@ -344,6 +349,18 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         return cell as UITableViewCell
+    }
+    
+    /*
+    override func performSegue(withIdentifier identifier: String, sender: Any?) {
+        // Initiate view controller
+        // Configuring
+        //self.showDetailViewController(<#T##vc: UIViewController##UIViewController#>, sender: self)
+    }*/
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! MapViewIndoorMapsTableViewController
+        vc.location_id = selected_location_id
     }
     
 }

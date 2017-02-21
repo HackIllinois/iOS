@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12106.1" systemVersion="16E154a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12074.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,23 +21,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splash" translatesAutoresizingMaskIntoConstraints="NO" id="a2f-V0-RiH">
-                                <rect key="frame" x="-4" y="0.0" width="383" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HackIllinois" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4N-iE-8tP">
-                                <rect key="frame" x="57" y="20" width="261" height="58"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="a2f-V0-RiH" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-20" id="SKA-mQ-spQ"/>
-                            <constraint firstItem="T4N-iE-8tP" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Vht-FA-9Mq"/>
-                            <constraint firstItem="a2f-V0-RiH" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" id="ahP-Us-kvW"/>
-                            <constraint firstItem="T4N-iE-8tP" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="eDl-J1-lhH"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="a2f-V0-RiH" secondAttribute="trailing" constant="-20" id="nRY-bj-O9H"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="a2f-V0-RiH" secondAttribute="bottom" id="vj7-xw-jeK"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="a2f-V0-RiH" secondAttribute="bottom" id="5QP-Q5-Mut"/>
+                            <constraint firstAttribute="trailing" secondItem="a2f-V0-RiH" secondAttribute="trailing" id="P1n-t6-xAw"/>
+                            <constraint firstItem="a2f-V0-RiH" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="R0L-ky-gjl"/>
+                            <constraint firstItem="a2f-V0-RiH" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="ZFH-Bv-gdN"/>
                         </constraints>
                     </view>
                 </viewController>
