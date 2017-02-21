@@ -21,5 +21,4 @@ protocol LocationButtonContainerDelegate {
 protocol LocationButtonContainer {
     var buttons: [LocationButton] { get set }
     var locations: [Location] { get set}
-    var indexPath: IndexPath? { get set }
 }

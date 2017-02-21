@@ -9,13 +9,10 @@
 import UIKit
 
 class LocationButtonContainerTableViewCell: UITableViewCell, LocationButtonContainer {
-    
-    
     @IBOutlet weak var verticalStackView: UIStackView?
     
     weak var delegate: LocationButtonContainerDelegate?
     
-    var indexPath: IndexPath?
     var buttons = [LocationButton]()
     var locations = [Location]() {
         didSet {

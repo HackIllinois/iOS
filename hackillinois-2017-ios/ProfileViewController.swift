@@ -63,6 +63,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             
         case 2:
             guard let cell = cell as? ProfileTableViewLinksCell else { break }
+            // TODO: get these
             cell.githubLink = "https://github.com"
             cell.resumeLink = "https://google.com"
             cell.linkedinLink = "https://linkedin.com"

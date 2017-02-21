@@ -13,26 +13,25 @@ import SwiftyJSON
 class APIManager {
     static let shared = APIManager()
     
-    private let HACKILLINOIS_API_URL = "https://api.hackillinois.org/"
+    private let HACKILLINOIS_API_URL = "https://api.hackillinois.org/" // "http://13.90.146.188:8080"
     private var auth_header: [String: String]?
-    var auth_key: String?
+    private(set) var auth_key: String?
     
-    private init() {
-        
-    }
+    private init() { }
     
     func setAuthKey(_ key: String) {
         auth_header = ["Authorization": key]
         auth_key = key
     }
-    
-    
-    
+
     func deleteAuthKey() {
         auth_header = nil
         auth_key = nil
     }
     
+    
+    
+    // API
     func getAuthKey(username: String, password: String, success: ((JSON) -> Void)?, failure: ((Error) -> Void)?) {
         performRequest(endpoint: "v1/auth", method: .post, parameters: [
             "email": username,
@@ -45,10 +44,15 @@ class APIManager {
         performRequest(endpoint: "v1/registration/attendee", method: .get, parameters: nil, headers: auth_header, success: success, failure: failure)
     }
     
+//    func getEvents() {
+//        assert(auth_header != nil)
+//
+//    }
+    
+    
     private func performRequest(endpoint: String, method: HTTPMethod, parameters: [String: Any]?, headers: [String: String]? = nil, success: ((JSON) -> Void)?, failure: ((Error) -> Void)?) {
         let url = HACKILLINOIS_API_URL + endpoint
         Alamofire.request(url, method: method, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (reponse) in
-//            print(reponse)
             
             if reponse.result.isSuccess {
                 let json = JSON(reponse.result.value!)

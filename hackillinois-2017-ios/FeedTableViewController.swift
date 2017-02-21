@@ -20,7 +20,20 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var tableView: UITableView!
     
     /* Fetched results controller for lazy loading of cells */
-    var fetchedResultsController: NSFetchedResultsController<Feed>!
+//    var fetchedResultsController: NSFetchedResultsController<Feed>!
+    
+    lazy var fetchedResultsController: NSFetchedResultsController<Feed> = {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let summonersFetchRequest = NSFetchRequest<Feed>(entityName: "Feed")
+        summonersFetchRequest.sortDescriptors = [NSSortDescriptor(key: "startTime", ascending: false)]
+        summonersFetchRequest.includesSubentities = false
+        let frc = NSFetchedResultsController(fetchRequest: summonersFetchRequest, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        frc.delegate = self
+        return frc
+    }()
+
+    
     
     /* Cache of Tags to quickly generate the "Filter by..." menu */
     var tags = [String]()
@@ -39,17 +52,17 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
     // Not generalized due to very specific quirks to it
     // TODO: find a way to generalize
     func loadSavedData() {
-        if fetchedResultsController == nil {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let fetch = NSFetchRequest<Feed>(entityName: "Feed")
-            let sort = NSSortDescriptor(key: "startTime", ascending: false)
-            fetch.sortDescriptors = [sort]
-            
-            fetchedResultsController = NSFetchedResultsController<Feed>(fetchRequest: fetch, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
-            fetchedResultsController.delegate = self
-        }
-        
-        fetchedResultsController.fetchRequest.predicate = nil
+//        if fetchedResultsController == nil {
+//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//            let fetch = NSFetchRequest<Feed>(entityName: "Feed")
+//            let sort = NSSortDescriptor(key: "startTime", ascending: false)
+//            fetch.sortDescriptors = [sort]
+//            
+//            fetchedResultsController = NSFetchedResultsController<Feed>(fetchRequest: fetch, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+//            fetchedResultsController.delegate = self
+//        }
+//        
+//        fetchedResultsController.fetchRequest.predicate = nil
         performFetch()
     }
     
@@ -243,7 +256,6 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         
         if let cell = cell as? FeedTableViewCell {
             cell.delegate = self
-            cell.indexPath = indexPath
             
             cell.titleLabel.text = item.shortName.uppercased()
             cell.detailLabel.text = item.description_
