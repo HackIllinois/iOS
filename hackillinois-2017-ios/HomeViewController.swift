@@ -245,7 +245,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             "ECEB" : 3,
             "Electrical Computer Engineering Building" : 3,
             "Union" : 4,
-            "Illini Union" : 4]
+            "Illini Union" : 4,
+            "Kenny Gym" : 5,
+            "Kenneth Gym" : 5
+            ]
         
         let location_id = locations[location.name]
         if let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "Map") as? MapViewController {
