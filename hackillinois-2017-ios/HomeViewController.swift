@@ -240,6 +240,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             vc.isDirectionMode = true
             vc.directionModeLabel = LocationIdMapper.getLocalId(fromShortname: location.shortName)
             vc.directionModeTitle = location.name
+            vc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(vc, animated: true)
         }
 
