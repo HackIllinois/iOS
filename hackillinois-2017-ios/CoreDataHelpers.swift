@@ -19,7 +19,7 @@ class CoreDataHelpers {
      * Helper function to find or create location 
      * Finds the location entity if it exists, otherwise returns a new entity representing a location object
      */
-    class func createOrFetchLocation(idNum id: Int16, location locationName: String, abbreviation shortName: String, locationLatitude latitude: Float, locationLongitude longitude: Float, locationFeeds feeds: [Feed]?) -> Location {
+    class func createOrFetchLocation(id: Int16, latitude: Float, longitude: Float, locationName: String, shortName: String, feeds: [Feed]?) -> Location {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let fetchRequest = NSFetchRequest<Location>(entityName: "Location")
@@ -27,6 +27,8 @@ class CoreDataHelpers {
         
         if let locations = try? appDelegate.managedObjectContext.fetch(fetchRequest) {
             if locations.count > 0 {
+                // MARK: buggy locations update
+//                locations[0].update(id: id, latitude: latitude, longitude: longitude, name: locationName, shortName: shortName, feeds: feeds!)
                 return locations[0]
             }
         }
@@ -61,7 +63,8 @@ class CoreDataHelpers {
         
         if let feed = try? appDelegate.managedObjectContext.fetch(fetchRequest) {
             if feed.count > 0 {
-                return feed[0]
+                feed[0].update(description: description, startTime: startTime, endTime: endTime, updated: updated, qrCode: qrCode, shortName: shortName, name: name, locations: locations, tag: tag)
+                return feed[0];
             }
         }
             
@@ -70,6 +73,8 @@ class CoreDataHelpers {
         feed.initialize(id: id, description: description, startTime: startTime, endTime: endTime, updated: updated, qrCode: qrCode, shortName: shortName, name: name, locations: locations, tag: tag)
         return feed
     }
+    
+    
     
     /*
      * Helper function to save the context 
@@ -146,23 +151,29 @@ class CoreDataHelpers {
         return defaults.object(forKey: "timestamp") as? NSDate as Date?
     }
     
-    /* fetch the newest JSON data from the server */
-    class func updateEventsFeed() {
-        print ("update events feed called")
-        // MARK: change the APIURL to the real one
-        let eventsAPIURL = "http://13.90.146.188:8080/v1/events"
-        Alamofire.request(eventsAPIURL)
-            .responseJSON { response in
-                if let jsonValue = response.result.value {
-                    let json = JSON(jsonValue)
-                    for feedJSON in json["data"].arrayValue {
-                        CoreDataHelpers.configure(feedJSON: feedJSON);
-                    }
-                }
-        }
-        CoreDataHelpers.saveContext()
-    }
+//    /* fetch the newest JSON data from the server */
+//    class func updateEventsFeed() {
+//        print ("update events feed called")
+//        // MARK: change the APIURL to the real one
+//        let eventsAPIURL = "http://13.90.146.188:8080/v1/events"
+//        Alamofire.request(eventsAPIURL)
+//            .responseJSON { response in
+//                if let jsonValue = response.result.value {
+//                    let json = JSON(jsonValue)
+//                    for feedJSON in json["data"].arrayValue {
+//                        CoreDataHelpers.configure(feedJSON: feedJSON);
+//                    }
+//                }
+//        }
+//        CoreDataHelpers.saveContext()
+//    }
     
+    /* configures a batch of event objects */
+    class func configureEvents(feedJSON: JSON) {
+        for event in feedJSON["data"] {
+            self.configure(feedJSON: event.1)
+        }
+    }
     /* initializes Feed object from JSON */
     class func configure(feedJSON: JSON) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -177,15 +188,16 @@ class CoreDataHelpers {
         let tag = feedJSON["tag"].stringValue
         let locations = feedJSON["locations"]
         var tempLocations:[Location] = []
-        for location in locations {
-            let locationObject = NSEntityDescription.insertNewObject(forEntityName: "Location", into: appDelegate.managedObjectContext) as! Location
-            let id = location.1["id"].int16Value
-            let latitude = location.1["latitude"].floatValue
-            let longitude = location.1["longitude"].floatValue
-            let shortName = location.1["shortName"].stringValue
-            let name = location.1["name"].stringValue
-            locationObject.initialize(id: id, latitude: latitude, longitude: longitude, name: shortName, shortName: name, feeds: [])
-            tempLocations.append(locationObject)
+        if locations.arrayValue != [] {
+            for location in locations {
+                let id = location.1["id"].int16Value
+                let latitude = location.1["latitude"].floatValue
+                let longitude = location.1["longitude"].floatValue
+                let shortName = location.1["shortName"].stringValue
+                let name = location.1["name"].stringValue
+                let locationObject = self.createOrFetchLocation(id: id, latitude: latitude, longitude: longitude, locationName: shortName, shortName: name, feeds: [])
+                tempLocations.append(locationObject)
+            }
         }
         let l = CoreDataHelpers.createOrFetchFeed(id: id, description: description, startTime: startTime, endTime: endTime, updated: updated, qrCode: qrCode, shortName: shortName, name: name, locations: tempLocations, tag: tag)
         print(l)
@@ -200,7 +212,7 @@ class CoreDataHelpers {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         dateFormatter.timeZone = NSTimeZone(name: "CST") as TimeZone!
         let dateObject = dateFormatter.date(from: date)
-        return dateObject!
+        return dateObject ?? Date()
     }
      
 }

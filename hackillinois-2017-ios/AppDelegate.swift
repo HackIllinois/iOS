@@ -17,9 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var funcList = [String: ((Void) -> Void)]()
+    var mTimer = Timer()
     
+    /* a hashmap of functions that are iterated every five minutes */
     func iterateFunctions() {
-        CoreDataHelpers.updateEventsFeed()
+        APIManager.shared.getEvents(success: self.getEventsSuccess, failure: self.getEventsFailure)
         DispatchQueue.global(qos: .background).async {
             self.loadHackathonTimes()
         }
@@ -28,6 +30,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 callback()
             }
         }
+    }
+    
+    /* success handler for pulling getEvents success */
+    func getEventsSuccess(json: JSON) {
+        CoreDataHelpers.configureEvents(feedJSON: json)
+    }
+    
+    /* failure handler for pulling getEvents failure */
+    func getEventsFailure(error: Error) {
+        print("Fetch events failed")
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -63,7 +75,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = UIStoryboard(name: "Event", bundle: nil).instantiateInitialViewController()
         }
 
-//        mTimer = Timer.scheduledTimer(timeInterval: 10, target:self, selector: #selector(iterateFunctions), userInfo: nil, repeats: true)
+        /* timer that updates events every five minutes */
+        mTimer = Timer.scheduledTimer(timeInterval: 10, target:self, selector: #selector(iterateFunctions), userInfo: nil, repeats: true)
         
         OneSignal.initWithLaunchOptions(launchOptions, appId: "0cc1d341-2731-446b-a667-1d8fc1a06d88", handleNotificationReceived: { (notification) in
             print("Received Notification - \(notification?.payload.notificationID)")

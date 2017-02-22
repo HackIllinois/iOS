@@ -13,7 +13,8 @@ import SwiftyJSON
 class APIManager {
     static let shared = APIManager()
     
-    private let HACKILLINOIS_API_URL = "https://api.hackillinois.org/" // "http://13.90.146.188:8080"
+//    private let HACKILLINOIS_API_URL = "https://api.hackillinois.org/" // this is the actual endpoint
+    private let HACKILLINOIS_API_URL = "http://13.90.146.188:8080/" // this is the instance on azure
     private var auth_header: [String: String]?
     private(set) var auth_key: String?
     
@@ -44,16 +45,14 @@ class APIManager {
         performRequest(endpoint: "v1/registration/attendee", method: .get, parameters: nil, headers: auth_header, success: success, failure: failure)
     }
     
-//    func getEvents() {
-//        assert(auth_header != nil)
-//
-//    }
+    func getEvents(success: ((JSON) -> Void)?, failure: ((Error) -> Void)?) {
+        performRequest(endpoint: "v1/events", method: .get, parameters: nil, success: success, failure: failure)
+    }
     
     
     private func performRequest(endpoint: String, method: HTTPMethod, parameters: [String: Any]?, headers: [String: String]? = nil, success: ((JSON) -> Void)?, failure: ((Error) -> Void)?) {
         let url = HACKILLINOIS_API_URL + endpoint
         Alamofire.request(url, method: method, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (reponse) in
-            
             if reponse.result.isSuccess {
                 let json = JSON(reponse.result.value!)
                 success?(json)

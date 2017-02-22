@@ -30,7 +30,16 @@ class Location: NSManagedObject {
         self.longitude = longitude
         self.name = name
         self.shortName = shortName
-        self.id  = id;
+        self.id  = id
+        self.feeds = NSSet(array: feeds)
+    }
+    
+    func update(id: Int16, latitude: Float, longitude: Float, name: String, shortName: String, feeds: [Feed]) {
+        self.latitude = latitude
+        self.longitude = longitude
+        self.name = name
+        self.shortName = shortName
+        self.id = id
         self.feeds = NSSet(array: feeds)
     }
 }
