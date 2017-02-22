@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, QRButtonDelegate, LocationButtonContainerDelegate {
+class HomeViewController: BaseNSFetchedResultsTableViewController, QRButtonDelegate {
     
     // MARK: - Enums
     enum HackathonStatus {
@@ -20,7 +20,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         static var current: HackathonStatus {
             let time = Date()
-            // MARK: change me
+            // TODO: change me
             return .beforeHacking
             if time < HACKATHON_BEGIN_TIME {
                 return .beforeHackathon
@@ -34,35 +34,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    // MARK: - IBOutlets
-    @IBOutlet weak var homeTableView: UITableView!
-    
-    // MARK: - UIViewController
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        homeTableView.rowHeight = UITableViewAutomaticDimension
-        homeTableView.estimatedRowHeight = 200
-        
-        fetch()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        
-        if let eventDetailsVC = segue.destination as? EventDetailsViewController,
-           let indexPath = sender as? IndexPath {
-            let offsetIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section);
-            eventDetailsVC.event = fetchedResultsController.object(at: offsetIndexPath)
-        }
-    }
-    
     // MARK: - UITableViewDataSource
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return fetchedResultsController.sections?.count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let events = fetchedResultsController.sections?[section].numberOfObjects ?? 0
         
         switch HackathonStatus.current {
@@ -73,7 +46,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         
         /*****
@@ -142,54 +115,34 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: "showEventDetails", sender: indexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        super.tableView(tableView, didSelectRowAt: indexPath)
+        let offsetIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
+        performSegue(withIdentifier: "showEventDetails", sender: fetchedResultsController.object(at: offsetIndexPath))
     }
 
     // MARK: - NSFetchedResultsControllerDelegate
-    lazy var fetchedResultsController: NSFetchedResultsController<Feed> = {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        let fetchRequest = NSFetchRequest<Feed>(entityName: "Feed")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startTime", ascending: false)]
-        fetchRequest.includesSubentities = false
-        
-        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
-        frc.delegate = self
-        return frc
-    }()
-
-    func fetch() {
-        do {
-            try fetchedResultsController.performFetch()
-        } catch let error as NSError {
-            print("Failed to preform fetch operation, error: \(error)")
-        }
-        homeTableView.reloadData()
+    override func predicate() -> NSPredicate? {
+        return NSPredicate(format: "tag == %@", "HACKATHON")
     }
-
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        homeTableView.beginUpdates()
-    }
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    
+    override func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         guard HackathonStatus.current == .beforeHacking || HackathonStatus.current == .duringHacking else { return }
         switch type {
         case .insert:
             guard let insertIndexPath = newIndexPath else { return }
-            homeTableView.insertRows(at: [insertIndexPath], with: .fade)
+            tableView.insertRows(at: [insertIndexPath], with: .fade)
         case .delete:
             guard let deleteIndexPath = indexPath else { return }
-            homeTableView.deleteRows(at: [deleteIndexPath], with: .fade)
+            tableView.deleteRows(at: [deleteIndexPath], with: .fade)
         case .update:
-            guard let updateIndexPath = indexPath, let cell = homeTableView.cellForRow(at: updateIndexPath) else { return }
-            if(updateIndexPath.row <= 0) {
+            guard let updateIndexPath = indexPath, let cell = tableView.cellForRow(at: updateIndexPath) else { return }
+            if (updateIndexPath.row <= 0) {
                 return
             }
             let offsetIndexPath = IndexPath(row: updateIndexPath.row - 1, section: updateIndexPath.section);
             let event = fetchedResultsController.object(at: offsetIndexPath)
-
+            
             if let cell = cell as? HomeTableViewEventCell {
                 cell.titleLabel?.text = event.name
                 cell.timeLabel?.text = HLDateFormatter.shared.string(from: event.startTime)
@@ -197,49 +150,22 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.locations = event.locations.array as! [Location]
                 cell.layoutIfNeeded()
             }
-
-            homeTableView.reloadRows(at: [updateIndexPath], with: .fade)
         case .move:
             guard let fromIndexPath = indexPath, let toIndexPath = newIndexPath else { return }
-            homeTableView.insertRows(at: [toIndexPath],   with: .fade)
-            homeTableView.deleteRows(at: [fromIndexPath], with: .fade)
+            tableView.insertRows(at: [toIndexPath],   with: .fade)
+            tableView.deleteRows(at: [fromIndexPath], with: .fade)
         }
 
+        super.controller(controller, didChange: anObject, at: indexPath, for: type, newIndexPath: newIndexPath)
     }
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+    override func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         guard HackathonStatus.current == .beforeHacking || HackathonStatus.current == .duringHacking else { return }
-        switch type {
-        case .insert:
-            homeTableView.insertSections([sectionIndex], with: .fade)
-        case .delete:
-            homeTableView.deleteSections([sectionIndex], with: .fade)
-        case .update:
-            homeTableView.reloadSections([sectionIndex], with: .fade)
-        case .move:
-            break
-        }
+        super.controller(controller, didChange: sectionInfo, atSectionIndex: sectionIndex, for: type)
     }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        homeTableView.endUpdates()
-    }
-
     
     // MARK: - QRButtonDelegate
     func didTapQRButton() {
         performSegue(withIdentifier: "showQRCode", sender: nil)
-    }
-    
-    // MARK: - LocationButtonContainerDelegate
-    func locationButtonTapped(location: Location) {
-//        if let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "Map") as? MapViewController {
-//            vc.isDirectionMode = true
-//            vc.directionModeLabel = LocationIdMapper.getLocalId(fromShortname: location.shortName)
-//            vc.directionModeTitle = location.name
-//            vc.hidesBottomBarWhenPushed = true
-//            navigationController?.pushViewController(vc, animated: true)
-//        }
-
     }
 }

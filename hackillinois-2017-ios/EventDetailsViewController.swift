@@ -20,7 +20,7 @@ class EventDetailsViewController: UIViewController {
         super.viewDidLoad()
         let locations = event?.locations.array as? [Location] ?? []
         let names = locations.map { return $0.name }
-        eventLocationLabel.text = names.joined(separator: " ")
+        eventLocationLabel.text = names.joined(separator: "\n")
         
         eventTitleLabel.text = event?.name
         eventStartTime.text = HLDateFormatter.shared.string(from: event!.startTime)

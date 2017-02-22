@@ -34,7 +34,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     var datasource: [ProfileTableViewCells] = [
         .QRCode,
         .NameDiet,
-        .Links,
+//        .Links,
         .Information,
         .Information
     ]
