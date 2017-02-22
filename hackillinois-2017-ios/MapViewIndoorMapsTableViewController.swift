@@ -14,7 +14,7 @@ class MapViewIndoorMapsViewController: UIViewController, UITableViewDelegate, UI
     @IBOutlet var tableView: UITableView!
     
     // MARK: - Global Variables
-    var location_id: Int = 1
+    var location_id = 1
     var location_names = [Int: String]()
     var images = [UIImage]()
     

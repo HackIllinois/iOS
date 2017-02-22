@@ -17,7 +17,7 @@ class HLDateFormatter {
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US")
-        formatter.dateFormat = "hh:mm a"
+        formatter.dateFormat = "hh:mm a  EEEE"
         formatter.amSymbol = "am"
         formatter.pmSymbol = "pm"
         return formatter
@@ -39,7 +39,7 @@ class HLDateFormatter {
         }
         
         if timeSince < 60 * 60 {
-            return "\(floor(timeSince/60)) minutes ago"
+            return "\(Int(timeSince/60)) minutes ago"
         }
         
         if timeSince < 60 * 60 * 2 {
@@ -47,7 +47,7 @@ class HLDateFormatter {
         }
         
         if timeSince < 60 * 60 * 24 {
-            return "\(floor(timeSince/(60 * 60))) hours ago"
+            return "\(Int(timeSince/(60 * 60))) hours ago"
         }
 
         if timeSince < 60 * 60 * 24 * 2 {

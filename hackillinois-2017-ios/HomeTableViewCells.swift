@@ -62,6 +62,8 @@ class HomeTableViewTitleCell: UITableViewCell {
 
     @IBOutlet weak var containerView: UIView?
 
+    @IBOutlet weak var eventsTitleLabel: UILabel?
+    
     var timer = Timer()
     var isTicking = false
     

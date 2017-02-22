@@ -14,7 +14,7 @@ class FeedTableViewController: BaseNSFetchedResultsTableViewController {
     
     // MARK: NSFetchedResultsControllerDelegate
     override func predicate() -> NSPredicate? {
-        return NSPredicate(format: "tag == %@", "NOTIFICATION")
+        return NSPredicate(format: "tag == %@", "ANNOUNCEMENT")
     }
     
     // MARK: - UITableViewDataSource

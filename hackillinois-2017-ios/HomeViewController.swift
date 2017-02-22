@@ -20,8 +20,6 @@ class HomeViewController: BaseNSFetchedResultsTableViewController, QRButtonDeleg
         
         static var current: HackathonStatus {
             let time = Date()
-            // TODO: change me
-            return .beforeHacking
             if time < HACKATHON_BEGIN_TIME {
                 return .beforeHackathon
             } else if time < HACKING_BEGIN_TIME {
@@ -34,20 +32,54 @@ class HomeViewController: BaseNSFetchedResultsTableViewController, QRButtonDeleg
         }
     }
     
+    
+    // MARK: - IBAction
+    var showAll = false
+    @IBAction func filter() {
+        let alert = UIAlertController(title: "Filter Events", message: nil, preferredStyle: .actionSheet)
+        let allAction = UIAlertAction(title: "All", style: .default) { (_) in
+            self.showAll = true
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            self.fetch()
+        }
+        let upcomingAction = UIAlertAction(title: "Upcoming", style: .default) { (_) in
+            self.showAll = false
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            self.fetch()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(allAction)
+        alert.addAction(upcomingAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
     // MARK: - UITableViewDataSource
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let events = fetchedResultsController.sections?[section].numberOfObjects ?? 0
-        
+    override func numberOfSections(in tableView: UITableView) -> Int {
         switch HackathonStatus.current {
         case .beforeHackathon, .afterHackathon:
             return 1
         case .beforeHacking, .duringHacking:
-            return events + 1
+            return 2
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
+        case 0:
+            return 1
+        default:
+            switch HackathonStatus.current {
+            case .beforeHackathon, .afterHackathon:
+                return 0
+            case .beforeHacking, .duringHacking:
+                return fetchedResultsController.sections?[0].numberOfObjects ?? 0
+            }
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.row {
+        switch indexPath.section {
         
         /*****
          *      This is for the top cell => Regardless of which part of the event we are in,
@@ -56,7 +88,6 @@ class HomeViewController: BaseNSFetchedResultsTableViewController, QRButtonDeleg
          *      or "Submit Projects in xx Hours xx Minutes xx seconds"
          *****/
         case 0:
-            
             switch HackathonStatus.current {
                 
             case .beforeHackathon:
@@ -68,6 +99,7 @@ class HomeViewController: BaseNSFetchedResultsTableViewController, QRButtonDeleg
                     cell.titleLabel?.text = "Hacking Starts in..."
                     cell.detailTimeLabel?.text = "@ Friday 10:00 pm"
                     cell.endTime = HACKING_BEGIN_TIME
+                    cell.eventsTitleLabel?.text = showAll ? "All Events" : "Upcoming"
                     cell.timeStart()
                 }
                 return cell
@@ -78,6 +110,7 @@ class HomeViewController: BaseNSFetchedResultsTableViewController, QRButtonDeleg
                     cell.titleLabel?.text = "Submit Projects in..."
                     cell.detailTimeLabel?.text = "@ Sunday 10:00 am"
                     cell.endTime = HACKING_END_TIME
+                    cell.eventsTitleLabel?.text = showAll ? "All Events" : "Upcoming"
                     cell.timeStart()
                 }
                 return cell
@@ -92,9 +125,7 @@ class HomeViewController: BaseNSFetchedResultsTableViewController, QRButtonDeleg
          *      events that have qr code scanning and events that do not
          *****/
         default:
-            // check api for qr code
-            let offsetIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section);
-            let event = fetchedResultsController.object(at: offsetIndexPath)
+            let event = fetchedResultsController.sections?[0].objects?[indexPath.row] as! Feed
 
             let identifier = event.locations.count > 0 ? "HomeTableViewLocationsEventCell" : "HomeTableViewEventCell"
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
@@ -117,50 +148,45 @@ class HomeViewController: BaseNSFetchedResultsTableViewController, QRButtonDeleg
     // MARK: - UITableViewDelegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         super.tableView(tableView, didSelectRowAt: indexPath)
-        let offsetIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
-        performSegue(withIdentifier: "showEventDetails", sender: fetchedResultsController.object(at: offsetIndexPath))
+        performSegue(withIdentifier: "showEventDetails", sender: fetchedResultsController.sections?[0].objects?[indexPath.row])
     }
 
     // MARK: - NSFetchedResultsControllerDelegate
     override func predicate() -> NSPredicate? {
-        return NSPredicate(format: "tag == %@", "HACKATHON")
+        if showAll {
+            return NSPredicate(format: "tag == %@", "SCHEDULE")
+        } else {
+            return NSPredicate(format: "tag == %@ AND (startTime >= %@)", "SCHEDULE", NSDate(timeInterval: -1 * 60 * 60, since: Date()))
+        }
     }
     
     override func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         guard HackathonStatus.current == .beforeHacking || HackathonStatus.current == .duringHacking else { return }
+        
         switch type {
         case .insert:
             guard let insertIndexPath = newIndexPath else { return }
-            tableView.insertRows(at: [insertIndexPath], with: .fade)
+            let offsetIndexPath = IndexPath(row: insertIndexPath.row, section: insertIndexPath.section + 1)
+            tableView.insertRows(at: [offsetIndexPath], with: .fade)
+            
         case .delete:
             guard let deleteIndexPath = indexPath else { return }
-            tableView.deleteRows(at: [deleteIndexPath], with: .fade)
-        case .update:
-            guard let updateIndexPath = indexPath, let cell = tableView.cellForRow(at: updateIndexPath) else { return }
-            if (updateIndexPath.row <= 0) {
-                return
-            }
-            let offsetIndexPath = IndexPath(row: updateIndexPath.row - 1, section: updateIndexPath.section);
-            let event = fetchedResultsController.object(at: offsetIndexPath)
+            let offsetIndexPath = IndexPath(row: deleteIndexPath.row, section: deleteIndexPath.section + 1)
+            tableView.deleteRows(at: [offsetIndexPath], with: .fade)
             
-            if let cell = cell as? HomeTableViewEventCell {
-                cell.titleLabel?.text = event.name
-                cell.timeLabel?.text = HLDateFormatter.shared.string(from: event.startTime)
-                
-                cell.locations = event.locations.array as! [Location]
-                cell.layoutIfNeeded()
-            }
+        case .update:
+            break
+            
         case .move:
             guard let fromIndexPath = indexPath, let toIndexPath = newIndexPath else { return }
-            tableView.insertRows(at: [toIndexPath],   with: .fade)
-            tableView.deleteRows(at: [fromIndexPath], with: .fade)
+            let offsetIndexPath1 = IndexPath(row: fromIndexPath.row, section: fromIndexPath.section + 1)
+            let offsetIndexPath2 = IndexPath(row: toIndexPath.row, section: toIndexPath.section + 1)
+            tableView.moveRow(at: offsetIndexPath1, to: offsetIndexPath2)
         }
-
-        super.controller(controller, didChange: anObject, at: indexPath, for: type, newIndexPath: newIndexPath)
+        
     }
     
     override func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        guard HackathonStatus.current == .beforeHacking || HackathonStatus.current == .duringHacking else { return }
         super.controller(controller, didChange: sectionInfo, atSectionIndex: sectionIndex, for: type)
     }
     

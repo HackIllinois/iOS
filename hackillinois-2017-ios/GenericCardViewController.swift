@@ -13,12 +13,6 @@ class GenericCardViewController: UIViewController, UICollectionViewDelegateFlowL
     // MARK: Configuration Utility classes
     func configureCell(_ cell: UICollectionViewCell) {
         /* Configure cell */
-        cell.layer.shadowColor = UIColor.black.cgColor
-        cell.layer.shadowOffset = CGSize(width: 0, height: 1)
-        cell.layer.shadowOpacity = 1
-        cell.layer.shadowRadius = 3.0
-        cell.clipsToBounds = false
-        cell.layer.masksToBounds = false
     }
     
     // MARK: UICollectionDelegateFlowLayout

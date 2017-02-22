@@ -60,19 +60,19 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.nameLabel.text = user.name
             cell.dietLabel.text = user.diet
             
-        case 2:
-            guard let cell = cell as? ProfileTableViewLinksCell else { break }
-            // TODO: get these
-            cell.githubLink = "https://github.com"
-            cell.resumeLink = "https://google.com"
-            cell.linkedinLink = "https://linkedin.com"
+//        case 2:
+//            guard let cell = cell as? ProfileTableViewLinksCell else { break }
+//            // TODO: get these
+//            cell.githubLink = "https://github.com"
+//            cell.resumeLink = "https://google.com"
+//            cell.linkedinLink = "https://linkedin.com"
             
-        case 3:
+        case 2:
             guard let cell = cell as? ProfileTableViewInformationCell else { break }
             cell.titleLabel.text = "University"
             cell.detailLabel.text = user.school
             
-        case 4:
+        case 3:
             guard let cell = cell as? ProfileTableViewInformationCell else { break }
             cell.titleLabel.text = "Major"
             cell.detailLabel.text = user.major

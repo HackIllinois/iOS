@@ -11,6 +11,7 @@ import CoreData
 import UIKit
 import Alamofire
 import SwiftyJSON
+
 /* Provide namespace for helpers */
 class CoreDataHelpers {
     /* Mark - Helper functions to find location, tag, and create feeds */
@@ -151,45 +152,52 @@ class CoreDataHelpers {
         return defaults.object(forKey: "timestamp") as? NSDate as Date?
     }
     
-
-    /* configures a batch of event objects */
-    class func configureEvents(feedJSON: JSON) {
-        for event in feedJSON["data"] {
-            self.configure(feedJSON: event.1)
+    
+    // TODO: make announcement coredata object
+    class func configureAnnouncements(_ json: JSON) {
+        let ANNOUNCEMENT_ID_OFFSET = 10000
+        for announcement in json["data"].arrayValue {
+            let id = NSNumber(value:announcement["id"].intValue + ANNOUNCEMENT_ID_OFFSET)
+            
+            let description = announcement["description"].stringValue
+            let name        = announcement["title"].stringValue
+            let date        = stringToDate(date: announcement["created"].stringValue)
+            
+            let _ = CoreDataHelpers.createOrFetchFeed(id: id, description: description, startTime: date, endTime: date, updated: date, qrCode: 0, shortName: name, name: name, locations: [], tag: "ANNOUNCEMENT")
         }
     }
-    /* initializes Feed object from JSON */
-    class func configure(feedJSON: JSON) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let id = feedJSON["id"].numberValue
-        let name = feedJSON["name"].stringValue
-        let shortName = feedJSON["shortName"].stringValue
-        let qrCode = feedJSON["qrcode"].numberValue
-        let description = feedJSON["description"].stringValue
-        let updated = stringToDate(date: feedJSON["updated"].stringValue)
-        let startTime = stringToDate(date: feedJSON["startTime"].stringValue)
-        let endTime = stringToDate(date: feedJSON["endTime"].stringValue)
-        let tag = feedJSON["tag"].stringValue
-        let locations = feedJSON["locations"]
-        var tempLocations:[Location] = []
-        if locations.arrayValue != [] {
-            for location in locations {
-                let id = location.1["id"].int16Value
-                let latitude = location.1["latitude"].floatValue
-                let longitude = location.1["longitude"].floatValue
-                let shortName = location.1["shortName"].stringValue
-                let name = location.1["name"].stringValue
-                let locationObject = self.createOrFetchLocation(id: id, latitude: latitude, longitude: longitude, locationName: name, shortName: shortName, feeds: [])
-                tempLocations.append(locationObject)
+
+
+    /* configures a batch of event objects */
+    class func configureEvents(_ json: JSON) {
+        for event in json["data"].arrayValue {
+            let id = event["id"].numberValue
+            let name = event["name"].stringValue
+            let shortName = event["shortName"].stringValue
+            let qrCode = event["qrcode"].numberValue
+            let description = event["description"].stringValue
+            let updated = stringToDate(date: event["updated"].stringValue)
+            let startTime = stringToDate(date: event["startTime"].stringValue)
+            let endTime = stringToDate(date: event["endTime"].stringValue)
+            let tag = event["tag"].stringValue
+            var locations = [Location]()
+            
+            for location in event["locations"].arrayValue {
+                let id = location["id"].int16Value
+                let latitude = location["latitude"].floatValue
+                let longitude = location["longitude"].floatValue
+                let shortName = location["shortName"].stringValue
+                let name = location["name"].stringValue
+                let locationObject = createOrFetchLocation(id: id, latitude: latitude, longitude: longitude, locationName: name, shortName: shortName, feeds: [])
+                locations.append(locationObject)
             }
+            
+            let _ = CoreDataHelpers.createOrFetchFeed(id: id, description: description, startTime: startTime, endTime: endTime, updated: updated, qrCode: qrCode, shortName: shortName, name: name, locations: locations, tag: tag)
         }
-        let l = CoreDataHelpers.createOrFetchFeed(id: id, description: description, startTime: startTime, endTime: endTime, updated: updated, qrCode: qrCode, shortName: shortName, name: name, locations: tempLocations, tag: tag)
-        print(l)
     }
     
     /* converts date string to date object */
-    class func stringToDate(date: String) -> Date
-    {
+    class func stringToDate(date: String) -> Date {
         // the format below is the javascript simple date format
         // the Z represents GMT timezone (+0)
         let dateFormatter = DateFormatter()

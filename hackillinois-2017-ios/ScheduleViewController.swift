@@ -32,15 +32,6 @@ class ScheduleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set up background gradient
-        let gradient = CAGradientLayer()
-        let colorBottom = UIColor(red: 20/255, green: 36/255, blue: 66/255, alpha: 1.0)
-        let colorTop = UIColor(red: 28/255, green: 50/255, blue: 90/255, alpha: 1.0)
-        gradient.colors = [ colorTop.cgColor, colorBottom.cgColor ]
-        gradient.locations = [ 0.0, 1.0 ]
-        gradient.frame = view.bounds
-        self.view.layer.insertSublayer(gradient, at: 0)
-        
         // Set up transparent navigation bar
         if let navigationBar = self.navigationController?.navigationBar {
             // Set empty pixel as background image
@@ -48,7 +39,6 @@ class ScheduleViewController: UIViewController {
             navigationBar.shadowImage = UIImage()
             navigationBar.isTranslucent = true
             // Hide toolbar shadow
-            self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         }
 
         // Set up buttons array

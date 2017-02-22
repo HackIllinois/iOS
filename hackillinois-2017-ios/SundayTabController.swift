@@ -23,33 +23,11 @@ class SundayTabController: GenericTabController {
     func initIndex(){
         dayIndex = 2
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    
+
     override func viewWillAppear(_ animated: Bool) {
         // set up interval refresh
-        self.registerReloadFunction()
         self.updateTable()
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        self.unregisterReloadFunction()
-    }
-    
-    
-    func registerReloadFunction() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.setInterval(key: "FridayTabController", callback: self.updateTable)
-    }
-    
-    func unregisterReloadFunction() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let _ = appDelegate.clearIntereval(key: "FridayTabController")
-    }
-    
     
     func updateTable() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate

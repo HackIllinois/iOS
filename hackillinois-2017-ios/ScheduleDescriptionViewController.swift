@@ -23,25 +23,6 @@ class ScheduleDescriptionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set up background gradient
-        let gradient = CAGradientLayer()
-        let colorBottom = UIColor(red: 20/255, green: 36/255, blue: 66/255, alpha: 1.0)
-        let colorTop = UIColor(red: 28/255, green: 50/255, blue: 90/255, alpha: 1.0)
-        gradient.colors = [ colorTop.cgColor, colorBottom.cgColor ]
-        gradient.locations = [ 0.0, 1.0 ]
-        gradient.frame = view.bounds
-        self.view.layer.insertSublayer(gradient, at: 0)
-        
-        // Set up transparent navigation bar
-        if let navigationBar = self.navigationController?.navigationBar {
-            // Set empty pixel as background image
-            navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationBar.shadowImage = UIImage()
-            navigationBar.isTranslucent = true
-            // Hide toolbar shadow
-            self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
-        }
-        
         // Set up back button
         self.navigationController?.navigationBar.tintColor = UIColor(red: 93.0/255.0, green: 200.0/255.0, blue: 219.9/255.0, alpha: 1.0)
 

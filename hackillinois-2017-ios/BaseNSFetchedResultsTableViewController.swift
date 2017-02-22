@@ -64,7 +64,7 @@ class BaseNSFetchedResultsTableViewController: UIViewController, UITableViewDele
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         let fetchRequest = NSFetchRequest<Feed>(entityName: "Feed")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startTime", ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startTime", ascending: true), NSSortDescriptor(key: "shortName", ascending: true)]
         fetchRequest.includesSubentities = false
         
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
@@ -99,6 +99,7 @@ class BaseNSFetchedResultsTableViewController: UIViewController, UITableViewDele
             guard let deleteIndexPath = indexPath else { return }
             tableView.deleteRows(at: [deleteIndexPath], with: .fade)
         case .update:
+            break
             guard let updateIndexPath = indexPath else { return }
             tableView.reloadRows(at: [updateIndexPath], with: .fade)
         case .move:
