@@ -61,6 +61,10 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         map = mapView
         initializeLocations()
         
+//        let tabBarItem = UITabBarItem(tabBarSystemItem: "", tag: UIImage(named: "more"))
+        
+        
+        
         /* Call superclass's constructor after configuration */
         super.viewDidLoad()
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
@@ -91,10 +95,11 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         if isDirectionMode {
             directionTitleOverlay.isHidden = false
             directionTitle.text = directionModeTitle
-            self.title = "Directions"
+            self.title = "DIRECTIONS"
+            
         } else {
             directionTitleOverlay.isHidden = true
-            self.title = "Maps"
+            self.title = "MAPS"
         }
     }
     
