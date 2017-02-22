@@ -12,58 +12,100 @@ import CoreData
 private let reuseIdentifier = "feedCell"
 
 class FeedTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, LocationButtonContainerDelegate {
-    /* Variables */
+    // MARK: - Global Variables
     var refreshCleanUpRequired = false
     var dateTimeFormatter: DateFormatter!
-    
-    /* UI elements */
-    @IBOutlet weak var tableView: UITableView!
-    
-    /* Fetched results controller for lazy loading of cells */
-//    var fetchedResultsController: NSFetchedResultsController<Feed>!
-    
-    lazy var fetchedResultsController: NSFetchedResultsController<Feed> = {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        let summonersFetchRequest = NSFetchRequest<Feed>(entityName: "Feed")
-        summonersFetchRequest.sortDescriptors = [NSSortDescriptor(key: "startTime", ascending: false)]
-        summonersFetchRequest.includesSubentities = false
-        let frc = NSFetchedResultsController(fetchRequest: summonersFetchRequest, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
-        frc.delegate = self
-        return frc
-    }()
-
-    
-    
-    /* Cache of Tags to quickly generate the "Filter by..." menu */
+    // Cache of Tags to quickly generate the "Filter by..." menu
     var tags = [String]()
     
-    // Mark: Fetch function with predicate is already defined
-    func performFetch() {
-        do {
-            try self.fetchedResultsController.performFetch()
-            self.tableView.reloadData()
-        } catch {
-            print("Error loading: \(error)")
+    // MARK: - IBOutlets
+    @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: - View Configuration
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100
+        
+        
+        // Uncomment the following line to preserve selection between presentations
+        /* Preemptively load tags */
+        loadTags()
+        
+        
+        //        // Set up refresh indicator
+        //        // refreshControl = UIRefreshControl()
+        //        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh",
+        //                                                            attributes: [NSForegroundColorAttributeName: UIColor.fromRGBHex(mainTintColor)])
+        //        // Set refresh control look
+        //        refreshControl?.tintColor = UIColor.fromRGBHex(mainTintColor)
+        //        refreshControl?.bounds = CGRect(
+        //            x: refreshControl!.bounds.origin.x,
+        //            y: 50,
+        //            width: refreshControl!.bounds.size.width,
+        //            height: refreshControl!.bounds.size.height)
+        //
+        //        refreshControl?.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        
+        initializeSample()
+        // Load objects from core data
+        loadSavedData()
+    }
+    
+    // MARK: - Navigation
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using [segue destinationViewController].
+        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "feedDetail" {
+            let destination = segue.destination as! FeedDetailViewController
+            let feedItem = fetchedResultsController.object(at: tableView.indexPathForSelectedRow!)
+            
+            // Set up buildings
+            destination.buildings = []
+            
+            if let locationArray = feedItem.locations.array as? [Location] {
+                for location in locationArray {
+                    let building = Building(location: location)
+                    destination.buildings.append(building)
+                }
+            }
         }
     }
     
-    // Mark: Loading function for NSFetchedResultsController
+    // MARK: NSFetchedResultsControllerDelegate
+    // Fetched results controller for lazy loading of cells
+    lazy var fetchedResultsController: NSFetchedResultsController<Feed> = {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let fetchRequest = NSFetchRequest<Feed>(entityName: "Feed")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startTime", ascending: false)]
+        fetchRequest.includesSubentities = false
+        
+        fetchRequest.predicate = NSPredicate(format: "tag == %@", "NOTIFICATION")
+        
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        frc.delegate = self
+        return frc
+    }()
+    
+    
+    func loadSavedData() {
+        fetchedResultsController.fetchRequest.predicate = nil
+        fetch()
+    }
+    
     // Not generalized due to very specific quirks to it
     // TODO: find a way to generalize
-    func loadSavedData() {
-//        if fetchedResultsController == nil {
-//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//            let fetch = NSFetchRequest<Feed>(entityName: "Feed")
-//            let sort = NSSortDescriptor(key: "startTime", ascending: false)
-//            fetch.sortDescriptors = [sort]
-//            
-//            fetchedResultsController = NSFetchedResultsController<Feed>(fetchRequest: fetch, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
-//            fetchedResultsController.delegate = self
-//        }
-//        
-//        fetchedResultsController.fetchRequest.predicate = nil
-        performFetch()
+    func fetch() {
+        do {
+            try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            assertionFailure("Failed to preform fetch operation, error: \(error)")
+        }
+        tableView.reloadData()
     }
     
     func initializeSample() {
@@ -108,9 +150,7 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         CoreDataHelpers.setLatestUpdateTime(Date(timeIntervalSince1970: 1464042100))
     }
     
-    // Mark - FeedCollectionViewController
-    
-    /* Refresh the feed... */
+    // MARK: - FeedCollectionViewController
     func refresh() {
         tableView.reloadData()
         DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async { [unowned self] in
@@ -164,7 +204,7 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    // Mark: Show filtering options...
+    // MARK: - Show filtering options...
     @IBAction func showFilterBy() {
         // Add the tags here...
         let alert = UIAlertController(title: "Filter by...", message: "Select tag to sort by", preferredStyle: .actionSheet)
@@ -186,68 +226,14 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         
         alert.addAction(UIAlertAction(title: "Default", style: .default, handler: { [unowned self] action in
             self.fetchedResultsController.fetchRequest.predicate = nil
-            self.performFetch()
+            self.fetch()
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-
-    // Mark: View configuration
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 100
-        
-
-        // Uncomment the following line to preserve selection between presentations
-        /* Preemptively load tags */
-        loadTags()
-
-        
-//        // Set up refresh indicator
-//        // refreshControl = UIRefreshControl()
-//        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh",
-//                                                            attributes: [NSForegroundColorAttributeName: UIColor.fromRGBHex(mainTintColor)])
-//        // Set refresh control look
-//        refreshControl?.tintColor = UIColor.fromRGBHex(mainTintColor)
-//        refreshControl?.bounds = CGRect(
-//            x: refreshControl!.bounds.origin.x,
-//            y: 50,
-//            width: refreshControl!.bounds.size.width,
-//            height: refreshControl!.bounds.size.height)
-//        
-//        refreshControl?.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
-        
-        initializeSample()
-        // Load objects from core data
-        loadSavedData()
-    }
-
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-        
-        if segue.identifier == "feedDetail" {
-            let destination = segue.destination as! FeedDetailViewController
-            let feedItem = fetchedResultsController.object(at: tableView.indexPathForSelectedRow!)
-            
-            // Set up buildings
-            destination.buildings = []
-            
-            if let locationArray = feedItem.locations.array as? [Location] {
-                for location in locationArray {
-                    let building = Building(location: location)
-                    destination.buildings.append(building)
-                }
-            }
-        }
-    }
     
-    // MARK: UITableViewDataSource
+    // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = fetchedResultsController.object(at: indexPath)
 
