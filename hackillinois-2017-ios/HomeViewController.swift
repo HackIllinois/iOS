@@ -248,11 +248,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             "Illini Union" : 4,
             "Kenny Gym" : 5,
             "Kenneth Gym" : 5
-            ]
+        ]
         
-        let location_id = locations[location.name]
+        let location_id = locations[location.shortName]
         if let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "Map") as? MapViewController {
-            vc.labelPressed = location_id!
+            vc.isDirectionMode = true
+            vc.directionModeLabel = location_id!
+            vc.directionModeTitle = location.name
             navigationController?.pushViewController(vc, animated: true)
         }
 

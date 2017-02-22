@@ -195,7 +195,7 @@ class CoreDataHelpers {
                 let longitude = location.1["longitude"].floatValue
                 let shortName = location.1["shortName"].stringValue
                 let name = location.1["name"].stringValue
-                let locationObject = self.createOrFetchLocation(id: id, latitude: latitude, longitude: longitude, locationName: shortName, shortName: name, feeds: [])
+                let locationObject = self.createOrFetchLocation(id: id, latitude: latitude, longitude: longitude, locationName: name, shortName: shortName, feeds: [])
                 tempLocations.append(locationObject)
             }
         }

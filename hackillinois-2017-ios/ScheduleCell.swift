@@ -105,7 +105,7 @@ class ScheduleCell: UITableViewCell {
             self.time.text = props.time
             
             for (i, location) in props.locations.enumerated() {
-                self.locationButtons[i].button.setTitle(location.location_name, for: .normal)
+                self.locationButtons[i].button.setTitle(location.location_shortname, for: .normal)
             }
             for i in 0...2 {
                 self.locationButtons[i].constraint.constant = i < props.locations.count ? CELL_HEIGHT : 0.0

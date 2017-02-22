@@ -95,11 +95,11 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         if isDirectionMode {
             directionTitleOverlay.isHidden = false
             directionTitle.text = directionModeTitle
-            self.title = "DIRECTIONS"
+            self.title = "Directions"
             
         } else {
             directionTitleOverlay.isHidden = true
-            self.title = "MAPS"
+            self.title = "Maps"
         }
     }
     
