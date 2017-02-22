@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SwiftyJSON
 
 private let reuseIdentifier = "feedCell"
 
@@ -27,27 +28,9 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         
-        
-        // Uncomment the following line to preserve selection between presentations
-        /* Preemptively load tags */
+        // Preemptively load tags
         loadTags()
-        
-        
-        //        // Set up refresh indicator
-        //        // refreshControl = UIRefreshControl()
-        //        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh",
-        //                                                            attributes: [NSForegroundColorAttributeName: UIColor.fromRGBHex(mainTintColor)])
-        //        // Set refresh control look
-        //        refreshControl?.tintColor = UIColor.fromRGBHex(mainTintColor)
-        //        refreshControl?.bounds = CGRect(
-        //            x: refreshControl!.bounds.origin.x,
-        //            y: 50,
-        //            width: refreshControl!.bounds.size.width,
-        //            height: refreshControl!.bounds.size.height)
-        //
-        //        refreshControl?.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
-        
-        initializeSample()
+        attemptPullingEventData()
         // Load objects from core data
         loadSavedData()
     }
@@ -83,7 +66,7 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startTime", ascending: false)]
         fetchRequest.includesSubentities = false
         
-        fetchRequest.predicate = NSPredicate(format: "tag == %@", "NOTIFICATION")
+        fetchRequest.predicate = NSPredicate(format: "tag == %@", "EVENT")
         
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         
@@ -108,46 +91,35 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.reloadData()
     }
     
-    func initializeSample() {
-        // Make sure that the time stamp recieved is actually greater than our last updated time
-        let lastUpdated: Date? = CoreDataHelpers.getLatestUpdateTime() as Date?
-        if lastUpdated != nil {
-            // Replace with actual timestamp
-            if Date(timeIntervalSince1970: 1464042000).compare(lastUpdated!).rawValue <= 0 {
-                return
-            }
+    // MARK: - Events Logic
+    func attemptPullingEventData() {
+        APIManager.shared.getEvents(success: getEventsSuccess, failure: getEventsFailure)
+    }
+    
+    func getEventsSuccess(json: JSON) {
+        if let error = json["error"]["message"].string {
+            presentErrorLabel(text: error)
+        } else if let key = json["data"]["auth"].string {
+//            APIManager.shared.setAuthKey(key)
+//            APIManager.shared.getUserInfo(success: getUserInfoSuccess, failure: getEventsFailure)
         }
-        
-        // I guess they are permanent locations now
-        let dcl: Location! = CoreDataHelpers.createOrFetchLocation(id: 4, latitude: 40.113140, longitude: -88.226589, locationName: "Digital Computer Laboratory",  shortName: "DCL",  feeds: nil)
-        
-        let siebel: Location! = CoreDataHelpers.createOrFetchLocation(id: 1, latitude: 40.113926, longitude: -88.224916, locationName: "Thomas M. Siebel Center", shortName: "Siebel", feeds: nil)
-        
-        let eceb: Location! = CoreDataHelpers.createOrFetchLocation(id: 2,  latitude: 40.114828, longitude: -88.228049, locationName: "Electrical Computer Engineering Building", shortName: "ECEB", feeds: nil)
-        
-        let union: Location! = CoreDataHelpers.createOrFetchLocation(id: 3,  latitude: 40.109395, longitude: -88.227181,locationName: "Illini Union", shortName: "Union", feeds: nil)
-        
-        let date = Date(timeIntervalSince1970: 1486743300)
-        // Temporary Events
-        
-        _ = CoreDataHelpers.createOrFetchFeed(id: 1, description: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.", startTime: date, endTime: date, updated: date, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel, union], tag: "EVENT")
-        
-        _ = CoreDataHelpers.createOrFetchFeed(id: 2, description: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.", startTime: date, endTime: date, updated: date, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel, union], tag: "EVENT")
-        
-        _ = CoreDataHelpers.createOrFetchFeed(id: 3, description: "clue hunt", startTime: date, endTime: date, updated: date, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel, union], tag: "EVENT")
-        
-        _ = CoreDataHelpers.createOrFetchFeed(id: 1, description: "Dinner gonna be rdy in 10", startTime: date, endTime: date, updated: date, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel, union], tag: "XD")
-        
-        _ = CoreDataHelpers.createOrFetchFeed(id: 1, description: "career fair in the union", startTime: date, endTime: date, updated: date, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel, union], tag: "XD")
-        
-        // Generate dummy data to simulate scrolling down
-        for n in 0 ..< 7 {
-            let time = Date(timeIntervalSince1970: (TimeInterval(1464037000 - n*432)))
-            let _ = CoreDataHelpers.createOrFetchFeed(id: NSNumber(value: 10 + n), description: "Cool look these cells are now dynamically size. This means that the more text there is per notification, the larger the cell gets!", startTime: time, endTime: time, updated: time, qrCode: 1, shortName: "tt", name: "test event", locations: [siebel, eceb, union], tag: "XD")
-        }
-        
-        CoreDataHelpers.saveContext()
-        CoreDataHelpers.setLatestUpdateTime(Date(timeIntervalSince1970: 1464042100))
+//        else {
+//        }
+    }
+
+    
+    func getEventsFailure(error: Error) {
+        presentErrorLabel(text: error as! String)
+
+    }
+    
+    // MARK: - Events UI
+    func presentErrorLabel(text: String) {
+        print("ERROR: \(text)")
+//        let alert = UIAlertController()
+//        alert.title = "Unknown error"
+//        alert.message = text
+//        alert.show(<#UIViewController#>)
     }
     
     // MARK: - FeedCollectionViewController
