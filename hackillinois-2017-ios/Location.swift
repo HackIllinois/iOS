@@ -10,9 +10,10 @@
 import Foundation
 import CoreData
 import CoreLocation
+import MapKit
 
 
-class Location: NSManagedObject {
+class Location: NSManagedObject, MKAnnotation {
 
     /* Convenience updating function */
     func initialize(id: Int16, latitude: Float, longitude: Float, name: String, shortName: String, feeds: NSSet) {
@@ -41,5 +42,13 @@ class Location: NSManagedObject {
         self.shortName = shortName
         self.id = id
         self.feeds = NSSet(array: feeds)
+    }
+    
+    var coordinate: CLLocationCoordinate2D {
+        return CLLocationCoordinate2DMake(Double(latitude), Double(longitude))
+    }
+
+    var title: String? {
+        return name
     }
 }

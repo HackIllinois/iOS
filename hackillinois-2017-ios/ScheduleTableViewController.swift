@@ -35,15 +35,15 @@ class ScheduleTableViewController: UITableViewController {
     }
     
     func openLocation(_ location: DayItemLocation) {
-        if let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "Map") as? MapViewController {
-            //navigationController?.navigationBar.tintColor = UIColor(red: 93.0/255.0, green: 200.0/255.0, blue: 219.0/255.0, alpha: 1.0)
-            //navigationController?.navigationBar.backgroundColor = UIColor(red: 28.0/255.0, green: 50.0/255.0, blue: 90.0/255.0, alpha: 1.0)
-            vc.isDirectionMode = true
-            vc.directionModeLabel = location.location_id
-            vc.directionModeTitle = String(location.location_name)
-            vc.hidesBottomBarWhenPushed = true
-            navigationController?.pushViewController(vc, animated: true)
-        }
+//        if let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "Map") as? MapViewController {
+//            //navigationController?.navigationBar.tintColor = UIColor(red: 93.0/255.0, green: 200.0/255.0, blue: 219.0/255.0, alpha: 1.0)
+//            //navigationController?.navigationBar.backgroundColor = UIColor(red: 28.0/255.0, green: 50.0/255.0, blue: 90.0/255.0, alpha: 1.0)
+//            vc.isDirectionMode = true
+//            vc.directionModeLabel = location.location_id
+//            vc.directionModeTitle = String(location.location_name)
+//            vc.hidesBottomBarWhenPushed = true
+//            navigationController?.pushViewController(vc, animated: true)
+//        }
     }
     
     // Mark: UITableViewController

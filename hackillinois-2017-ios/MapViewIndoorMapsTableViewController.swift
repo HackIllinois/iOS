@@ -15,12 +15,6 @@ class MapViewIndoorMapsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        //self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         location_names[1] = "DCL"
         location_names[2] = "Siebel"
@@ -41,16 +35,12 @@ class MapViewIndoorMapsTableViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
         
-        images = items.filter({ (filename) -> Bool in
-            return filename.hasPrefix("indoor_\(location_id)")
-        }).sorted(by: { (a, b) -> Bool in
-            return a < b
-        }).map({ (filename) -> UIImage in
-            return UIImage(named: filename)!
-        })
-        self.tableView.reloadData()
+        images = items.filter { return $0.hasPrefix("indoor_\(location_id)")
+        }.sorted { return $0 < $1
+        }.map { return UIImage(named: $0)!
+        }
         
-        self.tableView.backgroundView = UIImageView(image: #imageLiteral(resourceName: "background"))
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,8 +49,6 @@ class MapViewIndoorMapsTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-    
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return images.count
     }
@@ -88,11 +76,11 @@ class MapViewIndoorMapsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let vc = UIStoryboard(name: "Schedule", bundle: nil).instantiateViewController(withIdentifier: "ScheduleDescriptionImageView") as? ScheduleDetailsImageViewController {
-            vc.imageData = UIImagePNGRepresentation(images[indexPath.row])
-            
-            navigationController?.pushViewController(vc, animated: true)
-        }
+//        if let vc = UIStoryboard(name: "Schedule", bundle: nil).instantiateViewController(withIdentifier: "ScheduleDescriptionImageView") as? ScheduleDetailsImageViewController {
+//            vc.imageData = UIImagePNGRepresentation(images[indexPath.row])
+//            
+//            navigationController?.pushViewController(vc, animated: true)
+//        }
     }
     
 }

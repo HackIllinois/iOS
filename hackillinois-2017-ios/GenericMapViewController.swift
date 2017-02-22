@@ -18,7 +18,7 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
     var manager: CLLocationManager!
     
     // Start off the locations and buttons as empty
-    var buildings: [Building]! = []
+    var locations = [Location]()
     var locationButton: UIButton!
     var locationSelected = 0
     
@@ -55,7 +55,7 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
     // Mark: External Application Functions
     /* Handler for opening the map in another application */
     func openInExternalMapApplication() {
-        guard !map.selectedAnnotations.isEmpty && map.selectedAnnotations[0].isKind(of: Building.self) else {
+        guard !map.selectedAnnotations.isEmpty && map.selectedAnnotations[0].isKind(of: Location.self) else {
             // Check if the location is nil and present an error
             let ac = UIAlertController(title: "Destination not selected", message: "You must select a location before routing.", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -76,7 +76,7 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
     
     /* Mark: Generate Google Maps URL */
     func generateGoogleMapsURL() -> URL {
-        let location = buildings[locationSelected]
+        let location = locations[locationSelected]
         let daddr = "daddr=\(location.coordinate.latitude),+\(location.coordinate.longitude)"
         let directionsmode = "directionsmode=walking"
         
@@ -92,7 +92,7 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
     
     /* Mark: Generate Apple Maps URL */
     func generateAppleMapsURL() -> URL {
-        let location = buildings[locationSelected]
+        let location = locations[locationSelected]
         let daddr = "daddr=\(location.coordinate.latitude),+\(location.coordinate.longitude)"
         let dirflg = "dirflg=w"
         
@@ -127,11 +127,11 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         // The rectangle's alignment is hacky due to iOS's autolayout constraints
         let screen = UIScreen.main.bounds
                 
-        // Only add the routing options if there are existing elements in buildings
-        if !buildings.isEmpty {
+        // Only add the routing options if there are existing elements in locations
+        if !locations.isEmpty {
             // var hue: CGFloat = 5.0 / 360.0
             
-            for building in buildings {
+            for building in locations {
                 // Create liquid cells
                 // let locationCell = CustomLiquidCell(icon: UIImage(named: "ic_forward_48pt")!, name: building.shortName!)
                 // locationCell.color = UIColor(hue: hue, saturation: 74/100, brightness: 90/100, alpha: 1.0) /* #e74c3c */
@@ -249,8 +249,8 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         }
         
         // Find index of selected Annotation
-        let sorter: ((Building) -> Bool) = { $0.coordinate == selectedAnnotation.coordinate }
-        if let selectedIndex = buildings.index(where: sorter) {
+        let sorter: ((Location) -> Bool) = { $0.coordinate == selectedAnnotation.coordinate }
+        if let selectedIndex = locations.index(where: sorter) {
             locationSelected = selectedIndex
         }
         routeTo(selectedAnnotation.coordinate, completion: nil)

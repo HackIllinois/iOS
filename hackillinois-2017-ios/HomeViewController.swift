@@ -233,13 +233,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - LocationButtonContainerDelegate
     func locationButtonTapped(location: Location) {
-        if let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "Map") as? MapViewController {
-            vc.isDirectionMode = true
-            vc.directionModeLabel = LocationIdMapper.getLocalId(fromShortname: location.shortName)
-            vc.directionModeTitle = location.name
-            vc.hidesBottomBarWhenPushed = true
-            navigationController?.pushViewController(vc, animated: true)
-        }
+//        if let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "Map") as? MapViewController {
+//            vc.isDirectionMode = true
+//            vc.directionModeLabel = LocationIdMapper.getLocalId(fromShortname: location.shortName)
+//            vc.directionModeTitle = location.name
+//            vc.hidesBottomBarWhenPushed = true
+//            navigationController?.pushViewController(vc, animated: true)
+//        }
 
     }
 }

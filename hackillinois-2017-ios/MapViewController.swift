@@ -36,25 +36,13 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         clearLabel(labelNumber: -1)
     }
     
-    // Mark: Initializing locations and where locations are set
-    /* Modify this function to change the locations available */
+    // MARK: - Initializing locations and where locations are set
     func initializeLocations() {
-        // Create Points for event locations
-        let dcl: Location! = CoreDataHelpers.createOrFetchLocation(id: 4, latitude: 40.113140, longitude: -88.226589, locationName: "Digital Computer Laboratory",  shortName: "DCL",  feeds: nil)
-        buildings.append(Building(location: dcl))
-        
-        let siebel: Location! = CoreDataHelpers.createOrFetchLocation(id: 1, latitude: 40.113926, longitude: -88.224916, locationName: "Thomas M. Siebel Center", shortName: "Siebel", feeds: nil)
-        buildings.append(Building(location: siebel))
-        
-        let eceb: Location! = CoreDataHelpers.createOrFetchLocation(id: 2,  latitude: 40.114828, longitude: -88.228049, locationName: "Electrical Computer Engineering Building", shortName: "ECEB", feeds: nil)
-        buildings.append(Building(location: eceb))
-        
-        let union: Location! = CoreDataHelpers.createOrFetchLocation(id: 3,  latitude: 40.109395, longitude: -88.227181, locationName: "Illini Union", shortName: "Union", feeds: nil)
-        buildings.append(Building(location: union))
-        
-        
-        let kenny: Location! = CoreDataHelpers.createOrFetchLocation(id: 5,  latitude: 40.112897, longitude: -88.227731,locationName: "Kenny Gym Annex", shortName: "Kenny", feeds: nil)
-        buildings.append(Building(location: kenny))
+        locations.append(CoreDataHelpers.createOrFetchLocation(id: 1, latitude: 40.113926, longitude: -88.224916, locationName: "Thomas M. Siebel Center", shortName: "Siebel", feeds: nil))
+        locations.append(CoreDataHelpers.createOrFetchLocation(id: 2, latitude: 40.114828, longitude: -88.228049, locationName: "Electrical Computer Engineering Building", shortName: "ECEB", feeds: nil))
+        locations.append(CoreDataHelpers.createOrFetchLocation(id: 3, latitude: 40.109395, longitude: -88.227181, locationName: "Illini Union", shortName: "Union", feeds: nil))
+        locations.append(CoreDataHelpers.createOrFetchLocation(id: 4, latitude: 40.113140, longitude: -88.226589, locationName: "Digital Computer Laboratory",  shortName: "DCL",  feeds: nil))
+        locations.append(CoreDataHelpers.createOrFetchLocation(id: 5, latitude: 40.112897, longitude: -88.227731, locationName: "Kenny Gym Annex", shortName: "Kenny", feeds: nil))
     }
     
     override func viewDidLoad() {
@@ -62,10 +50,9 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         map = mapView
         initializeLocations()
         
-        
         /* Call superclass's constructor after configuration */
         super.viewDidLoad()
-        self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+        navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         
         // mapControl.selectedSegmentIndex = UISegmentedControlNoSegment
         let tapMap = UIPanGestureRecognizer(target: self, action: #selector(MapViewController.didDragMap(gestureRecognizer:)))
@@ -249,17 +236,18 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
     }
     
     func loadAddress() {
-        let building = buildings[labelPressed-1]
+        let location = locations[labelPressed-1]
         let selected_location_id = labelPressed
         
         // Configure MapView to show the location user selected
-        map.setCamera(MKMapCamera.from(building: building), animated: true)
-        let annotation = map.annotations(in: MKMapRect(origin: MKMapPointForCoordinate(building.coordinate), size: MKMapSize(width: 1, height: 1))).first! as! MKAnnotation
+        map.setCamera(MKMapCamera.from(location: location), animated: true)
+        let annotation = map.annotations(in: MKMapRect(origin: MKMapPointForCoordinate(location.coordinate), size: MKMapSize(width: 1, height: 1))).first! as! MKAnnotation
         map.selectAnnotation(annotation, animated: true)
         // Route locations
-        routeTo(building.coordinate, completion: { (route: MKRoute?) in
+        routeTo(location.coordinate, completion: { (route: MKRoute?) in
             self.bottomSheet.directions = route
-            self.bottomSheet.reloadNavTable(address: building.address ?? "", name: building.longName ?? "", location_id: selected_location_id)
+            // TODO: Kevin
+            self.bottomSheet.reloadNavTable(address: "", name: location.name, location_id: selected_location_id)
             self.bottomSheet.scrollToButtons()
         })
     }
@@ -309,12 +297,13 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         }
         
         // Find index of selected Annotation
-        let sorter: ((Building) -> Bool) = { $0.coordinate == selectedAnnotation.coordinate }
-        if let selectedIndex = buildings.index(where: sorter) {
-            let building = buildings[selectedIndex]
-            routeTo(building.coordinate, completion: { (route: MKRoute?) in
+        let sorter: ((Location) -> Bool) = { $0.coordinate == selectedAnnotation.coordinate }
+        if let selectedIndex = locations.index(where: sorter) {
+            let location = locations[selectedIndex]
+            routeTo(location.coordinate, completion: { (route: MKRoute?) in
                 self.bottomSheet.directions = route
-                self.bottomSheet.reloadNavTable(address: building.address ?? "", name: building.longName ?? "", location_id: selectedIndex + 1)
+                // TODO : kevin
+                self.bottomSheet.reloadNavTable(address: "", name: location.name, location_id: selectedIndex + 1)
                 self.bottomSheet.scrollToButtons()
             })
             

@@ -56,7 +56,6 @@
 		3947F9561E4C473000FF4AF4 /* ScheduleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3947F9551E4C473000FF4AF4 /* ScheduleTableViewController.swift */; };
 		3947F9581E4C473F00FF4AF4 /* ScheduleDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3947F9571E4C473F00FF4AF4 /* ScheduleDescriptionViewController.swift */; };
 		39666E451E52924500A507DF /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39666E3D1E52924500A507DF /* EventDetailsViewController.swift */; };
-		39666E461E52924500A507DF /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39666E3E1E52924500A507DF /* Home.storyboard */; };
 		39666E471E52924500A507DF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39666E3F1E52924500A507DF /* HomeViewController.swift */; };
 		39666E4A1E52924500A507DF /* HomeTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39666E421E52924500A507DF /* HomeTableViewCells.swift */; };
 		3B9DD363D368F61BCC978D50 /* Pods_hackillinois_2017_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AED3BA33789E7AF752A2B590 /* Pods_hackillinois_2017_iosUITests.framework */; };
@@ -93,7 +92,6 @@
 		95F8C14C1E56ACD80012AC03 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F8C14B1E56ACD80012AC03 /* APIManager.swift */; };
 		A4A11EAF23DEA53522C53CC9 /* Pods_hackillinois_2017_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A268F8C0BE6AA0D521F467B9 /* Pods_hackillinois_2017_ios.framework */; };
 		A50876741E1C79130095F399 /* BottomMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50876731E1C79130095F399 /* BottomMapViewController.swift */; };
-		A50876781E1C921C0095F399 /* BottomMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50876771E1C921C0095F399 /* BottomMapViewController.xib */; };
 		A54825B11E160C6C00E35C71 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54825B01E160C6C00E35C71 /* ScheduleViewController.swift */; };
 		E20465CB1CF1FAF50054654E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20465CA1CF1FAF50054654E /* AppDelegate.swift */; };
 		E20465CD1CF1FAF50054654E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20465CC1CF1FAF50054654E /* LoginViewController.swift */; };
@@ -119,9 +117,6 @@
 		E2AC3F871CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */; };
 		E2AC3F881CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */; };
 		E2AC3F8E1CF21F3900C4F21F /* UIColor+fromHexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AC3F8D1CF21F3900C4F21F /* UIColor+fromHexTests.swift */; };
-		E2B6C3931D0B2E1200D851F9 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3921D0B2E1200D851F9 /* Feed.storyboard */; };
-		E2B6C3951D0B2E8000D851F9 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3941D0B2E8000D851F9 /* Map.storyboard */; };
-		E2B6C3971D0B2ED800D851F9 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3961D0B2ED800D851F9 /* Profile.storyboard */; };
 		E2BCA55B1CF36187006AAA8B /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2BCA55A1CF36187006AAA8B /* Event.storyboard */; };
 		E2BCA5621CF36CDA006AAA8B /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5611CF36CDA006AAA8B /* FeedTableViewController.swift */; };
 		E2BCA56A1CF373A1006AAA8B /* EventConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5691CF373A1006AAA8B /* EventConstants.swift */; };
@@ -132,7 +127,6 @@
 		E2BD82B51D09EA530009DB07 /* GenericMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BD82B41D09EA530009DB07 /* GenericMapViewController.swift */; };
 		E2D483331D00D3B100859A67 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D483321D00D3B100859A67 /* MapViewController.swift */; };
 		E2D4F0DD1D06AB7C00646BF8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2D4F0DC1D06AB7C00646BF8 /* MapKit.framework */; };
-		E2D4F0DF1D06AD3F00646BF8 /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4F0DE1D06AD3F00646BF8 /* Building.swift */; };
 		E2D4F0E11D06B28B00646BF8 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4F0E01D06B28B00646BF8 /* FeedTableViewCell.swift */; };
 		E2D4F0E31D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4F0E21D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift */; };
 		E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4F0E41D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift */; };
@@ -204,7 +198,6 @@
 		3947F9551E4C473000FF4AF4 /* ScheduleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewController.swift; sourceTree = "<group>"; };
 		3947F9571E4C473F00FF4AF4 /* ScheduleDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleDescriptionViewController.swift; sourceTree = "<group>"; };
 		39666E3D1E52924500A507DF /* EventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
-		39666E3E1E52924500A507DF /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		39666E3F1E52924500A507DF /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		39666E421E52924500A507DF /* HomeTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCells.swift; sourceTree = "<group>"; };
 		47356D346361EC1846BE1A9F /* Pods-hackillinois-2017-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-ios/Pods-hackillinois-2017-ios.release.xcconfig"; sourceTree = "<group>"; };
@@ -254,7 +247,6 @@
 		95F8C14B1E56ACD80012AC03 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		A268F8C0BE6AA0D521F467B9 /* Pods_hackillinois_2017_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50876731E1C79130095F399 /* BottomMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomMapViewController.swift; sourceTree = "<group>"; };
-		A50876771E1C921C0095F399 /* BottomMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomMapViewController.xib; sourceTree = "<group>"; };
 		A54825B01E160C6C00E35C71 /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
 		AA9D525BA78F9A5801BDF5D1 /* Pods-hackillinois-2017-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		AED3BA33789E7AF752A2B590 /* Pods_hackillinois_2017_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hackillinois_2017_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -287,9 +279,6 @@
 		E2A085F91D0C6688002197F9 /* DayItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayItem.swift; sourceTree = "<group>"; };
 		E2AC3F851CF21C3600C4F21F /* UIColor+fromHex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+fromHex.swift"; sourceTree = "<group>"; };
 		E2AC3F8D1CF21F3900C4F21F /* UIColor+fromHexTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+fromHexTests.swift"; sourceTree = "<group>"; };
-		E2B6C3921D0B2E1200D851F9 /* Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
-		E2B6C3941D0B2E8000D851F9 /* Map.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
-		E2B6C3961D0B2ED800D851F9 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		E2BCA55A1CF36187006AAA8B /* Event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Event.storyboard; sourceTree = "<group>"; };
 		E2BCA5611CF36CDA006AAA8B /* FeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		E2BCA5691CF373A1006AAA8B /* EventConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventConstants.swift; sourceTree = "<group>"; };
@@ -300,7 +289,6 @@
 		E2BD82B41D09EA530009DB07 /* GenericMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericMapViewController.swift; sourceTree = "<group>"; };
 		E2D483321D00D3B100859A67 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		E2D4F0DC1D06AB7C00646BF8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		E2D4F0DE1D06AD3F00646BF8 /* Building.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
 		E2D4F0E01D06B28B00646BF8 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		E2D4F0E21D06BE3100646BF8 /* CLLocationCoordinate2D+fromLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+fromLocation.swift"; sourceTree = "<group>"; };
 		E2D4F0E41D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MKMapCamera+initFromLocation.swift"; sourceTree = "<group>"; };
@@ -464,7 +452,6 @@
 		A50F29231E14D53B00878652 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				39666E3E1E52924500A507DF /* Home.storyboard */,
 				39666E3D1E52924500A507DF /* EventDetailsViewController.swift */,
 				39666E421E52924500A507DF /* HomeTableViewCells.swift */,
 				39666E3F1E52924500A507DF /* HomeViewController.swift */,
@@ -602,7 +589,6 @@
 		E2B6C39A1D0B30A300D851F9 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				E2B6C3961D0B2ED800D851F9 /* Profile.storyboard */,
 				E26F44F11D0EF2C100FB4A9F /* ProfileViewController.swift */,
 				0A3A1B2E1E4E45EB00EA2100 /* ProfileTableViewCells.swift */,
 			);
@@ -663,7 +649,6 @@
 		E2BCA5601CF36A15006AAA8B /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				E2B6C3921D0B2E1200D851F9 /* Feed.storyboard */,
 				E2BCA5611CF36CDA006AAA8B /* FeedTableViewController.swift */,
 				E2D4F0E01D06B28B00646BF8 /* FeedTableViewCell.swift */,
 			);
@@ -713,12 +698,9 @@
 		E2D483311D00D37800859A67 /* Maps */ = {
 			isa = PBXGroup;
 			children = (
-				E2B6C3941D0B2E8000D851F9 /* Map.storyboard */,
 				243720031E32D4D100B1C7C5 /* BottomViewTableViewCell.swift */,
 				243720011E32CEDD00B1C7C5 /* BottomViewController.swift */,
 				E2D483321D00D3B100859A67 /* MapViewController.swift */,
-				E2D4F0DE1D06AD3F00646BF8 /* Building.swift */,
-				A50876771E1C921C0095F399 /* BottomMapViewController.xib */,
 				A50876731E1C79130095F399 /* BottomMapViewController.swift */,
 				652DD8BF1E52E75A0039EC1A /* MapViewIndoorMapsTableViewController.swift */,
 			);
@@ -917,23 +899,18 @@
 				24794C6D1E340DFB0016F8D4 /* Brandon_thin.otf in Resources */,
 				390A8DE91E3AA90200018855 /* Gotham-BookItalic.otf in Resources */,
 				E277DD6B1CF4AF0400D7E018 /* keys.plist in Resources */,
-				E2B6C3951D0B2E8000D851F9 /* Map.storyboard in Resources */,
-				E2B6C3971D0B2ED800D851F9 /* Profile.storyboard in Resources */,
 				E20465D81CF1FAF50054654E /* LaunchScreen.storyboard in Resources */,
 				390A8DEC1E3AA90200018855 /* Gotham-Medium.otf in Resources */,
 				390A8DF11E3AA90200018855 /* Gotham-UltraItalic.otf in Resources */,
 				390A8DF21E3AA90200018855 /* Gotham-XLight.otf in Resources */,
 				6544EE461E52FE3F00065A60 /* indoor_1_1.png in Resources */,
-				A50876781E1C921C0095F399 /* BottomMapViewController.xib in Resources */,
 				E2F957051D0BA899003A0881 /* Schedule.storyboard in Resources */,
 				658F8E751E5D5C9500EFA572 /* indoor_2_1.png in Resources */,
 				658F8E741E5D5C9500EFA572 /* indoor_2_2.png in Resources */,
-				E2B6C3931D0B2E1200D851F9 /* Feed.storyboard in Resources */,
 				E20465D51CF1FAF50054654E /* Assets.xcassets in Resources */,
 				0A8E5C0C1E56DED6002344CC /* LocationButton.xib in Resources */,
 				65609DEE1E568468001DBB86 /* indoor_3_3.png in Resources */,
 				65609DF31E56850F001DBB86 /* indoor_3_cf_1.png in Resources */,
-				39666E461E52924500A507DF /* Home.storyboard in Resources */,
 				390A8DEB1E3AA90200018855 /* Gotham-LightItalic.otf in Resources */,
 				390A8DEE1E3AA90200018855 /* Gotham-Thin.otf in Resources */,
 				652DD8D31E52F2B00039EC1A /* indoor_2_0.png in Resources */,
@@ -1155,7 +1132,6 @@
 				653304F51E4FF83C00E881F8 /* DayItemLocation.swift in Sources */,
 				E23791411D21C4870020618E /* ReferencedButton.swift in Sources */,
 				E2BCA5801CF3B19E006AAA8B /* Location+CoreDataProperties.swift in Sources */,
-				E2D4F0DF1D06AD3F00646BF8 /* Building.swift in Sources */,
 				0A8E5C0A1E56DD60002344CC /* QRCodeGenerator.swift in Sources */,
 				3947F9581E4C473F00FF4AF4 /* ScheduleDescriptionViewController.swift in Sources */,
 				95CD1AAC1E56E89700D75807 /* qrinput.c in Sources */,
