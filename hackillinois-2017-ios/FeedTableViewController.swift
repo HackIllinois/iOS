@@ -30,8 +30,6 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         
         // Preemptively load tags
         loadTags()
-        // The following line generates hardcoded notification data
-        // initializeSample()
         attemptPullingEventData()
         // Load objects from core data
         loadSavedData()

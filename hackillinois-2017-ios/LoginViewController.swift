@@ -118,9 +118,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBAction func attemptLogin() {
         guard let (username, password) = localValidateLoginFields() else { return }
         // Present main application
-        let mainStoryboard = UIStoryboard(name: "Event", bundle: nil)
-        let mainViewController = mainStoryboard.instantiateInitialViewController()
-        present(mainViewController!, animated: true, completion: nil)
+//        let mainStoryboard = UIStoryboard(name: "Event", bundle: nil)
+//        let mainViewController = mainStoryboard.instantiateInitialViewController()
+//        present(mainViewController!, animated: true, completion: nil)
         
         presentBusyFormUI()
         
@@ -241,7 +241,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.isEnabled = false
     }
 
-    // MARK: - junk
+    // MARK: - Handle Processing User Info
     func processUserData(name: String, email: String, school: String, major: String, role: String, barcode: String, auth: String, initTime: Date, expirationTime: Date, userID: NSNumber, diet: String) {
         QRCodeGenerator.shared.id = userID
         // Store user data
