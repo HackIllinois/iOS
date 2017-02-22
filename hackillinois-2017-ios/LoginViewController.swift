@@ -140,7 +140,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     func getUserInfoSuccess(json: JSON) {
         let data = json["data"]
-        let name = data["firstName"].stringValue + data["lastName"].stringValue
+        let name = data["firstName"].stringValue + " " + data["lastName"].stringValue
         let email = usernameTextField.text ?? ""
         let school = data["school"].stringValue
         let major = data["major"].stringValue
