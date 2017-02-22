@@ -15,7 +15,7 @@ class QRCodeViewController: UIViewController, MIBlurPopupDelegate {
     var popupView: UIView {
         return qrCode
     }
-    var blurEffectStyle = UIBlurEffectStyle.light
+    var blurEffectStyle = UIBlurEffectStyle.dark
     var initialScaleAmmount: CGFloat = 1
     var animationDuration: TimeInterval = 0.25
 
