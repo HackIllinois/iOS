@@ -32,16 +32,16 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
     /* Modify this function to change the locations available */
     func initializeLocations() {
         // Create Points for event locations
-        let dcl: Location! = CoreDataHelpers.createOrFetchLocation(idNum: 4, location: "Digital Computer Laboratory", abbreviation: "DCL", locationLatitude: 40.113140, locationLongitude: -88.226589, locationFeeds: nil)
+        let dcl: Location! = CoreDataHelpers.createOrFetchLocation(id: 4, latitude: 40.113140, longitude: -88.226589, locationName: "Digital Computer Laboratory",  shortName: "DCL",  feeds: nil)
         buildings.append(Building(location: dcl))
         
-        let siebel: Location! = CoreDataHelpers.createOrFetchLocation(idNum: 1, location: "Thomas M. Siebel Center", abbreviation: "Siebel",locationLatitude: 40.113926, locationLongitude: -88.224916, locationFeeds: nil)
+        let siebel: Location! = CoreDataHelpers.createOrFetchLocation(id: 1, latitude: 40.113926, longitude: -88.224916, locationName: "Thomas M. Siebel Center", shortName: "Siebel", feeds: nil)
         buildings.append(Building(location: siebel))
         
-        let eceb: Location! = CoreDataHelpers.createOrFetchLocation(idNum: 2, location: "Electrical Computer Engineering Building", abbreviation: "ECEB", locationLatitude: 40.114828, locationLongitude: -88.228049, locationFeeds: nil)
+        let eceb: Location! = CoreDataHelpers.createOrFetchLocation(id: 2,  latitude: 40.114828, longitude: -88.228049, locationName: "Electrical Computer Engineering Building", shortName: "ECEB", feeds: nil)
         buildings.append(Building(location: eceb))
         
-        let union: Location! = CoreDataHelpers.createOrFetchLocation(idNum: 3, location: "Illini Union", abbreviation: "Union", locationLatitude: 40.109395, locationLongitude: -88.227181, locationFeeds: nil)
+        let union: Location! = CoreDataHelpers.createOrFetchLocation(id: 3,  latitude: 40.109395, longitude: -88.227181,locationName: "Illini Union", shortName: "Union", feeds: nil)
         buildings.append(Building(location: union))
     }
     

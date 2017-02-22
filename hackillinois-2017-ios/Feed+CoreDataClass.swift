@@ -11,7 +11,7 @@ import CoreData
 
 
 public class Feed: NSManagedObject {
-    func initialize(id: NSNumber, description: String, startTime: Date, endTime: Date, updated: Date, qrCode: NSNumber, shortName: String, name: String, locations: NSOrderedSet?, tags: String) {
+    func initialize(id: NSNumber, description: String, startTime: Date, endTime: Date, updated: Date, qrCode: NSNumber, shortName: String, name: String, locations: NSOrderedSet?, tag: String) {
         self.id = id
         self.description_ = description
         self.startTime = startTime
@@ -21,8 +21,26 @@ public class Feed: NSManagedObject {
         self.shortName = shortName
         self.name = name
         self.locations = locations!
-        self.tag = tags
+        self.tag = tag
     }
+    
+    /* update events when the id is the same */
+    func update(description: String, startTime: Date, endTime: Date, updated: Date, qrCode: NSNumber, shortName: String, name: String, locations: [Location], tag: String) {
+        self.description_ = description
+        self.startTime = startTime
+        self.endTime = endTime
+        self.updated_ = updated
+        self.qrCode = qrCode
+        self.shortName = shortName
+        self.name = name
+        self.tag = tag
+        
+        for location in locations {
+            location.feeds = location.feeds.adding(self) as NSSet
+        }
+    }
+    
+    
     
     @nonobjc func initialize(id: NSNumber, description: String, startTime: Date, endTime: Date, updated: Date, qrCode: NSNumber, shortName: String, name: String, locations: [Location], tag: String) {
         self.id = id

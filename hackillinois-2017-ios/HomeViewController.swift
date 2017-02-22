@@ -20,6 +20,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         static var current: HackathonStatus {
             let time = Date()
+            // MARK: change me
             return .beforeHacking
             if time < HACKATHON_BEGIN_TIME {
                 return .beforeHackathon
@@ -153,7 +154,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let fetchRequest = NSFetchRequest<Feed>(entityName: "Feed")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startTime", ascending: false)]
         fetchRequest.includesSubentities = false
-        fetchRequest.predicate = NSPredicate(format: "tag == %@", "EVENT")
+        
+        // MARK: changeme
+        fetchRequest.predicate = NSPredicate(format: "tag == %@", "HACKATHON")
+
+//        fetchRequest.predicate = NSPredicate(format: "tag == %@", "EVENT")
 
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         frc.delegate = self
@@ -184,6 +189,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             homeTableView.deleteRows(at: [deleteIndexPath], with: .fade)
         case .update:
             guard let updateIndexPath = indexPath, let cell = homeTableView.cellForRow(at: updateIndexPath) else { return }
+            if(updateIndexPath.row <= 0) {
+                return
+            }
             let offsetIndexPath = IndexPath(row: updateIndexPath.row - 1, section: updateIndexPath.section);
             let event = fetchedResultsController.object(at: offsetIndexPath)
 
