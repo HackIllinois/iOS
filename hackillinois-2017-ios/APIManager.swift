@@ -13,8 +13,8 @@ import SwiftyJSON
 class APIManager {
     static let shared = APIManager()
     
-//    private let HACKILLINOIS_API_URL = "https://api.hackillinois.org/" // this is the actual endpoint
-    private let HACKILLINOIS_API_URL = "http://13.90.146.188:8080/" // this is the instance on azure
+    private let HACKILLINOIS_API_URL = "https://api.hackillinois.org/" // this is the actual endpoint
+//    private let HACKILLINOIS_API_URL = "http://13.90.146.188:8080/" // this is the instance on azure
     private var auth_header: [String: String]?
     private(set) var auth_key: String?
     
