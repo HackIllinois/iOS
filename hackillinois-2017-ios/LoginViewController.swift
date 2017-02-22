@@ -32,8 +32,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        usernameTextField.text = initialEmail ?? "ios@hackillinois.org"
-        passwordTextField.text = "testtest"
+        usernameTextField.text = initialEmail
         
         loginActivityIndicator.startAnimating()
     }
