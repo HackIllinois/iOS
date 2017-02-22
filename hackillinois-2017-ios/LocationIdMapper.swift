@@ -20,12 +20,20 @@ class LocationIdMapper {
         "Union": 4,
         "Illini Union": 4,
         "Kenny Gym": 5,
-        "Kenneth Gym": 5,
         "Kenny Gym Annex": 5
+    ]
+    
+    static var addressMappings: [Int16: String] = [
+        1 : "1304 W Springfield Ave, Urbana, IL 61801",
+        2 : "201 N Goodwin Ave, Urbana, IL 61801",
+        3 : "306 N Wright St, Urbana, IL 61801",
+        4 : "1401 W Green St, Urbana, IL 61801",
+        5 : "1402-1406 W. Springfield Ave, Urbana, IL 61801"
     ]
     
     static func getLocalId(fromShortname: String) -> Int {
         let id = locationMappings[fromShortname]
         return id == nil ? -1 : id!
     }
+    
 }

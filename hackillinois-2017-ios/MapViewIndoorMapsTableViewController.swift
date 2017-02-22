@@ -8,11 +8,17 @@
 
 import UIKit
 
-class MapViewIndoorMapsTableViewController: UITableViewController {
+class MapViewIndoorMapsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    // MARK: - IBOutlets
+    @IBOutlet var tableView: UITableView!
+    
+    // MARK: - Global Variables
     var location_id: Int = 1
     var location_names = [Int: String]()
     var images = [UIImage]()
     
+    // MARK: UIViewController Setup
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,8 +32,7 @@ class MapViewIndoorMapsTableViewController: UITableViewController {
         if let name = location_names[location_id] {
             self.title = name
         }
-            
-        // load images
+        
         let fm = FileManager.default
         let path = Bundle.main.resourcePath!
         let items = try! fm.contentsOfDirectory(atPath: path)
@@ -49,12 +54,12 @@ class MapViewIndoorMapsTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return images.count
     }
 
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "image", for: indexPath)
 
         cell.backgroundColor = UIColor.clear
@@ -75,7 +80,7 @@ class MapViewIndoorMapsTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        if let vc = UIStoryboard(name: "Schedule", bundle: nil).instantiateViewController(withIdentifier: "ScheduleDescriptionImageView") as? ScheduleDetailsImageViewController {
 //            vc.imageData = UIImagePNGRepresentation(images[indexPath.row])
 //            

@@ -51,4 +51,8 @@ class Location: NSManagedObject, MKAnnotation {
     var title: String? {
         return name
     }
+    
+    var address: String? {
+        return LocationIdMapper.addressMappings[self.id]
+    }
 }

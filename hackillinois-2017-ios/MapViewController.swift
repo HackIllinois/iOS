@@ -246,8 +246,7 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         // Route locations
         routeTo(location.coordinate, completion: { (route: MKRoute?) in
             self.bottomSheet.directions = route
-            // TODO: Kevin
-            self.bottomSheet.reloadNavTable(address: "", name: location.name, location_id: selected_location_id)
+            self.bottomSheet.reloadNavTable(address: location.address ?? "", name: location.name, location_id: selected_location_id)
             self.bottomSheet.scrollToButtons()
         })
     }
@@ -302,8 +301,7 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
             let location = locations[selectedIndex]
             routeTo(location.coordinate, completion: { (route: MKRoute?) in
                 self.bottomSheet.directions = route
-                // TODO : kevin
-                self.bottomSheet.reloadNavTable(address: "", name: location.name, location_id: selectedIndex + 1)
+                self.bottomSheet.reloadNavTable(address: location.address ?? "", name: location.name, location_id: selectedIndex + 1)
                 self.bottomSheet.scrollToButtons()
             })
             

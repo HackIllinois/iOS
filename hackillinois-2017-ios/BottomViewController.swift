@@ -359,7 +359,7 @@ class BottomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }*/
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc = segue.destination as! MapViewIndoorMapsTableViewController
+        let vc = segue.destination as! MapViewIndoorMapsViewController
         vc.location_id = selected_location_id
     }
     
