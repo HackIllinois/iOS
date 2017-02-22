@@ -116,11 +116,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     // MARK: - Login Logic
     @IBAction func attemptLogin() {
-        // MARK: change me
-        let mainStoryboard = UIStoryboard(name: "Event", bundle: nil)
-        let mainViewController = mainStoryboard.instantiateInitialViewController()
-        present(mainViewController!, animated: true, completion: nil)
-        
         guard let (username, password) = localValidateLoginFields() else { return }
         
         presentBusyFormUI()
