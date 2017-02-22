@@ -49,8 +49,9 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         let eceb: Location! = CoreDataHelpers.createOrFetchLocation(id: 2,  latitude: 40.114828, longitude: -88.228049, locationName: "Electrical Computer Engineering Building", shortName: "ECEB", feeds: nil)
         buildings.append(Building(location: eceb))
         
-        let union: Location! = CoreDataHelpers.createOrFetchLocation(id: 3,  latitude: 40.109395, longitude: -88.227181,locationName: "Illini Union", shortName: "Union", feeds: nil)
+        let union: Location! = CoreDataHelpers.createOrFetchLocation(id: 3,  latitude: 40.109395, longitude: -88.227181, locationName: "Illini Union", shortName: "Union", feeds: nil)
         buildings.append(Building(location: union))
+        
         
         let kenny: Location! = CoreDataHelpers.createOrFetchLocation(id: 5,  latitude: 40.112897, longitude: -88.227731,locationName: "Kenny Gym Annex", shortName: "Kenny", feeds: nil)
         buildings.append(Building(location: kenny))
@@ -154,7 +155,7 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         kennyLabel.layer.shouldRasterize = true
         kennyLabel.layer.shadowOffset = CGSize(width: 0, height: 0)
         
-        if directionModeLabel >= 5 {
+        if directionModeLabel > 5 {
             UIAlertView(title: "Location id error", message: "Location id \(directionModeLabel) is not a valid id.", delegate: nil, cancelButtonTitle: "OK").show()
         } else {
             [{ _ in }, dclLabelTouched, siebelLabelTouched, ecebLabelTouched, unionLabelTouched, kennyLabelTouched][directionModeLabel]()

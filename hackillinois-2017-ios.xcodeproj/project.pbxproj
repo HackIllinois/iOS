@@ -74,6 +74,7 @@
 		65609DF11E5684F8001DBB86 /* indoor_2_cf_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DF01E5684F8001DBB86 /* indoor_2_cf_1.png */; };
 		65609DF31E56850F001DBB86 /* indoor_3_cf_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DF21E56850F001DBB86 /* indoor_3_cf_1.png */; };
 		65609DF61E568533001DBB86 /* indoor_5_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DF51E568533001DBB86 /* indoor_5_1.png */; };
+		6585FB4D1E5E013100CB7CEB /* LocationIdMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6585FB4C1E5E013100CB7CEB /* LocationIdMapper.swift */; };
 		658F8E711E5D5C3C00EFA572 /* indoor_3_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 658F8E701E5D5C3C00EFA572 /* indoor_3_1.png */; };
 		658F8E741E5D5C9500EFA572 /* indoor_2_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 658F8E721E5D5C9500EFA572 /* indoor_2_2.png */; };
 		658F8E751E5D5C9500EFA572 /* indoor_2_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 658F8E731E5D5C9500EFA572 /* indoor_2_1.png */; };
@@ -223,6 +224,7 @@
 		65609DF01E5684F8001DBB86 /* indoor_2_cf_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_2_cf_1.png; sourceTree = "<group>"; };
 		65609DF21E56850F001DBB86 /* indoor_3_cf_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_3_cf_1.png; sourceTree = "<group>"; };
 		65609DF51E568533001DBB86 /* indoor_5_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_5_1.png; sourceTree = "<group>"; };
+		6585FB4C1E5E013100CB7CEB /* LocationIdMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationIdMapper.swift; sourceTree = "<group>"; };
 		658F8E701E5D5C3C00EFA572 /* indoor_3_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_3_1.png; sourceTree = "<group>"; };
 		658F8E721E5D5C9500EFA572 /* indoor_2_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_2_2.png; sourceTree = "<group>"; };
 		658F8E731E5D5C9500EFA572 /* indoor_2_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_2_1.png; sourceTree = "<group>"; };
@@ -629,6 +631,7 @@
 				95CD1A991E56E80B00D75807 /* UIImage+MDQRCode.m */,
 				95CD1AB01E56E89B00D75807 /* qrcode */,
 				95CD1AB11E5704F800D75807 /* HLDateFormatter.swift */,
+				6585FB4C1E5E013100CB7CEB /* LocationIdMapper.swift */,
 			);
 			name = HelperClasses;
 			sourceTree = "<group>";
@@ -1110,6 +1113,7 @@
 				E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */,
 				95CD1AB21E5704F800D75807 /* HLDateFormatter.swift in Sources */,
 				E2BD82B51D09EA530009DB07 /* GenericMapViewController.swift in Sources */,
+				6585FB4D1E5E013100CB7CEB /* LocationIdMapper.swift in Sources */,
 				243720021E32CEDD00B1C7C5 /* BottomViewController.swift in Sources */,
 				E20465D31CF1FAF50054654E /* hackillinois_2017_ios.xcdatamodeld in Sources */,
 				E27755531D36B7F600E7A379 /* GenericHelpQStaffViewController.swift in Sources */,
