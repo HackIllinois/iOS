@@ -158,8 +158,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         // MARK: changeme
         fetchRequest.predicate = NSPredicate(format: "tag == %@", "HACKATHON")
 
-//        fetchRequest.predicate = NSPredicate(format: "tag == %@", "EVENT")
-
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         frc.delegate = self
         return frc
