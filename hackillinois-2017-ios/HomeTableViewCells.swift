@@ -7,10 +7,6 @@
 //
 import UIKit
 
-protocol QRButtonDelegate {
-    func didTapQRButton()
-}
-
 class HomeTableViewEventCell: LocationButtonContainerTableViewCell {
     // MARK: - IBOutlets
     @IBOutlet weak var titleLabel: UILabel!

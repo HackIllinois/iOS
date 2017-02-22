@@ -9,6 +9,10 @@
 import UIKit
 import MIBlurPopup
 
+protocol QRButtonDelegate {
+    func didTapQRButton()
+}
+
 class QRCodeViewController: UIViewController, MIBlurPopupDelegate {
     @IBOutlet weak var qrCode: UIImageView!
     

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0A3A1B2F1E4E45EB00EA2100 /* ProfileTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A1B2E1E4E45EB00EA2100 /* ProfileTableViewCells.swift */; };
-		0A53966D1E4E67FC007F6450 /* InsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A53966C1E4E67FC007F6450 /* InsetLabel.swift */; };
 		0A8E5C0A1E56DD60002344CC /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E5C091E56DD60002344CC /* QRCodeGenerator.swift */; };
 		0A8E5C0C1E56DED6002344CC /* LocationButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8E5C0B1E56DED6002344CC /* LocationButton.xib */; };
 		243720021E32CEDD00B1C7C5 /* BottomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243720011E32CEDD00B1C7C5 /* BottomViewController.swift */; };
@@ -77,6 +76,7 @@
 		658F8E711E5D5C3C00EFA572 /* indoor_3_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 658F8E701E5D5C3C00EFA572 /* indoor_3_1.png */; };
 		658F8E741E5D5C9500EFA572 /* indoor_2_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 658F8E721E5D5C9500EFA572 /* indoor_2_2.png */; };
 		658F8E751E5D5C9500EFA572 /* indoor_2_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 658F8E731E5D5C9500EFA572 /* indoor_2_1.png */; };
+		9545DCF61E5E162200F17B3A /* BaseNSFetchedResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9545DCF51E5E162200F17B3A /* BaseNSFetchedResultsTableViewController.swift */; };
 		956011BF1E5C04DF000D6F84 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956011BE1E5C04DF000D6F84 /* QRCodeViewController.swift */; };
 		9560A9AB1E58269900D488EE /* LocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9560A9AA1E58269900D488EE /* LocationButton.swift */; };
 		9593E2E81E58D8B0003EFB8B /* LocationButtonContainerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9593E2E71E58D8B0003EFB8B /* LocationButtonContainerTableViewCell.swift */; };
@@ -152,7 +152,6 @@
 
 /* Begin PBXFileReference section */
 		0A3A1B2E1E4E45EB00EA2100 /* ProfileTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCells.swift; sourceTree = "<group>"; };
-		0A53966C1E4E67FC007F6450 /* InsetLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsetLabel.swift; sourceTree = "<group>"; };
 		0A8E5C091E56DD60002344CC /* QRCodeGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
 		0A8E5C0B1E56DED6002344CC /* LocationButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationButton.xib; sourceTree = "<group>"; };
 		243720011E32CEDD00B1C7C5 /* BottomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomViewController.swift; sourceTree = "<group>"; };
@@ -223,6 +222,7 @@
 		658F8E731E5D5C9500EFA572 /* indoor_2_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_2_1.png; sourceTree = "<group>"; };
 		7297F322A1143327B53A6755 /* Pods-hackillinois-2017-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-ios/Pods-hackillinois-2017-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		89AB469B7EDC1D76D45870DA /* Pods-hackillinois-2017-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
+		9545DCF51E5E162200F17B3A /* BaseNSFetchedResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNSFetchedResultsTableViewController.swift; sourceTree = "<group>"; };
 		956011BE1E5C04DF000D6F84 /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		9560A9AA1E58269900D488EE /* LocationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationButton.swift; sourceTree = "<group>"; };
 		9593E2E71E58D8B0003EFB8B /* LocationButtonContainerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationButtonContainerTableViewCell.swift; sourceTree = "<group>"; };
@@ -324,14 +324,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0A53966E1E4E6AA5007F6450 /* Subclasses */ = {
-			isa = PBXGroup;
-			children = (
-				0A53966C1E4E67FC007F6450 /* InsetLabel.swift */,
-			);
-			name = Subclasses;
-			sourceTree = "<group>";
-		};
 		24371FFC1E32777E00B1C7C5 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -452,9 +444,9 @@
 		A50F29231E14D53B00878652 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				39666E3F1E52924500A507DF /* HomeViewController.swift */,
 				39666E3D1E52924500A507DF /* EventDetailsViewController.swift */,
 				39666E421E52924500A507DF /* HomeTableViewCells.swift */,
-				39666E3F1E52924500A507DF /* HomeViewController.swift */,
 				956011BE1E5C04DF000D6F84 /* QRCodeViewController.swift */,
 			);
 			name = Home;
@@ -598,7 +590,6 @@
 		E2B6C39C1D0B30F100D851F9 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				0A53966E1E4E6AA5007F6450 /* Subclasses */,
 				E2D1853A1D21CA1F00CA4816 /* Custom UI */,
 				E2BD82B31D09EA350009DB07 /* Generics */,
 				E2B6C39D1D0B311000D851F9 /* HelperClasses */,
@@ -635,13 +626,14 @@
 		E2BCA5591CF36167006AAA8B /* Event */ = {
 			isa = PBXGroup;
 			children = (
+				9545DCF51E5E162200F17B3A /* BaseNSFetchedResultsTableViewController.swift */,
 				E2BCA5691CF373A1006AAA8B /* EventConstants.swift */,
 				E2BCA55A1CF36187006AAA8B /* Event.storyboard */,
 				A50F29231E14D53B00878652 /* Home */,
 				E2BCA5601CF36A15006AAA8B /* Feed */,
 				E2B6C39A1D0B30A300D851F9 /* Profile */,
-				E2F957031D0BA882003A0881 /* Schedule */,
 				E2D483311D00D37800859A67 /* Maps */,
+				E2F957031D0BA882003A0881 /* Schedule */,
 			);
 			name = Event;
 			sourceTree = "<group>";
@@ -1118,7 +1110,6 @@
 				E28FB6A21D194951000D062F /* Chat.swift in Sources */,
 				E2A085FA1D0C6688002197F9 /* DayItem.swift in Sources */,
 				956011BF1E5C04DF000D6F84 /* QRCodeViewController.swift in Sources */,
-				0A53966D1E4E67FC007F6450 /* InsetLabel.swift in Sources */,
 				24632D171E4D58EA00E7A746 /* FridayTabController.swift in Sources */,
 				390CFC761E4FB9D800DC6F3A /* Feed+CoreDataClass.swift in Sources */,
 				E2BCA5621CF36CDA006AAA8B /* FeedTableViewController.swift in Sources */,
@@ -1131,6 +1122,7 @@
 				243720041E32D4D100B1C7C5 /* BottomViewTableViewCell.swift in Sources */,
 				653304F51E4FF83C00E881F8 /* DayItemLocation.swift in Sources */,
 				E23791411D21C4870020618E /* ReferencedButton.swift in Sources */,
+				9545DCF61E5E162200F17B3A /* BaseNSFetchedResultsTableViewController.swift in Sources */,
 				E2BCA5801CF3B19E006AAA8B /* Location+CoreDataProperties.swift in Sources */,
 				0A8E5C0A1E56DD60002344CC /* QRCodeGenerator.swift in Sources */,
 				3947F9581E4C473F00FF4AF4 /* ScheduleDescriptionViewController.swift in Sources */,
