@@ -30,9 +30,8 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         
         // Preemptively load tags
         loadTags()
-        attemptPullingEventData()
         // Load objects from core data
-        loadSavedData()
+        fetch()
     }
     
     // MARK: - Navigation
@@ -66,22 +65,12 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startTime", ascending: false)]
         fetchRequest.includesSubentities = false
         
-        fetchRequest.predicate = NSPredicate(format: "tag == %@", "EVENT")
-        
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         
         frc.delegate = self
         return frc
     }()
     
-    
-    func loadSavedData() {
-        fetchedResultsController.fetchRequest.predicate = nil
-        fetch()
-    }
-    
-    // Not generalized due to very specific quirks to it
-    // TODO: find a way to generalize
     func fetch() {
         do {
             try fetchedResultsController.performFetch()
@@ -91,82 +80,10 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.reloadData()
     }
     
-    // MARK: - Events Logic
-    func attemptPullingEventData() {
-        APIManager.shared.getEvents(success: getEventsSuccess, failure: getEventsFailure)
-    }
-    
-    func getEventsSuccess(json: JSON) {
-        if let error = json["error"]["message"].string {
-            presentErrorLabel(text: error)
-        } else if let key = json["data"]["auth"].string {
-//            APIManager.shared.setAuthKey(key)
-//            APIManager.shared.getUserInfo(success: getUserInfoSuccess, failure: getEventsFailure)
-        }
-//        else {
-//        }
-    }
-
-    
-    func getEventsFailure(error: Error) {
-        presentErrorLabel(text: error as! String)
-
-    }
-    
-    // MARK: - Events UI
-    func presentErrorLabel(text: String) {
-        print("ERROR: \(text)")
-//        let alert = UIAlertController()
-//        alert.title = "Unknown error"
-//        alert.message = text
-//        alert.show(<#UIViewController#>)
-    }
-    
     // MARK: - FeedCollectionViewController
-    func refresh() {
-        tableView.reloadData()
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async { [unowned self] in
-            // Check to see if the method previously failed.
-            if self.refreshCleanUpRequired {
-//                self.refreshControl!.endRefreshing()
-                // TODO: Different alert to user to wait a bit longer
-                DispatchQueue.main.async {
-                    let ac = UIAlertController(title: "Timeout Error", message: "Please wait a little longer before trying again.", preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    
-                    self.present(ac, animated: true, completion: nil)
-                }
-                return
-            }
-            
-            // Set timeout so the user isn't stuck with a long running process...
-            var timeout = false
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(timeoutIntervalSeconds * NSEC_PER_SEC)) / Double(NSEC_PER_SEC)) {
-                timeout = true
-                self.refreshCleanUpRequired = true
-                
-                // End refresh
-//                self.refreshControl!.endRefreshing()
-                // Present warning to user
-                let ac = UIAlertController(title: "Network Error", message: "Network connection has timed out. Please check your internet connection and try again later.", preferredStyle: .alert)
-                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                
-                self.present(ac, animated: true, completion: nil)
-                return
-            }
-            
-            // Get information from server
-            sleep(20) // Fake server response
-            
-            if timeout {
-                // clean up
-                self.refreshCleanUpRequired = false
-            }
-        }
-    }
     
-    /* Value to load all tags */
-    /* TODO: Hardcode tags instead? */
+//     Value to load all tags 
+//     TODO: Hardcode tags instead?
     func loadTags() {
         let tempFeed = CoreDataHelpers.loadContext(entityName: "Feed", fetchConfiguration: nil) as! [Feed]
         for feed in tempFeed {
@@ -236,9 +153,9 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // MARK: - LocationButtonContainerDelegate
     func locationButtonTapped(location: Location) {
+        // TODO: - Implement this
         print("did select location \(location.name): (\(location.latitude), \(location.longitude))")
         
+        
     }
-    
-    
 }
