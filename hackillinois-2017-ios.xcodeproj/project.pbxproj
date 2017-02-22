@@ -32,7 +32,6 @@
 		24794C701E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */; };
 		24794C711E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */; };
 		24F0CA7E1E5049AF005664F3 /* GenericTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0CA7D1E5049AF005664F3 /* GenericTabBarController.swift */; };
-		24F103FB1E503E00006701B7 /* GenericNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F103FA1E503E00006701B7 /* GenericNavigationController.swift */; };
 		2E58FD18C276D1CAB08DECC9 /* Pods_hackillinois_2017_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D56A959E0C581A830CD71729 /* Pods_hackillinois_2017_iosTests.framework */; };
 		390A8DE41E3AA90200018855 /* Gotham-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DD41E3AA90200018855 /* Gotham-Black.otf */; };
 		390A8DE51E3AA90200018855 /* Gotham-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 390A8DD51E3AA90200018855 /* Gotham-BlackItalic.otf */; };
@@ -103,14 +102,11 @@
 		E20465D81CF1FAF50054654E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20465D61CF1FAF50054654E /* LaunchScreen.storyboard */; };
 		E20465E31CF1FAF50054654E /* hackillinois_2017_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20465E21CF1FAF50054654E /* hackillinois_2017_iosTests.swift */; };
 		E20465EE1CF1FAF50054654E /* hackillinois_2017_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20465ED1CF1FAF50054654E /* hackillinois_2017_iosUITests.swift */; };
-		E224BFF41D19CCA60098AA8D /* HTTPHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224BFF31D19CCA60098AA8D /* HTTPHelpers.swift */; };
 		E23791411D21C4870020618E /* ReferencedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23791401D21C4870020618E /* ReferencedButton.swift */; };
 		E25377441CF8C485003795E7 /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25377431CF8C485003795E7 /* CoreDataHelpers.swift */; };
 		E26F44F21D0EF2C100FB4A9F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F44F11D0EF2C100FB4A9F /* ProfileViewController.swift */; };
 		E27755531D36B7F600E7A379 /* GenericHelpQStaffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27755521D36B7F600E7A379 /* GenericHelpQStaffViewController.swift */; };
-		E277DD691CF4A79100D7E018 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E277DD681CF4A79100D7E018 /* FeedDetailViewController.swift */; };
 		E277DD6B1CF4AF0400D7E018 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = E277DD6A1CF4AF0400D7E018 /* keys.plist */; };
-		E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E277DD6D1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift */; };
 		E28FB69F1D194951000D062F /* HelpQ+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28FB69B1D194950000D062F /* HelpQ+CoreDataProperties.swift */; };
 		E28FB6A01D194951000D062F /* HelpQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28FB69C1D194950000D062F /* HelpQ.swift */; };
 		E28FB6A11D194951000D062F /* Chat+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28FB69D1D194950000D062F /* Chat+CoreDataProperties.swift */; };
@@ -125,7 +121,6 @@
 		E2B6C3931D0B2E1200D851F9 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3921D0B2E1200D851F9 /* Feed.storyboard */; };
 		E2B6C3951D0B2E8000D851F9 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3941D0B2E8000D851F9 /* Map.storyboard */; };
 		E2B6C3971D0B2ED800D851F9 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6C3961D0B2ED800D851F9 /* Profile.storyboard */; };
-		E2BB42C61D133A9A009EF512 /* GenericInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BB42C51D133A9A009EF512 /* GenericInputView.swift */; };
 		E2BCA55B1CF36187006AAA8B /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2BCA55A1CF36187006AAA8B /* Event.storyboard */; };
 		E2BCA5621CF36CDA006AAA8B /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5611CF36CDA006AAA8B /* FeedTableViewController.swift */; };
 		E2BCA56A1CF373A1006AAA8B /* EventConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCA5691CF373A1006AAA8B /* EventConstants.swift */; };
@@ -185,7 +180,6 @@
 		24794C611E340DE80016F8D4 /* Brandon_thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_thin.otf; sourceTree = "<group>"; };
 		24794C6E1E341FF00016F8D4 /* UIColor+ColorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+ColorConstants.swift"; sourceTree = "<group>"; };
 		24F0CA7D1E5049AF005664F3 /* GenericTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericTabBarController.swift; sourceTree = "<group>"; };
-		24F103FA1E503E00006701B7 /* GenericNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericNavigationController.swift; sourceTree = "<group>"; };
 		390A8DD41E3AA90200018855 /* Gotham-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Black.otf"; sourceTree = "<group>"; };
 		390A8DD51E3AA90200018855 /* Gotham-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-BlackItalic.otf"; sourceTree = "<group>"; };
 		390A8DD61E3AA90200018855 /* Gotham-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Bold.otf"; sourceTree = "<group>"; };
@@ -277,14 +271,11 @@
 		E20465E91CF1FAF50054654E /* hackillinois-2017-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hackillinois-2017-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E20465ED1CF1FAF50054654E /* hackillinois_2017_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hackillinois_2017_iosUITests.swift; sourceTree = "<group>"; };
 		E20465EF1CF1FAF50054654E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E224BFF31D19CCA60098AA8D /* HTTPHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHelpers.swift; sourceTree = "<group>"; };
 		E23791401D21C4870020618E /* ReferencedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferencedButton.swift; sourceTree = "<group>"; };
 		E25377431CF8C485003795E7 /* CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
 		E26F44F11D0EF2C100FB4A9F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E27755521D36B7F600E7A379 /* GenericHelpQStaffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericHelpQStaffViewController.swift; sourceTree = "<group>"; };
-		E277DD681CF4A79100D7E018 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
 		E277DD6A1CF4AF0400D7E018 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
-		E277DD6D1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailTableViewCell.swift; sourceTree = "<group>"; };
 		E28FB69B1D194950000D062F /* HelpQ+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HelpQ+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E28FB69C1D194950000D062F /* HelpQ.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpQ.swift; sourceTree = "<group>"; };
 		E28FB69D1D194950000D062F /* Chat+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Chat+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -297,7 +288,6 @@
 		E2B6C3921D0B2E1200D851F9 /* Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		E2B6C3941D0B2E8000D851F9 /* Map.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		E2B6C3961D0B2ED800D851F9 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
-		E2BB42C51D133A9A009EF512 /* GenericInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericInputView.swift; sourceTree = "<group>"; };
 		E2BCA55A1CF36187006AAA8B /* Event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Event.storyboard; sourceTree = "<group>"; };
 		E2BCA5611CF36CDA006AAA8B /* FeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		E2BCA5691CF373A1006AAA8B /* EventConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventConstants.swift; sourceTree = "<group>"; };
@@ -472,10 +462,10 @@
 		A50F29231E14D53B00878652 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				39666E3E1E52924500A507DF /* Home.storyboard */,
 				39666E3D1E52924500A507DF /* EventDetailsViewController.swift */,
 				39666E421E52924500A507DF /* HomeTableViewCells.swift */,
 				39666E3F1E52924500A507DF /* HomeViewController.swift */,
-				39666E3E1E52924500A507DF /* Home.storyboard */,
 				956011BE1E5C04DF000D6F84 /* QRCodeViewController.swift */,
 			);
 			name = Home;
@@ -551,15 +541,6 @@
 			path = "hackillinois-2017-iosUITests";
 			sourceTree = "<group>";
 		};
-		E277DD6C1CF4B9EC00D7E018 /* FeedDetail */ = {
-			isa = PBXGroup;
-			children = (
-				E277DD681CF4A79100D7E018 /* FeedDetailViewController.swift */,
-				E277DD6D1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift */,
-			);
-			name = FeedDetail;
-			sourceTree = "<group>";
-		};
 		E2A085FB1D0C7069002197F9 /* ScheduleGenerics */ = {
 			isa = PBXGroup;
 			children = (
@@ -619,9 +600,9 @@
 		E2B6C39A1D0B30A300D851F9 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				0A3A1B2E1E4E45EB00EA2100 /* ProfileTableViewCells.swift */,
 				E2B6C3961D0B2ED800D851F9 /* Profile.storyboard */,
 				E26F44F11D0EF2C100FB4A9F /* ProfileViewController.swift */,
+				0A3A1B2E1E4E45EB00EA2100 /* ProfileTableViewCells.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -643,7 +624,6 @@
 			children = (
 				0A8E5C091E56DD60002344CC /* QRCodeGenerator.swift */,
 				E25377431CF8C485003795E7 /* CoreDataHelpers.swift */,
-				E224BFF31D19CCA60098AA8D /* HTTPHelpers.swift */,
 				95F8C14B1E56ACD80012AC03 /* APIManager.swift */,
 				95CD1A981E56E80B00D75807 /* UIImage+MDQRCode.h */,
 				95CD1A991E56E80B00D75807 /* UIImage+MDQRCode.m */,
@@ -683,7 +663,6 @@
 				E2B6C3921D0B2E1200D851F9 /* Feed.storyboard */,
 				E2BCA5611CF36CDA006AAA8B /* FeedTableViewController.swift */,
 				E2D4F0E01D06B28B00646BF8 /* FeedTableViewCell.swift */,
-				E277DD6C1CF4B9EC00D7E018 /* FeedDetail */,
 			);
 			name = Feed;
 			sourceTree = "<group>";
@@ -710,11 +689,9 @@
 			isa = PBXGroup;
 			children = (
 				E27755521D36B7F600E7A379 /* GenericHelpQStaffViewController.swift */,
-				24F103FA1E503E00006701B7 /* GenericNavigationController.swift */,
 				24F0CA7D1E5049AF005664F3 /* GenericTabBarController.swift */,
 				E2BD82B41D09EA530009DB07 /* GenericMapViewController.swift */,
 				E2A085F11D0C4E43002197F9 /* GenericCardViewController.swift */,
-				E2BB42C51D133A9A009EF512 /* GenericInputView.swift */,
 			);
 			name = Generics;
 			sourceTree = "<group>";
@@ -1146,10 +1123,8 @@
 				24794C6F1E341FF00016F8D4 /* UIColor+ColorConstants.swift in Sources */,
 				95CD1AAB1E56E89700D75807 /* qrencode.c in Sources */,
 				3947F9521E4C471100FF4AF4 /* SchedulePageViewController.swift in Sources */,
-				24F103FB1E503E00006701B7 /* GenericNavigationController.swift in Sources */,
 				95CD1A9A1E56E80B00D75807 /* UIImage+MDQRCode.m in Sources */,
 				95CD1AAE1E56E89700D75807 /* rscode.c in Sources */,
-				E277DD6E1CF4BA1100D7E018 /* FeedDetailTableViewCell.swift in Sources */,
 				E28FB69F1D194951000D062F /* HelpQ+CoreDataProperties.swift in Sources */,
 				E2D4F0E51D06BF6600646BF8 /* MKMapCamera+initFromLocation.swift in Sources */,
 				655227D91E4DD18000DD88D7 /* ScheduleDetailsImageViewController.swift in Sources */,
@@ -1164,14 +1139,12 @@
 				956011BF1E5C04DF000D6F84 /* QRCodeViewController.swift in Sources */,
 				0A53966D1E4E67FC007F6450 /* InsetLabel.swift in Sources */,
 				24632D171E4D58EA00E7A746 /* FridayTabController.swift in Sources */,
-				E224BFF41D19CCA60098AA8D /* HTTPHelpers.swift in Sources */,
 				390CFC761E4FB9D800DC6F3A /* Feed+CoreDataClass.swift in Sources */,
 				E2BCA5621CF36CDA006AAA8B /* FeedTableViewController.swift in Sources */,
 				24632D191E4D58EA00E7A746 /* SundayTabController.swift in Sources */,
 				39666E4A1E52924500A507DF /* HomeTableViewCells.swift in Sources */,
 				39666E451E52924500A507DF /* EventDetailsViewController.swift in Sources */,
 				390CFC771E4FB9D800DC6F3A /* Feed+CoreDataProperties.swift in Sources */,
-				E2BB42C61D133A9A009EF512 /* GenericInputView.swift in Sources */,
 				E2D483331D00D3B100859A67 /* MapViewController.swift in Sources */,
 				3947F9541E4C472000FF4AF4 /* GenericTabController.swift in Sources */,
 				243720041E32D4D100B1C7C5 /* BottomViewTableViewCell.swift in Sources */,
@@ -1190,7 +1163,6 @@
 				E2AC3F861CF21C3600C4F21F /* UIColor+fromHex.swift in Sources */,
 				E20465CB1CF1FAF50054654E /* AppDelegate.swift in Sources */,
 				3947F9561E4C473000FF4AF4 /* ScheduleTableViewController.swift in Sources */,
-				E277DD691CF4A79100D7E018 /* FeedDetailViewController.swift in Sources */,
 				E26F44F21D0EF2C100FB4A9F /* ProfileViewController.swift in Sources */,
 				95F8C14C1E56ACD80012AC03 /* APIManager.swift in Sources */,
 				0A3A1B2F1E4E45EB00EA2100 /* ProfileTableViewCells.swift in Sources */,

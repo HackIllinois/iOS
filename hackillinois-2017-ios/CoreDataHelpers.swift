@@ -151,23 +151,7 @@ class CoreDataHelpers {
         return defaults.object(forKey: "timestamp") as? NSDate as Date?
     }
     
-//    /* fetch the newest JSON data from the server */
-//    class func updateEventsFeed() {
-//        print ("update events feed called")
-//        // MARK: change the APIURL to the real one
-//        let eventsAPIURL = "http://13.90.146.188:8080/v1/events"
-//        Alamofire.request(eventsAPIURL)
-//            .responseJSON { response in
-//                if let jsonValue = response.result.value {
-//                    let json = JSON(jsonValue)
-//                    for feedJSON in json["data"].arrayValue {
-//                        CoreDataHelpers.configure(feedJSON: feedJSON);
-//                    }
-//                }
-//        }
-//        CoreDataHelpers.saveContext()
-//    }
-    
+
     /* configures a batch of event objects */
     class func configureEvents(feedJSON: JSON) {
         for event in feedJSON["data"] {

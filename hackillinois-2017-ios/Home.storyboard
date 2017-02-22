@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gah-u1-v8Z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E154a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gah-u1-v8Z">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -64,7 +64,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@ Friday 4:00 pm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ucv-Is-4t4">
-                                                    <rect key="frame" x="120" y="177" width="135" height="26"/>
+                                                    <rect key="frame" x="120.5" y="177" width="135" height="26"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="26" id="AZL-eh-C98"/>
                                                     </constraints>
@@ -460,7 +460,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="5xn-gy-Aq9">
-                                                    <rect key="frame" x="52" y="29" width="272" height="379"/>
+                                                    <rect key="frame" x="51.5" y="29" width="272" height="379"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thanks for Attending!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e23-W8-6Um">
                                                             <rect key="frame" x="0.0" y="0.0" width="272" height="46"/>
@@ -539,7 +539,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="RF7-ax-iNl">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RF7-ax-iNl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -608,8 +608,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G5W-Qj-wRH">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="1900"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G5W-Qj-wRH">
+                                <rect key="frame" x="0.0" y="64" width="375" height="1787"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1HO-T3-BBB" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="184"/>
@@ -660,10 +660,10 @@
                                     </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="1HO-T3-BBB" firstAttribute="top" secondItem="G5W-Qj-wRH" secondAttribute="top" id="7Wf-Od-o9C"/>
                                     <constraint firstItem="1HO-T3-BBB" firstAttribute="leading" secondItem="G5W-Qj-wRH" secondAttribute="leading" id="d6T-Vy-U1W"/>
                                     <constraint firstAttribute="bottom" secondItem="1HO-T3-BBB" secondAttribute="bottom" id="gaT-QJ-1XD"/>
                                     <constraint firstAttribute="trailing" secondItem="1HO-T3-BBB" secondAttribute="trailing" id="pzs-GB-ybr"/>
-                                    <constraint firstItem="1HO-T3-BBB" firstAttribute="top" secondItem="G5W-Qj-wRH" secondAttribute="top" id="zQ4-8m-mMd"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -671,12 +671,14 @@
                         <constraints>
                             <constraint firstItem="1HO-T3-BBB" firstAttribute="width" secondItem="Icx-h1-ngf" secondAttribute="width" id="GIc-0c-nar"/>
                             <constraint firstItem="G5W-Qj-wRH" firstAttribute="leading" secondItem="Icx-h1-ngf" secondAttribute="leading" id="Hkp-Gp-X3U"/>
-                            <constraint firstItem="G5W-Qj-wRH" firstAttribute="height" secondItem="Icx-h1-ngf" secondAttribute="height" id="dQR-wr-pB4"/>
                             <constraint firstItem="G5W-Qj-wRH" firstAttribute="width" secondItem="Icx-h1-ngf" secondAttribute="width" id="lbB-P2-Ail"/>
-                            <constraint firstItem="G5W-Qj-wRH" firstAttribute="top" secondItem="Icx-h1-ngf" secondAttribute="top" id="lwp-WR-JE8"/>
+                            <constraint firstItem="G5W-Qj-wRH" firstAttribute="top" secondItem="W15-4C-Odd" secondAttribute="bottom" id="skI-gb-seg"/>
+                            <constraint firstItem="MZs-97-CMQ" firstAttribute="top" secondItem="G5W-Qj-wRH" secondAttribute="bottom" id="tnx-AM-ySs"/>
                             <constraint firstItem="1HO-T3-BBB" firstAttribute="height" secondItem="Icx-h1-ngf" secondAttribute="height" priority="250" id="xmB-LX-gbn"/>
                         </constraints>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="1900"/>
                     <connections>
                         <outlet property="eventDescriptionLabel" destination="BgP-wM-1Hd" id="URy-eM-X3n"/>
                         <outlet property="eventLocationLabel" destination="59E-T6-CQa" id="UUs-80-A4e"/>
@@ -691,7 +693,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1948" y="-148"/>
+            <point key="canvasLocation" x="2044" y="-148.42578710644679"/>
         </scene>
     </scenes>
     <resources>

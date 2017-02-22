@@ -155,9 +155,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startTime", ascending: false)]
         fetchRequest.includesSubentities = false
         
-        // MARK: changeme
-        fetchRequest.predicate = NSPredicate(format: "tag == %@", "HACKATHON")
-
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         frc.delegate = self
         return frc
@@ -167,7 +164,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         do {
             try fetchedResultsController.performFetch()
         } catch let error as NSError {
-            assertionFailure("Failed to preform fetch operation, error: \(error)")
+            print("Failed to preform fetch operation, error: \(error)")
         }
         homeTableView.reloadData()
     }

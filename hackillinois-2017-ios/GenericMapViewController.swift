@@ -16,6 +16,7 @@ class GenericMapViewController: UIViewController, CLLocationManagerDelegate, MKM
     
     /* Variables */
     var manager: CLLocationManager!
+    
     // Start off the locations and buttons as empty
     var buildings: [Building]! = []
     var locationButton: UIButton!

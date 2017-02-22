@@ -88,25 +88,7 @@ class GenericHelpQStaffViewController: GenericCardViewController, NSFetchedResul
         /* Configure collectionView for consistency */
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
     }
-    
-    /*
-    // Mark: Button Handler
-    func cellButtonPressed(sender: ReferencedButton) {
-        let helpQItem = sender.referenceObject as! HelpQ
         
-        /* Configure button */
-        if !helpQItem.isHelping.boolValue {
-            helpQItem.assignMentor(mentor: user.name, helpStatus: true)
-            sender.setTitle("Stop Helping User", forState: .Normal)
-        } else {
-            helpQItem.assignMentor(mentor: "", helpStatus: false)
-            sender.setTitle("Help User", forState: .Normal)
-        }
-        
-        saveAndReload()
-    }
-    */
-    
     // Mark: UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return fetchedResultsController.sections?[section].numberOfObjects ?? 0

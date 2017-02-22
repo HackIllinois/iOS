@@ -8,9 +8,9 @@
 
 import UIKit
 
-class GenericCardViewController: UIViewController,  UICollectionViewDelegateFlowLayout {
+class GenericCardViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     
-    // Mark: Configuration Utility classes
+    // MARK: Configuration Utility classes
     func configureCell(_ cell: UICollectionViewCell) {
         /* Configure cell */
         cell.layer.shadowColor = UIColor.black.cgColor
@@ -21,7 +21,7 @@ class GenericCardViewController: UIViewController,  UICollectionViewDelegateFlow
         cell.layer.masksToBounds = false
     }
     
-    // Mark: UICollectionDelegateFlowLayout
+    // MARK: UICollectionDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // Support multiple devices by adding dynamic padding
         let screen = UIScreen.main.bounds

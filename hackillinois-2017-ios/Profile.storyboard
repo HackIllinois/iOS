@@ -23,7 +23,7 @@
                     <tabBarItem key="tabBarItem" title="" image="profile_off" selectedImage="profile_on" id="lTe-0J-ZeA"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="cmv-jz-cAv">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="cmv-jz-cAv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -90,11 +90,11 @@
                                             <outlet property="qrCode" destination="BJb-LQ-OT8" id="9r2-ba-o0i"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ProfileTableViewNameDietCell" rowHeight="54" id="Mdm-7u-dsQ" customClass="ProfileTableViewNameDietCell" customModule="hackillinois_2017_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="288" width="375" height="54"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ProfileTableViewNameDietCell" rowHeight="53" id="Mdm-7u-dsQ" customClass="ProfileTableViewNameDietCell" customModule="hackillinois_2017_ios" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="288" width="375" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mdm-7u-dsQ" id="a2j-4i-mHE">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="53"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rjS-ZS-uir">
@@ -134,7 +134,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ProfileTableViewLinksCell" rowHeight="124" id="vDk-x6-8Q9" customClass="ProfileTableViewLinksCell" customModule="hackillinois_2017_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="342" width="375" height="124"/>
+                                        <rect key="frame" x="0.0" y="341" width="375" height="124"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vDk-x6-8Q9" id="v2j-wC-Hnz">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="124"/>
@@ -185,7 +185,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ProfileTableViewInformationCell" rowHeight="212" id="KHR-Z6-HKu" customClass="ProfileTableViewInformationCell" customModule="hackillinois_2017_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="466" width="375" height="212"/>
+                                        <rect key="frame" x="0.0" y="465" width="375" height="212"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KHR-Z6-HKu" id="YyS-9x-YA5">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="212"/>
@@ -195,7 +195,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cdo-LY-v0c">
-                                                            <rect key="frame" x="29" y="9" width="317" height="22"/>
+                                                            <rect key="frame" x="29" y="8.5" width="317" height="23.5"/>
                                                             <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="20"/>
                                                             <color key="textColor" red="0.96078431369999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>

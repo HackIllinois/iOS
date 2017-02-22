@@ -24,16 +24,16 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
     @IBOutlet weak var directionTitleOverlay: UIView!
     @IBOutlet weak var directionTitle: UILabel!
     
-    var labelPressed: Int = 0
+    var labelPressed = 0
     
-    var directionModeLabel: Int = 0
-    var isDirectionMode: Bool = false
-    var directionModeTitle: String = "Room number, Somewhere on Earth"
+    var directionModeLabel = 0
+    var isDirectionMode = false
+    var directionModeTitle = "Room number, Somewhere on Earth"
     
     func closeCleanUp() {
-        self.map.removeOverlays(self.map.overlays)
-        self.map.deselectAnnotation(self.map.selectedAnnotations[0], animated: true)
-        self.clearLabel(labelNumber: -1)
+        map.removeOverlays(map.overlays)
+        map.deselectAnnotation(map.selectedAnnotations[0], animated: true)
+        clearLabel(labelNumber: -1)
     }
     
     // Mark: Initializing locations and where locations are set
@@ -60,9 +60,6 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         /* Required configurations before calling the superclass's constructor */
         map = mapView
         initializeLocations()
-        
-//        let tabBarItem = UITabBarItem(tabBarSystemItem: "", tag: UIImage(named: "more"))
-        
         
         
         /* Call superclass's constructor after configuration */
@@ -91,15 +88,13 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
     }
     
     func updateDirectionModeState() {
-        print(isDirectionMode)
         if isDirectionMode {
             directionTitleOverlay.isHidden = false
             directionTitle.text = directionModeTitle
-            self.title = "DIRECTIONS"
-            
+            navigationItem.title = "Directions"
         } else {
             directionTitleOverlay.isHidden = true
-            self.title = "MAPS"
+            navigationItem.title = "Maps"
         }
     }
     
@@ -292,8 +287,6 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
     
     func addBottomSheetView() {
         self.bottomSheet = self.storyboard?.instantiateViewController(withIdentifier: "BottomView") as! BottomViewController
-        // bottomSheet?.view.backgroundColor = UIColor.clear
-        // bottomSheet?.modalPresentationStyle = .overCurrentContext
         self.addChildViewController(bottomSheet!)
         
         self.view.addSubview((bottomSheet?.view)!)
@@ -311,7 +304,6 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
     override func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         let selectedAnnotation = mapView.selectedAnnotations[0]
         if selectedAnnotation.isKind(of: MKUserLocation.self) {
-            // Don't do anything if the user location is selected
             return
         }
         
@@ -324,6 +316,7 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
                 self.bottomSheet.reloadNavTable(address: building.address ?? "", name: building.longName ?? "", location_id: selectedIndex + 1)
                 self.bottomSheet.scrollToButtons()
             })
+            
             // Set appropriate selection for cleanup later
             clearLabel(labelNumber: -1) // Clear everything
             switch Int(selectedIndex) {

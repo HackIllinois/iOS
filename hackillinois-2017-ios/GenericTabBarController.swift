@@ -25,11 +25,6 @@ class GenericTabBarController: UITabBarController {
     
     /* View that masks and handles the tap control */
     var tapRecognitionView: UIView?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-//        self.tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)

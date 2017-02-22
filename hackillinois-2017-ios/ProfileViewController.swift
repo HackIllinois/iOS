@@ -30,7 +30,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.estimatedRowHeight = 100
     }
     
-    
     // MARK: UITableViewDataSource
     var datasource: [ProfileTableViewCells] = [
         .QRCode,

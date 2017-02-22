@@ -10,14 +10,9 @@ import UIKit
 import CoreData
 import SwiftyJSON
 
-private let reuseIdentifier = "feedCell"
-
 class FeedTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, LocationButtonContainerDelegate {
-    // MARK: - Global Variables
-    var refreshCleanUpRequired = false
-    var dateTimeFormatter: DateFormatter!
-    // Cache of Tags to quickly generate the "Filter by..." menu
-    var tags = [String]()
+
+    var tags = ["Hackathon", "Schedule"]
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
@@ -28,36 +23,15 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         
-        // Preemptively load tags
-        loadTags()
-        // Load objects from core data
         fetch()
     }
     
     // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
         
-        if segue.identifier == "feedDetail" {
-            let destination = segue.destination as! FeedDetailViewController
-            let feedItem = fetchedResultsController.object(at: tableView.indexPathForSelectedRow!)
-            
-            // Set up buildings
-            destination.buildings = []
-            
-            if let locationArray = feedItem.locations.array as? [Location] {
-                for location in locationArray {
-                    let building = Building(location: location)
-                    destination.buildings.append(building)
-                }
-            }
-        }
     }
     
     // MARK: NSFetchedResultsControllerDelegate
-    // Fetched results controller for lazy loading of cells
     lazy var fetchedResultsController: NSFetchedResultsController<Feed> = {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
@@ -75,47 +49,26 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         do {
             try fetchedResultsController.performFetch()
         } catch let error as NSError {
-            assertionFailure("Failed to preform fetch operation, error: \(error)")
+            print("Failed to preform fetch operation, error: \(error)")
         }
         tableView.reloadData()
     }
     
-    // MARK: - FeedCollectionViewController
-    
-//     Value to load all tags 
-//     TODO: Hardcode tags instead?
-    func loadTags() {
-        let tempFeed = CoreDataHelpers.loadContext(entityName: "Feed", fetchConfiguration: nil) as! [Feed]
-        for feed in tempFeed {
-            if !tags.contains(feed.tag) {
-                tags.append(feed.tag)
-            }
-        }
-    }
-    
     // MARK: - Show filtering options...
     @IBAction func showFilterBy() {
-        // Add the tags here...
         let alert = UIAlertController(title: "Filter by...", message: "Select tag to sort by", preferredStyle: .actionSheet)
-        // Could be slow for many tags...
+
         for tag in tags {
             alert.addAction(UIAlertAction(title: tag, style: .default, handler: {
-                [unowned self] alert in
-                let predicate = NSPredicate(format: "tag == %@", tag)
-                self.fetchedResultsController.fetchRequest.predicate = predicate
-                
-                do {
-                    try self.fetchedResultsController.performFetch()
-                    self.tableView.reloadData()
-                } catch {
-                    print("Error loading: \(error)")
-                }
+                [weak self] alert in
+                self?.fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "tag == %@", tag.uppercased())
+                self?.fetch()
             }))
         }
         
-        alert.addAction(UIAlertAction(title: "Default", style: .default, handler: { [unowned self] action in
-            self.fetchedResultsController.fetchRequest.predicate = nil
-            self.fetch()
+        alert.addAction(UIAlertAction(title: "Default", style: .default, handler: { [weak self] action in
+            self?.fetchedResultsController.fetchRequest.predicate = nil
+            self?.fetch()
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -153,8 +106,6 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // MARK: - LocationButtonContainerDelegate
     func locationButtonTapped(location: Location) {
-        // TODO: - Implement this
-        print("did select location \(location.name): (\(location.latitude), \(location.longitude))")
         
         
     }
