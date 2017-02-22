@@ -26,7 +26,7 @@ class MapViewIndoorMapsTableViewController: UITableViewController {
         location_names[2] = "Siebel"
         location_names[3] = "ECEB"
         location_names[4] = "Union"
-        location_names[5] = "Kenny Gym"
+        location_names[5] = "Kenny Gym Annex"
         
         self.navigationItem.hidesBackButton = false
         if let name = location_names[location_id] {

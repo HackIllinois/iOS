@@ -52,7 +52,7 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         let union: Location! = CoreDataHelpers.createOrFetchLocation(id: 3,  latitude: 40.109395, longitude: -88.227181,locationName: "Illini Union", shortName: "Union", feeds: nil)
         buildings.append(Building(location: union))
         
-        let kenny: Location! = CoreDataHelpers.createOrFetchLocation(id: 5,  latitude: 40.112897, longitude: -88.227731,locationName: "Kenny Gym", shortName: "Kenny", feeds: nil)
+        let kenny: Location! = CoreDataHelpers.createOrFetchLocation(id: 5,  latitude: 40.112897, longitude: -88.227731,locationName: "Kenny Gym Annex", shortName: "Kenny", feeds: nil)
         buildings.append(Building(location: kenny))
     }
     
