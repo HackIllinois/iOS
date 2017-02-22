@@ -61,7 +61,7 @@ class DayItem: NSObject {
         for location in locations {
             let location = location as! Location
             self.locations.append(
-                DayItemLocation(id: Int(location.id) + 1, name: location.name, shortname: location.shortName)
+                DayItemLocation(id: LocationIdMapper.getLocalId(fromShortname: location.shortName), name: location.name, shortname: location.shortName)
             )
         }
         

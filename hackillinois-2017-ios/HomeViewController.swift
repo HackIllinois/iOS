@@ -236,24 +236,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - LocationButtonContainerDelegate
     func locationButtonTapped(location: Location) {
-        let locations: [String: Int] = [
-            "DCL" : 1,
-            "Digital Computer Laboratory": 1,
-            "Thomas M. Siebel Center" : 2,
-            "Siebel" : 2,
-            "Thomas Siebel Center" : 2,
-            "ECEB" : 3,
-            "Electrical Computer Engineering Building" : 3,
-            "Union" : 4,
-            "Illini Union" : 4,
-            "Kenny Gym" : 5,
-            "Kenneth Gym" : 5
-        ]
-        
-        let location_id = locations[location.shortName]
         if let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "Map") as? MapViewController {
             vc.isDirectionMode = true
-            vc.directionModeLabel = location_id!
+            vc.directionModeLabel = LocationIdMapper.getLocalId(fromShortname: location.shortName)
             vc.directionModeTitle = location.name
             navigationController?.pushViewController(vc, animated: true)
         }
