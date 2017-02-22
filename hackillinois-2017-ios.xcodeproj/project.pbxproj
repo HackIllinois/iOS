@@ -75,8 +75,8 @@
 		65609DED1E568468001DBB86 /* indoor_3_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DE91E568468001DBB86 /* indoor_3_2.png */; };
 		65609DEE1E568468001DBB86 /* indoor_3_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DEA1E568468001DBB86 /* indoor_3_3.png */; };
 		65609DEF1E568468001DBB86 /* indoor_3_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DEB1E568468001DBB86 /* indoor_3_4.png */; };
-		65609DF11E5684F8001DBB86 /* indoor_cf_2_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DF01E5684F8001DBB86 /* indoor_cf_2_1.png */; };
-		65609DF31E56850F001DBB86 /* indoor_cf_3_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DF21E56850F001DBB86 /* indoor_cf_3_1.png */; };
+		65609DF11E5684F8001DBB86 /* indoor_2_cf_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DF01E5684F8001DBB86 /* indoor_2_cf_1.png */; };
+		65609DF31E56850F001DBB86 /* indoor_3_cf_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DF21E56850F001DBB86 /* indoor_3_cf_1.png */; };
 		65609DF61E568533001DBB86 /* indoor_5_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 65609DF51E568533001DBB86 /* indoor_5_1.png */; };
 		956011BF1E5C04DF000D6F84 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956011BE1E5C04DF000D6F84 /* QRCodeViewController.swift */; };
 		9560A9AB1E58269900D488EE /* LocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9560A9AA1E58269900D488EE /* LocationButton.swift */; };
@@ -229,8 +229,8 @@
 		65609DE91E568468001DBB86 /* indoor_3_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_3_2.png; sourceTree = "<group>"; };
 		65609DEA1E568468001DBB86 /* indoor_3_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_3_3.png; sourceTree = "<group>"; };
 		65609DEB1E568468001DBB86 /* indoor_3_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_3_4.png; sourceTree = "<group>"; };
-		65609DF01E5684F8001DBB86 /* indoor_cf_2_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_cf_2_1.png; sourceTree = "<group>"; };
-		65609DF21E56850F001DBB86 /* indoor_cf_3_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_cf_3_1.png; sourceTree = "<group>"; };
+		65609DF01E5684F8001DBB86 /* indoor_2_cf_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_2_cf_1.png; sourceTree = "<group>"; };
+		65609DF21E56850F001DBB86 /* indoor_3_cf_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_3_cf_1.png; sourceTree = "<group>"; };
 		65609DF51E568533001DBB86 /* indoor_5_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indoor_5_1.png; sourceTree = "<group>"; };
 		7297F322A1143327B53A6755 /* Pods-hackillinois-2017-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-ios/Pods-hackillinois-2017-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		89AB469B7EDC1D76D45870DA /* Pods-hackillinois-2017-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hackillinois-2017-iosUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-hackillinois-2017-iosUITests/Pods-hackillinois-2017-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -406,7 +406,7 @@
 				65609DE91E568468001DBB86 /* indoor_3_2.png */,
 				65609DEA1E568468001DBB86 /* indoor_3_3.png */,
 				65609DEB1E568468001DBB86 /* indoor_3_4.png */,
-				65609DF21E56850F001DBB86 /* indoor_cf_3_1.png */,
+				65609DF21E56850F001DBB86 /* indoor_3_cf_1.png */,
 			);
 			path = eceb;
 			sourceTree = "<group>";
@@ -419,7 +419,7 @@
 				652DD8CB1E52F2B00039EC1A /* indoor_2_4.png */,
 				652DD8CC1E52F2B00039EC1A /* indoor_2_2.png */,
 				652DD8CD1E52F2B00039EC1A /* indoor_2_3.png */,
-				65609DF01E5684F8001DBB86 /* indoor_cf_2_1.png */,
+				65609DF01E5684F8001DBB86 /* indoor_2_cf_1.png */,
 			);
 			path = siebel;
 			sourceTree = "<group>";
@@ -934,7 +934,7 @@
 				24794C6C1E340DFB0016F8D4 /* Brandon_thin_it.otf in Resources */,
 				390A8DEA1E3AA90200018855 /* Gotham-Light.otf in Resources */,
 				390A8DEF1E3AA90200018855 /* Gotham-ThinItalic.otf in Resources */,
-				65609DF11E5684F8001DBB86 /* indoor_cf_2_1.png in Resources */,
+				65609DF11E5684F8001DBB86 /* indoor_2_cf_1.png in Resources */,
 				24794C6D1E340DFB0016F8D4 /* Brandon_thin.otf in Resources */,
 				390A8DE91E3AA90200018855 /* Gotham-BookItalic.otf in Resources */,
 				E277DD6B1CF4AF0400D7E018 /* keys.plist in Resources */,
@@ -951,7 +951,7 @@
 				E20465D51CF1FAF50054654E /* Assets.xcassets in Resources */,
 				0A8E5C0C1E56DED6002344CC /* LocationButton.xib in Resources */,
 				65609DEE1E568468001DBB86 /* indoor_3_3.png in Resources */,
-				65609DF31E56850F001DBB86 /* indoor_cf_3_1.png in Resources */,
+				65609DF31E56850F001DBB86 /* indoor_3_cf_1.png in Resources */,
 				39666E461E52924500A507DF /* Home.storyboard in Resources */,
 				390A8DEB1E3AA90200018855 /* Gotham-LightItalic.otf in Resources */,
 				390A8DEE1E3AA90200018855 /* Gotham-Thin.otf in Resources */,

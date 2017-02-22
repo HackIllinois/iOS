@@ -10,10 +10,12 @@ import UIKit
 
 class DayItemLocation: NSObject {
     var location_name: String
+    var location_shortname: String
     var location_id: Int
     
-    init(id: Int, name: String) {
+    init(id: Int, name: String, shortname: String) {
         self.location_name = name
+        self.location_shortname = shortname
         self.location_id = id
     }
 }

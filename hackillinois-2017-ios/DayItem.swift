@@ -61,7 +61,7 @@ class DayItem: NSObject {
         for location in locations {
             let location = location as! Location
             self.locations.append(
-                DayItemLocation(id: Int(location.id) + 1, name: location.shortName)
+                DayItemLocation(id: Int(location.id) + 1, name: location.name, shortname: location.shortName)
             )
         }
         
@@ -71,11 +71,11 @@ class DayItem: NSObject {
         } else if self.name.range(of: "career fair", options: .caseInsensitive) != nil {
             for location in self.locations {
                 if location.location_name.range(of: "Siebel", options: .caseInsensitive) != nil {
-                    self.imageFileName = "indoor_cf_2_1.png"
+                    self.imageFileName = "indoor_2_cf_1.png"
                 } else if location.location_name.range(of: "ECEB", options: .caseInsensitive) != nil ||
                     location.location_name.range(of: "Electrical and Computer Engineering Building", options: .caseInsensitive) != nil ||
                     location.location_name.range(of: "ECE Building", options: .caseInsensitive) != nil {
-                    self.imageFileName = "indoor_cf_3_1.png"
+                    self.imageFileName = "indoor_3_cf_1.png"
                 }
             }
         }

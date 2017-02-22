@@ -19,13 +19,21 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
     @IBOutlet weak var unionLabel: UILabel!
     @IBOutlet weak var ecebLabel: UILabel!
     @IBOutlet weak var siebelLabel: UILabel!
+    @IBOutlet weak var kennyLabel: UILabel!
+    
+    @IBOutlet weak var directionTitleOverlay: UIView!
+    @IBOutlet weak var directionTitle: UILabel!
     
     var labelPressed: Int = 0
+    
+    var directionModeLabel: Int = 0
+    var isDirectionMode: Bool = false
+    var directionModeTitle: String = "Room number, Somewhere on Earth"
     
     func closeCleanUp() {
         self.map.removeOverlays(self.map.overlays)
         self.map.deselectAnnotation(self.map.selectedAnnotations[0], animated: true)
-        self.clearLabel(labelNumber: 5)
+        self.clearLabel(labelNumber: -1)
     }
     
     // Mark: Initializing locations and where locations are set
@@ -43,6 +51,9 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         
         let union: Location! = CoreDataHelpers.createOrFetchLocation(id: 3,  latitude: 40.109395, longitude: -88.227181,locationName: "Illini Union", shortName: "Union", feeds: nil)
         buildings.append(Building(location: union))
+        
+        let kenny: Location! = CoreDataHelpers.createOrFetchLocation(id: 5,  latitude: 40.112897, longitude: -88.227731,locationName: "Kenny Gym", shortName: "Kenny", feeds: nil)
+        buildings.append(Building(location: kenny))
     }
     
     override func viewDidLoad() {
@@ -61,6 +72,9 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         
         initTouches()
         
+        // update direction mode
+        updateDirectionModeState()
+        
         // Set up background gradient
         let gradient = CAGradientLayer()
         let colorBottom = UIColor(red: 20/255, green: 36/255, blue: 66/255, alpha: 1.0)
@@ -70,6 +84,18 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         gradient.frame = view.bounds
         self.view.layer.insertSublayer(gradient, at: 0)
         
+    }
+    
+    func updateDirectionModeState() {
+        print(isDirectionMode)
+        if isDirectionMode {
+            directionTitleOverlay.isHidden = false
+            directionTitle.text = directionModeTitle
+            self.title = "DIRECTIONS"
+        } else {
+            directionTitleOverlay.isHidden = true
+            self.title = "MAPS"
+        }
     }
     
     func initTouches() {
@@ -92,6 +118,11 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         unionTouch.numberOfTapsRequired = 1
         unionLabel.addGestureRecognizer(unionTouch)
         unionLabel.isUserInteractionEnabled = true
+        
+        let kennyTouch = UITapGestureRecognizer(target: self, action: #selector(kennyLabelTouched))
+        kennyTouch.numberOfTapsRequired = 1
+        kennyLabel.addGestureRecognizer(kennyTouch)
+        kennyLabel.isUserInteractionEnabled = true
         
         dclLabel.layer.shadowRadius = 4.0
         dclLabel.layer.shadowOpacity = 0
@@ -117,10 +148,16 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         unionLabel.layer.shouldRasterize = true
         unionLabel.layer.shadowOffset = CGSize(width: 0, height: 0)
         
-        if labelPressed >= 4 {
-            UIAlertView(title: "Location id error", message: "Location id \(labelPressed) is not a valid id.", delegate: nil, cancelButtonTitle: "OK").show()
+        kennyLabel.layer.shadowRadius = 4.0
+        kennyLabel.layer.shadowOpacity = 0
+        kennyLabel.layer.shadowColor = UIColor.hiaSeafoamBlue.cgColor
+        kennyLabel.layer.shouldRasterize = true
+        kennyLabel.layer.shadowOffset = CGSize(width: 0, height: 0)
+        
+        if directionModeLabel >= 5 {
+            UIAlertView(title: "Location id error", message: "Location id \(directionModeLabel) is not a valid id.", delegate: nil, cancelButtonTitle: "OK").show()
         } else {
-            [{ _ in }, dclLabelTouched, siebelLabelTouched, ecebLabelTouched, unionLabelTouched][labelPressed]()
+            [{ _ in }, dclLabelTouched, siebelLabelTouched, ecebLabelTouched, unionLabelTouched, kennyLabelTouched][directionModeLabel]()
         }
     }
     
@@ -143,16 +180,22 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
             unionLabel.layer.shadowOpacity = 0
             break
         case 5:
+            kennyLabel.textColor = UIColor.hiaFadedBlue
+            kennyLabel.layer.shadowOpacity = 0
+            break
+        case -1:
             print("reset")
             // RESET ALL
             dclLabel.textColor = UIColor.hiaFadedBlue
             siebelLabel.textColor = UIColor.hiaFadedBlue
             ecebLabel.textColor = UIColor.hiaFadedBlue
             unionLabel.textColor = UIColor.hiaFadedBlue
+            kennyLabel.textColor = UIColor.hiaFadedBlue
             dclLabel.layer.shadowOpacity = 0
             siebelLabel.layer.shadowOpacity = 0
             ecebLabel.layer.shadowOpacity = 0
             unionLabel.layer.shadowOpacity = 0
+            kennyLabel.layer.shadowOpacity = 0
             labelPressed = 0
         default:
             break
@@ -161,7 +204,6 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
     
     func dclLabelTouched() {
         clearLabel(labelNumber: labelPressed)
-        print("DCL")
         dclLabel.layer.shadowOpacity = 1
         dclLabel.textColor = UIColor.hiaSeafoamBlue
         labelPressed = 1
@@ -192,6 +234,15 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
         unionLabel.layer.shadowOpacity = 1
         unionLabel.textColor = UIColor.hiaSeafoamBlue
         labelPressed = 4
+        
+        loadAddress()
+    }
+    
+    func kennyLabelTouched() {
+        clearLabel(labelNumber: labelPressed)
+        kennyLabel.layer.shadowOpacity = 1
+        kennyLabel.textColor = UIColor.hiaSeafoamBlue
+        labelPressed = 5
         
         loadAddress()
     }
@@ -269,7 +320,7 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
                 self.bottomSheet.scrollToButtons()
             })
             // Set appropriate selection for cleanup later
-            clearLabel(labelNumber: 5) // Clear everything
+            clearLabel(labelNumber: -1) // Clear everything
             switch Int(selectedIndex) {
             case 0:
                 dclLabel.textColor = UIColor.hiaSeafoamBlue
@@ -287,10 +338,19 @@ class MapViewController: GenericMapViewController, UIGestureRecognizerDelegate, 
                 unionLabel.textColor = UIColor.hiaSeafoamBlue
                 unionLabel.layer.shadowOpacity = 1
                 break
+            case 4:
+                kennyLabel.textColor = UIColor.hiaSeafoamBlue
+                kennyLabel.layer.shadowOpacity = 1
+                break
             default:
                 break
             }
             labelPressed = Int(selectedIndex)+1
+            
+            if selectedIndex + 1 != directionModeLabel {
+                isDirectionMode = false
+                updateDirectionModeState()
+            }
         }
     }
 }

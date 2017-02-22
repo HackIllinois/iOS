@@ -40,7 +40,7 @@ class ScheduleCell: UITableViewCell {
     var titleStr: String
     var timeStr: String
     var descriptionStr: String
-    var tableCall: (_ location_id: Int) -> Void
+    var tableCall: (_ location: DayItemLocation) -> Void
     var props: DayItem?
     
     let CELL_HEIGHT: CGFloat = 30.0
@@ -72,7 +72,7 @@ class ScheduleCell: UITableViewCell {
     
     @IBAction func locationOnClick(_ sender: UIButton) {
         if let props = props {
-            tableCall(props.locations[sender.tag].location_id)
+            tableCall(props.locations[sender.tag])
         }
     }
     
@@ -98,7 +98,7 @@ class ScheduleCell: UITableViewCell {
     }
     
     // Set cell content
-    func setEventContent(title: String, time: String, description: String) {
+    func setEventContent() {
         initValues()
         if let props = props {
             self.title.text = props.name
