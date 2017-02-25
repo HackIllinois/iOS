@@ -44,6 +44,36 @@ class CoreDataHelpers {
         return location
     }
 
+    class func createOrUpdateLocation(id: Int16, latitude: Float, longitude: Float, locationName: String, shortName: String, feeds: [Feed]?) {
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let fetchRequest = NSFetchRequest<Location>(entityName: "Location")
+        fetchRequest.predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
+        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "shortName", ascending: true) ]
+        
+        if let locations = try? appDelegate.managedObjectContext.fetch(fetchRequest) {
+            if locations.count > 0 {
+                let location = locations[0]
+                if feeds == nil {
+                    location.initialize(id: id, latitude: latitude, longitude: longitude, name: locationName, shortName: shortName, feeds: [])
+                } else {
+                    location.initialize(id: id, latitude: latitude, longitude: longitude, name: locationName, shortName: shortName, feeds: feeds!)
+                }
+                return
+            }
+        }
+        
+        /* Was not found */
+        let location = NSEntityDescription.insertNewObject(forEntityName: "Location", into: appDelegate.managedObjectContext) as! Location
+        if feeds == nil {
+            location.initialize(id: id, latitude: latitude, longitude: longitude, name: locationName, shortName: shortName, feeds: [])
+        } else {
+            location.initialize(id: id, latitude: latitude, longitude: longitude, name: locationName, shortName: shortName, feeds: feeds!)
+        }
+    }
+    
+
+    
     
     /* 
      * Helper function to create a feed
