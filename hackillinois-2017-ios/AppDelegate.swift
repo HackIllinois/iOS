@@ -40,6 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UIApplication.shared.statusBarStyle = .lightContent
         
+        
+        
         loadHackathonTimes()
         
         /* Find out which part of the application to go to */
@@ -182,6 +184,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         HACKING_BEGIN_TIME = Date(timeIntervalSince1970: 1487995200)
         HACKING_END_TIME = Date(timeIntervalSince1970: 1488124800)
         HACKATHON_END_TIME = Date(timeIntervalSince1970: 1488146400)
+        
+        let _ = CoreDataHelpers.createOrFetchLocation(id: 1, latitude: 40.113140, longitude: -88.226589, locationName: "Digital Computer Laboratory",  shortName: "DCL",  feeds: nil)
+        let _ = CoreDataHelpers.createOrFetchLocation(id: 2, latitude: 40.113926, longitude: -88.224916, locationName: "Thomas M. Siebel Center", shortName: "Siebel", feeds: nil)
+        let _ = CoreDataHelpers.createOrFetchLocation(id: 3, latitude: 40.114828, longitude: -88.228049, locationName: "Electrical Computer Engineering Building", shortName: "ECEB", feeds: nil)
+        let _ = CoreDataHelpers.createOrFetchLocation(id: 4, latitude: 40.109395, longitude: -88.227181, locationName: "Illini Union", shortName: "Union", feeds: nil)
+        let _ = CoreDataHelpers.createOrFetchLocation(id: 5, latitude: 40.112897, longitude: -88.227731, locationName: "Kenny Gym Annex", shortName: "Kenny", feeds: nil)
+        
     }
 
 }

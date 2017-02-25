@@ -24,12 +24,11 @@ class CoreDataHelpers {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let fetchRequest = NSFetchRequest<Location>(entityName: "Location")
-        fetchRequest.predicate = NSPredicate(format: "name == %@", locationName)
+        fetchRequest.predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
+        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "shortName", ascending: true) ]
         
         if let locations = try? appDelegate.managedObjectContext.fetch(fetchRequest) {
             if locations.count > 0 {
-                // MARK: buggy locations update
-//                locations[0].update(id: id, latitude: latitude, longitude: longitude, name: locationName, shortName: shortName, feeds: feeds!)
                 return locations[0]
             }
         }
@@ -70,7 +69,6 @@ class CoreDataHelpers {
         }
             
         let feed = NSEntityDescription.insertNewObject(forEntityName: "Feed", into: appDelegate.managedObjectContext) as! Feed
-            //        feed.initialize(id: id, message: message, time: Date(timeIntervalSince1970: TimeInterval(timestamp)), locations: locations, tags: tags)
         feed.initialize(id: id, description: description, startTime: startTime, endTime: endTime, updated: updated, qrCode: qrCode, shortName: shortName, name: name, locations: locations, tag: tag)
         return feed
     }
@@ -152,7 +150,6 @@ class CoreDataHelpers {
         return defaults.object(forKey: "timestamp") as? NSDate as Date?
     }
     
-    
     // TODO: make announcement coredata object
     class func configureAnnouncements(_ json: JSON) {
         let ANNOUNCEMENT_ID_OFFSET = 10000
@@ -183,7 +180,7 @@ class CoreDataHelpers {
             var locations = [Location]()
             
             for location in event["locations"].arrayValue {
-                let id = location["id"].int16Value
+                let id = location["locationId"].int16Value
                 let latitude = location["latitude"].floatValue
                 let longitude = location["longitude"].floatValue
                 let shortName = location["shortName"].stringValue
