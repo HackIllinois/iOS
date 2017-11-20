@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HILoginViewController.swift
 //  HackIllinois
 //
 //  Created by Rauhul Varma on 4/16/17.
@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import SafariServices
 
-class ViewController: UIViewController {
+class HILoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        .perform(withAuthorization: nil)
+
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -21,5 +24,11 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func login() {
+        let url = URL(string: "http://ec2-107-20-14-41.compute-1.amazonaws.com/v1/auth")!
+
+        let svc = SFSafariViewController(url: url)
+        self.present(svc, animated: true, completion: nil)
+    }
 }
 

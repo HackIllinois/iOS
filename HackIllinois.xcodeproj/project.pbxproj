@@ -8,24 +8,45 @@
 
 /* Begin PBXBuildFile section */
 		92BAC9AD8126B7191387EFD4 /* Pods_HackIllinois.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F04F5235BAD89F8C72CDF3DF /* Pods_HackIllinois.framework */; };
+		950F57141FBE8139001F7DF4 /* HIBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F57131FBE8139001F7DF4 /* HIBaseService.swift */; };
+		950F57161FBE81FA001F7DF4 /* HIAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F57151FBE81FA001F7DF4 /* HIAuthService.swift */; };
+		950F57181FBE84A9001F7DF4 /* APIReturnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F57171FBE84A9001F7DF4 /* APIReturnable.swift */; };
 		951827A81EA35DB800049F79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951827981EA35DB800049F79 /* AppDelegate.swift */; };
 		951827A91EA35DB800049F79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 951827991EA35DB800049F79 /* Assets.xcassets */; };
-		951827AC1EA35DB800049F79 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9518279F1EA35DB800049F79 /* ViewController.swift */; };
-		951827AD1EA35DB800049F79 /* HackIllinois.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 951827A11EA35DB800049F79 /* HackIllinois.xcdatamodeld */; };
 		951827B41EA35E8B00049F79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 951827B21EA35E8B00049F79 /* LaunchScreen.storyboard */; };
 		951827B51EA35E8B00049F79 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 951827B31EA35E8B00049F79 /* Main.storyboard */; };
+		953199C91FC25CA0009F2AA1 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953199C81FC25CA0009F2AA1 /* CoreDataController.swift */; };
+		957D7C821FC28ED600C4332A /* HIEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957D7C811FC28ED600C4332A /* HIEventsViewController.swift */; };
+		957D7C841FC28F4100C4332A /* HIEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957D7C831FC28F4100C4332A /* HIEventService.swift */; };
+		957D7CAA1FC2940800C4332A /* HIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957D7CA51FC2940800C4332A /* HIEvent.swift */; };
+		957D7CAB1FC2940800C4332A /* HIAPIReturnDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957D7CA61FC2940800C4332A /* HIAPIReturnDataContainer.swift */; };
+		957D7CAC1FC2940800C4332A /* HackIllinois.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 957D7CA81FC2940800C4332A /* HackIllinois.xcdatamodeld */; };
+		957D7CAE1FC2950900C4332A /* HILocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957D7CAD1FC2950900C4332A /* HILocation.swift */; };
+		957DB2E61FC2435100F8C45E /* HILoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957DB2E51FC2435100F8C45E /* HILoginViewController.swift */; };
+		957DB2EE1FC24DB400F8C45E /* HIShadeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957DB2ED1FC24DB400F8C45E /* HIShadeController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5FC8086340F925BE21CB525A /* Pods-HackIllinois.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackIllinois.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HackIllinois/Pods-HackIllinois.debug.xcconfig"; sourceTree = "<group>"; };
+		950F57131FBE8139001F7DF4 /* HIBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIBaseService.swift; sourceTree = "<group>"; };
+		950F57151FBE81FA001F7DF4 /* HIAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAuthService.swift; sourceTree = "<group>"; };
+		950F57171FBE84A9001F7DF4 /* APIReturnable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIReturnable.swift; sourceTree = "<group>"; };
+		950F57191FBFC8E3001F7DF4 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };
 		9518277F1EA35AF100049F79 /* HackIllinois.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackIllinois.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		951827981EA35DB800049F79 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		951827991EA35DB800049F79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9518279F1EA35DB800049F79 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		951827A21EA35DB800049F79 /* HackIllinois.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HackIllinois.xcdatamodel; sourceTree = "<group>"; };
 		951827A31EA35DB800049F79 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		951827B21EA35E8B00049F79 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		951827B31EA35E8B00049F79 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		953199C81FC25CA0009F2AA1 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		957D7C811FC28ED600C4332A /* HIEventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEventsViewController.swift; sourceTree = "<group>"; };
+		957D7C831FC28F4100C4332A /* HIEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEventService.swift; sourceTree = "<group>"; };
+		957D7CA51FC2940800C4332A /* HIEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIEvent.swift; sourceTree = "<group>"; };
+		957D7CA61FC2940800C4332A /* HIAPIReturnDataContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIAPIReturnDataContainer.swift; sourceTree = "<group>"; };
+		957D7CA91FC2940800C4332A /* HackIllinois.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HackIllinois.xcdatamodel; sourceTree = "<group>"; };
+		957D7CAD1FC2950900C4332A /* HILocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILocation.swift; sourceTree = "<group>"; };
+		957DB2E51FC2435100F8C45E /* HILoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HILoginViewController.swift; sourceTree = "<group>"; };
+		957DB2ED1FC24DB400F8C45E /* HIShadeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIShadeController.swift; sourceTree = "<group>"; };
 		DDD9B0A40012E69EC437D438 /* Pods-HackIllinois.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackIllinois.release.xcconfig"; path = "Pods/Target Support Files/Pods-HackIllinois/Pods-HackIllinois.release.xcconfig"; sourceTree = "<group>"; };
 		F04F5235BAD89F8C72CDF3DF /* Pods_HackIllinois.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HackIllinois.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -51,6 +72,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		950F57121FBE8127001F7DF4 /* APIService */ = {
+			isa = PBXGroup;
+			children = (
+				950F57131FBE8139001F7DF4 /* HIBaseService.swift */,
+				950F57151FBE81FA001F7DF4 /* HIAuthService.swift */,
+				957D7C831FC28F4100C4332A /* HIEventService.swift */,
+			);
+			path = APIService;
+			sourceTree = "<group>";
+		};
 		951827761EA35AF100049F79 = {
 			isa = PBXGroup;
 			children = (
@@ -72,16 +103,16 @@
 		951827971EA35DB800049F79 /* HackIllinois */ = {
 			isa = PBXGroup;
 			children = (
+				950F57191FBFC8E3001F7DF4 /* HackIllinois.entitlements */,
+				950F57121FBE8127001F7DF4 /* APIService */,
 				951827981EA35DB800049F79 /* AppDelegate.swift */,
 				951827991EA35DB800049F79 /* Assets.xcassets */,
-				951827A11EA35DB800049F79 /* HackIllinois.xcdatamodeld */,
 				951827A31EA35DB800049F79 /* Info.plist */,
 				951827AF1EA35E8B00049F79 /* Playgrounds */,
 				951827B11EA35E8B00049F79 /* StoryBoards */,
-				9518279E1EA35DB800049F79 /* Controllers */,
-				951827A01EA35DB800049F79 /* Extensions */,
 				951827A41EA35DB800049F79 /* Models */,
-				951827A51EA35DB800049F79 /* UI */,
+				957DB2E21FC2431200F8C45E /* Views */,
+				9518279E1EA35DB800049F79 /* Controllers */,
 			);
 			path = HackIllinois;
 			sourceTree = "<group>";
@@ -89,46 +120,21 @@
 		9518279E1EA35DB800049F79 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9518279F1EA35DB800049F79 /* ViewController.swift */,
+				953199C81FC25CA0009F2AA1 /* CoreDataController.swift */,
+				957DB2E91FC2453100F8C45E /* FlowControllers */,
+				957DB2E41FC2435100F8C45E /* ViewControllers */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		951827A01EA35DB800049F79 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		951827A41EA35DB800049F79 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				957D7CA71FC2940800C4332A /* CoreDataModels */,
+				957D7CA41FC2940800C4332A /* HIAPIModels */,
+				950F57171FBE84A9001F7DF4 /* APIReturnable.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		951827A51EA35DB800049F79 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				951827A61EA35DB800049F79 /* Fonts */,
-				951827A71EA35DB800049F79 /* Views */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		951827A61EA35DB800049F79 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
-		951827A71EA35DB800049F79 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		951827AF1EA35E8B00049F79 /* Playgrounds */ = {
@@ -145,6 +151,48 @@
 				951827B31EA35E8B00049F79 /* Main.storyboard */,
 			);
 			path = StoryBoards;
+			sourceTree = "<group>";
+		};
+		957D7CA41FC2940800C4332A /* HIAPIModels */ = {
+			isa = PBXGroup;
+			children = (
+				957D7CA51FC2940800C4332A /* HIEvent.swift */,
+				957D7CAD1FC2950900C4332A /* HILocation.swift */,
+				957D7CA61FC2940800C4332A /* HIAPIReturnDataContainer.swift */,
+			);
+			path = HIAPIModels;
+			sourceTree = "<group>";
+		};
+		957D7CA71FC2940800C4332A /* CoreDataModels */ = {
+			isa = PBXGroup;
+			children = (
+				957D7CA81FC2940800C4332A /* HackIllinois.xcdatamodeld */,
+			);
+			path = CoreDataModels;
+			sourceTree = "<group>";
+		};
+		957DB2E21FC2431200F8C45E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		957DB2E41FC2435100F8C45E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				957DB2E51FC2435100F8C45E /* HILoginViewController.swift */,
+				957D7C811FC28ED600C4332A /* HIEventsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		957DB2E91FC2453100F8C45E /* FlowControllers */ = {
+			isa = PBXGroup;
+			children = (
+				957DB2ED1FC24DB400F8C45E /* HIShadeController.swift */,
+			);
+			path = FlowControllers;
 			sourceTree = "<group>";
 		};
 		F72B3B69EAC62CED55961F6D /* Frameworks */ = {
@@ -193,6 +241,11 @@
 						DevelopmentTeam = 8VNQTQM2L6;
 						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -234,9 +287,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-HackIllinois/Pods-HackIllinois-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/APIManager/APIManager.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/APIManager.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -264,13 +320,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HackIllinois-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -280,9 +339,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				951827AC1EA35DB800049F79 /* ViewController.swift in Sources */,
-				951827AD1EA35DB800049F79 /* HackIllinois.xcdatamodeld in Sources */,
+				957D7C821FC28ED600C4332A /* HIEventsViewController.swift in Sources */,
+				950F57161FBE81FA001F7DF4 /* HIAuthService.swift in Sources */,
+				957D7CAC1FC2940800C4332A /* HackIllinois.xcdatamodeld in Sources */,
+				957D7CAE1FC2950900C4332A /* HILocation.swift in Sources */,
+				957D7C841FC28F4100C4332A /* HIEventService.swift in Sources */,
+				950F57181FBE84A9001F7DF4 /* APIReturnable.swift in Sources */,
+				957D7CAA1FC2940800C4332A /* HIEvent.swift in Sources */,
+				957D7CAB1FC2940800C4332A /* HIAPIReturnDataContainer.swift in Sources */,
+				957DB2EE1FC24DB400F8C45E /* HIShadeController.swift in Sources */,
+				957DB2E61FC2435100F8C45E /* HILoginViewController.swift in Sources */,
 				951827A81EA35DB800049F79 /* AppDelegate.swift in Sources */,
+				953199C91FC25CA0009F2AA1 /* CoreDataController.swift in Sources */,
+				950F57141FBE8139001F7DF4 /* HIBaseService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,10 +468,11 @@
 			baseConfigurationReference = 5FC8086340F925BE21CB525A /* Pods-HackIllinois.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HackIllinois/HackIllinois.entitlements;
 				DEVELOPMENT_TEAM = 8VNQTQM2L6;
 				INFOPLIST_FILE = HackIllinois/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hackillinois.HackIllinois;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hackillinois.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -414,10 +484,11 @@
 			baseConfigurationReference = DDD9B0A40012E69EC437D438 /* Pods-HackIllinois.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HackIllinois/HackIllinois.entitlements;
 				DEVELOPMENT_TEAM = 8VNQTQM2L6;
 				INFOPLIST_FILE = HackIllinois/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hackillinois.HackIllinois;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hackillinois.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -448,12 +519,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		951827A11EA35DB800049F79 /* HackIllinois.xcdatamodeld */ = {
+		957D7CA81FC2940800C4332A /* HackIllinois.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				951827A21EA35DB800049F79 /* HackIllinois.xcdatamodel */,
+				957D7CA91FC2940800C4332A /* HackIllinois.xcdatamodel */,
 			);
-			currentVersion = 951827A21EA35DB800049F79 /* HackIllinois.xcdatamodel */;
+			currentVersion = 957D7CA91FC2940800C4332A /* HackIllinois.xcdatamodel */;
 			path = HackIllinois.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
