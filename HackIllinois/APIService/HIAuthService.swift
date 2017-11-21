@@ -15,9 +15,9 @@ class HIAuthService: HIBaseService {
         return super.baseURL + "/auth"
     }
 
-    class func login() -> APIRequest<HIAuthService, Data> {
-        return APIRequest<HIAuthService, Data>(endpoint: "", method: .GET)
-    }
+//    class func login() -> APIRequest<HIAuthService, Data> {
+//        return APIRequest<HIAuthService, Data>(endpoint: "", method: .GET)
+//    }
 
 
 }

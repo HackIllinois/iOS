@@ -22,9 +22,6 @@ class HIBaseService: APIService {
         ]
     }
 
-    static var authorizationKey = ""
-
-
-
+    static var authorizationKey = "Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN5c3RlbXNAaGFja2lsbGlub2lzLm9yZyIsInJvbGVzIjpbeyJyb2xlIjoiQURNSU4iLCJhY3RpdmUiOjF9XSwiaWF0IjoxNTExMTU1NTg4LCJleHAiOjE1MTE3NjAzODgsInN1YiI6IjEifQ.NiM9JsS5MQ5wcG7DG3gO_rF3m2i7E-dueg7NuJGEGTE"
 
 }

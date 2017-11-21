@@ -12,4 +12,10 @@ import APIManager
 struct HIAPIReturnDataContainer<Model: Decodable>: Decodable, APIReturnable {
     var meta: String?
     var data: [Model]
+
+    public init(from data: Data) throws {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(Formatter.iso8601)
+        self = try decoder.decode(HIAPIReturnDataContainer.self, from: data)
+    }
 }

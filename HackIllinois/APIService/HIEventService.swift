@@ -9,6 +9,12 @@
 import Foundation
 import APIManager
 
+extension Data: APIReturnable {
+    public init(from data: Data) {
+        self = data
+    }
+}
+
 class HIEventService: HIBaseService {
 
     override class var baseURL: String {
@@ -16,22 +22,22 @@ class HIEventService: HIBaseService {
     }
 
     // MARK: Events
-    class func create(event: HIEvent) -> APIRequest<HIAuthService, HIEventContained> {
+    class func create(event: HIEvent) -> APIRequest<HIEventService, HIEventContained> {
         let eventDict = [String: Any]()
-        return APIRequest<HIAuthService, HIEventContained>(endpoint: "", body: eventDict, method: .POST)
+        return APIRequest<HIEventService, HIEventContained>(endpoint: "", body: eventDict, method: .POST)
     }
 
-    class func getAllEvents(active: Bool = false) -> APIRequest<HIAuthService, HIEventContained> {
-        return APIRequest<HIAuthService, HIEventContained>(endpoint: "", params: ["active": "\(active)"], method: .GET)
+    class func getAllEvents(active: Bool = false) -> APIRequest<HIEventService, HIEventContained> {
+        return APIRequest<HIEventService, HIEventContained>(endpoint: "", params: ["active": "\(active)"], method: .GET)
     }
 
     // MARK: Locations
-    class func create(location: HILocation) -> APIRequest<HIAuthService, HILocationContained> {
+    class func create(location: Location) -> APIRequest<HIEventService, Location.Contained> {
         let locationDict = [String: Any]()
-        return APIRequest<HIAuthService, HILocationContained>(endpoint: "/location", body: locationDict, method: .POST)
+        return APIRequest<HIEventService, Location.Contained>(endpoint: "/location", body: locationDict, method: .POST)
     }
 
-    class func getAllLocations() -> APIRequest<HIAuthService, HILocationsContained> {
-        return APIRequest<HIAuthService, HILocationsContained>(endpoint: "/location/all", method: .GET)
+    class func getAllLocations() -> APIRequest<HIEventService, Location.Contained> {
+        return APIRequest<HIEventService, Location.Contained>(endpoint: "/location/all", method: .GET)
     }
 }

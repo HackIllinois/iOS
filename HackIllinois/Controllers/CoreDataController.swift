@@ -13,10 +13,12 @@ class CoreDataController {
 
     static let shared = CoreDataController()
 
-    private init() { }
+    private init() {
+        persistentContainer.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
+    }
 
     // MARK: - Core Data stack
-
     lazy var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation
@@ -25,7 +27,7 @@ class CoreDataController {
          error conditions that could cause the creation of the store to fail.
          */
         let container = NSPersistentContainer(name: "HackIllinois")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -40,13 +42,12 @@ class CoreDataController {
                  */
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-        })
+        }
         return container
     }()
 
-    // MARK: - Core Data Saving support
-
-    func saveContext () {
+    // MARK: - Core Data saving support
+    func saveContext() {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
