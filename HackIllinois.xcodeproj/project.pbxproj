@@ -35,7 +35,7 @@
 		95DE250B1FC3FCF7000F599D /* HIBaseViewController+UITableViewDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DE25061FC3FCF7000F599D /* HIBaseViewController+UITableViewDatasource.swift */; };
 		95DE250C1FC3FCF7000F599D /* HIBaseViewController+UITextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DE25071FC3FCF7000F599D /* HIBaseViewController+UITextFieldDelegate.swift */; };
 		95DE250D1FC3FCF7000F599D /* HIBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DE25081FC3FCF7000F599D /* HIBaseViewController.swift */; };
-		95DE25101FC3FD61000F599D /* EventsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DE250F1FC3FD61000F599D /* EventsDataSource.swift */; };
+		95DE25101FC3FD61000F599D /* EventDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DE250F1FC3FD61000F599D /* EventDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,7 +71,7 @@
 		95DE25061FC3FCF7000F599D /* HIBaseViewController+UITableViewDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HIBaseViewController+UITableViewDatasource.swift"; sourceTree = "<group>"; };
 		95DE25071FC3FCF7000F599D /* HIBaseViewController+UITextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HIBaseViewController+UITextFieldDelegate.swift"; sourceTree = "<group>"; };
 		95DE25081FC3FCF7000F599D /* HIBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIBaseViewController.swift; sourceTree = "<group>"; };
-		95DE250F1FC3FD61000F599D /* EventsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsDataSource.swift; sourceTree = "<group>"; };
+		95DE250F1FC3FD61000F599D /* EventDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDataSource.swift; sourceTree = "<group>"; };
 		DDD9B0A40012E69EC437D438 /* Pods-HackIllinois.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackIllinois.release.xcconfig"; path = "Pods/Target Support Files/Pods-HackIllinois/Pods-HackIllinois.release.xcconfig"; sourceTree = "<group>"; };
 		F04F5235BAD89F8C72CDF3DF /* Pods_HackIllinois.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HackIllinois.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -244,7 +244,7 @@
 		95DE250E1FC3FD28000F599D /* DataSources */ = {
 			isa = PBXGroup;
 			children = (
-				95DE250F1FC3FD61000F599D /* EventsDataSource.swift */,
+				95DE250F1FC3FD61000F599D /* EventDataSource.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -412,7 +412,7 @@
 				957DB2E61FC2435100F8C45E /* HILoginViewController.swift in Sources */,
 				951827A81EA35DB800049F79 /* AppDelegate.swift in Sources */,
 				953199C91FC25CA0009F2AA1 /* CoreDataController.swift in Sources */,
-				95DE25101FC3FD61000F599D /* EventsDataSource.swift in Sources */,
+				95DE25101FC3FD61000F599D /* EventDataSource.swift in Sources */,
 				95DE24DC1FC3ADBE000F599D /* HIAnnouncementService.swift in Sources */,
 				950F57141FBE8139001F7DF4 /* HIBaseService.swift in Sources */,
 				95DE25091FC3FCF7000F599D /* HIBaseViewController+NSFetchedResultsControllerDelegate.swift in Sources */,

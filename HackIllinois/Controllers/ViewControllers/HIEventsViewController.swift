@@ -12,20 +12,15 @@ import CoreData
 
 class HIEventsViewController: HIBaseViewController {
 
-    // MARK: CoreData
-    lazy var fetchedResultsController: NSFetchedResultsController<Announcement> = {
-        // Create Fetch Request
-        let fetchRequest: NSFetchRequest<Announcement> = Announcement.fetchRequest()
+    lazy var fetchedResultsController: NSFetchedResultsController<Event> = {
+        let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
 
-        // Configure Fetch Request
         fetchRequest.sortDescriptors = [
             NSSortDescriptor(key: "id", ascending: true)
         ]
 
-        // Create Fetched Results Controller
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataController.shared.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
 
-        // Configure Fetched Results Controller
         fetchedResultsController.delegate = self
 
         return fetchedResultsController
@@ -40,23 +35,38 @@ class HIEventsViewController: HIBaseViewController {
             print(reason)
         }
         .perform(withAuthorization: nil)
+
+        HIEventService.getAllEvents()
+        .onSuccess { (contained) in
+            print(contained)
+        }
+        .onFailure { (reason) in
+            print(reason)
+        }
+        .perform(withAuthorization: nil)
+
+        HIEventService.getAllLocations()
+        .onSuccess { (contained) in
+            print(contained)
+        }
+        .onFailure { (reason) in
+            print(reason)
+        }
+        .perform(withAuthorization: nil)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
-        try! fetchedResultsController.performFetch()
+        tableView?.dataSource = self
     }
 
 }
-
 
 extension HIEventsViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = fetchedResultsController.object(at: indexPath).title
+        cell.textLabel?.text = fetchedResultsController.object(at: indexPath).name
         return cell
     }
 }
-
-
