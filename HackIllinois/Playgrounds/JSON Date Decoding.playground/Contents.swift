@@ -41,3 +41,10 @@ if let justADate = (try? decoder.decode(JustADate.self, from: data)) ??
     (try? decoder2.decode(JustADate.self, from: data)) {
     Formatter.iso8601.string(from: justADate.date)    // "2017-06-19T18:43:19.532Z"
 }
+
+
+
+let d = Date.init(timeInterval: -1000, since: Date())
+
+Date().timeIntervalSince(d)
+

@@ -15,9 +15,23 @@ class HIBaseViewController: UIViewController {
     // MARK: Properties
     var _fetchedResultsController: NSFetchedResultsController<NSManagedObject>?
 
-    @IBOutlet weak var tableView: UITableView?
+//    var updateOperations =  [(UICollectionView) -> Void]()
+    var updateOperations = [BlockOperation]()
+
+    @IBOutlet weak var collectionView: UICollectionView?
+
+    // MARK: Object life cycle
+    deinit {
+        updateOperations.forEach { $0.cancel() }
+        updateOperations.removeAll()
+    }
 
     // MARK: View life cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         registerForKeyboardNotifications()
@@ -26,11 +40,6 @@ class HIBaseViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unregisterForKeyboardNotifications()
-    }
-
-    // MARK: Alert presentation
-    func presentErrorViewController(withTitle title: String, andMessage message: String? = nil, dismissParentOnCompletion exit: Bool) {
-
     }
 
 }

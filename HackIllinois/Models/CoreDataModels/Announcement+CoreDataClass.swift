@@ -39,6 +39,8 @@ public class Announcement: NSManagedObject, Decodable {
                 info = try container.decode(String.self, forKey: .info)
                 time = try container.decode(Date.self, forKey: .time)
                 title = try container.decode(String.self, forKey: .title)
+//                let locations = 
+
                 try backgroundContext.save()
             } catch {
                 anyError = error

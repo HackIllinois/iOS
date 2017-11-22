@@ -22,13 +22,13 @@ class HIEventService: HIBaseService {
     }
 
     // MARK: Events
-    class func create(event: HIEvent) -> APIRequest<HIEventService, HIEventContained> {
+    class func create(event: Event) -> APIRequest<HIEventService, Event.Contained> {
         let eventDict = [String: Any]()
-        return APIRequest<HIEventService, HIEventContained>(endpoint: "", body: eventDict, method: .POST)
+        return APIRequest<HIEventService, Event.Contained>(endpoint: "", body: eventDict, method: .POST)
     }
 
-    class func getAllEvents(active: Bool = false) -> APIRequest<HIEventService, HIEventContained> {
-        return APIRequest<HIEventService, HIEventContained>(endpoint: "", params: ["active": "\(active)"], method: .GET)
+    class func getAllEvents(active: Bool = false) -> APIRequest<HIEventService, Event.Contained> {
+        return APIRequest<HIEventService, Event.Contained>(endpoint: "", params: ["active": "\(active)"], method: .GET)
     }
 
     // MARK: Locations

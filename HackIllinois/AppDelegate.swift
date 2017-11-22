@@ -27,7 +27,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        // Appearance customization
+        let navigationBarAppearace = UINavigationBar.appearance()
+
+        navigationBarAppearace.tintColor = UIColor(named: "hotPink")
+        navigationBarAppearace.barTintColor = UIColor(named: "paleBlue")
+        navigationBarAppearace.titleTextAttributes = [
+            NSAttributedStringKey.foregroundColor: UIColor(named: "darkIndigo") as Any
+        ]
+        navigationBarAppearace.shadowImage = UIImage()
+        navigationBarAppearace.setBackgroundImage(UIImage(),for: .default)
+
         return true
     }
 

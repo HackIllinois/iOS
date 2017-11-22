@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="l6j-zp-6n4" customClass="HIDateHeader" customModule="HackIllinois" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="62"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0v9-uf-Iw5">
+                    <rect key="frame" x="12" y="36" width="351" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" name="darkIndigo"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstItem="0v9-uf-Iw5" firstAttribute="leading" secondItem="1At-hE-95z" secondAttribute="leading" constant="12" id="ExC-Po-PUg"/>
+                <constraint firstItem="1At-hE-95z" firstAttribute="bottom" secondItem="0v9-uf-Iw5" secondAttribute="bottom" constant="5" id="d6d-UY-SE5"/>
+                <constraint firstItem="1At-hE-95z" firstAttribute="trailing" secondItem="0v9-uf-Iw5" secondAttribute="trailing" constant="12" id="gCU-tE-xfq"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="1At-hE-95z"/>
+            <connections>
+                <outlet property="titleLabel" destination="0v9-uf-Iw5" id="pLG-c3-vCC"/>
+            </connections>
+            <point key="canvasLocation" x="114.5" y="19"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <namedColor name="darkIndigo">
+            <color red="0.10999999940395355" green="0.019999999552965164" blue="0.36899998784065247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

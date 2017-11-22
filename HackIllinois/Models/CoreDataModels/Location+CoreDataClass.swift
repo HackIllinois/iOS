@@ -32,6 +32,7 @@ public class Location: NSManagedObject, Decodable {
 
         self.init(context: backgroundContext)
 
+//        decoder.userInfo[CodingUserInfoKey]
         var anyError: Error?
         backgroundContext.performAndWait {
             do {
