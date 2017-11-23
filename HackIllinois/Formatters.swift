@@ -87,7 +87,7 @@ extension Date {
 
         // SECOND
         case (15 * SECOND_IN_SECONDS)... :
-            let second = floor(timeSinceDate/SECOND_IN_SECONDS)
+//            let second = floor(timeSinceDate/SECOND_IN_SECONDS)
             return "a few seconds ago"
 
         default:

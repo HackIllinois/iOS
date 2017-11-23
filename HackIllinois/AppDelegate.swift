@@ -34,7 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearace.tintColor = UIColor(named: "hotPink")
         navigationBarAppearace.barTintColor = UIColor(named: "paleBlue")
         navigationBarAppearace.titleTextAttributes = [
-            NSAttributedStringKey.foregroundColor: UIColor(named: "darkIndigo") as Any
+            NSAttributedStringKey.foregroundColor: UIColor(named: "darkIndigo") as Any,
+            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16) as Any
         ]
         navigationBarAppearace.shadowImage = UIImage()
         navigationBarAppearace.setBackgroundImage(UIImage(),for: .default)

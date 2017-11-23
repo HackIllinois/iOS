@@ -17,16 +17,17 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0v9-uf-Iw5">
-                    <rect key="frame" x="12" y="36" width="351" height="21"/>
+                    <rect key="frame" x="0.0" y="36" width="375" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" name="darkIndigo"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
+            <color key="backgroundColor" name="paleBlue"/>
             <constraints>
-                <constraint firstItem="0v9-uf-Iw5" firstAttribute="leading" secondItem="1At-hE-95z" secondAttribute="leading" constant="12" id="ExC-Po-PUg"/>
+                <constraint firstItem="0v9-uf-Iw5" firstAttribute="leading" secondItem="1At-hE-95z" secondAttribute="leading" id="ExC-Po-PUg"/>
                 <constraint firstItem="1At-hE-95z" firstAttribute="bottom" secondItem="0v9-uf-Iw5" secondAttribute="bottom" constant="5" id="d6d-UY-SE5"/>
-                <constraint firstItem="1At-hE-95z" firstAttribute="trailing" secondItem="0v9-uf-Iw5" secondAttribute="trailing" constant="12" id="gCU-tE-xfq"/>
+                <constraint firstItem="1At-hE-95z" firstAttribute="trailing" secondItem="0v9-uf-Iw5" secondAttribute="trailing" id="gCU-tE-xfq"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="1At-hE-95z"/>
             <connections>
@@ -38,6 +39,9 @@
     <resources>
         <namedColor name="darkIndigo">
             <color red="0.10999999940395355" green="0.019999999552965164" blue="0.36899998784065247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="paleBlue">
+            <color red="0.94900000095367432" green="0.96100002527236938" blue="0.99599999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

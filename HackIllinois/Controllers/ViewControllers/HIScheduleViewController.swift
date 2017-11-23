@@ -74,6 +74,7 @@ extension HIScheduleViewController {
         collectionView?.register(UINib(nibName: HIEventCell.IDENTIFIER, bundle: nil), forCellWithReuseIdentifier: HIEventCell.IDENTIFIER)
         collectionView?.register(UINib(nibName: HIDateHeader.IDENTIFIER, bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HIDateHeader.IDENTIFIER)
 
+        collectionView?.contentInset = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
 
         try! fetchedResultsController.performFetch()
     }
@@ -96,7 +97,7 @@ extension HIScheduleViewController {
         case UICollectionElementKindSectionHeader:
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HIDateHeader.IDENTIFIER, for: indexPath)
             if let header = header as? HIDateHeader {
-                header.titleLabel.text = "section header"
+                header.titleLabel.text = "\(indexPath.section + 1):00 pm"
             }
             return header
         default:
@@ -105,11 +106,11 @@ extension HIScheduleViewController {
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 4
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        return 3
     }
 }
 
@@ -124,14 +125,16 @@ extension HIScheduleViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDelegateFlowLayout
 extension HIScheduleViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.contentSize.width - (2 * 12)
-//        let event = fetchedResultsController.object(at: indexPath)
-//        let height = 19 + 22 * (event.locations.count + 1) + 19
-        return CGSize(width: width, height: CGFloat(80))
+        let insets = collectionView.contentInset.left + collectionView.contentInset.right
+        let width = collectionView.contentSize.width - insets
+        //        let event = fetchedResultsController.object(at: indexPath)
+        let height = 80 //19 + 22 * (event.locations.count + 1) + 19
+        return CGSize(width: width, height: CGFloat(height))
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let width = collectionView.contentSize.width - (2 * 12)
+        let insets = collectionView.contentInset.left + collectionView.contentInset.right
+        let width = collectionView.contentSize.width - insets
         let height = 53
         return CGSize(width: width, height: CGFloat(height))
     }
