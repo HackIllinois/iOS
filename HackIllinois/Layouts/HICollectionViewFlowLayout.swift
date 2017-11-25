@@ -11,7 +11,51 @@ import UIKit
 
 
 class HICollectionViewFlowLayout: UICollectionViewFlowLayout {
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        return true
+    }
 
+    private lazy var dynamicAnimator: UIDynamicAnimator = {
+        return UIDynamicAnimator(collectionViewLayout: self)
+    }()
+
+    override func prepare() {
+        super.prepare()
+
+        guard let collectionView = collectionView else { return }
+        let contentSize = collectionView.contentSize
+        let contentRect = CGRect(origin: .zero, size: contentSize)
+
+        // inefficent, asking for layout of every single item in collectionview
+
+        guard let items = super.layoutAttributesForElements(in: contentRect) else {
+            dynamicAnimator.removeAllBehaviors()
+            return
+        }
+        if dynamicAnimator.behaviors.count != items.count {
+            dynamicAnimator.removeAllBehaviors()
+            items.forEach { (item) in
+                let attachmentBehavior = UIAttachmentBehavior(item: item, attachedToAnchor: item.center)
+                attachmentBehavior.length = 0.0
+                attachmentBehavior.damping = 0.8
+                attachmentBehavior.frequency = 1.0
+                dynamicAnimator.addBehavior(attachmentBehavior)
+            }
+        }
+    }
+
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        return dynamicAnimator.items(in: rect) as? [UICollectionViewLayoutAttributes]
+    }
+
+    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        return dynamicAnimator.layoutAttributesForCell(at: indexPath)
+    }
+
+    public func reload() {
+        dynamicAnimator.removeAllBehaviors()
+        prepare()
+    }
 
 }
 

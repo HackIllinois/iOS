@@ -1,5 +1,5 @@
 //
-//  HIBaseViewController+UITableViewDatasource.swift
+//  HIBaseViewController+UICollectionViewDataSource.swift
 //  HackIllinois
 //
 //  Created by Rauhul Varma on 11/20/17.

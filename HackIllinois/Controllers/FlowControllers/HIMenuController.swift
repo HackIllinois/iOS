@@ -2,7 +2,7 @@
 //  HIMenuController.swift
 //  HackIllinois
 //
-//  Created by Rauhul Varma on 11/22/17.
+//  Created by Rauhul Varma on 11/23/17.
 //  Copyright © 2017 HackIllinois. All rights reserved.
 //
 
@@ -15,74 +15,54 @@ class HIMenuController: UIViewController {
     let MENU_ITEM_HEIGHT: CGFloat = 58
 
     // MARK: Properties
-    var image: UIImage?
+
+    private var _tabBarController: UITabBarController?
+
+    override var tabBarController: UITabBarController? {
+        get {
+            return _tabBarController
+        }
+        set {
+            if _tabBarController == nil {
+                _tabBarController = newValue
+            }
+        }
+    }
 
     @IBOutlet weak var stackViewContainerHeight: NSLayoutConstraint!
     @IBOutlet weak var stackViewHeight: NSLayoutConstraint!
     @IBOutlet weak var stackView: UIStackView!
 
-    @IBOutlet weak var imageViewOverlap: NSLayoutConstraint!
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var contentViewOverlap: NSLayoutConstraint!
+    @IBOutlet weak var contentView: UIView!
 
     @IBOutlet weak var overlayView: UIView!
 
     // MARK: View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        imageView.frame = view.frame
-        overlayView.frame = view.frame
-        navigationItem.hidesBackButton = true
+        tabBarController = childViewControllers.first { $0 is UITabBarController } as? UITabBarController
+        tabBarController?.viewControllers?.forEach { (viewController) in
+            let _ = viewController.view
+        }
         resetMenuItems()
         addMenuItems()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        imageView.image = image
         view.layoutIfNeeded()
-        navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        animateOpen()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     // MARK: Display menu
-    static private var _shared: HIMenuController?
-
-    static private var shared: HIMenuController {
-        get {
-            if _shared == nil {
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let viewController = storyboard.instantiateViewController(withIdentifier: "HIMenuController")
-                guard let menuViewController = viewController as? HIMenuController else { fatalError("Invalid storyboard setup") }
-                _shared = menuViewController
-            }
-            return _shared!
-        }
-    }
-
-    static func displayMenu(sender: UIViewController) {
-        HIMenuController.shared.image = sender.tabBarController?.view.renderAsImage()
-        sender.navigationController?.pushViewController(HIMenuController.shared, animated: false)
-    }
-
     @IBAction func dismissMenu(_ sender: Any) {
-        animateClosed { _ in
-            self.navigationController?.popViewController(animated: false)
-        }
+        animateClosed()
     }
 
     // MARK: Menu animation
     func animateOpen() {
         stackViewContainerHeight.constant = stackViewHeight.constant + 11 + 28 + view.safeAreaInsets.top
-        imageViewOverlap.constant = -view.safeAreaInsets.top
+        contentViewOverlap.constant = -view.safeAreaInsets.top
 
         UIView.animate(withDuration: 0.75, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: {
             self.overlayView.alpha = 0.70
@@ -90,14 +70,14 @@ class HIMenuController: UIViewController {
         }, completion: nil)
     }
 
-    func animateClosed(completion: ((Bool) -> Void)?) {
+    func animateClosed() {
         stackViewContainerHeight.constant = 0
-        imageViewOverlap.constant = 0
+        contentViewOverlap.constant = 0
 
-        UIView.animate(withDuration: 0.75, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: {
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: {
             self.overlayView.alpha = 0.0
             self.view.layoutIfNeeded()
-        }, completion: completion)
+        }, completion: nil)
     }
 
     // MARK: Setup stack view buttons
@@ -134,17 +114,8 @@ class HIMenuController: UIViewController {
 
     // MARK:
     @objc func didSelectItem(_ sender: UIButton) {
-        if tabBarController?.selectedIndex != sender.tag {
-//            let nextViewController = tabBarController?.viewControllers?[sender.tag]
-//            nextViewController?.viewWillAppear(false)
-//            nextViewController?.viewDidAppear(false)
-//            imageView.image = nextViewController?.view?.renderAsImage()
-        }
-
-        animateClosed { _ in
-            self.tabBarController?.selectedIndex = sender.tag
-            self.navigationController?.popViewController(animated: false)
-        }
+        tabBarController?.selectedIndex = sender.tag
+        animateClosed()
     }
 
 

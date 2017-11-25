@@ -12,7 +12,7 @@ import UIKit
 extension UIViewController {
 
     @IBAction func openMenu(_ sender: UIButton) {
-        HIMenuController.displayMenu(sender: self)
+        (tabBarController?.parent as? HIMenuController)?.animateOpen()
     }
 
 }

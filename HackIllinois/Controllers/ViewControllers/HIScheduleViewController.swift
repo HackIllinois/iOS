@@ -60,7 +60,6 @@ extension HIScheduleViewController {
 
 // MARK: - UIViewController
 extension HIScheduleViewController {
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let indexPath = sender as? IndexPath, let eventDetailViewController = segue.destination as? HIEventDetailViewController {
@@ -70,15 +69,17 @@ extension HIScheduleViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // HIBaseViewController
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
+        setupRefreshControl()
+
+        // CollectionView
         collectionView?.register(UINib(nibName: HIEventCell.IDENTIFIER, bundle: nil), forCellWithReuseIdentifier: HIEventCell.IDENTIFIER)
         collectionView?.register(UINib(nibName: HIDateHeader.IDENTIFIER, bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HIDateHeader.IDENTIFIER)
-
-        collectionView?.contentInset = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
+//        (collectionView?.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = CGSize(width: 300, height: 100)
 
         try! fetchedResultsController.performFetch()
     }
-
 }
 
 // MARK: - UICollectionViewDataSource
@@ -92,18 +93,18 @@ extension HIScheduleViewController {
         return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-        case UICollectionElementKindSectionHeader:
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HIDateHeader.IDENTIFIER, for: indexPath)
-            if let header = header as? HIDateHeader {
-                header.titleLabel.text = "\(indexPath.section + 1):00 pm"
-            }
-            return header
-        default:
-            fatalError("No other supplementary views should be shown")
-        }
-    }
+//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//        switch kind {
+//        case UICollectionElementKindSectionHeader:
+//            let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HIDateHeader.IDENTIFIER, for: indexPath)
+//            if let header = header as? HIDateHeader {
+//                header.titleLabel.text = "\(indexPath.section + 1):00 pm"
+//            }
+//            return header
+//        default:
+//            fatalError("No other supplementary views should be shown")
+//        }
+//    }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 4
@@ -115,29 +116,35 @@ extension HIScheduleViewController {
 }
 
 // MARK: - UICollectionViewDelegate
-extension HIScheduleViewController: UICollectionViewDelegate {
+extension HIScheduleViewController {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
         performSegue(withIdentifier: "ShowEventDetail", sender: indexPath)
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
 
-// MARK: - UICollectionViewDelegateFlowLayout
-extension HIScheduleViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let insets = collectionView.contentInset.left + collectionView.contentInset.right
-        let width = collectionView.contentSize.width - insets
-        //        let event = fetchedResultsController.object(at: indexPath)
-        let height = 80 //19 + 22 * (event.locations.count + 1) + 19
-        return CGSize(width: width, height: CGFloat(height))
+// MARK: - HICollectionViewDelegateFlowLayout
+extension HIScheduleViewController {
+    func hiBaseCollectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, heightForItemAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let insets = collectionView.contentInset.left + collectionView.contentInset.right
-        let width = collectionView.contentSize.width - insets
-        let height = 53
-        return CGSize(width: width, height: CGFloat(height))
+    func hiBaseCollectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceHeightForHeaderInSection section: Int) -> CGFloat {
+        return 53
     }
 }
 
+// MARK: - UIRefreshControl
+extension HIScheduleViewController {
+    override func refresh(_ sender: UIRefreshControl) {
+        refreshAnimation.play()
+    }
+}
 
+extension HIScheduleViewController {
+    override func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        super.controllerDidChangeContent(controller)
+        collectionView?.reloadData()
+        (collectionView?.collectionViewLayout as? HICollectionViewFlowLayout)?.reload()
+    }
+}

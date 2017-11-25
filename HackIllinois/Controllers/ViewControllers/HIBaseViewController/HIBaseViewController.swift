@@ -9,11 +9,14 @@
 import Foundation
 import UIKit
 import CoreData
+import Lottie
 
 class HIBaseViewController: UIViewController {
 
     // MARK: Properties
     var _fetchedResultsController: NSFetchedResultsController<NSManagedObject>?
+    var refreshControl = UIRefreshControl()
+    var refreshAnimation = LOTAnimationView(name: "loader_ring")
 
 //    var updateOperations =  [(UICollectionView) -> Void]()
     var updateOperations = [BlockOperation]()
@@ -41,5 +44,10 @@ class HIBaseViewController: UIViewController {
         super.viewWillDisappear(animated)
         unregisterForKeyboardNotifications()
     }
+
+    // MARK: Misc
+    // Must be in main class due to swift limitations
+
+    // MARK: Item Size
 
 }
