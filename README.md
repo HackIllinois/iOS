@@ -1,6 +1,6 @@
-# iphone-2017
+# iOS
 
-Official iOS application for HackIllinois. Please read this README before continuing.
+Official iOS apps for HackIllinois. Please read this README before continuing.
 
 # Branch Information #
 
