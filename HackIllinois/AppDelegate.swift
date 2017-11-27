@@ -38,7 +38,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16) as Any
         ]
         navigationBarAppearace.shadowImage = UIImage()
-        navigationBarAppearace.setBackgroundImage(UIImage(),for: .default)
+
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
+        UIColor(named: "paleBlue")?.setFill()
+        UIRectFill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        navigationBarAppearace.setBackgroundImage(image, for: .default)
+        navigationBarAppearace.isTranslucent = false
+
 
         return true
     }

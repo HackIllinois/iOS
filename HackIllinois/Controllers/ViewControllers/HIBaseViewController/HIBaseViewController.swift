@@ -45,9 +45,4 @@ class HIBaseViewController: UIViewController {
         unregisterForKeyboardNotifications()
     }
 
-    // MARK: Misc
-    // Must be in main class due to swift limitations
-
-    // MARK: Item Size
-
 }

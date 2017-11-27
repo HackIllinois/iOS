@@ -16,3 +16,9 @@ extension UIViewController {
     }
 
 }
+
+extension UIViewController: StoryboardIdentifiable {
+    static var storyboardIdentifier: String {
+        return String(describing: self)
+    }
+}
