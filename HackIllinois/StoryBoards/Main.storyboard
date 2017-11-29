@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qif-wc-4DQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BoP-XA-mK3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -263,9 +263,9 @@
                         <viewLayoutGuide key="safeArea" id="nOM-cc-Df3"/>
                     </view>
                     <navigationItem key="navigationItem" title="SCANNER" id="6xT-5v-BbH">
-                        <barButtonItem key="leftBarButtonItem" image="MenuOpen" id="5CR-FM-Vx1">
+                        <barButtonItem key="leftBarButtonItem" image="MenuOpen" id="iyd-Af-CcN">
                             <connections>
-                                <action selector="openMenu:" destination="YYo-kf-2fA" id="17o-sO-3sS"/>
+                                <action selector="openMenu:" destination="YYo-kf-2fA" id="yZx-nS-edx"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

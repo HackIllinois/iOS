@@ -20,6 +20,7 @@ extension HIBaseViewController {
                 }
             }
         )
+        present(alert, animated: true, completion: nil)
     }
 
 }
