@@ -20,8 +20,8 @@
                     <rect key="frame" x="12" y="0.0" width="351" height="62"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0v9-uf-Iw5">
-                            <rect key="frame" x="0.0" y="36" width="351" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <rect key="frame" x="0.0" y="41" width="351" height="16"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                             <color key="textColor" name="darkIndigo"/>
                             <nil key="highlightedColor"/>
                         </label>

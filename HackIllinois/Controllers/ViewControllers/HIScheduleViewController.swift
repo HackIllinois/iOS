@@ -76,7 +76,6 @@ extension HIScheduleViewController {
         // CollectionView
         collectionView?.register(UINib(nibName: HIEventCell.IDENTIFIER, bundle: nil), forCellWithReuseIdentifier: HIEventCell.IDENTIFIER)
         collectionView?.register(UINib(nibName: HIDateHeader.IDENTIFIER, bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HIDateHeader.IDENTIFIER)
-//        (collectionView?.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = CGSize(width: 300, height: 100)
 
         try! fetchedResultsController.performFetch()
     }
@@ -93,18 +92,18 @@ extension HIScheduleViewController {
         return cell
     }
 
-//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        switch kind {
-//        case UICollectionElementKindSectionHeader:
-//            let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HIDateHeader.IDENTIFIER, for: indexPath)
-//            if let header = header as? HIDateHeader {
-//                header.titleLabel.text = "\(indexPath.section + 1):00 pm"
-//            }
-//            return header
-//        default:
-//            fatalError("No other supplementary views should be shown")
-//        }
-//    }
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionElementKindSectionHeader:
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HIDateHeader.IDENTIFIER, for: indexPath)
+            if let header = header as? HIDateHeader {
+                header.titleLabel.text = "\(indexPath.section + 1):00 PM"
+            }
+            return header
+        default:
+            fatalError("No other supplementary views should be shown")
+        }
+    }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 4

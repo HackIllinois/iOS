@@ -21,10 +21,6 @@ extension HIBaseViewController {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
-    @objc func keyboardWillShow(_ notification: NSNotification) { }
-
-    @objc func keyboardWillHide(_ notification: NSNotification) { }
-
     func animateWithKeyboardLayout(notification: NSNotification, layout: ((CGRect) -> Void)?) {
         guard let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double,
             let curveValue = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? Int,

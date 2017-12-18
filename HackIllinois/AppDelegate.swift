@@ -21,10 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
               let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
               let queryItems = components.queryItems,
               let code = queryItems.first(where: { $0.name == "code" })?.value else { return false }
+        print(url.absoluteString)
         print(code)
         return true
     }
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearace.barTintColor = UIColor(named: "paleBlue")
         navigationBarAppearace.titleTextAttributes = [
             NSAttributedStringKey.foregroundColor: UIColor(named: "darkIndigo") as Any,
-            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16) as Any
+            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15, weight: .bold) as Any
         ]
         navigationBarAppearace.shadowImage = UIImage()
 
@@ -49,6 +49,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearace.setBackgroundImage(image, for: .default)
         navigationBarAppearace.isTranslucent = false
 
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = UIStoryboard(.login).instantiate(HILoginFlowController.self)
+        window?.makeKeyAndVisible()
 
         return true
     }

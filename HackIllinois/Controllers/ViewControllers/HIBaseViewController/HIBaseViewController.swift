@@ -45,4 +45,18 @@ class HIBaseViewController: UIViewController {
         unregisterForKeyboardNotifications()
     }
 
+    // MARK: - Misc
+    // cannot ovveride method in extension
+    // next responder chain
+    func nextReponder(current: UIResponder) -> UIResponder? {
+        return nil
+    }
+
+    func actionForFinalResponder() { }
+
+    // keyboard frame change
+    @objc func keyboardWillShow(_ notification: NSNotification) { }
+
+    @objc func keyboardWillHide(_ notification: NSNotification) { }
+
 }

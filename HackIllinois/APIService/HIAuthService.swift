@@ -8,6 +8,7 @@
 
 import Foundation
 import APIManager
+import SafariServices
 
 class HIAuthService: HIBaseService {
 
@@ -15,9 +16,16 @@ class HIAuthService: HIBaseService {
         return super.baseURL + "/auth"
     }
 
-//    class func login() -> APIRequest<HIAuthService, Data> {
-//        return APIRequest<HIAuthService, Data>(endpoint: "", method: .GET)
-//    }
+    class func login(email: String, password: String) -> APIRequest<HIAuthService, Data> {
+        var body = [String: String]()
+        body["email"]    = email
+        body["password"] = password
+        return APIRequest<HIAuthService, Data>(endpoint: "", body: body, method: .POST)
+    }
 
+//    class func loginSession() -> SFAuthenticationSession? {
+//        guard let url = URL(string: baseURL) else { return nil }
+//        return session
+//    }
 
 }

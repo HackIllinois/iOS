@@ -11,12 +11,6 @@ import UIKit
 
 extension HIBaseViewController: UITextFieldDelegate {
 
-    func nextReponder(current: UIResponder) -> UIResponder? {
-        return nil
-    }
-
-    func actionForFinalResponder() { }
-
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let nextReponder = nextReponder(current: textField) {
             nextReponder.becomeFirstResponder()

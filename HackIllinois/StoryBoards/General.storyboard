@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BoP-XA-mK3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -12,21 +12,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Launch View Controller-->
-        <scene sceneID="hae-4H-bLZ">
-            <objects>
-                <viewController id="Zkz-bk-Ndk" customClass="HILaunchViewController" customModule="HackIllinois" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="leF-42-MdG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="V1C-dW-BJG"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8vy-Z9-6KH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3694" y="614"/>
-        </scene>
         <!--SCHEDULE-->
         <scene sceneID="cex-JV-Pfg">
             <objects>
@@ -36,7 +21,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FKn-rm-kam">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="98" width="375" height="569"/>
                                 <color key="backgroundColor" name="paleBlue"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="h2g-3j-6pH" customClass="HICollectionViewFlowLayout" customModule="HackIllinois" customModuleProvider="target">
                                     <size key="itemSize" width="0.0" height="0.0"/>
@@ -50,13 +35,23 @@
                                     <outlet property="delegate" destination="G7j-bq-gni" id="lha-zP-iYw"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GcH-dS-XzV" customClass="HISegmentedControl" customModule="HackIllinois" customModuleProvider="target">
+                                <rect key="frame" x="16" y="64" width="343" height="34"/>
+                                <color key="backgroundColor" name="paleBlue"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="MvS-BO-p16"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" name="paleBlue"/>
                         <constraints>
+                            <constraint firstItem="FKn-rm-kam" firstAttribute="top" secondItem="GcH-dS-XzV" secondAttribute="bottom" id="JPT-w8-1rc"/>
+                            <constraint firstItem="GcH-dS-XzV" firstAttribute="top" secondItem="gXN-Cf-MiA" secondAttribute="top" id="Lq6-AR-Ncv"/>
                             <constraint firstAttribute="bottom" secondItem="FKn-rm-kam" secondAttribute="bottom" id="QYz-Fh-jrD"/>
                             <constraint firstItem="FKn-rm-kam" firstAttribute="leading" secondItem="gXN-Cf-MiA" secondAttribute="leading" id="WmH-tP-xM0"/>
-                            <constraint firstItem="FKn-rm-kam" firstAttribute="top" secondItem="gXN-Cf-MiA" secondAttribute="top" id="bHE-RR-640"/>
+                            <constraint firstItem="gXN-Cf-MiA" firstAttribute="trailing" secondItem="GcH-dS-XzV" secondAttribute="trailing" constant="16" id="awO-jv-gUp"/>
                             <constraint firstItem="FKn-rm-kam" firstAttribute="trailing" secondItem="gXN-Cf-MiA" secondAttribute="trailing" id="fRG-OF-8El"/>
+                            <constraint firstItem="GcH-dS-XzV" firstAttribute="leading" secondItem="gXN-Cf-MiA" secondAttribute="leading" constant="16" id="qpT-6H-s0K"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gXN-Cf-MiA"/>
                     </view>
@@ -593,10 +588,10 @@
             <color red="0.80000001192092896" green="0.85100001096725464" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="paleBlue">
-            <color red="0.94900000095367432" green="0.96100002527236938" blue="0.99599999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.96078431372549022" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="buL-ig-Fhb"/>
+        <segue reference="ZdR-hV-ShJ"/>
     </inferredMetricsTieBreakers>
 </document>

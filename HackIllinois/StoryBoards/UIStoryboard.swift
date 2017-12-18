@@ -14,11 +14,12 @@ extension UIStoryboard {
     /// The uniform place where we state all the storyboard we have in our application
 
     enum Storyboard: String {
-        case main   = "Main"
-        case modals = "Modals"
+        case general
+        case modals
+        case login
 
         var filename: String {
-            return rawValue
+            return rawValue.capitalized
         }
     }
 
@@ -28,7 +29,7 @@ extension UIStoryboard {
         self.init(name: storyboard.filename, bundle: bundle)
     }
 
-    func instantiate<T: StoryboardIdentifiable>(_ type: T.Type, additionalConfigutation configuration: ((T) -> Void)?) -> T {
+    func instantiate<T: StoryboardIdentifiable>(_ type: T.Type, additionalConfigutation configuration: ((T) -> Void)? = nil) -> T {
         guard let viewController = self.instantiateViewController(withIdentifier: T.storyboardIdentifier) as? T else {
             fatalError("Couldn't instantiate view controller with identifier \(T.storyboardIdentifier) ")
         }

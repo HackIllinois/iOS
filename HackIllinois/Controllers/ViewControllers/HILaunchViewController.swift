@@ -23,7 +23,7 @@ class HILaunchViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         animationView.play{ (finished) in
-            let nextViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HIMenuController")
+            let nextViewController = UIStoryboard(.general).instantiate(HIMenuController.self)
 //            nextViewController.transitioningDelegate = self
             self.present(nextViewController, animated: true, completion: nil)
         }
