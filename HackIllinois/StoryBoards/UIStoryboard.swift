@@ -12,7 +12,6 @@ import UIKit
 extension UIStoryboard {
 
     /// The uniform place where we state all the storyboard we have in our application
-
     enum Storyboard: String {
         case general
         case modals
@@ -22,7 +21,6 @@ extension UIStoryboard {
             return rawValue.capitalized
         }
     }
-
 
     // MARK: - Convenience Initializers
     convenience init(_ storyboard: Storyboard, bundle: Bundle? = nil) {

@@ -23,9 +23,12 @@ class HIAuthService: HIBaseService {
         return APIRequest<HIAuthService, Data>(endpoint: "", body: body, method: .POST)
     }
 
-//    class func loginSession() -> SFAuthenticationSession? {
-//        guard let url = URL(string: baseURL) else { return nil }
-//        return session
-//    }
+    // let url = URL(string: "https://github.com/login/oauth/authorize?scope=user:email&client_id=6a31db63429227214035&redirect_uri=https://hackillinois.org/auth/ios")!
+    class func githubLoginURL() -> URL {
+        guard let url = URL(string: baseURL + "?mobile=1") else {
+            fatalError()
+        }
+        return url
+    }
 
 }

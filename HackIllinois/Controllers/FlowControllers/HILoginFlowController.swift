@@ -46,10 +46,12 @@ class HILoginFlowController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        animationView.contentMode = .scaleAspectFill
-        animationView.frame = view.frame
-        animationView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(animationView)
+        if shouldDisplayAnimationOnNextAppearance {
+            animationView.contentMode = .scaleAspectFill
+            animationView.frame = view.frame
+            animationView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            view.addSubview(animationView)
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -68,20 +70,19 @@ extension HILoginFlowController: HILoginSelectionViewControllerDelegate {
     func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HILoginSelectionViewController.SelectionType) {
         switch selection {
         case .hacker:
-            let url = URL(string: "http://ec2-107-20-14-41.compute-1.amazonaws.com/v1/auth?callbackUrl=hackillinois://")!
-//            UIApplication.shared.open(URL(string: "http://ec2-107-20-14-41.compute-1.amazonaws.com/v1/auth")!, options: [:], completionHandler: nil)
-
-            loginSession = SFAuthenticationSession(url: url, callbackURLScheme: "hackillinois://") { (url, error) in
-                print(url ?? "empty url", error?.localizedDescription ?? "no error")
+            loginSession = SFAuthenticationSession(url: HIAuthService.githubLoginURL(), callbackURLScheme: nil) { [weak self] (url, error) in
+                if let url = url,
+                    let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
+                    let queryItems = components.queryItems,
+                    let code = queryItems.first(where: { $0.name == "code" })?.value {
+                    print("auth success", code)
+                } else {
+                    let alert = UIAlertController(title: "Authentication Failed", message: nil, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    self?.present(alert, animated: true, completion: nil)
+                }
             }
             loginSession?.start()
-
-
-//            if let loginViewController = HIAuthService.loginViewController() {
-//                loginSelectionViewController.present(loginViewController, animated: true, completion: nil)
-//            } else {
-//                loginSelectionViewController.presentErrorController(title: "Error", message: "Internal Error.", dismissParentOnCompletion: false)
-//            }
 
         case .mentor, .staff, .volunteer:
             navController.pushViewController(userPassLoginViewController, animated: true)
