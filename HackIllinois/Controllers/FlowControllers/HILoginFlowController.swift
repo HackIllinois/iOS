@@ -10,13 +10,25 @@ import UIKit
 import Lottie
 import SafariServices
 
+
+enum HILoginSelection {
+    case hacker
+    case mentor
+    case staff
+    case volunteer
+}
+
 class HILoginFlowController: UIViewController {
 
+    // MARK: Properties
     let animationView = LOTAnimationView(name: "data")
     var shouldDisplayAnimationOnNextAppearance = true
+    var isCurrentlyPerformingUserPassLogin = false
 
+    // keeps the login session from going out of scope during presentation
     var loginSession: SFAuthenticationSession?
 
+    // MARK: ViewControllers
     lazy var navController: UINavigationController = {
         let vc = UINavigationController(rootViewController: loginSelectionViewController)
         vc.isNavigationBarHidden = true
@@ -35,6 +47,7 @@ class HILoginFlowController: UIViewController {
         return vc
     }()
 
+    // MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         addChildViewController(navController)
@@ -63,11 +76,15 @@ class HILoginFlowController: UIViewController {
             shouldDisplayAnimationOnNextAppearance = false
         }
     }
+
+    // MARK: Login Flow
+
+
 }
 
 // MARK: - HILoginSelectionViewControllerDelegate
 extension HILoginFlowController: HILoginSelectionViewControllerDelegate {
-    func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HILoginSelectionViewController.SelectionType) {
+    func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HILoginSelection) {
         switch selection {
         case .hacker:
             loginSession = SFAuthenticationSession(url: HIAuthService.githubLoginURL(), callbackURLScheme: nil) { [weak self] (url, error) in
@@ -92,21 +109,57 @@ extension HILoginFlowController: HILoginSelectionViewControllerDelegate {
 
 // MARK: - HIUserPassLoginViewControllerDelegate
 extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
+
     func userPassLoginViewControllerDidSelectBackButton(_ userPassLoginViewController: HIUserPassLoginViewController) {
+
+//        cancellogin?
         navController.popViewController(animated: true)
     }
 
     func userPassLoginViewControllerDidSelectLoginButton(_ userPassLoginViewController: HIUserPassLoginViewController, forUsername username: String, andPassword password: String) {
+        isCurrentlyPerformingUserPassLogin = true
+
+        let style = userPassLoginViewControllerStyleFor(userPassLoginViewController)
+        userPassLoginViewController.stylizeFor(style)
 
         HIAuthService.login(email: username, password: password)
-        .onSuccess { (data) in
+        .onSuccess { [weak self] (data) in
+            guard self?.isCurrentlyPerformingUserPassLogin == true else { return }
+
+            DispatchQueue.main.async {
+                if let strongSelf = self {
+                    strongSelf.isCurrentlyPerformingUserPassLogin = false
+                    let style = strongSelf.userPassLoginViewControllerStyleFor(userPassLoginViewController)
+                    strongSelf.userPassLoginViewController.stylizeFor(style)
+                }
+            }
+
             print(data)
         }
-        .onFailure { (reason) in
+        .onFailure { [weak self] (reason) in
+            guard self?.isCurrentlyPerformingUserPassLogin == true else { return }
+
+            DispatchQueue.main.async {
+                if let strongSelf = self {
+                    strongSelf.isCurrentlyPerformingUserPassLogin = false
+                    let style = strongSelf.userPassLoginViewControllerStyleFor(userPassLoginViewController)
+                    strongSelf.userPassLoginViewController.stylizeFor(style)
+                }
+            }
+
             print(reason)
         }
         .perform(withAuthorization: nil)
+    }
 
+    func userPassLoginViewControllerStyleFor(_ userPassLoginViewController: HIUserPassLoginViewController) -> HIUserPassLoginViewControllerStyle {
+        switch isCurrentlyPerformingUserPassLogin {
+        case true:
+            return .currentlyPerformingLogin
+
+        case false:
+            return .readyToLogin
+        }
     }
 
 

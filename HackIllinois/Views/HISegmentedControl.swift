@@ -50,31 +50,34 @@ import UIKit
     }
 
 
-    func setupView(){
+    func setupView() {
         setupLabels()
         insertSubview(indicatorView, at: 0)
         insertSubview(bottomView, at: 0)
     }
 
-    func setupLabels(){
+    func setupLabels() {
         labels.forEach { $0.removeFromSuperview() }
 
         labels.removeAll(keepingCapacity: true)
 
-        for (index, item) in items.enumerated() {
-            let label = UILabel()
-            label.text = items[index]
-            label.backgroundColor = .clear
-            label.textAlignment = .center
-            label.font = font
-            label.textColor = index == 0 ? selectedLabelColor : unselectedLabelColor
-            label.text = item
-            label.translatesAutoresizingMaskIntoConstraints = false
-            addSubview(label)
-            labels.append(label)
+        for index in items.indices {
+            setupLabelForItem(at: index)
         }
 
         constrain(labels: labels)
+    }
+
+    func setupLabelForItem(at index: Int) {
+        let label = UILabel()
+        label.backgroundColor = .clear
+        label.textAlignment = .center
+        label.font = font
+        label.textColor = index == 0 ? selectedLabelColor : unselectedLabelColor
+        label.text = items[index]
+        label.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(label)
+        labels.append(label)
     }
 
     override func layoutSubviews() {

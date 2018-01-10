@@ -10,17 +10,10 @@ import Foundation
 import UIKit
 
 protocol HILoginSelectionViewControllerDelegate: class {
-    func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HILoginSelectionViewController.SelectionType)
+    func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HILoginSelection)
 }
 
 class HILoginSelectionViewController: HIBaseViewController {
-
-    enum SelectionType {
-        case hacker
-        case mentor
-        case staff
-        case volunteer
-    }
 
     weak var delegate: HILoginSelectionViewControllerDelegate?
 

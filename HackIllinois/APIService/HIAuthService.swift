@@ -16,7 +16,7 @@ class HIAuthService: HIBaseService {
         return super.baseURL + "/auth"
     }
 
-    class func login(email: String, password: String) -> APIRequest<HIAuthService, Data> {
+    class func login(email: String?, password: String) -> APIRequest<HIAuthService, Data> {
         var body = [String: String]()
         body["email"]    = email
         body["password"] = password
