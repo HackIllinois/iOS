@@ -22,22 +22,22 @@ class HIEventService: HIBaseService {
     }
 
     // MARK: Events
-    class func create(event: Event) -> APIRequest<HIEventService, Event.Contained> {
+    class func create(event: Event) -> APIRequest<Event.Contained> {
         let eventDict = [String: Any]()
-        return APIRequest<HIEventService, Event.Contained>(endpoint: "", body: eventDict, method: .POST)
+        return APIRequest<Event.Contained>(service: self, endpoint: "", body: eventDict, method: .POST)
     }
 
-    class func getAllEvents(active: Bool = false) -> APIRequest<HIEventService, Event.Contained> {
-        return APIRequest<HIEventService, Event.Contained>(endpoint: "", params: ["active": "\(active)"], method: .GET)
+    class func getAllEvents(active: Bool = false) -> APIRequest<Event.Contained> {
+        return APIRequest<Event.Contained>(service: self, endpoint: "", params: ["active": "\(active)"], method: .GET)
     }
 
     // MARK: Locations
-    class func create(location: Location) -> APIRequest<HIEventService, Location.Contained> {
+    class func create(location: Location) -> APIRequest<Location.Contained> {
         let locationDict = [String: Any]()
-        return APIRequest<HIEventService, Location.Contained>(endpoint: "/location", body: locationDict, method: .POST)
+        return APIRequest<Location.Contained>(service: self, endpoint: "/location", body: locationDict, method: .POST)
     }
 
-    class func getAllLocations() -> APIRequest<HIEventService, Location.Contained> {
-        return APIRequest<HIEventService, Location.Contained>(endpoint: "/location/all", method: .GET)
+    class func getAllLocations() -> APIRequest<Location.Contained> {
+        return APIRequest<Location.Contained>(service: self, endpoint: "/location/all", method: .GET)
     }
 }

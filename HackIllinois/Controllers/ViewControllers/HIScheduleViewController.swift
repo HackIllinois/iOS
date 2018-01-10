@@ -36,7 +36,7 @@ extension HIScheduleViewController {
         .onFailure { (reason) in
             print(reason)
         }
-        .perform(withAuthorization: nil)
+        .perform()
 
         HIEventService.getAllEvents()
         .onSuccess { (contained) in
@@ -45,7 +45,7 @@ extension HIScheduleViewController {
         .onFailure { (reason) in
             print(reason)
         }
-        .perform(withAuthorization: nil)
+        .perform()
 
         HIEventService.getAllLocations()
         .onSuccess { (contained) in
@@ -54,7 +54,7 @@ extension HIScheduleViewController {
         .onFailure { (reason) in
             print(reason)
         }
-        .perform(withAuthorization: nil)
+        .perform()
     }
 }
 

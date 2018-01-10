@@ -149,7 +149,7 @@ extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
 
             print(reason)
         }
-        .perform(withAuthorization: nil)
+        .perform()
     }
 
     func userPassLoginViewControllerStyleFor(_ userPassLoginViewController: HIUserPassLoginViewController) -> HIUserPassLoginViewControllerStyle {

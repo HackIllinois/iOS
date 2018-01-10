@@ -16,11 +16,11 @@ class HIAuthService: HIBaseService {
         return super.baseURL + "/auth"
     }
 
-    class func login(email: String?, password: String) -> APIRequest<HIAuthService, Data> {
+    class func login(email: String?, password: String) -> APIRequest<Data> {
         var body = [String: String]()
         body["email"]    = email
         body["password"] = password
-        return APIRequest<HIAuthService, Data>(endpoint: "", body: body, method: .POST)
+        return APIRequest<Data>(service: self, endpoint: "", body: body, method: .POST)
     }
 
     // let url = URL(string: "https://github.com/login/oauth/authorize?scope=user:email&client_id=6a31db63429227214035&redirect_uri=https://hackillinois.org/auth/ios")!
