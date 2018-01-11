@@ -25,19 +25,17 @@ enum HIUserPassLoginViewControllerStyle {
 
 class HIUserPassLoginViewController: HIBaseViewController {
 
-
     // MARK: Properties
-    var delegate: HIUserPassLoginViewControllerDelegate?
+    weak var delegate: HIUserPassLoginViewControllerDelegate?
     var activityIndicator = UIActivityIndicatorView()
     var originalLoginButtonColor: UIColor?
 
-
-    // MARK: IBOutlets
+    // MARK: Outlets
     @IBOutlet weak var usernameTextFeild: UITextField!
     @IBOutlet weak var passwordTextFeild: UITextField!
     @IBOutlet weak var loginButton: UIButton!
 
-    // MARK: IBActions
+    // MARK: Actions
     @IBAction func didSelectBack(_ sender: UIButton) {
         delegate?.userPassLoginViewControllerDidSelectBackButton(self)
     }
@@ -47,7 +45,7 @@ class HIUserPassLoginViewController: HIBaseViewController {
         delegate?.userPassLoginViewControllerDidSelectLoginButton(self, forUsername: username, andPassword: password)
     }
 
-    // MARK: View lifecycle
+    // MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator = UIActivityIndicatorView()
@@ -64,8 +62,6 @@ class HIUserPassLoginViewController: HIBaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        
 
         let style = delegate?.userPassLoginViewControllerStyleFor(self) ?? .readyToLogin
         stylizeFor(style)

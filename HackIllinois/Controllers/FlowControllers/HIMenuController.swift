@@ -61,7 +61,7 @@ class HIMenuController: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
 
         coordinator.animate(alongsideTransition: { (context) in
-            self.animateMenuFor(state: self.state)
+            self.animateMenuFor(self.state)
         }, completion: nil)
     }
 
@@ -69,13 +69,13 @@ class HIMenuController: UIViewController {
     @IBAction func open(_ sender: Any) {
         guard state != .open else { return }
         state = .open
-        animateMenuFor(state: state)
+        animateMenuFor(state)
     }
 
     @IBAction func close(_ sender: Any) {
         guard state != .closed else { return }
         state = .closed
-        animateMenuFor(state: state)
+        animateMenuFor(state)
     }
 
     // MARK: Private API
@@ -85,7 +85,7 @@ class HIMenuController: UIViewController {
     }
 
     // MARK: - Helpers
-    private func updateConstraintsFor(state: State) {
+    private func updateConstraintsFor(_ state: State) {
         switch state {
         case .open:
             stackViewContainerHeight.constant = stackViewHeight.constant + 11 + 28 + view.safeAreaInsets.top
@@ -97,7 +97,7 @@ class HIMenuController: UIViewController {
         }
     }
 
-    private func updateOverlayViewAlphaFor(state: State) {
+    private func updateOverlayViewAlphaFor(_ state: State) {
         switch state {
         case .open:
             overlayView.alpha = 0.70
@@ -106,11 +106,11 @@ class HIMenuController: UIViewController {
         }
     }
 
-    private func animateMenuFor(state: State) {
+    private func animateMenuFor(_ state: State) {
         let animator = UIViewPropertyAnimator(duration: 0.5, dampingRatio: 0.8)
-        updateConstraintsFor(state: state)
+        updateConstraintsFor(state)
         animator.addAnimations {
-            self.updateOverlayViewAlphaFor(state: state)
+            self.updateOverlayViewAlphaFor(state)
             self.view.layoutIfNeeded()
         }
         animator.startAnimation()

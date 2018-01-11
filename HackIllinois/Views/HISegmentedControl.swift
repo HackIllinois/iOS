@@ -9,36 +9,32 @@
 import Foundation
 import UIKit
 
-@IBDesignable class HISegmentedControl: UIControl {
+class HISegmentedControl: UIControl {
 
-    var items: [String] = ["Friday", "Saturday", "Sunday"] {
-        didSet { setupLabels() }
-    }
+    // MARK: - Properties
+    private(set) var items = ["Friday", "Saturday", "Sunday"]
 
-    var selectedIndex: Int = 0 {
+    private(set) var selectedIndex: Int = 0 {
         didSet {
-            displayNewSelectedIndex()
+            displayNewSelectedIndex(previousIndex: oldValue)
             sendActions(for: .valueChanged)
         }
     }
 
-
     private var labels = [UILabel]()
-    var font                 = UIFont.systemFont(ofSize: 13, weight: .medium)
-    var selectedLabelColor   = UIColor(named: "darkIndigo")
-    var unselectedLabelColor = UIColor(named: "darkIndigo")
+    private var font                 = UIFont.systemFont(ofSize: 13, weight: .medium)
+    private var selectedLabelColor   = UIColor(named: "darkIndigo")
+    private var unselectedLabelColor = UIColor(named: "darkIndigo")
 
+    private var indicatorView = UIView()
+    private var indicatorViewColor   = UIColor(named: "hotPink")
+    private var indicatorViewHeight  = CGFloat(3)
 
-    var indicatorView = UIView()
-    var indicatorViewColor   = UIColor(named: "hotPink")
-    var indicatorViewHeight  = CGFloat(3)
+    private var bottomView = UIView()
+    private var bottomViewColor = UIColor(named: "hotPink")
+    private var bottomViewHeight = CGFloat(1)
 
-
-    var bottomView = UIView()
-    var bottomViewColor = UIColor(named: "hotPink")
-    var bottomViewHeight = CGFloat(1)
-
-
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -49,37 +45,7 @@ import UIKit
         setupView()
     }
 
-
-    func setupView() {
-        setupLabels()
-        insertSubview(indicatorView, at: 0)
-        insertSubview(bottomView, at: 0)
-    }
-
-    func setupLabels() {
-        labels.forEach { $0.removeFromSuperview() }
-
-        labels.removeAll(keepingCapacity: true)
-
-        for index in items.indices {
-            setupLabelForItem(at: index)
-        }
-
-        constrain(labels: labels)
-    }
-
-    func setupLabelForItem(at index: Int) {
-        let label = UILabel()
-        label.backgroundColor = .clear
-        label.textAlignment = .center
-        label.font = font
-        label.textColor = index == 0 ? selectedLabelColor : unselectedLabelColor
-        label.text = items[index]
-        label.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(label)
-        labels.append(label)
-    }
-
+    // MARK: - UIView
     override func layoutSubviews() {
         super.layoutSubviews()
 
@@ -90,7 +56,7 @@ import UIKit
         bottomView.frame = CGRect(x: 0, y: frame.height - (2 * bottomViewHeight), width: frame.width, height: bottomViewHeight)
         bottomView.backgroundColor = bottomViewColor
 
-        displayNewSelectedIndex()
+        displayNewSelectedIndex(previousIndex: 0)
     }
 
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
@@ -106,18 +72,47 @@ import UIKit
         return false
     }
 
-    func displayNewSelectedIndex() {
-        labels.forEach { $0.textColor = unselectedLabelColor }
-
-        let selectedLabel = labels[selectedIndex]
-        selectedLabel.textColor = selectedLabelColor
-
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: [], animations: {
-            self.indicatorView.frame.origin.x = selectedLabel.frame.origin.x
-        }, completion: nil)
+    // MARK: - Label Setup
+    private func setupView() {
+        setupLabels()
+        insertSubview(indicatorView, at: 0)
+        insertSubview(bottomView, at: 0)
     }
 
-    func constrain(labels: [UIView]) {
+    private func setupLabels() {
+        labels.forEach { $0.removeFromSuperview() }
+        labels.removeAll(keepingCapacity: true)
+        items.indices.forEach { setupLabelForItem(at: $0) }
+        constrain(labels: labels)
+    }
+
+    private func setupLabelForItem(at index: Int) {
+        let label = UILabel()
+        label.backgroundColor = .clear
+        label.textAlignment = .center
+        label.font = font
+        label.textColor = index == 0 ? selectedLabelColor : unselectedLabelColor
+        label.text = items[index]
+        label.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(label)
+        labels.append(label)
+    }
+
+    private func displayNewSelectedIndex(previousIndex: Int) {
+        let previousLabel = labels[previousIndex]
+        let selectedLabel = labels[selectedIndex]
+
+        previousLabel.textColor = unselectedLabelColor
+        selectedLabel.textColor = selectedLabelColor
+
+        let animator = UIViewPropertyAnimator(duration: 0.5, dampingRatio: 0.8)
+        animator.addAnimations {
+            self.indicatorView.frame.origin.x = selectedLabel.frame.origin.x
+        }
+        animator.startAnimation()
+    }
+
+    private func constrain(labels: [UIView]) {
 
         for (index, view) in labels.enumerated() {
             // top
