@@ -51,7 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearace.isTranslucent = false
 
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = UIStoryboard(.login).instantiate(HILoginFlowController.self)
+        window?.rootViewController = UIStoryboard(.general).instantiate(HIMenuController.self)
+            //UIStoryboard(.login).instantiate(HILoginFlowController.self)
         window?.makeKeyAndVisible()
 
         return true

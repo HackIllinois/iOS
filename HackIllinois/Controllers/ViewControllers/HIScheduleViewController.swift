@@ -106,11 +106,11 @@ extension HIScheduleViewController {
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 4
+        return 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 0
     }
 }
 

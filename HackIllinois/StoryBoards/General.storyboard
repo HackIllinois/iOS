@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BoP-XA-mK3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -356,7 +356,7 @@
                                         </constraints>
                                         <state key="normal" image="MenuClose"/>
                                         <connections>
-                                            <action selector="dismissMenu:" destination="BoP-XA-mK3" eventType="touchUpInside" id="OZO-C1-Ewq"/>
+                                            <action selector="close:" destination="BoP-XA-mK3" eventType="touchUpInside" id="95K-ZE-agb"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -400,7 +400,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="spa-3k-vf2" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="5ef-W2-p4c">
                     <connections>
-                        <action selector="dismissMenu:" destination="BoP-XA-mK3" id="ZsP-Lg-afs"/>
+                        <action selector="open:" destination="BoP-XA-mK3" id="Oyo-bz-tmS"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

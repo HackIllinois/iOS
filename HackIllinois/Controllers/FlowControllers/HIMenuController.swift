@@ -11,13 +11,17 @@ import UIKit
 
 class HIMenuController: UIViewController {
 
-    // MARK: Constants
-    let MENU_ITEM_HEIGHT: CGFloat = 58
+    // MARK: - Types
+    enum State {
+        case open
+        case closed
+    }
 
-    // MARK: Properties
+    // MARK: - Constants
+    private let MENU_ITEM_HEIGHT: CGFloat = 58
 
+    // MARK: - Properties
     private var _tabBarController: UITabBarController?
-
     override var tabBarController: UITabBarController? {
         get {
             return _tabBarController
@@ -29,16 +33,19 @@ class HIMenuController: UIViewController {
         }
     }
 
-    @IBOutlet weak var stackViewContainerHeight: NSLayoutConstraint!
-    @IBOutlet weak var stackViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var stackView: UIStackView!
+    private(set) var state = State.closed
 
-    @IBOutlet weak var contentViewOverlap: NSLayoutConstraint!
-    @IBOutlet weak var contentView: UIView!
+    // MARK: - Outlets
+    @IBOutlet weak private var stackViewContainerHeight: NSLayoutConstraint!
+    @IBOutlet weak private var stackViewHeight: NSLayoutConstraint!
+    @IBOutlet weak private var stackView: UIStackView!
 
-    @IBOutlet weak var overlayView: UIView!
+    @IBOutlet weak private var contentViewOverlap: NSLayoutConstraint!
+    @IBOutlet weak private var contentView: UIView!
 
-    // MARK: View life cycle
+    @IBOutlet weak private var overlayView: UIView!
+
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBarController = childViewControllers.first { $0 is UITabBarController } as? UITabBarController
@@ -46,42 +53,71 @@ class HIMenuController: UIViewController {
             let _ = viewController.view
         }
         resetMenuItems()
-        addMenuItems()
+        createMenuItems()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        view.layoutIfNeeded()
-    }
+    // MARK: - Rotation Handling
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
 
-    // MARK: Display menu
-    @IBAction func dismissMenu(_ sender: Any) {
-        animateClosed()
-    }
-
-    // MARK: Menu animation
-    func animateOpen() {
-        stackViewContainerHeight.constant = stackViewHeight.constant + 11 + 28 + view.safeAreaInsets.top
-        contentViewOverlap.constant = -view.safeAreaInsets.top
-
-        UIView.animate(withDuration: 0.75, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: {
-            self.overlayView.alpha = 0.70
-            self.view.layoutIfNeeded()
+        coordinator.animate(alongsideTransition: { (context) in
+            self.animateMenuFor(state: self.state)
         }, completion: nil)
     }
 
-    func animateClosed() {
-        stackViewContainerHeight.constant = 0
-        contentViewOverlap.constant = 0
-
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: {
-            self.overlayView.alpha = 0.0
-            self.view.layoutIfNeeded()
-        }, completion: nil)
+    // MARK: - API
+    @IBAction func open(_ sender: Any) {
+        guard state != .open else { return }
+        state = .open
+        animateMenuFor(state: state)
     }
 
-    // MARK: Setup stack view buttons
-    func addMenuItems() {
+    @IBAction func close(_ sender: Any) {
+        guard state != .closed else { return }
+        state = .closed
+        animateMenuFor(state: state)
+    }
+
+    // MARK: Private API
+    @objc private func didSelectItem(_ sender: UIButton) {
+        tabBarController?.selectedIndex = sender.tag
+        close(sender)
+    }
+
+    // MARK: - Helpers
+    private func updateConstraintsFor(state: State) {
+        switch state {
+        case .open:
+            stackViewContainerHeight.constant = stackViewHeight.constant + 11 + 28 + view.safeAreaInsets.top
+            contentViewOverlap.constant = -view.safeAreaInsets.top
+
+        case .closed:
+            stackViewContainerHeight.constant = 0
+            contentViewOverlap.constant = 0
+        }
+    }
+
+    private func updateOverlayViewAlphaFor(state: State) {
+        switch state {
+        case .open:
+            overlayView.alpha = 0.70
+        case .closed:
+            overlayView.alpha = 0.0
+        }
+    }
+
+    private func animateMenuFor(state: State) {
+        let animator = UIViewPropertyAnimator(duration: 0.5, dampingRatio: 0.8)
+        updateConstraintsFor(state: state)
+        animator.addAnimations {
+            self.updateOverlayViewAlphaFor(state: state)
+            self.view.layoutIfNeeded()
+        }
+        animator.startAnimation()
+    }
+
+    // MARK: - Menu Setup
+    private func createMenuItems() {
         guard let viewControllers = tabBarController?.viewControllers else { return }
         stackViewHeight.constant = CGFloat(viewControllers.count) * MENU_ITEM_HEIGHT
 
@@ -92,16 +128,7 @@ class HIMenuController: UIViewController {
         }
     }
 
-    func resetMenuItems() {
-        stackView.arrangedSubviews.forEach { (view) in
-            stackView.removeArrangedSubview(view)
-            view.removeFromSuperview()
-        }
-
-        stackViewHeight.constant = 0
-    }
-
-    func createMenuItem(title: String?, index: Int) -> UIButton {
+    private func createMenuItem(title: String?, index: Int) -> UIButton {
         let button = UIButton(type: .system)
         button.tag = index
         button.heightAnchor.constraint(equalToConstant: MENU_ITEM_HEIGHT).isActive = true
@@ -112,11 +139,13 @@ class HIMenuController: UIViewController {
         return button
     }
 
-    // MARK:
-    @objc func didSelectItem(_ sender: UIButton) {
-        tabBarController?.selectedIndex = sender.tag
-        animateClosed()
-    }
+    private func resetMenuItems() {
+        stackView.arrangedSubviews.forEach { (view) in
+            stackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
 
+        stackViewHeight.constant = 0
+    }
 
 }
