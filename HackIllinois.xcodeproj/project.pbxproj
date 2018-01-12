@@ -22,9 +22,7 @@
 		951827B41EA35E8B00049F79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 951827B21EA35E8B00049F79 /* LaunchScreen.storyboard */; };
 		951827B51EA35E8B00049F79 /* General.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 951827B31EA35E8B00049F79 /* General.storyboard */; };
 		953199C91FC25CA0009F2AA1 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953199C81FC25CA0009F2AA1 /* CoreDataController.swift */; };
-		953C54791FC7A93400B566C9 /* HIBaseViewController+UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C54781FC7A93400B566C9 /* HIBaseViewController+UICollectionViewDelegateFlowLayout.swift */; };
 		953C547B1FC7B36500B566C9 /* HICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C547A1FC7B36500B566C9 /* HICollectionViewDelegateFlowLayout.swift */; };
-		953C547F1FC7B49600B566C9 /* HIBaseViewController+HICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C547E1FC7B49600B566C9 /* HIBaseViewController+HICollectionViewDelegateFlowLayout.swift */; };
 		954EE1CE1FD0E2B40078F39E /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 954EE1CD1FD0E2B40078F39E /* Login.storyboard */; };
 		954EE1D11FD0F14E0078F39E /* HILoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954EE1D01FD0F14E0078F39E /* HILoginViewController.swift */; };
 		954EE1D31FD0F1680078F39E /* HILoginSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */; };
@@ -32,6 +30,7 @@
 		954F82A11FD3C33D009071F0 /* HILoginFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954F82A01FD3C33D009071F0 /* HILoginFlowController.swift */; };
 		9553EC7D1FCF99F600B6B3EE /* HISegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9553EC7C1FCF99F600B6B3EE /* HISegmentedControl.swift */; };
 		955875401FCBAD7800F79570 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9558753F1FCBAD7800F79570 /* UIStoryboard.swift */; };
+		9558876C20083E7900B8F937 /* Countdown.json in Resources */ = {isa = PBXBuildFile; fileRef = 9558876B20083E7900B8F937 /* Countdown.json */; };
 		956F41E11FC7577500557DC7 /* HIAnnouncmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F41E01FC7577500557DC7 /* HIAnnouncmentsViewController.swift */; };
 		956F41E31FC76C8E00557DC7 /* HIMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F41E21FC76C8E00557DC7 /* HIMenuController.swift */; };
 		957D7C821FC28ED600C4332A /* HIScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957D7C811FC28ED600C4332A /* HIScheduleViewController.swift */; };
@@ -47,7 +46,6 @@
 		959AD4011FC4ECC700691399 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959AD4001FC4ECC700691399 /* Operators.swift */; };
 		959AD4031FC4F5FA00691399 /* HIAnnouncementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 959AD4021FC4F5FA00691399 /* HIAnnouncementCell.xib */; };
 		959AD4051FC5159700691399 /* HIEventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959AD4041FC5159700691399 /* HIEventDetailViewController.swift */; };
-		959AD4071FC5165800691399 /* HIBaseViewController+AlertPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959AD4061FC5165800691399 /* HIBaseViewController+AlertPresentation.swift */; };
 		959AD40C1FC53AEB00691399 /* HIEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959AD40B1FC53AEB00691399 /* HIEventCell.swift */; };
 		959AD40E1FC53AF500691399 /* HIEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 959AD40D1FC53AF500691399 /* HIEventCell.xib */; };
 		959C59261FC8A4B900761BF2 /* splashy_loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 959C59251FC8A4B900761BF2 /* splashy_loader.json */; };
@@ -57,13 +55,8 @@
 		95A472911FC6056700381329 /* HIDateHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95A472901FC6056700381329 /* HIDateHeader.xib */; };
 		95A472951FC64B3A00381329 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A472941FC64B3A00381329 /* UIView.swift */; };
 		95A472971FC64DC100381329 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A472961FC64DC100381329 /* UIViewController.swift */; };
-		95CF9D771FC7E38D00A3C69A /* HIBaseViewController+UIRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CF9D761FC7E38D00A3C69A /* HIBaseViewController+UIRefreshControl.swift */; };
+		95C3BE302008B99C0008ED79 /* HIBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C3BE2F2008B99C0008ED79 /* HIBaseViewController.swift */; };
 		95DE24DC1FC3ADBE000F599D /* HIAnnouncementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DE24DB1FC3ADBE000F599D /* HIAnnouncementService.swift */; };
-		95DE25091FC3FCF7000F599D /* HIBaseViewController+NSFetchedResultsControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DE25041FC3FCF7000F599D /* HIBaseViewController+NSFetchedResultsControllerDelegate.swift */; };
-		95DE250A1FC3FCF7000F599D /* HIBaseViewController+KeyboardNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DE25051FC3FCF7000F599D /* HIBaseViewController+KeyboardNotifications.swift */; };
-		95DE250B1FC3FCF7000F599D /* HIBaseViewController+UICollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DE25061FC3FCF7000F599D /* HIBaseViewController+UICollectionViewDataSource.swift */; };
-		95DE250C1FC3FCF7000F599D /* HIBaseViewController+UITextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DE25071FC3FCF7000F599D /* HIBaseViewController+UITextFieldDelegate.swift */; };
-		95DE250D1FC3FCF7000F599D /* HIBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DE25081FC3FCF7000F599D /* HIBaseViewController.swift */; };
 		95DE25101FC3FD61000F599D /* EventDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DE250F1FC3FD61000F599D /* EventDataSource.swift */; };
 		95FC1D1E1FCBD20E00F8AD60 /* HIUserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */; };
 		95FC1D201FCBD21600F8AD60 /* Modals.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95FC1D1F1FCBD21600F8AD60 /* Modals.storyboard */; };
@@ -88,9 +81,7 @@
 		951827B21EA35E8B00049F79 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		951827B31EA35E8B00049F79 /* General.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = General.storyboard; sourceTree = "<group>"; };
 		953199C81FC25CA0009F2AA1 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
-		953C54781FC7A93400B566C9 /* HIBaseViewController+UICollectionViewDelegateFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HIBaseViewController+UICollectionViewDelegateFlowLayout.swift"; sourceTree = "<group>"; };
 		953C547A1FC7B36500B566C9 /* HICollectionViewDelegateFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICollectionViewDelegateFlowLayout.swift; sourceTree = "<group>"; };
-		953C547E1FC7B49600B566C9 /* HIBaseViewController+HICollectionViewDelegateFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HIBaseViewController+HICollectionViewDelegateFlowLayout.swift"; sourceTree = "<group>"; };
 		954EE1CD1FD0E2B40078F39E /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		954EE1D01FD0F14E0078F39E /* HILoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HILoginViewController.swift; sourceTree = "<group>"; };
 		954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILoginSelectionViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +89,7 @@
 		954F82A01FD3C33D009071F0 /* HILoginFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILoginFlowController.swift; sourceTree = "<group>"; };
 		9553EC7C1FCF99F600B6B3EE /* HISegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HISegmentedControl.swift; sourceTree = "<group>"; };
 		9558753F1FCBAD7800F79570 /* UIStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
+		9558876B20083E7900B8F937 /* Countdown.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Countdown.json; sourceTree = "<group>"; };
 		956F41E01FC7577500557DC7 /* HIAnnouncmentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAnnouncmentsViewController.swift; sourceTree = "<group>"; };
 		956F41E21FC76C8E00557DC7 /* HIMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIMenuController.swift; sourceTree = "<group>"; };
 		957D7C811FC28ED600C4332A /* HIScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScheduleViewController.swift; sourceTree = "<group>"; };
@@ -113,7 +105,6 @@
 		959AD4001FC4ECC700691399 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		959AD4021FC4F5FA00691399 /* HIAnnouncementCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HIAnnouncementCell.xib; sourceTree = "<group>"; };
 		959AD4041FC5159700691399 /* HIEventDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEventDetailViewController.swift; sourceTree = "<group>"; };
-		959AD4061FC5165800691399 /* HIBaseViewController+AlertPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HIBaseViewController+AlertPresentation.swift"; sourceTree = "<group>"; };
 		959AD40B1FC53AEB00691399 /* HIEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEventCell.swift; sourceTree = "<group>"; };
 		959AD40D1FC53AF500691399 /* HIEventCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HIEventCell.xib; sourceTree = "<group>"; };
 		959C59251FC8A4B900761BF2 /* splashy_loader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splashy_loader.json; sourceTree = "<group>"; };
@@ -123,14 +114,9 @@
 		95A472901FC6056700381329 /* HIDateHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HIDateHeader.xib; sourceTree = "<group>"; };
 		95A472941FC64B3A00381329 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		95A472961FC64DC100381329 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		95CF9D761FC7E38D00A3C69A /* HIBaseViewController+UIRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HIBaseViewController+UIRefreshControl.swift"; sourceTree = "<group>"; };
+		95C3BE2F2008B99C0008ED79 /* HIBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIBaseViewController.swift; sourceTree = "<group>"; };
 		95DE24DA1FC3AC5D000F599D /* JSON Date Decoding.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "JSON Date Decoding.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		95DE24DB1FC3ADBE000F599D /* HIAnnouncementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAnnouncementService.swift; sourceTree = "<group>"; };
-		95DE25041FC3FCF7000F599D /* HIBaseViewController+NSFetchedResultsControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HIBaseViewController+NSFetchedResultsControllerDelegate.swift"; sourceTree = "<group>"; };
-		95DE25051FC3FCF7000F599D /* HIBaseViewController+KeyboardNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HIBaseViewController+KeyboardNotifications.swift"; sourceTree = "<group>"; };
-		95DE25061FC3FCF7000F599D /* HIBaseViewController+UICollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HIBaseViewController+UICollectionViewDataSource.swift"; sourceTree = "<group>"; };
-		95DE25071FC3FCF7000F599D /* HIBaseViewController+UITextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HIBaseViewController+UITextFieldDelegate.swift"; sourceTree = "<group>"; };
-		95DE25081FC3FCF7000F599D /* HIBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIBaseViewController.swift; sourceTree = "<group>"; };
 		95DE250F1FC3FD61000F599D /* EventDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDataSource.swift; sourceTree = "<group>"; };
 		95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIUserDetailViewController.swift; sourceTree = "<group>"; };
 		95FC1D1F1FCBD21600F8AD60 /* Modals.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Modals.storyboard; sourceTree = "<group>"; };
@@ -259,6 +245,14 @@
 			path = HILoginFlowViewControllers;
 			sourceTree = "<group>";
 		};
+		9558876A20083E7900B8F937 /* Countdown */ = {
+			isa = PBXGroup;
+			children = (
+				9558876B20083E7900B8F937 /* Countdown.json */,
+			);
+			path = Countdown;
+			sourceTree = "<group>";
+		};
 		957D7CA41FC2940800C4332A /* APIModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,14 +290,14 @@
 		957DB2E41FC2435100F8C45E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				954EE1CF1FD0F14E0078F39E /* HILoginFlowViewControllers */,
-				95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */,
 				956F41E01FC7577500557DC7 /* HIAnnouncmentsViewController.swift */,
-				95DE25031FC3FCF7000F599D /* HIBaseViewController */,
+				95C3BE2F2008B99C0008ED79 /* HIBaseViewController.swift */,
 				959AD4041FC5159700691399 /* HIEventDetailViewController.swift */,
 				959AD3FB1FC4B0DE00691399 /* HILaunchViewController.swift */,
-				957D7C811FC28ED600C4332A /* HIScheduleViewController.swift */,
+				954EE1CF1FD0F14E0078F39E /* HILoginFlowViewControllers */,
 				9510F6A61FCB7E53007D19DB /* HIScannerViewController.swift */,
+				957D7C811FC28ED600C4332A /* HIScheduleViewController.swift */,
+				95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */,
 				95A472961FC64DC100381329 /* UIViewController.swift */,
 			);
 			path = ViewControllers;
@@ -321,6 +315,7 @@
 		959AD3F21FC4B03800691399 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				9558876A20083E7900B8F937 /* Countdown */,
 				959AD3F31FC4B03800691399 /* Launch */,
 				95CF9D731FC7E31700A3C69A /* Refresh */,
 			);
@@ -388,22 +383,6 @@
 				959C59251FC8A4B900761BF2 /* splashy_loader.json */,
 			);
 			path = Refresh;
-			sourceTree = "<group>";
-		};
-		95DE25031FC3FCF7000F599D /* HIBaseViewController */ = {
-			isa = PBXGroup;
-			children = (
-				95DE25081FC3FCF7000F599D /* HIBaseViewController.swift */,
-				959AD4061FC5165800691399 /* HIBaseViewController+AlertPresentation.swift */,
-				953C547E1FC7B49600B566C9 /* HIBaseViewController+HICollectionViewDelegateFlowLayout.swift */,
-				95DE25051FC3FCF7000F599D /* HIBaseViewController+KeyboardNotifications.swift */,
-				95DE25041FC3FCF7000F599D /* HIBaseViewController+NSFetchedResultsControllerDelegate.swift */,
-				95DE25061FC3FCF7000F599D /* HIBaseViewController+UICollectionViewDataSource.swift */,
-				953C54781FC7A93400B566C9 /* HIBaseViewController+UICollectionViewDelegateFlowLayout.swift */,
-				95DE25071FC3FCF7000F599D /* HIBaseViewController+UITextFieldDelegate.swift */,
-				95CF9D761FC7E38D00A3C69A /* HIBaseViewController+UIRefreshControl.swift */,
-			);
-			path = HIBaseViewController;
 			sourceTree = "<group>";
 		};
 		95DE250E1FC3FD28000F599D /* DataSources */ = {
@@ -492,6 +471,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				959AD3F91FC4B03800691399 /* img_0.png in Resources */,
+				9558876C20083E7900B8F937 /* Countdown.json in Resources */,
 				959AD3FA1FC4B03800691399 /* data.json in Resources */,
 				959C59281FC8A5AF00761BF2 /* loader_ring.json in Resources */,
 				951827B51EA35E8B00049F79 /* General.storyboard in Resources */,
@@ -571,13 +551,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				957D7C821FC28ED600C4332A /* HIScheduleViewController.swift in Sources */,
-				95DE250A1FC3FCF7000F599D /* HIBaseViewController+KeyboardNotifications.swift in Sources */,
 				950F57161FBE81FA001F7DF4 /* HIAuthService.swift in Sources */,
-				953C54791FC7A93400B566C9 /* HIBaseViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
-				95DE250B1FC3FCF7000F599D /* HIBaseViewController+UICollectionViewDataSource.swift in Sources */,
 				95A4728F1FC6055E00381329 /* HIDateHeader.swift in Sources */,
 				9510F6A41FCB7D6E007D19DB /* Event+CoreDataProperties.swift in Sources */,
-				95CF9D771FC7E38D00A3C69A /* HIBaseViewController+UIRefreshControl.swift in Sources */,
 				957D7CAC1FC2940800C4332A /* HackIllinois.xcdatamodeld in Sources */,
 				959AD3FF1FC4EB8400691399 /* HIAnnouncementCell.swift in Sources */,
 				9510F6A71FCB7E53007D19DB /* HIScannerViewController.swift in Sources */,
@@ -586,22 +562,19 @@
 				959AD40C1FC53AEB00691399 /* HIEventCell.swift in Sources */,
 				95FC1D1E1FCBD20E00F8AD60 /* HIUserDetailViewController.swift in Sources */,
 				959AD4051FC5159700691399 /* HIEventDetailViewController.swift in Sources */,
-				959AD4071FC5165800691399 /* HIBaseViewController+AlertPresentation.swift in Sources */,
+				95C3BE302008B99C0008ED79 /* HIBaseViewController.swift in Sources */,
 				959AD4011FC4ECC700691399 /* Operators.swift in Sources */,
 				954F82A11FD3C33D009071F0 /* HILoginFlowController.swift in Sources */,
 				957D7C841FC28F4100C4332A /* HIEventService.swift in Sources */,
 				95A472971FC64DC100381329 /* UIViewController.swift in Sources */,
 				954EE1D11FD0F14E0078F39E /* HILoginViewController.swift in Sources */,
-				95DE250D1FC3FCF7000F599D /* HIBaseViewController.swift in Sources */,
 				955875401FCBAD7800F79570 /* UIStoryboard.swift in Sources */,
 				957D7CAB1FC2940800C4332A /* HIAPIReturnDataContainer.swift in Sources */,
 				9553EC7D1FCF99F600B6B3EE /* HISegmentedControl.swift in Sources */,
 				95A4728C1FC5FE9900381329 /* HICollectionViewFlowLayout.swift in Sources */,
-				95DE250C1FC3FCF7000F599D /* HIBaseViewController+UITextFieldDelegate.swift in Sources */,
 				9510F6A11FCB7D6E007D19DB /* Event+CoreDataClass.swift in Sources */,
 				951827A81EA35DB800049F79 /* AppDelegate.swift in Sources */,
 				959AD3FC1FC4B0DE00691399 /* HILaunchViewController.swift in Sources */,
-				953C547F1FC7B49600B566C9 /* HIBaseViewController+HICollectionViewDelegateFlowLayout.swift in Sources */,
 				953199C91FC25CA0009F2AA1 /* CoreDataController.swift in Sources */,
 				9510F6A31FCB7D6E007D19DB /* Location+CoreDataClass.swift in Sources */,
 				9510F6A01FCB7D6E007D19DB /* Announcement+CoreDataClass.swift in Sources */,
@@ -609,7 +582,6 @@
 				95DE24DC1FC3ADBE000F599D /* HIAnnouncementService.swift in Sources */,
 				950F57141FBE8139001F7DF4 /* HIBaseService.swift in Sources */,
 				95A472951FC64B3A00381329 /* UIView.swift in Sources */,
-				95DE25091FC3FCF7000F599D /* HIBaseViewController+NSFetchedResultsControllerDelegate.swift in Sources */,
 				954EE1D51FD0F17F0078F39E /* HIUserPassLoginViewController.swift in Sources */,
 				957D7CB81FC39EA100C4332A /* Formatters.swift in Sources */,
 				956F41E31FC76C8E00557DC7 /* HIMenuController.swift in Sources */,

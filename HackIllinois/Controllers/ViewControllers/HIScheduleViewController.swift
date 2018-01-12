@@ -11,7 +11,6 @@ import UIKit
 import CoreData
 
 class HIScheduleViewController: HIBaseViewController {
-
     lazy var fetchedResultsController: NSFetchedResultsController<Event> = {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
 
@@ -23,7 +22,6 @@ class HIScheduleViewController: HIBaseViewController {
 
         return fetchedResultsController
     }()
-
 }
 
 // MARK: - IBActions
@@ -73,48 +71,45 @@ extension HIScheduleViewController {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         setupRefreshControl()
 
-        // CollectionView
-        collectionView?.register(UINib(nibName: HIEventCell.IDENTIFIER, bundle: nil), forCellWithReuseIdentifier: HIEventCell.IDENTIFIER)
-        collectionView?.register(UINib(nibName: HIDateHeader.IDENTIFIER, bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HIDateHeader.IDENTIFIER)
+        // UITableView
+        tableView?.register(UINib(nibName: HIEventCell.IDENTIFIER, bundle: nil), forCellReuseIdentifier: HIEventCell.IDENTIFIER)
+        tableView?.register(UINib(nibName: HIDateHeader.IDENTIFIER, bundle: nil), forHeaderFooterViewReuseIdentifier: HIDateHeader.IDENTIFIER)
 
         try! fetchedResultsController.performFetch()
     }
 }
 
-// MARK: - UICollectionViewDataSource
+// MARK: - UITableViewDataSource
 extension HIScheduleViewController {
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HIEventCell.IDENTIFIER, for: indexPath)
+
+    // FIXME: remove after finished layout debugging
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: HIEventCell.IDENTIFIER, for: indexPath)
         if let cell = cell as? HIEventCell {
-//            cell.titleLabel.text = fetchedResultsController.object(at: indexPath).name
+            // cell.titleLabel.text = fetchedResultsController.object(at: indexPath).name
             cell.titleLabel.text = "event"
         }
         return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-        case UICollectionElementKindSectionHeader:
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HIDateHeader.IDENTIFIER, for: indexPath)
-            if let header = header as? HIDateHeader {
-                header.titleLabel.text = "\(indexPath.section + 1):00 PM"
-            }
-            return header
-        default:
-            fatalError("No other supplementary views should be shown")
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HIDateHeader.IDENTIFIER)
+        if let header = header as? HIDateHeader {
+            header.titleLabel.text = "\(section + 1):00 PM"
         }
-    }
-
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 0
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return header
     }
 }
 
-// MARK: - UICollectionViewDelegate
+// MARK: - UITableViewDelegate
 extension HIScheduleViewController {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         performSegue(withIdentifier: "ShowEventDetail", sender: indexPath)
@@ -122,28 +117,9 @@ extension HIScheduleViewController {
     }
 }
 
-// MARK: - HICollectionViewDelegateFlowLayout
-extension HIScheduleViewController {
-    func hiBaseCollectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, heightForItemAt indexPath: IndexPath) -> CGFloat {
-        return 80
-    }
-
-    func hiBaseCollectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceHeightForHeaderInSection section: Int) -> CGFloat {
-        return 53
-    }
-}
-
 // MARK: - UIRefreshControl
 extension HIScheduleViewController {
     override func refresh(_ sender: UIRefreshControl) {
         refreshAnimation.play()
-    }
-}
-
-extension HIScheduleViewController {
-    override func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        super.controllerDidChangeContent(controller)
-        collectionView?.reloadData()
-        (collectionView?.collectionViewLayout as? HICollectionViewFlowLayout)?.reload()
     }
 }

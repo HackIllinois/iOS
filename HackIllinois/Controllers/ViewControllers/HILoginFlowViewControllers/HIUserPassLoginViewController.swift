@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 protocol HIUserPassLoginViewControllerDelegate: class {
     func userPassLoginViewControllerDidSelectBackButton(_ userPassLoginViewController: HIUserPassLoginViewController)
 
@@ -24,18 +23,19 @@ enum HIUserPassLoginViewControllerStyle {
 }
 
 class HIUserPassLoginViewController: HIBaseViewController {
-
-    // MARK: Properties
+    // MARK: - Properties
     weak var delegate: HIUserPassLoginViewControllerDelegate?
     var activityIndicator = UIActivityIndicatorView()
     var originalLoginButtonColor: UIColor?
 
-    // MARK: Outlets
+    // MARK: - Outlets
     @IBOutlet weak var usernameTextFeild: UITextField!
     @IBOutlet weak var passwordTextFeild: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+}
 
-    // MARK: Actions
+// MARK: - Actions
+extension HIUserPassLoginViewController {
     @IBAction func didSelectBack(_ sender: UIButton) {
         delegate?.userPassLoginViewControllerDidSelectBackButton(self)
     }
@@ -44,8 +44,10 @@ class HIUserPassLoginViewController: HIBaseViewController {
         guard let username = usernameTextFeild.text, let password = passwordTextFeild.text else { return }
         delegate?.userPassLoginViewControllerDidSelectLoginButton(self, forUsername: username, andPassword: password)
     }
+}
 
-    // MARK: View Life Cycle
+// MARK: - UIViewController
+extension HIUserPassLoginViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator = UIActivityIndicatorView()
@@ -66,8 +68,10 @@ class HIUserPassLoginViewController: HIBaseViewController {
         let style = delegate?.userPassLoginViewControllerStyleFor(self) ?? .readyToLogin
         stylizeFor(style)
     }
+}
 
-    // MARK: Responder chain
+// MARK: - Responder Chain
+extension HIUserPassLoginViewController {
     override func nextReponder(current: UIResponder) -> UIResponder? {
         switch current {
         case usernameTextFeild:
@@ -83,8 +87,10 @@ class HIUserPassLoginViewController: HIBaseViewController {
         guard let username = usernameTextFeild.text, let password = passwordTextFeild.text else { return }
         delegate?.userPassLoginViewControllerDidSelectLoginButton(self, forUsername: username, andPassword: password)
     }
+}
 
-    // MARK: Styling
+// MARK: - Styling
+extension HIUserPassLoginViewController {
     func stylizeFor(_ style: HIUserPassLoginViewControllerStyle) {
         switch style {
         case .currentlyPerformingLogin:

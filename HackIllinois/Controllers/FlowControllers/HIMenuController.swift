@@ -19,6 +19,7 @@ class HIMenuController: UIViewController {
 
     // MARK: - Constants
     private let MENU_ITEM_HEIGHT: CGFloat = 58
+    // TODO: Introduce MENU_MAX_HEIGHT, add scroll bar if menu height is larger than this value
 
     // MARK: - Properties
     private var _tabBarController: UITabBarController?
@@ -49,9 +50,6 @@ class HIMenuController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBarController = childViewControllers.first { $0 is UITabBarController } as? UITabBarController
-        tabBarController?.viewControllers?.forEach { (viewController) in
-            let _ = viewController.view
-        }
         resetMenuItems()
         createMenuItems()
     }

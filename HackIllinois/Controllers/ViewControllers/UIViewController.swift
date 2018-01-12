@@ -9,17 +9,9 @@
 import Foundation
 import UIKit
 
-// TODO: Change to extension on HIBaseViewController
-extension UIViewController {
-
-    @IBAction func openMenu(_ sender: UIButton) {
-        (tabBarController?.parent as? HIMenuController)?.open(sender)
-    }
-
-}
-
 extension UIViewController: StoryboardIdentifiable {
     static var storyboardIdentifier: String {
         return String(describing: self)
     }
 }
+

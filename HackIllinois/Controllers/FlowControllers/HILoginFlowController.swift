@@ -137,6 +137,8 @@ extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
             print(data)
         }
         .onFailure { [weak self] (reason) in
+            print(reason)
+
             guard self?.isCurrentlyPerformingUserPassLogin == true else { return }
 
             DispatchQueue.main.async {
@@ -146,8 +148,6 @@ extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
                     strongSelf.userPassLoginViewController.stylizeFor(style)
                 }
             }
-
-            print(reason)
         }
         .perform()
     }
