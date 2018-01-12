@@ -20,21 +20,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FKn-rm-kam">
-                                <rect key="frame" x="0.0" y="98" width="375" height="569"/>
-                                <color key="backgroundColor" name="paleBlue"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="h2g-3j-6pH" customClass="HICollectionViewFlowLayout" customModule="HackIllinois" customModuleProvider="target">
-                                    <size key="itemSize" width="0.0" height="0.0"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="12" minY="0.0" maxX="12" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                                <connections>
-                                    <outlet property="dataSource" destination="G7j-bq-gni" id="OZQ-La-9v4"/>
-                                    <outlet property="delegate" destination="G7j-bq-gni" id="lha-zP-iYw"/>
-                                </connections>
-                            </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GcH-dS-XzV" customClass="HISegmentedControl" customModule="HackIllinois" customModuleProvider="target">
                                 <rect key="frame" x="16" y="64" width="343" height="34"/>
                                 <color key="backgroundColor" name="paleBlue"/>
@@ -42,15 +27,33 @@
                                     <constraint firstAttribute="height" constant="34" id="MvS-BO-p16"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mvl-wr-xVg">
+                                <rect key="frame" x="0.0" y="98" width="375" height="569"/>
+                                <color key="backgroundColor" name="paleBlue"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="2fp-wp-Zrp">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="uaJ-FM-KLB">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
+                                <connections>
+                                    <outlet property="dataSource" destination="G7j-bq-gni" id="KeO-qv-87M"/>
+                                    <outlet property="delegate" destination="G7j-bq-gni" id="ILl-ke-IcJ"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" name="paleBlue"/>
                         <constraints>
-                            <constraint firstItem="FKn-rm-kam" firstAttribute="top" secondItem="GcH-dS-XzV" secondAttribute="bottom" id="JPT-w8-1rc"/>
                             <constraint firstItem="GcH-dS-XzV" firstAttribute="top" secondItem="gXN-Cf-MiA" secondAttribute="top" id="Lq6-AR-Ncv"/>
-                            <constraint firstAttribute="bottom" secondItem="FKn-rm-kam" secondAttribute="bottom" id="QYz-Fh-jrD"/>
-                            <constraint firstItem="FKn-rm-kam" firstAttribute="leading" secondItem="gXN-Cf-MiA" secondAttribute="leading" id="WmH-tP-xM0"/>
+                            <constraint firstItem="mvl-wr-xVg" firstAttribute="top" secondItem="GcH-dS-XzV" secondAttribute="bottom" id="R9g-gQ-Sad"/>
+                            <constraint firstItem="mvl-wr-xVg" firstAttribute="leading" secondItem="gXN-Cf-MiA" secondAttribute="leading" id="VRD-aG-bFX"/>
                             <constraint firstItem="gXN-Cf-MiA" firstAttribute="trailing" secondItem="GcH-dS-XzV" secondAttribute="trailing" constant="16" id="awO-jv-gUp"/>
-                            <constraint firstItem="FKn-rm-kam" firstAttribute="trailing" secondItem="gXN-Cf-MiA" secondAttribute="trailing" id="fRG-OF-8El"/>
+                            <constraint firstItem="gXN-Cf-MiA" firstAttribute="trailing" secondItem="mvl-wr-xVg" secondAttribute="trailing" id="i5O-gS-Ult"/>
+                            <constraint firstItem="gXN-Cf-MiA" firstAttribute="bottom" secondItem="mvl-wr-xVg" secondAttribute="bottom" id="q4Y-dt-XfJ"/>
                             <constraint firstItem="GcH-dS-XzV" firstAttribute="leading" secondItem="gXN-Cf-MiA" secondAttribute="leading" constant="16" id="qpT-6H-s0K"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gXN-Cf-MiA"/>
@@ -58,7 +61,7 @@
                     <navigationItem key="navigationItem" title="SCHEDULE" leftItemsSupplementBackButton="YES" id="r6C-36-KMM">
                         <barButtonItem key="leftBarButtonItem" image="MenuOpen" id="jNb-pN-GXx">
                             <connections>
-                                <action selector="openMenu:" destination="G7j-bq-gni" id="2CY-9R-hcV"/>
+                                <action selector="openMenu:" destination="G7j-bq-gni" id="kTZ-0P-0zj"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="MenuUnfavorited" id="HYQ-yT-TZ5">
@@ -68,7 +71,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="collectionView" destination="FKn-rm-kam" id="JdS-GU-dYn"/>
+                        <outlet property="tableView" destination="mvl-wr-xVg" id="q95-Cl-C0D"/>
                         <segue destination="Hgu-X0-PbQ" kind="show" identifier="ShowEventDetail" id="ZdR-hV-ShJ"/>
                     </connections>
                 </viewController>
@@ -131,7 +134,7 @@
         <!--PROFILE-->
         <scene sceneID="r3l-mo-00U">
             <objects>
-                <viewController title="PROFILE" id="Rlo-SE-LBI" sceneMemberID="viewController">
+                <viewController title="PROFILE" id="Rlo-SE-LBI" customClass="HIBaseViewController" customModule="HackIllinois" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GJ0-Lv-C9o">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -204,7 +207,7 @@
                     <navigationItem key="navigationItem" title="PROFILE" id="y6S-Xy-s2S">
                         <barButtonItem key="leftBarButtonItem" image="MenuOpen" id="18M-da-DoS">
                             <connections>
-                                <action selector="openMenu:" destination="Rlo-SE-LBI" id="FLL-S3-Gsi"/>
+                                <action selector="openMenu:" destination="Rlo-SE-LBI" id="n7k-8L-8wR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -218,6 +221,7 @@
             <objects>
                 <navigationController title="NOTIFICATIONS" id="sna-pQ-qyq" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="NOTIFICATIONS" id="ig5-rK-TlJ"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4e9-lP-9Zg">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -235,6 +239,7 @@
             <objects>
                 <navigationController title="SCANNER" id="qif-wc-4DQ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="SCANNER" id="9Fo-P4-HMi"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tlR-gk-Gab">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -277,28 +282,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="HET-me-wab">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Z6U-xF-TPQ">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" name="paleBlue"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Xi9-A4-rz1">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
                                 <connections>
-                                    <outlet property="dataSource" destination="zAl-l1-ohH" id="vOY-Ti-4fI"/>
-                                    <outlet property="delegate" destination="zAl-l1-ohH" id="Rx7-ux-Nqg"/>
+                                    <outlet property="dataSource" destination="zAl-l1-ohH" id="KcS-Bn-b5P"/>
+                                    <outlet property="delegate" destination="zAl-l1-ohH" id="aBF-ZH-qBH"/>
                                 </connections>
-                            </collectionView>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" name="paleBlue"/>
                         <constraints>
-                            <constraint firstItem="HET-me-wab" firstAttribute="leading" secondItem="NcD-Kg-tv3" secondAttribute="leading" id="MhB-Hl-CT3"/>
-                            <constraint firstItem="HET-me-wab" firstAttribute="top" secondItem="NcD-Kg-tv3" secondAttribute="top" id="fTt-Zc-rJe"/>
-                            <constraint firstAttribute="bottom" secondItem="HET-me-wab" secondAttribute="bottom" id="gQS-hC-a1S"/>
-                            <constraint firstItem="NcD-Kg-tv3" firstAttribute="trailing" secondItem="HET-me-wab" secondAttribute="trailing" id="lI3-Lb-bbn"/>
+                            <constraint firstItem="Z6U-xF-TPQ" firstAttribute="top" secondItem="NcD-Kg-tv3" secondAttribute="top" id="5N0-RO-LYN"/>
+                            <constraint firstItem="NcD-Kg-tv3" firstAttribute="bottom" secondItem="Z6U-xF-TPQ" secondAttribute="bottom" id="JVb-RQ-ACu"/>
+                            <constraint firstItem="NcD-Kg-tv3" firstAttribute="trailing" secondItem="Z6U-xF-TPQ" secondAttribute="trailing" id="Vcj-LB-tHY"/>
+                            <constraint firstItem="Z6U-xF-TPQ" firstAttribute="leading" secondItem="NcD-Kg-tv3" secondAttribute="leading" id="YkT-77-xQ6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NcD-Kg-tv3"/>
                     </view>
@@ -310,7 +308,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="collectionView" destination="HET-me-wab" id="Gdu-ge-9d8"/>
+                        <outlet property="tableView" destination="Z6U-xF-TPQ" id="wFQ-e3-gJf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8zf-3T-gha" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -475,21 +473,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OoS-K7-dcH">
-                                <rect key="frame" x="0.0" y="358" width="375" height="309"/>
-                                <color key="backgroundColor" name="paleBlue"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="D2b-4U-haf" customClass="HICollectionViewFlowLayout" customModule="HackIllinois" customModuleProvider="target">
-                                    <size key="itemSize" width="0.0" height="0.0"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="12" minY="0.0" maxX="12" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                                <connections>
-                                    <outlet property="dataSource" destination="QOa-5C-hYA" id="ajb-0S-VUQ"/>
-                                    <outlet property="delegate" destination="QOa-5C-hYA" id="vMl-Ss-khN"/>
-                                </connections>
-                            </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HACKING ENDS IN:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uIs-aL-hv4">
                                 <rect key="frame" x="0.0" y="84" width="375" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -509,20 +492,38 @@
                                     <constraint firstAttribute="height" constant="188" id="sie-RD-Jnh"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0gz-do-cn4">
+                                <rect key="frame" x="0.0" y="358" width="375" height="309"/>
+                                <color key="backgroundColor" name="paleBlue"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="lvd-F5-ZUg">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="TGh-Np-N8V">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
+                                <connections>
+                                    <outlet property="dataSource" destination="QOa-5C-hYA" id="gd7-4j-yKD"/>
+                                    <outlet property="delegate" destination="QOa-5C-hYA" id="N1h-Sy-oK6"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" name="paleBlue"/>
                         <constraints>
                             <constraint firstItem="jj6-Lu-Sqa" firstAttribute="trailing" secondItem="dNB-VJ-Aqo" secondAttribute="trailing" id="3ys-YH-VlI"/>
-                            <constraint firstAttribute="bottom" secondItem="OoS-K7-dcH" secondAttribute="bottom" id="AtH-TC-8ah"/>
-                            <constraint firstItem="OoS-K7-dcH" firstAttribute="leading" secondItem="jj6-Lu-Sqa" secondAttribute="leading" id="Fwd-W0-vJ6"/>
+                            <constraint firstItem="jj6-Lu-Sqa" firstAttribute="trailing" secondItem="0gz-do-cn4" secondAttribute="trailing" id="DRe-TA-CVp"/>
+                            <constraint firstItem="jj6-Lu-Sqa" firstAttribute="bottom" secondItem="0gz-do-cn4" secondAttribute="bottom" id="KVw-ZD-enR"/>
                             <constraint firstItem="fnt-kF-TjS" firstAttribute="leading" secondItem="jj6-Lu-Sqa" secondAttribute="leading" constant="12" id="OTN-4s-vNk"/>
-                            <constraint firstItem="OoS-K7-dcH" firstAttribute="trailing" secondItem="jj6-Lu-Sqa" secondAttribute="trailing" id="bqX-tg-f05"/>
+                            <constraint firstItem="0gz-do-cn4" firstAttribute="top" secondItem="dNB-VJ-Aqo" secondAttribute="bottom" constant="20" id="Vuc-A7-geI"/>
                             <constraint firstItem="dNB-VJ-Aqo" firstAttribute="top" secondItem="fnt-kF-TjS" secondAttribute="bottom" constant="15" id="cQF-BO-r1k"/>
-                            <constraint firstItem="OoS-K7-dcH" firstAttribute="top" secondItem="dNB-VJ-Aqo" secondAttribute="bottom" constant="20" id="hgr-uX-7iW"/>
                             <constraint firstItem="uIs-aL-hv4" firstAttribute="top" secondItem="jj6-Lu-Sqa" secondAttribute="top" constant="20" id="kxc-47-poq"/>
                             <constraint firstItem="fnt-kF-TjS" firstAttribute="top" secondItem="uIs-aL-hv4" secondAttribute="bottom" constant="15" id="lq9-GN-AQ2"/>
                             <constraint firstItem="dNB-VJ-Aqo" firstAttribute="leading" secondItem="jj6-Lu-Sqa" secondAttribute="leading" id="nhZ-0f-SKI"/>
                             <constraint firstItem="dNB-VJ-Aqo" firstAttribute="centerX" secondItem="OVp-Nn-BZn" secondAttribute="centerX" id="vKD-1l-7s6"/>
+                            <constraint firstItem="0gz-do-cn4" firstAttribute="leading" secondItem="jj6-Lu-Sqa" secondAttribute="leading" id="vXo-9a-IL4"/>
                             <constraint firstItem="uIs-aL-hv4" firstAttribute="leading" secondItem="jj6-Lu-Sqa" secondAttribute="leading" id="wZ1-me-A8A"/>
                             <constraint firstItem="jj6-Lu-Sqa" firstAttribute="trailing" secondItem="fnt-kF-TjS" secondAttribute="trailing" constant="12" id="xYi-ZC-24t"/>
                             <constraint firstItem="jj6-Lu-Sqa" firstAttribute="trailing" secondItem="uIs-aL-hv4" secondAttribute="trailing" id="xce-lc-zz5"/>
@@ -532,7 +533,7 @@
                     <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="xnr-3S-j4H">
                         <barButtonItem key="leftBarButtonItem" image="MenuOpen" id="eD8-to-6vY">
                             <connections>
-                                <action selector="openMenu:" destination="QOa-5C-hYA" id="BP7-jx-OVG"/>
+                                <action selector="openMenu:" destination="QOa-5C-hYA" id="Lvi-Wt-cVZ"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="MenuUnfavorited" id="FNU-Dp-gj4">
@@ -542,7 +543,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="collectionView" destination="OoS-K7-dcH" id="U7v-VH-bmM"/>
+                        <outlet property="tableView" destination="0gz-do-cn4" id="aha-HC-rC0"/>
                         <segue destination="Hgu-X0-PbQ" kind="show" identifier="ShowEventDetail" id="buL-ig-Fhb"/>
                     </connections>
                 </viewController>
@@ -586,6 +587,9 @@
         </namedColor>
         <namedColor name="lightPeriwinkle">
             <color red="0.80000001192092896" green="0.85100001096725464" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="paleBlue">
+            <color red="0.94901960784313721" green="0.96078431372549022" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="paleBlue">
             <color red="0.94901960784313721" green="0.96078431372549022" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

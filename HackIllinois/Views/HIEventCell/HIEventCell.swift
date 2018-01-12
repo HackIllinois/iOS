@@ -9,13 +9,26 @@
 import Foundation
 import UIKit
 
-class HIEventCell: UICollectionViewCell {
+class HIEventCell: UITableViewCell {
 
     static let IDENTIFIER = "HIEventCell"
+
+    private var detailDisclosureImage = UIImage(named: "DisclosureIndicator")
 
     @IBOutlet weak var favoritedButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var locationsStackView: UIStackView!
+
+
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        accessoryView = UIImageView(image: detailDisclosureImage)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        accessoryView = UIImageView(image: detailDisclosureImage)
+    }
 
     override func prepareForReuse() {
         super.prepareForReuse()

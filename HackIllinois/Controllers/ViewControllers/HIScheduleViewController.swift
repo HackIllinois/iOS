@@ -24,7 +24,7 @@ class HIScheduleViewController: HIBaseViewController {
     }()
 }
 
-// MARK: - IBActions
+// MARK: - Actions
 extension HIScheduleViewController {
     @IBAction func launchGet() {
         HIAnnouncementService.getAllAnnouncements()
@@ -82,7 +82,7 @@ extension HIScheduleViewController {
 // MARK: - UITableViewDataSource
 extension HIScheduleViewController {
 
-    // FIXME: remove after finished layout debugging
+    // FIXME: remove after finishing layout debugging
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -112,6 +112,7 @@ extension HIScheduleViewController {
 // MARK: - UITableViewDelegate
 extension HIScheduleViewController {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // FIXME: remove segue
         performSegue(withIdentifier: "ShowEventDetail", sender: indexPath)
         collectionView.deselectItem(at: indexPath, animated: true)
     }

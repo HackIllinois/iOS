@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class HIDateHeader: UICollectionReusableView {
+class HIDateHeader: UITableViewHeaderFooterView {
     static let IDENTIFIER = "HIDateHeader"
 
     @IBOutlet weak var titleLabel: UILabel!
