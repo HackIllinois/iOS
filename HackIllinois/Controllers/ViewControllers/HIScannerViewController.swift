@@ -11,13 +11,15 @@ import UIKit
 import AVKit
 
 class HIScannerViewController: HIBaseViewController {
-
     var captureSession: AVCaptureSession?
     let hapticGenerator = UINotificationFeedbackGenerator()
 
     var loadFailed = false
     var respondingToQRCodeFound = true
+}
 
+// MARK: - UIViewController
+extension HIScannerViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -52,9 +54,15 @@ class HIScannerViewController: HIBaseViewController {
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
-
 }
 
+// MARK: - UINavigationItem Setup
+extension HIScannerViewController {
+    @objc dynamic override func setupNavigationItem() {
+        super.setupNavigationItem()
+        title = "SCANNER"
+    }
+}
 
 // MARK: UINavigationControllerDelegate
 extension HIScannerViewController: UINavigationControllerDelegate {

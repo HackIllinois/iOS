@@ -36,10 +36,21 @@ extension HIAnnouncmentsViewController {
         super.viewDidLoad()
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         tableView?.register(UINib(nibName: HIAnnouncementCell.IDENTIFIER, bundle: nil), forCellReuseIdentifier: HIAnnouncementCell.IDENTIFIER)
+        
+        tableView?.delegate = self
+        tableView?.dataSource = self
 
         tableView?.contentInset = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
 
-        try! fetchedResultsController.performFetch()
+        try? _fetchedResultsController?.performFetch()
+    }
+}
+
+// MARK: - UINavigationItem Setup
+extension HIAnnouncmentsViewController {
+    @objc dynamic override func setupNavigationItem() {
+        super.setupNavigationItem()
+        title = "NOTIFICATIONS"
     }
 }
 

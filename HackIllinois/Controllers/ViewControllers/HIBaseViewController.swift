@@ -23,8 +23,8 @@ class HIBaseViewController: UIViewController {
 
 // MARK: - HIMenuController
 extension HIBaseViewController {
-    @IBAction func openMenu(_ sender: UIButton) {
-        (tabBarController?.parent as? HIMenuController)?.open(sender)
+    @objc func openMenu() {
+        (tabBarController?.parent as? HIMenuController)?.open(self)
     }
 }
 
@@ -32,7 +32,8 @@ extension HIBaseViewController {
 extension HIBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+        setupNavigationItem()
+        // setup tabbaritem
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -43,6 +44,14 @@ extension HIBaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unregisterForKeyboardNotifications()
+    }
+}
+
+// MARK: - UINavigationItem Setup
+extension HIBaseViewController {
+    @objc dynamic func setupNavigationItem() {
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuOpen"), style: .plain, target: self, action: #selector(HIBaseViewController.openMenu))
     }
 }
 
