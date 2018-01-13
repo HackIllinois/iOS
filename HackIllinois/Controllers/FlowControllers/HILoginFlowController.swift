@@ -88,6 +88,7 @@ extension HILoginFlowController: HILoginSelectionViewControllerDelegate {
         switch selection {
         case .hacker:
             loginSession = SFAuthenticationSession(url: HIAuthService.githubLoginURL(), callbackURLScheme: nil) { [weak self] (url, error) in
+                print(url ?? "", error ?? "")
                 if let url = url,
                     let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
                     let queryItems = components.queryItems,

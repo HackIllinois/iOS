@@ -25,7 +25,7 @@ class HIAuthService: HIBaseService {
 
     // let url = URL(string: "https://github.com/login/oauth/authorize?scope=user:email&client_id=6a31db63429227214035&redirect_uri=https://hackillinois.org/auth/ios")!
     class func githubLoginURL() -> URL {
-        guard let url = URL(string: baseURL + "?mobile=1") else {
+        guard let url = URL(string: baseURL + "?isMobile=1") else {
             fatalError()
         }
         return url
