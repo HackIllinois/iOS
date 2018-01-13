@@ -14,9 +14,10 @@ protocol HILoginSelectionViewControllerDelegate: class {
 }
 
 class HILoginSelectionViewController: HIBaseViewController {
-
+    // MARK: - Properties
     weak var delegate: HILoginSelectionViewControllerDelegate?
 
+    // MARK: - Actions
     @IBAction func didSelectHacker(_ button: UIButton) {
         delegate?.loginSelectionViewController(self, didMakeLoginSelection: .hacker)
     }
@@ -32,5 +33,4 @@ class HILoginSelectionViewController: HIBaseViewController {
     @IBAction func didSelectVolunteer(_ button: UIButton) {
         delegate?.loginSelectionViewController(self, didMakeLoginSelection: .volunteer)
     }
-
 }

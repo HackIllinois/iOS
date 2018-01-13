@@ -19,19 +19,10 @@ class HIMenuController: UIViewController {
 
     // MARK: - Constants
     private let MENU_ITEM_HEIGHT: CGFloat = 58
+    // TODO: Introduce MENU_MAX_HEIGHT, add scroll bar if menu height is larger than this value
 
     // MARK: - Properties
     private var _tabBarController: UITabBarController?
-    override var tabBarController: UITabBarController? {
-        get {
-            return _tabBarController
-        }
-        set {
-            if _tabBarController == nil {
-                _tabBarController = newValue
-            }
-        }
-    }
 
     private(set) var state = State.closed
 
@@ -48,10 +39,27 @@ class HIMenuController: UIViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBarController = childViewControllers.first { $0 is UITabBarController } as? UITabBarController
-        tabBarController?.viewControllers?.forEach { (viewController) in
-            let _ = viewController.view
-        }
+
+        let tabBarController = UITabBarController()
+        tabBarController.tabBar.isHidden = true
+        addChildViewController(tabBarController)
+        tabBarController.view.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(tabBarController.view)
+        tabBarController.view.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        tabBarController.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        tabBarController.view.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+        tabBarController.view.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+        tabBarController.didMove(toParentViewController: self)
+        _tabBarController = tabBarController
+
+        setupViewControllers(
+            UIStoryboard(.general).instantiate(HIHomeViewController.self),
+            UIStoryboard(.general).instantiate(HIScheduleViewController.self),
+            UIStoryboard(.general).instantiate(HIAnnouncmentsViewController.self),
+            UIStoryboard(.general).instantiate(HIUserDetailViewController.self),
+            UIStoryboard(.general).instantiate(HIScannerViewController.self)
+        )
+
         resetMenuItems()
         createMenuItems()
     }
@@ -66,6 +74,15 @@ class HIMenuController: UIViewController {
     }
 
     // MARK: - API
+    func setupViewControllers(_ viewControllers: UIViewController...) {
+        _tabBarController?.viewControllers = viewControllers.map {
+            _ = $0.view // forces viewDidLoad to run, allows .title to be accessible
+            let navigationController = UINavigationController(rootViewController: $0)
+            navigationController.title = $0.title
+            return navigationController
+        }
+    }
+
     @IBAction func open(_ sender: Any) {
         guard state != .open else { return }
         state = .open
@@ -80,7 +97,7 @@ class HIMenuController: UIViewController {
 
     // MARK: Private API
     @objc private func didSelectItem(_ sender: UIButton) {
-        tabBarController?.selectedIndex = sender.tag
+        _tabBarController?.selectedIndex = sender.tag
         close(sender)
     }
 
@@ -118,7 +135,7 @@ class HIMenuController: UIViewController {
 
     // MARK: - Menu Setup
     private func createMenuItems() {
-        guard let viewControllers = tabBarController?.viewControllers else { return }
+        guard let viewControllers = _tabBarController?.viewControllers else { return }
         stackViewHeight.constant = CGFloat(viewControllers.count) * MENU_ITEM_HEIGHT
 
         for (index, viewController) in viewControllers.enumerated() {
