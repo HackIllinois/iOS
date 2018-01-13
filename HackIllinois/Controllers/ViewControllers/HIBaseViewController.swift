@@ -33,7 +33,7 @@ extension HIBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationItem()
-        // setup tabbaritem
+        setupTableView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -55,18 +55,29 @@ extension HIBaseViewController {
     }
 }
 
+// MARK: - UITableView Setup
+extension HIBaseViewController {
+    @objc dynamic func setupTableView() {
+        tableView?.delegate = self
+        tableView?.dataSource = self
+        tableView?.separatorStyle = .none
+//        tableView?.insetsContentViewsToSafeArea = true
+//        print(tableView?.safeAreaInsets)
+    }
+}
+
 // MARK: - UITableViewDelegate
 extension HIBaseViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 85
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 53
+        return 25
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return CGFloat.leastNonzeroMagnitude
+        return 15
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

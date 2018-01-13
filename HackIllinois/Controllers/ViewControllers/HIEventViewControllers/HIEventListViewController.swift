@@ -14,17 +14,12 @@ class HIEventListViewController: HIBaseViewController { }
 // MARK: - UIViewController
 extension HIEventListViewController {
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // HIBaseViewController
-        setupRefreshControl()
-
-        // UITableView
         tableView?.register(UINib(nibName: HIEventCell.IDENTIFIER, bundle: nil), forCellReuseIdentifier: HIEventCell.IDENTIFIER)
         tableView?.register(UINib(nibName: HIDateHeader.IDENTIFIER, bundle: nil), forHeaderFooterViewReuseIdentifier: HIDateHeader.IDENTIFIER)
+        super.viewDidLoad()
 
-        tableView?.delegate = self
-        tableView?.dataSource = self
-
+        setupRefreshControl()
+        
         try? _fetchedResultsController?.performFetch()
     }
 }

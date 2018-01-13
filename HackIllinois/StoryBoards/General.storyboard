@@ -27,16 +27,16 @@
                                     <constraint firstAttribute="height" constant="34" id="MvS-BO-p16"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mvl-wr-xVg">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="m3G-hc-hi9">
                                 <rect key="frame" x="0.0" y="54" width="375" height="613"/>
                                 <color key="backgroundColor" name="paleBlue"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="2fp-wp-Zrp">
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="WG0-3l-rr8">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
-                                <view key="tableFooterView" contentMode="scaleToFill" id="uaJ-FM-KLB">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="h1H-zc-up1">
+                                    <rect key="frame" x="0.0" y="35" width="375" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
@@ -45,29 +45,23 @@
                         <color key="backgroundColor" name="paleBlue"/>
                         <constraints>
                             <constraint firstItem="GcH-dS-XzV" firstAttribute="top" secondItem="gXN-Cf-MiA" secondAttribute="top" id="Lq6-AR-Ncv"/>
-                            <constraint firstItem="mvl-wr-xVg" firstAttribute="top" secondItem="GcH-dS-XzV" secondAttribute="bottom" id="R9g-gQ-Sad"/>
-                            <constraint firstItem="mvl-wr-xVg" firstAttribute="leading" secondItem="gXN-Cf-MiA" secondAttribute="leading" id="VRD-aG-bFX"/>
+                            <constraint firstItem="m3G-hc-hi9" firstAttribute="top" secondItem="GcH-dS-XzV" secondAttribute="bottom" id="O76-ab-wZQ"/>
+                            <constraint firstItem="m3G-hc-hi9" firstAttribute="trailing" secondItem="gXN-Cf-MiA" secondAttribute="trailing" id="Rsn-RR-nUm"/>
                             <constraint firstItem="gXN-Cf-MiA" firstAttribute="trailing" secondItem="GcH-dS-XzV" secondAttribute="trailing" constant="16" id="awO-jv-gUp"/>
-                            <constraint firstItem="gXN-Cf-MiA" firstAttribute="trailing" secondItem="mvl-wr-xVg" secondAttribute="trailing" id="i5O-gS-Ult"/>
-                            <constraint firstItem="gXN-Cf-MiA" firstAttribute="bottom" secondItem="mvl-wr-xVg" secondAttribute="bottom" id="q4Y-dt-XfJ"/>
+                            <constraint firstItem="m3G-hc-hi9" firstAttribute="leading" secondItem="gXN-Cf-MiA" secondAttribute="leading" id="c9K-Y8-qUa"/>
+                            <constraint firstAttribute="bottom" secondItem="m3G-hc-hi9" secondAttribute="bottom" id="cSF-Ep-8nf"/>
                             <constraint firstItem="GcH-dS-XzV" firstAttribute="leading" secondItem="gXN-Cf-MiA" secondAttribute="leading" constant="16" id="qpT-6H-s0K"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gXN-Cf-MiA"/>
                     </view>
-                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="r6C-36-KMM">
-                        <barButtonItem key="rightBarButtonItem" image="MenuUnfavorited" id="HYQ-yT-TZ5">
-                            <connections>
-                                <action selector="launchGet" destination="G7j-bq-gni" id="DOU-ht-Gwp"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="r6C-36-KMM"/>
                     <connections>
-                        <outlet property="tableView" destination="mvl-wr-xVg" id="RCx-CK-onL"/>
+                        <outlet property="tableView" destination="m3G-hc-hi9" id="Zmh-ZC-G0E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pia-ES-8SO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1874" y="1346"/>
+            <point key="canvasLocation" x="-1874.4000000000001" y="1345.2773613193403"/>
         </scene>
         <!--EVENT DETAILS-->
         <scene sceneID="M1Y-z4-J9C">
@@ -371,8 +365,8 @@
                                     <constraint firstAttribute="height" constant="188" id="sie-RD-Jnh"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0gz-do-cn4">
-                                <rect key="frame" x="0.0" y="314" width="375" height="353"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="0gz-do-cn4">
+                                <rect key="frame" x="0.0" y="299" width="375" height="368"/>
                                 <color key="backgroundColor" name="paleBlue"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="lvd-F5-ZUg">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
@@ -380,7 +374,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="TGh-Np-N8V">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="35" width="375" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
@@ -390,9 +384,9 @@
                         <constraints>
                             <constraint firstItem="jj6-Lu-Sqa" firstAttribute="trailing" secondItem="dNB-VJ-Aqo" secondAttribute="trailing" id="3ys-YH-VlI"/>
                             <constraint firstItem="jj6-Lu-Sqa" firstAttribute="trailing" secondItem="0gz-do-cn4" secondAttribute="trailing" id="DRe-TA-CVp"/>
-                            <constraint firstItem="jj6-Lu-Sqa" firstAttribute="bottom" secondItem="0gz-do-cn4" secondAttribute="bottom" id="KVw-ZD-enR"/>
+                            <constraint firstAttribute="bottom" secondItem="0gz-do-cn4" secondAttribute="bottom" id="KVw-ZD-enR"/>
                             <constraint firstItem="fnt-kF-TjS" firstAttribute="leading" secondItem="jj6-Lu-Sqa" secondAttribute="leading" constant="12" id="OTN-4s-vNk"/>
-                            <constraint firstItem="0gz-do-cn4" firstAttribute="top" secondItem="dNB-VJ-Aqo" secondAttribute="bottom" constant="20" id="Vuc-A7-geI"/>
+                            <constraint firstItem="0gz-do-cn4" firstAttribute="top" secondItem="dNB-VJ-Aqo" secondAttribute="bottom" constant="5" id="Vuc-A7-geI"/>
                             <constraint firstItem="dNB-VJ-Aqo" firstAttribute="top" secondItem="fnt-kF-TjS" secondAttribute="bottom" constant="15" id="cQF-BO-r1k"/>
                             <constraint firstItem="uIs-aL-hv4" firstAttribute="top" secondItem="jj6-Lu-Sqa" secondAttribute="top" constant="20" id="kxc-47-poq"/>
                             <constraint firstItem="fnt-kF-TjS" firstAttribute="top" secondItem="uIs-aL-hv4" secondAttribute="bottom" constant="15" id="lq9-GN-AQ2"/>
@@ -417,7 +411,6 @@
     </scenes>
     <resources>
         <image name="MenuClose" width="17" height="17"/>
-        <image name="MenuUnfavorited" width="25" height="24"/>
         <namedColor name="bubbleGumPink">
             <color red="0.98000001907348633" green="0.36100000143051147" blue="0.70200002193450928" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -434,7 +427,7 @@
             <color red="0.94901960784313721" green="0.96078431372549022" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="paleBlue">
-            <color red="0.94901960784313721" green="0.96078431372549022" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.96078431369999995" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

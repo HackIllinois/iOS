@@ -33,15 +33,11 @@ extension HIAnnouncmentsViewController {
 // MARK: - UIViewController
 extension HIAnnouncmentsViewController {
     override func viewDidLoad() {
-        super.viewDidLoad()
-        _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         tableView?.register(UINib(nibName: HIAnnouncementCell.IDENTIFIER, bundle: nil), forCellReuseIdentifier: HIAnnouncementCell.IDENTIFIER)
+        super.viewDidLoad()
+
+        _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         
-        tableView?.delegate = self
-        tableView?.dataSource = self
-
-        tableView?.contentInset = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
-
         try? _fetchedResultsController?.performFetch()
     }
 }

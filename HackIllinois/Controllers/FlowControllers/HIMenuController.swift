@@ -118,6 +118,7 @@ class HIMenuController: UIViewController {
         switch state {
         case .open:
             overlayView.alpha = 0.70
+
         case .closed:
             overlayView.alpha = 0.0
         }
@@ -164,5 +165,4 @@ class HIMenuController: UIViewController {
 
         stackViewHeight.constant = 0
     }
-
 }

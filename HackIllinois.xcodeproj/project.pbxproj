@@ -231,8 +231,8 @@
 			isa = PBXGroup;
 			children = (
 				951827B21EA35E8B00049F79 /* LaunchScreen.storyboard */,
-				954EE1CD1FD0E2B40078F39E /* Login.storyboard */,
 				951827B31EA35E8B00049F79 /* General.storyboard */,
+				954EE1CD1FD0E2B40078F39E /* Login.storyboard */,
 				95FC1D1F1FCBD21600F8AD60 /* Modals.storyboard */,
 				9558753F1FCBAD7800F79570 /* UIStoryboard.swift */,
 			);
