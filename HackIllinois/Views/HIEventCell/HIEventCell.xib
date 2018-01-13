@@ -40,7 +40,6 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4U-Gg-SO3">
                                 <rect key="frame" x="0.0" y="0.0" width="58" height="74.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="58" id="XAe-5Q-Gun"/>
                                 </constraints>
@@ -64,7 +63,6 @@
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                 <integer key="value" value="8"/>
                             </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
@@ -78,6 +76,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" name="paleBlue"/>
             <connections>
+                <outlet property="containerView" destination="bHm-aK-vlu" id="x6m-Sy-pHN"/>
                 <outlet property="favoritedButton" destination="g4U-Gg-SO3" id="p1X-m4-7Bn"/>
                 <outlet property="locationsStackView" destination="hOU-Rm-ucq" id="uRT-sq-WCy"/>
                 <outlet property="titleLabel" destination="D8U-Ou-Qpe" id="Oag-k7-HGH"/>

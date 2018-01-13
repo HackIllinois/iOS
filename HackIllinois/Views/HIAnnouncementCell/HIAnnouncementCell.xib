@@ -56,6 +56,7 @@
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
+                <outlet property="containerView" destination="09A-vg-Kg1" id="eAJ-HN-rsB"/>
                 <outlet property="infoLabel" destination="l5O-KX-yEu" id="mHY-Jc-THn"/>
                 <outlet property="timeLabel" destination="Lsr-Hk-nvZ" id="5sO-ia-f6v"/>
                 <outlet property="titleLabel" destination="pOl-53-ne8" id="Laf-ru-aJs"/>

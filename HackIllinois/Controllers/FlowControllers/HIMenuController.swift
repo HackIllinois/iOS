@@ -151,7 +151,7 @@ class HIMenuController: UIViewController {
         button.tag = index
         button.heightAnchor.constraint(equalToConstant: MENU_ITEM_HEIGHT).isActive = true
         button.contentHorizontalAlignment = .left
-        button.setTitleColor(UIColor(named: "darkIndigo"), for: .normal)
+        button.setTitleColor(HIColor.darkIndigo, for: .normal)
         button.setTitle(title, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         return button

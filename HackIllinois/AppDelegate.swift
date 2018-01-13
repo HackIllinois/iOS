@@ -32,17 +32,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Appearance customization
         let navigationBarAppearace = UINavigationBar.appearance()
 
-        navigationBarAppearace.tintColor = UIColor(named: "hotPink")
-        navigationBarAppearace.barTintColor = UIColor(named: "paleBlue")
+        navigationBarAppearace.tintColor = HIColor.hotPink
+        navigationBarAppearace.barTintColor = HIColor.paleBlue
         navigationBarAppearace.titleTextAttributes = [
-            NSAttributedStringKey.foregroundColor: UIColor(named: "darkIndigo") as Any,
+            NSAttributedStringKey.foregroundColor: HIColor.darkIndigo as Any,
             NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15, weight: .bold) as Any
         ]
         navigationBarAppearace.shadowImage = UIImage()
 
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
-        UIColor(named: "paleBlue")?.setFill()
+        HIColor.paleBlue.setFill()
         UIRectFill(rect)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

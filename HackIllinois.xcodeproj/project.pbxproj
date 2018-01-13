@@ -21,6 +21,8 @@
 		951827A91EA35DB800049F79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 951827991EA35DB800049F79 /* Assets.xcassets */; };
 		951827B41EA35E8B00049F79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 951827B21EA35E8B00049F79 /* LaunchScreen.storyboard */; };
 		951827B51EA35E8B00049F79 /* General.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 951827B31EA35E8B00049F79 /* General.storyboard */; };
+		9521CA682009DC1D008BF038 /* HIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521CA672009DC1D008BF038 /* HIColor.swift */; };
+		9521CA6A2009E1AF008BF038 /* HITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521CA692009E1AF008BF038 /* HITableViewCell.swift */; };
 		953199C91FC25CA0009F2AA1 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953199C81FC25CA0009F2AA1 /* CoreDataController.swift */; };
 		953C547B1FC7B36500B566C9 /* HICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C547A1FC7B36500B566C9 /* HICollectionViewDelegateFlowLayout.swift */; };
 		954EE1CE1FD0E2B40078F39E /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 954EE1CD1FD0E2B40078F39E /* Login.storyboard */; };
@@ -82,6 +84,8 @@
 		951827A31EA35DB800049F79 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		951827B21EA35E8B00049F79 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		951827B31EA35E8B00049F79 /* General.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = General.storyboard; sourceTree = "<group>"; };
+		9521CA672009DC1D008BF038 /* HIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIColor.swift; sourceTree = "<group>"; };
+		9521CA692009E1AF008BF038 /* HITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITableViewCell.swift; sourceTree = "<group>"; };
 		953199C81FC25CA0009F2AA1 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		953C547A1FC7B36500B566C9 /* HICollectionViewDelegateFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICollectionViewDelegateFlowLayout.swift; sourceTree = "<group>"; };
 		954EE1CD1FD0E2B40078F39E /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
@@ -188,6 +192,7 @@
 				9518279E1EA35DB800049F79 /* Controllers */,
 				95DE250E1FC3FD28000F599D /* DataSources */,
 				957D7CB71FC39EA100C4332A /* Formatters.swift */,
+				9521CA672009DC1D008BF038 /* HIColor.swift */,
 				950F57191FBFC8E3001F7DF4 /* HackIllinois.entitlements */,
 				951827A31EA35DB800049F79 /* Info.plist */,
 				95A4728A1FC5FE9900381329 /* Layouts */,
@@ -287,6 +292,7 @@
 				959AD40A1FC53AE100691399 /* HIEventCell */,
 				95A472941FC64B3A00381329 /* UIView.swift */,
 				9553EC7C1FCF99F600B6B3EE /* HISegmentedControl.swift */,
+				9521CA692009E1AF008BF038 /* HITableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -564,6 +570,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9521CA6A2009E1AF008BF038 /* HITableViewCell.swift in Sources */,
 				950F57161FBE81FA001F7DF4 /* HIAuthService.swift in Sources */,
 				95A4728F1FC6055E00381329 /* HIDateHeader.swift in Sources */,
 				9510F6A41FCB7D6E007D19DB /* Event+CoreDataProperties.swift in Sources */,
@@ -593,6 +600,7 @@
 				959AD3FC1FC4B0DE00691399 /* HILaunchViewController.swift in Sources */,
 				953199C91FC25CA0009F2AA1 /* CoreDataController.swift in Sources */,
 				9510F6A31FCB7D6E007D19DB /* Location+CoreDataClass.swift in Sources */,
+				9521CA682009DC1D008BF038 /* HIColor.swift in Sources */,
 				9510F6A01FCB7D6E007D19DB /* Announcement+CoreDataClass.swift in Sources */,
 				95DE25101FC3FD61000F599D /* EventDataSource.swift in Sources */,
 				95DE24DC1FC3ADBE000F599D /* HIAnnouncementService.swift in Sources */,

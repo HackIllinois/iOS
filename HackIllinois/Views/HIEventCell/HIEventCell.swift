@@ -9,23 +9,10 @@
 import Foundation
 import UIKit
 
-class HIEventCell: UITableViewCell {
+class HIEventCell: HITableViewCell {
 
+    // MARK: - Static
     static let IDENTIFIER = "HIEventCell"
-
-    @IBOutlet weak var favoritedButton: UIButton!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var locationsStackView: UIStackView!
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        titleLabel.text = nil
-        locationsStackView.arrangedSubviews.forEach { (view) in
-            if view != titleLabel {
-                locationsStackView.removeArrangedSubview(view)
-            }
-        }
-    }
 
     static func <- (lhs: HIEventCell, rhs: Event) {
         lhs.titleLabel.text = rhs.name
@@ -37,4 +24,21 @@ class HIEventCell: UITableViewCell {
         }
     }
 
+    // MARK: - Outlets
+    @IBOutlet weak var favoritedButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var locationsStackView: UIStackView!
+}
+
+// MARK: - UITableViewCell
+extension HIEventCell {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        titleLabel.text = nil
+        locationsStackView.arrangedSubviews.forEach { (view) in
+            if view != titleLabel {
+                locationsStackView.removeArrangedSubview(view)
+            }
+        }
+    }
 }

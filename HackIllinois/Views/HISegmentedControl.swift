@@ -22,16 +22,16 @@ class HISegmentedControl: UIControl {
     }
 
     private var labels = [UILabel]()
-    private var font                 = UIFont.systemFont(ofSize: 13, weight: .medium)
-    private var selectedLabelColor   = UIColor(named: "darkIndigo")
-    private var unselectedLabelColor = UIColor(named: "darkIndigo")
+    private var font = UIFont.systemFont(ofSize: 13, weight: .medium)
+    private var selectedLabelColor = HIColor.darkIndigo
+    private var unselectedLabelColor = HIColor.darkIndigo
 
     private var indicatorView = UIView()
-    private var indicatorViewColor   = UIColor(named: "hotPink")
-    private var indicatorViewHeight  = CGFloat(3)
+    private var indicatorViewColor = HIColor.hotPink
+    private var indicatorViewHeight = CGFloat(3)
 
     private var bottomView = UIView()
-    private var bottomViewColor = UIColor(named: "hotPink")
+    private var bottomViewColor = HIColor.hotPink
     private var bottomViewHeight = CGFloat(1)
 
     // MARK: - Init

@@ -63,58 +63,6 @@
             </objects>
             <point key="canvasLocation" x="-1874.4000000000001" y="1345.2773613193403"/>
         </scene>
-        <!--EVENT DETAILS-->
-        <scene sceneID="M1Y-z4-J9C">
-            <objects>
-                <viewController storyboardIdentifier="HIEventDetailViewController" title="EVENT DETAILS" id="Hgu-X0-PbQ" customClass="HIEventDetailViewController" customModule="HackIllinois" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="SEE-uL-qv8">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oxH-OH-epq">
-                                <rect key="frame" x="12" y="40" width="351" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="XyX-aS-Ssv"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIl-NP-z56">
-                                <rect key="frame" x="12" y="192" width="351" height="50"/>
-                                <color key="backgroundColor" name="lightPeriwinkle"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="OjK-pe-JRM"/>
-                                </constraints>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" name="darkIndigo"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" name="paleBlue"/>
-                        <constraints>
-                            <constraint firstItem="eIl-NP-z56" firstAttribute="top" secondItem="oxH-OH-epq" secondAttribute="bottom" constant="24" id="5yh-DH-Rnz"/>
-                            <constraint firstItem="oxH-OH-epq" firstAttribute="leading" secondItem="uVQ-Dg-Xo1" secondAttribute="leading" constant="12" id="6ha-hi-GZ9"/>
-                            <constraint firstItem="uVQ-Dg-Xo1" firstAttribute="trailing" secondItem="oxH-OH-epq" secondAttribute="trailing" constant="12" id="QdW-bx-UNP"/>
-                            <constraint firstItem="oxH-OH-epq" firstAttribute="top" secondItem="uVQ-Dg-Xo1" secondAttribute="top" constant="20" id="V25-yd-ros"/>
-                            <constraint firstItem="uVQ-Dg-Xo1" firstAttribute="trailing" secondItem="eIl-NP-z56" secondAttribute="trailing" constant="12" id="Wxp-8L-huo"/>
-                            <constraint firstItem="eIl-NP-z56" firstAttribute="leading" secondItem="uVQ-Dg-Xo1" secondAttribute="leading" constant="12" id="wF9-xX-5lz"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="uVQ-Dg-Xo1"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vHC-pd-feo" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1300" y="1345"/>
-        </scene>
         <!--User Detail View Controller-->
         <scene sceneID="r3l-mo-00U">
             <objects>
@@ -419,9 +367,6 @@
         </namedColor>
         <namedColor name="darkIndigo">
             <color red="0.10999999940395355" green="0.019999999552965164" blue="0.36899998784065247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="lightPeriwinkle">
-            <color red="0.80000001192092896" green="0.85100001096725464" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="paleBlue">
             <color red="0.94901960784313721" green="0.96078431372549022" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
