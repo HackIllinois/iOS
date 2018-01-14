@@ -92,7 +92,7 @@ extension HILoginFlowController: HILoginSelectionViewControllerDelegate {
                 if let url = url,
                     let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
                     let queryItems = components.queryItems,
-                    let code = queryItems.first(where: { $0.name == "code" })?.value {
+                    let code = queryItems.first(where: { $0.name == "token" })?.value {
                     print("auth success", code)
                 } else {
                     let alert = UIAlertController(title: "Authentication Failed", message: nil, preferredStyle: .alert)
