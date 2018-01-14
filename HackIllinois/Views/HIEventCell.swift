@@ -14,20 +14,10 @@ class HIEventCell: HIBaseTableViewCell {
     // MARK: - Static
     static let IDENTIFIER = "HIEventCell"
 
-    static func <- (lhs: HIEventCell, rhs: Event) {
-        lhs.titleLabel.text = rhs.name
-        rhs.locations.forEach { (location) in
-            if let location = location as? Location {
-                let label = UILabel()
-                label.text = location.name
-            }
-        }
-    }
-
     // MARK: - Properties
     var favoritedButton = UIButton()
-    var titleLabel = UILabel()
-    var locationsStackView = UIStackView()
+    var contentStackView = UIStackView()
+    var contentStackViewHeight = NSLayoutConstraint()
 
     // MARK: - Init
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -64,18 +54,15 @@ class HIEventCell: HIBaseTableViewCell {
         disclosureIndicatorView.widthAnchor.constraint(equalToConstant: 65).isActive = true
 
         
-        // TODO: locationsStackView.alignment
-        locationsStackView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(locationsStackView)
-        locationsStackView.leadingAnchor.constraint(equalTo: favoritedButton.trailingAnchor).isActive = true
-        locationsStackView.trailingAnchor.constraint(equalTo: disclosureIndicatorView.leadingAnchor).isActive = true
-        locationsStackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-
-
-        titleLabel.textColor = HIColor.darkIndigo
-        titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .light)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        locationsStackView.addArrangedSubview(titleLabel)
+        contentStackView.axis = .vertical
+        contentStackView.distribution = .equalSpacing
+        contentStackView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(contentStackView)
+        contentStackView.leadingAnchor.constraint(equalTo: favoritedButton.trailingAnchor).isActive = true
+        contentStackView.trailingAnchor.constraint(equalTo: disclosureIndicatorView.leadingAnchor).isActive = true
+        contentStackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+        contentStackViewHeight = contentStackView.heightAnchor.constraint(equalToConstant: 0)
+        contentStackViewHeight.isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -83,15 +70,52 @@ class HIEventCell: HIBaseTableViewCell {
     }
 }
 
+// MARK: - Population
+extension HIEventCell {
+    private static func labelFor(title: String) -> UILabel {
+        let titleLabel = UILabel()
+        titleLabel.text = title
+        titleLabel.textColor = HIColor.darkIndigo
+        titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .light)
+        return titleLabel
+    }
+
+    // TODO: change to -> private static func labelFor(Location: Location) -> UILabel {
+    private static func labelFor(locationText: String) -> UILabel {
+        let locationLabel = UILabel()
+        locationLabel.text = locationText
+        locationLabel.textColor = HIColor.darkIndigo
+        locationLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
+        return locationLabel
+    }
+
+    // TODO: remove this once the true event model is ready
+    static func heightForCell(with numEvents: Int) -> CGFloat {
+        return 73 + 21 * CGFloat(numEvents)
+    }
+
+    // TODO: remove this once the true event model is ready
+    static func <- (lhs: HIEventCell, rhs: IndexPath) {
+        var contentStackViewHeight: CGFloat = 0
+        let titleLabel = labelFor(title: "Current Event Name\(rhs.row)")
+        contentStackViewHeight += titleLabel.intrinsicContentSize.height
+        lhs.contentStackView.addArrangedSubview(titleLabel)
+        for index in 0..<rhs.row {
+            let locationLabel = labelFor(locationText: "Location \(index)")
+            contentStackViewHeight += locationLabel.intrinsicContentSize.height + 3
+            lhs.contentStackView.addArrangedSubview(locationLabel)
+        }
+        lhs.contentStackViewHeight.constant = contentStackViewHeight
+    }
+}
+
 // MARK: - UITableViewCell
 extension HIEventCell {
     override func prepareForReuse() {
         super.prepareForReuse()
-        titleLabel.text = nil
-        locationsStackView.arrangedSubviews.forEach { (view) in
-            if view != titleLabel {
-                locationsStackView.removeArrangedSubview(view)
-            }
+        contentStackView.arrangedSubviews.forEach { (view) in
+            contentStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
         }
     }
 }

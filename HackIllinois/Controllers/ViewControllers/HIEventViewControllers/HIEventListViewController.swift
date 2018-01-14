@@ -45,8 +45,9 @@ extension HIEventListViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HIEventCell.IDENTIFIER, for: indexPath)
         if let cell = cell as? HIEventCell {
-            // cell.titleLabel.text = fetchedResultsController.object(at: indexPath).name
-            cell.titleLabel.text = "event"
+            // cell <- fetchedResultsController.object(at: indexPath)
+            cell <- indexPath
+
         }
         return cell
     }
@@ -63,7 +64,12 @@ extension HIEventListViewController {
 // MARK: - UITableViewDelegate
 extension HIEventListViewController {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
+        // FIXME: Remove
+        return HIEventCell.heightForCell(with: indexPath.row)
+        guard let event = _fetchedResultsController?.object(at: indexPath) as? Event else {
+            return CGFloat.leastNonzeroMagnitude
+        }
+        return 0 // HIEventCell.heightForCell(displaying: event)
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
