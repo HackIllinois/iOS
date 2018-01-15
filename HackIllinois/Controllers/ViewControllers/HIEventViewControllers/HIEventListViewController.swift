@@ -35,11 +35,11 @@ extension HIEventListViewController {
 extension HIEventListViewController {
     // FIXME: remove after finishing layout debugging
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 4
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,10 +77,18 @@ extension HIEventListViewController {
         eventDetailViewController.modalPresentationStyle = .overCurrentContext
         eventDetailViewController.modalTransitionStyle = .crossDissolve
         // eventDetailViewController.model = self._fetchedResultsController?.object(at: indexPath) as? Event
-
+//        eventDetailViewController.transitioningDelegate = self
         present(eventDetailViewController, animated: true, completion: nil)
         super.tableView(tableView, didSelectRowAt: indexPath)
     }
+}
+
+// MARK: - UIViewControllerTransitioningDelegate
+extension HIEventListViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return HIAnimator()
+    }
+
 }
 
 // MARK: - UIRefreshControl
