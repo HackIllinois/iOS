@@ -1,5 +1,5 @@
 //
-//  HITableViewCell.swift
+//  HIBaseTableViewCell.swift
 //  HackIllinois
 //
 //  Created by Rauhul Varma on 1/12/18.
@@ -9,13 +9,26 @@
 import Foundation
 import UIKit
 
-class HITableViewCell: UITableViewCell {
+class HIBaseTableViewCell: UITableViewCell {
+    // MARK: - Properties
+    var selectedColor: UIColor {
+        return HIColor.bubbleGumPink
+    }
+
+    var highlightedColor: UIColor {
+        return HIColor.lightPeriwinkle
+    }
+
+    var defaultColor: UIColor {
+        return HIColor.white
+    }
+
     // MARK: - Outlets
     @IBOutlet weak var containerView: UIView!
 }
 
 // MARK: - UITableViewCell
-extension HITableViewCell {
+extension HIBaseTableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         containerView.backgroundColor = HIColor.white
@@ -25,7 +38,7 @@ extension HITableViewCell {
         let duration = animated ? 0.2 : 0
         let animator = UIViewPropertyAnimator(duration: duration, curve: .linear)
         animator.addAnimations {
-            self.containerView.backgroundColor = highlighted ? HIColor.lightPeriwinkle : HIColor.white
+            self.containerView.backgroundColor = highlighted ? self.highlightedColor : self.defaultColor
         }
         animator.startAnimation()
     }
@@ -34,8 +47,22 @@ extension HITableViewCell {
         let duration = animated ? 0.2 : 0
         let animator = UIViewPropertyAnimator(duration: duration, curve: .linear)
         animator.addAnimations {
-            self.containerView.backgroundColor = selected ? HIColor.bubbleGumPink : HIColor.white
+            self.containerView.backgroundColor = selected ? self.selectedColor : self.defaultColor
         }
         animator.startAnimation()
+    }
+}
+
+// MARK: - StoryboardIdentifiable
+extension UITableViewCell: StoryboardIdentifiable {
+    static var storyboardIdentifier: String {
+        return String(describing: self)
+    }
+}
+
+// MARK: - StoryboardIdentifiable
+extension UITableViewHeaderFooterView: StoryboardIdentifiable {
+    static var storyboardIdentifier: String {
+        return String(describing: self)
     }
 }

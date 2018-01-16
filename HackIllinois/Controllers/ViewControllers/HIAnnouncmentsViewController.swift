@@ -33,12 +33,19 @@ extension HIAnnouncmentsViewController {
 // MARK: - UIViewController
 extension HIAnnouncmentsViewController {
     override func viewDidLoad() {
-        tableView?.register(UINib(nibName: HIAnnouncementCell.IDENTIFIER, bundle: nil), forCellReuseIdentifier: HIAnnouncementCell.IDENTIFIER)
         super.viewDidLoad()
 
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         
         try? _fetchedResultsController?.performFetch()
+    }
+}
+
+// MARK: - UITableView Setup
+extension HIAnnouncmentsViewController {
+    override func setupTableView() {
+        tableView?.register(UINib(nibName: HIAnnouncementCell.storyboardIdentifier, bundle: nil), forCellReuseIdentifier: HIAnnouncementCell.storyboardIdentifier)
+        super.setupTableView()
     }
 }
 
@@ -53,7 +60,7 @@ extension HIAnnouncmentsViewController {
 // MARK: - UITableViewDataSource
 extension HIAnnouncmentsViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: HIAnnouncementCell.IDENTIFIER, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: HIAnnouncementCell.storyboardIdentifier, for: indexPath)
         if let cell = cell as? HIAnnouncementCell {
             //            cell.titleLabel.text = fetchedResultsController.object(at: indexPath).name
             cell.titleLabel.text = "announcement"

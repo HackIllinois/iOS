@@ -9,11 +9,8 @@
 import Foundation
 import UIKit
 
-class HIEventCell: HITableViewCell {
-
+class HIEventCell: HIBaseTableViewCell {
     // MARK: - Static
-    static let IDENTIFIER = "HIEventCell"
-
     static func <- (lhs: HIEventCell, rhs: Event) {
         lhs.titleLabel.text = rhs.name
         rhs.locations.forEach { (location) in

@@ -9,10 +9,8 @@
 import Foundation
 import UIKit
 
-class HIAnnouncementCell: HITableViewCell {
+class HIAnnouncementCell: HIBaseTableViewCell {
     // MARK: - Static
-    static let IDENTIFIER = "HIAnnouncementCell"
-
     static func <- (lhs: HIAnnouncementCell, rhs: Announcement) {
         lhs.titleLabel.text = rhs.title.capitalized
         lhs.timeLabel.text  = Date.humanReadableTimeSince(rhs.time)

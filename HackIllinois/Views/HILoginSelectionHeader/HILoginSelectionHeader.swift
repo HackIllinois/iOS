@@ -1,21 +1,21 @@
 //
-//  HIDateHeader.swift
+//  HILoginSelectionHeader.swift
 //  HackIllinois
 //
-//  Created by Rauhul Varma on 11/22/17.
-//  Copyright © 2017 HackIllinois. All rights reserved.
+//  Created by Rauhul Varma on 1/14/18.
+//  Copyright © 2018 HackIllinois. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class HIDateHeader: UITableViewHeaderFooterView {
-    // MARK: - Outlets
+class HILoginSelectionHeader: UITableViewHeaderFooterView {
+    // MARK: - Outlet
     @IBOutlet weak var titleLabel: UILabel!
 }
 
 // MARK: - UITableViewHeaderFooterView
-extension HIDateHeader {
+extension HILoginSelectionHeader {
     override func prepareForReuse() {
         super.prepareForReuse()
         titleLabel.text = nil

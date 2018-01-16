@@ -61,23 +61,21 @@ extension HIBaseViewController {
         tableView?.delegate = self
         tableView?.dataSource = self
         tableView?.separatorStyle = .none
-//        tableView?.insetsContentViewsToSafeArea = true
-//        print(tableView?.safeAreaInsets)
     }
 }
 
 // MARK: - UITableViewDelegate
 extension HIBaseViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
+        return CGFloat.leastNonzeroMagnitude
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 25
+        return CGFloat.leastNonzeroMagnitude
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 15
+        return CGFloat.leastNonzeroMagnitude
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
