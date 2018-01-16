@@ -7,23 +7,17 @@
 //
 
 import UIKit
+import APIManager
 import Lottie
 import SafariServices
-
-
-enum HILoginSelection {
-    case hacker
-    case mentor
-    case staff
-    case volunteer
-}
+import SwiftKeychainAccess
 
 class HILoginFlowController: UIViewController {
 
     // MARK: Properties
     let animationView = LOTAnimationView(name: "data")
     var shouldDisplayAnimationOnNextAppearance = true
-    var isCurrentlyPerformingUserPassLogin = false
+    var userPassRequestToken: APIRequestToken?
 
     // keeps the login session from going out of scope during presentation
     var loginSession: SFAuthenticationSession?
@@ -75,6 +69,17 @@ class HILoginFlowController: UIViewController {
             }
             shouldDisplayAnimationOnNextAppearance = false
         }
+//        let testUser = HIUser(loginMethod: HIUser.LoginMethod.github, token: "testtokebnenenen", identifier: "rauhul - github")
+
+
+        print(Keychain.default.allKeys())
+//        print(Keychain.default.store(testUser, forKey: testUser.identifier))
+//        print(Keychain.default.allKeys())
+
+        for key in Keychain.default.allKeys() {
+            let retrievedValue = Keychain.default.retrieve(HIUser.self, forKey: key)
+            print(retrievedValue ?? "retrieve failed")
+        }
     }
 
     // MARK: Login Flow
@@ -84,9 +89,14 @@ class HILoginFlowController: UIViewController {
 
 // MARK: - HILoginSelectionViewControllerDelegate
 extension HILoginFlowController: HILoginSelectionViewControllerDelegate {
-    func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HILoginSelection) {
+    func loginSelectionViewControllerKeychainAccounts(_ loginSelectionViewController: HILoginSelectionViewController) -> [String] {
+
+        return []
+    }
+
+    func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HILoginMethod) {
         switch selection {
-        case .hacker:
+        case .github:
             loginSession = SFAuthenticationSession(url: HIAuthService.githubLoginURL(), callbackURLScheme: nil) { [weak self] (url, error) in
                 print(url ?? "", error ?? "")
                 if let url = url,
@@ -102,15 +112,18 @@ extension HILoginFlowController: HILoginSelectionViewControllerDelegate {
             }
             loginSession?.start()
 
-        case .mentor, .staff, .volunteer:
+        case .userPass:
             navController.pushViewController(userPassLoginViewController, animated: true)
+
+        case .existing:
+            // TODO: write this case
+            break
         }
     }
 }
 
 // MARK: - HIUserPassLoginViewControllerDelegate
 extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
-
     func userPassLoginViewControllerDidSelectBackButton(_ userPassLoginViewController: HIUserPassLoginViewController) {
 
 //        cancellogin?
@@ -118,18 +131,14 @@ extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
     }
 
     func userPassLoginViewControllerDidSelectLoginButton(_ userPassLoginViewController: HIUserPassLoginViewController, forUsername username: String, andPassword password: String) {
-        isCurrentlyPerformingUserPassLogin = true
-
         let style = userPassLoginViewControllerStyleFor(userPassLoginViewController)
         userPassLoginViewController.stylizeFor(style)
 
-        HIAuthService.login(email: username, password: password)
+        userPassRequestToken = HIAuthService.login(email: username, password: password)
         .onSuccess { [weak self] (data) in
-            guard self?.isCurrentlyPerformingUserPassLogin == true else { return }
 
             DispatchQueue.main.async {
                 if let strongSelf = self {
-                    strongSelf.isCurrentlyPerformingUserPassLogin = false
                     let style = strongSelf.userPassLoginViewControllerStyleFor(userPassLoginViewController)
                     strongSelf.userPassLoginViewController.stylizeFor(style)
                 }
@@ -140,11 +149,8 @@ extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
         .onFailure { [weak self] (reason) in
             print(reason)
 
-            guard self?.isCurrentlyPerformingUserPassLogin == true else { return }
-
             DispatchQueue.main.async {
                 if let strongSelf = self {
-                    strongSelf.isCurrentlyPerformingUserPassLogin = false
                     let style = strongSelf.userPassLoginViewControllerStyleFor(userPassLoginViewController)
                     strongSelf.userPassLoginViewController.stylizeFor(style)
                 }
@@ -154,16 +160,9 @@ extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
     }
 
     func userPassLoginViewControllerStyleFor(_ userPassLoginViewController: HIUserPassLoginViewController) -> HIUserPassLoginViewControllerStyle {
-        switch isCurrentlyPerformingUserPassLogin {
-        case true:
-            return .currentlyPerformingLogin
-
-        case false:
-            return .readyToLogin
-        }
+        guard let state = userPassRequestToken?.state else { return .readyToLogin }
+        return state == .running ? .currentlyPerformingLogin : .readyToLogin
     }
-
-
 }
 
 

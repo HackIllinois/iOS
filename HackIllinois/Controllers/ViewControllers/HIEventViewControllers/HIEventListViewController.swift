@@ -24,6 +24,13 @@ extension HIEventListViewController {
     }
 }
 
+// MARK: - UITableView Setup
+extension HIEventListViewController {
+    override func setupTableView() {
+        super.setupTableView()
+    }
+}
+
 // MARK: - UITableViewDataSource
 extension HIEventListViewController {
     // FIXME: remove after finishing layout debugging
@@ -36,7 +43,7 @@ extension HIEventListViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: HIEventCell.IDENTIFIER, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: HIEventCell.storyboardIdentifier, for: indexPath)
         if let cell = cell as? HIEventCell {
             // cell.titleLabel.text = fetchedResultsController.object(at: indexPath).name
             cell.titleLabel.text = "event"
@@ -45,7 +52,7 @@ extension HIEventListViewController {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HIDateHeader.IDENTIFIER)
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HIDateHeader.storyboardIdentifier)
         if let header = header as? HIDateHeader {
             header.titleLabel.text = "\(section + 1):00 PM"
         }
@@ -55,10 +62,25 @@ extension HIEventListViewController {
 
 // MARK: - UITableViewDelegate
 extension HIEventListViewController {
+<<<<<<< HEAD
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 85
     }
 
+=======
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 85
+    }
+
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 25
+    }
+
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 15
+    }
+
+>>>>>>> keychain UI infra
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let eventDetailViewController = HIEventDetailViewController()
         eventDetailViewController.modalPresentationStyle = .overCurrentContext
