@@ -37,6 +37,27 @@ extension HIUserDetailViewController {
 
 // MARK: - UIViewController
 extension HIUserDetailViewController {
+    override func loadView() {
+        super.loadView()
+        
+        let userDetailContainer = UIView(frame: .zero)
+        userDetailContainer.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(userDetailContainer)
+        userDetailContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
+        userDetailContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
+        userDetailContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
+        userDetailContainer.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        
+        let lookingUpUserLabel = UILabel(frame: .zero)
+        lookingUpUserLabel.translatesAutoresizingMaskIntoConstraints = false
+        userDetailContainer.addSubview(lookingUpUserLabel)
+        lookingUpUserLabel.leadingAnchor.constraint(equalTo: userDetailContainer.leadingAnchor, constant: 12).isActive = true
+        lookingUpUserLabel.trailingAnchor.constraint(equalTo: userDetailContainer.trailingAnchor, constant: -12).isActive = true
+        lookingUpUserLabel.centerYAnchor.constraint(equalTo: userDetailContainer.centerYAnchor).isActive = true
+        
+//        let animationView = Animat
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        animation.loopAnimation = true

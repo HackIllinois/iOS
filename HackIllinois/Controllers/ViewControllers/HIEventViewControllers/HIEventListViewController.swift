@@ -56,11 +56,11 @@ extension HIEventListViewController {
 // MARK: - UITableViewDelegate
 extension HIEventListViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let eventDetailViewController = UIStoryboard(.modals).instantiate(HIEventDetailViewController.self) {
-            $0.modalPresentationStyle = .overCurrentContext
-            $0.modalTransitionStyle = .crossDissolve
-//            $0.model = self._fetchedResultsController?.object(at: indexPath) as? Event
-        }
+        let eventDetailViewController = HIEventDetailViewController()
+        eventDetailViewController.modalPresentationStyle = .overCurrentContext
+        eventDetailViewController.modalTransitionStyle = .crossDissolve
+        // eventDetailViewController.model = self._fetchedResultsController?.object(at: indexPath) as? Event
+
         present(eventDetailViewController, animated: true, completion: nil)
         super.tableView(tableView, didSelectRowAt: indexPath)
     }

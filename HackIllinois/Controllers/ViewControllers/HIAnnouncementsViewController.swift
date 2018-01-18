@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class HIAnnouncmentsViewController: HIBaseViewController {
+class HIAnnouncementsViewController: HIBaseViewController {
     // MARK - Properties
     lazy var fetchedResultsController: NSFetchedResultsController<Announcement> = {
         let fetchRequest: NSFetchRequest<Announcement> = Announcement.fetchRequest()
@@ -23,15 +23,30 @@ class HIAnnouncmentsViewController: HIBaseViewController {
 
         return fetchedResultsController
     }()
+
 }
 
 // MARK: - Actions
-extension HIAnnouncmentsViewController {
+extension HIAnnouncementsViewController {
 
 }
 
 // MARK: - UIViewController
-extension HIAnnouncmentsViewController {
+extension HIAnnouncementsViewController {
+    override func loadView() {
+        super.loadView()
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tableView)
+        
+        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        
+        self.tableView = tableView
+    }
+    
     override func viewDidLoad() {
         tableView?.register(UINib(nibName: HIAnnouncementCell.IDENTIFIER, bundle: nil), forCellReuseIdentifier: HIAnnouncementCell.IDENTIFIER)
         super.viewDidLoad()
@@ -40,10 +55,12 @@ extension HIAnnouncmentsViewController {
         
         try? _fetchedResultsController?.performFetch()
     }
+    
+
 }
 
 // MARK: - UINavigationItem Setup
-extension HIAnnouncmentsViewController {
+extension HIAnnouncementsViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
         title = "NOTIFICATIONS"
@@ -51,7 +68,7 @@ extension HIAnnouncmentsViewController {
 }
 
 // MARK: - UITableViewDataSource
-extension HIAnnouncmentsViewController {
+extension HIAnnouncementsViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HIAnnouncementCell.IDENTIFIER, for: indexPath)
         if let cell = cell as? HIAnnouncementCell {

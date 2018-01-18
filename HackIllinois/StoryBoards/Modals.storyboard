@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -23,16 +23,16 @@
                                 <rect key="frame" x="30" y="557" width="315" height="80"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Looking up user" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqh-Co-YZ6">
-                                        <rect key="frame" x="12" y="29.5" width="222" height="21"/>
+                                        <rect key="frame" x="12" y="29.5" width="214" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" name="darkIndigo"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p3x-bS-uM5">
-                                        <rect key="frame" x="242" y="0.0" width="73" height="80"/>
+                                        <rect key="frame" x="234" y="0.0" width="81" height="80"/>
                                         <color key="backgroundColor" name="paleBlue"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="p3x-bS-uM5" secondAttribute="height" multiplier="29:32" constant="1" id="fOJ-6T-qlR"/>
+                                            <constraint firstAttribute="width" secondItem="p3x-bS-uM5" secondAttribute="height" constant="1" id="fOJ-6T-qlR"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -79,70 +79,10 @@
             </objects>
             <point key="canvasLocation" x="528.79999999999995" y="2294.3028485757122"/>
         </scene>
-        <!--EVENT DETAILS-->
-        <scene sceneID="Nm7-NU-INr">
-            <objects>
-                <viewController storyboardIdentifier="HIEventDetailViewController" title="EVENT DETAILS" id="gHw-ga-YDU" customClass="HIEventDetailViewController" customModule="HackIllinois" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="PPX-US-gK9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gDq-CE-afP">
-                                <rect key="frame" x="32" y="84" width="311" height="519"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="95p-JX-yBu">
-                                        <rect key="frame" x="14" y="455" width="283" height="50"/>
-                                        <color key="backgroundColor" name="lightPeriwinkle"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="0LC-Dl-lp7"/>
-                                        </constraints>
-                                        <state key="normal" title="Get Directions">
-                                            <color key="titleColor" name="darkIndigo"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" name="paleBlue"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="95p-JX-yBu" secondAttribute="trailing" constant="14" id="4as-VD-JuN"/>
-                                    <constraint firstItem="95p-JX-yBu" firstAttribute="leading" secondItem="gDq-CE-afP" secondAttribute="leading" constant="14" id="bvI-De-K2M"/>
-                                    <constraint firstAttribute="bottom" secondItem="95p-JX-yBu" secondAttribute="bottom" constant="14" id="mpg-mT-EK7"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="0.082352941176470587" green="0.0" blue="0.29608163237571716" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="gDq-CE-afP" firstAttribute="top" secondItem="gNm-yh-aHC" secondAttribute="top" constant="64" id="5m2-3L-FMb"/>
-                            <constraint firstItem="gNm-yh-aHC" firstAttribute="bottom" secondItem="gDq-CE-afP" secondAttribute="bottom" constant="64" id="LmI-e7-b9R"/>
-                            <constraint firstItem="gNm-yh-aHC" firstAttribute="trailing" secondItem="gDq-CE-afP" secondAttribute="trailing" constant="32" id="hHb-Mq-rg5"/>
-                            <constraint firstItem="gDq-CE-afP" firstAttribute="leading" secondItem="gNm-yh-aHC" secondAttribute="leading" constant="32" id="r69-1E-qt4"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="gNm-yh-aHC"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8UZ-ks-L7T" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1341.5999999999999" y="2293.4032983508246"/>
-        </scene>
     </scenes>
     <resources>
         <namedColor name="darkIndigo">
             <color red="0.10999999940000001" green="0.019999999550000001" blue="0.36899998779999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="darkIndigo">
-            <color red="0.10999999940395355" green="0.019999999552965164" blue="0.36899998784065247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="lightPeriwinkle">
-            <color red="0.80000001190000003" green="0.851000011" blue="0.98799997569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="paleBlue">
             <color red="0.94901960784313721" green="0.96078431372549022" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

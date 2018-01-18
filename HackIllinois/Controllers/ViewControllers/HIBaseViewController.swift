@@ -19,6 +19,20 @@ class HIBaseViewController: UIViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView?
+    
+    // MARK: - Init
+    convenience init() {
+        self.init(nibName: nil, bundle: nil)
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        // TODO: fatalError("init(coder:) should not be used")
+        super.init(coder: aDecoder)
+    }
 }
 
 // MARK: - HIMenuController
@@ -30,6 +44,11 @@ extension HIBaseViewController {
 
 // MARK: - UIViewController
 extension HIBaseViewController {
+    override func loadView() {
+        view = UIView()
+        view.backgroundColor = HIColor.paleBlue
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationItem()
