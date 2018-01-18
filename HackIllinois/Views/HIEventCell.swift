@@ -24,11 +24,12 @@ class HIEventCell: HITableViewCell {
         }
     }
 
-    // MARK: - Outlets
+    // MARK: - Properties
     var favoritedButton = UIButton()
     var titleLabel = UILabel()
     var locationsStackView = UIStackView()
 
+    // MARK: - Init
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -64,8 +65,8 @@ class HIEventCell: HITableViewCell {
         disclosureIndicatorView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         disclosureIndicatorView.widthAnchor.constraint(equalToConstant: 65).isActive = true
 
-
-//        locationsStackView.alignment
+        
+        // TODO: locationsStackView.alignment
         locationsStackView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(locationsStackView)
         locationsStackView.leadingAnchor.constraint(equalTo: favoritedButton.trailingAnchor).isActive = true
