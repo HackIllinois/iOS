@@ -138,9 +138,6 @@
         <namedColor name="darkIndigo">
             <color red="0.10999999940000001" green="0.019999999550000001" blue="0.36899998779999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="darkIndigo">
-            <color red="0.10999999940395355" green="0.019999999552965164" blue="0.36899998784065247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="lightPeriwinkle">
             <color red="0.80000001190000003" green="0.851000011" blue="0.98799997569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

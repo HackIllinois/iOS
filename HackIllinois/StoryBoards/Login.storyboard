@@ -95,7 +95,7 @@
                                     <constraint firstAttribute="height" constant="1" id="zt2-5i-gvg"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="USERNAME" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="49z-1P-YR4">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="EMAIL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="49z-1P-YR4">
                                 <rect key="frame" x="30" y="119" width="315" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="rlM-ps-AFR"/>
@@ -163,9 +163,9 @@
                         <viewLayoutGuide key="safeArea" id="wVL-eu-D4Q"/>
                     </view>
                     <connections>
+                        <outlet property="emailTextField" destination="49z-1P-YR4" id="T19-4C-ZZt"/>
                         <outlet property="loginButton" destination="whV-kM-O1B" id="lRz-5T-ldK"/>
-                        <outlet property="passwordTextFeild" destination="ACy-VY-gpe" id="Mbt-Oj-dLe"/>
-                        <outlet property="usernameTextFeild" destination="49z-1P-YR4" id="T19-4C-ZZt"/>
+                        <outlet property="passwordTextField" destination="ACy-VY-gpe" id="Mbt-Oj-dLe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W6f-7Y-TLL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -184,10 +184,7 @@
             <color red="0.80000001192092896" green="0.85100001096725464" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="paleBlue">
-            <color red="0.94901960780000005" green="0.96078431369999995" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="paleBlue">
-            <color red="0.94901960784313721" green="0.96078431372549022" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94900000095367432" green="0.96100002527236938" blue="0.99599999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

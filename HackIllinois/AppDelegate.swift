@@ -7,53 +7,23 @@
 //
 
 import UIKit
-import CoreData
+import SwiftKeychainAccess
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var currentUser: HIUser?
 
     // FIXME: Allows arbitary loads (make github issue)
-
-//    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-//        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
-//              let url = userActivity.webpageURL,
-//              let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
-//              let queryItems = components.queryItems,
-//              let code = queryItems.first(where: { $0.name == "code" })?.value else { return false }
-//        print(url.absoluteString)
-//        print(code)
-//        return true
-//    }
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
-        // Appearance customization
-        let navigationBarAppearace = UINavigationBar.appearance()
-
-        navigationBarAppearace.tintColor = HIColor.hotPink
-        navigationBarAppearace.barTintColor = HIColor.paleBlue
-        navigationBarAppearace.titleTextAttributes = [
-            NSAttributedStringKey.foregroundColor: HIColor.darkIndigo as Any,
-            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15, weight: .bold) as Any
-        ]
-        navigationBarAppearace.shadowImage = UIImage()
-
-        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
-        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
-        HIColor.paleBlue.setFill()
-        UIRectFill(rect)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-
-        navigationBarAppearace.setBackgroundImage(image, for: .default)
-        navigationBarAppearace.isTranslucent = false
+        resetPersistentDataIfNeeded()
+        setupNavigationBarAppearance()
 
         window = UIWindow(frame: UIScreen.main.bounds)
 
         let menuController = UIStoryboard(.general).instantiate(HIMenuController.self)
-        window?.rootViewController = UIStoryboard(.login).instantiate(HILoginFlowController.self)
+        window?.rootViewController = menuController//UIStoryboard(.login).instantiate(HILoginFlowController.self)
         window?.makeKeyAndVisible()
 
         return true
@@ -86,3 +56,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+// MARK: - Appearance Customization
+extension AppDelegate {
+    func setupNavigationBarAppearance() {
+        let navigationBarAppearace = UINavigationBar.appearance()
+
+        navigationBarAppearace.tintColor = HIColor.hotPink
+        navigationBarAppearace.barTintColor = HIColor.paleBlue
+        navigationBarAppearace.titleTextAttributes = [
+            NSAttributedStringKey.foregroundColor: HIColor.darkIndigo as Any,
+            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15, weight: .bold) as Any
+        ]
+        navigationBarAppearace.shadowImage = UIImage()
+
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
+        HIColor.paleBlue.setFill()
+        UIRectFill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        navigationBarAppearace.setBackgroundImage(image, for: .default)
+        navigationBarAppearace.isTranslucent = false
+    }
+}
+
+
+// MARK: - HIAppFlow
+extension AppDelegate {
+    func resetPersistentDataIfNeeded() {
+        guard !UserDefaults.standard.bool(forKey: "HIAPPLICATION_INSTALLED") else { return }
+        _ = Keychain.default.purge()
+        UserDefaults.standard.set(true, forKey: "HIAPPLICATION_INSTALLED")
+    }
+
+    func initalViewController() {
+        
+    }
+
+    func switchAccounts() {
+
+    }
+
+
+}

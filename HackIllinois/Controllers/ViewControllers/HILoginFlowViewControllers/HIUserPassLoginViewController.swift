@@ -12,9 +12,7 @@ import UIKit
 protocol HIUserPassLoginViewControllerDelegate: class {
     func userPassLoginViewControllerDidSelectBackButton(_ userPassLoginViewController: HIUserPassLoginViewController)
 
-    func userPassLoginViewControllerDidSelectLoginButton(_ userPassLoginViewController: HIUserPassLoginViewController, forUsername username: String, andPassword password: String)
-
-    func userPassLoginViewControllerStyleFor(_ userPassLoginViewController: HIUserPassLoginViewController) -> HIUserPassLoginViewControllerStyle
+    func userPassLoginViewControllerDidSelectLoginButton(_ userPassLoginViewController: HIUserPassLoginViewController, forEmail email: String, andPassword password: String)
 }
 
 enum HIUserPassLoginViewControllerStyle {
@@ -29,8 +27,8 @@ class HIUserPassLoginViewController: HIBaseViewController {
     var originalLoginButtonColor: UIColor?
 
     // MARK: - Outlets
-    @IBOutlet weak var usernameTextFeild: UITextField!
-    @IBOutlet weak var passwordTextFeild: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
 }
 
@@ -41,8 +39,8 @@ extension HIUserPassLoginViewController {
     }
 
     @IBAction func didSelectLogin(_ sender: UIButton) {
-        guard let username = usernameTextFeild.text, let password = passwordTextFeild.text else { return }
-        delegate?.userPassLoginViewControllerDidSelectLoginButton(self, forUsername: username, andPassword: password)
+        guard let email = emailTextField.text, let password = passwordTextField.text else { return }
+        delegate?.userPassLoginViewControllerDidSelectLoginButton(self, forEmail: email, andPassword: password)
     }
 }
 
@@ -59,14 +57,11 @@ extension HIUserPassLoginViewController {
         loginButton.addSubview(activityIndicator)
         activityIndicator.centerXAnchor.constraint(equalTo: loginButton.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: loginButton.centerYAnchor).isActive = true
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        let style = delegate?.userPassLoginViewControllerStyleFor(self) ?? .readyToLogin
-        stylizeFor(style)
+        stylizeFor(.readyToLogin)
     }
 }
 
@@ -74,9 +69,9 @@ extension HIUserPassLoginViewController {
 extension HIUserPassLoginViewController {
     override func nextReponder(current: UIResponder) -> UIResponder? {
         switch current {
-        case usernameTextFeild:
-            return passwordTextFeild
-        case passwordTextFeild:
+        case emailTextField:
+            return passwordTextField
+        case passwordTextField:
             return nil
         default:
             return nil
@@ -84,8 +79,8 @@ extension HIUserPassLoginViewController {
     }
 
     override func actionForFinalResponder() {
-        guard let username = usernameTextFeild.text, let password = passwordTextFeild.text else { return }
-        delegate?.userPassLoginViewControllerDidSelectLoginButton(self, forUsername: username, andPassword: password)
+        guard let email = emailTextField.text, let password = passwordTextField.text else { return }
+        delegate?.userPassLoginViewControllerDidSelectLoginButton(self, forEmail: email, andPassword: password)
     }
 }
 

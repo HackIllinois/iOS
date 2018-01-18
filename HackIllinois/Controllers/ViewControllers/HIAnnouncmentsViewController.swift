@@ -34,9 +34,7 @@ extension HIAnnouncmentsViewController {
 extension HIAnnouncmentsViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
-        
         try? _fetchedResultsController?.performFetch()
     }
 }
