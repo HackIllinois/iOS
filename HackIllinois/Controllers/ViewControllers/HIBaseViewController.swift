@@ -19,6 +19,20 @@ class HIBaseViewController: UIViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView?
+    
+    // MARK: - Init
+    convenience init() {
+        self.init(nibName: nil, bundle: nil)
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        // TODO: fatalError("init(coder:) should not be used")
+        super.init(coder: aDecoder)
+    }
 }
 
 // MARK: - HIMenuController
@@ -30,6 +44,11 @@ extension HIBaseViewController {
 
 // MARK: - UIViewController
 extension HIBaseViewController {
+    override func loadView() {
+        view = UIView()
+        view.backgroundColor = HIColor.paleBlue
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationItem()
@@ -61,6 +80,8 @@ extension HIBaseViewController {
         tableView?.delegate = self
         tableView?.dataSource = self
         tableView?.separatorStyle = .none
+        tableView?.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: CGFloat.leastNonzeroMagnitude, height: CGFloat.leastNonzeroMagnitude))
+        tableView?.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: CGFloat.leastNonzeroMagnitude, height: CGFloat.leastNonzeroMagnitude))
 //        tableView?.insetsContentViewsToSafeArea = true
 //        print(tableView?.safeAreaInsets)
     }
@@ -68,18 +89,6 @@ extension HIBaseViewController {
 
 // MARK: - UITableViewDelegate
 extension HIBaseViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
-    }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 25
-    }
-
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 15
-    }
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
