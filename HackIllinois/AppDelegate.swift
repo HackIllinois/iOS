@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
 
         let menuController = UIStoryboard(.general).instantiate(HIMenuController.self)
-        window?.rootViewController = menuController//UIStoryboard(.login).instantiate(HILoginFlowController.self)
+        window?.rootViewController = UIStoryboard(.login).instantiate(HILoginFlowController.self)
         window?.makeKeyAndVisible()
 
         return true

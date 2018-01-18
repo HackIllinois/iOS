@@ -53,11 +53,11 @@ class HIMenuController: UIViewController {
         _tabBarController = tabBarController
 
         setupViewControllers(
-            HIHomeViewController(),
-            HIScheduleViewController(),
-            HIAnnouncementsViewController(),
+            UIStoryboard(.general).instantiate(HIHomeViewController.self),
+            UIStoryboard(.general).instantiate(HIScheduleViewController.self),
+            UIStoryboard(.general).instantiate(HIAnnouncmentsViewController.self),
             UIStoryboard(.general).instantiate(HIUserDetailViewController.self),
-            HIScannerViewController()
+            UIStoryboard(.general).instantiate(HIScannerViewController.self)
         )
 
         resetMenuItems()
