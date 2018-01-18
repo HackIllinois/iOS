@@ -44,12 +44,12 @@ extension HIAnnouncementsViewController {
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        
+        tableView.estimatedRowHeight = 100
         self.tableView = tableView
     }
     
     override func viewDidLoad() {
-        tableView?.register(UINib(nibName: HIAnnouncementCell.IDENTIFIER, bundle: nil), forCellReuseIdentifier: HIAnnouncementCell.IDENTIFIER)
+        tableView?.register(HIAnnouncementCell.self, forCellReuseIdentifier: HIAnnouncementCell.IDENTIFIER)
         super.viewDidLoad()
 
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
@@ -70,11 +70,26 @@ extension HIAnnouncementsViewController {
 
 // MARK: - UITableViewDataSource
 extension HIAnnouncementsViewController {
+    //TODO: move to delegate
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HIAnnouncementCell.IDENTIFIER, for: indexPath)
         if let cell = cell as? HIAnnouncementCell {
-            //            cell.titleLabel.text = fetchedResultsController.object(at: indexPath).name
-            cell.titleLabel.text = "announcement"
+            // cell <- fetchedResultsController.object(at: indexPath).name
+            cell.titleLabel.text = "title"
+            cell.timeLabel.text = "time"
+            cell.infoLabel.text = "info"
         }
         return cell
     }
