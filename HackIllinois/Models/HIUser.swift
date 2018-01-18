@@ -15,10 +15,26 @@ enum HILoginMethod: Int, Codable {
     case existing
 }
 
+enum HIUserPermissions: Int, Codable {
+    case hacker
+    case volunteer
+    case staff
+    case superUser
+}
+
 struct HIUser: Codable {
     var loginMethod: HILoginMethod
+    var permissions: HIUserPermissions
     var token: String
     var identifier: String
+    var active = false
+
+    init(loginMethod: HILoginMethod, permissions: HIUserPermissions, token: String, identifier: String) {
+        self.loginMethod = loginMethod
+        self.permissions = permissions
+        self.token = token
+        self.identifier = identifier
+    }
 }
 
 // MARK: - DataConvertible

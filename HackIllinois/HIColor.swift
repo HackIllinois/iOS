@@ -30,6 +30,10 @@ class HIColor: UIColor {
         return UIColor(named: "white")!
     }
 
+    static var darkBlueGrey: UIColor {
+        return UIColor(named: "darkBlueGrey")!
+    }
+
     static var darkBlueGrey70: UIColor {
         return UIColor(named: "darkBlueGrey70")!
     }

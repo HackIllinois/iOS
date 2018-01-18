@@ -19,46 +19,42 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="TITLE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjP-JF-TQ1">
-                        <rect key="frame" x="59" y="14" width="257" height="16"/>
+                        <rect key="frame" x="51" y="14" width="273" height="16"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                         <color key="textColor" name="darkIndigo"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G6j-N8-4nB">
-                        <rect key="frame" x="29" y="42.5" width="317" height="1"/>
+                        <rect key="frame" x="23" y="42.5" width="329" height="1"/>
                         <color key="backgroundColor" name="hotPink"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="n9g-ba-ttM"/>
                         </constraints>
                     </view>
-                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KW4-YA-172">
-                        <rect key="frame" x="324" y="10" width="22" height="22"/>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="EEf-GB-IbX">
+                        <rect key="frame" x="332" y="11" width="20" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="22" id="psh-YK-jSc"/>
-                            <constraint firstAttribute="width" constant="22" id="u2h-Yx-StC"/>
+                            <constraint firstAttribute="width" constant="20" id="cyV-Vc-AUH"/>
+                            <constraint firstAttribute="height" constant="20" id="eZy-VF-X6X"/>
                         </constraints>
-                        <color key="tintColor" name="hotPink"/>
-                        <connections>
-                            <action selector="deleteButtonPressedWithSender:" destination="nfe-KA-xZr" eventType="touchUpInside" id="83u-og-p1h"/>
-                        </connections>
-                    </button>
+                    </activityIndicatorView>
                 </subviews>
                 <color key="backgroundColor" name="paleBlue"/>
                 <constraints>
-                    <constraint firstItem="gjP-JF-TQ1" firstAttribute="leading" secondItem="Bzx-Yb-WPO" secondAttribute="leading" priority="999" constant="29" id="3LM-D3-sAM"/>
-                    <constraint firstAttribute="trailing" secondItem="KW4-YA-172" secondAttribute="trailing" constant="29" id="Iny-mp-AcU"/>
+                    <constraint firstItem="gjP-JF-TQ1" firstAttribute="leading" secondItem="Bzx-Yb-WPO" secondAttribute="leading" priority="999" constant="23" id="3LM-D3-sAM"/>
+                    <constraint firstItem="EEf-GB-IbX" firstAttribute="leading" secondItem="gjP-JF-TQ1" secondAttribute="trailing" constant="8" id="CLW-QD-bLZ"/>
                     <constraint firstAttribute="bottom" secondItem="G6j-N8-4nB" secondAttribute="bottom" id="S8V-an-1Av"/>
-                    <constraint firstItem="KW4-YA-172" firstAttribute="leading" secondItem="gjP-JF-TQ1" secondAttribute="trailing" constant="8" id="SzJ-Qa-boG"/>
                     <constraint firstItem="gjP-JF-TQ1" firstAttribute="centerX" secondItem="Bzx-Yb-WPO" secondAttribute="centerX" id="cAB-jC-NvD"/>
-                    <constraint firstItem="KW4-YA-172" firstAttribute="centerY" secondItem="Bzx-Yb-WPO" secondAttribute="centerY" id="foH-RH-xvh"/>
-                    <constraint firstItem="G6j-N8-4nB" firstAttribute="leading" secondItem="Bzx-Yb-WPO" secondAttribute="leading" constant="29" id="hb0-Zr-VWV"/>
-                    <constraint firstAttribute="trailing" secondItem="G6j-N8-4nB" secondAttribute="trailing" constant="29" id="q8M-Dk-fVJ"/>
+                    <constraint firstAttribute="trailing" secondItem="EEf-GB-IbX" secondAttribute="trailing" constant="23" id="h92-sp-QsQ"/>
+                    <constraint firstItem="G6j-N8-4nB" firstAttribute="leading" secondItem="Bzx-Yb-WPO" secondAttribute="leading" constant="23" id="hb0-Zr-VWV"/>
+                    <constraint firstAttribute="trailing" secondItem="G6j-N8-4nB" secondAttribute="trailing" constant="23" id="q8M-Dk-fVJ"/>
+                    <constraint firstItem="EEf-GB-IbX" firstAttribute="centerY" secondItem="Bzx-Yb-WPO" secondAttribute="centerY" id="sA7-af-s1d"/>
                     <constraint firstItem="gjP-JF-TQ1" firstAttribute="centerY" secondItem="Bzx-Yb-WPO" secondAttribute="centerY" id="vMr-WC-PgD"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="activityIndicator" destination="EEf-GB-IbX" id="Xse-3w-7It"/>
                 <outlet property="containerView" destination="Bzx-Yb-WPO" id="o1b-Oz-Mck"/>
-                <outlet property="deleteButton" destination="KW4-YA-172" id="Rdp-o8-jBJ"/>
                 <outlet property="indicatorView" destination="G6j-N8-4nB" id="nio-K8-ruW"/>
                 <outlet property="titleLabel" destination="gjP-JF-TQ1" id="V5B-p4-fpg"/>
             </connections>
@@ -72,11 +68,8 @@
         <namedColor name="hotPink">
             <color red="0.92900002002716064" green="0.0" blue="0.54900002479553223" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="hotPink">
-            <color red="0.92900002002716064" green="0.0" blue="0.54900002479553223" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="paleBlue">
-            <color red="0.94901960784313721" green="0.96078431372549022" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94900000095367432" green="0.96100002527236938" blue="0.99599999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

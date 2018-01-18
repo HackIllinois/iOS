@@ -10,16 +10,16 @@ import Foundation
 import UIKit
 
 protocol HILoginSelectionViewControllerDelegate: class {
-    func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HILoginMethod)
+    func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HILoginMethod, withUserInfo info: String?)
     func loginSelectionViewControllerKeychainAccounts(_ loginSelectionViewController: HILoginSelectionViewController) -> [String]
 }
 
 class HILoginSelectionViewController: HIBaseViewController {
     // MARK: - Properties
-    weak var delegate: HILoginSelectionViewControllerDelegate?
+    weak var delegate: HILoginSelectionViewControllerDelegate!
 
     var staticDataStore: [(loginMethod: HILoginMethod, displayText: String)] = [
-        (.github, "HACKER"),
+        (.github,   "HACKER"),
         (.userPass, "MENTOR"),
         (.userPass, "STAFF"),
         (.userPass, "VOLUNTEER")
@@ -30,6 +30,9 @@ class HILoginSelectionViewController: HIBaseViewController {
 extension HILoginSelectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        guard let _ = delegate else {
+            fatalError("delegate must not be nil")
+        }
     }
 }
 
@@ -67,9 +70,7 @@ extension HILoginSelectionViewController {
             case 0:
                 cell.titleLabel.text = staticDataStore[indexPath.row].displayText
             default:
-                cell.titleLabel.text = "DYNAMIC ACCOUNT"
-                // TODO: remove and require signout vs switch accounts (talk to juli)
-                cell.deleteButton.isHidden = false
+                cell.titleLabel.text = delegate.loginSelectionViewControllerKeychainAccounts(self)[indexPath.row].uppercased()
             }
             if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
                 cell.indicatorView.isHidden = true
@@ -98,15 +99,15 @@ extension HILoginSelectionViewController {
 
 // MARK: - UITableViewDelegate
 extension HILoginSelectionViewController {
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 45
     }
 
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 45
     }
 
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 30
     }
 
@@ -114,10 +115,11 @@ extension HILoginSelectionViewController {
         switch indexPath.section {
         case 0:
             let selection = staticDataStore[indexPath.row].loginMethod
-            delegate?.loginSelectionViewController(self, didMakeLoginSelection: selection)
+            delegate.loginSelectionViewController(self, didMakeLoginSelection: selection, withUserInfo: nil)
 
         default:
-            delegate?.loginSelectionViewController(self, didMakeLoginSelection: .existing)
+            let info = delegate.loginSelectionViewControllerKeychainAccounts(self)[indexPath.row]
+            delegate.loginSelectionViewController(self, didMakeLoginSelection: .existing, withUserInfo: info)
 
         }
         super.tableView(tableView, didSelectRowAt: indexPath)

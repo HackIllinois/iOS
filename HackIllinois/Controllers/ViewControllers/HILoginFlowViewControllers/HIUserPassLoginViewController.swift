@@ -12,9 +12,7 @@ import UIKit
 protocol HIUserPassLoginViewControllerDelegate: class {
     func userPassLoginViewControllerDidSelectBackButton(_ userPassLoginViewController: HIUserPassLoginViewController)
 
-    func userPassLoginViewControllerDidSelectLoginButton(_ userPassLoginViewController: HIUserPassLoginViewController, forUsername username: String, andPassword password: String)
-
-    func userPassLoginViewControllerStyleFor(_ userPassLoginViewController: HIUserPassLoginViewController) -> HIUserPassLoginViewControllerStyle
+    func userPassLoginViewControllerDidSelectLoginButton(_ userPassLoginViewController: HIUserPassLoginViewController, forEmail email: String, andPassword password: String)
 }
 
 enum HIUserPassLoginViewControllerStyle {
@@ -29,8 +27,8 @@ class HIUserPassLoginViewController: HIBaseViewController {
     var activityIndicator = UIActivityIndicatorView()
 
     // MARK: - Outlets
-    var usernameTextFeild = UITextField()
-    var passwordTextFeild = UITextField()
+    var emailTextField = UITextField()
+    var passwordTextField = UITextField()
     var signInButton = UIButton()
 }
 
@@ -41,8 +39,8 @@ extension HIUserPassLoginViewController {
     }
 
     @objc func didSelectLogin(_ sender: UIButton) {
-        guard let username = usernameTextFeild.text, let password = passwordTextFeild.text else { return }
-        delegate?.userPassLoginViewControllerDidSelectLoginButton(self, forUsername: username, andPassword: password)
+        guard let email = emailTextField.text, let password = passwordTextField.text else { return }
+        delegate?.userPassLoginViewControllerDidSelectLoginButton(self, forEmail: email, andPassword: password)
     }
 }
 
@@ -74,47 +72,47 @@ extension HIUserPassLoginViewController {
         logInLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
 
 
-        usernameTextFeild.placeholder = "USERNAME"
-        usernameTextFeild.textColor = HIColor.darkIndigo
-        usernameTextFeild.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        usernameTextFeild.textContentType = .username
-        usernameTextFeild.tintColor = HIColor.hotPink
-        usernameTextFeild.autocapitalizationType = .none
-        usernameTextFeild.autocorrectionType = .no
-        usernameTextFeild.enablesReturnKeyAutomatically = true
-        usernameTextFeild.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(usernameTextFeild)
-        usernameTextFeild.topAnchor.constraint(equalTo: logInLabel.bottomAnchor, constant: 23).isActive = true
-        usernameTextFeild.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
-        usernameTextFeild.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
-        usernameTextFeild.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        emailTextField.placeholder = "USERNAME"
+        emailTextField.textColor = HIColor.darkIndigo
+        emailTextField.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+        emailTextField.textContentType = .username
+        emailTextField.tintColor = HIColor.hotPink
+        emailTextField.autocapitalizationType = .none
+        emailTextField.autocorrectionType = .no
+        emailTextField.enablesReturnKeyAutomatically = true
+        emailTextField.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(emailTextField)
+        emailTextField.topAnchor.constraint(equalTo: logInLabel.bottomAnchor, constant: 23).isActive = true
+        emailTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
+        emailTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
+        emailTextField.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
 
         let separatorView = UIView()
         separatorView.backgroundColor = HIColor.hotPink
         separatorView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(separatorView)
-        separatorView.topAnchor.constraint(equalTo: usernameTextFeild.bottomAnchor).isActive = true
+        separatorView.topAnchor.constraint(equalTo: emailTextField.bottomAnchor).isActive = true
         separatorView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 23).isActive = true
         separatorView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -23).isActive = true
         separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
 
 
-        passwordTextFeild.placeholder = "PASSWORD"
-        passwordTextFeild.textColor = HIColor.darkIndigo
-        passwordTextFeild.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        passwordTextFeild.textContentType = .username
-        passwordTextFeild.tintColor = HIColor.hotPink
-        passwordTextFeild.autocapitalizationType = .none
-        passwordTextFeild.autocorrectionType = .no
-        passwordTextFeild.enablesReturnKeyAutomatically = true
-        passwordTextFeild.isSecureTextEntry = true
-        passwordTextFeild.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(passwordTextFeild)
-        passwordTextFeild.topAnchor.constraint(equalTo: separatorView.bottomAnchor).isActive = true
-        passwordTextFeild.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
-        passwordTextFeild.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
-        passwordTextFeild.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        passwordTextField.placeholder = "PASSWORD"
+        passwordTextField.textColor = HIColor.darkIndigo
+        passwordTextField.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+        passwordTextField.textContentType = .username
+        passwordTextField.tintColor = HIColor.hotPink
+        passwordTextField.autocapitalizationType = .none
+        passwordTextField.autocorrectionType = .no
+        passwordTextField.enablesReturnKeyAutomatically = true
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(passwordTextField)
+        passwordTextField.topAnchor.constraint(equalTo: separatorView.bottomAnchor).isActive = true
+        passwordTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
+        passwordTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
+        passwordTextField.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
 
         signInButton.backgroundColor = HIColor.lightPeriwinkle
@@ -125,7 +123,7 @@ extension HIUserPassLoginViewController {
         signInButton.addTarget(self, action: #selector(HIUserPassLoginViewController.didSelectLogin(_:)), for: .touchUpInside)
         signInButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(signInButton)
-        signInButton.topAnchor.constraint(equalTo: passwordTextFeild.bottomAnchor, constant: 71).isActive = true
+        signInButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 71).isActive = true
         signInButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         signInButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         signInButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -142,9 +140,7 @@ extension HIUserPassLoginViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        let style = delegate?.userPassLoginViewControllerStyleFor(self) ?? .readyToLogin
-        stylizeFor(style)
+        stylizeFor(.readyToLogin)
     }
 }
 
@@ -152,9 +148,9 @@ extension HIUserPassLoginViewController {
 extension HIUserPassLoginViewController {
     override func nextReponder(current: UIResponder) -> UIResponder? {
         switch current {
-        case usernameTextFeild:
-            return passwordTextFeild
-        case passwordTextFeild:
+        case emailTextField:
+            return passwordTextField
+        case passwordTextField:
             return nil
         default:
             return nil
@@ -162,8 +158,8 @@ extension HIUserPassLoginViewController {
     }
 
     override func actionForFinalResponder() {
-        guard let username = usernameTextFeild.text, let password = passwordTextFeild.text else { return }
-        delegate?.userPassLoginViewControllerDidSelectLoginButton(self, forUsername: username, andPassword: password)
+        guard let email = emailTextField.text, let password = passwordTextField.text else { return }
+        delegate?.userPassLoginViewControllerDidSelectLoginButton(self, forEmail: email, andPassword: password)
     }
 }
 

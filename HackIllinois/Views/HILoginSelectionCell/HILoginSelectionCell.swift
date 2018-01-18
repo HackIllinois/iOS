@@ -24,27 +24,21 @@ class HILoginSelectionCell: HIBaseTableViewCell {
     // MARK: - Outlets
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var indicatorView: UIView!
-    @IBOutlet weak var deleteButton: UIButton!
-}
-
-// MARK: - Actions
-extension HILoginSelectionCell {
-    @IBAction func deleteButtonPressed(sender: Any?) {
-
-    }
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 }
 
 // MARK: - UITableViewCell
 extension HILoginSelectionCell {
     override func awakeFromNib() {
         super.awakeFromNib()
-        deleteButton.transform = CGAffineTransform.identity.rotated(by: CGFloat.pi/4)
+        activityIndicator.color = HIColor.hotPink
+        activityIndicator.hidesWhenStopped = true
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
         titleLabel.text = nil
         indicatorView.isHidden = false
-        deleteButton.isHidden = true
+        activityIndicator.stopAnimating()
     }
 }

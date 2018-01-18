@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class HIAnnouncementCell: HITableViewCell {
+class HIAnnouncementCell: HIBaseTableViewCell {
     // MARK: - Static
     static let IDENTIFIER = "HIAnnouncementCell"
 
