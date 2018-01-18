@@ -35,6 +35,7 @@ extension HIAnnouncementsViewController {
 extension HIAnnouncementsViewController {
     override func loadView() {
         super.loadView()
+
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)

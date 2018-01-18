@@ -14,8 +14,8 @@ class HIEventListViewController: HIBaseViewController { }
 // MARK: - UIViewController
 extension HIEventListViewController {
     override func viewDidLoad() {
-        tableView?.register(UINib(nibName: HIEventCell.IDENTIFIER, bundle: nil), forCellReuseIdentifier: HIEventCell.IDENTIFIER)
-        tableView?.register(UINib(nibName: HIDateHeader.IDENTIFIER, bundle: nil), forHeaderFooterViewReuseIdentifier: HIDateHeader.IDENTIFIER)
+        tableView?.register(HIDateHeader.self, forHeaderFooterViewReuseIdentifier: HIDateHeader.IDENTIFIER)
+        tableView?.register(HIEventCell.self, forCellReuseIdentifier: HIEventCell.IDENTIFIER)
         super.viewDidLoad()
 
         setupRefreshControl()
@@ -55,6 +55,10 @@ extension HIEventListViewController {
 
 // MARK: - UITableViewDelegate
 extension HIEventListViewController {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 85
+    }
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let eventDetailViewController = HIEventDetailViewController()
         eventDetailViewController.modalPresentationStyle = .overCurrentContext

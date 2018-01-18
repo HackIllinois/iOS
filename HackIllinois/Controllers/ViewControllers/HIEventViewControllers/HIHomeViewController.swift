@@ -30,7 +30,7 @@ extension HIHomeViewController {
     override func loadView() {
         super.loadView()
         
-        let hackingEndsInLabel = UILabel(frame: .zero)
+        let hackingEndsInLabel = UILabel()
         hackingEndsInLabel.text = "HACKING ENDS IN:"
         hackingEndsInLabel.textColor = HIColor.darkIndigo
         hackingEndsInLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
@@ -42,7 +42,7 @@ extension HIHomeViewController {
         hackingEndsInLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         
         
-        let countdownContainerView = UIView(frame: .zero)
+        let countdownContainerView = UIView()
         // TODO: remove background color after view debugging
         countdownContainerView.backgroundColor = HIColor.hotPink
         countdownContainerView.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +53,7 @@ extension HIHomeViewController {
         countdownContainerView.heightAnchor.constraint(equalToConstant: 188).isActive = true
         
         
-        let happeningNowLabel = UILabel(frame: .zero)
+        let happeningNowLabel = UILabel()
         // TODO: check if colon should appear after NOW
         happeningNowLabel.text = "HAPPENING NOW"
         happeningNowLabel.textColor = HIColor.darkIndigo
@@ -67,9 +67,9 @@ extension HIHomeViewController {
         
         
         let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.insetsContentViewsToSafeArea = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
-        
         tableView.topAnchor.constraint(equalTo: happeningNowLabel.bottomAnchor, constant: 5).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -89,5 +89,23 @@ extension HIHomeViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
         title = "HOME"
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension HIHomeViewController {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return nil
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension HIHomeViewController {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return .leastNonzeroMagnitude
+    }
+
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNonzeroMagnitude
     }
 }

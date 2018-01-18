@@ -40,7 +40,7 @@ extension HIUserDetailViewController {
     override func loadView() {
         super.loadView()
         
-        let userDetailContainer = UIView(frame: .zero)
+        let userDetailContainer = UIView()
         userDetailContainer.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(userDetailContainer)
         userDetailContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
@@ -48,7 +48,7 @@ extension HIUserDetailViewController {
         userDetailContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
         userDetailContainer.heightAnchor.constraint(equalToConstant: 80).isActive = true
         
-        let lookingUpUserLabel = UILabel(frame: .zero)
+        let lookingUpUserLabel = UILabel()
         lookingUpUserLabel.translatesAutoresizingMaskIntoConstraints = false
         userDetailContainer.addSubview(lookingUpUserLabel)
         lookingUpUserLabel.leadingAnchor.constraint(equalTo: userDetailContainer.leadingAnchor, constant: 12).isActive = true

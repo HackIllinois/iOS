@@ -22,7 +22,7 @@ extension HIEventDetailViewController {
         // TODO: change to darkbluegrey70
         view.backgroundColor = UIColor(displayP3Red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
         
-        let eventDetailContainer = UIView(frame: .zero)
+        let eventDetailContainer = UIView()
         eventDetailContainer.backgroundColor = HIColor.paleBlue
         eventDetailContainer.layer.cornerRadius = 8
         eventDetailContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +33,7 @@ extension HIEventDetailViewController {
         eventDetailContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
         
  
-        let directionsButton = UIButton(frame: .zero)
+        let directionsButton = UIButton()
         directionsButton.backgroundColor = HIColor.lightPeriwinkle
         directionsButton.layer.cornerRadius = 8
         directionsButton.setTitle("Get Directions", for: .normal)
@@ -45,7 +45,6 @@ extension HIEventDetailViewController {
         directionsButton.bottomAnchor.constraint(equalTo: eventDetailContainer.bottomAnchor, constant: -14).isActive = true
         directionsButton.trailingAnchor.constraint(equalTo: eventDetailContainer.trailingAnchor, constant: -14).isActive = true
         directionsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -62,7 +62,7 @@ extension HIScheduleViewController {
     override func loadView() {
         super.loadView()
         
-        let segmentedControl = HISegmentedControl(frame: .zero)
+        let segmentedControl = HISegmentedControl()
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
         
@@ -96,3 +96,19 @@ extension HIScheduleViewController {
         title = "SCHEDULE"
     }
 }
+
+// MARK: - UITableViewDelegate
+extension HIEventListViewController {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 25
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 15
+    }
+}
+
+
+
+
+
