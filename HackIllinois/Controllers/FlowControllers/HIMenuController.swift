@@ -65,7 +65,7 @@ extension HIMenuController {
         }
     }
 
-    @IBAction func open(_ sender: Any) {
+    func open(_ sender: Any) {
         guard state != .open else { return }
         state = .open
         animateMenuFor(state)

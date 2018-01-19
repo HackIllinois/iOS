@@ -18,7 +18,7 @@ class HIBaseViewController: UIViewController {
     var refreshAnimation = LOTAnimationView(name: "loader_ring")
 
     // MARK: - Outlets
-    @IBOutlet weak var tableView: UITableView?
+    var tableView: UITableView?
     
     // MARK: - Init
     convenience init() {

@@ -11,7 +11,7 @@ import UIKit
 
 class HITableViewCell: UITableViewCell {
     // MARK: - Outlets
-    @IBOutlet weak var containerView: UIView!
+    var containerView: UIView!
 }
 
 // MARK: - UITableViewCell

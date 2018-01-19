@@ -27,7 +27,7 @@ class HIScheduleViewController: HIEventListViewController {
 
 // MARK: - Actions
 extension HIScheduleViewController {
-    @IBAction func launchGet() {
+    func launchGet() {
         HIAnnouncementService.getAllAnnouncements()
         .onSuccess { (contained) in
             print(contained)

@@ -18,15 +18,14 @@ protocol HIUserDetailViewControllerDelegate: class {
 class HIUserDetailViewController: HIBaseViewController {
     // MARK: - Properties
     weak var delegate: HIUserDetailViewControllerDelegate?
-//    let animation = LOTAnimationView(name: "loader_ring")
 
     // MARK: - Outlets
-    @IBOutlet weak var animationView: UIView!
+    var animationView: UIView!
 }
 
 // MARK: - Actions
 extension HIUserDetailViewController {
-    @IBAction func dismiss() {
+    func dismiss() {
         let animated = true
         delegate?.willDismissViewController(self, animated: animated)
         dismiss(animated: animated) {
