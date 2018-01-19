@@ -22,8 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window = UIWindow(frame: UIScreen.main.bounds)
 
-        let menuController = UIStoryboard(.general).instantiate(HIMenuController.self)
-        window?.rootViewController = menuController//UIStoryboard(.login).instantiate(HILoginFlowController.self)
+        window?.rootViewController = initalViewController()
         window?.makeKeyAndVisible()
 
         return true
@@ -90,8 +89,55 @@ extension AppDelegate {
         UserDefaults.standard.set(true, forKey: "HIAPPLICATION_INSTALLED")
     }
 
-    func initalViewController() {
-        
+    func initalViewController() -> UIViewController {
+        var userToActivate: HIUser?
+        for key in Keychain.default.allKeys() {
+            guard let user = Keychain.default.retrieve(HIUser.self, forKey: key) else {
+                Keychain.default.removeObject(forKey: key)
+                continue
+            }
+            if user.isActive {
+                if var user = userToActivate {
+                    user.isActive = false
+                    Keychain.default.store(user, forKey: user.identifier)
+                }
+                userToActivate = user
+            }
+        }
+
+        // TODO: remove
+//        userToActivate = HIUser(loginMethod: .userPass, permissions: .hacker, token: "sf", identifier: "rauhul_test")
+//        userToActivate?.isActive = true
+
+        if let user = userToActivate {
+            return menuControllerSetupFor(user: user)
+        } else {
+            return UIStoryboard(.login).instantiate(HILoginFlowController.self)
+        }
+    }
+
+    func menuControllerSetupFor(user: HIUser) -> HIMenuController {
+        let menuController = UIStoryboard(.general).instantiate(HIMenuController.self)
+
+        var viewControllers = [UIViewController]()
+        if [.hacker].contains(user.permissions) {
+            viewControllers.append(UIStoryboard(.general).instantiate(HIHomeViewController.self))
+        }
+        if [.hacker, .volunteer, .staff, .superUser].contains(user.permissions) {
+            viewControllers.append(UIStoryboard(.general).instantiate(HIScheduleViewController.self))
+        }
+        if [.hacker, .volunteer, .staff, .superUser].contains(user.permissions) {
+            viewControllers.append(UIStoryboard(.general).instantiate(HIAnnouncmentsViewController.self))
+        }
+        if [.hacker, .volunteer, .staff, .superUser].contains(user.permissions) {
+            viewControllers.append(UIStoryboard(.general).instantiate(HIUserDetailViewController.self))
+        }
+        if [.volunteer, .staff, .superUser].contains(user.permissions) {
+            viewControllers.append(UIStoryboard(.general).instantiate(HIScannerViewController.self))
+        }
+        menuController.setupMenuFor(viewControllers)
+
+        return menuController
     }
 
     func switchAccounts() {
