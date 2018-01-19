@@ -14,8 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    // FIXME: Allows arbitary loads (make github issue)
-
+    // FIXME: Allows arbitary loads
+    // FIXME: Remove landscape support
 //    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
 //        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
 //              let url = userActivity.webpageURL,
