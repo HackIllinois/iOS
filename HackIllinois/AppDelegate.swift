@@ -50,10 +50,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearace.setBackgroundImage(image, for: .default)
         navigationBarAppearace.isTranslucent = false
 
+        UITableView.appearance().backgroundColor = HIColor.paleBlue
+
         window = UIWindow(frame: UIScreen.main.bounds)
 
-        let menuController = UIStoryboard(.general).instantiate(HIMenuController.self)
-        window?.rootViewController = HILoginFlowController()
+
+
+        let menuController = HIMenuController()
+        menuController.setupViewControllers(
+            HIHomeViewController(),
+            HIScheduleViewController(),
+            HIAnnouncementsViewController(),
+            UIStoryboard(.general).instantiate(HIUserDetailViewController.self),
+            HIScannerViewController()
+        )
+
+        window?.rootViewController = menuController //HILoginFlowController()
         window?.makeKeyAndVisible()
 
         return true

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BoP-XA-mK3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -91,101 +90,10 @@
             </objects>
             <point key="canvasLocation" x="-2745" y="1343"/>
         </scene>
-        <!--Menu Controller-->
-        <scene sceneID="XaY-8d-NiM">
-            <objects>
-                <viewController storyboardIdentifier="HIMenuController" id="BoP-XA-mK3" customClass="HIMenuController" customModule="HackIllinois" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="rXN-WH-eAx">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sKy-4C-z2N">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" name="paleBlue"/>
-                            </view>
-                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FOK-BE-NrS">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" name="darkBlueGrey"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="5ef-W2-p4c" appends="YES" id="Epa-5W-GzU"/>
-                                </connections>
-                            </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W8u-zA-e1Y">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="orX-Vl-dno">
-                                        <rect key="frame" x="59" y="39" width="257" height="0.0"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" id="bEK-oA-h4p"/>
-                                        </constraints>
-                                    </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kf4-Le-T9l">
-                                        <rect key="frame" x="0.0" y="19" width="49" height="49"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="49" id="IeS-lu-WHw"/>
-                                            <constraint firstAttribute="height" constant="49" id="YzT-Gb-pfL"/>
-                                        </constraints>
-                                        <state key="normal" image="MenuClose"/>
-                                        <connections>
-                                            <action selector="close:" destination="BoP-XA-mK3" eventType="touchUpInside" id="95K-ZE-agb"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" name="paleBlue"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" id="Rm2-z9-tdE"/>
-                                    <constraint firstItem="orX-Vl-dno" firstAttribute="leading" secondItem="W8u-zA-e1Y" secondAttribute="leading" constant="59" id="eA6-YM-bsZ"/>
-                                    <constraint firstItem="kf4-Le-T9l" firstAttribute="leading" secondItem="W8u-zA-e1Y" secondAttribute="leading" id="mSv-zl-aWV"/>
-                                    <constraint firstItem="kf4-Le-T9l" firstAttribute="top" secondItem="W8u-zA-e1Y" secondAttribute="topMargin" constant="-9" id="tjp-I3-MZp"/>
-                                    <constraint firstAttribute="trailing" secondItem="orX-Vl-dno" secondAttribute="trailing" constant="59" id="tvd-zk-Qoc"/>
-                                    <constraint firstItem="orX-Vl-dno" firstAttribute="top" secondItem="W8u-zA-e1Y" secondAttribute="topMargin" constant="11" id="uqc-f4-xTI"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" name="paleBlue"/>
-                        <constraints>
-                            <constraint firstItem="FOK-BE-NrS" firstAttribute="top" secondItem="sKy-4C-z2N" secondAttribute="top" id="Nps-R1-eho"/>
-                            <constraint firstItem="FOK-BE-NrS" firstAttribute="trailing" secondItem="sKy-4C-z2N" secondAttribute="trailing" id="Q5P-Gw-C3y"/>
-                            <constraint firstItem="sKy-4C-z2N" firstAttribute="height" secondItem="rXN-WH-eAx" secondAttribute="height" id="RUL-I2-QvY"/>
-                            <constraint firstItem="W8u-zA-e1Y" firstAttribute="top" secondItem="rXN-WH-eAx" secondAttribute="top" id="bGa-ta-PBX"/>
-                            <constraint firstItem="FOK-BE-NrS" firstAttribute="leading" secondItem="sKy-4C-z2N" secondAttribute="leading" id="g4t-YB-YWb"/>
-                            <constraint firstItem="UEm-xi-Bsn" firstAttribute="trailing" secondItem="W8u-zA-e1Y" secondAttribute="trailing" id="ghu-fx-2nj"/>
-                            <constraint firstItem="sKy-4C-z2N" firstAttribute="top" secondItem="W8u-zA-e1Y" secondAttribute="bottom" id="hZD-RU-hFD"/>
-                            <constraint firstItem="sKy-4C-z2N" firstAttribute="trailing" secondItem="rXN-WH-eAx" secondAttribute="trailing" id="iji-NK-PS6"/>
-                            <constraint firstItem="sKy-4C-z2N" firstAttribute="leading" secondItem="rXN-WH-eAx" secondAttribute="leading" id="p4V-b4-RcS"/>
-                            <constraint firstItem="sKy-4C-z2N" firstAttribute="width" secondItem="rXN-WH-eAx" secondAttribute="width" id="ptn-yw-e9e"/>
-                            <constraint firstItem="W8u-zA-e1Y" firstAttribute="leading" secondItem="UEm-xi-Bsn" secondAttribute="leading" id="u2c-ae-X0D"/>
-                            <constraint firstItem="FOK-BE-NrS" firstAttribute="bottom" secondItem="sKy-4C-z2N" secondAttribute="bottom" id="y5r-QO-RXD"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="UEm-xi-Bsn"/>
-                    </view>
-                    <connections>
-                        <outlet property="contentView" destination="sKy-4C-z2N" id="iql-ud-phP"/>
-                        <outlet property="contentViewOverlap" destination="hZD-RU-hFD" id="Uqg-bW-AKa"/>
-                        <outlet property="overlayView" destination="FOK-BE-NrS" id="Dzp-V5-8cu"/>
-                        <outlet property="stackView" destination="orX-Vl-dno" id="2xD-gp-w2j"/>
-                        <outlet property="stackViewContainerHeight" destination="Rm2-z9-tdE" id="m5i-7n-NXh"/>
-                        <outlet property="stackViewHeight" destination="bEK-oA-h4p" id="2Zh-OH-e1c"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="spa-3k-vf2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="5ef-W2-p4c">
-                    <connections>
-                        <action selector="open:" destination="BoP-XA-mK3" id="Oyo-bz-tmS"/>
-                    </connections>
-                </tapGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="-3462" y="1344"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="MenuClose" width="17" height="17"/>
         <namedColor name="bubbleGumPink">
             <color red="0.98000001907348633" green="0.36100000143051147" blue="0.70200002193450928" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="darkBlueGrey">
-            <color red="0.059000000357627869" green="0.071000002324581146" blue="0.18400000035762787" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="darkIndigo">
             <color red="0.10999999940395355" green="0.019999999552965164" blue="0.36899998784065247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

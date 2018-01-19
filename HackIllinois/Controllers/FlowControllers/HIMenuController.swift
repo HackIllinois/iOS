@@ -22,64 +22,46 @@ class HIMenuController: UIViewController {
     // TODO: Introduce MENU_MAX_HEIGHT, add scroll bar if menu height is larger than this value
 
     // MARK: - Properties
-    private var _tabBarController: UITabBarController?
+    private var _tabBarController = UITabBarController()
 
     private(set) var state = State.closed
 
     // MARK: - Outlets
-    @IBOutlet weak private var stackViewContainerHeight: NSLayoutConstraint!
-    @IBOutlet weak private var stackViewHeight: NSLayoutConstraint!
-    @IBOutlet weak private var stackView: UIStackView!
+    var menuHeight = NSLayoutConstraint()
+    var menuOverlap = NSLayoutConstraint()
+    var menuItemsHeight = NSLayoutConstraint()
 
-    @IBOutlet weak private var contentViewOverlap: NSLayoutConstraint!
-    @IBOutlet weak private var contentView: UIView!
+    var overlayView = UIView()
+    var menuItems = UIStackView()
 
-    @IBOutlet weak private var overlayView: UIView!
-
-    // MARK: - View Life Cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        let tabBarController = UITabBarController()
-        tabBarController.tabBar.isHidden = true
-        addChildViewController(tabBarController)
-        tabBarController.view.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(tabBarController.view)
-        tabBarController.view.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        tabBarController.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        tabBarController.view.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
-        tabBarController.view.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
-        tabBarController.didMove(toParentViewController: self)
-        _tabBarController = tabBarController
-
-        setupViewControllers(
-            HIHomeViewController(),
-            HIScheduleViewController(),
-            HIAnnouncementsViewController(),
-            UIStoryboard(.general).instantiate(HIUserDetailViewController.self),
-            HIScannerViewController()
-        )
-
-        resetMenuItems()
-        createMenuItems()
+    // MARK: - Init
+    convenience init() {
+        self.init(nibName: nil, bundle: nil)
     }
 
-    // MARK: - Rotation Handling
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-
-        coordinator.animate(alongsideTransition: { (context) in
-            self.animateMenuFor(self.state)
-        }, completion: nil)
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
-    // MARK: - API
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) should not be used")
+    }
+}
+
+// MARK: - Actions
+extension HIMenuController {
     func setupViewControllers(_ viewControllers: UIViewController...) {
-        _tabBarController?.viewControllers = viewControllers.map {
+        _tabBarController.viewControllers = viewControllers.map {
             _ = $0.view // forces viewDidLoad to run, allows .title to be accessible
+            $0.view.frame = _tabBarController.view.frame
             let navigationController = UINavigationController(rootViewController: $0)
             navigationController.title = $0.title
             return navigationController
+        }
+
+        if let _ = view {
+            resetMenuItems()
+            createMenuItems()
         }
     }
 
@@ -89,28 +71,110 @@ class HIMenuController: UIViewController {
         animateMenuFor(state)
     }
 
-    @IBAction func close(_ sender: Any) {
+    @objc func close(_ sender: Any) {
         guard state != .closed else { return }
         state = .closed
         animateMenuFor(state)
     }
 
-    // MARK: Private API
     @objc private func didSelectItem(_ sender: UIButton) {
-        _tabBarController?.selectedIndex = sender.tag
+        _tabBarController.selectedIndex = sender.tag
         close(sender)
     }
+}
 
-    // MARK: - Helpers
+// MARK: - UIViewController
+extension HIMenuController {
+    override func loadView() {
+        view = UIView()
+
+        _tabBarController.tabBar.isHidden = true
+        addChildViewController(_tabBarController)
+        _tabBarController.view.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(_tabBarController.view)
+        _tabBarController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        _tabBarController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        _tabBarController.view.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        _tabBarController.view.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+        _tabBarController.didMove(toParentViewController: self)
+
+
+        // TODO: Darkbluegrey (70 is view alpha channel)
+        overlayView.backgroundColor = HIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+        overlayView.alpha = 0.0
+        overlayView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(overlayView)
+        overlayView.topAnchor.constraint(equalTo: _tabBarController.view.topAnchor).isActive = true
+        overlayView.leadingAnchor.constraint(equalTo: _tabBarController.view.leadingAnchor).isActive = true
+        overlayView.bottomAnchor.constraint(equalTo: _tabBarController.view.bottomAnchor).isActive = true
+        overlayView.trailingAnchor.constraint(equalTo: _tabBarController.view.trailingAnchor).isActive = true
+
+
+        let menu = UIView()
+        menu.backgroundColor = HIColor.paleBlue
+        menu.clipsToBounds = true
+        menu.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(menu)
+        menu.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        menu.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        menuOverlap = menu.bottomAnchor.constraint(equalTo: _tabBarController.view.topAnchor)
+        menuOverlap.isActive = true
+        menu.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        menuHeight = menu.heightAnchor.constraint(equalToConstant: 0)
+        menuHeight.isActive = true
+
+
+        let closeMenuButton = UIButton(type: .system)
+        closeMenuButton.setImage(#imageLiteral(resourceName: "MenuClose"), for: .normal)
+        closeMenuButton.tintColor = HIColor.hotPink
+        closeMenuButton.addTarget(self, action: #selector(HIMenuController.close(_:)), for: .touchUpInside)
+        closeMenuButton.translatesAutoresizingMaskIntoConstraints = false
+        menu.addSubview(closeMenuButton)
+        closeMenuButton.topAnchor.constraint(equalTo: menu.safeAreaLayoutGuide.topAnchor, constant: -9).isActive = true
+        closeMenuButton.leadingAnchor.constraint(equalTo: menu.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        closeMenuButton.widthAnchor.constraint(equalToConstant: 49).isActive = true
+        closeMenuButton.heightAnchor.constraint(equalToConstant: 49).isActive = true
+
+
+        menuItems.axis = .vertical
+        menuItems.distribution = .fillEqually
+        menuItems.translatesAutoresizingMaskIntoConstraints = false
+        menu.addSubview(menuItems)
+        menuItems.topAnchor.constraint(equalTo: menu.safeAreaLayoutGuide.topAnchor, constant: 11).isActive = true
+        menuItems.leadingAnchor.constraint(equalTo: menu.safeAreaLayoutGuide.leadingAnchor, constant: 59).isActive = true
+        menuItems.trailingAnchor.constraint(equalTo: menu.safeAreaLayoutGuide.trailingAnchor, constant: -59).isActive = true
+        menuItemsHeight = menuItems.heightAnchor.constraint(equalToConstant: 0)
+        menuItemsHeight.isActive = true
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        resetMenuItems()
+        createMenuItems()
+    }
+
+    // MARK: Rotation Handling
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        coordinator.animate(alongsideTransition: { (context) in
+            self.animateMenuFor(self.state)
+        }, completion: nil)
+    }
+}
+
+// MARK: - Animation
+extension HIMenuController {
     private func updateConstraintsFor(_ state: State) {
         switch state {
         case .open:
-            stackViewContainerHeight.constant = stackViewHeight.constant + 11 + 28 + view.safeAreaInsets.top
-            contentViewOverlap.constant = -view.safeAreaInsets.top
+            menuHeight.constant = menuItemsHeight.constant + 11 + 28 + view.safeAreaInsets.top
+            menuOverlap.constant = view.safeAreaInsets.top
 
         case .closed:
-            stackViewContainerHeight.constant = 0
-            contentViewOverlap.constant = 0
+            menuHeight.constant = 0
+            menuOverlap.constant = 0
         }
     }
 
@@ -126,6 +190,7 @@ class HIMenuController: UIViewController {
 
     private func animateMenuFor(_ state: State) {
         let animator = UIViewPropertyAnimator(duration: 0.5, dampingRatio: 0.8)
+        view.layoutIfNeeded()
         updateConstraintsFor(state)
         animator.addAnimations {
             self.updateOverlayViewAlphaFor(state)
@@ -133,36 +198,37 @@ class HIMenuController: UIViewController {
         }
         animator.startAnimation()
     }
+}
 
-    // MARK: - Menu Setup
+// MARK: - Menu Item Setup
+extension HIMenuController {
+    private func resetMenuItems() {
+        menuItems.arrangedSubviews.forEach { (view) in
+            menuItems.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+
+        menuItemsHeight.constant = 0
+    }
+
     private func createMenuItems() {
-        guard let viewControllers = _tabBarController?.viewControllers else { return }
-        stackViewHeight.constant = CGFloat(viewControllers.count) * MENU_ITEM_HEIGHT
+        let viewControllers = _tabBarController.viewControllers ?? []
+        menuItemsHeight.constant = CGFloat(viewControllers.count) * MENU_ITEM_HEIGHT
 
         for (index, viewController) in viewControllers.enumerated() {
             let button = createMenuItem(title: viewController.title, index: index)
             button.addTarget(self, action: #selector(didSelectItem(_:)), for: .touchUpInside)
-            stackView.addArrangedSubview(button)
+            menuItems.addArrangedSubview(button)
         }
     }
 
     private func createMenuItem(title: String?, index: Int) -> UIButton {
         let button = UIButton(type: .system)
         button.tag = index
-        button.heightAnchor.constraint(equalToConstant: MENU_ITEM_HEIGHT).isActive = true
         button.contentHorizontalAlignment = .left
-        button.setTitleColor(HIColor.darkIndigo, for: .normal)
         button.setTitle(title, for: .normal)
+        button.setTitleColor(HIColor.darkIndigo, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         return button
-    }
-
-    private func resetMenuItems() {
-        stackView.arrangedSubviews.forEach { (view) in
-            stackView.removeArrangedSubview(view)
-            view.removeFromSuperview()
-        }
-
-        stackViewHeight.constant = 0
     }
 }
