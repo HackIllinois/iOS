@@ -27,7 +27,7 @@ struct HIUser: Codable {
     var permissions: HIUserPermissions
     var token: String
     var identifier: String
-    var active = false
+    var isActive = false
 
     init(loginMethod: HILoginMethod, permissions: HIUserPermissions, token: String, identifier: String) {
         self.loginMethod = loginMethod

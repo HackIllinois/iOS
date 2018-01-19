@@ -50,9 +50,10 @@ class HIMenuController: UIViewController {
 
 // MARK: - Actions
 extension HIMenuController {
-    func setupViewControllers(_ viewControllers: UIViewController...) {
+    func setupMenuFor(_ viewControllers: [UIViewController]) {
         _tabBarController.viewControllers = viewControllers.map {
             _ = $0.view // forces viewDidLoad to run, allows .title to be accessible
+            // TODO: determine if necessary
             $0.view.frame = _tabBarController.view.frame
             let navigationController = UINavigationController(rootViewController: $0)
             navigationController.title = $0.title
@@ -214,7 +215,6 @@ extension HIMenuController {
     private func createMenuItems() {
         let viewControllers = _tabBarController.viewControllers ?? []
         menuItemsHeight.constant = CGFloat(viewControllers.count) * MENU_ITEM_HEIGHT
-
         for (index, viewController) in viewControllers.enumerated() {
             let button = createMenuItem(title: viewController.title, index: index)
             button.addTarget(self, action: #selector(didSelectItem(_:)), for: .touchUpInside)

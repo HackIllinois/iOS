@@ -96,7 +96,7 @@ class HILoginFlowController: UIViewController {
 
     func loginSucceeded(user: HIUser) {
         var user = user
-        user.active = true
+        user.isActive = true
         Keychain.default.store(user, forKey: user.identifier)
         refreshKeychainContents()
         delegate?.loginFlowController(self, didLoginWith: user)
