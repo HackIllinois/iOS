@@ -109,34 +109,34 @@ extension AppDelegate {
         }
 
         // TODO: remove
-//        userToActivate = HIUser(loginMethod: .userPass, permissions: .hacker, token: "sf", identifier: "rauhul_test")
-//        userToActivate?.isActive = true
+        userToActivate = HIUser(loginMethod: .userPass, permissions: .hacker, token: "sf", identifier: "rauhul_test")
+        userToActivate?.isActive = true
 
         if let user = userToActivate {
             return menuControllerSetupFor(user: user)
         } else {
-            return UIStoryboard(.login).instantiate(HILoginFlowController.self)
+            return HILoginFlowController()
         }
     }
 
     func menuControllerSetupFor(user: HIUser) -> HIMenuController {
-        let menuController = UIStoryboard(.general).instantiate(HIMenuController.self)
+        let menuController = HIMenuController()
 
         var viewControllers = [UIViewController]()
         if [.hacker].contains(user.permissions) {
-            viewControllers.append(UIStoryboard(.general).instantiate(HIHomeViewController.self))
+            viewControllers.append(HIHomeViewController())
         }
         if [.hacker, .volunteer, .staff, .superUser].contains(user.permissions) {
-            viewControllers.append(UIStoryboard(.general).instantiate(HIScheduleViewController.self))
+            viewControllers.append(HIScheduleViewController())
         }
         if [.hacker, .volunteer, .staff, .superUser].contains(user.permissions) {
-            viewControllers.append(UIStoryboard(.general).instantiate(HIAnnouncementsViewController.self))
+            viewControllers.append(HIAnnouncementsViewController())
         }
         if [.hacker, .volunteer, .staff, .superUser].contains(user.permissions) {
-            viewControllers.append(UIStoryboard(.general).instantiate(HIUserDetailViewController.self))
+            viewControllers.append(HIUserDetailViewController())
         }
         if [.volunteer, .staff, .superUser].contains(user.permissions) {
-            viewControllers.append(UIStoryboard(.general).instantiate(HIScannerViewController.self))
+            viewControllers.append(HIScannerViewController())
         }
         menuController.setupMenuFor(viewControllers)
 
