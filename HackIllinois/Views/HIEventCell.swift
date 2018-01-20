@@ -35,7 +35,6 @@ class HIEventCell: HIBaseTableViewCell {
 
         backgroundColor = HIColor.paleBlue
 
-        let containerView = UIView()
         containerView.backgroundColor = HIColor.white
         containerView.layer.cornerRadius = 8
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -44,7 +43,6 @@ class HIEventCell: HIBaseTableViewCell {
         containerView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         containerView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -5).isActive = true
         containerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
-        self.containerView = containerView
 
 
         favoritedButton.setImage(#imageLiteral(resourceName: "Unfavorited"), for: .normal)

@@ -14,8 +14,6 @@ class HIEventListViewController: HIBaseViewController { }
 // MARK: - UIViewController
 extension HIEventListViewController {
     override func viewDidLoad() {
-        tableView?.register(HIDateHeader.self, forHeaderFooterViewReuseIdentifier: HIDateHeader.IDENTIFIER)
-        tableView?.register(HIEventCell.self, forCellReuseIdentifier: HIEventCell.IDENTIFIER)
         super.viewDidLoad()
 
         setupRefreshControl()
@@ -27,6 +25,8 @@ extension HIEventListViewController {
 // MARK: - UITableView Setup
 extension HIEventListViewController {
     override func setupTableView() {
+        tableView?.register(HIDateHeader.self, forHeaderFooterViewReuseIdentifier: HIDateHeader.IDENTIFIER)
+        tableView?.register(HIEventCell.self, forCellReuseIdentifier: HIEventCell.IDENTIFIER)
         super.setupTableView()
     }
 }
@@ -52,7 +52,7 @@ extension HIEventListViewController {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HIDateHeader.storyboardIdentifier)
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HIDateHeader.IDENTIFIER)
         if let header = header as? HIDateHeader {
             header.titleLabel.text = "\(section + 1):00 PM"
         }

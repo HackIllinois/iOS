@@ -23,8 +23,7 @@ class HIBaseTableViewCell: UITableViewCell {
         return HIColor.white
     }
 
-    // MARK: - Outlets
-    var containerView: UIView!
+    var containerView = UIView()
 }
 
 // MARK: - UITableViewCell
@@ -50,19 +49,5 @@ extension HIBaseTableViewCell {
             self.containerView.backgroundColor = selected ? self.selectedColor : self.defaultColor
         }
         animator.startAnimation()
-    }
-}
-
-// MARK: - StoryboardIdentifiable
-extension UITableViewCell: StoryboardIdentifiable {
-    static var storyboardIdentifier: String {
-        return String(describing: self)
-    }
-}
-
-// MARK: - StoryboardIdentifiable
-extension UITableViewHeaderFooterView: StoryboardIdentifiable {
-    static var storyboardIdentifier: String {
-        return String(describing: self)
     }
 }
