@@ -61,7 +61,7 @@ extension HIUserDetailViewController {
         userDetailContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         userDetailContainer.heightAnchor.constraint(equalToConstant: 430).isActive = true
         
-
+        // TODO: rename to qrCode
         userImageContainer.backgroundColor = HIColor.darkIndigo
         userImageContainer.translatesAutoresizingMaskIntoConstraints = false
         userDetailContainer.addSubview(userImageContainer)
@@ -91,11 +91,13 @@ extension HIUserDetailViewController {
         
         userNameLabel.text = "JOHN DOE"
         userNameLabel.textColor = HIColor.darkIndigo
+        userNameLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         userNameLabel.translatesAutoresizingMaskIntoConstraints = false
         userDataStackView.addArrangedSubview(userNameLabel)
         
         userInfoLabel.text = "DIETARY RESTRICTIONS"
         userInfoLabel.textColor = HIColor.hotPink
+        userInfoLabel.font = UIFont.systemFont(ofSize: 13)
         userInfoLabel.translatesAutoresizingMaskIntoConstraints = false
         userDataStackView.addArrangedSubview(userInfoLabel)
         
@@ -106,6 +108,7 @@ extension HIUserDetailViewController {
         let emergencyContactTitle = UILabel()
         emergencyContactTitle.text = "EMERGENCY CONTACT"
         emergencyContactTitle.textColor = HIColor.darkIndigo
+        emergencyContactTitle.font = UIFont.systemFont(ofSize: 13, weight: .bold)
         emergencyContactTitle.translatesAutoresizingMaskIntoConstraints = false
         emergencyContactContainer.addSubview(emergencyContactTitle)
         // TODO: add constraints because fuck me
@@ -118,16 +121,19 @@ extension HIUserDetailViewController {
         
         emergencyContactNameLabel.text = "JANE DOE"
         emergencyContactNameLabel.textColor = HIColor.hotPink
+        emergencyContactNameLabel.font = UIFont.systemFont(ofSize: 13)
         emergencyContactNameLabel.translatesAutoresizingMaskIntoConstraints = false
         emergencyContactStackView.addArrangedSubview(emergencyContactNameLabel)
         
         emergencyContactPhoneLabel.text = "630 - 000 - 9090"
         emergencyContactPhoneLabel.textColor = HIColor.hotPink
+        emergencyContactPhoneLabel.font = UIFont.systemFont(ofSize: 13)
         emergencyContactPhoneLabel.translatesAutoresizingMaskIntoConstraints = false
         emergencyContactStackView.addArrangedSubview(emergencyContactPhoneLabel)
         
         emergencyContactEmailLabel.text = "jane@doe.com"
         emergencyContactEmailLabel.textColor = HIColor.hotPink
+        emergencyContactEmailLabel.font = UIFont.systemFont(ofSize: 13)
         emergencyContactEmailLabel.translatesAutoresizingMaskIntoConstraints = false
         emergencyContactStackView.addArrangedSubview(emergencyContactEmailLabel)
         

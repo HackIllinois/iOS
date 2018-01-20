@@ -48,6 +48,7 @@ extension HIUserLookupViewController {
         userDetailContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
         userDetailContainer.heightAnchor.constraint(equalToConstant: 80).isActive = true
         
+        // TODO: check if styling is necessary here
         let lookingUpUserLabel = UILabel()
         lookingUpUserLabel.translatesAutoresizingMaskIntoConstraints = false
         userDetailContainer.addSubview(lookingUpUserLabel)
