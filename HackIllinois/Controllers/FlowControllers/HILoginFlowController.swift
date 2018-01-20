@@ -7,23 +7,24 @@
 //
 
 import UIKit
+import APIManager
 import Lottie
 import SafariServices
+import SwiftKeychainAccess
 
-
-enum HILoginSelection {
-    case hacker
-    case mentor
-    case staff
-    case volunteer
+protocol HILoginFlowControllerDelegate: class {
+    func loginFlowController(_ loginFlowController: HILoginFlowController, didLoginWith user: HIUser)
 }
 
 class HILoginFlowController: UIViewController {
 
-    // MARK: Properties
+    // MARK: - Properties
+    weak var delegate: HILoginFlowControllerDelegate?
+
     let animationView = LOTAnimationView(name: "data")
     var shouldDisplayAnimationOnNextAppearance = true
-    var isCurrentlyPerformingUserPassLogin = false
+    var userPassRequestToken: APIRequestToken?
+    var keychainContents = [String]()
 
     // keeps the login session from going out of scope during presentation
     var loginSession: SFAuthenticationSession?
@@ -59,6 +60,7 @@ class HILoginFlowController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        refreshKeychainContents()
         if shouldDisplayAnimationOnNextAppearance {
             animationView.contentMode = .scaleAspectFill
             animationView.frame = view.frame
@@ -75,95 +77,163 @@ class HILoginFlowController: UIViewController {
             }
             shouldDisplayAnimationOnNextAppearance = false
         }
+
+        let testUser = HIUser(loginMethod: .userPass, permissions: .hacker, token: "toktok", identifier: "rauhul")
+        print(Keychain.default.store(testUser, forKey: testUser.identifier))
+        refreshKeychainContents()
+
+        for key in Keychain.default.allKeys() {
+            let retrievedValue = Keychain.default.retrieve(HIUser.self, forKey: key)
+            print(retrievedValue ?? "retrieve failed")
+        }
     }
 
-    // MARK: Login Flow
+    // MARK: - Login Flow
+    func validateLogin(user: HIUser, failure: Void) {
 
+        loginSucceeded(user: user)
+    }
+
+    func loginSucceeded(user: HIUser) {
+        var user = user
+        user.isActive = true
+        Keychain.default.store(user, forKey: user.identifier)
+        refreshKeychainContents()
+        delegate?.loginFlowController(self, didLoginWith: user)
+    }
+}
+
+// MARK: - Keychain
+extension HILoginFlowController {
+    func refreshKeychainContents() {
+        keychainContents = Keychain.default.allKeys().sorted { $0 < $1 }
+        loginSelectionViewController.tableView?.reloadData()
+    }
+    // TODO: check for active accounts
+
+    func removeUser(id: String) {
+        Keychain.default.removeObject(forKey: id)
+    }
+
+    func keychainRetrievalSucceeded(user: HIUser) {
+        // TODO: validation in the future
+        // FIXME: theres a chance that a recovered github account will have a token that is revoked, we should probably validate this token.
+        // low chance of this happening in 48 hours, fix it later.
+        // this is also a concern for user-pass logins
+
+
+        validateLogin(user: user, failure: ())
+    }
+
+    func keychainRetrievalFailed(id: String) {
+        removeUser(id: id)
+        refreshKeychainContents()
+        let alert = UIAlertController(title: "Account Switch Failed", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
 
 }
 
 // MARK: - HILoginSelectionViewControllerDelegate
 extension HILoginFlowController: HILoginSelectionViewControllerDelegate {
-    func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HILoginSelection) {
+    func loginSelectionViewControllerKeychainAccounts(_ loginSelectionViewController: HILoginSelectionViewController) -> [String] {
+        return keychainContents
+    }
+
+    func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HILoginMethod, withUserInfo info: String?) {
         switch selection {
-        case .hacker:
+        case .github:
+            print("URL::", HIAuthService.githubLoginURL())
             loginSession = SFAuthenticationSession(url: HIAuthService.githubLoginURL(), callbackURLScheme: nil) { [weak self] (url, error) in
                 print(url ?? "", error ?? "")
                 if let url = url,
                     let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
                     let queryItems = components.queryItems,
-                    let code = queryItems.first(where: { $0.name == "token" })?.value {
-                    print("auth success", code)
-                } else {
-                    let alert = UIAlertController(title: "Authentication Failed", message: nil, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                    self?.present(alert, animated: true, completion: nil)
+                    let token = queryItems.first(where: { $0.name == "token" })?.value {
+                    // TODO: add where token.stripping(newlineAndWhitespace Characters) != ""
+
+                    // TODO: add permissions
+                    print(token)
+                    let newUser = HIUser(loginMethod: .github, permissions: .hacker, token: token, identifier: "")
+                    self?.loginSucceeded(user: newUser)
+                }
+
+                // TODO: clean this code
+                if let error = error {
+                    do  {
+                        throw error
+                    } catch SFAuthenticationError.canceledLogin {
+                        // do nothing
+                    } catch {
+                        let alert = UIAlertController(title: "Authentication Failed", message: nil, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                        self?.present(alert, animated: true, completion: nil)
+                    }
                 }
             }
             loginSession?.start()
 
-        case .mentor, .staff, .volunteer:
+        case .userPass:
             navController.pushViewController(userPassLoginViewController, animated: true)
+
+        case .existing:
+            guard let identifier = info else { break }
+
+            if let user = Keychain.default.retrieve(HIUser.self, forKey: identifier) {
+                keychainRetrievalSucceeded(user: user)
+            } else {
+                keychainRetrievalFailed(id: identifier)
+            }
         }
     }
 }
 
 // MARK: - HIUserPassLoginViewControllerDelegate
 extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
-
     func userPassLoginViewControllerDidSelectBackButton(_ userPassLoginViewController: HIUserPassLoginViewController) {
-
-//        cancellogin?
+        if userPassRequestToken?.state == .running {
+            userPassRequestToken?.cancel()
+            userPassRequestToken = nil
+        }
         navController.popViewController(animated: true)
     }
 
-    func userPassLoginViewControllerDidSelectLoginButton(_ userPassLoginViewController: HIUserPassLoginViewController, forUsername username: String, andPassword password: String) {
-        isCurrentlyPerformingUserPassLogin = true
+    func userPassLoginViewControllerDidSelectLoginButton(_ userPassLoginViewController: HIUserPassLoginViewController, forEmail email: String, andPassword password: String) {
+        userPassLoginViewController.stylizeFor(.currentlyPerformingLogin)
 
-        let style = userPassLoginViewControllerStyleFor(userPassLoginViewController)
-        userPassLoginViewController.stylizeFor(style)
+        userPassRequestToken = HIAuthService.login(email: email, password: password)
+        .onSuccess { [weak self] (authContained) in
 
-        HIAuthService.login(email: username, password: password)
-        .onSuccess { [weak self] (data) in
-            guard self?.isCurrentlyPerformingUserPassLogin == true else { return }
+            let newUser = HIUser(loginMethod: .userPass, permissions: .hacker, token: authContained.data[0].auth, identifier: "")
+
 
             DispatchQueue.main.async {
-                if let strongSelf = self {
-                    strongSelf.isCurrentlyPerformingUserPassLogin = false
-                    let style = strongSelf.userPassLoginViewControllerStyleFor(userPassLoginViewController)
-                    strongSelf.userPassLoginViewController.stylizeFor(style)
-                }
+                self?.userPassLoginViewController.stylizeFor(.readyToLogin)
             }
 
-            print(data)
+            print(authContained)
         }
-        .onFailure { [weak self] (reason) in
-            print(reason)
-
-            guard self?.isCurrentlyPerformingUserPassLogin == true else { return }
+        .onFailure { [weak self] (error) in
+            do  {
+                throw error
+            } catch DecodingError.dataCorrupted(let context) {
+                print("DecodingError.dataCorrupted", context)
+            } catch DecodingError.keyNotFound(let key, let context) {
+                print("DecodingError.keyNotFound", key, context)
+            } catch DecodingError.typeMismatch(let type, let context) {
+                print("DecodingError.typeMismatch", type, context)
+            } catch {
+                print(error)
+            }
 
             DispatchQueue.main.async {
-                if let strongSelf = self {
-                    strongSelf.isCurrentlyPerformingUserPassLogin = false
-                    let style = strongSelf.userPassLoginViewControllerStyleFor(userPassLoginViewController)
-                    strongSelf.userPassLoginViewController.stylizeFor(style)
-                }
+                // shake with error
+                self?.userPassLoginViewController.stylizeFor(.readyToLogin)
             }
         }
         .perform()
     }
-
-    func userPassLoginViewControllerStyleFor(_ userPassLoginViewController: HIUserPassLoginViewController) -> HIUserPassLoginViewControllerStyle {
-        switch isCurrentlyPerformingUserPassLogin {
-        case true:
-            return .currentlyPerformingLogin
-
-        case false:
-            return .readyToLogin
-        }
-    }
-
-
 }
 
 

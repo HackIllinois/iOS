@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class HIEventCell: HITableViewCell {
+class HIEventCell: HIBaseTableViewCell {
 
     // MARK: - Static
     static let IDENTIFIER = "HIEventCell"
