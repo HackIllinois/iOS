@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35240BCA20130C5D00E0C0D8 /* HIUserLookupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35240BC920130C5C00E0C0D8 /* HIUserLookupViewController.swift */; };
 		92BAC9AD8126B7191387EFD4 /* Pods_HackIllinois.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F04F5235BAD89F8C72CDF3DF /* Pods_HackIllinois.framework */; };
 		950F57141FBE8139001F7DF4 /* HIBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F57131FBE8139001F7DF4 /* HIBaseService.swift */; };
 		950F57161FBE81FA001F7DF4 /* HIAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F57151FBE81FA001F7DF4 /* HIAuthService.swift */; };
@@ -59,6 +60,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		35240BC920130C5C00E0C0D8 /* HIUserLookupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIUserLookupViewController.swift; sourceTree = "<group>"; };
 		5FC8086340F925BE21CB525A /* Pods-HackIllinois.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackIllinois.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HackIllinois/Pods-HackIllinois.debug.xcconfig"; sourceTree = "<group>"; };
 		950F57131FBE8139001F7DF4 /* HIBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIBaseService.swift; sourceTree = "<group>"; };
 		950F57151FBE81FA001F7DF4 /* HIAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAuthService.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				95C18DC620096539004784B5 /* HIEventViewControllers */,
 				954EE1CF1FD0F14E0078F39E /* HILoginFlowViewControllers */,
 				9510F6A61FCB7E53007D19DB /* HIScannerViewController.swift */,
+				35240BC920130C5C00E0C0D8 /* HIUserLookupViewController.swift */,
 				95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */,
 				95A472961FC64DC100381329 /* UIViewController.swift */,
 			);
@@ -548,6 +551,7 @@
 				95C18DCA20096539004784B5 /* HIEventDetailViewController.swift in Sources */,
 				95C18DC52009618C004784B5 /* HIHomeViewController.swift in Sources */,
 				9510F6A11FCB7D6E007D19DB /* Event+CoreDataClass.swift in Sources */,
+				35240BCA20130C5D00E0C0D8 /* HIUserLookupViewController.swift in Sources */,
 				951827A81EA35DB800049F79 /* AppDelegate.swift in Sources */,
 				953199C91FC25CA0009F2AA1 /* CoreDataController.swift in Sources */,
 				9510F6A31FCB7D6E007D19DB /* Location+CoreDataClass.swift in Sources */,
