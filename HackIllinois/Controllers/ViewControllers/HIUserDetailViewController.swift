@@ -40,6 +40,10 @@ var userImageContainer = UIView()
 var userNameLabel = UILabel()
 var userInfoLabel = UILabel()
 
+var emergencyContactNameLabel = UILabel()
+var emergencyContactPhoneLabel = UILabel()
+var emergencyContactEmailLabel = UILabel()
+
 
 // MARK: - UIViewController
 extension HIUserDetailViewController {
@@ -85,15 +89,48 @@ extension HIUserDetailViewController {
         userDataStackView.alignment = .center
         
         
-//        userNameLabel.text = "JOHN DOE"
+        userNameLabel.text = "JOHN DOE"
         userNameLabel.textColor = HIColor.darkIndigo
         userNameLabel.translatesAutoresizingMaskIntoConstraints = false
         userDataStackView.addArrangedSubview(userNameLabel)
         
-//        userInfoLabel.text = "DIETARY RESTRICTIONS"
+        userInfoLabel.text = "DIETARY RESTRICTIONS"
         userInfoLabel.textColor = HIColor.hotPink
         userInfoLabel.translatesAutoresizingMaskIntoConstraints = false
         userDataStackView.addArrangedSubview(userInfoLabel)
+        
+        
+        let emergencyContactContainer = UIView()
+        view.addSubview(emergencyContactContainer)
+        
+        let emergencyContactTitle = UILabel()
+        emergencyContactTitle.text = "EMERGENCY CONTACT"
+        emergencyContactTitle.textColor = HIColor.darkIndigo
+        emergencyContactTitle.translatesAutoresizingMaskIntoConstraints = false
+        emergencyContactContainer.addSubview(emergencyContactTitle)
+        // TODO: add constraints because fuck me
+        
+        let emergencyContactStackView = UIStackView()
+        emergencyContactStackView.translatesAutoresizingMaskIntoConstraints = false
+        emergencyContactContainer.addSubview(emergencyContactStackView)
+        // TODO: add constraints here too
+        emergencyContactStackView.axis = .vertical
+        
+        emergencyContactNameLabel.text = "JANE DOE"
+        emergencyContactNameLabel.textColor = HIColor.hotPink
+        emergencyContactNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        emergencyContactStackView.addArrangedSubview(emergencyContactNameLabel)
+        
+        emergencyContactPhoneLabel.text = "630 - 000 - 9090"
+        emergencyContactPhoneLabel.textColor = HIColor.hotPink
+        emergencyContactPhoneLabel.translatesAutoresizingMaskIntoConstraints = false
+        emergencyContactStackView.addArrangedSubview(emergencyContactPhoneLabel)
+        
+        emergencyContactEmailLabel.text = "jane@doe.com"
+        emergencyContactEmailLabel.textColor = HIColor.hotPink
+        emergencyContactEmailLabel.translatesAutoresizingMaskIntoConstraints = false
+        emergencyContactStackView.addArrangedSubview(emergencyContactEmailLabel)
+        
     }
     
     override func viewDidLoad() {
