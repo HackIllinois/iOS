@@ -14,8 +14,8 @@ class HIEventListViewController: HIBaseViewController { }
 // MARK: - UIViewController
 extension HIEventListViewController {
     override func viewDidLoad() {
-        tableView?.register(UINib(nibName: HIEventCell.IDENTIFIER, bundle: nil), forCellReuseIdentifier: HIEventCell.IDENTIFIER)
-        tableView?.register(UINib(nibName: HIDateHeader.IDENTIFIER, bundle: nil), forHeaderFooterViewReuseIdentifier: HIDateHeader.IDENTIFIER)
+        tableView?.register(HIDateHeader.self, forHeaderFooterViewReuseIdentifier: HIDateHeader.IDENTIFIER)
+        tableView?.register(HIEventCell.self, forCellReuseIdentifier: HIEventCell.IDENTIFIER)
         super.viewDidLoad()
 
         setupRefreshControl()
@@ -55,12 +55,16 @@ extension HIEventListViewController {
 
 // MARK: - UITableViewDelegate
 extension HIEventListViewController {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 85
+    }
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let eventDetailViewController = UIStoryboard(.modals).instantiate(HIEventDetailViewController.self) {
-            $0.modalPresentationStyle = .overCurrentContext
-            $0.modalTransitionStyle = .crossDissolve
-//            $0.model = self._fetchedResultsController?.object(at: indexPath) as? Event
-        }
+        let eventDetailViewController = HIEventDetailViewController()
+        eventDetailViewController.modalPresentationStyle = .overCurrentContext
+        eventDetailViewController.modalTransitionStyle = .crossDissolve
+        // eventDetailViewController.model = self._fetchedResultsController?.object(at: indexPath) as? Event
+
         present(eventDetailViewController, animated: true, completion: nil)
         super.tableView(tableView, didSelectRowAt: indexPath)
     }

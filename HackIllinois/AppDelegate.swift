@@ -14,8 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    // FIXME: Allows arbitary loads (make github issue)
-
+    // FIXME: Allows arbitary loads
+    // FIXME: Remove landscape support
 //    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
 //        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
 //              let url = userActivity.webpageURL,
@@ -50,10 +50,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearace.setBackgroundImage(image, for: .default)
         navigationBarAppearace.isTranslucent = false
 
+        UITableView.appearance().backgroundColor = HIColor.paleBlue
+
         window = UIWindow(frame: UIScreen.main.bounds)
 
-        let menuController = UIStoryboard(.general).instantiate(HIMenuController.self)
-        window?.rootViewController = UIStoryboard(.login).instantiate(HILoginFlowController.self)
+
+
+        let menuController = HIMenuController()
+        menuController.setupViewControllers(
+            HIHomeViewController(),
+            HIScheduleViewController(),
+            HIAnnouncementsViewController(),
+            UIStoryboard(.general).instantiate(HIUserDetailViewController.self),
+            HIScannerViewController()
+        )
+
+        window?.rootViewController = menuController //HILoginFlowController()
         window?.makeKeyAndVisible()
 
         return true
