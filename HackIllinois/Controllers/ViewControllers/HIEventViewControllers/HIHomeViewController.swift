@@ -67,7 +67,6 @@ extension HIHomeViewController {
         
         
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.insetsContentViewsToSafeArea = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: happeningNowLabel.bottomAnchor, constant: 5).isActive = true

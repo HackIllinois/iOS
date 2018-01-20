@@ -31,13 +31,13 @@ class HILoginFlowController: UIViewController {
 
     // MARK: ViewControllers
     lazy var navController: UINavigationController = {
-        let vc = UINavigationController(rootViewController: userPassLoginViewController)
+        let vc = UINavigationController(rootViewController: loginSelectionViewController)
         vc.isNavigationBarHidden = true
         return vc
     }()
 
     lazy var loginSelectionViewController: HILoginSelectionViewController = {
-        let vc = UIStoryboard(.login).instantiate(HILoginSelectionViewController.self)
+        let vc = HILoginSelectionViewController()
         vc.delegate = self
         return vc
     }()

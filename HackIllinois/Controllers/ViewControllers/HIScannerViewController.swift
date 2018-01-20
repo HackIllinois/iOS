@@ -122,10 +122,9 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
         // pause scanner
         respondingToQRCodeFound = false
 
-        let userDetailViewController = UIStoryboard(.modals).instantiate(HIUserDetailViewController.self) {
-            $0.delegate = self
-            $0.modalPresentationStyle = .overCurrentContext
-        }
+        let userDetailViewController = HIUserDetailViewController()
+        userDetailViewController.delegate = self
+        userDetailViewController.modalPresentationStyle = .overCurrentContext
         present(userDetailViewController, animated: true, completion: nil)
     }
 

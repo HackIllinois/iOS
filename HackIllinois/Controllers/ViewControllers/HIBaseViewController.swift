@@ -30,8 +30,7 @@ class HIBaseViewController: UIViewController {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        // TODO: fatalError("init(coder:) should not be used")
-        super.init(coder: aDecoder)
+        fatalError("init(coder:) should not be used")
     }
 }
 
