@@ -363,9 +363,9 @@
 				9518277B1EA35AF100049F79 /* Sources */,
 				9518277C1EA35AF100049F79 /* Frameworks */,
 				9518277D1EA35AF100049F79 /* Resources */,
-				950038292011E61100FB8F10 /* ShellScript */,
 				4BB122A7E5028FEBC4CB4FEB /* [CP] Embed Pods Frameworks */,
 				FB38EA2841D0B5D4BAE3221B /* [CP] Copy Pods Resources */,
+				95CD0ED6201523B800D79DCC /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -476,7 +476,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HackIllinois/Pods-HackIllinois-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		950038292011E61100FB8F10 /* ShellScript */ = {
+		95CD0ED6201523B800D79DCC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -487,7 +487,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "TAGS=\"TODO:|FIXME:\"\necho \"searching ${SRCROOT} for ${TAGS}\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 \\\n| xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" \\\n| perl -p -e \"s/($TAGS)/ warning: \\$1/\"";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		FB38EA2841D0B5D4BAE3221B /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

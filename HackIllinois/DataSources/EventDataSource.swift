@@ -25,7 +25,7 @@ class EventDataSource: NSObject {
         return fetchedResultsController
     }()
 
-    let delegate: NSFetchedResultsControllerDelegate?
+    weak var delegate: NSFetchedResultsControllerDelegate?
     let sectionNameKeyPath: String?
 
     init(delegate: NSFetchedResultsControllerDelegate, sectionNameKeyPath: String?) {

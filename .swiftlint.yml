@@ -1,0 +1,18 @@
+line_length:
+  warning: 180
+  error: 350
+  ignores_comments: true
+  ignores_urls: true
+
+identifier_name:
+  allowed_symbols: "_"
+  min_length: 2
+  max_length:
+    warning: 80
+    error: 160
+  excluded:
+    - id
+    - _fetchedResultsController
+
+excluded:
+  - Pods

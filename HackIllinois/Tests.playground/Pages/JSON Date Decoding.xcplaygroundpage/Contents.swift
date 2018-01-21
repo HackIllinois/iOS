@@ -44,7 +44,6 @@ if let justADate = (try? decoder.decode(JustADate.self, from: data)) ??
 
 
 
-let d = Date.init(timeInterval: -1000, since: Date())
+let time = Date.init(timeInterval: -1000, since: Date())
 
-Date().timeIntervalSince(d)
-
+Date().timeIntervalSince(time)
