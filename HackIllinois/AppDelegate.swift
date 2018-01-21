@@ -20,8 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         resetPersistentDataIfNeeded()
         setupNavigationBarAppearance()
-
-        UITableView.appearance().backgroundColor = HIColor.paleBlue
+        setupTableViewAppearance()
 
         window = UIWindow(frame: UIScreen.main.bounds)
 
@@ -81,6 +80,16 @@ extension AppDelegate {
         navigationBarAppearace.setBackgroundImage(image, for: .default)
         navigationBarAppearace.isTranslucent = false
     }
+
+    func setupTableViewAppearance() {
+        let tableViewAppearance = UITableView.appearance()
+        tableViewAppearance.backgroundColor = HIColor.paleBlue
+        tableViewAppearance.separatorStyle = .none
+        tableViewAppearance.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: CGFloat.leastNonzeroMagnitude, height: CGFloat.leastNonzeroMagnitude))
+        tableViewAppearance.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: CGFloat.leastNonzeroMagnitude, height: CGFloat.leastNonzeroMagnitude))
+        tableViewAppearance.showsHorizontalScrollIndicator = false
+    }
+
 }
 
 

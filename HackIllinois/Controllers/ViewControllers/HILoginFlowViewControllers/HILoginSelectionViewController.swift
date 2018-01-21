@@ -16,7 +16,7 @@ protocol HILoginSelectionViewControllerDelegate: class {
 
 class HILoginSelectionViewController: HIBaseViewController {
     // MARK: - Properties
-    weak var delegate: HILoginSelectionViewControllerDelegate!
+    weak var delegate: HILoginSelectionViewControllerDelegate?
 
     var staticDataStore: [(loginMethod: HILoginMethod, displayText: String)] = [
         (.github,   "HACKER"),
@@ -31,22 +31,14 @@ extension HILoginSelectionViewController {
     override func loadView() {
         super.loadView()
         let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.alwaysBounceVertical = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 54).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-
         self.tableView = tableView
-    }
-
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        guard let _ = delegate else {
-            fatalError("delegate must not be nil")
-        }
     }
 }
 
@@ -56,7 +48,6 @@ extension HILoginSelectionViewController {
         tableView?.register(HILoginSelectionHeader.self, forHeaderFooterViewReuseIdentifier: HILoginSelectionHeader.IDENTIFIER)
         tableView?.register(HILoginSelectionCell.self, forCellReuseIdentifier: HILoginSelectionCell.IDENTIFIER)
         super.setupTableView()
-        tableView?.alwaysBounceVertical = false
     }
 }
 
@@ -84,12 +75,11 @@ extension HILoginSelectionViewController {
             case 0:
                 cell.titleLabel.text = staticDataStore[indexPath.row].displayText
             default:
-                cell.titleLabel.text = delegate.loginSelectionViewControllerKeychainAccounts(self)[indexPath.row].uppercased()
+                cell.titleLabel.text = delegate?.loginSelectionViewControllerKeychainAccounts(self)[indexPath.row].uppercased()
             }
             if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
                 cell.indicatorView.isHidden = true
             }
-            cell.layoutIfNeeded()
         }
         return cell
     }
@@ -127,15 +117,17 @@ extension HILoginSelectionViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 0:
-            let selection = staticDataStore[indexPath.row].loginMethod
-            delegate.loginSelectionViewController(self, didMakeLoginSelection: selection, withUserInfo: nil)
+        if let delegate = delegate {
+            switch indexPath.section {
+            case 0:
+                let selection = staticDataStore[indexPath.row].loginMethod
+                delegate.loginSelectionViewController(self, didMakeLoginSelection: selection, withUserInfo: nil)
 
-        default:
-            let info = delegate.loginSelectionViewControllerKeychainAccounts(self)[indexPath.row]
-            delegate.loginSelectionViewController(self, didMakeLoginSelection: .existing, withUserInfo: info)
+            default:
+                let info = delegate.loginSelectionViewControllerKeychainAccounts(self)[indexPath.row]
+                delegate.loginSelectionViewController(self, didMakeLoginSelection: .existing, withUserInfo: info)
 
+            }
         }
         super.tableView(tableView, didSelectRowAt: indexPath)
     }
