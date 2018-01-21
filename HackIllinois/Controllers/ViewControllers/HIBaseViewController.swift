@@ -81,6 +81,7 @@ extension HIBaseViewController {
         tableView?.separatorStyle = .none
         tableView?.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: CGFloat.leastNonzeroMagnitude, height: CGFloat.leastNonzeroMagnitude))
         tableView?.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: CGFloat.leastNonzeroMagnitude, height: CGFloat.leastNonzeroMagnitude))
+        tableView?.showsHorizontalScrollIndicator = false
     }
 }
 

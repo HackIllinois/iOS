@@ -90,21 +90,3 @@ extension HIHomeViewController {
         title = "HOME"
     }
 }
-
-// MARK: - UITableViewDataSource
-extension HIHomeViewController {
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return nil
-    }
-}
-
-// MARK: - UITableViewDelegate
-extension HIHomeViewController {
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return .leastNonzeroMagnitude
-    }
-
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return .leastNonzeroMagnitude
-    }
-}

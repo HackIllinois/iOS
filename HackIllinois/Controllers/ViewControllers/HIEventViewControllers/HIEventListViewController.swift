@@ -45,25 +45,23 @@ extension HIEventListViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HIEventCell.IDENTIFIER, for: indexPath)
         if let cell = cell as? HIEventCell {
-            // cell.titleLabel.text = fetchedResultsController.object(at: indexPath).name
-            cell.titleLabel.text = "event"
+            // cell <- fetchedResultsController.object(at: indexPath)
+            cell <- indexPath
+
         }
         return cell
-    }
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HIDateHeader.IDENTIFIER)
-        if let header = header as? HIDateHeader {
-            header.titleLabel.text = "\(section + 1):00 PM"
-        }
-        return header
     }
 }
 
 // MARK: - UITableViewDelegate
 extension HIEventListViewController {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
+        // FIXME: Remove
+        return HIEventCell.heightForCell(with: indexPath.row)
+        guard let _ = _fetchedResultsController?.object(at: indexPath) as? Event else {
+            return CGFloat.leastNonzeroMagnitude
+        }
+        return 0 // HIEventCell.heightForCell(displaying: event)
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
