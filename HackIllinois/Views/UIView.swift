@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 extension UIView {
-
     func renderAsImage() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(bounds.size, isOpaque, 0.0)
         guard let context = UIGraphicsGetCurrentContext() else { return nil }
@@ -19,5 +18,4 @@ extension UIView {
         UIGraphicsEndImageContext()
         return image
     }
-    
 }

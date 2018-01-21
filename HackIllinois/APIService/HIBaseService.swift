@@ -17,7 +17,7 @@ class HIBaseService: APIService {
 
     class var headers: HTTPHeaders? {
         return [
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
 //            "Authorization": HIBaseService.authorizationKey
         ]
     }

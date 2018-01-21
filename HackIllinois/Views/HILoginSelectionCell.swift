@@ -44,7 +44,6 @@ class HILoginSelectionCell: HIBaseTableViewCell {
         indicatorView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -23).isActive = true
         indicatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
 
-
         activityIndicator.color = HIColor.hotPink
         activityIndicator.hidesWhenStopped = true
         activityIndicator.startAnimating()
@@ -54,7 +53,6 @@ class HILoginSelectionCell: HIBaseTableViewCell {
         activityIndicator.widthAnchor.constraint(equalToConstant: 20).isActive = true
         activityIndicator.heightAnchor.constraint(equalToConstant: 20).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-
 
         titleLabel.textColor = HIColor.darkIndigo
         titleLabel.textAlignment = .center

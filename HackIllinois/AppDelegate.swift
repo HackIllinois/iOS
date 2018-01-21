@@ -92,7 +92,6 @@ extension AppDelegate {
 
 }
 
-
 // MARK: - HIAppFlow
 extension AppDelegate {
     func resetPersistentDataIfNeeded() {
@@ -120,7 +119,7 @@ extension AppDelegate {
         // TODO: remove
         userToActivate = HIUser(loginMethod: .userPass, permissions: .hacker, token: "sf", identifier: "rauhul_test")
         userToActivate?.isActive = true
-//        return HILoginFlowController()
+        // return HILoginFlowController()
         if let user = userToActivate {
             return menuControllerSetupFor(user: user)
         } else {
@@ -155,6 +154,5 @@ extension AppDelegate {
     func switchAccounts() {
 
     }
-
 
 }

@@ -59,7 +59,6 @@ extension HIUserPassLoginViewController {
         backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 29).isActive = true
 
-
         let logInLabel = UILabel()
         logInLabel.text = "LOG IN"
         logInLabel.textColor = HIColor.hotPink
@@ -70,7 +69,6 @@ extension HIUserPassLoginViewController {
         logInLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 29).isActive = true
         logInLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -29).isActive = true
         logInLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
-
 
         emailTextField.placeholder = "USERNAME"
         emailTextField.textColor = HIColor.darkIndigo
@@ -87,7 +85,6 @@ extension HIUserPassLoginViewController {
         emailTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
         emailTextField.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
-
         let separatorView = UIView()
         separatorView.backgroundColor = HIColor.hotPink
         separatorView.translatesAutoresizingMaskIntoConstraints = false
@@ -96,7 +93,6 @@ extension HIUserPassLoginViewController {
         separatorView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 23).isActive = true
         separatorView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -23).isActive = true
         separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
-
 
         passwordTextField.placeholder = "PASSWORD"
         passwordTextField.textColor = HIColor.darkIndigo
@@ -114,7 +110,6 @@ extension HIUserPassLoginViewController {
         passwordTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
         passwordTextField.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
-
         signInButton.backgroundColor = HIColor.lightPeriwinkle
         signInButton.layer.cornerRadius = 8
         signInButton.setTitle("Sign In", for: .normal)
@@ -127,7 +122,6 @@ extension HIUserPassLoginViewController {
         signInButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         signInButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         signInButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-
 
         activityIndicator.tintColor = HIColor.hotPink
         activityIndicator.stopAnimating()

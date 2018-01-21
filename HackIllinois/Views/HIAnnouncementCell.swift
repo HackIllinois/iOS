@@ -23,7 +23,7 @@ class HIAnnouncementCell: HIBaseTableViewCell {
     var titleLabel = UILabel()
     var timeLabel = UILabel()
     var infoLabel = UILabel()
-    
+
     // MARK: - Init
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -39,15 +39,13 @@ class HIAnnouncementCell: HIBaseTableViewCell {
         containerView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -5).isActive = true
         containerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
 
-        
         titleLabel.textColor = HIColor.hotPink
         titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .light)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(titleLabel)
         titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 14).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 23).isActive = true
-        titleLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true        
-
+        titleLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
 
         timeLabel.textColor = HIColor.hotPink
         timeLabel.font = UIFont.systemFont(ofSize: 17, weight: .light)
@@ -60,7 +58,6 @@ class HIAnnouncementCell: HIBaseTableViewCell {
         timeLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         timeLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
 
-        
         infoLabel.textColor = HIColor.darkIndigo
         infoLabel.font = UIFont.systemFont(ofSize: 17, weight: .light)
         infoLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -70,7 +67,7 @@ class HIAnnouncementCell: HIBaseTableViewCell {
         infoLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -7).isActive = true
         infoLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10).isActive = true
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) should not be used.")
     }

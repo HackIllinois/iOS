@@ -17,7 +17,7 @@ extension HIEventListViewController {
         super.viewDidLoad()
 
         setupRefreshControl()
-        
+
         try? _fetchedResultsController?.performFetch()
     }
 }
@@ -58,7 +58,7 @@ extension HIEventListViewController {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // FIXME: Remove
         return HIEventCell.heightForCell(with: indexPath.row)
-        guard let _ = _fetchedResultsController?.object(at: indexPath) as? Event else {
+        guard _fetchedResultsController?.object(at: indexPath) as? Event != nil else {
             return CGFloat.leastNonzeroMagnitude
         }
         return 0 // HIEventCell.heightForCell(displaying: event)
