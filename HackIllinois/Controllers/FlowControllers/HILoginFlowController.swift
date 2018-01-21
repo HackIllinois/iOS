@@ -17,7 +17,6 @@ protocol HILoginFlowControllerDelegate: class {
 }
 
 class HILoginFlowController: UIViewController {
-
     // MARK: - Properties
     weak var delegate: HILoginFlowControllerDelegate?
 
@@ -48,7 +47,23 @@ class HILoginFlowController: UIViewController {
         return vc
     }()
 
-    // MARK: View lifecycle
+    // MARK: - Init
+    convenience init(delegate: HILoginFlowControllerDelegate) {
+        self.init(nibName: nil, bundle: nil)
+        self.delegate = delegate
+    }
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) should not be used")
+    }
+}
+
+// MARK: - UIViewController
+extension HILoginFlowController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addChildViewController(navController)
@@ -87,10 +102,11 @@ class HILoginFlowController: UIViewController {
             print(retrievedValue ?? "retrieve failed")
         }
     }
+}
 
-    // MARK: - Login Flow
+// MARK: - Login Flow
+extension HILoginFlowController {
     func validateLogin(user: HIUser, failure: Void) {
-
         loginSucceeded(user: user)
     }
 

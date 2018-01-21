@@ -54,6 +54,7 @@
 		95C18DCB20096539004784B5 /* HIScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C18DC820096539004784B5 /* HIScheduleViewController.swift */; };
 		95C18DCC20096539004784B5 /* HIEventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C18DC920096539004784B5 /* HIEventListViewController.swift */; };
 		95C3BE302008B99C0008ED79 /* HIBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C3BE2F2008B99C0008ED79 /* HIBaseViewController.swift */; };
+		95CD0ED52015217E00D79DCC /* HIApplicationStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CD0ED42015217E00D79DCC /* HIApplicationStateController.swift */; };
 		95DC404120105D7300C1E266 /* HIUserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DC404020105D7300C1E266 /* HIUserAuth.swift */; };
 		95DE24DC1FC3ADBE000F599D /* HIAnnouncementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DE24DB1FC3ADBE000F599D /* HIAnnouncementService.swift */; };
 		95DE25101FC3FD61000F599D /* EventDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DE250F1FC3FD61000F599D /* EventDataSource.swift */; };
@@ -113,6 +114,7 @@
 		95C18DC820096539004784B5 /* HIScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIScheduleViewController.swift; sourceTree = "<group>"; };
 		95C18DC920096539004784B5 /* HIEventListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIEventListViewController.swift; sourceTree = "<group>"; };
 		95C3BE2F2008B99C0008ED79 /* HIBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIBaseViewController.swift; sourceTree = "<group>"; };
+		95CD0ED42015217E00D79DCC /* HIApplicationStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIApplicationStateController.swift; sourceTree = "<group>"; };
 		95DC404020105D7300C1E266 /* HIUserAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIUserAuth.swift; sourceTree = "<group>"; };
 		95DE24DB1FC3ADBE000F599D /* HIAnnouncementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAnnouncementService.swift; sourceTree = "<group>"; };
 		95DE250F1FC3FD61000F599D /* EventDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDataSource.swift; sourceTree = "<group>"; };
@@ -285,8 +287,9 @@
 		957DB2E91FC2453100F8C45E /* FlowControllers */ = {
 			isa = PBXGroup;
 			children = (
-				956F41E21FC76C8E00557DC7 /* HIMenuController.swift */,
+				95CD0ED42015217E00D79DCC /* HIApplicationStateController.swift */,
 				952831A3200F2B35002C9F3E /* HILoginFlowController.swift */,
+				956F41E21FC76C8E00557DC7 /* HIMenuController.swift */,
 			);
 			path = FlowControllers;
 			sourceTree = "<group>";
@@ -531,6 +534,7 @@
 				95B5704F200C777800D1D64D /* HILoginSelectionHeader.swift in Sources */,
 				95FC1D1E1FCBD20E00F8AD60 /* HIUserDetailViewController.swift in Sources */,
 				95C3BE302008B99C0008ED79 /* HIBaseViewController.swift in Sources */,
+				95CD0ED52015217E00D79DCC /* HIApplicationStateController.swift in Sources */,
 				959AD4011FC4ECC700691399 /* Operators.swift in Sources */,
 				957D7C841FC28F4100C4332A /* HIEventService.swift in Sources */,
 				95C18DCC20096539004784B5 /* HIEventListViewController.swift in Sources */,

@@ -34,13 +34,6 @@ class HIBaseViewController: UIViewController {
     }
 }
 
-// MARK: - HIMenuController
-extension HIBaseViewController {
-    @objc func openMenu() {
-        (tabBarController?.parent as? HIMenuController)?.open(self)
-    }
-}
-
 // MARK: - UIViewController
 extension HIBaseViewController {
     override func loadView() {
@@ -69,7 +62,6 @@ extension HIBaseViewController {
 extension HIBaseViewController {
     @objc dynamic func setupNavigationItem() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuOpen"), style: .plain, target: self, action: #selector(HIBaseViewController.openMenu))
     }
 }
 

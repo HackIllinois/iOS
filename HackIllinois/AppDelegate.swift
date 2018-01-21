@@ -12,8 +12,10 @@ import SwiftKeychainAccess
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    // MARK: - Properties
     var window: UIWindow?
     var currentUser: HIUser?
+    lazy var applicationStateController = HIApplicationStateController(window: window)
 
     // FIXME: Allows arbitary loads
     // FIXME: Remove landscape support
@@ -21,12 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         resetPersistentDataIfNeeded()
         setupNavigationBarAppearance()
         setupTableViewAppearance()
-
-        window = UIWindow(frame: UIScreen.main.bounds)
-
-        window?.rootViewController = initalViewController()
-        window?.makeKeyAndVisible()
-
+        applicationStateController.startUp()
         return true
     }
 
@@ -89,70 +86,13 @@ extension AppDelegate {
         tableViewAppearance.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: CGFloat.leastNonzeroMagnitude, height: CGFloat.leastNonzeroMagnitude))
         tableViewAppearance.showsHorizontalScrollIndicator = false
     }
-
 }
 
-// MARK: - HIAppFlow
+// MARK: - Helpers
 extension AppDelegate {
     func resetPersistentDataIfNeeded() {
         guard !UserDefaults.standard.bool(forKey: "HIAPPLICATION_INSTALLED") else { return }
         _ = Keychain.default.purge()
         UserDefaults.standard.set(true, forKey: "HIAPPLICATION_INSTALLED")
     }
-
-    func initalViewController() -> UIViewController {
-        var userToActivate: HIUser?
-        for key in Keychain.default.allKeys() {
-            guard let user = Keychain.default.retrieve(HIUser.self, forKey: key) else {
-                Keychain.default.removeObject(forKey: key)
-                continue
-            }
-            if user.isActive {
-                if var user = userToActivate {
-                    user.isActive = false
-                    Keychain.default.store(user, forKey: user.identifier)
-                }
-                userToActivate = user
-            }
-        }
-
-        // TODO: remove
-        userToActivate = HIUser(loginMethod: .userPass, permissions: .hacker, token: "sf", identifier: "rauhul_test")
-        userToActivate?.isActive = true
-        // return HILoginFlowController()
-        if let user = userToActivate {
-            return menuControllerSetupFor(user: user)
-        } else {
-            return HILoginFlowController()
-        }
-    }
-
-    func menuControllerSetupFor(user: HIUser) -> HIMenuController {
-        let menuController = HIMenuController()
-
-        var viewControllers = [UIViewController]()
-        if [.hacker].contains(user.permissions) {
-            viewControllers.append(HIHomeViewController())
-        }
-        if [.hacker, .volunteer, .staff, .superUser].contains(user.permissions) {
-            viewControllers.append(HIScheduleViewController())
-        }
-        if [.hacker, .volunteer, .staff, .superUser].contains(user.permissions) {
-            viewControllers.append(HIAnnouncementsViewController())
-        }
-        if [.hacker, .volunteer, .staff, .superUser].contains(user.permissions) {
-            viewControllers.append(HIUserDetailViewController())
-        }
-        if [.volunteer, .staff, .superUser].contains(user.permissions) {
-            viewControllers.append(HIScannerViewController())
-        }
-        menuController.setupMenuFor(viewControllers)
-
-        return menuController
-    }
-
-    func switchAccounts() {
-
-    }
-
 }
