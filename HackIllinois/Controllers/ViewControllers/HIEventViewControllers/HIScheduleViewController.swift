@@ -98,7 +98,7 @@ extension HIScheduleViewController {
 }
 
 // MARK: - UITableViewDelegate
-extension HIEventListViewController {
+extension HIScheduleViewController {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 25
     }
@@ -108,6 +108,16 @@ extension HIEventListViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
+extension HIScheduleViewController {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HIDateHeader.IDENTIFIER)
+        if let header = header as? HIDateHeader {
+            header.titleLabel.text = "\(section + 1):00 PM"
+        }
+        return header
+    }
+}
 
 
 

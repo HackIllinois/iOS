@@ -90,10 +90,3 @@ extension HIHomeViewController {
         title = "HOME"
     }
 }
-
-// MARK: - UITableViewDataSource
-extension HIHomeViewController {
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return nil
-    }
-}
