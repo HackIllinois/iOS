@@ -35,6 +35,8 @@ class HIHomeViewController: HIEventListViewController {
 
         return fetchedResultsController
     }()
+    
+    let countdownViewController = HICountdownViewController()
 }
 
 // MARK: - UIViewController
@@ -53,15 +55,19 @@ extension HIHomeViewController {
         hackingEndsInLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         hackingEndsInLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
 
-        let countdownContainerView = UIView()
+
+
         // TODO: remove background color after view debugging
-        countdownContainerView.backgroundColor = HIColor.hotPink
-        countdownContainerView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(countdownContainerView)
-        countdownContainerView.topAnchor.constraint(equalTo: hackingEndsInLabel.bottomAnchor, constant: 15).isActive = true
-        countdownContainerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
-        countdownContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
-        countdownContainerView.heightAnchor.constraint(equalToConstant: 188).isActive = true
+        countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        addChildViewController(countdownViewController)
+        view.addSubview(countdownViewController.view)
+        countdownViewController.view.topAnchor.constraint(equalTo: hackingEndsInLabel.bottomAnchor, constant: 15).isActive = true
+        countdownViewController.view.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
+        countdownViewController.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
+        countdownViewController.view.heightAnchor.constraint(equalToConstant: 188).isActive = true
+
+        countdownViewController.didMove(toParentViewController: self)
+
 
         let happeningNowLabel = UILabel()
         happeningNowLabel.text = "HAPPENING NOW"
@@ -70,7 +76,7 @@ extension HIHomeViewController {
         happeningNowLabel.textAlignment = .center
         happeningNowLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(happeningNowLabel)
-        happeningNowLabel.topAnchor.constraint(equalTo: countdownContainerView.bottomAnchor, constant: 15).isActive = true
+        happeningNowLabel.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor, constant: 15).isActive = true
         happeningNowLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         happeningNowLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
 
