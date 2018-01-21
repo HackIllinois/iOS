@@ -72,7 +72,7 @@ class HILoginFlowController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if shouldDisplayAnimationOnNextAppearance {
-            animationView.play { (finished) in
+            animationView.play { (_) in
                 self.animationView.removeFromSuperview()
             }
             shouldDisplayAnimationOnNextAppearance = false
@@ -109,7 +109,6 @@ extension HILoginFlowController {
         keychainContents = Keychain.default.allKeys().sorted { $0 < $1 }
         loginSelectionViewController.tableView?.reloadData()
     }
-    // TODO: check for active accounts
 
     func removeUser(id: String) {
         Keychain.default.removeObject(forKey: id)
@@ -120,7 +119,6 @@ extension HILoginFlowController {
         // FIXME: theres a chance that a recovered github account will have a token that is revoked, we should probably validate this token.
         // low chance of this happening in 48 hours, fix it later.
         // this is also a concern for user-pass logins
-
 
         validateLogin(user: user, failure: ())
     }
@@ -161,7 +159,7 @@ extension HILoginFlowController: HILoginSelectionViewControllerDelegate {
 
                 // TODO: clean this code
                 if let error = error {
-                    do  {
+                    do {
                         throw error
                     } catch SFAuthenticationError.canceledLogin {
                         // do nothing
@@ -205,8 +203,7 @@ extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
         userPassRequestToken = HIAuthService.login(email: email, password: password)
         .onSuccess { [weak self] (authContained) in
 
-            let newUser = HIUser(loginMethod: .userPass, permissions: .hacker, token: authContained.data[0].auth, identifier: "")
-
+            _ = HIUser(loginMethod: .userPass, permissions: .hacker, token: authContained.data[0].auth, identifier: "")
 
             DispatchQueue.main.async {
                 self?.userPassLoginViewController.stylizeFor(.readyToLogin)
@@ -215,7 +212,7 @@ extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
             print(authContained)
         }
         .onFailure { [weak self] (error) in
-            do  {
+            do {
                 throw error
             } catch DecodingError.dataCorrupted(let context) {
                 print("DecodingError.dataCorrupted", context)
@@ -235,5 +232,3 @@ extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
         .perform()
     }
 }
-
-

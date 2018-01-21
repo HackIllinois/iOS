@@ -60,7 +60,7 @@ extension HIMenuController {
             return navigationController
         }
 
-        if let _ = view {
+        if view != nil {
             resetMenuItems()
             createMenuItems()
         }
@@ -99,7 +99,6 @@ extension HIMenuController {
         _tabBarController.view.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         _tabBarController.didMove(toParentViewController: self)
 
-
         // TODO: Darkbluegrey (70 is view alpha channel)
         overlayView.backgroundColor = HIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
         overlayView.alpha = 0.0
@@ -109,7 +108,6 @@ extension HIMenuController {
         overlayView.leadingAnchor.constraint(equalTo: _tabBarController.view.leadingAnchor).isActive = true
         overlayView.bottomAnchor.constraint(equalTo: _tabBarController.view.bottomAnchor).isActive = true
         overlayView.trailingAnchor.constraint(equalTo: _tabBarController.view.trailingAnchor).isActive = true
-
 
         let menu = UIView()
         menu.backgroundColor = HIColor.paleBlue
@@ -124,7 +122,6 @@ extension HIMenuController {
         menuHeight = menu.heightAnchor.constraint(equalToConstant: 0)
         menuHeight.isActive = true
 
-
         let closeMenuButton = UIButton(type: .system)
         closeMenuButton.setImage(#imageLiteral(resourceName: "MenuClose"), for: .normal)
         closeMenuButton.tintColor = HIColor.hotPink
@@ -135,7 +132,6 @@ extension HIMenuController {
         closeMenuButton.leadingAnchor.constraint(equalTo: menu.safeAreaLayoutGuide.leadingAnchor).isActive = true
         closeMenuButton.widthAnchor.constraint(equalToConstant: 49).isActive = true
         closeMenuButton.heightAnchor.constraint(equalToConstant: 49).isActive = true
-
 
         menuItems.axis = .vertical
         menuItems.distribution = .fillEqually
@@ -159,7 +155,7 @@ extension HIMenuController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
-        coordinator.animate(alongsideTransition: { (context) in
+        coordinator.animate(alongsideTransition: { (_) in
             self.animateMenuFor(self.state)
         }, completion: nil)
     }

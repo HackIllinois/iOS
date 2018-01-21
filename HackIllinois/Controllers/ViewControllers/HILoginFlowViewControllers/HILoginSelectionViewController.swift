@@ -19,10 +19,10 @@ class HILoginSelectionViewController: HIBaseViewController {
     weak var delegate: HILoginSelectionViewControllerDelegate?
 
     var staticDataStore: [(loginMethod: HILoginMethod, displayText: String)] = [
-        (.github,   "HACKER"),
+        (.github, "HACKER"),
         (.userPass, "MENTOR"),
         (.userPass, "STAFF"),
-        (.userPass, "VOLUNTEER"),
+        (.userPass, "VOLUNTEER")
     ]
 }
 

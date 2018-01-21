@@ -34,7 +34,6 @@ class HIEventCell: HIBaseTableViewCell {
         containerView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -5).isActive = true
         containerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
 
-
         favoritedButton.setImage(#imageLiteral(resourceName: "Unfavorited"), for: .normal)
         favoritedButton.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(favoritedButton)
@@ -42,7 +41,6 @@ class HIEventCell: HIBaseTableViewCell {
         favoritedButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         favoritedButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
         favoritedButton.widthAnchor.constraint(equalToConstant: 58).isActive = true
-
 
         let disclosureIndicatorView = UIImageView(image: #imageLiteral(resourceName: "DisclosureIndicator"))
         disclosureIndicatorView.contentMode = .center
@@ -53,7 +51,6 @@ class HIEventCell: HIBaseTableViewCell {
         disclosureIndicatorView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         disclosureIndicatorView.widthAnchor.constraint(equalToConstant: 65).isActive = true
 
-        
         contentStackView.axis = .vertical
         contentStackView.distribution = .equalSpacing
         contentStackView.translatesAutoresizingMaskIntoConstraints = false

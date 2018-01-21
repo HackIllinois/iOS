@@ -19,16 +19,16 @@ class HIBaseViewController: UIViewController {
 
     // MARK: - Outlets
     var tableView: UITableView?
-    
+
     // MARK: - Init
     convenience init() {
         self.init(nibName: nil, bundle: nil)
     }
-    
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) should not be used")
     }
@@ -47,7 +47,7 @@ extension HIBaseViewController {
         view = UIView()
         view.backgroundColor = HIColor.paleBlue
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationItem()
@@ -124,7 +124,7 @@ extension HIBaseViewController: NSFetchedResultsControllerDelegate {
             tableView?.reloadRows(at: [updateIndexPath], with: .fade)
         case .move:
             guard let fromIndexPath = indexPath, let toIndexPath = newIndexPath else { return }
-            tableView?.insertRows(at: [toIndexPath],   with: .fade)
+            tableView?.insertRows(at: [toIndexPath], with: .fade)
             tableView?.deleteRows(at: [fromIndexPath], with: .fade)
         }
     }
@@ -247,5 +247,3 @@ extension HIBaseViewController {
         present(alert, animated: true, completion: nil)
     }
 }
-
-

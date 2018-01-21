@@ -34,7 +34,7 @@ struct HIUser: Codable {
 // MARK: - DataConvertible
 extension HIUser: DataConvertible {
     init?(data: Data) {
-        do  {
+        do {
             self = try JSONDecoder().decode(HIUser.self, from: data)
         } catch {
             return nil
@@ -42,7 +42,8 @@ extension HIUser: DataConvertible {
     }
 
     var data: Data {
-        return try! JSONEncoder().encode(HIUser.self)
+        let encoded = try? JSONEncoder().encode(HIUser.self)
+        return encoded ?? Data()
     }
 
 }

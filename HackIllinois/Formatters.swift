@@ -9,7 +9,7 @@
 import Foundation
 
 extension Formatter {
-    
+
     static let iso8601: DateFormatter = {
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .iso8601)
@@ -37,7 +37,6 @@ extension Date {
     static let HOUR_IN_SECONDS   =     3600.0
     static let MINUTE_IN_SECONDS =       60.0
     static let SECOND_IN_SECONDS =        1.0
-
 
     static func humanReadableTimeSince(_ date: Date) -> String {
         let timeSinceDate = Date().timeIntervalSince(date)

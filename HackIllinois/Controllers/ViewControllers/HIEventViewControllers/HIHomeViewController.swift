@@ -29,7 +29,7 @@ class HIHomeViewController: HIEventListViewController {
 extension HIHomeViewController {
     override func loadView() {
         super.loadView()
-        
+
         let hackingEndsInLabel = UILabel()
         hackingEndsInLabel.text = "HACKING ENDS IN:"
         hackingEndsInLabel.textColor = HIColor.darkIndigo
@@ -40,8 +40,7 @@ extension HIHomeViewController {
         hackingEndsInLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         hackingEndsInLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         hackingEndsInLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        
-        
+
         let countdownContainerView = UIView()
         // TODO: remove background color after view debugging
         countdownContainerView.backgroundColor = HIColor.hotPink
@@ -51,8 +50,7 @@ extension HIHomeViewController {
         countdownContainerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         countdownContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         countdownContainerView.heightAnchor.constraint(equalToConstant: 188).isActive = true
-        
-        
+
         let happeningNowLabel = UILabel()
         // TODO: check if colon should appear after NOW
         happeningNowLabel.text = "HAPPENING NOW"
@@ -64,8 +62,7 @@ extension HIHomeViewController {
         happeningNowLabel.topAnchor.constraint(equalTo: countdownContainerView.bottomAnchor, constant: 15).isActive = true
         happeningNowLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         happeningNowLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        
-        
+
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
@@ -73,10 +70,10 @@ extension HIHomeViewController {
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        
+
         self.tableView = tableView
     }
-    
+
     override func viewDidLoad() {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         super.viewDidLoad()

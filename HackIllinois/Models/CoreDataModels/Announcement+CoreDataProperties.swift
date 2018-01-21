@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension Announcement {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Announcement> {

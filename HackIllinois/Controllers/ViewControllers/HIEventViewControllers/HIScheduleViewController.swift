@@ -15,9 +15,16 @@ class HIScheduleViewController: HIEventListViewController {
     lazy var fetchedResultsController: NSFetchedResultsController<Event> = {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
 
-        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "id", ascending: true) ]
+        fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "id", ascending: true)
+        ]
 
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataController.shared.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        let fetchedResultsController = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: CoreDataController.shared.persistentContainer.viewContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
 
         fetchedResultsController.delegate = self
 
@@ -61,28 +68,28 @@ extension HIScheduleViewController {
 extension HIScheduleViewController {
     override func loadView() {
         super.loadView()
-        
+
         let segmentedControl = HISegmentedControl()
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
-        
+
         segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 34).isActive = true
-        
+
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
-        
+
         tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        
+
         self.tableView = tableView
     }
-    
+
     override func viewDidLoad() {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         super.viewDidLoad()
@@ -118,7 +125,3 @@ extension HIScheduleViewController {
         return header
     }
 }
-
-
-
-

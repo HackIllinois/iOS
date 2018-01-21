@@ -18,14 +18,19 @@ class EventDataSource: NSObject {
             NSSortDescriptor(key: "id", ascending: true)
         ]
 
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataController.shared.persistentContainer.viewContext, sectionNameKeyPath: sectionNameKeyPath, cacheName: nil)
+        let fetchedResultsController = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: CoreDataController.shared.persistentContainer.viewContext,
+            sectionNameKeyPath: sectionNameKeyPath,
+            cacheName: nil
+        )
 
         fetchedResultsController.delegate = delegate
 
         return fetchedResultsController
     }()
 
-    let delegate: NSFetchedResultsControllerDelegate?
+    weak var delegate: NSFetchedResultsControllerDelegate?
     let sectionNameKeyPath: String?
 
     init(delegate: NSFetchedResultsControllerDelegate, sectionNameKeyPath: String?) {

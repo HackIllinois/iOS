@@ -34,11 +34,15 @@ extension HIScannerViewController {
             }
         }
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if loadFailed {
-            presentErrorController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", dismissParentOnCompletion: false)
+            presentErrorController(
+                title: "Scanning not supported",
+                message: "Your device does not support scanning a code from an item. Please use a device with a camera.",
+                dismissParentOnCompletion: false
+            )
         }
     }
 
@@ -66,24 +70,21 @@ extension HIScannerViewController {
 
 // MARK: UINavigationControllerDelegate
 extension HIScannerViewController: UINavigationControllerDelegate {
-    
     func navigationControllerSupportedInterfaceOrientations(_ navigationController: UINavigationController) -> UIInterfaceOrientationMask {
         return .portrait
     }
-    
+
     func navigationControllerPreferredInterfaceOrientationForPresentation(_ navigationController: UINavigationController) -> UIInterfaceOrientation {
         return .portrait
     }
-
 }
 
 // MARK: AVCaptureMetadataOutputObjectsDelegate
 extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
-    
     func setupCaptureSession() {
         captureSession = AVCaptureSession()
         let metadataOutput = AVCaptureMetadataOutput()
-        
+
         guard
             let captureSession = captureSession,
             let videoCaptureDevice = AVCaptureDevice.default(for: .video),
@@ -94,18 +95,18 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
                 loadFailed = true
                 return
         }
-        
+
         captureSession.addInput(videoInput)
         captureSession.addOutput(metadataOutput)
         metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
         metadataOutput.metadataObjectTypes = [.qr]
-        
+
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.frame = view.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
     }
-    
+
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         guard respondingToQRCodeFound else { return }
         if let qrString = (metadataObjects.first as? AVMetadataMachineReadableCodeObject)?.stringValue {
@@ -118,7 +119,7 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
     func found(code: String) {
         print(code)
         // validateCode (user_id=000)
-        
+
         // pause scanner
         respondingToQRCodeFound = false
 
@@ -128,16 +129,13 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
         present(userDetailViewController, animated: true, completion: nil)
     }
 
-    
 }
 
 extension HIScannerViewController: HIUserDetailViewControllerDelegate {
     func willDismissViewController(_ viewController: HIUserDetailViewController, animated: Bool) { }
-    
+
     func didDismissViewController(_ viewController: HIUserDetailViewController, animated: Bool) {
         respondingToQRCodeFound = true
     }
-    
+
 }
-
-
