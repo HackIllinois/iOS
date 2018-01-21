@@ -109,9 +109,9 @@ extension AppDelegate {
         }
 
         // TODO: remove
-        userToActivate = HIUser(loginMethod: .userPass, permissions: .hacker, token: "sf", identifier: "rauhul_test")
-        userToActivate?.isActive = true
-
+//        userToActivate = HIUser(loginMethod: .userPass, permissions: .hacker, token: "sf", identifier: "rauhul_test")
+//        userToActivate?.isActive = true
+        return HILoginFlowController()
         if let user = userToActivate {
             return menuControllerSetupFor(user: user)
         } else {

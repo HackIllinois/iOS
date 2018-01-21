@@ -22,12 +22,26 @@ class HILoginSelectionViewController: HIBaseViewController {
         (.github,   "HACKER"),
         (.userPass, "MENTOR"),
         (.userPass, "STAFF"),
-        (.userPass, "VOLUNTEER")
+        (.userPass, "VOLUNTEER"),
     ]
 }
 
 // MARK: - UIViewController
 extension HILoginSelectionViewController {
+    override func loadView() {
+        super.loadView()
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tableView)
+        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 54).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+
+        self.tableView = tableView
+    }
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let _ = delegate else {
@@ -39,8 +53,8 @@ extension HILoginSelectionViewController {
 // MARK: - UITableView Setup
 extension HILoginSelectionViewController {
     override func setupTableView() {
-        tableView?.register(UINib(nibName: HILoginSelectionCell.storyboardIdentifier, bundle: nil), forCellReuseIdentifier: HILoginSelectionCell.storyboardIdentifier)
-        tableView?.register(UINib(nibName: HILoginSelectionHeader.storyboardIdentifier, bundle: nil), forHeaderFooterViewReuseIdentifier: HILoginSelectionHeader.storyboardIdentifier)
+        tableView?.register(HILoginSelectionHeader.self, forHeaderFooterViewReuseIdentifier: HILoginSelectionHeader.IDENTIFIER)
+        tableView?.register(HILoginSelectionCell.self, forCellReuseIdentifier: HILoginSelectionCell.IDENTIFIER)
         super.setupTableView()
         tableView?.alwaysBounceVertical = false
     }
@@ -64,7 +78,7 @@ extension HILoginSelectionViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: HILoginSelectionCell.storyboardIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: HILoginSelectionCell.IDENTIFIER, for: indexPath)
         if let cell = cell as? HILoginSelectionCell {
             switch indexPath.section {
             case 0:
@@ -75,12 +89,13 @@ extension HILoginSelectionViewController {
             if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
                 cell.indicatorView.isHidden = true
             }
+            cell.layoutIfNeeded()
         }
         return cell
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HILoginSelectionHeader.storyboardIdentifier)
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HILoginSelectionHeader.IDENTIFIER)
         if let header = header as? HILoginSelectionHeader {
             switch section {
             case 0:
