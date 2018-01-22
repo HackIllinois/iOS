@@ -10,17 +10,29 @@ import Foundation
 import UIKit
 import SwiftKeychainAccess
 
+extension Notification.Name {
+    static let loginUser  = Notification.Name("HIApplicationStateControllerLoginUser")
+    static let switchUser = Notification.Name("HIApplicationStateControllerSwitchUser")
+    static let logoutUser = Notification.Name("HIApplicationStateControllerLogoutUser")
+}
+
 class HIApplicationStateController {
+
     // MARK: - Properties
     var window: UIWindow?
 
     // MARK: ViewControllers
-    lazy var loginFlowController = HILoginFlowController(delegate: self)
-    lazy var menuController = HIMenuController(delegate: self)
+    lazy var loginFlowController = HILoginFlowController()
+    lazy var menuController = HIMenuController()
 
     // MARK: - Init
     init(window: UIWindow?) {
         self.window = window
+        
+    }
+
+    deinit {
+
     }
 }
 
@@ -93,14 +105,3 @@ extension HIApplicationStateController {
     }
 }
 
-// MARK: - HILoginFlowControllerDelegate
-extension HIApplicationStateController: HILoginFlowControllerDelegate {
-    func loginFlowController(_ loginFlowController: HILoginFlowController, didLoginWith user: HIUser) {
-
-    }
-}
-
-// MARK: - HIMenuControllerDelegate
-extension HIApplicationStateController: HIMenuControllerDelegate {
-
-}

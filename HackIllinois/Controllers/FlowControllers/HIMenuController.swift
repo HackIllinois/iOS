@@ -9,12 +9,7 @@
 import Foundation
 import UIKit
 
-protocol HIMenuControllerDelegate: class {
-
-}
-
 class HIMenuController: UIViewController {
-
     // MARK: - Types
     enum State {
         case open
@@ -26,31 +21,16 @@ class HIMenuController: UIViewController {
     // TODO: Introduce MENU_MAX_HEIGHT, add scroll bar if menu height is larger than this value
 
     // MARK: - Properties
-    private var _tabBarController = UITabBarController()
-
     private(set) var state = State.closed
-    weak var delegate: HIMenuControllerDelegate?
 
-    var menuHeight = NSLayoutConstraint()
-    var menuOverlap = NSLayoutConstraint()
-    var menuItemsHeight = NSLayoutConstraint()
+    private var _tabBarController = UITabBarController()
 
     var overlayView = UIView()
     var menuItems = UIStackView()
 
-    // MARK: - Init
-    convenience init(delegate: HIMenuControllerDelegate) {
-        self.init(nibName: nil, bundle: nil)
-        self.delegate = delegate
-    }
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) should not be used")
-    }
+    var menuHeight = NSLayoutConstraint()
+    var menuOverlap = NSLayoutConstraint()
+    var menuItemsHeight = NSLayoutConstraint()
 }
 
 // MARK: - Actions

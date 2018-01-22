@@ -12,14 +12,8 @@ import Lottie
 import SafariServices
 import SwiftKeychainAccess
 
-protocol HILoginFlowControllerDelegate: class {
-    func loginFlowController(_ loginFlowController: HILoginFlowController, didLoginWith user: HIUser)
-}
-
 class HILoginFlowController: UIViewController {
     // MARK: - Properties
-    weak var delegate: HILoginFlowControllerDelegate?
-
     let animationView = LOTAnimationView(name: "data")
     var shouldDisplayAnimationOnNextAppearance = true
     var userPassRequestToken: APIRequestToken?
@@ -29,43 +23,16 @@ class HILoginFlowController: UIViewController {
     var loginSession: SFAuthenticationSession?
 
     // MARK: ViewControllers
-    lazy var navController: UINavigationController = {
-        let vc = UINavigationController(rootViewController: loginSelectionViewController)
-        vc.isNavigationBarHidden = true
-        return vc
-    }()
-
-    lazy var loginSelectionViewController: HILoginSelectionViewController = {
-        let vc = HILoginSelectionViewController()
-        vc.delegate = self
-        return vc
-    }()
-
-    lazy var userPassLoginViewController: HIUserPassLoginViewController = {
-        let vc = HIUserPassLoginViewController()
-        vc.delegate = self
-        return vc
-    }()
-
-    // MARK: - Init
-    convenience init(delegate: HILoginFlowControllerDelegate) {
-        self.init(nibName: nil, bundle: nil)
-        self.delegate = delegate
-    }
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) should not be used")
-    }
+    lazy var navController = UINavigationController(rootViewController: loginSelectionViewController)
+    lazy var loginSelectionViewController = HILoginSelectionViewController(delegate: self)
+    lazy var userPassLoginViewController = HIUserPassLoginViewController(delegate: self)
 }
 
 // MARK: - UIViewController
 extension HILoginFlowController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        navController.isNavigationBarHidden = true
         addChildViewController(navController)
         navController.view.frame = view.frame
         navController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -115,7 +82,7 @@ extension HILoginFlowController {
         user.isActive = true
         Keychain.default.store(user, forKey: user.identifier)
         refreshKeychainContents()
-        delegate?.loginFlowController(self, didLoginWith: user)
+//        delegate?.loginFlowController(self, didLoginWith: user)
     }
 }
 

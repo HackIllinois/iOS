@@ -24,6 +24,20 @@ class HILoginSelectionViewController: HIBaseViewController {
         (.userPass, "STAFF"),
         (.userPass, "VOLUNTEER")
     ]
+
+    // MARK: - Init
+    convenience init(delegate: HILoginSelectionViewControllerDelegate) {
+        self.init(nibName: nil, bundle: nil)
+        self.delegate = delegate
+    }
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) should not be used")
+    }
 }
 
 // MARK: - UIViewController
