@@ -14,7 +14,7 @@ class HITrackingService: HIBaseService {
     override class var baseURL: String {
         return super.baseURL + "/tracking"
     }
-        
+
     class func githubLoginURL() -> URL {
         guard let url = URL(string: baseURL + "?isMobile=1") else {
             fatalError()

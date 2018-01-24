@@ -179,6 +179,9 @@ extension HIUserPassLoginViewController {
             signInButton.backgroundColor = UIColor.gray
             activityIndicator.startAnimating()
 
+            emailTextField.text = nil
+            passwordTextField.text = nil
+
         case .readyToLogin:
             signInButton.isEnabled = true
             signInButton.setTitle("Sign In", for: .normal)
