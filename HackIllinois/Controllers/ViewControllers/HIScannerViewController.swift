@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import AVKit
-import APIManager
 
 class HIScannerViewController: HIBaseViewController {
     var captureSession: AVCaptureSession?
