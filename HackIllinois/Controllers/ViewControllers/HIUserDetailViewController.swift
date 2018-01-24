@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 protocol HIUserDetailViewControllerDelegate: class {
     func willDismissViewController(_ viewController: HIUserDetailViewController, animated: Bool)
     func didDismissViewController(_ viewController: HIUserDetailViewController, animated: Bool)
@@ -103,9 +102,12 @@ extension HIUserDetailViewController {
         view.addSubview(emergencyContactTitle)
         emergencyContactTitle.topAnchor.constraint(equalTo: userDetailContainer.bottomAnchor, constant: 29).isActive = true
         emergencyContactTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
-        emergencyContactTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 24).isActive = true
+        emergencyContactTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24).isActive = true
+        emergencyContactTitle.heightAnchor.constraint(equalToConstant: 22).isActive = true
 
         let emergencyContactStackView = UIStackView()
+        emergencyContactStackView.axis = .vertical
+        emergencyContactStackView.distribution = .fillEqually
         emergencyContactStackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(emergencyContactStackView)
         emergencyContactStackView.topAnchor.constraint(equalTo: emergencyContactTitle.bottomAnchor, constant: 7).isActive = true
@@ -113,8 +115,6 @@ extension HIUserDetailViewController {
         emergencyContactStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24).isActive = true
         emergencyContactStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -42).isActive = true
         emergencyContactStackView.heightAnchor.constraint(equalToConstant: 60)
-        emergencyContactStackView.distribution = .fillEqually
-        emergencyContactStackView.axis = .vertical
 
         emergencyContactNameLabel.text = "JANE DOE"
         emergencyContactNameLabel.textColor = HIColor.hotPink

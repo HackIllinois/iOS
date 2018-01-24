@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		35240BCA20130C5D00E0C0D8 /* HIUserLookupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35240BC920130C5C00E0C0D8 /* HIUserLookupViewController.swift */; };
+		35BD9E4A2017DFED005B6FCE /* HITrackingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BD9E492017DFED005B6FCE /* HITrackingService.swift */; };
 		6602C7A6DEE0178C82BE1497 /* Pods_HackIllinois.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F912C974275240F02A49C6D /* Pods_HackIllinois.framework */; };
 		950F57141FBE8139001F7DF4 /* HIBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F57131FBE8139001F7DF4 /* HIBaseService.swift */; };
 		950F57161FBE81FA001F7DF4 /* HIAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F57151FBE81FA001F7DF4 /* HIAuthService.swift */; };
@@ -61,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		35240BC920130C5C00E0C0D8 /* HIUserLookupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIUserLookupViewController.swift; sourceTree = "<group>"; };
+		35BD9E492017DFED005B6FCE /* HITrackingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITrackingService.swift; sourceTree = "<group>"; };
 		5F912C974275240F02A49C6D /* Pods_HackIllinois.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HackIllinois.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ACE213775C4DAD26D29206F /* Pods-HackIllinois.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackIllinois.release.xcconfig"; path = "Pods/Target Support Files/Pods-HackIllinois/Pods-HackIllinois.release.xcconfig"; sourceTree = "<group>"; };
 		950F57131FBE8139001F7DF4 /* HIBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIBaseService.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				95DE24DB1FC3ADBE000F599D /* HIAnnouncementService.swift */,
+				35BD9E492017DFED005B6FCE /* HITrackingService.swift */,
 				950F57151FBE81FA001F7DF4 /* HIAuthService.swift */,
 				950F57131FBE8139001F7DF4 /* HIBaseService.swift */,
 				957D7C831FC28F4100C4332A /* HIEventService.swift */,
@@ -536,6 +539,7 @@
 				9553EC7D1FCF99F600B6B3EE /* HISegmentedControl.swift in Sources */,
 				95C18DCA20096539004784B5 /* HIEventDetailViewController.swift in Sources */,
 				95C18DC52009618C004784B5 /* HIHomeViewController.swift in Sources */,
+				35BD9E4A2017DFED005B6FCE /* HITrackingService.swift in Sources */,
 				9510F6A11FCB7D6E007D19DB /* Event+CoreDataClass.swift in Sources */,
 				35240BCA20130C5D00E0C0D8 /* HIUserLookupViewController.swift in Sources */,
 				951827A81EA35DB800049F79 /* AppDelegate.swift in Sources */,

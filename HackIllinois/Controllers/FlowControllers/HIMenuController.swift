@@ -99,8 +99,7 @@ extension HIMenuController {
         _tabBarController.view.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         _tabBarController.didMove(toParentViewController: self)
 
-        // TODO: Darkbluegrey (70 is view alpha channel)
-        overlayView.backgroundColor = HIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+        overlayView.backgroundColor = HIColor.darkBlueGrey
         overlayView.alpha = 0.0
         overlayView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(overlayView)
@@ -129,7 +128,7 @@ extension HIMenuController {
         closeMenuButton.translatesAutoresizingMaskIntoConstraints = false
         menu.addSubview(closeMenuButton)
         closeMenuButton.topAnchor.constraint(equalTo: menu.safeAreaLayoutGuide.topAnchor, constant: -9).isActive = true
-        closeMenuButton.leadingAnchor.constraint(equalTo: menu.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        closeMenuButton.leadingAnchor.constraint(equalTo: menu.safeAreaLayoutGuide.leadingAnchor, constant: 3).isActive = true
         closeMenuButton.widthAnchor.constraint(equalToConstant: 49).isActive = true
         closeMenuButton.heightAnchor.constraint(equalToConstant: 49).isActive = true
 
