@@ -19,89 +19,121 @@ extension Notification.Name {
 class HIApplicationStateController {
 
     // MARK: - Properties
-    var window: UIWindow?
+    var window = UIWindow(frame: UIScreen.main.bounds)
+    var user: HIUser?
 
     // MARK: ViewControllers
-    lazy var loginFlowController = HILoginFlowController()
-    lazy var menuController = HIMenuController()
+    var loginFlowController = HILoginFlowController()
+    var menuController = HIMenuController()
 
     // MARK: - Init
-    init(window: UIWindow?) {
-        self.window = window
-        
+    init() {
+        NotificationCenter.default.addObserver(self, selector: #selector(HIApplicationStateController.loginUser), name: .loginUser, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(HIApplicationStateController.switchUser), name: .switchUser, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(HIApplicationStateController.logoutUser), name: .logoutUser, object: nil)
+
+        resetPersistentDataIfNeeded()
+        recoverUserIfPossible()
+
+        if user != nil {
+            loginFlowController.shouldDisplayAnimationOnNextAppearance = false
+        }
+
+        updateWindowViewController(animated: false)
+        window.makeKeyAndVisible()
     }
 
     deinit {
-
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
 // MARK: - API
 extension HIApplicationStateController {
-    func startUp() {
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = initalViewController()
-        window?.makeKeyAndVisible()
+    func resetPersistentDataIfNeeded() {
+        guard !UserDefaults.standard.bool(forKey: "HIAPPLICATION_INSTALLED") else { return }
+        _ = Keychain.default.purge()
+        UserDefaults.standard.set(true, forKey: "HIAPPLICATION_INSTALLED")
     }
 
-    func initalViewController() -> UIViewController {
-        var userToActivate: HIUser?
+    func recoverUserIfPossible() {
         for key in Keychain.default.allKeys() {
             guard let user = Keychain.default.retrieve(HIUser.self, forKey: key) else {
                 Keychain.default.removeObject(forKey: key)
                 continue
             }
             if user.isActive {
-                if var user = userToActivate {
+                if var user = self.user {
                     user.isActive = false
                     Keychain.default.store(user, forKey: user.identifier)
                 }
-                userToActivate = user
+                self.user = user
             }
         }
-
-        // TODO: remove
-        // userToActivate = HIUser(loginMethod: .userPass, permissions: .hacker, token: "sf", identifier: "rauhul_test")
-        // userToActivate?.isActive = true
-
-        if let user = userToActivate {
-            setupMenuControllerFor(user: user)
-            return menuController
-        } else {
-            return loginFlowController
-        }
     }
 
-    func setupMenuControllerFor(user: HIUser) {
+    func viewControllersFor(user: HIUser) -> [UIViewController] {
         var viewControllers = [UIViewController]()
-        if [.hacker].contains(user.permissions) {
+        if [.attendee].contains(user.permissions) {
             viewControllers.append(HIHomeViewController())
         }
-        if [.hacker, .volunteer, .staff, .superUser].contains(user.permissions) {
+        if [.attendee, .volunteer, .staff, .admin].contains(user.permissions) {
             viewControllers.append(HIScheduleViewController())
         }
-        if [.hacker, .volunteer, .staff, .superUser].contains(user.permissions) {
+        if [.attendee, .volunteer, .staff, .admin].contains(user.permissions) {
             viewControllers.append(HIAnnouncementsViewController())
         }
-        if [.hacker, .volunteer, .staff, .superUser].contains(user.permissions) {
+        if [.attendee, .volunteer, .staff, .admin].contains(user.permissions) {
             viewControllers.append(HIUserDetailViewController())
         }
-        if [.volunteer, .staff, .superUser].contains(user.permissions) {
+        if [.volunteer, .staff, .admin].contains(user.permissions) {
             viewControllers.append(HIScannerViewController())
         }
-        menuController.setupMenuFor(viewControllers)
+        return viewControllers
     }
 
-    func switchAccounts() {
-//        vc.view.frame = rootViewController.view.frame
-//        vc.view.layoutIfNeeded()
-//
-//        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {
-//            window.rootViewController = vc
-//        }, completion: { completed in
-//            // maybe do something here
-//        })
+    @objc func loginUser(_ notification: Notification) {
+        guard var user = notification.userInfo?["user"] as? HIUser else { return }
+        user.isActive = true
+        Keychain.default.store(user, forKey: user.identifier)
+        self.user = user
 
+        updateWindowViewController(animated: true)
+    }
+
+    @objc func switchUser() {
+        guard var user = user else { return }
+        user.isActive = false
+        Keychain.default.store(user, forKey: user.identifier)
+        self.user = nil
+
+        updateWindowViewController(animated: true)
+    }
+
+    @objc func logoutUser() {
+        guard let user = user else { return }
+        _ = Keychain.default.removeObject(forKey: user.identifier)
+        self.user = nil
+
+        updateWindowViewController(animated: true)
+    }
+
+    func updateWindowViewController(animated: Bool) {
+        let viewController: UIViewController
+        if let user = user {
+            let menuViewControllers = viewControllersFor(user: user)
+            menuController.setupMenuFor(menuViewControllers)
+            menuController._tabBarController.selectedIndex = 0
+            viewController = menuController
+        } else {
+            loginFlowController.navController.popToRootViewController(animated: false)
+            viewController = loginFlowController
+        }
+
+        let duration = animated ? 0.3 : 0
+        viewController.view.layoutIfNeeded()
+        UIView.transition(with: window, duration: duration, options: .transitionCrossDissolve, animations: {
+            self.window.rootViewController = viewController
+        }, completion: nil)
     }
 }
-

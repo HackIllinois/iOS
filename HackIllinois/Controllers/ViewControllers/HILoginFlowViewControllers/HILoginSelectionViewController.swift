@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol HILoginSelectionViewControllerDelegate: class {
-    func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HILoginMethod, withUserInfo info: String?)
+    func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HILoginSelection, withUserInfo info: String?)
     func loginSelectionViewControllerKeychainAccounts(_ loginSelectionViewController: HILoginSelectionViewController) -> [String]
 }
 
@@ -18,7 +18,7 @@ class HILoginSelectionViewController: HIBaseViewController {
     // MARK: - Properties
     weak var delegate: HILoginSelectionViewControllerDelegate?
 
-    var staticDataStore: [(loginMethod: HILoginMethod, displayText: String)] = [
+    var staticDataStore: [(loginMethod: HILoginSelection, displayText: String)] = [
         (.github, "HACKER"),
         (.userPass, "MENTOR"),
         (.userPass, "STAFF"),
@@ -67,7 +67,6 @@ extension HILoginSelectionViewController {
 
 // MARK: - UITableViewDataSource
 extension HILoginSelectionViewController {
-    // FIXME: remove after finishing layout debugging
     override func numberOfSections(in tableView: UITableView) -> Int {
         let keychainAccounts = delegate?.loginSelectionViewControllerKeychainAccounts(self).count ?? 0
         return keychainAccounts > 0 ? 2 : 1
@@ -94,6 +93,7 @@ extension HILoginSelectionViewController {
             if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
                 cell.indicatorView.isHidden = true
             }
+            cell.activityIndicator.isHidden = true
         }
         return cell
     }
@@ -146,4 +146,3 @@ extension HILoginSelectionViewController {
         super.tableView(tableView, didSelectRowAt: indexPath)
     }
 }
-

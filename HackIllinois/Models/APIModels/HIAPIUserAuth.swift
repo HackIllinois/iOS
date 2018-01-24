@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct HIUserAuth: Codable {
-    typealias Contained = HIAPIReturnDataContainer<HIUserAuth>
-
+struct HIAPIUserAuth: Codable {
+    typealias Contained = HIAPIReturnDataContainer<HIAPIUserAuth>
+    
     var auth: String
 }

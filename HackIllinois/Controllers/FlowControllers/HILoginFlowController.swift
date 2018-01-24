@@ -32,6 +32,7 @@ class HILoginFlowController: UIViewController {
 extension HILoginFlowController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = HIColor.paleBlue
         navController.isNavigationBarHidden = true
         addChildViewController(navController)
         navController.view.frame = view.frame
@@ -54,36 +55,43 @@ extension HILoginFlowController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if shouldDisplayAnimationOnNextAppearance {
-            animationView.play { (_) in
+            animationView.play { _ in
                 self.animationView.removeFromSuperview()
             }
             shouldDisplayAnimationOnNextAppearance = false
-        }
-
-        let testUser = HIUser(loginMethod: .userPass, permissions: .hacker, token: "toktok", identifier: "rauhul")
-        print(Keychain.default.store(testUser, forKey: testUser.identifier))
-        refreshKeychainContents()
-
-        for key in Keychain.default.allKeys() {
-            let retrievedValue = Keychain.default.retrieve(HIUser.self, forKey: key)
-            print(retrievedValue ?? "retrieve failed")
         }
     }
 }
 
 // MARK: - Login Flow
 extension HILoginFlowController {
-    func validateLogin(user: HIUser, failure: Void) {
-        loginSucceeded(user: user)
+    func populateUserData(loginMethod: HILoginMethod, token: String, sender: HIBaseViewController) {
+        // TODO: remove once APIManager is updated to allow headers specific to requests
+        let tmpUser = HIUser(loginMethod: loginMethod, permissions: .attendee, token: token, identifier: "", isActive: false, id: 0)
+        HIUserService.get()
+        .onSuccess { (containedUser) in
+            let userInfo = containedUser.data[0]
+            let user = HIUser(
+                loginMethod: loginMethod,
+                permissions: userInfo.roles[0].permissions,
+                token: token,
+                identifier: userInfo.info.email,
+                isActive: true,
+                id: userInfo.info.id
+            )
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: [
+                    "user": user
+                ])
+            }
+        }
+        .onFailure { _ in
+            sender.presentErrorController(title: "Authentication Failed", message: nil, dismissParentOnCompletion: false)
+        }
+        .authorization(tmpUser)
+        .perform()
     }
 
-    func loginSucceeded(user: HIUser) {
-        var user = user
-        user.isActive = true
-        Keychain.default.store(user, forKey: user.identifier)
-        refreshKeychainContents()
-//        delegate?.loginFlowController(self, didLoginWith: user)
-    }
 }
 
 // MARK: - Keychain
@@ -93,23 +101,20 @@ extension HILoginFlowController {
         loginSelectionViewController.tableView?.reloadData()
     }
 
-    func removeUser(id: String) {
-        Keychain.default.removeObject(forKey: id)
-    }
-
     func keychainRetrievalSucceeded(user: HIUser) {
         // TODO: validation in the future
         // FIXME: theres a chance that a recovered github account will have a token that is revoked, we should probably validate this token.
         // low chance of this happening in 48 hours, fix it later.
         // this is also a concern for user-pass logins
-
-        validateLogin(user: user, failure: ())
+        NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: [
+            "user": user
+        ])
     }
 
     func keychainRetrievalFailed(id: String) {
-        removeUser(id: id)
+        Keychain.default.removeObject(forKey: id)
         refreshKeychainContents()
-        let alert = UIAlertController(title: "Account Switch Failed", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Login Failed", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
@@ -122,31 +127,27 @@ extension HILoginFlowController: HILoginSelectionViewControllerDelegate {
         return keychainContents
     }
 
-    func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HILoginMethod, withUserInfo info: String?) {
+    func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HILoginSelection, withUserInfo info: String?) {
         switch selection {
         case .github:
-            print("URL::", HIAuthService.githubLoginURL())
+            print("URL ::", HIAuthService.githubLoginURL())
             loginSession = SFAuthenticationSession(url: HIAuthService.githubLoginURL(), callbackURLScheme: nil) { [weak self] (url, error) in
-                print(url ?? "", error ?? "")
+
                 if let url = url,
                     let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
                     let queryItems = components.queryItems,
-                    let token = queryItems.first(where: { $0.name == "token" })?.value {
-                    // TODO: add where token.stripping(newlineAndWhitespace Characters) != ""
+                    let token = queryItems.first(where: { $0.name == "token" })?.value,
+                    token.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
 
-                    // TODO: add permissions
-                    print(token)
-                    let newUser = HIUser(loginMethod: .github, permissions: .hacker, token: token, identifier: "")
-                    self?.loginSucceeded(user: newUser)
+                    DispatchQueue.main.async {
+                        self?.populateUserData(loginMethod: .github, token: token, sender: loginSelectionViewController)
+                    }
                 }
 
-                // TODO: clean this code
                 if let error = error {
-                    do {
-                        throw error
-                    } catch SFAuthenticationError.canceledLogin {
+                    if (error as? SFAuthenticationError)?.code == SFAuthenticationError.canceledLogin {
                         // do nothing
-                    } catch {
+                    } else {
                         let alert = UIAlertController(title: "Authentication Failed", message: nil, preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                         self?.present(alert, animated: true, completion: nil)
@@ -185,14 +186,10 @@ extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
 
         userPassRequestToken = HIAuthService.login(email: email, password: password)
         .onSuccess { [weak self] (authContained) in
-
-            _ = HIUser(loginMethod: .userPass, permissions: .hacker, token: authContained.data[0].auth, identifier: "")
-
             DispatchQueue.main.async {
+                self?.populateUserData(loginMethod: .userPass, token: authContained.data[0].auth, sender: userPassLoginViewController)
                 self?.userPassLoginViewController.stylizeFor(.readyToLogin)
             }
-
-            print(authContained)
         }
         .onFailure { [weak self] (error) in
             do {
@@ -208,7 +205,7 @@ extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
             }
 
             DispatchQueue.main.async {
-                // shake with error
+                // TODO: Shake with error
                 self?.userPassLoginViewController.stylizeFor(.readyToLogin)
             }
         }

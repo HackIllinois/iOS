@@ -9,14 +9,7 @@
 import Foundation
 import APIManager
 
-extension Data: APIReturnable {
-    public init(from data: Data) {
-        self = data
-    }
-}
-
 class HIEventService: HIBaseService {
-
     override class var baseURL: String {
         return super.baseURL + "/event"
     }

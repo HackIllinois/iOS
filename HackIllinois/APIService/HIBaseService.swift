@@ -7,21 +7,25 @@
 //
 
 import Foundation
+import UIKit
 import APIManager
 
 class HIBaseService: APIService {
-
     class var baseURL: String {
-        return "http://ec2-54-227-68-47.compute-1.amazonaws.com/v1"
+        return "http://api.test.hackillinois.org/v1"
     }
 
     class var headers: HTTPHeaders? {
-        return [
-            "Content-Type": "application/json"
-//            "Authorization": HIBaseService.authorizationKey
-        ]
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        if let user = (UIApplication.shared.delegate as? AppDelegate)?.applicationStateController.user {
+            switch user.loginMethod {
+            case .github:
+                headers["Authorization"] = "Bearer \(user.token)"
+            case .userPass:
+                headers["Authorization"] = "Basic \(user.token)"
+            }
+        }
+        return headers
     }
-
-//    static var authorizationKey = "Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN5c3RlbXNAaGFja2lsbGlub2lzLm9yZyIsInJvbGVzIjpbeyJyb2xlIjoiQURNSU4iLCJhY3RpdmUiOjF9XSwiaWF0IjoxNTExMTU1NTg4LCJleHAiOjE1MTE3NjAzODgsInN1YiI6IjEifQ.NiM9JsS5MQ5wcG7DG3gO_rF3m2i7E-dueg7NuJGEGTE"
-
 }

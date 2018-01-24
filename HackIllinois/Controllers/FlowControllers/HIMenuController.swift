@@ -23,7 +23,7 @@ class HIMenuController: UIViewController {
     // MARK: - Properties
     private(set) var state = State.closed
 
-    private var _tabBarController = UITabBarController()
+    private(set) var _tabBarController = UITabBarController()
 
     var overlayView = UIView()
     var menuItems = UIStackView()

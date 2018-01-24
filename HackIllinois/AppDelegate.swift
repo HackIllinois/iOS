@@ -15,15 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Properties
     var window: UIWindow?
     var currentUser: HIUser?
-    lazy var applicationStateController = HIApplicationStateController(window: window)
+    var applicationStateController = HIApplicationStateController()
 
     // FIXME: Allows arbitary loads
     // FIXME: Remove landscape support
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        resetPersistentDataIfNeeded()
         setupNavigationBarAppearance()
         setupTableViewAppearance()
-        applicationStateController.startUp()
+        applicationStateController.window.makeKeyAndVisible()
         return true
     }
 
@@ -85,14 +84,5 @@ extension AppDelegate {
         tableViewAppearance.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: CGFloat.leastNonzeroMagnitude, height: CGFloat.leastNonzeroMagnitude))
         tableViewAppearance.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: CGFloat.leastNonzeroMagnitude, height: CGFloat.leastNonzeroMagnitude))
         tableViewAppearance.showsHorizontalScrollIndicator = false
-    }
-}
-
-// MARK: - Helpers
-extension AppDelegate {
-    func resetPersistentDataIfNeeded() {
-        guard !UserDefaults.standard.bool(forKey: "HIAPPLICATION_INSTALLED") else { return }
-        _ = Keychain.default.purge()
-        UserDefaults.standard.set(true, forKey: "HIAPPLICATION_INSTALLED")
     }
 }

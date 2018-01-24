@@ -29,13 +29,9 @@ struct HIAPIReturnDataContainer<Model: Decodable>: Decodable, APIReturnable {
         meta = try container.decodeIfPresent(String.self, forKey: .meta)
         do {
             data = try container.decode([Model].self, forKey: .data)
-        } catch let error {
-            do {
-                let singleDataValue = try container.decode(Model.self, forKey: .data)
-                data = [singleDataValue]
-            } catch _ {
-                throw error
-            }
+        } catch _ {
+            let singleDataValue = try container.decode(Model.self, forKey: .data)
+            data = [singleDataValue]
         }
     }
 }

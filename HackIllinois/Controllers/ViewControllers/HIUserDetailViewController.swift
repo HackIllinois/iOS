@@ -25,13 +25,16 @@ class HIUserDetailViewController: HIBaseViewController {
 // MARK: - Actions
 extension HIUserDetailViewController {
     @objc func didSelectLogoutButton(_ sender: Any) {
-        // FIXME: look at replacing with delegation
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(
-            UIAlertAction(title: "Switch Accounts", style: .default) { print($0) }
+            UIAlertAction(title: "Switch User", style: .default) { _ in
+                NotificationCenter.default.post(name: .switchUser, object: nil)
+            }
         )
         alert.addAction(
-            UIAlertAction(title: "Logout", style: .destructive) { print($0) }
+            UIAlertAction(title: "Logout", style: .destructive) { _ in
+                NotificationCenter.default.post(name: .logoutUser, object: nil)
+            }
         )
         alert.addAction(
             UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
