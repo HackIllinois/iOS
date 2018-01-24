@@ -18,6 +18,8 @@ extension Notification.Name {
 
 class HIApplicationStateController {
 
+    static var shared: HIApplicationStateController?
+
     // MARK: - Properties
     var window = UIWindow(frame: UIScreen.main.bounds)
     var user: HIUser?
@@ -141,6 +143,7 @@ extension HIApplicationStateController {
         menuController.setupMenuFor(menuViewControllers)
         menuController._tabBarController.selectedIndex = 0
 
-        HIEventService.refreshEvents()
+        HIEventDataSource.refresh()
+        HIAnnouncementDataSource.refresh()
     }
 }

@@ -9,12 +9,12 @@
 import Foundation
 import APIManager
 
-class HIUserService: HIBaseService {
-    override class var baseURL: String {
+final class HIUserService: HIBaseService {
+    override static var baseURL: String {
         return super.baseURL + "/user"
     }
 
-    class func get() -> APIRequest<HIAPIUser.Contained> {
+    static func get() -> APIRequest<HIAPIUser.Contained> {
         return APIRequest<HIAPIUser.Contained>(service: self, endpoint: "", method: .GET)
     }
 }

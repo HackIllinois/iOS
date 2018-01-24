@@ -18,7 +18,7 @@ class HIBaseService: APIService {
     class var headers: HTTPHeaders? {
         var headers = HTTPHeaders()
         headers["Content-Type"] = "application/json"
-        if let user = (UIApplication.shared.delegate as? AppDelegate)?.applicationStateController.user {
+        if let user = HIApplicationStateController.shared?.user {
             switch user.loginMethod {
             case .github:
                 headers["Authorization"] = "Bearer \(user.token)"

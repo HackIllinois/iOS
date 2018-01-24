@@ -74,7 +74,7 @@ extension HIEventListViewController {
 extension HIEventListViewController {
     override func refresh(_ sender: UIRefreshControl) {
         refreshAnimation.play()
-        HIEventService.refreshEvents(completion: endRefreshing)
+        HIEventDataSource.refresh(completion: endRefreshing)
     }
 
     func endRefreshing() {
