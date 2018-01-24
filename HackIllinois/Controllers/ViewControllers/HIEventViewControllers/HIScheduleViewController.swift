@@ -44,15 +44,6 @@ extension HIScheduleViewController {
         }
         .perform()
 
-        HIEventService.getAllEvents()
-        .onSuccess { (contained) in
-            print(contained)
-        }
-        .onFailure { (reason) in
-            print(reason)
-        }
-        .perform()
-
         HIEventService.getAllLocations()
         .onSuccess { (contained) in
             print(contained)

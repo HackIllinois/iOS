@@ -40,17 +40,7 @@ struct HIAPIUser: Codable {
             let active = try container.decode(Int.self, forKey: .active)
             self.active = active == 1 ? true : false
             let role = try container.decode(String.self, forKey: .permissions)
-            guard let permissions = HIUserPermissions(rawValue: role) else {
-                throw DecodingError.typeMismatch(
-                    HIUserPermissions.self,
-                    DecodingError.Context(
-                        codingPath: [CodingKeys.permissions],
-                        debugDescription: "Role not aliased to any permission level"
-                    )
-                )
-            }
-            self.permissions = permissions
+            permissions = HIUserPermissions(rawValue: role) ?? .attendee
         }
-
     }
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 import APIManager
+import CoreData
 
 class HIEventService: HIBaseService {
     override class var baseURL: String {
@@ -15,22 +16,70 @@ class HIEventService: HIBaseService {
     }
 
     // MARK: Events
-    class func create(event: Event) -> APIRequest<Event.Contained> {
+    class func create(event: HIAPIEvent) -> APIRequest<HIAPIEvent.Contained> {
         let eventDict = [String: Any]()
-        return APIRequest<Event.Contained>(service: self, endpoint: "", body: eventDict, method: .POST)
+        return APIRequest<HIAPIEvent.Contained>(service: self, endpoint: "", body: eventDict, method: .POST)
     }
 
-    class func getAllEvents(active: Bool = false) -> APIRequest<Event.Contained> {
-        return APIRequest<Event.Contained>(service: self, endpoint: "", params: ["active": "\(active)"], method: .GET)
+    class func getAllEvents(active: Bool = false) -> APIRequest<HIAPIEvent.Contained> {
+        return APIRequest<HIAPIEvent.Contained>(service: self, endpoint: "", params: ["active": "\(active)"], method: .GET)
     }
 
     // MARK: Locations
-    class func create(location: Location) -> APIRequest<Location.Contained> {
+    class func create(location: HIAPILocation) -> APIRequest<HIAPILocation.Contained> {
         let locationDict = [String: Any]()
-        return APIRequest<Location.Contained>(service: self, endpoint: "/location", body: locationDict, method: .POST)
+        return APIRequest<HIAPILocation.Contained>(service: self, endpoint: "/location", body: locationDict, method: .POST)
     }
 
-    class func getAllLocations() -> APIRequest<Location.Contained> {
-        return APIRequest<Location.Contained>(service: self, endpoint: "/location/all", method: .GET)
+    class func getAllLocations() -> APIRequest<HIAPILocation.Contained> {
+        return APIRequest<HIAPILocation.Contained>(service: self, endpoint: "/location/all", method: .GET)
+    }
+
+    // TODO: move into somthing like EventDataSource
+    // add a bool isRefreshing to ensure multiple refreshes are not requested
+    class func refreshEvents(completion: (() -> Void)? = nil) {
+        let backgroundContext = CoreDataController.shared.persistentContainer.newBackgroundContext()
+        backgroundContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+
+        HIEventService.getAllLocations()
+        .onSuccess { (containedLocations) in
+            backgroundContext.reset()
+
+            var locations = [Location]()
+            backgroundContext.performAndWait {
+                for location in containedLocations.data {
+                    locations.append(
+                        Location(context: backgroundContext, location: location)
+                    )
+                }
+            }
+
+            DispatchQueue.main.async {
+                HIEventService.getAllEvents()
+                .onSuccess { (containedEvents) in
+
+                    backgroundContext.performAndWait {
+                        for event in containedEvents.data {
+                            let eventLocationIds = event.locations.map { Int16($0.locationId) }
+                            let eventLocations = locations.filter { eventLocationIds.contains($0.id) }
+
+                            _ = Event(context: backgroundContext, event: event, locations: NSSet(array: eventLocations))
+                        }
+                        try? backgroundContext.save()
+                    }
+                    completion?()
+                }
+                .onFailure { _ in
+                    completion?()
+                }
+                .perform()
+            }
+        }
+        .onFailure { error in
+            print(error)
+            completion?()
+        }
+        .perform()
+
     }
 }

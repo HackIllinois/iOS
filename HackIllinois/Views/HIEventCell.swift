@@ -86,19 +86,18 @@ extension HIEventCell {
         return locationLabel
     }
 
-    // TODO: remove this once the true event model is ready
-    static func heightForCell(with numEvents: Int) -> CGFloat {
-        return 73 + 21 * CGFloat(numEvents)
+    static func heightForCell(with event: Event) -> CGFloat {
+        return 73 + 21 * CGFloat(event.locations.count)
     }
 
-    // TODO: remove this once the true event model is ready
-    static func <- (lhs: HIEventCell, rhs: IndexPath) {
+    static func <- (lhs: HIEventCell, rhs: Event) {
         var contentStackViewHeight: CGFloat = 0
-        let titleLabel = labelFor(title: "Current Event Name\(rhs.row)")
+        let titleLabel = labelFor(title: rhs.name)
         contentStackViewHeight += titleLabel.intrinsicContentSize.height
         lhs.contentStackView.addArrangedSubview(titleLabel)
-        for index in 0..<rhs.row {
-            let locationLabel = labelFor(locationText: "Location \(index)")
+        for location in rhs.locations {
+            guard let location = location as? Location else { continue }
+            let locationLabel = labelFor(locationText: location.name)
             contentStackViewHeight += locationLabel.intrinsicContentSize.height + 3
             lhs.contentStackView.addArrangedSubview(locationLabel)
         }
