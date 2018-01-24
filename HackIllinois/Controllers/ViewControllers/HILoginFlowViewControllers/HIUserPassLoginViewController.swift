@@ -25,11 +25,23 @@ class HIUserPassLoginViewController: HIBaseViewController {
     weak var delegate: HIUserPassLoginViewControllerDelegate?
 
     var activityIndicator = UIActivityIndicatorView()
-
-    // MARK: - Outlets
     var emailTextField = UITextField()
     var passwordTextField = UITextField()
     var signInButton = UIButton()
+
+    // MARK: - Init
+    convenience init(delegate: HIUserPassLoginViewControllerDelegate) {
+        self.init(nibName: nil, bundle: nil)
+        self.delegate = delegate
+    }
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) should not be used")
+    }
 }
 
 // MARK: - Actions
@@ -166,6 +178,9 @@ extension HIUserPassLoginViewController {
             signInButton.setTitle(nil, for: .normal)
             signInButton.backgroundColor = UIColor.gray
             activityIndicator.startAnimating()
+
+            emailTextField.text = nil
+            passwordTextField.text = nil
 
         case .readyToLogin:
             signInButton.isEnabled = true

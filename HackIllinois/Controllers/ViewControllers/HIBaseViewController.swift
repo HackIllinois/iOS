@@ -19,26 +19,6 @@ class HIBaseViewController: UIViewController {
 
     // MARK: - Outlets
     var tableView: UITableView?
-
-    // MARK: - Init
-    convenience init() {
-        self.init(nibName: nil, bundle: nil)
-    }
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) should not be used")
-    }
-}
-
-// MARK: - HIMenuController
-extension HIBaseViewController {
-    @objc func openMenu() {
-        (tabBarController?.parent as? HIMenuController)?.open(self)
-    }
 }
 
 // MARK: - UIViewController
@@ -69,7 +49,6 @@ extension HIBaseViewController {
 extension HIBaseViewController {
     @objc dynamic func setupNavigationItem() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuOpen"), style: .plain, target: self, action: #selector(HIBaseViewController.openMenu))
     }
 }
 

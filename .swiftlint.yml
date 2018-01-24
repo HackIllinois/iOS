@@ -13,6 +13,7 @@ identifier_name:
   excluded:
     - id
     - _fetchedResultsController
+    - _tabBarController
 
 excluded:
   - Pods

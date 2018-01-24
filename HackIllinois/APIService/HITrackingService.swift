@@ -14,14 +14,7 @@ class HITrackingService: HIBaseService {
     override class var baseURL: String {
         return super.baseURL + "/tracking"
     }
-    
-    class func login(email: String, password: String) -> APIRequest<HIUserAuth.Contained> {
-        var body = [String: String]()
-        body["email"]    = email
-        body["password"] = password
-        return APIRequest<HIUserAuth.Contained>(service: self, endpoint: "", body: body, method: .POST)
-    }
-    
+
     class func githubLoginURL() -> URL {
         guard let url = URL(string: baseURL + "?isMobile=1") else {
             fatalError()

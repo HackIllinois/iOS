@@ -124,18 +124,19 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
         respondingToQRCodeFound = false
 
         let userDetailViewController = HIUserDetailViewController()
-        userDetailViewController.delegate = self
+//        userDetailViewController.delegate = self
         userDetailViewController.modalPresentationStyle = .overCurrentContext
         present(userDetailViewController, animated: true, completion: nil)
     }
 
 }
 
-extension HIScannerViewController: HIUserDetailViewControllerDelegate {
-    func willDismissViewController(_ viewController: HIUserDetailViewController, animated: Bool) { }
+//extension HIScannerViewController: HIUserDetailViewControllerDelegate {
+//    func willDismissViewController(_ viewController: HIUserDetailViewController, animated: Bool) { }
+//
+//    func didDismissViewController(_ viewController: HIUserDetailViewController, animated: Bool) {
+//        respondingToQRCodeFound = true
+//    }
+//
+//}
 
-    func didDismissViewController(_ viewController: HIUserDetailViewController, animated: Bool) {
-        respondingToQRCodeFound = true
-    }
-
-}

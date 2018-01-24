@@ -8,18 +8,26 @@
 
 import Foundation
 import SwiftKeychainAccess
+import APIManager
 
 enum HILoginMethod: Int, Codable {
+    case github
+    case userPass
+}
+
+enum HILoginSelection: Int {
     case github
     case userPass
     case existing
 }
 
-enum HIUserPermissions: Int, Codable {
-    case hacker
-    case volunteer
-    case staff
-    case superUser
+enum HIUserPermissions: String, Codable {
+    case attendee = "ATTENDEE"
+    case volunteer = "VOLUNTEER"
+    case mentor = "MENTOR"
+    case sponsor = "SPONSOR"
+    case staff = "STAFF"
+    case admin = "ADMIN"
 }
 
 struct HIUser: Codable {
@@ -27,14 +35,8 @@ struct HIUser: Codable {
     var permissions: HIUserPermissions
     var token: String
     var identifier: String
-    var isActive = false
-
-    init(loginMethod: HILoginMethod, permissions: HIUserPermissions, token: String, identifier: String) {
-        self.loginMethod = loginMethod
-        self.permissions = permissions
-        self.token = token
-        self.identifier = identifier
-    }
+    var isActive: Bool
+    var id: Int
 }
 
 // MARK: - DataConvertible
@@ -50,5 +52,19 @@ extension HIUser: DataConvertible {
     var data: Data {
         let encoded = try? JSONEncoder().encode(self)
         return encoded ?? Data()
+    }
+}
+
+// MARK: - APIAuthorization
+extension HIUser: APIAuthorization {
+    func embedInto<ReturnType>(request: APIRequest<ReturnType>) -> (HTTPParameters?, HTTPBody?, HTTPHeaders?) {
+        var headers = HTTPHeaders()
+        switch loginMethod {
+        case .github:
+            headers["Authorization"] = "Bearer \(token)"
+        case .userPass:
+            headers["Authorization"] = "Basic \(token)"
+        }
+        return (request.params, request.body, headers)
     }
 }

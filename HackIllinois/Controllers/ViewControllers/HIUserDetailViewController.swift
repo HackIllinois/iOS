@@ -9,15 +9,8 @@
 import Foundation
 import UIKit
 
-protocol HIUserDetailViewControllerDelegate: class {
-    func willDismissViewController(_ viewController: HIUserDetailViewController, animated: Bool)
-    func didDismissViewController(_ viewController: HIUserDetailViewController, animated: Bool)
-}
-
 class HIUserDetailViewController: HIBaseViewController {
     // MARK: - Properties
-    weak var delegate: HIUserDetailViewControllerDelegate?
-
     var qrCode = UIView()
     var userNameLabel = UILabel()
     var userInfoLabel = UILabel()
@@ -26,24 +19,32 @@ class HIUserDetailViewController: HIBaseViewController {
     var emergencyContactPhoneLabel = UILabel()
     var emergencyContactEmailLabel = UILabel()
 
-    // MARK: - Outlets
     var animationView: UIView!
 }
 
 // MARK: - Actions
 extension HIUserDetailViewController {
-    func dismiss() {
-        let animated = true
-        delegate?.willDismissViewController(self, animated: animated)
-        dismiss(animated: animated) {
-            self.delegate?.didDismissViewController(self, animated: animated)
-        }
+    @objc func didSelectLogoutButton(_ sender: Any) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(
+            UIAlertAction(title: "Switch User", style: .default) { _ in
+                NotificationCenter.default.post(name: .switchUser, object: nil)
+            }
+        )
+        alert.addAction(
+            UIAlertAction(title: "Logout", style: .destructive) { _ in
+                NotificationCenter.default.post(name: .logoutUser, object: nil)
+            }
+        )
+        alert.addAction(
+            UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        )
+        present(alert, animated: true, completion: nil)
     }
 }
 
 // MARK: - UIViewController
 extension HIUserDetailViewController {
-
     override func loadView() {
         super.loadView()
 
@@ -133,28 +134,6 @@ extension HIUserDetailViewController {
         emergencyContactEmailLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
         emergencyContactEmailLabel.translatesAutoresizingMaskIntoConstraints = false
         emergencyContactStackView.addArrangedSubview(emergencyContactEmailLabel)
-
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //        animation.loopAnimation = true
-        //        animation.frame.size = animationView.frame.size
-        //        animation.frame.origin = .zero
-        //        animationView.addSubview(animation)
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        //        animation.completionBlock = { (_) in
-        //            print("done")
-        //        }
-        //        animation.play()
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        //        animation.stop()
     }
 }
 
@@ -163,5 +142,7 @@ extension HIUserDetailViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
         title = "PROFILE"
+        // TODO: replace with Logout Item
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "DisclosureIndicator"), style: .plain, target: self, action: #selector(HIUserDetailViewController.didSelectLogoutButton(_:)))
     }
 }

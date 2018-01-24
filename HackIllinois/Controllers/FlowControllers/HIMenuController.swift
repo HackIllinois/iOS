@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 class HIMenuController: UIViewController {
-
     // MARK: - Types
     enum State {
         case open
@@ -22,30 +21,16 @@ class HIMenuController: UIViewController {
     // TODO: Introduce MENU_MAX_HEIGHT, add scroll bar if menu height is larger than this value
 
     // MARK: - Properties
-    private var _tabBarController = UITabBarController()
-
     private(set) var state = State.closed
 
-    // MARK: - Outlets
-    var menuHeight = NSLayoutConstraint()
-    var menuOverlap = NSLayoutConstraint()
-    var menuItemsHeight = NSLayoutConstraint()
+    private(set) var _tabBarController = UITabBarController()
 
     var overlayView = UIView()
     var menuItems = UIStackView()
 
-    // MARK: - Init
-    convenience init() {
-        self.init(nibName: nil, bundle: nil)
-    }
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) should not be used")
-    }
+    var menuHeight = NSLayoutConstraint()
+    var menuOverlap = NSLayoutConstraint()
+    var menuItemsHeight = NSLayoutConstraint()
 }
 
 // MARK: - Actions
@@ -53,10 +38,10 @@ extension HIMenuController {
     func setupMenuFor(_ viewControllers: [UIViewController]) {
         _tabBarController.viewControllers = viewControllers.map {
             _ = $0.view // forces viewDidLoad to run, allows .title to be accessible
-            // TODO: determine if necessary
-            $0.view.frame = _tabBarController.view.frame
+            $0.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuOpen"), style: .plain, target: self, action: #selector(HIMenuController.open))
             let navigationController = UINavigationController(rootViewController: $0)
             navigationController.title = $0.title
+
             return navigationController
         }
 
@@ -66,7 +51,7 @@ extension HIMenuController {
         }
     }
 
-    func open(_ sender: Any) {
+    @objc func open(_ sender: Any) {
         guard state != .open else { return }
         state = .open
         animateMenuFor(state)
@@ -150,7 +135,6 @@ extension HIMenuController {
         createMenuItems()
     }
 
-    // MARK: Rotation Handling
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
