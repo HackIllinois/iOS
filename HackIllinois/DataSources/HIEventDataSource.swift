@@ -23,45 +23,59 @@ final class HIEventDataSource {
         backgroundContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
 
         HIEventService.getAllLocations()
-        .onSuccess { (containedLocations) in
-            // TODO: only remove all events/locations
-            backgroundContext.reset()
+        .onCompletion { result in
+            switch result {
+            case .success(let containedLocations):
+                // TODO: only remove all events/locations
+                backgroundContext.reset()
 
-            var locations = [Location]()
-            backgroundContext.performAndWait {
-                containedLocations.data.forEach { location in
-                    locations.append(
-                        Location(context: backgroundContext, location: location)
-                    )
-                }
-            }
-
-            HIEventService.getAllEvents()
-            .onSuccess { (containedEvents) in
-
+                var locations = [Location]()
                 backgroundContext.performAndWait {
-                    containedEvents.data.forEach { event in
-                        let eventLocationIds = event.locations.map { Int16($0.locationId) }
-                        let eventLocations = locations.filter { eventLocationIds.contains($0.id) }
-
-                        _ = Event(context: backgroundContext, event: event, locations: NSSet(array: eventLocations))
+                    containedLocations.data.forEach { location in
+                        locations.append(
+                            Location(context: backgroundContext, location: location)
+                        )
                     }
                 }
-                try? backgroundContext.save()
 
+                HIEventService.getAllEvents()
+                .onCompletion { result in
+                    switch result {
+                    case .success(let containedEvents):
+                        backgroundContext.performAndWait {
+                            containedEvents.data.forEach { event in
+                                let eventLocationIds = event.locations.map { Int16($0.locationId) }
+                                let eventLocations = locations.filter { eventLocationIds.contains($0.id) }
+
+                                _ = Event(context: backgroundContext, event: event, locations: NSSet(array: eventLocations))
+                            }
+                        }
+                        try? backgroundContext.save()
+
+                        completion?()
+                        isRefreshing = false
+
+                    case .cancellation:
+                        completion?()
+                        isRefreshing = false
+
+                    case .failure:
+                        completion?()
+                        isRefreshing = false
+
+                    }
+                }
+                .perform()
+
+            case .cancellation:
+                completion?()
+                isRefreshing = false
+
+            case .failure(let error):
+                print(error)
                 completion?()
                 isRefreshing = false
             }
-            .onFailure { _ in
-                completion?()
-                isRefreshing = false
-            }
-            .perform()
-        }
-        .onFailure { error in
-            print(error)
-            completion?()
-            isRefreshing = false
         }
         .perform()
     }

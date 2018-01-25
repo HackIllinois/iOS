@@ -114,10 +114,8 @@ extension HIAnnouncementsViewController {
     }
 
     func endRefreshing() {
-        DispatchQueue.main.async {
-            self.refreshControl.endRefreshing()
-            self.refreshAnimation.stop()
-        }
+        refreshControl.endRefreshing()
+        refreshAnimation.stop()
     }
 }
 

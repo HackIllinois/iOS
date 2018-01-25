@@ -23,23 +23,28 @@ final class HIAnnouncementDataSource {
         backgroundContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
 
         HIAnnouncementService.getAllAnnouncements()
-        .onSuccess { (containedAnnouncements) in
-            // TODO: only remove all announcements
-            backgroundContext.reset()
+        .onCompletion { result in
+            switch result {
+            case .success(let containedAnnouncements):
+                // TODO: only remove all announcements
+                backgroundContext.reset()
 
-            backgroundContext.performAndWait {
-                containedAnnouncements.data.forEach { announcement in
-                    _ = Announcement(context: backgroundContext, announcement: announcement)
+                backgroundContext.performAndWait {
+                    containedAnnouncements.data.forEach { announcement in
+                        _ = Announcement(context: backgroundContext, announcement: announcement)
+                    }
                 }
+                try? backgroundContext.save()
+
+            case .cancellation:
+                break
+            case .failure(let error):
+                print(error)
             }
-            try? backgroundContext.save()
-            completion?()
-            isRefreshing = false
-        }
-        .onFailure { error in
-            print(error)
-            completion?()
-            isRefreshing = false
+            DispatchQueue.main.async {
+                completion?()
+                isRefreshing = false
+            }
         }
         .perform()
     }

@@ -66,29 +66,29 @@ extension HILoginFlowController {
 // MARK: - Login Flow
 extension HILoginFlowController {
     func populateUserData(loginMethod: HILoginMethod, token: String, sender: HIBaseViewController) {
-        // TODO: remove once APIManager is updated to allow headers specific to requests
-        let tmpUser = HIUser(loginMethod: loginMethod, permissions: .attendee, token: token, identifier: "", isActive: false, id: 0)
-        HIUserService.get()
-        .onSuccess { (containedUser) in
-            let userInfo = containedUser.data[0]
-            let user = HIUser(
-                loginMethod: loginMethod,
-                permissions: userInfo.roles[0].permissions,
-                token: token,
-                identifier: userInfo.info.email,
-                isActive: true,
-                id: userInfo.info.id
-            )
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: [
-                    "user": user
-                ])
+        HIUserService.getUser(by: token, with: loginMethod)
+        .onCompletion { result in
+            switch result {
+            case .success(let containedUser):
+                let userInfo = containedUser.data[0]
+                let user = HIUser(
+                    loginMethod: loginMethod,
+                    permissions: userInfo.roles[0].permissions,
+                    token: token,
+                    identifier: userInfo.info.email,
+                    isActive: true,
+                    id: userInfo.info.id
+                )
+
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
+                }
+            case .cancellation:
+                break
+            case .failure:
+                sender.presentErrorController(title: "Authentication Failed", message: nil, dismissParentOnCompletion: false)
             }
         }
-        .onFailure { _ in
-            sender.presentErrorController(title: "Authentication Failed", message: nil, dismissParentOnCompletion: false)
-        }
-        .authorization(tmpUser)
         .perform()
     }
 
@@ -185,28 +185,34 @@ extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
         userPassLoginViewController.stylizeFor(.currentlyPerformingLogin)
 
         userPassRequestToken = HIAuthService.login(email: email, password: password)
-        .onSuccess { [weak self] (authContained) in
-            DispatchQueue.main.async {
-                self?.populateUserData(loginMethod: .userPass, token: authContained.data[0].auth, sender: userPassLoginViewController)
-                self?.userPassLoginViewController.stylizeFor(.readyToLogin)
-            }
-        }
-        .onFailure { [weak self] (error) in
-            do {
-                throw error
-            } catch DecodingError.dataCorrupted(let context) {
-                print("DecodingError.dataCorrupted", context)
-            } catch DecodingError.keyNotFound(let key, let context) {
-                print("DecodingError.keyNotFound", key, context)
-            } catch DecodingError.typeMismatch(let type, let context) {
-                print("DecodingError.typeMismatch", type, context)
-            } catch {
-                print(error)
-            }
+        .onCompletion { result in
+            switch result {
+            case .success(let containedAuth):
+                DispatchQueue.main.async { [weak self] in
+                    self?.populateUserData(loginMethod: .userPass, token: containedAuth.data[0].auth, sender: userPassLoginViewController)
+                    self?.userPassLoginViewController.stylizeFor(.readyToLogin)
+                }
 
-            DispatchQueue.main.async {
-                // TODO: Shake with error
-                self?.userPassLoginViewController.stylizeFor(.readyToLogin)
+            case .cancellation:
+                break
+
+            case .failure(let error):
+                do {
+                    throw error
+                } catch DecodingError.dataCorrupted(let context) {
+                    print("DecodingError.dataCorrupted", context)
+                } catch DecodingError.keyNotFound(let key, let context) {
+                    print("DecodingError.keyNotFound", key, context)
+                } catch DecodingError.typeMismatch(let type, let context) {
+                    print("DecodingError.typeMismatch", type, context)
+                } catch {
+                    print(error)
+                }
+
+                DispatchQueue.main.async { [weak self] in
+                    // TODO: Shake with error
+                    self?.userPassLoginViewController.stylizeFor(.readyToLogin)
+                }
             }
         }
         .perform()

@@ -15,17 +15,5 @@ class HIBaseService: APIService {
         return "http://api.test.hackillinois.org/v1"
     }
 
-    class var headers: HTTPHeaders? {
-        var headers = HTTPHeaders()
-        headers["Content-Type"] = "application/json"
-        if let user = HIApplicationStateController.shared?.user {
-            switch user.loginMethod {
-            case .github:
-                headers["Authorization"] = "Bearer \(user.token)"
-            case .userPass:
-                headers["Authorization"] = "Basic \(user.token)"
-            }
-        }
-        return headers
-    }
+    static var headers = ["Content-Type": "application/json"]
 }

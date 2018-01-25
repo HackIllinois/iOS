@@ -33,12 +33,12 @@ final class HIAnnouncementService: HIBaseService {
         if let after = after { params["after"] = Formatter.iso8601.string(from: after)  }
         if let before = before { params["before"] = Formatter.iso8601.string(from: before) }
         if let limit = limit { params["limit"] = String(limit) }
-        return APIRequest<HIAPIAnnouncement.Contained>(service: self, endpoint: "/all", params: params, method: .GET)
+        return APIRequest<HIAPIAnnouncement.Contained>(service: self, endpoint: "/all", parameters: params, method: .GET)
     }
 
     static func delete(announcement: HIAPIAnnouncement) -> APIRequest<HIAPIAnnouncement.Contained> {
         var params = [String: String]()
         params["id"] = String(announcement.id)
-        return APIRequest<HIAPIAnnouncement.Contained>(service: self, endpoint: "", params: params, method: .DELETE)
+        return APIRequest<HIAPIAnnouncement.Contained>(service: self, endpoint: "", parameters: params, method: .DELETE)
     }
 }
