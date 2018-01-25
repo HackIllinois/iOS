@@ -9,19 +9,12 @@
 import Foundation
 import APIManager
 
-class HITrackingService: HIBaseService {
+final class HITrackingService: HIBaseService {
     
-    override class var baseURL: String {
+    override static var baseURL: String {
         return super.baseURL + "/tracking"
     }
 
-    class func githubLoginURL() -> URL {
-        guard let url = URL(string: baseURL + "?isMobile=1") else {
-            fatalError()
-        }
-        return url
-    }
-    
 //    class func found(meta: String, data:) -> APIRequest<HIUserAuth.Contained> {
 //        var body = [String: String]()
 //        body =

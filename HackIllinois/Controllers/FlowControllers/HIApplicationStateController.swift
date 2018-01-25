@@ -18,6 +18,8 @@ extension Notification.Name {
 
 class HIApplicationStateController {
 
+    static var shared: HIApplicationStateController?
+
     // MARK: - Properties
     var window = UIWindow(frame: UIScreen.main.bounds)
     var user: HIUser?
@@ -40,7 +42,6 @@ class HIApplicationStateController {
         }
 
         updateWindowViewController(animated: false)
-        window.makeKeyAndVisible()
     }
 
     deinit {
@@ -74,6 +75,8 @@ extension HIApplicationStateController {
 
     func viewControllersFor(user: HIUser) -> [UIViewController] {
         var viewControllers = [UIViewController]()
+        viewControllers.append(HIHomeViewController())
+
         if [.attendee].contains(user.permissions) {
             viewControllers.append(HIHomeViewController())
         }
@@ -121,9 +124,7 @@ extension HIApplicationStateController {
     func updateWindowViewController(animated: Bool) {
         let viewController: UIViewController
         if let user = user {
-            let menuViewControllers = viewControllersFor(user: user)
-            menuController.setupMenuFor(menuViewControllers)
-            menuController._tabBarController.selectedIndex = 0
+            prepareMenuControllerForDisplay(with: user)
             viewController = menuController
         } else {
             loginFlowController.navController.popToRootViewController(animated: false)
@@ -135,5 +136,14 @@ extension HIApplicationStateController {
         UIView.transition(with: window, duration: duration, options: .transitionCrossDissolve, animations: {
             self.window.rootViewController = viewController
         }, completion: nil)
+    }
+
+    func prepareMenuControllerForDisplay(with user: HIUser) {
+        let menuViewControllers = viewControllersFor(user: user)
+        menuController.setupMenuFor(menuViewControllers)
+        menuController._tabBarController.selectedIndex = 0
+
+        HIEventDataSource.refresh()
+        HIAnnouncementDataSource.refresh()
     }
 }

@@ -53,14 +53,23 @@ extension HIAnnouncementsViewController {
     }
 
     override func viewDidLoad() {
-        tableView?.register(HIAnnouncementCell.self, forCellReuseIdentifier: HIAnnouncementCell.IDENTIFIER)
         super.viewDidLoad()
+
+        setupRefreshControl()
 
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
 
         try? _fetchedResultsController?.performFetch()
     }
 
+}
+
+// MARK: - UITableView Setup
+extension HIAnnouncementsViewController {
+    override func setupTableView() {
+        tableView?.register(HIAnnouncementCell.self, forCellReuseIdentifier: HIAnnouncementCell.IDENTIFIER)
+        super.setupTableView()
+    }
 }
 
 // MARK: - UINavigationItem Setup
@@ -73,27 +82,40 @@ extension HIAnnouncementsViewController {
 
 // MARK: - UITableViewDataSource
 extension HIAnnouncementsViewController {
-    //TODO: move to delegate
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
-    }
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HIAnnouncementCell.IDENTIFIER, for: indexPath)
         if let cell = cell as? HIAnnouncementCell {
-            // cell <- fetchedResultsController.object(at: indexPath).name
-            cell.titleLabel.text = "title"
-            cell.timeLabel.text = "time"
-            cell.infoLabel.text = "info"
+            let announcement = fetchedResultsController.object(at: indexPath)
+            cell <- announcement
         }
         return cell
     }
 }
+
+// MARK: - UITableViewDelegate
+extension HIAnnouncementsViewController {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let announcement = fetchedResultsController.object(at: indexPath)
+        return HIAnnouncementCell.heightForCell(with: announcement)
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        super.tableView(tableView, didSelectRowAt: indexPath)
+    }
+}
+
+
+
+// MARK: - UIRefreshControl
+extension HIAnnouncementsViewController {
+    override func refresh(_ sender: UIRefreshControl) {
+        refreshAnimation.play()
+        HIAnnouncementDataSource.refresh(completion: endRefreshing)
+    }
+
+    func endRefreshing() {
+        refreshControl.endRefreshing()
+        refreshAnimation.stop()
+    }
+}
+

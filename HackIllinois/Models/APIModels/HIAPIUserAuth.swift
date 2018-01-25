@@ -10,6 +10,6 @@ import Foundation
 
 struct HIAPIUserAuth: Codable {
     typealias Contained = HIAPIReturnDataContainer<HIAPIUserAuth>
-    
+
     var auth: String
 }

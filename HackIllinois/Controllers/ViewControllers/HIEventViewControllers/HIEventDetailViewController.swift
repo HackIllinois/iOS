@@ -17,8 +17,7 @@ class HIEventDetailViewController: HIBaseViewController {
 extension HIEventDetailViewController {
     override func loadView() {
         super.loadView()
-        // TODO: change to darkbluegrey70
-        view.backgroundColor = UIColor(displayP3Red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+        view.backgroundColor = HIColor.darkBlueGrey70
 
         let eventDetailContainer = UIView()
         eventDetailContainer.backgroundColor = HIColor.paleBlue
@@ -46,8 +45,8 @@ extension HIEventDetailViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if model == nil {
+//        if model == nil {
             presentErrorController(title: "Error", message: "Failed to load event.", dismissParentOnCompletion: true)
-        }
+//        }
     }
 }

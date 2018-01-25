@@ -10,20 +10,20 @@ import Foundation
 import APIManager
 import SafariServices
 
-class HIAuthService: HIBaseService {
+final class HIAuthService: HIBaseService {
 
-    override class var baseURL: String {
+    override static var baseURL: String {
         return super.baseURL + "/auth"
     }
 
-    class func login(email: String, password: String) -> APIRequest<HIAPIUserAuth.Contained> {
+    static func login(email: String, password: String) -> APIRequest<HIAPIUserAuth.Contained> {
         var body = [String: String]()
         body["email"]    = email
         body["password"] = password
         return APIRequest<HIAPIUserAuth.Contained>(service: self, endpoint: "", body: body, method: .POST)
     }
 
-    class func githubLoginURL() -> URL {
+    static func githubLoginURL() -> URL {
         guard let url = URL(string: baseURL + "?isMobile=1") else {
             fatalError()
         }

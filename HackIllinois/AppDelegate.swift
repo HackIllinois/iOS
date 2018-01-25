@@ -12,17 +12,12 @@ import SwiftKeychainAccess
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    // MARK: - Properties
-    var window: UIWindow?
-    var currentUser: HIUser?
-    var applicationStateController = HIApplicationStateController()
-
     // FIXME: Allows arbitary loads
-    // FIXME: Remove landscape support
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         setupNavigationBarAppearance()
         setupTableViewAppearance()
-        applicationStateController.window.makeKeyAndVisible()
+        HIApplicationStateController.shared = HIApplicationStateController()
+        HIApplicationStateController.shared?.window.makeKeyAndVisible()
         return true
     }
 

@@ -32,38 +32,6 @@ class HIScheduleViewController: HIEventListViewController {
     }()
 }
 
-// MARK: - Actions
-extension HIScheduleViewController {
-    func launchGet() {
-        HIAnnouncementService.getAllAnnouncements()
-        .onSuccess { (contained) in
-            print(contained)
-        }
-        .onFailure { (reason) in
-            print(reason)
-        }
-        .perform()
-
-        HIEventService.getAllEvents()
-        .onSuccess { (contained) in
-            print(contained)
-        }
-        .onFailure { (reason) in
-            print(reason)
-        }
-        .perform()
-
-        HIEventService.getAllLocations()
-        .onSuccess { (contained) in
-            print(contained)
-        }
-        .onFailure { (reason) in
-            print(reason)
-        }
-        .perform()
-    }
-}
-
 // MARK: - UIViewController
 extension HIScheduleViewController {
     override func loadView() {

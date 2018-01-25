@@ -13,12 +13,6 @@ class HIAnnouncementCell: HIBaseTableViewCell {
     // MARK: - Static
     static let IDENTIFIER = "HIAnnouncementCell"
 
-    static func <- (lhs: HIAnnouncementCell, rhs: Announcement) {
-        lhs.titleLabel.text = rhs.title.capitalized
-        lhs.timeLabel.text  = Date.humanReadableTimeSince(rhs.time)
-        lhs.infoLabel.text  = rhs.info
-    }
-
     // MARK: - Properties
     var titleLabel = UILabel()
     var timeLabel = UILabel()
@@ -40,7 +34,7 @@ class HIAnnouncementCell: HIBaseTableViewCell {
         containerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
 
         titleLabel.textColor = HIColor.hotPink
-        titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .light)
+        titleLabel.font = UIFont.systemFont(ofSize: 13)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(titleLabel)
         titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 14).isActive = true
@@ -48,7 +42,7 @@ class HIAnnouncementCell: HIBaseTableViewCell {
         titleLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
 
         timeLabel.textColor = HIColor.hotPink
-        timeLabel.font = UIFont.systemFont(ofSize: 17, weight: .light)
+        timeLabel.font = UIFont.systemFont(ofSize: 13)
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(timeLabel)
         timeLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 14).isActive = true
@@ -59,7 +53,7 @@ class HIAnnouncementCell: HIBaseTableViewCell {
         timeLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
 
         infoLabel.textColor = HIColor.darkIndigo
-        infoLabel.font = UIFont.systemFont(ofSize: 17, weight: .light)
+        infoLabel.font = UIFont.systemFont(ofSize: 13)
         infoLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(infoLabel)
         infoLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12).isActive = true
@@ -73,7 +67,20 @@ class HIAnnouncementCell: HIBaseTableViewCell {
     }
 }
 
-// MARK: - Static
+// MARK: - Population
+extension HIAnnouncementCell {
+    static func heightForCell(with announcement: Announcement) -> CGFloat {
+        // TODO: this method
+        return 100
+    }
+
+    static func <- (lhs: HIAnnouncementCell, rhs: Announcement) {
+        lhs.titleLabel.text = rhs.title.capitalized
+        lhs.timeLabel.text  = Date.humanReadableTimeSince(rhs.time)
+        lhs.infoLabel.text  = rhs.info
+    }
+}
+
 extension HIAnnouncementCell {
     override func prepareForReuse() {
         super.prepareForReuse()

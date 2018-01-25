@@ -8,29 +8,31 @@
 
 import Foundation
 import APIManager
+import CoreData
 
-class HIEventService: HIBaseService {
-    override class var baseURL: String {
+final class HIEventService: HIBaseService {
+    override static var baseURL: String {
         return super.baseURL + "/event"
     }
 
     // MARK: Events
-    class func create(event: Event) -> APIRequest<Event.Contained> {
+    static func create(event: HIAPIEvent) -> APIRequest<HIAPIEvent.Contained> {
         let eventDict = [String: Any]()
-        return APIRequest<Event.Contained>(service: self, endpoint: "", body: eventDict, method: .POST)
+        return APIRequest<HIAPIEvent.Contained>(service: self, endpoint: "", body: eventDict, method: .POST)
     }
 
-    class func getAllEvents(active: Bool = false) -> APIRequest<Event.Contained> {
-        return APIRequest<Event.Contained>(service: self, endpoint: "", params: ["active": "\(active)"], method: .GET)
+    static func getAllEvents(active: Bool = false) -> APIRequest<HIAPIEvent.Contained> {
+        let paramaters = ["active": "\(active)"]
+        return APIRequest<HIAPIEvent.Contained>(service: self, endpoint: "", parameters: paramaters, method: .GET)
     }
 
     // MARK: Locations
-    class func create(location: Location) -> APIRequest<Location.Contained> {
+    static func create(location: HIAPILocation) -> APIRequest<HIAPILocation.Contained> {
         let locationDict = [String: Any]()
-        return APIRequest<Location.Contained>(service: self, endpoint: "/location", body: locationDict, method: .POST)
+        return APIRequest<HIAPILocation.Contained>(service: self, endpoint: "/location", body: locationDict, method: .POST)
     }
 
-    class func getAllLocations() -> APIRequest<Location.Contained> {
-        return APIRequest<Location.Contained>(service: self, endpoint: "/location/all", method: .GET)
+    static func getAllLocations() -> APIRequest<HIAPILocation.Contained> {
+        return APIRequest<HIAPILocation.Contained>(service: self, endpoint: "/location/all", method: .GET)
     }
 }

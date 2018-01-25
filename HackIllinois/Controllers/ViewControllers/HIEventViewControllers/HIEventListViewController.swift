@@ -9,7 +9,19 @@
 import Foundation
 import UIKit
 
-class HIEventListViewController: HIBaseViewController { }
+class HIEventListViewController: HIBaseViewController {
+    let eventDetailViewController = HIEventDetailViewController()
+
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        eventDetailViewController.modalPresentationStyle = .overCurrentContext
+        eventDetailViewController.modalTransitionStyle = .crossDissolve
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) should not be used.")
+    }
+}
 
 // MARK: - UIViewController
 extension HIEventListViewController {
@@ -33,21 +45,10 @@ extension HIEventListViewController {
 
 // MARK: - UITableViewDataSource
 extension HIEventListViewController {
-    // FIXME: remove after finishing layout debugging
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
-    }
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HIEventCell.IDENTIFIER, for: indexPath)
-        if let cell = cell as? HIEventCell {
-            // cell <- fetchedResultsController.object(at: indexPath)
-            cell <- indexPath
-
+        if let cell = cell as? HIEventCell, let event = _fetchedResultsController?.object(at: indexPath) as? Event {
+            cell <- event
         }
         return cell
     }
@@ -56,20 +57,14 @@ extension HIEventListViewController {
 // MARK: - UITableViewDelegate
 extension HIEventListViewController {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // FIXME: Remove
-        return HIEventCell.heightForCell(with: indexPath.row)
-        guard _fetchedResultsController?.object(at: indexPath) as? Event != nil else {
+        guard let event = _fetchedResultsController?.object(at: indexPath) as? Event else {
             return CGFloat.leastNonzeroMagnitude
         }
-        return 0 // HIEventCell.heightForCell(displaying: event)
+        return HIEventCell.heightForCell(with: event)
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let eventDetailViewController = HIEventDetailViewController()
-        eventDetailViewController.modalPresentationStyle = .overCurrentContext
-        eventDetailViewController.modalTransitionStyle = .crossDissolve
-        // eventDetailViewController.model = self._fetchedResultsController?.object(at: indexPath) as? Event
-
+        eventDetailViewController.model = _fetchedResultsController?.object(at: indexPath) as? Event
         present(eventDetailViewController, animated: true, completion: nil)
         super.tableView(tableView, didSelectRowAt: indexPath)
     }
@@ -79,5 +74,13 @@ extension HIEventListViewController {
 extension HIEventListViewController {
     override func refresh(_ sender: UIRefreshControl) {
         refreshAnimation.play()
+        HIEventDataSource.refresh(completion: endRefreshing)
+    }
+
+    func endRefreshing() {
+        DispatchQueue.main.async {
+            self.refreshControl.endRefreshing()
+            self.refreshAnimation.stop()
+        }
     }
 }

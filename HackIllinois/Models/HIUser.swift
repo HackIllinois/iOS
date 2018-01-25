@@ -57,7 +57,7 @@ extension HIUser: DataConvertible {
 
 // MARK: - APIAuthorization
 extension HIUser: APIAuthorization {
-    func embedInto<ReturnType>(request: APIRequest<ReturnType>) -> (HTTPParameters?, HTTPBody?, HTTPHeaders?) {
+    public func headersFor<ReturnType>(request: APIRequest<ReturnType>) -> HTTPHeaders {
         var headers = HTTPHeaders()
         switch loginMethod {
         case .github:
@@ -65,6 +65,6 @@ extension HIUser: APIAuthorization {
         case .userPass:
             headers["Authorization"] = "Basic \(token)"
         }
-        return (request.params, request.body, headers)
+        return headers
     }
 }
