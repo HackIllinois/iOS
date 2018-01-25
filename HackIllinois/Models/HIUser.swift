@@ -28,27 +28,20 @@ enum HIUserPermissions: String, Codable, Comparable {
     case sponsor = "SPONSOR"
     case staff = "STAFF"
     case admin = "ADMIN"
-    
+
     private var intValue: Int {
         switch self {
-        case .admin:
-            return 5
-        case .staff:
-            return 4
-        case .sponsor:
-            return 3
-        case .mentor:
-            return 2
-        case .volunteer:
-            return 1
-        case .attendee:
-            return 0
+        case .admin: return 5
+        case .staff: return 4
+        case .sponsor: return 3
+        case .mentor: return 2
+        case .volunteer: return 1
+        case .attendee: return 0
         }
-        
     }
-    
-    public static func <(first: HIUserPermissions, second: HIUserPermissions) -> Bool {
-        return first.intValue < second.intValue
+
+    public static func < (lhs: HIUserPermissions, rhs: HIUserPermissions) -> Bool {
+        return lhs.intValue < rhs.intValue
     }
 }
 
