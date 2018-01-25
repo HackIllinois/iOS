@@ -21,13 +21,28 @@ enum HILoginSelection: Int {
     case existing
 }
 
-enum HIUserPermissions: String, Codable {
+enum HIUserPermissions: String, Codable, Comparable {
     case attendee = "ATTENDEE"
     case volunteer = "VOLUNTEER"
     case mentor = "MENTOR"
     case sponsor = "SPONSOR"
     case staff = "STAFF"
     case admin = "ADMIN"
+
+    private var intValue: Int {
+        switch self {
+        case .admin: return 5
+        case .staff: return 4
+        case .sponsor: return 3
+        case .mentor: return 2
+        case .volunteer: return 1
+        case .attendee: return 0
+        }
+    }
+
+    public static func < (lhs: HIUserPermissions, rhs: HIUserPermissions) -> Bool {
+        return lhs.intValue < rhs.intValue
+    }
 }
 
 struct HIUser: Codable {
