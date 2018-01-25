@@ -31,12 +31,8 @@ class HIUserPassLoginViewController: HIBaseViewController {
 
     // MARK: - Init
     convenience init(delegate: HIUserPassLoginViewControllerDelegate) {
-        self.init(nibName: nil, bundle: nil)
+        super.init(nibName: nil, bundle: nil)
         self.delegate = delegate
-    }
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
     required init?(coder aDecoder: NSCoder) {

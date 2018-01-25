@@ -46,6 +46,7 @@ final class HIAnnouncementDataSource {
                 isRefreshing = false
             }
         }
+        .authorization(HIApplicationStateController.shared.user)
         .perform()
     }
 }

@@ -19,6 +19,7 @@ final class HIEventDataSource {
             return
         }
         isRefreshing = true
+
         let backgroundContext = CoreDataController.shared.persistentContainer.newBackgroundContext()
         backgroundContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
 
@@ -52,19 +53,13 @@ final class HIEventDataSource {
                         }
                         try? backgroundContext.save()
 
-                        completion?()
-                        isRefreshing = false
-
-                    case .cancellation:
-                        completion?()
-                        isRefreshing = false
-
-                    case .failure:
-                        completion?()
-                        isRefreshing = false
-
+                    case .cancellation, .failure:
+                        break
                     }
+                    completion?()
+                    isRefreshing = false
                 }
+                .authorization(HIApplicationStateController.shared.user)
                 .perform()
 
             case .cancellation:
@@ -77,6 +72,7 @@ final class HIEventDataSource {
                 isRefreshing = false
             }
         }
+        .authorization(HIApplicationStateController.shared.user)
         .perform()
     }
 }

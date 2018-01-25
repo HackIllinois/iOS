@@ -14,10 +14,21 @@ class HIHomeViewController: HIEventListViewController {
     // MARK: - Properties
     lazy var fetchedResultsController: NSFetchedResultsController<Event> = {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
-        // FIXME: add predicate for current hour +- 1
-        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "id", ascending: true) ]
 
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataController.shared.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "name", ascending: true),
+            NSSortDescriptor(key: "id", ascending: true)
+        ]
+
+        // TODO: maybe extend start to be a a but before now such that events that are soon to begin are included in this view!
+        fetchRequest.predicate = NSPredicate(format: "(start < now()) AND (end > now())")
+
+        let fetchedResultsController = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: CoreDataController.shared.persistentContainer.viewContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
 
         fetchedResultsController.delegate = self
 
@@ -31,7 +42,7 @@ extension HIHomeViewController {
         super.loadView()
 
         let hackingEndsInLabel = UILabel()
-        hackingEndsInLabel.text = "HACKING ENDS IN:"
+        hackingEndsInLabel.text = "HACKING ENDS IN"
         hackingEndsInLabel.textColor = HIColor.darkIndigo
         hackingEndsInLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         hackingEndsInLabel.textAlignment = .center
@@ -52,7 +63,6 @@ extension HIHomeViewController {
         countdownContainerView.heightAnchor.constraint(equalToConstant: 188).isActive = true
 
         let happeningNowLabel = UILabel()
-        // TODO: check if colon should appear after NOW
         happeningNowLabel.text = "HAPPENING NOW"
         happeningNowLabel.textColor = HIColor.darkIndigo
         happeningNowLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)

@@ -56,7 +56,6 @@ extension HIUserDetailViewController {
         userDetailContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 13).isActive = true
         userDetailContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         userDetailContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
-        userDetailContainer.heightAnchor.constraint(equalToConstant: 430).isActive = true
 
         qrCode.backgroundColor = HIColor.darkIndigo
         qrCode.translatesAutoresizingMaskIntoConstraints = false
@@ -115,7 +114,7 @@ extension HIUserDetailViewController {
         emergencyContactStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
         emergencyContactStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24).isActive = true
         emergencyContactStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -42).isActive = true
-        emergencyContactStackView.heightAnchor.constraint(equalToConstant: 60)
+        emergencyContactStackView.heightAnchor.constraint(equalToConstant: 60).isActive = true
 
         emergencyContactNameLabel.text = "JANE DOE"
         emergencyContactNameLabel.textColor = HIColor.hotPink
