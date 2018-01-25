@@ -69,18 +69,17 @@ class HIEventCell: HIBaseTableViewCell {
 
 // MARK: - Population
 extension HIEventCell {
-    private static func labelFor(title: String) -> UILabel {
+    private static func labelFor(_ event: Event) -> UILabel {
         let titleLabel = UILabel()
-        titleLabel.text = title
+        titleLabel.text = event.name
         titleLabel.textColor = HIColor.darkIndigo
         titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .light)
         return titleLabel
     }
 
-    // TODO: change to -> private static func labelFor(Location: Location) -> UILabel {
-    private static func labelFor(locationText: String) -> UILabel {
+    private static func labelFor(_ location: Location) -> UILabel {
         let locationLabel = UILabel()
-        locationLabel.text = locationText
+        locationLabel.text = location.name
         locationLabel.textColor = HIColor.darkIndigo
         locationLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
         return locationLabel
@@ -92,12 +91,12 @@ extension HIEventCell {
 
     static func <- (lhs: HIEventCell, rhs: Event) {
         var contentStackViewHeight: CGFloat = 0
-        let titleLabel = labelFor(title: rhs.name)
+        let titleLabel = labelFor(rhs)
         contentStackViewHeight += titleLabel.intrinsicContentSize.height
         lhs.contentStackView.addArrangedSubview(titleLabel)
         for location in rhs.locations {
             guard let location = location as? Location else { continue }
-            let locationLabel = labelFor(locationText: location.name)
+            let locationLabel = labelFor(location)
             contentStackViewHeight += locationLabel.intrinsicContentSize.height + 3
             lhs.contentStackView.addArrangedSubview(locationLabel)
         }
