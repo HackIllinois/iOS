@@ -89,6 +89,7 @@ extension HILoginFlowController {
                 sender.presentErrorController(title: "Authentication Failed", message: nil, dismissParentOnCompletion: false)
             }
         }
+        .authorization(HIApplicationStateController.shared.user)
         .perform()
     }
 

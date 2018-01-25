@@ -14,10 +14,21 @@ class HIHomeViewController: HIEventListViewController {
     // MARK: - Properties
     lazy var fetchedResultsController: NSFetchedResultsController<Event> = {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
-        // FIXME: add predicate for current hour +- 1
-        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "id", ascending: true) ]
 
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataController.shared.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "name", ascending: true),
+            NSSortDescriptor(key: "id", ascending: true)
+        ]
+
+        // TODO: maybe extend start to be a a but before now such that events that are soon to begin are included in this view!
+        fetchRequest.predicate = NSPredicate(format: "(start < now()) AND (end > now())")
+
+        let fetchedResultsController = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: CoreDataController.shared.persistentContainer.viewContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
 
         fetchedResultsController.delegate = self
 

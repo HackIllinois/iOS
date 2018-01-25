@@ -18,7 +18,7 @@ extension Notification.Name {
 
 class HIApplicationStateController {
 
-    static var shared: HIApplicationStateController?
+    static var shared = HIApplicationStateController()
 
     // MARK: - Properties
     var window = UIWindow(frame: UIScreen.main.bounds)
@@ -33,6 +33,14 @@ class HIApplicationStateController {
         NotificationCenter.default.addObserver(self, selector: #selector(HIApplicationStateController.loginUser), name: .loginUser, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(HIApplicationStateController.switchUser), name: .switchUser, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(HIApplicationStateController.logoutUser), name: .logoutUser, object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    func initalize() {
+        window.makeKeyAndVisible()
 
         resetPersistentDataIfNeeded()
         recoverUserIfPossible()
@@ -44,9 +52,6 @@ class HIApplicationStateController {
         updateWindowViewController(animated: false)
     }
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
 }
 
 // MARK: - API
@@ -127,7 +132,7 @@ extension HIApplicationStateController {
             prepareMenuControllerForDisplay(with: user)
             viewController = menuController
         } else {
-            loginFlowController.navController.popToRootViewController(animated: false)
+            prepareLoginControllerForDisplay()
             viewController = loginFlowController
         }
 
@@ -145,5 +150,9 @@ extension HIApplicationStateController {
 
         HIEventDataSource.refresh()
         HIAnnouncementDataSource.refresh()
+    }
+
+    func prepareLoginControllerForDisplay() {
+        loginFlowController.navController.popToRootViewController(animated: false)
     }
 }

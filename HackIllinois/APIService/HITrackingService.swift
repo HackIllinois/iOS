@@ -10,7 +10,7 @@ import Foundation
 import APIManager
 
 final class HITrackingService: HIBaseService {
-    
+
     override static var baseURL: String {
         return super.baseURL + "/tracking"
     }

@@ -104,8 +104,6 @@ extension HIAnnouncementsViewController {
     }
 }
 
-
-
 // MARK: - UIRefreshControl
 extension HIAnnouncementsViewController {
     override func refresh(_ sender: UIRefreshControl) {
@@ -118,4 +116,3 @@ extension HIAnnouncementsViewController {
         refreshAnimation.stop()
     }
 }
-
