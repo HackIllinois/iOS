@@ -55,8 +55,10 @@ extension HILoginFlowController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if shouldDisplayAnimationOnNextAppearance {
+            UIApplication.shared.keyWindow?.windowLevel = UIWindowLevelStatusBar
             animationView.play { _ in
                 self.animationView.removeFromSuperview()
+                UIApplication.shared.keyWindow?.windowLevel = UIWindowLevelNormal
             }
             shouldDisplayAnimationOnNextAppearance = false
         }
