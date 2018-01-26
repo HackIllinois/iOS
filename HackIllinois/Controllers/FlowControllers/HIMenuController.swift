@@ -126,6 +126,10 @@ extension HIMenuController {
         menuItems.trailingAnchor.constraint(equalTo: menu.safeAreaLayoutGuide.trailingAnchor, constant: -59).isActive = true
         menuItemsHeight = menuItems.heightAnchor.constraint(equalToConstant: 0)
         menuItemsHeight.isActive = true
+        
+        let tapToClose = UITapGestureRecognizer(target: self, action: #selector(HIMenuController.close(_:)))
+        overlayView.addGestureRecognizer(tapToClose)
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
