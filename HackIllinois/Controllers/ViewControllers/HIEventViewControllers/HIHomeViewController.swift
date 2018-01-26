@@ -16,6 +16,7 @@ class HIHomeViewController: HIEventListViewController {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
 
         fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "start", ascending: true),
             NSSortDescriptor(key: "name", ascending: true),
             NSSortDescriptor(key: "id", ascending: true)
         ]

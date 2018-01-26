@@ -12,6 +12,8 @@ import CoreData
 @objc(Event)
 public class Event: NSManagedObject {
 
+    static var hour = 0
+
     convenience init(context moc: NSManagedObjectContext, event: HIAPIEvent, locations: NSSet) {
         guard let entity = NSEntityDescription.entity(forEntityName: "Event", in: moc) else { fatalError() }
         self.init(entity: entity, insertInto: moc)
@@ -19,8 +21,9 @@ public class Event: NSManagedObject {
         id = event.id
         info = event.info
         name = event.name
-        start = event.start
-        tag = 0 // TODO: Remove this property
+        start = Date().addingTimeInterval(TimeInterval(Event.hour) * 3600)
+        Event.hour += 1
+//            event.start
         self.locations = locations
     }
 }

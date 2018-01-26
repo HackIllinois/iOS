@@ -16,13 +16,15 @@ class HIScheduleViewController: HIEventListViewController {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
 
         fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "start", ascending: true),
+            NSSortDescriptor(key: "name", ascending: true),
             NSSortDescriptor(key: "id", ascending: true)
         ]
 
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
             managedObjectContext: CoreDataController.shared.persistentContainer.viewContext,
-            sectionNameKeyPath: nil,
+            sectionNameKeyPath: "sectionIdentifier",
             cacheName: nil
         )
 
@@ -81,14 +83,25 @@ extension HIScheduleViewController {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 15
     }
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return super.numberOfSections(in: tableView)
+    }
 }
 
 // MARK: - UITableViewDataSource
 extension HIScheduleViewController {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HIDateHeader.IDENTIFIER)
-        if let header = header as? HIDateHeader {
-            header.titleLabel.text = "\(section + 1):00 PM"
+        // TODO: maybe get first event in the section and use that to get the section title??
+        // TODO: eval code speed.
+        // TOOD: check that this works correctly for all timezones
+        if let header = header as? HIDateHeader,
+            let sections = fetchedResultsController.sections,
+            section < sections.count,
+            let date = Formatter.coreData.date(from: sections[section].name) {
+
+            header.titleLabel.text = Formatter.simpleTime.string(from: date)
         }
         return header
     }
