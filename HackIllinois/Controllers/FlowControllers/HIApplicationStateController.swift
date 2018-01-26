@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 import SwiftKeychainAccess
 
+//TODO: remove
+import CoreData
+
 extension Notification.Name {
     static let loginUser  = Notification.Name("HIApplicationStateControllerLoginUser")
     static let switchUser = Notification.Name("HIApplicationStateControllerSwitchUser")

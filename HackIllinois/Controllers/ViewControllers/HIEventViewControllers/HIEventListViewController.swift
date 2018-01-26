@@ -11,25 +11,13 @@ import UIKit
 
 class HIEventListViewController: HIBaseViewController {
     let eventDetailViewController = HIEventDetailViewController()
-
-    init() {
-        super.init(nibName: nil, bundle: nil)
-        eventDetailViewController.modalPresentationStyle = .overCurrentContext
-        eventDetailViewController.modalTransitionStyle = .crossDissolve
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) should not be used.")
-    }
 }
 
 // MARK: - UIViewController
 extension HIEventListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupRefreshControl()
-
         try? _fetchedResultsController?.performFetch()
     }
 }
@@ -64,8 +52,8 @@ extension HIEventListViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        eventDetailViewController.model = _fetchedResultsController?.object(at: indexPath) as? Event
-        present(eventDetailViewController, animated: true, completion: nil)
+        eventDetailViewController.event = _fetchedResultsController?.object(at: indexPath) as? Event
+        navigationController?.pushViewController(eventDetailViewController, animated: true)
         super.tableView(tableView, didSelectRowAt: indexPath)
     }
 }
