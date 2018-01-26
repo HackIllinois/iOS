@@ -229,11 +229,24 @@ extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
                 }
 
                 DispatchQueue.main.async { [weak self] in
-                    // TODO: Shake with error
+                    // TODO: Show some other kind of indicator of incorrect password (maybe a red UIlabel)
+                    self?.view.shake()
                     self?.userPassLoginViewController.stylizeFor(.readyToLogin)
                 }
             }
         }
         .perform()
+    }
+}
+
+extension UIView {
+    func shake(count: Float = 3, for duration: TimeInterval = 0.5, withTranslation translation: Float = -3) {
+        let animation: CABasicAnimation = CABasicAnimation(keyPath: "transform.translation.x")
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.repeatCount = count
+        animation.duration = duration/TimeInterval(animation.repeatCount)
+        animation.autoreverses = true
+        animation.byValue = translation
+        layer.add(animation, forKey: "shake")
     }
 }
