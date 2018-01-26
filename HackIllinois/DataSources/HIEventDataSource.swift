@@ -15,8 +15,8 @@ final class HIEventDataSource {
     static func deleteLocationsAndEvents(backgroundContext: NSManagedObjectContext) {
         let locationsFetch = NSFetchRequest<Location>(entityName: "Location")
         let eventsFetch = NSFetchRequest<Event>(entityName: "Event")
-        var locationObjects = try? backgroundContext.fetch(locationsFetch) as [Location]
-        var eventObjects    = try? backgroundContext.fetch(eventsFetch) as [Event]
+        var locationObjects = try? backgroundContext.fetch(locationsFetch)
+        var eventObjects    = try? backgroundContext.fetch(eventsFetch)
         print("Deleting Events and Locations")
         print("Locations being deleted:\n===================")
         if let locationObjects = locationObjects {
@@ -37,8 +37,8 @@ final class HIEventDataSource {
         } catch { print("Failed to save context") }
         print("Checking state of Main Context...")
         let mainContext = CoreDataController.shared.persistentContainer.viewContext
-        locationObjects = try? mainContext.fetch(locationsFetch) as [Location]
-        eventObjects    = try? mainContext.fetch(eventsFetch) as [Event]
+        locationObjects = try? mainContext.fetch(locationsFetch)
+        eventObjects    = try? mainContext.fetch(eventsFetch)
         print("Current state of context")
         if let locationObjects = locationObjects {
             print("Number of Locations: \(locationObjects.count)")
@@ -53,8 +53,8 @@ final class HIEventDataSource {
                 switch result {
                 case .success(let containedLocations):
                     // TODO: only remove all events/locations
-//                    deleteLocationsAndEvents(backgroundContext: backgroundContext)
-                    backgroundContext.reset()
+                    deleteLocationsAndEvents(backgroundContext: backgroundContext)
+//                    backgroundContext.reset()
                     var locations = [Location]()
                     backgroundContext.performAndWait {
                         containedLocations.data.forEach { location in
@@ -78,8 +78,8 @@ final class HIEventDataSource {
                                     try backgroundContext.save()
                                     let locationsFetch = NSFetchRequest<Location>(entityName: "Location")
                                     let eventsFetch = NSFetchRequest<Event>(entityName: "Event")
-                                    var locationObjects = try? backgroundContext.fetch(locationsFetch) as [Location]
-                                    var eventObjects    = try? backgroundContext.fetch(eventsFetch) as [Event]
+                                    var locationObjects = try? backgroundContext.fetch(locationsFetch)
+                                    var eventObjects    = try? backgroundContext.fetch(eventsFetch)
                                     print("Current state of context")
                                     print("Locations:\n===================")
                                     if let locationObjects = locationObjects {
@@ -94,8 +94,8 @@ final class HIEventDataSource {
                                         }
                                     }
                                     let mainContext = CoreDataController.shared.persistentContainer.viewContext
-                                    locationObjects = try? mainContext.fetch(locationsFetch) as [Location]
-                                    eventObjects    = try? mainContext.fetch(eventsFetch) as [Event]
+                                    locationObjects = try? mainContext.fetch(locationsFetch)
+                                    eventObjects    = try? mainContext.fetch(eventsFetch)
                                     print("Current state of context")
                                     if let locationObjects = locationObjects {
                                         print("Number of Locations: \(locationObjects.count)")
