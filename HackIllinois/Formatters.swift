@@ -27,6 +27,18 @@ extension Formatter {
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXXXX"
         return formatter
     }()
+
+    static let coreData: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZ"
+        return formatter
+    }()
+
+    static let simpleTime: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        return formatter
+    }()
 }
 
 extension Date {
@@ -92,5 +104,31 @@ extension Date {
             return "just now"
         }
 
+    }
+}
+
+extension Date {
+    func byRemoving(components componentsToRemove: Set<Calendar.Component>) -> Date {
+        let allComponents: Set<Calendar.Component> = [
+            .calendar,
+            .day,
+            .era,
+            .hour,
+            .minute,
+            .month,
+            .nanosecond,
+            .quarter,
+            .second,
+            .timeZone,
+            .weekOfMonth,
+            .weekOfYear,
+            .weekday,
+            .weekdayOrdinal,
+            .year,
+            .yearForWeekOfYear
+        ]
+        let remainingComponents = allComponents.symmetricDifference(componentsToRemove)
+        let extractedComponents = Calendar.current.dateComponents(remainingComponents, from: self)
+        return Calendar.current.date(from: extractedComponents)!
     }
 }

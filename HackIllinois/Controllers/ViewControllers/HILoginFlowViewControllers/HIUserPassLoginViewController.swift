@@ -30,9 +30,9 @@ class HIUserPassLoginViewController: HIBaseViewController {
     var signInButton = UIButton()
 
     // MARK: - Init
-    convenience init(delegate: HIUserPassLoginViewControllerDelegate) {
-        super.init(nibName: nil, bundle: nil)
+    init(delegate: HIUserPassLoginViewControllerDelegate) {
         self.delegate = delegate
+        super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {

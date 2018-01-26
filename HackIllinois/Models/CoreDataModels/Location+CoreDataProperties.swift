@@ -1,13 +1,15 @@
 //
 //  Location+CoreDataProperties.swift
-//  
+//  HackIllinois
 //
-//  Created by Rauhul Varma on 11/20/17.
+//  Created by Rauhul Varma on 1/25/18.
+//  Copyright © 2018 HackIllinois. All rights reserved.
 //
 //
 
 import Foundation
 import CoreData
+
 
 extension Location {
 

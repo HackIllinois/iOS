@@ -1,8 +1,9 @@
 //
 //  Event+CoreDataProperties.swift
-//  
+//  HackIllinois
 //
-//  Created by Rauhul Varma on 11/20/17.
+//  Created by Rauhul Varma on 1/25/18.
+//  Copyright © 2018 HackIllinois. All rights reserved.
 //
 //
 
@@ -20,8 +21,12 @@ extension Event {
     @NSManaged public var info: String
     @NSManaged public var name: String
     @NSManaged public var start: Date
-    @NSManaged public var tag: Int16
     @NSManaged public var locations: NSSet
+
+    @objc dynamic var sectionIdentifier: Date {
+        let excessComponents: Set<Calendar.Component> = [.minute, .second, .nanosecond]
+        return start.byRemoving(components: excessComponents)
+    }
 
 }
 
