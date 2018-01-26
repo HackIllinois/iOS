@@ -127,14 +127,11 @@ extension HIMenuController {
         menuItemsHeight = menuItems.heightAnchor.constraint(equalToConstant: 0)
         menuItemsHeight.isActive = true
     }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
         resetMenuItems()
         createMenuItems()
     }
-
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
@@ -187,7 +184,6 @@ extension HIMenuController {
             menuItems.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
-
         menuItemsHeight.constant = 0
     }
 

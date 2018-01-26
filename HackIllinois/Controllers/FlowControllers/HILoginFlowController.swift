@@ -19,6 +19,16 @@ class HILoginFlowController: UIViewController {
     var userPassRequestToken: APIRequestToken?
     var keychainContents = [String]()
 
+    // MARK: Status Bar
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .slide
+    }
+
+    var statusBarIsHidden = false
+    override var prefersStatusBarHidden: Bool {
+        return statusBarIsHidden
+    }
+
     // keeps the login session from going out of scope during presentation
     var loginSession: SFAuthenticationSession?
 
@@ -55,8 +65,16 @@ extension HILoginFlowController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if shouldDisplayAnimationOnNextAppearance {
+            statusBarIsHidden = true
+            setNeedsStatusBarAppearanceUpdate()
+
             animationView.play { _ in
                 self.animationView.removeFromSuperview()
+
+                self.statusBarIsHidden = false
+                UIView.animate(withDuration: 0.25) { () -> Void in
+                    self.setNeedsStatusBarAppearanceUpdate()
+                }
             }
             shouldDisplayAnimationOnNextAppearance = false
         }
