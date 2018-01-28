@@ -21,7 +21,7 @@ class HIHomeViewController: HIEventListViewController {
             NSSortDescriptor(key: "id", ascending: true)
         ]
 
-        // TODO: maybe extend start to be a a but before now such that events that are soon to begin are included in this view
+        // TODO: maybe extend start to be a bit before now() such that events that begin shortly are included in this view
         fetchRequest.predicate = NSPredicate(format: "(start < now()) AND (end > now())")
 
         let fetchedResultsController = NSFetchedResultsController(
