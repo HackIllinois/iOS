@@ -12,6 +12,7 @@ import AVKit
 
 class HIScannerViewController: HIBaseViewController {
     var captureSession: AVCaptureSession?
+    var previewLayer: AVCaptureVideoPreviewLayer?
     let hapticGenerator = UINotificationFeedbackGenerator()
 
     var loadFailed = false
@@ -33,6 +34,7 @@ extension HIScannerViewController {
                 self?.captureSession?.startRunning()
             }
         }
+        previewLayer?.frame = view.layer.bounds
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -105,6 +107,7 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
         previewLayer.frame = view.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
+        self.previewLayer = previewLayer
     }
 
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
