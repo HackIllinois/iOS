@@ -8,15 +8,20 @@
 
 import UIKit
 import SwiftKeychainAccess
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // FIXME: Allows arbitary loads
+    var locationManager = CLLocationManager()
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         setupNavigationBarAppearance()
         setupTableViewAppearance()
         HIApplicationStateController.shared.initalize()
+
+        locationManager.requestWhenInUseAuthorization()
         return true
     }
 

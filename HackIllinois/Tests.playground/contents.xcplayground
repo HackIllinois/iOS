@@ -3,6 +3,5 @@
     <pages>
         <page name='JSON Date Decoding'/>
         <page name='Keychain'/>
-        <page name='Localized Date hour extraction'/>
     </pages>
 </playground>

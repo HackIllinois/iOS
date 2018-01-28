@@ -20,7 +20,7 @@ final class HIAnnouncementDataSource {
         }
         isRefreshing = true
         let backgroundContext = CoreDataController.shared.persistentContainer.newBackgroundContext()
-        backgroundContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+        backgroundContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
 
         HIAnnouncementService.getAllAnnouncements()
         .onCompletion { result in

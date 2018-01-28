@@ -21,7 +21,7 @@ final class HIEventDataSource {
         isRefreshing = true
 
         let backgroundContext = CoreDataController.shared.persistentContainer.newBackgroundContext()
-        backgroundContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+        backgroundContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
 
         HIEventService.getAllLocations()
         .onCompletion { result in
