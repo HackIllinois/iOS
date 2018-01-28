@@ -40,6 +40,7 @@ class HIApplicationStateController {
     }
 
     func initalize() {
+        window.backgroundColor = HIColor.paleBlue
         window.makeKeyAndVisible()
 
         resetPersistentDataIfNeeded()

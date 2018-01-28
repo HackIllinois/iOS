@@ -139,4 +139,3 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
 //    }
 //
 //}
-
