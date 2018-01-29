@@ -19,7 +19,6 @@ class HICountdownViewController: UIViewController {
     var minutes = LOTAnimationView(name: "Countdown")
     var seconds = LOTAnimationView(name: "Countdown")
     let eventStartUnixTime = 15102379999.0 // TODO: change to needed time
-    var timeRemaining = 0.0
     var hoursLeft = 0
     var minutesLeft = 0
     var secondsLeft = 0
@@ -108,7 +107,7 @@ extension HICountdownViewController {
         hoursLeft = getHours(timeInSeconds: diffTime)
         minutesLeft = getMinutes(timeInSeconds: diffTime)
         secondsLeft = getSeconds(timeInSeconds: diffTime)
-        
+
         if diffTime > 0 {
             hourFrame = (hoursLeft * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
             minuteFrame = (minutesLeft * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
@@ -154,7 +153,6 @@ extension HICountdownViewController {
 
         secondFrame = (secondFrame - FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
         seconds.play(fromFrame: NSNumber(value: secondFrame + FRAMES_PER_TICK), toFrame: NSNumber(value: secondFrame))
-        
-        print(hourFrame, minuteFrame, secondFrame)
+
     }
 }
