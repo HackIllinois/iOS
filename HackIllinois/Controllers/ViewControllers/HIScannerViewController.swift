@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import AVKit
+import APIManager
 
 class HIScannerViewController: HIBaseViewController {
     var captureSession: AVCaptureSession?
@@ -17,6 +18,8 @@ class HIScannerViewController: HIBaseViewController {
 
     var loadFailed = false
     var respondingToQRCodeFound = true
+
+    var lookingUpUserAlertController: UIAlertController?
 }
 
 // MARK: - UIViewController
@@ -112,33 +115,62 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
 
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         guard respondingToQRCodeFound else { return }
-        if let qrString = (metadataObjects.first as? AVMetadataMachineReadableCodeObject)?.stringValue {
-            AudioServicesPlaySystemSound(1004)
-            hapticGenerator.notificationOccurred(.success)
-            found(code: qrString)
+        if let code = (metadataObjects.first as? AVMetadataMachineReadableCodeObject)?.stringValue {
+            found(code: code)
         }
     }
 
     func found(code: String) {
-        print(code)
-        // validateCode (user_id=000)
+        guard let url = URL(string: code),
+            url.scheme == "hackillinois",
+            let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
+            let queryItems = components.queryItems,
+            let idString = queryItems.first(where: { $0.name == "id" })?.value,
+            let id = Int(idString),
+            let identifier = queryItems.first(where: { $0.name == "identifier" })?.value else { return }
 
-        // pause scanner
+        AudioServicesPlaySystemSound(1004)
+        hapticGenerator.notificationOccurred(.success)
         respondingToQRCodeFound = false
 
-        let userDetailViewController = HIUserDetailViewController()
-//        userDetailViewController.delegate = self
-        userDetailViewController.modalPresentationStyle = .overCurrentContext
-        present(userDetailViewController, animated: true, completion: nil)
+        let lookingUpUserAlertController = UIAlertController(title: "Checking user...", message: identifier, preferredStyle: .alert)
+        self.lookingUpUserAlertController = lookingUpUserAlertController
+        present(lookingUpUserAlertController, animated: true, completion: nil)
+
+        HITrackingService.track(id: id)
+        .onCompletion { (result) in
+            DispatchQueue.main.async { [weak self] in
+                guard let strongSelf = self, let alert = strongSelf.lookingUpUserAlertController else { return }
+                switch result {
+                case .success(let successContainer):
+                    if let error = successContainer.error {
+                        switch error.type {
+                        case "InvalidTrackingStateError", "InvalidParameterError":
+                            alert.title = "Error"
+                        default:
+                            alert.title = "Unknown Error"
+                        }
+                    } else {
+                        alert.title = "Success"
+                    }
+                    alert.message = successContainer.error?.message
+                case .cancellation:
+                    alert.title = "Cancelled"
+                    alert.message = nil
+                case .failure(let error):
+                    alert.title = "Unknown Error"
+                    alert.message = error.localizedDescription
+                }
+
+                alert.addAction(
+                    UIAlertAction(title: "Ok", style: .default) { _ in
+                        strongSelf.respondingToQRCodeFound = true
+                        strongSelf.lookingUpUserAlertController = nil
+                    }
+                )
+            }
+        }
+        .authorization(HIApplicationStateController.shared.user)
+        .perform()
     }
-
 }
-
-//extension HIScannerViewController: HIUserDetailViewControllerDelegate {
-//    func willDismissViewController(_ viewController: HIUserDetailViewController, animated: Bool) { }
-//
-//    func didDismissViewController(_ viewController: HIUserDetailViewController, animated: Bool) {
-//        respondingToQRCodeFound = true
-//    }
-//
-//}

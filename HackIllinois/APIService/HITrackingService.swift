@@ -10,14 +10,19 @@ import Foundation
 import APIManager
 
 final class HITrackingService: HIBaseService {
-
     override static var baseURL: String {
         return super.baseURL + "/tracking"
     }
 
-//    class func found(meta: String, data:) -> APIRequest<HIUserAuth.Contained> {
-//        var body = [String: String]()
-//        body =
-//        return APIRequest<HIUserAuth.Contained>(service: self, endpoint: "", body: body, method: .GET)
-//    }
+    override static func hiValidate(statusCode: Int) throws {
+        if !(200..<300).contains(statusCode) && statusCode != 400 {
+            let description = HTTPURLResponse.localizedString(forStatusCode: statusCode)
+            throw APIRequestError.invalidHTTPReponse(code: statusCode, description: description)
+        }
+    }
+
+    static func track(id: Int) -> APIRequest<HIAPISuccessContainer> {
+        return APIRequest<HIAPISuccessContainer>(service: self, endpoint: "/\(id)", method: .GET)
+    }
+
 }

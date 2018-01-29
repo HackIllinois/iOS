@@ -16,8 +16,6 @@ class HIBaseViewController: UIViewController {
     var _fetchedResultsController: NSFetchedResultsController<NSManagedObject>?
     var refreshControl = UIRefreshControl()
     var refreshAnimation = LOTAnimationView(name: "loader_ring")
-
-    // MARK: - Outlets
     var tableView: UITableView?
 }
 

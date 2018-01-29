@@ -16,4 +16,15 @@ class HIBaseService: APIService {
     }
 
     static var headers = ["Content-Type": "application/json"]
+
+    static func validate(statusCode: Int) throws {
+        try hiValidate(statusCode: statusCode)
+    }
+
+    class func hiValidate(statusCode: Int) throws {
+        if !(200..<300).contains(statusCode) {
+            let description = HTTPURLResponse.localizedString(forStatusCode: statusCode)
+            throw APIRequestError.invalidHTTPReponse(code: statusCode, description: description)
+        }
+    }
 }

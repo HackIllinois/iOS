@@ -11,15 +11,9 @@ import UIKit
 
 class HIUserDetailViewController: HIBaseViewController {
     // MARK: - Properties
-    var qrCode = UIView()
+    var qrCode = UIImageView()
     var userNameLabel = UILabel()
     var userInfoLabel = UILabel()
-
-    var emergencyContactNameLabel = UILabel()
-    var emergencyContactPhoneLabel = UILabel()
-    var emergencyContactEmailLabel = UILabel()
-
-    var animationView: UIView!
 }
 
 // MARK: - Actions
@@ -60,79 +54,44 @@ extension HIUserDetailViewController {
         qrCode.backgroundColor = HIColor.darkIndigo
         qrCode.translatesAutoresizingMaskIntoConstraints = false
         userDetailContainer.addSubview(qrCode)
-        qrCode.topAnchor.constraint(equalTo: userDetailContainer.topAnchor, constant: 48).isActive = true
-        qrCode.leadingAnchor.constraint(equalTo: userDetailContainer.leadingAnchor, constant: 42).isActive = true
-        qrCode.trailingAnchor.constraint(equalTo: userDetailContainer.trailingAnchor, constant: -42).isActive = true
+        qrCode.topAnchor.constraint(equalTo: userDetailContainer.topAnchor, constant: 32).isActive = true
+        qrCode.leadingAnchor.constraint(equalTo: userDetailContainer.leadingAnchor, constant: 32).isActive = true
+        qrCode.trailingAnchor.constraint(equalTo: userDetailContainer.trailingAnchor, constant: -32).isActive = true
         qrCode.heightAnchor.constraint(equalTo: qrCode.widthAnchor).isActive = true
 
-        let userDataStackContainer = UIView()
-        userDataStackContainer.translatesAutoresizingMaskIntoConstraints = false
-        userDetailContainer.addSubview(userDataStackContainer)
-        userDataStackContainer.topAnchor.constraint(equalTo: qrCode.bottomAnchor).isActive = true
-        userDataStackContainer.bottomAnchor.constraint(equalTo: userDetailContainer.bottomAnchor).isActive = true
-        userDataStackContainer.centerXAnchor.constraint(equalTo: userDetailContainer.centerXAnchor).isActive = true
-
         let userDataStackView = UIStackView()
-        userDataStackView.translatesAutoresizingMaskIntoConstraints = false
-        userDataStackContainer.addSubview(userDataStackView)
-        userDataStackView.leadingAnchor.constraint(equalTo: userDataStackContainer.leadingAnchor).isActive = true
-        userDataStackView.trailingAnchor.constraint(equalTo: userDataStackContainer.trailingAnchor).isActive = true
-        userDataStackView.centerYAnchor.constraint(equalTo: userDataStackContainer.centerYAnchor).isActive = true
         userDataStackView.axis = .vertical
-        userDataStackView.alignment = .center
+        userDataStackView.alignment = .fill
+        userDataStackView.distribution = .fillProportionally
+        userDataStackView.translatesAutoresizingMaskIntoConstraints = false
+        userDetailContainer.addSubview(userDataStackView)
+        userDataStackView.topAnchor.constraint(equalTo: qrCode.bottomAnchor, constant: 22).isActive = true
+        userDataStackView.leadingAnchor.constraint(equalTo: userDetailContainer.leadingAnchor, constant: 32).isActive = true
+        userDataStackView.bottomAnchor.constraint(equalTo: userDetailContainer.bottomAnchor, constant: -32).isActive = true
+        userDataStackView.trailingAnchor.constraint(equalTo: userDetailContainer.trailingAnchor, constant: -32).isActive = true
+        userDataStackView.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
-        userNameLabel.text = "JOHN DOE"
+        userNameLabel.text = "ASDJH SADHJL ASD"
+        userNameLabel.textAlignment = .center
         userNameLabel.textColor = HIColor.darkIndigo
         userNameLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         userNameLabel.translatesAutoresizingMaskIntoConstraints = false
         userDataStackView.addArrangedSubview(userNameLabel)
 
         userInfoLabel.text = "NO DIETARY RESTRICTIONS"
+        userInfoLabel.textAlignment = .center
         userInfoLabel.textColor = HIColor.hotPink
         userInfoLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
         userInfoLabel.translatesAutoresizingMaskIntoConstraints = false
         userDataStackView.addArrangedSubview(userInfoLabel)
+    }
 
-        // TODO: verify fonts with sketch
-        let emergencyContactTitle = UILabel()
-        emergencyContactTitle.text = "EMERGENCY CONTACT"
-        emergencyContactTitle.textColor = HIColor.darkIndigo
-        emergencyContactTitle.font = UIFont.systemFont(ofSize: 13, weight: .bold)
-        emergencyContactTitle.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(emergencyContactTitle)
-        emergencyContactTitle.topAnchor.constraint(equalTo: userDetailContainer.bottomAnchor, constant: 29).isActive = true
-        emergencyContactTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
-        emergencyContactTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24).isActive = true
-        emergencyContactTitle.heightAnchor.constraint(equalToConstant: 22).isActive = true
-
-        let emergencyContactStackView = UIStackView()
-        emergencyContactStackView.axis = .vertical
-        emergencyContactStackView.distribution = .fillEqually
-        emergencyContactStackView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(emergencyContactStackView)
-        emergencyContactStackView.topAnchor.constraint(equalTo: emergencyContactTitle.bottomAnchor, constant: 7).isActive = true
-        emergencyContactStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
-        emergencyContactStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24).isActive = true
-        emergencyContactStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -42).isActive = true
-        emergencyContactStackView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-
-        emergencyContactNameLabel.text = "JANE DOE"
-        emergencyContactNameLabel.textColor = HIColor.hotPink
-        emergencyContactNameLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
-        emergencyContactNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        emergencyContactStackView.addArrangedSubview(emergencyContactNameLabel)
-
-        emergencyContactPhoneLabel.text = "630 - 000 - 9090"
-        emergencyContactPhoneLabel.textColor = HIColor.hotPink
-        emergencyContactPhoneLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
-        emergencyContactPhoneLabel.translatesAutoresizingMaskIntoConstraints = false
-        emergencyContactStackView.addArrangedSubview(emergencyContactPhoneLabel)
-
-        emergencyContactEmailLabel.text = "jane@doe.com"
-        emergencyContactEmailLabel.textColor = HIColor.hotPink
-        emergencyContactEmailLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
-        emergencyContactEmailLabel.translatesAutoresizingMaskIntoConstraints = false
-        emergencyContactStackView.addArrangedSubview(emergencyContactEmailLabel)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        guard let user = HIApplicationStateController.shared.user,
+            let url = URL(string: "hackillinois://qrcode/user?id=\(user.id)&identifier=\(user.identifier)") else { return }
+        view.layoutIfNeeded()
+        qrCode.image = QRCode(string: url.absoluteString, size: qrCode.frame.height)?.image
     }
 }
 
@@ -141,7 +100,6 @@ extension HIUserDetailViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
         title = "PROFILE"
-        // TODO: replace with Logout Item
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "DisclosureIndicator"), style: .plain, target: self, action: #selector(HIUserDetailViewController.didSelectLogoutButton(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "LogoutButton"), style: .plain, target: self, action: #selector(HIUserDetailViewController.didSelectLogoutButton(_:)))
     }
 }

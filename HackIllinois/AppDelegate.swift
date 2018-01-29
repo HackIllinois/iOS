@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupNavigationBarAppearance()
         setupTableViewAppearance()
         HIApplicationStateController.shared.initalize()
-
         locationManager.requestWhenInUseAuthorization()
         return true
     }
