@@ -18,8 +18,7 @@ class HICountdownViewController: UIViewController {
     var hours = LOTAnimationView(name: "Countdown")
     var minutes = LOTAnimationView(name: "Countdown")
     var seconds = LOTAnimationView(name: "Countdown")
-    let eventStartUnixTime = 15102379999.0
-    var currentUnixTime = 0.0
+    let eventStartUnixTime = 15102379999.0 // TODO: change to needed time
     var timeRemaining = 0.0
     var hoursLeft = 0
     var minutesLeft = 0
@@ -100,8 +99,7 @@ extension HICountdownViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        currentUnixTime = NSDate().timeIntervalSince1970
-        diffTime = eventStartUnixTime - currentUnixTime
+        diffTime = eventStartUnixTime - NSDate().timeIntervalSince1970
 
         hours.animationSpeed = 2.0
         minutes.animationSpeed = 2.0
@@ -112,9 +110,9 @@ extension HICountdownViewController {
         secondsLeft = getSeconds(timeInSeconds: diffTime)
         
         if diffTime > 0 {
-            hourFrame = (hoursLeft * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % 1800
-            minuteFrame = (minutesLeft * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % 1800
-            secondFrame = (secondsLeft * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % 1800
+            hourFrame = (hoursLeft * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
+            minuteFrame = (minutesLeft * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
+            secondFrame = (secondsLeft * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
         } else {
             hourFrame = 0
             minuteFrame = 0
@@ -144,12 +142,12 @@ extension HICountdownViewController {
     }
 
     @objc func updateCountdown() {
-        if minuteFrame == 1770 && secondFrame == 1770 {
+        if minuteFrame == (TOTAL_NUM_FRAMES - FRAMES_PER_TICK) && secondFrame == (TOTAL_NUM_FRAMES - FRAMES_PER_TICK) {
             hourFrame = (hourFrame - FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
             hours.play(fromFrame: NSNumber(value: hourFrame + FRAMES_PER_TICK), toFrame: NSNumber(value: hourFrame))
         }
 
-        if secondFrame == 1770 {
+        if secondFrame == (TOTAL_NUM_FRAMES - FRAMES_PER_TICK) {
             minuteFrame = (minuteFrame - FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
             minutes.play(fromFrame: NSNumber(value: minuteFrame + FRAMES_PER_TICK), toFrame: NSNumber(value: minuteFrame))
         }

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		35240BCA20130C5D00E0C0D8 /* HIUserLookupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35240BC920130C5C00E0C0D8 /* HIUserLookupViewController.swift */; };
 		35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */; };
 		35BD9E4A2017DFED005B6FCE /* HITrackingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BD9E492017DFED005B6FCE /* HITrackingService.swift */; };
 		35C33CF6201990EB005A22ED /* Countdown.json in Resources */ = {isa = PBXBuildFile; fileRef = 35C33CF5201990EB005A22ED /* Countdown.json */; };
@@ -69,7 +68,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		35240BC920130C5C00E0C0D8 /* HIUserLookupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIUserLookupViewController.swift; sourceTree = "<group>"; };
 		35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HICountdownViewController.swift; sourceTree = "<group>"; };
 		35BD9E492017DFED005B6FCE /* HITrackingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITrackingService.swift; sourceTree = "<group>"; };
 		35C33CF5201990EB005A22ED /* Countdown.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Countdown.json; sourceTree = "<group>"; };
@@ -309,7 +307,6 @@
 				954EE1CF1FD0F14E0078F39E /* HILoginFlowViewControllers */,
 				9510F6A61FCB7E53007D19DB /* HIScannerViewController.swift */,
 				95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */,
-				35240BC920130C5C00E0C0D8 /* HIUserLookupViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
