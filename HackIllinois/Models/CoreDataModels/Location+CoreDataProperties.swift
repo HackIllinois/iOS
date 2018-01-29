@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-
 extension Location {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Location> {
@@ -22,7 +21,6 @@ extension Location {
     @NSManaged public var longitude: Double
     @NSManaged public var name: String
     @NSManaged public var events: NSSet
-
 }
 
 // MARK: Generated accessors for events

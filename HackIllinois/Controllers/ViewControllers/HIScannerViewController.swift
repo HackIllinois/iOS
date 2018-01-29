@@ -26,18 +26,7 @@ class HIScannerViewController: HIBaseViewController {
 extension HIScannerViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupCaptureSession()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if captureSession?.isRunning == false {
-            DispatchQueue.main.async { [weak self] in
-                self?.captureSession?.startRunning()
-            }
-        }
-        previewLayer?.frame = view.layer.bounds
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -48,16 +37,21 @@ extension HIScannerViewController {
                 message: "Your device does not support scanning a code from an item. Please use a device with a camera.",
                 dismissParentOnCompletion: false
             )
+        } else if captureSession?.isRunning == false {
+            previewLayer?.frame = view.layer.bounds
+            DispatchQueue.main.async { [weak self] in
+                self?.captureSession?.startRunning()
+            }
         }
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         if captureSession?.isRunning == true {
             DispatchQueue.main.async { [weak self] in
                 self?.captureSession?.stopRunning()
             }
         }
-        super.viewWillDisappear(animated)
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

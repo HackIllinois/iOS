@@ -81,7 +81,7 @@ extension HIEventDetailViewController {
         eventDetailContainer.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 8).isActive = true
         tableView.leadingAnchor.constraint(equalTo: eventDetailContainer.leadingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: eventDetailContainer.bottomAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: eventDetailContainer.bottomAnchor, constant: -6).isActive = true
         tableView.trailingAnchor.constraint(equalTo: eventDetailContainer.trailingAnchor).isActive = true
         tableViewHeight = tableView.heightAnchor.constraint(equalToConstant: 0)
         tableViewHeight.isActive = true
@@ -98,7 +98,7 @@ extension HIEventDetailViewController {
         let targetSize = CGSize(width: descriptionLabel.frame.width, height: CGFloat.greatestFiniteMagnitude)
         let neededSize = descriptionLabel.sizeThatFits(targetSize)
         descriptionLabelHeight.constant = neededSize.height
-        tableViewHeight.constant = CGFloat(event.locations.count) * 200 + 6
+        tableViewHeight.constant = CGFloat(event.locations.count) * 200
     }
 
     override func viewDidAppear(_ animated: Bool) {
