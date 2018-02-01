@@ -59,7 +59,9 @@ extension HIUserPassLoginViewController {
         super.loadView()
 
         let backButton = UIButton(type: .system)
-        backButton.setTitle("Back", for: .normal)
+//        backButton.setTitle("Back", for: .normal)
+        backButton.setImage(UIImage(cgImage: #imageLiteral(resourceName: "DisclosureIndicator").cgImage!, scale: 2.0, orientation: .down), for: .normal)
+        backButton.tintColor = HIColor.hotPink
         backButton.setTitleColor(HIColor.hotPink, for: .normal)
         backButton.addTarget(self, action: #selector(HIUserPassLoginViewController.didSelectBack(_:)), for: .touchUpInside)
         backButton.translatesAutoresizingMaskIntoConstraints = false
