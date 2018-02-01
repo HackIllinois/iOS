@@ -176,13 +176,11 @@ extension HIUserPassLoginViewController {
         activityIndicator.centerXAnchor.constraint(equalTo: signInButton.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: signInButton.centerYAnchor).isActive = true
     }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         stylizeFor(.readyToLogin)
         emailTextField.text = nil
         passwordTextField.text = nil
-
     }
 }
 
