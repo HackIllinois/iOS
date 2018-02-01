@@ -13,35 +13,29 @@ final class HIEventDataSource {
 
     static var isRefreshing = false
     static func deleteLocationsAndEvents(backgroundContext: NSManagedObjectContext) {
-        let locationsFetch = NSFetchRequest<Location>(entityName: "Location")
-        let eventsFetch = NSFetchRequest<Event>(entityName: "Event")
-        var locationObjects = try? backgroundContext.fetch(locationsFetch)
-        var eventObjects    = try? backgroundContext.fetch(eventsFetch)
-        if let locationObjects = locationObjects {
-            for location in locationObjects {
-                backgroundContext.delete(location)
-            }
-        }
-        if let eventObjects = eventObjects {
-            for event in eventObjects {
-                backgroundContext.delete(event)
-            }
-        }
+        let locationObjectsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")
+        let eventObjectsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Event")
+        let locationsBatchDeleteRequest = NSBatchDeleteRequest(fetchRequest: locationObjectsFetchRequest)
+        let eventsBatchDeleteRequest = NSBatchDeleteRequest(fetchRequest: eventObjectsFetchRequest)
         do {
+            try backgroundContext.execute(locationsBatchDeleteRequest)
+            try backgroundContext.execute(eventsBatchDeleteRequest)
             try backgroundContext.save()
         } catch { print("Failed to save context") }
-        let mainContext = CoreDataController.shared.persistentContainer.viewContext
-        locationObjects = try? mainContext.fetch(locationsFetch)
-        eventObjects    = try? mainContext.fetch(eventsFetch)
     }
-    static func populateLocationsAndEvents(backgroundContext: NSManagedObjectContext, completion: (() -> Void)?) {
+    static func refresh(completion: (() -> Void)? = nil) {
+        guard !isRefreshing else {
+            completion?()
+            return
+        }
+        isRefreshing = true
+        let backgroundContext = CoreDataController.shared.persistentContainer.newBackgroundContext()
+        backgroundContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         HIEventService.getAllLocations()
             .onCompletion { result in
                 switch result {
                 case .success(let containedLocations):
-                    // TODO: only remove all events/locations
                     deleteLocationsAndEvents(backgroundContext: backgroundContext)
-//                    backgroundContext.reset()
                     var locations = [Location]()
                     backgroundContext.performAndWait {
                         containedLocations.data.forEach { location in
@@ -63,13 +57,6 @@ final class HIEventDataSource {
                                 }
                                 do {
                                     try backgroundContext.save()
-                                    let locationsFetch = NSFetchRequest<Location>(entityName: "Location")
-                                    let eventsFetch = NSFetchRequest<Event>(entityName: "Event")
-                                    var locationObjects = try? backgroundContext.fetch(locationsFetch)
-                                    var eventObjects    = try? backgroundContext.fetch(eventsFetch)
-                                    let mainContext = CoreDataController.shared.persistentContainer.viewContext
-                                    locationObjects = try? mainContext.fetch(locationsFetch)
-                                    eventObjects    = try? mainContext.fetch(eventsFetch)
                                 } catch { print("Failed to save context") }
                             case .cancellation, .failure:
                                 break
@@ -90,15 +77,5 @@ final class HIEventDataSource {
             }
             .authorization(HIApplicationStateController.shared.user)
             .perform()
-    }
-    static func refresh(completion: (() -> Void)? = nil) {
-        guard !isRefreshing else {
-            completion?()
-            return
-        }
-        isRefreshing = true
-        let backgroundContext = CoreDataController.shared.persistentContainer.newBackgroundContext()
-        backgroundContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
-        populateLocationsAndEvents(backgroundContext: backgroundContext, completion: completion)
     }
 }
