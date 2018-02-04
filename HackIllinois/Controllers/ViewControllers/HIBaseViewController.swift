@@ -15,7 +15,7 @@ class HIBaseViewController: UIViewController {
     // MARK: - Properties
     var _fetchedResultsController: NSFetchedResultsController<NSManagedObject>?
     var refreshControl = UIRefreshControl()
-    var refreshAnimation = LOTAnimationView(name: "loader_ring")
+    var refreshAnimation = LOTAnimationView(name: "refresh")
     var tableView: UITableView?
 }
 
@@ -158,17 +158,17 @@ extension HIBaseViewController {
         tableView?.addSubview(refreshControl)
 
         // Setup refresh animation
+        refreshAnimation.alpha = 0.0
         refreshAnimation.loopAnimation = true
         refreshAnimation.contentMode = .scaleAspectFit
-        refreshAnimation.frame = .zero
         refreshAnimation.translatesAutoresizingMaskIntoConstraints = false
         refreshControl.addSubview(refreshAnimation)
 
         // Constrain refresh animation
-        refreshAnimation.topAnchor.constraint(equalTo: refreshControl.topAnchor).isActive = true
-        refreshAnimation.bottomAnchor.constraint(equalTo: refreshControl.bottomAnchor).isActive = true
         refreshAnimation.leftAnchor.constraint(equalTo: refreshControl.leftAnchor).isActive = true
         refreshAnimation.rightAnchor.constraint(equalTo: refreshControl.rightAnchor).isActive = true
+        refreshAnimation.centerYAnchor.constraint(equalTo: refreshControl.centerYAnchor).isActive = true
+        refreshAnimation.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
 
     @objc dynamic func refresh(_ sender: UIRefreshControl) {
@@ -176,9 +176,14 @@ extension HIBaseViewController {
     }
 
     func endRefreshing() {
-        DispatchQueue.main.async {
-            self.refreshControl.endRefreshing()
-            self.refreshAnimation.stop()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
+            self.refreshAnimation.loopAnimation = false
+            self.refreshAnimation.completionBlock = { _ in
+                self.refreshControl.endRefreshing()
+                UIViewPropertyAnimator(duration: 0.25, curve: .linear) {
+                    self.refreshAnimation.alpha = 0.0
+                }.startAnimation()
+            }
         }
     }
 }

@@ -45,11 +45,10 @@
 		959AD3FF1FC4EB8400691399 /* HIAnnouncementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959AD3FE1FC4EB8400691399 /* HIAnnouncementCell.swift */; };
 		959AD4011FC4ECC700691399 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959AD4001FC4ECC700691399 /* Operators.swift */; };
 		959AD40C1FC53AEB00691399 /* HIEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959AD40B1FC53AEB00691399 /* HIEventCell.swift */; };
-		959C59261FC8A4B900761BF2 /* splashy_loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 959C59251FC8A4B900761BF2 /* splashy_loader.json */; };
-		959C59281FC8A5AF00761BF2 /* loader_ring.json in Resources */ = {isa = PBXBuildFile; fileRef = 959C59271FC8A5AF00761BF2 /* loader_ring.json */; };
 		95A4728F1FC6055E00381329 /* HIDateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A4728E1FC6055E00381329 /* HIDateHeader.swift */; };
 		95B5704B200C6BA500D1D64D /* HILoginSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B5704A200C6BA500D1D64D /* HILoginSelectionCell.swift */; };
 		95B5704F200C777800D1D64D /* HILoginSelectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B5704E200C777800D1D64D /* HILoginSelectionHeader.swift */; };
+		95BB543B2022CF1200A43523 /* refresh.json in Resources */ = {isa = PBXBuildFile; fileRef = 95BB543A2022CF1200A43523 /* refresh.json */; };
 		95C18DC52009618C004784B5 /* HIHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C18DC42009618C004784B5 /* HIHomeViewController.swift */; };
 		95C18DCA20096539004784B5 /* HIEventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C18DC720096539004784B5 /* HIEventDetailViewController.swift */; };
 		95C18DCB20096539004784B5 /* HIScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C18DC820096539004784B5 /* HIScheduleViewController.swift */; };
@@ -111,11 +110,10 @@
 		959AD3FE1FC4EB8400691399 /* HIAnnouncementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAnnouncementCell.swift; sourceTree = "<group>"; };
 		959AD4001FC4ECC700691399 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		959AD40B1FC53AEB00691399 /* HIEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEventCell.swift; sourceTree = "<group>"; };
-		959C59251FC8A4B900761BF2 /* splashy_loader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splashy_loader.json; sourceTree = "<group>"; };
-		959C59271FC8A5AF00761BF2 /* loader_ring.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loader_ring.json; sourceTree = "<group>"; };
 		95A4728E1FC6055E00381329 /* HIDateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIDateHeader.swift; sourceTree = "<group>"; };
 		95B5704A200C6BA500D1D64D /* HILoginSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILoginSelectionCell.swift; sourceTree = "<group>"; };
 		95B5704E200C777800D1D64D /* HILoginSelectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILoginSelectionHeader.swift; sourceTree = "<group>"; };
+		95BB543A2022CF1200A43523 /* refresh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = refresh.json; sourceTree = "<group>"; };
 		95C18DC42009618C004784B5 /* HIHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIHomeViewController.swift; sourceTree = "<group>"; };
 		95C18DC720096539004784B5 /* HIEventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIEventDetailViewController.swift; sourceTree = "<group>"; };
 		95C18DC820096539004784B5 /* HIScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIScheduleViewController.swift; sourceTree = "<group>"; };
@@ -362,8 +360,7 @@
 		95CF9D731FC7E31700A3C69A /* Refresh */ = {
 			isa = PBXGroup;
 			children = (
-				959C59271FC8A5AF00761BF2 /* loader_ring.json */,
-				959C59251FC8A4B900761BF2 /* splashy_loader.json */,
+				95BB543A2022CF1200A43523 /* refresh.json */,
 			);
 			path = Refresh;
 			sourceTree = "<group>";
@@ -447,10 +444,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				959AD3F91FC4B03800691399 /* img_0.png in Resources */,
+				95BB543B2022CF1200A43523 /* refresh.json in Resources */,
 				9558876C20083E7900B8F937 /* Countdown.json in Resources */,
 				959AD3FA1FC4B03800691399 /* data.json in Resources */,
-				959C59281FC8A5AF00761BF2 /* loader_ring.json in Resources */,
-				959C59261FC8A4B900761BF2 /* splashy_loader.json in Resources */,
 				959AD3F81FC4B03800691399 /* img_1.png in Resources */,
 				951827A91EA35DB800049F79 /* Assets.xcassets in Resources */,
 				951827B41EA35E8B00049F79 /* LaunchScreen.storyboard in Resources */,
