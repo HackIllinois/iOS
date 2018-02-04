@@ -61,6 +61,10 @@ extension HIEventListViewController {
 // MARK: - UIRefreshControl
 extension HIEventListViewController {
     override func refresh(_ sender: UIRefreshControl) {
+        refreshAnimation.loopAnimation = true
+        UIViewPropertyAnimator(duration: 0.25, curve: .linear) {
+            self.refreshAnimation.alpha = 1.0
+        }.startAnimation()
         refreshAnimation.play()
         HIEventDataSource.refresh(completion: endRefreshing)
     }
