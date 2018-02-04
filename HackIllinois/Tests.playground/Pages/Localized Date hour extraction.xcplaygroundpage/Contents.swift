@@ -13,7 +13,6 @@ let minutes = calendar.component(.minute, from: date)
 let seconds = calendar.component(.second, from: date)
 print("hours = \(hour):\(minutes):\(seconds)")
 
-
 let components = Calendar.current.dateComponents([.calendar, .day, .era, .hour, .month, .quarter, .timeZone, .weekOfMonth, .weekOfYear, .weekday, .weekdayOrdinal, .year, .yearForWeekOfYear], from: date)
 
 //Calendar.current.date(from: components)
@@ -30,7 +29,5 @@ extension Date {
     }
 }
 
-
 date
 date.byRemoving(components: [.minute, .second, .nanosecond])
-

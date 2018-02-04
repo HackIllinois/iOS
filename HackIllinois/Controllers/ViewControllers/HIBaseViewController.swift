@@ -174,6 +174,13 @@ extension HIBaseViewController {
     @objc dynamic func refresh(_ sender: UIRefreshControl) {
         fatalError("refresh(_:) must be implemented in a subclass of HIBaseViewController.")
     }
+
+    func endRefreshing() {
+        DispatchQueue.main.async {
+            self.refreshControl.endRefreshing()
+            self.refreshAnimation.stop()
+        }
+    }
 }
 
 // MARK: - Keyboard Notifications

@@ -31,12 +31,14 @@ final class HIAnnouncementDataSource {
             case .success(let containedAnnouncements):
                 do {
                     try backgroundContext.execute(announcementsBatchDeleteRequest)
+                    try backgroundContext.save()
                 } catch {
+                    print("error")
                     completion?()
                     isRefreshing = false
                     return
                 }
-
+                print(containedAnnouncements)
                 backgroundContext.performAndWait {
                     containedAnnouncements.data.forEach { announcement in
                         _ = Announcement(context: backgroundContext, announcement: announcement)

@@ -59,13 +59,15 @@ extension HIUserPassLoginViewController {
         super.loadView()
 
         let backButton = UIButton(type: .system)
-        backButton.setTitle("Back", for: .normal)
-        backButton.setTitleColor(HIColor.hotPink, for: .normal)
+        backButton.setImage(#imageLiteral(resourceName: "BackButton"), for: .normal)
+        backButton.tintColor = HIColor.hotPink
         backButton.addTarget(self, action: #selector(HIUserPassLoginViewController.didSelectBack(_:)), for: .touchUpInside)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(backButton)
         backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 29).isActive = true
+        backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        backButton.widthAnchor.constraint(equalToConstant: 67).isActive = true
+        backButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
         let logInLabel = UILabel()
         logInLabel.text = "LOG IN"

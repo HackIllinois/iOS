@@ -64,11 +64,4 @@ extension HIEventListViewController {
         refreshAnimation.play()
         HIEventDataSource.refresh(completion: endRefreshing)
     }
-
-    func endRefreshing() {
-        DispatchQueue.main.async {
-            self.refreshControl.endRefreshing()
-            self.refreshAnimation.stop()
-        }
-    }
 }

@@ -110,9 +110,4 @@ extension HIAnnouncementsViewController {
         refreshAnimation.play()
         HIAnnouncementDataSource.refresh(completion: endRefreshing)
     }
-
-    func endRefreshing() {
-        refreshControl.endRefreshing()
-        refreshAnimation.stop()
-    }
 }
