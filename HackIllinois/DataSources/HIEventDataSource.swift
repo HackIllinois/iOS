@@ -32,50 +32,50 @@ final class HIEventDataSource {
         let backgroundContext = CoreDataController.shared.persistentContainer.newBackgroundContext()
         backgroundContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         HIEventService.getAllLocations()
-            .onCompletion { result in
-                switch result {
-                case .success(let containedLocations):
-                    deleteLocationsAndEvents(backgroundContext: backgroundContext)
-                    var locations = [Location]()
-                    backgroundContext.performAndWait {
-                        containedLocations.data.forEach { location in
-                            locations.append(
-                                Location(context: backgroundContext, location: location)
-                            )
-                        }
+        .onCompletion { result in
+            switch result {
+            case .success(let containedLocations):
+                deleteLocationsAndEvents(backgroundContext: backgroundContext)
+                var locations = [Location]()
+                backgroundContext.performAndWait {
+                    containedLocations.data.forEach { location in
+                        locations.append(
+                            Location(context: backgroundContext, location: location)
+                        )
                     }
-                    HIEventService.getAllEvents()
-                        .onCompletion { result in
-                            switch result {
-                            case .success(let containedEvents):
-                                backgroundContext.performAndWait {
-                                    containedEvents.data.forEach { event in
-                                        let eventLocationIds = event.locations.map { Int16($0.locationId) }
-                                        let eventLocations = locations.filter { eventLocationIds.contains($0.id) }
-                                        _ = Event(context: backgroundContext, event: event, locations: NSSet(array: eventLocations))
-                                    }
-                                }
-                                do {
-                                    try backgroundContext.save()
-                                } catch { print("Failed to save context") }
-                            case .cancellation, .failure:
-                                break
-                            }
-                            completion?()
-                            isRefreshing = false
-                        }
-                        .authorization(HIApplicationStateController.shared.user)
-                        .perform()
-                case .cancellation:
-                    completion?()
-                    isRefreshing = false
-                case .failure(let error):
-                    print(error)
-                    completion?()
-                    isRefreshing = false
                 }
+                HIEventService.getAllEvents()
+                    .onCompletion { result in
+                        switch result {
+                        case .success(let containedEvents):
+                            backgroundContext.performAndWait {
+                                containedEvents.data.forEach { event in
+                                    let eventLocationIds = event.locations.map { Int16($0.locationId) }
+                                    let eventLocations = locations.filter { eventLocationIds.contains($0.id) }
+                                    _ = Event(context: backgroundContext, event: event, locations: NSSet(array: eventLocations))
+                                }
+                            }
+                            do {
+                                try backgroundContext.save()
+                            } catch { print("Failed to save context") }
+                        case .cancellation, .failure:
+                            break
+                        }
+                        completion?()
+                        isRefreshing = false
+                    }
+                    .authorization(HIApplicationStateController.shared.user)
+                    .perform()
+            case .cancellation:
+                completion?()
+                isRefreshing = false
+            case .failure(let error):
+                print(error)
+                completion?()
+                isRefreshing = false
             }
-            .authorization(HIApplicationStateController.shared.user)
-            .perform()
+        }
+        .authorization(HIApplicationStateController.shared.user)
+        .perform()
     }
 }
