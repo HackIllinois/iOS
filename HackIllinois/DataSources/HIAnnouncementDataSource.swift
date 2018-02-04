@@ -44,15 +44,11 @@ final class HIAnnouncementDataSource {
                 }
                 try? backgroundContext.save()
 
-            case .cancellation:
+            case .cancellation, .failure:
                 break
-            case .failure(let error):
-                print(error)
             }
-            DispatchQueue.main.async {
-                completion?()
-                isRefreshing = false
-            }
+            completion?()
+            isRefreshing = false
         }
         .authorization(HIApplicationStateController.shared.user)
         .perform()
