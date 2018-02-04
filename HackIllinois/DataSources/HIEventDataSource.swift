@@ -13,6 +13,11 @@ final class HIEventDataSource {
 
     static var isRefreshing = false
 
+    static let locationsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")
+    static let locationsBatchDeleteRequest = NSBatchDeleteRequest(fetchRequest: locationsFetchRequest)
+    static let eventsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Event")
+    static let eventsBatchDeleteRequest = NSBatchDeleteRequest(fetchRequest: eventsFetchRequest)
+
     static func refresh(completion: (() -> Void)? = nil) {
         guard !isRefreshing else {
             completion?()
@@ -27,8 +32,14 @@ final class HIEventDataSource {
         .onCompletion { result in
             switch result {
             case .success(let containedLocations):
-                // TODO: only remove all events/locations
-                backgroundContext.reset()
+                do {
+                    try backgroundContext.execute(locationsBatchDeleteRequest)
+                    try backgroundContext.execute(eventsBatchDeleteRequest)
+                } catch {
+                    completion?()
+                    isRefreshing = false
+                    return
+                }
 
                 var locations = [Location]()
                 backgroundContext.performAndWait {
@@ -62,12 +73,7 @@ final class HIEventDataSource {
                 .authorization(HIApplicationStateController.shared.user)
                 .perform()
 
-            case .cancellation:
-                completion?()
-                isRefreshing = false
-
-            case .failure(let error):
-                print(error)
+            case .cancellation, .failure:
                 completion?()
                 isRefreshing = false
             }

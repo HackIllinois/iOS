@@ -13,6 +13,9 @@ final class HIAnnouncementDataSource {
 
     static var isRefreshing = false
 
+    static let announcementsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Announcement")
+    static let announcementsBatchDeleteRequest = NSBatchDeleteRequest(fetchRequest: announcementsFetchRequest)
+
     static func refresh(completion: (() -> Void)? = nil) {
         guard !isRefreshing else {
             completion?()
@@ -26,8 +29,13 @@ final class HIAnnouncementDataSource {
         .onCompletion { result in
             switch result {
             case .success(let containedAnnouncements):
-                // TODO: only remove all announcements
-                backgroundContext.reset()
+                do {
+                    try backgroundContext.execute(announcementsBatchDeleteRequest)
+                } catch {
+                    completion?()
+                    isRefreshing = false
+                    return
+                }
 
                 backgroundContext.performAndWait {
                     containedAnnouncements.data.forEach { announcement in
@@ -36,15 +44,11 @@ final class HIAnnouncementDataSource {
                 }
                 try? backgroundContext.save()
 
-            case .cancellation:
+            case .cancellation, .failure:
                 break
-            case .failure(let error):
-                print(error)
             }
-            DispatchQueue.main.async {
-                completion?()
-                isRefreshing = false
-            }
+            completion?()
+            isRefreshing = false
         }
         .authorization(HIApplicationStateController.shared.user)
         .perform()
