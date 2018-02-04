@@ -35,7 +35,9 @@ final class HIEventDataSource {
                 do {
                     try backgroundContext.execute(locationsBatchDeleteRequest)
                     try backgroundContext.execute(eventsBatchDeleteRequest)
+                    try backgroundContext.save()
                 } catch {
+                    print("error")
                     completion?()
                     isRefreshing = false
                     return
@@ -73,7 +75,11 @@ final class HIEventDataSource {
                 .authorization(HIApplicationStateController.shared.user)
                 .perform()
 
-            case .cancellation, .failure:
+            case .cancellation:
+                completion?()
+                isRefreshing = false
+            case .failure(let error):
+                print(error)
                 completion?()
                 isRefreshing = false
             }

@@ -46,7 +46,6 @@ class HILoginSelectionCell: HIBaseTableViewCell {
 
         activityIndicator.color = HIColor.hotPink
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.startAnimating()
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(activityIndicator)
         activityIndicator.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -23).isActive = true
@@ -75,6 +74,6 @@ extension HILoginSelectionCell {
         super.prepareForReuse()
         titleLabel.text = nil
         indicatorView.isHidden = false
-        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
     }
 }

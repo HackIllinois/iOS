@@ -12,7 +12,7 @@ import QuartzCore
 import PlaygroundSupport
 
 UIGraphicsBeginImageContext(CGSize(width: 100, height: 100))
-let viewPath = UIBezierPath(ovalIn: CGRect(x:1,y:1,width:98,height:98))
+let viewPath = UIBezierPath(ovalIn: CGRect(x: 1, y: 1, width: 98, height: 98))
 viewPath.lineWidth = 2
 viewPath.stroke()
 let image = UIGraphicsGetImageFromCurrentImageContext()
@@ -29,7 +29,7 @@ let view = UIView(frame:
 view.backgroundColor = UIColor.white
 XCPShowView(identifier: "view", view: view)
 
-let label = UILabel(frame:view.bounds)
+let label = UILabel(frame: view.bounds)
 label.text = "This is the text in the background behind the circle."
 label.numberOfLines = 0
 view.addSubview(label)
@@ -40,7 +40,7 @@ effectView.frame = view.bounds
 view.addSubview(effectView)
 effectView.alpha = 0.8
 
-let circleView = UIImageView(image:image)
+let circleView = UIImageView(image: image)
 effectView.contentView.addSubview(circleView)
 
 let maskPath = UIBezierPath(ovalIn: circleView.bounds)
@@ -49,4 +49,3 @@ mask.path = maskPath.cgPath
 effectView.layer.mask = mask
 PlaygroundPage.current.liveView = view
 PlaygroundPage.current.needsIndefiniteExecution = true
-
