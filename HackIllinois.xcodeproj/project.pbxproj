@@ -31,6 +31,7 @@
 		9521CA6A2009E1AF008BF038 /* HIBaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521CA692009E1AF008BF038 /* HIBaseTableViewCell.swift */; };
 		952831A4200F2B35002C9F3E /* HILoginFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952831A3200F2B35002C9F3E /* HILoginFlowController.swift */; };
 		953199C91FC25CA0009F2AA1 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953199C81FC25CA0009F2AA1 /* CoreDataController.swift */; };
+		9531D3A2202837B300B76B20 /* LOTAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9531D3A1202837B300B76B20 /* LOTAnimationView.swift */; };
 		9544799C200C39870005408B /* HIUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9544799B200C39870005408B /* HIUser.swift */; };
 		954EE1D31FD0F1680078F39E /* HILoginSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */; };
 		954EE1D51FD0F17F0078F39E /* HIUserPassLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954EE1D41FD0F17F0078F39E /* HIUserPassLoginViewController.swift */; };
@@ -96,6 +97,7 @@
 		9521CA692009E1AF008BF038 /* HIBaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIBaseTableViewCell.swift; sourceTree = "<group>"; };
 		952831A3200F2B35002C9F3E /* HILoginFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HILoginFlowController.swift; sourceTree = "<group>"; };
 		953199C81FC25CA0009F2AA1 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		9531D3A1202837B300B76B20 /* LOTAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LOTAnimationView.swift; sourceTree = "<group>"; };
 		9544799B200C39870005408B /* HIUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIUser.swift; sourceTree = "<group>"; };
 		9544799D200C3CE40005408B /* Tests.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Tests.playground; sourceTree = "<group>"; };
 		954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILoginSelectionViewController.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				9553EC7C1FCF99F600B6B3EE /* HISegmentedControl.swift */,
 				9521CA692009E1AF008BF038 /* HIBaseTableViewCell.swift */,
 				95F0AE90201B087F005968BC /* HIEventDetailLocationCell.swift */,
+				9531D3A1202837B300B76B20 /* LOTAnimationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -583,6 +586,7 @@
 				957D7CB81FC39EA100C4332A /* Formatters.swift in Sources */,
 				956F41E31FC76C8E00557DC7 /* HIMenuController.swift in Sources */,
 				9510F6A51FCB7D6E007D19DB /* Announcement+CoreDataProperties.swift in Sources */,
+				9531D3A2202837B300B76B20 /* LOTAnimationView.swift in Sources */,
 				954EE1D31FD0F1680078F39E /* HILoginSelectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

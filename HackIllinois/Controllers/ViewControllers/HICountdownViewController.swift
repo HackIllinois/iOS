@@ -12,54 +12,48 @@ import Lottie
 
 class HICountdownViewController: UIViewController {
 
-    // MARK: - Properties
+    // MARK: - Constants
     let FRAMES_PER_TICK = 30
     let TOTAL_NUM_FRAMES = 1800
+
+    // MARK: - Properties
     var hours = LOTAnimationView(name: "Countdown")
     var minutes = LOTAnimationView(name: "Countdown")
     var seconds = LOTAnimationView(name: "Countdown")
-    let eventStartUnixTime = 15102379999.0 // TODO: change to needed time
-    var hoursLeft = 0
-    var minutesLeft = 0
-    var secondsLeft = 0
+
+    // TODO: change to needed time
+    let countdownDate = Date(timeIntervalSince1970: 1519428600)
     var hourFrame = 0
     var minuteFrame = 0
     var secondFrame = 0
-    var diffTime = 0.0
     var timer = Timer()
 
-    // MARK: - Helper functions
-    func getHours(timeInSeconds: Double) -> Int {
-        let hour = (timeInSeconds / Double(3600)).remainder(dividingBy: 60.0)
-        return Int(hour)
+    var timeDifference: TimeInterval = 0.0
+    var hoursRemaining: Int {
+        return Int(timeDifference / 3600) % 60
     }
 
-    func getMinutes(timeInSeconds: Double) -> Int {
-        let minute = ((timeInSeconds.remainder(dividingBy: 3600.0)) / Double(60))
-        return Int(minute)
+    var minutesRemaining: Int {
+        return Int(timeDifference / 60) % 60
     }
 
-    func getSeconds(timeInSeconds: Double) -> Int {
-        let second = ((timeInSeconds.remainder(dividingBy: 3600.0)).remainder(dividingBy: 60.0))
-        return Int(second)
+    var secondsRemaining: Int {
+        return Int(timeDifference) % 60
     }
-    init() {
-        super.init(nibName: nil, bundle: nil)
-        hours.contentMode = .scaleAspectFit
-        minutes.contentMode = .scaleAspectFit
-        seconds.contentMode = .scaleAspectFit
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) should not be used.")
-    }
-
 }
 
 // MARK: - UIViewController
 extension HICountdownViewController {
     override func loadView() {
         view = UIView()
+
+        hours.contentMode = .scaleAspectFit
+        minutes.contentMode = .scaleAspectFit
+        seconds.contentMode = .scaleAspectFit
+
+        hours.animationSpeed = 2.0
+        minutes.animationSpeed = 2.0
+        seconds.animationSpeed = 2.0
 
         let countdownStackView = UIStackView()
         countdownStackView.distribution = .fillEqually
@@ -90,7 +84,7 @@ extension HICountdownViewController {
         stackView.addArrangedSubview(countDownView)
         stackView.addArrangedSubview(label)
 
-        countDownView.widthAnchor.constraint(equalTo: label.widthAnchor, multiplier: 2).isActive = true
+        countDownView.widthAnchor.constraint(equalTo: label.widthAnchor, multiplier: 2.3).isActive = true
 
         return stackView
     }
@@ -98,37 +92,27 @@ extension HICountdownViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        diffTime = eventStartUnixTime - NSDate().timeIntervalSince1970
+        updateTimeDifference()
 
-        hours.animationSpeed = 2.0
-        minutes.animationSpeed = 2.0
-        seconds.animationSpeed = 2.0
-
-        hoursLeft = getHours(timeInSeconds: diffTime)
-        minutesLeft = getMinutes(timeInSeconds: diffTime)
-        secondsLeft = getSeconds(timeInSeconds: diffTime)
-
-        if diffTime > 0 {
-            hourFrame = (hoursLeft * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
-            minuteFrame = (minutesLeft * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
-            secondFrame = (secondsLeft * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
+        if timeDifference > 0 {
+            hourFrame = (hoursRemaining * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
+            minuteFrame = (minutesRemaining * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
+            secondFrame = (secondsRemaining * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
         } else {
             hourFrame = 0
             minuteFrame = 0
             secondFrame = 0
         }
-        // TODO: ask charlee to set frames such that each number shows up on a (k mod 30) frame where k = currFrame, start at 00 and count up
 
-        hours.setProgressWithFrame(NSNumber(value: hourFrame))
-        minutes.setProgressWithFrame(NSNumber(value: minuteFrame))
-        seconds.setProgressWithFrame(NSNumber(value: secondFrame))
-
+        hours.setProgress(frame: hourFrame)
+        minutes.setProgress(frame: minuteFrame)
+        seconds.setProgress(frame: secondFrame)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if diffTime > 0 {
+        if timeDifference > 0 {
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCountdown), userInfo: nil, repeats: true)
         }
     }
@@ -139,20 +123,38 @@ extension HICountdownViewController {
             timer.invalidate()
         }
     }
+}
 
+extension HICountdownViewController {
     @objc func updateCountdown() {
-        if minuteFrame == (TOTAL_NUM_FRAMES - FRAMES_PER_TICK) && secondFrame == (TOTAL_NUM_FRAMES - FRAMES_PER_TICK) {
-            hourFrame = (hourFrame - FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
-            hours.play(fromFrame: NSNumber(value: hourFrame + FRAMES_PER_TICK), toFrame: NSNumber(value: hourFrame))
+        updateTimeDifference()
+
+        let hoursEndFrame = hoursRemaining * FRAMES_PER_TICK
+        let hoursStartFrame = hoursEndFrame + FRAMES_PER_TICK
+        if hourFrame != hoursEndFrame {
+            hourFrame = hoursEndFrame
+            hours.play(from: hoursStartFrame, to: hoursEndFrame)
         }
 
-        if secondFrame == (TOTAL_NUM_FRAMES - FRAMES_PER_TICK) {
-            minuteFrame = (minuteFrame - FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
-            minutes.play(fromFrame: NSNumber(value: minuteFrame + FRAMES_PER_TICK), toFrame: NSNumber(value: minuteFrame))
+        let minutesEndFrame = minutesRemaining * FRAMES_PER_TICK
+        let minutesStartFrame = minutesEndFrame + FRAMES_PER_TICK
+        if minuteFrame != minutesEndFrame {
+            minuteFrame = minutesEndFrame
+            minutes.play(from: minutesStartFrame, to: minutesEndFrame)
         }
 
-        secondFrame = (secondFrame - FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
-        seconds.play(fromFrame: NSNumber(value: secondFrame + FRAMES_PER_TICK), toFrame: NSNumber(value: secondFrame))
+        let secondsEndFrame = secondsRemaining * FRAMES_PER_TICK
+        let secondsStartFrame = secondsEndFrame + FRAMES_PER_TICK
+        if secondFrame != secondsEndFrame {
+            secondFrame = secondsEndFrame
+            seconds.play(from: secondsStartFrame, to: secondsEndFrame)
+        }
+    }
 
+    func updateTimeDifference() {
+        timeDifference = countdownDate.timeIntervalSince(Date())
+        print("--- time info ---")
+        print(timeDifference)
+        print(hoursRemaining, minutesRemaining, secondsRemaining)
     }
 }
