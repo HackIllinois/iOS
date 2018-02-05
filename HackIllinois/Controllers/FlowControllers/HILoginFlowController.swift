@@ -14,7 +14,7 @@ import SwiftKeychainAccess
 
 class HILoginFlowController: UIViewController {
     // MARK: - Properties
-    let animationView = LOTAnimationView(name: "data")
+    let animationView = LOTAnimationView(name: "intro")
     var shouldDisplayAnimationOnNextAppearance = true
     var userPassRequestToken: APIRequestToken?
     var keychainContents = [String]()
