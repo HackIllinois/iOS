@@ -129,7 +129,6 @@ extension HILoginFlowController {
             "user": user
         ])
     }
-
     func keychainRetrievalFailed(id: String) {
         Keychain.default.removeObject(forKey: id)
         refreshKeychainContents()
@@ -137,7 +136,6 @@ extension HILoginFlowController {
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-
 }
 
 // MARK: - HILoginSelectionViewControllerDelegate
@@ -229,7 +227,8 @@ extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
                 }
 
                 DispatchQueue.main.async { [weak self] in
-                    // TODO: Shake with error
+                    // TODO: Show some other kind of indicator of incorrect password (maybe a red UIlabel)
+                    self?.userPassLoginViewController.shakeWithError()
                     self?.userPassLoginViewController.stylizeFor(.readyToLogin)
                 }
             }

@@ -28,6 +28,7 @@ class HIUserPassLoginViewController: HIBaseViewController {
     var emailTextField = UITextField()
     var passwordTextField = UITextField()
     var signInButton = UIButton()
+    var containerView = UIView()
 
     // MARK: - Init
     init(delegate: HIUserPassLoginViewControllerDelegate) {
@@ -49,6 +50,33 @@ extension HIUserPassLoginViewController {
     @objc func didSelectLogin(_ sender: UIButton) {
         guard let email = emailTextField.text, let password = passwordTextField.text else { return }
         delegate?.userPassLoginViewControllerDidSelectLoginButton(self, forEmail: email, andPassword: password)
+    }
+    
+    func shakeWithError() {
+        let duration: TimeInterval = 0.5
+        let translation: CGFloat = 15
+        let viewCenter  = containerView.center
+        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeOut)
+        animator.addAnimations {
+            UIView.animateKeyframes(withDuration: duration, delay: 0, options: [.calculationModeCubic], animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.125) {
+                    self.containerView.center  = CGPoint(x: viewCenter.x + translation, y: viewCenter.y)
+                }
+                UIView.addKeyframe(withRelativeStartTime: 0.125, relativeDuration: 0.25) {
+                    self.containerView.center  = CGPoint(x: viewCenter.x - (translation - 3), y: viewCenter.y)
+                }
+                UIView.addKeyframe(withRelativeStartTime: 0.375, relativeDuration: 0.25) {
+                    self.containerView.center  = CGPoint(x: viewCenter.x + (translation - 6), y: viewCenter.y)
+                }
+                UIView.addKeyframe(withRelativeStartTime: 0.625, relativeDuration: 0.25) {
+                    self.containerView.center  = CGPoint(x: viewCenter.x - (translation - 9), y: viewCenter.y)
+                }
+                UIView.addKeyframe(withRelativeStartTime: 0.875, relativeDuration: 0.125) {
+                    self.containerView.center  = viewCenter
+                }
+            })
+        }
+        animator.startAnimation()
     }
 }
 
@@ -80,6 +108,13 @@ extension HIUserPassLoginViewController {
         logInLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -29).isActive = true
         logInLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
 
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(containerView)
+        containerView.topAnchor.constraint(equalTo: logInLabel.bottomAnchor, constant: 23).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
+        containerView.heightAnchor.constraint(equalToConstant: 89).isActive = true
+
         emailTextField.placeholder = "USERNAME"
         emailTextField.textColor = HIColor.darkIndigo
         emailTextField.font = UIFont.systemFont(ofSize: 13, weight: .medium)
@@ -89,19 +124,19 @@ extension HIUserPassLoginViewController {
         emailTextField.autocorrectionType = .no
         emailTextField.enablesReturnKeyAutomatically = true
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(emailTextField)
-        emailTextField.topAnchor.constraint(equalTo: logInLabel.bottomAnchor, constant: 23).isActive = true
-        emailTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
-        emailTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
+        containerView.addSubview(emailTextField)
+        emailTextField.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 0).isActive = true
+        emailTextField.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0).isActive = true
+        emailTextField.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 0).isActive = true
         emailTextField.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
         let separatorView = UIView()
         separatorView.backgroundColor = HIColor.hotPink
         separatorView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(separatorView)
+        containerView.addSubview(separatorView)
         separatorView.topAnchor.constraint(equalTo: emailTextField.bottomAnchor).isActive = true
-        separatorView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 23).isActive = true
-        separatorView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -23).isActive = true
+        separatorView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0).isActive = true
+        separatorView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 0).isActive = true
         separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
 
         passwordTextField.placeholder = "PASSWORD"
@@ -114,10 +149,10 @@ extension HIUserPassLoginViewController {
         passwordTextField.enablesReturnKeyAutomatically = true
         passwordTextField.isSecureTextEntry = true
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(passwordTextField)
+        containerView.addSubview(passwordTextField)
         passwordTextField.topAnchor.constraint(equalTo: separatorView.bottomAnchor).isActive = true
-        passwordTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
-        passwordTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
+        passwordTextField.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0).isActive = true
+        passwordTextField.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 0).isActive = true
         passwordTextField.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
         signInButton.backgroundColor = HIColor.lightPeriwinkle
@@ -128,7 +163,7 @@ extension HIUserPassLoginViewController {
         signInButton.addTarget(self, action: #selector(HIUserPassLoginViewController.didSelectLogin(_:)), for: .touchUpInside)
         signInButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(signInButton)
-        signInButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 71).isActive = true
+        signInButton.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 71).isActive = true
         signInButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         signInButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         signInButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -141,10 +176,11 @@ extension HIUserPassLoginViewController {
         activityIndicator.centerXAnchor.constraint(equalTo: signInButton.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: signInButton.centerYAnchor).isActive = true
     }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         stylizeFor(.readyToLogin)
+        emailTextField.text = nil
+        passwordTextField.text = nil
     }
 }
 
@@ -176,9 +212,6 @@ extension HIUserPassLoginViewController {
             signInButton.setTitle(nil, for: .normal)
             signInButton.backgroundColor = UIColor.gray
             activityIndicator.startAnimating()
-
-            emailTextField.text = nil
-            passwordTextField.text = nil
 
         case .readyToLogin:
             signInButton.isEnabled = true
