@@ -17,9 +17,9 @@ class HICountdownViewController: UIViewController {
     let TOTAL_NUM_FRAMES = 1800
 
     // MARK: - Properties
-    var hours = LOTAnimationView(name: "Countdown")
-    var minutes = LOTAnimationView(name: "Countdown")
-    var seconds = LOTAnimationView(name: "Countdown")
+    var hours = LOTAnimationView(name: "countdown")
+    var minutes = LOTAnimationView(name: "countdown")
+    var seconds = LOTAnimationView(name: "countdown")
 
     // TODO: change to needed time
     let countdownDate = Date(timeIntervalSince1970: 1519428600)
