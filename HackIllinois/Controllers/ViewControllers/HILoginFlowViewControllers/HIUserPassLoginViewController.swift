@@ -107,14 +107,14 @@ extension HIUserPassLoginViewController {
         logInLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 29).isActive = true
         logInLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -29).isActive = true
         logInLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
-        
+
         containerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(containerView)
         containerView.topAnchor.constraint(equalTo: logInLabel.bottomAnchor, constant: 23).isActive = true
         containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
         containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
         containerView.heightAnchor.constraint(equalToConstant: 89).isActive = true
-        
+
         emailTextField.placeholder = "USERNAME"
         emailTextField.textColor = HIColor.darkIndigo
         emailTextField.font = UIFont.systemFont(ofSize: 13, weight: .medium)
