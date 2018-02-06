@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */; };
+		356B219D202A5786007113D6 /* countdown-24.json in Resources */ = {isa = PBXBuildFile; fileRef = 356B219B202A5786007113D6 /* countdown-24.json */; };
+		356B219E202A5786007113D6 /* countdown-60.json in Resources */ = {isa = PBXBuildFile; fileRef = 356B219C202A5786007113D6 /* countdown-60.json */; };
 		35BD9E4A2017DFED005B6FCE /* HITrackingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BD9E492017DFED005B6FCE /* HITrackingService.swift */; };
-		35C33CF6201990EB005A22ED /* countdown.json in Resources */ = {isa = PBXBuildFile; fileRef = 35C33CF5201990EB005A22ED /* countdown.json */; };
 		6602C7A6DEE0178C82BE1497 /* Pods_HackIllinois.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F912C974275240F02A49C6D /* Pods_HackIllinois.framework */; };
 		950F57141FBE8139001F7DF4 /* HIBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F57131FBE8139001F7DF4 /* HIBaseService.swift */; };
 		950F57161FBE81FA001F7DF4 /* HIAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F57151FBE81FA001F7DF4 /* HIAuthService.swift */; };
@@ -71,8 +72,9 @@
 
 /* Begin PBXFileReference section */
 		35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HICountdownViewController.swift; sourceTree = "<group>"; };
+		356B219B202A5786007113D6 /* countdown-24.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countdown-24.json"; sourceTree = "<group>"; };
+		356B219C202A5786007113D6 /* countdown-60.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countdown-60.json"; sourceTree = "<group>"; };
 		35BD9E492017DFED005B6FCE /* HITrackingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITrackingService.swift; sourceTree = "<group>"; };
-		35C33CF5201990EB005A22ED /* countdown.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countdown.json; sourceTree = "<group>"; };
 		5F912C974275240F02A49C6D /* Pods_HackIllinois.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HackIllinois.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ACE213775C4DAD26D29206F /* Pods-HackIllinois.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackIllinois.release.xcconfig"; path = "Pods/Target Support Files/Pods-HackIllinois/Pods-HackIllinois.release.xcconfig"; sourceTree = "<group>"; };
 		950F57131FBE8139001F7DF4 /* HIBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIBaseService.swift; sourceTree = "<group>"; };
@@ -272,7 +274,8 @@
 		9558876A20083E7900B8F937 /* Countdown */ = {
 			isa = PBXGroup;
 			children = (
-				35C33CF5201990EB005A22ED /* countdown.json */,
+				356B219B202A5786007113D6 /* countdown-24.json */,
+				356B219C202A5786007113D6 /* countdown-60.json */,
 			);
 			path = Countdown;
 			sourceTree = "<group>";
@@ -453,10 +456,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				95BB543B2022CF1200A43523 /* refresh.json in Resources */,
-				35C33CF6201990EB005A22ED /* countdown.json in Resources */,
 				9531D3A920284BB200B76B20 /* img_0.png in Resources */,
 				951827A91EA35DB800049F79 /* Assets.xcassets in Resources */,
 				9531D3A820284BB200B76B20 /* img_1.png in Resources */,
+				356B219D202A5786007113D6 /* countdown-24.json in Resources */,
+				356B219E202A5786007113D6 /* countdown-60.json in Resources */,
 				951827B41EA35E8B00049F79 /* LaunchScreen.storyboard in Resources */,
 				9531D3AA20284BB200B76B20 /* intro.json in Resources */,
 			);

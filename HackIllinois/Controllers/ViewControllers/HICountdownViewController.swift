@@ -17,24 +17,30 @@ class HICountdownViewController: UIViewController {
     let TOTAL_NUM_FRAMES = 1800
 
     // MARK: - Properties
-    var hours = LOTAnimationView(name: "countdown")
-    var minutes = LOTAnimationView(name: "countdown")
-    var seconds = LOTAnimationView(name: "countdown")
+    var days = LOTAnimationView(name: "countdown-60")
+    var hours = LOTAnimationView(name: "countdown-24")
+    var minutes = LOTAnimationView(name: "countdown-60")
+    var seconds = LOTAnimationView(name: "countdown-60")
 
     // TODO: change to needed time
-    let countdownDate = Date(timeIntervalSince1970: 1517948820)
+    let countdownDate = Date(timeIntervalSince1970: 1519422180)
+    var dayFrame = 0
     var hourFrame = 0
     var minuteFrame = 0
     var secondFrame = 0
     var timer = Timer()
 
     var timeDifference: TimeInterval = 0.0
+    var daysRemaining: Int {
+        return max(0, Int(timeDifference / Date.DAY_IN_SECONDS) % 60)
+    }
+
     var hoursRemaining: Int {
-        return max(0, Int(timeDifference / 3600) % 60)
+        return max(0, Int(timeDifference / Date.HOUR_IN_SECONDS) % 24)
     }
 
     var minutesRemaining: Int {
-        return max(0, Int(timeDifference / 60) % 60)
+        return max(0, Int(timeDifference / Date.MINUTE_IN_SECONDS) % 60)
     }
 
     var secondsRemaining: Int {
@@ -44,21 +50,15 @@ class HICountdownViewController: UIViewController {
 
 // MARK: - UIViewController
 extension HICountdownViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(HICountdownViewController.handleApplicationDidBecomeActive(notification:)),
-                                               name: .UIApplicationDidBecomeActive,
-                                               object: nil)
-    }
-
     override func loadView() {
         view = UIView()
 
+        days.contentMode = .scaleAspectFit
         hours.contentMode = .scaleAspectFit
         minutes.contentMode = .scaleAspectFit
         seconds.contentMode = .scaleAspectFit
 
+        days.animationSpeed = 2.0
         hours.animationSpeed = 2.0
         minutes.animationSpeed = 2.0
         seconds.animationSpeed = 2.0
@@ -72,6 +72,7 @@ extension HICountdownViewController {
         countdownStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         countdownStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
 
+        countdownStackView.addArrangedSubview(stackView(with: days, and: "D"))
         countdownStackView.addArrangedSubview(stackView(with: hours, and: "H"))
         countdownStackView.addArrangedSubview(stackView(with: minutes, and: "M"))
         countdownStackView.addArrangedSubview(stackView(with: seconds, and: "S"))
@@ -102,16 +103,23 @@ extension HICountdownViewController {
 
         updateTimeDifference()
         setupCounters()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(HICountdownViewController.handleApplicationDidBecomeActive(notification:)),
+            name: .UIApplicationDidBecomeActive,
+            object: nil
+        )
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        timer = Timer.scheduledTimer(timeInterval: 1,
-                                     target: self,
-                                     selector: #selector(HICountdownViewController.updateCountdown),
-                                     userInfo: nil,
-                                     repeats: true)
+        timer = Timer.scheduledTimer(
+            timeInterval: 1,
+            target: self,
+            selector: #selector(HICountdownViewController.updateCountdown),
+            userInfo: nil,
+            repeats: true)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -119,6 +127,12 @@ extension HICountdownViewController {
         if timer.isValid {
             timer.invalidate()
         }
+
+        NotificationCenter.default.removeObserver(
+            self,
+            name: .UIApplicationDidBecomeActive,
+            object: nil
+        )
     }
 }
 
@@ -129,10 +143,12 @@ extension HICountdownViewController {
     }
 
     func setupCounters() {
+        dayFrame = daysRemaining * FRAMES_PER_TICK
         hourFrame = hoursRemaining * FRAMES_PER_TICK
         minuteFrame = minutesRemaining * FRAMES_PER_TICK
         secondFrame = secondsRemaining * FRAMES_PER_TICK
 
+        days.setProgress(frame: dayFrame)
         hours.setProgress(frame: hourFrame)
         minutes.setProgress(frame: minuteFrame)
         seconds.setProgress(frame: secondFrame)
@@ -141,6 +157,13 @@ extension HICountdownViewController {
     @objc func updateCountdown() {
         updateTimeDifference()
         guard timeDifference > 0 else { return }
+
+        let daysEndFrame = daysRemaining * FRAMES_PER_TICK
+        let daysStartFrame = daysEndFrame + FRAMES_PER_TICK
+        if dayFrame != daysEndFrame {
+            dayFrame = daysEndFrame
+            days.play(from: daysStartFrame, to: daysEndFrame)
+        }
 
         let hoursEndFrame = hoursRemaining * FRAMES_PER_TICK
         let hoursStartFrame = hoursEndFrame + FRAMES_PER_TICK
@@ -168,6 +191,6 @@ extension HICountdownViewController {
         timeDifference = countdownDate.timeIntervalSince(Date())
         print("--- time info ---")
         print(timeDifference)
-        print(hoursRemaining, minutesRemaining, secondsRemaining)
+        print(daysRemaining, hoursRemaining, minutesRemaining, secondsRemaining)
     }
 }
