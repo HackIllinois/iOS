@@ -23,7 +23,7 @@ class HICountdownViewController: UIViewController {
     var seconds = LOTAnimationView(name: "countdown")
 
     // TODO: change to needed time
-    let countdownDate = Date(timeIntervalSince1970: 1519428600)
+    let countdownDate = Date(timeIntervalSince1970: 1519417620)
     var dayFrame = 0
     var hourFrame = 0
     var minuteFrame = 0
@@ -32,11 +32,11 @@ class HICountdownViewController: UIViewController {
 
     var timeDifference: TimeInterval = 0.0
     var daysRemaining: Int {
-        return Int(timeDifference / 3600) % 60
+        return max(0, Int(timeDifference / 86400) % 60)
     }
-    
+
     var hoursRemaining: Int {
-        return max(0, Int(timeDifference / 3600) % 60)
+        return max(0, Int(timeDifference / 3600) % 24)
     }
 
     var minutesRemaining: Int {
@@ -138,10 +138,12 @@ extension HICountdownViewController {
     }
 
     func setupCounters() {
+        dayFrame = daysRemaining * FRAMES_PER_TICK
         hourFrame = hoursRemaining * FRAMES_PER_TICK
         minuteFrame = minutesRemaining * FRAMES_PER_TICK
         secondFrame = secondsRemaining * FRAMES_PER_TICK
 
+        days.setProgress(frame: dayFrame)
         hours.setProgress(frame: hourFrame)
         minutes.setProgress(frame: minuteFrame)
         seconds.setProgress(frame: secondFrame)
@@ -151,6 +153,13 @@ extension HICountdownViewController {
         updateTimeDifference()
         guard timeDifference > 0 else { return }
 
+        let daysEndFrame = daysRemaining * FRAMES_PER_TICK
+        let daysStartFrame = daysEndFrame + FRAMES_PER_TICK
+        if dayFrame != daysEndFrame {
+            dayFrame = daysEndFrame
+            days.play(from: daysStartFrame, to: daysEndFrame)
+        }
+        
         let hoursEndFrame = hoursRemaining * FRAMES_PER_TICK
         let hoursStartFrame = hoursEndFrame + FRAMES_PER_TICK
         if hourFrame != hoursEndFrame {
@@ -177,6 +186,6 @@ extension HICountdownViewController {
         timeDifference = countdownDate.timeIntervalSince(Date())
         print("--- time info ---")
         print(timeDifference)
-        print(hoursRemaining, minutesRemaining, secondsRemaining)
+        print(daysRemaining, hoursRemaining, minutesRemaining, secondsRemaining)
     }
 }
