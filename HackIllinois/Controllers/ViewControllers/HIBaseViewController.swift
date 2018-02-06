@@ -17,6 +17,7 @@ class HIBaseViewController: UIViewController {
     var refreshControl = UIRefreshControl()
     var refreshAnimation = LOTAnimationView(name: "refresh")
     var tableView: UITableView?
+    let tableBackgroundView = HIEmptyTableBackgroundView()
 }
 
 // MARK: - UIViewController
@@ -68,7 +69,20 @@ extension HIBaseViewController: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 extension HIBaseViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard let sectionCount = _fetchedResultsController?.sections?.count else { return 0 }
+        let sectionCount = _fetchedResultsController?.sections?.count ?? 0
+        if sectionCount > 0 {
+            if _fetchedResultsController?.sectionNameKeyPath == nil {
+                if _fetchedResultsController?.sections?[0].numberOfObjects ?? 0 > 0 {
+                    tableView.backgroundView = nil
+                } else {
+                    tableView.backgroundView = tableBackgroundView
+                }
+            } else {
+                tableView.backgroundView = nil
+            }
+        } else {
+            tableView.backgroundView = tableBackgroundView
+        }
         return sectionCount
     }
 
@@ -84,43 +98,44 @@ extension HIBaseViewController: UITableViewDataSource {
 
 // MARK: - NSFetchedResultsControllerDelegate
 extension HIBaseViewController: NSFetchedResultsControllerDelegate {
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView?.beginUpdates()
-    }
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
-        case .insert:
-            guard let insertIndexPath = newIndexPath else { return }
-            tableView?.insertRows(at: [insertIndexPath], with: .fade)
-        case .delete:
-            guard let deleteIndexPath = indexPath else { return }
-            tableView?.deleteRows(at: [deleteIndexPath], with: .fade)
-        case .update:
-            guard let updateIndexPath = indexPath else { return }
-            tableView?.reloadRows(at: [updateIndexPath], with: .fade)
-        case .move:
-            guard let fromIndexPath = indexPath, let toIndexPath = newIndexPath else { return }
-            tableView?.insertRows(at: [toIndexPath], with: .fade)
-            tableView?.deleteRows(at: [fromIndexPath], with: .fade)
-        }
-    }
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        switch type {
-        case .insert:
-            tableView?.insertSections([sectionIndex], with: .fade)
-        case .delete:
-            tableView?.deleteSections([sectionIndex], with: .fade)
-        case .update:
-            tableView?.reloadSections([sectionIndex], with: .fade)
-        case .move:
-            break
-        }
-    }
+//    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        tableView?.beginUpdates()
+//    }
+//
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//        switch type {
+//        case .insert:
+//            guard let insertIndexPath = newIndexPath else { return }
+//            tableView?.insertRows(at: [insertIndexPath], with: .fade)
+//        case .delete:
+//            guard let deleteIndexPath = indexPath else { return }
+//            tableView?.deleteRows(at: [deleteIndexPath], with: .fade)
+//        case .update:
+//            guard let updateIndexPath = indexPath else { return }
+//            tableView?.reloadRows(at: [path], with: .fade)
+//        case .move:
+//            guard let fromIndexPath = indexPath, let toIndexPath = newIndexPath else { return }
+//            tableView?.insertRows(at: [toIndexPath], with: .fade)
+//            tableView?.deleteRows(at: [fromIndexPath], with: .fade)
+//        }
+//    }
+//
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+//        switch type {
+//        case .insert:
+//            tableView?.insertSections([sectionIndex], with: .fade)
+//        case .delete:
+//            tableView?.deleteSections([sectionIndex], with: .fade)
+//        case .update:
+//            tableView?.reloadSections([sectionIndex], with: .fade)
+//        case .move:
+//            break
+//        }
+//    }
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView?.endUpdates()
+//        tableView?.endUpdates()
+        tableView?.reloadData()
     }
 }
 
@@ -155,7 +170,7 @@ extension HIBaseViewController {
         refreshControl.backgroundColor = UIColor.clear
         refreshControl.tintColor = UIColor.clear
         refreshControl.addTarget(self, action: #selector(HIBaseViewController.refresh(_:)), for: .valueChanged)
-        tableView?.addSubview(refreshControl)
+        tableView?.insertSubview(refreshControl, at: 0)
 
         // Setup refresh animation
         refreshAnimation.alpha = 0.0
@@ -172,18 +187,24 @@ extension HIBaseViewController {
     }
 
     @objc dynamic func refresh(_ sender: UIRefreshControl) {
-        fatalError("refresh(_:) must be implemented in a subclass of HIBaseViewController.")
+        refreshAnimation.setProgress(frame: 0)
+        refreshAnimation.play()
+        UIViewPropertyAnimator(duration: 0.125, curve: .linear) {
+            self.refreshAnimation.alpha = 1.0
+        }.startAnimation()
     }
 
     func endRefreshing() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
-            self.refreshAnimation.loopAnimation = false
-            self.refreshAnimation.completionBlock = { _ in
-                self.refreshControl.endRefreshing()
-                UIViewPropertyAnimator(duration: 0.25, curve: .linear) {
-                    self.refreshAnimation.alpha = 0.0
-                }.startAnimation()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250)) {
+            let animator = UIViewPropertyAnimator(duration: 0.125, curve: .linear) {
+                self.refreshAnimation.alpha = 0.0
             }
+            animator.addCompletion { _ in
+                self.tableView?.reloadData()
+                self.refreshAnimation.stop()
+                self.refreshControl.endRefreshing()
+            }
+            animator.startAnimation()
         }
     }
 }

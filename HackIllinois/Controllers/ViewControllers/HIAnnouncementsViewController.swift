@@ -28,7 +28,6 @@ class HIAnnouncementsViewController: HIBaseViewController {
 
         return fetchedResultsController
     }()
-
 }
 
 // MARK: - Actions
@@ -107,7 +106,7 @@ extension HIAnnouncementsViewController {
 // MARK: - UIRefreshControl
 extension HIAnnouncementsViewController {
     override func refresh(_ sender: UIRefreshControl) {
-        refreshAnimation.play()
+        super.refresh(sender)
         HIAnnouncementDataSource.refresh(completion: endRefreshing)
     }
 }

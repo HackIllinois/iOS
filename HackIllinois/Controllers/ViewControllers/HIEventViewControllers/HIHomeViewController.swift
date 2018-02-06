@@ -35,7 +35,7 @@ class HIHomeViewController: HIEventListViewController {
 
         return fetchedResultsController
     }()
-    
+
     let countdownViewController = HICountdownViewController()
 }
 
@@ -55,9 +55,6 @@ extension HIHomeViewController {
         hackingEndsInLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         hackingEndsInLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
 
-
-
-        // TODO: remove background color after view debugging
         countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
         addChildViewController(countdownViewController)
         view.addSubview(countdownViewController.view)
@@ -65,9 +62,7 @@ extension HIHomeViewController {
         countdownViewController.view.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
         countdownViewController.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
         countdownViewController.view.heightAnchor.constraint(equalToConstant: 188).isActive = true
-
         countdownViewController.didMove(toParentViewController: self)
-
 
         let happeningNowLabel = UILabel()
         happeningNowLabel.text = "HAPPENING NOW"

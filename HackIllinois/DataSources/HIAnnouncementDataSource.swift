@@ -13,41 +13,32 @@ final class HIAnnouncementDataSource {
 
     static var isRefreshing = false
 
-    static let announcementsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Announcement")
-    static let announcementsBatchDeleteRequest = NSBatchDeleteRequest(fetchRequest: announcementsFetchRequest)
-
     static func refresh(completion: (() -> Void)? = nil) {
         guard !isRefreshing else {
             completion?()
             return
         }
         isRefreshing = true
-        let backgroundContext = CoreDataController.shared.persistentContainer.newBackgroundContext()
-        backgroundContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
 
         HIAnnouncementService.getAllAnnouncements()
         .onCompletion { result in
             switch result {
-            case .success(let containedAnnouncements):
-                do {
-                    try backgroundContext.execute(announcementsBatchDeleteRequest)
-                    try backgroundContext.save()
-                } catch {
-                    print("error")
-                    completion?()
-                    isRefreshing = false
-                    return
+            case .success(var containedAnnouncements):
+                DispatchQueue.main.sync {
+                    do {
+                        let ctx = CoreDataController.shared.persistentContainer.viewContext
+                        containedAnnouncements.data.forEach {
+                            _ = Announcement(context: ctx, announcement: $0)
+                        }
+                        try ctx.save()
+                    } catch { }
                 }
-                print(containedAnnouncements)
-                backgroundContext.performAndWait {
-                    containedAnnouncements.data.forEach { announcement in
-                        _ = Announcement(context: backgroundContext, announcement: announcement)
-                    }
-                }
-                try? backgroundContext.save()
 
-            case .cancellation, .failure:
+            case .cancellation:
                 break
+
+            case .failure(let error):
+                print("error", error)
             }
             completion?()
             isRefreshing = false

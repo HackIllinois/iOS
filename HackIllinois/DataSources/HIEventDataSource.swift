@@ -13,11 +13,6 @@ final class HIEventDataSource {
 
     static var isRefreshing = false
 
-    static let locationsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")
-    static let locationsBatchDeleteRequest = NSBatchDeleteRequest(fetchRequest: locationsFetchRequest)
-    static let eventsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Event")
-    static let eventsBatchDeleteRequest = NSBatchDeleteRequest(fetchRequest: eventsFetchRequest)
-
     static func refresh(completion: (() -> Void)? = nil) {
         guard !isRefreshing else {
             completion?()
@@ -25,49 +20,29 @@ final class HIEventDataSource {
         }
         isRefreshing = true
 
-        let backgroundContext = CoreDataController.shared.persistentContainer.newBackgroundContext()
-        backgroundContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-
         HIEventService.getAllLocations()
         .onCompletion { result in
             switch result {
             case .success(let containedLocations):
-                do {
-                    try backgroundContext.execute(locationsBatchDeleteRequest)
-                    try backgroundContext.execute(eventsBatchDeleteRequest)
-                    try backgroundContext.save()
-                } catch {
-                    print("error")
-                    completion?()
-                    isRefreshing = false
-                    return
-                }
-
-                var locations = [Location]()
-                backgroundContext.performAndWait {
-                    containedLocations.data.forEach { location in
-                        locations.append(
-                            Location(context: backgroundContext, location: location)
-                        )
-                    }
-                }
 
                 HIEventService.getAllEvents()
                 .onCompletion { result in
-                    switch result {
-                    case .success(let containedEvents):
-                        backgroundContext.performAndWait {
-                            containedEvents.data.forEach { event in
-                                let eventLocationIds = event.locations.map { Int16($0.locationId) }
-                                let eventLocations = locations.filter { eventLocationIds.contains($0.id) }
-
-                                _ = Event(context: backgroundContext, event: event, locations: NSSet(array: eventLocations))
-                            }
+                    if case let .success(containedEvents) = result {
+                        DispatchQueue.main.sync {
+                            do {
+                                let ctx = CoreDataController.shared.persistentContainer.viewContext
+                                var locations = [Location]()
+                                containedLocations.data.forEach { location in
+                                    locations.append( Location(context: ctx, location: location) )
+                                }
+                                containedEvents.data.forEach { event in
+                                    let eventLocationIds = event.locations.map { Int16($0.locationId) }
+                                    let eventLocations = locations.filter { eventLocationIds.contains($0.id) }
+                                    _ = Event(context: ctx, event: event, locations: NSSet(array: eventLocations))
+                                }
+                                try ctx.save()
+                            } catch { }
                         }
-                        try? backgroundContext.save()
-
-                    case .cancellation, .failure:
-                        break
                     }
                     completion?()
                     isRefreshing = false
