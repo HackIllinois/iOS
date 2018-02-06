@@ -22,7 +22,7 @@ class HICountdownViewController: UIViewController {
     var seconds = LOTAnimationView(name: "countdown")
 
     // TODO: change to needed time
-    let countdownDate = Date(timeIntervalSince1970: 1517946420)
+    let countdownDate = Date(timeIntervalSince1970: 1517942500)
     var hourFrame = 0
     var minuteFrame = 0
     var secondFrame = 0
@@ -30,15 +30,15 @@ class HICountdownViewController: UIViewController {
 
     var timeDifference: TimeInterval = 0.0
     var hoursRemaining: Int {
-        return Int(timeDifference / 3600) % 60
+        return max(0, Int(timeDifference / 3600) % 60)
     }
 
     var minutesRemaining: Int {
-        return Int(timeDifference / 60) % 60
+        return max(0, Int(timeDifference / 60) % 60)
     }
 
     var secondsRemaining: Int {
-        return Int(timeDifference) % 60
+        return max(0, Int(timeDifference) % 60)
     }
 }
 
@@ -47,8 +47,8 @@ extension HICountdownViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.handleApplicationDidBecomeActive(notification:)),
-                                               name: Notification.Name("UIApplicationDidBecomeActiveNotification"),
+                                               selector: #selector(HICountdownViewController.handleApplicationDidBecomeActive(notification:)),
+                                               name: Notification.Name.UIApplicationDidBecomeActive,
                                                object: nil)
     }
 
@@ -109,7 +109,7 @@ extension HICountdownViewController {
 
         timer = Timer.scheduledTimer(timeInterval: 1,
                                      target: self,
-                                     selector: #selector(updateCountdown),
+                                     selector: #selector(HICountdownViewController.updateCountdown),
                                      userInfo: nil,
                                      repeats: true)
     }
@@ -129,9 +129,9 @@ extension HICountdownViewController {
     }
 
     func setupCounters() {
-        hourFrame = (hoursRemaining * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
-        minuteFrame = (minutesRemaining * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
-        secondFrame = (secondsRemaining * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
+        hourFrame = hoursRemaining * FRAMES_PER_TICK
+        minuteFrame = minutesRemaining * FRAMES_PER_TICK
+        secondFrame = secondsRemaining * FRAMES_PER_TICK
 
         hours.setProgress(frame: hourFrame)
         minutes.setProgress(frame: minuteFrame)
