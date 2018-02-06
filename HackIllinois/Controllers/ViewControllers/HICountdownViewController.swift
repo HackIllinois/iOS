@@ -22,7 +22,7 @@ class HICountdownViewController: UIViewController {
     var seconds = LOTAnimationView(name: "countdown")
 
     // TODO: change to needed time
-    let countdownDate = Date(timeIntervalSince1970: 1517942500)
+    let countdownDate = Date(timeIntervalSince1970: 1517948820)
     var hourFrame = 0
     var minuteFrame = 0
     var secondFrame = 0
@@ -48,7 +48,7 @@ extension HICountdownViewController {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(HICountdownViewController.handleApplicationDidBecomeActive(notification:)),
-                                               name: Notification.Name.UIApplicationDidBecomeActive,
+                                               name: .UIApplicationDidBecomeActive,
                                                object: nil)
     }
 
@@ -140,10 +140,7 @@ extension HICountdownViewController {
 
     @objc func updateCountdown() {
         updateTimeDifference()
-        guard timeDifference > 0 else {
-            timer.invalidate()
-            return
-        }
+        guard timeDifference > 0 else { return }
 
         let hoursEndFrame = hoursRemaining * FRAMES_PER_TICK
         let hoursStartFrame = hoursEndFrame + FRAMES_PER_TICK
