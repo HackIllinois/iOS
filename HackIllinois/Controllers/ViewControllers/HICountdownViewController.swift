@@ -22,7 +22,7 @@ class HICountdownViewController: UIViewController {
     var seconds = LOTAnimationView(name: "countdown")
 
     // TODO: change to needed time
-    let countdownDate = Date(timeIntervalSince1970: 1519428600)
+    let countdownDate = Date(timeIntervalSince1970: 1517946420)
     var hourFrame = 0
     var minuteFrame = 0
     var secondFrame = 0
@@ -44,6 +44,14 @@ class HICountdownViewController: UIViewController {
 
 // MARK: - UIViewController
 extension HICountdownViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.handleApplicationDidBecomeActive(notification:)),
+                                               name: Notification.Name("UIApplicationDidBecomeActiveNotification"),
+                                               object: nil)
+    }
+
     override func loadView() {
         view = UIView()
 
@@ -93,28 +101,17 @@ extension HICountdownViewController {
         super.viewWillAppear(animated)
 
         updateTimeDifference()
-
-        if timeDifference > 0 {
-            hourFrame = (hoursRemaining * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
-            minuteFrame = (minutesRemaining * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
-            secondFrame = (secondsRemaining * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
-        } else {
-            hourFrame = 0
-            minuteFrame = 0
-            secondFrame = 0
-        }
-
-        hours.setProgress(frame: hourFrame)
-        minutes.setProgress(frame: minuteFrame)
-        seconds.setProgress(frame: secondFrame)
+        setupCounters()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if timeDifference > 0 {
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCountdown), userInfo: nil, repeats: true)
-        }
+        timer = Timer.scheduledTimer(timeInterval: 1,
+                                     target: self,
+                                     selector: #selector(updateCountdown),
+                                     userInfo: nil,
+                                     repeats: true)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -126,8 +123,27 @@ extension HICountdownViewController {
 }
 
 extension HICountdownViewController {
+    @objc func handleApplicationDidBecomeActive(notification: Notification) {
+        updateTimeDifference()
+        setupCounters()
+    }
+
+    func setupCounters() {
+        hourFrame = (hoursRemaining * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
+        minuteFrame = (minutesRemaining * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
+        secondFrame = (secondsRemaining * FRAMES_PER_TICK + TOTAL_NUM_FRAMES) % TOTAL_NUM_FRAMES
+
+        hours.setProgress(frame: hourFrame)
+        minutes.setProgress(frame: minuteFrame)
+        seconds.setProgress(frame: secondFrame)
+    }
+
     @objc func updateCountdown() {
         updateTimeDifference()
+        guard timeDifference > 0 else {
+            timer.invalidate()
+            return
+        }
 
         let hoursEndFrame = hoursRemaining * FRAMES_PER_TICK
         let hoursStartFrame = hoursEndFrame + FRAMES_PER_TICK
