@@ -17,18 +17,24 @@ class HICountdownViewController: UIViewController {
     let TOTAL_NUM_FRAMES = 1800
 
     // MARK: - Properties
+    var days = LOTAnimationView(name: "countdown")
     var hours = LOTAnimationView(name: "countdown")
     var minutes = LOTAnimationView(name: "countdown")
     var seconds = LOTAnimationView(name: "countdown")
 
     // TODO: change to needed time
-    let countdownDate = Date(timeIntervalSince1970: 1517948820)
+    let countdownDate = Date(timeIntervalSince1970: 1519428600)
+    var dayFrame = 0
     var hourFrame = 0
     var minuteFrame = 0
     var secondFrame = 0
     var timer = Timer()
 
     var timeDifference: TimeInterval = 0.0
+    var daysRemaining: Int {
+        return Int(timeDifference / 3600) % 60
+    }
+    
     var hoursRemaining: Int {
         return max(0, Int(timeDifference / 3600) % 60)
     }
@@ -55,10 +61,12 @@ extension HICountdownViewController {
     override func loadView() {
         view = UIView()
 
+        days.contentMode = .scaleAspectFit
         hours.contentMode = .scaleAspectFit
         minutes.contentMode = .scaleAspectFit
         seconds.contentMode = .scaleAspectFit
 
+        days.animationSpeed = 2.0
         hours.animationSpeed = 2.0
         minutes.animationSpeed = 2.0
         seconds.animationSpeed = 2.0
@@ -72,6 +80,7 @@ extension HICountdownViewController {
         countdownStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         countdownStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
 
+        countdownStackView.addArrangedSubview(stackView(with: days, and: "D"))
         countdownStackView.addArrangedSubview(stackView(with: hours, and: "H"))
         countdownStackView.addArrangedSubview(stackView(with: minutes, and: "M"))
         countdownStackView.addArrangedSubview(stackView(with: seconds, and: "S"))
