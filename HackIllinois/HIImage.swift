@@ -15,8 +15,8 @@ class QRCode {
 
     // MARK: - Init
     init?(string: String, size: CGFloat) {
-        let tint = CIColor(color: HIColor.darkIndigo)
-        let backgroundColor = CIColor(color: HIColor.white)
+        let tint = CIColor(color: HIApplication.Color.darkIndigo)
+        let backgroundColor = CIColor(color: HIApplication.Color.white)
 
         guard let qrFilter = CIFilter(name: "CIQRCodeGenerator"),
             let colorFilter = CIFilter(name: "CIFalseColor"),

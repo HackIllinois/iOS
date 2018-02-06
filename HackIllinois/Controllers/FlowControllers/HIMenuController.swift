@@ -84,7 +84,7 @@ extension HIMenuController {
         _tabBarController.view.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         _tabBarController.didMove(toParentViewController: self)
 
-        overlayView.backgroundColor = HIColor.darkBlueGrey
+        overlayView.backgroundColor = HIApplication.Color.darkBlueGrey
         overlayView.alpha = 0.0
         overlayView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(overlayView)
@@ -94,7 +94,7 @@ extension HIMenuController {
         overlayView.trailingAnchor.constraint(equalTo: _tabBarController.view.trailingAnchor).isActive = true
 
         let menu = UIView()
-        menu.backgroundColor = HIColor.paleBlue
+        menu.backgroundColor = HIApplication.Color.paleBlue
         menu.clipsToBounds = true
         menu.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(menu)
@@ -108,7 +108,7 @@ extension HIMenuController {
 
         let closeMenuButton = UIButton(type: .system)
         closeMenuButton.setImage(#imageLiteral(resourceName: "MenuClose"), for: .normal)
-        closeMenuButton.tintColor = HIColor.hotPink
+        closeMenuButton.tintColor = HIApplication.Color.hotPink
         closeMenuButton.addTarget(self, action: #selector(HIMenuController.close(_:)), for: .touchUpInside)
         closeMenuButton.translatesAutoresizingMaskIntoConstraints = false
         menu.addSubview(closeMenuButton)
@@ -205,7 +205,7 @@ extension HIMenuController {
         button.tag = index
         button.contentHorizontalAlignment = .left
         button.setTitle(title, for: .normal)
-        button.setTitleColor(HIColor.darkIndigo, for: .normal)
+        button.setTitleColor(HIApplication.Color.darkIndigo, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         return button
     }

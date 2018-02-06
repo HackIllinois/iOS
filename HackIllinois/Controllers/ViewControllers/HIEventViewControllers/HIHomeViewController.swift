@@ -46,7 +46,7 @@ extension HIHomeViewController {
 
         let hackingEndsInLabel = UILabel()
         hackingEndsInLabel.text = "HACKING ENDS IN"
-        hackingEndsInLabel.textColor = HIColor.darkIndigo
+        hackingEndsInLabel.textColor = HIApplication.Color.darkIndigo
         hackingEndsInLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         hackingEndsInLabel.textAlignment = .center
         hackingEndsInLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -66,7 +66,7 @@ extension HIHomeViewController {
 
         let happeningNowLabel = UILabel()
         happeningNowLabel.text = "HAPPENING NOW"
-        happeningNowLabel.textColor = HIColor.darkIndigo
+        happeningNowLabel.textColor = HIApplication.Color.darkIndigo
         happeningNowLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         happeningNowLabel.textAlignment = .center
         happeningNowLabel.translatesAutoresizingMaskIntoConstraints = false

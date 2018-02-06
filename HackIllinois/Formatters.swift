@@ -9,7 +9,6 @@
 import Foundation
 
 extension Formatter {
-
     static let iso8601: DateFormatter = {
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .iso8601)
@@ -57,49 +56,46 @@ extension Date {
         // YEARS
         case (2 * YEAR_IN_SECONDS)... :
             let years = Int(floor(timeSinceDate/YEAR_IN_SECONDS))
-            return "\(years) years ago"
+            return "\(years)y ago"
         case (1 * YEAR_IN_SECONDS)... :
             return "last year"
 
         // MONTH
         case (2 * MONTH_IN_SECONDS)... :
             let month = Int(floor(timeSinceDate/MONTH_IN_SECONDS))
-            return "\(month) months ago"
+            return "\(month)mo ago"
         case (1 * MONTH_IN_SECONDS)... :
             return "last month"
 
         // WEEK
         case (2 * WEEK_IN_SECONDS)... :
             let week = Int(floor(timeSinceDate/WEEK_IN_SECONDS))
-            return "\(week) weeks ago"
+            return "\(week)w ago"
         case (1 * WEEK_IN_SECONDS)... :
             return "last week"
 
         // DAY
         case (2 * DAY_IN_SECONDS)... :
             let day = Int(floor(timeSinceDate/DAY_IN_SECONDS))
-            return "\(day) days ago"
+            return "\(day)d ago"
         case (1 * DAY_IN_SECONDS)... :
             return "yesterday"
 
         // HOUR
         case (2 * HOUR_IN_SECONDS)... :
             let hour = Int(floor(timeSinceDate/HOUR_IN_SECONDS))
-            return "\(hour) hours ago"
+            return "\(hour)h ago"
         case (1 * HOUR_IN_SECONDS)... :
-            return "yesterday"
+            return "an hour ago"
 
         // MINUTE
         case (2 * MINUTE_IN_SECONDS)... :
             let minute = Int(floor(timeSinceDate/MINUTE_IN_SECONDS))
-            return "\(minute) minutes ago"
+            return "\(minute)m ago"
         case (1 * MINUTE_IN_SECONDS)... :
             return "a minute ago"
 
         // SECOND
-        case (15 * SECOND_IN_SECONDS)... :
-            return "a few seconds ago"
-
         default:
             return "just now"
         }

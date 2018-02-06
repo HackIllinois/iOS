@@ -81,7 +81,7 @@ extension HICountdownViewController {
     func stackView(with countDownView: LOTAnimationView, and labelString: String) -> UIStackView {
         let label = UILabel()
         label.text = labelString
-        label.textColor = HIColor.hotPink
+        label.textColor = HIApplication.Color.hotPink
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 21, weight: .light)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -100,7 +100,7 @@ extension HICountdownViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        print("HICountdownViewController::viewWillAppear")
         updateTimeDifference()
         setupCounters()
         NotificationCenter.default.addObserver(

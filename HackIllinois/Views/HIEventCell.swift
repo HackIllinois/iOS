@@ -23,9 +23,9 @@ class HIEventCell: HIBaseTableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        backgroundColor = HIColor.paleBlue
+        backgroundColor = HIApplication.Color.paleBlue
 
-        containerView.backgroundColor = HIColor.white
+        containerView.backgroundColor = HIApplication.Color.white
         containerView.layer.cornerRadius = 8
         containerView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(containerView)
@@ -72,7 +72,7 @@ extension HIEventCell {
     private static func labelFor(_ event: Event) -> UILabel {
         let titleLabel = UILabel()
         titleLabel.text = event.name
-        titleLabel.textColor = HIColor.darkIndigo
+        titleLabel.textColor = HIApplication.Color.darkIndigo
         titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .light)
         return titleLabel
     }
@@ -80,7 +80,7 @@ extension HIEventCell {
     private static func labelFor(_ location: Location) -> UILabel {
         let locationLabel = UILabel()
         locationLabel.text = location.name
-        locationLabel.textColor = HIColor.darkIndigo
+        locationLabel.textColor = HIApplication.Color.darkIndigo
         locationLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
         return locationLabel
     }

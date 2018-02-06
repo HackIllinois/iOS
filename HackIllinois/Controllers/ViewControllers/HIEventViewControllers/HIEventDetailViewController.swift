@@ -30,7 +30,7 @@ extension HIEventDetailViewController {
         super.loadView()
 
         let eventDetailContainer = UIView()
-        eventDetailContainer.backgroundColor = HIColor.white
+        eventDetailContainer.backgroundColor = HIApplication.Color.white
         eventDetailContainer.layer.cornerRadius = 8
         eventDetailContainer.layer.masksToBounds = true
         eventDetailContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -56,7 +56,7 @@ extension HIEventDetailViewController {
         favoritedButton.bottomAnchor.constraint(equalTo: upperContainerView.bottomAnchor).isActive = true
         favoritedButton.widthAnchor.constraint(equalToConstant: 58).isActive = true
 
-        titleLabel.textColor = HIColor.darkIndigo
+        titleLabel.textColor = HIApplication.Color.darkIndigo
         titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .light)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         upperContainerView.addSubview(titleLabel)
@@ -65,7 +65,7 @@ extension HIEventDetailViewController {
         titleLabel.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor).isActive = true
 
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.textColor = HIColor.darkIndigo
+        descriptionLabel.textColor = HIApplication.Color.darkIndigo
         descriptionLabel.font = UIFont.systemFont(ofSize: 13)
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         eventDetailContainer.addSubview(descriptionLabel)
@@ -76,7 +76,7 @@ extension HIEventDetailViewController {
         descriptionLabelHeight.isActive = true
 
         let tableView = UITableView()
-        tableView.backgroundColor = HIColor.white
+        tableView.backgroundColor = HIApplication.Color.white
         tableView.translatesAutoresizingMaskIntoConstraints = false
         eventDetailContainer.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 8).isActive = true

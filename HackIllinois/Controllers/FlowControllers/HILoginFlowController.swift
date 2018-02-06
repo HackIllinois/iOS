@@ -42,7 +42,7 @@ class HILoginFlowController: UIViewController {
 extension HILoginFlowController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = HIColor.paleBlue
+        view.backgroundColor = HIApplication.Color.paleBlue
         navController.isNavigationBarHidden = true
         addChildViewController(navController)
         navController.view.frame = view.frame

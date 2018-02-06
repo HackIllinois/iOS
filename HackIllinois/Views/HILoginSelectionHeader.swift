@@ -21,7 +21,7 @@ class HILoginSelectionHeader: UITableViewHeaderFooterView {
         super.init(reuseIdentifier: reuseIdentifier)
 
         let containerView = UIView()
-        containerView.backgroundColor = HIColor.paleBlue
+        containerView.backgroundColor = HIApplication.Color.paleBlue
         containerView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(containerView)
         containerView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
@@ -29,7 +29,7 @@ class HILoginSelectionHeader: UITableViewHeaderFooterView {
         containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
         containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
 
-        titleLabel.textColor = HIColor.hotPink
+        titleLabel.textColor = HIApplication.Color.hotPink
         titleLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(titleLabel)

@@ -15,7 +15,11 @@ class HIAnnouncementsViewController: HIBaseViewController {
     lazy var fetchedResultsController: NSFetchedResultsController<Announcement> = {
         let fetchRequest: NSFetchRequest<Announcement> = Announcement.fetchRequest()
 
-        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "id", ascending: true) ]
+        fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "time", ascending: false),
+            NSSortDescriptor(key: "title", ascending: true),
+            NSSortDescriptor(key: "id", ascending: true)
+        ]
 
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
@@ -48,6 +52,7 @@ extension HIAnnouncementsViewController {
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView = tableView
     }
 
@@ -93,10 +98,10 @@ extension HIAnnouncementsViewController {
 
 // MARK: - UITableViewDelegate
 extension HIAnnouncementsViewController {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let announcement = fetchedResultsController.object(at: indexPath)
-        return HIAnnouncementCell.heightForCell(with: announcement)
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        let announcement = fetchedResultsController.object(at: indexPath)
+//        return HIAnnouncementCell.heightForCell(with: announcement)
+//    }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         super.tableView(tableView, didSelectRowAt: indexPath)
