@@ -199,13 +199,13 @@
 				9518279E1EA35DB800049F79 /* Controllers */,
 				9521A6A6201912B4009059C6 /* DataSources */,
 				957D7CB71FC39EA100C4332A /* Formatters.swift */,
+				95DC43EB202A61E9007E9B1A /* HIApplicationConstants.swift */,
+				95CA922F201E60D300C46037 /* HIImage.swift */,
 				951827A31EA35DB800049F79 /* Info.plist */,
 				951827B21EA35E8B00049F79 /* LaunchScreen.storyboard */,
 				951827A41EA35DB800049F79 /* Models */,
 				9544799D200C3CE40005408B /* Tests.playground */,
 				957DB2E21FC2431200F8C45E /* Views */,
-				95CA922F201E60D300C46037 /* HIImage.swift */,
-				95DC43EB202A61E9007E9B1A /* HIApplicationConstants.swift */,
 			);
 			path = HackIllinois;
 			sourceTree = "<group>";

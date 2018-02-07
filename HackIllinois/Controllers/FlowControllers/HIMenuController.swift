@@ -38,7 +38,7 @@ extension HIMenuController {
     func setupMenuFor(_ viewControllers: [UIViewController]) {
         _tabBarController.viewControllers = viewControllers.map {
             _ = $0.view // forces viewDidLoad to run, allows .title to be accessible
-            $0.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuOpen"), style: .plain, target: self, action: #selector(HIMenuController.open))
+            $0.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuOpen"), style: .plain, target: self, action: #selector(open))
             let navigationController = UINavigationController(rootViewController: $0)
             navigationController.title = $0.title
 
@@ -109,7 +109,7 @@ extension HIMenuController {
         let closeMenuButton = UIButton(type: .system)
         closeMenuButton.setImage(#imageLiteral(resourceName: "MenuClose"), for: .normal)
         closeMenuButton.tintColor = HIApplication.Color.hotPink
-        closeMenuButton.addTarget(self, action: #selector(HIMenuController.close(_:)), for: .touchUpInside)
+        closeMenuButton.addTarget(self, action: #selector(close(_:)), for: .touchUpInside)
         closeMenuButton.translatesAutoresizingMaskIntoConstraints = false
         menu.addSubview(closeMenuButton)
         closeMenuButton.topAnchor.constraint(equalTo: menu.safeAreaLayoutGuide.topAnchor, constant: -9).isActive = true
@@ -127,7 +127,7 @@ extension HIMenuController {
         menuItemsHeight = menuItems.heightAnchor.constraint(equalToConstant: 0)
         menuItemsHeight.isActive = true
 
-        let overlayViewTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HIMenuController.close(_:)))
+        let overlayViewTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(close(_:)))
         overlayView.addGestureRecognizer(overlayViewTapGestureRecognizer)
     }
     override func viewDidLoad() {

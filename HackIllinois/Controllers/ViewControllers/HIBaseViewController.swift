@@ -31,6 +31,7 @@ extension HIBaseViewController {
         super.viewDidLoad()
         setupNavigationItem()
         setupTableView()
+        try? _fetchedResultsController?.performFetch()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -169,7 +170,7 @@ extension HIBaseViewController {
         // Setup refresh control
         refreshControl.backgroundColor = UIColor.clear
         refreshControl.tintColor = UIColor.clear
-        refreshControl.addTarget(self, action: #selector(HIBaseViewController.refresh(_:)), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         tableView?.insertSubview(refreshControl, at: 0)
 
         // Setup refresh animation
@@ -200,7 +201,6 @@ extension HIBaseViewController {
                 self.refreshAnimation.alpha = 0.0
             }
             animator.addCompletion { _ in
-                self.tableView?.reloadData()
                 self.refreshAnimation.stop()
                 self.refreshControl.endRefreshing()
             }

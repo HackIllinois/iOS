@@ -22,6 +22,7 @@ enum HILoginSelection: Int {
 }
 
 enum HIUserPermissions: String, Codable, Comparable {
+    case guest = "GUEST"
     case attendee = "ATTENDEE"
     case volunteer = "VOLUNTEER"
     case mentor = "MENTOR"
@@ -37,6 +38,7 @@ enum HIUserPermissions: String, Codable, Comparable {
         case .mentor: return 2
         case .volunteer: return 1
         case .attendee: return 0
+        case .guest: return -1
         }
     }
 

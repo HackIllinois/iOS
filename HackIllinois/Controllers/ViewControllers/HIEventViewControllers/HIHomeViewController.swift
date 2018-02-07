@@ -36,13 +36,15 @@ class HIHomeViewController: HIEventListViewController {
         return fetchedResultsController
     }()
 
-    let countdownViewController = HICountdownViewController()
-    
-    var staticDataStore: [(date: Date, message: String)] = [
-        (HIApplication.Configuration.EVENT_START_TIME, "EVENT BEGINS IN"),
+    let countdownTitleLabel = UILabel()
+    lazy var countdownViewController = HICountdownViewController(delegate: self)
+
+    var countdownDataStoreIndex = 0
+    var staticDataStore: [(date: Date, displayText: String)] = [
+        (HIApplication.Configuration.EVENT_START_TIME, "HACKILLINOIS BEGINS IN"),
         (HIApplication.Configuration.HACKING_START_TIME, "HACKING BEGINS IN"),
         (HIApplication.Configuration.HACKING_END_TIME, "HACKING ENDS IN"),
-        (HIApplication.Configuration.EVENT_END_TIME, "EVENT ENDS IN")
+        (HIApplication.Configuration.EVENT_END_TIME, "HACKILLINOIS ENDS IN")
     ]
 }
 
@@ -51,7 +53,6 @@ extension HIHomeViewController {
     override func loadView() {
         super.loadView()
 
-        let countdownTitleLabel = UILabel()
         countdownTitleLabel.text = "HACKING ENDS IN"
         countdownTitleLabel.textColor = HIApplication.Color.darkIndigo
         countdownTitleLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
@@ -104,5 +105,20 @@ extension HIHomeViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
         title = "HOME"
+    }
+}
+
+extension HIHomeViewController: HICountdownViewControllerDelegate {
+    func countdownToDateFor(countdownViewController: HICountdownViewController) -> Date? {
+        let now = Date()
+        while countdownDataStoreIndex < staticDataStore.count {
+            let currDate = staticDataStore[countdownDataStoreIndex].date
+            if currDate > now {
+                countdownTitleLabel.text = staticDataStore[countdownDataStoreIndex].displayText
+                return currDate
+            }
+            countdownDataStoreIndex += 1
+        }
+        return nil
     }
 }

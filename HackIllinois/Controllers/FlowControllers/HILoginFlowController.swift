@@ -91,7 +91,7 @@ extension HILoginFlowController {
                 let userInfo = containedUser.data[0]
                 let user = HIUser(
                     loginMethod: loginMethod,
-                    permissions: userInfo.roles.map { $0.permissions }.reduce(.attendee, max),
+                    permissions: userInfo.roles.map { $0.permissions }.reduce(.guest, max),
                     token: token,
                     identifier: userInfo.info.email,
                     isActive: true,

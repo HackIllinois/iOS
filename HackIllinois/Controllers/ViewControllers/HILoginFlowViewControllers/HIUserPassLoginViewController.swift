@@ -89,7 +89,7 @@ extension HIUserPassLoginViewController {
         let backButton = UIButton(type: .system)
         backButton.setImage(#imageLiteral(resourceName: "BackButton"), for: .normal)
         backButton.tintColor = HIApplication.Color.hotPink
-        backButton.addTarget(self, action: #selector(HIUserPassLoginViewController.didSelectBack(_:)), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(didSelectBack(_:)), for: .touchUpInside)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(backButton)
         backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -160,7 +160,7 @@ extension HIUserPassLoginViewController {
         signInButton.setTitle("Sign In", for: .normal)
         signInButton.setTitleColor(HIApplication.Color.darkIndigo, for: .normal)
         signInButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        signInButton.addTarget(self, action: #selector(HIUserPassLoginViewController.didSelectLogin(_:)), for: .touchUpInside)
+        signInButton.addTarget(self, action: #selector(didSelectLogin(_:)), for: .touchUpInside)
         signInButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(signInButton)
         signInButton.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 71).isActive = true
