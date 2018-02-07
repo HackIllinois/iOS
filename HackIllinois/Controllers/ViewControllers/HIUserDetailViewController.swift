@@ -71,14 +71,12 @@ extension HIUserDetailViewController {
         userDataStackView.trailingAnchor.constraint(equalTo: userDetailContainer.trailingAnchor, constant: -32).isActive = true
         userDataStackView.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
-        userNameLabel.text = "ASDJH SADHJL ASD"
         userNameLabel.textAlignment = .center
         userNameLabel.textColor = HIApplication.Color.darkIndigo
         userNameLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         userNameLabel.translatesAutoresizingMaskIntoConstraints = false
         userDataStackView.addArrangedSubview(userNameLabel)
 
-        userInfoLabel.text = "NO DIETARY RESTRICTIONS"
         userInfoLabel.textAlignment = .center
         userInfoLabel.textColor = HIApplication.Color.hotPink
         userInfoLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
@@ -91,7 +89,15 @@ extension HIUserDetailViewController {
         guard let user = HIApplicationStateController.shared.user,
             let url = URL(string: "hackillinois://qrcode/user?id=\(user.id)&identifier=\(user.identifier)") else { return }
         view.layoutIfNeeded()
-        qrCode.image = QRCode(string: url.absoluteString, size: qrCode.frame.height)?.image
+        let frame = qrCode.frame.height
+        DispatchQueue.global(qos: .userInitiated).async {
+            let qrCodeImage = QRCode(string: url.absoluteString, size: frame)?.image
+            DispatchQueue.main.async {
+                self.qrCode.image = qrCodeImage
+            }
+        }
+        userNameLabel.text = (user.name ?? user.identifier).uppercased()
+        userInfoLabel.text = user.dietaryRestrictions?.displayText ?? "UNKNOWN DIETARY RESTRICTIONS"
     }
 }
 

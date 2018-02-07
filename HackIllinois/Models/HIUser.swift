@@ -42,8 +42,24 @@ enum HIUserPermissions: String, Codable, Comparable {
         }
     }
 
-    public static func < (lhs: HIUserPermissions, rhs: HIUserPermissions) -> Bool {
+    static func < (lhs: HIUserPermissions, rhs: HIUserPermissions) -> Bool {
         return lhs.intValue < rhs.intValue
+    }
+}
+
+enum HIDietaryRestrictions: String, Codable {
+    case none = "NONE"
+    case vegetarian = "VEGETARIAN"
+    case vegan = "VEGAN"
+    case glutenFree = "GLUTEN_FREE"
+
+    var displayText: String {
+        switch self {
+        case .none: return "NO DIETARY RESTRICTIONS"
+        case .vegetarian: return "VEGETARIAN"
+        case .vegan: return "VEGAN"
+        case .glutenFree: return "GLUTEN FREE"
+        }
     }
 }
 
@@ -54,6 +70,9 @@ struct HIUser: Codable {
     var identifier: String
     var isActive: Bool
     var id: Int
+
+    var name: String?
+    var dietaryRestrictions: HIDietaryRestrictions?
 }
 
 // MARK: - DataConvertible

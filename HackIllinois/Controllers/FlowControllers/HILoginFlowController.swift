@@ -89,25 +89,42 @@ extension HILoginFlowController {
             switch result {
             case .success(let containedUser):
                 let userInfo = containedUser.data[0]
-                let user = HIUser(
+                var user = HIUser(
                     loginMethod: loginMethod,
                     permissions: userInfo.roles.map { $0.permissions }.reduce(.guest, max),
                     token: token,
                     identifier: userInfo.info.email,
                     isActive: true,
-                    id: userInfo.info.id
+                    id: userInfo.info.id,
+                    name: nil,
+                    dietaryRestrictions: nil
                 )
 
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
+                HIRegistrationService.getAttendee(by: token, with: loginMethod)
+                .onCompletion { result in
+                    switch result {
+                    case .success(let containedAttendee):
+                        let attendeeInfo = containedAttendee.data[0]
+                        let names = [attendeeInfo.firstName, attendeeInfo.lastName].flatMap { $0 } as [String]
+                        user.name = names.joined(separator: " ")
+                        user.dietaryRestrictions = attendeeInfo.diet
+
+                    case .cancellation, .failure:
+                        break
+                    }
+
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
+                    }
                 }
+                .perform()
+
             case .cancellation:
                 break
             case .failure:
                 sender.presentErrorController(title: "Authentication Failed", message: nil, dismissParentOnCompletion: false)
             }
         }
-        .authorization(HIApplicationStateController.shared.user)
         .perform()
     }
 
@@ -147,7 +164,7 @@ extension HILoginFlowController: HILoginSelectionViewControllerDelegate {
     func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HILoginSelection, withUserInfo info: String?) {
         switch selection {
         case .github:
-            print("URL ::", HIAuthService.githubLoginURL())
+            print("URL::\(HIAuthService.githubLoginURL())")
             loginSession = SFAuthenticationSession(url: HIAuthService.githubLoginURL(), callbackURLScheme: nil) { [weak self] (url, error) in
 
                 if let url = url,

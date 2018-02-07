@@ -97,6 +97,7 @@ extension HIApplicationStateController {
         if [.volunteer, .staff, .admin].contains(user.permissions) {
             viewControllers.append(HIScannerViewController())
         }
+
         return viewControllers
     }
 
@@ -105,6 +106,7 @@ extension HIApplicationStateController {
         user.isActive = true
         Keychain.default.store(user, forKey: user.identifier)
         self.user = user
+        print("PERMISSIONS::\(user.permissions)")
 
         updateWindowViewController(animated: true)
     }
