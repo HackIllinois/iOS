@@ -21,7 +21,7 @@ class HILoginSelectionCell: HIBaseTableViewCell {
     weak var delegate: HILoginSelectionCellDelegate?
 
     override var defaultColor: UIColor {
-        return HIColor.paleBlue
+        return HIApplication.Color.paleBlue
     }
 
     var titleLabel = UILabel()
@@ -32,11 +32,11 @@ class HILoginSelectionCell: HIBaseTableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        backgroundColor = HIColor.paleBlue
+        backgroundColor = HIApplication.Color.paleBlue
 
         containerView = contentView
 
-        indicatorView.backgroundColor = HIColor.hotPink
+        indicatorView.backgroundColor = HIApplication.Color.hotPink
         indicatorView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(indicatorView)
         indicatorView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 23).isActive = true
@@ -44,7 +44,7 @@ class HILoginSelectionCell: HIBaseTableViewCell {
         indicatorView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -23).isActive = true
         indicatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
 
-        activityIndicator.color = HIColor.hotPink
+        activityIndicator.color = HIApplication.Color.hotPink
         activityIndicator.hidesWhenStopped = true
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(activityIndicator)
@@ -53,7 +53,7 @@ class HILoginSelectionCell: HIBaseTableViewCell {
         activityIndicator.heightAnchor.constraint(equalToConstant: 20).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
 
-        titleLabel.textColor = HIColor.darkIndigo
+        titleLabel.textColor = HIApplication.Color.darkIndigo
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.systemFont(ofSize: 13, weight: .medium)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

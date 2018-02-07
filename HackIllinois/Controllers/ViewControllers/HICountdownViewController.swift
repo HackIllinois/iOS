@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 import Lottie
 
+protocol HICountdownViewControllerDelegate: class {
+    func countdownToDateFor(countdownViewController: HICountdownViewController) -> Date?
+}
+
 class HICountdownViewController: UIViewController {
 
     // MARK: - Constants
@@ -22,8 +26,7 @@ class HICountdownViewController: UIViewController {
     var minutes = LOTAnimationView(name: "countdown-60")
     var seconds = LOTAnimationView(name: "countdown-60")
 
-    // TODO: change to needed time
-    let countdownDate = Date(timeIntervalSince1970: 1519422180)
+    var countdownDate: Date?
     var dayFrame = 0
     var hourFrame = 0
     var minuteFrame = 0
@@ -45,6 +48,22 @@ class HICountdownViewController: UIViewController {
 
     var secondsRemaining: Int {
         return max(0, Int(timeDifference) % 60)
+    }
+
+    weak var delegate: HICountdownViewControllerDelegate?
+
+    // MARK: - Init
+    convenience init(delegate: HICountdownViewControllerDelegate) {
+        self.init(nibName: nil, bundle: nil)
+        self.delegate = delegate
+    }
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) should not be used.")
     }
 }
 
@@ -81,7 +100,7 @@ extension HICountdownViewController {
     func stackView(with countDownView: LOTAnimationView, and labelString: String) -> UIStackView {
         let label = UILabel()
         label.text = labelString
-        label.textColor = HIColor.hotPink
+        label.textColor = HIApplication.Color.hotPink
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 21, weight: .light)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -100,46 +119,35 @@ extension HICountdownViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        updateTimeDifference()
-        setupCounters()
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(HICountdownViewController.handleApplicationDidBecomeActive(notification:)),
-            name: .UIApplicationDidBecomeActive,
-            object: nil
-        )
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        timer = Timer.scheduledTimer(
-            timeInterval: 1,
-            target: self,
-            selector: #selector(HICountdownViewController.updateCountdown),
-            userInfo: nil,
-            repeats: true)
+        startUpCountdown()
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(startUpCountdown),
+            name: .UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(tearDownCountdown),
+            name: .UIApplicationDidBecomeActive, object: nil)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        if timer.isValid {
-            timer.invalidate()
-        }
-
-        NotificationCenter.default.removeObserver(
-            self,
-            name: .UIApplicationDidBecomeActive,
-            object: nil
-        )
+        NotificationCenter.default.removeObserver(self, name: .UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillResignActive, object: nil)
+        tearDownCountdown()
     }
 }
 
 extension HICountdownViewController {
-    @objc func handleApplicationDidBecomeActive(notification: Notification) {
+    @objc func startUpCountdown() {
+        countdownDate = delegate?.countdownToDateFor(countdownViewController: self)
         updateTimeDifference()
         setupCounters()
+        timer = Timer.scheduledTimer(
+            timeInterval: 1,
+            target: self,
+            selector: #selector(updateCountdown),
+            userInfo: nil,
+            repeats: true
+        )
     }
 
     func setupCounters() {
@@ -156,7 +164,10 @@ extension HICountdownViewController {
 
     @objc func updateCountdown() {
         updateTimeDifference()
-        guard timeDifference > 0 else { return }
+        guard timeDifference > 0 else {
+            countdownDate = delegate?.countdownToDateFor(countdownViewController: self)
+            return
+        }
 
         let daysEndFrame = daysRemaining * FRAMES_PER_TICK
         let daysStartFrame = daysEndFrame + FRAMES_PER_TICK
@@ -188,9 +199,12 @@ extension HICountdownViewController {
     }
 
     func updateTimeDifference() {
-        timeDifference = countdownDate.timeIntervalSince(Date())
-        print("--- time info ---")
-        print(timeDifference)
-        print(daysRemaining, hoursRemaining, minutesRemaining, secondsRemaining)
+        timeDifference = countdownDate?.timeIntervalSince(Date()) ?? 0
+    }
+
+    @objc func tearDownCountdown() {
+        if timer.isValid {
+            timer.invalidate()
+        }
     }
 }

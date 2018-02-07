@@ -18,7 +18,7 @@ class HIDateHeader: UITableViewHeaderFooterView {
         super.init(reuseIdentifier: reuseIdentifier)
 
         let backgroundView = UIView()
-        backgroundView.backgroundColor = HIColor.paleBlue
+        backgroundView.backgroundColor = HIApplication.Color.paleBlue
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(backgroundView)
         backgroundView.topAnchor.constraint(equalTo: topAnchor).isActive = true
@@ -28,7 +28,7 @@ class HIDateHeader: UITableViewHeaderFooterView {
 
         self.backgroundView = backgroundView
 
-        titleLabel.textColor = HIColor.darkIndigo
+        titleLabel.textColor = HIApplication.Color.darkIndigo
         titleLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.addSubview(titleLabel)

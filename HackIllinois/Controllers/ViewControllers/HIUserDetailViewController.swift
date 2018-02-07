@@ -44,14 +44,14 @@ extension HIUserDetailViewController {
 
         let userDetailContainer = UIView()
         userDetailContainer.layer.cornerRadius = 8
-        userDetailContainer.backgroundColor = HIColor.white
+        userDetailContainer.backgroundColor = HIApplication.Color.white
         userDetailContainer.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(userDetailContainer)
         userDetailContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 13).isActive = true
         userDetailContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         userDetailContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
 
-        qrCode.backgroundColor = HIColor.darkIndigo
+        qrCode.backgroundColor = HIApplication.Color.darkIndigo
         qrCode.translatesAutoresizingMaskIntoConstraints = false
         userDetailContainer.addSubview(qrCode)
         qrCode.topAnchor.constraint(equalTo: userDetailContainer.topAnchor, constant: 32).isActive = true
@@ -71,16 +71,14 @@ extension HIUserDetailViewController {
         userDataStackView.trailingAnchor.constraint(equalTo: userDetailContainer.trailingAnchor, constant: -32).isActive = true
         userDataStackView.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
-        userNameLabel.text = "ASDJH SADHJL ASD"
         userNameLabel.textAlignment = .center
-        userNameLabel.textColor = HIColor.darkIndigo
+        userNameLabel.textColor = HIApplication.Color.darkIndigo
         userNameLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         userNameLabel.translatesAutoresizingMaskIntoConstraints = false
         userDataStackView.addArrangedSubview(userNameLabel)
 
-        userInfoLabel.text = "NO DIETARY RESTRICTIONS"
         userInfoLabel.textAlignment = .center
-        userInfoLabel.textColor = HIColor.hotPink
+        userInfoLabel.textColor = HIApplication.Color.hotPink
         userInfoLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
         userInfoLabel.translatesAutoresizingMaskIntoConstraints = false
         userDataStackView.addArrangedSubview(userInfoLabel)
@@ -91,7 +89,15 @@ extension HIUserDetailViewController {
         guard let user = HIApplicationStateController.shared.user,
             let url = URL(string: "hackillinois://qrcode/user?id=\(user.id)&identifier=\(user.identifier)") else { return }
         view.layoutIfNeeded()
-        qrCode.image = QRCode(string: url.absoluteString, size: qrCode.frame.height)?.image
+        let frame = qrCode.frame.height
+        DispatchQueue.global(qos: .userInitiated).async {
+            let qrCodeImage = QRCode(string: url.absoluteString, size: frame)?.image
+            DispatchQueue.main.async {
+                self.qrCode.image = qrCodeImage
+            }
+        }
+        userNameLabel.text = (user.name ?? user.identifier).uppercased()
+        userInfoLabel.text = user.dietaryRestrictions?.displayText ?? "UNKNOWN DIETARY RESTRICTIONS"
     }
 }
 
@@ -99,7 +105,7 @@ extension HIUserDetailViewController {
 extension HIUserDetailViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
-        title = "PROFILE"
+        title = "BADGE"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "LogoutButton"), style: .plain, target: self, action: #selector(HIUserDetailViewController.didSelectLogoutButton(_:)))
     }
 }

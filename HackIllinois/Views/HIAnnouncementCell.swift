@@ -22,9 +22,9 @@ class HIAnnouncementCell: HIBaseTableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        backgroundColor = HIColor.paleBlue
+        backgroundColor = HIApplication.Color.paleBlue
 
-        containerView.backgroundColor = HIColor.white
+        containerView.backgroundColor = HIApplication.Color.white
         containerView.layer.cornerRadius = 8
         containerView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(containerView)
@@ -33,33 +33,36 @@ class HIAnnouncementCell: HIBaseTableViewCell {
         containerView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -5).isActive = true
         containerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
 
-        titleLabel.textColor = HIColor.hotPink
+        titleLabel.textColor = HIApplication.Color.hotPink
         titleLabel.font = UIFont.systemFont(ofSize: 13)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(titleLabel)
-        titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 14).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 23).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
+        titleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
 
-        timeLabel.textColor = HIColor.hotPink
+        timeLabel.textColor = HIApplication.Color.hotPink
         timeLabel.font = UIFont.systemFont(ofSize: 13)
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(timeLabel)
-        timeLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 14).isActive = true
+        timeLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10).isActive = true
         timeLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 8).isActive = true
-        timeLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10).isActive = true
+        timeLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -12).isActive = true
         timeLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
         timeLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         timeLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
 
-        infoLabel.textColor = HIColor.darkIndigo
+        infoLabel.textColor = HIApplication.Color.darkIndigo
+        infoLabel.numberOfLines = 0
         infoLabel.font = UIFont.systemFont(ofSize: 13)
         infoLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(infoLabel)
         infoLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12).isActive = true
         infoLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 23).isActive = true
-        infoLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -7).isActive = true
-        infoLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10).isActive = true
+        infoLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -14).isActive = true
+        infoLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -12).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -69,13 +72,8 @@ class HIAnnouncementCell: HIBaseTableViewCell {
 
 // MARK: - Population
 extension HIAnnouncementCell {
-    static func heightForCell(with announcement: Announcement) -> CGFloat {
-        // TODO: this method
-        return 100
-    }
-
     static func <- (lhs: HIAnnouncementCell, rhs: Announcement) {
-        lhs.titleLabel.text = rhs.title.capitalized
+        lhs.titleLabel.text = rhs.title
         lhs.timeLabel.text  = Date.humanReadableTimeSince(rhs.time)
         lhs.infoLabel.text  = rhs.info
     }

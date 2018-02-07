@@ -12,15 +12,15 @@ import UIKit
 class HIBaseTableViewCell: UITableViewCell {
     // MARK: - Properties
     var selectedColor: UIColor {
-        return HIColor.bubbleGumPink
+        return HIApplication.Color.hotPink
     }
 
     var highlightedColor: UIColor {
-        return HIColor.lightPeriwinkle
+        return HIApplication.Color.lightPeriwinkle
     }
 
     var defaultColor: UIColor {
-        return HIColor.white
+        return HIApplication.Color.white
     }
 
     var containerView = UIView()
@@ -30,7 +30,7 @@ class HIBaseTableViewCell: UITableViewCell {
 extension HIBaseTableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
-        containerView.backgroundColor = HIColor.white
+        containerView.backgroundColor = HIApplication.Color.white
     }
 
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {

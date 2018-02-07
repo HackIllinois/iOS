@@ -36,7 +36,16 @@ class HIHomeViewController: HIEventListViewController {
         return fetchedResultsController
     }()
 
-    let countdownViewController = HICountdownViewController()
+    let countdownTitleLabel = UILabel()
+    lazy var countdownViewController = HICountdownViewController(delegate: self)
+
+    var countdownDataStoreIndex = 0
+    var staticDataStore: [(date: Date, displayText: String)] = [
+        (HIApplication.Configuration.EVENT_START_TIME, "HACKILLINOIS BEGINS IN"),
+        (HIApplication.Configuration.HACKING_START_TIME, "HACKING BEGINS IN"),
+        (HIApplication.Configuration.HACKING_END_TIME, "HACKING ENDS IN"),
+        (HIApplication.Configuration.EVENT_END_TIME, "HACKILLINOIS ENDS IN")
+    ]
 }
 
 // MARK: - UIViewController
@@ -44,34 +53,33 @@ extension HIHomeViewController {
     override func loadView() {
         super.loadView()
 
-        let hackingEndsInLabel = UILabel()
-        hackingEndsInLabel.text = "HACKING ENDS IN"
-        hackingEndsInLabel.textColor = HIColor.darkIndigo
-        hackingEndsInLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        hackingEndsInLabel.textAlignment = .center
-        hackingEndsInLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(hackingEndsInLabel)
-        hackingEndsInLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        hackingEndsInLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        hackingEndsInLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        countdownTitleLabel.text = "HACKING ENDS IN"
+        countdownTitleLabel.textColor = HIApplication.Color.darkIndigo
+        countdownTitleLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        countdownTitleLabel.textAlignment = .center
+        countdownTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(countdownTitleLabel)
+        countdownTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        countdownTitleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        countdownTitleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
 
         countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
         addChildViewController(countdownViewController)
         view.addSubview(countdownViewController.view)
-        countdownViewController.view.topAnchor.constraint(equalTo: hackingEndsInLabel.bottomAnchor, constant: 15).isActive = true
+        countdownViewController.view.topAnchor.constraint(equalTo: countdownTitleLabel.bottomAnchor, constant: 8).isActive = true
         countdownViewController.view.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
         countdownViewController.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
-        countdownViewController.view.heightAnchor.constraint(equalToConstant: 188).isActive = true
+        countdownViewController.view.heightAnchor.constraint(equalToConstant: 150).isActive = true
         countdownViewController.didMove(toParentViewController: self)
 
         let happeningNowLabel = UILabel()
         happeningNowLabel.text = "HAPPENING NOW"
-        happeningNowLabel.textColor = HIColor.darkIndigo
+        happeningNowLabel.textColor = HIApplication.Color.darkIndigo
         happeningNowLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         happeningNowLabel.textAlignment = .center
         happeningNowLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(happeningNowLabel)
-        happeningNowLabel.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor, constant: 15).isActive = true
+        happeningNowLabel.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor, constant: 16).isActive = true
         happeningNowLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         happeningNowLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
 
@@ -97,5 +105,20 @@ extension HIHomeViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
         title = "HOME"
+    }
+}
+
+extension HIHomeViewController: HICountdownViewControllerDelegate {
+    func countdownToDateFor(countdownViewController: HICountdownViewController) -> Date? {
+        let now = Date()
+        while countdownDataStoreIndex < staticDataStore.count {
+            let currDate = staticDataStore[countdownDataStoreIndex].date
+            if currDate > now {
+                countdownTitleLabel.text = staticDataStore[countdownDataStoreIndex].displayText
+                return currDate
+            }
+            countdownDataStoreIndex += 1
+        }
+        return nil
     }
 }

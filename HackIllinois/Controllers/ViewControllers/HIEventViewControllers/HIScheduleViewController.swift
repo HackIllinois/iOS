@@ -62,6 +62,7 @@ extension HIScheduleViewController {
 
     override func viewDidLoad() {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
+        setupRefreshControl()
         super.viewDidLoad()
     }
 }

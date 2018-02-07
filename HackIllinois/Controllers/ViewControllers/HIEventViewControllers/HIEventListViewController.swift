@@ -13,15 +13,6 @@ class HIEventListViewController: HIBaseViewController {
     let eventDetailViewController = HIEventDetailViewController()
 }
 
-// MARK: - UIViewController
-extension HIEventListViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupRefreshControl()
-        try? _fetchedResultsController?.performFetch()
-    }
-}
-
 // MARK: - UITableView Setup
 extension HIEventListViewController {
     override func setupTableView() {

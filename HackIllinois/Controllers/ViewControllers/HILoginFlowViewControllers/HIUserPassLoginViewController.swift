@@ -88,8 +88,8 @@ extension HIUserPassLoginViewController {
 
         let backButton = UIButton(type: .system)
         backButton.setImage(#imageLiteral(resourceName: "BackButton"), for: .normal)
-        backButton.tintColor = HIColor.hotPink
-        backButton.addTarget(self, action: #selector(HIUserPassLoginViewController.didSelectBack(_:)), for: .touchUpInside)
+        backButton.tintColor = HIApplication.Color.hotPink
+        backButton.addTarget(self, action: #selector(didSelectBack(_:)), for: .touchUpInside)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(backButton)
         backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -99,7 +99,7 @@ extension HIUserPassLoginViewController {
 
         let logInLabel = UILabel()
         logInLabel.text = "LOG IN"
-        logInLabel.textColor = HIColor.hotPink
+        logInLabel.textColor = HIApplication.Color.hotPink
         logInLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         logInLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(logInLabel)
@@ -116,10 +116,10 @@ extension HIUserPassLoginViewController {
         containerView.heightAnchor.constraint(equalToConstant: 89).isActive = true
 
         emailTextField.placeholder = "USERNAME"
-        emailTextField.textColor = HIColor.darkIndigo
+        emailTextField.textColor = HIApplication.Color.darkIndigo
         emailTextField.font = UIFont.systemFont(ofSize: 13, weight: .medium)
         emailTextField.textContentType = .username
-        emailTextField.tintColor = HIColor.hotPink
+        emailTextField.tintColor = HIApplication.Color.hotPink
         emailTextField.autocapitalizationType = .none
         emailTextField.autocorrectionType = .no
         emailTextField.enablesReturnKeyAutomatically = true
@@ -131,7 +131,7 @@ extension HIUserPassLoginViewController {
         emailTextField.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
         let separatorView = UIView()
-        separatorView.backgroundColor = HIColor.hotPink
+        separatorView.backgroundColor = HIApplication.Color.hotPink
         separatorView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(separatorView)
         separatorView.topAnchor.constraint(equalTo: emailTextField.bottomAnchor).isActive = true
@@ -140,10 +140,10 @@ extension HIUserPassLoginViewController {
         separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
 
         passwordTextField.placeholder = "PASSWORD"
-        passwordTextField.textColor = HIColor.darkIndigo
+        passwordTextField.textColor = HIApplication.Color.darkIndigo
         passwordTextField.font = UIFont.systemFont(ofSize: 13, weight: .medium)
         passwordTextField.textContentType = .username
-        passwordTextField.tintColor = HIColor.hotPink
+        passwordTextField.tintColor = HIApplication.Color.hotPink
         passwordTextField.autocapitalizationType = .none
         passwordTextField.autocorrectionType = .no
         passwordTextField.enablesReturnKeyAutomatically = true
@@ -155,12 +155,12 @@ extension HIUserPassLoginViewController {
         passwordTextField.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 0).isActive = true
         passwordTextField.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
-        signInButton.backgroundColor = HIColor.lightPeriwinkle
+        signInButton.backgroundColor = HIApplication.Color.lightPeriwinkle
         signInButton.layer.cornerRadius = 8
         signInButton.setTitle("Sign In", for: .normal)
-        signInButton.setTitleColor(HIColor.darkIndigo, for: .normal)
+        signInButton.setTitleColor(HIApplication.Color.darkIndigo, for: .normal)
         signInButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        signInButton.addTarget(self, action: #selector(HIUserPassLoginViewController.didSelectLogin(_:)), for: .touchUpInside)
+        signInButton.addTarget(self, action: #selector(didSelectLogin(_:)), for: .touchUpInside)
         signInButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(signInButton)
         signInButton.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 71).isActive = true
@@ -168,7 +168,7 @@ extension HIUserPassLoginViewController {
         signInButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         signInButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
 
-        activityIndicator.tintColor = HIColor.hotPink
+        activityIndicator.tintColor = HIApplication.Color.hotPink
         activityIndicator.stopAnimating()
         activityIndicator.hidesWhenStopped = true
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
@@ -216,7 +216,7 @@ extension HIUserPassLoginViewController {
         case .readyToLogin:
             signInButton.isEnabled = true
             signInButton.setTitle("Sign In", for: .normal)
-            signInButton.backgroundColor = HIColor.lightPeriwinkle
+            signInButton.backgroundColor = HIApplication.Color.lightPeriwinkle
             activityIndicator.stopAnimating()
         }
     }

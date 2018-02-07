@@ -30,9 +30,9 @@ class HIApplicationStateController {
 
     // MARK: - Init
     init() {
-        NotificationCenter.default.addObserver(self, selector: #selector(HIApplicationStateController.loginUser), name: .loginUser, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(HIApplicationStateController.switchUser), name: .switchUser, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(HIApplicationStateController.logoutUser), name: .logoutUser, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(loginUser), name: .loginUser, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(switchUser), name: .switchUser, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(logoutUser), name: .logoutUser, object: nil)
     }
 
     deinit {
@@ -40,7 +40,7 @@ class HIApplicationStateController {
     }
 
     func initalize() {
-        window.backgroundColor = HIColor.paleBlue
+        window.backgroundColor = HIApplication.Color.paleBlue
         window.makeKeyAndVisible()
 
         resetPersistentDataIfNeeded()
@@ -81,23 +81,23 @@ extension HIApplicationStateController {
 
     func viewControllersFor(user: HIUser) -> [UIViewController] {
         var viewControllers = [UIViewController]()
-        viewControllers.append(HIHomeViewController())
 
-        if [.attendee].contains(user.permissions) {
+        if [.guest, .attendee].contains(user.permissions) {
             viewControllers.append(HIHomeViewController())
         }
-        if [.attendee, .volunteer, .staff, .admin].contains(user.permissions) {
-            viewControllers.append(HIScheduleViewController())
-        }
+
+        viewControllers.append(HIScheduleViewController())
+
         if [.attendee, .volunteer, .staff, .admin].contains(user.permissions) {
             viewControllers.append(HIAnnouncementsViewController())
         }
-        if [.attendee, .volunteer, .staff, .admin].contains(user.permissions) {
-            viewControllers.append(HIUserDetailViewController())
-        }
+
+        viewControllers.append(HIUserDetailViewController())
+
         if [.volunteer, .staff, .admin].contains(user.permissions) {
             viewControllers.append(HIScannerViewController())
         }
+
         return viewControllers
     }
 
@@ -106,6 +106,7 @@ extension HIApplicationStateController {
         user.isActive = true
         Keychain.default.store(user, forKey: user.identifier)
         self.user = user
+        print("PERMISSIONS::\(user.permissions)")
 
         updateWindowViewController(animated: true)
     }
