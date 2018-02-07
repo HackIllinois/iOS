@@ -23,7 +23,7 @@ class HICountdownViewController: UIViewController {
     var seconds = LOTAnimationView(name: "countdown-60")
 
     // TODO: change to needed time
-    let countdownDate = Date(timeIntervalSince1970: 1519422180)
+    var countdownDate = Date(timeIntervalSince1970: 1519422180)
     var dayFrame = 0
     var hourFrame = 0
     var minuteFrame = 0
