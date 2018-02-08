@@ -23,7 +23,7 @@ final class HIAnnouncementDataSource {
         HIAnnouncementService.getAllAnnouncements()
         .onCompletion { result in
             switch result {
-            case .success(var containedAnnouncements):
+            case .success(let containedAnnouncements):
                 DispatchQueue.main.sync {
                     do {
                         let ctx = CoreDataController.shared.persistentContainer.viewContext

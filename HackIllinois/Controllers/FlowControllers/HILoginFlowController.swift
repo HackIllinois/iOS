@@ -70,7 +70,6 @@ extension HILoginFlowController {
 
             animationView.play { _ in
                 self.animationView.removeFromSuperview()
-
                 self.statusBarIsHidden = false
                 UIView.animate(withDuration: 0.25) { () -> Void in
                     self.setNeedsStatusBarAppearanceUpdate()
@@ -127,7 +126,6 @@ extension HILoginFlowController {
         }
         .perform()
     }
-
 }
 
 // MARK: - Keychain
