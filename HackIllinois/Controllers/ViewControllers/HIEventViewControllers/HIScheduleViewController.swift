@@ -32,6 +32,61 @@ class HIScheduleViewController: HIEventListViewController {
 
         return fetchedResultsController
     }()
+
+    var dataStore = [(displayText: String, predicate: NSPredicate)]()
+
+    // MARK: - Init
+    convenience init() {
+        self.init(nibName: nil, bundle: nil)
+
+        let fridayPredicate = NSPredicate(
+            format: "%@ =< start AND start < %@",
+            HIApplication.Configuration.FRIDAY_START_TIME as NSDate,
+            HIApplication.Configuration.FRIDAY_END_TIME as NSDate
+        )
+        dataStore.append((displayText: "FRIDAY", predicate: fridayPredicate))
+
+        let saturdayPredicate = NSPredicate(
+            format: "%@ =< start AND start < %@",
+            HIApplication.Configuration.SATURDAY_START_TIME as NSDate,
+            HIApplication.Configuration.SATURDAY_END_TIME as NSDate
+        )
+        dataStore.append((displayText: "SATURDAY", predicate: saturdayPredicate))
+
+        let sundayPredicate = NSPredicate(
+            format: "%@ =< start AND start < %@",
+            HIApplication.Configuration.SUNDAY_START_TIME as NSDate,
+            HIApplication.Configuration.SUNDAY_END_TIME as NSDate
+        )
+        dataStore.append((displayText: "SUNDAY", predicate: sundayPredicate))
+
+        fetchedResultsController.fetchRequest.predicate = fridayPredicate
+    }
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) should not be used.")
+    }
+}
+
+// MARK: - Actions
+extension HIScheduleViewController {
+    @objc func didSelectTab(_ sender: HISegmentedControl) {
+        fetchedResultsController.fetchRequest.predicate = dataStore[sender.selectedIndex].predicate
+        try? fetchedResultsController.performFetch()
+        if let tableView = tableView {
+            UIView.transition(
+                with: tableView,
+                duration: 0.35,
+                options: .transitionCrossDissolve,
+                animations: {
+                    tableView.reloadData()
+            })
+        }
+    }
 }
 
 // MARK: - UIViewController
@@ -39,10 +94,11 @@ extension HIScheduleViewController {
     override func loadView() {
         super.loadView()
 
-        let segmentedControl = HISegmentedControl()
+        let items = dataStore.map { $0.displayText }
+        let segmentedControl = HISegmentedControl(items: items)
+        segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
-
         segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
@@ -51,7 +107,6 @@ extension HIScheduleViewController {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
-
         tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
