@@ -17,7 +17,7 @@ class HIBaseService: APIService {
 
     static var headers = ["Content-Type": "application/json"]
 
-    static var paramaters = ["client" : "iOS"]
+    static var paramaters = ["client": "iOS"]
 
     static func validate(statusCode: Int) throws {
         try hiValidate(statusCode: statusCode)

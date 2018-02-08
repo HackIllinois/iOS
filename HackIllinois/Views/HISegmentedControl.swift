@@ -12,12 +12,14 @@ import UIKit
 class HISegmentedControl: UIControl {
 
     // MARK: - Properties
-    private(set) var items = ["Friday", "Saturday", "Sunday"]
+    private(set) var items: [String]
 
     private(set) var selectedIndex: Int = 0 {
         didSet {
-            displayNewSelectedIndex(previousIndex: oldValue)
-            sendActions(for: .valueChanged)
+            if oldValue != selectedIndex {
+                displayNewSelectedIndex(previousIndex: oldValue)
+                sendActions(for: .valueChanged)
+            }
         }
     }
 
@@ -35,14 +37,14 @@ class HISegmentedControl: UIControl {
     private var bottomViewHeight = CGFloat(1)
 
     // MARK: - Init
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(items: [String]) {
+        self.items = items
+        super.init(frame: .zero)
         setupView()
     }
 
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setupView()
+        fatalError("init(coder:) should not be used")
     }
 
     // MARK: - UIView
