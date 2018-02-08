@@ -10,9 +10,6 @@ import Foundation
 import UIKit
 
 class HIAnnouncementCell: HIBaseTableViewCell {
-    // MARK: - Static
-    static let IDENTIFIER = "HIAnnouncementCell"
-
     // MARK: - Properties
     var titleLabel = UILabel()
     var timeLabel = UILabel()

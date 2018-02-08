@@ -242,7 +242,6 @@ extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
                 }
 
                 DispatchQueue.main.async { [weak self] in
-                    // TODO: Show some other kind of indicator of incorrect password (maybe a red UIlabel)
                     self?.userPassLoginViewController.shakeWithError()
                     self?.userPassLoginViewController.stylizeFor(.readyToLogin)
                 }

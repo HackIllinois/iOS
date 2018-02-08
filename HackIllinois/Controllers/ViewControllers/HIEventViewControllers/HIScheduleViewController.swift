@@ -148,10 +148,7 @@ extension HIScheduleViewController {
 // MARK: - UITableViewDataSource
 extension HIScheduleViewController {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HIDateHeader.IDENTIFIER)
-        // TODO: maybe get first event in the section and use that to get the section title??
-        // TODO: eval code speed.
-        // TOOD: check that this works correctly for all timezones
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HIDateHeader.identifier)
         if let header = header as? HIDateHeader,
             let sections = fetchedResultsController.sections,
             section < sections.count,

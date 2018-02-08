@@ -11,9 +11,6 @@ import UIKit
 import MapKit
 
 class HIEventDetailLocationCell: HIBaseTableViewCell {
-
-    static let IDENTIFIER = "HIEventDetailLocationCell"
-
     // MARK: - Properties
     var selectedEffect: UIBlurEffect {
         return UIBlurEffect(style: .extraLight)

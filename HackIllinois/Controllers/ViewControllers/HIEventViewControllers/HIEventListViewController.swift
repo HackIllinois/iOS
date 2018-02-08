@@ -16,8 +16,8 @@ class HIEventListViewController: HIBaseViewController {
 // MARK: - UITableView Setup
 extension HIEventListViewController {
     override func setupTableView() {
-        tableView?.register(HIDateHeader.self, forHeaderFooterViewReuseIdentifier: HIDateHeader.IDENTIFIER)
-        tableView?.register(HIEventCell.self, forCellReuseIdentifier: HIEventCell.IDENTIFIER)
+        tableView?.register(HIDateHeader.self, forHeaderFooterViewReuseIdentifier: HIDateHeader.identifier)
+        tableView?.register(HIEventCell.self, forCellReuseIdentifier: HIEventCell.identifier)
         super.setupTableView()
     }
 }
@@ -25,7 +25,7 @@ extension HIEventListViewController {
 // MARK: - UITableViewDataSource
 extension HIEventListViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: HIEventCell.IDENTIFIER, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: HIEventCell.identifier, for: indexPath)
         if let cell = cell as? HIEventCell, let event = _fetchedResultsController?.object(at: indexPath) as? Event {
             cell <- event
         }

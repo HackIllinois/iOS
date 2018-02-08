@@ -121,7 +121,7 @@ extension HIEventDetailViewController {
 extension HIEventDetailViewController {
     override func setupTableView() {
         tableView?.alwaysBounceVertical = false
-        tableView?.register(HIEventDetailLocationCell.self, forCellReuseIdentifier: HIEventDetailLocationCell.IDENTIFIER)
+        tableView?.register(HIEventDetailLocationCell.self, forCellReuseIdentifier: HIEventDetailLocationCell.identifier)
         super.setupTableView()
     }
 }
@@ -139,7 +139,7 @@ extension HIEventDetailViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: HIEventDetailLocationCell.IDENTIFIER, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: HIEventDetailLocationCell.identifier, for: indexPath)
         if let cell = cell as? HIEventDetailLocationCell,
             let event = event,
             event.locations.count > indexPath.row,

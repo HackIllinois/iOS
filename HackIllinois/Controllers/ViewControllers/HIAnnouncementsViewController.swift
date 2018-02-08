@@ -71,7 +71,7 @@ extension HIAnnouncementsViewController {
 // MARK: - UITableView Setup
 extension HIAnnouncementsViewController {
     override func setupTableView() {
-        tableView?.register(HIAnnouncementCell.self, forCellReuseIdentifier: HIAnnouncementCell.IDENTIFIER)
+        tableView?.register(HIAnnouncementCell.self, forCellReuseIdentifier: HIAnnouncementCell.identifier)
         super.setupTableView()
     }
 }
@@ -87,7 +87,7 @@ extension HIAnnouncementsViewController {
 // MARK: - UITableViewDataSource
 extension HIAnnouncementsViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: HIAnnouncementCell.IDENTIFIER, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: HIAnnouncementCell.identifier, for: indexPath)
         if let cell = cell as? HIAnnouncementCell {
             let announcement = fetchedResultsController.object(at: indexPath)
             cell <- announcement
