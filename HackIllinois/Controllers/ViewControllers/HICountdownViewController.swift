@@ -125,7 +125,7 @@ extension HICountdownViewController {
             name: .UIApplicationDidBecomeActive, object: nil)
         NotificationCenter.default.addObserver(self,
             selector: #selector(tearDownCountdown),
-            name: .UIApplicationDidBecomeActive, object: nil)
+            name: .UIApplicationWillResignActive, object: nil)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
