@@ -10,10 +10,6 @@ import Foundation
 import UIKit
 
 class HIEventCell: HIBaseTableViewCell {
-
-    // MARK: - Static
-    static let IDENTIFIER = "HIEventCell"
-
     // MARK: - Properties
     var favoritedButton = UIButton()
     var contentStackView = UIStackView()

@@ -59,8 +59,8 @@ extension HILoginSelectionViewController {
 // MARK: - UITableView Setup
 extension HILoginSelectionViewController {
     override func setupTableView() {
-        tableView?.register(HILoginSelectionHeader.self, forHeaderFooterViewReuseIdentifier: HILoginSelectionHeader.IDENTIFIER)
-        tableView?.register(HILoginSelectionCell.self, forCellReuseIdentifier: HILoginSelectionCell.IDENTIFIER)
+        tableView?.register(HILoginSelectionHeader.self, forHeaderFooterViewReuseIdentifier: HILoginSelectionHeader.identifier)
+        tableView?.register(HILoginSelectionCell.self, forCellReuseIdentifier: HILoginSelectionCell.identifier)
         super.setupTableView()
     }
 }
@@ -82,7 +82,7 @@ extension HILoginSelectionViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: HILoginSelectionCell.IDENTIFIER, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: HILoginSelectionCell.identifier, for: indexPath)
         if let cell = cell as? HILoginSelectionCell {
             switch indexPath.section {
             case 0:
@@ -99,7 +99,7 @@ extension HILoginSelectionViewController {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HILoginSelectionHeader.IDENTIFIER)
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HILoginSelectionHeader.identifier)
         if let header = header as? HILoginSelectionHeader {
             switch section {
             case 0:

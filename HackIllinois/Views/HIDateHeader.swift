@@ -10,8 +10,6 @@ import Foundation
 import UIKit
 
 class HIDateHeader: UITableViewHeaderFooterView {
-    static let IDENTIFIER = "HIDateHeader"
-
     var titleLabel = UILabel()
 
     override init(reuseIdentifier: String?) {

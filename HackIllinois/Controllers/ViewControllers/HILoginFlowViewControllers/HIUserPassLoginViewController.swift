@@ -51,7 +51,7 @@ extension HIUserPassLoginViewController {
         guard let email = emailTextField.text, let password = passwordTextField.text else { return }
         delegate?.userPassLoginViewControllerDidSelectLoginButton(self, forEmail: email, andPassword: password)
     }
-    
+
     func shakeWithError() {
         let duration: TimeInterval = 0.5
         let translation: CGFloat = 15

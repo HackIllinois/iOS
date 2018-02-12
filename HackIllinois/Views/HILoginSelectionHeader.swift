@@ -10,9 +10,6 @@ import Foundation
 import UIKit
 
 class HILoginSelectionHeader: UITableViewHeaderFooterView {
-    // TODO: change to protocol with string describing self
-    static let IDENTIFIER = "HILoginSelectionHeader"
-
     // MARK: - Properties
     var titleLabel = UILabel()
 

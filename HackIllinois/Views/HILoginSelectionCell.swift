@@ -14,9 +14,6 @@ protocol HILoginSelectionCellDelegate: class {
 }
 
 class HILoginSelectionCell: HIBaseTableViewCell {
-
-    static let IDENTIFIER = "HILoginSelectionCell"
-
     // MARK: - Properties
     weak var delegate: HILoginSelectionCellDelegate?
 
