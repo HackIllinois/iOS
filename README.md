@@ -26,4 +26,4 @@ pod install
 open Hackillinois.xcworkspace
 ```
 
-Remember that you MUST open the .xcworkspace file for development, rather than using the xcodeproj file.
+Remember you must use the .xcworkspace file for development, rather than the .xcodeproj file.
