@@ -2,27 +2,28 @@
 
 Official iOS apps for HackIllinois. Please read this README before continuing.
 
-# Branch Information #
+## Branch Information #
 
-## master
-Master only hosts released versions of the Hackillinois application. Currently 0.3.0-beta.
+### master
+Master only hosts released versions of the Hackillinois application. Currently 1.0 build(3)
 
-## dev
+### dev
 Dev hosts a semi-stable version of the next release and all work should be done on branches off dev and commited via PR's.
 
-# Requirements #
+## Requirements #
 1. Cocoapods
 2. XCode 9
-3. Swift 4 
-4. iOS 11.0 
+3. Swift 4
+4. iOS 11.0
 
 
-# Installation #
+## Installation #
 
 ``` shell
-$ cd /path/to/github/dir
-$ pod install
-$ open Hackillinois.xcworkspace
+git clone https://github.com/HackIllinois/iOS.git
+cd iOS
+pod install
+open Hackillinois.xcworkspace
 ```
 
-Remember that you MUST open the .xcworkspace file and develop on that, rather than using the xcodeproj file.
+Remember you must use the .xcworkspace file for development, rather than the .xcodeproj file.
