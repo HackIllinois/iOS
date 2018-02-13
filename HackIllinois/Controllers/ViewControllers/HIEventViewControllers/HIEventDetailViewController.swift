@@ -98,7 +98,7 @@ extension HIEventDetailViewController {
         let targetSize = CGSize(width: descriptionLabel.frame.width, height: CGFloat.greatestFiniteMagnitude)
         let neededSize = descriptionLabel.sizeThatFits(targetSize)
         descriptionLabelHeight.constant = neededSize.height
-        tableViewHeight.constant = CGFloat(event.locations.count) * 200
+        tableViewHeight.constant = CGFloat(event.locations.count) * 160
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -128,7 +128,6 @@ extension HIEventDetailViewController {
 
 // MARK: - UITableViewDataSource
 extension HIEventDetailViewController {
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -157,7 +156,7 @@ extension HIEventDetailViewController {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        return 160
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

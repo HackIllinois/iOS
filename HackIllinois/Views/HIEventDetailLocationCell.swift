@@ -24,6 +24,8 @@ class HIEventDetailLocationCell: HIBaseTableViewCell {
         return UIBlurEffect(style: .light)
     }
 
+//    let locationManager = CLLocationManager()
+
     // MARK: Views
     let mapView = MKMapView()
     let mapAnnotation = MKPointAnnotation()
@@ -47,7 +49,6 @@ class HIEventDetailLocationCell: HIBaseTableViewCell {
         containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6).isActive = true
         containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12).isActive = true
 
-        mapView.showsUserLocation = true
         mapView.isUserInteractionEnabled = false
         mapView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(mapView)
@@ -93,6 +94,7 @@ extension HIEventDetailLocationCell {
         super.prepareForReuse()
         titleLabel.text = nil
         mapView.removeAnnotation(mapAnnotation)
+//        mapView.showsUserLocation = false
         mapAnnotation.coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     }
 
@@ -122,11 +124,14 @@ extension HIEventDetailLocationCell {
         let clLocation = CLLocation(latitude: rhs.latitude, longitude: rhs.longitude)
 
         let distance: CLLocationDistance
-        if let userLocation = CLLocationManager().location {
-            distance = userLocation.distance(from: clLocation)
-        } else {
-            distance = 1000
-        }
+//        lhs.locationManager.startUpdatingLocation()
+//        if let userLocation = lhs.locationManager.location {
+//            lhs.mapView.showsUserLocation = true
+//            distance = userLocation.distance(from: clLocation)
+//        } else {
+            distance = 150
+//        }
+//        lhs.locationManager.stopUpdatingLocation()
 
         let region = MKCoordinateRegionMakeWithDistance(clLocation.coordinate, distance * 2, distance)
         let topLeft = CLLocationCoordinate2D(

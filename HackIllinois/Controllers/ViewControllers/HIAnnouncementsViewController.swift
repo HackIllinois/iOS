@@ -21,6 +21,8 @@ class HIAnnouncementsViewController: HIBaseViewController {
             NSSortDescriptor(key: "id", ascending: true)
         ]
 
+        fetchRequest.predicate = NSPredicate(format: "now() >= time")
+
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
             managedObjectContext: CoreDataController.shared.persistentContainer.viewContext,
@@ -32,11 +34,6 @@ class HIAnnouncementsViewController: HIBaseViewController {
 
         return fetchedResultsController
     }()
-}
-
-// MARK: - Actions
-extension HIAnnouncementsViewController {
-
 }
 
 // MARK: - UIViewController

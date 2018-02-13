@@ -13,6 +13,9 @@ final class HIEventDataSource {
 
     static var isRefreshing = false
 
+    static let locationsFetchRequest = NSFetchRequest<Location>(entityName: "Location")
+    static let eventsFetchRequest = NSFetchRequest<Event>(entityName: "Event")
+
     static func refresh(completion: (() -> Void)? = nil) {
         guard !isRefreshing else {
             completion?()
@@ -31,6 +34,12 @@ final class HIEventDataSource {
                         DispatchQueue.main.sync {
                             do {
                                 let ctx = CoreDataController.shared.persistentContainer.viewContext
+                                try? ctx.fetch(locationsFetchRequest).forEach {
+                                    ctx.delete($0)
+                                }
+                                try? ctx.fetch(eventsFetchRequest).forEach {
+                                    ctx.delete($0)
+                                }
                                 var locations = [Location]()
                                 containedLocations.data.forEach { location in
                                     locations.append( Location(context: ctx, location: location) )

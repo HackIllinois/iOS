@@ -13,6 +13,8 @@ final class HIAnnouncementDataSource {
 
     static var isRefreshing = false
 
+    static let announcementsFetchRequest = NSFetchRequest<Announcement>(entityName: "Announcement")
+
     static func refresh(completion: (() -> Void)? = nil) {
         guard !isRefreshing else {
             completion?()
@@ -27,6 +29,9 @@ final class HIAnnouncementDataSource {
                 DispatchQueue.main.sync {
                     do {
                         let ctx = CoreDataController.shared.persistentContainer.viewContext
+                        try? ctx.fetch(announcementsFetchRequest).forEach {
+                            ctx.delete($0)
+                        }
                         containedAnnouncements.data.forEach {
                             _ = Announcement(context: ctx, announcement: $0)
                         }
