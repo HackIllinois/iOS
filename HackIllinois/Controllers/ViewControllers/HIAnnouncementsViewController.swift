@@ -34,6 +34,8 @@ class HIAnnouncementsViewController: HIBaseViewController {
 
         return fetchedResultsController
     }()
+
+    var adminAnnouncementViewController = HIAdminAnnouncementViewController()
 }
 
 // MARK: - UIViewController
@@ -55,14 +57,27 @@ extension HIAnnouncementsViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupRefreshControl()
-
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
-
         try? _fetchedResultsController?.performFetch()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        var rightNavigationItem: UIBarButtonItem?
+        if HIApplicationStateController.shared.user?.permissions == .admin {
+            rightNavigationItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(presentAdminAnnouncementViewController))
+        }
+        navigationItem.rightBarButtonItem = rightNavigationItem
+    }
+}
+
+// MARK: - Actions
+extension HIAnnouncementsViewController {
+    @objc func presentAdminAnnouncementViewController() {
+        navigationController?.pushViewController(adminAnnouncementViewController, animated: true)
+    }
 }
 
 // MARK: - UITableView Setup
