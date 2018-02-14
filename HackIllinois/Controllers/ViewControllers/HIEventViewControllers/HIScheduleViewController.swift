@@ -80,7 +80,7 @@ extension HIScheduleViewController {
         if let tableView = tableView {
             UIView.transition(
                 with: tableView,
-                duration: 0.35,
+                duration: 0.125,
                 options: .transitionCrossDissolve,
                 animations: {
                     tableView.reloadData()
