@@ -14,10 +14,10 @@ final class HIAnnouncementService: HIBaseService {
         return super.baseURL + "/announcement"
     }
 
-    static func create(announcement: HIAPIAnnouncement) -> APIRequest<HIAPIAnnouncement.Contained> {
+    static func create(title: String, description: String) -> APIRequest<HIAPIAnnouncement.Contained> {
         var announcementDict = [String: Any]()
-        announcementDict["title"]       = announcement.title
-        announcementDict["description"] = announcement.info
+        announcementDict["title"]       = title
+        announcementDict["description"] = description
         return APIRequest<HIAPIAnnouncement.Contained>(service: self, endpoint: "", body: announcementDict, method: .POST)
     }
 

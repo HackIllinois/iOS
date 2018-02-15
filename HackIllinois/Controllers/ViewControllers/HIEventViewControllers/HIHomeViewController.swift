@@ -46,6 +46,8 @@ class HIHomeViewController: HIEventListViewController {
         (HIApplication.Configuration.HACKING_END_TIME, "HACKING ENDS IN"),
         (HIApplication.Configuration.EVENT_END_TIME, "HACKILLINOIS ENDS IN")
     ]
+
+    var timer = Timer()
 }
 
 // MARK: - UIViewController
@@ -97,6 +99,29 @@ extension HIHomeViewController {
     override func viewDidLoad() {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         super.viewDidLoad()
+        setupRefreshControl()
+    }
+
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupPredicateRefreshTimer()
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(setupPredicateRefreshTimer),
+            name: .UIApplicationDidBecomeActive, object: nil
+        )
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(teardownPredicateRefreshTimer),
+            name: .UIApplicationWillResignActive, object: nil
+        )
+
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: .UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillResignActive, object: nil)
+        teardownPredicateRefreshTimer()
     }
 }
 
@@ -120,5 +145,34 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
             countdownDataStoreIndex += 1
         }
         return nil
+    }
+}
+
+extension HIHomeViewController {
+    @objc func setupPredicateRefreshTimer() {
+        timer = Timer.scheduledTimer(
+            timeInterval: 30,
+            target: self,
+            selector: #selector(refreshPredicate),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+
+    @objc func refreshPredicate() {
+        try? fetchedResultsController.performFetch()
+        if let tableView = tableView {
+            UIView.transition(
+                with: tableView,
+                duration: 0.125,
+                options: .transitionCrossDissolve,
+                animations: {
+                    tableView.reloadData()
+            })
+        }
+    }
+
+    @objc func teardownPredicateRefreshTimer() {
+        timer.invalidate()
     }
 }

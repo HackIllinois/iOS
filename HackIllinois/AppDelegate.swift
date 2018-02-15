@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    var locationManager = CLLocationManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        UIView.swizzle
         setupNavigationBarAppearance()
         setupTableViewAppearance()
         HIApplicationStateController.shared.initalize()

@@ -5,7 +5,7 @@ Official iOS apps for HackIllinois. Please read this README before continuing.
 ## Branch Information #
 
 ### master
-Master only hosts released versions of the Hackillinois application. Currently 1.0 build(3)
+Master only hosts released versions of the Hackillinois application. Currently 1.0.1 build(1).
 
 ### dev
 Dev hosts a semi-stable version of the next release and all work should be done on branches off dev and commited via PR's.
