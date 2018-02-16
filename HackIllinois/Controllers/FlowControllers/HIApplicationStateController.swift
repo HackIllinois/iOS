@@ -81,17 +81,9 @@ extension HIApplicationStateController {
 
     func viewControllersFor(user: HIUser) -> [UIViewController] {
         var viewControllers = [UIViewController]()
-
-        if [.guest, .attendee].contains(user.permissions) {
-            viewControllers.append(HIHomeViewController())
-        }
-
+        viewControllers.append(HIHomeViewController())
         viewControllers.append(HIScheduleViewController())
-
-        if [.attendee, .volunteer, .staff, .admin].contains(user.permissions) {
-            viewControllers.append(HIAnnouncementsViewController())
-        }
-
+        viewControllers.append(HIAnnouncementsViewController())
         viewControllers.append(HIUserDetailViewController())
 
         if [.volunteer, .staff, .admin].contains(user.permissions) {
