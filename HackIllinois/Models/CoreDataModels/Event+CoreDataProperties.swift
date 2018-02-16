@@ -24,7 +24,7 @@ extension Event {
     @NSManaged public var locations: NSSet
 
     @objc dynamic var sectionIdentifier: Date {
-        let excessComponents: Set<Calendar.Component> = [.minute, .second, .nanosecond]
+        let excessComponents: Set<Calendar.Component> = [.second, .nanosecond]
         return start.byRemoving(components: excessComponents)
     }
 
