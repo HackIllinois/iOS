@@ -66,6 +66,7 @@
 		95DC404120105D7300C1E266 /* HIAPIUserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DC404020105D7300C1E266 /* HIAPIUserAuth.swift */; };
 		95DC43EA202A38EB007E9B1A /* HIEmptyTableBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DC43E9202A38EB007E9B1A /* HIEmptyTableBackgroundView.swift */; };
 		95DC43EC202A61E9007E9B1A /* HIApplicationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DC43EB202A61E9007E9B1A /* HIApplicationConstants.swift */; };
+		95DDC3C52036D51B0061292A /* Stickers.xcstickers in Resources */ = {isa = PBXBuildFile; fileRef = 95DDC3C42036D51B0061292A /* Stickers.xcstickers */; };
 		95DE24DC1FC3ADBE000F599D /* HIAnnouncementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DE24DB1FC3ADBE000F599D /* HIAnnouncementService.swift */; };
 		95E24AEA201ED0CD007B7620 /* HIAPISuccessContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E24AE9201ED0CD007B7620 /* HIAPISuccessContainer.swift */; };
 		95E265F9201859BE000FC63D /* HIAPIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E265F8201859BE000FC63D /* HIAPIEvent.swift */; };
@@ -137,6 +138,7 @@
 		95DC404020105D7300C1E266 /* HIAPIUserAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIAPIUserAuth.swift; sourceTree = "<group>"; };
 		95DC43E9202A38EB007E9B1A /* HIEmptyTableBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEmptyTableBackgroundView.swift; sourceTree = "<group>"; };
 		95DC43EB202A61E9007E9B1A /* HIApplicationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIApplicationConstants.swift; sourceTree = "<group>"; };
+		95DDC3C42036D51B0061292A /* Stickers.xcstickers */ = {isa = PBXFileReference; lastKnownFileType = folder.stickers; path = Stickers.xcstickers; sourceTree = "<group>"; };
 		95DE24DB1FC3ADBE000F599D /* HIAnnouncementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAnnouncementService.swift; sourceTree = "<group>"; };
 		95E24AE9201ED0CD007B7620 /* HIAPISuccessContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAPISuccessContainer.swift; sourceTree = "<group>"; };
 		95E265F8201859BE000FC63D /* HIAPIEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAPIEvent.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				951827A41EA35DB800049F79 /* Models */,
 				9544799D200C3CE40005408B /* Tests.playground */,
 				957DB2E21FC2431200F8C45E /* Views */,
+				95DDC3C42036D51B0061292A /* Stickers.xcstickers */,
 			);
 			path = HackIllinois;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 			files = (
 				95BB543B2022CF1200A43523 /* refresh.json in Resources */,
 				9531D3A920284BB200B76B20 /* img_0.png in Resources */,
+				95DDC3C52036D51B0061292A /* Stickers.xcstickers in Resources */,
 				951827A91EA35DB800049F79 /* Assets.xcassets in Resources */,
 				9531D3A820284BB200B76B20 /* img_1.png in Resources */,
 				356B219D202A5786007113D6 /* countdown-24.json in Resources */,
