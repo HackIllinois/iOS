@@ -123,6 +123,7 @@ extension HIUserPassLoginViewController {
         emailTextField.autocapitalizationType = .none
         emailTextField.autocorrectionType = .no
         emailTextField.enablesReturnKeyAutomatically = true
+        emailTextField.delegate = self
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(emailTextField)
         emailTextField.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 0).isActive = true
@@ -148,6 +149,8 @@ extension HIUserPassLoginViewController {
         passwordTextField.autocorrectionType = .no
         passwordTextField.enablesReturnKeyAutomatically = true
         passwordTextField.isSecureTextEntry = true
+        passwordTextField.returnKeyType = .go
+        passwordTextField.delegate = self
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(passwordTextField)
         passwordTextField.topAnchor.constraint(equalTo: separatorView.bottomAnchor).isActive = true
