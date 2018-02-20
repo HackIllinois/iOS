@@ -25,8 +25,8 @@ class HIUserPassLoginViewController: HIBaseViewController {
     weak var delegate: HIUserPassLoginViewControllerDelegate?
 
     var activityIndicator = UIActivityIndicatorView()
-    var emailTextField = UITextField()
-    var passwordTextField = UITextField()
+    var emailTextField = HITextField(style: .username)
+    var passwordTextField = HITextField(style: .password)
     var signInButton = UIButton()
     var containerView = UIView()
 
@@ -34,6 +34,8 @@ class HIUserPassLoginViewController: HIBaseViewController {
     init(delegate: HIUserPassLoginViewControllerDelegate) {
         self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -115,16 +117,6 @@ extension HIUserPassLoginViewController {
         containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
         containerView.heightAnchor.constraint(equalToConstant: 89).isActive = true
 
-        emailTextField.placeholder = "USERNAME"
-        emailTextField.textColor = HIApplication.Color.darkIndigo
-        emailTextField.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        emailTextField.textContentType = .username
-        emailTextField.tintColor = HIApplication.Color.hotPink
-        emailTextField.autocapitalizationType = .none
-        emailTextField.autocorrectionType = .no
-        emailTextField.enablesReturnKeyAutomatically = true
-        emailTextField.delegate = self
-        emailTextField.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(emailTextField)
         emailTextField.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 0).isActive = true
         emailTextField.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0).isActive = true
@@ -140,18 +132,6 @@ extension HIUserPassLoginViewController {
         separatorView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 0).isActive = true
         separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
 
-        passwordTextField.placeholder = "PASSWORD"
-        passwordTextField.textColor = HIApplication.Color.darkIndigo
-        passwordTextField.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        passwordTextField.textContentType = .username
-        passwordTextField.tintColor = HIApplication.Color.hotPink
-        passwordTextField.autocapitalizationType = .none
-        passwordTextField.autocorrectionType = .no
-        passwordTextField.enablesReturnKeyAutomatically = true
-        passwordTextField.isSecureTextEntry = true
-        passwordTextField.returnKeyType = .go
-        passwordTextField.delegate = self
-        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(passwordTextField)
         passwordTextField.topAnchor.constraint(equalTo: separatorView.bottomAnchor).isActive = true
         passwordTextField.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0).isActive = true
