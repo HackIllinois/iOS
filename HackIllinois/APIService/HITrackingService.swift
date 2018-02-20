@@ -25,4 +25,11 @@ final class HITrackingService: HIBaseService {
         return APIRequest<HIAPISuccessContainer>(service: self, endpoint: "/\(id)", method: .GET)
     }
 
+    static func create(name: String, duration: Int) -> APIRequest<HIAPISuccessContainer> {
+        var eventDict = [String: Any]()
+        eventDict["name"]     = name
+        eventDict["duration"] = duration * 60 // user inputs minutes but API wants seconds
+        return APIRequest<HIAPISuccessContainer>(service: self, endpoint: "", body: eventDict, method: .POST)
+    }
+
 }

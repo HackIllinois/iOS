@@ -20,6 +20,7 @@ class HIScannerViewController: HIBaseViewController {
     var respondingToQRCodeFound = true
 
     var lookingUpUserAlertController: UIAlertController?
+    var adminEventViewController = HIAdminEventViewController()
 }
 
 // MARK: - UIViewController
@@ -44,6 +45,15 @@ extension HIScannerViewController {
             }
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        var rightNavigationItem: UIBarButtonItem?
+        if HIApplicationStateController.shared.user?.permissions == .admin {
+            rightNavigationItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(presentAdminEventViewController))
+        }
+        navigationItem.rightBarButtonItem = rightNavigationItem
+    }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -56,6 +66,13 @@ extension HIScannerViewController {
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
+    }
+}
+
+// MARK: - Actions
+extension HIScannerViewController {
+    @objc func presentAdminEventViewController() {
+        navigationController?.pushViewController(adminEventViewController, animated: true)
     }
 }
 
