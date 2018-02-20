@@ -20,7 +20,7 @@ class HIScannerViewController: HIBaseViewController {
     var respondingToQRCodeFound = true
 
     var lookingUpUserAlertController: UIAlertController?
-    var adminEventViewController = HIScannerViewController()
+    var adminEventViewController = HIAdminEventViewController()
 }
 
 // MARK: - UIViewController

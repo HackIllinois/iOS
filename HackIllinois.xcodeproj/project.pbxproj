@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A360882203539FF001F5F85 /* HIEventAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A360881203539FF001F5F85 /* HIEventAdminViewController.swift */; };
-		0A36088420353D90001F5F85 /* HIAPITracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A36088320353D90001F5F85 /* HIAPITracking.swift */; };
+		0A360882203539FF001F5F85 /* HIAdminEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */; };
 		35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */; };
 		356B219D202A5786007113D6 /* countdown-24.json in Resources */ = {isa = PBXBuildFile; fileRef = 356B219B202A5786007113D6 /* countdown-24.json */; };
 		356B219E202A5786007113D6 /* countdown-60.json in Resources */ = {isa = PBXBuildFile; fileRef = 356B219C202A5786007113D6 /* countdown-60.json */; };
@@ -102,8 +101,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0A360881203539FF001F5F85 /* HIEventAdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEventAdminViewController.swift; sourceTree = "<group>"; };
-		0A36088320353D90001F5F85 /* HIAPITracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAPITracking.swift; sourceTree = "<group>"; };
+		0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAdminEventViewController.swift; sourceTree = "<group>"; };
 		35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HICountdownViewController.swift; sourceTree = "<group>"; };
 		356B219B202A5786007113D6 /* countdown-24.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countdown-24.json"; sourceTree = "<group>"; };
 		356B219C202A5786007113D6 /* countdown-60.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countdown-60.json"; sourceTree = "<group>"; };
@@ -335,7 +333,6 @@
 				957D7CA61FC2940800C4332A /* HIAPIReturnDataContainer.swift */,
 				95DB8C702018419500173ACC /* HIAPIUser.swift */,
 				95E265F8201859BE000FC63D /* HIAPIEvent.swift */,
-				0A36088320353D90001F5F85 /* HIAPITracking.swift */,
 				9521A6AB201917B6009059C6 /* HIAPIAnnouncement.swift */,
 				95E24AE9201ED0CD007B7620 /* HIAPISuccessContainer.swift */,
 				955772FB202B96A500FCE7C0 /* HIAPIAttendee.swift */,
@@ -378,7 +375,7 @@
 		957DB2E41FC2435100F8C45E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				0A360881203539FF001F5F85 /* HIEventAdminViewController.swift */,
+				0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */,
 				958C863A2033C94800803F81 /* HIAdminAnnouncementViewController.swift */,
 				956F41E01FC7577500557DC7 /* HIAnnouncementsViewController.swift */,
 				95C3BE2F2008B99C0008ED79 /* HIBaseViewController.swift */,
@@ -663,7 +660,6 @@
 				955772FA202B963800FCE7C0 /* HIRegistrationService.swift in Sources */,
 				955772FC202B96A500FCE7C0 /* HIAPIAttendee.swift in Sources */,
 				95E265F9201859BE000FC63D /* HIAPIEvent.swift in Sources */,
-				0A36088420353D90001F5F85 /* HIAPITracking.swift in Sources */,
 				35BD9E4A2017DFED005B6FCE /* HITrackingService.swift in Sources */,
 				35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */,
 				9510F6A11FCB7D6E007D19DB /* Event+CoreDataClass.swift in Sources */,
@@ -673,7 +669,7 @@
 				9510F6A31FCB7D6E007D19DB /* Location+CoreDataClass.swift in Sources */,
 				9510F6A01FCB7D6E007D19DB /* Announcement+CoreDataClass.swift in Sources */,
 				95DE24DC1FC3ADBE000F599D /* HIAnnouncementService.swift in Sources */,
-				0A360882203539FF001F5F85 /* HIEventAdminViewController.swift in Sources */,
+				0A360882203539FF001F5F85 /* HIAdminEventViewController.swift in Sources */,
 				9521A6AC201917B6009059C6 /* HIAPIAnnouncement.swift in Sources */,
 				95F0AE91201B087F005968BC /* HIEventDetailLocationCell.swift in Sources */,
 				95DC43EA202A38EB007E9B1A /* HIEmptyTableBackgroundView.swift in Sources */,
