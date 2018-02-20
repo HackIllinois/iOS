@@ -18,8 +18,8 @@ enum HIAdminEventViewControllerStyle {
 class HIAdminEventViewController: HIBaseViewController {
     // MARK: - Properties
     var activityIndicator = UIActivityIndicatorView()
-    var titleTextField = UITextField()
-    var durationTextField = UITextField()
+    var titleTextField = HITextField(style: .standard(placeholder: "TITLE"))
+    var durationTextField = HITextField(style: .standard(placeholder: "DURATION (MINUTES)"))
     var createEventButton = UIButton()
 }
 
@@ -92,14 +92,7 @@ extension HIAdminEventViewController {
 
         // Title TextField
         titleTextField.placeholder = "TITLE"
-        titleTextField.textColor = HIApplication.Color.darkIndigo
-        titleTextField.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        titleTextField.tintColor = HIApplication.Color.hotPink
-        titleTextField.autocapitalizationType = .sentences
-        titleTextField.autocorrectionType = .yes
         titleTextField.delegate = self
-        titleTextField.enablesReturnKeyAutomatically = true
-        titleTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(titleTextField)
         titleTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24).isActive = true
         titleTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
@@ -117,16 +110,8 @@ extension HIAdminEventViewController {
         separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
 
         // Description TextField
-        durationTextField.placeholder = "DURATION (MINUTES)"
-        durationTextField.textColor = HIApplication.Color.darkIndigo
-        durationTextField.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        durationTextField.tintColor = HIApplication.Color.hotPink
-        durationTextField.backgroundColor = UIColor.clear
         durationTextField.keyboardType = .numberPad
-        durationTextField.autocorrectionType = .yes
         durationTextField.delegate = self
-        durationTextField.enablesReturnKeyAutomatically = true
-        durationTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(durationTextField)
         durationTextField.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 0).isActive = true
         durationTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true

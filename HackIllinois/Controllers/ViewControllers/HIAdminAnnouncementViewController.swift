@@ -18,8 +18,8 @@ enum HIAnnouncementAdminViewControllerStyle {
 class HIAdminAnnouncementViewController: HIBaseViewController {
     // MARK: - Properties
     var activityIndicator = UIActivityIndicatorView()
-    var titleTextField = UITextField()
-    var descriptionTextField = UITextField()
+    var titleTextField = HITextField(style: .standard(placeholder: "TITLE"))
+    var descriptionTextField = HITextField(style: .standard(placeholder: "DESCRIPTION"))
     var createAnnouncementButton = UIButton()
 }
 
@@ -78,15 +78,7 @@ extension HIAdminAnnouncementViewController {
         super.loadView()
 
         // Title TextField
-        titleTextField.placeholder = "TITLE"
-        titleTextField.textColor = HIApplication.Color.darkIndigo
-        titleTextField.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        titleTextField.tintColor = HIApplication.Color.hotPink
-        titleTextField.autocapitalizationType = .sentences
-        titleTextField.autocorrectionType = .yes
         titleTextField.delegate = self
-        titleTextField.enablesReturnKeyAutomatically = true
-        titleTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(titleTextField)
         titleTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24).isActive = true
         titleTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
@@ -104,16 +96,7 @@ extension HIAdminAnnouncementViewController {
         separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
 
         // Description TextField
-        descriptionTextField.placeholder = "DESCRIPTION"
-        descriptionTextField.textColor = HIApplication.Color.darkIndigo
-        descriptionTextField.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        descriptionTextField.tintColor = HIApplication.Color.hotPink
-        descriptionTextField.backgroundColor = UIColor.clear
-        descriptionTextField.autocapitalizationType = .sentences
-        descriptionTextField.autocorrectionType = .yes
         descriptionTextField.delegate = self
-        descriptionTextField.enablesReturnKeyAutomatically = true
-        descriptionTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(descriptionTextField)
         descriptionTextField.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 0).isActive = true
         descriptionTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true

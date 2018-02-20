@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A360882203539FF001F5F85 /* HIAdminEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */; };
 		350495B1203BBEE200F87E29 /* HITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350495B0203BBEE200F87E29 /* HITextField.swift */; };
+		350495B3203BC8E200F87E29 /* HIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350495B2203BC8E200F87E29 /* HIButton.swift */; };
 		35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */; };
 		356B219D202A5786007113D6 /* countdown-24.json in Resources */ = {isa = PBXBuildFile; fileRef = 356B219B202A5786007113D6 /* countdown-24.json */; };
 		356B219E202A5786007113D6 /* countdown-60.json in Resources */ = {isa = PBXBuildFile; fileRef = 356B219C202A5786007113D6 /* countdown-60.json */; };
@@ -104,6 +105,7 @@
 /* Begin PBXFileReference section */
 		0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAdminEventViewController.swift; sourceTree = "<group>"; };
 		350495B0203BBEE200F87E29 /* HITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITextField.swift; sourceTree = "<group>"; };
+		350495B2203BC8E200F87E29 /* HIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIButton.swift; sourceTree = "<group>"; };
 		35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HICountdownViewController.swift; sourceTree = "<group>"; };
 		356B219B202A5786007113D6 /* countdown-24.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countdown-24.json"; sourceTree = "<group>"; };
 		356B219C202A5786007113D6 /* countdown-60.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countdown-60.json"; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 				9553EC7C1FCF99F600B6B3EE /* HISegmentedControl.swift */,
 				350495B0203BBEE200F87E29 /* HITextField.swift */,
 				9531D3A1202837B300B76B20 /* LOTAnimationView.swift */,
+				350495B2203BC8E200F87E29 /* HIButton.swift */,
 				957CE5C9202C4C1700122348 /* Identifiable.swift */,
 			);
 			path = Views;
@@ -688,6 +691,7 @@
 				950F57141FBE8139001F7DF4 /* HIBaseService.swift in Sources */,
 				954EE1D51FD0F17F0078F39E /* HIUserPassLoginViewController.swift in Sources */,
 				957D7CB81FC39EA100C4332A /* Formatters.swift in Sources */,
+				350495B3203BC8E200F87E29 /* HIButton.swift in Sources */,
 				957CE5CA202C4C1700122348 /* Identifiable.swift in Sources */,
 				956F41E31FC76C8E00557DC7 /* HIMenuController.swift in Sources */,
 				9510F6A51FCB7D6E007D19DB /* Announcement+CoreDataProperties.swift in Sources */,

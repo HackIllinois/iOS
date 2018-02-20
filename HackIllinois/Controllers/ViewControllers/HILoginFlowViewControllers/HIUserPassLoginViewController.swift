@@ -27,7 +27,7 @@ class HIUserPassLoginViewController: HIBaseViewController {
     var activityIndicator = UIActivityIndicatorView()
     var emailTextField = HITextField(style: .username)
     var passwordTextField = HITextField(style: .password)
-    var signInButton = UIButton()
+    var signInButton = HIButton(style: .standard(title: "Sign In"))
     var containerView = UIView()
 
     // MARK: - Init
@@ -36,6 +36,7 @@ class HIUserPassLoginViewController: HIBaseViewController {
         super.init(nibName: nil, bundle: nil)
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        signInButton.addTarget(self, action: #selector(didSelectLogin(_:)), for: .touchUpInside)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -138,26 +139,11 @@ extension HIUserPassLoginViewController {
         passwordTextField.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 0).isActive = true
         passwordTextField.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
-        signInButton.backgroundColor = HIApplication.Color.lightPeriwinkle
-        signInButton.layer.cornerRadius = 8
-        signInButton.setTitle("Sign In", for: .normal)
-        signInButton.setTitleColor(HIApplication.Color.darkIndigo, for: .normal)
-        signInButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        signInButton.addTarget(self, action: #selector(didSelectLogin(_:)), for: .touchUpInside)
-        signInButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(signInButton)
         signInButton.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 71).isActive = true
         signInButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         signInButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         signInButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-
-        activityIndicator.tintColor = HIApplication.Color.hotPink
-        activityIndicator.stopAnimating()
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        signInButton.addSubview(activityIndicator)
-        activityIndicator.centerXAnchor.constraint(equalTo: signInButton.centerXAnchor).isActive = true
-        activityIndicator.centerYAnchor.constraint(equalTo: signInButton.centerYAnchor).isActive = true
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
