@@ -91,7 +91,7 @@ extension HILoginSelectionViewController {
                 cell.titleLabel.text = delegate?.loginSelectionViewControllerKeychainAccounts(self)[indexPath.row].uppercased()
             }
             if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
-                cell.indicatorView.isHidden = true
+                cell.separatorView.isHidden = true
             }
             cell.activityIndicator.isHidden = true
         }

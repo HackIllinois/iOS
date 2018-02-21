@@ -17,15 +17,25 @@ enum HIAnnouncementAdminViewControllerStyle {
 
 class HIAdminAnnouncementViewController: HIBaseViewController {
     // MARK: - Properties
-    var activityIndicator = UIActivityIndicatorView()
     var titleTextField = HITextField(style: .standard(placeholder: "TITLE"))
     var descriptionTextField = HITextField(style: .standard(placeholder: "DESCRIPTION"))
-    var createAnnouncementButton = UIButton()
+    var createAnnouncementButton = HIButton(style: .async(title: "Create Announcement"))
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nil, bundle: nil)
+        titleTextField.delegate = self
+        descriptionTextField.delegate = self
+        createAnnouncementButton.addTarget(self, action: #selector(didSelectCreateAnnouncement), for: .touchUpInside)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) should not be used.")
+    }
 }
 
 // MARK: - Actions
 extension HIAdminAnnouncementViewController {
-    @objc func didSelectCreateAnnouncement(_ sender: UIButton) {
+    @objc func didSelectCreateAnnouncement() {
         guard let title = titleTextField.text, let description = descriptionTextField.text, title != "", description != "" else {
             return
         }
@@ -78,7 +88,6 @@ extension HIAdminAnnouncementViewController {
         super.loadView()
 
         // Title TextField
-        titleTextField.delegate = self
         view.addSubview(titleTextField)
         titleTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24).isActive = true
         titleTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
@@ -86,17 +95,13 @@ extension HIAdminAnnouncementViewController {
         titleTextField.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
         // Seperator View
-        let separatorView = UILabel()
-        separatorView.backgroundColor = HIApplication.Color.hotPink
-        separatorView.translatesAutoresizingMaskIntoConstraints = false
+        let separatorView = HIView(style: .separator)
         view.addSubview(separatorView)
         separatorView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor).isActive = true
         separatorView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
         separatorView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
-        separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
 
         // Description TextField
-        descriptionTextField.delegate = self
         view.addSubview(descriptionTextField)
         descriptionTextField.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 0).isActive = true
         descriptionTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
@@ -104,27 +109,11 @@ extension HIAdminAnnouncementViewController {
         descriptionTextField.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
         // Create Announcement Button
-        createAnnouncementButton.backgroundColor = HIApplication.Color.lightPeriwinkle
-        createAnnouncementButton.layer.cornerRadius = 8
-        createAnnouncementButton.setTitle("Create Announcement", for: .normal)
-        createAnnouncementButton.setTitleColor(HIApplication.Color.darkIndigo, for: .normal)
-        createAnnouncementButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        createAnnouncementButton.addTarget(self, action: #selector(HIAdminAnnouncementViewController.didSelectCreateAnnouncement(_:)), for: .touchUpInside)
-        createAnnouncementButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(createAnnouncementButton)
         createAnnouncementButton.topAnchor.constraint(equalTo: descriptionTextField.bottomAnchor, constant: 44).isActive = true
         createAnnouncementButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         createAnnouncementButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         createAnnouncementButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-
-        // Activity Indicator
-        activityIndicator.tintColor = HIApplication.Color.hotPink
-        activityIndicator.stopAnimating()
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        createAnnouncementButton.addSubview(activityIndicator)
-        activityIndicator.centerXAnchor.constraint(equalTo: createAnnouncementButton.centerXAnchor).isActive = true
-        activityIndicator.centerYAnchor.constraint(equalTo: createAnnouncementButton.centerYAnchor).isActive = true
     }
 }
 
@@ -141,7 +130,7 @@ extension HIAdminAnnouncementViewController {
         }
     }
     override func actionForFinalResponder() {
-        didSelectCreateAnnouncement(createAnnouncementButton)
+        didSelectCreateAnnouncement()
     }
 }
 
@@ -158,16 +147,9 @@ extension HIAdminAnnouncementViewController {
     func stylizeFor(_ style: HIAnnouncementAdminViewControllerStyle) {
         switch style {
         case .currentlyCreatingAnnouncement:
-            createAnnouncementButton.isEnabled = false
-            createAnnouncementButton.setTitle(nil, for: .normal)
-            createAnnouncementButton.backgroundColor = UIColor.gray
-            activityIndicator.startAnimating()
-
+            createAnnouncementButton.setAsyncTask(running: true)
         case .readyToCreateAnnouncement:
-            createAnnouncementButton.isEnabled = true
-            createAnnouncementButton.setTitle("Create Notification", for: .normal)
-            createAnnouncementButton.backgroundColor = HIApplication.Color.lightPeriwinkle
-            activityIndicator.stopAnimating()
+            createAnnouncementButton.setAsyncTask(running: false)
         }
     }
 }

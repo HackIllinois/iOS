@@ -29,10 +29,7 @@ extension HIEventDetailViewController {
     override func loadView() {
         super.loadView()
 
-        let eventDetailContainer = UIView()
-        eventDetailContainer.backgroundColor = HIApplication.Color.white
-        eventDetailContainer.layer.cornerRadius = 8
-        eventDetailContainer.layer.masksToBounds = true
+        let eventDetailContainer = HIView(style: .content)
         eventDetailContainer.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(eventDetailContainer)
         eventDetailContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12).isActive = true

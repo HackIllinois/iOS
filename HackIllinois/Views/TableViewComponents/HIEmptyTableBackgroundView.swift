@@ -11,7 +11,9 @@ import UIKit
 class HIEmptyTableBackgroundView: UIView {
     init() {
         super.init(frame: .zero)
+        backgroundColor = HIApplication.Color.paleBlue
         let backgroundImageView = UIImageView(image: #imageLiteral(resourceName: "EmptyTableView"))
+        backgroundImageView.backgroundColor = HIApplication.Color.paleBlue
         backgroundImageView.contentMode = .scaleAspectFit
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(backgroundImageView)

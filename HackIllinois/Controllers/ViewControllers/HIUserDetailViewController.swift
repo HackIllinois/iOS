@@ -42,10 +42,7 @@ extension HIUserDetailViewController {
     override func loadView() {
         super.loadView()
 
-        let userDetailContainer = UIView()
-        userDetailContainer.layer.cornerRadius = 8
-        userDetailContainer.backgroundColor = HIApplication.Color.white
-        userDetailContainer.translatesAutoresizingMaskIntoConstraints = false
+        let userDetailContainer = HIView(style: .content)
         view.addSubview(userDetailContainer)
         userDetailContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 13).isActive = true
         userDetailContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true

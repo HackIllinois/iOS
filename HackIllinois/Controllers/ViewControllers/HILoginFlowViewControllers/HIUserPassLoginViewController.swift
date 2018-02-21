@@ -24,10 +24,9 @@ class HIUserPassLoginViewController: HIBaseViewController {
     // MARK: - Properties
     weak var delegate: HIUserPassLoginViewControllerDelegate?
 
-    var activityIndicator = UIActivityIndicatorView()
     var emailTextField = HITextField(style: .username)
     var passwordTextField = HITextField(style: .password)
-    var signInButton = HIButton(style: .standard(title: "Sign In"))
+    var signInButton = HIButton(style: .async(title: "Sign In"))
     var containerView = UIView()
 
     // MARK: - Init
@@ -36,7 +35,7 @@ class HIUserPassLoginViewController: HIBaseViewController {
         super.init(nibName: nil, bundle: nil)
         emailTextField.delegate = self
         passwordTextField.delegate = self
-        signInButton.addTarget(self, action: #selector(didSelectLogin(_:)), for: .touchUpInside)
+        signInButton.addTarget(self, action: #selector(didSelectLogin), for: .touchUpInside)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -46,11 +45,11 @@ class HIUserPassLoginViewController: HIBaseViewController {
 
 // MARK: - Actions
 extension HIUserPassLoginViewController {
-    @objc func didSelectBack(_ sender: UIButton) {
+    @objc func didSelectBack() {
         delegate?.userPassLoginViewControllerDidSelectBackButton(self)
     }
 
-    @objc func didSelectLogin(_ sender: UIButton) {
+    @objc func didSelectLogin() {
         guard let email = emailTextField.text, let password = passwordTextField.text else { return }
         delegate?.userPassLoginViewControllerDidSelectLoginButton(self, forEmail: email, andPassword: password)
     }
@@ -92,7 +91,7 @@ extension HIUserPassLoginViewController {
         let backButton = UIButton(type: .system)
         backButton.setImage(#imageLiteral(resourceName: "BackButton"), for: .normal)
         backButton.tintColor = HIApplication.Color.hotPink
-        backButton.addTarget(self, action: #selector(didSelectBack(_:)), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(didSelectBack), for: .touchUpInside)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(backButton)
         backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -124,14 +123,11 @@ extension HIUserPassLoginViewController {
         emailTextField.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 0).isActive = true
         emailTextField.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
-        let separatorView = UIView()
-        separatorView.backgroundColor = HIApplication.Color.hotPink
-        separatorView.translatesAutoresizingMaskIntoConstraints = false
+        let separatorView = HIView(style: .separator)
         containerView.addSubview(separatorView)
         separatorView.topAnchor.constraint(equalTo: emailTextField.bottomAnchor).isActive = true
         separatorView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0).isActive = true
         separatorView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 0).isActive = true
-        separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
 
         containerView.addSubview(passwordTextField)
         passwordTextField.topAnchor.constraint(equalTo: separatorView.bottomAnchor).isActive = true
@@ -177,16 +173,9 @@ extension HIUserPassLoginViewController {
     func stylizeFor(_ style: HIUserPassLoginViewControllerStyle) {
         switch style {
         case .currentlyPerformingLogin:
-            signInButton.isEnabled = false
-            signInButton.setTitle(nil, for: .normal)
-            signInButton.backgroundColor = UIColor.gray
-            activityIndicator.startAnimating()
-
+            signInButton.setAsyncTask(running: true)
         case .readyToLogin:
-            signInButton.isEnabled = true
-            signInButton.setTitle("Sign In", for: .normal)
-            signInButton.backgroundColor = HIApplication.Color.lightPeriwinkle
-            activityIndicator.stopAnimating()
+            signInButton.setAsyncTask(running: false)
         }
     }
 }

@@ -23,8 +23,7 @@ class HIBaseViewController: UIViewController {
 // MARK: - UIViewController
 extension HIBaseViewController {
     override func loadView() {
-        view = UIView()
-        view.backgroundColor = HIApplication.Color.paleBlue
+        view = HIView(style: .background)
     }
 
     override func viewDidLoad() {

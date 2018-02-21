@@ -45,6 +45,7 @@
 		9553EC7D1FCF99F600B6B3EE /* HISegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9553EC7C1FCF99F600B6B3EE /* HISegmentedControl.swift */; };
 		955772FA202B963800FCE7C0 /* HIRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955772F9202B963800FCE7C0 /* HIRegistrationService.swift */; };
 		955772FC202B96A500FCE7C0 /* HIAPIAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955772FB202B96A500FCE7C0 /* HIAPIAttendee.swift */; };
+		956BE918203CC43300D29F48 /* HIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956BE917203CC43300D29F48 /* HIView.swift */; };
 		956F41E11FC7577500557DC7 /* HIAnnouncementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F41E01FC7577500557DC7 /* HIAnnouncementsViewController.swift */; };
 		956F41E31FC76C8E00557DC7 /* HIMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F41E21FC76C8E00557DC7 /* HIMenuController.swift */; };
 		957CE5CA202C4C1700122348 /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957CE5C9202C4C1700122348 /* Identifiable.swift */; };
@@ -146,6 +147,7 @@
 		9553EC7C1FCF99F600B6B3EE /* HISegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HISegmentedControl.swift; sourceTree = "<group>"; };
 		955772F9202B963800FCE7C0 /* HIRegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIRegistrationService.swift; sourceTree = "<group>"; };
 		955772FB202B96A500FCE7C0 /* HIAPIAttendee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAPIAttendee.swift; sourceTree = "<group>"; };
+		956BE917203CC43300D29F48 /* HIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIView.swift; sourceTree = "<group>"; };
 		956F41E01FC7577500557DC7 /* HIAnnouncementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAnnouncementsViewController.swift; sourceTree = "<group>"; };
 		956F41E21FC76C8E00557DC7 /* HIMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIMenuController.swift; sourceTree = "<group>"; };
 		957CE5C9202C4C1700122348 /* Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 				9531D3A1202837B300B76B20 /* LOTAnimationView.swift */,
 				350495B2203BC8E200F87E29 /* HIButton.swift */,
 				957CE5C9202C4C1700122348 /* Identifiable.swift */,
+				956BE917203CC43300D29F48 /* HIView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -693,6 +696,7 @@
 				957D7CB81FC39EA100C4332A /* Formatters.swift in Sources */,
 				350495B3203BC8E200F87E29 /* HIButton.swift in Sources */,
 				957CE5CA202C4C1700122348 /* Identifiable.swift in Sources */,
+				956BE918203CC43300D29F48 /* HIView.swift in Sources */,
 				956F41E31FC76C8E00557DC7 /* HIMenuController.swift in Sources */,
 				9510F6A51FCB7D6E007D19DB /* Announcement+CoreDataProperties.swift in Sources */,
 				9531D3A2202837B300B76B20 /* LOTAnimationView.swift in Sources */,
