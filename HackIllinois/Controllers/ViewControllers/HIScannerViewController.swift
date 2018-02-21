@@ -45,7 +45,7 @@ extension HIScannerViewController {
             }
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         var rightNavigationItem: UIBarButtonItem?

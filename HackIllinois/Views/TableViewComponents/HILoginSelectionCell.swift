@@ -22,7 +22,7 @@ class HILoginSelectionCell: HIBaseTableViewCell {
     }
 
     var titleLabel = UILabel()
-    var indicatorView = UIView()
+    var separatorView = HIView(style: .separator)
     var activityIndicator = UIActivityIndicatorView()
 
     // MARK: - Init
@@ -33,13 +33,11 @@ class HILoginSelectionCell: HIBaseTableViewCell {
 
         containerView = contentView
 
-        indicatorView.backgroundColor = HIApplication.Color.hotPink
-        indicatorView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(indicatorView)
-        indicatorView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 23).isActive = true
-        indicatorView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
-        indicatorView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -23).isActive = true
-        indicatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        separatorView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(separatorView)
+        separatorView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 23).isActive = true
+        separatorView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+        separatorView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -23).isActive = true
 
         activityIndicator.color = HIApplication.Color.hotPink
         activityIndicator.hidesWhenStopped = true
@@ -70,7 +68,7 @@ extension HILoginSelectionCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         titleLabel.text = nil
-        indicatorView.isHidden = false
+        separatorView.isHidden = false
         activityIndicator.isHidden = true
     }
 }

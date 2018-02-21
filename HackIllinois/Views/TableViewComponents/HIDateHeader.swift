@@ -15,17 +15,10 @@ class HIDateHeader: UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
 
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = HIApplication.Color.paleBlue
-        backgroundView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(backgroundView)
-        backgroundView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        backgroundView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-
+        let backgroundView = HIView(style: .background)
         self.backgroundView = backgroundView
 
+        titleLabel.backgroundColor = HIApplication.Color.paleBlue
         titleLabel.textColor = HIApplication.Color.darkIndigo
         titleLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

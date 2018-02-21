@@ -70,7 +70,7 @@ class HICountdownViewController: UIViewController {
 // MARK: - UIViewController
 extension HICountdownViewController {
     override func loadView() {
-        view = UIView()
+        view = HIView(style: .background)
 
         days.contentMode = .scaleAspectFit
         hours.contentMode = .scaleAspectFit
@@ -98,7 +98,10 @@ extension HICountdownViewController {
     }
 
     func stackView(with countDownView: LOTAnimationView, and labelString: String) -> UIStackView {
+        countDownView.backgroundColor = HIApplication.Color.paleBlue
+
         let label = UILabel()
+        label.backgroundColor = HIApplication.Color.paleBlue
         label.text = labelString
         label.textColor = HIApplication.Color.hotPink
         label.textAlignment = .center

@@ -72,7 +72,7 @@ extension HIMenuController {
 // MARK: - UIViewController
 extension HIMenuController {
     override func loadView() {
-        view = UIView()
+        view = HIView(style: .background)
 
         _tabBarController.tabBar.isHidden = true
         addChildViewController(_tabBarController)
@@ -93,7 +93,7 @@ extension HIMenuController {
         overlayView.bottomAnchor.constraint(equalTo: _tabBarController.view.bottomAnchor).isActive = true
         overlayView.trailingAnchor.constraint(equalTo: _tabBarController.view.trailingAnchor).isActive = true
 
-        let menu = UIView()
+        let menu = HIView(style: .background)
         menu.backgroundColor = HIApplication.Color.paleBlue
         menu.clipsToBounds = true
         menu.translatesAutoresizingMaskIntoConstraints = false
@@ -194,19 +194,9 @@ extension HIMenuController {
         let viewControllers = _tabBarController.viewControllers ?? []
         menuItemsHeight.constant = CGFloat(viewControllers.count) * MENU_ITEM_HEIGHT
         for (index, viewController) in viewControllers.enumerated() {
-            let button = createMenuItem(title: viewController.title, index: index)
+            let button = HIButton(style: .menu(title: viewController.title, tag: index))
             button.addTarget(self, action: #selector(didSelectItem(_:)), for: .touchUpInside)
             menuItems.addArrangedSubview(button)
         }
-    }
-
-    private func createMenuItem(title: String?, index: Int) -> UIButton {
-        let button = UIButton(type: .system)
-        button.tag = index
-        button.contentHorizontalAlignment = .left
-        button.setTitle(title, for: .normal)
-        button.setTitleColor(HIApplication.Color.darkIndigo, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        return button
     }
 }

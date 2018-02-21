@@ -17,8 +17,7 @@ class HILoginSelectionHeader: UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
 
-        let containerView = UIView()
-        containerView.backgroundColor = HIApplication.Color.paleBlue
+        let containerView = HIView(style: .background)
         containerView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(containerView)
         containerView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true

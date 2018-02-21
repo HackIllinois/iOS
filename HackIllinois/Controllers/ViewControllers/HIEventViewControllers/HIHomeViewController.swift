@@ -55,6 +55,7 @@ extension HIHomeViewController {
     override func loadView() {
         super.loadView()
 
+        countdownTitleLabel.backgroundColor = HIApplication.Color.paleBlue
         countdownTitleLabel.text = "HACKING ENDS IN"
         countdownTitleLabel.textColor = HIApplication.Color.darkIndigo
         countdownTitleLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
@@ -75,6 +76,7 @@ extension HIHomeViewController {
         countdownViewController.didMove(toParentViewController: self)
 
         let happeningNowLabel = UILabel()
+        happeningNowLabel.backgroundColor = HIApplication.Color.paleBlue
         happeningNowLabel.text = "HAPPENING NOW"
         happeningNowLabel.textColor = HIApplication.Color.darkIndigo
         happeningNowLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
@@ -102,7 +104,6 @@ extension HIHomeViewController {
         setupRefreshControl()
     }
 
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupPredicateRefreshTimer()
@@ -114,7 +115,6 @@ extension HIHomeViewController {
             selector: #selector(teardownPredicateRefreshTimer),
             name: .UIApplicationWillResignActive, object: nil
         )
-
     }
 
     override func viewWillDisappear(_ animated: Bool) {
