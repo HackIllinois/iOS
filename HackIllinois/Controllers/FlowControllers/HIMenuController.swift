@@ -25,7 +25,7 @@ class HIMenuController: UIViewController {
 
     private(set) var _tabBarController = UITabBarController()
 
-    var overlayView = UIView()
+    var overlayView = HIView(style: .overlay)
     var menuItems = UIStackView()
 
     var menuHeight = NSLayoutConstraint()
@@ -39,10 +39,7 @@ extension HIMenuController {
         _tabBarController.viewControllers = viewControllers.map {
             _ = $0.view // forces viewDidLoad to run, allows .title to be accessible
             $0.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuOpen"), style: .plain, target: self, action: #selector(open))
-            let navigationController = UINavigationController(rootViewController: $0)
-            navigationController.title = $0.title
-
-            return navigationController
+            return HINavigationController(rootViewController: $0)
         }
 
         if view != nil {
@@ -84,9 +81,7 @@ extension HIMenuController {
         _tabBarController.view.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         _tabBarController.didMove(toParentViewController: self)
 
-        overlayView.backgroundColor = HIApplication.Color.darkBlueGrey
         overlayView.alpha = 0.0
-        overlayView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(overlayView)
         overlayView.topAnchor.constraint(equalTo: _tabBarController.view.topAnchor).isActive = true
         overlayView.leadingAnchor.constraint(equalTo: _tabBarController.view.leadingAnchor).isActive = true
@@ -94,7 +89,7 @@ extension HIMenuController {
         overlayView.trailingAnchor.constraint(equalTo: _tabBarController.view.trailingAnchor).isActive = true
 
         let menu = HIView(style: .background)
-        menu.backgroundColor = HIApplication.Color.paleBlue
+        menu.backgroundColor = HIApplication.Palette.current.background
         menu.clipsToBounds = true
         menu.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(menu)
@@ -108,7 +103,7 @@ extension HIMenuController {
 
         let closeMenuButton = UIButton(type: .system)
         closeMenuButton.setImage(#imageLiteral(resourceName: "MenuClose"), for: .normal)
-        closeMenuButton.tintColor = HIApplication.Color.hotPink
+        closeMenuButton.tintColor = HIApplication.Palette.current.accent
         closeMenuButton.addTarget(self, action: #selector(close(_:)), for: .touchUpInside)
         closeMenuButton.translatesAutoresizingMaskIntoConstraints = false
         menu.addSubview(closeMenuButton)

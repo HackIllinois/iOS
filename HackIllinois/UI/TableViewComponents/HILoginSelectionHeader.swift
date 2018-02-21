@@ -25,7 +25,7 @@ class HILoginSelectionHeader: UITableViewHeaderFooterView {
         containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
         containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
 
-        titleLabel.textColor = HIApplication.Color.hotPink
+        titleLabel.textColor = HIApplication.Palette.current.accent
         titleLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(titleLabel)

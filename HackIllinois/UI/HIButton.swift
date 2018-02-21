@@ -43,19 +43,33 @@ class HIButton: UIButton {
         addTarget(self, action: #selector(handleTouchDragExit), for: .touchDragExit)
         addTarget(self, action: #selector(handleTouchUpInside), for: .touchUpInside)
 
-        setTitleColor(HIApplication.Color.darkIndigo, for: .normal)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
+        refreshForThemeChange()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) should not be used.")
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: - Themeable
+    @objc func refreshForThemeChange() {
+        setTitleColor(HIApplication.Palette.current.primary, for: .normal)
         translatesAutoresizingMaskIntoConstraints = false
 
         switch style {
         case .standard(let title):
-            backgroundColor = HIApplication.Color.lightPeriwinkle
+            backgroundColor = HIApplication.Palette.current.actionBackground
 
             layer.cornerRadius = 8
             setTitle(title, for: .normal)
             titleLabel?.font = UIFont.systemFont(ofSize: 15)
 
         case .async(let title):
-            backgroundColor = HIApplication.Color.lightPeriwinkle
+            backgroundColor = HIApplication.Palette.current.actionBackground
 
             layer.cornerRadius = 8
             setTitle(title, for: .normal)
@@ -63,7 +77,7 @@ class HIButton: UIButton {
 
             let activityIndicator = UIActivityIndicatorView()
             addSubview(activityIndicator)
-            activityIndicator.tintColor = HIApplication.Color.hotPink
+            activityIndicator.tintColor = HIApplication.Palette.current.accent
             activityIndicator.stopAnimating()
             activityIndicator.hidesWhenStopped = true
             activityIndicator.translatesAutoresizingMaskIntoConstraints = false
@@ -72,17 +86,13 @@ class HIButton: UIButton {
             self.activityIndicator = activityIndicator
 
         case .menu(let title, let tag):
-            backgroundColor = HIApplication.Color.paleBlue
+            backgroundColor = HIApplication.Palette.current.background
             contentHorizontalAlignment = .left
             setTitle(title, for: .normal)
-            setTitleColor(HIApplication.Color.darkIndigo, for: .normal)
+            setTitleColor(HIApplication.Palette.current.primary, for: .normal)
             titleLabel?.font = UIFont.systemFont(ofSize: 16)
             self.tag = tag
         }
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) should not be used.")
     }
 
     // MARK: - API
@@ -98,7 +108,7 @@ class HIButton: UIButton {
         } else {
             isEnabled = true
             setTitle(title, for: .normal)
-            backgroundColor = HIApplication.Color.lightPeriwinkle
+            backgroundColor = HIApplication.Palette.current.actionBackground
             activityIndicator?.stopAnimating()
         }
     }

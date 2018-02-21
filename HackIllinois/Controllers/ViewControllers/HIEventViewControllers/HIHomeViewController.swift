@@ -36,7 +36,7 @@ class HIHomeViewController: HIEventListViewController {
         return fetchedResultsController
     }()
 
-    let countdownTitleLabel = UILabel()
+    let countdownTitleLabel = HILabel(style: .title)
     lazy var countdownViewController = HICountdownViewController(delegate: self)
 
     var countdownDataStoreIndex = 0
@@ -55,12 +55,7 @@ extension HIHomeViewController {
     override func loadView() {
         super.loadView()
 
-        countdownTitleLabel.backgroundColor = HIApplication.Color.paleBlue
         countdownTitleLabel.text = "HACKING ENDS IN"
-        countdownTitleLabel.textColor = HIApplication.Color.darkIndigo
-        countdownTitleLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        countdownTitleLabel.textAlignment = .center
-        countdownTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(countdownTitleLabel)
         countdownTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         countdownTitleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
@@ -75,20 +70,14 @@ extension HIHomeViewController {
         countdownViewController.view.heightAnchor.constraint(equalToConstant: 150).isActive = true
         countdownViewController.didMove(toParentViewController: self)
 
-        let happeningNowLabel = UILabel()
-        happeningNowLabel.backgroundColor = HIApplication.Color.paleBlue
+        let happeningNowLabel = HILabel(style: .title)
         happeningNowLabel.text = "HAPPENING NOW"
-        happeningNowLabel.textColor = HIApplication.Color.darkIndigo
-        happeningNowLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        happeningNowLabel.textAlignment = .center
-        happeningNowLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(happeningNowLabel)
         happeningNowLabel.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor, constant: 16).isActive = true
         happeningNowLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         happeningNowLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
 
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        let tableView = HITableView(style: .standard)
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: happeningNowLabel.bottomAnchor, constant: 5).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true

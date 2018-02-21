@@ -18,7 +18,7 @@ class HILoginSelectionCell: HIBaseTableViewCell {
     weak var delegate: HILoginSelectionCellDelegate?
 
     override var defaultColor: UIColor {
-        return HIApplication.Color.paleBlue
+        return HIApplication.Palette.current.background
     }
 
     var titleLabel = UILabel()
@@ -29,7 +29,7 @@ class HILoginSelectionCell: HIBaseTableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        backgroundColor = HIApplication.Color.paleBlue
+        backgroundColor = HIApplication.Palette.current.background
 
         containerView = contentView
 
@@ -39,7 +39,7 @@ class HILoginSelectionCell: HIBaseTableViewCell {
         separatorView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
         separatorView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -23).isActive = true
 
-        activityIndicator.color = HIApplication.Color.hotPink
+        activityIndicator.color = HIApplication.Palette.current.accent
         activityIndicator.hidesWhenStopped = true
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(activityIndicator)
@@ -48,7 +48,7 @@ class HILoginSelectionCell: HIBaseTableViewCell {
         activityIndicator.heightAnchor.constraint(equalToConstant: 20).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
 
-        titleLabel.textColor = HIApplication.Color.darkIndigo
+        titleLabel.textColor = HIApplication.Palette.current.primary
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.systemFont(ofSize: 13, weight: .medium)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

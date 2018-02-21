@@ -11,17 +11,15 @@ import UIKit
 
 class HIAnnouncementCell: HIBaseTableViewCell {
     // MARK: - Properties
-    var titleLabel = UILabel()
-    var timeLabel = UILabel()
-    var infoLabel = UILabel()
+    var titleLabel = HILabel(style: .subtitle)
+    var timeLabel = HILabel(style: .subtitle)
+    var infoLabel = HILabel(style: .description)
 
     // MARK: - Init
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        backgroundColor = HIApplication.Color.paleBlue
-
-        containerView.backgroundColor = HIApplication.Color.white
+        containerView.backgroundColor = HIApplication.Palette.current.contentBackground
         containerView.layer.cornerRadius = 8
         containerView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(containerView)
@@ -30,9 +28,6 @@ class HIAnnouncementCell: HIBaseTableViewCell {
         containerView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -5).isActive = true
         containerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
 
-        titleLabel.textColor = HIApplication.Color.hotPink
-        titleLabel.font = UIFont.systemFont(ofSize: 13)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(titleLabel)
         titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 23).isActive = true
@@ -40,9 +35,6 @@ class HIAnnouncementCell: HIBaseTableViewCell {
         titleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
         titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
 
-        timeLabel.textColor = HIApplication.Color.hotPink
-        timeLabel.font = UIFont.systemFont(ofSize: 13)
-        timeLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(timeLabel)
         timeLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10).isActive = true
         timeLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 8).isActive = true
@@ -51,10 +43,6 @@ class HIAnnouncementCell: HIBaseTableViewCell {
         timeLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         timeLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
 
-        infoLabel.textColor = HIApplication.Color.darkIndigo
-        infoLabel.numberOfLines = 0
-        infoLabel.font = UIFont.systemFont(ofSize: 13)
-        infoLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(infoLabel)
         infoLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12).isActive = true
         infoLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 23).isActive = true

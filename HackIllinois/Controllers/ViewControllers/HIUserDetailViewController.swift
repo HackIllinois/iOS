@@ -12,8 +12,8 @@ import UIKit
 class HIUserDetailViewController: HIBaseViewController {
     // MARK: - Properties
     var qrCode = UIImageView()
-    var userNameLabel = UILabel()
-    var userInfoLabel = UILabel()
+    var userNameLabel = HILabel(style: .title)
+    var userInfoLabel = HILabel(style: .subtitle)
 }
 
 // MARK: - Actions
@@ -48,7 +48,7 @@ extension HIUserDetailViewController {
         userDetailContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         userDetailContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
 
-        qrCode.backgroundColor = HIApplication.Color.darkIndigo
+        qrCode.backgroundColor = HIApplication.Palette.current.primary
         qrCode.translatesAutoresizingMaskIntoConstraints = false
         userDetailContainer.addSubview(qrCode)
         qrCode.topAnchor.constraint(equalTo: userDetailContainer.topAnchor, constant: 32).isActive = true
@@ -68,16 +68,8 @@ extension HIUserDetailViewController {
         userDataStackView.trailingAnchor.constraint(equalTo: userDetailContainer.trailingAnchor, constant: -32).isActive = true
         userDataStackView.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
-        userNameLabel.textAlignment = .center
-        userNameLabel.textColor = HIApplication.Color.darkIndigo
-        userNameLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-        userNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        userDataStackView.addArrangedSubview(userNameLabel)
-
         userInfoLabel.textAlignment = .center
-        userInfoLabel.textColor = HIApplication.Color.hotPink
-        userInfoLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
-        userInfoLabel.translatesAutoresizingMaskIntoConstraints = false
+        userDataStackView.addArrangedSubview(userNameLabel)
         userDataStackView.addArrangedSubview(userInfoLabel)
     }
 
@@ -103,6 +95,6 @@ extension HIUserDetailViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
         title = "BADGE"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "LogoutButton"), style: .plain, target: self, action: #selector(HIUserDetailViewController.didSelectLogoutButton(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "LogoutButton"), style: .plain, target: self, action: #selector(didSelectLogoutButton(_:)))
     }
 }

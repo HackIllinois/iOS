@@ -56,14 +56,29 @@ class HICountdownViewController: UIViewController {
     convenience init(delegate: HICountdownViewControllerDelegate) {
         self.init(nibName: nil, bundle: nil)
         self.delegate = delegate
+
     }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
+        refreshForThemeChange()
     }
 
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) should not be used.")
+        fatalError("init(coder:) should not be used")
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: - Themeable
+    @objc func refreshForThemeChange() {
+        days.backgroundColor = HIApplication.Palette.current.background
+        hours.backgroundColor = HIApplication.Palette.current.background
+        minutes.backgroundColor = HIApplication.Palette.current.background
+        seconds.backgroundColor = HIApplication.Palette.current.background
     }
 }
 
@@ -98,16 +113,10 @@ extension HICountdownViewController {
     }
 
     func stackView(with countDownView: LOTAnimationView, and labelString: String) -> UIStackView {
-        countDownView.backgroundColor = HIApplication.Color.paleBlue
-
-        let label = UILabel()
-        label.backgroundColor = HIApplication.Color.paleBlue
-        label.text = labelString
-        label.textColor = HIApplication.Color.hotPink
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 21, weight: .light)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        countDownView.backgroundColor = HIApplication.Palette.current.background
         countDownView.translatesAutoresizingMaskIntoConstraints = false
+
+        let label = HILabel(style: .countdown(text: labelString))
 
         let stackView = UIStackView()
         stackView.distribution = .fillProportionally

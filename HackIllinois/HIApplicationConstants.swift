@@ -12,16 +12,56 @@ import UIKit
 // MARK: - Operators
 infix operator <-
 
+// MARK: - Notifications
+extension Notification.Name {
+    static let themeDidChange = Notification.Name("HIApplicationThemeDidChange")
+}
+
 // MARK: - Constants
 struct HIApplication {
-    struct Color {
-        static let paleBlue = UIColor(named: "paleBlue")!
-        static let hotPink = UIColor(named: "hotPink")!
-        static let darkIndigo = UIColor(named: "darkIndigo")!
-        static let lightPeriwinkle = UIColor(named: "lightPeriwinkle")!
-        static let white = UIColor(named: "white")!
-        static let darkBlueGrey = UIColor(named: "darkBlueGrey")!
-        static let darkBlueGrey70 = UIColor(named: "darkBlueGrey70")!
+    struct Palette {
+        let primary: UIColor
+        let accent: UIColor
+        let background: UIColor
+        let contentBackground: UIColor
+        let actionBackground: UIColor
+        let overlay: UIColor
+        let dark: UIColor
+
+        private static let dayPalette = HIApplication.Palette(
+            primary: UIColor(named: "darkIndigo")!,
+            accent: UIColor(named: "hotPink")!,
+            background: UIColor(named: "paleBlue")!,
+            contentBackground: UIColor(named: "white")!,
+            actionBackground: UIColor(named: "lightPeriwinkle")!,
+            overlay: UIColor(named: "darkBlueGrey")!,
+            dark: UIColor(named: "darkIndigo")!
+        )
+
+        private static let nightPalette = HIApplication.Palette(
+            primary: UIColor.white,
+            accent: UIColor(named: "hotPink")!,
+            background: UIColor.darkGray,
+            contentBackground: UIColor.lightGray,
+            actionBackground: UIColor.gray,
+            overlay: UIColor.lightGray,
+            dark: UIColor.darkGray
+        )
+
+        static var current: Palette {
+            switch Theme.current {
+            case .day: return dayPalette
+            case .night: return nightPalette
+            }
+        }
+    }
+
+    enum Theme {
+        static var current: Theme = .day {
+            didSet { NotificationCenter.default.post(name: .themeDidChange, object: nil) }
+        }
+        case day
+        case night
     }
 
     struct Configuration {

@@ -29,7 +29,7 @@ class HIAdminAnnouncementViewController: HIBaseViewController {
     }
 
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) should not be used.")
+        fatalError("init(coder:) should not be used")
     }
 }
 

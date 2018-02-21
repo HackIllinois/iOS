@@ -37,11 +37,11 @@ class HIEventDetailLocationCell: HIBaseTableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        contentView.backgroundColor = HIApplication.Color.white
+        contentView.backgroundColor = HIApplication.Palette.current.contentBackground
         containerView = UIView()
         containerView.layer.cornerRadius = 8
         containerView.layer.masksToBounds = true
-        containerView.backgroundColor = HIApplication.Color.paleBlue
+        containerView.backgroundColor = HIApplication.Palette.current.background
         containerView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(containerView)
         containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6).isActive = true
@@ -64,7 +64,7 @@ class HIEventDetailLocationCell: HIBaseTableViewCell {
         blurEffectView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         blurEffectView.heightAnchor.constraint(equalToConstant: 40).isActive = true
 
-        titleLabel.textColor = HIApplication.Color.darkIndigo
+        titleLabel.textColor = HIApplication.Palette.current.primary
         titleLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         blurEffectView.contentView.addSubview(titleLabel)

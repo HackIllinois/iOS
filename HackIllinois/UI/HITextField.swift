@@ -24,11 +24,24 @@ class HITextField: UITextField {
     init(style: Style) {
         self.style = style
         super.init(frame: .zero)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
+        refreshForThemeChange()
+    }
 
-        textColor = HIApplication.Color.darkIndigo
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) should not be used.")
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: - Themeable
+    @objc func refreshForThemeChange() {
+        textColor = HIApplication.Palette.current.primary
         font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        tintColor = HIApplication.Color.hotPink
-        backgroundColor = UIColor.clear
+        tintColor = HIApplication.Palette.current.accent
+        backgroundColor = HIApplication.Palette.current.background
         enablesReturnKeyAutomatically = true
         translatesAutoresizingMaskIntoConstraints = false
 
@@ -50,12 +63,6 @@ class HITextField: UITextField {
             returnKeyType = .go
             autocapitalizationType = .none
             autocorrectionType = .no
-
         }
-
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) should not be used.")
     }
 }

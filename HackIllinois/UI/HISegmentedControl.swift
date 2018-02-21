@@ -25,26 +25,40 @@ class HISegmentedControl: UIControl {
 
     private var labels = [UILabel]()
     private var font = UIFont.systemFont(ofSize: 13, weight: .medium)
-    private var selectedLabelColor = HIApplication.Color.darkIndigo
-    private var unselectedLabelColor = HIApplication.Color.darkIndigo
 
     private var indicatorView = UIView()
-    private var indicatorViewColor = HIApplication.Color.hotPink
     private var indicatorViewHeight = CGFloat(3)
 
     private var bottomView = UIView()
-    private var bottomViewColor = HIApplication.Color.hotPink
     private var bottomViewHeight = CGFloat(1)
 
     // MARK: - Init
     init(items: [String]) {
         self.items = items
         super.init(frame: .zero)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
+        translatesAutoresizingMaskIntoConstraints = false
         setupView()
+        refreshForThemeChange()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) should not be used")
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: - Themeable
+    @objc func refreshForThemeChange() {
+        backgroundColor = HIApplication.Palette.current.background
+        labels.forEach {
+            $0.textColor = HIApplication.Palette.current.primary
+            $0.backgroundColor = HIApplication.Palette.current.background
+        }
+        bottomView.backgroundColor = HIApplication.Palette.current.accent
+        indicatorView.backgroundColor = HIApplication.Palette.current.accent
     }
 
     // MARK: - UIView
@@ -53,10 +67,7 @@ class HISegmentedControl: UIControl {
 
         let indicatorViewWidth = frame.width / CGFloat(items.count)
         indicatorView.frame = CGRect(x: 0, y: frame.height - indicatorViewHeight, width: indicatorViewWidth, height: indicatorViewHeight)
-        indicatorView.backgroundColor = indicatorViewColor
-
         bottomView.frame = CGRect(x: 0, y: frame.height - (2 * bottomViewHeight), width: frame.width, height: bottomViewHeight)
-        bottomView.backgroundColor = bottomViewColor
 
         displayNewSelectedIndex(previousIndex: 0)
     }
@@ -77,8 +88,8 @@ class HISegmentedControl: UIControl {
     // MARK: - Label Setup
     private func setupView() {
         setupLabels()
-        insertSubview(indicatorView, at: 0)
-        insertSubview(bottomView, at: 0)
+        addSubview(bottomView)
+        addSubview(indicatorView)
     }
 
     private func setupLabels() {
@@ -90,10 +101,8 @@ class HISegmentedControl: UIControl {
 
     private func setupLabelForItem(at index: Int) {
         let label = UILabel()
-        label.backgroundColor = .clear
         label.textAlignment = .center
         label.font = font
-        label.textColor = index == 0 ? selectedLabelColor : unselectedLabelColor
         label.text = items[index]
         label.translatesAutoresizingMaskIntoConstraints = false
         addSubview(label)
@@ -101,11 +110,8 @@ class HISegmentedControl: UIControl {
     }
 
     private func displayNewSelectedIndex(previousIndex: Int) {
-        let previousLabel = labels[previousIndex]
+//        let previousLabel = labels[previousIndex]
         let selectedLabel = labels[selectedIndex]
-
-        previousLabel.textColor = unselectedLabelColor
-        selectedLabel.textColor = selectedLabelColor
 
         let animator = UIViewPropertyAnimator(duration: 0.5, dampingRatio: 0.8)
         animator.addAnimations {

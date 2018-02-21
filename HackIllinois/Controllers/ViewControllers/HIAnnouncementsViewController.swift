@@ -43,8 +43,7 @@ extension HIAnnouncementsViewController {
     override func loadView() {
         super.loadView()
 
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        let tableView = HITableView(style: .standard)
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
@@ -98,11 +97,21 @@ extension HIAnnouncementsViewController {
 
 // MARK: - UITableViewDataSource
 extension HIAnnouncementsViewController {
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HIAnnouncementCell.identifier, for: indexPath)
         if let cell = cell as? HIAnnouncementCell {
-            let announcement = fetchedResultsController.object(at: indexPath)
-            cell <- announcement
+//            let announcement = fetchedResultsController.object(at: indexPath)
+//            cell <- announcement
+            cell.infoLabel.text = "garbage info"
+            cell.timeLabel.text = "a some point in time"
+            cell.titleLabel.text = "some title"
         }
         return cell
     }
@@ -110,11 +119,6 @@ extension HIAnnouncementsViewController {
 
 // MARK: - UITableViewDelegate
 extension HIAnnouncementsViewController {
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        let announcement = fetchedResultsController.object(at: indexPath)
-//        return HIAnnouncementCell.heightForCell(with: announcement)
-//    }
-
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         super.tableView(tableView, didSelectRowAt: indexPath)
     }

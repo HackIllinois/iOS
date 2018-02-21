@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class HIDateHeader: UITableViewHeaderFooterView {
-    var titleLabel = UILabel()
+    var titleLabel = HILabel(style: .date)
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -18,10 +18,6 @@ class HIDateHeader: UITableViewHeaderFooterView {
         let backgroundView = HIView(style: .background)
         self.backgroundView = backgroundView
 
-        titleLabel.backgroundColor = HIApplication.Color.paleBlue
-        titleLabel.textColor = HIApplication.Color.darkIndigo
-        titleLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.addSubview(titleLabel)
         titleLabel.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor, constant: 14).isActive = true
         titleLabel.bottomAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.bottomAnchor).isActive = true
