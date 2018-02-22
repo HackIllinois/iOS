@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import PassKit
 
 class HIUserDetailViewController: HIBaseViewController {
     // MARK: - Properties
@@ -87,6 +88,47 @@ extension HIUserDetailViewController {
         }
         userNameLabel.text = (user.name ?? user.identifier).uppercased()
         userInfoLabel.text = user.dietaryRestrictions?.displayText ?? "UNKNOWN DIETARY RESTRICTIONS"
+        setupPass()
+    }
+}
+
+// MARK: - Passbook/Wallet support
+extension HIUserDetailViewController {
+    func setupPass() {
+        guard PKPassLibrary.isPassLibraryAvailable(),
+            let user = HIApplicationStateController.shared.user,
+            !UserDefaults.standard.bool(forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)_") else { return }
+//        UserDefaults.standard.set(true, forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)")
+//        let passData = HIWalletBadge()
+//        guard let data = try? JSONEncoder().encode(passData) else {
+//            print("fuck")
+//            return
+//        }
+//        let pass = PKPass(data: data, error: nil)
+//        let addCont = PKAddPassesViewController(pass: pass)
+//        self.present(addCont, animated: true, completion: nil)
+//        guard let path = Bundle.main.path(forResource: "Badge", ofType: "pkpass"),
+//            let file = NSData(contentsOfFile: path) else { return }
+        let msg: String = "hackillinois://qrcode/user?id=\(user.id)&identifier=\(user.identifier)"
+        print(msg)
+        HIPassService.getPass(with: msg)
+        .onCompletion { result in
+            switch result {
+            case .success(let data):
+                print(data)
+                let pass = PKPass(data: data as Data, error: nil)
+                let vc = PKAddPassesViewController(pass: pass)
+                self.present(vc, animated: true, completion: nil)
+            case .cancellation:
+                break
+            case .failure(let error):
+                print(error)
+            }
+        }
+        .perform()
+//        let pass = PKPass(data: file as Data, error: nil)
+//        let vc = PKAddPassesViewController(pass: pass)
+//        self.present(vc, animated: true, completion: nil)
     }
 }
 
