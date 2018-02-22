@@ -40,8 +40,8 @@ extension HIAdminAnnouncementViewController {
             return
         }
 
-        let message = "Create a new notification with title \"\(title)\" and description \"\(description)\"?"
-        let confirmAlertController = UIAlertController(title: "Confirm Notification", message: message, preferredStyle: .alert)
+        let message = "Create a new announcement with title \"\(title)\" and description \"\(description)\"?"
+        let confirmAlertController = UIAlertController(title: "Confirm Announcement", message: message, preferredStyle: .alert)
         confirmAlertController.addAction(
             UIAlertAction(title: "Yes", style: .default) { _ in
                 self.stylizeFor(.currentlyCreatingAnnouncement)
@@ -53,7 +53,7 @@ extension HIAdminAnnouncementViewController {
                             self?.stylizeFor(.readyToCreateAnnouncement)
                             self?.titleTextField.text = ""
                             self?.descriptionTextField.text = ""
-                            let alert = UIAlertController(title: "Notification Created", message: nil, preferredStyle: .alert)
+                            let alert = UIAlertController(title: "Announcement Created", message: nil, preferredStyle: .alert)
                             alert.addAction(
                                 UIAlertAction(title: "OK", style: .default) { _ in
                                     self?.navigationController?.popViewController(animated: true)

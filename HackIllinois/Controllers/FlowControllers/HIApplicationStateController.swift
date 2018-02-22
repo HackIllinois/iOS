@@ -84,7 +84,7 @@ extension HIApplicationStateController {
         viewControllers.append(HIAnnouncementsViewController())
         viewControllers.append(HIUserDetailViewController())
 
-        if [.volunteer, .staff, .admin].contains(user.permissions) {
+        if [.volunteer, .mentor, .sponsor, .staff, .admin].contains(user.permissions) {
             viewControllers.append(HIScannerViewController())
         }
 

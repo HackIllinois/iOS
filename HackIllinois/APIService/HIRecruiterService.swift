@@ -11,13 +11,19 @@ import APIManager
 
 final class HIRecruiterService: HIBaseService {
     override static var baseURL: String {
-        return super.baseURL + "/requests"
+        return super.baseURL + "/recruiters"
     }
     
-    static func recruiterRequest(name: String, duration: Int) -> APIRequest<HIAPISuccessContainer> {
-        var eventDict = [String: Any]()
-        eventDict["attendeeUserId"] = name
-        return APIRequest<HIAPISuccessContainer>(service: self, endpoint: "recruiterInterestRequest", body: eventDict, method: .POST)
+    static func followUserBy(id: Int) -> APIRequest<HIAPISuccessContainer> {
+        var body = HTTPBody()
+        body["id"] = id
+        return APIRequest<HIAPISuccessContainer>(service: self, endpoint: "/apply", body: body, method: .POST)
     }
-    
+
+    static func followedUsers(id: Int) -> APIRequest<HIAPISuccessContainer> {
+        var body = HTTPBody()
+        body["id"] = id
+        return APIRequest<HIAPISuccessContainer>(service: self, endpoint: "/apply", body: body, method: .POST)
+    }
+
 }

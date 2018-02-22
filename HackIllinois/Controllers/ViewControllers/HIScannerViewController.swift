@@ -49,7 +49,7 @@ extension HIScannerViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         var rightNavigationItem: UIBarButtonItem?
-        if HIApplicationStateController.shared.user?.permissions == .admin || HIApplicationStateController.shared.user?.permissions == .sponsor || HIApplicationStateController.shared.user?.permissions == .mentor {
+        if HIApplicationStateController.shared.user?.permissions == .admin {
             rightNavigationItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(presentAdminEventViewController))
         }
         navigationItem.rightBarButtonItem = rightNavigationItem
@@ -132,7 +132,8 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
     }
 
     func found(code: String) {
-        guard let url = URL(string: code),
+        guard let user = HIApplicationStateController.shared.user,
+            let url = URL(string: code),
             url.scheme == "hackillinois",
             let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
             let queryItems = components.queryItems,
@@ -147,6 +148,17 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
         let lookingUpUserAlertController = UIAlertController(title: "Checking user...", message: identifier, preferredStyle: .alert)
         self.lookingUpUserAlertController = lookingUpUserAlertController
         present(lookingUpUserAlertController, animated: true, completion: nil)
+
+
+        switch user.permissions {
+        case .volunteer, .staff, .admin:
+
+        case .mentor, .sponsor:
+
+        default:
+            break
+        }
+
 
         HITrackingService.track(id: id)
         .onCompletion { (result) in
