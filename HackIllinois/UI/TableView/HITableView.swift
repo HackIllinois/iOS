@@ -22,6 +22,8 @@ class HITableView: UITableView {
     init(style: Style) {
         self.style_ = style
         super.init(frame: .zero, style: .grouped)
+        translatesAutoresizingMaskIntoConstraints = false
+
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
     }
@@ -36,7 +38,6 @@ class HITableView: UITableView {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        translatesAutoresizingMaskIntoConstraints = false
         switch HIApplication.Theme.current {
         case .day:
             indicatorStyle = .black
@@ -46,7 +47,6 @@ class HITableView: UITableView {
         switch style_ {
         case .standard:
             backgroundColor = HIApplication.Palette.current.background
-
         }
     }
 
