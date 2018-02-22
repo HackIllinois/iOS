@@ -15,12 +15,14 @@ class HIButton: UIButton {
         case standard(title: String?)
         case async(title: String?)
         case menu(title: String?, tag: Int)
+        case icon(image: UIImage)
 
         var rawValue: Int {
             switch self {
             case .standard: return 0
             case .async: return 1
             case .menu: return 2
+            case .icon: return 3
             }
         }
 
@@ -43,27 +45,21 @@ class HIButton: UIButton {
         addTarget(self, action: #selector(handleTouchDragExit), for: .touchDragExit)
         addTarget(self, action: #selector(handleTouchUpInside), for: .touchUpInside)
 
-        setTitleColor(HIApplication.Color.darkIndigo, for: .normal)
         translatesAutoresizingMaskIntoConstraints = false
 
         switch style {
         case .standard(let title):
-            backgroundColor = HIApplication.Color.lightPeriwinkle
-
             layer.cornerRadius = 8
             setTitle(title, for: .normal)
             titleLabel?.font = UIFont.systemFont(ofSize: 15)
 
         case .async(let title):
-            backgroundColor = HIApplication.Color.lightPeriwinkle
-
             layer.cornerRadius = 8
             setTitle(title, for: .normal)
             titleLabel?.font = UIFont.systemFont(ofSize: 15)
 
             let activityIndicator = UIActivityIndicatorView()
             addSubview(activityIndicator)
-            activityIndicator.tintColor = HIApplication.Color.hotPink
             activityIndicator.stopAnimating()
             activityIndicator.hidesWhenStopped = true
             activityIndicator.translatesAutoresizingMaskIntoConstraints = false
@@ -72,17 +68,48 @@ class HIButton: UIButton {
             self.activityIndicator = activityIndicator
 
         case .menu(let title, let tag):
-            backgroundColor = HIApplication.Color.paleBlue
             contentHorizontalAlignment = .left
             setTitle(title, for: .normal)
-            setTitleColor(HIApplication.Color.darkIndigo, for: .normal)
             titleLabel?.font = UIFont.systemFont(ofSize: 16)
             self.tag = tag
+
+        case .icon(let image):
+            let templateImage = image.withRenderingMode(.alwaysTemplate)
+            setImage(templateImage, for: .normal)
         }
+
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
+        refreshForThemeChange()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) should not be used.")
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: - Themeable
+    @objc func refreshForThemeChange() {
+        setTitleColor(HIApplication.Palette.current.primary, for: .normal)
+
+        switch style {
+        case .standard:
+            backgroundColor = HIApplication.Palette.current.actionBackground
+
+        case .async:
+            backgroundColor = HIApplication.Palette.current.actionBackground
+            activityIndicator?.tintColor = HIApplication.Palette.current.accent
+
+        case .menu:
+            backgroundColor = HIApplication.Palette.current.background
+            setTitleColor(HIApplication.Palette.current.primary, for: .normal)
+
+        case .icon:
+            backgroundColor = HIApplication.Palette.current.background
+            tintColor = HIApplication.Palette.current.accent
+        }
     }
 
     // MARK: - API
@@ -98,7 +125,7 @@ class HIButton: UIButton {
         } else {
             isEnabled = true
             setTitle(title, for: .normal)
-            backgroundColor = HIApplication.Color.lightPeriwinkle
+            backgroundColor = HIApplication.Palette.current.actionBackground
             activityIndicator?.stopAnimating()
         }
     }

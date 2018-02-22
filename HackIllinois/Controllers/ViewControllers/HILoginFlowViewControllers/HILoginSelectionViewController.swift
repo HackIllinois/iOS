@@ -44,9 +44,8 @@ class HILoginSelectionViewController: HIBaseViewController {
 extension HILoginSelectionViewController {
     override func loadView() {
         super.loadView()
-        let tableView = UITableView(frame: .zero, style: .grouped)
+        let tableView = HITableView(style: .standard)
         tableView.alwaysBounceVertical = false
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 54).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
@@ -93,7 +92,6 @@ extension HILoginSelectionViewController {
             if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
                 cell.separatorView.isHidden = true
             }
-            cell.activityIndicator.isHidden = true
         }
         return cell
     }

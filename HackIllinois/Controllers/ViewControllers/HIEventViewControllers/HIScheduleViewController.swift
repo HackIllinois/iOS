@@ -68,7 +68,7 @@ class HIScheduleViewController: HIEventListViewController {
     }
 
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) should not be used.")
+        fatalError("init(coder:) should not be used")
     }
 }
 
@@ -104,8 +104,7 @@ extension HIScheduleViewController {
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 34).isActive = true
 
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        let tableView = HITableView(style: .standard)
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true

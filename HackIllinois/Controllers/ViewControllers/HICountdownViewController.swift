@@ -31,7 +31,7 @@ class HICountdownViewController: UIViewController {
     var hourFrame = 0
     var minuteFrame = 0
     var secondFrame = 0
-    var timer = Timer()
+    var timer: Timer?
 
     var timeDifference: TimeInterval = 0.0
     var daysRemaining: Int {
@@ -60,10 +60,24 @@ class HICountdownViewController: UIViewController {
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
+        refreshForThemeChange()
     }
 
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) should not be used.")
+        fatalError("init(coder:) should not be used")
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: - Themeable
+    @objc func refreshForThemeChange() {
+        days.backgroundColor = HIApplication.Palette.current.background
+        hours.backgroundColor = HIApplication.Palette.current.background
+        minutes.backgroundColor = HIApplication.Palette.current.background
+        seconds.backgroundColor = HIApplication.Palette.current.background
     }
 }
 
@@ -98,16 +112,10 @@ extension HICountdownViewController {
     }
 
     func stackView(with countDownView: LOTAnimationView, and labelString: String) -> UIStackView {
-        countDownView.backgroundColor = HIApplication.Color.paleBlue
-
-        let label = UILabel()
-        label.backgroundColor = HIApplication.Color.paleBlue
-        label.text = labelString
-        label.textColor = HIApplication.Color.hotPink
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 21, weight: .light)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        countDownView.backgroundColor = HIApplication.Palette.current.background
         countDownView.translatesAutoresizingMaskIntoConstraints = false
+
+        let label = HILabel(style: .countdown(text: labelString))
 
         let stackView = UIStackView()
         stackView.distribution = .fillProportionally
@@ -123,24 +131,16 @@ extension HICountdownViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         startUpCountdown()
-        NotificationCenter.default.addObserver(self,
-            selector: #selector(startUpCountdown),
-            name: .UIApplicationDidBecomeActive, object: nil)
-        NotificationCenter.default.addObserver(self,
-            selector: #selector(tearDownCountdown),
-            name: .UIApplicationWillResignActive, object: nil)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationDidBecomeActive, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillResignActive, object: nil)
         tearDownCountdown()
     }
 }
 
 extension HICountdownViewController {
-    @objc func startUpCountdown() {
+    func startUpCountdown() {
         countdownDate = delegate?.countdownToDateFor(countdownViewController: self)
         updateTimeDifference()
         setupCounters()
@@ -205,9 +205,8 @@ extension HICountdownViewController {
         timeDifference = countdownDate?.timeIntervalSince(Date()) ?? 0
     }
 
-    @objc func tearDownCountdown() {
-        if timer.isValid {
-            timer.invalidate()
-        }
+    func tearDownCountdown() {
+        timer?.invalidate()
+        timer = nil
     }
 }

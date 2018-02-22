@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         setupNavigationBarAppearance()
         setupTableViewAppearance()
+        _ = HIThemeEngine.shared
         HIApplicationStateController.shared.initalize()
 //        locationManager.requestWhenInUseAuthorization()
 //        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
@@ -57,28 +58,15 @@ extension AppDelegate {
     func setupNavigationBarAppearance() {
         let navigationBarAppearace = UINavigationBar.appearance()
 
-        navigationBarAppearace.tintColor = HIApplication.Color.hotPink
-        navigationBarAppearace.barTintColor = HIApplication.Color.paleBlue
         navigationBarAppearace.titleTextAttributes = [
-            NSAttributedStringKey.foregroundColor: HIApplication.Color.darkIndigo as Any,
             NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15, weight: .bold) as Any
         ]
         navigationBarAppearace.shadowImage = UIImage()
-
-        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
-        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
-        HIApplication.Color.paleBlue.setFill()
-        UIRectFill(rect)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-
-        navigationBarAppearace.setBackgroundImage(image, for: .default)
         navigationBarAppearace.isTranslucent = false
     }
 
     func setupTableViewAppearance() {
         let tableViewAppearance = UITableView.appearance()
-        tableViewAppearance.backgroundColor = HIApplication.Color.paleBlue
         tableViewAppearance.separatorStyle = .none
         tableViewAppearance.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: CGFloat.leastNonzeroMagnitude, height: CGFloat.leastNonzeroMagnitude))
         tableViewAppearance.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: CGFloat.leastNonzeroMagnitude, height: CGFloat.leastNonzeroMagnitude))

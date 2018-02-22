@@ -25,12 +25,45 @@ class HIMenuController: UIViewController {
 
     private(set) var _tabBarController = UITabBarController()
 
-    var overlayView = UIView()
+    var overlayView = HIView(style: .overlay)
     var menuItems = UIStackView()
 
     var menuHeight = NSLayoutConstraint()
     var menuOverlap = NSLayoutConstraint()
     var menuItemsHeight = NSLayoutConstraint()
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        switch HIApplication.Theme.current {
+        case .day:
+            return .default
+        case .night:
+            return .lightContent
+        }
+    }
+
+    // MARK: - Init
+    convenience init() {
+        self.init(nibName: nil, bundle: nil)
+    }
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
+        refreshForThemeChange()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) should not be used")
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: - Themeable
+    @objc func refreshForThemeChange() {
+        setNeedsStatusBarAppearanceUpdate()
+    }
 }
 
 // MARK: - Actions
@@ -39,10 +72,7 @@ extension HIMenuController {
         _tabBarController.viewControllers = viewControllers.map {
             _ = $0.view // forces viewDidLoad to run, allows .title to be accessible
             $0.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuOpen"), style: .plain, target: self, action: #selector(open))
-            let navigationController = UINavigationController(rootViewController: $0)
-            navigationController.title = $0.title
-
-            return navigationController
+            return HINavigationController(rootViewController: $0)
         }
 
         if view != nil {
@@ -84,9 +114,7 @@ extension HIMenuController {
         _tabBarController.view.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         _tabBarController.didMove(toParentViewController: self)
 
-        overlayView.backgroundColor = HIApplication.Color.darkBlueGrey
         overlayView.alpha = 0.0
-        overlayView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(overlayView)
         overlayView.topAnchor.constraint(equalTo: _tabBarController.view.topAnchor).isActive = true
         overlayView.leadingAnchor.constraint(equalTo: _tabBarController.view.leadingAnchor).isActive = true
@@ -94,7 +122,7 @@ extension HIMenuController {
         overlayView.trailingAnchor.constraint(equalTo: _tabBarController.view.trailingAnchor).isActive = true
 
         let menu = HIView(style: .background)
-        menu.backgroundColor = HIApplication.Color.paleBlue
+        menu.backgroundColor = HIApplication.Palette.current.background
         menu.clipsToBounds = true
         menu.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(menu)
@@ -106,9 +134,7 @@ extension HIMenuController {
         menuHeight = menu.heightAnchor.constraint(equalToConstant: 0)
         menuHeight.isActive = true
 
-        let closeMenuButton = UIButton(type: .system)
-        closeMenuButton.setImage(#imageLiteral(resourceName: "MenuClose"), for: .normal)
-        closeMenuButton.tintColor = HIApplication.Color.hotPink
+        let closeMenuButton = HIButton(style: .icon(image: #imageLiteral(resourceName: "MenuClose")))
         closeMenuButton.addTarget(self, action: #selector(close(_:)), for: .touchUpInside)
         closeMenuButton.translatesAutoresizingMaskIntoConstraints = false
         menu.addSubview(closeMenuButton)

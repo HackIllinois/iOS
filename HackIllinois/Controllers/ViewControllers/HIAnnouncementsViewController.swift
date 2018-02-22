@@ -43,8 +43,7 @@ extension HIAnnouncementsViewController {
     override func loadView() {
         super.loadView()
 
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        let tableView = HITableView(style: .standard)
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
@@ -110,11 +109,6 @@ extension HIAnnouncementsViewController {
 
 // MARK: - UITableViewDelegate
 extension HIAnnouncementsViewController {
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        let announcement = fetchedResultsController.object(at: indexPath)
-//        return HIAnnouncementCell.heightForCell(with: announcement)
-//    }
-
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         super.tableView(tableView, didSelectRowAt: indexPath)
     }
