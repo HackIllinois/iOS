@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import PassKit
 
 class HIUserDetailViewController: HIBaseViewController {
     // MARK: - Properties
@@ -87,6 +88,36 @@ extension HIUserDetailViewController {
         }
         userNameLabel.text = (user.name ?? user.identifier).uppercased()
         userInfoLabel.text = user.dietaryRestrictions?.displayText ?? "UNKNOWN DIETARY RESTRICTIONS"
+        setupPass()
+    }
+}
+
+// MARK: - Passbook/Wallet support
+extension HIUserDetailViewController {
+    func setupPass() {
+        guard PKPassLibrary.isPassLibraryAvailable(),
+            let user = HIApplicationStateController.shared.user,
+            !UserDefaults.standard.bool(forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)") else { return }
+        let passString = "hackillinois://qrcode/user?id=\(user.id)&identifier=\(user.identifier)"
+        HIPassService.getPass(with: passString)
+        .onCompletion { result in
+            switch result {
+            case .success(let data):
+                let pass = PKPass(data: data, error: nil)
+                let vc = PKAddPassesViewController(pass: pass)
+                DispatchQueue.main.async { [weak self] in
+                    if let strongSelf = self {
+                        UserDefaults.standard.set(true, forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)")
+                        strongSelf.present(vc, animated: true, completion: nil)
+                    }
+                }
+            case .cancellation:
+                break
+            case .failure(let error):
+                print(error)
+            }
+        }
+        .perform()
     }
 }
 
