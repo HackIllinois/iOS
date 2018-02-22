@@ -36,7 +36,7 @@ class HIHomeViewController: HIEventListViewController {
         return fetchedResultsController
     }()
 
-    let countdownTitleLabel = UILabel()
+    let countdownTitleLabel = HILabel(style: .title)
     lazy var countdownViewController = HICountdownViewController(delegate: self)
 
     var countdownDataStoreIndex = 0
@@ -47,7 +47,7 @@ class HIHomeViewController: HIEventListViewController {
         (HIApplication.Configuration.EVENT_END_TIME, "HACKILLINOIS ENDS IN")
     ]
 
-    var timer = Timer()
+    var timer: Timer?
 }
 
 // MARK: - UIViewController
@@ -56,10 +56,6 @@ extension HIHomeViewController {
         super.loadView()
 
         countdownTitleLabel.text = "HACKING ENDS IN"
-        countdownTitleLabel.textColor = HIApplication.Color.darkIndigo
-        countdownTitleLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        countdownTitleLabel.textAlignment = .center
-        countdownTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(countdownTitleLabel)
         countdownTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         countdownTitleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
@@ -74,19 +70,14 @@ extension HIHomeViewController {
         countdownViewController.view.heightAnchor.constraint(equalToConstant: 150).isActive = true
         countdownViewController.didMove(toParentViewController: self)
 
-        let happeningNowLabel = UILabel()
+        let happeningNowLabel = HILabel(style: .title)
         happeningNowLabel.text = "HAPPENING NOW"
-        happeningNowLabel.textColor = HIApplication.Color.darkIndigo
-        happeningNowLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        happeningNowLabel.textAlignment = .center
-        happeningNowLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(happeningNowLabel)
         happeningNowLabel.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor, constant: 16).isActive = true
         happeningNowLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         happeningNowLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
 
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        let tableView = HITableView(style: .standard)
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: happeningNowLabel.bottomAnchor, constant: 5).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
@@ -102,25 +93,13 @@ extension HIHomeViewController {
         setupRefreshControl()
     }
 
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupPredicateRefreshTimer()
-        NotificationCenter.default.addObserver(self,
-            selector: #selector(setupPredicateRefreshTimer),
-            name: .UIApplicationDidBecomeActive, object: nil
-        )
-        NotificationCenter.default.addObserver(self,
-            selector: #selector(teardownPredicateRefreshTimer),
-            name: .UIApplicationWillResignActive, object: nil
-        )
-
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationDidBecomeActive, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillResignActive, object: nil)
         teardownPredicateRefreshTimer()
     }
 }
@@ -149,7 +128,7 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
 }
 
 extension HIHomeViewController {
-    @objc func setupPredicateRefreshTimer() {
+    func setupPredicateRefreshTimer() {
         timer = Timer.scheduledTimer(
             timeInterval: 30,
             target: self,
@@ -172,7 +151,8 @@ extension HIHomeViewController {
         }
     }
 
-    @objc func teardownPredicateRefreshTimer() {
-        timer.invalidate()
+    func teardownPredicateRefreshTimer() {
+        timer?.invalidate()
+        timer = nil
     }
 }

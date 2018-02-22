@@ -17,14 +17,13 @@ class HIBaseViewController: UIViewController {
     var refreshControl = UIRefreshControl()
     var refreshAnimation = LOTAnimationView(name: "refresh")
     var tableView: UITableView?
-    let tableBackgroundView = HIEmptyTableBackgroundView()
+    let tableBackgroundView = HIView(style: .emptyTable)
 }
 
 // MARK: - UIViewController
 extension HIBaseViewController {
     override func loadView() {
-        view = UIView()
-        view.backgroundColor = HIApplication.Color.paleBlue
+        view = HIView(style: .background)
     }
 
     override func viewDidLoad() {
