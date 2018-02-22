@@ -75,12 +75,6 @@ class HIScheduleViewController: HIEventListViewController {
 // MARK: - Actions
 extension HIScheduleViewController {
     @objc func didSelectTab(_ sender: HISegmentedControl) {
-        if HIApplication.Theme.current == .day {
-            HIApplication.Theme.current = .night
-        } else {
-            HIApplication.Theme.current = .day
-        }
-
         fetchedResultsController.fetchRequest.predicate = dataStore[sender.selectedIndex].predicate
         try? fetchedResultsController.performFetch()
         if let tableView = tableView {

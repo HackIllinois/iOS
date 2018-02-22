@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         setupNavigationBarAppearance()
         setupTableViewAppearance()
+        _ = HIThemeEngine.shared
         HIApplicationStateController.shared.initalize()
 //        locationManager.requestWhenInUseAuthorization()
 //        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers

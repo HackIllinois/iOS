@@ -31,7 +31,7 @@ class HICountdownViewController: UIViewController {
     var hourFrame = 0
     var minuteFrame = 0
     var secondFrame = 0
-    var timer = Timer()
+    var timer: Timer?
 
     var timeDifference: TimeInterval = 0.0
     var daysRemaining: Int {
@@ -131,24 +131,16 @@ extension HICountdownViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         startUpCountdown()
-        NotificationCenter.default.addObserver(self,
-            selector: #selector(startUpCountdown),
-            name: .UIApplicationDidBecomeActive, object: nil)
-        NotificationCenter.default.addObserver(self,
-            selector: #selector(tearDownCountdown),
-            name: .UIApplicationWillResignActive, object: nil)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationDidBecomeActive, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillResignActive, object: nil)
         tearDownCountdown()
     }
 }
 
 extension HICountdownViewController {
-    @objc func startUpCountdown() {
+    func startUpCountdown() {
         countdownDate = delegate?.countdownToDateFor(countdownViewController: self)
         updateTimeDifference()
         setupCounters()
@@ -213,9 +205,8 @@ extension HICountdownViewController {
         timeDifference = countdownDate?.timeIntervalSince(Date()) ?? 0
     }
 
-    @objc func tearDownCountdown() {
-        if timer.isValid {
-            timer.invalidate()
-        }
+    func tearDownCountdown() {
+        timer?.invalidate()
+        timer = nil
     }
 }
