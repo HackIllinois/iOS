@@ -49,7 +49,7 @@ extension HIScannerViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         var rightNavigationItem: UIBarButtonItem?
-        if HIApplicationStateController.shared.user?.permissions == .admin {
+        if HIApplicationStateController.shared.user?.permissions == .admin || HIApplicationStateController.shared.user?.permissions == .sponsor || HIApplicationStateController.shared.user?.permissions == .mentor {
             rightNavigationItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(presentAdminEventViewController))
         }
         navigationItem.rightBarButtonItem = rightNavigationItem
