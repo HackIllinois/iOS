@@ -97,21 +97,11 @@ extension HIAnnouncementsViewController {
 
 // MARK: - UITableViewDataSource
 extension HIAnnouncementsViewController {
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
-    }
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HIAnnouncementCell.identifier, for: indexPath)
         if let cell = cell as? HIAnnouncementCell {
-//            let announcement = fetchedResultsController.object(at: indexPath)
-//            cell <- announcement
-            cell.infoLabel.text = "garbage info"
-            cell.timeLabel.text = "a some point in time"
-            cell.titleLabel.text = "some title"
+            let announcement = fetchedResultsController.object(at: indexPath)
+            cell <- announcement
         }
         return cell
     }

@@ -26,7 +26,6 @@ struct HIApplication {
         let contentBackground: UIColor
         let actionBackground: UIColor
         let overlay: UIColor
-        let dark: UIColor
 
         private static let dayPalette = HIApplication.Palette(
             primary: UIColor(named: "darkIndigo")!,
@@ -34,18 +33,16 @@ struct HIApplication {
             background: UIColor(named: "paleBlue")!,
             contentBackground: UIColor(named: "white")!,
             actionBackground: UIColor(named: "lightPeriwinkle")!,
-            overlay: UIColor(named: "darkBlueGrey")!,
-            dark: UIColor(named: "darkIndigo")!
+            overlay: UIColor(named: "darkBlueGrey")!
         )
 
         private static let nightPalette = HIApplication.Palette(
-            primary: UIColor.white,
-            accent: UIColor(named: "hotPink")!,
-            background: UIColor.darkGray,
-            contentBackground: UIColor.lightGray,
-            actionBackground: UIColor.gray,
-            overlay: UIColor.lightGray,
-            dark: UIColor.darkGray
+            primary: UIColor(red: 207/255, green: 216/255, blue: 238/255, alpha: 255/255),
+            accent: UIColor(red: 244/255, green: 151/255, blue: 185/255, alpha: 255/255),
+            background: UIColor(red: 17/255, green: 17/255, blue: 47/255, alpha: 255/255),
+            contentBackground: UIColor(red: 34/255, green: 29/255, blue: 91/255, alpha: 255/255),
+            actionBackground: UIColor(red: 64/255, green: 73/255, blue: 158/255, alpha: 255/255),
+            overlay: UIColor.black
         )
 
         static var current: Palette {

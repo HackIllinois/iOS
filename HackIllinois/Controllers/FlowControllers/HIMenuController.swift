@@ -31,6 +31,39 @@ class HIMenuController: UIViewController {
     var menuHeight = NSLayoutConstraint()
     var menuOverlap = NSLayoutConstraint()
     var menuItemsHeight = NSLayoutConstraint()
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        switch HIApplication.Theme.current {
+        case .day:
+            return .default
+        case .night:
+            return .lightContent
+        }
+    }
+
+    // MARK: - Init
+    convenience init() {
+        self.init(nibName: nil, bundle: nil)
+    }
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
+        refreshForThemeChange()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) should not be used")
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: - Themeable
+    @objc func refreshForThemeChange() {
+        setNeedsStatusBarAppearanceUpdate()
+    }
 }
 
 // MARK: - Actions
@@ -101,9 +134,7 @@ extension HIMenuController {
         menuHeight = menu.heightAnchor.constraint(equalToConstant: 0)
         menuHeight.isActive = true
 
-        let closeMenuButton = UIButton(type: .system)
-        closeMenuButton.setImage(#imageLiteral(resourceName: "MenuClose"), for: .normal)
-        closeMenuButton.tintColor = HIApplication.Palette.current.accent
+        let closeMenuButton = HIButton(style: .icon(image: #imageLiteral(resourceName: "MenuClose")))
         closeMenuButton.addTarget(self, action: #selector(close(_:)), for: .touchUpInside)
         closeMenuButton.translatesAutoresizingMaskIntoConstraints = false
         menu.addSubview(closeMenuButton)

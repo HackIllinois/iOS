@@ -11,23 +11,22 @@ import UIKit
 
 class HIBubbleCell: UITableViewCell {
     // MARK: - Properties
-    var selectedColor: UIColor {
-        return HIApplication.Palette.current.accent
-    }
-
-    var highlightedColor: UIColor {
-        return HIApplication.Palette.current.actionBackground
-    }
-
     var defaultColor: UIColor {
         return HIApplication.Palette.current.contentBackground
     }
+
+    var activeColor: UIColor {
+        return HIApplication.Palette.current.actionBackground
+    }
+
+    var animator: UIViewPropertyAnimator?
 
     var bubbleView = HIView(style: .content)
 
     // MARK: - Init
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        selectionStyle = .none
 
         addSubview(bubbleView)
         bubbleView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
@@ -53,26 +52,21 @@ class HIBubbleCell: UITableViewCell {
     }
 
     // MARK: - UITableViewCell
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        bubbleView.backgroundColor = HIApplication.Palette.current.contentBackground
-    }
-
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        let duration = animated ? 0.2 : 0
-        let animator = UIViewPropertyAnimator(duration: duration, curve: .linear)
-        animator.addAnimations {
-            self.bubbleView.backgroundColor = highlighted ? self.highlightedColor : self.defaultColor
-        }
-        animator.startAnimation()
+        setActive(highlighted)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        let duration = animated ? 0.2 : 0
-        let animator = UIViewPropertyAnimator(duration: duration, curve: .linear)
-        animator.addAnimations {
-            self.bubbleView.backgroundColor = selected ? self.selectedColor : self.defaultColor
+        setActive(selected)
+    }
+
+    func setActive(_ active: Bool) {
+        let finalColor = active ? activeColor : defaultColor
+        animator?.stopAnimation(true)
+        animator = UIViewPropertyAnimator(duration: 0.2, curve: .linear)
+        animator?.addAnimations { [weak self] in
+            self?.bubbleView.backgroundColor = finalColor
         }
-        animator.startAnimation()
+        animator?.startAnimation()
     }
 }

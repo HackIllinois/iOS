@@ -88,22 +88,16 @@ extension HIUserPassLoginViewController {
     override func loadView() {
         super.loadView()
 
-        let backButton = UIButton(type: .system)
-        backButton.setImage(#imageLiteral(resourceName: "BackButton"), for: .normal)
-        backButton.tintColor = HIApplication.Palette.current.accent
+        let backButton = HIButton(style: .icon(image: #imageLiteral(resourceName: "BackButton")))
         backButton.addTarget(self, action: #selector(didSelectBack), for: .touchUpInside)
-        backButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(backButton)
         backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         backButton.widthAnchor.constraint(equalToConstant: 67).isActive = true
         backButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
-        let logInLabel = UILabel()
+        let logInLabel = HILabel(style: .loginHeader)
         logInLabel.text = "LOG IN"
-        logInLabel.textColor = HIApplication.Palette.current.accent
-        logInLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        logInLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(logInLabel)
         logInLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 54).isActive = true
         logInLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 29).isActive = true

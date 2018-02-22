@@ -56,7 +56,6 @@ class HICountdownViewController: UIViewController {
     convenience init(delegate: HICountdownViewControllerDelegate) {
         self.init(nibName: nil, bundle: nil)
         self.delegate = delegate
-
     }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {

@@ -60,12 +60,14 @@ extension HIEventCell {
 
     static func <- (lhs: HIEventCell, rhs: Event) {
         var contentStackViewHeight: CGFloat = 0
-        let titleLabel = HILabel(style: .event(text: rhs.name))
+        let titleLabel = HILabel(style: .event)
+        titleLabel.text = rhs.name
         contentStackViewHeight += titleLabel.intrinsicContentSize.height
         lhs.contentStackView.addArrangedSubview(titleLabel)
         if let locations = rhs.locations as? Set<Location> {
             for location in locations {
-                let locationLabel = HILabel(style: .location(text: location.name))
+                let locationLabel = HILabel(style: .location)
+                locationLabel.text = location.name
                 contentStackViewHeight += locationLabel.intrinsicContentSize.height + 3
                 lhs.contentStackView.addArrangedSubview(locationLabel)
             }

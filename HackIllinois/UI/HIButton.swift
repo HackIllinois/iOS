@@ -15,12 +15,14 @@ class HIButton: UIButton {
         case standard(title: String?)
         case async(title: String?)
         case menu(title: String?, tag: Int)
+        case icon(image: UIImage)
 
         var rawValue: Int {
             switch self {
             case .standard: return 0
             case .async: return 1
             case .menu: return 2
+            case .icon: return 3
             }
         }
 
@@ -43,6 +45,39 @@ class HIButton: UIButton {
         addTarget(self, action: #selector(handleTouchDragExit), for: .touchDragExit)
         addTarget(self, action: #selector(handleTouchUpInside), for: .touchUpInside)
 
+        translatesAutoresizingMaskIntoConstraints = false
+
+        switch style {
+        case .standard(let title):
+            layer.cornerRadius = 8
+            setTitle(title, for: .normal)
+            titleLabel?.font = UIFont.systemFont(ofSize: 15)
+
+        case .async(let title):
+            layer.cornerRadius = 8
+            setTitle(title, for: .normal)
+            titleLabel?.font = UIFont.systemFont(ofSize: 15)
+
+            let activityIndicator = UIActivityIndicatorView()
+            addSubview(activityIndicator)
+            activityIndicator.stopAnimating()
+            activityIndicator.hidesWhenStopped = true
+            activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+            activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+            activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+            self.activityIndicator = activityIndicator
+
+        case .menu(let title, let tag):
+            contentHorizontalAlignment = .left
+            setTitle(title, for: .normal)
+            titleLabel?.font = UIFont.systemFont(ofSize: 16)
+            self.tag = tag
+
+        case .icon(let image):
+            let templateImage = image.withRenderingMode(.alwaysTemplate)
+            setImage(templateImage, for: .normal)
+        }
+
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
     }
@@ -58,40 +93,22 @@ class HIButton: UIButton {
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
         setTitleColor(HIApplication.Palette.current.primary, for: .normal)
-        translatesAutoresizingMaskIntoConstraints = false
 
         switch style {
-        case .standard(let title):
+        case .standard:
             backgroundColor = HIApplication.Palette.current.actionBackground
 
-            layer.cornerRadius = 8
-            setTitle(title, for: .normal)
-            titleLabel?.font = UIFont.systemFont(ofSize: 15)
-
-        case .async(let title):
+        case .async:
             backgroundColor = HIApplication.Palette.current.actionBackground
+            activityIndicator?.tintColor = HIApplication.Palette.current.accent
 
-            layer.cornerRadius = 8
-            setTitle(title, for: .normal)
-            titleLabel?.font = UIFont.systemFont(ofSize: 15)
-
-            let activityIndicator = UIActivityIndicatorView()
-            addSubview(activityIndicator)
-            activityIndicator.tintColor = HIApplication.Palette.current.accent
-            activityIndicator.stopAnimating()
-            activityIndicator.hidesWhenStopped = true
-            activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-            activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-            activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            self.activityIndicator = activityIndicator
-
-        case .menu(let title, let tag):
+        case .menu:
             backgroundColor = HIApplication.Palette.current.background
-            contentHorizontalAlignment = .left
-            setTitle(title, for: .normal)
             setTitleColor(HIApplication.Palette.current.primary, for: .normal)
-            titleLabel?.font = UIFont.systemFont(ofSize: 16)
-            self.tag = tag
+
+        case .icon:
+            backgroundColor = HIApplication.Palette.current.background
+            tintColor = HIApplication.Palette.current.accent
         }
     }
 

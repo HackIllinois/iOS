@@ -21,7 +21,7 @@ class HIApplicationStateController {
     static var shared = HIApplicationStateController()
 
     // MARK: - Properties
-    var window = UIWindow(frame: UIScreen.main.bounds)
+    var window = HIWindow(frame: UIScreen.main.bounds)
     var user: HIUser?
 
     // MARK: ViewControllers
@@ -51,7 +51,6 @@ class HIApplicationStateController {
 
         updateWindowViewController(animated: false)
     }
-
 }
 
 // MARK: - API

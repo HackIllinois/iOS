@@ -24,24 +24,7 @@ class HITextField: UITextField {
     init(style: Style) {
         self.style = style
         super.init(frame: .zero)
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
-        refreshForThemeChange()
-    }
 
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) should not be used.")
-    }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
-    // MARK: - Themeable
-    @objc func refreshForThemeChange() {
-        textColor = HIApplication.Palette.current.primary
-        font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        tintColor = HIApplication.Palette.current.accent
-        backgroundColor = HIApplication.Palette.current.background
         enablesReturnKeyAutomatically = true
         translatesAutoresizingMaskIntoConstraints = false
 
@@ -63,6 +46,34 @@ class HITextField: UITextField {
             returnKeyType = .go
             autocapitalizationType = .none
             autocorrectionType = .no
+        }
+
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
+        refreshForThemeChange()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) should not be used.")
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: - Themeable
+    @objc func refreshForThemeChange() {
+        textColor = HIApplication.Palette.current.primary
+        font = UIFont.systemFont(ofSize: 13, weight: .medium)
+        tintColor = HIApplication.Palette.current.accent
+        backgroundColor = HIApplication.Palette.current.background
+
+        if let placeholder = placeholder {
+            attributedPlaceholder = NSAttributedString(
+                string: placeholder,
+                attributes: [
+                    NSAttributedStringKey.foregroundColor: HIApplication.Palette.current.primary.withAlphaComponent(0.5)
+                ]
+            )
         }
     }
 }

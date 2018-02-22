@@ -13,12 +13,14 @@ class HILabel: UILabel {
     // MARK: - Types
     enum Style {
         case date
-        case location(text: String)
-        case event(text: String)
+        case location
+        case event
         case title
         case subtitle
         case description
         case countdown(text: String)
+        case loginHeader
+        case loginSelection
     }
 
     // MARK: - Properties
@@ -36,12 +38,10 @@ class HILabel: UILabel {
         case .date:
             font = UIFont.systemFont(ofSize: 13, weight: .bold)
 
-        case .location(let text):
-            self.text = text
+        case .location:
             font = UIFont.systemFont(ofSize: 13, weight: .bold)
 
-        case .event(let text):
-            self.text = text
+        case .event:
             font = UIFont.systemFont(ofSize: 18, weight: .light)
 
         case .title:
@@ -59,6 +59,13 @@ class HILabel: UILabel {
             self.text = text
             textAlignment = .center
             font = UIFont.systemFont(ofSize: 21, weight: .light)
+
+        case .loginHeader:
+            font = UIFont.systemFont(ofSize: 15, weight: .medium)
+
+        case .loginSelection:
+            textAlignment = .center
+            font = UIFont.systemFont(ofSize: 13, weight: .medium)
 
         }
 
@@ -102,6 +109,13 @@ class HILabel: UILabel {
         case .countdown:
             backgroundColor = HIApplication.Palette.current.background
             textColor = HIApplication.Palette.current.accent
+
+        case .loginHeader:
+            backgroundColor = HIApplication.Palette.current.background
+            textColor = HIApplication.Palette.current.accent
+
+        case .loginSelection:
+            textColor = HIApplication.Palette.current.primary
 
         }
     }

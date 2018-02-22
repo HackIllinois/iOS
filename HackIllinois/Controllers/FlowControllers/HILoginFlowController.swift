@@ -29,6 +29,15 @@ class HILoginFlowController: UIViewController {
         return statusBarIsHidden
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        switch HIApplication.Theme.current {
+        case .day:
+            return .default
+        case .night:
+            return .lightContent
+        }
+    }
+
     // keeps the login session from going out of scope during presentation
     var loginSession: SFAuthenticationSession?
 
@@ -36,6 +45,30 @@ class HILoginFlowController: UIViewController {
     lazy var navController = UINavigationController(rootViewController: loginSelectionViewController)
     lazy var loginSelectionViewController = HILoginSelectionViewController(delegate: self)
     lazy var userPassLoginViewController = HIUserPassLoginViewController(delegate: self)
+
+    // MARK: - Init
+    convenience init() {
+        self.init(nibName: nil, bundle: nil)
+    }
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
+        refreshForThemeChange()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) should not be used")
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: - Themeable
+    @objc func refreshForThemeChange() {
+        setNeedsStatusBarAppearanceUpdate()
+    }
 }
 
 // MARK: - UIViewController

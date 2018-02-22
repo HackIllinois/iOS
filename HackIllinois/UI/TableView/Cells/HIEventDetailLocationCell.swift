@@ -10,35 +10,24 @@ import Foundation
 import UIKit
 import MapKit
 
-class HIEventDetailLocationCell: HIBaseTableViewCell {
+class HIEventDetailLocationCell: UITableViewCell {
+
     // MARK: - Properties
-    var selectedEffect: UIBlurEffect {
-        return UIBlurEffect(style: .extraLight)
-    }
-
-    var highlightedEffect: UIBlurEffect {
-        return UIBlurEffect(style: .extraLight)
-    }
-
-    var defaultEffect: UIBlurEffect {
-        return UIBlurEffect(style: .light)
-    }
-
-//    let locationManager = CLLocationManager()
+    var animator: UIViewPropertyAnimator?
 
     // MARK: Views
     let mapView = MKMapView()
     let mapAnnotation = MKPointAnnotation()
-    let titleLabel = UILabel()
+    let titleLabel = HILabel(style: .location)
 
-    lazy var blurEffectView = UIVisualEffectView(effect: defaultEffect)
+    var blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+    let containerView = UIView()
 
     // MARK: - Init
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        selectionStyle = .none
 
-        contentView.backgroundColor = HIApplication.Palette.current.contentBackground
-        containerView = UIView()
         containerView.layer.cornerRadius = 8
         containerView.layer.masksToBounds = true
         containerView.backgroundColor = HIApplication.Palette.current.background
@@ -81,10 +70,28 @@ class HIEventDetailLocationCell: HIBaseTableViewCell {
         disclosureIndicatorImageView.bottomAnchor.constraint(equalTo: blurEffectView.contentView.bottomAnchor).isActive = true
         disclosureIndicatorImageView.trailingAnchor.constraint(equalTo: blurEffectView.contentView.trailingAnchor).isActive = true
         disclosureIndicatorImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
+
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
+        refreshForThemeChange()
     }
 
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) should not be used.")
+        fatalError("init(coder:) should not be used")
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: - Themeable
+    @objc func refreshForThemeChange() {
+        contentView.backgroundColor = HIApplication.Palette.current.contentBackground
+        switch HIApplication.Theme.current {
+        case .day:
+            blurEffectView.effect = UIBlurEffect(style: .light)
+        case .night:
+            blurEffectView.effect = UIBlurEffect(style: .extraLight)
+        }
     }
 }
 
@@ -94,26 +101,27 @@ extension HIEventDetailLocationCell {
         super.prepareForReuse()
         titleLabel.text = nil
         mapView.removeAnnotation(mapAnnotation)
-//        mapView.showsUserLocation = false
         mapAnnotation.coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     }
 
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        let duration = animated ? 0.2 : 0
-        let animator = UIViewPropertyAnimator(duration: duration, curve: .linear)
-        animator.addAnimations {
-            self.blurEffectView.effect = highlighted ? self.highlightedEffect : self.defaultEffect
-        }
-        animator.startAnimation()
+        super.setHighlighted(highlighted, animated: animated)
+        setActive(highlighted)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        let duration = animated ? 0.2 : 0
-        let animator = UIViewPropertyAnimator(duration: duration, curve: .linear)
-        animator.addAnimations {
-            self.blurEffectView.effect = selected ? self.selectedEffect : self.defaultEffect
+        super.setHighlighted(selected, animated: animated)
+        setActive(selected)
+    }
+
+    func setActive(_ active: Bool) {
+        let finalAlpha: CGFloat = active ? 0.5 : 1.0
+        animator?.stopAnimation(true)
+        animator = UIViewPropertyAnimator(duration: 0.2, curve: .linear)
+        animator?.addAnimations { [weak self] in
+            self?.containerView.alpha = finalAlpha
         }
-        animator.startAnimation()
+        animator?.startAnimation()
     }
 }
 
@@ -123,15 +131,7 @@ extension HIEventDetailLocationCell {
         lhs.titleLabel.text = rhs.name
         let clLocation = CLLocation(latitude: rhs.latitude, longitude: rhs.longitude)
 
-        let distance: CLLocationDistance
-//        lhs.locationManager.startUpdatingLocation()
-//        if let userLocation = lhs.locationManager.location {
-//            lhs.mapView.showsUserLocation = true
-//            distance = userLocation.distance(from: clLocation)
-//        } else {
-            distance = 150
-//        }
-//        lhs.locationManager.stopUpdatingLocation()
+        let distance: CLLocationDistance = 150
 
         let region = MKCoordinateRegionMakeWithDistance(clLocation.coordinate, distance * 2, distance)
         let topLeft = CLLocationCoordinate2D(

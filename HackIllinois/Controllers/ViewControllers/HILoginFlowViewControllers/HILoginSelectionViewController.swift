@@ -92,7 +92,6 @@ extension HILoginSelectionViewController {
             if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
                 cell.separatorView.isHidden = true
             }
-            cell.activityIndicator.isHidden = true
         }
         return cell
     }

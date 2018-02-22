@@ -15,8 +15,8 @@ class HIEventDetailViewController: HIBaseViewController {
     var event: Event?
 
     // MARK: Views
-    let titleLabel = UILabel()
-    let descriptionLabel = UILabel()
+    let titleLabel = HILabel(style: .event)
+    let descriptionLabel = HILabel(style: .description)
     let favoritedButton = UIButton()
 
     // MARK: Constraints
@@ -92,7 +92,7 @@ extension HIEventDetailViewController {
         descriptionLabel.text = event.info
         tableView?.reloadData()
         view.layoutIfNeeded()
-        let targetSize = CGSize(width: descriptionLabel.frame.width, height: CGFloat.greatestFiniteMagnitude)
+        let targetSize = CGSize(width: descriptionLabel.frame.width, height: .greatestFiniteMagnitude)
         let neededSize = descriptionLabel.sizeThatFits(targetSize)
         descriptionLabelHeight.constant = neededSize.height
         tableViewHeight.constant = CGFloat(event.locations.count) * 160
