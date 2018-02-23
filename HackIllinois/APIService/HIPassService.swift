@@ -21,7 +21,6 @@ final class HIPassService: HIBaseService {
         ]
         return APIRequest<Data>(service: self, endpoint: "", body: params, method: .POST)
     }
-
 }
 
 extension Data: APIReturnable {

@@ -140,15 +140,7 @@ extension HIHomeViewController {
 
     @objc func refreshPredicate() {
         try? fetchedResultsController.performFetch()
-        if let tableView = tableView {
-            UIView.transition(
-                with: tableView,
-                duration: 0.125,
-                options: .transitionCrossDissolve,
-                animations: {
-                    tableView.reloadData()
-            })
-        }
+        animateTableViewReload()
     }
 
     func teardownPredicateRefreshTimer() {

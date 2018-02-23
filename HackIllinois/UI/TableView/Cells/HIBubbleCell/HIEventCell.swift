@@ -9,27 +9,31 @@
 import Foundation
 import UIKit
 
+protocol HIEventCellDelegate: class {
+    func eventCellDidSelectFavoriteButton(_ eventCell: HIEventCell)
+}
+
 class HIEventCell: HIBubbleCell {
     // MARK: - Properties
-    var favoritedButton = UIButton()
+    var favoritedButton = HIButton(style: .iconToggle(activeImage: #imageLiteral(resourceName: "Favorited"), inactiveImage: #imageLiteral(resourceName: "Unfavorited")))
     var contentStackView = UIStackView()
     var contentStackViewHeight = NSLayoutConstraint()
+
+    var indexPath: IndexPath?
+    weak var delegate: HIEventCellDelegate?
 
     // MARK: - Init
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        favoritedButton.setImage(#imageLiteral(resourceName: "Unfavorited"), for: .normal)
-        favoritedButton.translatesAutoresizingMaskIntoConstraints = false
+        favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         bubbleView.addSubview(favoritedButton)
         favoritedButton.topAnchor.constraint(equalTo: bubbleView.topAnchor).isActive = true
         favoritedButton.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor).isActive = true
         favoritedButton.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor).isActive = true
         favoritedButton.widthAnchor.constraint(equalToConstant: 58).isActive = true
 
-        let disclosureIndicatorView = UIImageView(image: #imageLiteral(resourceName: "DisclosureIndicator"))
-        disclosureIndicatorView.contentMode = .center
-        disclosureIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        let disclosureIndicatorView = HIImageView(style: .icon(image: #imageLiteral(resourceName: "DisclosureIndicator")))
         bubbleView.addSubview(disclosureIndicatorView)
         disclosureIndicatorView.topAnchor.constraint(equalTo: bubbleView.topAnchor).isActive = true
         disclosureIndicatorView.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor).isActive = true
@@ -52,6 +56,13 @@ class HIEventCell: HIBubbleCell {
     }
 }
 
+// MARK: - Actions
+extension HIEventCell {
+    @objc func didSelectFavoriteButton(_ sender: HIButton) {
+        delegate?.eventCellDidSelectFavoriteButton(self)
+    }
+}
+
 // MARK: - Population
 extension HIEventCell {
     static func heightForCell(with event: Event) -> CGFloat {
@@ -59,6 +70,7 @@ extension HIEventCell {
     }
 
     static func <- (lhs: HIEventCell, rhs: Event) {
+        lhs.favoritedButton.setToggle(active: rhs.favorite)
         var contentStackViewHeight: CGFloat = 0
         let titleLabel = HILabel(style: .event)
         titleLabel.text = rhs.name
@@ -80,6 +92,7 @@ extension HIEventCell {
 extension HIEventCell {
     override func prepareForReuse() {
         super.prepareForReuse()
+        favoritedButton.setToggle(active: false)
         contentStackView.arrangedSubviews.forEach { (view) in
             contentStackView.removeArrangedSubview(view)
             view.removeFromSuperview()

@@ -9,20 +9,16 @@
 import UIKit
 import SwiftKeychainAccess
 import CoreLocation
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-//    var locationManager = CLLocationManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         setupNavigationBarAppearance()
         setupTableViewAppearance()
         _ = HIThemeEngine.shared
         HIApplicationStateController.shared.initalize()
-//        locationManager.requestWhenInUseAuthorization()
-//        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-//        locationManager.pausesLocationUpdatesAutomatically = true
         return true
     }
 

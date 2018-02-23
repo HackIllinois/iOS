@@ -20,6 +20,7 @@ struct HIAPIEvent: Codable {
         case locations
     }
 
+    var favorite = false
     var id: Int16
     var name: String
     var info: String
@@ -41,4 +42,12 @@ struct HIAPILocation: Codable {
     var name: String
     var longitude: Double
     var latitude: Double
+}
+
+struct HIAPIFavorite: Codable {
+    typealias Contained = HIAPIReturnDataContainer<HIAPIFavorite>
+
+    var id: Int16
+    var userId: Int16
+    var eventId: Int16
 }

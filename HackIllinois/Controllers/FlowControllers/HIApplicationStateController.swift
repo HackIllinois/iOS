@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SwiftKeychainAccess
+import UserNotifications
 
 extension Notification.Name {
     static let loginUser  = Notification.Name("HIApplicationStateControllerLoginUser")
@@ -58,7 +59,9 @@ extension HIApplicationStateController {
     func resetPersistentDataIfNeeded() {
         guard !UserDefaults.standard.bool(forKey: "HIAPPLICATION_INSTALLED") else { return }
         _ = Keychain.default.purge()
+
         UserDefaults.standard.set(true, forKey: "HIAPPLICATION_INSTALLED")
+
     }
 
     func recoverUserIfPossible() {
@@ -84,7 +87,7 @@ extension HIApplicationStateController {
         viewControllers.append(HIAnnouncementsViewController())
         viewControllers.append(HIUserDetailViewController())
 
-        if [.volunteer, .staff, .admin].contains(user.permissions) {
+        if [.volunteer, .mentor, .sponsor, .staff, .admin].contains(user.permissions) {
             viewControllers.append(HIScannerViewController())
         }
 
