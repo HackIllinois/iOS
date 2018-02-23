@@ -61,9 +61,7 @@ class HIEventDetailLocationCell: UITableViewCell {
         titleLabel.leadingAnchor.constraint(equalTo: blurEffectView.contentView.leadingAnchor, constant: 8).isActive = true
         titleLabel.bottomAnchor.constraint(equalTo: blurEffectView.contentView.bottomAnchor).isActive = true
 
-        let disclosureIndicatorImageView = UIImageView(image: #imageLiteral(resourceName: "DisclosureIndicator"))
-        disclosureIndicatorImageView.contentMode = .center
-        disclosureIndicatorImageView.translatesAutoresizingMaskIntoConstraints = false
+        let disclosureIndicatorImageView = HIImageView(style: .icon(image: #imageLiteral(resourceName: "DisclosureIndicator")))
         blurEffectView.contentView.addSubview(disclosureIndicatorImageView)
         disclosureIndicatorImageView.topAnchor.constraint(equalTo: blurEffectView.contentView.topAnchor).isActive = true
         disclosureIndicatorImageView.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 8).isActive = true
@@ -88,9 +86,9 @@ class HIEventDetailLocationCell: UITableViewCell {
         contentView.backgroundColor = HIApplication.Palette.current.contentBackground
         switch HIApplication.Theme.current {
         case .day:
-            blurEffectView.effect = UIBlurEffect(style: .light)
+            blurEffectView.backgroundColor = nil
         case .night:
-            blurEffectView.effect = UIBlurEffect(style: .extraLight)
+            blurEffectView.backgroundColor = HIApplication.Palette.current.contentBackground.withAlphaComponent(0.7)
         }
     }
 }

@@ -132,7 +132,8 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
     }
 
     func found(code: String) {
-        guard let url = URL(string: code),
+        guard let user = HIApplicationStateController.shared.user,
+            let url = URL(string: code),
             url.scheme == "hackillinois",
             let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
             let queryItems = components.queryItems,
@@ -148,7 +149,51 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
         self.lookingUpUserAlertController = lookingUpUserAlertController
         present(lookingUpUserAlertController, animated: true, completion: nil)
 
+        switch user.permissions {
+        case .volunteer, .staff, .admin:
+            trackUserBy(id: id)
+        case .mentor, .sponsor:
+            followUserBy(id: id)
+        default:
+            break
+        }
+    }
+
+    func trackUserBy(id: Int) {
         HITrackingService.track(id: id)
+        .onCompletion { (result) in
+            DispatchQueue.main.async { [weak self] in
+                guard let strongSelf = self, let alert = strongSelf.lookingUpUserAlertController else { return }
+                switch result {
+                case .success(let successContainer):
+                    if let error = successContainer.error {
+                        alert.title = error.title
+                        alert.message = error.message
+                    } else {
+                        alert.title = "Success"
+                    }
+                case .cancellation:
+                    alert.title = "Cancelled"
+                    alert.message = nil
+                case .failure(let error):
+                    alert.title = "Unknown Error"
+                    alert.message = error.localizedDescription
+                }
+
+                alert.addAction(
+                    UIAlertAction(title: "Ok", style: .default) { _ in
+                        strongSelf.respondingToQRCodeFound = true
+                        strongSelf.lookingUpUserAlertController = nil
+                    }
+                )
+            }
+        }
+        .authorization(HIApplicationStateController.shared.user)
+        .perform()
+    }
+
+    func followUserBy(id: Int) {
+        HIRecruiterService.followUserBy(id: id)
         .onCompletion { (result) in
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self, let alert = strongSelf.lookingUpUserAlertController else { return }
@@ -184,4 +229,5 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
         .authorization(HIApplicationStateController.shared.user)
         .perform()
     }
+
 }

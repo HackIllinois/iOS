@@ -91,7 +91,7 @@ extension HIAnnouncementsViewController {
 extension HIAnnouncementsViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
-        title = "NOTIFICATIONS"
+        title = "ANNOUNCEMENTS"
     }
 }
 

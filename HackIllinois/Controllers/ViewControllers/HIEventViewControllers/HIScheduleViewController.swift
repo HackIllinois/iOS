@@ -33,6 +33,9 @@ class HIScheduleViewController: HIEventListViewController {
         return fetchedResultsController
     }()
 
+    var currentTab = 0
+    var onlyFavorites = false
+    let onlyFavoritesPredicate = NSPredicate(format: "favorite == YES" )
     var dataStore = [(displayText: String, predicate: NSPredicate)]()
 
     // MARK: - Init
@@ -60,7 +63,7 @@ class HIScheduleViewController: HIEventListViewController {
         )
         dataStore.append((displayText: "SUNDAY", predicate: sundayPredicate))
 
-        fetchedResultsController.fetchRequest.predicate = fridayPredicate
+        updatePredicate()
     }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -75,17 +78,35 @@ class HIScheduleViewController: HIEventListViewController {
 // MARK: - Actions
 extension HIScheduleViewController {
     @objc func didSelectTab(_ sender: HISegmentedControl) {
-        fetchedResultsController.fetchRequest.predicate = dataStore[sender.selectedIndex].predicate
-        try? fetchedResultsController.performFetch()
-        if let tableView = tableView {
-            UIView.transition(
-                with: tableView,
-                duration: 0.25,
-                options: .transitionCrossDissolve,
-                animations: {
-                    tableView.reloadData()
-            })
+        currentTab = sender.selectedIndex
+        updatePredicate()
+        animateReload()
+    }
+
+    @objc func didSelectFavoritesIcon(_ sender: UIBarButtonItem) {
+        onlyFavorites = !onlyFavorites
+        if onlyFavorites {
+            sender.image = #imageLiteral(resourceName: "MenuFavorited")
+        } else {
+            sender.image = #imageLiteral(resourceName: "MenuUnfavorited")
         }
+        updatePredicate()
+        animateReload()
+    }
+
+    func updatePredicate() {
+        let currentTabPredicate = dataStore[currentTab].predicate
+        if onlyFavorites {
+            let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [currentTabPredicate, onlyFavoritesPredicate])
+            fetchedResultsController.fetchRequest.predicate = compoundPredicate
+        } else {
+            fetchedResultsController.fetchRequest.predicate = currentTabPredicate
+        }
+    }
+
+    func animateReload() {
+        try? fetchedResultsController.performFetch()
+        animateTableViewReload()
     }
 }
 
@@ -126,6 +147,7 @@ extension HIScheduleViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
         title = "SCHEDULE"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuUnfavorited"), style: .plain, target: self, action: #selector(didSelectFavoritesIcon(_:)))
     }
 }
 

@@ -28,6 +28,8 @@ extension HIEventListViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: HIEventCell.identifier, for: indexPath)
         if let cell = cell as? HIEventCell, let event = _fetchedResultsController?.object(at: indexPath) as? Event {
             cell <- event
+            cell.delegate = self
+            cell.indexPath = indexPath
         }
         return cell
     }
@@ -54,5 +56,57 @@ extension HIEventListViewController {
     override func refresh(_ sender: UIRefreshControl) {
         super.refresh(sender)
         HIEventDataSource.refresh(completion: endRefreshing)
+    }
+}
+
+// MARK: - HIEventCellDelegate
+extension HIEventListViewController: HIEventCellDelegate {
+    func eventCellDidSelectFavoriteButton(_ eventCell: HIEventCell) {
+        guard let indexPath = eventCell.indexPath,
+            let isFavorite = eventCell.favoritedButton.isActive,
+            let event = _fetchedResultsController?.object(at: indexPath) as? Event else { return }
+
+        if isFavorite {
+            HIEventService.unfavortieBy(id: Int(event.id))
+                .onCompletion { result in
+                    switch result {
+                    case .success:
+                        DispatchQueue.main.async {
+                            HILocalNotificationController.shared.unscheduleNotification(for: event)
+                            event.favorite = false
+//                            if eventCell.indexPath == indexPath {
+//                                eventCell.setActive(event.favorite)
+//                            }
+                        }
+                    case .cancellation:
+                        break
+                    case .failure(let error):
+                        print(error, error.localizedDescription)
+                    }
+                }
+                .authorization(HIApplicationStateController.shared.user)
+                .perform()
+
+        } else {
+            HIEventService.favortieBy(id: Int(event.id))
+            .onCompletion { result in
+                switch result {
+                case .success:
+                    DispatchQueue.main.async {
+                        HILocalNotificationController.shared.scheduleNotification(for: event)
+                        event.favorite = true
+//                        if eventCell.indexPath == indexPath {
+//                            eventCell.setActive(event.favorite)
+//                        }
+                    }
+                case .cancellation:
+                    break
+                case .failure(let error):
+                    print(error, error.localizedDescription)
+                }
+            }
+            .authorization(HIApplicationStateController.shared.user)
+            .perform()
+        }
     }
 }
