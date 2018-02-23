@@ -15,6 +15,18 @@ class HIUserDetailViewController: HIBaseViewController {
     var qrCode = UIImageView()
     var userNameLabel = HILabel(style: .title)
     var userInfoLabel = HILabel(style: .subtitle)
+    
+    // MARK: - Init
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
+    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) should not be used.")
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 // MARK: - Actions
@@ -84,6 +96,16 @@ extension HIUserDetailViewController {
         guard let user = HIApplicationStateController.shared.user,
               let url = URL(string: "hackillinois://qrcode/user?id=\(user.id)&identifier=\(user.identifier)") else { return }
         view.layoutIfNeeded()
+        setupQRCode(user: user, url: url)
+        userNameLabel.text = (user.name ?? user.identifier).uppercased()
+        userInfoLabel.text = user.dietaryRestrictions?.displayText ?? "UNKNOWN DIETARY RESTRICTIONS"
+        setupPass()
+    }
+}
+
+// MARK: - QRCode Setup
+extension HIUserDetailViewController {
+    func setupQRCode(user: HIUser, url: URL) {
         let frame = qrCode.frame.height
         let passString = "hackillinois://qrcode/user?id=\(user.id)&identifier=\(user.identifier)"
         let qrCodeKey = CacheController.shared.getQRCodeKey(uniquePassString: passString)
@@ -102,9 +124,6 @@ extension HIUserDetailViewController {
                 }
             }
         }
-        userNameLabel.text = (user.name ?? user.identifier).uppercased()
-        userInfoLabel.text = user.dietaryRestrictions?.displayText ?? "UNKNOWN DIETARY RESTRICTIONS"
-        setupPass()
     }
 }
 
@@ -120,8 +139,8 @@ extension HIUserDetailViewController {
     }
     func setupPass() {
         guard PKPassLibrary.isPassLibraryAvailable(),
-            let user = HIApplicationStateController.shared.user,
-            !UserDefaults.standard.bool(forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)") else { return }
+              let user = HIApplicationStateController.shared.user,
+              !UserDefaults.standard.bool(forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)") else { return }
         let passString = "hackillinois://qrcode/user?id=\(user.id)&identifier=\(user.identifier)"
         let pkPassKey = CacheController.shared.getPKPassKey(uniquePassString: passString)
         if let cachedPass = CacheController.shared.pkPassCache.object(forKey: pkPassKey) {
@@ -166,3 +185,13 @@ extension HIUserDetailViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "LogoutButton"), style: .plain, target: self, action: #selector(didSelectLogoutButton(_:)))
     }
 }
+
+// MARK: - Themeable
+extension HIUserDetailViewController {
+    @objc func refreshForThemeChange() {
+        guard let user = HIApplicationStateController.shared.user,
+              let url = URL(string: "hackillinois://qrcode/user?id=\(user.id)&identifier=\(user.identifier)") else { return }
+        setupQRCode(user: user, url: url)
+    }
+}
+

@@ -19,7 +19,7 @@ class CacheController {
     }
     
     func getQRCodeKey(uniquePassString: String) -> NSString {
-        return ("QRCODE_" + uniquePassString) as NSString
+        return ("QRCODE_\(HIApplication.Theme.current)_\(uniquePassString)") as NSString
     }
     
 }
