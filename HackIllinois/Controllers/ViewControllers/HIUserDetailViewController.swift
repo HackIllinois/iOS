@@ -89,9 +89,6 @@ extension HIUserDetailViewController {
         userDataStackView.addArrangedSubview(userInfoLabel)
 
 //        let recognizer = HIForceGestureRecognizer(target: self, action: #selector(forceTouchSetupPass))
-        recognizer = UILongPressGestureRecognizer(target: self, action: #selector(forceTouchSetupPass))
-        userDetailContainer.isUserInteractionEnabled = true
-        userDetailContainer.addGestureRecognizer(recognizer)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -102,6 +99,10 @@ extension HIUserDetailViewController {
         setupQRCode(user: user, url: url)
         userNameLabel.text = (user.name ?? user.identifier).uppercased()
         userInfoLabel.text = user.dietaryRestrictions?.displayText ?? "UNKNOWN DIETARY RESTRICTIONS"
+        
+        recognizer = UILongPressGestureRecognizer(target: self, action: #selector(forceTouchSetupPass))
+        userDetailContainer.isUserInteractionEnabled = true
+        userDetailContainer.addGestureRecognizer(recognizer)
         setupPass()
     }
 }
