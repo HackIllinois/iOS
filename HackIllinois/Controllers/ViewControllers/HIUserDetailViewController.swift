@@ -9,12 +9,15 @@
 import Foundation
 import UIKit
 import PassKit
+import AVKit
 
 class HIUserDetailViewController: HIBaseViewController {
     // MARK: - Properties
     var qrCode = UIImageView()
     var userNameLabel = HILabel(style: .title)
     var userInfoLabel = HILabel(style: .subtitle)
+    private var recognizer: UILongPressGestureRecognizer!
+    private var userDetailContainer: HIView!
     
     // MARK: - Init
     init() {
@@ -55,7 +58,7 @@ extension HIUserDetailViewController {
     override func loadView() {
         super.loadView()
 
-        let userDetailContainer = HIView(style: .content)
+        userDetailContainer = HIView(style: .content)
         view.addSubview(userDetailContainer)
         userDetailContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 13).isActive = true
         userDetailContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
@@ -86,7 +89,7 @@ extension HIUserDetailViewController {
         userDataStackView.addArrangedSubview(userInfoLabel)
 
 //        let recognizer = HIForceGestureRecognizer(target: self, action: #selector(forceTouchSetupPass))
-        let recognizer = UILongPressGestureRecognizer(target: self, action: #selector(forceTouchSetupPass))
+        recognizer = UILongPressGestureRecognizer(target: self, action: #selector(forceTouchSetupPass))
         userDetailContainer.isUserInteractionEnabled = true
         userDetailContainer.addGestureRecognizer(recognizer)
     }
@@ -131,8 +134,9 @@ extension HIUserDetailViewController {
 extension HIUserDetailViewController {
     @objc func forceTouchSetupPass() {
         print("actived touch")
-        let generator = UIImpactFeedbackGenerator()
-        generator.impactOccurred()
+        let hapticGenerator = UINotificationFeedbackGenerator()
+        AudioServicesPlaySystemSound(1004)
+        hapticGenerator.notificationOccurred(.success)
         guard let user = HIApplicationStateController.shared.user else { return }
         UserDefaults.standard.set(false, forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)")
         setupPass()
@@ -145,6 +149,11 @@ extension HIUserDetailViewController {
         let pkPassKey = CacheController.shared.getPKPassKey(uniquePassString: passString)
         if let cachedPass = CacheController.shared.pkPassCache.object(forKey: pkPassKey) {
             print("USED CACHED PKPASS")
+            if PKPassLibrary().containsPass(cachedPass) {
+                print("IT WAS ALREADY THERE")
+                userDetailContainer.removeGestureRecognizer(recognizer)
+                return
+            }
             let vc = PKAddPassesViewController(pass: cachedPass)
             DispatchQueue.main.async { [weak self] in
                 if let strongSelf = self {
@@ -159,6 +168,9 @@ extension HIUserDetailViewController {
                     case .success(let data):
                         let pass = PKPass(data: data, error: nil)
                         CacheController.shared.pkPassCache.setObject(pass, forKey: pkPassKey)
+                        if PKPassLibrary().containsPass(pass) {
+                            return
+                        }
                         let vc = PKAddPassesViewController(pass: pass)
                         DispatchQueue.main.async { [weak self] in
                             if let strongSelf = self {
