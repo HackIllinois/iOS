@@ -134,8 +134,20 @@ extension HIBaseViewController: NSFetchedResultsControllerDelegate {
 //    }
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        tableView?.endUpdates()
-        tableView?.reloadData()
+        guard let tableView = tableView else { return }
+        tableView.reloadData()
+    }
+
+    func animateTableViewReload() {
+        if let tableView = tableView {
+            UIView.transition(
+                with: tableView,
+                duration: 0.25,
+                options: .transitionCrossDissolve,
+                animations: {
+                    tableView.reloadData()
+            })
+        }
     }
 }
 

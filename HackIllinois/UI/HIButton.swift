@@ -11,29 +11,22 @@ import UIKit
 
 class HIButton: UIButton {
     // MARK: - Types
-    enum Style: Equatable {
+    enum Style {
         case standard(title: String?)
         case async(title: String?)
         case menu(title: String?, tag: Int)
         case icon(image: UIImage)
-
-        var rawValue: Int {
-            switch self {
-            case .standard: return 0
-            case .async: return 1
-            case .menu: return 2
-            case .icon: return 3
-            }
-        }
-
-        static func == (lhs: HIButton.Style, rhs: HIButton.Style) -> Bool {
-            return lhs.rawValue == rhs.rawValue
-        }
+        case iconToggle(activeImage: UIImage, inactiveImage: UIImage)
     }
 
     // MARK: - Properties
     let style: Style
     var activityIndicator: UIActivityIndicatorView?
+
+    // MARK: Icon
+    private(set) var isActive: Bool?
+    var activeTemplateImage: UIImage?
+    var inactiveTemplateImage: UIImage?
 
     // MARK: - Init
     init(style: Style) {
@@ -46,6 +39,7 @@ class HIButton: UIButton {
         addTarget(self, action: #selector(handleTouchUpInside), for: .touchUpInside)
 
         translatesAutoresizingMaskIntoConstraints = false
+        adjustsImageWhenHighlighted = false
 
         switch style {
         case .standard(let title):
@@ -74,8 +68,14 @@ class HIButton: UIButton {
             self.tag = tag
 
         case .icon(let image):
-            let templateImage = image.withRenderingMode(.alwaysTemplate)
-            setImage(templateImage, for: .normal)
+            activeTemplateImage = image.withRenderingMode(.alwaysTemplate)
+            setImage(activeTemplateImage, for: .normal)
+
+        case .iconToggle(let activeImage, let inactiveImage):
+            activeTemplateImage = activeImage.withRenderingMode(.alwaysTemplate)
+            inactiveTemplateImage = inactiveImage.withRenderingMode(.alwaysTemplate)
+            setImage(inactiveTemplateImage, for: .normal)
+            isActive = false
         }
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
@@ -109,6 +109,10 @@ class HIButton: UIButton {
         case .icon:
             backgroundColor = HIApplication.Palette.current.background
             tintColor = HIApplication.Palette.current.accent
+
+        case .iconToggle:
+            tintColor = HIApplication.Palette.current.actionBackground
+
         }
     }
 
@@ -128,6 +132,16 @@ class HIButton: UIButton {
             backgroundColor = HIApplication.Palette.current.actionBackground
             activityIndicator?.stopAnimating()
         }
+    }
+
+    func setToggle(active: Bool) {
+        guard case .iconToggle = style else {
+            fatalError("setAsyncTask(_:) can only be used on an HIButton with Style async.")
+        }
+        guard isActive != active else { return }
+        isActive = active
+        let newImage = active ? activeTemplateImage : inactiveTemplateImage
+        setImage(newImage, for: .normal)
     }
 
     // MARK: - Touch Animations

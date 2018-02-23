@@ -17,11 +17,57 @@ class HIEventDetailViewController: HIBaseViewController {
     // MARK: Views
     let titleLabel = HILabel(style: .event)
     let descriptionLabel = HILabel(style: .description)
-    let favoritedButton = UIButton()
+    let favoritedButton = HIButton(style: .iconToggle(activeImage: #imageLiteral(resourceName: "Favorited"), inactiveImage: #imageLiteral(resourceName: "Unfavorited")))
 
     // MARK: Constraints
     var descriptionLabelHeight = NSLayoutConstraint()
     var tableViewHeight = NSLayoutConstraint()
+}
+
+// MARK: - Actions
+extension HIEventDetailViewController {
+    @objc func didSelectFavoriteButton(_ sender: HIButton) {
+        guard let isFavorite = sender.isActive, let event = event else { return }
+
+        if isFavorite {
+            HIEventService.unfavortieBy(id: Int(event.id))
+                .onCompletion { result in
+                    switch result {
+                    case .success:
+                        DispatchQueue.main.async {
+                            HILocalNotificationController.shared.unscheduleNotification(for: event)
+                            event.favorite = false
+                            sender.setToggle(active: event.favorite)
+                        }
+                    case .cancellation:
+                        break
+                    case .failure(let error):
+                        print(error, error.localizedDescription)
+                    }
+                }
+                .authorization(HIApplicationStateController.shared.user)
+                .perform()
+
+        } else {
+            HIEventService.favortieBy(id: Int(event.id))
+            .onCompletion { result in
+                switch result {
+                case .success:
+                    DispatchQueue.main.async {
+                        HILocalNotificationController.shared.scheduleNotification(for: event)
+                        event.favorite = true
+                        sender.setToggle(active: event.favorite)
+                    }
+                case .cancellation:
+                    break
+                case .failure(let error):
+                    print(error, error.localizedDescription)
+                }
+            }
+            .authorization(HIApplicationStateController.shared.user)
+            .perform()
+        }
+    }
 }
 
 // MARK: - UIViewController
@@ -45,8 +91,7 @@ extension HIEventDetailViewController {
         upperContainerView.trailingAnchor.constraint(equalTo: eventDetailContainer.trailingAnchor).isActive = true
         upperContainerView.heightAnchor.constraint(equalToConstant: 63).isActive = true
 
-        favoritedButton.setImage(#imageLiteral(resourceName: "Unfavorited"), for: .normal)
-        favoritedButton.translatesAutoresizingMaskIntoConstraints = false
+        favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         upperContainerView.addSubview(favoritedButton)
         favoritedButton.topAnchor.constraint(equalTo: upperContainerView.topAnchor).isActive = true
         favoritedButton.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor).isActive = true
@@ -90,6 +135,7 @@ extension HIEventDetailViewController {
         guard let event = event else { return }
         titleLabel.text = event.name
         descriptionLabel.text = event.info
+        favoritedButton.setToggle(active: event.favorite)
         tableView?.reloadData()
         view.layoutIfNeeded()
         let targetSize = CGSize(width: descriptionLabel.frame.width, height: .greatestFiniteMagnitude)
