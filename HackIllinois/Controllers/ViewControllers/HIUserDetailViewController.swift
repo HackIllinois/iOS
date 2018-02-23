@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import PassKit
-import AVKit
+import AudioToolbox
 
 class HIUserDetailViewController: HIBaseViewController {
     // MARK: - Properties
@@ -18,7 +18,7 @@ class HIUserDetailViewController: HIBaseViewController {
     var userInfoLabel = HILabel(style: .subtitle)
     private var recognizer: UILongPressGestureRecognizer!
     private var userDetailContainer: HIView!
-    
+
     // MARK: - Init
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -99,10 +99,12 @@ extension HIUserDetailViewController {
         setupQRCode(user: user, url: url)
         userNameLabel.text = (user.name ?? user.identifier).uppercased()
         userInfoLabel.text = user.dietaryRestrictions?.displayText ?? "UNKNOWN DIETARY RESTRICTIONS"
-        
+
         recognizer = UILongPressGestureRecognizer(target: self, action: #selector(forceTouchSetupPass))
+        recognizer.minimumPressDuration = 0.5
         userDetailContainer.isUserInteractionEnabled = true
         userDetailContainer.addGestureRecognizer(recognizer)
+
         setupPass()
     }
 }
@@ -133,14 +135,17 @@ extension HIUserDetailViewController {
 
 // MARK: - Passbook/Wallet support
 extension HIUserDetailViewController {
-    @objc func forceTouchSetupPass() {
-        print("actived touch")
-        let hapticGenerator = UINotificationFeedbackGenerator()
-        AudioServicesPlaySystemSound(1004)
-        hapticGenerator.notificationOccurred(.success)
-        guard let user = HIApplicationStateController.shared.user else { return }
-        UserDefaults.standard.set(false, forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)")
-        setupPass()
+    @objc func forceTouchSetupPass(sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+        case .began:
+            print("actived touch")
+            userDetailContainer.removeGestureRecognizer(sender)
+            guard let user = HIApplicationStateController.shared.user else { return }
+            UserDefaults.standard.set(false, forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)")
+            setupPass()
+        default:
+            print("shouldn't happen")
+        }
     }
     func setupPass() {
         guard PKPassLibrary.isPassLibraryAvailable(),
@@ -160,6 +165,7 @@ extension HIUserDetailViewController {
                 if let strongSelf = self {
                     UserDefaults.standard.set(true, forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)")
                     strongSelf.present(vc, animated: true, completion: nil)
+                    AudioServicesPlaySystemSound(1520)
                 }
             }
         } else {
@@ -177,6 +183,7 @@ extension HIUserDetailViewController {
                             if let strongSelf = self {
                                 UserDefaults.standard.set(true, forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)")
                                 strongSelf.present(vc, animated: true, completion: nil)
+                                AudioServicesPlaySystemSound(1520)
                             }
                         }
                     case .cancellation:
@@ -207,4 +214,3 @@ extension HIUserDetailViewController {
         setupQRCode(user: user, url: url)
     }
 }
-
