@@ -72,18 +72,34 @@ extension HIUserDetailViewController {
         userInfoLabel.textAlignment = .center
         userDataStackView.addArrangedSubview(userNameLabel)
         userDataStackView.addArrangedSubview(userInfoLabel)
+
+//        let recognizer = HIForceGestureRecognizer(target: self, action: #selector(forceTouchSetupPass))
+        let recognizer = UILongPressGestureRecognizer(target: self, action: #selector(forceTouchSetupPass))
+        userDetailContainer.isUserInteractionEnabled = true
+        userDetailContainer.addGestureRecognizer(recognizer)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let user = HIApplicationStateController.shared.user,
-            let url = URL(string: "hackillinois://qrcode/user?id=\(user.id)&identifier=\(user.identifier)") else { return }
+              let url = URL(string: "hackillinois://qrcode/user?id=\(user.id)&identifier=\(user.identifier)") else { return }
         view.layoutIfNeeded()
         let frame = qrCode.frame.height
-        DispatchQueue.global(qos: .userInitiated).async {
-            let qrCodeImage = QRCode(string: url.absoluteString, size: frame)?.image
+        let passString = "hackillinois://qrcode/user?id=\(user.id)&identifier=\(user.identifier)"
+        let qrCodeKey = CacheController.shared.getQRCodeKey(uniquePassString: passString)
+        if let cachedImage = CacheController.shared.qrCodeCache.object(forKey: qrCodeKey) {
+            print("USED CACHED IMAGE")
             DispatchQueue.main.async {
-                self.qrCode.image = qrCodeImage
+                self.qrCode.image = cachedImage
+            }
+        } else {
+            DispatchQueue.global(qos: .userInitiated).async {
+                if let qrCodeImage = QRCode(string: url.absoluteString, size: frame)?.image {
+                    DispatchQueue.main.async {
+                        self.qrCode.image = qrCodeImage
+                        CacheController.shared.qrCodeCache.setObject(qrCodeImage, forKey: qrCodeKey)
+                    }
+                }
             }
         }
         userNameLabel.text = (user.name ?? user.identifier).uppercased()
@@ -94,30 +110,51 @@ extension HIUserDetailViewController {
 
 // MARK: - Passbook/Wallet support
 extension HIUserDetailViewController {
+    @objc func forceTouchSetupPass() {
+        print("actived touch")
+        let generator = UIImpactFeedbackGenerator()
+        generator.impactOccurred()
+        guard let user = HIApplicationStateController.shared.user else { return }
+        UserDefaults.standard.set(false, forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)")
+        setupPass()
+    }
     func setupPass() {
         guard PKPassLibrary.isPassLibraryAvailable(),
             let user = HIApplicationStateController.shared.user,
             !UserDefaults.standard.bool(forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)") else { return }
         let passString = "hackillinois://qrcode/user?id=\(user.id)&identifier=\(user.identifier)"
-        HIPassService.getPass(with: passString)
-        .onCompletion { result in
-            switch result {
-            case .success(let data):
-                let pass = PKPass(data: data, error: nil)
-                let vc = PKAddPassesViewController(pass: pass)
-                DispatchQueue.main.async { [weak self] in
-                    if let strongSelf = self {
-                        UserDefaults.standard.set(true, forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)")
-                        strongSelf.present(vc, animated: true, completion: nil)
+        let pkPassKey = CacheController.shared.getPKPassKey(uniquePassString: passString)
+        if let cachedPass = CacheController.shared.pkPassCache.object(forKey: pkPassKey) {
+            print("USED CACHED PKPASS")
+            let vc = PKAddPassesViewController(pass: cachedPass)
+            DispatchQueue.main.async { [weak self] in
+                if let strongSelf = self {
+                    UserDefaults.standard.set(true, forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)")
+                    strongSelf.present(vc, animated: true, completion: nil)
+                }
+            }
+        } else {
+            HIPassService.getPass(with: passString)
+                .onCompletion { result in
+                    switch result {
+                    case .success(let data):
+                        let pass = PKPass(data: data, error: nil)
+                        CacheController.shared.pkPassCache.setObject(pass, forKey: pkPassKey)
+                        let vc = PKAddPassesViewController(pass: pass)
+                        DispatchQueue.main.async { [weak self] in
+                            if let strongSelf = self {
+                                UserDefaults.standard.set(true, forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)")
+                                strongSelf.present(vc, animated: true, completion: nil)
+                            }
+                        }
+                    case .cancellation:
+                        break
+                    case .failure(let error):
+                        print(error)
                     }
                 }
-            case .cancellation:
-                break
-            case .failure(let error):
-                print(error)
-            }
+                .perform()
         }
-        .perform()
     }
 }
 

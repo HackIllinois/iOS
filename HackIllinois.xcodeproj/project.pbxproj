@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0A360882203539FF001F5F85 /* HIAdminEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */; };
+		0AFB419A203FB29500196026 /* HIForceGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFB4199203FB29500196026 /* HIForceGestureRecognizer.swift */; };
+		0AFB419C203FCA0800196026 /* CacheController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFB419B203FCA0800196026 /* CacheController.swift */; };
 		35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */; };
 		35BD9E4A2017DFED005B6FCE /* HITrackingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BD9E492017DFED005B6FCE /* HITrackingService.swift */; };
 		35D7CE9720380ACF00654E28 /* Stickers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35D7CE9620380ACF00654E28 /* Stickers.xcassets */; };
@@ -110,6 +112,8 @@
 
 /* Begin PBXFileReference section */
 		0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAdminEventViewController.swift; sourceTree = "<group>"; };
+		0AFB4199203FB29500196026 /* HIForceGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIForceGestureRecognizer.swift; sourceTree = "<group>"; };
+		0AFB419B203FCA0800196026 /* CacheController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheController.swift; sourceTree = "<group>"; };
 		35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HICountdownViewController.swift; sourceTree = "<group>"; };
 		35BD9E492017DFED005B6FCE /* HITrackingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITrackingService.swift; sourceTree = "<group>"; };
 		35D7CE9420380ACF00654E28 /* Stickers.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Stickers.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -325,6 +329,7 @@
 		9518279E1EA35DB800049F79 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0AFB419B203FCA0800196026 /* CacheController.swift */,
 				953199C81FC25CA0009F2AA1 /* CoreDataController.swift */,
 				957DB2E91FC2453100F8C45E /* FlowControllers */,
 				957DB2E41FC2435100F8C45E /* ViewControllers */,
@@ -418,6 +423,7 @@
 		95A7D279203D4F54005EAEAF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				0AFB4199203FB29500196026 /* HIForceGestureRecognizer.swift */,
 				95069260203EE14000D7C34C /* Animations */,
 				95D791E8203E12C900C3BA62 /* HIThemeEngine.swift */,
 				95A7D27B203D4F54005EAEAF /* HIButton.swift */,
@@ -713,6 +719,7 @@
 				9544799C200C39870005408B /* HIUser.swift in Sources */,
 				95A7D28B203D4F54005EAEAF /* HISegmentedControl.swift in Sources */,
 				95D791E9203E12C900C3BA62 /* HIThemeEngine.swift in Sources */,
+				0AFB419C203FCA0800196026 /* CacheController.swift in Sources */,
 				957D7CAB1FC2940800C4332A /* HIAPIReturnDataContainer.swift in Sources */,
 				95E24AEA201ED0CD007B7620 /* HIAPISuccessContainer.swift in Sources */,
 				95A7D28C203D4F54005EAEAF /* HITextField.swift in Sources */,
@@ -734,6 +741,7 @@
 				95D791ED203E370A00C3BA62 /* HIWindow.swift in Sources */,
 				95A7D29C203D595F005EAEAF /* HITableView.swift in Sources */,
 				9510F6A01FCB7D6E007D19DB /* Announcement+CoreDataClass.swift in Sources */,
+				0AFB419A203FB29500196026 /* HIForceGestureRecognizer.swift in Sources */,
 				95DE24DC1FC3ADBE000F599D /* HIAnnouncementService.swift in Sources */,
 				0A360882203539FF001F5F85 /* HIAdminEventViewController.swift in Sources */,
 				9521A6AC201917B6009059C6 /* HIAPIAnnouncement.swift in Sources */,
