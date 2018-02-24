@@ -63,7 +63,7 @@ struct HIApplication {
 
     struct Configuration {
         static let EVENT_START_TIME = Date(timeIntervalSince1970: 1519423200) // 2018-02-23T16:00:00-0600 = 2018-02-23T22:00:00+0000
-        static let HACKING_START_TIME = Date(timeIntervalSince1970: 1519455600) // 2018-02-23T23:00:00-0600 = 2018-02-24T07:00:00+0000
+        static let HACKING_START_TIME = Date(timeIntervalSince1970: 1519448400) // 2018-02-23T23:00:00-0600 = 2018-02-24T05:00:00+0000
         static let HACKING_END_TIME = Date(timeIntervalSince1970: 1519578000) // 2018-02-25T11:00:00-0600 = 2018-02-25T17:00:00+0000
         static let EVENT_END_TIME = Date(timeIntervalSince1970: 1519599600) // 2018-02-25T17:00:00-0600 = 2018-02-25T23:00:00+0000
 
