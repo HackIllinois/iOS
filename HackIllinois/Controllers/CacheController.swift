@@ -14,12 +14,12 @@ class CacheController {
     let pkPassCache = NSCache<NSString, PKPass>()
     let qrCodeCache = NSCache<NSString, UIImage>()
     
-    func getPKPassKey(uniquePassString: String) -> NSString {
-         return ("PKPASS_" + uniquePassString) as NSString
+    func getPKPassKey(uniquePassString: String) -> String {
+         return ("PKPASS_" + uniquePassString)
     }
     
-    func getQRCodeKey(uniquePassString: String) -> NSString {
-        return ("QRCODE_\(HIApplication.Theme.current)_\(uniquePassString)") as NSString
+    func getQRCodeKey(uniquePassString: String) -> String {
+        return ("QRCODE_\(HIApplication.Theme.current)_\(uniquePassString)")
     }
     
 }
