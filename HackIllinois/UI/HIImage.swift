@@ -19,8 +19,8 @@ class QRCode {
         let backgroundColor = CIColor(color: HIApplication.Palette.current.contentBackground)
 
         guard let qrFilter = CIFilter(name: "CIQRCodeGenerator"),
-            let colorFilter = CIFilter(name: "CIFalseColor"),
-            let data = string.data(using: .utf8) else { return nil }
+              let colorFilter = CIFilter(name: "CIFalseColor"),
+              let data = string.data(using: .utf8) else { return nil }
 
         qrFilter.setDefaults()
         qrFilter.setValue(data, forKey: "inputMessage")
