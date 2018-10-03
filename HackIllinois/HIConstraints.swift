@@ -45,31 +45,37 @@ class HIConstraints {
         }
         
     }
+
+    class func setConstraints(constraintedView: UIView, withLayoutGuide: UILayoutGuide, setTop : Bool, setBottom : Bool, setWidth : Bool, setHeight : Bool, setLeading : Bool, setTrailing : Bool) {
+        
+        setConstraintWithOffsetFromLayoutGuide(constraintedView: constraintedView, withLayoutGuide: withLayoutGuide, setTop: setTop, setBottom: setBottom, setWidth: setWidth, setHeight: setHeight, setLeading: setLeading, setTrailing: setTrailing, topConstant: 0, bottomConstant: 0, widthConstant: 0, heightConstant: 0, leadingConstant: 0, trailingConstant: 0)
+        
+    }
     
-    class func setConstraintConstants(constraintedView : UIView, setTop : Bool, setBottom : Bool, setWidth : Bool, setHeight : Bool, setLeading : Bool, setTrailing : Bool, topConstant : CGFloat, bottomConstant : CGFloat, widthConstant : CGFloat, heightConstant : CGFloat, leadingConstant : CGFloat, trailingConstant : CGFloat) {
+    class func setConstraintWithOffsetFromLayoutGuide(constraintedView: UIView, withLayoutGuide: UILayoutGuide, setTop : Bool, setBottom : Bool, setWidth : Bool, setHeight : Bool, setLeading : Bool, setTrailing : Bool, topConstant : CGFloat, bottomConstant : CGFloat, widthConstant : CGFloat, heightConstant : CGFloat, leadingConstant : CGFloat, trailingConstant : CGFloat) {
         
         if (setTop) {
-            constraintedView.topAnchor.constraint(constant: topConstant).isActive = true
+            constraintedView.topAnchor.constraint(equalTo:withLayoutGuide.topAnchor, constant: topConstant).isActive = true
         }
         
         if (setBottom) {
-            constraintedView.bottomAnchor.constraint(constant: bottomConstant).isActive = true
+            constraintedView.bottomAnchor.constraint(equalTo:withLayoutGuide.bottomAnchor, constant: bottomConstant).isActive = true
         }
         
         if (setWidth) {
-            constraintedView.widthAnchor.constraint(constant: widthConstant).isActive = true
+            constraintedView.widthAnchor.constraint(equalTo:withLayoutGuide.widthAnchor, constant: widthConstant).isActive = true
         }
         
         if (setHeight) {
-            constraintedView.heightAnchor.constraint(constant: heightConstant).isActive = true
+            constraintedView.heightAnchor.constraint(equalTo:withLayoutGuide.heightAnchor, constant: heightConstant).isActive = true
         }
         
         if (setLeading) {
-            constraintedView.leadingAnchor.constraint(constant: leadingConstant).isActive = true
+            constraintedView.leadingAnchor.constraint(equalTo:withLayoutGuide.leadingAnchor, constant: leadingConstant).isActive = true
         }
         
         if (setTrailing) {
-            constraintedView.trailingAnchor.constraint(constant: trailingConstant).isActive = true
+            constraintedView.trailingAnchor.constraint(equalTo:withLayoutGuide.trailingAnchor, constant: trailingConstant).isActive = true
         }
         
     }

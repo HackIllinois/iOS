@@ -37,41 +37,31 @@ class HIEventDetailLocationCell: UITableViewCell {
         containerView.backgroundColor = HIApplication.Palette.current.background
         containerView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(containerView)
-        containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6).isActive = true
-        containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12).isActive = true
+        HIConstraints.setConstraintsWithOffsetFromView(constraintedView: containerView, equalToView: contentView, setTop: true, setBottom: true, setWidth: false, setHeight: false, setLeading: true, setTrailing: true, topConstant: 6, bottomConstant: -6, widthConstant: 0, heightConstant: 0, leadingConstant: 12, trailingConstant: -12)
+        
 
         mapView.isUserInteractionEnabled = false
         mapView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(mapView)
-        mapView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        mapView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        mapView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
-        mapView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        HIConstraints.setConstraints(constraintedView: mapView, equalToView: containerView, setTop: true, setBottom: true, setWidth: false, setHeight: false, setLeading: true, setTrailing: true)
 
         blurEffectView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(blurEffectView)
-        blurEffectView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        blurEffectView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        blurEffectView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        HIConstraints.setConstraints(constraintedView: blurEffectView, equalToView: containerView, setTop: true, setBottom: false, setWidth: false, setHeight: false, setLeading: true, setTrailing: true)
         blurEffectView.heightAnchor.constraint(equalToConstant: 40).isActive = true
 
         titleLabel.textColor = HIApplication.Palette.current.primary
         titleLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         blurEffectView.contentView.addSubview(titleLabel)
-        titleLabel.topAnchor.constraint(equalTo: blurEffectView.contentView.topAnchor).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: blurEffectView.contentView.leadingAnchor, constant: 8).isActive = true
-        titleLabel.bottomAnchor.constraint(equalTo: blurEffectView.contentView.bottomAnchor).isActive = true
+        HIConstraints.setConstraints(constraintedView: titleLabel, equalToView: blurEffectView.contentView, setTop: true, setBottom: true, setWidth: false, setHeight: false, setLeading: false, setTrailing: false)
 
         let disclosureIndicatorImageView = HIImageView(style: .icon(image: #imageLiteral(resourceName: "DisclosureIndicator")))
         blurEffectView.contentView.addSubview(disclosureIndicatorImageView)
-        disclosureIndicatorImageView.topAnchor.constraint(equalTo: blurEffectView.contentView.topAnchor).isActive = true
         disclosureIndicatorImageView.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 8).isActive = true
-        disclosureIndicatorImageView.bottomAnchor.constraint(equalTo: blurEffectView.contentView.bottomAnchor).isActive = true
-        disclosureIndicatorImageView.trailingAnchor.constraint(equalTo: blurEffectView.contentView.trailingAnchor).isActive = true
         disclosureIndicatorImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        HIConstraints.setConstraints(constraintedView: disclosureIndicatorImageView, equalToView: blurEffectView.contentView, setTop: true, setBottom: true, setWidth: false, setHeight: false, setLeading: false, setTrailing: true)
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
