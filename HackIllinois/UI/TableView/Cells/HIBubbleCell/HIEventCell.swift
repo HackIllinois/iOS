@@ -29,6 +29,8 @@ class HIEventCell: HIBubbleCell {
     // MARK: - Init
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        contentView.addSubview(bubbleView)
 
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         bubbleView.addSubview(favoritedButton)
