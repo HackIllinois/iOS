@@ -207,6 +207,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9E24C9C13CEF2AFACB281BB5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -508,6 +515,7 @@
 			buildConfigurationList = 35D7CE9E20380ACF00654E28 /* Build configuration list for PBXNativeTarget "Stickers" */;
 			buildPhases = (
 				35D7CE9220380ACF00654E28 /* Resources */,
+				9E24C9C13CEF2AFACB281BB5 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -527,7 +535,6 @@
 				9518277C1EA35AF100049F79 /* Frameworks */,
 				9518277D1EA35AF100049F79 /* Resources */,
 				4BB122A7E5028FEBC4CB4FEB /* [CP] Embed Pods Frameworks */,
-				FB38EA2841D0B5D4BAE3221B /* [CP] Copy Pods Resources */,
 				95CD0ED6201523B800D79DCC /* ShellScript */,
 				35D7CE9F20380ACF00654E28 /* Embed App Extensions */,
 			);
@@ -667,21 +674,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
-		};
-		FB38EA2841D0B5D4BAE3221B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HackIllinois/Pods-HackIllinois-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
