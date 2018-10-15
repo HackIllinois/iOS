@@ -18,6 +18,8 @@ class HIAnnouncementCell: HIBubbleCell {
     // MARK: - Init
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        contentView.addSubview(bubbleView)
 
         bubbleView.addSubview(titleLabel)
         titleLabel.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 10).isActive = true
