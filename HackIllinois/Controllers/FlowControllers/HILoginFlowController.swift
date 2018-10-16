@@ -266,20 +266,27 @@ extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
                 break
 
             case .failure(let error):
+                var errorMessage:String = "Invalid ID or Password"
                 do {
                     throw error
                 } catch DecodingError.dataCorrupted(let context) {
                     print("DecodingError.dataCorrupted", context)
+                    errorMessage = "Data Corrupted"
                 } catch DecodingError.keyNotFound(let key, let context) {
                     print("DecodingError.keyNotFound", key, context)
+                    errorMessage = "Invalid ID or Password"
                 } catch DecodingError.typeMismatch(let type, let context) {
                     print("DecodingError.typeMismatch", type, context)
+                    errorMessage = "Type Mismatch"
                 } catch {
                     print(error)
+                    errorMessage = "Invalid ID or Password"
                 }
+                
 
                 DispatchQueue.main.async { [weak self] in
                     self?.userPassLoginViewController.shakeWithError()
+                    self?.userPassLoginViewController.displayPopupLoginFailure(message: errorMessage)
                     self?.userPassLoginViewController.stylizeFor(.readyToLogin)
                 }
             }
