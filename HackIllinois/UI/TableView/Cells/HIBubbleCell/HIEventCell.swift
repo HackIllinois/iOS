@@ -29,7 +29,7 @@ class HIEventCell: HIBubbleCell {
     // MARK: - Init
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+        
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         bubbleView.addSubview(favoritedButton)
         favoritedButton.topAnchor.constraint(equalTo: bubbleView.topAnchor).isActive = true

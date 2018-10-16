@@ -22,7 +22,7 @@ class HIAnnouncementCell: HIBubbleCell {
     // MARK: - Init
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+        
         bubbleView.addSubview(titleLabel)
         titleLabel.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 10).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 23).isActive = true
