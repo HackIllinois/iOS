@@ -41,11 +41,11 @@ class HILoginSelectionCell: UITableViewCell {
 
         separatorView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(separatorView)
-        separatorView.constrain(to: contentView, leadingInset: 24, bottomInset: 0, trailingInset: -24)
+        separatorView.constrain(to: contentView, trailingInset: -24, bottomInset: 0, leadingInset: 24)
 
         contentView.addSubview(titleLabel)
         titleLabel.bottomAnchor.constraint(equalTo: separatorView.topAnchor).isActive = true
-        titleLabel.constrain(to: contentView, topInset: 0, leadingInset: 0, trailingInset: 0)
+        titleLabel.constrain(to: contentView, topInset: 0, trailingInset: 0, leadingInset: 0)
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()

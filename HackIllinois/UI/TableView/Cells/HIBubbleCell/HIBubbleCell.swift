@@ -33,7 +33,7 @@ class HIBubbleCell: UITableViewCell {
         selectionStyle = .none
 
         addSubview(bubbleView)
-        bubbleView.constain(to: safeAreaLayoutGuide, topInset: 5, leadingInset: 12, bottomInset: -5, trailingInset: -12)
+        bubbleView.constain(to: safeAreaLayoutGuide, topInset: 5, trailingInset: -12, bottomInset: -5, leadingInset: 12)
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()

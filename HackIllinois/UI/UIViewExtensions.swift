@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 internal extension UIView {
-    func constrain(to view: UIView, topInset: CGFloat? = nil, leadingInset: CGFloat? = nil, bottomInset: CGFloat? = nil, trailingInset: CGFloat? = nil, widthInset: CGFloat? = nil, heightInset: CGFloat? = nil) {
+    func constrain(to view: UIView, topInset: CGFloat? = nil, trailingInset: CGFloat? = nil, bottomInset: CGFloat? = nil, leadingInset: CGFloat? = nil, widthInset: CGFloat? = nil, heightInset: CGFloat? = nil) {
         
         if let topInset = topInset {
             topAnchor.constraint(equalTo: view.topAnchor, constant: topInset).isActive = true
@@ -38,7 +38,7 @@ internal extension UIView {
         
     }
     
-    func constain(to layoutGuide:UILayoutGuide, topInset: CGFloat? = nil, leadingInset: CGFloat? = nil, bottomInset: CGFloat? = nil, trailingInset: CGFloat? = nil, widthInset: CGFloat? = nil, heightInset: CGFloat? = nil) {
+    func constain(to layoutGuide:UILayoutGuide, topInset: CGFloat? = nil, trailingInset: CGFloat? = nil, bottomInset: CGFloat? = nil, leadingInset: CGFloat? = nil, widthInset: CGFloat? = nil, heightInset: CGFloat? = nil) {
         
         if let topInset = topInset {
             topAnchor.constraint(equalTo: layoutGuide.topAnchor, constant: topInset).isActive = true

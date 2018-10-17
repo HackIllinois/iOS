@@ -37,17 +37,17 @@ class HIEventDetailLocationCell: UITableViewCell {
         containerView.backgroundColor = HIApplication.Palette.current.background
         containerView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(containerView)
-        containerView.constrain(to: contentView, topInset: 6, leadingInset: 12, bottomInset: -6,  trailingInset: -12)
+        containerView.constrain(to: contentView, topInset: 6, trailingInset: -12, bottomInset: -6,  leadingInset: 12)
         
 
         mapView.isUserInteractionEnabled = false
         mapView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(mapView)
-        mapView.constrain(to: containerView, topInset: 0, leadingInset: 0, bottomInset: 0,  trailingInset: 0)
+        mapView.constrain(to: containerView, topInset: 0, trailingInset: 0, bottomInset: 0,  leadingInset: 0)
 
         blurEffectView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(blurEffectView)
-        blurEffectView.constrain(to: containerView, topInset: 0, leadingInset: 0, trailingInset: 0)
+        blurEffectView.constrain(to: containerView, topInset: 0, trailingInset: 0, leadingInset: 0)
         blurEffectView.heightAnchor.constraint(equalToConstant: 40).isActive = true
 
         titleLabel.textColor = HIApplication.Palette.current.primary
@@ -61,7 +61,7 @@ class HIEventDetailLocationCell: UITableViewCell {
         blurEffectView.contentView.addSubview(disclosureIndicatorImageView)
         disclosureIndicatorImageView.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 8).isActive = true
         disclosureIndicatorImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        disclosureIndicatorImageView.constrain(to: blurEffectView.contentView, topInset: 0, bottomInset: 0, trailingInset: 0)
+        disclosureIndicatorImageView.constrain(to: blurEffectView.contentView, topInset: 0, trailingInset: 0, bottomInset: 0)
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
