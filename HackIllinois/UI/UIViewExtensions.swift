@@ -10,58 +10,58 @@ import Foundation
 import UIKit
 
 internal extension UIView {
-    func setConstraints(superView: UIView, topInset: CGFloat? = nil, bottomInset: CGFloat? = nil, widthInset: CGFloat? = nil, heightInset: CGFloat? = nil, leadingInset: CGFloat? = nil, trailingInset: CGFloat? = nil) {
+    func constrain(to view: UIView, topInset: CGFloat? = nil, leadingInset: CGFloat? = nil, bottomInset: CGFloat? = nil, trailingInset: CGFloat? = nil, widthInset: CGFloat? = nil, heightInset: CGFloat? = nil) {
         
         if let topInset = topInset {
-            topAnchor.constraint(equalTo: superView.topAnchor, constant: topInset).isActive = true
+            topAnchor.constraint(equalTo: view.topAnchor, constant: topInset).isActive = true
         }
         
         if let bottomInset = bottomInset {
-            bottomAnchor.constraint(equalTo: superView.bottomAnchor, constant: bottomInset).isActive = true
+            bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: bottomInset).isActive = true
         }
         
         if let widthInset = widthInset {
-            widthAnchor.constraint(equalTo: superView.widthAnchor, constant: widthInset).isActive = true
+            widthAnchor.constraint(equalTo: view.widthAnchor, constant: widthInset).isActive = true
         }
         
         if let heightInset = heightInset {
-            heightAnchor.constraint(equalTo: superView.heightAnchor, constant: heightInset).isActive = true
+            heightAnchor.constraint(equalTo: view.heightAnchor, constant: heightInset).isActive = true
         }
         
         if let leadingInset = leadingInset {
-            leadingAnchor.constraint(equalTo: superView.leadingAnchor, constant: leadingInset).isActive = true
+            leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leadingInset).isActive = true
         }
         
         if let trailingInset = trailingInset {
-            trailingAnchor.constraint(equalTo: superView.trailingAnchor, constant: trailingInset).isActive = true
+            trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: trailingInset).isActive = true
         }
         
     }
     
-    func setConstraints(withLayoutGuide:UILayoutGuide, topInset: CGFloat? = nil, bottomInset: CGFloat? = nil, widthInset: CGFloat? = nil, heightInset: CGFloat? = nil, leadingInset: CGFloat? = nil, trailingInset: CGFloat? = nil) {
+    func constain(to layoutGuide:UILayoutGuide, topInset: CGFloat? = nil, leadingInset: CGFloat? = nil, bottomInset: CGFloat? = nil, trailingInset: CGFloat? = nil, widthInset: CGFloat? = nil, heightInset: CGFloat? = nil) {
         
         if let topInset = topInset {
-            topAnchor.constraint(equalTo: withLayoutGuide.topAnchor, constant: topInset).isActive = true
+            topAnchor.constraint(equalTo: layoutGuide.topAnchor, constant: topInset).isActive = true
         }
         
         if let bottomInset = bottomInset {
-            bottomAnchor.constraint(equalTo: withLayoutGuide.bottomAnchor, constant: bottomInset).isActive = true
+            bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor, constant: bottomInset).isActive = true
         }
         
         if let widthInset = widthInset {
-            widthAnchor.constraint(equalTo: withLayoutGuide.widthAnchor, constant: widthInset).isActive = true
+            widthAnchor.constraint(equalTo: layoutGuide.widthAnchor, constant: widthInset).isActive = true
         }
         
         if let heightInset = heightInset {
-            heightAnchor.constraint(equalTo: withLayoutGuide.heightAnchor, constant: heightInset).isActive = true
+            heightAnchor.constraint(equalTo: layoutGuide.heightAnchor, constant: heightInset).isActive = true
         }
         
         if let leadingInset = leadingInset {
-            leadingAnchor.constraint(equalTo: withLayoutGuide.leadingAnchor, constant: leadingInset).isActive = true
+            leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor, constant: leadingInset).isActive = true
         }
         
         if let trailingInset = trailingInset {
-            trailingAnchor.constraint(equalTo: withLayoutGuide.trailingAnchor, constant: trailingInset).isActive = true
+            trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor, constant: trailingInset).isActive = true
         }
         
     }

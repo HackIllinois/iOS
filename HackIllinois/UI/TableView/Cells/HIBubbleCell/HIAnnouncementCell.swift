@@ -41,7 +41,7 @@ class HIAnnouncementCell: HIBubbleCell {
 
         bubbleView.addSubview(infoLabel)
         infoLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12).isActive = true
-        infoLabel.setConstraints(superView: bubbleView, bottomInset: -14, leadingInset: 23, trailingInset: -12)
+        infoLabel.constrain(to: bubbleView, leadingInset: 23, bottomInset: -14,  trailingInset: -12)
     }
 
     required init?(coder aDecoder: NSCoder) {

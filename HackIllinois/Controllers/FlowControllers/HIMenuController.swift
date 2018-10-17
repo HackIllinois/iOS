@@ -112,13 +112,13 @@ extension HIMenuController {
         addChildViewController(_tabBarController)
         _tabBarController.view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(_tabBarController.view)
-        _tabBarController.view.setConstraints(superView: view, widthInset: 0, heightInset: 0, leadingInset: 0, trailingInset: 0)
+        _tabBarController.view.constrain(to: view, leadingInset: 0, trailingInset: 0, widthInset: 0, heightInset: 0)
         
         _tabBarController.didMove(toParentViewController: self)
 
         overlayView.alpha = 0.0
         view.addSubview(overlayView)
-        overlayView.setConstraints(superView: _tabBarController.view, topInset: 0, bottomInset: 0, leadingInset: 0, trailingInset: 0)
+        overlayView.constrain(to: _tabBarController.view, topInset: 0, leadingInset: 0, bottomInset: 0, trailingInset: 0)
         
 
         let menu = HIView(style: .background)
@@ -126,7 +126,7 @@ extension HIMenuController {
         menu.clipsToBounds = true
         menu.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(menu)
-        menu.setConstraints(superView: view, topInset: 0, leadingInset: 0, trailingInset: 0)
+        menu.constrain(to: view, topInset: 0, leadingInset: 0, trailingInset: 0)
         
         
         menuOverlap = menu.bottomAnchor.constraint(equalTo: _tabBarController.view.topAnchor)
@@ -152,7 +152,7 @@ extension HIMenuController {
         menuItems.distribution = .fillEqually
         menuItems.translatesAutoresizingMaskIntoConstraints = false
         menu.addSubview(menuItems)
-        menuItems.setConstraints(withLayoutGuide:menu.safeAreaLayoutGuide, topInset: 11, leadingInset: 59, trailingInset: -59)
+        menuItems.constain(to: menu.safeAreaLayoutGuide, topInset: 11, leadingInset: 59, trailingInset: -59)
         menuItemsHeight = menuItems.heightAnchor.constraint(equalToConstant: 0)
         menuItemsHeight.isActive = true
 
