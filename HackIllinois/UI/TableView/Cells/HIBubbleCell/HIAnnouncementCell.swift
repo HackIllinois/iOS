@@ -36,13 +36,12 @@ class HIAnnouncementCell: HIBubbleCell {
         timeLabel.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -12).isActive = true
         timeLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
         timeLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+
         timeLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
 
         bubbleView.addSubview(infoLabel)
         infoLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12).isActive = true
-        infoLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 23).isActive = true
-        infoLabel.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: -14).isActive = true
-        infoLabel.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -12).isActive = true
+        infoLabel.setConstraints(superView: bubbleView, bottomInset: -14, leadingInset: 23, trailingInset: -12)
     }
 
     required init?(coder aDecoder: NSCoder) {

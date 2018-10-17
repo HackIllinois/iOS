@@ -32,17 +32,14 @@ class HIEventCell: HIBubbleCell {
 
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         bubbleView.addSubview(favoritedButton)
-        favoritedButton.topAnchor.constraint(equalTo: bubbleView.topAnchor).isActive = true
-        favoritedButton.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor).isActive = true
-        favoritedButton.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor).isActive = true
         favoritedButton.widthAnchor.constraint(equalToConstant: 58).isActive = true
+        favoritedButton.setConstraints(superView: bubbleView, topInset: 0, bottomInset: 0, leadingInset: 0)
 
         let disclosureIndicatorView = HIImageView(style: .icon(image: #imageLiteral(resourceName: "DisclosureIndicator")))
         bubbleView.addSubview(disclosureIndicatorView)
-        disclosureIndicatorView.topAnchor.constraint(equalTo: bubbleView.topAnchor).isActive = true
-        disclosureIndicatorView.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor).isActive = true
-        disclosureIndicatorView.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor).isActive = true
         disclosureIndicatorView.widthAnchor.constraint(equalToConstant: 65).isActive = true
+        disclosureIndicatorView.setConstraints(superView: bubbleView, topInset: 0, bottomInset: 0, trailingInset: 0)
+        
 
         contentStackView.axis = .vertical
         contentStackView.distribution = .equalSpacing
