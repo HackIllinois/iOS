@@ -112,20 +112,21 @@ extension HIMenuController {
         addChildViewController(_tabBarController)
         _tabBarController.view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(_tabBarController.view)
-        HIConstraints.setConstraints(constraintedView: _tabBarController.view, equalToView: view, setTop: false, setBottom: false, setWidth: true, setHeight: true, setLeading: true, setTrailing: true)
+        _tabBarController.view.setConstraints(superView: view, widthInset: 0, heightInset: 0, leadingInset: 0, trailingInset: 0)
         
         _tabBarController.didMove(toParentViewController: self)
 
         overlayView.alpha = 0.0
         view.addSubview(overlayView)
-        HIConstraints.setConstraints(constraintedView: overlayView, equalToView: _tabBarController.view, setTop: true, setBottom: true, setWidth: false, setHeight: false, setLeading: true, setTrailing: true)
+        overlayView.setConstraints(superView: _tabBarController.view, topInset: 0, bottomInset: 0, leadingInset: 0, trailingInset: 0)
+        
 
         let menu = HIView(style: .background)
         menu.backgroundColor = HIApplication.Palette.current.background
         menu.clipsToBounds = true
         menu.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(menu)
-        HIConstraints.setConstraints(constraintedView: menu, equalToView: view, setTop: true, setBottom: false, setWidth: false, setHeight: false, setLeading: true, setTrailing: true)
+        menu.setConstraints(superView: view, topInset: 0, leadingInset: 0, trailingInset: 0)
         
         
         menuOverlap = menu.bottomAnchor.constraint(equalTo: _tabBarController.view.topAnchor)
@@ -151,10 +152,7 @@ extension HIMenuController {
         menuItems.distribution = .fillEqually
         menuItems.translatesAutoresizingMaskIntoConstraints = false
         menu.addSubview(menuItems)
-        
-        HIConstraints.setConstraintWithOffsetFromLayoutGuide(constraintedView: menuItems, withLayoutGuide: menu.safeAreaLayoutGuide, setTop: true, setBottom: false, setWidth: false, setHeight: false, setLeading: true, setTrailing: true, topConstant: 11, bottomConstant: 0, widthConstant: 0, heightConstant: 0, leadingConstant: 59, trailingConstant: -59)
-
-        
+        menuItems.setConstraints(withLayoutGuide:menu.safeAreaLayoutGuide, topInset: 11, bottomInset: 0, widthInset: 0, heightInset: 0, leadingInset: 59, trailingInset: -59)
         menuItemsHeight = menuItems.heightAnchor.constraint(equalToConstant: 0)
         menuItemsHeight.isActive = true
 

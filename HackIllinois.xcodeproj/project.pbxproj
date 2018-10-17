@@ -42,6 +42,7 @@
 		9544799C200C39870005408B /* HIUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9544799B200C39870005408B /* HIUser.swift */; };
 		954EE1D31FD0F1680078F39E /* HILoginSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */; };
 		954EE1D51FD0F17F0078F39E /* HIUserPassLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954EE1D41FD0F17F0078F39E /* HIUserPassLoginViewController.swift */; };
+		9552D92821758E4C00A8C869 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9552D92721758E4C00A8C869 /* UIViewExtensions.swift */; };
 		955772FA202B963800FCE7C0 /* HIRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955772F9202B963800FCE7C0 /* HIRegistrationService.swift */; };
 		955772FC202B96A500FCE7C0 /* HIAPIAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955772FB202B96A500FCE7C0 /* HIAPIAttendee.swift */; };
 		956F41E11FC7577500557DC7 /* HIAnnouncementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F41E01FC7577500557DC7 /* HIAnnouncementsViewController.swift */; };
@@ -50,7 +51,6 @@
 		957D7CAB1FC2940800C4332A /* HIAPIReturnDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957D7CA61FC2940800C4332A /* HIAPIReturnDataContainer.swift */; };
 		957D7CAC1FC2940800C4332A /* HackIllinois.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 957D7CA81FC2940800C4332A /* HackIllinois.xcdatamodeld */; };
 		957D7CB81FC39EA100C4332A /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957D7CB71FC39EA100C4332A /* Formatters.swift */; };
-		9587DD02215C680E00FD9962 /* HIConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9587DD01215C680E00FD9962 /* HIConstraints.swift */; };
 		958C863B2033C94800803F81 /* HIAdminAnnouncementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958C863A2033C94800803F81 /* HIAdminAnnouncementViewController.swift */; };
 		95A7D28A203D4F54005EAEAF /* HIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7D27B203D4F54005EAEAF /* HIButton.swift */; };
 		95A7D28B203D4F54005EAEAF /* HISegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7D27C203D4F54005EAEAF /* HISegmentedControl.swift */; };
@@ -153,6 +153,7 @@
 		9544799D200C3CE40005408B /* Tests.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Tests.playground; sourceTree = "<group>"; };
 		954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILoginSelectionViewController.swift; sourceTree = "<group>"; };
 		954EE1D41FD0F17F0078F39E /* HIUserPassLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIUserPassLoginViewController.swift; sourceTree = "<group>"; };
+		9552D92721758E4C00A8C869 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		955772F9202B963800FCE7C0 /* HIRegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIRegistrationService.swift; sourceTree = "<group>"; };
 		955772FB202B96A500FCE7C0 /* HIAPIAttendee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAPIAttendee.swift; sourceTree = "<group>"; };
 		956F41E01FC7577500557DC7 /* HIAnnouncementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAnnouncementsViewController.swift; sourceTree = "<group>"; };
@@ -161,7 +162,6 @@
 		957D7CA61FC2940800C4332A /* HIAPIReturnDataContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIAPIReturnDataContainer.swift; sourceTree = "<group>"; };
 		957D7CA91FC2940800C4332A /* HackIllinois.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HackIllinois.xcdatamodel; sourceTree = "<group>"; };
 		957D7CB71FC39EA100C4332A /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
-		9587DD01215C680E00FD9962 /* HIConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIConstraints.swift; sourceTree = "<group>"; };
 		958C863A2033C94800803F81 /* HIAdminAnnouncementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIAdminAnnouncementViewController.swift; sourceTree = "<group>"; };
 		95A7D27B203D4F54005EAEAF /* HIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIButton.swift; sourceTree = "<group>"; };
 		95A7D27C203D4F54005EAEAF /* HISegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HISegmentedControl.swift; sourceTree = "<group>"; };
@@ -329,7 +329,6 @@
 				9521A6A6201912B4009059C6 /* DataSources */,
 				957D7CB71FC39EA100C4332A /* Formatters.swift */,
 				95DC43EB202A61E9007E9B1A /* HIApplicationConstants.swift */,
-				9587DD01215C680E00FD9962 /* HIConstraints.swift */,
 				951827A31EA35DB800049F79 /* Info.plist */,
 				951827B21EA35E8B00049F79 /* LaunchScreen.storyboard */,
 				951827A41EA35DB800049F79 /* Models */,
@@ -447,6 +446,7 @@
 				95A7D27F203D4F54005EAEAF /* HIView.swift */,
 				95D791EC203E370A00C3BA62 /* HIWindow.swift */,
 				95A7D27E203D4F54005EAEAF /* Identifiable.swift */,
+				9552D92721758E4C00A8C869 /* UIViewExtensions.swift */,
 				95A7D280203D4F54005EAEAF /* TableView */,
 			);
 			path = UI;
@@ -689,6 +689,7 @@
 				95CA9230201E60D300C46037 /* HIImage.swift in Sources */,
 				95A7D2A0203D60E9005EAEAF /* HIBubbleCell.swift in Sources */,
 				95DC404120105D7300C1E266 /* HIAPIUserAuth.swift in Sources */,
+				9552D92821758E4C00A8C869 /* UIViewExtensions.swift in Sources */,
 				84E3DD05203EA27800BF3883 /* HIPassService.swift in Sources */,
 				958C863B2033C94800803F81 /* HIAdminAnnouncementViewController.swift in Sources */,
 				95DB8C712018419500173ACC /* HIAPIUser.swift in Sources */,
@@ -708,7 +709,6 @@
 				95A7D28F203D4F54005EAEAF /* HIEventCell.swift in Sources */,
 				95FC1D1E1FCBD20E00F8AD60 /* HIUserDetailViewController.swift in Sources */,
 				95C3BE302008B99C0008ED79 /* HIBaseViewController.swift in Sources */,
-				9587DD02215C680E00FD9962 /* HIConstraints.swift in Sources */,
 				95CD0ED52015217E00D79DCC /* HIApplicationStateController.swift in Sources */,
 				957D7C841FC28F4100C4332A /* HIEventService.swift in Sources */,
 				95A7D292203D4F54005EAEAF /* HILoginSelectionCell.swift in Sources */,
