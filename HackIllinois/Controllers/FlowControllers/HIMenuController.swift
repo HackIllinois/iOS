@@ -152,7 +152,7 @@ extension HIMenuController {
         menuItems.distribution = .fillEqually
         menuItems.translatesAutoresizingMaskIntoConstraints = false
         menu.addSubview(menuItems)
-        menuItems.setConstraints(withLayoutGuide:menu.safeAreaLayoutGuide, topInset: 11, bottomInset: 0, widthInset: 0, heightInset: 0, leadingInset: 59, trailingInset: -59)
+        menuItems.setConstraints(withLayoutGuide:menu.safeAreaLayoutGuide, topInset: 11, leadingInset: 59, trailingInset: -59)
         menuItemsHeight = menuItems.heightAnchor.constraint(equalToConstant: 0)
         menuItemsHeight.isActive = true
 
