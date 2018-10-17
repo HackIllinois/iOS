@@ -144,10 +144,6 @@ extension HIMenuController {
         closeMenuButton.widthAnchor.constraint(equalToConstant: 49).isActive = true
         closeMenuButton.heightAnchor.constraint(equalToConstant: 49).isActive = true
         
-        
-        
-        
-
         menuItems.axis = .vertical
         menuItems.distribution = .fillEqually
         menuItems.translatesAutoresizingMaskIntoConstraints = false
