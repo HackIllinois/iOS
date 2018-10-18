@@ -112,29 +112,26 @@ extension HIMenuController {
         addChildViewController(_tabBarController)
         _tabBarController.view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(_tabBarController.view)
-        _tabBarController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        _tabBarController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        _tabBarController.view.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        _tabBarController.view.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+        _tabBarController.view.constrain(to: view, trailingInset: 0, leadingInset: 0, widthInset: 0, heightInset: 0)
+        
         _tabBarController.didMove(toParentViewController: self)
 
         overlayView.alpha = 0.0
         view.addSubview(overlayView)
-        overlayView.topAnchor.constraint(equalTo: _tabBarController.view.topAnchor).isActive = true
-        overlayView.leadingAnchor.constraint(equalTo: _tabBarController.view.leadingAnchor).isActive = true
-        overlayView.bottomAnchor.constraint(equalTo: _tabBarController.view.bottomAnchor).isActive = true
-        overlayView.trailingAnchor.constraint(equalTo: _tabBarController.view.trailingAnchor).isActive = true
+        overlayView.constrain(to: _tabBarController.view, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        
 
         let menu = HIView(style: .background)
         menu.backgroundColor = HIApplication.Palette.current.background
         menu.clipsToBounds = true
         menu.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(menu)
-        menu.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        menu.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        menu.constrain(to: view, topInset: 0, trailingInset: 0, leadingInset: 0)
+        
+        
         menuOverlap = menu.bottomAnchor.constraint(equalTo: _tabBarController.view.topAnchor)
         menuOverlap.isActive = true
-        menu.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        
         menuHeight = menu.heightAnchor.constraint(equalToConstant: 0)
         menuHeight.isActive = true
 
@@ -146,14 +143,12 @@ extension HIMenuController {
         closeMenuButton.leadingAnchor.constraint(equalTo: menu.safeAreaLayoutGuide.leadingAnchor, constant: 3).isActive = true
         closeMenuButton.widthAnchor.constraint(equalToConstant: 49).isActive = true
         closeMenuButton.heightAnchor.constraint(equalToConstant: 49).isActive = true
-
+        
         menuItems.axis = .vertical
         menuItems.distribution = .fillEqually
         menuItems.translatesAutoresizingMaskIntoConstraints = false
         menu.addSubview(menuItems)
-        menuItems.topAnchor.constraint(equalTo: menu.safeAreaLayoutGuide.topAnchor, constant: 11).isActive = true
-        menuItems.leadingAnchor.constraint(equalTo: menu.safeAreaLayoutGuide.leadingAnchor, constant: 59).isActive = true
-        menuItems.trailingAnchor.constraint(equalTo: menu.safeAreaLayoutGuide.trailingAnchor, constant: -59).isActive = true
+        menuItems.constain(to: menu.safeAreaLayoutGuide, topInset: 11, trailingInset: -59, leadingInset: 59)
         menuItemsHeight = menuItems.heightAnchor.constraint(equalToConstant: 0)
         menuItemsHeight.isActive = true
 
