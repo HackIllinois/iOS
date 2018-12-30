@@ -48,7 +48,7 @@ class HILoginSelectionViewController: HIBaseViewController {
 extension HILoginSelectionViewController {
     override func loadView() {
         super.loadView()
-        let tableView = HITableView(style: .standard)
+        let tableView = HITableView()
         tableView.alwaysBounceVertical = false
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 54).isActive = true

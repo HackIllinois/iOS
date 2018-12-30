@@ -15,16 +15,11 @@ import UIKit
 
 class HITableView: UITableView {
     // MARK: - Types
-    enum Style {
-        case standard
-    }
 
     // MARK: - Properties
-    let style_: Style
 
     // MARK: - Init
-    init(style: Style) {
-        self.style_ = style
+    init() {
         super.init(frame: .zero, style: .grouped)
         translatesAutoresizingMaskIntoConstraints = false
 
@@ -48,10 +43,7 @@ class HITableView: UITableView {
         case .night:
             indicatorStyle = .white
         }
-        switch style_ {
-        case .standard:
-            backgroundColor = HIApplication.Palette.current.background
-        }
+        backgroundColor = HIApplication.Palette.current.background
     }
 
 }
