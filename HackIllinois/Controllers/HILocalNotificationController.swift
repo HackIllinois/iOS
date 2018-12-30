@@ -30,6 +30,7 @@ class HILocalNotificationController: NSObject {
                 UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (granted, _) in
                     if granted { authorized() }
                 }
+            case .provisional: break
             }
         }
     }
