@@ -199,31 +199,42 @@ extension HILoginFlowController: HILoginSelectionViewControllerDelegate {
     func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HILoginSelection, withUserInfo info: String?) {
         switch selection {
         case .github:
-            print("URL::\(HIAuthService.githubLoginURL())")
-            loginSession = SFAuthenticationSession(url: HIAuthService.githubLoginURL(), callbackURLScheme: nil) { [weak self] (url, error) in
-
-                if let url = url,
-                    let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
-                    let queryItems = components.queryItems,
-                    let token = queryItems.first(where: { $0.name == "token" })?.value,
-                    token.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
-
-                    DispatchQueue.main.async {
-                        self?.populateUserData(loginMethod: .github, token: token, sender: loginSelectionViewController)
-                    }
-                }
-
-                if let error = error {
-                    if (error as? SFAuthenticationError)?.code == SFAuthenticationError.canceledLogin {
-                        // do nothing
-                    } else {
-                        let alert = UIAlertController(title: "Authentication Failed", message: nil, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                        self?.present(alert, animated: true, completion: nil)
-                    }
-                }
-            }
-            loginSession?.start()
+//            print("URL::\(HIAuthService.githubLoginURL())")
+//            loginSession = SFAuthenticationSession(url: HIAuthService.githubLoginURL(), callbackURLScheme: nil) { [weak self] (url, error) in
+//
+//                if let url = url,
+//                    let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
+//                    let queryItems = components.queryItems,
+//                    let token = queryItems.first(where: { $0.name == "token" })?.value,
+//                    token.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
+//
+//                    DispatchQueue.main.async {
+//                        self?.populateUserData(loginMethod: .github, token: token, sender: loginSelectionViewController)
+//                    }
+//                }
+//
+//                if let error = error {
+//                    if (error as? SFAuthenticationError)?.code == SFAuthenticationError.canceledLogin {
+//                        // do nothing
+//                    } else {
+//                        let alert = UIAlertController(title: "Authentication Failed", message: nil, preferredStyle: .alert)
+//                        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+//                        self?.present(alert, animated: true, completion: nil)
+//                    }
+//                }
+//            }
+//            loginSession?.start()
+            let user = HIUser(
+                loginMethod: .github,
+                permissions: .admin,
+                token: "bosd",
+                identifier: "test@accoutn.com",
+                isActive: true,
+                id: 1,
+                name: "test",
+                dietaryRestrictions: .none
+            )
+            NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
 
         case .userPass:
             navController.pushViewController(userPassLoginViewController, animated: true)
