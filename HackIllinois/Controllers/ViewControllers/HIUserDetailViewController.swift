@@ -106,7 +106,12 @@ extension HIUserDetailViewController {
         .onCompletion { result in
             switch result {
             case .success(let data):
-                let pass = PKPass(data: data, error: nil)
+                var error: NSError?
+                let pass = PKPass(data: data, error: &error)
+                if let error = error {
+                    print(error)
+                    return
+                }
                 let vc = PKAddPassesViewController(pass: pass)
                 DispatchQueue.main.async { [weak self] in
                     if let strongSelf = self {
