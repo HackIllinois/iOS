@@ -47,7 +47,7 @@ extension HIAnnouncementsViewController {
     override func loadView() {
         super.loadView()
 
-        let tableView = HITableView(style: .standard)
+        let tableView = HITableView()
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true

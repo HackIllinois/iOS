@@ -42,6 +42,7 @@
 		9544799C200C39870005408B /* HIUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9544799B200C39870005408B /* HIUser.swift */; };
 		954EE1D31FD0F1680078F39E /* HILoginSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */; };
 		954EE1D51FD0F17F0078F39E /* HIUserPassLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954EE1D41FD0F17F0078F39E /* HIUserPassLoginViewController.swift */; };
+		9552D92821758E4C00A8C869 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9552D92721758E4C00A8C869 /* UIViewExtensions.swift */; };
 		955772FA202B963800FCE7C0 /* HIRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955772F9202B963800FCE7C0 /* HIRegistrationService.swift */; };
 		955772FC202B96A500FCE7C0 /* HIAPIAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955772FB202B96A500FCE7C0 /* HIAPIAttendee.swift */; };
 		956F41E11FC7577500557DC7 /* HIAnnouncementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F41E01FC7577500557DC7 /* HIAnnouncementsViewController.swift */; };
@@ -152,6 +153,7 @@
 		9544799D200C3CE40005408B /* Tests.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Tests.playground; sourceTree = "<group>"; };
 		954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILoginSelectionViewController.swift; sourceTree = "<group>"; };
 		954EE1D41FD0F17F0078F39E /* HIUserPassLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIUserPassLoginViewController.swift; sourceTree = "<group>"; };
+		9552D92721758E4C00A8C869 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		955772F9202B963800FCE7C0 /* HIRegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIRegistrationService.swift; sourceTree = "<group>"; };
 		955772FB202B96A500FCE7C0 /* HIAPIAttendee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAPIAttendee.swift; sourceTree = "<group>"; };
 		956F41E01FC7577500557DC7 /* HIAnnouncementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAnnouncementsViewController.swift; sourceTree = "<group>"; };
@@ -199,6 +201,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		29D333FC7383657348963D23 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9518277C1EA35AF100049F79 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -437,6 +446,7 @@
 				95A7D27F203D4F54005EAEAF /* HIView.swift */,
 				95D791EC203E370A00C3BA62 /* HIWindow.swift */,
 				95A7D27E203D4F54005EAEAF /* Identifiable.swift */,
+				9552D92721758E4C00A8C869 /* UIViewExtensions.swift */,
 				95A7D280203D4F54005EAEAF /* TableView */,
 			);
 			path = UI;
@@ -508,6 +518,7 @@
 			buildConfigurationList = 35D7CE9E20380ACF00654E28 /* Build configuration list for PBXNativeTarget "Stickers" */;
 			buildPhases = (
 				35D7CE9220380ACF00654E28 /* Resources */,
+				29D333FC7383657348963D23 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -527,7 +538,6 @@
 				9518277C1EA35AF100049F79 /* Frameworks */,
 				9518277D1EA35AF100049F79 /* Resources */,
 				4BB122A7E5028FEBC4CB4FEB /* [CP] Embed Pods Frameworks */,
-				FB38EA2841D0B5D4BAE3221B /* [CP] Copy Pods Resources */,
 				95CD0ED6201523B800D79DCC /* ShellScript */,
 				35D7CE9F20380ACF00654E28 /* Embed App Extensions */,
 			);
@@ -668,21 +678,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		FB38EA2841D0B5D4BAE3221B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HackIllinois/Pods-HackIllinois-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -694,6 +689,7 @@
 				95CA9230201E60D300C46037 /* HIImage.swift in Sources */,
 				95A7D2A0203D60E9005EAEAF /* HIBubbleCell.swift in Sources */,
 				95DC404120105D7300C1E266 /* HIAPIUserAuth.swift in Sources */,
+				9552D92821758E4C00A8C869 /* UIViewExtensions.swift in Sources */,
 				84E3DD05203EA27800BF3883 /* HIPassService.swift in Sources */,
 				958C863B2033C94800803F81 /* HIAdminAnnouncementViewController.swift in Sources */,
 				95DB8C712018419500173ACC /* HIAPIUser.swift in Sources */,
