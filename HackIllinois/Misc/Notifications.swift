@@ -1,5 +1,5 @@
 //
-//  Notifcations.swift
+//  Notifications.swift
 //  HackIllinois
 //
 //  Created by Rauhul Varma on 1/4/19.

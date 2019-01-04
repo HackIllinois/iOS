@@ -81,14 +81,14 @@
 		95D791ED203E370A00C3BA62 /* HIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D791EC203E370A00C3BA62 /* HIWindow.swift */; };
 		95DB8C712018419500173ACC /* HIAPIUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB8C702018419500173ACC /* HIAPIUser.swift */; };
 		95DC404120105D7300C1E266 /* HIAPIUserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DC404020105D7300C1E266 /* HIAPIUserAuth.swift */; };
-		95DC43EC202A61E9007E9B1A /* HIApplicationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DC43EB202A61E9007E9B1A /* HIApplicationConstants.swift */; };
+		95DC43EC202A61E9007E9B1A /* HIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DC43EB202A61E9007E9B1A /* HIConfiguration.swift */; };
 		95DE24DC1FC3ADBE000F599D /* HIAnnouncementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DE24DB1FC3ADBE000F599D /* HIAnnouncementService.swift */; };
 		95E24AEA201ED0CD007B7620 /* HIAPISuccessContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E24AE9201ED0CD007B7620 /* HIAPISuccessContainer.swift */; };
 		95E265F9201859BE000FC63D /* HIAPIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E265F8201859BE000FC63D /* HIAPIEvent.swift */; };
 		95FC1D1E1FCBD20E00F8AD60 /* HIUserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */; };
 		95FC79BE21E0199600715036 /* HIAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC79BD21E0199600715036 /* HIAppearance.swift */; };
 		95FC79C121E0243D00715036 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC79C021E0243D00715036 /* Operators.swift */; };
-		95FC79C321E024A700715036 /* Notifcations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC79C221E024A700715036 /* Notifcations.swift */; };
+		95FC79C321E024A700715036 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC79C221E024A700715036 /* Notifications.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -195,14 +195,14 @@
 		95D791EC203E370A00C3BA62 /* HIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIWindow.swift; sourceTree = "<group>"; };
 		95DB8C702018419500173ACC /* HIAPIUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAPIUser.swift; sourceTree = "<group>"; };
 		95DC404020105D7300C1E266 /* HIAPIUserAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIAPIUserAuth.swift; sourceTree = "<group>"; };
-		95DC43EB202A61E9007E9B1A /* HIApplicationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIApplicationConstants.swift; sourceTree = "<group>"; };
+		95DC43EB202A61E9007E9B1A /* HIConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIConfiguration.swift; sourceTree = "<group>"; };
 		95DE24DB1FC3ADBE000F599D /* HIAnnouncementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAnnouncementService.swift; sourceTree = "<group>"; };
 		95E24AE9201ED0CD007B7620 /* HIAPISuccessContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAPISuccessContainer.swift; sourceTree = "<group>"; };
 		95E265F8201859BE000FC63D /* HIAPIEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAPIEvent.swift; sourceTree = "<group>"; };
 		95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIUserDetailViewController.swift; sourceTree = "<group>"; };
 		95FC79BD21E0199600715036 /* HIAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAppearance.swift; sourceTree = "<group>"; };
 		95FC79C021E0243D00715036 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
-		95FC79C221E024A700715036 /* Notifcations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifcations.swift; sourceTree = "<group>"; };
+		95FC79C221E024A700715036 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		FB7A684A9E0518F3903C3ADC /* Pods-HackIllinois.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackIllinois.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HackIllinois/Pods-HackIllinois.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -334,8 +334,6 @@
 				951827991EA35DB800049F79 /* Assets.xcassets */,
 				9518279E1EA35DB800049F79 /* Controllers */,
 				9521A6A6201912B4009059C6 /* DataSources */,
-				957D7CB71FC39EA100C4332A /* Formatters.swift */,
-				95DC43EB202A61E9007E9B1A /* HIApplicationConstants.swift */,
 				951827A31EA35DB800049F79 /* Info.plist */,
 				951827B21EA35E8B00049F79 /* LaunchScreen.storyboard */,
 				951827A41EA35DB800049F79 /* Models */,
@@ -514,7 +512,9 @@
 			isa = PBXGroup;
 			children = (
 				95FC79C021E0243D00715036 /* Operators.swift */,
-				95FC79C221E024A700715036 /* Notifcations.swift */,
+				95FC79C221E024A700715036 /* Notifications.swift */,
+				957D7CB71FC39EA100C4332A /* Formatters.swift */,
+				95DC43EB202A61E9007E9B1A /* HIConfiguration.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -729,7 +729,7 @@
 				95CD0ED52015217E00D79DCC /* HIApplicationStateController.swift in Sources */,
 				957D7C841FC28F4100C4332A /* HIEventService.swift in Sources */,
 				95A7D292203D4F54005EAEAF /* HILoginSelectionCell.swift in Sources */,
-				95DC43EC202A61E9007E9B1A /* HIApplicationConstants.swift in Sources */,
+				95DC43EC202A61E9007E9B1A /* HIConfiguration.swift in Sources */,
 				95C18DCC20096539004784B5 /* HIEventListViewController.swift in Sources */,
 				95A7D28A203D4F54005EAEAF /* HIButton.swift in Sources */,
 				95A7D28E203D4F54005EAEAF /* HIView.swift in Sources */,
@@ -770,7 +770,7 @@
 				95A7D29E203D5BA4005EAEAF /* HILabel.swift in Sources */,
 				956F41E31FC76C8E00557DC7 /* HIMenuController.swift in Sources */,
 				9510F6A51FCB7D6E007D19DB /* Announcement+CoreDataProperties.swift in Sources */,
-				95FC79C321E024A700715036 /* Notifcations.swift in Sources */,
+				95FC79C321E024A700715036 /* Notifications.swift in Sources */,
 				95FC79BE21E0199600715036 /* HIAppearance.swift in Sources */,
 				954EE1D31FD0F1680078F39E /* HILoginSelectionViewController.swift in Sources */,
 			);
