@@ -34,7 +34,7 @@ class HIEventDetailLocationCell: UITableViewCell {
 
         containerView.layer.cornerRadius = 8
         containerView.layer.masksToBounds = true
-        containerView.backgroundColor = HIApplication.Palette.current.background
+        containerView.backgroundColor = HIAppearance.current.background
         containerView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(containerView)
         containerView.constrain(to: contentView, topInset: 6, trailingInset: -12, bottomInset: -6,  leadingInset: 12)
@@ -50,7 +50,7 @@ class HIEventDetailLocationCell: UITableViewCell {
         blurEffectView.constrain(to: containerView, topInset: 0, trailingInset: 0, leadingInset: 0)
         blurEffectView.heightAnchor.constraint(equalToConstant: 40).isActive = true
 
-        titleLabel.textColor = HIApplication.Palette.current.primary
+        titleLabel.textColor = HIAppearance.current.primary
         titleLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         blurEffectView.contentView.addSubview(titleLabel)
@@ -77,13 +77,14 @@ class HIEventDetailLocationCell: UITableViewCell {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        contentView.backgroundColor = HIApplication.Palette.current.contentBackground
-        switch HIApplication.Theme.current {
-        case .day:
-            blurEffectView.backgroundColor = nil
-        case .night:
-            blurEffectView.backgroundColor = HIApplication.Palette.current.contentBackground.withAlphaComponent(0.7)
-        }
+        contentView.backgroundColor = HIAppearance.current.contentBackground
+        // FIXME:
+//        switch HIApplication.Theme.current {
+//        case .day:
+//            blurEffectView.backgroundColor = nil
+//        case .night:
+        blurEffectView.backgroundColor = HIAppearance.current.contentBackground.withAlphaComponent(0.7)
+//        }
     }
 }
 

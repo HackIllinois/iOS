@@ -86,6 +86,9 @@
 		95E24AEA201ED0CD007B7620 /* HIAPISuccessContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E24AE9201ED0CD007B7620 /* HIAPISuccessContainer.swift */; };
 		95E265F9201859BE000FC63D /* HIAPIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E265F8201859BE000FC63D /* HIAPIEvent.swift */; };
 		95FC1D1E1FCBD20E00F8AD60 /* HIUserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */; };
+		95FC79BE21E0199600715036 /* HIAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC79BD21E0199600715036 /* HIAppearance.swift */; };
+		95FC79C121E0243D00715036 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC79C021E0243D00715036 /* Operators.swift */; };
+		95FC79C321E024A700715036 /* Notifcations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC79C221E024A700715036 /* Notifcations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,6 +200,9 @@
 		95E24AE9201ED0CD007B7620 /* HIAPISuccessContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAPISuccessContainer.swift; sourceTree = "<group>"; };
 		95E265F8201859BE000FC63D /* HIAPIEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAPIEvent.swift; sourceTree = "<group>"; };
 		95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIUserDetailViewController.swift; sourceTree = "<group>"; };
+		95FC79BD21E0199600715036 /* HIAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAppearance.swift; sourceTree = "<group>"; };
+		95FC79C021E0243D00715036 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
+		95FC79C221E024A700715036 /* Notifcations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifcations.swift; sourceTree = "<group>"; };
 		FB7A684A9E0518F3903C3ADC /* Pods-HackIllinois.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackIllinois.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HackIllinois/Pods-HackIllinois.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -322,6 +328,7 @@
 		951827971EA35DB800049F79 /* HackIllinois */ = {
 			isa = PBXGroup;
 			children = (
+				95FC79BF21E0243000715036 /* Misc */,
 				950F57121FBE8127001F7DF4 /* APIService */,
 				951827981EA35DB800049F79 /* AppDelegate.swift */,
 				951827991EA35DB800049F79 /* Assets.xcassets */,
@@ -448,6 +455,7 @@
 				95A7D27E203D4F54005EAEAF /* Identifiable.swift */,
 				9552D92721758E4C00A8C869 /* UIViewExtensions.swift */,
 				95A7D280203D4F54005EAEAF /* TableView */,
+				95FC79BD21E0199600715036 /* HIAppearance.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -500,6 +508,15 @@
 				95A7D287203D4F54005EAEAF /* HILoginSelectionHeader.swift */,
 			);
 			path = Headers;
+			sourceTree = "<group>";
+		};
+		95FC79BF21E0243000715036 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				95FC79C021E0243D00715036 /* Operators.swift */,
+				95FC79C221E024A700715036 /* Notifcations.swift */,
+			);
+			path = Misc;
 			sourceTree = "<group>";
 		};
 		EAE6D26341C3ACE27256067A /* Frameworks */ = {
@@ -736,6 +753,7 @@
 				9521A6A820191590009059C6 /* HIEventDataSource.swift in Sources */,
 				9506926E203EE14000D7C34C /* LOTAnimationView.swift in Sources */,
 				95D6DA78203F8C3900E7C982 /* HIImageView.swift in Sources */,
+				95FC79C121E0243D00715036 /* Operators.swift in Sources */,
 				95A7D294203D4F54005EAEAF /* HIDateHeader.swift in Sources */,
 				95D6DA7A203F983700E7C982 /* HILocalNotificationController.swift in Sources */,
 				9510F6A31FCB7D6E007D19DB /* Location+CoreDataClass.swift in Sources */,
@@ -752,6 +770,8 @@
 				95A7D29E203D5BA4005EAEAF /* HILabel.swift in Sources */,
 				956F41E31FC76C8E00557DC7 /* HIMenuController.swift in Sources */,
 				9510F6A51FCB7D6E007D19DB /* Announcement+CoreDataProperties.swift in Sources */,
+				95FC79C321E024A700715036 /* Notifcations.swift in Sources */,
+				95FC79BE21E0199600715036 /* HIAppearance.swift in Sources */,
 				954EE1D31FD0F1680078F39E /* HILoginSelectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

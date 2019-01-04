@@ -25,11 +25,11 @@ class HILoginSelectionCell: UITableViewCell {
     var separatorView = HIView(style: .separator)
 
     var defaultColor: UIColor {
-        return HIApplication.Palette.current.background
+        return HIAppearance.current.background
     }
 
     var activeColor: UIColor {
-        return HIApplication.Palette.current.actionBackground
+        return HIAppearance.current.actionBackground
     }
 
     var animator: UIViewPropertyAnimator?
@@ -61,7 +61,7 @@ class HILoginSelectionCell: UITableViewCell {
 
     // MARK: - Themeable
     @objc  func refreshForThemeChange() {
-        contentView.backgroundColor = HIApplication.Palette.current.background
+        contentView.backgroundColor = HIAppearance.current.background
     }
 }
 

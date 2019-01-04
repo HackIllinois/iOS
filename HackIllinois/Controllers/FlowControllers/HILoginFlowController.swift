@@ -34,12 +34,7 @@ class HILoginFlowController: UIViewController {
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        switch HIApplication.Theme.current {
-        case .day:
-            return .default
-        case .night:
-            return .lightContent
-        }
+        return HIAppearance.current.preferredStatusBarStyle
     }
 
     // keeps the login session from going out of scope during presentation
@@ -79,7 +74,7 @@ class HILoginFlowController: UIViewController {
 extension HILoginFlowController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = HIApplication.Palette.current.background
+        view.backgroundColor = HIAppearance.current.background
         navController.isNavigationBarHidden = true
         addChildViewController(navController)
         navController.view.frame = view.frame

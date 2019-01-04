@@ -78,10 +78,10 @@ class HICountdownViewController: UIViewController {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        days.backgroundColor = HIApplication.Palette.current.background
-        hours.backgroundColor = HIApplication.Palette.current.background
-        minutes.backgroundColor = HIApplication.Palette.current.background
-        seconds.backgroundColor = HIApplication.Palette.current.background
+        days.backgroundColor = HIAppearance.current.background
+        hours.backgroundColor = HIAppearance.current.background
+        minutes.backgroundColor = HIAppearance.current.background
+        seconds.backgroundColor = HIAppearance.current.background
     }
 }
 
@@ -116,7 +116,7 @@ extension HICountdownViewController {
     }
 
     func stackView(with countDownView: LOTAnimationView, and labelString: String) -> UIStackView {
-        countDownView.backgroundColor = HIApplication.Palette.current.background
+        countDownView.backgroundColor = HIAppearance.current.background
         countDownView.translatesAutoresizingMaskIntoConstraints = false
 
         let label = HILabel(style: .countdown(text: labelString))

@@ -16,11 +16,11 @@ import UIKit
 class HIBubbleCell: UITableViewCell {
     // MARK: - Properties
     var defaultColor: UIColor {
-        return HIApplication.Palette.current.contentBackground
+        return HIAppearance.current.contentBackground
     }
 
     var activeColor: UIColor {
-        return HIApplication.Palette.current.actionBackground
+        return HIAppearance.current.actionBackground
     }
 
     var animator: UIViewPropertyAnimator?
@@ -49,7 +49,7 @@ class HIBubbleCell: UITableViewCell {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        contentView.backgroundColor = HIApplication.Palette.current.background
+        contentView.backgroundColor = HIAppearance.current.background
     }
 
     // MARK: - UITableViewCell

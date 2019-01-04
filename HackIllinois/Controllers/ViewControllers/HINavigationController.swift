@@ -36,15 +36,15 @@ class HINavigationController: UINavigationController {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        navigationBar.tintColor = HIApplication.Palette.current.accent
-        navigationBar.barTintColor = HIApplication.Palette.current.background
+        navigationBar.tintColor = HIAppearance.current.accent
+        navigationBar.barTintColor = HIAppearance.current.background
         navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.foregroundColor: HIApplication.Palette.current.primary as Any
+            NSAttributedStringKey.foregroundColor: HIAppearance.current.primary as Any
         ]
 
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
-        HIApplication.Palette.current.background.setFill()
+        HIAppearance.current.background.setFill()
         UIRectFill(rect)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
