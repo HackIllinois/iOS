@@ -75,7 +75,7 @@ class HITextField: UITextField {
             attributedPlaceholder = NSAttributedString(
                 string: placeholder,
                 attributes: [
-                    NSAttributedStringKey.foregroundColor: HIAppearance.current.primary.withAlphaComponent(0.5)
+                    NSAttributedString.Key.foregroundColor: HIAppearance.current.primary.withAlphaComponent(0.5)
                 ]
             )
         }

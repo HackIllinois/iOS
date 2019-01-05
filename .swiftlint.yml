@@ -1,3 +1,6 @@
+disabled_rules:
+  - cyclomatic_complexity
+
 line_length:
   warning: 180
   error: 350
@@ -14,6 +17,9 @@ identifier_name:
     - id
     - _fetchedResultsController
     - _tabBarController
+
+nesting:
+  type_level: 2
 
 excluded:
   - Pods

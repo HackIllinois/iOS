@@ -64,7 +64,7 @@ class HILocalNotificationController: NSObject {
                 content.title = "\(event.name) starts in \(minutesUntilEvent) minutes!"
             }
             content.body = event.info
-            content.sound = UNNotificationSound.default()
+            content.sound = UNNotificationSound.default
 
             let request = UNNotificationRequest(identifier: "\(event.id)", content: content, trigger: trigger)
 

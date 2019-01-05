@@ -39,7 +39,7 @@ class HINavigationController: UINavigationController {
         navigationBar.tintColor = HIAppearance.current.accent
         navigationBar.barTintColor = HIAppearance.current.background
         navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.foregroundColor: HIAppearance.current.primary as Any
+            NSAttributedString.Key.foregroundColor: HIAppearance.current.primary as Any
         ]
 
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)

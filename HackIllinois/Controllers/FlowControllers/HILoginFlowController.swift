@@ -76,11 +76,11 @@ extension HILoginFlowController {
         super.viewDidLoad()
         view.backgroundColor = HIAppearance.current.background
         navController.isNavigationBarHidden = true
-        addChildViewController(navController)
+        addChild(navController)
         navController.view.frame = view.frame
         navController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(navController.view)
-        navController.didMove(toParentViewController: self)
+        navController.didMove(toParent: self)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -136,7 +136,7 @@ extension HILoginFlowController {
                     switch result {
                     case .success(let containedAttendee):
                         let attendeeInfo = containedAttendee.data[0]
-                        let names = [attendeeInfo.firstName, attendeeInfo.lastName].flatMap { $0 } as [String]
+                        let names = [attendeeInfo.firstName, attendeeInfo.lastName].compactMap { $0 } as [String]
                         user.name = names.joined(separator: " ")
                         user.dietaryRestrictions = attendeeInfo.diet
 
@@ -169,7 +169,7 @@ extension HILoginFlowController {
 
     func keychainRetrievalSucceeded(user: HIUser) {
         // TODO: validation in the future
-        // FIXME: theres a chance that a recovered github account will have a token that is revoked, we should probably validate this token.
+        // theres a chance that a recovered github account will have a token that is revoked, we should probably validate this token.
         // low chance of this happening in 48 hours, fix it later.
         // this is also a concern for user-pass logins
         NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: [
@@ -191,7 +191,9 @@ extension HILoginFlowController: HILoginSelectionViewControllerDelegate {
         return keychainContents
     }
 
-    func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HILoginSelection, withUserInfo info: String?) {
+    func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController,
+                                      didMakeLoginSelection selection: HILoginSelection,
+                                      withUserInfo info: String?) {
         switch selection {
         case .github:
             print("URL::\(HIAuthService.githubLoginURL())")

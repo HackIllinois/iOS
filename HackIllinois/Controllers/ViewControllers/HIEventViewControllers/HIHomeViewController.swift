@@ -66,13 +66,13 @@ extension HIHomeViewController {
         countdownTitleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
 
         countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        addChildViewController(countdownViewController)
+        addChild(countdownViewController)
         view.addSubview(countdownViewController.view)
         countdownViewController.view.topAnchor.constraint(equalTo: countdownTitleLabel.bottomAnchor, constant: 8).isActive = true
         countdownViewController.view.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
         countdownViewController.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
         countdownViewController.view.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        countdownViewController.didMove(toParentViewController: self)
+        countdownViewController.didMove(toParent: self)
 
         let happeningNowLabel = HILabel(style: .title)
         happeningNowLabel.text = "HAPPENING NOW"
