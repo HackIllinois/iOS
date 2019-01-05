@@ -4,5 +4,5 @@ osx_image: xcode10.1
 
 script:
   - swiftlint --strict
-  - xcodebuild clean test -project HackIllinois.xcworkspace -scheme HackIllinois -destination "platform=iOS Simulator,OS=12.1,name=iPhone X"
+  - xcodebuild clean test -project HackIllinois.xcodeproj -scheme HackIllinois -destination "platform=iOS Simulator,OS=12.1,name=iPhone X"
 
