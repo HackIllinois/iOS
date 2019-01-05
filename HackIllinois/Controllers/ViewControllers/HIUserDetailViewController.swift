@@ -9,6 +9,7 @@
 //  this license in a file with the distribution.
 //
 
+import os
 import Foundation
 import UIKit
 import PassKit
@@ -106,8 +107,19 @@ extension HIUserDetailViewController {
         .onCompletion { result in
             switch result {
             case .success(let data):
-                guard let pass = try? PKPass(data: data),
-                    let vc = PKAddPassesViewController(pass: pass) else { return }
+                let vc: PKAddPassesViewController!
+                do {
+                    let pass = try PKPass(data: data)
+                    vc = PKAddPassesViewController(pass: pass)
+                } catch let error {
+                    os_log(
+                        "Error initializing PKPass: %s",
+                        log: Logger.viewController,
+                        type:.error,
+                        error.localizedDescription
+                    )
+                    return
+                }
                 DispatchQueue.main.async { [weak self] in
                     if let strongSelf = self {
                         UserDefaults.standard.set(true, forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)")
@@ -117,7 +129,12 @@ extension HIUserDetailViewController {
             case .cancellation:
                 break
             case .failure(let error):
-                print(error)
+                os_log(
+                    "Error retrieving HIPass: %s",
+                    log: Logger.viewController,
+                    type:.error,
+                    error.localizedDescription
+                )
             }
         }
         .perform()
