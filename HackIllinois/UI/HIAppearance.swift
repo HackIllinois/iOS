@@ -19,6 +19,7 @@ struct HIAppearance: Equatable {
     let contentBackground: UIColor
     let actionBackground: UIColor
     let overlay: UIColor
+    let frostedTint: UIColor
     let preferredStatusBarStyle: UIStatusBarStyle
     let indicatorStyle: UIScrollView.IndicatorStyle
 
@@ -29,6 +30,7 @@ struct HIAppearance: Equatable {
         contentBackground: UIColor(named: "white")!,
         actionBackground: UIColor(named: "lightPeriwinkle")!,
         overlay: UIColor(named: "darkBlueGrey")!,
+        frostedTint: .clear,
         preferredStatusBarStyle: .default,
         indicatorStyle: .black
     )
@@ -40,6 +42,7 @@ struct HIAppearance: Equatable {
         contentBackground: UIColor(red: 34/255, green: 29/255, blue: 91/255, alpha: 255/255),
         actionBackground: UIColor(red: 64/255, green: 73/255, blue: 158/255, alpha: 255/255),
         overlay: UIColor.black,
+        frostedTint: UIColor(red: 34/255, green: 29/255, blue: 91/255, alpha: 0.7),
         preferredStatusBarStyle: .lightContent,
         indicatorStyle: .white
     )

@@ -78,13 +78,7 @@ class HIEventDetailLocationCell: UITableViewCell {
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
         contentView.backgroundColor = HIAppearance.current.contentBackground
-        // FIXME:
-//        switch HIApplication.Theme.current {
-//        case .day:
-//            blurEffectView.backgroundColor = nil
-//        case .night:
-        blurEffectView.backgroundColor = HIAppearance.current.contentBackground.withAlphaComponent(0.7)
-//        }
+        blurEffectView.backgroundColor = HIAppearance.current.frostedTint
     }
 }
 
