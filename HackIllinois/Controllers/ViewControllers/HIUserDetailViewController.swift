@@ -9,10 +9,10 @@
 //  this license in a file with the distribution.
 //
 
-import os
 import Foundation
 import UIKit
 import PassKit
+import os
 
 class HIUserDetailViewController: HIBaseViewController {
     // MARK: - Properties
