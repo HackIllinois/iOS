@@ -76,49 +76,35 @@ extension HIEventDetailViewController {
 
 // MARK: - UIViewController
 extension HIEventDetailViewController {
-    // swiftlint:disable:next function_body_length
     override func loadView() {
         super.loadView()
 
         let eventDetailContainer = HIView(style: .content)
         eventDetailContainer.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(eventDetailContainer)
-        eventDetailContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12).isActive = true
-        eventDetailContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
-        eventDetailContainer.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12).isActive = true
-        eventDetailContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
+        setEventDetailContainerAnchors(eventDetailContainer: eventDetailContainer)
 
         let upperContainerView = UIView()
         upperContainerView.translatesAutoresizingMaskIntoConstraints = false
         eventDetailContainer.addSubview(upperContainerView)
-        upperContainerView.topAnchor.constraint(equalTo: eventDetailContainer.topAnchor).isActive = true
-        upperContainerView.leadingAnchor.constraint(equalTo: eventDetailContainer.leadingAnchor).isActive = true
-        upperContainerView.trailingAnchor.constraint(equalTo: eventDetailContainer.trailingAnchor).isActive = true
-        upperContainerView.heightAnchor.constraint(equalToConstant: 63).isActive = true
+        setUpperContainerViewAnchors(upperContainerView: upperContainerView, eventDetailContainer: eventDetailContainer)
 
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         upperContainerView.addSubview(favoritedButton)
-        favoritedButton.topAnchor.constraint(equalTo: upperContainerView.topAnchor).isActive = true
-        favoritedButton.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor).isActive = true
-        favoritedButton.bottomAnchor.constraint(equalTo: upperContainerView.bottomAnchor).isActive = true
-        favoritedButton.widthAnchor.constraint(equalToConstant: 58).isActive = true
+        setFavoritedButtonAnchors(upperContainerView: upperContainerView)
 
         titleLabel.textColor = HIAppearance.current.primary
         titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .light)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         upperContainerView.addSubview(titleLabel)
-        titleLabel.leadingAnchor.constraint(equalTo: favoritedButton.trailingAnchor).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: upperContainerView.trailingAnchor, constant: -8).isActive = true
-        titleLabel.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor).isActive = true
+        setTitleLabelAnchors(upperContainerView: upperContainerView)
 
         descriptionLabel.numberOfLines = 0
         descriptionLabel.textColor = HIAppearance.current.primary
         descriptionLabel.font = UIFont.systemFont(ofSize: 13)
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         eventDetailContainer.addSubview(descriptionLabel)
-        descriptionLabel.topAnchor.constraint(equalTo: upperContainerView.bottomAnchor).isActive = true
-        descriptionLabel.leadingAnchor.constraint(equalTo: eventDetailContainer.leadingAnchor, constant: 12).isActive = true
-        descriptionLabel.trailingAnchor.constraint(equalTo: eventDetailContainer.trailingAnchor, constant: -12).isActive = true
+        setDescriptionLabelAnchors(upperContainerView: upperContainerView, eventDetailContainer: eventDetailContainer)
         descriptionLabelHeight = descriptionLabel.heightAnchor.constraint(equalToConstant: 100)
         descriptionLabelHeight.isActive = true
 
@@ -126,13 +112,50 @@ extension HIEventDetailViewController {
         tableView.backgroundColor = HIAppearance.current.contentBackground
         tableView.translatesAutoresizingMaskIntoConstraints = false
         eventDetailContainer.addSubview(tableView)
+        setTableViewAnchors(tableView: tableView, eventDetailContainer: eventDetailContainer)
+        tableViewHeight = tableView.heightAnchor.constraint(equalToConstant: 0)
+        tableViewHeight.isActive = true
+        self.tableView = tableView
+    }
+
+    private func setEventDetailContainerAnchors(eventDetailContainer: HIView) {
+        eventDetailContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12).isActive = true
+        eventDetailContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
+        eventDetailContainer.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12).isActive = true
+        eventDetailContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
+    }
+
+    private func setUpperContainerViewAnchors(upperContainerView: UIView, eventDetailContainer: HIView) {
+        upperContainerView.topAnchor.constraint(equalTo: eventDetailContainer.topAnchor).isActive = true
+        upperContainerView.leadingAnchor.constraint(equalTo: eventDetailContainer.leadingAnchor).isActive = true
+        upperContainerView.trailingAnchor.constraint(equalTo: eventDetailContainer.trailingAnchor).isActive = true
+        upperContainerView.heightAnchor.constraint(equalToConstant: 63).isActive = true
+    }
+
+    private func setFavoritedButtonAnchors(upperContainerView: UIView) {
+        favoritedButton.topAnchor.constraint(equalTo: upperContainerView.topAnchor).isActive = true
+        favoritedButton.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor).isActive = true
+        favoritedButton.bottomAnchor.constraint(equalTo: upperContainerView.bottomAnchor).isActive = true
+        favoritedButton.widthAnchor.constraint(equalToConstant: 58).isActive = true
+    }
+
+    private func setTitleLabelAnchors(upperContainerView: UIView) {
+        titleLabel.leadingAnchor.constraint(equalTo: favoritedButton.trailingAnchor).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: upperContainerView.trailingAnchor, constant: -8).isActive = true
+        titleLabel.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor).isActive = true
+    }
+
+    private func setDescriptionLabelAnchors(upperContainerView: UIView, eventDetailContainer: HIView) {
+        descriptionLabel.topAnchor.constraint(equalTo: upperContainerView.bottomAnchor).isActive = true
+        descriptionLabel.leadingAnchor.constraint(equalTo: eventDetailContainer.leadingAnchor, constant: 12).isActive = true
+        descriptionLabel.trailingAnchor.constraint(equalTo: eventDetailContainer.trailingAnchor, constant: -12).isActive = true
+    }
+
+    private func setTableViewAnchors(tableView: UITableView, eventDetailContainer: HIView) {
         tableView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 8).isActive = true
         tableView.leadingAnchor.constraint(equalTo: eventDetailContainer.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: eventDetailContainer.bottomAnchor, constant: -6).isActive = true
         tableView.trailingAnchor.constraint(equalTo: eventDetailContainer.trailingAnchor).isActive = true
-        tableViewHeight = tableView.heightAnchor.constraint(equalToConstant: 0)
-        tableViewHeight.isActive = true
-        self.tableView = tableView
     }
 
     override func viewWillAppear(_ animated: Bool) {
