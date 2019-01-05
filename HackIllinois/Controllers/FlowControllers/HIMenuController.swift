@@ -83,6 +83,7 @@ extension HIMenuController {
         guard state != .open else { return }
         state = .open
         animateMenuFor(state)
+        HIAppearance.change(to: HIAppearance.current == .day ? .night : .day)
     }
 
     @objc func close(_ sender: Any) {

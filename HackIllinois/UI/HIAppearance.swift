@@ -47,9 +47,12 @@ struct HIAppearance: Equatable {
         indicatorStyle: .white
     )
 
-    static var current: HIAppearance = day {
-        didSet {
-            NotificationCenter.default.post(name: .themeDidChange, object: nil)
-        }
+    static private(set) var current = day
+
+    static func change(to newAppearance: HIAppearance) {
+        guard current != newAppearance else { return }
+        current = newAppearance
+
+        NotificationCenter.default.post(name: .themeDidChange, object: nil)
     }
 }

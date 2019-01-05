@@ -16,7 +16,7 @@ import os
 
 class HIUserDetailViewController: HIBaseViewController {
     // MARK: - Properties
-    var qrCode = UIImageView()
+    var qrImageView = HIImageView(style: .template)
     var userNameLabel = HILabel(style: .title)
     var userInfoLabel = HILabel(style: .subtitle)
 }
@@ -53,13 +53,12 @@ extension HIUserDetailViewController {
         userDetailContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         userDetailContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
 
-        qrCode.backgroundColor = HIAppearance.current.primary
-        qrCode.translatesAutoresizingMaskIntoConstraints = false
-        userDetailContainer.addSubview(qrCode)
-        qrCode.topAnchor.constraint(equalTo: userDetailContainer.topAnchor, constant: 32).isActive = true
-        qrCode.leadingAnchor.constraint(equalTo: userDetailContainer.leadingAnchor, constant: 32).isActive = true
-        qrCode.trailingAnchor.constraint(equalTo: userDetailContainer.trailingAnchor, constant: -32).isActive = true
-        qrCode.heightAnchor.constraint(equalTo: qrCode.widthAnchor).isActive = true
+        qrImageView.translatesAutoresizingMaskIntoConstraints = false
+        userDetailContainer.addSubview(qrImageView)
+        qrImageView.topAnchor.constraint(equalTo: userDetailContainer.topAnchor, constant: 32).isActive = true
+        qrImageView.leadingAnchor.constraint(equalTo: userDetailContainer.leadingAnchor, constant: 32).isActive = true
+        qrImageView.trailingAnchor.constraint(equalTo: userDetailContainer.trailingAnchor, constant: -32).isActive = true
+        qrImageView.heightAnchor.constraint(equalTo: qrImageView.widthAnchor).isActive = true
 
         let userDataStackView = UIStackView()
         userDataStackView.axis = .vertical
@@ -67,7 +66,7 @@ extension HIUserDetailViewController {
         userDataStackView.distribution = .fillProportionally
         userDataStackView.translatesAutoresizingMaskIntoConstraints = false
         userDetailContainer.addSubview(userDataStackView)
-        userDataStackView.topAnchor.constraint(equalTo: qrCode.bottomAnchor, constant: 22).isActive = true
+        userDataStackView.topAnchor.constraint(equalTo: qrImageView.bottomAnchor, constant: 22).isActive = true
         userDataStackView.leadingAnchor.constraint(equalTo: userDetailContainer.leadingAnchor, constant: 32).isActive = true
         userDataStackView.bottomAnchor.constraint(equalTo: userDetailContainer.bottomAnchor, constant: -32).isActive = true
         userDataStackView.trailingAnchor.constraint(equalTo: userDetailContainer.trailingAnchor, constant: -32).isActive = true
@@ -83,11 +82,11 @@ extension HIUserDetailViewController {
         guard let user = HIApplicationStateController.shared.user,
             let url = URL(string: "hackillinois://qrcode/user?id=\(user.id)&identifier=\(user.identifier)") else { return }
         view.layoutIfNeeded()
-        let frame = qrCode.frame.height
+        let frame = qrImageView.frame.height
         DispatchQueue.global(qos: .userInitiated).async {
-            let qrCodeImage = QRCode(string: url.absoluteString, size: frame)?.image
+            let qrImage = HIQRImage.from(string: url.absoluteString, size: frame)
             DispatchQueue.main.async {
-                self.qrCode.image = qrCodeImage
+                self.qrImageView.image = qrImage
             }
         }
         userNameLabel.text = (user.name ?? user.identifier).uppercased()

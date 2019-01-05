@@ -1,5 +1,5 @@
 //
-//  HIImage.swift
+//  HIQRImage.swift
 //  HackIllinois
 //
 //  Created by Rauhul Varma on 1/28/18.
@@ -10,18 +10,11 @@
 //  this license in a file with the distribution.
 //
 
-import Foundation
 import UIKit
+import CoreGraphics
 
-class QRCode {
-
-    var image: UIImage
-
-    // MARK: - Init
-    init?(string: String, size: CGFloat) {
-        let tint = CIColor(color: HIAppearance.current.accent)
-        let backgroundColor = CIColor(color: HIAppearance.current.contentBackground)
-
+class HIQRImage {
+    static func from(string: String, size: CGFloat) -> UIImage? {
         guard let qrFilter = CIFilter(name: "CIQRCodeGenerator"),
             let colorFilter = CIFilter(name: "CIFalseColor"),
             let data = string.data(using: .utf8) else { return nil }
@@ -32,13 +25,17 @@ class QRCode {
 
         colorFilter.setDefaults()
         colorFilter.setValue(qrFilter.outputImage, forKey: "inputImage")
-        colorFilter.setValue(tint, forKey: "inputColor0")
-        colorFilter.setValue(backgroundColor, forKey: "inputColor1")
+        colorFilter.setValue(CIColor.black, forKey: "inputColor0")
+        colorFilter.setValue(CIColor.clear, forKey: "inputColor1")
 
         guard let ciImage = colorFilter.outputImage else { return nil }
         let scale = size / ciImage.extent.height
         let transform = CGAffineTransform(scaleX: scale, y: scale)
         let scaledCIImage = ciImage.transformed(by: transform)
-        image = UIImage(ciImage: scaledCIImage)
+
+        let ciContext = CIContext()
+        guard let cgImage = ciContext.createCGImage(scaledCIImage, from: scaledCIImage.extent) else { return nil }
+
+        return UIImage(cgImage: cgImage).withRenderingMode(.alwaysTemplate)
     }
 }

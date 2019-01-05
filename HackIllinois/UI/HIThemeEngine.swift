@@ -51,9 +51,7 @@ class HIThemeEngine {
         } else {
             newAppearance = .night
         }
-        if HIAppearance.current != newAppearance {
-            HIAppearance.current = newAppearance
-        }
+        HIAppearance.change(to: newAppearance)
     }
 
     func tearDownTimer() {
