@@ -9,5 +9,5 @@ osx_image: xcode10.1
 script:
   - swiftlint --strict
   - xcodebuild -list
-  - xcodebuild clean build test -workspace HackIllinois.xcworkspace -scheme HackIllinois -destination "platform=iOS Simulator,OS=12.1,name=iPhone X" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO | xcpretty -c
+  - xcodebuild clean build -workspace HackIllinois.xcworkspace -scheme HackIllinois -destination "platform=iOS Simulator,OS=12.1,name=iPhone X" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
 
