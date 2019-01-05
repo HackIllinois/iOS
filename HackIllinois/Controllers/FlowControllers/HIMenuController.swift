@@ -22,7 +22,6 @@ class HIMenuController: UIViewController {
 
     // MARK: - Constants
     private let MENU_ITEM_HEIGHT: CGFloat = 58
-    // TODO: Introduce MENU_MAX_HEIGHT, add scroll bar if menu height is larger than this value
 
     // MARK: - Properties
     private(set) var state = State.closed

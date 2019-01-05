@@ -40,6 +40,7 @@ class HIAdminEventViewController: HIBaseViewController {
 
 // MARK: - Actions
 extension HIAdminEventViewController {
+    // swiftlint:disable:next function_body_length
     @objc func didSelectCreateEvent() {
         guard let title = titleTextField.text,
               let durationText = durationTextField.text,

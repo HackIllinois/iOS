@@ -168,10 +168,6 @@ extension HILoginFlowController {
     }
 
     func keychainRetrievalSucceeded(user: HIUser) {
-        // TODO: validation in the future
-        // theres a chance that a recovered github account will have a token that is revoked, we should probably validate this token.
-        // low chance of this happening in 48 hours, fix it later.
-        // this is also a concern for user-pass logins
         NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: [
             "user": user
         ])

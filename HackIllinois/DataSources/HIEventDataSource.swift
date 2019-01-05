@@ -20,6 +20,7 @@ final class HIEventDataSource {
     static let locationsFetchRequest = NSFetchRequest<Location>(entityName: "Location")
     static let eventsFetchRequest = NSFetchRequest<Event>(entityName: "Event")
 
+    // swiftlint:disable:next function_body_length
     static func refresh(completion: (() -> Void)? = nil) {
         guard !isRefreshing else {
             completion?()
