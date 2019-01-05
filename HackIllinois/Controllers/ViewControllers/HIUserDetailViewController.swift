@@ -12,6 +12,7 @@
 import Foundation
 import UIKit
 import PassKit
+import os
 
 class HIUserDetailViewController: HIBaseViewController {
     // MARK: - Properties
@@ -106,18 +107,38 @@ extension HIUserDetailViewController {
         .onCompletion { result in
             switch result {
             case .success(let data):
-                guard let pass = try? PKPass(data: data),
-                    let vc = PKAddPassesViewController(pass: pass) else { return }
+                let passVC: PKAddPassesViewController
+                do {
+                    let pass = try PKPass(data: data)
+                    if let vc = PKAddPassesViewController(pass: pass) {
+                        passVC = vc
+                    } else {
+                        throw HIError.passbookError
+                    }
+                } catch let error {
+                    os_log(
+                        "Error initializing PKPass: %s",
+                        log: Logger.ui,
+                        type: .error,
+                        error.localizedDescription
+                    )
+                    return
+                }
                 DispatchQueue.main.async { [weak self] in
                     if let strongSelf = self {
                         UserDefaults.standard.set(true, forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)")
-                        strongSelf.present(vc, animated: true, completion: nil)
+                        strongSelf.present(passVC, animated: true, completion: nil)
                     }
                 }
             case .cancellation:
                 break
             case .failure(let error):
-                print(error)
+                os_log(
+                    "Error retrieving HIPass: %s",
+                    log: Logger.ui,
+                    type: .error,
+                    error.localizedDescription
+                )
             }
         }
         .perform()
