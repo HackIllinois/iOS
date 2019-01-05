@@ -1,5 +1,8 @@
-install:
-  - ./install_swiftlint.sh
+language: swift
+os: osx
+osx_image: xcode9.2
 
 script:
   - swiftlint
+  - swift build
+  - swift test
