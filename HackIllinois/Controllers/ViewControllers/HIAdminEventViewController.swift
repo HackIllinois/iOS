@@ -49,12 +49,12 @@ extension HIAdminEventViewController {
 
         let message = "Create a new tracked event \"\(title)\" for \(duration) minutes?"
         let confirmAlertController = UIAlertController(title: "Confirm Tracked Event", message: message, preferredStyle: .alert)
-        confirmAlertController.addAction(getConfirmAlertAction(title: title, duration: duration))
+        confirmAlertController.addAction(confirmAlertActionWith(title: title, duration: duration))
         confirmAlertController.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
         self.present(confirmAlertController, animated: true, completion: nil)
     }
 
-    private func getConfirmAlertAction(title: String, duration: Int) -> UIAlertAction {
+    private func confirmAlertActionWith(title: String, duration: Int) -> UIAlertAction {
         return UIAlertAction(title: "Yes", style: .default) { _ in
             self.stylizeFor(.currentlyCreatingEvent)
             HITrackingService.create(name: title, duration: duration)
