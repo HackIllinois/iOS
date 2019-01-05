@@ -3,4 +3,4 @@ os: osx
 osx_image: xcode10.1
 
 script:
-  - swiftlint
+  - swiftlint --strict

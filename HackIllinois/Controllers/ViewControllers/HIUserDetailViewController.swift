@@ -106,7 +106,6 @@ extension HIUserDetailViewController {
         .onCompletion { result in
             switch result {
             case .success(let data):
-                // TODO: do/try/catch -> log error
                 guard let pass = try? PKPass(data: data),
                     let vc = PKAddPassesViewController(pass: pass) else { return }
                 DispatchQueue.main.async { [weak self] in
