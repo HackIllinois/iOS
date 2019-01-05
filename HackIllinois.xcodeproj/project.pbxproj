@@ -10,6 +10,8 @@
 		0A360882203539FF001F5F85 /* HIAdminEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */; };
 		35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */; };
 		35264667203EC14100F59F48 /* HIRecruiterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35264666203EC14100F59F48 /* HIRecruiterService.swift */; };
+		35B4A44F21E091BA001B3AF0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4A44D21E091B9001B3AF0 /* Logger.swift */; };
+		35B4A45021E091BA001B3AF0 /* HIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4A44E21E091B9001B3AF0 /* HIError.swift */; };
 		35BD9E4A2017DFED005B6FCE /* HITrackingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BD9E492017DFED005B6FCE /* HITrackingService.swift */; };
 		35D7CE9720380ACF00654E28 /* Stickers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35D7CE9620380ACF00654E28 /* Stickers.xcassets */; };
 		35D7CE9B20380ACF00654E28 /* Stickers.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 35D7CE9420380ACF00654E28 /* Stickers.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -119,6 +121,8 @@
 		0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAdminEventViewController.swift; sourceTree = "<group>"; };
 		35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HICountdownViewController.swift; sourceTree = "<group>"; };
 		35264666203EC14100F59F48 /* HIRecruiterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIRecruiterService.swift; sourceTree = "<group>"; };
+		35B4A44D21E091B9001B3AF0 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		35B4A44E21E091B9001B3AF0 /* HIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIError.swift; sourceTree = "<group>"; };
 		35BD9E492017DFED005B6FCE /* HITrackingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITrackingService.swift; sourceTree = "<group>"; };
 		35D7CE9420380ACF00654E28 /* Stickers.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Stickers.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		35D7CE9620380ACF00654E28 /* Stickers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Stickers.xcassets; sourceTree = "<group>"; };
@@ -511,6 +515,8 @@
 		95FC79BF21E0243000715036 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				35B4A44E21E091B9001B3AF0 /* HIError.swift */,
+				35B4A44D21E091B9001B3AF0 /* Logger.swift */,
 				95FC79C021E0243D00715036 /* Operators.swift */,
 				95FC79C221E024A700715036 /* Notifications.swift */,
 				957D7CB71FC39EA100C4332A /* Formatters.swift */,
@@ -733,6 +739,7 @@
 				95C18DCC20096539004784B5 /* HIEventListViewController.swift in Sources */,
 				95A7D28A203D4F54005EAEAF /* HIButton.swift in Sources */,
 				95A7D28E203D4F54005EAEAF /* HIView.swift in Sources */,
+				35B4A44F21E091BA001B3AF0 /* Logger.swift in Sources */,
 				9544799C200C39870005408B /* HIUser.swift in Sources */,
 				95A7D28B203D4F54005EAEAF /* HISegmentedControl.swift in Sources */,
 				95D791E9203E12C900C3BA62 /* HIThemeEngine.swift in Sources */,
@@ -772,6 +779,7 @@
 				9510F6A51FCB7D6E007D19DB /* Announcement+CoreDataProperties.swift in Sources */,
 				95FC79C321E024A700715036 /* Notifications.swift in Sources */,
 				95FC79BE21E0199600715036 /* HIAppearance.swift in Sources */,
+				35B4A45021E091BA001B3AF0 /* HIError.swift in Sources */,
 				954EE1D31FD0F1680078F39E /* HILoginSelectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
