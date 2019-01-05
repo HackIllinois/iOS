@@ -1,8 +1,13 @@
 language: swift
 os: osx
 osx_image: xcode10.1
+# xcode_workspace: HackIllinois.xcworkspace
+# xcode_scheme: HackIllinois
+# xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone X
+
 
 script:
   - swiftlint --strict
-  - xcodebuild clean test -workspace HackIllinois.xcworkspace -scheme HackIllinois -destination "platform=iOS Simulator,OS=12.1,name=iPhone X"
+  - xcodebuild -list
+  - xcodebuild clean build test -workspace HackIllinois.xcworkspace -scheme HackIllinois -destination "platform=iOS Simulator,OS=12.1,name=iPhone X" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO | xcpretty -c
 
