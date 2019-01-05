@@ -9,5 +9,5 @@
 import Foundation
 
 enum HIError: Error {
-    case PassbookError
+    case passbookError
 }

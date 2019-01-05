@@ -110,11 +110,10 @@ extension HIUserDetailViewController {
                 let passVC: PKAddPassesViewController
                 do {
                     let pass = try PKPass(data: data)
-                    let vc = PKAddPassesViewController(pass: pass)
-                    if vc != nil {
-                        passVC = vc!
+                    if let vc = PKAddPassesViewController(pass: pass) {
+                        passVC = vc
                     } else {
-                        throw HIError.PassbookError
+                        throw HIError.passbookError
                     }
                 } catch let error {
                     os_log(
