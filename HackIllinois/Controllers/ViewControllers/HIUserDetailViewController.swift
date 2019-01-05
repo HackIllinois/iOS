@@ -115,7 +115,7 @@ extension HIUserDetailViewController {
                     os_log(
                         "Error initializing PKPass: %s",
                         log: Logger.viewController,
-                        type:.error,
+                        type: .error,
                         error.localizedDescription
                     )
                     return
@@ -132,7 +132,7 @@ extension HIUserDetailViewController {
                 os_log(
                     "Error retrieving HIPass: %s",
                     log: Logger.viewController,
-                    type:.error,
+                    type: .error,
                     error.localizedDescription
                 )
             }
