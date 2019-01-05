@@ -40,7 +40,6 @@ class HIAdminEventViewController: HIBaseViewController {
 
 // MARK: - Actions
 extension HIAdminEventViewController {
-    // swiftlint:disable:next function_body_length
     @objc func didSelectCreateEvent() {
         guard let title = titleTextField.text,
               let durationText = durationTextField.text,
@@ -50,10 +49,15 @@ extension HIAdminEventViewController {
 
         let message = "Create a new tracked event \"\(title)\" for \(duration) minutes?"
         let confirmAlertController = UIAlertController(title: "Confirm Tracked Event", message: message, preferredStyle: .alert)
-        confirmAlertController.addAction(
-            UIAlertAction(title: "Yes", style: .default) { _ in
-                self.stylizeFor(.currentlyCreatingEvent)
-                HITrackingService.create(name: title, duration: duration)
+        confirmAlertController.addAction(getConfirmAlertAction(title: title, duration: duration))
+        confirmAlertController.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        self.present(confirmAlertController, animated: true, completion: nil)
+    }
+
+    private func getConfirmAlertAction(title: String, duration: Int) -> UIAlertAction {
+        return UIAlertAction(title: "Yes", style: .default) { _ in
+            self.stylizeFor(.currentlyCreatingEvent)
+            HITrackingService.create(name: title, duration: duration)
                 .onCompletion { result in
                     let alertTitle: String
                     var alertMessage: String?
@@ -93,10 +97,7 @@ extension HIAdminEventViewController {
                 }
                 .authorization(HIApplicationStateController.shared.user)
                 .perform()
-            }
-        )
-        confirmAlertController.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-        self.present(confirmAlertController, animated: true, completion: nil)
+        }
     }
 }
 
