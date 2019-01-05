@@ -52,7 +52,7 @@ extension HIUserDetailViewController {
         userDetailContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         userDetailContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
 
-        qrCode.backgroundColor = HIApplication.Palette.current.primary
+        qrCode.backgroundColor = HIAppearance.current.primary
         qrCode.translatesAutoresizingMaskIntoConstraints = false
         userDetailContainer.addSubview(qrCode)
         qrCode.topAnchor.constraint(equalTo: userDetailContainer.topAnchor, constant: 32).isActive = true

@@ -45,10 +45,10 @@ class HIHomeViewController: HIEventListViewController {
 
     var countdownDataStoreIndex = 0
     var staticDataStore: [(date: Date, displayText: String)] = [
-        (HIApplication.Configuration.EVENT_START_TIME, "HACKILLINOIS BEGINS IN"),
-        (HIApplication.Configuration.HACKING_START_TIME, "HACKING BEGINS IN"),
-        (HIApplication.Configuration.HACKING_END_TIME, "HACKING ENDS IN"),
-        (HIApplication.Configuration.EVENT_END_TIME, "HACKILLINOIS ENDS IN")
+        (HIConfiguration.EVENT_START_TIME, "HACKILLINOIS BEGINS IN"),
+        (HIConfiguration.HACKING_START_TIME, "HACKING BEGINS IN"),
+        (HIConfiguration.HACKING_END_TIME, "HACKING ENDS IN"),
+        (HIConfiguration.EVENT_END_TIME, "HACKILLINOIS ENDS IN")
     ]
 
     var timer: Timer?

@@ -88,38 +88,38 @@ class HILabel: UILabel {
     @objc func refreshForThemeChange() {
         switch style {
         case .date:
-            backgroundColor = HIApplication.Palette.current.background
-            textColor = HIApplication.Palette.current.primary
+            backgroundColor = HIAppearance.current.background
+            textColor = HIAppearance.current.primary
 
         case .location:
-//            backgroundColor = HIApplication.Palette.current.contentBackground
-            textColor = HIApplication.Palette.current.primary
+//            backgroundColor = HIAppearance.current.contentBackground
+            textColor = HIAppearance.current.primary
 
         case .event:
-//            backgroundColor = HIApplication.Palette.current.contentBackground
-            textColor = HIApplication.Palette.current.primary
+//            backgroundColor = HIAppearance.current.contentBackground
+            textColor = HIAppearance.current.primary
 
         case .title:
-//            backgroundColor = HIApplication.Palette.current.background
-            textColor = HIApplication.Palette.current.primary
+//            backgroundColor = HIAppearance.current.background
+            textColor = HIAppearance.current.primary
 
         case .subtitle:
-//            backgroundColor = HIApplication.Palette.current.background
-            textColor = HIApplication.Palette.current.accent
+//            backgroundColor = HIAppearance.current.background
+            textColor = HIAppearance.current.accent
 
         case .description:
-            textColor = HIApplication.Palette.current.primary
+            textColor = HIAppearance.current.primary
 
         case .countdown:
-            backgroundColor = HIApplication.Palette.current.background
-            textColor = HIApplication.Palette.current.accent
+            backgroundColor = HIAppearance.current.background
+            textColor = HIAppearance.current.accent
 
         case .loginHeader:
-            backgroundColor = HIApplication.Palette.current.background
-            textColor = HIApplication.Palette.current.accent
+            backgroundColor = HIAppearance.current.background
+            textColor = HIAppearance.current.accent
 
         case .loginSelection:
-            textColor = HIApplication.Palette.current.primary
+            textColor = HIAppearance.current.primary
 
         }
     }

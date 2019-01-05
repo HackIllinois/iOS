@@ -37,12 +37,7 @@ class HIMenuController: UIViewController {
     var menuItemsHeight = NSLayoutConstraint()
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        switch HIApplication.Theme.current {
-        case .day:
-            return .default
-        case .night:
-            return .lightContent
-        }
+        return HIAppearance.current.preferredStatusBarStyle
     }
 
     // MARK: - Init
@@ -122,7 +117,7 @@ extension HIMenuController {
         
 
         let menu = HIView(style: .background)
-        menu.backgroundColor = HIApplication.Palette.current.background
+        menu.backgroundColor = HIAppearance.current.background
         menu.clipsToBounds = true
         menu.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(menu)

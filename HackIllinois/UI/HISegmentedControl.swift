@@ -55,13 +55,13 @@ class HISegmentedControl: UIControl {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        backgroundColor = HIApplication.Palette.current.background
+        backgroundColor = HIAppearance.current.background
         labels.forEach {
-            $0.textColor = HIApplication.Palette.current.primary
-            $0.backgroundColor = HIApplication.Palette.current.background
+            $0.textColor = HIAppearance.current.primary
+            $0.backgroundColor = HIAppearance.current.background
         }
-        bottomView.backgroundColor = HIApplication.Palette.current.accent
-        indicatorView.backgroundColor = HIApplication.Palette.current.accent
+        bottomView.backgroundColor = HIAppearance.current.accent
+        indicatorView.backgroundColor = HIAppearance.current.accent
     }
 
     // MARK: - UIView

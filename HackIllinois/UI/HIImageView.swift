@@ -49,6 +49,6 @@ class HIImageView: UIImageView {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        tintColor = HIApplication.Palette.current.accent
+        tintColor = HIAppearance.current.accent
     }
 }

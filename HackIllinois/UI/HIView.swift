@@ -80,19 +80,19 @@ class HIView: UIView {
     @objc func refreshForThemeChange() {
         switch style {
         case .background:
-            backgroundColor = HIApplication.Palette.current.background
+            backgroundColor = HIAppearance.current.background
 
         case .content:
-            backgroundColor = HIApplication.Palette.current.contentBackground
+            backgroundColor = HIAppearance.current.contentBackground
 
         case .separator:
-            backgroundColor = HIApplication.Palette.current.accent
+            backgroundColor = HIAppearance.current.accent
 
         case .emptyTable:
-            backgroundColor = HIApplication.Palette.current.background
+            backgroundColor = HIAppearance.current.background
 
         case .overlay:
-            backgroundColor = HIApplication.Palette.current.overlay
+            backgroundColor = HIAppearance.current.overlay
         }
     }
 }
