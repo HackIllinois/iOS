@@ -104,12 +104,12 @@ extension HIMenuController {
         view = HIView(style: .background)
 
         _tabBarController.tabBar.isHidden = true
-        addChildViewController(_tabBarController)
+        addChild(_tabBarController)
         _tabBarController.view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(_tabBarController.view)
         _tabBarController.view.constrain(to: view, trailingInset: 0, leadingInset: 0, widthInset: 0, heightInset: 0)
         
-        _tabBarController.didMove(toParentViewController: self)
+        _tabBarController.didMove(toParent: self)
 
         overlayView.alpha = 0.0
         view.addSubview(overlayView)

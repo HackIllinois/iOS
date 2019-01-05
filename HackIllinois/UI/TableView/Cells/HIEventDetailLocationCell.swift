@@ -28,7 +28,7 @@ class HIEventDetailLocationCell: UITableViewCell {
     let containerView = UIView()
 
     // MARK: - Init
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
 
@@ -120,7 +120,7 @@ extension HIEventDetailLocationCell {
 
         let distance: CLLocationDistance = 150
 
-        let region = MKCoordinateRegionMakeWithDistance(clLocation.coordinate, distance * 2, distance)
+        let region = MKCoordinateRegion.init(center: clLocation.coordinate, latitudinalMeters: distance * 2, longitudinalMeters: distance)
         let topLeft = CLLocationCoordinate2D(
             latitude: region.center.latitude + (region.span.latitudeDelta / 2),
             longitude: region.center.longitude - (region.span.longitudeDelta / 2)
@@ -130,12 +130,12 @@ extension HIEventDetailLocationCell {
             longitude: region.center.longitude + (region.span.longitudeDelta / 2)
         )
 
-        let a = MKMapPointForCoordinate(topLeft)
-        let b = MKMapPointForCoordinate(bottomRight)
+        let topLeftPoint = MKMapPoint(topLeft)
+        let bottomoRightPoint = MKMapPoint(bottomRight)
 
         let rect = MKMapRect(
-            origin: MKMapPoint(x: min(a.x, b.x), y: min(a.y, b.y)),
-            size: MKMapSize(width: abs(a.x - b.x), height: abs(a.y - b.y))
+            origin: MKMapPoint(x: min(topLeftPoint.x, bottomoRightPoint.x), y: min(topLeftPoint.y, bottomoRightPoint.y)),
+            size: MKMapSize(width: abs(topLeftPoint.x - bottomoRightPoint.x), height: abs(topLeftPoint.y - bottomoRightPoint.y))
         )
 
         lhs.mapView.setVisibleMapRect(rect, edgePadding: UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0), animated: false)

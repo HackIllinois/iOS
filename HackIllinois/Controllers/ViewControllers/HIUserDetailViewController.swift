@@ -106,13 +106,9 @@ extension HIUserDetailViewController {
         .onCompletion { result in
             switch result {
             case .success(let data):
-                var error: NSError?
-                let pass = PKPass(data: data, error: &error)
-                if let error = error {
-                    print(error)
-                    return
-                }
-                let vc = PKAddPassesViewController(pass: pass)
+                // TODO: do/try/catch -> log error
+                guard let pass = try? PKPass(data: data),
+                    let vc = PKAddPassesViewController(pass: pass) else { return }
                 DispatchQueue.main.async { [weak self] in
                     if let strongSelf = self {
                         UserDefaults.standard.set(true, forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)")
