@@ -107,14 +107,19 @@ extension HIUserDetailViewController {
         .onCompletion { result in
             switch result {
             case .success(let data):
-                let vc: PKAddPassesViewController!
+                let passVC: PKAddPassesViewController
                 do {
                     let pass = try PKPass(data: data)
-                    vc = PKAddPassesViewController(pass: pass)
+                    let vc = PKAddPassesViewController(pass: pass)
+                    if vc != nil {
+                        passVC = vc!
+                    } else {
+                        throw HIError.PassbookError
+                    }
                 } catch let error {
                     os_log(
                         "Error initializing PKPass: %s",
-                        log: Logger.viewController,
+                        log: Logger.ui,
                         type: .error,
                         error.localizedDescription
                     )
@@ -123,7 +128,7 @@ extension HIUserDetailViewController {
                 DispatchQueue.main.async { [weak self] in
                     if let strongSelf = self {
                         UserDefaults.standard.set(true, forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)")
-                        strongSelf.present(vc, animated: true, completion: nil)
+                        strongSelf.present(passVC, animated: true, completion: nil)
                     }
                 }
             case .cancellation:
@@ -131,7 +136,7 @@ extension HIUserDetailViewController {
             case .failure(let error):
                 os_log(
                     "Error retrieving HIPass: %s",
-                    log: Logger.viewController,
+                    log: Logger.ui,
                     type: .error,
                     error.localizedDescription
                 )

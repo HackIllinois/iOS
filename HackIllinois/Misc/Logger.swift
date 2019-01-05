@@ -11,8 +11,8 @@
 //
 
 import Foundation
-import os.log
+import os
 
 struct Logger {
-    static var viewController = OSLog(subsystem: "com.hackillinois.ios", category: "view_controller")
+    static var ui = OSLog(subsystem: "com.hackillinois.ios", category: "ui")
 }
