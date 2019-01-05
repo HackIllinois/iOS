@@ -36,7 +36,7 @@ class HINavigationController: UINavigationController {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        navigationBar.tintColor = HIAppearance.current.accent
+        navigationBar.tintColr = HIAppearance.current.accent
         navigationBar.barTintColor = HIAppearance.current.background
         navigationBar.titleTextAttributes = [
             NSAttributedString.Key.foregroundColor: HIAppearance.current.primary as Any
