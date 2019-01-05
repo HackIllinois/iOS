@@ -1,5 +1,5 @@
 //
-//  HIQRImage.swift
+//  UIImage+QRCode.swift
 //  HackIllinois
 //
 //  Created by Rauhul Varma on 1/28/18.
@@ -13,11 +13,11 @@
 import UIKit
 import CoreGraphics
 
-class HIQRImage {
-    static func from(string: String, size: CGFloat) -> UIImage? {
+extension UIImage {
+    convenience init?(qrString: String, size: CGFloat) {
         guard let qrFilter = CIFilter(name: "CIQRCodeGenerator"),
             let colorFilter = CIFilter(name: "CIFalseColor"),
-            let data = string.data(using: .utf8) else { return nil }
+            let data = qrString.data(using: .utf8) else { return nil }
 
         qrFilter.setDefaults()
         qrFilter.setValue(data, forKey: "inputMessage")
@@ -36,6 +36,6 @@ class HIQRImage {
         let ciContext = CIContext()
         guard let cgImage = ciContext.createCGImage(scaledCIImage, from: scaledCIImage.extent) else { return nil }
 
-        return UIImage(cgImage: cgImage).withRenderingMode(.alwaysTemplate)
+        self.init(cgImage: cgImage)
     }
 }

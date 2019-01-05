@@ -84,7 +84,7 @@ extension HIUserDetailViewController {
         view.layoutIfNeeded()
         let frame = qrImageView.frame.height
         DispatchQueue.global(qos: .userInitiated).async {
-            let qrImage = HIQRImage.from(string: url.absoluteString, size: frame)
+            let qrImage = UIImage(qrString: url.absoluteString, size: frame)?.withRenderingMode(.alwaysTemplate)
             DispatchQueue.main.async {
                 self.qrImageView.image = qrImage
             }
