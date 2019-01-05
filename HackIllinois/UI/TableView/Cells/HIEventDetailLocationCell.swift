@@ -37,13 +37,12 @@ class HIEventDetailLocationCell: UITableViewCell {
         containerView.backgroundColor = HIAppearance.current.background
         containerView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(containerView)
-        containerView.constrain(to: contentView, topInset: 6, trailingInset: -12, bottomInset: -6,  leadingInset: 12)
-        
+        containerView.constrain(to: contentView, topInset: 6, trailingInset: -12, bottomInset: -6, leadingInset: 12)
 
         mapView.isUserInteractionEnabled = false
         mapView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(mapView)
-        mapView.constrain(to: containerView, topInset: 0, trailingInset: 0, bottomInset: 0,  leadingInset: 0)
+        mapView.constrain(to: containerView, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
 
         blurEffectView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(blurEffectView)

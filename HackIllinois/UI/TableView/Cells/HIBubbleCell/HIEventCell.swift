@@ -39,8 +39,8 @@ class HIEventCell: HIBubbleCell {
         bubbleView.addSubview(disclosureIndicatorView)
         disclosureIndicatorView.widthAnchor.constraint(equalToConstant: 65).isActive = true
         disclosureIndicatorView.constrain(to: bubbleView, topInset: 0, trailingInset: 0, bottomInset: 0)
-        
 
+        // add bubble view
         contentStackView.axis = .vertical
         contentStackView.distribution = .equalSpacing
         contentStackView.translatesAutoresizingMaskIntoConstraints = false

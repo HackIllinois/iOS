@@ -14,7 +14,13 @@ import Foundation
 import UIKit
 
 internal extension UIView {
-    func constrain(to view: UIView, topInset: CGFloat? = nil, trailingInset: CGFloat? = nil, bottomInset: CGFloat? = nil, leadingInset: CGFloat? = nil, widthInset: CGFloat? = nil, heightInset: CGFloat? = nil) {
+    func constrain(to view: UIView,
+                   topInset: CGFloat? = nil,
+                   trailingInset: CGFloat? = nil,
+                   bottomInset: CGFloat? = nil,
+                   leadingInset: CGFloat? = nil,
+                   widthInset: CGFloat? = nil,
+                   heightInset: CGFloat? = nil) {
 
         if let topInset = topInset {
             topAnchor.constraint(equalTo: view.topAnchor, constant: topInset).isActive = true
@@ -39,10 +45,15 @@ internal extension UIView {
         if let trailingInset = trailingInset {
             trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: trailingInset).isActive = true
         }
-
     }
 
-    func constain(to layoutGuide: UILayoutGuide, topInset: CGFloat? = nil, trailingInset: CGFloat? = nil, bottomInset: CGFloat? = nil, leadingInset: CGFloat? = nil, widthInset: CGFloat? = nil, heightInset: CGFloat? = nil) {
+    func constain(to layoutGuide: UILayoutGuide,
+                  topInset: CGFloat? = nil,
+                  trailingInset: CGFloat? = nil,
+                  bottomInset: CGFloat? = nil,
+                  leadingInset: CGFloat? = nil,
+                  widthInset: CGFloat? = nil,
+                  heightInset: CGFloat? = nil) {
 
         if let topInset = topInset {
             topAnchor.constraint(equalTo: layoutGuide.topAnchor, constant: topInset).isActive = true
@@ -67,7 +78,5 @@ internal extension UIView {
         if let trailingInset = trailingInset {
             trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor, constant: trailingInset).isActive = true
         }
-
     }
-
 }
