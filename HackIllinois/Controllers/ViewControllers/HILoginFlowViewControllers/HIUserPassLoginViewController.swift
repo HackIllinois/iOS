@@ -88,57 +88,85 @@ extension HIUserPassLoginViewController {
 
 // MARK: - UIViewController
 extension HIUserPassLoginViewController {
-    // swiftlint:disable:next function_body_length
     override func loadView() {
         super.loadView()
 
         let backButton = HIButton(style: .icon(image: #imageLiteral(resourceName: "BackButton")))
         backButton.addTarget(self, action: #selector(didSelectBack), for: .touchUpInside)
         view.addSubview(backButton)
-        backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        backButton.widthAnchor.constraint(equalToConstant: 67).isActive = true
-        backButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        setBackButtonAnchors(backButton: backButton)
 
         let logInLabel = HILabel(style: .loginHeader)
         logInLabel.text = "LOG IN"
         view.addSubview(logInLabel)
+        setLoginLabelAnchors(logInLabel: logInLabel)
+
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(containerView)
+        setContainerViewAnchors(logInLabel: logInLabel)
+
+        containerView.addSubview(emailTextField)
+        setEmailTextFieldAnchors()
+
+        let separatorView = HIView(style: .separator)
+        containerView.addSubview(separatorView)
+        setSeparatorViewAnchors(separatorView: separatorView)
+
+        containerView.addSubview(passwordTextField)
+        setPasswordTextFieldAnchors(separatorView: separatorView)
+
+        view.addSubview(signInButton)
+        setSignInButtonAnchors()
+    }
+
+    private func setBackButtonAnchors(backButton: HIButton) {
+        backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        backButton.widthAnchor.constraint(equalToConstant: 67).isActive = true
+        backButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+    }
+
+    private func setLoginLabelAnchors(logInLabel: HILabel) {
         logInLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 54).isActive = true
         logInLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 29).isActive = true
         logInLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -29).isActive = true
         logInLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
+    }
 
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(containerView)
+    private func setContainerViewAnchors(logInLabel: HILabel) {
         containerView.topAnchor.constraint(equalTo: logInLabel.bottomAnchor, constant: 23).isActive = true
         containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
         containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
         containerView.heightAnchor.constraint(equalToConstant: 89).isActive = true
+    }
 
-        containerView.addSubview(emailTextField)
+    private func setEmailTextFieldAnchors() {
         emailTextField.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 0).isActive = true
         emailTextField.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0).isActive = true
         emailTextField.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 0).isActive = true
         emailTextField.heightAnchor.constraint(equalToConstant: 44).isActive = true
+    }
 
-        let separatorView = HIView(style: .separator)
-        containerView.addSubview(separatorView)
+    private func setSeparatorViewAnchors(separatorView: HIView) {
         separatorView.topAnchor.constraint(equalTo: emailTextField.bottomAnchor).isActive = true
         separatorView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0).isActive = true
         separatorView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 0).isActive = true
+    }
 
-        containerView.addSubview(passwordTextField)
+    private func setPasswordTextFieldAnchors(separatorView: HIView) {
         passwordTextField.topAnchor.constraint(equalTo: separatorView.bottomAnchor).isActive = true
         passwordTextField.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0).isActive = true
         passwordTextField.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 0).isActive = true
         passwordTextField.heightAnchor.constraint(equalToConstant: 44).isActive = true
+    }
 
-        view.addSubview(signInButton)
+    private func setSignInButtonAnchors() {
         signInButton.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 71).isActive = true
         signInButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         signInButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         signInButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         stylizeFor(.readyToLogin)
