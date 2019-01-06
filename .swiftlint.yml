@@ -30,10 +30,10 @@ excluded:
 file_header:
    required_pattern: |
                      \/\/
-                     \/\/  SWIFTLINT_CURRENT_FILENAME\.swift
+                     \/\/  SWIFTLINT_CURRENT_FILENAME
                      \/\/  HackIllinois
                      \/\/
-                     \/\/  Created by .*? on \d{1,2}\/\d{1,2}\/\d{2}\.
+                     \/\/  Created by \S+?\ \S+ on \d{1,2}\/\d{1,2}\/\d{2}\.
                      \/\/  Copyright © \d{4} HackIllinois\. All rights reserved\.
                      \/\/  This file is part of the Hackillinois iOS App.
                      \/\/  The Hackillinois iOS App is open source software, released under the University of
