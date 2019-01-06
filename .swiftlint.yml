@@ -1,6 +1,9 @@
 disabled_rules:
   - cyclomatic_complexity
 
+opt_in_rules:
+  - file_header
+
 line_length:
   warning: 180
   error: 350
