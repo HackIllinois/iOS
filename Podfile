@@ -1,5 +1,8 @@
 platform :ios, '11.0'
 
+# ignore build warnings from Pods
+inhibit_all_warnings!
+
 target 'HackIllinois' do
     use_frameworks!
     pod 'APIManager', :git => 'https://github.com/rauhul/api-manager.git', :commit => '75e517645ed0bde8cec80ddcb6223e85b9810e61'
