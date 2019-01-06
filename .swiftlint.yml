@@ -30,7 +30,7 @@ excluded:
 file_header:
    required_pattern: |
                      \/\/
-                     \/\/  .*?\.swift
+                     \/\/  SWIFTLINT_CURRENT_FILENAME\.swift
                      \/\/  HackIllinois
                      \/\/
                      \/\/  Created by .*? on \d{1,2}\/\d{1,2}\/\d{2}\.
