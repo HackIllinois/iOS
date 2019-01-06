@@ -1,5 +1,5 @@
 //
-//  HIAnnouncementAdminViewController.swift
+//  HIAdminAnnouncementViewController.swift
 //  HackIllinois
 //
 //  Created by Kevin Rajan on 2/1/18.

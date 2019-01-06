@@ -1,5 +1,5 @@
 //
-//  HIUserAuth.swift
+//  HIAPIUserAuth.swift
 //  HackIllinois
 //
 //  Created by Rauhul Varma on 1/17/18.

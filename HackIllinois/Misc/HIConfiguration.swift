@@ -1,5 +1,5 @@
 //
-//  HIApplicationConstants.swift
+//  HIConfiguration.swift
 //  HackIllinois
 //
 //  Created by Rauhul Varma on 2/6/18.
