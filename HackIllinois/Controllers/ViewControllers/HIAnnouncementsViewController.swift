@@ -1,5 +1,5 @@
 //
-//  HIAnnouncmentsViewController.swift
+//  HIAnnouncementsViewController.swift
 //  HackIllinois
 //
 //  Created by Rauhul Varma on 11/23/17.

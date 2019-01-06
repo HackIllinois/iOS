@@ -1,5 +1,5 @@
 //
-//  Log.swift
+//  Logger.swift
 //  HackIllinois
 //
 //  Created by Tommy Yu on 1/4/19.
