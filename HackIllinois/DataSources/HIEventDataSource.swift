@@ -20,7 +20,6 @@ final class HIEventDataSource {
     static let locationsFetchRequest = NSFetchRequest<Location>(entityName: "Location")
     static let eventsFetchRequest = NSFetchRequest<Event>(entityName: "Event")
 
-    // swiftlint:disable:next function_body_length
     static func refresh(completion: (() -> Void)? = nil) {
         guard !isRefreshing else {
             completion?()
@@ -47,31 +46,7 @@ final class HIEventDataSource {
                                     event.favorite = containedFavorites.data.map { $0.eventId }.contains(event.id)
                                     updatedEvents.append(event)
                                 }
-
-                                DispatchQueue.main.sync {
-                                    do {
-                                        let ctx = CoreDataController.shared.persistentContainer.viewContext
-                                        try? ctx.fetch(locationsFetchRequest).forEach {
-                                            ctx.delete($0)
-                                        }
-                                        try? ctx.fetch(eventsFetchRequest).forEach {
-                                            ctx.delete($0)
-                                        }
-                                        var locations = [Location]()
-                                        containedLocations.data.forEach { location in
-                                            locations.append( Location(context: ctx, location: location) )
-                                        }
-                                        var events = [Event]()
-                                        updatedEvents.forEach { event in
-                                            let eventLocationIds = event.locations.map { Int16($0.locationId) }
-                                            let eventLocations = locations.filter { eventLocationIds.contains($0.id) }
-                                            events.append( Event(context: ctx, event: event, locations: NSSet(array: eventLocations)) )
-                                        }
-                                        HILocalNotificationController.shared.scheduleNotifications(for: events)
-
-                                        try ctx.save()
-                                    } catch { }
-                                }
+                                setEventNotifications(containedLocations: containedLocations, updatedEvents: updatedEvents)
                             }
                             completion?()
                             isRefreshing = false
@@ -92,5 +67,33 @@ final class HIEventDataSource {
         }
         .authorization(HIApplicationStateController.shared.user)
         .perform()
+    }
+
+    static private func setEventNotifications(containedLocations: HIAPILocation.Contained,
+                                              updatedEvents: [HIAPIEvent]) {
+        DispatchQueue.main.sync {
+            do {
+                let ctx = CoreDataController.shared.persistentContainer.viewContext
+                try? ctx.fetch(locationsFetchRequest).forEach {
+                    ctx.delete($0)
+                }
+                try? ctx.fetch(eventsFetchRequest).forEach {
+                    ctx.delete($0)
+                }
+                var locations = [Location]()
+                containedLocations.data.forEach { location in
+                    locations.append( Location(context: ctx, location: location) )
+                }
+                var events = [Event]()
+                updatedEvents.forEach { event in
+                    let eventLocationIds = event.locations.map { Int16($0.locationId) }
+                    let eventLocations = locations.filter { eventLocationIds.contains($0.id) }
+                    events.append( Event(context: ctx, event: event, locations: NSSet(array: eventLocations)) )
+                }
+                HILocalNotificationController.shared.scheduleNotifications(for: events)
+
+                try ctx.save()
+            } catch { }
+        }
     }
 }
