@@ -3,7 +3,7 @@ os: osx
 osx_image: xcode10.1
 
 before_install:
-    - pod update
+    - pod repo update
 
 script:
   - swiftlint --strict
