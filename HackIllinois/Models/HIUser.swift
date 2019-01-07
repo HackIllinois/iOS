@@ -9,6 +9,7 @@
 //  Illinois/NCSA Open Source License. You should have received a copy of
 //  this license in a file with the distribution.
 //
+
 import Foundation
 import SwiftKeychainAccess
 import APIManager
@@ -96,7 +97,7 @@ extension HIUser: DataConvertible {
 
 // MARK: - APIAuthorization
 extension HIUser: APIAuthorization {
-    public func headersFor<ReturnType>(request: APIRequest<ReturnType>) -> HTTPHeaders {
+    public func headersFor<ReturnType>(request: APIRequest<ReturnType>) -> HTTPHeaders? {
         var headers = HTTPHeaders()
         switch loginMethod {
         case .github:

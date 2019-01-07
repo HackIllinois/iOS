@@ -13,6 +13,7 @@
 import Foundation
 import UIKit
 import CoreData
+import APIManager
 
 enum HIAdminEventViewControllerStyle {
     case currentlyCreatingEvent
@@ -63,8 +64,8 @@ extension HIAdminEventViewController {
                     var alertMessage: String?
                     var shouldExitOnCompletion = false
 
-                    switch result {
-                    case .success(let successContainer):
+                    do {
+                        let (successContainer, _) = try result.get()
                         if let error = successContainer.error {
                             alertTitle = error.title
                             alertMessage = error.message
@@ -73,13 +74,13 @@ extension HIAdminEventViewController {
                             shouldExitOnCompletion = true
                         }
 
-                    case .cancellation:
+                    } catch APIRequestError.cancelled {
                         alertTitle = "Cancelled"
-
-                    case .failure(let error):
+                    } catch {
                         alertTitle = "Error"
                         alertMessage = error.localizedDescription
                     }
+
                     let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
                     alert.addAction(
                         UIAlertAction(title: "OK", style: .default) { [weak self] _ in
@@ -95,8 +96,8 @@ extension HIAdminEventViewController {
                         self?.present(alert, animated: true, completion: nil)
                     }
                 }
-                .authorization(HIApplicationStateController.shared.user)
-                .perform()
+                .authorize(with: HIApplicationStateController.shared.user)
+                .launch()
         }
     }
 }

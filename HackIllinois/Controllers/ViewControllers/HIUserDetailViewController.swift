@@ -105,24 +105,14 @@ extension HIUserDetailViewController {
         let passString = "hackillinois://qrcode/user?id=\(user.id)&identifier=\(user.identifier)"
         HIPassService.getPass(with: passString)
         .onCompletion { result in
-            switch result {
-            case .success(let data):
+            do {
+                let (data, _) = try result.get()
+                let pass = try PKPass(data: data)
                 let passVC: PKAddPassesViewController
-                do {
-                    let pass = try PKPass(data: data)
-                    if let vc = PKAddPassesViewController(pass: pass) {
-                        passVC = vc
-                    } else {
-                        throw HIError.passbookError
-                    }
-                } catch let error {
-                    os_log(
-                        "Error initializing PKPass: %s",
-                        log: Logger.ui,
-                        type: .error,
-                        error.localizedDescription
-                    )
-                    return
+                if let vc = PKAddPassesViewController(pass: pass) {
+                    passVC = vc
+                } else {
+                    throw HIError.passbookError
                 }
                 DispatchQueue.main.async { [weak self] in
                     if let strongSelf = self {
@@ -130,18 +120,16 @@ extension HIUserDetailViewController {
                         strongSelf.present(passVC, animated: true, completion: nil)
                     }
                 }
-            case .cancellation:
-                break
-            case .failure(let error):
+            } catch {
                 os_log(
-                    "Error retrieving HIPass: %s",
+                    "Error initializing PKPass: %s",
                     log: Logger.ui,
                     type: .error,
                     error.localizedDescription
                 )
             }
         }
-        .perform()
+        .launch()
     }
 }
 
