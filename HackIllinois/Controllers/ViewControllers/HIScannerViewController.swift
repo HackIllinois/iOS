@@ -168,18 +168,18 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
         .onCompletion { (result) in
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self, let alert = strongSelf.lookingUpUserAlertController else { return }
-                switch result {
-                case .success(let successContainer):
+                do {
+                    let (successContainer, _) = try result.get()
                     if let error = successContainer.error {
                         alert.title = error.title
                         alert.message = error.message
                     } else {
                         alert.title = "Success"
                     }
-                case .cancellation:
+                } catch APIRequestError.cancelled {
                     alert.title = "Cancelled"
                     alert.message = nil
-                case .failure(let error):
+                } catch {
                     alert.title = "Unknown Error"
                     alert.message = error.localizedDescription
                 }
@@ -192,8 +192,8 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
                 )
             }
         }
-        .authorization(HIApplicationStateController.shared.user)
-        .perform()
+        .authorize(with: HIApplicationStateController.shared.user)
+        .launch()
     }
 
     func followUserBy(id: Int) {
@@ -201,8 +201,8 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
         .onCompletion { (result) in
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self, let alert = strongSelf.lookingUpUserAlertController else { return }
-                switch result {
-                case .success(let successContainer):
+                do {
+                    let (successContainer, _) = try result.get()
                     if let error = successContainer.error {
                         switch error.type {
                         case "InvalidTrackingStateError", "InvalidParameterError":
@@ -214,10 +214,10 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
                         alert.title = "Success"
                     }
                     alert.message = successContainer.error?.message
-                case .cancellation:
+                } catch APIRequestError.cancelled {
                     alert.title = "Cancelled"
                     alert.message = nil
-                case .failure(let error):
+                } catch {
                     alert.title = "Unknown Error"
                     alert.message = error.localizedDescription
                 }
@@ -230,8 +230,8 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
                 )
             }
         }
-        .authorization(HIApplicationStateController.shared.user)
-        .perform()
+        .authorize(with: HIApplicationStateController.shared.user)
+        .launch()
     }
 
 }

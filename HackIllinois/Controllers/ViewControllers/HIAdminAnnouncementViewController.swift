@@ -65,8 +65,6 @@ extension HIAdminAnnouncementViewController {
                             )
                             self?.present(alert, animated: true, completion: nil)
                         }
-                    case .cancellation:
-                        break
                     case .failure(let error):
                         DispatchQueue.main.async { [weak self] in
                             self?.stylizeFor(.readyToCreateAnnouncement)
@@ -77,8 +75,8 @@ extension HIAdminAnnouncementViewController {
                         }
                     }
                 }
-                .authorization(HIApplicationStateController.shared.user)
-                .perform()
+                .authorize(with: HIApplicationStateController.shared.user)
+                .launch()
             }
         )
         confirmAlertController.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))

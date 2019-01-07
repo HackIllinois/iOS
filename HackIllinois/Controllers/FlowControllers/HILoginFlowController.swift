@@ -20,7 +20,7 @@ class HILoginFlowController: UIViewController {
     // MARK: - Properties
     let animationView = LOTAnimationView(name: "intro")
     var shouldDisplayAnimationOnNextAppearance = true
-    var userPassRequestToken: APIRequestToken?
+    var userPassRequest: APIRequest<HIAPIUserAuth.Contained>?
     var keychainContents = [String]()
 
     // MARK: Status Bar
@@ -118,7 +118,7 @@ extension HILoginFlowController {
         HIUserService.getUser(by: token, with: loginMethod)
         .onCompletion { result in
             switch result {
-            case .success(let containedUser):
+            case .success(let containedUser, _):
                 let userInfo = containedUser.data[0]
                 var user = HIUser(
                     loginMethod: loginMethod,
@@ -134,13 +134,13 @@ extension HILoginFlowController {
                 HIRegistrationService.getAttendee(by: token, with: loginMethod)
                 .onCompletion { result in
                     switch result {
-                    case .success(let containedAttendee):
+                    case .success(let containedAttendee, _):
                         let attendeeInfo = containedAttendee.data[0]
                         let names = [attendeeInfo.firstName, attendeeInfo.lastName].compactMap { $0 } as [String]
                         user.name = names.joined(separator: " ")
                         user.dietaryRestrictions = attendeeInfo.diet
 
-                    case .cancellation, .failure:
+                    case .failure:
                         break
                     }
 
@@ -148,15 +148,13 @@ extension HILoginFlowController {
                         NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
                     }
                 }
-                .perform()
+                .launch()
 
-            case .cancellation:
-                break
             case .failure:
                 sender.presentErrorController(title: "Authentication Failed", message: nil, dismissParentOnCompletion: false)
             }
         }
-        .perform()
+        .launch()
     }
 }
 
@@ -236,27 +234,25 @@ extension HILoginFlowController: HILoginSelectionViewControllerDelegate {
 // MARK: - HIUserPassLoginViewControllerDelegate
 extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
     func userPassLoginViewControllerDidSelectBackButton(_ userPassLoginViewController: HIUserPassLoginViewController) {
-        if userPassRequestToken?.state == .running {
-            userPassRequestToken?.cancel()
-            userPassRequestToken = nil
-        }
+        // FIX ME, @rauhul needs to release a new API-manager that exposes this property
+        // if userPassRequest?.state == .running {
+        //     userPassRequest?.cancel()
+        //     userPassRequest = nil
+        // }
         navController.popViewController(animated: true)
     }
 
     func userPassLoginViewControllerDidSelectLoginButton(_ userPassLoginViewController: HIUserPassLoginViewController, forEmail email: String, andPassword password: String) {
         userPassLoginViewController.stylizeFor(.currentlyPerformingLogin)
 
-        userPassRequestToken = HIAuthService.login(email: email, password: password)
+        userPassRequest = HIAuthService.login(email: email, password: password)
         .onCompletion { result in
             switch result {
-            case .success(let containedAuth):
+            case .success(let containedAuth, _):
                 DispatchQueue.main.async { [weak self] in
                     self?.populateUserData(loginMethod: .userPass, token: containedAuth.data[0].auth, sender: userPassLoginViewController)
                     self?.userPassLoginViewController.stylizeFor(.readyToLogin)
                 }
-
-            case .cancellation:
-                break
 
             case .failure(let error):
                 do {
@@ -277,6 +273,6 @@ extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
                 }
             }
         }
-        .perform()
+        .launch()
     }
 }
