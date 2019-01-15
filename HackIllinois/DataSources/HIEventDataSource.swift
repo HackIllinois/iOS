@@ -29,15 +29,15 @@ final class HIEventDataSource {
 
         HIEventService.getAllLocations()
         .onCompletion { result in
-            if case let .success(containedLocations) = result {
+            if case let .success(containedLocations, _) = result {
                 print("GET::LOCATIONS::SUCCESS")
                 HIEventService.getAllEvents()
                 .onCompletion { result in
-                    if case let .success(containedEvents) = result {
+                    if case let .success(containedEvents, _) = result {
                         print("GET::EVENTS::SUCCESS")
                         HIEventService.getAllFavorites()
                         .onCompletion { result in
-                            if case let .success(containedFavorites) = result {
+                            if case let .success(containedFavorites, _) = result {
                                 print("GET::FAVORITES::SUCCESS")
 
                                 var updatedEvents = [HIAPIEvent]()
@@ -51,22 +51,22 @@ final class HIEventDataSource {
                             completion?()
                             isRefreshing = false
                         }
-                        .authorization(HIApplicationStateController.shared.user)
-                        .perform()
+                        .authorize(with: HIApplicationStateController.shared.user)
+                        .launch()
                     } else {
                         completion?()
                         isRefreshing = false
                     }
                 }
-                .authorization(HIApplicationStateController.shared.user)
-                .perform()
+                .authorize(with: HIApplicationStateController.shared.user)
+                .launch()
             } else {
                 completion?()
                 isRefreshing = false
             }
         }
-        .authorization(HIApplicationStateController.shared.user)
-        .perform()
+        .authorize(with: HIApplicationStateController.shared.user)
+        .launch()
     }
 
     static private func setEventNotifications(containedLocations: HIAPILocation.Contained,

@@ -26,12 +26,12 @@ final class HIAnnouncementDataSource {
         }
         isRefreshing = true
 
-        HIAnnouncementService.getAllAnnouncements()
-        .onCompletion { result in
-            switch result {
-            case .success(let containedAnnouncements):
+        HIAnnouncementService
+            .getAllAnnouncements()
+            .onCompletion { result in
                 DispatchQueue.main.sync {
                     do {
+                        let (containedAnnouncements, _) = try result.get()
                         let ctx = CoreDataController.shared.persistentContainer.viewContext
                         try? ctx.fetch(announcementsFetchRequest).forEach {
                             ctx.delete($0)
@@ -40,19 +40,14 @@ final class HIAnnouncementDataSource {
                             _ = Announcement(context: ctx, announcement: $0)
                         }
                         try ctx.save()
-                    } catch { }
+                    } catch {
+                        print("error", error)
+                    }
                 }
-
-            case .cancellation:
-                break
-
-            case .failure(let error):
-                print("error", error)
+                completion?()
+                isRefreshing = false
             }
-            completion?()
-            isRefreshing = false
-        }
-        .authorization(HIApplicationStateController.shared.user)
-        .perform()
+            .authorize(with: HIApplicationStateController.shared.user)
+            .launch()
     }
 }

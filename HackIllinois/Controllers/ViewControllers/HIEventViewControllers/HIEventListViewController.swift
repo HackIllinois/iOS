@@ -82,14 +82,12 @@ extension HIEventListViewController: HIEventCellDelegate {
 //                                eventCell.setActive(event.favorite)
 //                            }
                         }
-                    case .cancellation:
-                        break
                     case .failure(let error):
                         print(error, error.localizedDescription)
                     }
                 }
-                .authorization(HIApplicationStateController.shared.user)
-                .perform()
+                .authorize(with: HIApplicationStateController.shared.user)
+                .launch()
 
         } else {
             HIEventService.favortieBy(id: Int(event.id))
@@ -103,14 +101,12 @@ extension HIEventListViewController: HIEventCellDelegate {
 //                            eventCell.setActive(event.favorite)
 //                        }
                     }
-                case .cancellation:
-                    break
                 case .failure(let error):
                     print(error, error.localizedDescription)
                 }
             }
-            .authorization(HIApplicationStateController.shared.user)
-            .perform()
+            .authorize(with: HIApplicationStateController.shared.user)
+            .launch()
         }
     }
 }

@@ -43,14 +43,12 @@ extension HIEventDetailViewController {
                             event.favorite = false
                             sender.setToggle(active: event.favorite)
                         }
-                    case .cancellation:
-                        break
                     case .failure(let error):
                         print(error, error.localizedDescription)
                     }
                 }
-                .authorization(HIApplicationStateController.shared.user)
-                .perform()
+                .authorize(with: HIApplicationStateController.shared.user)
+                .launch()
 
         } else {
             HIEventService.favortieBy(id: Int(event.id))
@@ -62,14 +60,12 @@ extension HIEventDetailViewController {
                         event.favorite = true
                         sender.setToggle(active: event.favorite)
                     }
-                case .cancellation:
-                    break
                 case .failure(let error):
                     print(error, error.localizedDescription)
                 }
             }
-            .authorization(HIApplicationStateController.shared.user)
-            .perform()
+            .authorize(with: HIApplicationStateController.shared.user)
+            .launch()
         }
     }
 }
