@@ -20,14 +20,14 @@ public final class EventService: BaseService {
     }
 
     // MARK: - Events
-    public static func create(event: Event) -> APIRequest<Event.Contained> {
+    public static func create(event: Event) -> APIRequest<EventContainer> {
         let eventDict = [String: Any]()
-        return APIRequest<Event.Contained>(service: self, endpoint: "", body: eventDict, method: .POST)
+        return APIRequest<EventContainer>(service: self, endpoint: "", body: eventDict, method: .POST)
     }
 
-    public static func getAllEvents(active: Bool = false) -> APIRequest<Event.Contained> {
+    public static func getAllEvents(active: Bool = false) -> APIRequest<EventContainer> {
         let paramaters = ["active": "\(active)"]
-        return APIRequest<Event.Contained>(service: self, endpoint: "", params: paramaters, method: .GET)
+        return APIRequest<EventContainer>(service: self, endpoint: "", params: paramaters, method: .GET)
     }
 
     // MARK: - Locations
@@ -41,19 +41,19 @@ public final class EventService: BaseService {
     }
 
     // MARK: - Favorties
-    public static func favortieBy(id: Int) -> APIRequest<Favorite.Contained> {
+    public static func favoriteBy(name: String) -> APIRequest<Favorite> {
         var body = HTTPBody()
-        body["eventId"] = id
-        return APIRequest<Favorite.Contained>(service: self, endpoint: "/favorite", body: body, method: .POST)
+        body["eventName"] = name
+        return APIRequest<Favorite>(service: self, endpoint: "favorite/add/", body: body, method: .POST)
     }
 
-    public static func unfavortieBy(id: Int) -> APIRequest<SuccessContainer> {
+    public static func unfavoriteBy(name: String) -> APIRequest<Favorite> {
         var body = HTTPBody()
-        body["eventId"] = id
-        return APIRequest<SuccessContainer>(service: self, endpoint: "/favorite", body: body, method: .DELETE)
+        body["eventName"] = name
+        return APIRequest<Favorite>(service: self, endpoint: "favorite/remove/", body: body, method: .POST)
     }
 
-    public static func getAllFavorites() -> APIRequest<Favorite.Contained> {
-        return APIRequest<Favorite.Contained>(service: self, endpoint: "/favorite", method: .GET)
+    public static func getAllFavorites() -> APIRequest<Favorite> {
+        return APIRequest<Favorite>(service: self, endpoint: "favorite/", method: .GET)
     }
 }

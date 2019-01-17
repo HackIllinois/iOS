@@ -11,10 +11,13 @@
 //
 
 import Foundation
+import APIManager
+
+public struct EventContainer: Decodable, APIReturnable {
+    public let events: [Event]
+}
 
 public struct Event: Codable {
-    public typealias Contained = ReturnDataContainer<Event>
-
     internal enum CodingKeys: String, CodingKey {
         case id
         case name
@@ -48,10 +51,7 @@ public struct Location: Codable {
     public let latitude: Double
 }
 
-public struct Favorite: Codable {
-    public typealias Contained = ReturnDataContainer<Favorite>
-
-    public let id: Int16
-    public let userId: Int16
-    public let eventId: Int16
+public struct Favorite: Codable, APIReturnable {
+    public let events: [String]
+    public let id: String
 }

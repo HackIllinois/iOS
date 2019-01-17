@@ -72,35 +72,37 @@ extension HIEventListViewController: HIEventCellDelegate {
             let event = _fetchedResultsController?.object(at: indexPath) as? Event else { return }
 
         if isFavorite {
-            HIAPI.EventService.unfavortieBy(id: Int(event.id))
-                .onCompletion { result in
-                    switch result {
-                    case .success:
-                        DispatchQueue.main.async {
-                            HILocalNotificationController.shared.unscheduleNotification(for: event)
-                            event.favorite = false
-//                            if eventCell.indexPath == indexPath {
-//                                eventCell.setActive(event.favorite)
-//                            }
-                        }
-                    case .failure(let error):
-                        print(error, error.localizedDescription)
+            HIAPI.EventService.unfavoriteBy(name: event.name)
+            .onCompletion { result in
+                switch result {
+                case .success:
+                    DispatchQueue.main.async {
+                        HILocalNotificationController.shared.unscheduleNotification(for: event)
+                        event.favorite = false
+                        // FIXME:
+                        // if eventCell.indexPath == indexPath {
+                        //     eventCell.setActive(event.favorite)
+                        // }
                     }
+                case .failure(let error):
+                    print(error, error.localizedDescription)
                 }
-                .authorize(with: HIApplicationStateController.shared.user)
-                .launch()
+            }
+            .authorize(with: HIApplicationStateController.shared.user)
+            .launch()
 
         } else {
-            HIAPI.EventService.favortieBy(id: Int(event.id))
+            HIAPI.EventService.favoriteBy(name: event.name)
             .onCompletion { result in
                 switch result {
                 case .success:
                     DispatchQueue.main.async {
                         HILocalNotificationController.shared.scheduleNotification(for: event)
                         event.favorite = true
-//                        if eventCell.indexPath == indexPath {
-//                            eventCell.setActive(event.favorite)
-//                        }
+                        // FIXME:
+                        // if eventCell.indexPath == indexPath {
+                        //     eventCell.setActive(event.favorite)
+                        // }
                     }
                 case .failure(let error):
                     print(error, error.localizedDescription)

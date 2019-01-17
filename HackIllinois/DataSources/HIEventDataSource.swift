@@ -28,46 +28,50 @@ final class HIEventDataSource {
         }
         isRefreshing = true
 
-        HIAPI.EventService.getAllLocations()
-        .onCompletion { result in
-            if case let .success(containedLocations, _) = result {
-                print("GET::LOCATIONS::SUCCESS")
-                HIAPI.EventService.getAllEvents()
-                .onCompletion { result in
-                    if case let .success(containedEvents, _) = result {
-                        print("GET::EVENTS::SUCCESS")
-                        HIAPI.EventService.getAllFavorites()
+        HIAPI.EventService.getAllEvents()
+            .onCompletion { result in
+                switch result {
+                case .success(let containedEvents, _):
+                    HIAPI.EventService.getAllFavorites()
                         .onCompletion { result in
-                            if case let .success(containedFavorites, _) = result {
-                                print("GET::FAVORITES::SUCCESS")
+                            switch result {
+                            case .success(let containedFavorites, _):
+                                let evs = containedEvents.events
+                                DispatchQueue.main.sync {
+                                    do {
+                                        let ctx = HICoreDataController.shared.persistentContainer.viewContext
+                                        try? ctx.fetch(locationsFetchRequest).forEach {
+                                            ctx.delete($0)
+                                        }
+                                        try? ctx.fetch(eventsFetchRequest).forEach {
+                                            ctx.delete($0)
+                                        }
+                                        var events = [Event]()
+                                        evs.forEach { event in
+                                            events.append(Event(context: ctx, event: event, locations: NSSet()))
+                                        }
+                                        HILocalNotificationController.shared.scheduleNotifications(for: events)
 
+                                        isRefreshing = false
+                                    }
+                                }
                                 var updatedEvents = [HIAPI.Event]()
-                                containedEvents.data.forEach { event in
+                                containedEvents.events.forEach { event in
                                     var event = event
-                                    event.favorite = containedFavorites.data.map { $0.eventId }.contains(event.id)
+                                    event.favorite = containedFavorites.events.map { $0 }.contains(event.name)
                                     updatedEvents.append(event)
                                 }
-                                setEventNotifications(containedLocations: containedLocations, updatedEvents: updatedEvents)
+                            case .failure:
+                                isRefreshing = false
                             }
-                            completion?()
-                            isRefreshing = false
                         }
                         .authorize(with: HIApplicationStateController.shared.user)
                         .launch()
-                    } else {
-                        completion?()
-                        isRefreshing = false
-                    }
+                case .failure:
+                    isRefreshing = false
                 }
-                .authorize(with: HIApplicationStateController.shared.user)
-                .launch()
-            } else {
-                completion?()
-                isRefreshing = false
             }
-        }
-        .authorize(with: HIApplicationStateController.shared.user)
-        .launch()
+            .launch()
     }
 
     static private func setEventNotifications(containedLocations: HIAPI.Location.Contained,
@@ -85,13 +89,14 @@ final class HIEventDataSource {
                 containedLocations.data.forEach { location in
                     locations.append( Location(context: ctx, location: location) )
                 }
-                var events = [Event]()
-                updatedEvents.forEach { event in
-                    let eventLocationIds = event.locations.map { Int16($0.locationId) }
-                    let eventLocations = locations.filter { eventLocationIds.contains($0.id) }
-                    events.append( Event(context: ctx, event: event, locations: NSSet(array: eventLocations)) )
-                }
-                HILocalNotificationController.shared.scheduleNotifications(for: events)
+                // FIXME:
+//                var events = [Event]()
+//                updatedEvents.forEach { event in
+//                    let eventLocationIds = event.locations.map { Int16($0.locationId) }
+//                    let eventLocations = locations.filter { eventLocationIds.contains($0.id) }
+//                    events.append( Event(context: ctx, event: event, locations: NSSet(array: eventLocations)) )
+//                }
+//                HILocalNotificationController.shared.scheduleNotifications(for: events)
 
                 try ctx.save()
             } catch { }

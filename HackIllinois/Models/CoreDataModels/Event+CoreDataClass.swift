@@ -21,7 +21,6 @@ public class Event: NSManagedObject {
         self.init(entity: entity, insertInto: moc)
         favorite = event.favorite
         end = event.end
-        id = event.id
         info = event.info
         name = event.name
         start = event.start
