@@ -18,7 +18,7 @@ import UserNotifications
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         setupNavigationBarAppearance()
         setupTableViewAppearance()
         _ = HIThemeEngine.shared
@@ -59,7 +59,7 @@ extension AppDelegate {
         let navigationBarAppearace = UINavigationBar.appearance()
 
         navigationBarAppearace.titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15, weight: .bold) as Any
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .bold) as Any
         ]
         navigationBarAppearace.shadowImage = UIImage()
         navigationBarAppearace.isTranslucent = false

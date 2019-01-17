@@ -27,7 +27,7 @@ final class HIEventService: HIBaseService {
 
     static func getAllEvents(active: Bool = false) -> APIRequest<HIAPIEvent.Contained> {
         let paramaters = ["active": "\(active)"]
-        return APIRequest<HIAPIEvent.Contained>(service: self, endpoint: "", parameters: paramaters, method: .GET)
+        return APIRequest<HIAPIEvent.Contained>(service: self, endpoint: "", params: paramaters, method: .GET)
     }
 
     // MARK: - Locations

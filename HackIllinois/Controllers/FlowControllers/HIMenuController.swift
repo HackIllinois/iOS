@@ -22,7 +22,6 @@ class HIMenuController: UIViewController {
 
     // MARK: - Constants
     private let MENU_ITEM_HEIGHT: CGFloat = 58
-    // TODO: Introduce MENU_MAX_HEIGHT, add scroll bar if menu height is larger than this value
 
     // MARK: - Properties
     private(set) var state = State.closed
@@ -37,12 +36,7 @@ class HIMenuController: UIViewController {
     var menuItemsHeight = NSLayoutConstraint()
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        switch HIApplication.Theme.current {
-        case .day:
-            return .default
-        case .night:
-            return .lightContent
-        }
+        return HIAppearance.current.preferredStatusBarStyle
     }
 
     // MARK: - Init
@@ -109,29 +103,27 @@ extension HIMenuController {
         view = HIView(style: .background)
 
         _tabBarController.tabBar.isHidden = true
-        addChildViewController(_tabBarController)
+        addChild(_tabBarController)
         _tabBarController.view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(_tabBarController.view)
         _tabBarController.view.constrain(to: view, trailingInset: 0, leadingInset: 0, widthInset: 0, heightInset: 0)
-        
-        _tabBarController.didMove(toParentViewController: self)
+
+        _tabBarController.didMove(toParent: self)
 
         overlayView.alpha = 0.0
         view.addSubview(overlayView)
         overlayView.constrain(to: _tabBarController.view, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
-        
 
         let menu = HIView(style: .background)
-        menu.backgroundColor = HIApplication.Palette.current.background
+        menu.backgroundColor = HIAppearance.current.background
         menu.clipsToBounds = true
         menu.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(menu)
         menu.constrain(to: view, topInset: 0, trailingInset: 0, leadingInset: 0)
-        
-        
+
         menuOverlap = menu.bottomAnchor.constraint(equalTo: _tabBarController.view.topAnchor)
         menuOverlap.isActive = true
-        
+
         menuHeight = menu.heightAnchor.constraint(equalToConstant: 0)
         menuHeight.isActive = true
 
@@ -143,7 +135,7 @@ extension HIMenuController {
         closeMenuButton.leadingAnchor.constraint(equalTo: menu.safeAreaLayoutGuide.leadingAnchor, constant: 3).isActive = true
         closeMenuButton.widthAnchor.constraint(equalToConstant: 49).isActive = true
         closeMenuButton.heightAnchor.constraint(equalToConstant: 49).isActive = true
-        
+
         menuItems.axis = .vertical
         menuItems.distribution = .fillEqually
         menuItems.translatesAutoresizingMaskIntoConstraints = false

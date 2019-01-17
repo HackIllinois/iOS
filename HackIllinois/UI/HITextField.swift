@@ -66,16 +66,16 @@ class HITextField: UITextField {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        textColor = HIApplication.Palette.current.primary
+        textColor = HIAppearance.current.primary
         font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        tintColor = HIApplication.Palette.current.accent
-        backgroundColor = HIApplication.Palette.current.background
+        tintColor = HIAppearance.current.accent
+        backgroundColor = HIAppearance.current.background
 
         if let placeholder = placeholder {
             attributedPlaceholder = NSAttributedString(
                 string: placeholder,
                 attributes: [
-                    NSAttributedStringKey.foregroundColor: HIApplication.Palette.current.primary.withAlphaComponent(0.5)
+                    NSAttributedString.Key.foregroundColor: HIAppearance.current.primary.withAlphaComponent(0.5)
                 ]
             )
         }

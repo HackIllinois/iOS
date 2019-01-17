@@ -37,13 +37,8 @@ class HITableView: UITableView {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        switch HIApplication.Theme.current {
-        case .day:
-            indicatorStyle = .black
-        case .night:
-            indicatorStyle = .white
-        }
-        backgroundColor = HIApplication.Palette.current.background
+        indicatorStyle = HIAppearance.current.indicatorStyle
+        backgroundColor = HIAppearance.current.background
     }
 
 }

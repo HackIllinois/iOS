@@ -88,7 +88,7 @@ extension HIUserPassLoginViewController {
 
 // MARK: - UIViewController
 extension HIUserPassLoginViewController {
-
+    // swiftlint:disable:next function_body_length
     override func loadView() {
         super.loadView()
 

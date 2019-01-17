@@ -25,7 +25,6 @@ class HIHomeViewController: HIEventListViewController {
             NSSortDescriptor(key: "id", ascending: true)
         ]
 
-        // TODO: maybe extend start to be a bit before now() such that events that begin shortly are included in this view
         fetchRequest.predicate = NSPredicate(format: "(start < now()) AND (end > now())")
 
         let fetchedResultsController = NSFetchedResultsController(
@@ -45,10 +44,10 @@ class HIHomeViewController: HIEventListViewController {
 
     var countdownDataStoreIndex = 0
     var staticDataStore: [(date: Date, displayText: String)] = [
-        (HIApplication.Configuration.EVENT_START_TIME, "HACKILLINOIS BEGINS IN"),
-        (HIApplication.Configuration.HACKING_START_TIME, "HACKING BEGINS IN"),
-        (HIApplication.Configuration.HACKING_END_TIME, "HACKING ENDS IN"),
-        (HIApplication.Configuration.EVENT_END_TIME, "HACKILLINOIS ENDS IN")
+        (HIConfiguration.EVENT_START_TIME, "HACKILLINOIS BEGINS IN"),
+        (HIConfiguration.HACKING_START_TIME, "HACKING BEGINS IN"),
+        (HIConfiguration.HACKING_END_TIME, "HACKING ENDS IN"),
+        (HIConfiguration.EVENT_END_TIME, "HACKILLINOIS ENDS IN")
     ]
 
     var timer: Timer?
@@ -66,13 +65,13 @@ extension HIHomeViewController {
         countdownTitleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
 
         countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        addChildViewController(countdownViewController)
+        addChild(countdownViewController)
         view.addSubview(countdownViewController.view)
         countdownViewController.view.topAnchor.constraint(equalTo: countdownTitleLabel.bottomAnchor, constant: 8).isActive = true
         countdownViewController.view.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
         countdownViewController.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
         countdownViewController.view.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        countdownViewController.didMove(toParentViewController: self)
+        countdownViewController.didMove(toParent: self)
 
         let happeningNowLabel = HILabel(style: .title)
         happeningNowLabel.text = "HAPPENING NOW"

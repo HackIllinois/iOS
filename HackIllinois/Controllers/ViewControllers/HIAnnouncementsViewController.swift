@@ -1,5 +1,5 @@
 //
-//  HIAnnouncmentsViewController.swift
+//  HIAnnouncementsViewController.swift
 //  HackIllinois
 //
 //  Created by Rauhul Varma on 11/23/17.
@@ -54,7 +54,7 @@ extension HIAnnouncementsViewController {
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         tableView.estimatedRowHeight = 100
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         self.tableView = tableView
     }
 

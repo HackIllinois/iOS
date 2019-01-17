@@ -45,15 +45,13 @@ class HIThemeEngine {
         guard let sunrise = calendar.date(bySettingHour: 6, minute: 30, second: 0, of: now),
             let sunset = calendar.date(bySettingHour: 17, minute: 30, second: 0, of: now) else { return }
 
-        let newTheme: HIApplication.Theme
+        let newAppearance: HIAppearance
         if now >= sunrise && now <= sunset {
-            newTheme = .day
+            newAppearance = .day
         } else {
-            newTheme = .night
+            newAppearance = .night
         }
-        if HIApplication.Theme.current != newTheme {
-            HIApplication.Theme.current = newTheme
-        }
+        HIAppearance.change(to: newAppearance)
     }
 
     func tearDownTimer() {

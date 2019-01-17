@@ -31,6 +31,6 @@ class HIWindow: UIWindow {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        backgroundColor = HIApplication.Palette.current.background
+        backgroundColor = HIAppearance.current.background
     }
 }

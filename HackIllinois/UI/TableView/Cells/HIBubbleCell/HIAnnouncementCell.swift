@@ -20,7 +20,7 @@ class HIAnnouncementCell: HIBubbleCell {
     var infoLabel = HILabel(style: .description)
 
     // MARK: - Init
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         bubbleView.addSubview(titleLabel)
@@ -41,7 +41,7 @@ class HIAnnouncementCell: HIBubbleCell {
 
         bubbleView.addSubview(infoLabel)
         infoLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12).isActive = true
-        infoLabel.constrain(to: bubbleView, trailingInset: -12, bottomInset: -14,  leadingInset: 23)
+        infoLabel.constrain(to: bubbleView, trailingInset: -12, bottomInset: -14, leadingInset: 23)
     }
 
     required init?(coder aDecoder: NSCoder) {

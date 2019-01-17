@@ -27,7 +27,7 @@ class HIEventCell: HIBubbleCell {
     weak var delegate: HIEventCellDelegate?
 
     // MARK: - Init
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
@@ -39,8 +39,8 @@ class HIEventCell: HIBubbleCell {
         bubbleView.addSubview(disclosureIndicatorView)
         disclosureIndicatorView.widthAnchor.constraint(equalToConstant: 65).isActive = true
         disclosureIndicatorView.constrain(to: bubbleView, topInset: 0, trailingInset: 0, bottomInset: 0)
-        
 
+        // add bubble view
         contentStackView.axis = .vertical
         contentStackView.distribution = .equalSpacing
         contentStackView.translatesAutoresizingMaskIntoConstraints = false

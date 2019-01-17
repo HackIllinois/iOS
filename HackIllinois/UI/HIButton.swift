@@ -96,26 +96,26 @@ class HIButton: UIButton {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        setTitleColor(HIApplication.Palette.current.primary, for: .normal)
+        setTitleColor(HIAppearance.current.primary, for: .normal)
 
         switch style {
         case .standard:
-            backgroundColor = HIApplication.Palette.current.actionBackground
+            backgroundColor = HIAppearance.current.actionBackground
 
         case .async:
-            backgroundColor = HIApplication.Palette.current.actionBackground
-            activityIndicator?.tintColor = HIApplication.Palette.current.accent
+            backgroundColor = HIAppearance.current.actionBackground
+            activityIndicator?.tintColor = HIAppearance.current.accent
 
         case .menu:
-            backgroundColor = HIApplication.Palette.current.background
-            setTitleColor(HIApplication.Palette.current.primary, for: .normal)
+            backgroundColor = HIAppearance.current.background
+            setTitleColor(HIAppearance.current.primary, for: .normal)
 
         case .icon:
-            backgroundColor = HIApplication.Palette.current.background
-            tintColor = HIApplication.Palette.current.accent
+            backgroundColor = HIAppearance.current.background
+            tintColor = HIAppearance.current.accent
 
         case .iconToggle:
-            tintColor = HIApplication.Palette.current.actionBackground
+            tintColor = HIAppearance.current.actionBackground
 
         }
     }
@@ -133,7 +133,7 @@ class HIButton: UIButton {
         } else {
             isEnabled = true
             setTitle(title, for: .normal)
-            backgroundColor = HIApplication.Palette.current.actionBackground
+            backgroundColor = HIAppearance.current.actionBackground
             activityIndicator?.stopAnimating()
         }
     }

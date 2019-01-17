@@ -13,6 +13,7 @@
 import Foundation
 import UIKit
 import CoreData
+import APIManager
 
 enum HIAdminEventViewControllerStyle {
     case currentlyCreatingEvent
@@ -49,17 +50,22 @@ extension HIAdminEventViewController {
 
         let message = "Create a new tracked event \"\(title)\" for \(duration) minutes?"
         let confirmAlertController = UIAlertController(title: "Confirm Tracked Event", message: message, preferredStyle: .alert)
-        confirmAlertController.addAction(
-            UIAlertAction(title: "Yes", style: .default) { _ in
-                self.stylizeFor(.currentlyCreatingEvent)
-                HITrackingService.create(name: title, duration: duration)
+        confirmAlertController.addAction(confirmAlertActionWith(title: title, duration: duration))
+        confirmAlertController.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        self.present(confirmAlertController, animated: true, completion: nil)
+    }
+
+    private func confirmAlertActionWith(title: String, duration: Int) -> UIAlertAction {
+        return UIAlertAction(title: "Yes", style: .default) { _ in
+            self.stylizeFor(.currentlyCreatingEvent)
+            HITrackingService.create(name: title, duration: duration)
                 .onCompletion { result in
                     let alertTitle: String
                     var alertMessage: String?
                     var shouldExitOnCompletion = false
 
-                    switch result {
-                    case .success(let successContainer):
+                    do {
+                        let (successContainer, _) = try result.get()
                         if let error = successContainer.error {
                             alertTitle = error.title
                             alertMessage = error.message
@@ -68,13 +74,13 @@ extension HIAdminEventViewController {
                             shouldExitOnCompletion = true
                         }
 
-                    case .cancellation:
+                    } catch APIRequestError.cancelled {
                         alertTitle = "Cancelled"
-
-                    case .failure(let error):
+                    } catch {
                         alertTitle = "Error"
                         alertMessage = error.localizedDescription
                     }
+
                     let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
                     alert.addAction(
                         UIAlertAction(title: "OK", style: .default) { [weak self] _ in
@@ -90,12 +96,9 @@ extension HIAdminEventViewController {
                         self?.present(alert, animated: true, completion: nil)
                     }
                 }
-                .authorization(HIApplicationStateController.shared.user)
-                .perform()
-            }
-        )
-        confirmAlertController.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-        self.present(confirmAlertController, animated: true, completion: nil)
+                .authorize(with: HIApplicationStateController.shared.user)
+                .launch()
+        }
     }
 }
 

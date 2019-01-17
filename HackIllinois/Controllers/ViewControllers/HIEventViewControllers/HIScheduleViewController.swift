@@ -48,22 +48,22 @@ class HIScheduleViewController: HIEventListViewController {
 
         let fridayPredicate = NSPredicate(
             format: "%@ =< start AND start < %@",
-            HIApplication.Configuration.FRIDAY_START_TIME as NSDate,
-            HIApplication.Configuration.FRIDAY_END_TIME as NSDate
+            HIConfiguration.FRIDAY_START_TIME as NSDate,
+            HIConfiguration.FRIDAY_END_TIME as NSDate
         )
         dataStore.append((displayText: "FRIDAY", predicate: fridayPredicate))
 
         let saturdayPredicate = NSPredicate(
             format: "%@ =< start AND start < %@",
-            HIApplication.Configuration.SATURDAY_START_TIME as NSDate,
-            HIApplication.Configuration.SATURDAY_END_TIME as NSDate
+            HIConfiguration.SATURDAY_START_TIME as NSDate,
+            HIConfiguration.SATURDAY_END_TIME as NSDate
         )
         dataStore.append((displayText: "SATURDAY", predicate: saturdayPredicate))
 
         let sundayPredicate = NSPredicate(
             format: "%@ =< start AND start < %@",
-            HIApplication.Configuration.SUNDAY_START_TIME as NSDate,
-            HIApplication.Configuration.SUNDAY_END_TIME as NSDate
+            HIConfiguration.SUNDAY_START_TIME as NSDate,
+            HIConfiguration.SUNDAY_END_TIME as NSDate
         )
         dataStore.append((displayText: "SUNDAY", predicate: sundayPredicate))
 
