@@ -114,47 +114,97 @@ extension HILoginFlowController {
 
 // MARK: - Login Flow
 extension HILoginFlowController {
-    func populateUserData(loginMethod: HILoginMethod, token: String, sender: HIBaseViewController) {
-        HIUserService.getUser(by: token, with: loginMethod)
-        .onCompletion { result in
-            switch result {
-            case .success(let containedUser, _):
-                let userInfo = containedUser.data[0]
-                var user = HIUser(
-                    loginMethod: loginMethod,
-                    permissions: userInfo.roles.map { $0.permissions }.reduce(.guest, max),
-                    token: token,
-                    identifier: userInfo.info.email,
-                    isActive: true,
-                    id: userInfo.info.id,
-                    name: nil,
-                    dietaryRestrictions: nil
-                )
-
-                HIRegistrationService.getAttendee(by: token, with: loginMethod)
-                .onCompletion { result in
-                    switch result {
-                    case .success(let containedAttendee, _):
-                        let attendeeInfo = containedAttendee.data[0]
-                        let names = [attendeeInfo.firstName, attendeeInfo.lastName].compactMap { $0 } as [String]
-                        user.name = names.joined(separator: " ")
-                        user.dietaryRestrictions = attendeeInfo.diet
-
-                    case .failure:
-                        break
-                    }
-
+    func getUserTokenFromCode(code: String) {
+        let json: [String: Any] = ["code": code]
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        // create post request
+        let url = URL(string: "https://api.hackillinois.org/auth/code/github/?redirect_uri=https://test.hackillinois.org/auth/?isiOS=1")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        // insert json data to the request
+        request.httpBody = jsonData
+        let task = URLSession.shared.dataTask(with: request) { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any] {
+                if let token = responseJSON["token"] as? String {
+                    let tok = token.trimmingCharacters(in: .whitespacesAndNewlines)
                     DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
+                        self.populateUserData(loginMethod: .github, token: tok, sender: self.loginSelectionViewController)
                     }
                 }
-                .launch()
-
-            case .failure:
-                sender.presentErrorController(title: "Authentication Failed", message: nil, dismissParentOnCompletion: false)
             }
         }
-        .launch()
+        task.resume()
+    }
+}
+
+// MARK: - Login Flow
+extension HILoginFlowController {
+    func getUserFromJSON(responseData: Data, loginMethod: HILoginMethod, token: String) -> HIUser? {
+        do {
+            let json = try JSONSerialization.jsonObject(with: responseData, options: JSONSerialization.ReadingOptions.allowFragments)
+            var id = 0
+            var email = ""
+            var firstName = ""
+            var lastName = ""
+            if let dictionary = json as? [String: Any] {
+                if let dictId = dictionary["id"] as? Int {
+                    // access individual value in dictionary
+                    id = dictId
+                }
+                if let dictEmail = dictionary["email"] as? String {
+                    // access individual value in dictionary
+                    email = dictEmail
+                }
+                if let dictFirstName = dictionary["firstName"] as? String {
+                    // access individual value in dictionary
+                    firstName = dictFirstName
+                }
+                if let dictLastName = dictionary["lastName"] as? String {
+                    // access individual value in dictionary
+                    lastName = dictLastName
+                }
+            }
+            return HIUser(
+                loginMethod: loginMethod,
+                permissions: HIUserPermissions(rawValue: "ATTENDEE")!,
+                token: token,
+                identifier: email,
+                isActive: true,
+                id: id,
+                name: firstName + " " + lastName,
+                dietaryRestrictions: nil
+            )
+        } catch { return nil }
+    }
+    func populateUserData(loginMethod: HILoginMethod, token: String, sender: HIBaseViewController) {
+        var request = URLRequest(url: URL(string: "https://api.hackillinois.org/user/")!)
+        request.setValue(token, forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        URLSession.shared.dataTask(with: request) { data, _, _ in
+            if let responseData = data {
+                var user = self.getUserFromJSON(responseData: responseData, loginMethod: loginMethod, token: token)
+                HIRegistrationService.getAttendee(by: token, with: loginMethod)
+                    .onCompletion { result in
+                        switch result {
+                        case .success(let containedAttendee, _):
+                            let attendeeInfo = containedAttendee.data[0]
+                            let names = [attendeeInfo.firstName, attendeeInfo.lastName].compactMap { $0 } as [String]
+                            user?.name = names.joined(separator: " ")
+                            user?.dietaryRestrictions = attendeeInfo.diet
+                        case .failure:
+                            break
+                        }
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user as Any])
+                        }
+                    }
+                    .launch()
+            }
+            }.resume()
     }
 }
 
@@ -168,7 +218,7 @@ extension HILoginFlowController {
     func keychainRetrievalSucceeded(user: HIUser) {
         NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: [
             "user": user
-        ])
+            ])
     }
     func keychainRetrievalFailed(id: String) {
         Keychain.default.removeObject(forKey: id)
@@ -190,20 +240,16 @@ extension HILoginFlowController: HILoginSelectionViewControllerDelegate {
                                       withUserInfo info: String?) {
         switch selection {
         case .github:
-            print("URL::\(HIAuthService.githubLoginURL())")
-            loginSession = SFAuthenticationSession(url: HIAuthService.githubLoginURL(), callbackURLScheme: nil) { [weak self] (url, error) in
-
+            loginSession = SFAuthenticationSession(url: URL(string: "https://api.hackillinois.org/auth/github/?redirect_uri=https://test.hackillinois.org/auth/?isiOS=1")!, callbackURLScheme: "https://test.hackillinois.org/auth/?isiOS=1") { [weak self] (url, error) in
                 if let url = url,
                     let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
                     let queryItems = components.queryItems,
-                    let token = queryItems.first(where: { $0.name == "token" })?.value,
-                    token.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
-
+                    let code = queryItems.first(where: { $0.name == "code" })?.value,
+                    code.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
                     DispatchQueue.main.async {
-                        self?.populateUserData(loginMethod: .github, token: token, sender: loginSelectionViewController)
+                        self?.getUserTokenFromCode(code: code)
                     }
                 }
-
                 if let error = error {
                     if (error as? SFAuthenticationError)?.code == SFAuthenticationError.canceledLogin {
                         // do nothing
@@ -246,33 +292,33 @@ extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
         userPassLoginViewController.stylizeFor(.currentlyPerformingLogin)
 
         userPassRequest = HIAuthService.login(email: email, password: password)
-        .onCompletion { result in
-            switch result {
-            case .success(let containedAuth, _):
-                DispatchQueue.main.async { [weak self] in
-                    self?.populateUserData(loginMethod: .userPass, token: containedAuth.data[0].auth, sender: userPassLoginViewController)
-                    self?.userPassLoginViewController.stylizeFor(.readyToLogin)
-                }
+            .onCompletion { result in
+                switch result {
+                case .success(let containedAuth, _):
+                    DispatchQueue.main.async { [weak self] in
+                        self?.populateUserData(loginMethod: .userPass, token: containedAuth.data[0].auth, sender: userPassLoginViewController)
+                        self?.userPassLoginViewController.stylizeFor(.readyToLogin)
+                    }
 
-            case .failure(let error):
-                do {
-                    throw error
-                } catch DecodingError.dataCorrupted(let context) {
-                    print("DecodingError.dataCorrupted", context)
-                } catch DecodingError.keyNotFound(let key, let context) {
-                    print("DecodingError.keyNotFound", key, context)
-                } catch DecodingError.typeMismatch(let type, let context) {
-                    print("DecodingError.typeMismatch", type, context)
-                } catch {
-                    print(error)
-                }
+                case .failure(let error):
+                    do {
+                        throw error
+                    } catch DecodingError.dataCorrupted(let context) {
+                        print("DecodingError.dataCorrupted", context)
+                    } catch DecodingError.keyNotFound(let key, let context) {
+                        print("DecodingError.keyNotFound", key, context)
+                    } catch DecodingError.typeMismatch(let type, let context) {
+                        print("DecodingError.typeMismatch", type, context)
+                    } catch {
+                        print(error)
+                    }
 
-                DispatchQueue.main.async { [weak self] in
-                    self?.userPassLoginViewController.shakeWithError()
-                    self?.userPassLoginViewController.stylizeFor(.readyToLogin)
+                    DispatchQueue.main.async { [weak self] in
+                        self?.userPassLoginViewController.shakeWithError()
+                        self?.userPassLoginViewController.stylizeFor(.readyToLogin)
+                    }
                 }
             }
-        }
-        .launch()
+            .launch()
     }
 }
