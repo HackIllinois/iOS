@@ -25,12 +25,10 @@ class HIHomeViewController: HIEventListViewController {
             NSSortDescriptor(key: "id", ascending: true)
         ]
 
-        fetchRequest.predicate = NSPredicate(format: "(start < now()) AND (end > now())")
-
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
             managedObjectContext: HICoreDataController.shared.persistentContainer.viewContext,
-            sectionNameKeyPath: nil,
+            sectionNameKeyPath: "sectionIdentifier",
             cacheName: nil
         )
 
@@ -51,6 +49,49 @@ class HIHomeViewController: HIEventListViewController {
     ]
 
     var timer: Timer?
+
+    var currentTab = 0
+    var dataStore = [(displayText: String, predicate: NSPredicate)]()
+
+    convenience init() {
+        self.init(nibName: nil, bundle: nil)
+
+        let nowPredicate = NSPredicate(format: "(start < now()) AND (end > now())")
+        dataStore.append((displayText: "HAPPENING NOW", predicate: nowPredicate) )
+
+        let inFifteenMinutes = Date(timeIntervalSinceNow: 900)
+        let soonPredicate = NSPredicate(format: "(start < %@) AND (start > now())", inFifteenMinutes as NSDate)
+        dataStore.append((displayText: "UPCOMINNG", predicate: soonPredicate))
+
+        updatePredicate()
+    }
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) should not be used")
+    }
+}
+
+// MARK: - Actions
+extension HIHomeViewController {
+    @objc func didSelectTab(_ sender: HISegmentedControl) {
+        currentTab = sender.selectedIndex
+        updatePredicate()
+        animateReload()
+    }
+
+    func updatePredicate() {
+        let currentTabPredicate = dataStore[currentTab].predicate
+        fetchedResultsController.fetchRequest.predicate = currentTabPredicate
+    }
+
+    func animateReload() {
+        try? fetchedResultsController.performFetch()
+        animateTableViewReload()
+    }
 }
 
 // MARK: - UIViewController
@@ -73,16 +114,19 @@ extension HIHomeViewController {
         countdownViewController.view.heightAnchor.constraint(equalToConstant: 150).isActive = true
         countdownViewController.didMove(toParent: self)
 
-        let happeningNowLabel = HILabel(style: .title)
-        happeningNowLabel.text = "HAPPENING NOW"
-        view.addSubview(happeningNowLabel)
-        happeningNowLabel.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor, constant: 16).isActive = true
-        happeningNowLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        happeningNowLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        let items = dataStore.map { $0.displayText }
+        let segmentedControl = HISegmentedControl(items: items)
+        segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(segmentedControl)
+        segmentedControl.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor, constant: 5).isActive = true
+        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
+        segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
+        segmentedControl.heightAnchor.constraint(equalToConstant: 34).isActive = true
 
         let tableView = HITableView()
         view.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: happeningNowLabel.bottomAnchor, constant: 5).isActive = true
+        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
