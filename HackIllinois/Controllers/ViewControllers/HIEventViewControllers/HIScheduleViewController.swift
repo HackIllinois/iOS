@@ -118,7 +118,6 @@ extension HIScheduleViewController {
 extension HIScheduleViewController {
     override func loadView() {
         super.loadView()
-
         let items = dataStore.map { $0.displayText }
         let segmentedControl = HISegmentedControl(items: items)
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
@@ -128,7 +127,6 @@ extension HIScheduleViewController {
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 34).isActive = true
-
         let tableView = HITableView()
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor).isActive = true

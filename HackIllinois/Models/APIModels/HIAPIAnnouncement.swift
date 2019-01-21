@@ -16,14 +16,14 @@ struct HIAPIAnnouncement: Codable {
     typealias Contained = HIAPIReturnDataContainer<HIAPIAnnouncement>
 
     private enum CodingKeys: String, CodingKey {
-        case id
         case title
-        case info = "description"
-        case time = "created"
+        case body
+        case time
+        case topic
     }
 
-    var id: Int16
     var title: String
-    var info: String
-    var time: Date
+    var body: String
+    var time: Int64
+    var topic: String
 }
