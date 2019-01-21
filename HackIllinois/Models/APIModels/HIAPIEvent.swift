@@ -11,92 +11,32 @@
 //
 
 import Foundation
-import APIManager
 
-struct HIAPIEventReturnDataContainer<Model: Decodable>: Decodable, APIReturnable {
-    var events: [Model]
-
-    enum CodingKeys: CodingKey {
-        case events
-    }
-
-    public init(from data: Data) throws {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .formatted(Formatter.iso8601)
-        self = try decoder.decode(HIAPIEventReturnDataContainer.self, from: data)
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        do {
-            events = try container.decode([Model].self, forKey: .events)
-        } catch _ {
-            let singleDataValue = try container.decode(Model.self, forKey: .events)
-            events = [singleDataValue]
-        }
-    }
-}
-
-struct HIAPIEventsContainer: Codable {
-
-    let events: [HIAPIEventDated]
+struct HIAPIEvent: Codable {
+    typealias Contained = HIAPIReturnDataContainer<HIAPIEvent>
 
     private enum CodingKeys: String, CodingKey {
-        case events
-    }
-
-}
-
-struct HIAPIEvent {
-
-    var favorite = false
-    var name: String
-    var info: String
-    var end: Date
-    var start: Date
-    var eventType: String
-    var sponsor: String
-    var latitude: Double
-    var longitude: Double
-
-    init(favorite: Bool, name: String, info: String, end: Date, start: Date, eventType: String, sponsor: String, latitude: Double, longitude: Double) {
-        self.favorite = favorite
-        self.name = name
-        self.info = info
-        self.end = end
-        self.start = start
-        self.eventType = eventType
-        self.sponsor = sponsor
-        self.latitude = latitude
-        self.longitude = longitude
-    }
-}
-
-struct HIAPIEventDated: Codable {
-    typealias Contained = HIAPIEventReturnDataContainer<HIAPIEventDated>
-
-    private enum CodingKeys: String, CodingKey {
+        case id
         case name
         case info = "description"
         case end = "endTime"
         case start = "startTime"
-        case eventType
-        case latitude
-        case longitude
-        case locationDescription
-        case sponsor
+        case locations
     }
 
     var favorite = false
+    var id: Int16
     var name: String
     var info: String
-    var end: Double
-    var start: Double
-    var eventType: String
-    var locationDescription: String
-    var sponsor: String
-    var latitude: Double
-    var longitude: Double
+    var end: Date
+    var start: Date
+    var locations: [HIAPILocationReference]
+
+    struct HIAPILocationReference: Codable {
+        var id: Int16
+        var eventId: Int16
+        var locationId: Int16
+    }
 }
 
 struct HIAPILocation: Codable {

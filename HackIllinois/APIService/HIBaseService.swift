@@ -16,7 +16,8 @@ import APIManager
 
 class HIBaseService: APIService {
     class var baseURL: String {
-        return "https://api.hackillinois.org/"
+        return "https://api.hackillinois.org/v1"
+//        return "http://api.test.hackillinois.org/v1"
     }
 
     static var headers = ["Content-Type": "application/json"]

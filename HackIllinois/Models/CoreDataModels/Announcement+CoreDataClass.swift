@@ -18,8 +18,9 @@ public class Announcement: NSManagedObject {
     convenience init(context moc: NSManagedObjectContext, announcement: HIAPIAnnouncement) {
         guard let entity = NSEntityDescription.entity(forEntityName: "Announcement", in: moc) else { fatalError() }
         self.init(entity: entity, insertInto: moc)
-        info = announcement.body
+        id = announcement.id
+        info = announcement.info
         title = announcement.title
-        time = Date(timeIntervalSince1970: TimeInterval(announcement.time))
+        time = announcement.time
     }
 }

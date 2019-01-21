@@ -20,29 +20,14 @@ final class HIEventService: HIBaseService {
     }
 
     // MARK: - Events
-    static func create(event: HIAPIEvent) -> APIRequest<HIAPIEventDated.Contained> {
+    static func create(event: HIAPIEvent) -> APIRequest<HIAPIEvent.Contained> {
         let eventDict = [String: Any]()
-        return APIRequest<HIAPIEventDated.Contained>(service: self, endpoint: "", body: eventDict, method: .POST)
+        return APIRequest<HIAPIEvent.Contained>(service: self, endpoint: "", body: eventDict, method: .POST)
     }
 
-    static func getAllEvents(active: Bool = false) -> APIRequest<HIAPIEventDated.Contained> {
+    static func getAllEvents(active: Bool = false) -> APIRequest<HIAPIEvent.Contained> {
         let paramaters = ["active": "\(active)"]
-        return APIRequest<HIAPIEventDated.Contained>(service: self, endpoint: "/", params: paramaters, method: .GET)
-    }
-
-    static func getAllEventsRaw(completed: @escaping ((_ events: [HIAPIEventDated]) -> Void)) {
-        let url = URL(string: "\(self.baseURL)/?Content-Type=application/json")!
-        let task = URLSession.shared.dataTask(with: url) {(data, _, _) in
-            guard let data = data else { return }
-            let jsonString = String(data: data, encoding: .utf8)!
-            print(jsonString)
-            if let jsonData = jsonString.data(using: .utf8) {
-                let eventsObject = try? JSONDecoder().decode(HIAPIEventsContainer.self, from: jsonData)
-                completed(eventsObject?.events ?? [])
-            }
-        }
-
-        task.resume()
+        return APIRequest<HIAPIEvent.Contained>(service: self, endpoint: "", params: paramaters, method: .GET)
     }
 
     // MARK: - Locations

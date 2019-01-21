@@ -28,7 +28,7 @@ final class HIAnnouncementService: HIBaseService {
     static func update(announcement: HIAPIAnnouncement) -> APIRequest<HIAPIAnnouncement.Contained> {
         var announcementDict = [String: Any]()
         announcementDict["title"]       = announcement.title
-        announcementDict["description"] = announcement.body
+        announcementDict["description"] = announcement.info
         return APIRequest<HIAPIAnnouncement.Contained>(service: self, endpoint: "", body: announcementDict, method: .PUT)
     }
 
@@ -41,7 +41,8 @@ final class HIAnnouncementService: HIBaseService {
     }
 
     static func delete(announcement: HIAPIAnnouncement) -> APIRequest<HIAPIAnnouncement.Contained> {
-        let params = [String: String]()
+        var params = [String: String]()
+        params["id"] = String(announcement.id)
         return APIRequest<HIAPIAnnouncement.Contained>(service: self, endpoint: "", params: params, method: .DELETE)
     }
 }
