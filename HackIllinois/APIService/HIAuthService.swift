@@ -32,4 +32,10 @@ final class HIAuthService: HIBaseService {
         return url
     }
 
+    static func getUserTokenFromCode(code: String) -> APIRequest<HIAPIUserToken> {
+        var body = [String: String]()
+        body["code"] = code
+        return APIRequest<HIAPIUserToken>(service: self, endpoint: "/code/github/?redirect_uri=https://test.hackillinois.org/auth/?isiOS=1", body: body, method: .POST)
+    }
+
 }

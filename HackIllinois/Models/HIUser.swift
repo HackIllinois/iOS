@@ -79,6 +79,8 @@ struct HIUser: Codable {
     var dietaryRestrictions: HIDietaryRestrictions?
 }
 
+
+
 // MARK: - DataConvertible
 extension HIUser: DataConvertible {
     init?(data: Data) {

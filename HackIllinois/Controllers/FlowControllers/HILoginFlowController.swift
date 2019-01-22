@@ -114,97 +114,27 @@ extension HILoginFlowController {
 
 // MARK: - Login Flow
 extension HILoginFlowController {
-    func getUserTokenFromCode(code: String) {
-        let json: [String: Any] = ["code": code]
-        let jsonData = try? JSONSerialization.data(withJSONObject: json)
-        // create post request
-        let url = URL(string: "https://api.hackillinois.org/auth/code/github/?redirect_uri=https://test.hackillinois.org/auth/?isiOS=1")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        // insert json data to the request
-        request.httpBody = jsonData
-        let task = URLSession.shared.dataTask(with: request) { data, _, error in
-            guard let data = data, error == nil else {
-                return
-            }
-            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            if let responseJSON = responseJSON as? [String: Any] {
-                if let token = responseJSON["token"] as? String {
-                    let tok = token.trimmingCharacters(in: .whitespacesAndNewlines)
-                    DispatchQueue.main.async {
-                        self.populateUserData(loginMethod: .github, token: tok, sender: self.loginSelectionViewController)
-                    }
-                }
-            }
-        }
-        task.resume()
-    }
-}
-
-// MARK: - Login Flow
-extension HILoginFlowController {
-    func getUserFromJSON(responseData: Data, loginMethod: HILoginMethod, token: String) -> HIUser? {
-        do {
-            let json = try JSONSerialization.jsonObject(with: responseData, options: JSONSerialization.ReadingOptions.allowFragments)
-            var id = 0
-            var email = ""
-            var firstName = ""
-            var lastName = ""
-            if let dictionary = json as? [String: Any] {
-                if let dictId = dictionary["id"] as? Int {
-                    // access individual value in dictionary
-                    id = dictId
-                }
-                if let dictEmail = dictionary["email"] as? String {
-                    // access individual value in dictionary
-                    email = dictEmail
-                }
-                if let dictFirstName = dictionary["firstName"] as? String {
-                    // access individual value in dictionary
-                    firstName = dictFirstName
-                }
-                if let dictLastName = dictionary["lastName"] as? String {
-                    // access individual value in dictionary
-                    lastName = dictLastName
-                }
-            }
-            return HIUser(
-                loginMethod: loginMethod,
-                permissions: HIUserPermissions(rawValue: "ATTENDEE")!,
-                token: token,
-                identifier: email,
-                isActive: true,
-                id: id,
-                name: firstName + " " + lastName,
-                dietaryRestrictions: nil
-            )
-        } catch { return nil }
-    }
     func populateUserData(loginMethod: HILoginMethod, token: String, sender: HIBaseViewController) {
-        var request = URLRequest(url: URL(string: "https://api.hackillinois.org/user/")!)
-        request.setValue(token, forHTTPHeaderField: "Authorization")
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        URLSession.shared.dataTask(with: request) { data, _, _ in
-            if let responseData = data {
-                var user = self.getUserFromJSON(responseData: responseData, loginMethod: loginMethod, token: token)
-                HIRegistrationService.getAttendee(by: token, with: loginMethod)
-                    .onCompletion { result in
-                        switch result {
-                        case .success(let containedAttendee, _):
-                            let attendeeInfo = containedAttendee.data[0]
-                            let names = [attendeeInfo.firstName, attendeeInfo.lastName].compactMap { $0 } as [String]
-                            user?.name = names.joined(separator: " ")
-                            user?.dietaryRestrictions = attendeeInfo.diet
-                        case .failure:
-                            break
+        HIUserService.getUser(by: token, with: .github)
+            .onCompletion { result in
+                print(result)
+                print(token)
+                if case let .success(user, _) = result {
+                    HIRegistrationService.getAttendee(by: token, with: loginMethod)
+                        .onCompletion { result in
+                            print(result)
+                            if case .success(_, _) = result {
+                                DispatchQueue.main.async {
+                                    NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user as Any])
+                                }
+                            }
                         }
-                        DispatchQueue.main.async {
-                            NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user as Any])
-                        }
-                    }
-                    .launch()
+                        .authorize(with: HIApplicationStateController.shared.user)
+                        .launch()
+                }
             }
-            }.resume()
+            .authorize(with: HIApplicationStateController.shared.user)
+            .launch()
     }
 }
 
@@ -247,7 +177,16 @@ extension HILoginFlowController: HILoginSelectionViewControllerDelegate {
                     let code = queryItems.first(where: { $0.name == "code" })?.value,
                     code.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
                     DispatchQueue.main.async {
-                        self?.getUserTokenFromCode(code: code)
+                        HIAuthService.getUserTokenFromCode(code: code)
+                            .onCompletion { result in
+                                if case let .success(tok, _) = result {
+                                    DispatchQueue.main.async {
+                                        self?.populateUserData(loginMethod: .github, token: tok.token, sender: (self?.loginSelectionViewController)!)
+                                    }
+                                }
+                            }
+                            .authorize(with: HIApplicationStateController.shared.user)
+                            .launch()
                     }
                 }
                 if let error = error {
