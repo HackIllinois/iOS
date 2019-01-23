@@ -170,7 +170,7 @@ extension HIMenuController {
             menuOverlap.constant = view.safeAreaInsets.top
 
         case .closed:
-            menuHeight.constant = 0
+            menuHeight.constant = view.safeAreaInsets.top
             menuOverlap.constant = 0
         }
     }
