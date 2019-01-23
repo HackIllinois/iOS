@@ -18,11 +18,11 @@ public class Event: NSManagedObject {
     convenience init(context moc: NSManagedObjectContext, event: HIAPIEvent, locations: NSSet) {
         guard let entity = NSEntityDescription.entity(forEntityName: "Event", in: moc) else { fatalError() }
         self.init(entity: entity, insertInto: moc)
-        self.favorite = event.favorite
-        self.end = event.end
-        self.info = event.info
-        self.name = event.name
-        self.start = event.start
+        favorite = event.favorite
+        end = Date(timeIntervalSince1970: event.end)
+        info = event.info
+        name = event.name
+        start = Date(timeIntervalSince1970: event.start)
         self.locations = locations
     }
 }

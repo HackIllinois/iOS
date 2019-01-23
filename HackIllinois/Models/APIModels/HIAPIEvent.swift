@@ -13,41 +13,12 @@
 import Foundation
 import APIManager
 
-struct HIAPIEventReturnDataContainer<Model: Decodable>: Decodable, APIReturnable {
-    var events: [Model]
-
-    enum CodingKeys: CodingKey {
-        case events
-    }
-
-    public init(from data: Data) throws {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .formatted(Formatter.iso8601)
-        self = try decoder.decode(HIAPIEventReturnDataContainer.self, from: data)
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        do {
-            events = try container.decode([Model].self, forKey: .events)
-        } catch _ {
-            let singleDataValue = try container.decode(Model.self, forKey: .events)
-            events = [singleDataValue]
-        }
-    }
+struct HIAPIEventsContainer: Codable, APIReturnable {
+    let events: [HIAPIEvent]
 }
 
-struct HIAPIEventsContainer: Codable {
-
-    let events: [HIAPIEventDated]
-
-    private enum CodingKeys: String, CodingKey {
-        case events
-    }
-}
-
-struct HIAPIEventDated: Codable {
-    typealias Contained = HIAPIEventReturnDataContainer<HIAPIEventDated>
+struct HIAPIEvent: Codable, APIReturnable {
+    typealias Contained = HIAPIEventsContainer
 
     private enum CodingKeys: String, CodingKey {
         case name
@@ -71,31 +42,6 @@ struct HIAPIEventDated: Codable {
     var sponsor: String
     var latitude: Double
     var longitude: Double
-}
-
-struct HIAPIEvent {
-
-    var favorite = false
-    var name: String
-    var info: String
-    var end: Date
-    var start: Date
-    var eventType: String
-    var sponsor: String
-    var latitude: Double
-    var longitude: Double
-
-    init(favorite: Bool, name: String, info: String, end: Date, start: Date, eventType: String, sponsor: String, latitude: Double, longitude: Double) {
-        self.favorite = favorite
-        self.name = name
-        self.info = info
-        self.end = end
-        self.start = start
-        self.eventType = eventType
-        self.sponsor = sponsor
-        self.latitude = latitude
-        self.longitude = longitude
-    }
 }
 
 struct HIAPILocation: Codable {

@@ -27,39 +27,34 @@ final class HIEventDataSource {
         }
         isRefreshing = true
 
-        HIEventService.getAllEventsRaw(completed: {events in
-            var actualEvents = [HIAPIEvent]()
-            for event in events {
-                let ev = HIAPIEvent(favorite: event.favorite,
-                                    name: event.name,
-                                    info: event.info,
-                                    end: Date(timeIntervalSince1970: event.end),
-                                    start: Date(timeIntervalSince1970: event.start),
-                                    eventType: event.eventType,
-                                    sponsor: event.sponsor,
-                                    latitude: event.latitude,
-                                    longitude: event.longitude)
-                actualEvents.append(ev)
-            }
-            DispatchQueue.main.sync {
-                do {
-                    let ctx = CoreDataController.shared.persistentContainer.viewContext
-                    try? ctx.fetch(locationsFetchRequest).forEach {
-                        ctx.delete($0)
-                    }
-                    try? ctx.fetch(eventsFetchRequest).forEach {
-                        ctx.delete($0)
-                    }
-                    var events = [Event]()
-                    actualEvents.forEach { event in
-                        events.append(Event(context: ctx, event: event, locations: NSSet()))
-                    }
-                    HILocalNotificationController.shared.scheduleNotifications(for: events)
+        HIEventService.getAllEvents()
+            .onCompletion { result in
+                switch result {
+                case .success(let containedEvents, _):
+                    let evs = containedEvents.events
+                    DispatchQueue.main.sync {
+                        do {
+                            let ctx = CoreDataController.shared.persistentContainer.viewContext
+                            try? ctx.fetch(locationsFetchRequest).forEach {
+                                ctx.delete($0)
+                            }
+                            try? ctx.fetch(eventsFetchRequest).forEach {
+                                ctx.delete($0)
+                            }
+                            var events = [Event]()
+                            evs.forEach { event in
+                                events.append(Event(context: ctx, event: event, locations: NSSet()))
+                            }
+                            HILocalNotificationController.shared.scheduleNotifications(for: events)
 
-                    isRefreshing = false
+                            isRefreshing = false
+                        }
+                    }
+                case .failure:
+                    break
                 }
             }
-        })
+            .launch()
     }
 
     static private func setEventNotifications(containedLocations: HIAPILocation.Contained,
