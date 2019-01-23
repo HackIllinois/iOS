@@ -68,18 +68,24 @@ enum HIDietaryRestrictions: String, Codable {
 }
 
 struct HIUser: Codable {
+    init(loginMethod: HILoginMethod, permissions: HIUserPermissions?, token: String, identifier: String, isActive: Bool, id: String) {
+        self.loginMethod = loginMethod
+        self.permissions = (permissions != nil) ? permissions! : HIUserPermissions.guest
+        self.token = token
+        self.identifier = identifier
+        self.isActive = isActive
+        self.id = id
+    }
     var loginMethod: HILoginMethod
     var permissions: HIUserPermissions
     var token: String
     var identifier: String
     var isActive: Bool
-    var id: Int
+    var id: String
 
     var name: String?
     var dietaryRestrictions: HIDietaryRestrictions?
 }
-
-
 
 // MARK: - DataConvertible
 extension HIUser: DataConvertible {

@@ -28,7 +28,12 @@ final class HIAuthService: HIBaseService {
     }
 
     static func githubLoginURL() -> URL {
-        guard let url = URL(string: baseURL + "?isMobile=1") else { fatalError() }
+        guard let url = URL(string: baseURL + "/github/?redirect_uri=https://test.hackillinois.org/auth/?isiOS=1") else { fatalError() }
+        return url
+    }
+
+    static func oauthCallbackURL() -> URL {
+        guard let url = URL(string: "https://test.hackillinois.org/auth/?isiOS=1") else { fatalError() }
         return url
     }
 

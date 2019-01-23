@@ -117,16 +117,25 @@ extension HILoginFlowController {
     func populateUserData(loginMethod: HILoginMethod, token: String, sender: HIBaseViewController) {
         HIUserService.getUser(by: token, with: .github)
             .onCompletion { result in
-                print(result)
-                print(token)
-                if case let .success(user, _) = result {
+                if case let .success(returnedUser, _) = result {
+                    var user = HIUser(loginMethod: loginMethod,
+                                      permissions: nil,
+                                      token: token,
+                                      identifier: returnedUser.email,
+                                      isActive: true,
+                                      id: returnedUser.id)
                     HIRegistrationService.getAttendee(by: token, with: loginMethod)
                         .onCompletion { result in
-                            print(result)
-                            if case .success(_, _) = result {
-                                DispatchQueue.main.async {
-                                    NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user as Any])
-                                }
+                            switch result {
+                            case .success(let returnedAttendee, _):
+                                let names = [returnedAttendee.firstName, returnedAttendee.lastName].compactMap { $0 } as [String]
+                                user.name = names.joined(separator: " ")
+                                user.dietaryRestrictions = returnedAttendee.diet
+                            case .failure:
+                                break
+                            }
+                            DispatchQueue.main.async {
+                                NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
                             }
                         }
                         .authorize(with: HIApplicationStateController.shared.user)
@@ -170,7 +179,8 @@ extension HILoginFlowController: HILoginSelectionViewControllerDelegate {
                                       withUserInfo info: String?) {
         switch selection {
         case .github:
-            loginSession = SFAuthenticationSession(url: URL(string: "https://api.hackillinois.org/auth/github/?redirect_uri=https://test.hackillinois.org/auth/?isiOS=1")!, callbackURLScheme: "https://test.hackillinois.org/auth/?isiOS=1") { [weak self] (url, error) in
+            loginSession = SFAuthenticationSession(url: HIAuthService.githubLoginURL(),
+                                                   callbackURLScheme: HIAuthService.oauthCallbackURL().absoluteString) { [weak self] (url, error) in
                 if let url = url,
                     let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
                     let queryItems = components.queryItems,

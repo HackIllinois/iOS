@@ -18,7 +18,7 @@ final class HIRegistrationService: HIBaseService {
         return super.baseURL + "/registration/"
     }
 
-    static func getAttendee(by token: String, with loginMethod: HILoginMethod) -> APIRequest<HIAPIAttendee.Contained> {
+    static func getAttendee(by token: String, with loginMethod: HILoginMethod) -> APIRequest<HIAPIAttendee> {
         var headers = HTTPHeaders()
         switch loginMethod {
         case .github:
@@ -26,6 +26,6 @@ final class HIRegistrationService: HIBaseService {
         case .userPass:
             headers["Authorization"] = token
         }
-        return APIRequest<HIAPIAttendee.Contained>(service: self, endpoint: "attendee/", headers: headers, method: .GET)
+        return APIRequest<HIAPIAttendee>(service: self, endpoint: "attendee/", headers: headers, method: .GET)
     }
 }

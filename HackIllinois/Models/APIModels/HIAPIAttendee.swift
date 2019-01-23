@@ -11,11 +11,30 @@
 //
 
 import Foundation
+import APIManager
 
-struct HIAPIAttendee: Codable {
-    typealias Contained = HIAPIReturnDataContainer<HIAPIAttendee>
-
-    let firstName: String
-    let lastName: String
-    let diet: HIDietaryRestrictions
+struct HIAPIAttendee: Codable, APIReturnable {
+    var id: String
+    var firstName: String?
+    var lastName: String?
+    var email: String
+    var shirtSize: String
+    var diet: HIDietaryRestrictions?
+    var age: Int16
+    var graduationYear: Int16
+    var transportation: String
+    var school: String
+    var major: String
+    var gender: String
+    var professionalInterest: String?
+    var github: String?
+    var linkedin: String?
+    var interests: [String]?
+    var isBeginner: Bool?
+    var isPrivate: Bool?
+    var phone: String
+    var longforms: [[String: String]]?
+    var extraInfos: [[String: String]]?
+    var osContributors: [[String: String]]?
+    var collaborators: [[String: String]]?
 }
