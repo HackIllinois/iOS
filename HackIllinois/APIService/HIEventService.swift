@@ -41,19 +41,25 @@ final class HIEventService: HIBaseService {
     }
 
     // MARK: - Favorties
-    static func favortieBy(id: Int) -> APIRequest<HIAPIFavorite.Contained> {
+    static func favoriteBy(token: String, name: String) -> APIRequest<HIAPIFavorite> {
+        var headers = HTTPHeaders()
+        headers["Authorization"] = token
         var body = HTTPBody()
-        body["eventId"] = id
-        return APIRequest<HIAPIFavorite.Contained>(service: self, endpoint: "/favorite", body: body, method: .POST)
+        body["eventName"] = name
+        return APIRequest<HIAPIFavorite>(service: self, endpoint: "/favorite/add/", body: body, headers: headers, method: .POST)
     }
 
-    static func unfavortieBy(id: Int) -> APIRequest<HIAPISuccessContainer> {
+    static func unfavoriteBy(token: String, name: String) -> APIRequest<HIAPIFavorite> {
+        var headers = HTTPHeaders()
+        headers["Authorization"] = token
         var body = HTTPBody()
-        body["eventId"] = id
-        return APIRequest<HIAPISuccessContainer>(service: self, endpoint: "/favorite", body: body, method: .DELETE)
+        body["eventName"] = name
+        return APIRequest<HIAPIFavorite>(service: self, endpoint: "/favorite/remove/", body: body, headers: headers, method: .POST)
     }
 
-    static func getAllFavorites() -> APIRequest<HIAPIFavorite.Contained> {
-        return APIRequest<HIAPIFavorite.Contained>(service: self, endpoint: "/favorite", method: .GET)
+    static func getAllFavorites(token: String) -> APIRequest<HIAPIFavorite> {
+        var headers = HTTPHeaders()
+        headers["Authorization"] = token
+        return APIRequest<HIAPIFavorite>(service: self, endpoint: "/favorite/", headers: headers, method: .GET)
     }
 }

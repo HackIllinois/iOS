@@ -13,6 +13,7 @@
 import Foundation
 import UIKit
 import MapKit
+import SwiftKeychainAccess
 
 class HIEventDetailViewController: HIBaseViewController {
     // MARK: - Properties
@@ -32,40 +33,53 @@ class HIEventDetailViewController: HIBaseViewController {
 extension HIEventDetailViewController {
     @objc func didSelectFavoriteButton(_ sender: HIButton) {
         guard let isFavorite = sender.isActive, let event = event else { return }
+        
+        var currUser: HIUser?
+        for key in Keychain.default.allKeys() {
+            guard let user = Keychain.default.retrieve(HIUser.self, forKey: key) else {
+                Keychain.default.removeObject(forKey: key)
+                continue
+            }
+            if user.isActive {
+                currUser = user
+            }
+        }
 
         if isFavorite {
-            HIEventService.unfavortieBy(id: Int(event.id))
+            if let currentUser = currUser {
+                HIEventService.unfavoriteBy(token: currentUser.token, name: event.name)
+                    .onCompletion { result in
+                        switch result {
+                        case .success:
+                            DispatchQueue.main.async {
+                                HILocalNotificationController.shared.unscheduleNotification(for: event)
+                                event.favorite = false
+                                sender.setToggle(active: event.favorite)
+                            }
+                        case .failure(let error):
+                            print(error, error.localizedDescription)
+                        }
+                    }
+                    .launch()
+            }
+
+        } else {
+            if let currentUser = currUser {
+                HIEventService.favoriteBy(token: currentUser.token, name: event.name)
                 .onCompletion { result in
                     switch result {
                     case .success:
                         DispatchQueue.main.async {
-                            HILocalNotificationController.shared.unscheduleNotification(for: event)
-                            event.favorite = false
+                            HILocalNotificationController.shared.scheduleNotification(for: event)
+                            event.favorite = true
                             sender.setToggle(active: event.favorite)
                         }
                     case .failure(let error):
                         print(error, error.localizedDescription)
                     }
                 }
-                .authorize(with: HIApplicationStateController.shared.user)
                 .launch()
-
-        } else {
-            HIEventService.favortieBy(id: Int(event.id))
-            .onCompletion { result in
-                switch result {
-                case .success:
-                    DispatchQueue.main.async {
-                        HILocalNotificationController.shared.scheduleNotification(for: event)
-                        event.favorite = true
-                        sender.setToggle(active: event.favorite)
-                    }
-                case .failure(let error):
-                    print(error, error.localizedDescription)
-                }
             }
-            .authorize(with: HIApplicationStateController.shared.user)
-            .launch()
         }
     }
 }

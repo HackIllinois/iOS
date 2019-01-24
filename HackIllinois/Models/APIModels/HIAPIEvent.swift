@@ -13,7 +13,7 @@
 import Foundation
 import APIManager
 
-struct HIAPIEventsContainer: Codable, APIReturnable {
+struct HIAPIEventsContainer: Decodable, APIReturnable {
     let events: [HIAPIEvent]
 }
 
@@ -53,10 +53,7 @@ struct HIAPILocation: Codable {
     var latitude: Double
 }
 
-struct HIAPIFavorite: Codable {
-    typealias Contained = HIAPIReturnDataContainer<HIAPIFavorite>
-
-    var id: Int16
-    var userId: Int16
-    var eventId: Int16
+struct HIAPIFavorite: Codable, APIReturnable {
+    let events: [String]
+    let id: String
 }

@@ -12,6 +12,7 @@
 
 import Foundation
 import CoreData
+import SwiftKeychainAccess
 
 final class HIEventDataSource {
 
@@ -27,31 +28,62 @@ final class HIEventDataSource {
         }
         isRefreshing = true
 
+        var currUser: HIUser?
+
+        for key in Keychain.default.allKeys() {
+            guard let user = Keychain.default.retrieve(HIUser.self, forKey: key) else {
+                Keychain.default.removeObject(forKey: key)
+                continue
+            }
+            if user.isActive {
+                currUser = user
+            }
+        }
+
         HIEventService.getAllEvents()
             .onCompletion { result in
                 switch result {
                 case .success(let containedEvents, _):
-                    let evs = containedEvents.events
-                    DispatchQueue.main.sync {
-                        do {
-                            let ctx = CoreDataController.shared.persistentContainer.viewContext
-                            try? ctx.fetch(locationsFetchRequest).forEach {
-                                ctx.delete($0)
-                            }
-                            try? ctx.fetch(eventsFetchRequest).forEach {
-                                ctx.delete($0)
-                            }
-                            var events = [Event]()
-                            evs.forEach { event in
-                                events.append(Event(context: ctx, event: event, locations: NSSet()))
-                            }
-                            HILocalNotificationController.shared.scheduleNotifications(for: events)
+                    if let currentUser = currUser {
+                        HIEventService.getAllFavorites(token: currentUser.token)
+                            .onCompletion { result in
+                                print("GETALLFAV")
+                                print(result)
+                                switch result {
+                                case .success(let containedFavorites, _):
+                                    let evs = containedEvents.events
+                                    DispatchQueue.main.sync {
+                                        do {
+                                            let ctx = CoreDataController.shared.persistentContainer.viewContext
+                                            try? ctx.fetch(locationsFetchRequest).forEach {
+                                                ctx.delete($0)
+                                            }
+                                            try? ctx.fetch(eventsFetchRequest).forEach {
+                                                ctx.delete($0)
+                                            }
+                                            var events = [Event]()
+                                            evs.forEach { event in
+                                                events.append(Event(context: ctx, event: event, locations: NSSet()))
+                                            }
+                                            HILocalNotificationController.shared.scheduleNotifications(for: events)
 
-                            isRefreshing = false
-                        }
+                                            isRefreshing = false
+                                        }
+                                    }
+                                    var updatedEvents = [HIAPIEvent]()
+                                    containedEvents.events.forEach { event in
+                                        var event = event
+                                        event.favorite = containedFavorites.events.map { $0 }.contains(event.name)
+                                        updatedEvents.append(event)
+                                    }
+                                case .failure:
+                                    isRefreshing = false
+                                }
+                            }
+                            .launch()
                     }
                 case .failure:
-                    break
+                    isRefreshing = false
                 }
             }
             .launch()

@@ -12,6 +12,7 @@
 
 import Foundation
 import UIKit
+import SwiftKeychainAccess
 
 class HIEventListViewController: HIBaseViewController {
     let eventDetailViewController = HIEventDetailViewController()
@@ -69,44 +70,57 @@ extension HIEventListViewController: HIEventCellDelegate {
         guard let indexPath = eventCell.indexPath,
             let isFavorite = eventCell.favoritedButton.isActive,
             let event = _fetchedResultsController?.object(at: indexPath) as? Event else { return }
+        
+        var currUser: HIUser?
+        for key in Keychain.default.allKeys() {
+            guard let user = Keychain.default.retrieve(HIUser.self, forKey: key) else {
+                Keychain.default.removeObject(forKey: key)
+                continue
+            }
+            if user.isActive {
+                currUser = user
+            }
+        }
 
         if isFavorite {
-            HIEventService.unfavortieBy(id: Int(event.id))
+            if let currentUser = currUser {
+                HIEventService.unfavoriteBy(token: currentUser.token, name: event.name)
+                    .onCompletion { result in
+                        switch result {
+                        case .success:
+                            DispatchQueue.main.async {
+                                HILocalNotificationController.shared.unscheduleNotification(for: event)
+                                event.favorite = false
+    //                            if eventCell.indexPath == indexPath {
+    //                                eventCell.setActive(event.favorite)
+    //                            }
+                            }
+                        case .failure(let error):
+                            print(error, error.localizedDescription)
+                        }
+                    }
+                    .launch()
+            }
+
+        } else {
+            if let currentUser = currUser {
+                HIEventService.favoriteBy(token: currentUser.token, name: event.name)
                 .onCompletion { result in
                     switch result {
                     case .success:
                         DispatchQueue.main.async {
-                            HILocalNotificationController.shared.unscheduleNotification(for: event)
-                            event.favorite = false
-//                            if eventCell.indexPath == indexPath {
-//                                eventCell.setActive(event.favorite)
-//                            }
+                            HILocalNotificationController.shared.scheduleNotification(for: event)
+                            event.favorite = true
+    //                        if eventCell.indexPath == indexPath {
+    //                            eventCell.setActive(event.favorite)
+    //                        }
                         }
                     case .failure(let error):
                         print(error, error.localizedDescription)
                     }
                 }
-                .authorize(with: HIApplicationStateController.shared.user)
                 .launch()
-
-        } else {
-            HIEventService.favortieBy(id: Int(event.id))
-            .onCompletion { result in
-                switch result {
-                case .success:
-                    DispatchQueue.main.async {
-                        HILocalNotificationController.shared.scheduleNotification(for: event)
-                        event.favorite = true
-//                        if eventCell.indexPath == indexPath {
-//                            eventCell.setActive(event.favorite)
-//                        }
-                    }
-                case .failure(let error):
-                    print(error, error.localizedDescription)
-                }
             }
-            .authorize(with: HIApplicationStateController.shared.user)
-            .launch()
         }
     }
 }
