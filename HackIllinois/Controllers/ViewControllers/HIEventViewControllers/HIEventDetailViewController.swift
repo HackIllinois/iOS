@@ -33,7 +33,7 @@ class HIEventDetailViewController: HIBaseViewController {
 extension HIEventDetailViewController {
     @objc func didSelectFavoriteButton(_ sender: HIButton) {
         guard let isFavorite = sender.isActive, let event = event else { return }
-        
+
         if isFavorite {
             HIEventService.unfavoriteBy(name: event.name)
                 .onCompletion { result in
