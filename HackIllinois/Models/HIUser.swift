@@ -101,9 +101,9 @@ extension HIUser: APIAuthorization {
         var headers = HTTPHeaders()
         switch loginMethod {
         case .github:
-            headers["Authorization"] = "Bearer \(token)"
+            headers["Authorization"] = token
         case .userPass:
-            headers["Authorization"] = "Basic \(token)"
+            headers["Authorization"] = token
         }
         return headers
     }
