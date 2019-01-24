@@ -167,7 +167,7 @@ extension HIMenuController {
         switch state {
         case .open:
             menuHeight.constant = menuItemsHeight.constant + 11 + 28 + view.safeAreaInsets.top
-            menuOverlap.constant = view.safeAreaInsets.top
+            menuOverlap.constant = 0
 
         case .closed:
             menuHeight.constant = view.safeAreaInsets.top
