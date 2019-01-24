@@ -81,7 +81,7 @@ extension HIUserDetailViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let user = HIApplicationStateController.shared.user,
-            let url = URL(string: "hackillinois://qrcode/user?id=\(user.id)&identifier=\(user.identifier)") else { return }
+            let url = URL(string: "hackillinois://qrcode/user?id=\(user.id)&identifier=\(user)") else { return }
         view.layoutIfNeeded()
         let frame = qrImageView.frame.height
         DispatchQueue.global(qos: .userInitiated).async {
@@ -90,8 +90,8 @@ extension HIUserDetailViewController {
                 self.qrImageView.image = qrImage
             }
         }
-        userNameLabel.text = (user.name ?? user.identifier).uppercased()
-        userInfoLabel.text = user.dietaryRestrictions?.displayText ?? "UNKNOWN DIETARY RESTRICTIONS"
+        userNameLabel.text = (user.firstName).uppercased()
+        userInfoLabel.text = user.dietaryRestrictions.displayText
         setupPass()
     }
 }
@@ -102,7 +102,7 @@ extension HIUserDetailViewController {
         guard PKPassLibrary.isPassLibraryAvailable(),
             let user = HIApplicationStateController.shared.user,
             !UserDefaults.standard.bool(forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)") else { return }
-        let passString = "hackillinois://qrcode/user?id=\(user.id)&identifier=\(user.identifier)"
+        let passString = "hackillinois://qrcode/user?id=\(user.id)&identifier=\(user.id)"
         HIPassService.getPass(with: passString)
         .onCompletion { result in
             do {

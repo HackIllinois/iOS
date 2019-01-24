@@ -20,8 +20,6 @@ class HILoginFlowController: UIViewController {
     // MARK: - Properties
     let animationView = LOTAnimationView(name: "intro")
     var shouldDisplayAnimationOnNextAppearance = true
-    var userPassRequest: APIRequest<HIAPIUserAuth.Contained>?
-    var keychainContents = [String]()
 
     // MARK: Status Bar
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
@@ -43,7 +41,6 @@ class HILoginFlowController: UIViewController {
     // MARK: ViewControllers
     lazy var navController = UINavigationController(rootViewController: loginSelectionViewController)
     lazy var loginSelectionViewController = HILoginSelectionViewController(delegate: self)
-    lazy var userPassLoginViewController = HIUserPassLoginViewController(delegate: self)
 
     // MARK: - Init
     convenience init() {
@@ -85,7 +82,6 @@ extension HILoginFlowController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        refreshKeychainContents()
         if shouldDisplayAnimationOnNextAppearance {
             animationView.contentMode = .scaleAspectFill
             animationView.frame = view.frame
@@ -113,166 +109,123 @@ extension HILoginFlowController {
 }
 
 // MARK: - Login Flow
-extension HILoginFlowController {
-    func populateUserData(loginMethod: HILoginMethod, token: String, sender: HIBaseViewController) {
-        HIUserService.getUser(by: token, with: loginMethod)
-        .onCompletion { result in
-            switch result {
-            case .success(let containedUser, _):
-                let userInfo = containedUser.data[0]
-                var user = HIUser(
-                    loginMethod: loginMethod,
-                    permissions: userInfo.roles.map { $0.permissions }.reduce(.guest, max),
-                    token: token,
-                    identifier: userInfo.info.email,
-                    isActive: true,
-                    id: userInfo.info.id,
-                    name: nil,
-                    dietaryRestrictions: nil
-                )
-
-                HIRegistrationService.getAttendee(by: token, with: loginMethod)
-                .onCompletion { result in
-                    switch result {
-                    case .success(let containedAttendee, _):
-                        let attendeeInfo = containedAttendee.data[0]
-                        let names = [attendeeInfo.firstName, attendeeInfo.lastName].compactMap { $0 } as [String]
-                        user.name = names.joined(separator: " ")
-                        user.dietaryRestrictions = attendeeInfo.diet
-
-                    case .failure:
-                        break
-                    }
-
-                    DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
-                    }
+private extension HILoginFlowController {
+    private func attemptOAuthLogin(provider: HIAuthService.OAuthProvider, sender: HIBaseViewController) {
+        let loginURL = HIAuthService.oauthURL(provider: provider)
+        loginSession = SFAuthenticationSession(url: loginURL, callbackURLScheme: nil) { [weak self] (url, error) in
+            if let url = url,
+                let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
+                let queryItems = components.queryItems,
+                let code = queryItems.first(where: { $0.name == "code" })?.value,
+                code.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
+                self?.exchangeOAuthCodeForAPIToken(provider: provider, code: code, sender: sender)
+            } else if let error = error, (error as? SFAuthenticationError)?.code == SFAuthenticationError.canceledLogin {
+                // do nothing
+            } else {
+                DispatchQueue.main.async {
+                    sender.presentErrorController(title: "Authentication Failed", message: nil, dismissParentOnCompletion: false)
                 }
-                .launch()
+            }
+        }
+        loginSession?.start()
+    }
 
-            case .failure:
-                sender.presentErrorController(title: "Authentication Failed", message: nil, dismissParentOnCompletion: false)
+    private func exchangeOAuthCodeForAPIToken(provider: HIAuthService.OAuthProvider, code: String, sender: HIBaseViewController) {
+        HIAuthService.getAPIToken(provider: provider, code: code)
+        .onCompletion { [weak self] result in
+            do {
+                let (apiToken, _) = try result.get()
+                self?.populateUserData(provider: provider, sender: sender, buildingUser:
+                    HIUser(
+                        provider: provider,
+                        permissions: .user,
+                        token: apiToken.token,
+                        id: "",
+                        username: "",
+                        firstName: "",
+                        lastName: "",
+                        email: "",
+                        dietaryRestrictions: .none
+                    )
+                )
+            } catch {
+                DispatchQueue.main.async {
+                    sender.presentErrorController(title: "Authentication Failed", message: nil, dismissParentOnCompletion: false)
+                }
             }
         }
         .launch()
     }
-}
 
-// MARK: - Keychain
-extension HILoginFlowController {
-    func refreshKeychainContents() {
-        keychainContents = Keychain.default.allKeys().sorted { $0 < $1 }
-        loginSelectionViewController.tableView?.reloadData()
+    private func populateUserData(provider: HIAuthService.OAuthProvider, sender: HIBaseViewController, buildingUser user: HIUser) {
+        HIUserService.getUser()
+        .onCompletion { [weak self] result in
+            do {
+                let (apiUser, _) = try result.get()
+                print(apiUser)
+                var user = user
+                user.id = apiUser.id
+                user.username = apiUser.username
+                user.firstName = apiUser.firstName
+                user.lastName = apiUser.lastName
+                user.email = apiUser.email
+                self?.populateRoleData(provider: provider, sender: sender, buildingUser: user)
+            } catch {
+                DispatchQueue.main.async {
+                    sender.presentErrorController(title: "Authentication Failed", message: nil, dismissParentOnCompletion: false)
+                }
+            }
+        }
+        .authorize(with: user)
+        .launch()
     }
 
-    func keychainRetrievalSucceeded(user: HIUser) {
-        NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: [
-            "user": user
-        ])
+    private func populateRoleData(provider: HIAuthService.OAuthProvider, sender: HIBaseViewController, buildingUser user: HIUser) {
+        HIAuthService.getRoles()
+        .onCompletion { [weak self] result in
+            do {
+                let (apiRoles, _) = try result.get()
+                print(apiRoles)
+                var user = user
+                // TODO: test with admin/staff account
+                user.permissions = apiRoles.roles.reduce(.user, max)
+                self?.populateRegistrationData(provider: provider, sender: sender, buildingUser: user)
+            } catch {
+                DispatchQueue.main.async {
+                    sender.presentErrorController(title: "Authentication Failed", message: nil, dismissParentOnCompletion: false)
+                }
+            }
+        }
+        .authorize(with: user)
+        .launch()
     }
-    func keychainRetrievalFailed(id: String) {
-        Keychain.default.removeObject(forKey: id)
-        refreshKeychainContents()
-        let alert = UIAlertController(title: "Login Failed", message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+
+    private func populateRegistrationData(provider: HIAuthService.OAuthProvider, sender: HIBaseViewController, buildingUser user: HIUser) {
+        //                HIRegistrationService.getAttendee(by: token)
+        //                .onCompletion { result in
+        //                    switch result {
+        //                    case .success(let containedAttendee, _):
+        //                        let attendeeInfo = containedAttendee.data[0]
+        //                        let names = [attendeeInfo.firstName, attendeeInfo.lastName].compactMap { $0 } as [String]
+        //                        user.name = names.joined(separator: " ")
+        //                        user.dietaryRestrictions = attendeeInfo.diet
+        //
+        //                    case .failure:
+        //                        break
+        //                    }
+        //
+        //                    DispatchQueue.main.async {
+        //                        NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
+        //                    }
+        //                }
+        //                .launch()
     }
 }
 
 // MARK: - HILoginSelectionViewControllerDelegate
 extension HILoginFlowController: HILoginSelectionViewControllerDelegate {
-    func loginSelectionViewControllerKeychainAccounts(_ loginSelectionViewController: HILoginSelectionViewController) -> [String] {
-        return keychainContents
-    }
-
     func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController,
-                                      didMakeLoginSelection selection: HILoginSelection,
-                                      withUserInfo info: String?) {
-        switch selection {
-        case .github:
-            print("URL::\(HIAuthService.githubLoginURL())")
-            loginSession = SFAuthenticationSession(url: HIAuthService.githubLoginURL(), callbackURLScheme: nil) { [weak self] (url, error) in
-
-                if let url = url,
-                    let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
-                    let queryItems = components.queryItems,
-                    let token = queryItems.first(where: { $0.name == "token" })?.value,
-                    token.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
-
-                    DispatchQueue.main.async {
-                        self?.populateUserData(loginMethod: .github, token: token, sender: loginSelectionViewController)
-                    }
-                }
-
-                if let error = error {
-                    if (error as? SFAuthenticationError)?.code == SFAuthenticationError.canceledLogin {
-                        // do nothing
-                    } else {
-                        let alert = UIAlertController(title: "Authentication Failed", message: nil, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                        self?.present(alert, animated: true, completion: nil)
-                    }
-                }
-            }
-            loginSession?.start()
-
-        case .userPass:
-            navController.pushViewController(userPassLoginViewController, animated: true)
-
-        case .existing:
-            guard let identifier = info else { break }
-
-            if let user = Keychain.default.retrieve(HIUser.self, forKey: identifier) {
-                keychainRetrievalSucceeded(user: user)
-            } else {
-                keychainRetrievalFailed(id: identifier)
-            }
-        }
-    }
-}
-
-// MARK: - HIUserPassLoginViewControllerDelegate
-extension HILoginFlowController: HIUserPassLoginViewControllerDelegate {
-    func userPassLoginViewControllerDidSelectBackButton(_ userPassLoginViewController: HIUserPassLoginViewController) {
-        // FIX ME, @rauhul needs to release a new API-manager that exposes this property
-        // if userPassRequest?.state == .running {
-        //     userPassRequest?.cancel()
-        //     userPassRequest = nil
-        // }
-        navController.popViewController(animated: true)
-    }
-
-    func userPassLoginViewControllerDidSelectLoginButton(_ userPassLoginViewController: HIUserPassLoginViewController, forEmail email: String, andPassword password: String) {
-        userPassLoginViewController.stylizeFor(.currentlyPerformingLogin)
-
-        userPassRequest = HIAuthService.login(email: email, password: password)
-        .onCompletion { result in
-            switch result {
-            case .success(let containedAuth, _):
-                DispatchQueue.main.async { [weak self] in
-                    self?.populateUserData(loginMethod: .userPass, token: containedAuth.data[0].auth, sender: userPassLoginViewController)
-                    self?.userPassLoginViewController.stylizeFor(.readyToLogin)
-                }
-
-            case .failure(let error):
-                do {
-                    throw error
-                } catch DecodingError.dataCorrupted(let context) {
-                    print("DecodingError.dataCorrupted", context)
-                } catch DecodingError.keyNotFound(let key, let context) {
-                    print("DecodingError.keyNotFound", key, context)
-                } catch DecodingError.typeMismatch(let type, let context) {
-                    print("DecodingError.typeMismatch", type, context)
-                } catch {
-                    print(error)
-                }
-
-                DispatchQueue.main.async { [weak self] in
-                    self?.userPassLoginViewController.shakeWithError()
-                    self?.userPassLoginViewController.stylizeFor(.readyToLogin)
-                }
-            }
-        }
-        .launch()
+                                      didMakeLoginSelection selection: HIAuthService.OAuthProvider) {
+        attemptOAuthLogin(provider: selection, sender: loginSelectionViewController)
     }
 }

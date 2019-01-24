@@ -17,19 +17,29 @@ import SafariServices
 final class HIAuthService: HIBaseService {
 
     override static var baseURL: String {
-        return super.baseURL + "/auth"
+        return super.baseURL + "auth/"
     }
 
-    static func login(email: String, password: String) -> APIRequest<HIAPIUserAuth.Contained> {
-        var body = [String: String]()
-        body["email"]    = email
-        body["password"] = password
-        return APIRequest<HIAPIUserAuth.Contained>(service: self, endpoint: "", body: body, method: .POST)
+    enum OAuthProvider: String, Codable {
+        case github
+        case google
+        case linkedIn = "linkedin"
+
+        static let all: [OAuthProvider] = [.github, .google, .linkedIn]
     }
 
-    static func githubLoginURL() -> URL {
-        guard let url = URL(string: baseURL + "?isMobile=1") else { fatalError() }
+    static func oauthURL(provider: OAuthProvider) -> URL {
+        guard let url = URL(string: HIAuthService.baseURL + "\(provider.rawValue)/?redirect_uri=https://hackillinois.org/auth/?isiOS=1") else { fatalError() }
         return url
     }
 
+    static func getAPIToken(provider: OAuthProvider, code: String) -> APIRequest<HIAPIToken> {
+        var body = HTTPParameters()
+        body["code"] = code
+        return APIRequest<HIAPIToken>(service: self, endpoint: "code/\(provider.rawValue)/?redirect_uri=https://hackillinois.org/auth/?isiOS=1", body: body, method: .POST)
+    }
+
+    static func getRoles() -> APIRequest<HIAPIRoles> {
+        return APIRequest<HIAPIRoles>(service: self, endpoint: "roles/", method: .GET)
+    }
 }

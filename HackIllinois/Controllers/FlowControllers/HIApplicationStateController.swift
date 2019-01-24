@@ -68,20 +68,21 @@ extension HIApplicationStateController {
 
     }
 
+    // FIXME:
     func recoverUserIfPossible() {
-        for key in Keychain.default.allKeys() {
-            guard let user = Keychain.default.retrieve(HIUser.self, forKey: key) else {
-                Keychain.default.removeObject(forKey: key)
-                continue
-            }
-            if user.isActive {
-                if var user = self.user {
-                    user.isActive = false
-                    Keychain.default.store(user, forKey: user.identifier)
-                }
-                self.user = user
-            }
-        }
+//        for key in Keychain.default.allKeys() {
+//            guard let user = Keychain.default.retrieve(HIUser.self, forKey: key) else {
+//                Keychain.default.removeObject(forKey: key)
+//                continue
+//            }
+//            if user.isActive {
+//                if var user = self.user {
+//                    user.isActive = false
+//                    Keychain.default.store(user, forKey: user.identifier)
+//                }
+//                self.user = user
+//            }
+//        }
     }
 
     func viewControllersFor(user: HIUser) -> [UIViewController] {
@@ -91,35 +92,38 @@ extension HIApplicationStateController {
         viewControllers.append(HIAnnouncementsViewController())
         viewControllers.append(HIUserDetailViewController())
 
-        if [.volunteer, .mentor, .sponsor, .staff, .admin].contains(user.permissions) {
+        if [.mentor, .sponsor, .staff, .admin].contains(user.permissions) {
             viewControllers.append(HIScannerViewController())
         }
 
         return viewControllers
     }
 
+    // FIXME:
     @objc func loginUser(_ notification: Notification) {
         guard var user = notification.userInfo?["user"] as? HIUser else { return }
-        user.isActive = true
-        Keychain.default.store(user, forKey: user.identifier)
+//        user.isActive = true
+//        Keychain.default.store(user, forKey: user.identifier)
         self.user = user
         print("PERMISSIONS::\(user.permissions)")
 
         updateWindowViewController(animated: true)
     }
 
+    // FIXME:
     @objc func switchUser() {
         guard var user = user else { return }
-        user.isActive = false
-        Keychain.default.store(user, forKey: user.identifier)
+//        user.isActive = false
+//        Keychain.default.store(user, forKey: user.identifier)
         self.user = nil
 
         updateWindowViewController(animated: true)
     }
 
+    // FIXME:
     @objc func logoutUser() {
         guard let user = user else { return }
-        _ = Keychain.default.removeObject(forKey: user.identifier)
+//        _ = Keychain.default.removeObject(forKey: user.identifier)
         self.user = nil
 
         updateWindowViewController(animated: true)

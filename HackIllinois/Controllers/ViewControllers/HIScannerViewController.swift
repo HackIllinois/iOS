@@ -154,7 +154,7 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
         present(lookingUpUserAlertController, animated: true, completion: nil)
 
         switch user.permissions {
-        case .volunteer, .staff, .admin:
+        case .staff, .admin:
             trackUserBy(id: id)
         case .mentor, .sponsor:
             followUserBy(id: id)

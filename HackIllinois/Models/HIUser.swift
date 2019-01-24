@@ -14,35 +14,25 @@ import Foundation
 import SwiftKeychainAccess
 import APIManager
 
-enum HILoginMethod: Int, Codable {
-    case github
-    case userPass
-}
-
-enum HILoginSelection: Int {
-    case github
-    case userPass
-    case existing
-}
-
 enum HIUserPermissions: String, Codable, Comparable {
-    case guest = "GUEST"
-    case attendee = "ATTENDEE"
-    case volunteer = "VOLUNTEER"
-    case mentor = "MENTOR"
-    case sponsor = "SPONSOR"
-    case staff = "STAFF"
-    case admin = "ADMIN"
+
+    case user = "User"
+    case applicant = "Applicant"
+    case attendee = "Attendee"
+    case mentor = "Mentor"
+    case sponsor = "Sponsor"
+    case staff = "Staff"
+    case admin = "Admin"
 
     private var intValue: Int {
         switch self {
-        case .admin: return 5
-        case .staff: return 4
-        case .sponsor: return 3
-        case .mentor: return 2
-        case .volunteer: return 1
-        case .attendee: return 0
-        case .guest: return -1
+        case .admin: return 6
+        case .staff: return 5
+        case .sponsor: return 4
+        case .mentor: return 3
+        case .attendee: return 2
+        case .applicant: return 1
+        case .user: return 0
         }
     }
 
@@ -68,15 +58,19 @@ enum HIDietaryRestrictions: String, Codable {
 }
 
 struct HIUser: Codable {
-    var loginMethod: HILoginMethod
+    var provider: HIAuthService.OAuthProvider
     var permissions: HIUserPermissions
     var token: String
-    var identifier: String
-    var isActive: Bool
-    var id: Int
+    var id: String
+    var username: String
+    var firstName: String
+    var lastName: String
+    var email: String
+    var dietaryRestrictions: HIDietaryRestrictions
 
-    var name: String?
-    var dietaryRestrictions: HIDietaryRestrictions?
+    var qrInfo: String {
+        return "hackillinois://user?userid=\(id)"
+    }
 }
 
 // MARK: - DataConvertible
@@ -99,12 +93,7 @@ extension HIUser: DataConvertible {
 extension HIUser: APIAuthorization {
     public func headersFor<ReturnType>(request: APIRequest<ReturnType>) -> HTTPHeaders? {
         var headers = HTTPHeaders()
-        switch loginMethod {
-        case .github:
-            headers["Authorization"] = "Bearer \(token)"
-        case .userPass:
-            headers["Authorization"] = "Basic \(token)"
-        }
+        headers["Authorization"] = token
         return headers
     }
 }

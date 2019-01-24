@@ -10,41 +10,17 @@
 //  this license in a file with the distribution.
 //
 
+import APIManager
 import Foundation
 
-struct HIAPIUser: Codable {
-    typealias Contained = HIAPIReturnDataContainer<HIAPIUser>
+struct HIAPIUser: Codable, APIReturnable {
+    var id: String
+    var username: String
+    var firstName: String
+    var lastName: String
+    var email: String
+}
 
-    enum CodingKeys: String, CodingKey {
-        case info = "user"
-        case roles = "roles"
-    }
-
-    var info: Info
-    var roles: [Role]
-
-    struct Info: Codable {
-        var id: Int
-        var githubHandle: String?
-        var email: String
-    }
-
-    struct Role: Codable {
-
-        enum CodingKeys: String, CodingKey {
-            case permissions = "role"
-            case active = "active"
-        }
-
-        var permissions: HIUserPermissions
-        var active: Bool
-
-        init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-            let active = try container.decode(Int.self, forKey: .active)
-            self.active = active == 1 ? true : false
-            let role = try container.decode(String.self, forKey: .permissions)
-            permissions = HIUserPermissions(rawValue: role) ?? .attendee
-        }
-    }
+struct HIAPIRoles: Codable, APIReturnable {
+    var roles: [HIUserPermissions]
 }

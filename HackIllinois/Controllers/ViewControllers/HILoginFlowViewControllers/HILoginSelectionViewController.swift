@@ -14,20 +14,12 @@ import Foundation
 import UIKit
 
 protocol HILoginSelectionViewControllerDelegate: class {
-    func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HILoginSelection, withUserInfo info: String?)
-    func loginSelectionViewControllerKeychainAccounts(_ loginSelectionViewController: HILoginSelectionViewController) -> [String]
+    func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HIAuthService.OAuthProvider)
 }
 
 class HILoginSelectionViewController: HIBaseViewController {
     // MARK: - Properties
     weak var delegate: HILoginSelectionViewControllerDelegate?
-
-    var staticDataStore: [(loginMethod: HILoginSelection, displayText: String)] = [
-        (.github, "HACKER"),
-        (.userPass, "MENTOR"),
-        (.userPass, "STAFF"),
-        (.userPass, "VOLUNTEER")
-    ]
 
     // MARK: - Init
     convenience init(delegate: HILoginSelectionViewControllerDelegate) {
@@ -71,28 +63,17 @@ extension HILoginSelectionViewController {
 // MARK: - UITableViewDataSource
 extension HILoginSelectionViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        let keychainAccounts = delegate?.loginSelectionViewControllerKeychainAccounts(self).count ?? 0
-        return keychainAccounts > 0 ? 2 : 1
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return staticDataStore.count
-        default:
-            return delegate?.loginSelectionViewControllerKeychainAccounts(self).count ?? 0
-        }
+        return HIAuthService.OAuthProvider.all.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HILoginSelectionCell.identifier, for: indexPath)
         if let cell = cell as? HILoginSelectionCell {
-            switch indexPath.section {
-            case 0:
-                cell.titleLabel.text = staticDataStore[indexPath.row].displayText
-            default:
-                cell.titleLabel.text = delegate?.loginSelectionViewControllerKeychainAccounts(self)[indexPath.row].uppercased()
-            }
+            cell.titleLabel.text = HIAuthService.OAuthProvider.all[indexPath.row].rawValue.uppercased()
             if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
                 cell.separatorView.isHidden = true
             }
@@ -103,12 +84,7 @@ extension HILoginSelectionViewController {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HILoginSelectionHeader.identifier)
         if let header = header as? HILoginSelectionHeader {
-            switch section {
-            case 0:
-                header.titleLabel.text = "I AM A"
-            default:
-                header.titleLabel.text = "ACCOUNTS"
-            }
+            header.titleLabel.text = "LOGIN"
         }
         return header
     }
@@ -134,16 +110,8 @@ extension HILoginSelectionViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let delegate = delegate {
-            switch indexPath.section {
-            case 0:
-                let selection = staticDataStore[indexPath.row].loginMethod
-                delegate.loginSelectionViewController(self, didMakeLoginSelection: selection, withUserInfo: nil)
-
-            default:
-                let info = delegate.loginSelectionViewControllerKeychainAccounts(self)[indexPath.row]
-                delegate.loginSelectionViewController(self, didMakeLoginSelection: .existing, withUserInfo: info)
-
-            }
+            let selection = HIAuthService.OAuthProvider.all[indexPath.row]
+            delegate.loginSelectionViewController(self, didMakeLoginSelection: selection)
         }
         super.tableView(tableView, didSelectRowAt: indexPath)
     }
