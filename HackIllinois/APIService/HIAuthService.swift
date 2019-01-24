@@ -39,7 +39,7 @@ final class HIAuthService: HIBaseService {
         return APIRequest<HIAPIToken>(service: self, endpoint: "code/\(provider.rawValue)/?redirect_uri=https://hackillinois.org/auth/?isiOS=1", body: body, method: .POST)
     }
 
-    static func getRoles() -> APIRequest<HIAPIRoles> {
-        return APIRequest<HIAPIRoles>(service: self, endpoint: "roles/", method: .GET)
+    static func getRoles() -> APIRequest<HIAPIRolesContainer> {
+        return APIRequest<HIAPIRolesContainer>(service: self, endpoint: "roles/", method: .GET)
     }
 }

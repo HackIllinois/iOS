@@ -65,7 +65,6 @@ extension HIApplicationStateController {
         _ = Keychain.default.purge()
 
         UserDefaults.standard.set(true, forKey: "HIAPPLICATION_INSTALLED")
-
     }
 
     // FIXME:
@@ -92,7 +91,7 @@ extension HIApplicationStateController {
         viewControllers.append(HIAnnouncementsViewController())
         viewControllers.append(HIUserDetailViewController())
 
-        if [.mentor, .sponsor, .staff, .admin].contains(user.permissions) {
+        if !user.roles.intersection([.staff, .admin]).isEmpty {
             viewControllers.append(HIScannerViewController())
         }
 
@@ -105,8 +104,6 @@ extension HIApplicationStateController {
 //        user.isActive = true
 //        Keychain.default.store(user, forKey: user.identifier)
         self.user = user
-        print("PERMISSIONS::\(user.permissions)")
-
         updateWindowViewController(animated: true)
     }
 

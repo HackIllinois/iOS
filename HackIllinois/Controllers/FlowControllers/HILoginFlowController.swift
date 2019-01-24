@@ -35,10 +35,11 @@ class HILoginFlowController: UIViewController {
         return HIAppearance.current.preferredStatusBarStyle
     }
 
-    // keeps the login session from going out of scope during presentation
+    // prevents the login session from going out of scope during presentation
     var loginSession: SFAuthenticationSession?
 
     // MARK: ViewControllers
+    // FIME: remove
     lazy var navController = UINavigationController(rootViewController: loginSelectionViewController)
     lazy var loginSelectionViewController = HILoginSelectionViewController(delegate: self)
 
@@ -110,15 +111,17 @@ extension HILoginFlowController {
 
 // MARK: - Login Flow
 private extension HILoginFlowController {
-    private func attemptOAuthLogin(provider: HIAuthService.OAuthProvider, sender: HIBaseViewController) {
-        let loginURL = HIAuthService.oauthURL(provider: provider)
+    private func attemptOAuthLogin(buildingUser user: HIUser, sender: HIBaseViewController) {
+        let loginURL = HIAuthService.oauthURL(provider: user.provider)
         loginSession = SFAuthenticationSession(url: loginURL, callbackURLScheme: nil) { [weak self] (url, error) in
             if let url = url,
                 let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
                 let queryItems = components.queryItems,
                 let code = queryItems.first(where: { $0.name == "code" })?.value,
                 code.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
-                self?.exchangeOAuthCodeForAPIToken(provider: provider, code: code, sender: sender)
+                var user = user
+                user.oauthCode = code
+                self?.exchangeOAuthCodeForAPIToken(buildingUser: user, sender: sender)
             } else if let error = error, (error as? SFAuthenticationError)?.code == SFAuthenticationError.canceledLogin {
                 // do nothing
             } else {
@@ -130,24 +133,14 @@ private extension HILoginFlowController {
         loginSession?.start()
     }
 
-    private func exchangeOAuthCodeForAPIToken(provider: HIAuthService.OAuthProvider, code: String, sender: HIBaseViewController) {
-        HIAuthService.getAPIToken(provider: provider, code: code)
+    private func exchangeOAuthCodeForAPIToken(buildingUser user: HIUser, sender: HIBaseViewController) {
+        HIAuthService.getAPIToken(provider: user.provider, code: user.oauthCode)
         .onCompletion { [weak self] result in
             do {
                 let (apiToken, _) = try result.get()
-                self?.populateUserData(provider: provider, sender: sender, buildingUser:
-                    HIUser(
-                        provider: provider,
-                        permissions: .user,
-                        token: apiToken.token,
-                        id: "",
-                        username: "",
-                        firstName: "",
-                        lastName: "",
-                        email: "",
-                        dietaryRestrictions: .none
-                    )
-                )
+                var user = user
+                user.token = apiToken.token
+                self?.populateUserData(buildingUser: user, sender: sender)
             } catch {
                 DispatchQueue.main.async {
                     sender.presentErrorController(title: "Authentication Failed", message: nil, dismissParentOnCompletion: false)
@@ -157,19 +150,18 @@ private extension HILoginFlowController {
         .launch()
     }
 
-    private func populateUserData(provider: HIAuthService.OAuthProvider, sender: HIBaseViewController, buildingUser user: HIUser) {
+    private func populateUserData(buildingUser user: HIUser, sender: HIBaseViewController) {
         HIUserService.getUser()
         .onCompletion { [weak self] result in
             do {
                 let (apiUser, _) = try result.get()
-                print(apiUser)
                 var user = user
                 user.id = apiUser.id
                 user.username = apiUser.username
                 user.firstName = apiUser.firstName
                 user.lastName = apiUser.lastName
                 user.email = apiUser.email
-                self?.populateRoleData(provider: provider, sender: sender, buildingUser: user)
+                self?.populateRoleData(buildingUser: user, sender: sender)
             } catch {
                 DispatchQueue.main.async {
                     sender.presentErrorController(title: "Authentication Failed", message: nil, dismissParentOnCompletion: false)
@@ -180,16 +172,14 @@ private extension HILoginFlowController {
         .launch()
     }
 
-    private func populateRoleData(provider: HIAuthService.OAuthProvider, sender: HIBaseViewController, buildingUser user: HIUser) {
+    private func populateRoleData(buildingUser user: HIUser, sender: HIBaseViewController) {
         HIAuthService.getRoles()
         .onCompletion { [weak self] result in
             do {
-                let (apiRoles, _) = try result.get()
-                print(apiRoles)
+                let (apiRolesContainer, _) = try result.get()
                 var user = user
-                // TODO: test with admin/staff account
-                user.permissions = apiRoles.roles.reduce(.user, max)
-                self?.populateRegistrationData(provider: provider, sender: sender, buildingUser: user)
+                user.roles = apiRolesContainer.roles
+                self?.populateRegistrationData(buildingUser: user, sender: sender)
             } catch {
                 DispatchQueue.main.async {
                     sender.presentErrorController(title: "Authentication Failed", message: nil, dismissParentOnCompletion: false)
@@ -200,25 +190,24 @@ private extension HILoginFlowController {
         .launch()
     }
 
-    private func populateRegistrationData(provider: HIAuthService.OAuthProvider, sender: HIBaseViewController, buildingUser user: HIUser) {
-        //                HIRegistrationService.getAttendee(by: token)
-        //                .onCompletion { result in
-        //                    switch result {
-        //                    case .success(let containedAttendee, _):
-        //                        let attendeeInfo = containedAttendee.data[0]
-        //                        let names = [attendeeInfo.firstName, attendeeInfo.lastName].compactMap { $0 } as [String]
-        //                        user.name = names.joined(separator: " ")
-        //                        user.dietaryRestrictions = attendeeInfo.diet
-        //
-        //                    case .failure:
-        //                        break
-        //                    }
-        //
-        //                    DispatchQueue.main.async {
-        //                        NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
-        //                    }
-        //                }
-        //                .launch()
+    private func populateRegistrationData(buildingUser user: HIUser, sender: HIBaseViewController) {
+        HIRegistrationService.getAttendee()
+        .onCompletion { result in
+            do {
+                let (apiAttendeeContainer, _) = try result.get()
+                var user = user
+                user.dietaryRestrictions = apiAttendeeContainer.attendee.diet
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    sender.presentErrorController(title: "Authentication Failed", message: nil, dismissParentOnCompletion: false)
+                }
+            }
+        }
+        .authorize(with: user)
+        .launch()
     }
 }
 
@@ -226,6 +215,7 @@ private extension HILoginFlowController {
 extension HILoginFlowController: HILoginSelectionViewControllerDelegate {
     func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController,
                                       didMakeLoginSelection selection: HIAuthService.OAuthProvider) {
-        attemptOAuthLogin(provider: selection, sender: loginSelectionViewController)
+        let user = HIUser(provider: selection)
+        attemptOAuthLogin(buildingUser: user, sender: loginSelectionViewController)
     }
 }
