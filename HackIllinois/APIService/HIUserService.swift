@@ -15,17 +15,10 @@ import APIManager
 
 final class HIUserService: HIBaseService {
     override static var baseURL: String {
-        return super.baseURL + "/user"
+        return super.baseURL + "user/"
     }
 
-    static func getUser(by token: String, with loginMethod: HILoginMethod) -> APIRequest<HIAPIUser.Contained> {
-        var headers = HTTPHeaders()
-        switch loginMethod {
-        case .github:
-            headers["Authorization"] = "Bearer \(token)"
-        case .userPass:
-            headers["Authorization"] = "Basic \(token)"
-        }
-        return APIRequest<HIAPIUser.Contained>(service: self, endpoint: "", headers: headers, method: .GET)
+    static func getUser() -> APIRequest<HIAPIUser> {
+        return APIRequest<HIAPIUser>(service: self, endpoint: "", headers: headers, method: .GET)
     }
 }

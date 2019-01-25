@@ -16,17 +16,17 @@ import APIManager
 
 class HIBaseService: APIService {
     class var baseURL: String {
-        return "https://api.hackillinois.org"
+        return "https://api.hackillinois.org/"
     }
-
+    
     static var headers = ["Content-Type": "application/json"]
-
+    
     static var paramaters = ["client": "iOS"]
-
+    
     static func validate(statusCode: Int) throws {
         try hiValidate(statusCode: statusCode)
     }
-
+    
     class func hiValidate(statusCode: Int) throws {
         if !(200..<300).contains(statusCode) {
             let description = HTTPURLResponse.localizedString(forStatusCode: statusCode)

@@ -14,4 +14,6 @@ import Foundation
 
 enum HIError: Error {
     case passbookError
+    case unknownAuthenticationError
+    case optionSetDecodingFailure
 }
