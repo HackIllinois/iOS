@@ -12,10 +12,11 @@
 
 import Foundation
 import CoreData
+import HIAPI
 
 @objc(Location)
 public class Location: NSManagedObject {
-    convenience init(context moc: NSManagedObjectContext, location: HIAPILocation) {
+    convenience init(context moc: NSManagedObjectContext, location: HIAPI.Location) {
         guard let entity = NSEntityDescription.entity(forEntityName: "Location", in: moc) else { fatalError() }
         self.init(entity: entity, insertInto: moc)
 

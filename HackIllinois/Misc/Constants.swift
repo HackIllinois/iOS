@@ -29,4 +29,5 @@ struct HIConstants {
 
     // Keychain
     static let STORED_ACCOUNT_KEY = "org.hackillinois.ios.active_account"
+    static let APPLICATION_INSTALLED_KEY = "org.hackillinois.ios.application_installed"
 }

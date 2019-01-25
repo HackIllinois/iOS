@@ -12,10 +12,11 @@
 
 import Foundation
 import CoreData
+import HIAPI
 
 @objc(Announcement)
 public class Announcement: NSManagedObject {
-    convenience init(context moc: NSManagedObjectContext, announcement: HIAPIAnnouncement) {
+    convenience init(context moc: NSManagedObjectContext, announcement: HIAPI.Announcement) {
         guard let entity = NSEntityDescription.entity(forEntityName: "Announcement", in: moc) else { fatalError() }
         self.init(entity: entity, insertInto: moc)
         id = announcement.id
