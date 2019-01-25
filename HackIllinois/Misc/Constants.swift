@@ -27,7 +27,10 @@ struct HIConstants {
     static let SUNDAY_START_TIME = Date(timeIntervalSince1970: 1519538400) // 2018-02-25T00:00:00-0600 = 2018-02-25T06:00:00+0000
     static let SUNDAY_END_TIME = Date(timeIntervalSince1970: 1519624799) // 2018-02-25T23:59:59-0600 = 2018-02-26T05:59:59+0000
 
-    // Keychain
+    // Keys
     static let STORED_ACCOUNT_KEY = "org.hackillinois.ios.active_account"
     static let APPLICATION_INSTALLED_KEY = "org.hackillinois.ios.application_installed"
+    static func PASS_PROMPTED_KEY(user: HIUser) -> String {
+        return "org.hackillinois.ios.pass_prompted_\(user.id)"
+    }
 }

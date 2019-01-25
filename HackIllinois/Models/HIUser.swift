@@ -27,8 +27,8 @@ struct HIUser: Codable {
     var lastName = ""
     var email = ""
 
-    var qrInfo: String {
-        return "hackillinois://user?userid=\(id)"
+    var qrURL: URL? {
+        return URL(string: "hackillinois://user?userid=\(id)")
     }
 
     init(provider: HIAPI.AuthService.OAuthProvider) {
