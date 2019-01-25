@@ -16,18 +16,18 @@ import CoreData
 
 final class HIEventService: HIBaseService {
     override static var baseURL: String {
-        return super.baseURL + "/event"
+        return super.baseURL + "event/"
     }
 
     // MARK: - Events
     static func create(event: HIAPIEvent) -> APIRequest<HIAPIEvent> {
         let eventDict = [String: Any]()
-        return APIRequest<HIAPIEvent>(service: self, endpoint: "/", body: eventDict, method: .POST)
+        return APIRequest<HIAPIEvent>(service: self, endpoint: "", body: eventDict, method: .POST)
     }
 
     static func getAllEvents() -> APIRequest<HIAPIEvent.Contained> {
         let paramaters = ["Content-Type": "application/json"]
-        return APIRequest<HIAPIEvent.Contained>(service: self, endpoint: "/", params: paramaters, method: .GET)
+        return APIRequest<HIAPIEvent.Contained>(service: self, endpoint: "", params: paramaters, method: .GET)
     }
 
     // MARK: - Locations
@@ -44,16 +44,16 @@ final class HIEventService: HIBaseService {
     static func favoriteBy(name: String) -> APIRequest<HIAPIFavorite> {
         var body = HTTPBody()
         body["eventName"] = name
-        return APIRequest<HIAPIFavorite>(service: self, endpoint: "/favorite/add/", body: body, method: .POST)
+        return APIRequest<HIAPIFavorite>(service: self, endpoint: "favorite/add/", body: body, method: .POST)
     }
 
     static func unfavoriteBy(name: String) -> APIRequest<HIAPIFavorite> {
         var body = HTTPBody()
         body["eventName"] = name
-        return APIRequest<HIAPIFavorite>(service: self, endpoint: "/favorite/remove/", body: body, method: .POST)
+        return APIRequest<HIAPIFavorite>(service: self, endpoint: "favorite/remove/", body: body, method: .POST)
     }
 
     static func getAllFavorites() -> APIRequest<HIAPIFavorite> {
-        return APIRequest<HIAPIFavorite>(service: self, endpoint: "/favorite/", method: .GET)
+        return APIRequest<HIAPIFavorite>(service: self, endpoint: "favorite/", method: .GET)
     }
 }

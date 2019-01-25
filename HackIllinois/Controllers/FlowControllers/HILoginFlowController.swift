@@ -20,46 +20,46 @@ class HILoginFlowController: UIViewController {
     // MARK: - Properties
     let animationView = LOTAnimationView(name: "intro")
     var shouldDisplayAnimationOnNextAppearance = true
-    
+
     // MARK: Status Bar
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return .slide
     }
-    
+
     var statusBarIsHidden = false
     override var prefersStatusBarHidden: Bool {
         return statusBarIsHidden
     }
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return HIAppearance.current.preferredStatusBarStyle
     }
-    
+
     // prevents the login session from going out of scope during presentation
     var loginSession: SFAuthenticationSession?
-    
+
     // MARK: ViewControllers
     lazy var loginSelectionViewController = HILoginSelectionViewController(delegate: self)
-    
+
     // MARK: - Init
     convenience init() {
         self.init(nibName: nil, bundle: nil)
     }
-    
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) should not be used")
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
         setNeedsStatusBarAppearanceUpdate()
@@ -77,7 +77,7 @@ extension HILoginFlowController {
         view.addSubview(loginSelectionViewController.view)
         loginSelectionViewController.didMove(toParent: self)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if shouldDisplayAnimationOnNextAppearance {
@@ -87,13 +87,13 @@ extension HILoginFlowController {
             view.addSubview(animationView)
         }
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if shouldDisplayAnimationOnNextAppearance {
             statusBarIsHidden = true
             setNeedsStatusBarAppearanceUpdate()
-            
+
             animationView.play { _ in
                 self.animationView.removeFromSuperview()
                 self.statusBarIsHidden = false
@@ -132,7 +132,7 @@ private extension HILoginFlowController {
         }
         loginSession?.start()
     }
-    
+
     private func exchangeOAuthCodeForAPIToken(buildingUser user: HIUser, sender: HIBaseViewController) {
         HIAuthService.getAPIToken(provider: user.provider, code: user.oauthCode)
             .onCompletion { [weak self] result in
@@ -147,7 +147,7 @@ private extension HILoginFlowController {
             }
             .launch()
     }
-    
+
     private func populateUserData(buildingUser user: HIUser, sender: HIBaseViewController) {
         HIUserService.getUser()
             .onCompletion { [weak self] result in
@@ -167,7 +167,7 @@ private extension HILoginFlowController {
             .authorize(with: user)
             .launch()
     }
-    
+
     private func populateRoleData(buildingUser user: HIUser, sender: HIBaseViewController) {
         HIAuthService.getRoles()
             .onCompletion { [weak self] result in
@@ -183,7 +183,7 @@ private extension HILoginFlowController {
             .authorize(with: user)
             .launch()
     }
-    
+
     private func populateRegistrationData(buildingUser user: HIUser, sender: HIBaseViewController) {
         HIRegistrationService.getAttendee()
             .onCompletion { [weak self] result in
@@ -201,7 +201,7 @@ private extension HILoginFlowController {
             .authorize(with: user)
             .launch()
     }
-    
+
     private func presentAuthenticationFailure(withError error: Error, sender: HIBaseViewController) {
         DispatchQueue.main.async {
             sender.presentErrorController(title: "Authentication Failed", message: error.localizedDescription, dismissParentOnCompletion: false)
