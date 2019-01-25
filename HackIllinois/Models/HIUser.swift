@@ -14,22 +14,6 @@ import Foundation
 import SwiftKeychainAccess
 import APIManager
 
-enum HIDietaryRestrictions: String, Codable {
-    case none = "NONE"
-    case vegetarian = "VEGETARIAN"
-    case vegan = "VEGAN"
-    case glutenFree = "GLUTEN_FREE"
-
-    var displayText: String {
-        switch self {
-        case .none: return "NO DIETARY RESTRICTIONS"
-        case .vegetarian: return "VEGETARIAN"
-        case .vegan: return "VEGAN"
-        case .glutenFree: return "GLUTEN FREE"
-        }
-    }
-}
-
 struct HIUser: Codable {
     var provider: HIAuthService.OAuthProvider
     var roles: HIAPIRoles = []

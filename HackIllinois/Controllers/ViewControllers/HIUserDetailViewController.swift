@@ -27,11 +27,6 @@ extension HIUserDetailViewController {
     @objc func didSelectLogoutButton(_ sender: Any) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(
-            UIAlertAction(title: "Switch User", style: .default) { _ in
-                NotificationCenter.default.post(name: .switchUser, object: nil)
-            }
-        )
-        alert.addAction(
             UIAlertAction(title: "Logout", style: .destructive) { _ in
                 NotificationCenter.default.post(name: .logoutUser, object: nil)
             }

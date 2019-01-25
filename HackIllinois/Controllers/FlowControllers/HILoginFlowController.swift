@@ -122,12 +122,15 @@ private extension HILoginFlowController {
                 var user = user
                 user.oauthCode = code
                 self?.exchangeOAuthCodeForAPIToken(buildingUser: user, sender: sender)
-            } else if let error = error, (error as? SFAuthenticationError)?.code == SFAuthenticationError.canceledLogin {
-                // do nothing
-            } else {
-                DispatchQueue.main.async {
-                    sender.presentErrorController(title: "Authentication Failed", message: nil, dismissParentOnCompletion: false)
+            } else if let error = error {
+                if (error as? SFAuthenticationError)?.code == SFAuthenticationError.canceledLogin {
+                    // do nothing
+                } else {
+                    self?.presentAuthenticationFailure(withError: error, sender: sender)
                 }
+            } else {
+                let error = HIError.unknownAuthenticationError
+                self?.presentAuthenticationFailure(withError: error, sender: sender)
             }
         }
         loginSession?.start()
@@ -142,9 +145,7 @@ private extension HILoginFlowController {
                 user.token = apiToken.token
                 self?.populateUserData(buildingUser: user, sender: sender)
             } catch {
-                DispatchQueue.main.async {
-                    sender.presentErrorController(title: "Authentication Failed", message: nil, dismissParentOnCompletion: false)
-                }
+                self?.presentAuthenticationFailure(withError: error, sender: sender)
             }
         }
         .launch()
@@ -163,9 +164,7 @@ private extension HILoginFlowController {
                 user.email = apiUser.email
                 self?.populateRoleData(buildingUser: user, sender: sender)
             } catch {
-                DispatchQueue.main.async {
-                    sender.presentErrorController(title: "Authentication Failed", message: nil, dismissParentOnCompletion: false)
-                }
+                self?.presentAuthenticationFailure(withError: error, sender: sender)
             }
         }
         .authorize(with: user)
@@ -181,9 +180,7 @@ private extension HILoginFlowController {
                 user.roles = apiRolesContainer.roles
                 self?.populateRegistrationData(buildingUser: user, sender: sender)
             } catch {
-                DispatchQueue.main.async {
-                    sender.presentErrorController(title: "Authentication Failed", message: nil, dismissParentOnCompletion: false)
-                }
+                self?.presentAuthenticationFailure(withError: error, sender: sender)
             }
         }
         .authorize(with: user)
@@ -192,7 +189,7 @@ private extension HILoginFlowController {
 
     private func populateRegistrationData(buildingUser user: HIUser, sender: HIBaseViewController) {
         HIRegistrationService.getAttendee()
-        .onCompletion { result in
+        .onCompletion { [weak self] result in
             do {
                 let (apiAttendeeContainer, _) = try result.get()
                 var user = user
@@ -201,13 +198,17 @@ private extension HILoginFlowController {
                     NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
                 }
             } catch {
-                DispatchQueue.main.async {
-                    sender.presentErrorController(title: "Authentication Failed", message: nil, dismissParentOnCompletion: false)
-                }
+                self?.presentAuthenticationFailure(withError: error, sender: sender)
             }
         }
         .authorize(with: user)
         .launch()
+    }
+
+    private func presentAuthenticationFailure(withError error: Error, sender: HIBaseViewController) {
+        DispatchQueue.main.async {
+            sender.presentErrorController(title: "Authentication Failed", message: error.localizedDescription, dismissParentOnCompletion: false)
+        }
     }
 }
 

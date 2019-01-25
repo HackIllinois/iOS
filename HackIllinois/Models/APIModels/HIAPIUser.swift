@@ -61,8 +61,19 @@ struct HIAPIRoles: OptionSet, Codable {
         case "Sponsor": self = .sponsor
         case "Staff": self = .staff
         case "Admin": self = .admin
-        default: throw NSError(domain: "HIAPIRoles", code: 0, userInfo: nil) // make this more descriptive
+        default: throw HIError.optionSetDecodingFailure
         }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        if contains(.user) { try container.encode("User") }
+        if contains(.applicant) { try container.encode("Applicant") }
+        if contains(.attendee) { try container.encode("Attendee") }
+        if contains(.mentor) { try container.encode("Mentor") }
+        if contains(.sponsor) { try container.encode("Sponsor") }
+        if contains(.staff) { try container.encode("Staff") }
+        if contains(.admin) { try container.encode("Admin") }
     }
 }
 
@@ -96,8 +107,16 @@ struct HIAPIDietaryRestrictions: OptionSet, Codable, APIReturnable {
         case "VEGETARIAN": self = .vegetarian
         case "NOPEANUT": self = .nopeanut
         case "NOGLUTEN": self = .nogluten
-        default: throw NSError(domain: "HIAPIDietaryRestrictions", code: 0, userInfo: nil) // make this more descriptive
+        default: throw HIError.optionSetDecodingFailure
         }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        if contains(.vegan) { try container.encode("VEGAN") }
+        if contains(.vegetarian) { try container.encode("VEGETARIAN") }
+        if contains(.nopeanut) { try container.encode("NOPEANUT") }
+        if contains(.nogluten) { try container.encode("NOGLUTEN") }
     }
 }
 
