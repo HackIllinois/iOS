@@ -29,7 +29,7 @@ class HIAnnouncementsViewController: HIBaseViewController {
 
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
-            managedObjectContext: CoreDataController.shared.persistentContainer.viewContext,
+            managedObjectContext: HICoreDataController.shared.persistentContainer.viewContext,
             sectionNameKeyPath: nil,
             cacheName: nil
         )

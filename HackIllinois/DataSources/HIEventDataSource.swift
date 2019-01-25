@@ -74,7 +74,7 @@ final class HIEventDataSource {
                                               updatedEvents: [HIAPI.Event]) {
         DispatchQueue.main.sync {
             do {
-                let ctx = CoreDataController.shared.persistentContainer.viewContext
+                let ctx = HICoreDataController.shared.persistentContainer.viewContext
                 try? ctx.fetch(locationsFetchRequest).forEach {
                     ctx.delete($0)
                 }

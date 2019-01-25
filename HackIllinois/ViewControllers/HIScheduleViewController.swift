@@ -27,7 +27,7 @@ class HIScheduleViewController: HIEventListViewController {
 
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
-            managedObjectContext: CoreDataController.shared.persistentContainer.viewContext,
+            managedObjectContext: HICoreDataController.shared.persistentContainer.viewContext,
             sectionNameKeyPath: "sectionIdentifier",
             cacheName: nil
         )

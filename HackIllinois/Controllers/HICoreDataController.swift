@@ -1,5 +1,5 @@
 //
-//  CoreDataController.swift
+//  HICoreDataController.swift
 //  HackIllinois
 //
 //  Created by Rauhul Varma on 11/19/17.
@@ -13,9 +13,9 @@
 import Foundation
 import CoreData
 
-class CoreDataController {
+class HICoreDataController {
 
-    static let shared = CoreDataController()
+    static let shared = HICoreDataController()
 
     private init() {
         persistentContainer.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
