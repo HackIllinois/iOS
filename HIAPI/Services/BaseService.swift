@@ -21,8 +21,6 @@ public class BaseService: APIService {
 
     public static var headers: HTTPHeaders? = ["Content-Type": "application/json"]
 
-    public static var parameters: HTTPParameters? = ["client": "iOS"]
-
     public static func validate(statusCode: Int) throws {
         try hiValidate(statusCode: statusCode)
     }
