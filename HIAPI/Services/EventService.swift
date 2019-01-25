@@ -16,18 +16,18 @@ import CoreData
 
 public final class EventService: BaseService {
     public override static var baseURL: String {
-        return super.baseURL + "/event"
+        return super.baseURL + "event/"
     }
 
     // MARK: - Events
     public static func create(event: Event) -> APIRequest<EventContainer> {
         let eventDict = [String: Any]()
+        fatalError("FIXME")
         return APIRequest<EventContainer>(service: self, endpoint: "", body: eventDict, method: .POST)
     }
 
-    public static func getAllEvents(active: Bool = false) -> APIRequest<EventContainer> {
-        let paramaters = ["active": "\(active)"]
-        return APIRequest<EventContainer>(service: self, endpoint: "", params: paramaters, method: .GET)
+    public static func getAllEvents() -> APIRequest<EventContainer> {
+        return APIRequest<EventContainer>(service: self, endpoint: "", method: .GET)
     }
 
     // MARK: - Locations
@@ -37,7 +37,7 @@ public final class EventService: BaseService {
 //    }
 
     public static func getAllLocations() -> APIRequest<Location.Contained> {
-        return APIRequest<Location.Contained>(service: self, endpoint: "/location/all", method: .GET)
+        return APIRequest<Location.Contained>(service: self, endpoint: "location/all", method: .GET)
     }
 
     // MARK: - Favorties
