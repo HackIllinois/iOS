@@ -1,5 +1,5 @@
 //
-//  HIAPIReturnDataContainer.swift
+//  ReturnDataContainer.swift
 //  HackIllinois
 //
 //  Created by Rauhul Varma on 11/19/17.
@@ -13,11 +13,31 @@
 import Foundation
 import APIManager
 
-struct HIAPIReturnDataContainer<Model: Decodable>: Decodable, APIReturnable {
-    var meta: String?
-    var data: [Model]
+struct Formatter {
+    static let iso8601: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+        return formatter
+    }()
 
-    enum CodingKeys: CodingKey {
+    static let iso8601withoutMS: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXXXX"
+        return formatter
+    }()
+}
+
+public struct ReturnDataContainer<Model: Decodable>: Decodable, APIReturnable {
+    public var meta: String?
+    public var data: [Model]
+
+    internal enum CodingKeys: CodingKey {
         case meta
         case data
     }
@@ -25,7 +45,7 @@ struct HIAPIReturnDataContainer<Model: Decodable>: Decodable, APIReturnable {
     public init(from data: Data) throws {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(Formatter.iso8601)
-        self = try decoder.decode(HIAPIReturnDataContainer.self, from: data)
+        self = try decoder.decode(ReturnDataContainer.self, from: data)
     }
 
     public init(from decoder: Decoder) throws {

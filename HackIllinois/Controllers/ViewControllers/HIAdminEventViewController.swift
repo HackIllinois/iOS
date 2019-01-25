@@ -14,6 +14,7 @@ import Foundation
 import UIKit
 import CoreData
 import APIManager
+import HIAPI
 
 enum HIAdminEventViewControllerStyle {
     case currentlyCreatingEvent
@@ -58,7 +59,7 @@ extension HIAdminEventViewController {
     private func confirmAlertActionWith(title: String, duration: Int) -> UIAlertAction {
         return UIAlertAction(title: "Yes", style: .default) { _ in
             self.stylizeFor(.currentlyCreatingEvent)
-            HITrackingService.create(name: title, duration: duration)
+            HIAPI.TrackingService.create(name: title, duration: duration)
                 .onCompletion { result in
                     let alertTitle: String
                     var alertMessage: String?

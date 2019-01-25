@@ -1,5 +1,5 @@
 //
-//  HITrackingService.swift
+//  TrackingService.swift
 //  HackIllinois
 //
 //  Created by Sujay Patwardhan on 1/23/18.
@@ -13,27 +13,27 @@
 import Foundation
 import APIManager
 
-final class HITrackingService: HIBaseService {
-    override static var baseURL: String {
+public final class TrackingService: BaseService {
+    public override static var baseURL: String {
         return super.baseURL + "/tracking"
     }
 
-    override static func hiValidate(statusCode: Int) throws {
+    override public static func hiValidate(statusCode: Int) throws {
         if !(200..<300).contains(statusCode) && statusCode != 400 {
             let description = HTTPURLResponse.localizedString(forStatusCode: statusCode)
             throw APIRequestError.invalidHTTPReponse(code: statusCode, description: description)
         }
     }
 
-    static func track(id: Int) -> APIRequest<HIAPISuccessContainer> {
-        return APIRequest<HIAPISuccessContainer>(service: self, endpoint: "/\(id)", method: .GET)
+    public static func track(id: Int) -> APIRequest<SuccessContainer> {
+        return APIRequest<SuccessContainer>(service: self, endpoint: "/\(id)", method: .GET)
     }
 
-    static func create(name: String, duration: Int) -> APIRequest<HIAPISuccessContainer> {
+    public static func create(name: String, duration: Int) -> APIRequest<SuccessContainer> {
         var eventDict = [String: Any]()
         eventDict["name"]     = name
         eventDict["duration"] = duration * 60 // user inputs minutes but API wants seconds
-        return APIRequest<HIAPISuccessContainer>(service: self, endpoint: "", body: eventDict, method: .POST)
+        return APIRequest<SuccessContainer>(service: self, endpoint: "", body: eventDict, method: .POST)
     }
 
 }

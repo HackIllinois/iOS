@@ -1,8 +1,8 @@
 //
-//  HIAPISuccessContainer.swift
+//  RegistrationService.swift
 //  HackIllinois
 //
-//  Created by Rauhul Varma on 1/28/18.
+//  Created by Rauhul Varma on 2/7/18.
 //  Copyright © 2018 HackIllinois. All rights reserved.
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of
@@ -13,15 +13,12 @@
 import Foundation
 import APIManager
 
-struct HIAPISuccessContainer: Decodable, APIReturnable {
-    let meta: String?
-    let error: Error?
+public final class RegistrationService: BaseService {
+    public override static var baseURL: String {
+        return super.baseURL + "registration/"
+    }
 
-    struct Error: Decodable {
-        let type: String
-        let status: Int
-        let title: String
-        let message: String
-        let source: String
+    public static func getAttendee() -> APIRequest<AttendeeContainer> {
+        return APIRequest<AttendeeContainer>(service: self, endpoint: "", method: .GET)
     }
 }

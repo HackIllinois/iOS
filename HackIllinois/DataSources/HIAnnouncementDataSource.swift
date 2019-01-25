@@ -12,6 +12,7 @@
 
 import Foundation
 import CoreData
+import HIAPI
 
 final class HIAnnouncementDataSource {
 
@@ -26,7 +27,7 @@ final class HIAnnouncementDataSource {
         }
         isRefreshing = true
 
-        HIAnnouncementService
+        HIAPI.AnnouncementService
             .getAllAnnouncements()
             .onCompletion { result in
                 DispatchQueue.main.sync {

@@ -1,5 +1,5 @@
 //
-//  HIUserService.swift
+//  UserService.swift
 //  HackIllinois
 //
 //  Created by Rauhul Varma on 1/23/18.
@@ -13,12 +13,12 @@
 import Foundation
 import APIManager
 
-final class HIUserService: HIBaseService {
-    override static var baseURL: String {
+public final class UserService: BaseService {
+    public override static var baseURL: String {
         return super.baseURL + "user/"
     }
 
-    static func getUser() -> APIRequest<HIAPIUser> {
-        return APIRequest<HIAPIUser>(service: self, endpoint: "", headers: headers, method: .GET)
+    public static func getUser() -> APIRequest<User> {
+        return APIRequest<User>(service: self, endpoint: "", headers: headers, method: .GET)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  HIBaseService.swift
+//  BaseService.swift
 //  HackIllinois
 //
 //  Created by Rauhul Varma on 11/16/17.
@@ -14,16 +14,16 @@ import Foundation
 import UIKit
 import APIManager
 
-class HIBaseService: APIService {
-    class var baseURL: String {
+public class BaseService: APIService {
+    public class var baseURL: String {
         return "https://api.hackillinois.org/"
     }
 
-    static var headers = ["Content-Type": "application/json"]
+    public static var headers: HTTPHeaders? = ["Content-Type": "application/json"]
 
-    static var paramaters = ["client": "iOS"]
+    public static var parameters: HTTPParameters? = ["client": "iOS"]
 
-    static func validate(statusCode: Int) throws {
+    public static func validate(statusCode: Int) throws {
         try hiValidate(statusCode: statusCode)
     }
 

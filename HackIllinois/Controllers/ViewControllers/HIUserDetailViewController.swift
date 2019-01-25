@@ -14,6 +14,7 @@ import Foundation
 import UIKit
 import PassKit
 import os
+import HIAPI
 
 class HIUserDetailViewController: HIBaseViewController {
     // MARK: - Properties
@@ -98,7 +99,7 @@ extension HIUserDetailViewController {
             let user = HIApplicationStateController.shared.user,
             !UserDefaults.standard.bool(forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)") else { return }
         let passString = "hackillinois://qrcode/user?id=\(user.id)&identifier=\(user.id)"
-        HIPassService.getPass(with: passString)
+        HIAPI.PassService.getPass(with: passString)
         .onCompletion { result in
             do {
                 let (data, _) = try result.get()

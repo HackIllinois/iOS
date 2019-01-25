@@ -12,6 +12,7 @@
 
 import Foundation
 import UIKit
+import HIAPI
 
 class HIEventListViewController: HIBaseViewController {
     let eventDetailViewController = HIEventDetailViewController()
@@ -71,7 +72,7 @@ extension HIEventListViewController: HIEventCellDelegate {
             let event = _fetchedResultsController?.object(at: indexPath) as? Event else { return }
 
         if isFavorite {
-            HIEventService.unfavortieBy(id: Int(event.id))
+            HIAPI.EventService.unfavortieBy(id: Int(event.id))
                 .onCompletion { result in
                     switch result {
                     case .success:
@@ -90,7 +91,7 @@ extension HIEventListViewController: HIEventCellDelegate {
                 .launch()
 
         } else {
-            HIEventService.favortieBy(id: Int(event.id))
+            HIAPI.EventService.favortieBy(id: Int(event.id))
             .onCompletion { result in
                 switch result {
                 case .success:

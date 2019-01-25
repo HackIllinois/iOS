@@ -1,5 +1,5 @@
 //
-//  HIAPIAnnouncement.swift
+//  Announcement.swift
 //  HackIllinois
 //
 //  Created by Rauhul Varma on 1/24/18.
@@ -12,18 +12,18 @@
 
 import Foundation
 
-struct HIAPIAnnouncement: Codable {
-    typealias Contained = HIAPIReturnDataContainer<HIAPIAnnouncement>
+public struct Announcement: Codable {
+    public typealias Contained = ReturnDataContainer<Announcement>
 
-    private enum CodingKeys: String, CodingKey {
+    internal enum CodingKeys: String, CodingKey {
         case id
         case title
         case info = "description"
         case time = "created"
     }
 
-    var id: Int16
-    var title: String
-    var info: String
-    var time: Date
+    public var id: Int16
+    public var title: String
+    public var info: String
+    public var time: Date
 }

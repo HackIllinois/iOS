@@ -15,6 +15,7 @@ import APIManager
 import Lottie
 import SafariServices
 import SwiftKeychainAccess
+import HIAPI
 
 class HILoginFlowController: UIViewController {
     // MARK: - Properties
@@ -109,7 +110,7 @@ extension HILoginFlowController {
 // MARK: - Login Flow
 private extension HILoginFlowController {
     private func attemptOAuthLogin(buildingUser user: HIUser, sender: HIBaseViewController) {
-        let loginURL = HIAuthService.oauthURL(provider: user.provider)
+        let loginURL = HIAPI.AuthService.oauthURL(provider: user.provider)
         loginSession = SFAuthenticationSession(url: loginURL, callbackURLScheme: nil) { [weak self] (url, error) in
             if let url = url,
                 let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
@@ -134,7 +135,7 @@ private extension HILoginFlowController {
     }
 
     private func exchangeOAuthCodeForAPIToken(buildingUser user: HIUser, sender: HIBaseViewController) {
-        HIAuthService.getAPIToken(provider: user.provider, code: user.oauthCode)
+        HIAPI.AuthService.getAPIToken(provider: user.provider, code: user.oauthCode)
         .onCompletion { [weak self] result in
             do {
                 let (apiToken, _) = try result.get()
@@ -149,7 +150,7 @@ private extension HILoginFlowController {
     }
 
     private func populateUserData(buildingUser user: HIUser, sender: HIBaseViewController) {
-        HIUserService.getUser()
+        HIAPI.UserService.getUser()
         .onCompletion { [weak self] result in
             do {
                 let (apiUser, _) = try result.get()
@@ -169,7 +170,7 @@ private extension HILoginFlowController {
     }
 
     private func populateRoleData(buildingUser user: HIUser, sender: HIBaseViewController) {
-        HIAuthService.getRoles()
+        HIAPI.AuthService.getRoles()
         .onCompletion { [weak self] result in
             do {
                 let (apiRolesContainer, _) = try result.get()
@@ -185,7 +186,7 @@ private extension HILoginFlowController {
     }
 
     private func populateRegistrationData(buildingUser user: HIUser, sender: HIBaseViewController) {
-        HIRegistrationService.getAttendee()
+        HIAPI.RegistrationService.getAttendee()
         .onCompletion { [weak self] result in
             do {
                 let (apiAttendeeContainer, _) = try result.get()
@@ -212,7 +213,7 @@ private extension HILoginFlowController {
 // MARK: - HILoginSelectionViewControllerDelegate
 extension HILoginFlowController: HILoginSelectionViewControllerDelegate {
     func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController,
-                                      didMakeLoginSelection selection: HIAuthService.OAuthProvider) {
+                                      didMakeLoginSelection selection: HIAPI.AuthService.OAuthProvider) {
         let user = HIUser(provider: selection)
         attemptOAuthLogin(buildingUser: user, sender: loginSelectionViewController)
     }

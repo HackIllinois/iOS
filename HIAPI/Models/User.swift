@@ -1,5 +1,5 @@
 //
-//  HIAPIUser.swift
+//  User.swift
 //  HackIllinois
 //
 //  Created by Rauhul Varma on 1/23/18.
@@ -13,46 +13,46 @@
 import APIManager
 import Foundation
 
-struct HIAPIUser: Codable, APIReturnable {
-    var id: String
-    var username: String
-    var firstName: String
-    var lastName: String
-    var email: String
+public struct User: Codable, APIReturnable {
+    public let id: String
+    public let username: String
+    public let firstName: String
+    public let lastName: String
+    public let email: String
 }
 
-struct HIAPIRolesContainer: Codable, APIReturnable {
-    let roles: HIAPIRoles
+public struct RolesContainer: Codable, APIReturnable {
+    public let roles: Roles
 }
 
-struct HIAPIRoles: OptionSet, Codable {
-    let rawValue: Int
+public struct Roles: OptionSet, Codable {
+    public let rawValue: Int
 
-    static let user = HIAPIRoles(rawValue: 1 << 0)
-    static let applicant = HIAPIRoles(rawValue: 1 << 1)
-    static let attendee = HIAPIRoles(rawValue: 1 << 2)
-    static let mentor = HIAPIRoles(rawValue: 1 << 3)
-    static let sponsor = HIAPIRoles(rawValue: 1 << 4)
-    static let staff = HIAPIRoles(rawValue: 1 << 5)
-    static let admin = HIAPIRoles(rawValue: 1 << 6)
+    public static let user = Roles(rawValue: 1 << 0)
+    public static let applicant = Roles(rawValue: 1 << 1)
+    public static let attendee = Roles(rawValue: 1 << 2)
+    public static let mentor = Roles(rawValue: 1 << 3)
+    public static let sponsor = Roles(rawValue: 1 << 4)
+    public static let staff = Roles(rawValue: 1 << 5)
+    public static let admin = Roles(rawValue: 1 << 6)
 
-    init(rawValue: Int) {
+    public init(rawValue: Int) {
         self.rawValue = rawValue
     }
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
-        var options = [HIAPIRoles]()
+        var options = [Roles]()
         while !container.isAtEnd {
             let string = try container.decode(String.self)
-            let option = try HIAPIRoles(string: string)
+            let option = try Roles(string: string)
             options.append(option)
         }
-        let null = HIAPIRoles(rawValue: 0)
+        let null = Roles(rawValue: 0)
         self = options.reduce(null) { return $0.union($1) }
     }
 
-    init(string: String) throws {
+    internal init(string: String) throws {
         switch string {
         case "User": self = .user
         case "Applicant": self = .applicant
@@ -61,11 +61,11 @@ struct HIAPIRoles: OptionSet, Codable {
         case "Sponsor": self = .sponsor
         case "Staff": self = .staff
         case "Admin": self = .admin
-        default: throw HIError.optionSetDecodingFailure
+        default: throw DecodingError.unknownOption
         }
     }
 
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         if contains(.user) { try container.encode("User") }
         if contains(.applicant) { try container.encode("Applicant") }
@@ -77,41 +77,41 @@ struct HIAPIRoles: OptionSet, Codable {
     }
 }
 
-struct HIAPIDietaryRestrictions: OptionSet, Codable, APIReturnable {
-    let rawValue: Int
+public struct DietaryRestrictions: OptionSet, Codable, APIReturnable {
+    public let rawValue: Int
 
-    static let vegan = HIAPIDietaryRestrictions(rawValue: 1 << 0)
-    static let vegetarian = HIAPIDietaryRestrictions(rawValue: 1 << 1)
-    static let nopeanut = HIAPIDietaryRestrictions(rawValue: 1 << 2)
-    static let nogluten = HIAPIDietaryRestrictions(rawValue: 1 << 3)
+    public static let vegan = DietaryRestrictions(rawValue: 1 << 0)
+    public static let vegetarian = DietaryRestrictions(rawValue: 1 << 1)
+    public static let nopeanut = DietaryRestrictions(rawValue: 1 << 2)
+    public static let nogluten = DietaryRestrictions(rawValue: 1 << 3)
 
-    init(rawValue: Int) {
+    public init(rawValue: Int) {
         self.rawValue = rawValue
     }
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
-        var options = [HIAPIDietaryRestrictions]()
+        var options = [DietaryRestrictions]()
         while !container.isAtEnd {
             let string = try container.decode(String.self)
-            let option = try HIAPIDietaryRestrictions(string: string)
+            let option = try DietaryRestrictions(string: string)
             options.append(option)
         }
-        let null = HIAPIDietaryRestrictions(rawValue: 0)
+        let null = DietaryRestrictions(rawValue: 0)
         self = options.reduce(null) { return $0.union($1) }
     }
 
-    init(string: String) throws {
+    internal init(string: String) throws {
         switch string {
         case "VEGAN": self = .vegan
         case "VEGETARIAN": self = .vegetarian
         case "NOPEANUT": self = .nopeanut
         case "NOGLUTEN": self = .nogluten
-        default: throw HIError.optionSetDecodingFailure
+        default: throw DecodingError.unknownOption
         }
     }
 
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         if contains(.vegan) { try container.encode("VEGAN") }
         if contains(.vegetarian) { try container.encode("VEGETARIAN") }
@@ -120,14 +120,14 @@ struct HIAPIDietaryRestrictions: OptionSet, Codable, APIReturnable {
     }
 }
 
-struct HIAPIAttendeeContainer: Codable, APIReturnable {
-    let attendee: HIAPIAttendee
+public struct AttendeeContainer: Codable, APIReturnable {
+    public let attendee: Attendee
 }
 
-struct HIAPIAttendee: Codable, APIReturnable {
-    let diet: HIAPIDietaryRestrictions
+public struct Attendee: Codable, APIReturnable {
+    public let diet: DietaryRestrictions
 }
 
-struct HIAPIToken: Codable, APIReturnable {
-    var token: String
+public struct Token: Codable, APIReturnable {
+    public let token: String
 }

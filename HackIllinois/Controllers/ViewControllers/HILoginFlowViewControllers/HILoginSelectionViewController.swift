@@ -12,9 +12,10 @@
 
 import Foundation
 import UIKit
+import HIAPI
 
 protocol HILoginSelectionViewControllerDelegate: class {
-    func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HIAuthService.OAuthProvider)
+    func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HIAPI.AuthService.OAuthProvider)
 }
 
 class HILoginSelectionViewController: HIBaseViewController {
@@ -67,13 +68,13 @@ extension HILoginSelectionViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return HIAuthService.OAuthProvider.all.count
+        return HIAPI.AuthService.OAuthProvider.all.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HILoginSelectionCell.identifier, for: indexPath)
         if let cell = cell as? HILoginSelectionCell {
-            cell.titleLabel.text = HIAuthService.OAuthProvider.all[indexPath.row].rawValue.uppercased()
+            cell.titleLabel.text = HIAPI.AuthService.OAuthProvider.all[indexPath.row].rawValue.uppercased()
             if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
                 cell.separatorView.isHidden = true
             }
@@ -110,7 +111,7 @@ extension HILoginSelectionViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let delegate = delegate {
-            let selection = HIAuthService.OAuthProvider.all[indexPath.row]
+            let selection = HIAPI.AuthService.OAuthProvider.all[indexPath.row]
             delegate.loginSelectionViewController(self, didMakeLoginSelection: selection)
         }
         super.tableView(tableView, didSelectRowAt: indexPath)

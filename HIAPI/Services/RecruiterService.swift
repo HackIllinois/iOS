@@ -1,5 +1,5 @@
 //
-//  HIRecruiterService.swift
+//  RecruiterService.swift
 //  HackIllinois
 //
 //  Created by Sujay Patwardhan on 2/22/18.
@@ -13,15 +13,15 @@
 import Foundation
 import APIManager
 
-final class HIRecruiterService: HIBaseService {
-    override static var baseURL: String {
+public final class RecruiterService: BaseService {
+    public override static var baseURL: String {
         return super.baseURL + "/recruiter"
     }
 
-    static func followUserBy(id: Int) -> APIRequest<HIAPISuccessContainer> {
+    public static func followUserBy(id: Int) -> APIRequest<SuccessContainer> {
         var body = HTTPBody()
         body["attendeeUserId"] = id
         body["favorite"] = true
-        return APIRequest<HIAPISuccessContainer>(service: self, endpoint: "/interest", body: body, method: .POST)
+        return APIRequest<SuccessContainer>(service: self, endpoint: "/interest", body: body, method: .POST)
     }
 }

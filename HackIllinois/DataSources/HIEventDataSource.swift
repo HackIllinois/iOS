@@ -12,6 +12,7 @@
 
 import Foundation
 import CoreData
+import HIAPI
 
 final class HIEventDataSource {
 
@@ -27,20 +28,20 @@ final class HIEventDataSource {
         }
         isRefreshing = true
 
-        HIEventService.getAllLocations()
+        HIAPI.EventService.getAllLocations()
         .onCompletion { result in
             if case let .success(containedLocations, _) = result {
                 print("GET::LOCATIONS::SUCCESS")
-                HIEventService.getAllEvents()
+                HIAPI.EventService.getAllEvents()
                 .onCompletion { result in
                     if case let .success(containedEvents, _) = result {
                         print("GET::EVENTS::SUCCESS")
-                        HIEventService.getAllFavorites()
+                        HIAPI.EventService.getAllFavorites()
                         .onCompletion { result in
                             if case let .success(containedFavorites, _) = result {
                                 print("GET::FAVORITES::SUCCESS")
 
-                                var updatedEvents = [HIAPIEvent]()
+                                var updatedEvents = [HIAPI.Event]()
                                 containedEvents.data.forEach { event in
                                     var event = event
                                     event.favorite = containedFavorites.data.map { $0.eventId }.contains(event.id)
@@ -69,8 +70,8 @@ final class HIEventDataSource {
         .launch()
     }
 
-    static private func setEventNotifications(containedLocations: HIAPILocation.Contained,
-                                              updatedEvents: [HIAPIEvent]) {
+    static private func setEventNotifications(containedLocations: HIAPI.Location.Contained,
+                                              updatedEvents: [HIAPI.Event]) {
         DispatchQueue.main.sync {
             do {
                 let ctx = CoreDataController.shared.persistentContainer.viewContext

@@ -54,10 +54,10 @@ class HIApplicationStateController {
 // MARK: - API
 extension HIApplicationStateController {
     func resetPersistentDataIfNeeded() {
-        guard !UserDefaults.standard.bool(forKey: "HIAPPLICATION_INSTALLED") else { return }
+        guard !UserDefaults.standard.bool(forKey: HIConstants.APPLICATION_INSTALLED_KEY) else { return }
         _ = Keychain.default.purge()
 
-        UserDefaults.standard.set(true, forKey: "HIAPPLICATION_INSTALLED")
+        UserDefaults.standard.set(true, forKey: HIConstants.APPLICATION_INSTALLED_KEY)
     }
 
     func recoverUserIfPossible() {

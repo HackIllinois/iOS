@@ -13,11 +13,12 @@
 import Foundation
 import SwiftKeychainAccess
 import APIManager
+import HIAPI
 
 struct HIUser: Codable {
-    var provider: HIAuthService.OAuthProvider
-    var roles: HIAPIRoles = []
-    var dietaryRestrictions: HIAPIDietaryRestrictions = []
+    var provider: HIAPI.AuthService.OAuthProvider
+    var roles: HIAPI.Roles = []
+    var dietaryRestrictions: HIAPI.DietaryRestrictions = []
     var token = ""
     var oauthCode = ""
     var id = ""
@@ -30,7 +31,7 @@ struct HIUser: Codable {
         return "hackillinois://user?userid=\(id)"
     }
 
-    init(provider: HIAuthService.OAuthProvider) {
+    init(provider: HIAPI.AuthService.OAuthProvider) {
         self.provider = provider
     }
 }

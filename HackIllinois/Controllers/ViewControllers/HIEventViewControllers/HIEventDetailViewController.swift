@@ -13,6 +13,7 @@
 import Foundation
 import UIKit
 import MapKit
+import HIAPI
 
 class HIEventDetailViewController: HIBaseViewController {
     // MARK: - Properties
@@ -34,7 +35,7 @@ extension HIEventDetailViewController {
         guard let isFavorite = sender.isActive, let event = event else { return }
 
         if isFavorite {
-            HIEventService.unfavortieBy(id: Int(event.id))
+            HIAPI.EventService.unfavortieBy(id: Int(event.id))
                 .onCompletion { result in
                     switch result {
                     case .success:
@@ -51,7 +52,7 @@ extension HIEventDetailViewController {
                 .launch()
 
         } else {
-            HIEventService.favortieBy(id: Int(event.id))
+            HIAPI.EventService.favortieBy(id: Int(event.id))
             .onCompletion { result in
                 switch result {
                 case .success:

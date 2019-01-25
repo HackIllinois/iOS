@@ -13,6 +13,7 @@
 import Foundation
 import UIKit
 import CoreData
+import HIAPI
 
 enum HIAnnouncementAdminViewControllerStyle {
     case currentlyCreatingAnnouncement
@@ -49,7 +50,7 @@ extension HIAdminAnnouncementViewController {
         confirmAlertController.addAction(
             UIAlertAction(title: "Yes", style: .default) { _ in
                 self.stylizeFor(.currentlyCreatingAnnouncement)
-                HIAnnouncementService.create(title: title, description: description)
+                HIAPI.AnnouncementService.create(title: title, description: description)
                 .onCompletion { result in
                     switch result {
                     case .success:

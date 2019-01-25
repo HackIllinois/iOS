@@ -14,6 +14,7 @@ import Foundation
 import UIKit
 import AVKit
 import APIManager
+import HIAPI
 
 class HIScannerViewController: HIBaseViewController {
     var captureSession: AVCaptureSession?
@@ -156,7 +157,7 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
     }
 
     func trackUserBy(id: Int) {
-        HITrackingService.track(id: id)
+        HIAPI.TrackingService.track(id: id)
         .onCompletion { (result) in
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self, let alert = strongSelf.lookingUpUserAlertController else { return }
@@ -190,7 +191,7 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
 
     @available(*, deprecated: 2.0)
     func followUserBy(id: Int) {
-        HIRecruiterService.followUserBy(id: id)
+        HIAPI.RecruiterService.followUserBy(id: id)
         .onCompletion { (result) in
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self, let alert = strongSelf.lookingUpUserAlertController else { return }

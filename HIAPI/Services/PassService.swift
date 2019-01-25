@@ -1,5 +1,5 @@
 //
-//  HIPassService.swift
+//  PassService.swift
 //  HackIllinois
 //
 //  Created by Yasha Mostofi on 2/22/18.
@@ -14,12 +14,12 @@ import Foundation
 import APIManager
 import SafariServices
 
-final class HIPassService: HIBaseService {
-    override static var baseURL: String {
+public final class PassService: BaseService {
+    public override static var baseURL: String {
         return "https://passgen.hackillinois.org/pkpass"
     }
 
-    static func getPass(with msg: String) -> APIRequest<Data> {
+    public static func getPass(with msg: String) -> APIRequest<Data> {
         let params: HTTPBody = [
             "message": msg
         ]
