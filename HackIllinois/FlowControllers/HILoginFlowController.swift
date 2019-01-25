@@ -176,7 +176,13 @@ private extension HILoginFlowController {
                 let (apiRolesContainer, _) = try result.get()
                 var user = user
                 user.roles = apiRolesContainer.roles
-                self?.populateRegistrationData(buildingUser: user, sender: sender)
+                if user.roles.contains(.applicant) {
+                    self?.populateRegistrationData(buildingUser: user, sender: sender)
+                } else {
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
+                    }
+                }
             } catch {
                 self?.presentAuthenticationFailure(withError: error, sender: sender)
             }
