@@ -39,8 +39,6 @@ class HILoginFlowController: UIViewController {
     var loginSession: SFAuthenticationSession?
 
     // MARK: ViewControllers
-    // FIME: remove
-    lazy var navController = UINavigationController(rootViewController: loginSelectionViewController)
     lazy var loginSelectionViewController = HILoginSelectionViewController(delegate: self)
 
     // MARK: - Init
@@ -73,12 +71,11 @@ extension HILoginFlowController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = HIAppearance.current.background
-        navController.isNavigationBarHidden = true
-        addChild(navController)
-        navController.view.frame = view.frame
-        navController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(navController.view)
-        navController.didMove(toParent: self)
+        addChild(loginSelectionViewController)
+        loginSelectionViewController.view.frame = view.frame
+        loginSelectionViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(loginSelectionViewController.view)
+        loginSelectionViewController.didMove(toParent: self)
     }
 
     override func viewWillAppear(_ animated: Bool) {

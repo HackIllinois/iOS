@@ -123,7 +123,5 @@ extension HIApplicationStateController {
         HIAnnouncementDataSource.refresh()
     }
 
-    func prepareLoginControllerForDisplay() {
-        loginFlowController.navController.popToRootViewController(animated: false)
-    }
+    func prepareLoginControllerForDisplay() { }
 }
