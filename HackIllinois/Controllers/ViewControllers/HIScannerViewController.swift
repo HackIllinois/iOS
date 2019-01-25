@@ -53,7 +53,7 @@ extension HIScannerViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         var rightNavigationItem: UIBarButtonItem?
-        if HIApplicationStateController.shared.user?.permissions == .admin {
+        if HIApplicationStateController.shared.user?.roles.contains(.admin) == true {
             rightNavigationItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(presentAdminEventViewController))
         }
         navigationItem.rightBarButtonItem = rightNavigationItem
@@ -136,8 +136,7 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
     }
 
     func found(code: String) {
-        guard let user = HIApplicationStateController.shared.user,
-            let url = URL(string: code),
+        guard let url = URL(string: code),
             url.scheme == "hackillinois",
             let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
             let queryItems = components.queryItems,
@@ -153,14 +152,7 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
         self.lookingUpUserAlertController = lookingUpUserAlertController
         present(lookingUpUserAlertController, animated: true, completion: nil)
 
-        switch user.permissions {
-        case .volunteer, .staff, .admin:
-            trackUserBy(id: id)
-        case .mentor, .sponsor:
-            followUserBy(id: id)
-        default:
-            break
-        }
+        trackUserBy(id: id)
     }
 
     func trackUserBy(id: Int) {
@@ -196,6 +188,7 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
         .launch()
     }
 
+    @available(*, deprecated: 2.0)
     func followUserBy(id: Int) {
         HIRecruiterService.followUserBy(id: id)
         .onCompletion { (result) in

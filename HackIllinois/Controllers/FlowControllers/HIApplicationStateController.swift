@@ -15,12 +15,6 @@ import UIKit
 import SwiftKeychainAccess
 import UserNotifications
 
-extension Notification.Name {
-    static let loginUser  = Notification.Name("HIApplicationStateControllerLoginUser")
-    static let switchUser = Notification.Name("HIApplicationStateControllerSwitchUser")
-    static let logoutUser = Notification.Name("HIApplicationStateControllerLogoutUser")
-}
-
 class HIApplicationStateController {
 
     static var shared = HIApplicationStateController()
@@ -36,7 +30,6 @@ class HIApplicationStateController {
     // MARK: - Init
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(loginUser), name: .loginUser, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(switchUser), name: .switchUser, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(logoutUser), name: .logoutUser, object: nil)
     }
 
@@ -65,23 +58,15 @@ extension HIApplicationStateController {
         _ = Keychain.default.purge()
 
         UserDefaults.standard.set(true, forKey: "HIAPPLICATION_INSTALLED")
-
     }
 
     func recoverUserIfPossible() {
-        for key in Keychain.default.allKeys() {
-            guard let user = Keychain.default.retrieve(HIUser.self, forKey: key) else {
-                Keychain.default.removeObject(forKey: key)
-                continue
-            }
-            if user.isActive {
-                if var user = self.user {
-                    user.isActive = false
-                    Keychain.default.store(user, forKey: user.identifier)
-                }
-                self.user = user
-            }
+        guard Keychain.default.hasValue(forKey: HIConstants.STORED_ACCOUNT_KEY) else { return }
+        guard let user = Keychain.default.retrieve(HIUser.self, forKey: HIConstants.STORED_ACCOUNT_KEY) else {
+            Keychain.default.removeObject(forKey: HIConstants.STORED_ACCOUNT_KEY)
+            return
         }
+        self.user = user
     }
 
     func viewControllersFor(user: HIUser) -> [UIViewController] {
@@ -91,7 +76,7 @@ extension HIApplicationStateController {
         viewControllers.append(HIAnnouncementsViewController())
         viewControllers.append(HIUserDetailViewController())
 
-        if [.volunteer, .mentor, .sponsor, .staff, .admin].contains(user.permissions) {
+        if !user.roles.intersection([.staff, .admin]).isEmpty {
             viewControllers.append(HIScannerViewController())
         }
 
@@ -99,29 +84,16 @@ extension HIApplicationStateController {
     }
 
     @objc func loginUser(_ notification: Notification) {
-        guard var user = notification.userInfo?["user"] as? HIUser else { return }
-        user.isActive = true
-        Keychain.default.store(user, forKey: user.identifier)
+        guard let user = notification.userInfo?["user"] as? HIUser else { return }
+        guard Keychain.default.store(user, forKey: HIConstants.STORED_ACCOUNT_KEY) else { return }
         self.user = user
-        print("PERMISSIONS::\(user.permissions)")
-
-        updateWindowViewController(animated: true)
-    }
-
-    @objc func switchUser() {
-        guard var user = user else { return }
-        user.isActive = false
-        Keychain.default.store(user, forKey: user.identifier)
-        self.user = nil
-
         updateWindowViewController(animated: true)
     }
 
     @objc func logoutUser() {
-        guard let user = user else { return }
-        _ = Keychain.default.removeObject(forKey: user.identifier)
-        self.user = nil
-
+        guard user != nil else { return }
+        Keychain.default.removeObject(forKey: HIConstants.STORED_ACCOUNT_KEY)
+        user = nil
         updateWindowViewController(animated: true)
     }
 
@@ -151,7 +123,5 @@ extension HIApplicationStateController {
         HIAnnouncementDataSource.refresh()
     }
 
-    func prepareLoginControllerForDisplay() {
-        loginFlowController.navController.popToRootViewController(animated: false)
-    }
+    func prepareLoginControllerForDisplay() { }
 }
