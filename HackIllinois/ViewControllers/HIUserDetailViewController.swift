@@ -77,7 +77,7 @@ extension HIUserDetailViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let user = HIApplicationStateController.shared.user,
-            let url = URL(string: "hackillinois://qrcode/user?id=\(user.id)&identifier=\(user)") else { return }
+            let url = user.qrURL else { return }
         view.layoutIfNeeded()
         let frame = qrImageView.frame.height
         DispatchQueue.global(qos: .userInitiated).async {
@@ -97,9 +97,9 @@ extension HIUserDetailViewController {
     func setupPass() {
         guard PKPassLibrary.isPassLibraryAvailable(),
             let user = HIApplicationStateController.shared.user,
-            !UserDefaults.standard.bool(forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)") else { return }
-        let passString = "hackillinois://qrcode/user?id=\(user.id)&identifier=\(user.id)"
-        HIAPI.PassService.getPass(with: passString)
+            let url = user.qrURL,
+            !UserDefaults.standard.bool(forKey: HIConstants.PASS_PROMPTED_KEY(user: user)) else { return }
+        HIAPI.PassService.getPass(with: url.absoluteString)
         .onCompletion { result in
             do {
                 let (data, _) = try result.get()
@@ -112,7 +112,7 @@ extension HIUserDetailViewController {
                 }
                 DispatchQueue.main.async { [weak self] in
                     if let strongSelf = self {
-                        UserDefaults.standard.set(true, forKey: "HIAPPLICATION_PASS_PROMPTED_\(user.id)")
+                        UserDefaults.standard.set(true, forKey: HIConstants.PASS_PROMPTED_KEY(user: user))
                         strongSelf.present(passVC, animated: true, completion: nil)
                     }
                 }
