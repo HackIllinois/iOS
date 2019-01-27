@@ -2,8 +2,8 @@
 //  Location+CoreDataProperties.swift
 //  HackIllinois
 //
-//  Created by Rauhul Varma on 1/25/18.
-//  Copyright © 2018 HackIllinois. All rights reserved.
+//  Created by Rauhul Varma on 1/27/29.
+//  Copyright © 2019 HackIllinois. All rights reserved.
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of
 //  Illinois/NCSA Open Source License. You should have received a copy of
@@ -19,11 +19,11 @@ extension Location {
         return NSFetchRequest<Location>(entityName: "Location")
     }
 
-    @NSManaged public var id: Int16
     @NSManaged public var latitude: Double
     @NSManaged public var longitude: Double
     @NSManaged public var name: String
     @NSManaged public var events: NSSet
+
 }
 
 // MARK: Generated accessors for events

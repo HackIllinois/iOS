@@ -33,11 +33,11 @@ final class HIAnnouncementDataSource {
                 DispatchQueue.main.sync {
                     do {
                         let (containedAnnouncements, _) = try result.get()
-                        let ctx = HICoreDataController.shared.persistentContainer.viewContext
+                        let ctx = HICoreDataController.shared.viewContext
                         try? ctx.fetch(announcementsFetchRequest).forEach {
                             ctx.delete($0)
                         }
-                        containedAnnouncements.data.forEach {
+                        containedAnnouncements.announcements.forEach {
                             _ = Announcement(context: ctx, announcement: $0)
                         }
                         try ctx.save()

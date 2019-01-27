@@ -15,43 +15,48 @@ import APIManager
 
 public struct EventContainer: Decodable, APIReturnable {
     public let events: [Event]
+
+    public init(from data: Data) throws {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
+        self = try decoder.decode(EventContainer.self, from: data)
+    }
 }
 
 public struct Event: Codable {
     internal enum CodingKeys: String, CodingKey {
-        case id
-        case name
+        case endTime
+        case eventType
         case info = "description"
-        case end = "endTime"
-        case start = "startTime"
         case locations
+        case name
+        case sponsor
+        case startTime
     }
 
-    public var favorite = false
-    public let id: Int16
-    public let name: String
+    public let endTime: Date
+    // Could be made into an enum with some coredata work
+    public let eventType: String
     public let info: String
-    public let end: Date
-    public let start: Date
-    public let locations: [LocationReference]
-
-    public struct LocationReference: Codable {
-        public let id: Int16
-        public let eventId: Int16
-        public let locationId: Int16
-    }
+    public let locations: [Location]
+    public let name: String
+    public let sponsor: String
+    public let startTime: Date
 }
 
 public struct Location: Codable {
-    public typealias Contained = ReturnDataContainer<Location>
+    internal enum CodingKeys: String, CodingKey {
+        case latitude
+        case longitude
+        case name = "description"
+    }
 
-    public let id: Int16
-    public let name: String
-    public let longitude: Double
     public let latitude: Double
+    public let longitude: Double
+    public let name: String
 }
 
 public struct Favorite: Codable, APIReturnable {
-    public let events: [String]
+    public let events: Set<String>
     public let id: String
 }

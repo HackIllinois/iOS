@@ -12,6 +12,7 @@
 
 import Foundation
 import UIKit
+import HIAPI
 
 protocol HIEventCellDelegate: class {
     func eventCellDidSelectFavoriteButton(_ eventCell: HIEventCell)
@@ -77,7 +78,7 @@ extension HIEventCell {
         titleLabel.text = rhs.name
         contentStackViewHeight += titleLabel.intrinsicContentSize.height
         lhs.contentStackView.addArrangedSubview(titleLabel)
-        if let locations = rhs.locations as? Set<Location> {
+        if let locations = rhs.locations.allObjects as? [Location] {
             for location in locations {
                 let locationLabel = HILabel(style: .location)
                 locationLabel.text = location.name

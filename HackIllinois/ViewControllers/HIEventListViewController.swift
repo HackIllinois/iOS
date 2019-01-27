@@ -79,10 +79,6 @@ extension HIEventListViewController: HIEventCellDelegate {
                     DispatchQueue.main.async {
                         HILocalNotificationController.shared.unscheduleNotification(for: event)
                         event.favorite = false
-                        // FIXME:
-                        // if eventCell.indexPath == indexPath {
-                        //     eventCell.setActive(event.favorite)
-                        // }
                     }
                 case .failure(let error):
                     print(error, error.localizedDescription)
@@ -99,10 +95,6 @@ extension HIEventListViewController: HIEventCellDelegate {
                     DispatchQueue.main.async {
                         HILocalNotificationController.shared.scheduleNotification(for: event)
                         event.favorite = true
-                        // FIXME:
-                        // if eventCell.indexPath == indexPath {
-                        //     eventCell.setActive(event.favorite)
-                        // }
                     }
                 case .failure(let error):
                     print(error, error.localizedDescription)

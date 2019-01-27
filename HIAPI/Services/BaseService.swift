@@ -26,7 +26,7 @@ public class BaseService: APIService {
     }
 
     class func hiValidate(statusCode: Int) throws {
-        if !(200..<300).contains(statusCode) {
+        if statusCode != 200 {
             let description = HTTPURLResponse.localizedString(forStatusCode: statusCode)
             throw APIRequestError.invalidHTTPReponse(code: statusCode, description: description)
         }

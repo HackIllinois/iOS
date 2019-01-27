@@ -16,14 +16,18 @@ import HIAPI
 
 @objc(Event)
 public class Event: NSManagedObject {
-    convenience init(context moc: NSManagedObjectContext, event: HIAPI.Event, locations: NSSet) {
+
+    convenience init(context moc: NSManagedObjectContext, event: HIAPI.Event, locations: NSSet, favorite: Bool) {
         guard let entity = NSEntityDescription.entity(forEntityName: "Event", in: moc) else { fatalError() }
         self.init(entity: entity, insertInto: moc)
-        favorite = event.favorite
-        end = event.end
-        info = event.info
+        self.favorite = favorite
         name = event.name
-        start = event.start
+        startTime = event.startTime
+        endTime = event.endTime
+        info = event.info
+        sponsor = event.sponsor
+        eventType = event.eventType
         self.locations = locations
     }
+
 }

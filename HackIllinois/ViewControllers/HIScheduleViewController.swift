@@ -20,14 +20,13 @@ class HIScheduleViewController: HIEventListViewController {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
 
         fetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: "start", ascending: true),
-            NSSortDescriptor(key: "name", ascending: true),
-            NSSortDescriptor(key: "id", ascending: true)
+            NSSortDescriptor(key: "startTime", ascending: true),
+            NSSortDescriptor(key: "name", ascending: true)
         ]
 
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
-            managedObjectContext: HICoreDataController.shared.persistentContainer.viewContext,
+            managedObjectContext: HICoreDataController.shared.viewContext,
             sectionNameKeyPath: "sectionIdentifier",
             cacheName: nil
         )
@@ -47,21 +46,21 @@ class HIScheduleViewController: HIEventListViewController {
         self.init(nibName: nil, bundle: nil)
 
         let fridayPredicate = NSPredicate(
-            format: "%@ =< start AND start < %@",
+            format: "%@ =< startTime AND startTime < %@",
             HIConstants.FRIDAY_START_TIME as NSDate,
             HIConstants.FRIDAY_END_TIME as NSDate
         )
         dataStore.append((displayText: "FRIDAY", predicate: fridayPredicate))
 
         let saturdayPredicate = NSPredicate(
-            format: "%@ =< start AND start < %@",
+            format: "%@ =< startTime AND startTime < %@",
             HIConstants.SATURDAY_START_TIME as NSDate,
             HIConstants.SATURDAY_END_TIME as NSDate
         )
         dataStore.append((displayText: "SATURDAY", predicate: saturdayPredicate))
 
         let sundayPredicate = NSPredicate(
-            format: "%@ =< start AND start < %@",
+            format: "%@ =< startTime AND startTime < %@",
             HIConstants.SUNDAY_START_TIME as NSDate,
             HIConstants.SUNDAY_END_TIME as NSDate
         )

@@ -16,6 +16,7 @@ import HIAPI
 
 @objc(Announcement)
 public class Announcement: NSManagedObject {
+
     convenience init(context moc: NSManagedObjectContext, announcement: HIAPI.Announcement) {
         guard let entity = NSEntityDescription.entity(forEntityName: "Announcement", in: moc) else { fatalError() }
         self.init(entity: entity, insertInto: moc)
@@ -24,4 +25,5 @@ public class Announcement: NSManagedObject {
         title = announcement.title
         time = announcement.time
     }
+
 }
