@@ -24,6 +24,8 @@ class HIScheduleViewController: HIEventListViewController {
             NSSortDescriptor(key: "name", ascending: true)
         ]
 
+        fetchRequest.predicate = currentPredicate()
+
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
             managedObjectContext: HICoreDataController.shared.viewContext,
@@ -39,12 +41,8 @@ class HIScheduleViewController: HIEventListViewController {
     var currentTab = 0
     var onlyFavorites = false
     let onlyFavoritesPredicate = NSPredicate(format: "favorite == YES" )
-    var dataStore = [(displayText: String, predicate: NSPredicate)]()
-
-    // MARK: - Init
-    convenience init() {
-        self.init(nibName: nil, bundle: nil)
-
+    var dataStore: [(displayText: String, predicate: NSPredicate)] = {
+        var dataStore = [(displayText: String, predicate: NSPredicate)]()
         let fridayPredicate = NSPredicate(
             format: "%@ =< startTime AND startTime < %@",
             HIConstants.FRIDAY_START_TIME as NSDate,
@@ -65,17 +63,8 @@ class HIScheduleViewController: HIEventListViewController {
             HIConstants.SUNDAY_END_TIME as NSDate
         )
         dataStore.append((displayText: "SUNDAY", predicate: sundayPredicate))
-
-        updatePredicate()
-    }
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) should not be used")
-    }
+        return dataStore
+    }()
 }
 
 // MARK: - Actions
@@ -98,12 +87,16 @@ extension HIScheduleViewController {
     }
 
     func updatePredicate() {
+        fetchedResultsController.fetchRequest.predicate = currentPredicate()
+    }
+
+    func currentPredicate() -> NSPredicate {
         let currentTabPredicate = dataStore[currentTab].predicate
         if onlyFavorites {
             let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [currentTabPredicate, onlyFavoritesPredicate])
-            fetchedResultsController.fetchRequest.predicate = compoundPredicate
+            return compoundPredicate
         } else {
-            fetchedResultsController.fetchRequest.predicate = currentTabPredicate
+            return currentTabPredicate
         }
     }
 

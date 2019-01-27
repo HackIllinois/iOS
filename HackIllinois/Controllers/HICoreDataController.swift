@@ -21,7 +21,8 @@ class HICoreDataController {
         let container = NSPersistentContainer(name: "HackIllinois")
         container.persistentStoreDescriptions.first?.shouldMigrateStoreAutomatically = true
         container.persistentStoreDescriptions.first?.shouldInferMappingModelAutomatically = true
-        container.persistentStoreDescriptions.first?.shouldAddStoreAsynchronously = true
+        // could be set to true and hidden behind the launching animation + a loading screen if needed
+        container.persistentStoreDescriptions.first?.shouldAddStoreAsynchronously = false
         container.persistentStoreDescriptions.first?.isReadOnly = false
         container.loadPersistentStores { (_, error) in
             if let error = error as NSError? {
