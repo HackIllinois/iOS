@@ -78,8 +78,9 @@ extension HIEventCell {
         titleLabel.text = rhs.name
         contentStackViewHeight += titleLabel.intrinsicContentSize.height
         lhs.contentStackView.addArrangedSubview(titleLabel)
-        if let locations = rhs.locations.allObjects as? [Location] {
-            for location in locations {
+        if let locations = rhs.locations as? Set<Location> {
+            let sortedLocations = locations.sorted { $0.name < $1.name }
+            for location in sortedLocations {
                 let locationLabel = HILabel(style: .location)
                 locationLabel.text = location.name
                 contentStackViewHeight += locationLabel.intrinsicContentSize.height + 3

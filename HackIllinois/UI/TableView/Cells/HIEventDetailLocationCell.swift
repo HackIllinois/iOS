@@ -13,7 +13,6 @@
 import Foundation
 import UIKit
 import MapKit
-import HIAPI
 
 class HIEventDetailLocationCell: UITableViewCell {
 
