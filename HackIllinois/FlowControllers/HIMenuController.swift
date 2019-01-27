@@ -180,7 +180,7 @@ extension HIMenuController {
     private func updateOverlayViewAlphaFor(_ state: State) {
         switch state {
         case .open:
-            overlayView.alpha = 0.70
+            overlayView.alpha = 1.0
 
         case .closed:
             overlayView.alpha = 0.0

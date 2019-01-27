@@ -23,13 +23,13 @@ struct HIAppearance: Equatable {
     let preferredStatusBarStyle: UIStatusBarStyle
     let indicatorStyle: UIScrollView.IndicatorStyle
 
-    static let night = HIAppearance(
-        primary: UIColor(named: "darkIndigo")!,
-        accent: UIColor(named: "hotPink")!,
-        background: UIColor(named: "paleBlue")!,
-        contentBackground: UIColor(named: "white")!,
-        actionBackground: UIColor(named: "lightPeriwinkle")!,
-        overlay: UIColor(named: "darkBlueGrey")!,
+    static let day = HIAppearance(
+        primary: #colorLiteral(red: 0.003921568627, green: 0.3803921569, blue: 0.4666666667, alpha: 1),
+        accent: #colorLiteral(red: 1, green: 0.4666666667, blue: 0.4352941176, alpha: 1),
+        background: #colorLiteral(red: 0.9098039216, green: 0.9843137255, blue: 1, alpha: 1),
+        contentBackground: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
+        actionBackground: #colorLiteral(red: 1, green: 0.4666666667, blue: 0.4352941176, alpha: 1),
+        overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: .clear,
         preferredStatusBarStyle: .default,
         indicatorStyle: .black
