@@ -11,10 +11,13 @@
 //
 
 import Foundation
+import APIManager
+
+public struct AnnouncementContainer: Codable, APIReturnable {
+    public let announcements: [Announcement]
+}
 
 public struct Announcement: Codable {
-    public typealias Contained = ReturnDataContainer<Announcement>
-
     internal enum CodingKeys: String, CodingKey {
         case id
         case title
@@ -22,8 +25,8 @@ public struct Announcement: Codable {
         case time = "created"
     }
 
-    public var id: Int16
-    public var title: String
-    public var info: String
-    public var time: Date
+    public let id: Int16
+    public let title: String
+    public let info: String
+    public let time: Date
 }

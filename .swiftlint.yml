@@ -1,5 +1,6 @@
 disabled_rules:
   - cyclomatic_complexity
+  - large_tuple
 
 opt_in_rules:
   - file_header

@@ -20,14 +20,15 @@ class HIScheduleViewController: HIEventListViewController {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
 
         fetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: "start", ascending: true),
-            NSSortDescriptor(key: "name", ascending: true),
-            NSSortDescriptor(key: "id", ascending: true)
+            NSSortDescriptor(key: "startTime", ascending: true),
+            NSSortDescriptor(key: "name", ascending: true)
         ]
+
+        fetchRequest.predicate = currentPredicate()
 
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
-            managedObjectContext: HICoreDataController.shared.persistentContainer.viewContext,
+            managedObjectContext: HICoreDataController.shared.viewContext,
             sectionNameKeyPath: "sectionIdentifier",
             cacheName: nil
         )
@@ -40,43 +41,30 @@ class HIScheduleViewController: HIEventListViewController {
     var currentTab = 0
     var onlyFavorites = false
     let onlyFavoritesPredicate = NSPredicate(format: "favorite == YES" )
-    var dataStore = [(displayText: String, predicate: NSPredicate)]()
-
-    // MARK: - Init
-    convenience init() {
-        self.init(nibName: nil, bundle: nil)
-
+    var dataStore: [(displayText: String, predicate: NSPredicate)] = {
+        var dataStore = [(displayText: String, predicate: NSPredicate)]()
         let fridayPredicate = NSPredicate(
-            format: "%@ =< start AND start < %@",
+            format: "%@ =< startTime AND startTime < %@",
             HIConstants.FRIDAY_START_TIME as NSDate,
             HIConstants.FRIDAY_END_TIME as NSDate
         )
         dataStore.append((displayText: "FRIDAY", predicate: fridayPredicate))
 
         let saturdayPredicate = NSPredicate(
-            format: "%@ =< start AND start < %@",
+            format: "%@ =< startTime AND startTime < %@",
             HIConstants.SATURDAY_START_TIME as NSDate,
             HIConstants.SATURDAY_END_TIME as NSDate
         )
         dataStore.append((displayText: "SATURDAY", predicate: saturdayPredicate))
 
         let sundayPredicate = NSPredicate(
-            format: "%@ =< start AND start < %@",
+            format: "%@ =< startTime AND startTime < %@",
             HIConstants.SUNDAY_START_TIME as NSDate,
             HIConstants.SUNDAY_END_TIME as NSDate
         )
         dataStore.append((displayText: "SUNDAY", predicate: sundayPredicate))
-
-        updatePredicate()
-    }
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) should not be used")
-    }
+        return dataStore
+    }()
 }
 
 // MARK: - Actions
@@ -99,12 +87,16 @@ extension HIScheduleViewController {
     }
 
     func updatePredicate() {
+        fetchedResultsController.fetchRequest.predicate = currentPredicate()
+    }
+
+    func currentPredicate() -> NSPredicate {
         let currentTabPredicate = dataStore[currentTab].predicate
         if onlyFavorites {
             let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [currentTabPredicate, onlyFavoritesPredicate])
-            fetchedResultsController.fetchRequest.predicate = compoundPredicate
+            return compoundPredicate
         } else {
-            fetchedResultsController.fetchRequest.predicate = currentTabPredicate
+            return currentTabPredicate
         }
     }
 

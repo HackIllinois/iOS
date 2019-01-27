@@ -20,16 +20,15 @@ class HIHomeViewController: HIEventListViewController {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
 
         fetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: "start", ascending: true),
-            NSSortDescriptor(key: "name", ascending: true),
-            NSSortDescriptor(key: "id", ascending: true)
+            NSSortDescriptor(key: "startTime", ascending: true),
+            NSSortDescriptor(key: "name", ascending: true)
         ]
 
-        fetchRequest.predicate = NSPredicate(format: "(start < now()) AND (end > now())")
+        fetchRequest.predicate = NSPredicate(format: "startTime < now() AND endTime > now()")
 
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
-            managedObjectContext: HICoreDataController.shared.persistentContainer.viewContext,
+            managedObjectContext: HICoreDataController.shared.viewContext,
             sectionNameKeyPath: nil,
             cacheName: nil
         )

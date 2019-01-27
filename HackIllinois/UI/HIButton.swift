@@ -140,7 +140,7 @@ class HIButton: UIButton {
 
     func setToggle(active: Bool) {
         guard case .iconToggle = style else {
-            fatalError("setAsyncTask(_:) can only be used on an HIButton with Style async.")
+            fatalError("setToggle(_:) can only be used on an HIButton with Style iconToggle.")
         }
         guard isActive != active else { return }
         isActive = active

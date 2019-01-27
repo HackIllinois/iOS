@@ -18,4 +18,5 @@ enum AuthenticationError: Error {
 
 enum DecodingError: Error {
     case unknownOption
+    case unknownCase
 }

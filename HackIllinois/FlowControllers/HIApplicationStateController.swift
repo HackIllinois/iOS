@@ -56,7 +56,7 @@ extension HIApplicationStateController {
     func resetPersistentDataIfNeeded() {
         guard !UserDefaults.standard.bool(forKey: HIConstants.APPLICATION_INSTALLED_KEY) else { return }
         _ = Keychain.default.purge()
-
+        HICoreDataController.shared.purge()
         UserDefaults.standard.set(true, forKey: HIConstants.APPLICATION_INSTALLED_KEY)
     }
 

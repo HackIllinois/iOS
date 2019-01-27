@@ -35,24 +35,24 @@ extension HIEventDetailViewController {
         guard let isFavorite = sender.isActive, let event = event else { return }
 
         if isFavorite {
-            HIAPI.EventService.unfavortieBy(id: Int(event.id))
-                .onCompletion { result in
-                    switch result {
-                    case .success:
-                        DispatchQueue.main.async {
-                            HILocalNotificationController.shared.unscheduleNotification(for: event)
-                            event.favorite = false
-                            sender.setToggle(active: event.favorite)
-                        }
-                    case .failure(let error):
-                        print(error, error.localizedDescription)
+            HIAPI.EventService.unfavoriteBy(name: event.name)
+            .onCompletion { result in
+                switch result {
+                case .success:
+                    DispatchQueue.main.async {
+                        HILocalNotificationController.shared.unscheduleNotification(for: event)
+                        event.favorite = false
+                        sender.setToggle(active: event.favorite)
                     }
+                case .failure(let error):
+                    print(error, error.localizedDescription)
                 }
-                .authorize(with: HIApplicationStateController.shared.user)
-                .launch()
+            }
+            .authorize(with: HIApplicationStateController.shared.user)
+            .launch()
 
         } else {
-            HIAPI.EventService.favortieBy(id: Int(event.id))
+            HIAPI.EventService.favoriteBy(name: event.name)
             .onCompletion { result in
                 switch result {
                 case .success:
