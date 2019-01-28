@@ -22,7 +22,10 @@ class HIEventDetailViewController: HIBaseViewController {
     // MARK: Views
     let titleLabel = HILabel(style: .event)
     let descriptionLabel = HILabel(style: .description)
-    let favoritedButton = HIButton(style: .iconToggle(activeImage: #imageLiteral(resourceName: "Favorited"), inactiveImage: #imageLiteral(resourceName: "Unfavorited")))
+    let favoritedButton = HIButton(style: .content) {
+        $0.activeImage = #imageLiteral(resourceName: "Favorited")
+        $0.inactiveImage = #imageLiteral(resourceName: "Unfavorited")
+    }
 
     // MARK: Constraints
     var descriptionLabelHeight = NSLayoutConstraint()
@@ -32,9 +35,9 @@ class HIEventDetailViewController: HIBaseViewController {
 // MARK: - Actions
 extension HIEventDetailViewController {
     @objc func didSelectFavoriteButton(_ sender: HIButton) {
-        guard let isFavorite = sender.isActive, let event = event else { return }
+        guard let event = event else { return }
 
-        if isFavorite {
+        if sender.isActive {
             HIAPI.EventService.unfavoriteBy(name: event.name)
             .onCompletion { result in
                 switch result {
@@ -42,7 +45,7 @@ extension HIEventDetailViewController {
                     DispatchQueue.main.async {
                         HILocalNotificationController.shared.unscheduleNotification(for: event)
                         event.favorite = false
-                        sender.setToggle(active: event.favorite)
+                        sender.isActive = event.favorite
                     }
                 case .failure(let error):
                     print(error, error.localizedDescription)
@@ -59,7 +62,7 @@ extension HIEventDetailViewController {
                     DispatchQueue.main.async {
                         HILocalNotificationController.shared.scheduleNotification(for: event)
                         event.favorite = true
-                        sender.setToggle(active: event.favorite)
+                        sender.isActive = event.favorite
                     }
                 case .failure(let error):
                     print(error, error.localizedDescription)
@@ -137,7 +140,8 @@ extension HIEventDetailViewController {
         guard let event = event else { return }
         titleLabel.text = event.name
         descriptionLabel.text = event.info
-        favoritedButton.setToggle(active: event.favorite)
+        favoritedButton.isActive = event.favorite
+
         tableView?.reloadData()
         view.layoutIfNeeded()
         let targetSize = CGSize(width: descriptionLabel.frame.width, height: .greatestFiniteMagnitude)

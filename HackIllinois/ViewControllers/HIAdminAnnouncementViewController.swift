@@ -24,7 +24,7 @@ class HIAdminAnnouncementViewController: HIBaseViewController {
     // MARK: - Properties
     var titleTextField = HITextField(style: .standard(placeholder: "TITLE"))
     var descriptionTextField = HITextField(style: .standard(placeholder: "DESCRIPTION"))
-    var createAnnouncementButton = HIButton(style: .async(title: "Create Announcement"))
+    var createAnnouncementButton = HIButton(style: .standard) { $0.title = "Create Announcement" }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
@@ -150,9 +150,9 @@ extension HIAdminAnnouncementViewController {
     func stylizeFor(_ style: HIAnnouncementAdminViewControllerStyle) {
         switch style {
         case .currentlyCreatingAnnouncement:
-            createAnnouncementButton.setAsyncTask(running: true)
+            createAnnouncementButton.isRunning = true
         case .readyToCreateAnnouncement:
-            createAnnouncementButton.setAsyncTask(running: false)
+            createAnnouncementButton.isRunning = false
         }
     }
 }

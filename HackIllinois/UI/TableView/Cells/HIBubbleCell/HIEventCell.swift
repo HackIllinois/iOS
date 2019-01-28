@@ -20,7 +20,12 @@ protocol HIEventCellDelegate: class {
 
 class HIEventCell: HIBubbleCell {
     // MARK: - Properties
-    var favoritedButton = HIButton(style: .iconToggle(activeImage: #imageLiteral(resourceName: "Favorited"), inactiveImage: #imageLiteral(resourceName: "Unfavorited")))
+    let favoritedButton = HIButton(style: .content) {
+//        $0.usesTemplates = true
+        $0.activeImage = #imageLiteral(resourceName: "Favorited")
+        $0.inactiveImage = #imageLiteral(resourceName: "Unfavorited")
+    }
+
     var contentStackView = UIStackView()
     var contentStackViewHeight = NSLayoutConstraint()
 
@@ -72,7 +77,7 @@ extension HIEventCell {
     }
 
     static func <- (lhs: HIEventCell, rhs: Event) {
-        lhs.favoritedButton.setToggle(active: rhs.favorite)
+        lhs.favoritedButton.isActive = rhs.favorite
         var contentStackViewHeight: CGFloat = 0
         let titleLabel = HILabel(style: .event)
         titleLabel.text = rhs.name
@@ -95,7 +100,7 @@ extension HIEventCell {
 extension HIEventCell {
     override func prepareForReuse() {
         super.prepareForReuse()
-        favoritedButton.setToggle(active: false)
+        favoritedButton.isActive = false
         contentStackView.arrangedSubviews.forEach { (view) in
             contentStackView.removeArrangedSubview(view)
             view.removeFromSuperview()

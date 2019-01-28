@@ -16,26 +16,60 @@ import UIKit
 class HIButton: UIButton {
     // MARK: - Types
     enum Style {
-        case standard(title: String?)
-        case async(title: String?)
-        case menu(title: String?, tag: Int)
-        case icon(image: UIImage)
-        case iconToggle(activeImage: UIImage, inactiveImage: UIImage)
+        case content
+        case plain
+        case standard
+        case menu(tag: Int)
     }
 
     // MARK: - Properties
     let style: Style
-    var activityIndicator: UIActivityIndicatorView?
 
-    // MARK: Icon
-    private(set) var isActive: Bool?
-    var activeTemplateImage: UIImage?
-    var inactiveTemplateImage: UIImage?
+    var title: String?
+    var activeImage: UIImage?
+    var inactiveImage: UIImage?
+
+    var isActive: Bool = false {
+        willSet {
+            guard newValue != isActive else { return }
+            let newImage = newValue ? activeImage : inactiveImage
+            setImage(newImage, for: .normal)
+        }
+    }
+
+    var isRunning: Bool = false {
+        willSet {
+            guard newValue != isRunning else { return }
+            if newValue {
+                isEnabled = false
+                setTitle(nil, for: .normal)
+                backgroundColor = UIColor.lightGray
+                activityIndicator.startAnimating()
+            } else {
+                isEnabled = true
+                setTitle(title, for: .normal)
+                backgroundColor = HIAppearance.current.actionBackground
+                activityIndicator.stopAnimating()
+            }
+        }
+    }
+
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        self.addSubview(activityIndicator)
+        activityIndicator.stopAnimating()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        return activityIndicator
+    }()
 
     // MARK: - Init
-    init(style: Style) {
+    init(style: Style, additionalConfiguration: ((HIButton) -> Void)? = nil) {
         self.style = style
         super.init(frame: .zero)
+        additionalConfiguration?(self)
 
         addTarget(self, action: #selector(handleTouchDown), for: .touchDown)
         addTarget(self, action: #selector(handleTouchDragEnter), for: .touchDragEnter)
@@ -46,41 +80,21 @@ class HIButton: UIButton {
         adjustsImageWhenHighlighted = false
 
         switch style {
-        case .standard(let title):
-            layer.cornerRadius = 8
-            setTitle(title, for: .normal)
+        case .content, .plain:
             titleLabel?.font = UIFont.systemFont(ofSize: 15)
 
-        case .async(let title):
+        case .standard:
             layer.cornerRadius = 8
-            setTitle(title, for: .normal)
             titleLabel?.font = UIFont.systemFont(ofSize: 15)
 
-            let activityIndicator = UIActivityIndicatorView()
-            addSubview(activityIndicator)
-            activityIndicator.stopAnimating()
-            activityIndicator.hidesWhenStopped = true
-            activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-            activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-            activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            self.activityIndicator = activityIndicator
-
-        case .menu(let title, let tag):
+        case .menu(let tag):
             contentHorizontalAlignment = .left
-            setTitle(title, for: .normal)
             titleLabel?.font = UIFont.systemFont(ofSize: 16)
             self.tag = tag
-
-        case .icon(let image):
-            activeTemplateImage = image.withRenderingMode(.alwaysTemplate)
-            setImage(activeTemplateImage, for: .normal)
-
-        case .iconToggle(let activeImage, let inactiveImage):
-            activeTemplateImage = activeImage.withRenderingMode(.alwaysTemplate)
-            inactiveTemplateImage = inactiveImage.withRenderingMode(.alwaysTemplate)
-            setImage(inactiveTemplateImage, for: .normal)
-            isActive = false
         }
+
+        setTitle(title, for: .normal)
+        setImage(inactiveImage, for: .normal)
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
@@ -98,54 +112,22 @@ class HIButton: UIButton {
     @objc func refreshForThemeChange() {
         setTitleColor(HIAppearance.current.primary, for: .normal)
 
+        activityIndicator.tintColor = HIAppearance.current.accent
+        tintColor = HIAppearance.current.accent
+
         switch style {
+        case .content:
+            backgroundColor = HIAppearance.current.contentBackground
+
+        case .plain:
+            backgroundColor = HIAppearance.current.background
+
         case .standard:
             backgroundColor = HIAppearance.current.actionBackground
 
-        case .async:
-            backgroundColor = HIAppearance.current.actionBackground
-            activityIndicator?.tintColor = HIAppearance.current.accent
-
         case .menu:
             backgroundColor = HIAppearance.current.background
-            setTitleColor(HIAppearance.current.primary, for: .normal)
-
-        case .icon:
-            backgroundColor = HIAppearance.current.background
-            tintColor = HIAppearance.current.accent
-
-        case .iconToggle:
-            tintColor = HIAppearance.current.actionBackground
-
         }
-    }
-
-    // MARK: - API
-    func setAsyncTask(running: Bool) {
-        guard case let .async(title) = style else {
-            fatalError("setAsyncTask(_:) can only be used on an HIButton with Style async.")
-        }
-        if running {
-            isEnabled = false
-            setTitle(nil, for: .normal)
-            backgroundColor = UIColor.lightGray
-            activityIndicator?.startAnimating()
-        } else {
-            isEnabled = true
-            setTitle(title, for: .normal)
-            backgroundColor = HIAppearance.current.actionBackground
-            activityIndicator?.stopAnimating()
-        }
-    }
-
-    func setToggle(active: Bool) {
-        guard case .iconToggle = style else {
-            fatalError("setToggle(_:) can only be used on an HIButton with Style iconToggle.")
-        }
-        guard isActive != active else { return }
-        isActive = active
-        let newImage = active ? activeTemplateImage : inactiveTemplateImage
-        setImage(newImage, for: .normal)
     }
 
     // MARK: - Touch Animations

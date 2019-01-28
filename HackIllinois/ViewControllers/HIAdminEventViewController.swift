@@ -25,7 +25,7 @@ class HIAdminEventViewController: HIBaseViewController {
     // MARK: - Properties
     var titleTextField = HITextField(style: .standard(placeholder: "TITLE"))
     var durationTextField = HITextField(style: .standard(placeholder: "DURATION (MINUTES)"))
-    var createEventButton = HIButton(style: .async(title: "Create Tracked Event"))
+    var createEventButton = HIButton(style: .standard) { $0.title = "Create Tracked Event" }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
@@ -168,9 +168,9 @@ extension HIAdminEventViewController {
     func stylizeFor(_ style: HIAdminEventViewControllerStyle) {
         switch style {
         case .currentlyCreatingEvent:
-            createEventButton.setAsyncTask(running: true)
+            createEventButton.isRunning = true
         case .readyToCreateEvent:
-            createEventButton.setAsyncTask(running: false)
+            createEventButton.isRunning = false
         }
     }
 }

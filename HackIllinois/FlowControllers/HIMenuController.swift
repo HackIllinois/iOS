@@ -127,7 +127,9 @@ extension HIMenuController {
         menuHeight = menu.heightAnchor.constraint(equalToConstant: 0)
         menuHeight.isActive = true
 
-        let closeMenuButton = HIButton(style: .icon(image: #imageLiteral(resourceName: "MenuClose")))
+        let closeMenuButton = HIButton(style: .plain) {
+            $0.inactiveImage = #imageLiteral(resourceName: "MenuClose")
+        }
         closeMenuButton.addTarget(self, action: #selector(close(_:)), for: .touchUpInside)
         closeMenuButton.translatesAutoresizingMaskIntoConstraints = false
         menu.addSubview(closeMenuButton)
@@ -211,7 +213,9 @@ extension HIMenuController {
         let viewControllers = _tabBarController.viewControllers ?? []
         menuItemsHeight.constant = CGFloat(viewControllers.count) * MENU_ITEM_HEIGHT
         for (index, viewController) in viewControllers.enumerated() {
-            let button = HIButton(style: .menu(title: viewController.title, tag: index))
+            let button = HIButton(style: .menu(tag: index)) {
+                $0.title = viewController.title
+            }
             button.addTarget(self, action: #selector(didSelectItem(_:)), for: .touchUpInside)
             menuItems.addArrangedSubview(button)
         }
