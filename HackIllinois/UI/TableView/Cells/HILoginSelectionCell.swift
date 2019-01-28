@@ -60,7 +60,7 @@ class HILoginSelectionCell: UITableViewCell {
     }
 
     // MARK: - Themeable
-    @objc  func refreshForThemeChange() {
+    @objc func refreshForThemeChange() {
         contentView.backgroundColor = HIAppearance.current.background
     }
 }
@@ -94,5 +94,4 @@ extension HILoginSelectionCell {
         }
         animator?.startAnimation()
     }
-
 }

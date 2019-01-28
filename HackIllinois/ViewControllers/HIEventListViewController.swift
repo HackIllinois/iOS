@@ -68,10 +68,9 @@ extension HIEventListViewController {
 extension HIEventListViewController: HIEventCellDelegate {
     func eventCellDidSelectFavoriteButton(_ eventCell: HIEventCell) {
         guard let indexPath = eventCell.indexPath,
-            let isFavorite = eventCell.favoritedButton.isActive,
             let event = _fetchedResultsController?.object(at: indexPath) as? Event else { return }
 
-        if isFavorite {
+        if eventCell.favoritedButton.isActive {
             HIAPI.EventService.unfavoriteBy(name: event.name)
             .onCompletion { result in
                 switch result {

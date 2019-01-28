@@ -23,7 +23,7 @@ struct HIAppearance: Equatable {
     let preferredStatusBarStyle: UIStatusBarStyle
     let indicatorStyle: UIScrollView.IndicatorStyle
 
-    static let day = HIAppearance(
+    static let night = HIAppearance(
         primary: UIColor(named: "darkIndigo")!,
         accent: UIColor(named: "hotPink")!,
         background: UIColor(named: "paleBlue")!,
@@ -35,7 +35,7 @@ struct HIAppearance: Equatable {
         indicatorStyle: .black
     )
 
-    static let night = HIAppearance(
+    static let day = HIAppearance(
         primary: UIColor(red: 207/255, green: 216/255, blue: 238/255, alpha: 255/255),
         accent: UIColor(red: 244/255, green: 151/255, blue: 185/255, alpha: 255/255),
         background: UIColor(red: 17/255, green: 17/255, blue: 47/255, alpha: 255/255),
