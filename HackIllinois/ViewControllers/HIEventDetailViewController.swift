@@ -14,6 +14,7 @@ import Foundation
 import UIKit
 import MapKit
 import HIAPI
+import APIManager
 
 class HIEventDetailViewController: HIBaseViewController {
     // MARK: - Properties
@@ -37,40 +38,26 @@ extension HIEventDetailViewController {
     @objc func didSelectFavoriteButton(_ sender: HIButton) {
         guard let event = event else { return }
 
-        if sender.isActive {
-            HIAPI.EventService.unfavoriteBy(name: event.name)
-            .onCompletion { result in
-                switch result {
-                case .success:
-                    DispatchQueue.main.async {
-                        HILocalNotificationController.shared.unscheduleNotification(for: event)
-                        event.favorite = false
-                        sender.isActive = event.favorite
-                    }
-                case .failure(let error):
-                    print(error, error.localizedDescription)
-                }
-            }
-            .authorize(with: HIApplicationStateController.shared.user)
-            .launch()
+        let changeFavoriteStatusRequest: APIRequest<Favorite> =
+            sender.isActive ?
+                HIAPI.EventService.unfavoriteBy(name: event.name) :
+                HIAPI.EventService.favoriteBy(name: event.name)
 
-        } else {
-            HIAPI.EventService.favoriteBy(name: event.name)
-            .onCompletion { result in
-                switch result {
-                case .success:
-                    DispatchQueue.main.async {
-                        HILocalNotificationController.shared.scheduleNotification(for: event)
-                        event.favorite = true
-                        sender.isActive = event.favorite
-                    }
-                case .failure(let error):
-                    print(error, error.localizedDescription)
+        changeFavoriteStatusRequest
+        .onCompletion { result in
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    HILocalNotificationController.shared.unscheduleNotification(for: event)
+                    event.favorite = !sender.isActive
+                    sender.isActive = event.favorite
                 }
+            case .failure(let error):
+                print(error, error.localizedDescription)
             }
-            .authorize(with: HIApplicationStateController.shared.user)
-            .launch()
         }
+        .authorize(with: HIApplicationStateController.shared.user)
+        .launch()
     }
 }
 
