@@ -21,8 +21,11 @@ class HIEventListViewController: HIBaseViewController {
 // MARK: - UITableView Setup
 extension HIEventListViewController {
     override func setupTableView() {
-        tableView?.register(HIDateHeader.self, forHeaderFooterViewReuseIdentifier: HIDateHeader.identifier)
-        tableView?.register(HIEventCell.self, forCellReuseIdentifier: HIEventCell.identifier)
+        if let tableView = tableView {
+            tableView.register(HIDateHeader.self, forHeaderFooterViewReuseIdentifier: HIDateHeader.identifier)
+            tableView.register(HIEventCell.self, forCellReuseIdentifier: HIEventCell.identifier)
+            registerForPreviewing(with: self, sourceView: tableView)
+        }
         super.setupTableView()
     }
 }
@@ -102,5 +105,23 @@ extension HIEventListViewController: HIEventCellDelegate {
             .authorize(with: HIApplicationStateController.shared.user)
             .launch()
         }
+    }
+}
+
+// MARK: - UIViewControllerPreviewingDelegate
+extension HIEventListViewController: UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let tableView = tableView,
+            let indexPath = tableView.indexPathForRow(at: location),
+            let event = _fetchedResultsController?.object(at: indexPath) as? Event else {
+                return nil
+        }
+        previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
+        eventDetailViewController.event = event
+        return eventDetailViewController
+    }
+
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        navigationController?.pushViewController(viewControllerToCommit, animated: true)
     }
 }

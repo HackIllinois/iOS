@@ -77,11 +77,7 @@ extension HIScheduleViewController {
 
     @objc func didSelectFavoritesIcon(_ sender: UIBarButtonItem) {
         onlyFavorites = !onlyFavorites
-        if onlyFavorites {
-            sender.image = #imageLiteral(resourceName: "MenuFavorited")
-        } else {
-            sender.image = #imageLiteral(resourceName: "MenuUnfavorited")
-        }
+        sender.image = onlyFavorites ? #imageLiteral(resourceName: "MenuFavorited") : #imageLiteral(resourceName: "MenuUnfavorited")
         updatePredicate()
         animateReload()
     }
@@ -127,7 +123,6 @@ extension HIScheduleViewController {
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-
         self.tableView = tableView
     }
 
