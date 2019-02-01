@@ -18,6 +18,7 @@ class HIMenuController: UIViewController {
     enum State {
         case open
         case closed
+        case reopened
     }
 
     // MARK: - Constants
@@ -47,6 +48,7 @@ class HIMenuController: UIViewController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleAppReopened), name: UIApplication.willEnterForegroundNotification, object: nil)
         refreshForThemeChange()
     }
 
@@ -61,6 +63,12 @@ class HIMenuController: UIViewController {
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
         setNeedsStatusBarAppearanceUpdate()
+    }
+
+    @objc func handleAppReopened() {
+        if state == .open {
+            animateMenuFor(.reopened)
+        }
     }
 }
 
@@ -171,6 +179,9 @@ extension HIMenuController {
             menuHeight.constant = menuItemsHeight.constant + 11 + 28 + view.safeAreaInsets.top
             menuOverlap.constant = view.safeAreaInsets.top
 
+        case .reopened:
+            menuOverlap.constant = menuItemsHeight.constant + 11 + 28 + view.safeAreaInsets.top
+
         case .closed:
             menuHeight.constant = 0
             menuOverlap.constant = 0
@@ -179,7 +190,7 @@ extension HIMenuController {
 
     private func updateOverlayViewAlphaFor(_ state: State) {
         switch state {
-        case .open:
+        case .open, .reopened:
             overlayView.alpha = 0.70
 
         case .closed:
