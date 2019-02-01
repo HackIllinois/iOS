@@ -29,9 +29,9 @@ public final class AuthService: BaseService {
 
         public var displayName: String {
             switch self {
-            case .github: return "attendee"
-            case .google: return "staff"
-            case .linkedIn: return "recruiter"
+            case .github: return "ATTENDEE"
+            case .google: return "STAFF"
+            case .linkedIn: return "RECRUITER"
             }
         }
     }
