@@ -21,11 +21,19 @@ public final class AuthService: BaseService {
     }
 
     public enum OAuthProvider: String, Codable {
-        case github = "attendee"
-        case google = "staff"
-        case linkedIn = "recruiter"
+        case github
+        case google
+        case linkedIn = "linkedin"
 
         public static let all: [OAuthProvider] = [.github, .google, .linkedIn]
+
+        public var displayName: String {
+            switch self {
+            case .github: return "ATTENDEE"
+            case .google: return "STAFF"
+            case .linkedIn: return "RECRUITER"
+            }
+        }
     }
 
     public static func oauthURL(provider: OAuthProvider) -> URL {

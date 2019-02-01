@@ -74,7 +74,7 @@ extension HILoginSelectionViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HILoginSelectionCell.identifier, for: indexPath)
         if let cell = cell as? HILoginSelectionCell {
-            cell.titleLabel.text = HIAPI.AuthService.OAuthProvider.all[indexPath.row].rawValue.uppercased()
+            cell.titleLabel.text = HIAPI.AuthService.OAuthProvider.all[indexPath.row].displayName
             if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
                 cell.separatorView.isHidden = true
             }
