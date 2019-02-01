@@ -21,9 +21,9 @@ public final class AuthService: BaseService {
     }
 
     public enum OAuthProvider: String, Codable {
-        case github
-        case google
-        case linkedIn = "linkedin"
+        case github = "attendee"
+        case google = "staff"
+        case linkedIn = "recruiter"
 
         public static let all: [OAuthProvider] = [.github, .google, .linkedIn]
     }
