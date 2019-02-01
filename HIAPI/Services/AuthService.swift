@@ -26,7 +26,14 @@ public final class AuthService: BaseService {
         case linkedIn = "linkedin"
 
         public static let all: [OAuthProvider] = [.github, .google, .linkedIn]
-        public static let displayNames: [String] = ["attendee", "staff", "recruiter"]
+
+        public var displayName: String {
+            switch self {
+            case .github: return "attendee"
+            case .google: return "staff"
+            case .linkedIn: return "recruiter"
+            }
+        }
     }
 
     public static func oauthURL(provider: OAuthProvider) -> URL {
