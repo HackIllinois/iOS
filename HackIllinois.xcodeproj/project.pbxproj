@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		0A360882203539FF001F5F85 /* HIAdminEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */; };
 		35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */; };
+		3537DBAD2206B7F500D50384 /* Stickers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3537DBAC2206B7F500D50384 /* Stickers.xcassets */; };
 		35B4A44F21E091BA001B3AF0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4A44D21E091B9001B3AF0 /* Logger.swift */; };
 		35B4A45021E091BA001B3AF0 /* HIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4A44E21E091B9001B3AF0 /* HIError.swift */; };
-		35D7CE9720380ACF00654E28 /* Stickers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35D7CE9620380ACF00654E28 /* Stickers.xcassets */; };
 		35D7CE9B20380ACF00654E28 /* Stickers.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 35D7CE9420380ACF00654E28 /* Stickers.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6602C7A6DEE0178C82BE1497 /* Pods_HackIllinois.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F912C974275240F02A49C6D /* Pods_HackIllinois.framework */; };
 		9506926C203EE14000D7C34C /* countdown-24.json in Resources */ = {isa = PBXBuildFile; fileRef = 95069262203EE14000D7C34C /* countdown-24.json */; };
@@ -139,10 +139,10 @@
 /* Begin PBXFileReference section */
 		0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAdminEventViewController.swift; sourceTree = "<group>"; };
 		35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HICountdownViewController.swift; sourceTree = "<group>"; };
+		3537DBAC2206B7F500D50384 /* Stickers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Stickers.xcassets; sourceTree = "<group>"; };
 		35B4A44D21E091B9001B3AF0 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		35B4A44E21E091B9001B3AF0 /* HIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIError.swift; sourceTree = "<group>"; };
 		35D7CE9420380ACF00654E28 /* Stickers.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Stickers.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		35D7CE9620380ACF00654E28 /* Stickers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Stickers.xcassets; sourceTree = "<group>"; };
 		35D7CE9820380ACF00654E28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F912C974275240F02A49C6D /* Pods_HackIllinois.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HackIllinois.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ACE213775C4DAD26D29206F /* Pods-HackIllinois.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackIllinois.release.xcconfig"; path = "Pods/Target Support Files/Pods-HackIllinois/Pods-HackIllinois.release.xcconfig"; sourceTree = "<group>"; };
@@ -263,7 +263,7 @@
 		35D7CE9520380ACF00654E28 /* Stickers */ = {
 			isa = PBXGroup;
 			children = (
-				35D7CE9620380ACF00654E28 /* Stickers.xcassets */,
+				3537DBAC2206B7F500D50384 /* Stickers.xcassets */,
 				35D7CE9820380ACF00654E28 /* Info.plist */,
 			);
 			path = Stickers;
@@ -699,7 +699,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35D7CE9720380ACF00654E28 /* Stickers.xcassets in Resources */,
+				3537DBAD2206B7F500D50384 /* Stickers.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
