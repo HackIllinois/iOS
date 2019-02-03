@@ -1,6 +1,6 @@
-# iOS
+# iOS ![HackIllinois](https://raw.githubusercontent.com/HackIllinois/iOS/dev/.github/hi-logo.png)
 
-Official iOS apps for HackIllinois. Please read this README before continuing.
+Official iOS app for HackIllinois. Please read this README before continuing.
 
 ## Branch Information #
 
@@ -12,8 +12,8 @@ Dev hosts a semi-stable version of the next release and all work should be done 
 
 ## Requirements #
 1. Cocoapods
-2. XCode 9
-3. Swift 4
+2. XCode 10
+3. Swift 4.2
 4. iOS 11.0
 
 
