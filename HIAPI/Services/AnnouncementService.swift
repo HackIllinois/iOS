@@ -41,9 +41,10 @@ public final class AnnouncementService: BaseService {
 
     public static func getAllAnnouncements(after: Date? = nil, before: Date? = nil, limit: Int? = nil) -> APIRequest<AnnouncementContainer> {
         var params = [String: String]()
-        if let after = after { params["after"] = "\(after.timeIntervalSince1970)" }
+        /*if let after = after { params["after"] = "\(after.timeIntervalSince1970)" }
         if let before = before { params["before"] = "\(before.timeIntervalSince1970)" }
-        if let limit = limit { params["limit"] = String(limit) }
+         if let limit = limit { params["limit"] = String(limit) }*/ //Editted::
+        print("ANNOUNCEMENT::REQUEST")
         return APIRequest<AnnouncementContainer>(service: self, endpoint: "all/", params: params, method: .GET)
     }
 

@@ -44,6 +44,8 @@ class HILocalNotificationController: NSObject {
         }
     }
 
+    //CHANGE::EDIT::FOR::ANNOUCNEMENT
+    
     func scheduleNotification(for event: Event) {
         requestAuthorization {
             let scheduleDelay: TimeInterval = 10
