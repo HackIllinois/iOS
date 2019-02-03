@@ -77,7 +77,7 @@ public struct Roles: OptionSet, Codable {
     }
 }
 
-public struct DietaryRestrictions: OptionSet, Codable, APIReturnable {
+public struct DietaryRestrictions: OptionSet, Codable, APIReturnable, CustomStringConvertible {
     public let rawValue: Int
 
     public static let vegan = DietaryRestrictions(rawValue: 1 << 0)
@@ -85,6 +85,10 @@ public struct DietaryRestrictions: OptionSet, Codable, APIReturnable {
     public static let nopeanut = DietaryRestrictions(rawValue: 1 << 2)
     public static let nogluten = DietaryRestrictions(rawValue: 1 << 3)
 
+    public var description: String {
+        return "sujay"
+    }
+    
     public init(rawValue: Int) {
         self.rawValue = rawValue
     }

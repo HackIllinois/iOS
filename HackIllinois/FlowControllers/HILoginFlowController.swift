@@ -197,7 +197,7 @@ private extension HILoginFlowController {
             do {
                 let (apiAttendeeContainer, _) = try result.get()
                 var user = user
-                user.dietaryRestrictions = apiAttendeeContainer.attendee.diet
+                user.attendee = apiAttendeeContainer.attendee
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
                 }
