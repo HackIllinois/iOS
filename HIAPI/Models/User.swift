@@ -77,6 +77,16 @@ public struct Roles: OptionSet, Codable {
     }
 }
 
+fileprivate extension Optional where Wrapped == String {
+    static func += (lhs: inout String?, rhs: String) {
+        if lhs == nil {
+            lhs = rhs
+        } else {
+            lhs! += rhs
+        }
+    }
+}
+
 public struct DietaryRestrictions: OptionSet, Codable, APIReturnable, CustomStringConvertible {
     public let rawValue: Int
 
@@ -86,9 +96,45 @@ public struct DietaryRestrictions: OptionSet, Codable, APIReturnable, CustomStri
     public static let nogluten = DietaryRestrictions(rawValue: 1 << 3)
 
     public var description: String {
-        return "sujay"
+        var description: String?
+
+        var veganVegetarianDescription: String?
+        if contains(.vegan) {
+            veganVegetarianDescription += "VEGAN"
+        } else if contains(.vegetarian) {
+            veganVegetarianDescription += "VEGETARIAN"
+        }
+
+        var allergyDescription: String?
+        if contains(.nopeanut) {
+            allergyDescription += "PEANUT"
+        }
+
+        if contains(.nogluten) {
+            if allergyDescription != nil {
+                allergyDescription += " AND "
+            }
+            allergyDescription += "GLUTEN"
+        }
+
+        if allergyDescription != nil {
+            allergyDescription += " ALLERGY"
+        }
+
+        if let veganVegetarianDescription = veganVegetarianDescription {
+            description += veganVegetarianDescription
+        }
+
+        if let allergyDescription = allergyDescription {
+            if description != nil {
+                description += ", "
+            }
+            description += allergyDescription
+        }
+
+        return description ?? "NO DIETARY RESTRICTIONS"
     }
-    
+
     public init(rawValue: Int) {
         self.rawValue = rawValue
     }
