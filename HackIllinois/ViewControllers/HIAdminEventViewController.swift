@@ -29,7 +29,7 @@ class HIAdminEventViewController: HIBaseViewController {
     var createEventButton = HIButton {
         $0.backgroundHIColor = \.action
         $0.layer.cornerRadius = 8
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        $0.titleLabel?.font = HIAppearance.Font.button
         $0.title = "Create Tracked Event"
     }
 

@@ -27,7 +27,7 @@ class HISegmentedControl: UIControl {
     }
 
     private var labels = [UILabel]()
-    private var font = UIFont.systemFont(ofSize: 13, weight: .medium)
+    private var font = HIAppearance.Font.navigationSubtitle
 
     private var indicatorView = UIView()
     private var indicatorViewHeight = CGFloat(3)

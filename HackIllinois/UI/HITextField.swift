@@ -21,6 +21,8 @@ class HITextField: UITextField {
         super.init(frame: .zero)
         additionalConfiguration?(self)
 
+        font = HIAppearance.Font.navigationSubtitle
+
         enablesReturnKeyAutomatically = true
         translatesAutoresizingMaskIntoConstraints = false
 
@@ -38,7 +40,6 @@ class HITextField: UITextField {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        font = UIFont.systemFont(ofSize: 13, weight: .medium)
         textColor <- \.generalText
         tintColor <- \.accent
         backgroundColor <- \.baseBackground

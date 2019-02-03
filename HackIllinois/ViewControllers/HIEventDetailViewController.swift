@@ -21,8 +21,17 @@ class HIEventDetailViewController: HIBaseViewController {
     var event: Event?
 
     // MARK: Views
-    let titleLabel = HILabel(style: .event)
-    let descriptionLabel = HILabel(style: .description)
+    let titleLabel = HILabel(style: .event) {
+        $0.textColor <- \.generalText
+        $0.font = HIAppearance.Font.contentTitle
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    let descriptionLabel = HILabel(style: .description) {
+        $0.numberOfLines = 0
+        $0.textColor <- \.generalText
+        $0.font = HIAppearance.Font.contentText
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     let favoritedButton = HIButton {
         $0.tintHIColor = \.generalText
         $0.backgroundHIColor = \.clear
@@ -97,18 +106,11 @@ extension HIEventDetailViewController {
         favoritedButton.bottomAnchor.constraint(equalTo: upperContainerView.bottomAnchor).isActive = true
         favoritedButton.widthAnchor.constraint(equalToConstant: 58).isActive = true
 
-        titleLabel.textColor <- \.generalText
-        titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .light)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         upperContainerView.addSubview(titleLabel)
         titleLabel.leadingAnchor.constraint(equalTo: favoritedButton.trailingAnchor).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: upperContainerView.trailingAnchor, constant: -8).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor).isActive = true
 
-        descriptionLabel.numberOfLines = 0
-        descriptionLabel.textColor <- \.generalText
-        descriptionLabel.font = UIFont.systemFont(ofSize: 13)
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         eventDetailContainer.addSubview(descriptionLabel)
         descriptionLabel.topAnchor.constraint(equalTo: upperContainerView.bottomAnchor).isActive = true
         descriptionLabel.leadingAnchor.constraint(equalTo: eventDetailContainer.leadingAnchor, constant: 12).isActive = true

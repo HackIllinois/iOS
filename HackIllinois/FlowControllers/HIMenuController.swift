@@ -224,7 +224,7 @@ extension HIMenuController {
                 $0.titleHIColor = \.titleText
                 $0.backgroundHIColor = \.baseBackground
                 $0.contentHorizontalAlignment = .left
-                $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+                $0.titleLabel?.font = HIAppearance.Font.button
                 $0.tag = index
             }
             button.addTarget(self, action: #selector(didSelectItem(_:)), for: .touchUpInside)

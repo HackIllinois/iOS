@@ -17,7 +17,7 @@ class HIDateHeader: UITableViewHeaderFooterView {
     var titleLabel = HILabel {
         $0.textHIColor = \.generalText
         $0.backgroundHIColor = \.baseBackground
-        $0.font = UIFont.systemFont(ofSize: 13, weight: .bold)
+        $0.font = HIAppearance.Font.sectionHeader
     }
 
     override init(reuseIdentifier: String?) {

@@ -44,40 +44,40 @@ class HILabel: UILabel {
         case .location:
             textHIColor = \.generalText
             backgroundHIColor = \.clear
-            font = UIFont.systemFont(ofSize: 13, weight: .bold)
+            font = HIAppearance.Font.contentText
 
         case .event:
             textHIColor = \.generalText
             backgroundHIColor = \.clear
-            font = UIFont.systemFont(ofSize: 18, weight: .light)
+            font = HIAppearance.Font.contentTitle
 
         case .title:
             textHIColor = \.generalText
             backgroundHIColor = \.clear
             textAlignment = .center
-            font = UIFont.systemFont(ofSize: 15, weight: .medium)
+            font = HIAppearance.Font.button
 
         case .subtitle:
             textHIColor = \.accent
             backgroundHIColor = \.clear
-            font = UIFont.systemFont(ofSize: 13, weight: .light)
+            font = HIAppearance.Font.contentSubtitle
 
         case .description:
             textHIColor = \.generalText
             backgroundHIColor = \.clear
-            font = UIFont.systemFont(ofSize: 13, weight: .regular)
+            font = HIAppearance.Font.contentText
             numberOfLines = 0
 
         case .loginHeader:
             textHIColor = \.accent
             backgroundHIColor = \.baseBackground
-            font = UIFont.systemFont(ofSize: 15, weight: .medium)
+            font = HIAppearance.Font.navigationTitle
 
         case .loginSelection:
             textHIColor = \.generalText
             backgroundHIColor = \.clear
             textAlignment = .center
-            font = UIFont.systemFont(ofSize: 13, weight: .medium)
+            font = HIAppearance.Font.navigationSubtitle
         }
         }
 

@@ -125,7 +125,7 @@ extension HICountdownViewController {
             $0.textHIColor = \.accent
             $0.backgroundHIColor = \.baseBackground
             $0.textAlignment = .center
-            $0.font = UIFont.systemFont(ofSize: 21, weight: .light)
+            $0.font = HIAppearance.Font.glyph
             $0.text = labelString
         }
 
