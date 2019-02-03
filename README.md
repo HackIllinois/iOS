@@ -1,4 +1,4 @@
-# iOS ![HackIllinois](https://raw.githubusercontent.com/HackIllinois/iOS/dev/.github/hi-logo.png)
+# iOS ![HackIllinois](https://raw.githubusercontent.com/HackIllinois/iOS/sujay/update-readme/.github/hi-logo.png)
 
 Official iOS app for HackIllinois. Please read this README before continuing.
 
