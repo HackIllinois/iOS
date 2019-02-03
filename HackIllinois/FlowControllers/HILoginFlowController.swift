@@ -33,7 +33,7 @@ class HILoginFlowController: UIViewController {
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return HIAppearance.current.preferredStatusBarStyle
+        return (\HIAppearance.preferredStatusBarStyle).value
     }
 
     // prevents the login session from going out of scope during presentation
@@ -71,7 +71,7 @@ class HILoginFlowController: UIViewController {
 extension HILoginFlowController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = HIAppearance.current.background
+        view.backgroundColor <- \.baseBackground
         addChild(loginSelectionViewController)
         loginSelectionViewController.view.frame = view.frame
         loginSelectionViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]

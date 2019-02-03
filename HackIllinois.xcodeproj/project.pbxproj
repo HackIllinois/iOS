@@ -68,7 +68,6 @@
 		95CD0ED52015217E00D79DCC /* HIApplicationStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CD0ED42015217E00D79DCC /* HIApplicationStateController.swift */; };
 		95D6DA78203F8C3900E7C982 /* HIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6DA77203F8C3900E7C982 /* HIImageView.swift */; };
 		95D6DA7A203F983700E7C982 /* HILocalNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6DA79203F983700E7C982 /* HILocalNotificationController.swift */; };
-		95D791E9203E12C900C3BA62 /* HIThemeEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D791E8203E12C900C3BA62 /* HIThemeEngine.swift */; };
 		95D791ED203E370A00C3BA62 /* HIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D791EC203E370A00C3BA62 /* HIWindow.swift */; };
 		95E313E121FAB8D10092C22E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E313E021FAB8D10092C22E /* Constants.swift */; };
 		95E3142E21FAD5B40092C22E /* HIAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 95E3142C21FAD5B40092C22E /* HIAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -204,7 +203,6 @@
 		95CD0ED42015217E00D79DCC /* HIApplicationStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIApplicationStateController.swift; sourceTree = "<group>"; };
 		95D6DA77203F8C3900E7C982 /* HIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIImageView.swift; sourceTree = "<group>"; };
 		95D6DA79203F983700E7C982 /* HILocalNotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILocalNotificationController.swift; sourceTree = "<group>"; };
-		95D791E8203E12C900C3BA62 /* HIThemeEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIThemeEngine.swift; sourceTree = "<group>"; };
 		95D791EC203E370A00C3BA62 /* HIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIWindow.swift; sourceTree = "<group>"; };
 		95E313E021FAB8D10092C22E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		95E3142A21FAD5B30092C22E /* HIAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HIAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -414,19 +412,19 @@
 		957DB2E41FC2435100F8C45E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */,
 				958C863A2033C94800803F81 /* HIAdminAnnouncementViewController.swift */,
+				0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */,
 				956F41E01FC7577500557DC7 /* HIAnnouncementsViewController.swift */,
 				95C3BE2F2008B99C0008ED79 /* HIBaseViewController.swift */,
 				35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */,
-				954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */,
 				95C18DC720096539004784B5 /* HIEventDetailViewController.swift */,
 				95C18DC920096539004784B5 /* HIEventListViewController.swift */,
 				95C18DC42009618C004784B5 /* HIHomeViewController.swift */,
-				95C18DC820096539004784B5 /* HIScheduleViewController.swift */,
-				9510F6A61FCB7E53007D19DB /* HIScannerViewController.swift */,
-				95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */,
+				954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */,
 				95CCEA1E203D6B3600E3E28C /* HINavigationController.swift */,
+				9510F6A61FCB7E53007D19DB /* HIScannerViewController.swift */,
+				95C18DC820096539004784B5 /* HIScheduleViewController.swift */,
+				95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -459,7 +457,6 @@
 				95A7D29D203D5BA4005EAEAF /* HILabel.swift */,
 				95A7D27C203D4F54005EAEAF /* HISegmentedControl.swift */,
 				95A7D27D203D4F54005EAEAF /* HITextField.swift */,
-				95D791E8203E12C900C3BA62 /* HIThemeEngine.swift */,
 				95A7D27F203D4F54005EAEAF /* HIView.swift */,
 				95D791EC203E370A00C3BA62 /* HIWindow.swift */,
 				95A7D27E203D4F54005EAEAF /* Identifiable.swift */,
@@ -841,7 +838,6 @@
 				35B4A44F21E091BA001B3AF0 /* Logger.swift in Sources */,
 				9544799C200C39870005408B /* HIUser.swift in Sources */,
 				95A7D28B203D4F54005EAEAF /* HISegmentedControl.swift in Sources */,
-				95D791E9203E12C900C3BA62 /* HIThemeEngine.swift in Sources */,
 				957A4D7D21FDA71F007FDE0E /* MixTypeComparable.swift in Sources */,
 				95A7D28C203D4F54005EAEAF /* HITextField.swift in Sources */,
 				95C18DCA20096539004784B5 /* HIEventDetailViewController.swift in Sources */,

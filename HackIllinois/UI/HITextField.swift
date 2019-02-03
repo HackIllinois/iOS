@@ -14,43 +14,15 @@ import Foundation
 import UIKit
 
 class HITextField: UITextField {
-    // MARK: - Types
-    enum Style {
-        case standard(placeholder: String)
-        case username
-        case password
-    }
-
     // MARK: - Properties
-    let style: Style
 
     // MARK: - Init
-    init(style: Style) {
-        self.style = style
+    init(additionalConfiguration: ((HITextField) -> Void)? = nil) {
         super.init(frame: .zero)
+        additionalConfiguration?(self)
 
         enablesReturnKeyAutomatically = true
         translatesAutoresizingMaskIntoConstraints = false
-
-        switch style {
-        case .standard(let placeholder):
-            self.placeholder = placeholder
-
-        case .username:
-            placeholder = "USERNAME"
-            textContentType = .username
-            keyboardType = .emailAddress
-            autocapitalizationType = .none
-            autocorrectionType = .no
-
-        case .password:
-            placeholder = "PASSWORD"
-            textContentType = .password
-            isSecureTextEntry = true
-            returnKeyType = .go
-            autocapitalizationType = .none
-            autocorrectionType = .no
-        }
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
@@ -66,16 +38,16 @@ class HITextField: UITextField {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        textColor = HIAppearance.current.primary
         font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        tintColor = HIAppearance.current.accent
-        backgroundColor = HIAppearance.current.background
+        textColor <- \.generalText
+        tintColor <- \.accent
+        backgroundColor <- \.baseBackground
 
         if let placeholder = placeholder {
             attributedPlaceholder = NSAttributedString(
                 string: placeholder,
                 attributes: [
-                    NSAttributedString.Key.foregroundColor: HIAppearance.current.primary.withAlphaComponent(0.5)
+                    NSAttributedString.Key.foregroundColor: (\HIAppearance.generalText).value.withAlphaComponent(0.5)
                 ]
             )
         }

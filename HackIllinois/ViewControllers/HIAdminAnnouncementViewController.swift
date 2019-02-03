@@ -22,9 +22,14 @@ enum HIAnnouncementAdminViewControllerStyle {
 
 class HIAdminAnnouncementViewController: HIBaseViewController {
     // MARK: - Properties
-    var titleTextField = HITextField(style: .standard(placeholder: "TITLE"))
-    var descriptionTextField = HITextField(style: .standard(placeholder: "DESCRIPTION"))
-    var createAnnouncementButton = HIButton(style: .standard) { $0.title = "Create Announcement" }
+    var titleTextField = HITextField { $0.placeholder = "TITLE" }
+    var descriptionTextField = HITextField { $0.placeholder = "DESCRIPTION" }
+    var createAnnouncementButton = HIButton {
+        $0.backgroundHIColor = \.action
+        $0.layer.cornerRadius = 8
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        $0.title = "Create Announcement"
+    }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)

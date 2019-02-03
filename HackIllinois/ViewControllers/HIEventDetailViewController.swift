@@ -23,9 +23,11 @@ class HIEventDetailViewController: HIBaseViewController {
     // MARK: Views
     let titleLabel = HILabel(style: .event)
     let descriptionLabel = HILabel(style: .description)
-    let favoritedButton = HIButton(style: .content) {
+    let favoritedButton = HIButton {
+        $0.tintHIColor = \.generalText
+        $0.backgroundHIColor = \.clear
         $0.activeImage = #imageLiteral(resourceName: "Favorited")
-        $0.inactiveImage = #imageLiteral(resourceName: "Unfavorited")
+        $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
     }
 
     // MARK: Constraints
@@ -67,7 +69,12 @@ extension HIEventDetailViewController {
     override func loadView() {
         super.loadView()
 
-        let eventDetailContainer = HIView(style: .content)
+        let eventDetailContainer = HIView {
+            $0.backgroundHIColor = \.contentBackground
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.layer.cornerRadius = 8
+            $0.layer.masksToBounds = true
+        }
         eventDetailContainer.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(eventDetailContainer)
         eventDetailContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12).isActive = true
@@ -90,7 +97,7 @@ extension HIEventDetailViewController {
         favoritedButton.bottomAnchor.constraint(equalTo: upperContainerView.bottomAnchor).isActive = true
         favoritedButton.widthAnchor.constraint(equalToConstant: 58).isActive = true
 
-        titleLabel.textColor = HIAppearance.current.primary
+        titleLabel.textColor <- \.generalText
         titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .light)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         upperContainerView.addSubview(titleLabel)
@@ -99,7 +106,7 @@ extension HIEventDetailViewController {
         titleLabel.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor).isActive = true
 
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.textColor = HIAppearance.current.primary
+        descriptionLabel.textColor <- \.generalText
         descriptionLabel.font = UIFont.systemFont(ofSize: 13)
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         eventDetailContainer.addSubview(descriptionLabel)
@@ -110,7 +117,7 @@ extension HIEventDetailViewController {
         descriptionLabelHeight.isActive = true
 
         let tableView = UITableView()
-        tableView.backgroundColor = HIAppearance.current.contentBackground
+        tableView.backgroundColor <- \.contentBackground
         tableView.translatesAutoresizingMaskIntoConstraints = false
         eventDetailContainer.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 8).isActive = true

@@ -18,7 +18,9 @@ import HIAPI
 
 class HIUserDetailViewController: HIBaseViewController {
     // MARK: - Properties
-    var qrImageView = HIImageView(style: .template)
+    var qrImageView = HIImageView {
+        $0.tintHIColor = \.action
+    }
     var userNameLabel = HILabel(style: .title)
     var userInfoLabel = HILabel(style: .subtitle)
 }
@@ -44,7 +46,12 @@ extension HIUserDetailViewController {
     override func loadView() {
         super.loadView()
 
-        let userDetailContainer = HIView(style: .content)
+        let userDetailContainer = HIView {
+            $0.backgroundHIColor = \.contentBackground
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.layer.cornerRadius = 8
+            $0.layer.masksToBounds = true
+        }
         view.addSubview(userDetailContainer)
         userDetailContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 13).isActive = true
         userDetailContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true

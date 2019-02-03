@@ -24,6 +24,8 @@ class HICountdownViewController: UIViewController {
     let FRAMES_PER_TICK = 30
     let TOTAL_NUM_FRAMES = 1800
 
+    let backgroundHIColor: HIColor = \.baseBackground
+
     // MARK: - Properties
     var days = LOTAnimationView(name: "countdown-60")
     var hours = LOTAnimationView(name: "countdown-24")
@@ -78,17 +80,17 @@ class HICountdownViewController: UIViewController {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        days.backgroundColor = HIAppearance.current.background
-        hours.backgroundColor = HIAppearance.current.background
-        minutes.backgroundColor = HIAppearance.current.background
-        seconds.backgroundColor = HIAppearance.current.background
+        days.backgroundColor <- backgroundHIColor
+        hours.backgroundColor <- backgroundHIColor
+        minutes.backgroundColor <- backgroundHIColor
+        seconds.backgroundColor <- backgroundHIColor
     }
 }
 
 // MARK: - UIViewController
 extension HICountdownViewController {
     override func loadView() {
-        view = HIView(style: .background)
+        view = HIView { $0.backgroundHIColor = \.baseBackground }
 
         days.contentMode = .scaleAspectFit
         hours.contentMode = .scaleAspectFit
@@ -116,10 +118,16 @@ extension HICountdownViewController {
     }
 
     func stackView(with countDownView: LOTAnimationView, and labelString: String) -> UIStackView {
-        countDownView.backgroundColor = HIAppearance.current.background
+        countDownView.backgroundColor <- backgroundHIColor
         countDownView.translatesAutoresizingMaskIntoConstraints = false
 
-        let label = HILabel(style: .countdown(text: labelString))
+        let label = HILabel {
+            $0.textHIColor = \.accent
+            $0.backgroundHIColor = \.baseBackground
+            $0.textAlignment = .center
+            $0.font = UIFont.systemFont(ofSize: 21, weight: .light)
+            $0.text = labelString
+        }
 
         let stackView = UIStackView()
         stackView.distribution = .fillProportionally

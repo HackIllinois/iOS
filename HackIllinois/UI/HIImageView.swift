@@ -14,29 +14,15 @@ import Foundation
 import UIKit
 
 class HIImageView: UIImageView {
-    // MARK: - Types
-    enum Style {
-        case icon(image: UIImage)
-        case template
-    }
-
     // MARK: - Properties
-    let style: Style
+    var tintHIColor: HIColor?
 
     // MARK: - Init
-    init(style: Style) {
-        self.style = style
+    init(additionalConfiguration: ((HIImageView) -> Void)? = nil) {
         super.init(frame: .zero)
+        additionalConfiguration?(self)
 
         translatesAutoresizingMaskIntoConstraints = false
-
-        switch style {
-        case .icon(let image):
-            self.image = image.withRenderingMode(.alwaysTemplate)
-            contentMode = .center
-        case _:
-            break
-        }
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
@@ -52,6 +38,6 @@ class HIImageView: UIImageView {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        tintColor = HIAppearance.current.accent
+        tintColor <- tintHIColor
     }
 }
