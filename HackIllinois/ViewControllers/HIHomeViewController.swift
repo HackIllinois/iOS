@@ -57,7 +57,6 @@ extension HIHomeViewController {
     override func loadView() {
         super.loadView()
 
-        countdownTitleLabel.text = "HACKING ENDS IN"
         view.addSubview(countdownTitleLabel)
         countdownTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         countdownTitleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true

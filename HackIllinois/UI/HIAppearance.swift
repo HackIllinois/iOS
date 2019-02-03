@@ -61,6 +61,18 @@ struct HIAppearance: Equatable {
         NotificationCenter.default.post(name: .themeDidChange, object: nil)
     }
 
+    enum Font {
+        static let contentSubtitle = UIFont.systemFont(ofSize: 13, weight: .light)
+        static let contentText = UIFont.systemFont(ofSize: 13, weight: .regular)
+        static let contentTitle = UIFont.systemFont(ofSize: 18, weight: .light)
+
+        static let navigationSubtitle = UIFont.systemFont(ofSize: 13, weight: .medium)
+        static let navigationTitle = UIFont.systemFont(ofSize: 15, weight: .medium)
+
+        static let sectionHeader = UIFont.systemFont(ofSize: 13, weight: .bold)
+        static let button = UIFont.systemFont(ofSize: 15, weight: .regular)
+        static let glyph = UIFont.systemFont(ofSize: 21, weight: .light)
+    }
 }
 
 // MARK: - HIApperanceKeyPath

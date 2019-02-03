@@ -22,7 +22,11 @@ class HIEventDetailLocationCell: UITableViewCell {
     // MARK: Views
     let mapView = MKMapView()
     let mapAnnotation = MKPointAnnotation()
-    let titleLabel = HILabel(style: .location)
+    let titleLabel = HILabel(style: .location) {
+        $0.textColor <- \.generalText
+        $0.font = HIAppearance.Font.contentSubtitle
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
 
     var blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     let containerView = UIView()
@@ -49,9 +53,6 @@ class HIEventDetailLocationCell: UITableViewCell {
         blurEffectView.constrain(to: containerView, topInset: 0, trailingInset: 0, leadingInset: 0)
         blurEffectView.heightAnchor.constraint(equalToConstant: 40).isActive = true
 
-        titleLabel.textColor <- \.generalText
-        titleLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         blurEffectView.contentView.addSubview(titleLabel)
         titleLabel.leadingAnchor.constraint(equalTo: blurEffectView.contentView.leadingAnchor, constant: 8).isActive = true
         titleLabel.constrain(to: blurEffectView.contentView, topInset: 0, bottomInset: 0)

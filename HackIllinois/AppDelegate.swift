@@ -71,7 +71,7 @@ extension AppDelegate {
         let navigationBarAppearace = UINavigationBar.appearance()
 
         navigationBarAppearace.titleTextAttributes = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .bold) as Any
+            NSAttributedString.Key.font: HIAppearance.Font.navigationTitle as Any
         ]
         navigationBarAppearace.shadowImage = UIImage()
         navigationBarAppearace.isTranslucent = false
