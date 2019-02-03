@@ -20,10 +20,11 @@ protocol HIEventCellDelegate: class {
 
 class HIEventCell: HIBubbleCell {
     // MARK: - Properties
-    let favoritedButton = HIButton(style: .content) {
-//        $0.usesTemplates = true
+    let favoritedButton = HIButton {
+        $0.tintHIColor = \.generalText
+        $0.backgroundHIColor = \.clear
         $0.activeImage = #imageLiteral(resourceName: "Favorited")
-        $0.inactiveImage = #imageLiteral(resourceName: "Unfavorited")
+        $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
     }
 
     var contentStackView = UIStackView()
@@ -41,7 +42,11 @@ class HIEventCell: HIBubbleCell {
         favoritedButton.widthAnchor.constraint(equalToConstant: 58).isActive = true
         favoritedButton.constrain(to: bubbleView, topInset: 0, bottomInset: 0, leadingInset: 0)
 
-        let disclosureIndicatorView = HIImageView(style: .icon(image: #imageLiteral(resourceName: "DisclosureIndicator")))
+        let disclosureIndicatorView = HIImageView {
+            $0.tintHIColor = \.accent
+            $0.contentMode = .center
+            $0.image = #imageLiteral(resourceName: "DisclosureIndicator")
+        }
         bubbleView.addSubview(disclosureIndicatorView)
         disclosureIndicatorView.widthAnchor.constraint(equalToConstant: 65).isActive = true
         disclosureIndicatorView.constrain(to: bubbleView, topInset: 0, trailingInset: 0, bottomInset: 0)

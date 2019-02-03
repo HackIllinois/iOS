@@ -16,61 +16,69 @@ import UIKit
 class HILabel: UILabel {
     // MARK: - Types
     enum Style {
-        case date
         case location
         case event
         case title
         case subtitle
         case description
-        case countdown(text: String)
         case loginHeader
         case loginSelection
     }
 
     // MARK: - Properties
-    let style: Style
+    let style: Style?
+
+    var textHIColor: HIColor?
+    var backgroundHIColor: HIColor?
 
     // MARK: - Init
-    init(style: Style) {
+    init(style: Style? = nil, additionalConfiguration: ((HILabel) -> Void)? = nil) {
         self.style = style
         super.init(frame: .zero)
+        additionalConfiguration?(self)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
 
         translatesAutoresizingMaskIntoConstraints = false
-
+        if let style = style {
         switch style {
-        case .date:
-            font = UIFont.systemFont(ofSize: 13, weight: .bold)
-
         case .location:
+            textHIColor = \.generalText
+            backgroundHIColor = \.clear
             font = UIFont.systemFont(ofSize: 13, weight: .bold)
 
         case .event:
+            textHIColor = \.generalText
+            backgroundHIColor = \.clear
             font = UIFont.systemFont(ofSize: 18, weight: .light)
 
         case .title:
+            textHIColor = \.generalText
+            backgroundHIColor = \.clear
             textAlignment = .center
             font = UIFont.systemFont(ofSize: 15, weight: .medium)
 
         case .subtitle:
+            textHIColor = \.accent
+            backgroundHIColor = \.clear
             font = UIFont.systemFont(ofSize: 13, weight: .light)
 
         case .description:
+            textHIColor = \.generalText
+            backgroundHIColor = \.clear
             font = UIFont.systemFont(ofSize: 13, weight: .regular)
             numberOfLines = 0
 
-        case .countdown(let text):
-            self.text = text
-            textAlignment = .center
-            font = UIFont.systemFont(ofSize: 21, weight: .light)
-
         case .loginHeader:
+            textHIColor = \.accent
+            backgroundHIColor = \.baseBackground
             font = UIFont.systemFont(ofSize: 15, weight: .medium)
 
         case .loginSelection:
+            textHIColor = \.generalText
+            backgroundHIColor = \.clear
             textAlignment = .center
             font = UIFont.systemFont(ofSize: 13, weight: .medium)
-
+        }
         }
 
         refreshForThemeChange()
@@ -86,41 +94,7 @@ class HILabel: UILabel {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        switch style {
-        case .date:
-            backgroundColor = HIAppearance.current.background
-            textColor = HIAppearance.current.primary
-
-        case .location:
-//            backgroundColor = HIAppearance.current.contentBackground
-            textColor = HIAppearance.current.primary
-
-        case .event:
-//            backgroundColor = HIAppearance.current.contentBackground
-            textColor = HIAppearance.current.primary
-
-        case .title:
-//            backgroundColor = HIAppearance.current.background
-            textColor = HIAppearance.current.primary
-
-        case .subtitle:
-//            backgroundColor = HIAppearance.current.background
-            textColor = HIAppearance.current.accent
-
-        case .description:
-            textColor = HIAppearance.current.primary
-
-        case .countdown:
-            backgroundColor = HIAppearance.current.background
-            textColor = HIAppearance.current.accent
-
-        case .loginHeader:
-            backgroundColor = HIAppearance.current.background
-            textColor = HIAppearance.current.accent
-
-        case .loginSelection:
-            textColor = HIAppearance.current.primary
-
-        }
+        textColor <- textHIColor
+        backgroundColor <- backgroundHIColor
     }
 }

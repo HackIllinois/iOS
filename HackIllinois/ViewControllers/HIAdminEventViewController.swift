@@ -23,9 +23,15 @@ enum HIAdminEventViewControllerStyle {
 
 class HIAdminEventViewController: HIBaseViewController {
     // MARK: - Properties
-    var titleTextField = HITextField(style: .standard(placeholder: "TITLE"))
-    var durationTextField = HITextField(style: .standard(placeholder: "DURATION (MINUTES)"))
-    var createEventButton = HIButton(style: .standard) { $0.title = "Create Tracked Event" }
+    var titleTextField = HITextField { $0.placeholder = "TITLE" }
+    var durationTextField = HITextField { $0.placeholder = "DURATION (MINUTES)" }
+
+    var createEventButton = HIButton {
+        $0.backgroundHIColor = \.action
+        $0.layer.cornerRadius = 8
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        $0.title = "Create Tracked Event"
+    }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)

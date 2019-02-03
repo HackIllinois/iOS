@@ -14,25 +14,19 @@ import Foundation
 import UIKit
 
 class HIButton: UIButton {
-    // MARK: - Types
-    enum Style {
-        case content
-        case plain
-        case standard
-        case menu(tag: Int)
-    }
-
     // MARK: - Properties
-    let style: Style
-
     var title: String?
     var activeImage: UIImage?
-    var inactiveImage: UIImage?
+    var baseImage: UIImage?
+
+    var titleHIColor: HIColor?
+    var tintHIColor: HIColor?
+    var backgroundHIColor: HIColor?
 
     var isActive: Bool = false {
         willSet {
             guard newValue != isActive else { return }
-            let newImage = newValue ? activeImage : inactiveImage
+            let newImage = newValue ? activeImage : baseImage
             setImage(newImage, for: .normal)
         }
     }
@@ -48,7 +42,7 @@ class HIButton: UIButton {
             } else {
                 isEnabled = true
                 setTitle(title, for: .normal)
-                backgroundColor = HIAppearance.current.actionBackground
+                backgroundColor <- backgroundHIColor
                 activityIndicator.stopAnimating()
             }
         }
@@ -66,35 +60,20 @@ class HIButton: UIButton {
     }()
 
     // MARK: - Init
-    init(style: Style, additionalConfiguration: ((HIButton) -> Void)? = nil) {
-        self.style = style
+    init(additionalConfiguration: ((HIButton) -> Void)? = nil) {
         super.init(frame: .zero)
         additionalConfiguration?(self)
+
+        translatesAutoresizingMaskIntoConstraints = false
+        adjustsImageWhenHighlighted = false
+
+        setTitle(title, for: .normal)
+        setImage(baseImage, for: .normal)
 
         addTarget(self, action: #selector(handleTouchDown), for: .touchDown)
         addTarget(self, action: #selector(handleTouchDragEnter), for: .touchDragEnter)
         addTarget(self, action: #selector(handleTouchDragExit), for: .touchDragExit)
         addTarget(self, action: #selector(handleTouchUpInside), for: .touchUpInside)
-
-        translatesAutoresizingMaskIntoConstraints = false
-        adjustsImageWhenHighlighted = false
-
-        switch style {
-        case .content, .plain:
-            titleLabel?.font = UIFont.systemFont(ofSize: 15)
-
-        case .standard:
-            layer.cornerRadius = 8
-            titleLabel?.font = UIFont.systemFont(ofSize: 15)
-
-        case .menu(let tag):
-            contentHorizontalAlignment = .left
-            titleLabel?.font = UIFont.systemFont(ofSize: 16)
-            self.tag = tag
-        }
-
-        setTitle(title, for: .normal)
-        setImage(inactiveImage, for: .normal)
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
@@ -110,24 +89,10 @@ class HIButton: UIButton {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        setTitleColor(HIAppearance.current.primary, for: .normal)
-
-        activityIndicator.tintColor = HIAppearance.current.accent
-        tintColor = HIAppearance.current.accent
-
-        switch style {
-        case .content:
-            backgroundColor = HIAppearance.current.contentBackground
-
-        case .plain:
-            backgroundColor = HIAppearance.current.background
-
-        case .standard:
-            backgroundColor = HIAppearance.current.actionBackground
-
-        case .menu:
-            backgroundColor = HIAppearance.current.background
-        }
+        setTitleColor(titleHIColor?.value, for: .normal)
+        activityIndicator.tintColor <- tintHIColor
+        tintColor <- tintHIColor
+        backgroundColor <- backgroundHIColor
     }
 
     // MARK: - Touch Animations

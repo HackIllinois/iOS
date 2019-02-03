@@ -16,55 +16,46 @@ import UIKit
 class HIView: UIView {
     // MARK: - Types
     enum Style {
-        case background
-        case content
         case separator
         case emptyTable
-        case overlay
     }
 
     // MARK: - Properties
-    let style: Style
+    let style: Style?
+    var backgroundHIColor: HIColor?
 
     // MARK: - Init
-    init(style: Style) {
+    init(style: Style? = nil, additionalConfiguration: ((HIView) -> Void)? = nil) {
         self.style = style
         super.init(frame: .zero)
+        additionalConfiguration?(self)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
 
-        switch style {
-        case .background:
-            break
+        if let style = style {
+            switch style {
+            case .separator:
+                backgroundHIColor = \.accent
+                translatesAutoresizingMaskIntoConstraints = false
+                heightAnchor.constraint(equalToConstant: 1).isActive = true
 
-        case .content:
-            translatesAutoresizingMaskIntoConstraints = false
-            layer.cornerRadius = 8
-            layer.masksToBounds = true
-
-        case .separator:
-            translatesAutoresizingMaskIntoConstraints = false
-            heightAnchor.constraint(equalToConstant: 1).isActive = true
-
-        case .emptyTable:
-            let backgroundImageView = UIImageView(image: #imageLiteral(resourceName: "EmptyTableView"))
-            backgroundImageView.contentMode = .scaleAspectFit
-            backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
-            addSubview(backgroundImageView)
-            backgroundImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6).isActive = true
-            backgroundImageView.heightAnchor.constraint(equalTo: backgroundImageView.widthAnchor).isActive = true
-            backgroundImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-            NSLayoutConstraint(item: backgroundImageView,
-                               attribute: .centerY,
-                               relatedBy: .equal,
-                               toItem: self,
-                               attribute: .centerY,
-                               multiplier: 0.7,
-                               constant: 0.0).isActive = true
-
-        case .overlay:
-            translatesAutoresizingMaskIntoConstraints = false
+            case .emptyTable:
+                backgroundHIColor = \.baseBackground
+                let backgroundImageView = UIImageView(image: #imageLiteral(resourceName: "EmptyTableView"))
+                backgroundImageView.contentMode = .scaleAspectFit
+                backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+                addSubview(backgroundImageView)
+                backgroundImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6).isActive = true
+                backgroundImageView.heightAnchor.constraint(equalTo: backgroundImageView.widthAnchor).isActive = true
+                backgroundImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+                NSLayoutConstraint(item: backgroundImageView,
+                                   attribute: .centerY,
+                                   relatedBy: .equal,
+                                   toItem: self,
+                                   attribute: .centerY,
+                                   multiplier: 0.7,
+                                   constant: 0.0).isActive = true
+            }
         }
-
         refreshForThemeChange()
     }
 
@@ -78,21 +69,6 @@ class HIView: UIView {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        switch style {
-        case .background:
-            backgroundColor = HIAppearance.current.background
-
-        case .content:
-            backgroundColor = HIAppearance.current.contentBackground
-
-        case .separator:
-            backgroundColor = HIAppearance.current.accent
-
-        case .emptyTable:
-            backgroundColor = HIAppearance.current.background
-
-        case .overlay:
-            backgroundColor = HIAppearance.current.overlay
-        }
+        backgroundColor <- backgroundHIColor
     }
 }

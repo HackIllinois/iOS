@@ -15,17 +15,14 @@ import UIKit
 
 class HIBubbleCell: UITableViewCell {
     // MARK: - Properties
-    var defaultColor: UIColor {
-        return HIAppearance.current.contentBackground
-    }
-
-    var activeColor: UIColor {
-        return HIAppearance.current.actionBackground
-    }
-
     var animator: UIViewPropertyAnimator?
 
-    var bubbleView = HIView(style: .content)
+    var bubbleView = HIView {
+        $0.backgroundHIColor = \.contentBackground
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.layer.cornerRadius = 8
+        $0.layer.masksToBounds = true
+    }
 
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -49,7 +46,7 @@ class HIBubbleCell: UITableViewCell {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        contentView.backgroundColor = HIAppearance.current.background
+        contentView.backgroundColor <- \.baseBackground
     }
 
     // MARK: - UITableViewCell
@@ -62,11 +59,11 @@ class HIBubbleCell: UITableViewCell {
     }
 
     func setActive(_ active: Bool) {
-        let finalColor = active ? activeColor : defaultColor
+        let finalColor: HIColor = active ? \.action : \.contentBackground
         animator?.stopAnimation(true)
         animator = UIViewPropertyAnimator(duration: 0.2, curve: .linear)
         animator?.addAnimations { [weak self] in
-            self?.bubbleView.backgroundColor = finalColor
+            self?.bubbleView.backgroundColor = finalColor.value
         }
         animator?.startAnimation()
     }

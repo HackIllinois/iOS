@@ -34,7 +34,7 @@ class HIEventDetailLocationCell: UITableViewCell {
 
         containerView.layer.cornerRadius = 8
         containerView.layer.masksToBounds = true
-        containerView.backgroundColor = HIAppearance.current.background
+        containerView.backgroundColor <- \.baseBackground
         containerView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(containerView)
         containerView.constrain(to: contentView, topInset: 6, trailingInset: -12, bottomInset: -6, leadingInset: 12)
@@ -49,14 +49,18 @@ class HIEventDetailLocationCell: UITableViewCell {
         blurEffectView.constrain(to: containerView, topInset: 0, trailingInset: 0, leadingInset: 0)
         blurEffectView.heightAnchor.constraint(equalToConstant: 40).isActive = true
 
-        titleLabel.textColor = HIAppearance.current.primary
+        titleLabel.textColor <- \.generalText
         titleLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         blurEffectView.contentView.addSubview(titleLabel)
         titleLabel.leadingAnchor.constraint(equalTo: blurEffectView.contentView.leadingAnchor, constant: 8).isActive = true
         titleLabel.constrain(to: blurEffectView.contentView, topInset: 0, bottomInset: 0)
 
-        let disclosureIndicatorImageView = HIImageView(style: .icon(image: #imageLiteral(resourceName: "DisclosureIndicator")))
+        let disclosureIndicatorImageView = HIImageView {
+            $0.tintHIColor = \.accent
+            $0.contentMode = .center
+            $0.image = #imageLiteral(resourceName: "DisclosureIndicator")
+        }
         blurEffectView.contentView.addSubview(disclosureIndicatorImageView)
         disclosureIndicatorImageView.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 8).isActive = true
         disclosureIndicatorImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
@@ -76,8 +80,8 @@ class HIEventDetailLocationCell: UITableViewCell {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        contentView.backgroundColor = HIAppearance.current.contentBackground
-        blurEffectView.backgroundColor = HIAppearance.current.frostedTint
+        contentView.backgroundColor <- \.contentBackground
+        blurEffectView.backgroundColor <- \.frostedTint
     }
 }
 

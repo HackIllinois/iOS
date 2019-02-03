@@ -28,7 +28,10 @@ class HIMenuController: UIViewController {
 
     private(set) var _tabBarController = UITabBarController()
 
-    var overlayView = HIView(style: .overlay)
+    var overlayView = HIView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundHIColor = \.overlay
+    }
     var menuItems = UIStackView()
 
     var menuHeight = NSLayoutConstraint()
@@ -36,7 +39,7 @@ class HIMenuController: UIViewController {
     var menuItemsHeight = NSLayoutConstraint()
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return HIAppearance.current.preferredStatusBarStyle
+        return (\HIAppearance.preferredStatusBarStyle).value
     }
 
     // MARK: - Init
@@ -83,6 +86,7 @@ extension HIMenuController {
         guard state != .open else { return }
         state = .open
         animateMenuFor(state)
+        HIAppearance.toggle()
     }
 
     @objc func close(_ sender: Any) {
@@ -100,7 +104,7 @@ extension HIMenuController {
 // MARK: - UIViewController
 extension HIMenuController {
     override func loadView() {
-        view = HIView(style: .background)
+        view = HIView { $0.backgroundHIColor = \.baseBackground }
 
         _tabBarController.tabBar.isHidden = true
         addChild(_tabBarController)
@@ -114,10 +118,11 @@ extension HIMenuController {
         view.addSubview(overlayView)
         overlayView.constrain(to: _tabBarController.view, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
 
-        let menu = HIView(style: .background)
-        menu.backgroundColor = HIAppearance.current.background
-        menu.clipsToBounds = true
-        menu.translatesAutoresizingMaskIntoConstraints = false
+        let menu = HIView {
+            $0.backgroundHIColor = \.baseBackground
+            $0.clipsToBounds = true
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         view.addSubview(menu)
         menu.constrain(to: view, topInset: 0, trailingInset: 0, leadingInset: 0)
 
@@ -127,8 +132,10 @@ extension HIMenuController {
         menuHeight = menu.heightAnchor.constraint(equalToConstant: 0)
         menuHeight.isActive = true
 
-        let closeMenuButton = HIButton(style: .plain) {
-            $0.inactiveImage = #imageLiteral(resourceName: "MenuClose")
+        let closeMenuButton = HIButton {
+            $0.tintHIColor = \.accent
+            $0.backgroundHIColor = \.baseBackground
+            $0.baseImage = #imageLiteral(resourceName: "MenuClose")
         }
         closeMenuButton.addTarget(self, action: #selector(close(_:)), for: .touchUpInside)
         closeMenuButton.translatesAutoresizingMaskIntoConstraints = false
@@ -213,8 +220,13 @@ extension HIMenuController {
         let viewControllers = _tabBarController.viewControllers ?? []
         menuItemsHeight.constant = CGFloat(viewControllers.count) * MENU_ITEM_HEIGHT
         for (index, viewController) in viewControllers.enumerated() {
-            let button = HIButton(style: .menu(tag: index)) {
+            let button = HIButton {
                 $0.title = viewController.title
+                $0.titleHIColor = \.titleText
+                $0.backgroundHIColor = \.baseBackground
+                $0.contentHorizontalAlignment = .left
+                $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+                $0.tag = index
             }
             button.addTarget(self, action: #selector(didSelectItem(_:)), for: .touchUpInside)
             menuItems.addArrangedSubview(button)
