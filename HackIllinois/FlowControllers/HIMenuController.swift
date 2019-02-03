@@ -86,7 +86,6 @@ extension HIMenuController {
         guard state != .open else { return }
         state = .open
         animateMenuFor(state)
-        HIAppearance.toggle()
     }
 
     @objc func close(_ sender: Any) {

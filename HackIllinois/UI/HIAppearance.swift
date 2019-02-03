@@ -61,10 +61,6 @@ struct HIAppearance: Equatable {
         NotificationCenter.default.post(name: .themeDidChange, object: nil)
     }
 
-    // FIXME: remove
-    static func toggle() {
-        HIAppearance.change(to: HIAppearance.current == .day ? .night : .day)
-    }
 }
 
 // MARK: - HIApperanceKeyPath
