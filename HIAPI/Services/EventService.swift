@@ -2,7 +2,7 @@
 //  EventService.swift
 //  HackIllinois
 //
-//  Created by Rauhul Varma on 11/19/17.
+//  Created by HackIllinois Team on 11/19/17.
 //  Copyright © 2017 HackIllinois. All rights reserved.
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of

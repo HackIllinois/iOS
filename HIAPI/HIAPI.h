@@ -2,7 +2,7 @@
 //  HIAPI.h
 //  HIAPI
 //
-//  Created by Rauhul Varma on 1/24/19.
+//  Created by HackIllinois Team on 1/24/19.
 //  Copyright © 2019 HackIllinois. All rights reserved.
 //
 
