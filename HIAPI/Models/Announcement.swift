@@ -13,7 +13,12 @@
 import Foundation
 import APIManager
 
-public struct AnnouncementContainer: Codable, APIReturnable {
+public struct AnnouncementContainer: Decodable, APIReturnable {
+    
+    internal enum CodingKeys: String, CodingKey {
+        case announcements = "notifications"
+    }
+    
     public let announcements: [Announcement]
 }
 
