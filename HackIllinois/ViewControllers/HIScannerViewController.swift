@@ -69,8 +69,10 @@ extension HIScannerViewController {
         }
     }
 
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: { [weak self] (_) in
+            self?.setFrameForPreviewLayer()
+        }, completion: nil)
     }
 }
 
@@ -86,17 +88,6 @@ extension HIScannerViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
         title = "SCANNER"
-    }
-}
-
-// MARK: UINavigationControllerDelegate
-extension HIScannerViewController: UINavigationControllerDelegate {
-    func navigationControllerSupportedInterfaceOrientations(_ navigationController: UINavigationController) -> UIInterfaceOrientationMask {
-        return .portrait
-    }
-
-    func navigationControllerPreferredInterfaceOrientationForPresentation(_ navigationController: UINavigationController) -> UIInterfaceOrientation {
-        return .portrait
     }
 }
 
@@ -123,10 +114,29 @@ extension HIScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
         metadataOutput.metadataObjectTypes = [.qr]
 
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.frame = view.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
-        view.layer.addSublayer(previewLayer)
         self.previewLayer = previewLayer
+        setFrameForPreviewLayer()
+        view.layer.addSublayer(previewLayer)
+    }
+
+    func setFrameForPreviewLayer() {
+        guard let previewLayer = previewLayer else { return }
+
+        previewLayer.frame = view.layer.bounds
+
+        guard previewLayer.connection?.isVideoOrientationSupported == true else { return }
+
+        switch UIApplication.shared.statusBarOrientation {
+        case .portrait, .unknown:
+            previewLayer.connection?.videoOrientation = .portrait
+        case .portraitUpsideDown:
+            previewLayer.connection?.videoOrientation = .portraitUpsideDown
+        case .landscapeLeft:
+            previewLayer.connection?.videoOrientation = .landscapeLeft
+        case .landscapeRight:
+            previewLayer.connection?.videoOrientation = .landscapeRight
+        }
     }
 
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
