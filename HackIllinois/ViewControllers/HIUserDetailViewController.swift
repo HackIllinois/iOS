@@ -87,7 +87,7 @@ extension HIUserDetailViewController {
             }
         }
         userNameLabel.text = (user.firstName).uppercased()
-        userInfoLabel.text = "TODO" // user.dietaryRestrictions.displayText
+        userInfoLabel.text = user.dietaryRestrictions.description
         setupPass()
     }
 }

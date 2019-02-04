@@ -77,7 +77,7 @@ public struct Roles: OptionSet, Codable {
     }
 }
 
-public struct DietaryRestrictions: OptionSet, Codable, APIReturnable {
+public struct DietaryRestrictions: OptionSet, Codable, CustomStringConvertible, APIReturnable {
     public let rawValue: Int
 
     public static let vegan = DietaryRestrictions(rawValue: 1 << 0)
@@ -87,6 +87,23 @@ public struct DietaryRestrictions: OptionSet, Codable, APIReturnable {
 
     public init(rawValue: Int) {
         self.rawValue = rawValue
+    }
+
+    public var description: String {
+        var vals = [String]()
+        if self.contains(.vegan) {
+            vals.append("Vegan")
+        }
+        if self.contains(.vegetarian) {
+            vals.append("Vegetarian")
+        }
+        if self.contains(.nopeanut) {
+            vals.append("No Peanut")
+        }
+        if self.contains(.nogluten) {
+            vals.append("No Gluten")
+        }
+        return vals.joined(separator: ", ")
     }
 
     public init(from decoder: Decoder) throws {
