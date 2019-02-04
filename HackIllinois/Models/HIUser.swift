@@ -18,7 +18,7 @@ import HIAPI
 struct HIUser: Codable {
     var provider: HIAPI.AuthService.OAuthProvider
     var roles: HIAPI.Roles = []
-    var dietaryRestrictions: HIAPI.DietaryRestrictions = []
+    var attendee: HIAPI.Attendee?
     var token = ""
     var oauthCode = ""
     var id = ""

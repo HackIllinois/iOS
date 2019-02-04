@@ -77,6 +77,16 @@ public struct Roles: OptionSet, Codable {
     }
 }
 
+fileprivate extension Optional where Wrapped == String {
+    static func += (lhs: inout String?, rhs: String) {
+        if lhs == nil {
+            lhs = rhs
+        } else {
+            lhs! += rhs
+        }
+    }
+}
+
 public struct DietaryRestrictions: OptionSet, Codable, APIReturnable {
     public let rawValue: Int
 
@@ -84,6 +94,46 @@ public struct DietaryRestrictions: OptionSet, Codable, APIReturnable {
     public static let vegetarian = DietaryRestrictions(rawValue: 1 << 1)
     public static let nopeanut = DietaryRestrictions(rawValue: 1 << 2)
     public static let nogluten = DietaryRestrictions(rawValue: 1 << 3)
+
+    public var description: String? {
+        var description: String?
+
+        var veganVegetarianDescription: String?
+        if contains(.vegan) {
+            veganVegetarianDescription += "VEGAN"
+        } else if contains(.vegetarian) {
+            veganVegetarianDescription += "VEGETARIAN"
+        }
+
+        var allergyDescription: String?
+        if contains(.nopeanut) {
+            allergyDescription += "PEANUT"
+        }
+
+        if contains(.nogluten) {
+            if allergyDescription != nil {
+                allergyDescription += " AND "
+            }
+            allergyDescription += "GLUTEN"
+        }
+
+        if allergyDescription != nil {
+            allergyDescription += " ALLERGY"
+        }
+
+        if let veganVegetarianDescription = veganVegetarianDescription {
+            description += veganVegetarianDescription
+        }
+
+        if let allergyDescription = allergyDescription {
+            if description != nil {
+                description += ", "
+            }
+            description += allergyDescription
+        }
+
+        return description
+    }
 
     public init(rawValue: Int) {
         self.rawValue = rawValue
@@ -118,14 +168,6 @@ public struct DietaryRestrictions: OptionSet, Codable, APIReturnable {
         if contains(.nopeanut) { try container.encode("NOPEANUT") }
         if contains(.nogluten) { try container.encode("NOGLUTEN") }
     }
-}
-
-public struct AttendeeContainer: Codable, APIReturnable {
-    public let attendee: Attendee
-}
-
-public struct Attendee: Codable, APIReturnable {
-    public let diet: DietaryRestrictions
 }
 
 public struct Token: Codable, APIReturnable {
