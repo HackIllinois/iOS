@@ -1,6 +1,6 @@
 //
 //  Attendee.swift
-//  HIAPI
+//  HackIllinois
 //
 //  Created by HackIllinois Team on 2/3/19.
 //  Copyright © 2019 HackIllinois. All rights reserved.

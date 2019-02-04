@@ -170,14 +170,6 @@ public struct DietaryRestrictions: OptionSet, Codable, APIReturnable, CustomStri
     }
 }
 
-public struct AttendeeContainer: Codable, APIReturnable {
-    public let attendee: Attendee
-}
-
-public struct Attendee: Codable, APIReturnable {
-    public let diet: DietaryRestrictions
-}
-
 public struct Token: Codable, APIReturnable {
     public let token: String
 }
