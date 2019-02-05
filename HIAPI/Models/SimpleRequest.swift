@@ -1,5 +1,5 @@
 //
-//  SuccessContainer.swift
+//  SimpleRequest.swift
 //  HackIllinois
 //
 //  Created by HackIllinois Team on 1/28/18.
@@ -13,15 +13,6 @@
 import Foundation
 import APIManager
 
-public struct SuccessContainer: Decodable, APIReturnable {
-    public let meta: String?
-    public let error: Error?
-
-    public struct Error: Decodable {
-        public let type: String
-        public let status: Int
-        public let title: String
-        public let message: String
-        public let source: String
-    }
+public struct SimpleRequest: Decodable, APIReturnable {
+    public let message: String?
 }

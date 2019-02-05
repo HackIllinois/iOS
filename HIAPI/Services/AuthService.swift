@@ -37,7 +37,9 @@ public final class AuthService: BaseService {
     }
 
     public static func oauthURL(provider: OAuthProvider) -> URL {
-        guard let url = URL(string: AuthService.baseURL + "\(provider.rawValue)/?redirect_uri=https://hackillinois.org/auth/?isiOS=1") else { fatalError() }
+        guard let url = URL(string: AuthService.baseURL + "\(provider.rawValue)/?redirect_uri=https://hackillinois.org/auth/?isiOS=1") else {
+            fatalError("Invalid configuration.")
+        }
         return url
     }
 

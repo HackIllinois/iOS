@@ -211,7 +211,7 @@ private extension HILoginFlowController {
 
     private func presentAuthenticationFailure(withError error: Error, sender: HIBaseViewController) {
         DispatchQueue.main.async {
-            sender.presentErrorController(title: "Authentication Failed", message: error.localizedDescription, dismissParentOnCompletion: false)
+            sender.presentErrorController(title: "Authentication Failed", message: String(describing: error), dismissParentOnCompletion: false)
         }
     }
 }

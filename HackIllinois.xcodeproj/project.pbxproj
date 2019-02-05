@@ -26,7 +26,8 @@
 		9510F6A11FCB7D6E007D19DB /* Event+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9510F69B1FCB7D6E007D19DB /* Event+CoreDataClass.swift */; };
 		9510F6A41FCB7D6E007D19DB /* Event+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9510F69E1FCB7D6E007D19DB /* Event+CoreDataProperties.swift */; };
 		9510F6A51FCB7D6E007D19DB /* Announcement+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9510F69F1FCB7D6E007D19DB /* Announcement+CoreDataProperties.swift */; };
-		9510F6A71FCB7E53007D19DB /* HIScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9510F6A61FCB7E53007D19DB /* HIScannerViewController.swift */; };
+		9510F6A71FCB7E53007D19DB /* HIBaseScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9510F6A61FCB7E53007D19DB /* HIBaseScannerViewController.swift */; };
+		9515E43722093E1300BCAF92 /* HIEventScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9515E43622093E1300BCAF92 /* HIEventScannerViewController.swift */; };
 		951827A81EA35DB800049F79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951827981EA35DB800049F79 /* AppDelegate.swift */; };
 		951827A91EA35DB800049F79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 951827991EA35DB800049F79 /* Assets.xcassets */; };
 		951827B41EA35E8B00049F79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 951827B21EA35E8B00049F79 /* LaunchScreen.storyboard */; };
@@ -78,14 +79,12 @@
 		95E3146A21FAF1740092C22E /* AnnouncementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3145B21FAF1740092C22E /* AnnouncementService.swift */; };
 		95E3146B21FAF1740092C22E /* PassService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3145C21FAF1740092C22E /* PassService.swift */; };
 		95E3146C21FAF1740092C22E /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3145D21FAF1740092C22E /* UserService.swift */; };
-		95E3146D21FAF1740092C22E /* RecruiterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3145E21FAF1740092C22E /* RecruiterService.swift */; };
 		95E3146E21FAF1740092C22E /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3145F21FAF1740092C22E /* EventService.swift */; };
-		95E3146F21FAF1740092C22E /* TrackingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146021FAF1740092C22E /* TrackingService.swift */; };
 		95E3147021FAF1740092C22E /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146121FAF1740092C22E /* BaseService.swift */; };
 		95E3147121FAF1740092C22E /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146221FAF1740092C22E /* AuthService.swift */; };
 		95E3147221FAF1740092C22E /* RegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146321FAF1740092C22E /* RegistrationService.swift */; };
 		95E3147321FAF1740092C22E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146521FAF1740092C22E /* Event.swift */; };
-		95E3147421FAF1740092C22E /* SuccessContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146621FAF1740092C22E /* SuccessContainer.swift */; };
+		95E3147421FAF1740092C22E /* SimpleRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146621FAF1740092C22E /* SimpleRequest.swift */; };
 		95E3147521FAF1740092C22E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146721FAF1740092C22E /* User.swift */; };
 		95E3147621FAF1740092C22E /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146821FAF1740092C22E /* Announcement.swift */; };
 		95FC1D1E1FCBD20E00F8AD60 /* HIUserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */; };
@@ -159,7 +158,8 @@
 		9510F69B1FCB7D6E007D19DB /* Event+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9510F69E1FCB7D6E007D19DB /* Event+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9510F69F1FCB7D6E007D19DB /* Announcement+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Announcement+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		9510F6A61FCB7E53007D19DB /* HIScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScannerViewController.swift; sourceTree = "<group>"; };
+		9510F6A61FCB7E53007D19DB /* HIBaseScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIBaseScannerViewController.swift; sourceTree = "<group>"; };
+		9515E43622093E1300BCAF92 /* HIEventScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEventScannerViewController.swift; sourceTree = "<group>"; };
 		9518277F1EA35AF100049F79 /* HackIllinois.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackIllinois.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		951827981EA35DB800049F79 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		951827991EA35DB800049F79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -214,14 +214,12 @@
 		95E3145B21FAF1740092C22E /* AnnouncementService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementService.swift; sourceTree = "<group>"; };
 		95E3145C21FAF1740092C22E /* PassService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassService.swift; sourceTree = "<group>"; };
 		95E3145D21FAF1740092C22E /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
-		95E3145E21FAF1740092C22E /* RecruiterService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecruiterService.swift; sourceTree = "<group>"; };
 		95E3145F21FAF1740092C22E /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
-		95E3146021FAF1740092C22E /* TrackingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingService.swift; sourceTree = "<group>"; };
 		95E3146121FAF1740092C22E /* BaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		95E3146221FAF1740092C22E /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		95E3146321FAF1740092C22E /* RegistrationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationService.swift; sourceTree = "<group>"; };
 		95E3146521FAF1740092C22E /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		95E3146621FAF1740092C22E /* SuccessContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessContainer.swift; sourceTree = "<group>"; };
+		95E3146621FAF1740092C22E /* SimpleRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleRequest.swift; sourceTree = "<group>"; };
 		95E3146721FAF1740092C22E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		95E3146821FAF1740092C22E /* Announcement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Announcement.swift; sourceTree = "<group>"; };
 		95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIUserDetailViewController.swift; sourceTree = "<group>"; };
@@ -417,14 +415,15 @@
 				958C863A2033C94800803F81 /* HIAdminAnnouncementViewController.swift */,
 				0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */,
 				956F41E01FC7577500557DC7 /* HIAnnouncementsViewController.swift */,
+				9510F6A61FCB7E53007D19DB /* HIBaseScannerViewController.swift */,
 				95C3BE2F2008B99C0008ED79 /* HIBaseViewController.swift */,
 				35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */,
 				95C18DC720096539004784B5 /* HIEventDetailViewController.swift */,
 				95C18DC920096539004784B5 /* HIEventListViewController.swift */,
+				9515E43622093E1300BCAF92 /* HIEventScannerViewController.swift */,
 				95C18DC42009618C004784B5 /* HIHomeViewController.swift */,
 				954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */,
 				95CCEA1E203D6B3600E3E28C /* HINavigationController.swift */,
-				9510F6A61FCB7E53007D19DB /* HIScannerViewController.swift */,
 				95C18DC820096539004784B5 /* HIScheduleViewController.swift */,
 				95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */,
 			);
@@ -525,9 +524,7 @@
 				95E3145B21FAF1740092C22E /* AnnouncementService.swift */,
 				95E3145C21FAF1740092C22E /* PassService.swift */,
 				95E3145D21FAF1740092C22E /* UserService.swift */,
-				95E3145E21FAF1740092C22E /* RecruiterService.swift */,
 				95E3145F21FAF1740092C22E /* EventService.swift */,
-				95E3146021FAF1740092C22E /* TrackingService.swift */,
 				95E3146121FAF1740092C22E /* BaseService.swift */,
 				95E3146221FAF1740092C22E /* AuthService.swift */,
 				95E3146321FAF1740092C22E /* RegistrationService.swift */,
@@ -539,7 +536,7 @@
 			isa = PBXGroup;
 			children = (
 				95E3146521FAF1740092C22E /* Event.swift */,
-				95E3146621FAF1740092C22E /* SuccessContainer.swift */,
+				95E3146621FAF1740092C22E /* SimpleRequest.swift */,
 				3521FFA82207C03E00634A63 /* Attendee.swift */,
 				95E3146721FAF1740092C22E /* User.swift */,
 				95E3146821FAF1740092C22E /* Announcement.swift */,
@@ -827,9 +824,10 @@
 				95C18DCB20096539004784B5 /* HIScheduleViewController.swift in Sources */,
 				95CCEA1F203D6B3600E3E28C /* HINavigationController.swift in Sources */,
 				957D7CAC1FC2940800C4332A /* HackIllinois.xcdatamodeld in Sources */,
-				9510F6A71FCB7E53007D19DB /* HIScannerViewController.swift in Sources */,
+				9510F6A71FCB7E53007D19DB /* HIBaseScannerViewController.swift in Sources */,
 				956F41E11FC7577500557DC7 /* HIAnnouncementsViewController.swift in Sources */,
 				95A7D290203D4F54005EAEAF /* HIAnnouncementCell.swift in Sources */,
+				9515E43722093E1300BCAF92 /* HIEventScannerViewController.swift in Sources */,
 				95A7D28F203D4F54005EAEAF /* HIEventCell.swift in Sources */,
 				95FC1D1E1FCBD20E00F8AD60 /* HIUserDetailViewController.swift in Sources */,
 				95C3BE302008B99C0008ED79 /* HIBaseViewController.swift in Sources */,
@@ -887,10 +885,8 @@
 				95E3146B21FAF1740092C22E /* PassService.swift in Sources */,
 				95E3146A21FAF1740092C22E /* AnnouncementService.swift in Sources */,
 				95E3147221FAF1740092C22E /* RegistrationService.swift in Sources */,
-				95E3146F21FAF1740092C22E /* TrackingService.swift in Sources */,
-				95E3147421FAF1740092C22E /* SuccessContainer.swift in Sources */,
+				95E3147421FAF1740092C22E /* SimpleRequest.swift in Sources */,
 				95E3145921FAD71E0092C22E /* Error.swift in Sources */,
-				95E3146D21FAF1740092C22E /* RecruiterService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

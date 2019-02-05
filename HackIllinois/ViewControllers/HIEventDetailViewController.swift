@@ -18,21 +18,22 @@ import APIManager
 
 class HIEventDetailViewController: HIBaseViewController {
     // MARK: - Properties
+    private static let scannerViewController = HIEventScannerViewController()
     var event: Event?
 
     // MARK: Views
-    let titleLabel = HILabel(style: .event) {
+    private let titleLabel = HILabel(style: .event) {
         $0.textColor <- \.generalText
         $0.font = HIAppearance.Font.contentTitle
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    let descriptionLabel = HILabel(style: .description) {
+    private let descriptionLabel = HILabel(style: .description) {
         $0.numberOfLines = 0
         $0.textColor <- \.generalText
         $0.font = HIAppearance.Font.contentText
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    let favoritedButton = HIButton {
+    private let favoritedButton = HIButton {
         $0.tintHIColor = \.generalText
         $0.backgroundHIColor = \.clear
         $0.activeImage = #imageLiteral(resourceName: "Favorited")
@@ -40,8 +41,8 @@ class HIEventDetailViewController: HIBaseViewController {
     }
 
     // MARK: Constraints
-    var descriptionLabelHeight = NSLayoutConstraint()
-    var tableViewHeight = NSLayoutConstraint()
+    private var descriptionLabelHeight = NSLayoutConstraint()
+    private var tableViewHeight = NSLayoutConstraint()
 }
 
 // MARK: - Actions
@@ -69,6 +70,20 @@ extension HIEventDetailViewController {
         }
         .authorize(with: HIApplicationStateController.shared.user)
         .launch()
+    }
+
+    @objc func didSelectScanButton(_ sender: UIBarButtonItem) {
+        guard let event = event else { return }
+        let now = Date()
+        if event.startTime.addingTimeInterval(-15*60) > now {
+            let message = "The scanning period for this event has not begun; scanning begins 15 minutes before the event."
+            presentErrorController(title: "Sorry", message: message, dismissParentOnCompletion: false)
+        } else if now > event.endTime {
+            presentErrorController(title: "Sorry", message: "The scanning period for this event has ended.", dismissParentOnCompletion: false)
+        } else {
+            HIEventDetailViewController.scannerViewController.event = event
+            navigationController?.pushViewController(HIEventDetailViewController.scannerViewController, animated: true)
+        }
     }
 }
 
@@ -139,7 +154,7 @@ extension HIEventDetailViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if event == nil {
-            presentErrorController(title: "Error", message: "Failed to load event.", dismissParentOnCompletion: true)
+            presentErrorController(title: "Uh oh", message: "Failed to load event.", dismissParentOnCompletion: true)
         }
     }
 }
@@ -149,6 +164,9 @@ extension HIEventDetailViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
         title = "EVENT DETAILS"
+        if let user = HIApplicationStateController.shared.user, user.roles.contains(.staff) || user.roles.contains(.admin) {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(didSelectScanButton(_:)))
+        }
     }
 }
 
