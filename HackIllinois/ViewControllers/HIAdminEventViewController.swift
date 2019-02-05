@@ -65,40 +65,6 @@ extension HIAdminEventViewController {
     private func confirmAlertActionWith(title: String, duration: Int) -> UIAlertAction {
         return UIAlertAction(title: "Yes", style: .default) { _ in
             self.stylizeFor(.currentlyCreatingEvent)
-//            HIAPI.EventService.create(event:  )
-//            .onCompletion { result in
-//                let alertTitle: String
-//                var alertMessage: String?
-//                var shouldExitOnCompletion = false
-//
-//                do {
-//                    let (successContainer, _) = try result.get()
-//                    alertTitle = "Tracked Event Created"
-//                    shouldExitOnCompletion = true
-//                } catch APIRequestError.cancelled {
-//                    alertTitle = "Cancelled"
-//                } catch {
-//                    alertTitle = "Error"
-//                    alertMessage = error.localizedDescription
-//                }
-//
-//                let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-//                alert.addAction(
-//                    UIAlertAction(title: "OK", style: .default) { [weak self] _ in
-//                        if shouldExitOnCompletion {
-//                            self?.navigationController?.popViewController(animated: true)
-//                        }
-//                    }
-//                )
-//                DispatchQueue.main.async { [weak self] in
-//                    self?.stylizeFor(.readyToCreateEvent)
-//                    self?.titleTextField.text = ""
-//                    self?.durationTextField.text = ""
-//                    self?.present(alert, animated: true, completion: nil)
-//                }
-//            }
-//            .authorize(with: HIApplicationStateController.shared.user)
-//            .launch()
         }
     }
 }
