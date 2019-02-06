@@ -21,40 +21,28 @@ protocol HICountdownViewControllerDelegate: class {
 class HICountdownViewController: UIViewController {
 
     // MARK: - Constants
-    let FRAMES_PER_TICK = 30
-    let TOTAL_NUM_FRAMES = 1800
-
-    let backgroundHIColor: HIColor = \.baseBackground
+    private let FRAMES_PER_TICK = 30
+    private let TOTAL_NUM_FRAMES = 1800
 
     // MARK: - Properties
-    var days = LOTAnimationView(name: "countdown-60")
-    var hours = LOTAnimationView(name: "countdown-24")
-    var minutes = LOTAnimationView(name: "countdown-60")
-    var seconds = LOTAnimationView(name: "countdown-60")
+    private let days = LOTAnimationView(name: "countdown-60")
+    private let hours = LOTAnimationView(name: "countdown-24")
+    private let minutes = LOTAnimationView(name: "countdown-60")
+    private let seconds = LOTAnimationView(name: "countdown-60")
+    private let backgroundHIColor: HIColor = \.baseBackground
 
-    var countdownDate: Date?
-    var dayFrame = 0
-    var hourFrame = 0
-    var minuteFrame = 0
-    var secondFrame = 0
-    var timer: Timer?
+    private var countdownDate: Date?
+    private var dayFrame = 0
+    private var hourFrame = 0
+    private var minuteFrame = 0
+    private var secondFrame = 0
+    private var timer: Timer?
 
-    var timeDifference: TimeInterval = 0.0
-    var daysRemaining: Int {
-        return max(0, Int(timeDifference / Date.DAY_IN_SECONDS) % 60)
-    }
-
-    var hoursRemaining: Int {
-        return max(0, Int(timeDifference / Date.HOUR_IN_SECONDS) % 24)
-    }
-
-    var minutesRemaining: Int {
-        return max(0, Int(timeDifference / Date.MINUTE_IN_SECONDS) % 60)
-    }
-
-    var secondsRemaining: Int {
-        return max(0, Int(timeDifference) % 60)
-    }
+    private var timeDifference: TimeInterval = 0.0
+    private var daysRemaining: Int { return max(0, Int(timeDifference / Date.DAY_IN_SECONDS) % 60) }
+    private var hoursRemaining: Int { return max(0, Int(timeDifference / Date.HOUR_IN_SECONDS) % 24) }
+    private var minutesRemaining: Int { return max(0, Int(timeDifference / Date.MINUTE_IN_SECONDS) % 60) }
+    private var secondsRemaining: Int { return max(0, Int(timeDifference) % 60) }
 
     weak var delegate: HICountdownViewControllerDelegate?
 

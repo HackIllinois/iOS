@@ -38,18 +38,21 @@ class HIHomeViewController: HIEventListViewController {
         return fetchedResultsController
     }()
 
-    let countdownTitleLabel = HILabel(style: .title)
-    lazy var countdownViewController = HICountdownViewController(delegate: self)
+    private let countdownTitleLabel = HILabel(style: .title)
+    private lazy var countdownViewController = HICountdownViewController(delegate: self)
+    private let happeningNowLabel = HILabel(style: .title) {
+        $0.text = "HAPPENING NOW"
+    }
 
-    var countdownDataStoreIndex = 0
-    var staticDataStore: [(date: Date, displayText: String)] = [
+    private var countdownDataStoreIndex = 0
+    private var staticDataStore: [(date: Date, displayText: String)] = [
         (HIConstants.EVENT_START_TIME, "HACKILLINOIS BEGINS IN"),
         (HIConstants.HACKING_START_TIME, "HACKING BEGINS IN"),
         (HIConstants.HACKING_END_TIME, "HACKING ENDS IN"),
         (HIConstants.EVENT_END_TIME, "HACKILLINOIS ENDS IN")
     ]
 
-    var timer: Timer?
+    private var timer: Timer?
 }
 
 // MARK: - UIViewController
@@ -58,33 +61,25 @@ extension HIHomeViewController {
         super.loadView()
 
         view.addSubview(countdownTitleLabel)
-        countdownTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        countdownTitleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        countdownTitleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        countdownTitleLabel.constrain(to: view.safeAreaLayoutGuide, topInset: 20, trailingInset: 0, leadingInset: 0)
 
         countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
         addChild(countdownViewController)
         view.addSubview(countdownViewController.view)
         countdownViewController.view.topAnchor.constraint(equalTo: countdownTitleLabel.bottomAnchor, constant: 8).isActive = true
-        countdownViewController.view.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-        countdownViewController.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
-        countdownViewController.view.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        countdownViewController.view.constrain(to: view.safeAreaLayoutGuide, trailingInset: -20, leadingInset: 20)
+        countdownViewController.view.constrain(height: 150)
         countdownViewController.didMove(toParent: self)
 
-        let happeningNowLabel = HILabel(style: .title)
-        happeningNowLabel.text = "HAPPENING NOW"
         view.addSubview(happeningNowLabel)
         happeningNowLabel.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor, constant: 16).isActive = true
-        happeningNowLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        happeningNowLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        happeningNowLabel.constrain(to: view.safeAreaLayoutGuide, trailingInset: 0, leadingInset: 0)
 
         let tableView = HITableView()
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: happeningNowLabel.bottomAnchor, constant: 5).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-
+        tableView.constrain(to: view.safeAreaLayoutGuide, trailingInset: 0, leadingInset: 0)
+        tableView.constrain(to: view, bottomInset: 0)
         self.tableView = tableView
     }
 
