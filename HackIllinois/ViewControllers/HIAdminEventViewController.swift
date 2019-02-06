@@ -23,13 +23,14 @@ enum HIAdminEventViewControllerStyle {
 
 class HIAdminEventViewController: HIBaseViewController {
     // MARK: - Properties
-    var titleTextField = HITextField { $0.placeholder = "TITLE" }
-    var durationTextField = HITextField { $0.placeholder = "DURATION (MINUTES)" }
-
-    var createEventButton = HIButton {
-        $0.backgroundHIColor = \.action
+    private let titleTextField = HITextField { $0.placeholder = "TITLE" }
+    private let separatorView = HIView(style: .separator)
+    private let durationTextField = HITextField { $0.placeholder = "DURATION (MINUTES)" }
+    private let createEventButton = HIButton {
         $0.layer.cornerRadius = 8
         $0.titleLabel?.font = HIAppearance.Font.button
+        $0.backgroundHIColor = \.contentBackground
+        $0.titleHIColor = \.action
         $0.title = "Create Tracked Event"
     }
 
@@ -76,31 +77,25 @@ extension HIAdminEventViewController {
 
         // Title TextField
         view.addSubview(titleTextField)
-        titleTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24).isActive = true
-        titleTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
-        titleTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
-        titleTextField.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        titleTextField.constrain(to: view.safeAreaLayoutGuide, topInset: 24, trailingInset: -30, leadingInset: 30)
+        titleTextField.constrain(height: 44)
 
         // Seperator View
-        let separatorView = HIView(style: .separator)
         view.addSubview(separatorView)
         separatorView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor).isActive = true
-        separatorView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
-        separatorView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
+        separatorView.constrain(to: view.safeAreaLayoutGuide, trailingInset: -30, leadingInset: 30)
 
         // Description TextField
         view.addSubview(durationTextField)
         durationTextField.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 0).isActive = true
-        durationTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
-        durationTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
-        durationTextField.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        durationTextField.constrain(to: view.safeAreaLayoutGuide, trailingInset: -30, leadingInset: 30)
+        durationTextField.constrain(height: 44)
 
         // Create Event Button
         view.addSubview(createEventButton)
         createEventButton.topAnchor.constraint(equalTo: durationTextField.bottomAnchor, constant: 44).isActive = true
-        createEventButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
-        createEventButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
-        createEventButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        createEventButton.constrain(to: view.safeAreaLayoutGuide, trailingInset: -12, leadingInset: 12)
+        createEventButton.constrain(height: 50)
     }
 }
 

@@ -38,10 +38,10 @@ class HIScheduleViewController: HIEventListViewController {
         return fetchedResultsController
     }()
 
-    var currentTab = 0
-    var onlyFavorites = false
-    let onlyFavoritesPredicate = NSPredicate(format: "favorite == YES" )
-    var dataStore: [(displayText: String, predicate: NSPredicate)] = {
+    private var currentTab = 0
+    private var onlyFavorites = false
+    private let onlyFavoritesPredicate = NSPredicate(format: "favorite == YES" )
+    private var dataStore: [(displayText: String, predicate: NSPredicate)] = {
         var dataStore = [(displayText: String, predicate: NSPredicate)]()
         let fridayPredicate = NSPredicate(
             format: "%@ =< startTime AND startTime < %@",

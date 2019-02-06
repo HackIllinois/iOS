@@ -22,16 +22,26 @@ class HIEventDetailViewController: HIBaseViewController {
     var event: Event?
 
     // MARK: Views
+    private let eventDetailContainer = HIView {
+        $0.layer.cornerRadius = 8
+        $0.layer.masksToBounds = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundHIColor = \.contentBackground
+    }
+    private let upperContainerView = HIView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundHIColor = \.contentBackground
+    }
     private let titleLabel = HILabel(style: .event) {
+        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor <- \.generalText
         $0.font = HIAppearance.Font.contentTitle
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let descriptionLabel = HILabel(style: .description) {
-        $0.numberOfLines = 0
+        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor <- \.generalText
         $0.font = HIAppearance.Font.contentText
-        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.numberOfLines = 0
     }
     private let favoritedButton = HIButton {
         $0.tintHIColor = \.generalText
@@ -92,19 +102,10 @@ extension HIEventDetailViewController {
     override func loadView() {
         super.loadView()
 
-        let eventDetailContainer = HIView {
-            $0.backgroundHIColor = \.contentBackground
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.layer.cornerRadius = 8
-            $0.layer.masksToBounds = true
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
         view.addSubview(eventDetailContainer)
         eventDetailContainer.constrain(to: view.safeAreaLayoutGuide, topInset: 12, trailingInset: -12, leadingInset: 12)
         eventDetailContainer.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12).isActive = true
 
-        let upperContainerView = UIView()
-        upperContainerView.translatesAutoresizingMaskIntoConstraints = false
         eventDetailContainer.addSubview(upperContainerView)
         upperContainerView.constrain(to: eventDetailContainer, topInset: 0, trailingInset: 0, leadingInset: 0)
         upperContainerView.constrain(height: 63)

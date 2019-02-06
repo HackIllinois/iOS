@@ -21,8 +21,6 @@ class HIBaseScannerViewController: HIBaseViewController {
 
     var loadFailed = false
     var respondingToQRCodeFound = true
-
-    var adminEventViewController = HIAdminEventViewController()
 }
 
 // MARK: - UIViewController

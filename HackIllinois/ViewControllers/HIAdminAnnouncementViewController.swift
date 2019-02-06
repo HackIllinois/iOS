@@ -22,12 +22,14 @@ enum HIAnnouncementAdminViewControllerStyle {
 
 class HIAdminAnnouncementViewController: HIBaseViewController {
     // MARK: - Properties
-    var titleTextField = HITextField { $0.placeholder = "TITLE" }
-    var descriptionTextField = HITextField { $0.placeholder = "DESCRIPTION" }
-    var createAnnouncementButton = HIButton {
-        $0.backgroundHIColor = \.action
+    private let titleTextField = HITextField { $0.placeholder = "TITLE" }
+    private let separatorView = HIView(style: .separator)
+    private let descriptionTextField = HITextField { $0.placeholder = "DESCRIPTION" }
+    private let createAnnouncementButton = HIButton {
         $0.layer.cornerRadius = 8
         $0.titleLabel?.font = HIAppearance.Font.button
+        $0.backgroundHIColor = \.contentBackground
+        $0.titleHIColor = \.action
         $0.title = "Create Announcement"
     }
 
@@ -97,31 +99,25 @@ extension HIAdminAnnouncementViewController {
 
         // Title TextField
         view.addSubview(titleTextField)
-        titleTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24).isActive = true
-        titleTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
-        titleTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
-        titleTextField.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        titleTextField.constrain(to: view.safeAreaLayoutGuide, topInset: 24, trailingInset: -30, leadingInset: 30)
+        titleTextField.constrain(height: 44)
 
         // Seperator View
-        let separatorView = HIView(style: .separator)
         view.addSubview(separatorView)
         separatorView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor).isActive = true
-        separatorView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
-        separatorView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
+        separatorView.constrain(to: view.safeAreaLayoutGuide, trailingInset: -30, leadingInset: 30)
 
         // Description TextField
         view.addSubview(descriptionTextField)
         descriptionTextField.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 0).isActive = true
-        descriptionTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
-        descriptionTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
-        descriptionTextField.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        descriptionTextField.constrain(to: view.safeAreaLayoutGuide, trailingInset: -30, leadingInset: 30)
+        descriptionTextField.constrain(height: 44)
 
         // Create Announcement Button
         view.addSubview(createAnnouncementButton)
         createAnnouncementButton.topAnchor.constraint(equalTo: descriptionTextField.bottomAnchor, constant: 44).isActive = true
-        createAnnouncementButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
-        createAnnouncementButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
-        createAnnouncementButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        createAnnouncementButton.constrain(to: view.safeAreaLayoutGuide, trailingInset: -12, leadingInset: 12)
+        createAnnouncementButton.constrain(height: 50)
     }
 }
 
