@@ -18,11 +18,29 @@ import HIAPI
 
 class HIUserDetailViewController: HIBaseViewController {
     // MARK: - Properties
-    var qrImageView = HIImageView {
+    private let userDetailContainer = HIView {
+        $0.layer.cornerRadius = 8
+        $0.layer.masksToBounds = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundHIColor = \.contentBackground
+    }
+    private let qrImageView = HIImageView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.tintHIColor = \.action
     }
-    var userNameLabel = HILabel(style: .title)
-    var userInfoLabel = HILabel(style: .subtitle)
+    private let userNameLabel = HILabel {
+        $0.textHIColor = \.generalText
+        $0.backgroundHIColor = \.contentBackground
+        $0.font = HIAppearance.Font.navigationTitle
+        $0.textAlignment = .center
+    }
+    private let userInfoLabel = HILabel {
+        $0.textHIColor = \.generalText
+        $0.backgroundHIColor = \.contentBackground
+        $0.font = HIAppearance.Font.contentText
+        $0.textAlignment = .center
+        $0.numberOfLines = 0
+    }
 }
 
 // MARK: - Actions
@@ -46,37 +64,23 @@ extension HIUserDetailViewController {
     override func loadView() {
         super.loadView()
 
-        let userDetailContainer = HIView {
-            $0.backgroundHIColor = \.contentBackground
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.layer.cornerRadius = 8
-            $0.layer.masksToBounds = true
-        }
         view.addSubview(userDetailContainer)
-        userDetailContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 13).isActive = true
-        userDetailContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
-        userDetailContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
+        userDetailContainer.constrain(to: view.safeAreaLayoutGuide, topInset: 13, trailingInset: -12, leadingInset: 12)
 
-        qrImageView.translatesAutoresizingMaskIntoConstraints = false
         userDetailContainer.addSubview(qrImageView)
-        qrImageView.topAnchor.constraint(equalTo: userDetailContainer.topAnchor, constant: 32).isActive = true
-        qrImageView.leadingAnchor.constraint(equalTo: userDetailContainer.leadingAnchor, constant: 32).isActive = true
-        qrImageView.trailingAnchor.constraint(equalTo: userDetailContainer.trailingAnchor, constant: -32).isActive = true
+        qrImageView.constrain(to: userDetailContainer, topInset: 32, trailingInset: -32, leadingInset: 32)
         qrImageView.heightAnchor.constraint(equalTo: qrImageView.widthAnchor).isActive = true
 
         let userDataStackView = UIStackView()
         userDataStackView.axis = .vertical
-        userDataStackView.alignment = .fill
-        userDataStackView.distribution = .fillProportionally
+        userDataStackView.spacing = 2
+        userDataStackView.alignment = .center
+        userDataStackView.distribution = .fill
         userDataStackView.translatesAutoresizingMaskIntoConstraints = false
         userDetailContainer.addSubview(userDataStackView)
         userDataStackView.topAnchor.constraint(equalTo: qrImageView.bottomAnchor, constant: 22).isActive = true
-        userDataStackView.leadingAnchor.constraint(equalTo: userDetailContainer.leadingAnchor, constant: 32).isActive = true
-        userDataStackView.bottomAnchor.constraint(equalTo: userDetailContainer.bottomAnchor, constant: -32).isActive = true
-        userDataStackView.trailingAnchor.constraint(equalTo: userDetailContainer.trailingAnchor, constant: -32).isActive = true
-        userDataStackView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        userDataStackView.constrain(to: userDetailContainer, trailingInset: -32, bottomInset: -32, leadingInset: 32)
 
-        userInfoLabel.textAlignment = .center
         userDataStackView.addArrangedSubview(userNameLabel)
         userDataStackView.addArrangedSubview(userInfoLabel)
     }
@@ -93,7 +97,7 @@ extension HIUserDetailViewController {
                 self.qrImageView.image = qrImage
             }
         }
-        userNameLabel.text = (user.firstName).uppercased()
+        userNameLabel.text = user.firstName.uppercased()
         userInfoLabel.text = user.attendee?.diet.description ?? "NO DIETARY RESTRICTIONS"
         setupPass()
     }

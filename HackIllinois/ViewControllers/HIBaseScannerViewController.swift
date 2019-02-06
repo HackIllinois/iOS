@@ -68,14 +68,6 @@ extension HIBaseScannerViewController {
     }
 }
 
-// MARK: - UINavigationItem Setup
-extension HIBaseScannerViewController {
-    @objc dynamic override func setupNavigationItem() {
-        super.setupNavigationItem()
-        title = "SCANNER"
-    }
-}
-
 // MARK: AVCaptureMetadataOutputObjectsDelegate
 extension HIBaseScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
     func setupCaptureSession() {

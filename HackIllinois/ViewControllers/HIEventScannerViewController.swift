@@ -65,3 +65,11 @@ class HIEventScannerViewController: HIBaseScannerViewController {
         .launch()
     }
 }
+
+// MARK: - UINavigationItem Setup
+extension HIEventScannerViewController {
+    @objc dynamic override func setupNavigationItem() {
+        super.setupNavigationItem()
+        title = "EVENT SCANNER"
+    }
+}
