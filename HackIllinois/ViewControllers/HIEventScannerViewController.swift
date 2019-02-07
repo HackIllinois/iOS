@@ -18,18 +18,26 @@ import HIAPI
 
 class HIEventScannerViewController: HIBaseScannerViewController {
     var event: Event?
+}
 
-    override func found(code: String) {
-        guard let event = event,
-            let url = URL(string: code),
-            url.scheme == "hackillinois",
-            let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
-            let queryItems = components.queryItems,
-            let id = queryItems.first(where: { $0.name == "userid" })?.value else { return }
+// MARK: - UINavigationItem Setup
+extension HIEventScannerViewController {
+    @objc dynamic override func setupNavigationItem() {
+        super.setupNavigationItem()
+        title = "EVENT SCANNER"
+    }
+}
 
+// MARK: AVCaptureMetadataOutputObjectsDelegate
+extension HIEventScannerViewController {
+    override func found(user id: String) {
+        guard let event = event else {
+            respondingToQRCodeFound = true
+            dismiss(animated: true, completion: nil)
+            return
+        }
         AudioServicesPlaySystemSound(1004)
         hapticGenerator.notificationOccurred(.success)
-        respondingToQRCodeFound = false
 
         let alert = UIAlertController(title: "Checking user...", message: id, preferredStyle: .alert)
         present(alert, animated: true, completion: nil)
@@ -63,13 +71,5 @@ class HIEventScannerViewController: HIBaseScannerViewController {
         }
         .authorize(with: HIApplicationStateController.shared.user)
         .launch()
-    }
-}
-
-// MARK: - UINavigationItem Setup
-extension HIEventScannerViewController {
-    @objc dynamic override func setupNavigationItem() {
-        super.setupNavigationItem()
-        title = "EVENT SCANNER"
     }
 }

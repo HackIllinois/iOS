@@ -14,7 +14,7 @@ import UIKit
 
 struct HIAppearance: Equatable {
     let titleText: UIColor
-    let generalText: UIColor
+    let baseText: UIColor
     let accent: UIColor
     let action: UIColor
     let baseBackground: UIColor
@@ -28,7 +28,7 @@ struct HIAppearance: Equatable {
 
     fileprivate static let day = HIAppearance(
         titleText: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 1),
-        generalText: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 1),
+        baseText: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 1),
         accent: #colorLiteral(red: 1, green: 0.4666666667, blue: 0.4352941176, alpha: 1),
         action: #colorLiteral(red: 0.1215686275, green: 0.5176470588, blue: 0.6470588235, alpha: 1),
         baseBackground: #colorLiteral(red: 0.8901960784, green: 0.9647058824, blue: 1, alpha: 1),
@@ -41,7 +41,7 @@ struct HIAppearance: Equatable {
 
     fileprivate static let night = HIAppearance(
         titleText: #colorLiteral(red: 0.8901960784, green: 0.9647058824, blue: 1, alpha: 1),
-        generalText: #colorLiteral(red: 0.8901960784, green: 0.9647058824, blue: 1, alpha: 1),
+        baseText: #colorLiteral(red: 0.8901960784, green: 0.9647058824, blue: 1, alpha: 1),
         accent: #colorLiteral(red: 1, green: 0.4666666667, blue: 0.4352941176, alpha: 1),
         action: #colorLiteral(red: 0.8901960784, green: 0.9647058824, blue: 1, alpha: 1),
         baseBackground: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 1),

@@ -34,17 +34,17 @@ class HIEventDetailViewController: HIBaseViewController {
     }
     private let titleLabel = HILabel(style: .event) {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor <- \.generalText
+        $0.textColor <- \.baseText
         $0.font = HIAppearance.Font.contentTitle
     }
     private let descriptionLabel = HILabel(style: .description) {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor <- \.generalText
+        $0.textColor <- \.baseText
         $0.font = HIAppearance.Font.contentText
         $0.numberOfLines = 0
     }
     private let favoritedButton = HIButton {
-        $0.tintHIColor = \.generalText
+        $0.tintHIColor = \.baseText
         $0.backgroundHIColor = \.clear
         $0.activeImage = #imageLiteral(resourceName: "Favorited")
         $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
@@ -165,7 +165,7 @@ extension HIEventDetailViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
         title = "EVENT DETAILS"
-        if let user = HIApplicationStateController.shared.user, user.roles.contains(.staff) || user.roles.contains(.admin) {
+        if let user = HIApplicationStateController.shared.user, !user.roles.intersection([.staff, .admin]).isEmpty {
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(didSelectScanButton(_:)))
         }
     }

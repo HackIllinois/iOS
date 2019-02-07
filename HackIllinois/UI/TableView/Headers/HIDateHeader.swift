@@ -15,7 +15,7 @@ import UIKit
 
 class HIDateHeader: UITableViewHeaderFooterView {
     var titleLabel = HILabel {
-        $0.textHIColor = \.generalText
+        $0.textHIColor = \.baseText
         $0.backgroundHIColor = \.baseBackground
         $0.font = HIAppearance.Font.sectionHeader
     }

@@ -12,7 +12,6 @@
 
 import Foundation
 import APIManager
-import SafariServices
 
 public final class AuthService: BaseService {
 
@@ -46,11 +45,11 @@ public final class AuthService: BaseService {
     public static func getAPIToken(provider: OAuthProvider, code: String) -> APIRequest<Token> {
         var body = HTTPParameters()
         body["code"] = code
-
         return APIRequest<Token>(service: self, endpoint: "code/\(provider.rawValue)/?redirect_uri=https://hackillinois.org/auth/?isiOS=1", body: body, method: .POST)
     }
 
     public static func getRoles() -> APIRequest<RolesContainer> {
         return APIRequest<RolesContainer>(service: self, endpoint: "roles/", method: .GET)
     }
+
 }

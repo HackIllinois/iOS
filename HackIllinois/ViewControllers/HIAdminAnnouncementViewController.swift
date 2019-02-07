@@ -27,6 +27,7 @@ class HIAdminAnnouncementViewController: HIBaseViewController {
     private let descriptionTextField = HITextField { $0.placeholder = "DESCRIPTION" }
     private let createAnnouncementButton = HIButton {
         $0.layer.cornerRadius = 8
+        $0.layer.masksToBounds = true
         $0.titleLabel?.font = HIAppearance.Font.button
         $0.backgroundHIColor = \.contentBackground
         $0.titleHIColor = \.action

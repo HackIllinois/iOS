@@ -57,7 +57,7 @@ class HISegmentedControl: UIControl {
     @objc func refreshForThemeChange() {
         backgroundColor <- \.baseBackground
         labels.forEach {
-            $0.textColor <- \.generalText
+            $0.textColor <- \.baseText
             $0.backgroundColor <- \.baseBackground
         }
         bottomView.backgroundColor <- \.accent

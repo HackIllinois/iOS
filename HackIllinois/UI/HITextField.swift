@@ -40,7 +40,7 @@ class HITextField: UITextField {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        textColor <- \.generalText
+        textColor <- \.baseText
         tintColor <- \.accent
         backgroundColor <- \.baseBackground
 
@@ -48,7 +48,7 @@ class HITextField: UITextField {
             attributedPlaceholder = NSAttributedString(
                 string: placeholder,
                 attributes: [
-                    NSAttributedString.Key.foregroundColor: (\HIAppearance.generalText).value.withAlphaComponent(0.5)
+                    NSAttributedString.Key.foregroundColor: (\HIAppearance.baseText).value.withAlphaComponent(0.5)
                 ]
             )
         }

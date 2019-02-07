@@ -12,7 +12,6 @@
 
 import Foundation
 import APIManager
-import SafariServices
 
 public final class PassService: BaseService {
     public override static var baseURL: String {
@@ -20,9 +19,8 @@ public final class PassService: BaseService {
     }
 
     public static func getPass(with msg: String) -> APIRequest<Data> {
-        let params: HTTPBody = [
-            "message": msg
-        ]
+        var params = HTTPParameters()
+        params["message"] = msg
         return APIRequest<Data>(service: self, endpoint: "", body: params, method: .POST)
     }
 }

@@ -12,7 +12,6 @@
 
 import Foundation
 import APIManager
-import CoreData
 
 public class EventService: BaseService {
 
@@ -46,25 +45,4 @@ public class EventService: BaseService {
         return APIRequest<Favorite>(service: self, endpoint: "favorite/remove/", body: body, method: .POST)
     }
 
-}
-
-public final class TrackingService: EventService {
-
-    public override static var baseURL: String {
-        return super.baseURL + "track/"
-    }
-
-    public static func track(name: String, id: String) -> APIRequest<SimpleRequest> {
-        var body = HTTPBody()
-        body["eventName"] = name
-        body["userId"] = id
-        return APIRequest<SimpleRequest>(service: self, endpoint: "", body: body, method: .POST)
-    }
-
-    internal override static func hiValidate(statusCode: Int) throws {
-        if ![200, 422, 500].contains(statusCode) {
-            let description = HTTPURLResponse.localizedString(forStatusCode: statusCode)
-            throw APIRequestError.invalidHTTPReponse(code: statusCode, description: description)
-        }
-    }
 }
