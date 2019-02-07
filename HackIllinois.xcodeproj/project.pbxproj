@@ -92,6 +92,7 @@
 		95E3147421FAF1740092C22E /* SimpleRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146621FAF1740092C22E /* SimpleRequest.swift */; };
 		95E3147521FAF1740092C22E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146721FAF1740092C22E /* User.swift */; };
 		95E3147621FAF1740092C22E /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146821FAF1740092C22E /* Announcement.swift */; };
+		95F5B4A0220BCFFF00C59992 /* HIIndoorMapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F5B49F220BCFFF00C59992 /* HIIndoorMapsViewController.swift */; };
 		95FC1D1E1FCBD20E00F8AD60 /* HIUserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */; };
 		95FC79BE21E0199600715036 /* HIAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC79BD21E0199600715036 /* HIAppearance.swift */; };
 		95FC79C121E0243D00715036 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC79C021E0243D00715036 /* Operators.swift */; };
@@ -233,6 +234,7 @@
 		95E3146621FAF1740092C22E /* SimpleRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleRequest.swift; sourceTree = "<group>"; };
 		95E3146721FAF1740092C22E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		95E3146821FAF1740092C22E /* Announcement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Announcement.swift; sourceTree = "<group>"; };
+		95F5B49F220BCFFF00C59992 /* HIIndoorMapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIIndoorMapsViewController.swift; sourceTree = "<group>"; };
 		95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIUserDetailViewController.swift; sourceTree = "<group>"; };
 		95FC79BD21E0199600715036 /* HIAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAppearance.swift; sourceTree = "<group>"; };
 		95FC79C021E0243D00715036 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
@@ -451,6 +453,8 @@
 				95CCEA1E203D6B3600E3E28C /* HINavigationController.swift */,
 				95C18DC820096539004784B5 /* HIScheduleViewController.swift */,
 				95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */,
+				95CCEA1E203D6B3600E3E28C /* HINavigationController.swift */,
+				95F5B49F220BCFFF00C59992 /* HIIndoorMapsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -877,6 +881,7 @@
 				9544799C200C39870005408B /* HIUser.swift in Sources */,
 				95A7D28B203D4F54005EAEAF /* HISegmentedControl.swift in Sources */,
 				957A4D7D21FDA71F007FDE0E /* MixTypeComparable.swift in Sources */,
+				95F5B4A0220BCFFF00C59992 /* HIIndoorMapsViewController.swift in Sources */,
 				95A7D28C203D4F54005EAEAF /* HITextField.swift in Sources */,
 				95C18DCA20096539004784B5 /* HIEventDetailViewController.swift in Sources */,
 				9523A2902218BA2600341EBD /* HIImageView.swift in Sources */,
