@@ -29,13 +29,13 @@ class HIUserDetailViewController: HIBaseViewController {
         $0.tintHIColor = \.action
     }
     private let userNameLabel = HILabel {
-        $0.textHIColor = \.generalText
+        $0.textHIColor = \.baseText
         $0.backgroundHIColor = \.contentBackground
         $0.font = HIAppearance.Font.navigationTitle
         $0.textAlignment = .center
     }
     private let userInfoLabel = HILabel {
-        $0.textHIColor = \.generalText
+        $0.textHIColor = \.baseText
         $0.backgroundHIColor = \.contentBackground
         $0.font = HIAppearance.Font.contentText
         $0.textAlignment = .center

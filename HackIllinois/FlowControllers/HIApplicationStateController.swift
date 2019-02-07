@@ -75,6 +75,11 @@ extension HIApplicationStateController {
         viewControllers.append(HIScheduleViewController())
         viewControllers.append(HIAnnouncementsViewController())
         viewControllers.append(HIUserDetailViewController())
+
+        if !user.roles.intersection([.staff, .admin]).isEmpty {
+            viewControllers.append(HICheckInScannerViewController())
+        }
+
         return viewControllers
     }
 

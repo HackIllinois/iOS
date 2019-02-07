@@ -15,18 +15,24 @@ import UIKit
 import AVKit
 
 class HIBaseScannerViewController: HIBaseViewController {
-    var captureSession: AVCaptureSession?
-    var previewLayer: AVCaptureVideoPreviewLayer?
+    private var captureSession: AVCaptureSession?
+    private let previewView = HIView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundHIColor = \.baseBackground
+    }
+    private var previewLayer: AVCaptureVideoPreviewLayer?
     let hapticGenerator = UINotificationFeedbackGenerator()
 
-    var loadFailed = false
+    private var loadFailed = false
     var respondingToQRCodeFound = true
 }
 
 // MARK: - UIViewController
 extension HIBaseScannerViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
+        view.addSubview(previewView)
+        previewView.constrain(to: view, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
         setupCaptureSession()
     }
 
@@ -91,13 +97,13 @@ extension HIBaseScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
         previewLayer.videoGravity = .resizeAspectFill
         self.previewLayer = previewLayer
         setFrameForPreviewLayer()
-        view.layer.addSublayer(previewLayer)
+        previewView.layer.addSublayer(previewLayer)
     }
 
     func setFrameForPreviewLayer() {
         guard let previewLayer = previewLayer else { return }
 
-        previewLayer.frame = view.layer.bounds
+        previewLayer.frame = previewView.layer.bounds
 
         guard previewLayer.connection?.isVideoOrientationSupported == true else { return }
 
@@ -114,13 +120,19 @@ extension HIBaseScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
     }
 
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        guard respondingToQRCodeFound else { return }
-        if let code = (metadataObjects.first as? AVMetadataMachineReadableCodeObject)?.stringValue {
-            found(code: code)
-        }
+        guard respondingToQRCodeFound,
+            let meta = metadataObjects.first as? AVMetadataMachineReadableCodeObject,
+            let code = meta.stringValue,
+            let url = URL(string: code),
+            url.scheme == "hackillinois",
+            let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
+            let queryItems = components.queryItems,
+            let id = queryItems.first(where: { $0.name == "userId" })?.value else { return }
+        respondingToQRCodeFound = false
+        found(user: id)
     }
 
-    @objc func found(code: String) {
-        fatalError("found(code:) must be implemented in a subclass of HIBaseScannerViewController.")
+    @objc func found(user id: String) {
+        fatalError("found(user:) must be implemented in a subclass of HIBaseScannerViewController.")
     }
 }

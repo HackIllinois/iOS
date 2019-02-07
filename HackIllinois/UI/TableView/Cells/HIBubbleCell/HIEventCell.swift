@@ -21,7 +21,7 @@ protocol HIEventCellDelegate: class {
 class HIEventCell: HIBubbleCell {
     // MARK: - Properties
     let favoritedButton = HIButton {
-        $0.tintHIColor = \.generalText
+        $0.tintHIColor = \.baseText
         $0.backgroundHIColor = \.clear
         $0.activeImage = #imageLiteral(resourceName: "Favorited")
         $0.baseImage = #imageLiteral(resourceName: "Unfavorited")

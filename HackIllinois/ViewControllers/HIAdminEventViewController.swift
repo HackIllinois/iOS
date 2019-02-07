@@ -28,6 +28,7 @@ class HIAdminEventViewController: HIBaseViewController {
     private let durationTextField = HITextField { $0.placeholder = "DURATION (MINUTES)" }
     private let createEventButton = HIButton {
         $0.layer.cornerRadius = 8
+        $0.layer.masksToBounds = true
         $0.titleLabel?.font = HIAppearance.Font.button
         $0.backgroundHIColor = \.contentBackground
         $0.titleHIColor = \.action

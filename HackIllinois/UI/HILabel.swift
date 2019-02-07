@@ -42,17 +42,17 @@ class HILabel: UILabel {
         if let style = style {
         switch style {
         case .location:
-            textHIColor = \.generalText
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.contentText
 
         case .event:
-            textHIColor = \.generalText
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.contentTitle
 
         case .title:
-            textHIColor = \.generalText
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .center
             font = HIAppearance.Font.button
@@ -63,7 +63,7 @@ class HILabel: UILabel {
             font = HIAppearance.Font.contentSubtitle
 
         case .description:
-            textHIColor = \.generalText
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.contentText
             numberOfLines = 0
@@ -74,7 +74,7 @@ class HILabel: UILabel {
             font = HIAppearance.Font.navigationTitle
 
         case .loginSelection:
-            textHIColor = \.generalText
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .center
             font = HIAppearance.Font.navigationSubtitle
