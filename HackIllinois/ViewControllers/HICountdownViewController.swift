@@ -66,12 +66,24 @@ class HICountdownViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
 
+    private let countdownFillColor: HIColor = \.baseText
+    private var countdownFillColorCallback: LOTColorValueCallback?
+
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
         days.backgroundColor <- backgroundHIColor
         hours.backgroundColor <- backgroundHIColor
         minutes.backgroundColor <- backgroundHIColor
         seconds.backgroundColor <- backgroundHIColor
+
+        let fillColorKeypath = LOTKeypath(string: "**.Fill 1.Color")
+        let countdownFillColorCallback = LOTColorValueCallback(color: countdownFillColor.value.cgColor)
+        self.countdownFillColorCallback = countdownFillColorCallback
+
+        days.setValueDelegate(countdownFillColorCallback, for: fillColorKeypath)
+        hours.setValueDelegate(countdownFillColorCallback, for: fillColorKeypath)
+        minutes.setValueDelegate(countdownFillColorCallback, for: fillColorKeypath)
+        seconds.setValueDelegate(countdownFillColorCallback, for: fillColorKeypath)
     }
 }
 
@@ -144,13 +156,15 @@ extension HICountdownViewController {
         countdownDate = delegate?.countdownToDateFor(countdownViewController: self)
         updateTimeDifference()
         setupCounters()
-        timer = Timer.scheduledTimer(
+        let timer = Timer.scheduledTimer(
             timeInterval: 1,
             target: self,
             selector: #selector(updateCountdown),
             userInfo: nil,
             repeats: true
         )
+        RunLoop.main.add(timer, forMode: .common)
+        self.timer = timer
     }
 
     func setupCounters() {
