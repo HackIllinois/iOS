@@ -20,6 +20,12 @@ public struct AnnouncementContainer: Decodable, APIReturnable {
     }
     
     public let announcements: [Announcement]
+    
+    public init(from data: Data) throws {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
+        self = try decoder.decode(AnnouncementContainer.self, from: data)
+    }
 }
 
 public struct Announcement: Codable {
