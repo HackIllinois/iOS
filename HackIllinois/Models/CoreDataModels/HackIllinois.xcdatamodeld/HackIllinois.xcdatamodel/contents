@@ -5,11 +5,6 @@
         <attribute name="time" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
         <attribute name="topicName" optional="YES" attributeType="String" syncable="YES"/>
-        <uniquenessConstraints>
-            <uniquenessConstraint>
-                <constraint value="topicName"/>
-            </uniquenessConstraint>
-        </uniquenessConstraints>
     </entity>
     <entity name="Event" representedClassName="Event" syncable="YES">
         <attribute name="endTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
