@@ -21,8 +21,7 @@ class HIAnnouncementsViewController: HIBaseViewController {
 
         fetchRequest.sortDescriptors = [
             NSSortDescriptor(key: "time", ascending: false),
-            NSSortDescriptor(key: "title", ascending: true),
-            NSSortDescriptor(key: "id", ascending: true)
+            NSSortDescriptor(key: "title", ascending: true)
         ]
 
         fetchRequest.predicate = NSPredicate(format: "now() >= time")
