@@ -15,7 +15,7 @@ import APIManager
 
 public final class PassService: BaseService {
     public override static var baseURL: String {
-        return "https://passgen.hackillinois.org/pkpass"
+        return "https://pass.hackillinois.org/pkpass"
     }
 
     public static func getPass(with msg: String) -> APIRequest<Data> {
