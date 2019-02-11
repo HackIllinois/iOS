@@ -33,9 +33,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = HIThemeEngine.shared
         HIApplicationStateController.shared.initalize()
         
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
-            print("PERMISSION::GRANTED")
-        }
+//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+//            print("PERMISSION::GRANTED")
+//        }
         
         UIApplication.shared.registerForRemoteNotifications()
         
