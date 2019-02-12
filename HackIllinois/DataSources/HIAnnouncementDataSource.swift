@@ -27,31 +27,19 @@ final class HIAnnouncementDataSource {
         }
         isRefreshing = true
         
-        print("ENTERING::ANNOUNCEMENTS")
-        print(HIApplicationStateController.shared.user)
-        
         HIAPI.AnnouncementService.getAllAnnouncements()
                 .onCompletion { result in
                     do {
-                        print("Complete::announcements:: \(result)")
                         let (containedAnnouncements, _) = try result.get()
                             HICoreDataController.shared.performBackgroundTask { context -> Void in
                                 do {
                                     //Unwrap contained data
-                                    
-                                    print("CONTAINED::ANNOUNCEMENTS::\(containedAnnouncements)")
                                     let apiAnnouncements = containedAnnouncements.announcements
 
                                     let announcementFetchRequest = NSFetchRequest<Announcement>(entityName: "Announcement")
                                     
-                                    print("ANNOUNCEMENT::FETCH::REQ \(announcementFetchRequest)")
-                                    
                                     let coreDataAnnouncements = try context.fetch(announcementFetchRequest)
                                     
-                                    print("Core::data::announcements\(coreDataAnnouncements)") //Announcements are empty for some reason
-                                    
-
-                                    print("before::diff")
                                     //8) Diff the CoreData events and API events.
                                     let (
                                         coreDataAnnouncementsToDelete,
@@ -59,14 +47,11 @@ final class HIAnnouncementDataSource {
                                         apiAnnouncementsToInsert
                                     ) = diff(initial: coreDataAnnouncements, final: apiAnnouncements)
 
-                                    print("after::diff")
                                     // 9) Apply the diff
                                     coreDataAnnouncementsToDelete.forEach { coreDataAnnouncement in
                                         // Delete CoreData Announcement.
                                         context.delete(coreDataAnnouncement)
                                     }
-                                    
-                                    print("deleting::announcement")
 
                                     coreDataAnnouncementsToUpdate.forEach { (coreDataAnnouncement, apiAnnouncement) in
                                         // Update CoreData Announcement.
@@ -76,23 +61,19 @@ final class HIAnnouncementDataSource {
                                         coreDataAnnouncement.topicName = apiAnnouncement.topicName
                                     }
                                     
-                                    print("updating::announcement")
-                                    print(apiAnnouncementsToInsert)
-                                    
-                                    //Breaking::here
                                     apiAnnouncementsToInsert.forEach { apiAnnouncement in
                                         // Create CoreData announcement.
-                                        print("announcement::made")
                                         let coreDataAnnouncement = Announcement(context: context)
-                                        print("announcement::finished")
-                                        print("CD::Announcement \(coreDataAnnouncement)")
-                                        coreDataAnnouncement.time = apiAnnouncement.time
+                                       coreDataAnnouncement.time = apiAnnouncement.time
                                         coreDataAnnouncement.topicName = apiAnnouncement.topicName
                                         coreDataAnnouncement.info = apiAnnouncement.info
                                         coreDataAnnouncement.title = apiAnnouncement.title
                                     }
 
-                                    print("Reaching::save")
+                                    for announcement in coreDataAnnouncements {
+                                        HILocalNotificationController.shared.scheduleAnnouncement(this: announcement)
+                                    }
+                                    
                                     // 10) Save changes, call completion handler, unlock refresh
                                     try context.save()
                                     completion?()
@@ -100,9 +81,7 @@ final class HIAnnouncementDataSource {
                                 } catch {
                                     completion?()
                                     isRefreshing = false
-                                    print(error)
-                                    print("CAUGHT::ERROR")
-                                    fatalError("fuck")
+                                    fatalError("lol")
                                 }
                         }
                     } catch {
