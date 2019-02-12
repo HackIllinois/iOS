@@ -18,28 +18,36 @@ import HIAPI
 
 class HIUserDetailViewController: HIBaseViewController {
     // MARK: - Properties
-    private let userDetailContainer = HIView {
+    private let containerView = HIView {
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundHIColor = \.contentBackground
+        $0.backgroundHIColor = \.qrBackground
+    }
+    private let qrContainerView = HIView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundHIColor = \.qrBackground
     }
     private let qrImageView = HIImageView {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.tintHIColor = \.action
+        $0.tintHIColor = \.qrTint
+        $0.contentMode = .scaleAspectFit
     }
     private let userNameLabel = HILabel {
-        $0.textHIColor = \.baseText
-        $0.backgroundHIColor = \.contentBackground
+        $0.textHIColor = \.qrTint
+        $0.backgroundHIColor = \.qrBackground
         $0.font = HIAppearance.Font.navigationTitle
         $0.textAlignment = .center
+        $0.numberOfLines = 0
+        $0.setContentCompressionResistancePriority(.required, for: .vertical)
     }
     private let userInfoLabel = HILabel {
-        $0.textHIColor = \.baseText
-        $0.backgroundHIColor = \.contentBackground
+        $0.textHIColor = \.qrTint
+        $0.backgroundHIColor = \.qrBackground
         $0.font = HIAppearance.Font.contentText
         $0.textAlignment = .center
         $0.numberOfLines = 0
+        $0.setContentCompressionResistancePriority(.required, for: .vertical)
     }
 }
 
@@ -64,25 +72,40 @@ extension HIUserDetailViewController {
     override func loadView() {
         super.loadView()
 
-        view.addSubview(userDetailContainer)
-        userDetailContainer.constrain(to: view.safeAreaLayoutGuide, topInset: 13, trailingInset: -12, leadingInset: 12)
+        view.addSubview(containerView)
+        containerView.addSubview(qrContainerView)
+        qrContainerView.addSubview(qrImageView)
+        containerView.addSubview(userNameLabel)
+        containerView.addSubview(userInfoLabel)
 
-        userDetailContainer.addSubview(qrImageView)
-        qrImageView.constrain(to: userDetailContainer, topInset: 32, trailingInset: -32, leadingInset: 32)
-        qrImageView.heightAnchor.constraint(equalTo: qrImageView.widthAnchor).isActive = true
+        containerView.constrain(to: view.safeAreaLayoutGuide, topInset: 12, trailingInset: -12, leadingInset: 12)
+        view.safeAreaLayoutGuide.bottomAnchor.constraint(greaterThanOrEqualTo: containerView.bottomAnchor, constant: 12).isActive = true
 
-        let userDataStackView = UIStackView()
-        userDataStackView.axis = .vertical
-        userDataStackView.spacing = 2
-        userDataStackView.alignment = .center
-        userDataStackView.distribution = .fill
-        userDataStackView.translatesAutoresizingMaskIntoConstraints = false
-        userDetailContainer.addSubview(userDataStackView)
-        userDataStackView.topAnchor.constraint(equalTo: qrImageView.bottomAnchor, constant: 22).isActive = true
-        userDataStackView.constrain(to: userDetailContainer, trailingInset: -32, bottomInset: -32, leadingInset: 32)
+        qrContainerView.constrain(to: containerView, topInset: 32, trailingInset: -32, leadingInset: 32)
+        qrContainerView.bottomAnchor.constraint(equalTo: userNameLabel.topAnchor, constant: -22).isActive = true
 
-        userDataStackView.addArrangedSubview(userNameLabel)
-        userDataStackView.addArrangedSubview(userInfoLabel)
+        userNameLabel.constrain(to: containerView, trailingInset: -32, leadingInset: 32)
+        userNameLabel.bottomAnchor.constraint(equalTo: userInfoLabel.topAnchor, constant: -2).isActive = true
+
+        userInfoLabel.constrain(to: containerView, trailingInset: -32, bottomInset: -32, leadingInset: 32)
+
+        qrImageView.centerXAnchor.constraint(equalTo: qrContainerView.centerXAnchor).isActive = true
+        qrImageView.centerYAnchor.constraint(equalTo: qrContainerView.centerYAnchor).isActive = true
+
+        qrImageView.topAnchor.constraint(greaterThanOrEqualTo: qrContainerView.topAnchor).isActive = true
+        qrImageView.leadingAnchor.constraint(greaterThanOrEqualTo: qrContainerView.leadingAnchor).isActive = true
+        qrContainerView.trailingAnchor.constraint(greaterThanOrEqualTo: qrImageView.trailingAnchor).isActive = true
+        qrContainerView.bottomAnchor.constraint(greaterThanOrEqualTo: qrImageView.bottomAnchor).isActive = true
+
+        qrImageView.widthAnchor.constraint(equalTo: qrImageView.heightAnchor, multiplier: 1).isActive = true
+
+        let width = qrImageView.widthAnchor.constraint(equalTo: qrContainerView.widthAnchor, multiplier: 1)
+        width.priority = UILayoutPriority(rawValue: 500)
+        width.isActive = true
+        let height = qrImageView.heightAnchor.constraint(equalTo: qrContainerView.heightAnchor, multiplier: 1)
+        height.priority = UILayoutPriority(rawValue: 500)
+        height.isActive = true
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -90,9 +113,9 @@ extension HIUserDetailViewController {
         guard let user = HIApplicationStateController.shared.user,
             let url = user.qrURL else { return }
         view.layoutIfNeeded()
-        let frame = qrImageView.frame.height
+        let size = max(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
         DispatchQueue.global(qos: .userInitiated).async {
-            let qrImage = UIImage(qrString: url.absoluteString, size: frame)?.withRenderingMode(.alwaysTemplate)
+            let qrImage = UIImage(qrString: url.absoluteString, size: size)?.withRenderingMode(.alwaysTemplate)
             DispatchQueue.main.async {
                 self.qrImageView.image = qrImage
             }

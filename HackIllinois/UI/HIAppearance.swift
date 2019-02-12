@@ -21,33 +21,45 @@ struct HIAppearance: Equatable {
     let contentBackground: UIColor
     let overlay: UIColor
     let frostedTint: UIColor
+    let qrTint: UIColor
+    let qrBackground: UIColor
     let preferredStatusBarStyle: UIStatusBarStyle
     let scrollViewIndicatorStyle: UIScrollView.IndicatorStyle
 
     let clear: UIColor = .clear
 
+    private static let darkBlue = #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 1)
+    private static let blue = #colorLiteral(red: 0.1215686275, green: 0.5176470588, blue: 0.6470588235, alpha: 1)
+    private static let lightBlue = #colorLiteral(red: 0.8901960784, green: 0.9647058824, blue: 1, alpha: 1)
+    private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    private static let coral = #colorLiteral(red: 1, green: 0.4666666667, blue: 0.4352941176, alpha: 1)
+
     fileprivate static let day = HIAppearance(
-        titleText: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 1),
-        baseText: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 1),
-        accent: #colorLiteral(red: 1, green: 0.4666666667, blue: 0.4352941176, alpha: 1),
-        action: #colorLiteral(red: 0.1215686275, green: 0.5176470588, blue: 0.6470588235, alpha: 1),
-        baseBackground: #colorLiteral(red: 0.8901960784, green: 0.9647058824, blue: 1, alpha: 1),
-        contentBackground: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
+        titleText: darkBlue,
+        baseText: darkBlue,
+        accent: coral,
+        action: blue,
+        baseBackground: lightBlue,
+        contentBackground: white,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
-        frostedTint: .clear,
+        frostedTint: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0),
+        qrTint: blue,
+        qrBackground: white,
         preferredStatusBarStyle: .default,
         scrollViewIndicatorStyle: .black
     )
 
     fileprivate static let night = HIAppearance(
-        titleText: #colorLiteral(red: 0.8901960784, green: 0.9647058824, blue: 1, alpha: 1),
-        baseText: #colorLiteral(red: 0.8901960784, green: 0.9647058824, blue: 1, alpha: 1),
-        accent: #colorLiteral(red: 1, green: 0.4666666667, blue: 0.4352941176, alpha: 1),
-        action: #colorLiteral(red: 0.8901960784, green: 0.9647058824, blue: 1, alpha: 1),
-        baseBackground: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 1),
-        contentBackground: #colorLiteral(red: 0.1215686275, green: 0.5176470588, blue: 0.6470588235, alpha: 1),
+        titleText: lightBlue,
+        baseText: lightBlue,
+        accent: coral,
+        action: white,
+        baseBackground: darkBlue,
+        contentBackground: blue,
         overlay: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.47),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
+        qrTint: darkBlue,
+        qrBackground: lightBlue,
         preferredStatusBarStyle: .lightContent,
         scrollViewIndicatorStyle: .white
     )
