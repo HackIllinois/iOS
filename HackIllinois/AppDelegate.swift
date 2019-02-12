@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // Handle remote notification registration.
     func application(_ application: UIApplication,
-                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data){
+                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
         print("token::is: \(token)")
         
@@ -32,10 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupTableViewAppearance()
         _ = HIThemeEngine.shared
         HIApplicationStateController.shared.initalize()
-        
-//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
-//            print("PERMISSION::GRANTED")
-//        }
         
         UIApplication.shared.registerForRemoteNotifications()
         
@@ -55,7 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Failed to register with error: \(error)")
     }
-
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
