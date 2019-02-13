@@ -15,12 +15,13 @@ import APIManager
 
 public final class PassService: BaseService {
     public override static var baseURL: String {
-        return "https://passgen.hackillinois.org/pkpass"
+        return "https://pass.hackillinois.org/pkpass"
     }
 
-    public static func getPass(with msg: String) -> APIRequest<Data> {
+    public static func getPass(qr: String, identifier: String) -> APIRequest<Data> {
         var params = HTTPParameters()
-        params["message"] = msg
+        // Form URL manually because input qrUrl has an embedded parameter
+        params["message"] = "\(qr)&identifier=\(identifier)"
         return APIRequest<Data>(service: self, endpoint: "", body: params, method: .POST)
     }
 }
