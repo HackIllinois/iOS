@@ -110,8 +110,7 @@ extension HIUserDetailViewController {
             let user = HIApplicationStateController.shared.user,
             let url = user.qrURL,
             !UserDefaults.standard.bool(forKey: HIConstants.PASS_PROMPTED_KEY(user: user)) else { return }
-        let passUrl = "\(url.absoluteString)&identifier=\(user.email)"
-        HIAPI.PassService.getPass(with: passUrl)
+        HIAPI.PassService.getPass(qr: url.absoluteString, identifier: user.email)
         .onCompletion { result in
             do {
                 let (data, _) = try result.get()
