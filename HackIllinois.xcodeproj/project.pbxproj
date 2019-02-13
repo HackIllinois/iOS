@@ -96,6 +96,7 @@
 		95FC79C121E0243D00715036 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC79C021E0243D00715036 /* Operators.swift */; };
 		95FC79C321E024A700715036 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC79C221E024A700715036 /* Notifications.swift */; };
 		AEEEA4AA44FBFB6459DE8BF5 /* Pods_HIAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04B5E0956897F8113C7875D /* Pods_HIAPI.framework */; };
+		D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A309BB2211175200CBA351 /* PassKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -236,6 +237,8 @@
 		95FC79C221E024A700715036 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		A04B5E0956897F8113C7875D /* Pods_HIAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HIAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF9EC66ED72062AA9232ADB3 /* Pods-HIAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HIAPI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HIAPI/Pods-HIAPI.debug.xcconfig"; sourceTree = "<group>"; };
+		D3A309BA221116A600CBA351 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };
+		D3A309BB2211175200CBA351 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
 		EC118263E461191C2C81D529 /* Pods-HIAPI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HIAPI.release.xcconfig"; path = "Pods/Target Support Files/Pods-HIAPI/Pods-HIAPI.release.xcconfig"; sourceTree = "<group>"; };
 		FB7A684A9E0518F3903C3ADC /* Pods-HackIllinois.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackIllinois.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HackIllinois/Pods-HackIllinois.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -252,6 +255,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */,
 				95E3143121FAD5B40092C22E /* HIAPI.framework in Frameworks */,
 				6602C7A6DEE0178C82BE1497 /* Pods_HackIllinois.framework in Frameworks */,
 			);
@@ -351,6 +355,7 @@
 		951827971EA35DB800049F79 /* HackIllinois */ = {
 			isa = PBXGroup;
 			children = (
+				D3A309BA221116A600CBA351 /* HackIllinois.entitlements */,
 				957DB2E41FC2435100F8C45E /* ViewControllers */,
 				957DB2E91FC2453100F8C45E /* FlowControllers */,
 				951827981EA35DB800049F79 /* AppDelegate.swift */,
@@ -581,6 +586,7 @@
 		EAE6D26341C3ACE27256067A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D3A309BB2211175200CBA351 /* PassKit.framework */,
 				5F912C974275240F02A49C6D /* Pods_HackIllinois.framework */,
 				A04B5E0956897F8113C7875D /* Pods_HIAPI.framework */,
 			);
@@ -681,8 +687,14 @@
 						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
 							com.apple.SafariKeychain = {
 								enabled = 0;
+							};
+							com.apple.Wallet = {
+								enabled = 1;
 							};
 						};
 					};
@@ -1085,6 +1097,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HackIllinois/HackIllinois.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8VNQTQM2L6;
 				INFOPLIST_FILE = HackIllinois/Info.plist;
@@ -1102,6 +1115,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HackIllinois/HackIllinois.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8VNQTQM2L6;
 				INFOPLIST_FILE = HackIllinois/Info.plist;
