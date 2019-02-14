@@ -16,8 +16,12 @@ import CoreData
 import SwiftKeychainAccess
 
 class HIAnnouncementsViewController: HIBaseViewController {
-    // MARK: - Init
+    // MARK: - Constants
+    let STAFF_TOPIC_KEY = "Staff"
+    let VOLUNTEER_TOPIC_KEY = "Volunteer"
+    let ATTENDEE_TOPIC_KEY = "Attendee"
 
+    // MARK: - Properties
     var user: HIUser?
 
     func recoverUserIfPossible() {
@@ -29,7 +33,6 @@ class HIAnnouncementsViewController: HIBaseViewController {
         self.user = user
     }
 
-    // MARK: - Properties
     lazy var fetchedResultsController: NSFetchedResultsController<Announcement> = {
         let fetchRequest: NSFetchRequest<Announcement> = Announcement.fetchRequest()
 
@@ -42,8 +45,8 @@ class HIAnnouncementsViewController: HIBaseViewController {
 
         recoverUserIfPossible()
 
-        topicString = !(user?.roles.intersection([.staff, .admin]).isEmpty ?? true) ? "Staff":
-            !(user?.roles.intersection([.mentor, .sponsor]).isEmpty ?? true) ? "Volunteer" : "Attendee"
+        topicString = !(user?.roles.intersection([.staff, .admin]).isEmpty ?? true) ? STAFF_TOPIC_KEY:
+            !(user?.roles.intersection([.mentor, .sponsor]).isEmpty ?? true) ? VOLUNTEER_TOPIC_KEY : ATTENDEE_TOPIC_KEY
 
         var rolePredicate = NSPredicate(format: "topicName =[c] %@", topicString)
         var timePredicate = NSPredicate(format: "now() >= time")
