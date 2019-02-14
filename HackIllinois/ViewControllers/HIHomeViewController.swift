@@ -24,7 +24,7 @@ class HIHomeViewController: HIEventListViewController {
             NSSortDescriptor(key: "name", ascending: true)
         ]
 
-        fetchRequest.predicate = NSPredicate(format: "startTime < now() AND endTime > now()")
+        fetchRequest.predicate = currentPredicate()
 
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
@@ -36,6 +36,20 @@ class HIHomeViewController: HIEventListViewController {
         fetchedResultsController.delegate = self
 
         return fetchedResultsController
+    }()
+    
+    private var currentTab = 0
+    
+    private var dataStore: [(displayText: String, predicate: NSPredicate)] = {
+        var dataStore = [(displayText: String, predicate: NSPredicate)]()
+        let happeningNowPredicate = NSPredicate(format: "(startTime < now()) AND (endTime > now())")
+        dataStore.append((displayText: "HAPPENING NOW ", predicate: happeningNowPredicate))
+        
+        let inFifteenMinutes = Date(timeIntervalSinceNow: 900)
+        let upcomingPredicate = NSPredicate(format: "(startTime < %@) AND (startTime > now())", inFifteenMinutes as NSDate)
+        dataStore.append((displayText: "UPCOMING", predicate: upcomingPredicate))
+
+        return dataStore
     }()
 
     private let countdownTitleLabel = HILabel(style: .title)
@@ -55,6 +69,28 @@ class HIHomeViewController: HIEventListViewController {
     private var timer: Timer?
 }
 
+// MARK: - Actions
+extension HIHomeViewController {
+    @objc func didSelectTab(_ sender: HISegmentedControl) {
+        currentTab = sender.selectedIndex
+        updatePredicate()
+        animateReload()
+    }
+
+    func updatePredicate() {
+        fetchedResultsController.fetchRequest.predicate = currentPredicate()
+    }
+    
+    func currentPredicate() -> NSPredicate {
+        return dataStore[currentTab].predicate
+    }
+    
+    func animateReload() {
+        try? fetchedResultsController.performFetch()
+        animateTableViewReload()
+    }
+}
+
 // MARK: - UIViewController
 extension HIHomeViewController {
     override func loadView() {
@@ -71,13 +107,20 @@ extension HIHomeViewController {
         countdownViewController.view.constrain(height: 150)
         countdownViewController.didMove(toParent: self)
 
-        view.addSubview(happeningNowLabel)
-        happeningNowLabel.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor, constant: 16).isActive = true
-        happeningNowLabel.constrain(to: view.safeAreaLayoutGuide, trailingInset: 0, leadingInset: 0)
+        let items = dataStore.map { $0.displayText }
+        let segmentedControl = HISegmentedControl(items: items)
+        segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(segmentedControl)
+        segmentedControl.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor).isActive = true
+        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
+        segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
+        segmentedControl.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
 
         let tableView = HITableView()
         view.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: happeningNowLabel.bottomAnchor, constant: 5).isActive = true
+        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 5).isActive = true
         tableView.constrain(to: view.safeAreaLayoutGuide, trailingInset: 0, leadingInset: 0)
         tableView.constrain(to: view, bottomInset: 0)
         self.tableView = tableView
@@ -135,6 +178,7 @@ extension HIHomeViewController {
     }
 
     @objc func refreshPredicate() {
+        updatePredicate()
         try? fetchedResultsController.performFetch()
         animateTableViewReload()
     }
