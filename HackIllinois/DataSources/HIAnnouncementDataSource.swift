@@ -72,9 +72,6 @@ final class HIAnnouncementDataSource {
                                         coreDataAnnouncement.title = apiAnnouncement.title
                                     }
 
-                                    for announcement in coreDataAnnouncements {
-                                        HILocalNotificationController.shared.scheduleAnnouncement(for: announcement)
-                                    }
 
                                     // 10) Save changes, call completion handler, unlock refresh
                                     try context.save()
