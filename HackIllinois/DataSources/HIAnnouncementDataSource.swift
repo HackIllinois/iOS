@@ -72,7 +72,6 @@ final class HIAnnouncementDataSource {
                                         coreDataAnnouncement.title = apiAnnouncement.title
                                     }
 
-
                                     // 10) Save changes, call completion handler, unlock refresh
                                     try context.save()
                                     completion?()
