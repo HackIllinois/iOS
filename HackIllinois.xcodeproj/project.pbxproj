@@ -682,12 +682,12 @@
 				TargetAttributes = {
 					35D7CE9320380ACF00654E28 = {
 						CreatedOnToolsVersion = 9.2;
-						DevelopmentTeam = ZU588S9GNY;
+						DevelopmentTeam = 8VNQTQM2L6;
 						ProvisioningStyle = Automatic;
 					};
 					9518277E1EA35AF100049F79 = {
 						CreatedOnToolsVersion = 8.3;
-						DevelopmentTeam = ZU588S9GNY;
+						DevelopmentTeam = 8VNQTQM2L6;
 						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
