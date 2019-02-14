@@ -37,14 +37,14 @@ class HIHomeViewController: HIEventListViewController {
 
         return fetchedResultsController
     }()
-    
+
     private var currentTab = 0
-    
+
     private var dataStore: [(displayText: String, predicate: NSPredicate)] = {
         var dataStore = [(displayText: String, predicate: NSPredicate)]()
         let happeningNowPredicate = NSPredicate(format: "(startTime < now()) AND (endTime > now())")
         dataStore.append((displayText: "HAPPENING NOW ", predicate: happeningNowPredicate))
-        
+
         let inFifteenMinutes = Date(timeIntervalSinceNow: 900)
         let upcomingPredicate = NSPredicate(format: "(startTime < %@) AND (startTime > now())", inFifteenMinutes as NSDate)
         dataStore.append((displayText: "UPCOMING", predicate: upcomingPredicate))
@@ -80,11 +80,11 @@ extension HIHomeViewController {
     func updatePredicate() {
         fetchedResultsController.fetchRequest.predicate = currentPredicate()
     }
-    
+
     func currentPredicate() -> NSPredicate {
         return dataStore[currentTab].predicate
     }
-    
+
     func animateReload() {
         try? fetchedResultsController.performFetch()
         animateTableViewReload()
@@ -116,7 +116,6 @@ extension HIHomeViewController {
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 50).isActive = true
-
 
         let tableView = HITableView()
         view.addSubview(tableView)
