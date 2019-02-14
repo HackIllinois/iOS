@@ -44,37 +44,27 @@ class HILocalNotificationController: NSObject {
         }
     }
 
-    func scheduleAnnouncement(this announcement: Announcement) {
-        print("scheduling notif for \(announcement.title)")
-        let scheduleDelay: TimeInterval = 0
-        let secondsPerMinute: TimeInterval = 60
-        let timeBeforeEventStartForNotification = scheduleDelay * secondsPerMinute
-        
+    //Requests authorization upon login, so not needed when scheduling announcements
+    func scheduleAnnouncement(for announcement: Announcement) {
         let now = Date()
-        guard announcement.time > now else { print("too early\(announcement.time)"); return }
-        let timeIntervalUntilEventStart = announcement.time.timeIntervalSince(now)
-        let triggerDelay = max(1, timeIntervalUntilEventStart - timeBeforeEventStartForNotification)
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: triggerDelay, repeats: false)
-        
-        print("time interval until event start: \(timeIntervalUntilEventStart)")
-        
-        let content = UNMutableNotificationContent()
-        let minutesUntilEvent = min(10, Int(timeIntervalUntilEventStart/secondsPerMinute))
-        if minutesUntilEvent <= 1 {
-            content.title = "\(announcement.title) starts now!"
-        } else {
-            content.title = "\(announcement.title) starts in \(minutesUntilEvent) minutes!"
+        guard announcement.time > now else {
+            print("too early \(announcement.title) \(announcement.time)")
+            return
         }
+
+        let timeIntervalUntilEventStart = announcement.time.timeIntervalSince(now)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeIntervalUntilEventStart, repeats: false)
+
+        let content = UNMutableNotificationContent()
+        content.title = announcement.title
         content.body = announcement.info
         content.sound = UNNotificationSound.default
-        
+
         let request = UNNotificationRequest(identifier: announcement.title, content: content, trigger: trigger)
-        
+
         UNUserNotificationCenter.current().add(request)
-        
-        print("scheduling notif for \(request)")
     }
-    
+
     func scheduleNotification(for event: Event) {
         requestAuthorization {
             let scheduleDelay: TimeInterval = 10
