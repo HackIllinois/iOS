@@ -20,13 +20,15 @@ final class HIAnnouncementDataSource {
 
     static let announcementsFetchRequest = NSFetchRequest<Announcement>(entityName: "Announcement")
 
+    // Waive swiftlint warning
+    // swiftlint:disable:next function_body_length
     static func refresh(completion: (() -> Void)? = nil) {
         guard !isRefreshing else {
             completion?()
             return
         }
         isRefreshing = true
-        
+
         HIAPI.AnnouncementService.getAllAnnouncements()
                 .onCompletion { result in
                     do {
@@ -37,9 +39,9 @@ final class HIAnnouncementDataSource {
                                     let apiAnnouncements = containedAnnouncements.announcements
 
                                     let announcementFetchRequest = NSFetchRequest<Announcement>(entityName: "Announcement")
-                                    
+
                                     let coreDataAnnouncements = try context.fetch(announcementFetchRequest)
-                                    
+
                                     //8) Diff the CoreData events and API events.
                                     let (
                                         coreDataAnnouncementsToDelete,
@@ -60,7 +62,7 @@ final class HIAnnouncementDataSource {
                                         coreDataAnnouncement.time = apiAnnouncement.time
                                         coreDataAnnouncement.topicName = apiAnnouncement.topicName
                                     }
-                                    
+
                                     apiAnnouncementsToInsert.forEach { apiAnnouncement in
                                         // Create CoreData announcement.
                                         let coreDataAnnouncement = Announcement(context: context)
@@ -71,9 +73,9 @@ final class HIAnnouncementDataSource {
                                     }
 
                                     for announcement in coreDataAnnouncements {
-                                        HILocalNotificationController.shared.scheduleAnnouncement(this: announcement)
+                                        HILocalNotificationController.shared.scheduleAnnouncement(for: announcement)
                                     }
-                                    
+
                                     // 10) Save changes, call completion handler, unlock refresh
                                     try context.save()
                                     completion?()

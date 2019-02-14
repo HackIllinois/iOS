@@ -14,13 +14,13 @@ import Foundation
 import APIManager
 
 public struct AnnouncementContainer: Decodable, APIReturnable {
-    
+
     internal enum CodingKeys: String, CodingKey {
         case announcements = "notifications"
     }
-    
+
     public let announcements: [Announcement]
-    
+
     public init(from data: Data) throws {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .secondsSince1970

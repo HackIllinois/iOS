@@ -13,6 +13,7 @@
 import UIKit
 import CoreLocation
 import UserNotifications
+import HIAPI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,19 +23,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
         print("token::is: \(token)")
-        
+
         //Forward the token to HackIllinois AWS notifications server
         //HIAPI.AnnouncementService.sendToken(deviceToken: token)
     }
-    
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         setupNavigationBarAppearance()
         setupTableViewAppearance()
         _ = HIThemeEngine.shared
+        _ = HICoreDataController.shared
         HIApplicationStateController.shared.initalize()
-        
+
         UIApplication.shared.registerForRemoteNotifications()
-        
+
         return true
     }
 

@@ -17,7 +17,7 @@ public final class AnnouncementService: BaseService {
     public override static var baseURL: String {
         return super.baseURL + "notifications/"
     }
-    
+
     public static func sendToken(deviceToken: String) {
         var announcementDict = [String: Any]()
         announcementDict["deviceToken"] = deviceToken
@@ -40,17 +40,13 @@ public final class AnnouncementService: BaseService {
     }
 
     public static func getAllAnnouncements(after: Date? = nil, before: Date? = nil, limit: Int? = nil) -> APIRequest<AnnouncementContainer> {
-        var params = [String: String]()
-        /*if let after = after { params["after"] = "\(after.timeIntervalSince1970)" }
-        if let before = before { params["before"] = "\(before.timeIntervalSince1970)" }
-         if let limit = limit { params["limit"] = String(limit) }*/ //Editted::
-        print("ANNOUNCEMENT::REQUEST")
+        let params = [String: String]()
         return APIRequest<AnnouncementContainer>(service: self, endpoint: "all/", params: params, method: .GET)
     }
 
     public static func delete(announcement: Announcement) -> APIRequest<AnnouncementContainer> {
-        var params = [String: String]()
-        var topicName = announcement.topicName
+        let params = [String: String]()
+        let topicName = announcement.topicName
         return APIRequest<AnnouncementContainer>(service: self, endpoint: "\(topicName)/", params: params, method: .DELETE)
     }
 }
