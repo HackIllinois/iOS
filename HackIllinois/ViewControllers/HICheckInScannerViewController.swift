@@ -19,6 +19,7 @@ import HIAPI
 class HICheckInScannerViewController: HIBaseScannerViewController {
     private let containerView = HIView {
         $0.layer.cornerRadius = 16
+        $0.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         $0.layer.masksToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.baseBackground
@@ -50,7 +51,8 @@ extension HICheckInScannerViewController {
     override func loadView() {
         super.loadView()
         view.addSubview(containerView)
-        containerView.constrain(to: view, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        containerView.constrain(to: view, bottomInset: 0)
+        containerView.constrain(to: view.safeAreaLayoutGuide, trailingInset: 0, leadingInset: 0)
 
         containerView.addSubview(contentView)
         contentView.constrain(to: containerView, topInset: 8, trailingInset: -8, leadingInset: 8)
