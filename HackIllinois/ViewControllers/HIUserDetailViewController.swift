@@ -138,10 +138,7 @@ extension HIUserDetailViewController {
             do {
                 let (data, _) = try result.get()
                 let pass = try PKPass(data: data)
-                let passVC: PKAddPassesViewController
-                if let vc = PKAddPassesViewController(pass: pass) {
-                    passVC = vc
-                } else {
+                guard let passVC = PKAddPassesViewController(pass: pass) else {
                     throw HIError.passbookError
                 }
                 DispatchQueue.main.async { [weak self] in
