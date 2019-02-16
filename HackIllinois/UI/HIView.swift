@@ -40,11 +40,13 @@ class HIView: UIView {
 
             case .emptyTable:
                 backgroundHIColor = \.baseBackground
-                let backgroundImageView = UIImageView(image: #imageLiteral(resourceName: "EmptyTableView"))
-                backgroundImageView.contentMode = .scaleAspectFit
-                backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+                let backgroundImageView = HIImageView {
+                    $0.hiImage = \.emptyTableViewBackground
+                    $0.contentMode = .scaleAspectFit
+                    $0.translatesAutoresizingMaskIntoConstraints = false
+                }
                 addSubview(backgroundImageView)
-                backgroundImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6).isActive = true
+                backgroundImageView.widthAnchor.constraint(equalToConstant: 180).isActive = true
                 backgroundImageView.heightAnchor.constraint(equalTo: backgroundImageView.widthAnchor).isActive = true
                 backgroundImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
                 NSLayoutConstraint(item: backgroundImageView,
@@ -52,8 +54,14 @@ class HIView: UIView {
                                    relatedBy: .equal,
                                    toItem: self,
                                    attribute: .centerY,
-                                   multiplier: 0.7,
+                                   multiplier: 0.66,
                                    constant: 0.0).isActive = true
+                let label = HILabel(style: .loginSelection) {
+                    $0.text = "CHECK BACK LATER"
+                }
+                addSubview(label)
+                label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+                label.bottomAnchor.constraint(equalTo: backgroundImageView.topAnchor).isActive = true
             }
         }
         refreshForThemeChange()

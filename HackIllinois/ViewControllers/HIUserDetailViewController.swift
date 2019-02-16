@@ -28,7 +28,7 @@ class HIUserDetailViewController: HIBaseViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.qrBackground
     }
-    private let qrImageView = HIImageView {
+    private let qrImageView = HITintImageView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.tintHIColor = \.qrTint
         $0.contentMode = .scaleAspectFit
@@ -152,7 +152,7 @@ extension HIUserDetailViewController {
                     "Error initializing PKPass: %s",
                     log: Logger.ui,
                     type: .error,
-                    error.localizedDescription
+                    String(describing: error)
                 )
             }
         }
