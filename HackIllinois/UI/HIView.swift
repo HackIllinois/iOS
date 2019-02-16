@@ -49,17 +49,21 @@ class HIView: UIView {
                 backgroundImageView.widthAnchor.constraint(equalToConstant: 180).isActive = true
                 backgroundImageView.heightAnchor.constraint(equalTo: backgroundImageView.widthAnchor).isActive = true
                 backgroundImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-                NSLayoutConstraint(item: backgroundImageView,
+                let centerConstraint = NSLayoutConstraint(item: backgroundImageView,
                                    attribute: .centerY,
                                    relatedBy: .equal,
                                    toItem: self,
                                    attribute: .centerY,
                                    multiplier: 0.66,
-                                   constant: 0.0).isActive = true
+                                   constant: 0.0)
+                centerConstraint.priority = .defaultHigh
+                centerConstraint.isActive = true
                 let label = HILabel(style: .loginSelection) {
                     $0.text = "CHECK BACK LATER"
+                    $0.setContentCompressionResistancePriority(.required, for: .vertical)
                 }
                 addSubview(label)
+                label.topAnchor.constraint(greaterThanOrEqualTo: topAnchor, constant: 12).isActive = true
                 label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
                 label.bottomAnchor.constraint(equalTo: backgroundImageView.topAnchor).isActive = true
             }
