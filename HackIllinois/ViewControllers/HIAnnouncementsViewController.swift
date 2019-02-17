@@ -13,26 +13,10 @@
 import Foundation
 import UIKit
 import CoreData
-import SwiftKeychainAccess
+import HIAPI
 
 class HIAnnouncementsViewController: HIBaseViewController {
-    // MARK: - Constants
-    let STAFF_TOPIC_KEY = "Staff"
-    let VOLUNTEER_TOPIC_KEY = "Volunteer"
-    let ATTENDEE_TOPIC_KEY = "Attendee"
-
     // MARK: - Properties
-    var user: HIUser?
-
-    func recoverUserIfPossible() {
-        guard Keychain.default.hasValue(forKey: HIConstants.STORED_ACCOUNT_KEY) else { return }
-        guard let user = Keychain.default.retrieve(HIUser.self, forKey: HIConstants.STORED_ACCOUNT_KEY) else {
-            Keychain.default.removeObject(forKey: HIConstants.STORED_ACCOUNT_KEY)
-            return
-        }
-        self.user = user
-    }
-
     lazy var fetchedResultsController: NSFetchedResultsController<Announcement> = {
         let fetchRequest: NSFetchRequest<Announcement> = Announcement.fetchRequest()
 
@@ -41,16 +25,7 @@ class HIAnnouncementsViewController: HIBaseViewController {
             NSSortDescriptor(key: "title", ascending: true)
         ]
 
-        var topicString: String
-
-        recoverUserIfPossible()
-
-        topicString = !(user?.roles.intersection([.staff, .admin]).isEmpty ?? true) ? STAFF_TOPIC_KEY:
-            !(user?.roles.intersection([.mentor, .sponsor]).isEmpty ?? true) ? VOLUNTEER_TOPIC_KEY : ATTENDEE_TOPIC_KEY
-
-        var rolePredicate = NSPredicate(format: "topicName =[c] %@", topicString)
-        var timePredicate = NSPredicate(format: "now() >= time")
-        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [rolePredicate, timePredicate])
+        fetchRequest.predicate = currentPredicate()
 
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
@@ -86,6 +61,8 @@ extension HIAnnouncementsViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupRefreshControl()
+        _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
+        try? _fetchedResultsController?.performFetch()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -98,9 +75,6 @@ extension HIAnnouncementsViewController {
         navigationItem.rightBarButtonItem = rightNavigationItem
 
         HIAnnouncementDataSource.refresh()
-
-        _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
-        try? _fetchedResultsController?.performFetch()
     }
 }
 
@@ -108,6 +82,11 @@ extension HIAnnouncementsViewController {
 extension HIAnnouncementsViewController {
     @objc func presentAdminAnnouncementViewController() {
         navigationController?.pushViewController(adminAnnouncementViewController, animated: true)
+    }
+
+    func currentPredicate() -> NSPredicate {
+        let roles = HIApplicationStateController.shared.user?.roles ?? .null
+        return NSPredicate(format: "(\(roles.rawValue) & roles) > 0")
     }
 }
 

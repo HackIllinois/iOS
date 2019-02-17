@@ -16,9 +16,15 @@ import HIAPI
 
 final class HIAnnouncementDataSource {
 
-    static var isRefreshing = false
-
-    static let announcementsFetchRequest = NSFetchRequest<Announcement>(entityName: "Announcement")
+    // Serializes access to isRefreshing.
+    private static let isRefreshineQueue = DispatchQueue(label: "org.hackillinois.org.hi_announcement_data_source.is_refreshing_queue", attributes: .concurrent)
+    // Tracks if the DataSource is refreshing.
+    private static var _isRefreshing = false
+    // Setter and getter for isRefreshing.
+    public static var isRefreshing: Bool {
+        get { return isRefreshineQueue.sync { _isRefreshing } }
+        set { isRefreshineQueue.sync(flags: .barrier) { _isRefreshing = newValue } }
+    }
 
     // Waive swiftlint warning
     // swiftlint:disable:next function_body_length
@@ -30,64 +36,63 @@ final class HIAnnouncementDataSource {
         isRefreshing = true
 
         HIAPI.AnnouncementService.getAllAnnouncements()
-                .onCompletion { result in
-                    do {
-                        let (containedAnnouncements, _) = try result.get()
-                            HICoreDataController.shared.performBackgroundTask { context -> Void in
-                                do {
-                                    //Unwrap contained data
-                                    let apiAnnouncements = containedAnnouncements.announcements
+            .onCompletion { result in
+                do {
+                    let (containedAnnouncements, _) = try result.get()
+                    HICoreDataController.shared.performBackgroundTask { context -> Void in
+                        do {
+                            // 1) Unwrap contained data.
+                            let apiAnnouncements = containedAnnouncements.announcements
 
-                                    let announcementFetchRequest = NSFetchRequest<Announcement>(entityName: "Announcement")
+                            // 2) Get all CoreData announcements.
+                            let announcementFetchRequest = NSFetchRequest<Announcement>(entityName: "Announcement")
+                            let coreDataAnnouncements = try context.fetch(announcementFetchRequest)
 
-                                    let coreDataAnnouncements = try context.fetch(announcementFetchRequest)
+                            // 3) Diff the CoreData events and API events.
+                            let (
+                                coreDataAnnouncementsToDelete,
+                                coreDataAnnouncementsToUpdate,
+                                apiAnnouncementsToInsert
+                            ) = diff(initial: coreDataAnnouncements, final: apiAnnouncements)
 
-                                    //8) Diff the CoreData events and API events.
-                                    let (
-                                        coreDataAnnouncementsToDelete,
-                                        coreDataAnnouncementsToUpdate,
-                                        apiAnnouncementsToInsert
-                                    ) = diff(initial: coreDataAnnouncements, final: apiAnnouncements)
+                            // 4) Apply the diff
+                            coreDataAnnouncementsToDelete.forEach { coreDataAnnouncement in
+                                // Delete CoreData Announcement.
+                                context.delete(coreDataAnnouncement)
+                            }
 
-                                    // 9) Apply the diff
-                                    coreDataAnnouncementsToDelete.forEach { coreDataAnnouncement in
-                                        // Delete CoreData Announcement.
-                                        context.delete(coreDataAnnouncement)
-                                    }
+                            coreDataAnnouncementsToUpdate.forEach { (coreDataAnnouncement, apiAnnouncement) in
+                                // Update CoreData Announcement.
+                                coreDataAnnouncement.title = apiAnnouncement.title
+                                coreDataAnnouncement.info = apiAnnouncement.body
+                                coreDataAnnouncement.time = apiAnnouncement.time
+                                coreDataAnnouncement.roles = Int32(apiAnnouncement.roles.rawValue)
+                            }
 
-                                    coreDataAnnouncementsToUpdate.forEach { (coreDataAnnouncement, apiAnnouncement) in
-                                        // Update CoreData Announcement.
-                                        coreDataAnnouncement.title = apiAnnouncement.title
-                                        coreDataAnnouncement.info = apiAnnouncement.info
-                                        coreDataAnnouncement.time = apiAnnouncement.time
-                                        coreDataAnnouncement.topicName = apiAnnouncement.topicName
-                                    }
+                            apiAnnouncementsToInsert.forEach { apiAnnouncement in
+                                // Create CoreData announcement.
+                                let coreDataAnnouncement = Announcement(context: context)
+                                coreDataAnnouncement.time = apiAnnouncement.time
+                                coreDataAnnouncement.info = apiAnnouncement.body
+                                coreDataAnnouncement.title = apiAnnouncement.title
+                                coreDataAnnouncement.roles = Int32(apiAnnouncement.roles.rawValue)
+                            }
 
-                                    apiAnnouncementsToInsert.forEach { apiAnnouncement in
-                                        // Create CoreData announcement.
-                                        let coreDataAnnouncement = Announcement(context: context)
-                                       coreDataAnnouncement.time = apiAnnouncement.time
-                                        coreDataAnnouncement.topicName = apiAnnouncement.topicName
-                                        coreDataAnnouncement.info = apiAnnouncement.info
-                                        coreDataAnnouncement.title = apiAnnouncement.title
-                                    }
-
-                                    // 10) Save changes, call completion handler, unlock refresh
-                                    try context.save()
-                                    completion?()
-                                    isRefreshing = false
-                                } catch {
-                                    completion?()
-                                    isRefreshing = false
-                                    fatalError("lol")
-                                }
+                            // 10) Save changes, call completion handler, unlock refresh
+                            try context.save()
+                            completion?()
+                            isRefreshing = false
+                        } catch {
+                            completion?()
+                            isRefreshing = false
                         }
-                    } catch {
-                        completion?()
-                        isRefreshing = false
                     }
+                } catch {
+                    completion?()
+                    isRefreshing = false
                 }
-                .authorize(with: HIApplicationStateController.shared.user)
-                .launch()
+            }
+            .authorize(with: HIApplicationStateController.shared.user)
+            .launch()
         }
 }

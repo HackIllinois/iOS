@@ -97,11 +97,11 @@ extension Event: MixTypeComparable {
 }
 
 extension HIAPI.Announcement: MixTypeComparable {
-    var comparable: String { return title }
+    var comparable: Date { return time }
 }
 
 extension Announcement: MixTypeComparable {
-    var comparable: String { return title }
+    var comparable: Date { return time }
 }
 
 extension HIAPI.Location: MixTypeComparable {
