@@ -16,7 +16,6 @@ import Lottie
 import SafariServices
 import SwiftKeychainAccess
 import HIAPI
-import UserNotifications
 
 class HILoginFlowController: UIViewController {
     // MARK: - Properties
@@ -182,9 +181,6 @@ private extension HILoginFlowController {
                 } else {
                     DispatchQueue.main.async {
                         NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
-
-                        //Requests for notification authorization upon user login
-                        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (_, _) in }
                     }
                 }
             } catch {

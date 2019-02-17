@@ -44,27 +44,6 @@ class HILocalNotificationController: NSObject {
         }
     }
 
-    //Requests authorization upon login, so not needed when scheduling announcements
-    func scheduleAnnouncement(for announcement: Announcement) {
-        let now = Date()
-        guard announcement.time > now else {
-            print("too early \(announcement.title) \(announcement.time)")
-            return
-        }
-
-        let timeIntervalUntilEventStart = announcement.time.timeIntervalSince(now)
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeIntervalUntilEventStart, repeats: false)
-
-        let content = UNMutableNotificationContent()
-        content.title = announcement.title
-        content.body = announcement.info
-        content.sound = UNNotificationSound.default
-
-        let request = UNNotificationRequest(identifier: announcement.title, content: content, trigger: trigger)
-
-        UNUserNotificationCenter.current().add(request)
-    }
-
     func scheduleNotification(for event: Event) {
         requestAuthorization {
             let scheduleDelay: TimeInterval = 10

@@ -13,20 +13,9 @@
 import UIKit
 import CoreLocation
 import UserNotifications
-import HIAPI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    // Handle remote notification registration.
-    func application(_ application: UIApplication,
-                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-        print("token::is: \(token)")
-
-        //Forward the token to HackIllinois AWS notifications server
-        //HIAPI.AnnouncementService.sendToken(deviceToken: token)
-    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         setupNavigationBarAppearance()
@@ -34,9 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = HIThemeEngine.shared
         _ = HICoreDataController.shared
         HIApplicationStateController.shared.initalize()
-
-        UIApplication.shared.registerForRemoteNotifications()
-
         return true
     }
 
@@ -48,10 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             print(error)
         }
-    }
-
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("Failed to register with error: \(error)")
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
