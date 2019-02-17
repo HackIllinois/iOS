@@ -23,6 +23,7 @@ struct HIAppearance: Equatable {
     let frostedTint: UIColor
     let qrTint: UIColor
     let qrBackground: UIColor
+    let emptyTableViewBackground: UIImage
     let preferredStatusBarStyle: UIStatusBarStyle
     let scrollViewIndicatorStyle: UIScrollView.IndicatorStyle
 
@@ -45,6 +46,7 @@ struct HIAppearance: Equatable {
         frostedTint: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0),
         qrTint: blue,
         qrBackground: white,
+        emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewDay"),
         preferredStatusBarStyle: .default,
         scrollViewIndicatorStyle: .black
     )
@@ -60,6 +62,7 @@ struct HIAppearance: Equatable {
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         qrTint: darkBlue,
         qrBackground: lightBlue,
+        emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewNight"),
         preferredStatusBarStyle: .lightContent,
         scrollViewIndicatorStyle: .white
     )
@@ -109,6 +112,25 @@ extension Optional where Wrapped == UIColor {
     }
 
     static func <- (lhs: inout UIColor?, rhs: HIColor?) {
+        lhs = rhs?.value
+    }
+}
+
+// MARK: - HIImage
+typealias HIImage = KeyPath<HIAppearance, UIImage>
+
+extension UIImage {
+    static func <- (lhs: inout UIImage, rhs: HIImage) {
+        lhs = rhs.value
+    }
+}
+
+extension Optional where Wrapped == UIImage {
+    static func <- (lhs: inout UIImage?, rhs: HIImage) {
+        lhs = rhs.value
+    }
+
+    static func <- (lhs: inout UIImage?, rhs: HIImage?) {
         lhs = rhs?.value
     }
 }

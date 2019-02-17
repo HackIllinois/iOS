@@ -42,7 +42,7 @@ class HIEventCell: HIBubbleCell {
         favoritedButton.widthAnchor.constraint(equalToConstant: 58).isActive = true
         favoritedButton.constrain(to: bubbleView, topInset: 0, bottomInset: 0, leadingInset: 0)
 
-        let disclosureIndicatorView = HIImageView {
+        let disclosureIndicatorView = HITintImageView {
             $0.tintHIColor = \.accent
             $0.contentMode = .center
             $0.image = #imageLiteral(resourceName: "DisclosureIndicator")

@@ -57,7 +57,7 @@ class HIEventDetailLocationCell: UITableViewCell {
         titleLabel.leadingAnchor.constraint(equalTo: blurEffectView.contentView.leadingAnchor, constant: 8).isActive = true
         titleLabel.constrain(to: blurEffectView.contentView, topInset: 0, bottomInset: 0)
 
-        let disclosureIndicatorImageView = HIImageView {
+        let disclosureIndicatorImageView = HITintImageView {
             $0.tintHIColor = \.accent
             $0.contentMode = .center
             $0.image = #imageLiteral(resourceName: "DisclosureIndicator")

@@ -1,8 +1,8 @@
 //
-//  HIImageView.swift
+//  HITintImageView.swift
 //  HackIllinois
 //
-//  Created by HackIllinois Team on 2/16/19.
+//  Created by HackIllinois Team on 2/22/18.
 //  Copyright © 2018 HackIllinois. All rights reserved.
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of
@@ -13,12 +13,12 @@
 import Foundation
 import UIKit
 
-class HIImageView: UIImageView {
+class HITintImageView: UIImageView {
     // MARK: - Properties
-    var hiImage: HIImage?
+    var tintHIColor: HIColor?
 
     // MARK: - Init
-    init(additionalConfiguration: ((HIImageView) -> Void)? = nil) {
+    init(additionalConfiguration: ((HITintImageView) -> Void)? = nil) {
         super.init(frame: .zero)
         additionalConfiguration?(self)
 
@@ -38,6 +38,6 @@ class HIImageView: UIImageView {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        image <- hiImage
+        tintColor <- tintHIColor
     }
 }
