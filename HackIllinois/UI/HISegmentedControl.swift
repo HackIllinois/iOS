@@ -91,6 +91,7 @@ class HISegmentedControl: UIControl {
     // MARK: - Label Setup
     public func update(items: [String]) {
         self.items = items
+        selectedIndex = 0
         setupLabels()
     }
 

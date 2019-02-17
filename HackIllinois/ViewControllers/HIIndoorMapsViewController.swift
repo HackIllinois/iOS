@@ -57,23 +57,23 @@ extension HIIndoorMapsViewController {
         bottomSegmentedControl.heightAnchor.constraint(equalToConstant: 34).isActive = true
 
         // MapImageView setup
-//        view.addSubview(scrollView)
-//        scrollView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 24).isActive = true
-//        scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 24).isActive = true
-//        scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24).isActive = true
-//        scrollView.bottomAnchor.constraint(equalTo: bottomSegmentedControl.topAnchor, constant: -24).isActive = true
-//
-//        scrollView.minimumZoomScale = 1.0
-//        scrollView.maximumZoomScale = 5.0
-//        scrollView.addSubview(mapImageView)
-//
+        view.addSubview(scrollView)
+        scrollView.topAnchor.constraint(equalTo: topSegmentedControl.bottomAnchor, constant: 24).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 24).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: bottomSegmentedControl.topAnchor, constant: -24).isActive = true
+
+        scrollView.minimumZoomScale = 1.0
+        scrollView.maximumZoomScale = 5.0
+        scrollView.addSubview(mapImageView)
+
 //        mapImageView.image = indoorMaps[currentTab].floors[currentFloor].image
-//        mapImageView.contentMode = .scaleAspectFit
-//
-//        mapImageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 24).isActive = true
-//        mapImageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -24).isActive = true
-//        mapImageView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -24).isActive = true
-//        mapImageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 24).isActive = true
+        mapImageView.contentMode = .scaleAspectFit
+
+        mapImageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 24).isActive = true
+        mapImageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -24).isActive = true
+        mapImageView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -24).isActive = true
+        mapImageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 24).isActive = true
     }
 
     override func viewDidLayoutSubviews() {
