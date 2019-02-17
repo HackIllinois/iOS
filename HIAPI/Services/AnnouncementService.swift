@@ -18,6 +18,13 @@ public final class AnnouncementService: BaseService {
         return super.baseURL + "notifications/"
     }
 
+    public static func sendToken(deviceToken: String) -> APIRequest<SimpleRequest> {
+        var announcementDict = [String: Any]()
+        announcementDict["deviceToken"] = deviceToken
+        announcementDict["platform"] = "ios"
+        return APIRequest<SimpleRequest>(service: self, endpoint: "device/", body: announcementDict, method: .POST)
+    }
+
 //    public static func create(title: String, description: String) -> APIRequest<AnnouncementContainer> {
 //        var announcementDict = HTTPBody()
 //        announcementDict["title"]       = title
