@@ -13,20 +13,41 @@
 import Foundation
 import APIManager
 
-public struct AnnouncementContainer: Codable, APIReturnable {
+public struct AnnouncementContainer: Decodable, APIReturnable {
+
+    internal enum CodingKeys: String, CodingKey {
+        case announcements = "notifications"
+    }
+
     public let announcements: [Announcement]
+
+    public init(from data: Data) throws {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
+        self = try decoder.decode(AnnouncementContainer.self, from: data)
+    }
 }
 
 public struct Announcement: Codable {
     internal enum CodingKeys: String, CodingKey {
-        case id
         case title
-        case info = "description"
-        case time = "created"
+        case body
+        case time
+        case roles = "topicName"
     }
 
-    public let id: Int16
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.body = try container.decode(String.self, forKey: .body)
+        let time = try container.decode(Double.self, forKey: .time)
+        self.time = Date(timeIntervalSince1970: time)
+        let role = try container.decode(String.self, forKey: .roles)
+        self.roles = try Roles(string: role)
+    }
+
     public let title: String
-    public let info: String
+    public let body: String
     public let time: Date
+    public let roles: Roles
 }

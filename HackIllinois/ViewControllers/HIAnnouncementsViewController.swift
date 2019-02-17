@@ -13,6 +13,7 @@
 import Foundation
 import UIKit
 import CoreData
+import HIAPI
 
 class HIAnnouncementsViewController: HIBaseViewController {
     // MARK: - Properties
@@ -21,11 +22,10 @@ class HIAnnouncementsViewController: HIBaseViewController {
 
         fetchRequest.sortDescriptors = [
             NSSortDescriptor(key: "time", ascending: false),
-            NSSortDescriptor(key: "title", ascending: true),
-            NSSortDescriptor(key: "id", ascending: true)
+            NSSortDescriptor(key: "title", ascending: true)
         ]
 
-        fetchRequest.predicate = NSPredicate(format: "now() >= time")
+        fetchRequest.predicate = currentPredicate()
 
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
@@ -73,6 +73,8 @@ extension HIAnnouncementsViewController {
             rightNavigationItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(presentAdminAnnouncementViewController))
         }
         navigationItem.rightBarButtonItem = rightNavigationItem
+
+        HIAnnouncementDataSource.refresh()
     }
 }
 
@@ -80,6 +82,11 @@ extension HIAnnouncementsViewController {
 extension HIAnnouncementsViewController {
     @objc func presentAdminAnnouncementViewController() {
         navigationController?.pushViewController(adminAnnouncementViewController, animated: true)
+    }
+
+    func currentPredicate() -> NSPredicate {
+        let roles = HIApplicationStateController.shared.user?.roles ?? .null
+        return NSPredicate(format: "(\(roles.rawValue) & roles) > 0")
     }
 }
 

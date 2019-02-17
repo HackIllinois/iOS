@@ -152,7 +152,6 @@ final class HIEventDataSource {
                                 completion?()
                                 isRefreshing = false
                                 print(error)
-                                fatalError("fuck")
                             }
                         }
                     } catch {

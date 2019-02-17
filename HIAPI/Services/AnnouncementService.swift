@@ -15,34 +15,29 @@ import APIManager
 
 public final class AnnouncementService: BaseService {
     public override static var baseURL: String {
-        return super.baseURL + "announcement/"
+        return super.baseURL + "notifications/"
     }
 
-    public static func create(title: String, description: String) -> APIRequest<AnnouncementContainer> {
-        var announcementDict = [String: Any]()
-        announcementDict["title"]       = title
-        announcementDict["description"] = description
-        return APIRequest<AnnouncementContainer>(service: self, endpoint: "", body: announcementDict, method: .POST)
+//    public static func create(title: String, description: String) -> APIRequest<AnnouncementContainer> {
+//        var announcementDict = HTTPBody()
+//        announcementDict["title"]       = title
+//        announcementDict["description"] = description
+//        return APIRequest<AnnouncementContainer>(service: self, endpoint: "", body: announcementDict, method: .POST)
+//    }
+
+//    public static func update(announcement: Announcement) -> APIRequest<AnnouncementContainer> {
+//        var announcementDict = HTTPBody()
+//        announcementDict["title"]       = announcement.title
+//        announcementDict["description"] = announcement.info
+//        return APIRequest<AnnouncementContainer>(service: self, endpoint: "", body: announcementDict, method: .PUT)
+//    }
+
+    public static func getAllAnnouncements() -> APIRequest<AnnouncementContainer> {
+        return APIRequest<AnnouncementContainer>(service: self, endpoint: "all/", method: .GET)
     }
 
-    public static func update(announcement: Announcement) -> APIRequest<AnnouncementContainer> {
-        var announcementDict = [String: Any]()
-        announcementDict["title"]       = announcement.title
-        announcementDict["description"] = announcement.info
-        return APIRequest<AnnouncementContainer>(service: self, endpoint: "", body: announcementDict, method: .PUT)
-    }
-
-    public static func getAllAnnouncements(after: Date? = nil, before: Date? = nil, limit: Int? = nil) -> APIRequest<AnnouncementContainer> {
-        var params = [String: String]()
-        if let after = after { params["after"] = "\(after.timeIntervalSince1970)" }
-        if let before = before { params["before"] = "\(before.timeIntervalSince1970)" }
-        if let limit = limit { params["limit"] = String(limit) }
-        return APIRequest<AnnouncementContainer>(service: self, endpoint: "all/", params: params, method: .GET)
-    }
-
-    public static func delete(announcement: Announcement) -> APIRequest<AnnouncementContainer> {
-        var params = [String: String]()
-        params["id"] = String(announcement.id)
-        return APIRequest<AnnouncementContainer>(service: self, endpoint: "", params: params, method: .DELETE)
-    }
+//    public static func delete(announcement: Announcement) -> APIRequest<AnnouncementContainer> {
+//        let params = HTTPParameters()
+//        return APIRequest<AnnouncementContainer>(service: self, endpoint: "\(announcement.topic.rawValue)/", params: params, method: .DELETE)
+//    }
 }

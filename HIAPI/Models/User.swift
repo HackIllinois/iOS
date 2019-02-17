@@ -28,6 +28,7 @@ public struct RolesContainer: Codable, APIReturnable {
 public struct Roles: OptionSet, Codable {
     public let rawValue: Int
 
+    public static let null = Roles(rawValue: 0)
     public static let user = Roles(rawValue: 1 << 0)
     public static let applicant = Roles(rawValue: 1 << 1)
     public static let attendee = Roles(rawValue: 1 << 2)
@@ -48,8 +49,7 @@ public struct Roles: OptionSet, Codable {
             let option = try Roles(string: string)
             options.append(option)
         }
-        let null = Roles(rawValue: 0)
-        self = options.reduce(null) { return $0.union($1) }
+        self = options.reduce(.null) { return $0.union($1) }
     }
 
     internal init(string: String) throws {
@@ -61,7 +61,12 @@ public struct Roles: OptionSet, Codable {
         case "Sponsor": self = .sponsor
         case "Staff": self = .staff
         case "Admin": self = .admin
-        default: throw DecodingError.unknownOption
+        default:
+            #if DEBUG
+                throw DecodingError.unknownOption
+            #else
+                self = .null
+            #endif
         }
     }
 

@@ -58,34 +58,34 @@ extension HIAdminAnnouncementViewController {
         confirmAlertController.addAction(
             UIAlertAction(title: "Yes", style: .default) { _ in
                 self.stylizeFor(.currentlyCreatingAnnouncement)
-                HIAPI.AnnouncementService.create(title: title, description: description)
-                .onCompletion { result in
-                    switch result {
-                    case .success:
-                        DispatchQueue.main.async { [weak self] in
-                            self?.stylizeFor(.readyToCreateAnnouncement)
-                            self?.titleTextField.text = ""
-                            self?.descriptionTextField.text = ""
-                            let alert = UIAlertController(title: "Announcement Created", message: nil, preferredStyle: .alert)
-                            alert.addAction(
-                                UIAlertAction(title: "OK", style: .default) { _ in
-                                    self?.navigationController?.popViewController(animated: true)
-                                }
-                            )
-                            self?.present(alert, animated: true, completion: nil)
-                        }
-                    case .failure(let error):
-                        DispatchQueue.main.async { [weak self] in
-                            self?.stylizeFor(.readyToCreateAnnouncement)
-                            print(error.localizedDescription)
-                            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                            self?.present(alert, animated: true, completion: nil)
-                        }
-                    }
-                }
-                .authorize(with: HIApplicationStateController.shared.user)
-                .launch()
+//                HIAPI.AnnouncementService.create(title: title, description: description)
+//                .onCompletion { result in
+//                    switch result {
+//                    case .success:
+//                        DispatchQueue.main.async { [weak self] in
+//                            self?.stylizeFor(.readyToCreateAnnouncement)
+//                            self?.titleTextField.text = ""
+//                            self?.descriptionTextField.text = ""
+//                            let alert = UIAlertController(title: "Announcement Created", message: nil, preferredStyle: .alert)
+//                            alert.addAction(
+//                                UIAlertAction(title: "OK", style: .default) { _ in
+//                                    self?.navigationController?.popViewController(animated: true)
+//                                }
+//                            )
+//                            self?.present(alert, animated: true, completion: nil)
+//                        }
+//                    case .failure(let error):
+//                        DispatchQueue.main.async { [weak self] in
+//                            self?.stylizeFor(.readyToCreateAnnouncement)
+//                            print(error.localizedDescription)
+//                            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+//                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//                            self?.present(alert, animated: true, completion: nil)
+//                        }
+//                    }
+//                }
+//                .authorize(with: HIApplicationStateController.shared.user)
+//                .launch()
             }
         )
         confirmAlertController.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
