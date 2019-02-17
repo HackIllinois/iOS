@@ -198,7 +198,7 @@ extension HIBaseViewController {
         // Constrain refresh animation
         refreshAnimation.leftAnchor.constraint(equalTo: refreshControl.leftAnchor).isActive = true
         refreshAnimation.rightAnchor.constraint(equalTo: refreshControl.rightAnchor).isActive = true
-        refreshAnimation.centerYAnchor.constraint(equalTo: refreshControl.centerYAnchor).isActive = true
+        refreshAnimation.topAnchor.constraint(equalTo: refreshControl.topAnchor).isActive = true
         refreshAnimation.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
 

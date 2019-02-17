@@ -15,71 +15,26 @@ import UIKit
 
 class HIIndoorMapsViewController: HIBaseViewController {
     // MARK: - Properties
-    var currentTab = 0
-    var currentFloor = 0
-    var bottomSegmentedControl: HISegmentedControl!
+    private let topSegmentedControl = HISegmentedControl(items: HIMapsDataSource.shared.maps.map { $0.name })
+    private let bottomSegmentedControl = HISegmentedControl(items: HIMapsDataSource.shared.maps[0].floors.map { $0.name })
 
-    let mapImageView = HIImageView {
+    private let scrollView = UIScrollView(frame: .zero)
+    private let mapImageView = HIImageView {
         $0.backgroundColor = #colorLiteral(red: 0.1215686275, green: 0.5176470588, blue: 0.6470588235, alpha: 1)
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-
-    var indoorMaps: [(name: String, floors: [(floorName: String, image: UIImage)])] = {
-        var indoorMaps = [(name: String, floors: [(floorName: String, image: UIImage)])]()
-
-        //Siebel Maps
-        var siebelFloors = [(floorName: String, image: UIImage)]()
-        var siebelFloor1 = UIImage(named: "IndoorMapSiebel1") ?? UIImage()
-        var siebelFloor2 = UIImage(named: "IndoorMapSiebel2") ?? UIImage()
-        var siebelFloor3 = UIImage(named: "IndoorMapSiebel3") ?? UIImage()
-        siebelFloors.append((floorName: "Basement", image: siebelFloor1))
-        siebelFloors.append((floorName: "1st Floor", image: siebelFloor2))
-        siebelFloors.append((floorName: "2nd Floor", image: siebelFloor3))
-        indoorMaps.append((name: "Siebel", floors: siebelFloors))
-
-        //ECEB Maps
-        var ecebFloors = [(floorName: String, image: UIImage)]()
-        var ecebImage1 = UIImage(named: "IndoorMapECEB1") ?? UIImage()
-        var ecebImage2 = UIImage(named: "IndoorMapECEB2") ?? UIImage()
-        var ecebImage3 = UIImage(named: "IndoorMapECEB3") ?? UIImage()
-        ecebFloors.append((floorName: "1st Floor", image: ecebImage1))
-        ecebFloors.append((floorName: "2nd Floor", image: ecebImage2))
-        ecebFloors.append((floorName: "3rd Floor", image: ecebImage3))
-        indoorMaps.append((name: "ECEB", floors: ecebFloors))
-
-        //DCL Maps
-        var dclFloors = [(floorName: String, image: UIImage)]()
-        var dclImage = UIImage(named: "IndoorMapDCL") ?? UIImage()
-        dclFloors.append((floorName: "1st Floor", image: dclImage))
-        indoorMaps.append((name: "DCL", floors: dclFloors))
-
-        //Kenney Maps
-        var kenneyFloors = [(floorName: String, image: UIImage)]()
-        var kenneyImage = UIImage(named: "IndoorMapKenney") ?? UIImage()
-        kenneyFloors.append((floorName: "1st Floor", image: kenneyImage))
-        indoorMaps.append((name: "Kenney", floors: kenneyFloors))
-        return indoorMaps
-    }()
-
 }
 
 // MARK: - Actions
 extension HIIndoorMapsViewController {
-    @objc func didSelectMap(_ sender: HISegmentedControl) {
-        currentTab = sender.selectedIndex
-        currentFloor = 0
-        mapImageView.image = indoorMaps[currentTab].floors[currentFloor].image
-        updateBottomSegmentedControl()
-    }
+    @objc func didSelectSegmentedControl(_ sender: HISegmentedControl) {
+        let map = HIMapsDataSource.shared.maps[topSegmentedControl.selectedIndex]
+        if sender === topSegmentedControl {
+            bottomSegmentedControl.update(items: map.floors.map { $0.name })
+        }
 
-    @objc func didSelectFloor(_ sender: HISegmentedControl) {
-        currentFloor = sender.selectedIndex
-        mapImageView.image = indoorMaps[currentTab].floors[currentFloor].image
-    }
-
-    func updateBottomSegmentedControl() {
-        let bottomItems = indoorMaps[currentTab].floors.map { $0.floorName }
-        loadBottomSegmentedControl(with: bottomItems)
+        let floor = map.floors[0]
+        mapImageView.image = floor.image
     }
 }
 
@@ -88,37 +43,42 @@ extension HIIndoorMapsViewController {
     override func loadView() {
         super.loadView()
 
-        //Segmented Control Setup
-        let items = indoorMaps.map { $0.name }
-        let segmentedControl = HISegmentedControl(items: items)
-        segmentedControl.addTarget(self, action: #selector(didSelectMap(_:)), for: .valueChanged)
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(segmentedControl)
-        segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
-        segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
-        segmentedControl.heightAnchor.constraint(equalToConstant: 34).isActive = true
-        updateBottomSegmentedControl()
+        topSegmentedControl.addTarget(self, action: #selector(didSelectSegmentedControl(_:)), for: .valueChanged)
+        bottomSegmentedControl.addTarget(self, action: #selector(didSelectSegmentedControl(_:)), for: .valueChanged)
 
-        //MapImageView setup
-        view.addSubview(mapImageView)
-        mapImageView.image = indoorMaps[currentTab].floors[currentFloor].image
-        mapImageView.contentMode = .scaleAspectFit
-        mapImageView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 24).isActive = true
-        mapImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 24).isActive = true
-        mapImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24).isActive = true
-        mapImageView.bottomAnchor.constraint(equalTo: bottomSegmentedControl.topAnchor, constant: -24).isActive = true
+        // Segmented Control Setup
+        view.addSubview(topSegmentedControl)
+        topSegmentedControl.constrain(to: view.safeAreaLayoutGuide, topInset: 0, trailingInset: -12, leadingInset: 12)
+        topSegmentedControl.heightAnchor.constraint(equalToConstant: 34).isActive = true
+
+        view.addSubview(bottomSegmentedControl)
+        bottomSegmentedControl.topAnchor.constraint(equalTo: topSegmentedControl.bottomAnchor).isActive = true
+        bottomSegmentedControl.constrain(to: view.safeAreaLayoutGuide, trailingInset: 0, leadingInset: 0)
+        bottomSegmentedControl.heightAnchor.constraint(equalToConstant: 34).isActive = true
+
+        // MapImageView setup
+//        view.addSubview(scrollView)
+//        scrollView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 24).isActive = true
+//        scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 24).isActive = true
+//        scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24).isActive = true
+//        scrollView.bottomAnchor.constraint(equalTo: bottomSegmentedControl.topAnchor, constant: -24).isActive = true
+//
+//        scrollView.minimumZoomScale = 1.0
+//        scrollView.maximumZoomScale = 5.0
+//        scrollView.addSubview(mapImageView)
+//
+//        mapImageView.image = indoorMaps[currentTab].floors[currentFloor].image
+//        mapImageView.contentMode = .scaleAspectFit
+//
+//        mapImageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 24).isActive = true
+//        mapImageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -24).isActive = true
+//        mapImageView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -24).isActive = true
+//        mapImageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 24).isActive = true
     }
 
-    func loadBottomSegmentedControl(with items: [String]) {
-        bottomSegmentedControl = HISegmentedControl(items: items)
-        bottomSegmentedControl.addTarget(self, action: #selector(didSelectFloor(_:)), for: .valueChanged)
-        bottomSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(bottomSegmentedControl)
-        bottomSegmentedControl.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24).isActive = true
-        bottomSegmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
-        bottomSegmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
-        bottomSegmentedControl.heightAnchor.constraint(equalToConstant: 34).isActive = true
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+//        scrollView.contentSize = scrollView.frame.size
     }
 }
 

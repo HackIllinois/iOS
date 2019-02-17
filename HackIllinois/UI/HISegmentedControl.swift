@@ -20,7 +20,7 @@ class HISegmentedControl: UIControl {
     private(set) var selectedIndex: Int = 0 {
         didSet {
             if oldValue != selectedIndex {
-                displayNewSelectedIndex(previousIndex: oldValue)
+                displayNewSelectedIndex()
                 sendActions(for: .valueChanged)
             }
         }
@@ -72,7 +72,7 @@ class HISegmentedControl: UIControl {
         indicatorView.frame = CGRect(x: 0, y: frame.height - indicatorViewHeight, width: indicatorViewWidth, height: indicatorViewHeight)
         bottomView.frame = CGRect(x: 0, y: frame.height - (2 * bottomViewHeight), width: frame.width, height: bottomViewHeight)
 
-        displayNewSelectedIndex(previousIndex: 0)
+        displayNewSelectedIndex()
     }
 
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
@@ -89,6 +89,11 @@ class HISegmentedControl: UIControl {
     }
 
     // MARK: - Label Setup
+    public func update(items: [String]) {
+        self.items = items
+        setupLabels()
+    }
+
     private func setupView() {
         setupLabels()
         addSubview(bottomView)
@@ -107,13 +112,13 @@ class HISegmentedControl: UIControl {
         label.textAlignment = .center
         label.font = font
         label.text = items[index]
+        label.textColor <- \.baseText
         label.translatesAutoresizingMaskIntoConstraints = false
         addSubview(label)
         labels.append(label)
     }
 
-    private func displayNewSelectedIndex(previousIndex: Int) {
-//        let previousLabel = labels[previousIndex]
+    private func displayNewSelectedIndex() {
         let selectedLabel = labels[selectedIndex]
 
         let animator = UIViewPropertyAnimator(duration: 0.5, dampingRatio: 0.8)

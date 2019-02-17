@@ -40,6 +40,7 @@
 		9544799C200C39870005408B /* HIUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9544799B200C39870005408B /* HIUser.swift */; };
 		954EE1D31FD0F1680078F39E /* HILoginSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */; };
 		9552D92821758E4C00A8C869 /* UIView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9552D92721758E4C00A8C869 /* UIView+AutoLayout.swift */; };
+		9564E02F2218CE6F003A8EEB /* HIMapsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9564E02E2218CE6F003A8EEB /* HIMapsDataSource.swift */; };
 		956F41E11FC7577500557DC7 /* HIAnnouncementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F41E01FC7577500557DC7 /* HIAnnouncementsViewController.swift */; };
 		956F41E31FC76C8E00557DC7 /* HIMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F41E21FC76C8E00557DC7 /* HIMenuController.swift */; };
 		957A4D7D21FDA71F007FDE0E /* MixTypeComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957A4D7C21FDA71F007FDE0E /* MixTypeComparable.swift */; };
@@ -183,6 +184,7 @@
 		9544799D200C3CE40005408B /* Tests.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Tests.playground; sourceTree = "<group>"; };
 		954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILoginSelectionViewController.swift; sourceTree = "<group>"; };
 		9552D92721758E4C00A8C869 /* UIView+AutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AutoLayout.swift"; sourceTree = "<group>"; };
+		9564E02E2218CE6F003A8EEB /* HIMapsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIMapsDataSource.swift; sourceTree = "<group>"; };
 		956F41E01FC7577500557DC7 /* HIAnnouncementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAnnouncementsViewController.swift; sourceTree = "<group>"; };
 		956F41E21FC76C8E00557DC7 /* HIMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIMenuController.swift; sourceTree = "<group>"; };
 		957A4D7C21FDA71F007FDE0E /* MixTypeComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixTypeComparable.swift; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 			children = (
 				9521A6A720191590009059C6 /* HIEventDataSource.swift */,
 				9521A6A920191737009059C6 /* HIAnnouncementDataSource.swift */,
+				9564E02E2218CE6F003A8EEB /* HIMapsDataSource.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -451,7 +454,6 @@
 				9515E43622093E1300BCAF92 /* HIEventScannerViewController.swift */,
 				95C18DC42009618C004784B5 /* HIHomeViewController.swift */,
 				954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */,
-				95CCEA1E203D6B3600E3E28C /* HINavigationController.swift */,
 				95C18DC820096539004784B5 /* HIScheduleViewController.swift */,
 				95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */,
 				95CCEA1E203D6B3600E3E28C /* HINavigationController.swift */,
@@ -890,6 +892,7 @@
 				35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */,
 				9510F6A11FCB7D6E007D19DB /* Event+CoreDataClass.swift in Sources */,
 				951827A81EA35DB800049F79 /* AppDelegate.swift in Sources */,
+				9564E02F2218CE6F003A8EEB /* HIMapsDataSource.swift in Sources */,
 				953199C91FC25CA0009F2AA1 /* HICoreDataController.swift in Sources */,
 				95A7D28D203D4F54005EAEAF /* Identifiable.swift in Sources */,
 				9521A6A820191590009059C6 /* HIEventDataSource.swift in Sources */,
