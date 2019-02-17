@@ -12,6 +12,8 @@
 
 import Foundation
 import UserNotifications
+import UIKit
+import HIAPI
 
 class HILocalNotificationController: NSObject {
     static let shared = HILocalNotificationController()
@@ -21,14 +23,14 @@ class HILocalNotificationController: NSObject {
         UNUserNotificationCenter.current().delegate = self
     }
 
-    func requestAuthorization(authorized: @escaping (() -> Void)) {
+    func requestAuthorization(authorized: (() -> Void)? = nil) {
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             switch settings.authorizationStatus {
-            case .authorized: authorized()
+            case .authorized: authorized?()
             case .denied: break
             case .notDetermined:
                 UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (granted, _) in
-                    if granted { authorized() }
+                    if granted { authorized?() }
                 }
             case .provisional: break
             }
@@ -83,8 +85,8 @@ extension HILocalNotificationController: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        // Play a sound.
         completionHandler([.sound, .alert])
+        HIAnnouncementDataSource.injectAnnouncement(notification: notification)
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter,

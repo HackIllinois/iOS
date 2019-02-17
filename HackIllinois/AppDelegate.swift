@@ -16,25 +16,25 @@ import UserNotifications
 import HIAPI
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // Handle remote notification registration.
     func application(_ application: UIApplication,
                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        guard let user = HIApplicationStateController.shared.user else { return }
         let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-        print("token::is: \(token)")
 
-        //Forward the token to HackIllinois AWS notifications server
+        // Send the token to notifications server
         AnnouncementService.sendToken(deviceToken: token)
-            .onCompletion { result in
-                do {
-                    print("result::is\(result)")
-                }
+        .onCompletion { result in
+            do {
+                _ = try result.get()
+            } catch {
+                print(error)
             }
-            .authorize(with: HIApplicationStateController.shared.user)
-            .launch()
-
-        print("person:: \(HIApplicationStateController.shared.user)")
+        }
+        .authorize(with: user)
+        .launch()
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -42,28 +42,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         setupTableViewAppearance()
         _ = HIThemeEngine.shared
         _ = HICoreDataController.shared
+        _ = HILocalNotificationController.shared
         HIApplicationStateController.shared.initalize()
 
-        DispatchQueue.main.async {
-            UIApplication.shared.registerForRemoteNotifications()
-        }
-
-        UNUserNotificationCenter.current().delegate = self
-
         return true
-    }
-
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                willPresent notification: UNNotification,
-                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        // Play a sound.
-        print("Entering completion handler")
-        completionHandler([.sound, .alert])
-    }
-
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any],
-                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        print("GETTING::REMOTE::NOTIF\(userInfo)")
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

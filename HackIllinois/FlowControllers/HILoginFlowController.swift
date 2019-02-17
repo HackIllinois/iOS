@@ -160,6 +160,20 @@ private extension HILoginFlowController {
                 user.firstName = apiUser.firstName
                 user.lastName = apiUser.lastName
                 user.email = apiUser.email
+                self?.subscribeUserToRelevantTopics(buildingUser: user, sender: sender)
+            } catch {
+                self?.presentAuthenticationFailure(withError: error, sender: sender)
+            }
+        }
+        .authorize(with: user)
+        .launch()
+    }
+
+    private func subscribeUserToRelevantTopics(buildingUser user: HIUser, sender: HIBaseViewController) {
+        HIAPI.AnnouncementService.updateSubscriptions()
+        .onCompletion { [weak self] result in
+            do {
+                _ = try result.get()
                 self?.populateRoleData(buildingUser: user, sender: sender)
             } catch {
                 self?.presentAuthenticationFailure(withError: error, sender: sender)

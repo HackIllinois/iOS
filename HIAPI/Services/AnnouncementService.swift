@@ -25,6 +25,10 @@ public final class AnnouncementService: BaseService {
         return APIRequest<SimpleRequest>(service: self, endpoint: "device/", body: announcementDict, method: .POST)
     }
 
+    public static func updateSubscriptions() -> APIRequest<SimpleRequest> {
+        return APIRequest<SimpleRequest>(service: self, endpoint: "update/", method: .POST)
+    }
+
 //    public static func create(title: String, description: String) -> APIRequest<AnnouncementContainer> {
 //        var announcementDict = HTTPBody()
 //        announcementDict["title"]       = title
