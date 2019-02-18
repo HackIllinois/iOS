@@ -18,10 +18,14 @@ class HIIndoorMapsViewController: HIBaseViewController {
     private let topSegmentedControl = HISegmentedControl(items: HIMapsDataSource.shared.maps.map { $0.name })
     private let bottomSegmentedControl = HISegmentedControl(items: HIMapsDataSource.shared.maps[0].floors.map { $0.name })
 
+    private let contentView = HIView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundHIColor = \.accent
+    }
     private let scrollView = UIScrollView(frame: .zero)
     private let mapImageView = HIImageView {
-        $0.backgroundColor = #colorLiteral(red: 0.1215686275, green: 0.5176470588, blue: 0.6470588235, alpha: 1)
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = #colorLiteral(red: 0.1215686275, green: 0.5176470588, blue: 0.6470588235, alpha: 1)
     }
 }
 
@@ -53,32 +57,40 @@ extension HIIndoorMapsViewController {
 
         view.addSubview(bottomSegmentedControl)
         bottomSegmentedControl.topAnchor.constraint(equalTo: topSegmentedControl.bottomAnchor).isActive = true
-        bottomSegmentedControl.constrain(to: view.safeAreaLayoutGuide, trailingInset: 0, leadingInset: 0)
+        bottomSegmentedControl.constrain(to: view.safeAreaLayoutGuide, trailingInset: -12, leadingInset: 12)
         bottomSegmentedControl.heightAnchor.constraint(equalToConstant: 34).isActive = true
 
-        // MapImageView setup
         view.addSubview(scrollView)
         scrollView.topAnchor.constraint(equalTo: topSegmentedControl.bottomAnchor, constant: 24).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 24).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: bottomSegmentedControl.topAnchor, constant: -24).isActive = true
 
-        scrollView.minimumZoomScale = 1.0
-        scrollView.maximumZoomScale = 5.0
-        scrollView.addSubview(mapImageView)
+        // MapImageView setup
+        scrollView.backgroundColor = .red
+//        scrollView.minimumZoomScale = 1.0
+//        scrollView.maximumZoomScale = 5.0
+        scrollView.frame = CGRect(x: 0, y: 0, width: 400, height: 400)
+//        view.addSubview(scrollView)
+//        scrollView.topAnchor.constraint(equalTo: bottomSegmentedControl.bottomAnchor, constant: 24).isActive = true
+//        scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 24).isActive = true
+//        scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24).isActive = true
+//        scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
 
-//        mapImageView.image = indoorMaps[currentTab].floors[currentFloor].image
-        mapImageView.contentMode = .scaleAspectFit
-
-        mapImageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 24).isActive = true
-        mapImageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -24).isActive = true
-        mapImageView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -24).isActive = true
-        mapImageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 24).isActive = true
+//        scrollView.addSubview(mapImageView)
+//
+////        mapImageView.image = indoorMaps[currentTab].floors[currentFloor].image
+//        mapImageView.contentMode = .scaleAspectFit
+//
+//        mapImageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 24).isActive = true
+//        mapImageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -24).isActive = true
+//        mapImageView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -24).isActive = true
+//        mapImageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 24).isActive = true
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        scrollView.contentSize = scrollView.frame.size
+        scrollView.contentSize = scrollView.frame.size
     }
 }
 
