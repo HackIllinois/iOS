@@ -209,7 +209,7 @@ class HIThemeEngine {
 
         let newAppearance: HIAppearance
         if now >= sunrise && now <= sunset {
-            newAppearance = .night
+            newAppearance = .day
         } else {
             newAppearance = .night
         }
