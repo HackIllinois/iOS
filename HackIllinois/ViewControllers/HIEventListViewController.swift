@@ -84,8 +84,10 @@ extension HIEventListViewController: HIEventCellDelegate {
             switch result {
             case .success:
                 DispatchQueue.main.async {
-                    HILocalNotificationController.shared.unscheduleNotification(for: event)
-                    event.favorite = !eventCell.favoritedButton.isActive
+                    event.favorite.toggle()
+                    event.favorite ?
+                        HILocalNotificationController.shared.scheduleNotification(for: event) :
+                        HILocalNotificationController.shared.unscheduleNotification(for: event)
                 }
             case .failure(let error):
                 print(error, error.localizedDescription)

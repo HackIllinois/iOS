@@ -70,9 +70,11 @@ extension HIEventDetailViewController {
             switch result {
             case .success:
                 DispatchQueue.main.async {
-                    HILocalNotificationController.shared.unscheduleNotification(for: event)
-                    event.favorite = !sender.isActive
-                    sender.isActive = event.favorite
+                    sender.isActive.toggle()
+                    event.favorite.toggle()
+                    event.favorite ?
+                        HILocalNotificationController.shared.scheduleNotification(for: event) :
+                        HILocalNotificationController.shared.unscheduleNotification(for: event)
                 }
             case .failure(let error):
                 print(error, error.localizedDescription)
