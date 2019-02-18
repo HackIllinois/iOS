@@ -71,7 +71,7 @@ extension HIEventDetailViewController {
             case .success:
                 DispatchQueue.main.async {
                     sender.isActive.toggle()
-                    event.favorite = sender.isActive
+                    event.favorite.toggle()
                     event.favorite ?
                         HILocalNotificationController.shared.scheduleNotification(for: event) :
                         HILocalNotificationController.shared.unscheduleNotification(for: event)
