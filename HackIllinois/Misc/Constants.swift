@@ -15,10 +15,10 @@ import Foundation
 // MARK: - Constants
 struct HIConstants {
     // Times
-    static let EVENT_START_TIME = Date(timeIntervalSince1970: 1550858400) // Friday, February 22, 2019 12:00:00 PM GMT-06:00
-    static let HACKING_START_TIME = Date(timeIntervalSince1970: 1550887200) // Friday, February 22, 2019 8:00:00 PM GMT-06:00
+    static let EVENT_START_TIME = Date(timeIntervalSince1970: 1550872800) // Friday, February 22, 2019 4:00:00 PM GMT-06:00
+    static let HACKING_START_TIME = Date(timeIntervalSince1970: 1550898000) // Friday, February 22, 2019 11:00:00 PM GMT-06:00
     static let HACKING_END_TIME = Date(timeIntervalSince1970: 1551024000) // Sunday, February 24, 2019 10:00:00 AM GMT-06:00
-    static let EVENT_END_TIME = Date(timeIntervalSince1970: 1551031200) // Sunday, February 24, 2019 12:00:00 PM GMT-06:00
+    static let EVENT_END_TIME = Date(timeIntervalSince1970: 1551049200) // Sunday, February 24, 2019 05:00:00 PM GMT-06:00
 
     static let FRIDAY_START_TIME = Date(timeIntervalSince1970: 1550815200) // Friday, February 22, 2019 12:00:00 AM GMT-06:00
     static let FRIDAY_END_TIME = Date(timeIntervalSince1970: 1550901599) // Friday, February 22, 2019 11:59:59 PM GMT-06:00
