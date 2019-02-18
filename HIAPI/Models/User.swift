@@ -52,7 +52,7 @@ public struct Roles: OptionSet, Codable {
         self = options.reduce(.null) { return $0.union($1) }
     }
 
-    internal init(string: String) throws {
+    public init(string: String) throws {
         switch string {
         case "User": self = .user
         case "Applicant": self = .applicant

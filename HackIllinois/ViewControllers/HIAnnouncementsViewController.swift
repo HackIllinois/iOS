@@ -62,19 +62,34 @@ extension HIAnnouncementsViewController {
         super.viewDidLoad()
         setupRefreshControl()
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
-        try? _fetchedResultsController?.performFetch()
+        try? fetchedResultsController.performFetch()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(viewDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(viewWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
 
         var rightNavigationItem: UIBarButtonItem?
         if HIApplicationStateController.shared.user?.roles.contains(.admin) == true {
             rightNavigationItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(presentAdminAnnouncementViewController))
         }
         navigationItem.rightBarButtonItem = rightNavigationItem
+    }
 
-        HIAnnouncementDataSource.refresh()
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func viewDidBecomeActive() {
+        try? fetchedResultsController.performFetch()
+        animateTableViewReload()
+    }
+
+    @objc func viewWillEnterForeground() {
+        try? fetchedResultsController.performFetch()
+        animateTableViewReload()
     }
 }
 

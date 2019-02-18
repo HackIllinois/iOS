@@ -13,7 +13,6 @@
 import Foundation
 import UIKit
 import SwiftKeychainAccess
-import UserNotifications
 
 class HIApplicationStateController {
 
@@ -87,6 +86,8 @@ extension HIApplicationStateController {
         guard let user = notification.userInfo?["user"] as? HIUser else { return }
         guard Keychain.default.store(user, forKey: HIConstants.STORED_ACCOUNT_KEY) else { return }
         self.user = user
+        HILocalNotificationController.shared.requestAuthorization()
+        UIApplication.shared.registerForRemoteNotifications()
         updateWindowViewController(animated: true)
     }
 

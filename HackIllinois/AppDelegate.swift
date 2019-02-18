@@ -13,15 +13,36 @@
 import UIKit
 import CoreLocation
 import UserNotifications
+import HIAPI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    // Handle remote notification registration.
+    func application(_ application: UIApplication,
+                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        guard let user = HIApplicationStateController.shared.user else { return }
+        let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+
+        // Send the token to notifications server
+        AnnouncementService.sendToken(deviceToken: token)
+        .onCompletion { result in
+            do {
+                _ = try result.get()
+            } catch {
+                print(error)
+            }
+        }
+        .authorize(with: user)
+        .launch()
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         setupNavigationBarAppearance()
         setupTableViewAppearance()
         _ = HIThemeEngine.shared
         _ = HICoreDataController.shared
+        _ = HILocalNotificationController.shared
         HIApplicationStateController.shared.initalize()
         return true
     }
