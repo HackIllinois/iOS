@@ -117,7 +117,7 @@ extension HIHomeViewController {
         segmentedControl.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
-        segmentedControl.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        segmentedControl.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
         let tableView = HITableView()
         view.addSubview(tableView)

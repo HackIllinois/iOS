@@ -54,13 +54,13 @@ extension HIIndoorMapsViewController {
         // Segmented Control Setup
         view.addSubview(topSegmentedControl)
         topSegmentedControl.constrain(to: view.safeAreaLayoutGuide, topInset: 0, trailingInset: -12, leadingInset: 12)
-        topSegmentedControl.heightAnchor.constraint(equalToConstant: 34).isActive = true
+        topSegmentedControl.heightAnchor.constraint(equalToConstant: 44).isActive = true
         topSegmentedControl.setContentCompressionResistancePriority(.required, for: .vertical)
 
         view.addSubview(bottomSegmentedControl)
         bottomSegmentedControl.topAnchor.constraint(equalTo: topSegmentedControl.bottomAnchor).isActive = true
         bottomSegmentedControl.constrain(to: view.safeAreaLayoutGuide, trailingInset: -12, leadingInset: 12)
-        bottomSegmentedControl.heightAnchor.constraint(equalToConstant: 34).isActive = true
+        bottomSegmentedControl.heightAnchor.constraint(equalToConstant: 44).isActive = true
         topSegmentedControl.setContentCompressionResistancePriority(.required, for: .vertical)
 
         // MapImageView setup
