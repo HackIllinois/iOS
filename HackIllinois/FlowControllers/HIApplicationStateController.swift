@@ -79,10 +79,6 @@ extension HIApplicationStateController {
             viewControllers.append(HICheckInScannerViewController())
         }
 
-        if !user.roles.intersection([.admin]).isEmpty {
-            viewControllers.append(HIAdminAnnouncementViewController())
-        }
-
         return viewControllers
     }
 
