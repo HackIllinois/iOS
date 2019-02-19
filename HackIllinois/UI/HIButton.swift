@@ -87,10 +87,6 @@ class HIButton: UIButton {
         NotificationCenter.default.removeObserver(self)
     }
 
-    func newTitle(_ newTitle: String) {
-        setTitle(newTitle, for: .normal)
-    }
-
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
         setTitleColor(titleHIColor?.value, for: .normal)

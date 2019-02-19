@@ -108,9 +108,9 @@ extension HIAdminAnnouncementViewController {
 
     @objc func didSelectTopic() {
         let alert = UIAlertController(title: "Topic", message: "Please Choose Topic", preferredStyle: .actionSheet)
-        for topic in ["Staff", "Mentor", "Attendee", "Sponsor", "User", "Applicant", "Admin"] {
+        for topic in HIAPI.Roles.allRoles {
             alert.addAction(UIAlertAction(title: topic, style: .default, handler: { (action) in
-                self.topicButton.newTitle(topic)
+                self.topicButton.setTitle(topic, for: .normal)
                 self.currentTopic = topic
             }))
         }
