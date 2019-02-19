@@ -22,12 +22,11 @@ class HIIndoorMapsViewController: HIBaseViewController {
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundHIColor = \.accent
+        $0.backgroundHIColor = \.mapBackground
     }
     private let scrollView = UIScrollView(frame: .zero)
     private let mapImageView = HIImageView {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = #colorLiteral(red: 0.1215686275, green: 0.5176470588, blue: 0.6470588235, alpha: 1)
     }
 }
 
