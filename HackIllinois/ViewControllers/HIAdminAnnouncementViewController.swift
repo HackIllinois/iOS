@@ -53,7 +53,8 @@ extension HIAdminAnnouncementViewController {
             return
         }
 
-        let message = "Create a new announcement with title \"\(title)\" and description \"\(description)\"?"
+//        let message = "Create a new announcement with title \"\(title)\", description \"\(description), and topic \"\(topic)\"\"?"
+        let message = "Create a new announcement with title \"\(title)\", description \"\(description)\"?"
         let confirmAlertController = UIAlertController(title: "Confirm Announcement", message: message, preferredStyle: .alert)
         confirmAlertController.addAction(
             UIAlertAction(title: "Yes", style: .default) { _ in
@@ -113,10 +114,38 @@ extension HIAdminAnnouncementViewController {
         descriptionTextField.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 0).isActive = true
         descriptionTextField.constrain(to: view.safeAreaLayoutGuide, trailingInset: -30, leadingInset: 30)
         descriptionTextField.constrain(height: 44)
+        
+        // Staff, Mentor, Attendee, Sponsor, User, Applicant, Admin
+        class PickerData : NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
+            let topics = ["Staff", "Mentor", "Attendee", "Sponsor", "User", "Applicant", "Admin"]
+            
+            func numberOfComponents(in pickerView: UIPickerView) -> Int {
+                return 1
+            }
+            
+            func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+                return topics.count
+            }
+            
+            func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+                return topics[row]
+            }
+        }
+        
+        let pickerData = PickerData()
+        let pickerView = UIPickerView()
+        pickerView.backgroundColor = .white
+        pickerView.dataSource = pickerData
+        pickerView.delegate = pickerData
+        pickerView.reloadAllComponents()
+        view.addSubview(pickerView)
+        pickerView.topAnchor.constraint(equalTo: descriptionTextField.bottomAnchor, constant: 44).isActive = true
+//        pickerView.constrain(to: view.safeAreaLayoutGuide, trailingInset: -12, leadingInset: 12)
 
+        
         // Create Announcement Button
         view.addSubview(createAnnouncementButton)
-        createAnnouncementButton.topAnchor.constraint(equalTo: descriptionTextField.bottomAnchor, constant: 44).isActive = true
+        createAnnouncementButton.topAnchor.constraint(equalTo: pickerView.bottomAnchor, constant: 44).isActive = true
         createAnnouncementButton.constrain(to: view.safeAreaLayoutGuide, trailingInset: -12, leadingInset: 12)
         createAnnouncementButton.constrain(height: 50)
     }

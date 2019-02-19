@@ -29,26 +29,18 @@ public final class AnnouncementService: BaseService {
         return APIRequest<SimpleRequest>(service: self, endpoint: "update/", method: .POST)
     }
 
-//    public static func create(title: String, description: String) -> APIRequest<AnnouncementContainer> {
-//        var announcementDict = HTTPBody()
-//        announcementDict["title"]       = title
-//        announcementDict["description"] = description
-//        return APIRequest<AnnouncementContainer>(service: self, endpoint: "", body: announcementDict, method: .POST)
-//    }
-
-//    public static func update(announcement: Announcement) -> APIRequest<AnnouncementContainer> {
-//        var announcementDict = HTTPBody()
-//        announcementDict["title"]       = announcement.title
-//        announcementDict["description"] = announcement.info
-//        return APIRequest<AnnouncementContainer>(service: self, endpoint: "", body: announcementDict, method: .PUT)
-//    }
+    public static func create(title: String, description: String, topic: String) -> APIRequest<AnnouncementContainer> {
+        var announcementDict = HTTPBody()
+        announcementDict["title"] = title
+        announcementDict["body"] = description
+        return APIRequest<AnnouncementContainer>(service: self, endpoint: "notifications/\(topic)/", body: announcementDict, method: .POST)
+    }
 
     public static func getAllAnnouncements() -> APIRequest<AnnouncementContainer> {
         return APIRequest<AnnouncementContainer>(service: self, endpoint: "all/", method: .GET)
     }
 
-//    public static func delete(announcement: Announcement) -> APIRequest<AnnouncementContainer> {
-//        let params = HTTPParameters()
-//        return APIRequest<AnnouncementContainer>(service: self, endpoint: "\(announcement.topic.rawValue)/", params: params, method: .DELETE)
-//    }
+    public static func getTopics() -> APIRequest<Data> {
+        return APIRequest<Data>(service: self, endpoint: "", method: .GET)
+    }
 }
