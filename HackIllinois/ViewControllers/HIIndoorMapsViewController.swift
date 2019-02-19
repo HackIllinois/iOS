@@ -73,7 +73,6 @@ extension HIIndoorMapsViewController {
 
         scrollView.delegate = self
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-
         scrollView.maximumZoomScale = 5.0
         contentView.addSubview(scrollView)
         scrollView.constrain(to: contentView, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
