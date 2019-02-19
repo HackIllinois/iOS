@@ -138,14 +138,14 @@ extension HIAdminAnnouncementViewController {
         descriptionTextField.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 0).isActive = true
         descriptionTextField.constrain(to: view.safeAreaLayoutGuide, trailingInset: -30, leadingInset: 30)
         descriptionTextField.constrain(height: 44)
-        
+
         // Staff, Mentor, Attendee, Sponsor, User, Applicant, Admin
         // Topic Picker Button
         view.addSubview(topicButton)
         topicButton.topAnchor.constraint(equalTo: descriptionTextField.bottomAnchor, constant: 44).isActive = true
         topicButton.constrain(to: view.safeAreaLayoutGuide, trailingInset: -12, leadingInset: 12)
         topicButton.constrain(height: 50)
-        
+
         // Create Announcement Button
         view.addSubview(createAnnouncementButton)
         createAnnouncementButton.topAnchor.constraint(equalTo: topicButton.bottomAnchor, constant: 44).isActive = true
