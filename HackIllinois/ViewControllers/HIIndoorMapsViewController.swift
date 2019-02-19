@@ -98,6 +98,7 @@ extension HIIndoorMapsViewController {
             let minZoomScale = min(widthScale, heightScale)
             scrollView.minimumZoomScale = minZoomScale
             scrollView.zoomScale = minZoomScale
+            mapImageView.center = scrollView.center
         }
     }
 
