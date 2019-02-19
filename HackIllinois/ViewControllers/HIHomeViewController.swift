@@ -38,6 +38,8 @@ class HIHomeViewController: HIEventListViewController {
         return fetchedResultsController
     }()
 
+    var indoorMapsViewController = HIIndoorMapsViewController()
+
     private var currentTab = 0
 
     private var dataStore: [(displayText: String, predicate: NSPredicate)] = {
@@ -133,6 +135,10 @@ extension HIHomeViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        let rightNavigationItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MapIcon"), style: .plain, target: self, action: #selector(presentIndoorMapsViewController))
+        navigationItem.rightBarButtonItem = rightNavigationItem
+
         setupPredicateRefreshTimer()
     }
 
@@ -147,6 +153,13 @@ extension HIHomeViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
         title = "HOME"
+    }
+}
+
+// MARK: - Actions
+extension HIHomeViewController {
+    @objc func presentIndoorMapsViewController() {
+        navigationController?.pushViewController(indoorMapsViewController, animated: true)
     }
 }
 
