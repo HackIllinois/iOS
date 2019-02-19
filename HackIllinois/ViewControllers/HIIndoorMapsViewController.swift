@@ -40,6 +40,7 @@ extension HIIndoorMapsViewController {
 
         let floor = map.floors[bottomSegmentedControl.selectedIndex]
         mapImageView.image = floor.image
+        setZoomScale()
     }
 }
 
@@ -72,8 +73,8 @@ extension HIIndoorMapsViewController {
 
         scrollView.delegate = self
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.minimumZoomScale = 0.25
-        scrollView.maximumZoomScale = 3.0
+
+        scrollView.maximumZoomScale = 5.0
         contentView.addSubview(scrollView)
         scrollView.constrain(to: contentView, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
 
@@ -86,6 +87,23 @@ extension HIIndoorMapsViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         scrollView.contentSize = scrollView.frame.size
+    }
+
+    func setZoomScale() {
+        if let image = mapImageView.image {
+            let imageViewSize = image.size
+            let scrollViewSize = scrollView.bounds.size
+            let widthScale = scrollViewSize.width / imageViewSize.width
+            let heightScale = scrollViewSize.height / imageViewSize.height
+            let minZoomScale = min(widthScale, heightScale)
+            scrollView.minimumZoomScale = minZoomScale
+            scrollView.zoomScale = minZoomScale
+        }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setZoomScale()
     }
 }
 
