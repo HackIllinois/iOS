@@ -39,8 +39,4 @@ public final class AnnouncementService: BaseService {
     public static func getAllAnnouncements() -> APIRequest<AnnouncementContainer> {
         return APIRequest<AnnouncementContainer>(service: self, endpoint: "all/", method: .GET)
     }
-
-    public static func getTopics() -> APIRequest<Data> {
-        return APIRequest<Data>(service: self, endpoint: "", method: .GET)
-    }
 }
