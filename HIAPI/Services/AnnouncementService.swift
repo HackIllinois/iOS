@@ -29,11 +29,11 @@ public final class AnnouncementService: BaseService {
         return APIRequest<SimpleRequest>(service: self, endpoint: "update/", method: .POST)
     }
 
-    public static func create(title: String, description: String, topic: String) -> APIRequest<AnnouncementContainer> {
+    public static func create(title: String, description: String, topic: String) -> APIRequest<SimpleRequest> {
         var announcementDict = HTTPBody()
         announcementDict["title"] = title
         announcementDict["body"] = description
-        return APIRequest<AnnouncementContainer>(service: self, endpoint: "notifications/\(topic)/", body: announcementDict, method: .POST)
+        return APIRequest<SimpleRequest>(service: self, endpoint: "\(topic)/", body: announcementDict, method: .POST)
     }
 
     public static func getAllAnnouncements() -> APIRequest<AnnouncementContainer> {
