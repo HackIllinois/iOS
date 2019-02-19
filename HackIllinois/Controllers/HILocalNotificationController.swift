@@ -2,7 +2,7 @@
 //  HILocalNotificationController.swift
 //  HackIllinois
 //
-//  Created by Rauhul Varma on 2/22/18.
+//  Created by HackIllinois Team on 2/22/18.
 //  Copyright © 2018 HackIllinois. All rights reserved.
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of
@@ -12,6 +12,8 @@
 
 import Foundation
 import UserNotifications
+import UIKit
+import HIAPI
 
 class HILocalNotificationController: NSObject {
     static let shared = HILocalNotificationController()
@@ -21,14 +23,14 @@ class HILocalNotificationController: NSObject {
         UNUserNotificationCenter.current().delegate = self
     }
 
-    func requestAuthorization(authorized: @escaping (() -> Void)) {
+    func requestAuthorization(authorized: (() -> Void)? = nil) {
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             switch settings.authorizationStatus {
-            case .authorized: authorized()
+            case .authorized: authorized?()
             case .denied: break
             case .notDetermined:
                 UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (granted, _) in
-                    if granted { authorized() }
+                    if granted { authorized?() }
                 }
             case .provisional: break
             }
@@ -51,8 +53,8 @@ class HILocalNotificationController: NSObject {
             let timeBeforeEventStartForNotification = scheduleDelay * secondsPerMinute
 
             let now = Date()
-            guard event.start > now else { return }
-            let timeIntervalUntilEventStart = event.start.timeIntervalSince(now)
+            guard event.startTime > now else { return }
+            let timeIntervalUntilEventStart = event.startTime.timeIntervalSince(now)
             let triggerDelay = max(1, timeIntervalUntilEventStart - timeBeforeEventStartForNotification)
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: triggerDelay, repeats: false)
 
@@ -64,9 +66,9 @@ class HILocalNotificationController: NSObject {
                 content.title = "\(event.name) starts in \(minutesUntilEvent) minutes!"
             }
             content.body = event.info
-            content.sound = UNNotificationSound.default()
+            content.sound = UNNotificationSound.default
 
-            let request = UNNotificationRequest(identifier: "\(event.id)", content: content, trigger: trigger)
+            let request = UNNotificationRequest(identifier: event.name, content: content, trigger: trigger)
 
             UNUserNotificationCenter.current().add(request)
         }
@@ -74,7 +76,7 @@ class HILocalNotificationController: NSObject {
 
     func unscheduleNotification(for event: Event) {
         requestAuthorization {
-            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["\(event.id)"])
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["\(event.name)"])
         }
     }
 }
@@ -83,8 +85,8 @@ extension HILocalNotificationController: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        // Play a sound.
         completionHandler([.sound, .alert])
+        HIAnnouncementDataSource.injectAnnouncement(notification: notification)
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter,

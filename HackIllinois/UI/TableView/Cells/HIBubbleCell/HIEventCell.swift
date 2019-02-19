@@ -2,7 +2,7 @@
 //  HIEventCell.swift
 //  HackIllinois
 //
-//  Created by Rauhul Varma on 11/21/17.
+//  Created by HackIllinois Team on 11/21/17.
 //  Copyright © 2017 HackIllinois. All rights reserved.
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of
@@ -12,6 +12,7 @@
 
 import Foundation
 import UIKit
+import HIAPI
 
 protocol HIEventCellDelegate: class {
     func eventCellDidSelectFavoriteButton(_ eventCell: HIEventCell)
@@ -19,7 +20,13 @@ protocol HIEventCellDelegate: class {
 
 class HIEventCell: HIBubbleCell {
     // MARK: - Properties
-    var favoritedButton = HIButton(style: .iconToggle(activeImage: #imageLiteral(resourceName: "Favorited"), inactiveImage: #imageLiteral(resourceName: "Unfavorited")))
+    let favoritedButton = HIButton {
+        $0.tintHIColor = \.baseText
+        $0.backgroundHIColor = \.clear
+        $0.activeImage = #imageLiteral(resourceName: "Favorited")
+        $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
+    }
+
     var contentStackView = UIStackView()
     var contentStackViewHeight = NSLayoutConstraint()
 
@@ -27,7 +34,7 @@ class HIEventCell: HIBubbleCell {
     weak var delegate: HIEventCellDelegate?
 
     // MARK: - Init
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
@@ -35,12 +42,16 @@ class HIEventCell: HIBubbleCell {
         favoritedButton.widthAnchor.constraint(equalToConstant: 58).isActive = true
         favoritedButton.constrain(to: bubbleView, topInset: 0, bottomInset: 0, leadingInset: 0)
 
-        let disclosureIndicatorView = HIImageView(style: .icon(image: #imageLiteral(resourceName: "DisclosureIndicator")))
+        let disclosureIndicatorView = HITintImageView {
+            $0.tintHIColor = \.accent
+            $0.contentMode = .center
+            $0.image = #imageLiteral(resourceName: "DisclosureIndicator")
+        }
         bubbleView.addSubview(disclosureIndicatorView)
         disclosureIndicatorView.widthAnchor.constraint(equalToConstant: 65).isActive = true
         disclosureIndicatorView.constrain(to: bubbleView, topInset: 0, trailingInset: 0, bottomInset: 0)
-        
 
+        // add bubble view
         contentStackView.axis = .vertical
         contentStackView.distribution = .equalSpacing
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -71,19 +82,18 @@ extension HIEventCell {
     }
 
     static func <- (lhs: HIEventCell, rhs: Event) {
-        lhs.favoritedButton.setToggle(active: rhs.favorite)
+        lhs.favoritedButton.isActive = rhs.favorite
         var contentStackViewHeight: CGFloat = 0
         let titleLabel = HILabel(style: .event)
         titleLabel.text = rhs.name
         contentStackViewHeight += titleLabel.intrinsicContentSize.height
         lhs.contentStackView.addArrangedSubview(titleLabel)
-        if let locations = rhs.locations as? Set<Location> {
-            for location in locations {
-                let locationLabel = HILabel(style: .location)
-                locationLabel.text = location.name
-                contentStackViewHeight += locationLabel.intrinsicContentSize.height + 3
-                lhs.contentStackView.addArrangedSubview(locationLabel)
-            }
+        for location in rhs.locations {
+            guard let location = location as? Location else { continue }
+            let locationLabel = HILabel(style: .location)
+            locationLabel.text = location.name
+            contentStackViewHeight += locationLabel.intrinsicContentSize.height + 3
+            lhs.contentStackView.addArrangedSubview(locationLabel)
         }
         lhs.contentStackViewHeight.constant = contentStackViewHeight
     }
@@ -93,7 +103,7 @@ extension HIEventCell {
 extension HIEventCell {
     override func prepareForReuse() {
         super.prepareForReuse()
-        favoritedButton.setToggle(active: false)
+        favoritedButton.isActive = false
         contentStackView.arrangedSubviews.forEach { (view) in
             contentStackView.removeArrangedSubview(view)
             view.removeFromSuperview()

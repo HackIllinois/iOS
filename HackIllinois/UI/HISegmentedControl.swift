@@ -2,7 +2,7 @@
 //  HISegmentedControl.swift
 //  HackIllinois
 //
-//  Created by Rauhul Varma on 11/29/17.
+//  Created by HackIllinois Team on 11/29/17.
 //  Copyright © 2017 HackIllinois. All rights reserved.
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of
@@ -27,7 +27,7 @@ class HISegmentedControl: UIControl {
     }
 
     private var labels = [UILabel]()
-    private var font = UIFont.systemFont(ofSize: 13, weight: .medium)
+    private var font = HIAppearance.Font.navigationSubtitle
 
     private var indicatorView = UIView()
     private var indicatorViewHeight = CGFloat(3)
@@ -55,13 +55,13 @@ class HISegmentedControl: UIControl {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        backgroundColor = HIApplication.Palette.current.background
+        backgroundColor <- \.baseBackground
         labels.forEach {
-            $0.textColor = HIApplication.Palette.current.primary
-            $0.backgroundColor = HIApplication.Palette.current.background
+            $0.textColor <- \.baseText
+            $0.backgroundColor <- \.baseBackground
         }
-        bottomView.backgroundColor = HIApplication.Palette.current.accent
-        indicatorView.backgroundColor = HIApplication.Palette.current.accent
+        bottomView.backgroundColor <- \.accent
+        indicatorView.backgroundColor <- \.accent
     }
 
     // MARK: - UIView

@@ -2,7 +2,7 @@
 //  HIImageView.swift
 //  HackIllinois
 //
-//  Created by Rauhul Varma on 2/22/18.
+//  Created by HackIllinois Team on 2/16/19.
 //  Copyright © 2018 HackIllinois. All rights reserved.
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of
@@ -14,26 +14,15 @@ import Foundation
 import UIKit
 
 class HIImageView: UIImageView {
-    // MARK: - Types
-    enum Style {
-        case icon(image: UIImage)
-    }
-
     // MARK: - Properties
-    let style: Style
+    var hiImage: HIImage?
 
     // MARK: - Init
-    init(style: Style) {
-        self.style = style
+    init(additionalConfiguration: ((HIImageView) -> Void)? = nil) {
         super.init(frame: .zero)
+        additionalConfiguration?(self)
 
         translatesAutoresizingMaskIntoConstraints = false
-
-        switch style {
-        case .icon(let image):
-            self.image = image.withRenderingMode(.alwaysTemplate)
-            contentMode = .center
-        }
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
@@ -49,6 +38,6 @@ class HIImageView: UIImageView {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        tintColor = HIApplication.Palette.current.accent
+        image <- hiImage
     }
 }

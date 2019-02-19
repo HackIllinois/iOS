@@ -8,49 +8,45 @@
 
 /* Begin PBXBuildFile section */
 		0A360882203539FF001F5F85 /* HIAdminEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */; };
+		3521FFA92207C03E00634A63 /* Attendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521FFA82207C03E00634A63 /* Attendee.swift */; };
 		35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */; };
-		35264667203EC14100F59F48 /* HIRecruiterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35264666203EC14100F59F48 /* HIRecruiterService.swift */; };
-		35BD9E4A2017DFED005B6FCE /* HITrackingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BD9E492017DFED005B6FCE /* HITrackingService.swift */; };
-		35D7CE9720380ACF00654E28 /* Stickers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35D7CE9620380ACF00654E28 /* Stickers.xcassets */; };
+		3537DBAD2206B7F500D50384 /* Stickers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3537DBAC2206B7F500D50384 /* Stickers.xcassets */; };
+		35B4A44F21E091BA001B3AF0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4A44D21E091B9001B3AF0 /* Logger.swift */; };
+		35B4A45021E091BA001B3AF0 /* HIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4A44E21E091B9001B3AF0 /* HIError.swift */; };
 		35D7CE9B20380ACF00654E28 /* Stickers.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 35D7CE9420380ACF00654E28 /* Stickers.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6602C7A6DEE0178C82BE1497 /* Pods_HackIllinois.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F912C974275240F02A49C6D /* Pods_HackIllinois.framework */; };
-		84E3DD05203EA27800BF3883 /* HIPassService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DD04203EA27800BF3883 /* HIPassService.swift */; };
-		9506926C203EE14000D7C34C /* countdown-24.json in Resources */ = {isa = PBXBuildFile; fileRef = 95069262203EE14000D7C34C /* countdown-24.json */; };
-		9506926D203EE14000D7C34C /* countdown-60.json in Resources */ = {isa = PBXBuildFile; fileRef = 95069263203EE14000D7C34C /* countdown-60.json */; };
 		9506926E203EE14000D7C34C /* LOTAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95069264203EE14000D7C34C /* LOTAnimationView.swift */; };
-		9506926F203EE14000D7C34C /* refresh.json in Resources */ = {isa = PBXBuildFile; fileRef = 95069266203EE14000D7C34C /* refresh.json */; };
 		95069270203EE14000D7C34C /* img_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 95069269203EE14000D7C34C /* img_1.png */; };
 		95069271203EE14000D7C34C /* img_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 9506926A203EE14000D7C34C /* img_0.png */; };
 		95069272203EE14000D7C34C /* intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 9506926B203EE14000D7C34C /* intro.json */; };
-		950F57141FBE8139001F7DF4 /* HIBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F57131FBE8139001F7DF4 /* HIBaseService.swift */; };
-		950F57161FBE81FA001F7DF4 /* HIAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F57151FBE81FA001F7DF4 /* HIAuthService.swift */; };
 		9510F6A01FCB7D6E007D19DB /* Announcement+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9510F69A1FCB7D6E007D19DB /* Announcement+CoreDataClass.swift */; };
 		9510F6A11FCB7D6E007D19DB /* Event+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9510F69B1FCB7D6E007D19DB /* Event+CoreDataClass.swift */; };
-		9510F6A21FCB7D6E007D19DB /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9510F69C1FCB7D6E007D19DB /* Location+CoreDataProperties.swift */; };
-		9510F6A31FCB7D6E007D19DB /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9510F69D1FCB7D6E007D19DB /* Location+CoreDataClass.swift */; };
 		9510F6A41FCB7D6E007D19DB /* Event+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9510F69E1FCB7D6E007D19DB /* Event+CoreDataProperties.swift */; };
 		9510F6A51FCB7D6E007D19DB /* Announcement+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9510F69F1FCB7D6E007D19DB /* Announcement+CoreDataProperties.swift */; };
-		9510F6A71FCB7E53007D19DB /* HIScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9510F6A61FCB7E53007D19DB /* HIScannerViewController.swift */; };
+		9510F6A71FCB7E53007D19DB /* HIBaseScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9510F6A61FCB7E53007D19DB /* HIBaseScannerViewController.swift */; };
+		9515E43722093E1300BCAF92 /* HIEventScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9515E43622093E1300BCAF92 /* HIEventScannerViewController.swift */; };
 		951827A81EA35DB800049F79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951827981EA35DB800049F79 /* AppDelegate.swift */; };
 		951827A91EA35DB800049F79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 951827991EA35DB800049F79 /* Assets.xcassets */; };
 		951827B41EA35E8B00049F79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 951827B21EA35E8B00049F79 /* LaunchScreen.storyboard */; };
 		9521A6A820191590009059C6 /* HIEventDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521A6A720191590009059C6 /* HIEventDataSource.swift */; };
 		9521A6AA20191737009059C6 /* HIAnnouncementDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521A6A920191737009059C6 /* HIAnnouncementDataSource.swift */; };
-		9521A6AC201917B6009059C6 /* HIAPIAnnouncement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521A6AB201917B6009059C6 /* HIAPIAnnouncement.swift */; };
+		9523A2902218BA2600341EBD /* HIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9523A28F2218BA2600341EBD /* HIImageView.swift */; };
 		952831A4200F2B35002C9F3E /* HILoginFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952831A3200F2B35002C9F3E /* HILoginFlowController.swift */; };
-		953199C91FC25CA0009F2AA1 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953199C81FC25CA0009F2AA1 /* CoreDataController.swift */; };
+		952D153C220D37980041383A /* starfish.png in Resources */ = {isa = PBXBuildFile; fileRef = 952D153A220D37980041383A /* starfish.png */; };
+		952D153D220D37980041383A /* refresh.json in Resources */ = {isa = PBXBuildFile; fileRef = 952D153B220D37980041383A /* refresh.json */; };
+		952D1542220D453D0041383A /* countdown-60.json in Resources */ = {isa = PBXBuildFile; fileRef = 952D1540220D453D0041383A /* countdown-60.json */; };
+		952D1543220D453D0041383A /* countdown-24.json in Resources */ = {isa = PBXBuildFile; fileRef = 952D1541220D453D0041383A /* countdown-24.json */; };
+		953199C91FC25CA0009F2AA1 /* HICoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953199C81FC25CA0009F2AA1 /* HICoreDataController.swift */; };
 		9544799C200C39870005408B /* HIUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9544799B200C39870005408B /* HIUser.swift */; };
 		954EE1D31FD0F1680078F39E /* HILoginSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */; };
-		954EE1D51FD0F17F0078F39E /* HIUserPassLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954EE1D41FD0F17F0078F39E /* HIUserPassLoginViewController.swift */; };
-		9552D92821758E4C00A8C869 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9552D92721758E4C00A8C869 /* UIViewExtensions.swift */; };
-		955772FA202B963800FCE7C0 /* HIRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955772F9202B963800FCE7C0 /* HIRegistrationService.swift */; };
-		955772FC202B96A500FCE7C0 /* HIAPIAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955772FB202B96A500FCE7C0 /* HIAPIAttendee.swift */; };
+		9552D92821758E4C00A8C869 /* UIView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9552D92721758E4C00A8C869 /* UIView+AutoLayout.swift */; };
 		956F41E11FC7577500557DC7 /* HIAnnouncementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F41E01FC7577500557DC7 /* HIAnnouncementsViewController.swift */; };
 		956F41E31FC76C8E00557DC7 /* HIMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F41E21FC76C8E00557DC7 /* HIMenuController.swift */; };
-		957D7C841FC28F4100C4332A /* HIEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957D7C831FC28F4100C4332A /* HIEventService.swift */; };
-		957D7CAB1FC2940800C4332A /* HIAPIReturnDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957D7CA61FC2940800C4332A /* HIAPIReturnDataContainer.swift */; };
+		957A4D7D21FDA71F007FDE0E /* MixTypeComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957A4D7C21FDA71F007FDE0E /* MixTypeComparable.swift */; };
 		957D7CAC1FC2940800C4332A /* HackIllinois.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 957D7CA81FC2940800C4332A /* HackIllinois.xcdatamodeld */; };
 		957D7CB81FC39EA100C4332A /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957D7CB71FC39EA100C4332A /* Formatters.swift */; };
+		95838AC921FDCB5C00BD8F71 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95838AC721FDCB5C00BD8F71 /* Location+CoreDataProperties.swift */; };
+		95838ACA21FDCB5C00BD8F71 /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95838AC821FDCB5C00BD8F71 /* Location+CoreDataClass.swift */; };
 		958C863B2033C94800803F81 /* HIAdminAnnouncementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958C863A2033C94800803F81 /* HIAdminAnnouncementViewController.swift */; };
 		95A7D28A203D4F54005EAEAF /* HIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7D27B203D4F54005EAEAF /* HIButton.swift */; };
 		95A7D28B203D4F54005EAEAF /* HISegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7D27C203D4F54005EAEAF /* HISegmentedControl.swift */; };
@@ -66,26 +62,42 @@
 		95A7D29C203D595F005EAEAF /* HITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7D29B203D595F005EAEAF /* HITableView.swift */; };
 		95A7D29E203D5BA4005EAEAF /* HILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7D29D203D5BA4005EAEAF /* HILabel.swift */; };
 		95A7D2A0203D60E9005EAEAF /* HIBubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7D29F203D60E9005EAEAF /* HIBubbleCell.swift */; };
+		95B12041220BDDEF00E024BB /* HICheckInScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B12040220BDDEF00E024BB /* HICheckInScannerViewController.swift */; };
+		95B12043220BEA9D00E024BB /* CheckInService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B12042220BEA9D00E024BB /* CheckInService.swift */; };
+		95B12045220BEAD700E024BB /* TrackingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B12044220BEAD700E024BB /* TrackingService.swift */; };
 		95C18DC52009618C004784B5 /* HIHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C18DC42009618C004784B5 /* HIHomeViewController.swift */; };
 		95C18DCA20096539004784B5 /* HIEventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C18DC720096539004784B5 /* HIEventDetailViewController.swift */; };
 		95C18DCB20096539004784B5 /* HIScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C18DC820096539004784B5 /* HIScheduleViewController.swift */; };
 		95C18DCC20096539004784B5 /* HIEventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C18DC920096539004784B5 /* HIEventListViewController.swift */; };
 		95C3BE302008B99C0008ED79 /* HIBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C3BE2F2008B99C0008ED79 /* HIBaseViewController.swift */; };
-		95CA03F02017F62000CB250F /* HIUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CA03EF2017F62000CB250F /* HIUserService.swift */; };
-		95CA9230201E60D300C46037 /* HIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CA922F201E60D300C46037 /* HIImage.swift */; };
+		95CA9230201E60D300C46037 /* UIImage+QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CA922F201E60D300C46037 /* UIImage+QRCode.swift */; };
 		95CCEA1F203D6B3600E3E28C /* HINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CCEA1E203D6B3600E3E28C /* HINavigationController.swift */; };
 		95CD0ED52015217E00D79DCC /* HIApplicationStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CD0ED42015217E00D79DCC /* HIApplicationStateController.swift */; };
-		95D6DA78203F8C3900E7C982 /* HIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6DA77203F8C3900E7C982 /* HIImageView.swift */; };
+		95D6DA78203F8C3900E7C982 /* HITintImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6DA77203F8C3900E7C982 /* HITintImageView.swift */; };
 		95D6DA7A203F983700E7C982 /* HILocalNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6DA79203F983700E7C982 /* HILocalNotificationController.swift */; };
-		95D791E9203E12C900C3BA62 /* HIThemeEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D791E8203E12C900C3BA62 /* HIThemeEngine.swift */; };
 		95D791ED203E370A00C3BA62 /* HIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D791EC203E370A00C3BA62 /* HIWindow.swift */; };
-		95DB8C712018419500173ACC /* HIAPIUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB8C702018419500173ACC /* HIAPIUser.swift */; };
-		95DC404120105D7300C1E266 /* HIAPIUserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DC404020105D7300C1E266 /* HIAPIUserAuth.swift */; };
-		95DC43EC202A61E9007E9B1A /* HIApplicationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DC43EB202A61E9007E9B1A /* HIApplicationConstants.swift */; };
-		95DE24DC1FC3ADBE000F599D /* HIAnnouncementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DE24DB1FC3ADBE000F599D /* HIAnnouncementService.swift */; };
-		95E24AEA201ED0CD007B7620 /* HIAPISuccessContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E24AE9201ED0CD007B7620 /* HIAPISuccessContainer.swift */; };
-		95E265F9201859BE000FC63D /* HIAPIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E265F8201859BE000FC63D /* HIAPIEvent.swift */; };
+		95E313E121FAB8D10092C22E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E313E021FAB8D10092C22E /* Constants.swift */; };
+		95E3142E21FAD5B40092C22E /* HIAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 95E3142C21FAD5B40092C22E /* HIAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		95E3143121FAD5B40092C22E /* HIAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95E3142A21FAD5B30092C22E /* HIAPI.framework */; };
+		95E3143221FAD5B40092C22E /* HIAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 95E3142A21FAD5B30092C22E /* HIAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		95E3145921FAD71E0092C22E /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3145821FAD71E0092C22E /* Error.swift */; };
+		95E3146A21FAF1740092C22E /* AnnouncementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3145B21FAF1740092C22E /* AnnouncementService.swift */; };
+		95E3146B21FAF1740092C22E /* PassService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3145C21FAF1740092C22E /* PassService.swift */; };
+		95E3146C21FAF1740092C22E /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3145D21FAF1740092C22E /* UserService.swift */; };
+		95E3146E21FAF1740092C22E /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3145F21FAF1740092C22E /* EventService.swift */; };
+		95E3147021FAF1740092C22E /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146121FAF1740092C22E /* BaseService.swift */; };
+		95E3147121FAF1740092C22E /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146221FAF1740092C22E /* AuthService.swift */; };
+		95E3147221FAF1740092C22E /* RegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146321FAF1740092C22E /* RegistrationService.swift */; };
+		95E3147321FAF1740092C22E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146521FAF1740092C22E /* Event.swift */; };
+		95E3147421FAF1740092C22E /* SimpleRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146621FAF1740092C22E /* SimpleRequest.swift */; };
+		95E3147521FAF1740092C22E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146721FAF1740092C22E /* User.swift */; };
+		95E3147621FAF1740092C22E /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146821FAF1740092C22E /* Announcement.swift */; };
 		95FC1D1E1FCBD20E00F8AD60 /* HIUserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */; };
+		95FC79BE21E0199600715036 /* HIAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC79BD21E0199600715036 /* HIAppearance.swift */; };
+		95FC79C121E0243D00715036 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC79C021E0243D00715036 /* Operators.swift */; };
+		95FC79C321E024A700715036 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC79C221E024A700715036 /* Notifications.swift */; };
+		AEEEA4AA44FBFB6459DE8BF5 /* Pods_HIAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04B5E0956897F8113C7875D /* Pods_HIAPI.framework */; };
+		D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A309BB2211175200CBA351 /* PassKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +107,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 35D7CE9320380ACF00654E28;
 			remoteInfo = Stickers;
+		};
+		95E3142F21FAD5B40092C22E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 951827771EA35AF100049F79 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 95E3142921FAD5B30092C22E;
+			remoteInfo = HIAPI;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -110,35 +129,40 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		95E3143621FAD5B40092C22E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				95E3143221FAD5B40092C22E /* HIAPI.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAdminEventViewController.swift; sourceTree = "<group>"; };
+		3521FFA82207C03E00634A63 /* Attendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendee.swift; sourceTree = "<group>"; };
 		35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HICountdownViewController.swift; sourceTree = "<group>"; };
-		35264666203EC14100F59F48 /* HIRecruiterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIRecruiterService.swift; sourceTree = "<group>"; };
-		35BD9E492017DFED005B6FCE /* HITrackingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITrackingService.swift; sourceTree = "<group>"; };
+		3537DBAC2206B7F500D50384 /* Stickers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Stickers.xcassets; sourceTree = "<group>"; };
+		35B4A44D21E091B9001B3AF0 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		35B4A44E21E091B9001B3AF0 /* HIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIError.swift; sourceTree = "<group>"; };
 		35D7CE9420380ACF00654E28 /* Stickers.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Stickers.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		35D7CE9620380ACF00654E28 /* Stickers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Stickers.xcassets; sourceTree = "<group>"; };
 		35D7CE9820380ACF00654E28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F912C974275240F02A49C6D /* Pods_HackIllinois.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HackIllinois.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ACE213775C4DAD26D29206F /* Pods-HackIllinois.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackIllinois.release.xcconfig"; path = "Pods/Target Support Files/Pods-HackIllinois/Pods-HackIllinois.release.xcconfig"; sourceTree = "<group>"; };
-		84E3DD04203EA27800BF3883 /* HIPassService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIPassService.swift; sourceTree = "<group>"; };
-		95069262203EE14000D7C34C /* countdown-24.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countdown-24.json"; sourceTree = "<group>"; };
-		95069263203EE14000D7C34C /* countdown-60.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countdown-60.json"; sourceTree = "<group>"; };
 		95069264203EE14000D7C34C /* LOTAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LOTAnimationView.swift; sourceTree = "<group>"; };
-		95069266203EE14000D7C34C /* refresh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = refresh.json; sourceTree = "<group>"; };
 		95069269203EE14000D7C34C /* img_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_1.png; sourceTree = "<group>"; };
 		9506926A203EE14000D7C34C /* img_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_0.png; sourceTree = "<group>"; };
 		9506926B203EE14000D7C34C /* intro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = intro.json; sourceTree = "<group>"; };
-		950F57131FBE8139001F7DF4 /* HIBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIBaseService.swift; sourceTree = "<group>"; };
-		950F57151FBE81FA001F7DF4 /* HIAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAuthService.swift; sourceTree = "<group>"; };
 		9510F69A1FCB7D6E007D19DB /* Announcement+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Announcement+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9510F69B1FCB7D6E007D19DB /* Event+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataClass.swift"; sourceTree = "<group>"; };
-		9510F69C1FCB7D6E007D19DB /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		9510F69D1FCB7D6E007D19DB /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9510F69E1FCB7D6E007D19DB /* Event+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9510F69F1FCB7D6E007D19DB /* Announcement+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Announcement+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		9510F6A61FCB7E53007D19DB /* HIScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScannerViewController.swift; sourceTree = "<group>"; };
+		9510F6A61FCB7E53007D19DB /* HIBaseScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIBaseScannerViewController.swift; sourceTree = "<group>"; };
+		9515E43622093E1300BCAF92 /* HIEventScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEventScannerViewController.swift; sourceTree = "<group>"; };
 		9518277F1EA35AF100049F79 /* HackIllinois.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackIllinois.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		951827981EA35DB800049F79 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		951827991EA35DB800049F79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -146,22 +170,24 @@
 		951827B21EA35E8B00049F79 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9521A6A720191590009059C6 /* HIEventDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEventDataSource.swift; sourceTree = "<group>"; };
 		9521A6A920191737009059C6 /* HIAnnouncementDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAnnouncementDataSource.swift; sourceTree = "<group>"; };
-		9521A6AB201917B6009059C6 /* HIAPIAnnouncement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAPIAnnouncement.swift; sourceTree = "<group>"; };
+		9523A28F2218BA2600341EBD /* HIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIImageView.swift; sourceTree = "<group>"; };
 		952831A3200F2B35002C9F3E /* HILoginFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HILoginFlowController.swift; sourceTree = "<group>"; };
-		953199C81FC25CA0009F2AA1 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		952D153A220D37980041383A /* starfish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = starfish.png; sourceTree = "<group>"; };
+		952D153B220D37980041383A /* refresh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = refresh.json; sourceTree = "<group>"; };
+		952D1540220D453D0041383A /* countdown-60.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countdown-60.json"; sourceTree = "<group>"; };
+		952D1541220D453D0041383A /* countdown-24.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countdown-24.json"; sourceTree = "<group>"; };
+		953199C81FC25CA0009F2AA1 /* HICoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICoreDataController.swift; sourceTree = "<group>"; };
 		9544799B200C39870005408B /* HIUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIUser.swift; sourceTree = "<group>"; };
 		9544799D200C3CE40005408B /* Tests.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Tests.playground; sourceTree = "<group>"; };
 		954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILoginSelectionViewController.swift; sourceTree = "<group>"; };
-		954EE1D41FD0F17F0078F39E /* HIUserPassLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIUserPassLoginViewController.swift; sourceTree = "<group>"; };
-		9552D92721758E4C00A8C869 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
-		955772F9202B963800FCE7C0 /* HIRegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIRegistrationService.swift; sourceTree = "<group>"; };
-		955772FB202B96A500FCE7C0 /* HIAPIAttendee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAPIAttendee.swift; sourceTree = "<group>"; };
+		9552D92721758E4C00A8C869 /* UIView+AutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AutoLayout.swift"; sourceTree = "<group>"; };
 		956F41E01FC7577500557DC7 /* HIAnnouncementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAnnouncementsViewController.swift; sourceTree = "<group>"; };
 		956F41E21FC76C8E00557DC7 /* HIMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIMenuController.swift; sourceTree = "<group>"; };
-		957D7C831FC28F4100C4332A /* HIEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEventService.swift; sourceTree = "<group>"; };
-		957D7CA61FC2940800C4332A /* HIAPIReturnDataContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIAPIReturnDataContainer.swift; sourceTree = "<group>"; };
+		957A4D7C21FDA71F007FDE0E /* MixTypeComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixTypeComparable.swift; sourceTree = "<group>"; };
 		957D7CA91FC2940800C4332A /* HackIllinois.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HackIllinois.xcdatamodel; sourceTree = "<group>"; };
 		957D7CB71FC39EA100C4332A /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
+		95838AC721FDCB5C00BD8F71 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		95838AC821FDCB5C00BD8F71 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
 		958C863A2033C94800803F81 /* HIAdminAnnouncementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIAdminAnnouncementViewController.swift; sourceTree = "<group>"; };
 		95A7D27B203D4F54005EAEAF /* HIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIButton.swift; sourceTree = "<group>"; };
 		95A7D27C203D4F54005EAEAF /* HISegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HISegmentedControl.swift; sourceTree = "<group>"; };
@@ -177,26 +203,45 @@
 		95A7D29B203D595F005EAEAF /* HITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITableView.swift; sourceTree = "<group>"; };
 		95A7D29D203D5BA4005EAEAF /* HILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILabel.swift; sourceTree = "<group>"; };
 		95A7D29F203D60E9005EAEAF /* HIBubbleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIBubbleCell.swift; sourceTree = "<group>"; };
+		95B12040220BDDEF00E024BB /* HICheckInScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICheckInScannerViewController.swift; sourceTree = "<group>"; };
+		95B12042220BEA9D00E024BB /* CheckInService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInService.swift; sourceTree = "<group>"; };
+		95B12044220BEAD700E024BB /* TrackingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingService.swift; sourceTree = "<group>"; };
 		95C18DC42009618C004784B5 /* HIHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIHomeViewController.swift; sourceTree = "<group>"; };
 		95C18DC720096539004784B5 /* HIEventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIEventDetailViewController.swift; sourceTree = "<group>"; };
 		95C18DC820096539004784B5 /* HIScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIScheduleViewController.swift; sourceTree = "<group>"; };
 		95C18DC920096539004784B5 /* HIEventListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIEventListViewController.swift; sourceTree = "<group>"; };
 		95C3BE2F2008B99C0008ED79 /* HIBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIBaseViewController.swift; sourceTree = "<group>"; };
-		95CA03EF2017F62000CB250F /* HIUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIUserService.swift; sourceTree = "<group>"; };
-		95CA922F201E60D300C46037 /* HIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIImage.swift; sourceTree = "<group>"; };
+		95CA922F201E60D300C46037 /* UIImage+QRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+QRCode.swift"; sourceTree = "<group>"; };
 		95CCEA1E203D6B3600E3E28C /* HINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HINavigationController.swift; sourceTree = "<group>"; };
 		95CD0ED42015217E00D79DCC /* HIApplicationStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIApplicationStateController.swift; sourceTree = "<group>"; };
-		95D6DA77203F8C3900E7C982 /* HIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIImageView.swift; sourceTree = "<group>"; };
+		95D6DA77203F8C3900E7C982 /* HITintImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITintImageView.swift; sourceTree = "<group>"; };
 		95D6DA79203F983700E7C982 /* HILocalNotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILocalNotificationController.swift; sourceTree = "<group>"; };
-		95D791E8203E12C900C3BA62 /* HIThemeEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIThemeEngine.swift; sourceTree = "<group>"; };
 		95D791EC203E370A00C3BA62 /* HIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIWindow.swift; sourceTree = "<group>"; };
-		95DB8C702018419500173ACC /* HIAPIUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAPIUser.swift; sourceTree = "<group>"; };
-		95DC404020105D7300C1E266 /* HIAPIUserAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIAPIUserAuth.swift; sourceTree = "<group>"; };
-		95DC43EB202A61E9007E9B1A /* HIApplicationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIApplicationConstants.swift; sourceTree = "<group>"; };
-		95DE24DB1FC3ADBE000F599D /* HIAnnouncementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAnnouncementService.swift; sourceTree = "<group>"; };
-		95E24AE9201ED0CD007B7620 /* HIAPISuccessContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAPISuccessContainer.swift; sourceTree = "<group>"; };
-		95E265F8201859BE000FC63D /* HIAPIEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAPIEvent.swift; sourceTree = "<group>"; };
+		95E313E021FAB8D10092C22E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		95E3142A21FAD5B30092C22E /* HIAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HIAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		95E3142C21FAD5B40092C22E /* HIAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HIAPI.h; sourceTree = "<group>"; };
+		95E3142D21FAD5B40092C22E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		95E3145821FAD71E0092C22E /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		95E3145B21FAF1740092C22E /* AnnouncementService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementService.swift; sourceTree = "<group>"; };
+		95E3145C21FAF1740092C22E /* PassService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassService.swift; sourceTree = "<group>"; };
+		95E3145D21FAF1740092C22E /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		95E3145F21FAF1740092C22E /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
+		95E3146121FAF1740092C22E /* BaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
+		95E3146221FAF1740092C22E /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		95E3146321FAF1740092C22E /* RegistrationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationService.swift; sourceTree = "<group>"; };
+		95E3146521FAF1740092C22E /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		95E3146621FAF1740092C22E /* SimpleRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleRequest.swift; sourceTree = "<group>"; };
+		95E3146721FAF1740092C22E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		95E3146821FAF1740092C22E /* Announcement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Announcement.swift; sourceTree = "<group>"; };
 		95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIUserDetailViewController.swift; sourceTree = "<group>"; };
+		95FC79BD21E0199600715036 /* HIAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAppearance.swift; sourceTree = "<group>"; };
+		95FC79C021E0243D00715036 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
+		95FC79C221E024A700715036 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		A04B5E0956897F8113C7875D /* Pods_HIAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HIAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF9EC66ED72062AA9232ADB3 /* Pods-HIAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HIAPI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HIAPI/Pods-HIAPI.debug.xcconfig"; sourceTree = "<group>"; };
+		D3A309BA221116A600CBA351 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };
+		D3A309BB2211175200CBA351 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
+		EC118263E461191C2C81D529 /* Pods-HIAPI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HIAPI.release.xcconfig"; path = "Pods/Target Support Files/Pods-HIAPI/Pods-HIAPI.release.xcconfig"; sourceTree = "<group>"; };
 		FB7A684A9E0518F3903C3ADC /* Pods-HackIllinois.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackIllinois.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HackIllinois/Pods-HackIllinois.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -212,7 +257,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */,
+				95E3143121FAD5B40092C22E /* HIAPI.framework in Frameworks */,
 				6602C7A6DEE0178C82BE1497 /* Pods_HackIllinois.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		95E3142721FAD5B30092C22E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AEEEA4AA44FBFB6459DE8BF5 /* Pods_HIAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,7 +277,7 @@
 		35D7CE9520380ACF00654E28 /* Stickers */ = {
 			isa = PBXGroup;
 			children = (
-				35D7CE9620380ACF00654E28 /* Stickers.xcassets */,
+				3537DBAC2206B7F500D50384 /* Stickers.xcassets */,
 				35D7CE9820380ACF00654E28 /* Info.plist */,
 			);
 			path = Stickers;
@@ -233,6 +288,8 @@
 			children = (
 				6ACE213775C4DAD26D29206F /* Pods-HackIllinois.release.xcconfig */,
 				FB7A684A9E0518F3903C3ADC /* Pods-HackIllinois.debug.xcconfig */,
+				AF9EC66ED72062AA9232ADB3 /* Pods-HIAPI.debug.xcconfig */,
+				EC118263E461191C2C81D529 /* Pods-HIAPI.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -242,7 +299,7 @@
 			children = (
 				95069261203EE14000D7C34C /* Countdown */,
 				95069264203EE14000D7C34C /* LOTAnimationView.swift */,
-				95069265203EE14000D7C34C /* Refresh */,
+				952D1538220D37980041383A /* Refresh */,
 				95069267203EE14000D7C34C /* Launch */,
 			);
 			path = Animations;
@@ -251,18 +308,10 @@
 		95069261203EE14000D7C34C /* Countdown */ = {
 			isa = PBXGroup;
 			children = (
-				95069262203EE14000D7C34C /* countdown-24.json */,
-				95069263203EE14000D7C34C /* countdown-60.json */,
+				952D1541220D453D0041383A /* countdown-24.json */,
+				952D1540220D453D0041383A /* countdown-60.json */,
 			);
 			path = Countdown;
-			sourceTree = "<group>";
-		};
-		95069265203EE14000D7C34C /* Refresh */ = {
-			isa = PBXGroup;
-			children = (
-				95069266203EE14000D7C34C /* refresh.json */,
-			);
-			path = Refresh;
 			sourceTree = "<group>";
 		};
 		95069267203EE14000D7C34C /* Launch */ = {
@@ -283,27 +332,12 @@
 			path = images;
 			sourceTree = "<group>";
 		};
-		950F57121FBE8127001F7DF4 /* APIService */ = {
-			isa = PBXGroup;
-			children = (
-				95DE24DB1FC3ADBE000F599D /* HIAnnouncementService.swift */,
-				950F57151FBE81FA001F7DF4 /* HIAuthService.swift */,
-				950F57131FBE8139001F7DF4 /* HIBaseService.swift */,
-				957D7C831FC28F4100C4332A /* HIEventService.swift */,
-				84E3DD04203EA27800BF3883 /* HIPassService.swift */,
-				35264666203EC14100F59F48 /* HIRecruiterService.swift */,
-				955772F9202B963800FCE7C0 /* HIRegistrationService.swift */,
-				35BD9E492017DFED005B6FCE /* HITrackingService.swift */,
-				95CA03EF2017F62000CB250F /* HIUserService.swift */,
-			);
-			path = APIService;
-			sourceTree = "<group>";
-		};
 		951827761EA35AF100049F79 = {
 			isa = PBXGroup;
 			children = (
 				951827971EA35DB800049F79 /* HackIllinois */,
 				35D7CE9520380ACF00654E28 /* Stickers */,
+				95E3142B21FAD5B40092C22E /* HIAPI */,
 				951827801EA35AF100049F79 /* Products */,
 				6B0003FB1C250537E97323BE /* Pods */,
 				EAE6D26341C3ACE27256067A /* Frameworks */,
@@ -315,6 +349,7 @@
 			children = (
 				9518277F1EA35AF100049F79 /* HackIllinois.app */,
 				35D7CE9420380ACF00654E28 /* Stickers.appex */,
+				95E3142A21FAD5B30092C22E /* HIAPI.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -322,15 +357,17 @@
 		951827971EA35DB800049F79 /* HackIllinois */ = {
 			isa = PBXGroup;
 			children = (
-				950F57121FBE8127001F7DF4 /* APIService */,
+				D3A309BA221116A600CBA351 /* HackIllinois.entitlements */,
+				957DB2E41FC2435100F8C45E /* ViewControllers */,
+				957DB2E91FC2453100F8C45E /* FlowControllers */,
 				951827981EA35DB800049F79 /* AppDelegate.swift */,
 				951827991EA35DB800049F79 /* Assets.xcassets */,
 				9518279E1EA35DB800049F79 /* Controllers */,
 				9521A6A6201912B4009059C6 /* DataSources */,
-				957D7CB71FC39EA100C4332A /* Formatters.swift */,
-				95DC43EB202A61E9007E9B1A /* HIApplicationConstants.swift */,
+				958A33E421E143BF00F34C9E /* Extensions */,
 				951827A31EA35DB800049F79 /* Info.plist */,
 				951827B21EA35E8B00049F79 /* LaunchScreen.storyboard */,
+				95FC79BF21E0243000715036 /* Misc */,
 				951827A41EA35DB800049F79 /* Models */,
 				9544799D200C3CE40005408B /* Tests.playground */,
 				95A7D279203D4F54005EAEAF /* UI */,
@@ -341,10 +378,8 @@
 		9518279E1EA35DB800049F79 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				953199C81FC25CA0009F2AA1 /* CoreDataController.swift */,
-				957DB2E91FC2453100F8C45E /* FlowControllers */,
+				953199C81FC25CA0009F2AA1 /* HICoreDataController.swift */,
 				95D6DA79203F983700E7C982 /* HILocalNotificationController.swift */,
-				957DB2E41FC2435100F8C45E /* ViewControllers */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -353,7 +388,6 @@
 			isa = PBXGroup;
 			children = (
 				957D7CA71FC2940800C4332A /* CoreDataModels */,
-				957D7CA41FC2940800C4332A /* APIModels */,
 				9544799B200C39870005408B /* HIUser.swift */,
 			);
 			path = Models;
@@ -368,38 +402,32 @@
 			path = DataSources;
 			sourceTree = "<group>";
 		};
-		954EE1CF1FD0F14E0078F39E /* HILoginFlowViewControllers */ = {
+		952D1538220D37980041383A /* Refresh */ = {
 			isa = PBXGroup;
 			children = (
-				954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */,
-				954EE1D41FD0F17F0078F39E /* HIUserPassLoginViewController.swift */,
+				952D1539220D37980041383A /* images */,
+				952D153B220D37980041383A /* refresh.json */,
 			);
-			path = HILoginFlowViewControllers;
+			path = Refresh;
 			sourceTree = "<group>";
 		};
-		957D7CA41FC2940800C4332A /* APIModels */ = {
+		952D1539220D37980041383A /* images */ = {
 			isa = PBXGroup;
 			children = (
-				95DC404020105D7300C1E266 /* HIAPIUserAuth.swift */,
-				957D7CA61FC2940800C4332A /* HIAPIReturnDataContainer.swift */,
-				95DB8C702018419500173ACC /* HIAPIUser.swift */,
-				95E265F8201859BE000FC63D /* HIAPIEvent.swift */,
-				9521A6AB201917B6009059C6 /* HIAPIAnnouncement.swift */,
-				95E24AE9201ED0CD007B7620 /* HIAPISuccessContainer.swift */,
-				955772FB202B96A500FCE7C0 /* HIAPIAttendee.swift */,
+				952D153A220D37980041383A /* starfish.png */,
 			);
-			path = APIModels;
+			path = images;
 			sourceTree = "<group>";
 		};
 		957D7CA71FC2940800C4332A /* CoreDataModels */ = {
 			isa = PBXGroup;
 			children = (
+				95838AC821FDCB5C00BD8F71 /* Location+CoreDataClass.swift */,
+				95838AC721FDCB5C00BD8F71 /* Location+CoreDataProperties.swift */,
 				9510F69A1FCB7D6E007D19DB /* Announcement+CoreDataClass.swift */,
 				9510F69F1FCB7D6E007D19DB /* Announcement+CoreDataProperties.swift */,
 				9510F69B1FCB7D6E007D19DB /* Event+CoreDataClass.swift */,
 				9510F69E1FCB7D6E007D19DB /* Event+CoreDataProperties.swift */,
-				9510F69D1FCB7D6E007D19DB /* Location+CoreDataClass.swift */,
-				9510F69C1FCB7D6E007D19DB /* Location+CoreDataProperties.swift */,
 				957D7CA81FC2940800C4332A /* HackIllinois.xcdatamodeld */,
 			);
 			path = CoreDataModels;
@@ -408,16 +436,21 @@
 		957DB2E41FC2435100F8C45E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */,
 				958C863A2033C94800803F81 /* HIAdminAnnouncementViewController.swift */,
+				0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */,
 				956F41E01FC7577500557DC7 /* HIAnnouncementsViewController.swift */,
+				9510F6A61FCB7E53007D19DB /* HIBaseScannerViewController.swift */,
 				95C3BE2F2008B99C0008ED79 /* HIBaseViewController.swift */,
+				95B12040220BDDEF00E024BB /* HICheckInScannerViewController.swift */,
 				35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */,
-				95C18DC620096539004784B5 /* HIEventViewControllers */,
-				954EE1CF1FD0F14E0078F39E /* HILoginFlowViewControllers */,
-				9510F6A61FCB7E53007D19DB /* HIScannerViewController.swift */,
-				95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */,
+				95C18DC720096539004784B5 /* HIEventDetailViewController.swift */,
+				95C18DC920096539004784B5 /* HIEventListViewController.swift */,
+				9515E43622093E1300BCAF92 /* HIEventScannerViewController.swift */,
+				95C18DC42009618C004784B5 /* HIHomeViewController.swift */,
+				954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */,
 				95CCEA1E203D6B3600E3E28C /* HINavigationController.swift */,
+				95C18DC820096539004784B5 /* HIScheduleViewController.swift */,
+				95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -432,21 +465,29 @@
 			path = FlowControllers;
 			sourceTree = "<group>";
 		};
+		958A33E421E143BF00F34C9E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9552D92721758E4C00A8C869 /* UIView+AutoLayout.swift */,
+				95CA922F201E60D300C46037 /* UIImage+QRCode.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		95A7D279203D4F54005EAEAF /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				95069260203EE14000D7C34C /* Animations */,
+				95FC79BD21E0199600715036 /* HIAppearance.swift */,
 				95A7D27B203D4F54005EAEAF /* HIButton.swift */,
-				95CA922F201E60D300C46037 /* HIImage.swift */,
-				95D6DA77203F8C3900E7C982 /* HIImageView.swift */,
+				9523A28F2218BA2600341EBD /* HIImageView.swift */,
 				95A7D29D203D5BA4005EAEAF /* HILabel.swift */,
 				95A7D27C203D4F54005EAEAF /* HISegmentedControl.swift */,
 				95A7D27D203D4F54005EAEAF /* HITextField.swift */,
-				95D791E8203E12C900C3BA62 /* HIThemeEngine.swift */,
+				95D6DA77203F8C3900E7C982 /* HITintImageView.swift */,
 				95A7D27F203D4F54005EAEAF /* HIView.swift */,
 				95D791EC203E370A00C3BA62 /* HIWindow.swift */,
 				95A7D27E203D4F54005EAEAF /* Identifiable.swift */,
-				9552D92721758E4C00A8C869 /* UIViewExtensions.swift */,
 				95A7D280203D4F54005EAEAF /* TableView */,
 			);
 			path = UI;
@@ -460,17 +501,6 @@
 				95D791EB203E19F400C3BA62 /* Headers */,
 			);
 			path = TableView;
-			sourceTree = "<group>";
-		};
-		95C18DC620096539004784B5 /* HIEventViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				95C18DC720096539004784B5 /* HIEventDetailViewController.swift */,
-				95C18DC920096539004784B5 /* HIEventListViewController.swift */,
-				95C18DC42009618C004784B5 /* HIHomeViewController.swift */,
-				95C18DC820096539004784B5 /* HIScheduleViewController.swift */,
-			);
-			path = HIEventViewControllers;
 			sourceTree = "<group>";
 		};
 		95C96DF2203E0C3E002FF0CB /* HIBubbleCell */ = {
@@ -502,15 +532,82 @@
 			path = Headers;
 			sourceTree = "<group>";
 		};
+		95E3142B21FAD5B40092C22E /* HIAPI */ = {
+			isa = PBXGroup;
+			children = (
+				95E3146421FAF1740092C22E /* Models */,
+				95E3145A21FAF1740092C22E /* Services */,
+				95E3142C21FAD5B40092C22E /* HIAPI.h */,
+				95E3142D21FAD5B40092C22E /* Info.plist */,
+				95E3145821FAD71E0092C22E /* Error.swift */,
+			);
+			path = HIAPI;
+			sourceTree = "<group>";
+		};
+		95E3145A21FAF1740092C22E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				95E3145B21FAF1740092C22E /* AnnouncementService.swift */,
+				95E3146221FAF1740092C22E /* AuthService.swift */,
+				95E3146121FAF1740092C22E /* BaseService.swift */,
+				95B12042220BEA9D00E024BB /* CheckInService.swift */,
+				95E3145F21FAF1740092C22E /* EventService.swift */,
+				95E3145C21FAF1740092C22E /* PassService.swift */,
+				95E3146321FAF1740092C22E /* RegistrationService.swift */,
+				95B12044220BEAD700E024BB /* TrackingService.swift */,
+				95E3145D21FAF1740092C22E /* UserService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		95E3146421FAF1740092C22E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				95E3146821FAF1740092C22E /* Announcement.swift */,
+				3521FFA82207C03E00634A63 /* Attendee.swift */,
+				95E3146521FAF1740092C22E /* Event.swift */,
+				95E3146621FAF1740092C22E /* SimpleRequest.swift */,
+				95E3146721FAF1740092C22E /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		95FC79BF21E0243000715036 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				35B4A44E21E091B9001B3AF0 /* HIError.swift */,
+				35B4A44D21E091B9001B3AF0 /* Logger.swift */,
+				95FC79C021E0243D00715036 /* Operators.swift */,
+				95FC79C221E024A700715036 /* Notifications.swift */,
+				957D7CB71FC39EA100C4332A /* Formatters.swift */,
+				95E313E021FAB8D10092C22E /* Constants.swift */,
+				957A4D7C21FDA71F007FDE0E /* MixTypeComparable.swift */,
+			);
+			path = Misc;
+			sourceTree = "<group>";
+		};
 		EAE6D26341C3ACE27256067A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D3A309BB2211175200CBA351 /* PassKit.framework */,
 				5F912C974275240F02A49C6D /* Pods_HackIllinois.framework */,
+				A04B5E0956897F8113C7875D /* Pods_HIAPI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		95E3142521FAD5B30092C22E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95E3142E21FAD5B40092C22E /* HIAPI.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		35D7CE9320380ACF00654E28 /* Stickers */ = {
@@ -540,16 +637,37 @@
 				4BB122A7E5028FEBC4CB4FEB /* [CP] Embed Pods Frameworks */,
 				95CD0ED6201523B800D79DCC /* ShellScript */,
 				35D7CE9F20380ACF00654E28 /* Embed App Extensions */,
+				95E3143621FAD5B40092C22E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				35D7CE9A20380ACF00654E28 /* PBXTargetDependency */,
+				95E3143021FAD5B40092C22E /* PBXTargetDependency */,
 			);
 			name = HackIllinois;
 			productName = HackIllinois;
 			productReference = 9518277F1EA35AF100049F79 /* HackIllinois.app */;
 			productType = "com.apple.product-type.application";
+		};
+		95E3142921FAD5B30092C22E /* HIAPI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 95E3143521FAD5B40092C22E /* Build configuration list for PBXNativeTarget "HIAPI" */;
+			buildPhases = (
+				D0A0F622E8017764F318A867 /* [CP] Check Pods Manifest.lock */,
+				95E3142521FAD5B30092C22E /* Headers */,
+				95E3142621FAD5B30092C22E /* Sources */,
+				95E3142721FAD5B30092C22E /* Frameworks */,
+				95E3142821FAD5B30092C22E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HIAPI;
+			productName = HIAPI;
+			productReference = 95E3142A21FAD5B30092C22E /* HIAPI.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -558,7 +676,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = HackIllinois;
 				TargetAttributes = {
 					35D7CE9320380ACF00654E28 = {
@@ -569,13 +687,25 @@
 					9518277E1EA35AF100049F79 = {
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = 8VNQTQM2L6;
-						LastSwiftMigration = 0910;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
 							com.apple.SafariKeychain = {
 								enabled = 0;
 							};
+							com.apple.Wallet = {
+								enabled = 1;
+							};
 						};
+					};
+					95E3142921FAD5B30092C22E = {
+						CreatedOnToolsVersion = 10.1;
+						DevelopmentTeam = 8VNQTQM2L6;
+						LastSwiftMigration = 1010;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -594,6 +724,7 @@
 			targets = (
 				9518277E1EA35AF100049F79 /* HackIllinois */,
 				35D7CE9320380ACF00654E28 /* Stickers */,
+				95E3142921FAD5B30092C22E /* HIAPI */,
 			);
 		};
 /* End PBXProject section */
@@ -603,7 +734,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35D7CE9720380ACF00654E28 /* Stickers.xcassets in Resources */,
+				3537DBAD2206B7F500D50384 /* Stickers.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,14 +742,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9506926C203EE14000D7C34C /* countdown-24.json in Resources */,
+				952D153D220D37980041383A /* refresh.json in Resources */,
 				95069272203EE14000D7C34C /* intro.json in Resources */,
+				952D1543220D453D0041383A /* countdown-24.json in Resources */,
 				951827A91EA35DB800049F79 /* Assets.xcassets in Resources */,
+				952D153C220D37980041383A /* starfish.png in Resources */,
 				95069270203EE14000D7C34C /* img_1.png in Resources */,
-				9506926D203EE14000D7C34C /* countdown-60.json in Resources */,
-				9506926F203EE14000D7C34C /* refresh.json in Resources */,
+				952D1542220D453D0041383A /* countdown-60.json in Resources */,
 				95069271203EE14000D7C34C /* img_0.png in Resources */,
 				951827B41EA35E8B00049F79 /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		95E3142821FAD5B30092C22E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -649,20 +788,20 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-HackIllinois/Pods-HackIllinois-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/APIManager/APIManager.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-HackIllinois/Pods-HackIllinois-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainAccess/SwiftKeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
+				"${BUILT_PRODUCTS_DIR}/APIManager/APIManager.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/APIManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/APIManager.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HackIllinois/Pods-HackIllinois-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HackIllinois/Pods-HackIllinois-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		95CD0ED6201523B800D79DCC /* ShellScript */ = {
@@ -678,6 +817,28 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
+		D0A0F622E8017764F318A867 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HIAPI-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -685,74 +846,87 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95CA03F02017F62000CB250F /* HIUserService.swift in Sources */,
-				95CA9230201E60D300C46037 /* HIImage.swift in Sources */,
+				95CA9230201E60D300C46037 /* UIImage+QRCode.swift in Sources */,
 				95A7D2A0203D60E9005EAEAF /* HIBubbleCell.swift in Sources */,
-				95DC404120105D7300C1E266 /* HIAPIUserAuth.swift in Sources */,
-				9552D92821758E4C00A8C869 /* UIViewExtensions.swift in Sources */,
-				84E3DD05203EA27800BF3883 /* HIPassService.swift in Sources */,
+				9552D92821758E4C00A8C869 /* UIView+AutoLayout.swift in Sources */,
 				958C863B2033C94800803F81 /* HIAdminAnnouncementViewController.swift in Sources */,
-				95DB8C712018419500173ACC /* HIAPIUser.swift in Sources */,
 				952831A4200F2B35002C9F3E /* HILoginFlowController.swift in Sources */,
 				95A7D295203D4F54005EAEAF /* HILoginSelectionHeader.swift in Sources */,
-				950F57161FBE81FA001F7DF4 /* HIAuthService.swift in Sources */,
 				9510F6A41FCB7D6E007D19DB /* Event+CoreDataProperties.swift in Sources */,
+				95E313E121FAB8D10092C22E /* Constants.swift in Sources */,
+				95838AC921FDCB5C00BD8F71 /* Location+CoreDataProperties.swift in Sources */,
+				95838ACA21FDCB5C00BD8F71 /* Location+CoreDataClass.swift in Sources */,
 				9521A6AA20191737009059C6 /* HIAnnouncementDataSource.swift in Sources */,
 				95C18DCB20096539004784B5 /* HIScheduleViewController.swift in Sources */,
 				95CCEA1F203D6B3600E3E28C /* HINavigationController.swift in Sources */,
-				35264667203EC14100F59F48 /* HIRecruiterService.swift in Sources */,
 				957D7CAC1FC2940800C4332A /* HackIllinois.xcdatamodeld in Sources */,
-				9510F6A71FCB7E53007D19DB /* HIScannerViewController.swift in Sources */,
+				9510F6A71FCB7E53007D19DB /* HIBaseScannerViewController.swift in Sources */,
 				956F41E11FC7577500557DC7 /* HIAnnouncementsViewController.swift in Sources */,
 				95A7D290203D4F54005EAEAF /* HIAnnouncementCell.swift in Sources */,
-				9510F6A21FCB7D6E007D19DB /* Location+CoreDataProperties.swift in Sources */,
+				9515E43722093E1300BCAF92 /* HIEventScannerViewController.swift in Sources */,
 				95A7D28F203D4F54005EAEAF /* HIEventCell.swift in Sources */,
 				95FC1D1E1FCBD20E00F8AD60 /* HIUserDetailViewController.swift in Sources */,
 				95C3BE302008B99C0008ED79 /* HIBaseViewController.swift in Sources */,
 				95CD0ED52015217E00D79DCC /* HIApplicationStateController.swift in Sources */,
-				957D7C841FC28F4100C4332A /* HIEventService.swift in Sources */,
+				95B12041220BDDEF00E024BB /* HICheckInScannerViewController.swift in Sources */,
 				95A7D292203D4F54005EAEAF /* HILoginSelectionCell.swift in Sources */,
-				95DC43EC202A61E9007E9B1A /* HIApplicationConstants.swift in Sources */,
 				95C18DCC20096539004784B5 /* HIEventListViewController.swift in Sources */,
 				95A7D28A203D4F54005EAEAF /* HIButton.swift in Sources */,
 				95A7D28E203D4F54005EAEAF /* HIView.swift in Sources */,
+				35B4A44F21E091BA001B3AF0 /* Logger.swift in Sources */,
 				9544799C200C39870005408B /* HIUser.swift in Sources */,
 				95A7D28B203D4F54005EAEAF /* HISegmentedControl.swift in Sources */,
-				95D791E9203E12C900C3BA62 /* HIThemeEngine.swift in Sources */,
-				957D7CAB1FC2940800C4332A /* HIAPIReturnDataContainer.swift in Sources */,
-				95E24AEA201ED0CD007B7620 /* HIAPISuccessContainer.swift in Sources */,
+				957A4D7D21FDA71F007FDE0E /* MixTypeComparable.swift in Sources */,
 				95A7D28C203D4F54005EAEAF /* HITextField.swift in Sources */,
 				95C18DCA20096539004784B5 /* HIEventDetailViewController.swift in Sources */,
+				9523A2902218BA2600341EBD /* HIImageView.swift in Sources */,
 				95C18DC52009618C004784B5 /* HIHomeViewController.swift in Sources */,
-				955772FA202B963800FCE7C0 /* HIRegistrationService.swift in Sources */,
-				955772FC202B96A500FCE7C0 /* HIAPIAttendee.swift in Sources */,
-				95E265F9201859BE000FC63D /* HIAPIEvent.swift in Sources */,
-				35BD9E4A2017DFED005B6FCE /* HITrackingService.swift in Sources */,
 				35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */,
 				9510F6A11FCB7D6E007D19DB /* Event+CoreDataClass.swift in Sources */,
 				951827A81EA35DB800049F79 /* AppDelegate.swift in Sources */,
-				953199C91FC25CA0009F2AA1 /* CoreDataController.swift in Sources */,
+				953199C91FC25CA0009F2AA1 /* HICoreDataController.swift in Sources */,
 				95A7D28D203D4F54005EAEAF /* Identifiable.swift in Sources */,
 				9521A6A820191590009059C6 /* HIEventDataSource.swift in Sources */,
 				9506926E203EE14000D7C34C /* LOTAnimationView.swift in Sources */,
-				95D6DA78203F8C3900E7C982 /* HIImageView.swift in Sources */,
+				95D6DA78203F8C3900E7C982 /* HITintImageView.swift in Sources */,
+				95FC79C121E0243D00715036 /* Operators.swift in Sources */,
 				95A7D294203D4F54005EAEAF /* HIDateHeader.swift in Sources */,
 				95D6DA7A203F983700E7C982 /* HILocalNotificationController.swift in Sources */,
-				9510F6A31FCB7D6E007D19DB /* Location+CoreDataClass.swift in Sources */,
 				95D791ED203E370A00C3BA62 /* HIWindow.swift in Sources */,
 				95A7D29C203D595F005EAEAF /* HITableView.swift in Sources */,
 				9510F6A01FCB7D6E007D19DB /* Announcement+CoreDataClass.swift in Sources */,
-				95DE24DC1FC3ADBE000F599D /* HIAnnouncementService.swift in Sources */,
 				0A360882203539FF001F5F85 /* HIAdminEventViewController.swift in Sources */,
-				9521A6AC201917B6009059C6 /* HIAPIAnnouncement.swift in Sources */,
-				950F57141FBE8139001F7DF4 /* HIBaseService.swift in Sources */,
-				954EE1D51FD0F17F0078F39E /* HIUserPassLoginViewController.swift in Sources */,
 				957D7CB81FC39EA100C4332A /* Formatters.swift in Sources */,
 				95A7D296203D4F54005EAEAF /* HIEventDetailLocationCell.swift in Sources */,
 				95A7D29E203D5BA4005EAEAF /* HILabel.swift in Sources */,
 				956F41E31FC76C8E00557DC7 /* HIMenuController.swift in Sources */,
 				9510F6A51FCB7D6E007D19DB /* Announcement+CoreDataProperties.swift in Sources */,
+				95FC79C321E024A700715036 /* Notifications.swift in Sources */,
+				95FC79BE21E0199600715036 /* HIAppearance.swift in Sources */,
+				35B4A45021E091BA001B3AF0 /* HIError.swift in Sources */,
 				954EE1D31FD0F1680078F39E /* HILoginSelectionViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		95E3142621FAD5B30092C22E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3521FFA92207C03E00634A63 /* Attendee.swift in Sources */,
+				95E3147521FAF1740092C22E /* User.swift in Sources */,
+				95E3147021FAF1740092C22E /* BaseService.swift in Sources */,
+				95E3147321FAF1740092C22E /* Event.swift in Sources */,
+				95E3146E21FAF1740092C22E /* EventService.swift in Sources */,
+				95E3147621FAF1740092C22E /* Announcement.swift in Sources */,
+				95E3146C21FAF1740092C22E /* UserService.swift in Sources */,
+				95B12043220BEA9D00E024BB /* CheckInService.swift in Sources */,
+				95E3147121FAF1740092C22E /* AuthService.swift in Sources */,
+				95E3146B21FAF1740092C22E /* PassService.swift in Sources */,
+				95E3146A21FAF1740092C22E /* AnnouncementService.swift in Sources */,
+				95E3147221FAF1740092C22E /* RegistrationService.swift in Sources */,
+				95E3147421FAF1740092C22E /* SimpleRequest.swift in Sources */,
+				95B12045220BEAD700E024BB /* TrackingService.swift in Sources */,
+				95E3145921FAD71E0092C22E /* Error.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,6 +937,11 @@
 			isa = PBXTargetDependency;
 			target = 35D7CE9320380ACF00654E28 /* Stickers */;
 			targetProxy = 35D7CE9920380ACF00654E28 /* PBXContainerItemProxy */;
+		};
+		95E3143021FAD5B40092C22E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 95E3142921FAD5B30092C22E /* HIAPI */;
+			targetProxy = 95E3142F21FAD5B40092C22E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -779,7 +958,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Stickers/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hackillinois.ios.stickers;
+				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios.stickers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -798,7 +977,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Stickers/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hackillinois.ios.stickers;
+				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios.stickers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -819,6 +998,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -826,6 +1006,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -876,6 +1057,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -883,6 +1065,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -916,16 +1099,18 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FB7A684A9E0518F3903C3ADC /* Pods-HackIllinois.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HackIllinois/HackIllinois.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8VNQTQM2L6;
 				INFOPLIST_FILE = HackIllinois/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -warn-long-expression-type-checking=150";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hackillinois.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -933,15 +1118,81 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6ACE213775C4DAD26D29206F /* Pods-HackIllinois.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HackIllinois/HackIllinois.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8VNQTQM2L6;
 				INFOPLIST_FILE = HackIllinois/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hackillinois.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		95E3143321FAD5B40092C22E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF9EC66ED72062AA9232ADB3 /* Pods-HIAPI.debug.xcconfig */;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 8VNQTQM2L6;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = HIAPI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.HIAPI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		95E3143421FAD5B40092C22E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC118263E461191C2C81D529 /* Pods-HIAPI.release.xcconfig */;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 8VNQTQM2L6;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = HIAPI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.HIAPI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -971,6 +1222,15 @@
 			buildConfigurations = (
 				951827951EA35AF100049F79 /* Debug */,
 				951827961EA35AF100049F79 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		95E3143521FAD5B40092C22E /* Build configuration list for PBXNativeTarget "HIAPI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				95E3143321FAD5B40092C22E /* Debug */,
+				95E3143421FAD5B40092C22E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

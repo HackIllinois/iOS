@@ -2,7 +2,7 @@
 //  HIEventDataSource.swift
 //  HackIllinois
 //
-//  Created by Rauhul Varma on 1/24/18.
+//  Created by HackIllinois Team on 1/24/18.
 //  Copyright © 2018 HackIllinois. All rights reserved.
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of
@@ -12,14 +12,22 @@
 
 import Foundation
 import CoreData
+import HIAPI
 
 final class HIEventDataSource {
 
-    static var isRefreshing = false
+    // Serializes access to isRefreshing.
+    private static let isRefreshineQueue = DispatchQueue(label: "org.hackillinois.org.hi_event_data_source.is_refreshing_queue", attributes: .concurrent)
+    // Tracks if the DataSource is refreshing.
+    private static var _isRefreshing = false
+    // Setter and getter for isRefreshing.
+    public static var isRefreshing: Bool {
+        get { return isRefreshineQueue.sync { _isRefreshing } }
+        set { isRefreshineQueue.sync(flags: .barrier) { _isRefreshing = newValue } }
+    }
 
-    static let locationsFetchRequest = NSFetchRequest<Location>(entityName: "Location")
-    static let eventsFetchRequest = NSFetchRequest<Event>(entityName: "Event")
-
+    // Waive swiftlint warning
+    // swiftlint:disable:next function_body_length
     static func refresh(completion: (() -> Void)? = nil) {
         guard !isRefreshing else {
             completion?()
@@ -27,69 +35,139 @@ final class HIEventDataSource {
         }
         isRefreshing = true
 
-        HIEventService.getAllLocations()
+        HIAPI.EventService.getAllEvents()
         .onCompletion { result in
-            if case let .success(containedLocations) = result {
-                print("GET::LOCATIONS::SUCCESS")
-                HIEventService.getAllEvents()
+            do {
+                let (containedEvents, _) = try result.get()
+                HIAPI.EventService.getAllFavorites()
                 .onCompletion { result in
-                    if case let .success(containedEvents) = result {
-                        print("GET::EVENTS::SUCCESS")
-                        HIEventService.getAllFavorites()
-                        .onCompletion { result in
-                            if case let .success(containedFavorites) = result {
-                                print("GET::FAVORITES::SUCCESS")
+                    do {
+                        let (containedFavorites, _) = try result.get()
+                        HICoreDataController.shared.performBackgroundTask { context -> Void in
+                            do {
+                                // 1) Unwrap contained data
+                                let apiEvents = containedEvents.events
+                                let apiFavorites = containedFavorites.events
 
-                                var updatedEvents = [HIAPIEvent]()
-                                containedEvents.data.forEach { event in
-                                    var event = event
-                                    event.favorite = containedFavorites.data.map { $0.eventId }.contains(event.id)
-                                    updatedEvents.append(event)
+                                // 2) Compute all the unique API locations.
+                                let allLocations = apiEvents.flatMap { $0.locations }
+                                var uniquinglocationDictionary = [String: HIAPI.Location]()
+                                allLocations.forEach {
+                                    uniquinglocationDictionary[$0.name] = $0
+                                }
+                                let uniqueLocations = Array(uniquinglocationDictionary.values)
+
+                                // 3) Get all CoreData locations.
+                                let locationFetchRequest = NSFetchRequest<Location>(entityName: "Location")
+                                let coreDataLocations = try context.fetch(locationFetchRequest)
+
+                                // 4) Diff the CoreData locations and API locations.
+                                let (coreDataLocationsToDelete, coreDataLocationsToUpdate, apiLocationsToInsert)
+                                    = diff(initial: coreDataLocations, final: uniqueLocations)
+
+                                // 5) Create dictionary mapping location names to CoreData locations.
+                                var coreDataLocationsDicionary = [String: Location]()
+
+                                // 6) Apply location diff to CoreData.
+                                coreDataLocationsToDelete.forEach { coreDataLocation in
+                                    // Delete CoreData location.
+                                    context.delete(coreDataLocation)
                                 }
 
-                                DispatchQueue.main.sync {
-                                    do {
-                                        let ctx = CoreDataController.shared.persistentContainer.viewContext
-                                        try? ctx.fetch(locationsFetchRequest).forEach {
-                                            ctx.delete($0)
-                                        }
-                                        try? ctx.fetch(eventsFetchRequest).forEach {
-                                            ctx.delete($0)
-                                        }
-                                        var locations = [Location]()
-                                        containedLocations.data.forEach { location in
-                                            locations.append( Location(context: ctx, location: location) )
-                                        }
-                                        var events = [Event]()
-                                        updatedEvents.forEach { event in
-                                            let eventLocationIds = event.locations.map { Int16($0.locationId) }
-                                            let eventLocations = locations.filter { eventLocationIds.contains($0.id) }
-                                            events.append( Event(context: ctx, event: event, locations: NSSet(array: eventLocations)) )
-                                        }
-                                        HILocalNotificationController.shared.scheduleNotifications(for: events)
+                                coreDataLocationsToUpdate.forEach { (coreDataLocation, apiLocation) in
+                                    // Update CoreData location.
+                                    coreDataLocation.latitude = apiLocation.latitude
+                                    coreDataLocation.longitude = apiLocation.longitude
 
-                                        try ctx.save()
-                                    } catch { }
+                                    // Add to dictionary mapping names to CoreData locations.
+                                    coreDataLocationsDicionary[coreDataLocation.name] = coreDataLocation
                                 }
+
+                                apiLocationsToInsert.forEach { apiLocation in
+                                    // Create CoreData location.
+                                    let coreDataLocation = Location(context: context)
+                                    coreDataLocation.name = apiLocation.name
+                                    coreDataLocation.latitude = apiLocation.latitude
+                                    coreDataLocation.longitude = apiLocation.longitude
+
+                                    // Add to dictionary mapping names to CoreData locations.
+                                    coreDataLocationsDicionary[coreDataLocation.name] = coreDataLocation
+                                }
+
+                                // 7) Get all CoreData locations.
+                                let eventFetchRequest = NSFetchRequest<Event>(entityName: "Event")
+                                let coreDataEvents = try context.fetch(eventFetchRequest)
+
+                                // 8) Diff the CoreData events and API events.
+                                let (
+                                    coreDataEventsToDelete,
+                                    coreDataEventsToUpdate,
+                                    apiEventsToInsert
+                                ) = diff(initial: coreDataEvents, final: apiEvents)
+
+                                // 9) Apply the diff
+                                coreDataEventsToDelete.forEach { coreDataEvent in
+                                    // Delete CoreData event.
+                                    context.delete(coreDataEvent)
+                                }
+
+                                coreDataEventsToUpdate.forEach { (coreDataEvent, apiEvent) in
+                                    // Update CoreData event.
+                                    coreDataEvent.endTime = apiEvent.endTime
+                                    coreDataEvent.eventType = apiEvent.eventType
+                                    coreDataEvent.info = apiEvent.info
+                                    apiEvent.locations.forEach { apiLocation in
+                                        guard let coreDataLocation = coreDataLocationsDicionary[apiLocation.name] else { fatalError("fuckity fuck") }
+                                        coreDataEvent.addToLocations(coreDataLocation)
+                                    }
+                                    coreDataEvent.name = apiEvent.name
+                                    coreDataEvent.sponsor = apiEvent.sponsor
+                                    coreDataEvent.startTime = apiEvent.startTime
+                                    coreDataEvent.favorite = apiFavorites.contains(coreDataEvent.name)
+                                }
+
+                                apiEventsToInsert.forEach { apiEvent in
+                                    // Create CoreData event.
+                                    let coreDataEvent = Event(context: context)
+                                    coreDataEvent.endTime = apiEvent.endTime
+                                    coreDataEvent.eventType = apiEvent.eventType
+                                    coreDataEvent.info = apiEvent.info
+                                    apiEvent.locations.forEach { apiLocation in
+                                        guard let coreDataLocation = coreDataLocationsDicionary[apiLocation.name] else {
+                                            fatalError("fuckity fuck")
+                                        }
+                                        coreDataEvent.addToLocations(coreDataLocation)
+                                    }
+                                    coreDataEvent.name = apiEvent.name
+                                    coreDataEvent.sponsor = apiEvent.sponsor
+                                    coreDataEvent.startTime = apiEvent.startTime
+                                    coreDataEvent.favorite = apiFavorites.contains(coreDataEvent.name)
+                                }
+
+                                // 10) Save changes, call completion handler, unlock refresh
+                                try context.save()
+                                completion?()
+                                isRefreshing = false
+                            } catch {
+                                completion?()
+                                isRefreshing = false
+                                print(error)
                             }
-                            completion?()
-                            isRefreshing = false
                         }
-                        .authorization(HIApplicationStateController.shared.user)
-                        .perform()
-                    } else {
+                    } catch {
                         completion?()
                         isRefreshing = false
+                        print(error)
                     }
                 }
-                .authorization(HIApplicationStateController.shared.user)
-                .perform()
-            } else {
+                .authorize(with: HIApplicationStateController.shared.user)
+                .launch()
+            } catch {
                 completion?()
                 isRefreshing = false
             }
         }
-        .authorization(HIApplicationStateController.shared.user)
-        .perform()
+        .authorize(with: HIApplicationStateController.shared.user)
+        .launch()
     }
 }

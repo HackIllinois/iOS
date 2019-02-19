@@ -4,10 +4,10 @@ Official iOS apps for HackIllinois. Please read this README before continuing.
 
 ## Branch Information #
 
-### master
+### master [![Build Status](https://travis-ci.com/HackIllinois/iOS.svg?branch=master)](https://travis-ci.com/HackIllinois/iOS)
 Master only hosts released versions of the Hackillinois application. Currently 1.0.1 build(1).
 
-### dev
+### dev [![Build Status](https://travis-ci.com/HackIllinois/iOS.svg?branch=dev)](https://travis-ci.com/HackIllinois/iOS)
 Dev hosts a semi-stable version of the next release and all work should be done on branches off dev and commited via PR's.
 
 ## Requirements #

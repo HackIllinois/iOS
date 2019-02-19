@@ -2,7 +2,7 @@
 //  Event+CoreDataProperties.swift
 //  HackIllinois
 //
-//  Created by Rauhul Varma on 1/25/18.
+//  Created by HackIllinois Team on 1/25/18.
 //  Copyright © 2018 HackIllinois. All rights reserved.
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of
@@ -12,6 +12,7 @@
 
 import Foundation
 import CoreData
+import HIAPI
 
 extension Event {
 
@@ -19,17 +20,18 @@ extension Event {
         return NSFetchRequest<Event>(entityName: "Event")
     }
 
+    @NSManaged public var endTime: Date
+    @NSManaged public var eventType: String
     @NSManaged public var favorite: Bool
-    @NSManaged public var end: Date
-    @NSManaged public var id: Int16
     @NSManaged public var info: String
-    @NSManaged public var name: String
-    @NSManaged public var start: Date
     @NSManaged public var locations: NSSet
+    @NSManaged public var name: String
+    @NSManaged public var sponsor: String
+    @NSManaged public var startTime: Date
 
     @objc dynamic var sectionIdentifier: Date {
         let excessComponents: Set<Calendar.Component> = [.second, .nanosecond]
-        return start.byRemoving(components: excessComponents)
+        return startTime.byRemoving(components: excessComponents)
     }
 
 }

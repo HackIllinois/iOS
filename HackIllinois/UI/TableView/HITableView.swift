@@ -2,7 +2,7 @@
 //  HITableView.swift
 //  HackIllinois
 //
-//  Created by Rauhul Varma on 2/21/18.
+//  Created by HackIllinois Team on 2/21/18.
 //  Copyright © 2018 HackIllinois. All rights reserved.
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of
@@ -37,13 +37,8 @@ class HITableView: UITableView {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        switch HIApplication.Theme.current {
-        case .day:
-            indicatorStyle = .black
-        case .night:
-            indicatorStyle = .white
-        }
-        backgroundColor = HIApplication.Palette.current.background
+        indicatorStyle <- \.scrollViewIndicatorStyle
+        backgroundColor <- \.baseBackground
     }
 
 }

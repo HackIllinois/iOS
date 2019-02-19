@@ -2,7 +2,7 @@
 //  HILoginSelectionCell.swift
 //  HackIllinois
 //
-//  Created by Rauhul Varma on 1/14/18.
+//  Created by HackIllinois Team on 1/14/18.
 //  Copyright © 2018 HackIllinois. All rights reserved.
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of
@@ -25,17 +25,17 @@ class HILoginSelectionCell: UITableViewCell {
     var separatorView = HIView(style: .separator)
 
     var defaultColor: UIColor {
-        return HIApplication.Palette.current.background
+        return (\HIAppearance.baseBackground).value
     }
 
     var activeColor: UIColor {
-        return HIApplication.Palette.current.actionBackground
+        return (\HIAppearance.action).value
     }
 
     var animator: UIViewPropertyAnimator?
 
     // MARK: - Init
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
 
@@ -60,8 +60,8 @@ class HILoginSelectionCell: UITableViewCell {
     }
 
     // MARK: - Themeable
-    @objc  func refreshForThemeChange() {
-        contentView.backgroundColor = HIApplication.Palette.current.background
+    @objc func refreshForThemeChange() {
+        contentView.backgroundColor <- \.baseBackground
     }
 }
 
@@ -94,5 +94,4 @@ extension HILoginSelectionCell {
         }
         animator?.startAnimation()
     }
-
 }

@@ -2,7 +2,7 @@
 //  HIEventDetailLocationCell.swift
 //  HackIllinois
 //
-//  Created by Rauhul Varma on 1/26/18.
+//  Created by HackIllinois Team on 1/26/18.
 //  Copyright © 2018 HackIllinois. All rights reserved.
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of
@@ -22,42 +22,46 @@ class HIEventDetailLocationCell: UITableViewCell {
     // MARK: Views
     let mapView = MKMapView()
     let mapAnnotation = MKPointAnnotation()
-    let titleLabel = HILabel(style: .location)
+    let titleLabel = HILabel(style: .location) {
+        $0.textColor <- \.baseText
+        $0.font = HIAppearance.Font.contentSubtitle
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
 
     var blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     let containerView = UIView()
 
     // MARK: - Init
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
 
         containerView.layer.cornerRadius = 8
         containerView.layer.masksToBounds = true
-        containerView.backgroundColor = HIApplication.Palette.current.background
+        containerView.backgroundColor <- \.baseBackground
         containerView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(containerView)
-        containerView.constrain(to: contentView, topInset: 6, trailingInset: -12, bottomInset: -6,  leadingInset: 12)
-        
+        containerView.constrain(to: contentView, topInset: 6, trailingInset: -12, bottomInset: -6, leadingInset: 12)
 
         mapView.isUserInteractionEnabled = false
         mapView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(mapView)
-        mapView.constrain(to: containerView, topInset: 0, trailingInset: 0, bottomInset: 0,  leadingInset: 0)
+        mapView.constrain(to: containerView, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
 
         blurEffectView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(blurEffectView)
         blurEffectView.constrain(to: containerView, topInset: 0, trailingInset: 0, leadingInset: 0)
         blurEffectView.heightAnchor.constraint(equalToConstant: 40).isActive = true
 
-        titleLabel.textColor = HIApplication.Palette.current.primary
-        titleLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         blurEffectView.contentView.addSubview(titleLabel)
         titleLabel.leadingAnchor.constraint(equalTo: blurEffectView.contentView.leadingAnchor, constant: 8).isActive = true
         titleLabel.constrain(to: blurEffectView.contentView, topInset: 0, bottomInset: 0)
 
-        let disclosureIndicatorImageView = HIImageView(style: .icon(image: #imageLiteral(resourceName: "DisclosureIndicator")))
+        let disclosureIndicatorImageView = HITintImageView {
+            $0.tintHIColor = \.accent
+            $0.contentMode = .center
+            $0.image = #imageLiteral(resourceName: "DisclosureIndicator")
+        }
         blurEffectView.contentView.addSubview(disclosureIndicatorImageView)
         disclosureIndicatorImageView.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 8).isActive = true
         disclosureIndicatorImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
@@ -77,13 +81,8 @@ class HIEventDetailLocationCell: UITableViewCell {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        contentView.backgroundColor = HIApplication.Palette.current.contentBackground
-        switch HIApplication.Theme.current {
-        case .day:
-            blurEffectView.backgroundColor = nil
-        case .night:
-            blurEffectView.backgroundColor = HIApplication.Palette.current.contentBackground.withAlphaComponent(0.7)
-        }
+        contentView.backgroundColor <- \.contentBackground
+        blurEffectView.backgroundColor <- \.frostedTint
     }
 }
 
@@ -125,7 +124,7 @@ extension HIEventDetailLocationCell {
 
         let distance: CLLocationDistance = 150
 
-        let region = MKCoordinateRegionMakeWithDistance(clLocation.coordinate, distance * 2, distance)
+        let region = MKCoordinateRegion.init(center: clLocation.coordinate, latitudinalMeters: distance * 2, longitudinalMeters: distance)
         let topLeft = CLLocationCoordinate2D(
             latitude: region.center.latitude + (region.span.latitudeDelta / 2),
             longitude: region.center.longitude - (region.span.longitudeDelta / 2)
@@ -135,12 +134,12 @@ extension HIEventDetailLocationCell {
             longitude: region.center.longitude + (region.span.longitudeDelta / 2)
         )
 
-        let a = MKMapPointForCoordinate(topLeft)
-        let b = MKMapPointForCoordinate(bottomRight)
+        let topLeftPoint = MKMapPoint(topLeft)
+        let bottomoRightPoint = MKMapPoint(bottomRight)
 
         let rect = MKMapRect(
-            origin: MKMapPoint(x: min(a.x, b.x), y: min(a.y, b.y)),
-            size: MKMapSize(width: abs(a.x - b.x), height: abs(a.y - b.y))
+            origin: MKMapPoint(x: min(topLeftPoint.x, bottomoRightPoint.x), y: min(topLeftPoint.y, bottomoRightPoint.y)),
+            size: MKMapSize(width: abs(topLeftPoint.x - bottomoRightPoint.x), height: abs(topLeftPoint.y - bottomoRightPoint.y))
         )
 
         lhs.mapView.setVisibleMapRect(rect, edgePadding: UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0), animated: false)

@@ -2,7 +2,7 @@
 //  HIDateHeader.swift
 //  HackIllinois
 //
-//  Created by Rauhul Varma on 11/22/17.
+//  Created by HackIllinois Team on 11/22/17.
 //  Copyright © 2017 HackIllinois. All rights reserved.
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of
@@ -14,12 +14,16 @@ import Foundation
 import UIKit
 
 class HIDateHeader: UITableViewHeaderFooterView {
-    var titleLabel = HILabel(style: .date)
+    var titleLabel = HILabel {
+        $0.textHIColor = \.baseText
+        $0.backgroundHIColor = \.baseBackground
+        $0.font = HIAppearance.Font.sectionHeader
+    }
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
 
-        let backgroundView = HIView(style: .background)
+        let backgroundView = HIView { $0.backgroundHIColor = \.baseBackground }
         self.backgroundView = backgroundView
 
         backgroundView.addSubview(titleLabel)

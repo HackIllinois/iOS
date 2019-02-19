@@ -2,7 +2,7 @@
 //  HILoginSelectionHeader.swift
 //  HackIllinois
 //
-//  Created by Rauhul Varma on 1/14/18.
+//  Created by HackIllinois Team on 1/14/18.
 //  Copyright © 2018 HackIllinois. All rights reserved.
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of
@@ -21,7 +21,7 @@ class HILoginSelectionHeader: UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
 
-        let containerView = HIView(style: .background)
+        let containerView = HIView { $0.backgroundHIColor = \.baseBackground }
         containerView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(containerView)
         containerView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true

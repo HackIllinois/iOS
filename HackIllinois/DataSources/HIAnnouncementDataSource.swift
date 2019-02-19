@@ -2,7 +2,7 @@
 //  HIAnnouncementDataSource.swift
 //  HackIllinois
 //
-//  Created by Rauhul Varma on 1/24/18.
+//  Created by HackIllinois Team on 1/24/18.
 //  Copyright © 2018 HackIllinois. All rights reserved.
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of
@@ -12,13 +12,23 @@
 
 import Foundation
 import CoreData
+import HIAPI
+import UserNotifications
 
 final class HIAnnouncementDataSource {
 
-    static var isRefreshing = false
+    // Serializes access to isRefreshing.
+    private static let isRefreshineQueue = DispatchQueue(label: "org.hackillinois.org.hi_announcement_data_source.is_refreshing_queue", attributes: .concurrent)
+    // Tracks if the DataSource is refreshing.
+    private static var _isRefreshing = false
+    // Setter and getter for isRefreshing.
+    public static var isRefreshing: Bool {
+        get { return isRefreshineQueue.sync { _isRefreshing } }
+        set { isRefreshineQueue.sync(flags: .barrier) { _isRefreshing = newValue } }
+    }
 
-    static let announcementsFetchRequest = NSFetchRequest<Announcement>(entityName: "Announcement")
-
+    // Waive swiftlint warning
+    // swiftlint:disable:next function_body_length
     static func refresh(completion: (() -> Void)? = nil) {
         guard !isRefreshing else {
             completion?()
@@ -26,33 +36,97 @@ final class HIAnnouncementDataSource {
         }
         isRefreshing = true
 
-        HIAnnouncementService.getAllAnnouncements()
+        HIAPI.AnnouncementService.getAllAnnouncements()
         .onCompletion { result in
-            switch result {
-            case .success(let containedAnnouncements):
-                DispatchQueue.main.sync {
+            do {
+                let (containedAnnouncements, _) = try result.get()
+                HICoreDataController.shared.performBackgroundTask { context -> Void in
                     do {
-                        let ctx = CoreDataController.shared.persistentContainer.viewContext
-                        try? ctx.fetch(announcementsFetchRequest).forEach {
-                            ctx.delete($0)
+                        // 1) Unwrap contained data.
+                        let apiAnnouncements = containedAnnouncements.announcements
+
+                        // 2) Get all CoreData announcements.
+                        let announcementFetchRequest = NSFetchRequest<Announcement>(entityName: "Announcement")
+                        let coreDataAnnouncements = try context.fetch(announcementFetchRequest)
+
+                        // 3) Diff the CoreData events and API events.
+                        let (
+                            coreDataAnnouncementsToDelete,
+                            coreDataAnnouncementsToUpdate,
+                            apiAnnouncementsToInsert
+                        ) = diff(initial: coreDataAnnouncements, final: apiAnnouncements)
+
+                        // 4) Apply the diff
+                        coreDataAnnouncementsToDelete.forEach { coreDataAnnouncement in
+                            // Delete CoreData Announcement.
+                            context.delete(coreDataAnnouncement)
                         }
-                        containedAnnouncements.data.forEach {
-                            _ = Announcement(context: ctx, announcement: $0)
+
+                        coreDataAnnouncementsToUpdate.forEach { (coreDataAnnouncement, apiAnnouncement) in
+                            // Update CoreData Announcement.
+                            coreDataAnnouncement.title = apiAnnouncement.title
+                            coreDataAnnouncement.info = apiAnnouncement.body
+                            coreDataAnnouncement.time = apiAnnouncement.time
+                            coreDataAnnouncement.roles = Int32(apiAnnouncement.roles.rawValue)
                         }
-                        try ctx.save()
-                    } catch { }
+
+                        apiAnnouncementsToInsert.forEach { apiAnnouncement in
+                            // Create CoreData announcement.
+                            let coreDataAnnouncement = Announcement(context: context)
+                            coreDataAnnouncement.time = apiAnnouncement.time
+                            coreDataAnnouncement.info = apiAnnouncement.body
+                            coreDataAnnouncement.title = apiAnnouncement.title
+                            coreDataAnnouncement.roles = Int32(apiAnnouncement.roles.rawValue)
+                        }
+
+                        // 10) Save changes, call completion handler, unlock refresh
+                        try context.save()
+                        completion?()
+                        isRefreshing = false
+                    } catch {
+                        completion?()
+                        isRefreshing = false
+                    }
                 }
-
-            case .cancellation:
-                break
-
-            case .failure(let error):
-                print("error", error)
+            } catch {
+                completion?()
+                isRefreshing = false
             }
-            completion?()
-            isRefreshing = false
         }
-        .authorization(HIApplicationStateController.shared.user)
-        .perform()
+        .authorize(with: HIApplicationStateController.shared.user)
+        .launch()
+    }
+
+    // decode data from payload and inject into coredata
+    static func injectAnnouncement(notification: UNNotification) {
+        // 1) Extract the announcement data.
+        guard let data = notification.request.content.userInfo["data"] as? [String: Any],
+            let title = data["title"] as? String,
+            let body = data["body"] as? String,
+            let seconds = data["time"] as? TimeInterval,
+            let topicName = data["topicName"] as? String,
+            let roles = try? HIAPI.Roles(string: topicName) else { return }
+        let time = Date(timeIntervalSince1970: seconds)
+
+        HICoreDataController.shared.performBackgroundTask { context -> Void in
+            do {
+                // 1) Get all CoreData announcements.
+                let announcementFetchRequest = NSFetchRequest<Announcement>(entityName: "Announcement")
+                announcementFetchRequest.predicate = NSPredicate(format: "time == %@", time as NSDate)
+                let coreDataAnnouncements = try context.fetch(announcementFetchRequest)
+
+                // 2) Update the announcement if it exists, otherwise create it.
+                let coreDataAnnouncement = coreDataAnnouncements.first ?? Announcement(context: context)
+                coreDataAnnouncement.title = title
+                coreDataAnnouncement.info = body
+                coreDataAnnouncement.time = time
+                coreDataAnnouncement.roles = Int32(roles.rawValue)
+
+                // 3) Save changes, call completion handler.
+                try context.save()
+            } catch {
+                print(error)
+            }
+        }
     }
 }
