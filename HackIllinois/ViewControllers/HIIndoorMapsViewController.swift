@@ -25,9 +25,8 @@ class HIIndoorMapsViewController: HIBaseViewController {
         $0.backgroundHIColor = \.mapBackground
     }
     private let scrollView = UIScrollView(frame: .zero)
-    private let mapImageView = HIImageView {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+    private let mapImageView = UIImageView()
+    private var observation: NSKeyValueObservation?
 }
 
 // MARK: - Actions
@@ -71,39 +70,48 @@ extension HIIndoorMapsViewController {
         contentView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12).isActive = true
 
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap))
+        doubleTap.numberOfTapsRequired = 2
+        scrollView.addGestureRecognizer(doubleTap)
         scrollView.delegate = self
+        scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.maximumZoomScale = 5.0
         contentView.addSubview(scrollView)
         scrollView.constrain(to: contentView, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
 
-        mapImageView.image = HIMapsDataSource.shared.maps[0].floors[0].image
-        mapImageView.contentMode = .scaleAspectFit
         scrollView.addSubview(mapImageView)
-        mapImageView.constrain(to: scrollView, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        scrollView.contentSize = scrollView.frame.size
+        didSelectSegmentedControl(bottomSegmentedControl)
     }
 
     func setZoomScale() {
-        if let image = mapImageView.image {
-            let imageViewSize = image.size
-            let scrollViewSize = scrollView.bounds.size
-            let widthScale = scrollViewSize.width / imageViewSize.width
-            let heightScale = scrollViewSize.height / imageViewSize.height
-            let minZoomScale = min(widthScale, heightScale)
-            scrollView.minimumZoomScale = minZoomScale
-            scrollView.zoomScale = minZoomScale
-            mapImageView.center = scrollView.center
-        }
+        mapImageView.sizeToFit()
+        scrollView.contentOffset = .zero
+        let widthScale = scrollView.bounds.width / mapImageView.bounds.width
+        let heightScale = scrollView.bounds.height / mapImageView.bounds.height
+        let minScale = min(widthScale, heightScale)
+        let maxScale = max(widthScale, heightScale)
+        scrollView.minimumZoomScale = minScale
+        scrollView.maximumZoomScale = maxScale
+        scrollView.zoomScale = minScale
+        mapImageView.center = scrollView.center
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setZoomScale()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        observation = mapImageView.observe(\.bounds) { [weak scrollView] (mapImageView, _) in
+            scrollView?.contentSize = mapImageView.bounds.size
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        observation?.invalidate()
+        observation = nil
     }
 }
 
@@ -111,6 +119,21 @@ extension HIIndoorMapsViewController {
 extension HIIndoorMapsViewController {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return mapImageView
+    }
+
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        let offsetX = max((scrollView.bounds.size.width - scrollView.contentSize.width) * 0.5, 0.0)
+        let offsetY = max((scrollView.bounds.size.height - scrollView.contentSize.height) * 0.5, 0.0)
+        // adjust the center of image view
+        mapImageView.center = CGPoint(x: scrollView.contentSize.width * 0.5 + offsetX, y: scrollView.contentSize.height * 0.5 + offsetY)
+    }
+
+    @objc func handleDoubleTap(recognizer: UITapGestureRecognizer) {
+        if scrollView.zoomScale > scrollView.minimumZoomScale {
+            scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
+        } else {
+            scrollView.setZoomScale(scrollView.maximumZoomScale, animated: true)
+        }
     }
 }
 
