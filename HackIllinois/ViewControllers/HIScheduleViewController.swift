@@ -115,7 +115,7 @@ extension HIScheduleViewController {
         segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
-        segmentedControl.heightAnchor.constraint(equalToConstant: 34).isActive = true
+        segmentedControl.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
         let tableView = HITableView()
         view.addSubview(tableView)

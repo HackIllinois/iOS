@@ -40,6 +40,7 @@
 		9544799C200C39870005408B /* HIUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9544799B200C39870005408B /* HIUser.swift */; };
 		954EE1D31FD0F1680078F39E /* HILoginSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */; };
 		9552D92821758E4C00A8C869 /* UIView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9552D92721758E4C00A8C869 /* UIView+AutoLayout.swift */; };
+		9564E02F2218CE6F003A8EEB /* HIMapsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9564E02E2218CE6F003A8EEB /* HIMapsDataSource.swift */; };
 		956F41E11FC7577500557DC7 /* HIAnnouncementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F41E01FC7577500557DC7 /* HIAnnouncementsViewController.swift */; };
 		956F41E31FC76C8E00557DC7 /* HIMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F41E21FC76C8E00557DC7 /* HIMenuController.swift */; };
 		957A4D7D21FDA71F007FDE0E /* MixTypeComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957A4D7C21FDA71F007FDE0E /* MixTypeComparable.swift */; };
@@ -92,6 +93,7 @@
 		95E3147421FAF1740092C22E /* SimpleRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146621FAF1740092C22E /* SimpleRequest.swift */; };
 		95E3147521FAF1740092C22E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146721FAF1740092C22E /* User.swift */; };
 		95E3147621FAF1740092C22E /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146821FAF1740092C22E /* Announcement.swift */; };
+		95F5B4A0220BCFFF00C59992 /* HIIndoorMapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F5B49F220BCFFF00C59992 /* HIIndoorMapsViewController.swift */; };
 		95FC1D1E1FCBD20E00F8AD60 /* HIUserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */; };
 		95FC79BE21E0199600715036 /* HIAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC79BD21E0199600715036 /* HIAppearance.swift */; };
 		95FC79C121E0243D00715036 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC79C021E0243D00715036 /* Operators.swift */; };
@@ -181,6 +183,7 @@
 		9544799D200C3CE40005408B /* Tests.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Tests.playground; sourceTree = "<group>"; };
 		954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILoginSelectionViewController.swift; sourceTree = "<group>"; };
 		9552D92721758E4C00A8C869 /* UIView+AutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AutoLayout.swift"; sourceTree = "<group>"; };
+		9564E02E2218CE6F003A8EEB /* HIMapsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIMapsDataSource.swift; sourceTree = "<group>"; };
 		956F41E01FC7577500557DC7 /* HIAnnouncementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAnnouncementsViewController.swift; sourceTree = "<group>"; };
 		956F41E21FC76C8E00557DC7 /* HIMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIMenuController.swift; sourceTree = "<group>"; };
 		957A4D7C21FDA71F007FDE0E /* MixTypeComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixTypeComparable.swift; sourceTree = "<group>"; };
@@ -233,6 +236,7 @@
 		95E3146621FAF1740092C22E /* SimpleRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleRequest.swift; sourceTree = "<group>"; };
 		95E3146721FAF1740092C22E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		95E3146821FAF1740092C22E /* Announcement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Announcement.swift; sourceTree = "<group>"; };
+		95F5B49F220BCFFF00C59992 /* HIIndoorMapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIIndoorMapsViewController.swift; sourceTree = "<group>"; };
 		95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIUserDetailViewController.swift; sourceTree = "<group>"; };
 		95FC79BD21E0199600715036 /* HIAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAppearance.swift; sourceTree = "<group>"; };
 		95FC79C021E0243D00715036 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
@@ -398,6 +402,7 @@
 			children = (
 				9521A6A720191590009059C6 /* HIEventDataSource.swift */,
 				9521A6A920191737009059C6 /* HIAnnouncementDataSource.swift */,
+				9564E02E2218CE6F003A8EEB /* HIMapsDataSource.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -448,9 +453,10 @@
 				9515E43622093E1300BCAF92 /* HIEventScannerViewController.swift */,
 				95C18DC42009618C004784B5 /* HIHomeViewController.swift */,
 				954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */,
-				95CCEA1E203D6B3600E3E28C /* HINavigationController.swift */,
 				95C18DC820096539004784B5 /* HIScheduleViewController.swift */,
 				95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */,
+				95CCEA1E203D6B3600E3E28C /* HINavigationController.swift */,
+				95F5B49F220BCFFF00C59992 /* HIIndoorMapsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -877,6 +883,7 @@
 				9544799C200C39870005408B /* HIUser.swift in Sources */,
 				95A7D28B203D4F54005EAEAF /* HISegmentedControl.swift in Sources */,
 				957A4D7D21FDA71F007FDE0E /* MixTypeComparable.swift in Sources */,
+				95F5B4A0220BCFFF00C59992 /* HIIndoorMapsViewController.swift in Sources */,
 				95A7D28C203D4F54005EAEAF /* HITextField.swift in Sources */,
 				95C18DCA20096539004784B5 /* HIEventDetailViewController.swift in Sources */,
 				9523A2902218BA2600341EBD /* HIImageView.swift in Sources */,
@@ -884,6 +891,7 @@
 				35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */,
 				9510F6A11FCB7D6E007D19DB /* Event+CoreDataClass.swift in Sources */,
 				951827A81EA35DB800049F79 /* AppDelegate.swift in Sources */,
+				9564E02F2218CE6F003A8EEB /* HIMapsDataSource.swift in Sources */,
 				953199C91FC25CA0009F2AA1 /* HICoreDataController.swift in Sources */,
 				95A7D28D203D4F54005EAEAF /* Identifiable.swift in Sources */,
 				9521A6A820191590009059C6 /* HIEventDataSource.swift in Sources */,
