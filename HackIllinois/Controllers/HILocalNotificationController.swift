@@ -20,6 +20,7 @@ class HILocalNotificationController: NSObject {
 
     private override init() {
         super.init()
+        UIApplication.shared.registerForRemoteNotifications()
         UNUserNotificationCenter.current().delegate = self
     }
 

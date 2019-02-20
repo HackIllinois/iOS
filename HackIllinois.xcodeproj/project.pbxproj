@@ -452,11 +452,11 @@
 				95C18DC920096539004784B5 /* HIEventListViewController.swift */,
 				9515E43622093E1300BCAF92 /* HIEventScannerViewController.swift */,
 				95C18DC42009618C004784B5 /* HIHomeViewController.swift */,
+				95F5B49F220BCFFF00C59992 /* HIIndoorMapsViewController.swift */,
 				954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */,
+				95CCEA1E203D6B3600E3E28C /* HINavigationController.swift */,
 				95C18DC820096539004784B5 /* HIScheduleViewController.swift */,
 				95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */,
-				95CCEA1E203D6B3600E3E28C /* HINavigationController.swift */,
-				95F5B49F220BCFFF00C59992 /* HIIndoorMapsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
