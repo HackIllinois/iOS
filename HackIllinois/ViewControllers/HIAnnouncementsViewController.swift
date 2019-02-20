@@ -67,7 +67,8 @@ extension HIAnnouncementsViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(viewDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        HIAnnouncementDataSource.refresh()
+
         NotificationCenter.default.addObserver(self, selector: #selector(viewWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
 
         var rightNavigationItem: UIBarButtonItem?
@@ -82,14 +83,9 @@ extension HIAnnouncementsViewController {
         NotificationCenter.default.removeObserver(self)
     }
 
-    @objc func viewDidBecomeActive() {
-        try? fetchedResultsController.performFetch()
-        animateTableViewReload()
-    }
-
     @objc func viewWillEnterForeground() {
         try? fetchedResultsController.performFetch()
-        animateTableViewReload()
+        HIAnnouncementDataSource.refresh()
     }
 }
 
