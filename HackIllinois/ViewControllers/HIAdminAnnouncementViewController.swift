@@ -59,10 +59,6 @@ class HIAdminAnnouncementViewController: HIBaseViewController {
 // MARK: - Actions
 extension HIAdminAnnouncementViewController {
     @objc func didSelectCreateAnnouncement() {
-//        guard let title = titleTextField.text, let description = descriptionTextField.text,
-//            let topic = topicButton.title, title != "", description != "", topic != "" else {
-//            return
-//        }
         guard let title = titleTextField.text, let description = descriptionTextField.text, title != "", description != "" else {
                 return
         }
