@@ -63,7 +63,7 @@ extension HIAdminAnnouncementViewController {
                 return
         }
 
-        let message = "Create a new announcement with title \"\(title)\", description \"\(description), to topic \"\(currentTopic)\"?"
+        let message = "Create a new announcement with title \"\(title)\", description \"\(description)\", to topic \"\(currentTopic)\"?"
         let confirmAlertController = UIAlertController(title: "Confirm Announcement", message: message, preferredStyle: .alert)
         confirmAlertController.addAction(
             UIAlertAction(title: "Yes", style: .default) { _ in
