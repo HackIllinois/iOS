@@ -106,6 +106,7 @@ extension HIIndoorMapsViewController {
         observation = mapImageView.observe(\.bounds) { [weak scrollView] (mapImageView, _) in
             scrollView?.contentSize = mapImageView.bounds.size
         }
+        setZoomScale()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
