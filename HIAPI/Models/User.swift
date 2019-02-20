@@ -36,6 +36,7 @@ public struct Roles: OptionSet, Codable {
     public static let sponsor = Roles(rawValue: 1 << 4)
     public static let staff = Roles(rawValue: 1 << 5)
     public static let admin = Roles(rawValue: 1 << 6)
+    public static let allRoles = ["Staff", "Mentor", "Attendee", "Sponsor", "User", "Applicant", "Admin"]
 
     public init(rawValue: Int) {
         self.rawValue = rawValue

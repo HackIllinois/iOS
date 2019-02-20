@@ -33,12 +33,22 @@ class HIAdminAnnouncementViewController: HIBaseViewController {
         $0.titleHIColor = \.action
         $0.title = "Create Announcement"
     }
+    private let topicButton = HIButton {
+        $0.layer.cornerRadius = 8
+        $0.layer.masksToBounds = true
+        $0.titleLabel?.font = HIAppearance.Font.button
+        $0.backgroundHIColor = \.contentBackground
+        $0.titleHIColor = \.action
+        $0.title = "User"
+    }
+    private var currentTopic = "User"
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
         titleTextField.delegate = self
         descriptionTextField.delegate = self
         createAnnouncementButton.addTarget(self, action: #selector(didSelectCreateAnnouncement), for: .touchUpInside)
+        topicButton.addTarget(self, action: #selector(didSelectTopic), for: .touchUpInside)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -49,47 +59,62 @@ class HIAdminAnnouncementViewController: HIBaseViewController {
 // MARK: - Actions
 extension HIAdminAnnouncementViewController {
     @objc func didSelectCreateAnnouncement() {
+//        guard let title = titleTextField.text, let description = descriptionTextField.text,
+//            let topic = topicButton.title, title != "", description != "", topic != "" else {
+//            return
+//        }
         guard let title = titleTextField.text, let description = descriptionTextField.text, title != "", description != "" else {
-            return
+                return
         }
 
-        let message = "Create a new announcement with title \"\(title)\" and description \"\(description)\"?"
+        let message = "Create a new announcement with title \"\(title)\", description \"\(description), to topic \"\(currentTopic)\"?"
         let confirmAlertController = UIAlertController(title: "Confirm Announcement", message: message, preferredStyle: .alert)
         confirmAlertController.addAction(
             UIAlertAction(title: "Yes", style: .default) { _ in
                 self.stylizeFor(.currentlyCreatingAnnouncement)
-//                HIAPI.AnnouncementService.create(title: title, description: description)
-//                .onCompletion { result in
-//                    switch result {
-//                    case .success:
-//                        DispatchQueue.main.async { [weak self] in
-//                            self?.stylizeFor(.readyToCreateAnnouncement)
-//                            self?.titleTextField.text = ""
-//                            self?.descriptionTextField.text = ""
-//                            let alert = UIAlertController(title: "Announcement Created", message: nil, preferredStyle: .alert)
-//                            alert.addAction(
-//                                UIAlertAction(title: "OK", style: .default) { _ in
-//                                    self?.navigationController?.popViewController(animated: true)
-//                                }
-//                            )
-//                            self?.present(alert, animated: true, completion: nil)
-//                        }
-//                    case .failure(let error):
-//                        DispatchQueue.main.async { [weak self] in
-//                            self?.stylizeFor(.readyToCreateAnnouncement)
-//                            print(error.localizedDescription)
-//                            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-//                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//                            self?.present(alert, animated: true, completion: nil)
-//                        }
-//                    }
-//                }
-//                .authorize(with: HIApplicationStateController.shared.user)
-//                .launch()
+                HIAPI.AnnouncementService.create(title: title, description: description, topic: self.currentTopic)
+                .onCompletion { result in
+                    switch result {
+                    case .success:
+                        DispatchQueue.main.async { [weak self] in
+                            self?.stylizeFor(.readyToCreateAnnouncement)
+                            self?.titleTextField.text = ""
+                            self?.descriptionTextField.text = ""
+                            let alert = UIAlertController(title: "Announcement Created", message: nil, preferredStyle: .alert)
+                            alert.addAction(
+                                UIAlertAction(title: "OK", style: .default) { _ in
+                                    self?.navigationController?.popViewController(animated: true)
+                                }
+                            )
+                            self?.present(alert, animated: true, completion: nil)
+                        }
+                    case .failure(let error):
+                        DispatchQueue.main.async { [weak self] in
+                            self?.stylizeFor(.readyToCreateAnnouncement)
+                            print(error)
+                            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self?.present(alert, animated: true, completion: nil)
+                        }
+                    }
+                }
+                .authorize(with: HIApplicationStateController.shared.user)
+                .launch()
             }
         )
         confirmAlertController.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
         self.present(confirmAlertController, animated: true, completion: nil)
+    }
+
+    @objc func didSelectTopic() {
+        let alert = UIAlertController(title: "Topic", message: "Please Choose Topic", preferredStyle: .actionSheet)
+        for topic in HIAPI.Roles.allRoles {
+            alert.addAction(UIAlertAction(title: topic, style: .default, handler: { (_) in
+                self.topicButton.setTitle(topic, for: .normal)
+                self.currentTopic = topic
+            }))
+        }
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
@@ -114,9 +139,16 @@ extension HIAdminAnnouncementViewController {
         descriptionTextField.constrain(to: view.safeAreaLayoutGuide, trailingInset: -30, leadingInset: 30)
         descriptionTextField.constrain(height: 44)
 
+        // Staff, Mentor, Attendee, Sponsor, User, Applicant, Admin
+        // Topic Picker Button
+        view.addSubview(topicButton)
+        topicButton.topAnchor.constraint(equalTo: descriptionTextField.bottomAnchor, constant: 44).isActive = true
+        topicButton.constrain(to: view.safeAreaLayoutGuide, trailingInset: -12, leadingInset: 12)
+        topicButton.constrain(height: 50)
+
         // Create Announcement Button
         view.addSubview(createAnnouncementButton)
-        createAnnouncementButton.topAnchor.constraint(equalTo: descriptionTextField.bottomAnchor, constant: 44).isActive = true
+        createAnnouncementButton.topAnchor.constraint(equalTo: topicButton.bottomAnchor, constant: 44).isActive = true
         createAnnouncementButton.constrain(to: view.safeAreaLayoutGuide, trailingInset: -12, leadingInset: 12)
         createAnnouncementButton.constrain(height: 50)
     }
