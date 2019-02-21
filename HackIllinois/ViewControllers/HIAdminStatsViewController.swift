@@ -74,7 +74,7 @@ extension HIAdminStatsViewController {
                 do {
                     let (apiStatsString, _) = try result.get()
                     DispatchQueue.main.async {
-                        self?.statsLabel.text = apiStatsString
+                        self?.statsLabel.text = String(data: apiStatsString, encoding: .utf8) ?? ""
                     }
                 } catch {
                     DispatchQueue.main.async {

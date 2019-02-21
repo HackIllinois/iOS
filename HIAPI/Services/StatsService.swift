@@ -18,8 +18,8 @@ public final class StatsService: BaseService {
         return super.baseURL + "stat/"
     }
 
-    public static func getStats() -> APIRequest<String> {
-        return APIRequest<String>(service: self, endpoint: "", method: .GET)
+    public static func getStats() -> APIRequest<Data> {
+        return APIRequest<Data>(service: self, endpoint: "", method: .GET)
     }
 }
 
