@@ -53,7 +53,7 @@ class HIUserDetailViewController: HIBaseViewController {
 
 // MARK: - Actions
 extension HIUserDetailViewController {
-    @objc func didSelectLogoutButton(_ sender: Any) {
+    @objc func didSelectLogoutButton(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(
             UIAlertAction(title: "Logout", style: .destructive) { _ in
@@ -63,6 +63,7 @@ extension HIUserDetailViewController {
         alert.addAction(
             UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         )
+        alert.popoverPresentationController?.barButtonItem = sender
         present(alert, animated: true, completion: nil)
     }
 }
