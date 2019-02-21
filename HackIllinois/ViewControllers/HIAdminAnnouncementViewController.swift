@@ -48,7 +48,7 @@ class HIAdminAnnouncementViewController: HIBaseViewController {
         titleTextField.delegate = self
         descriptionTextField.delegate = self
         createAnnouncementButton.addTarget(self, action: #selector(didSelectCreateAnnouncement), for: .touchUpInside)
-        topicButton.addTarget(self, action: #selector(didSelectTopic), for: .touchUpInside)
+        topicButton.addTarget(self, action: #selector(didSelectTopic(sender:)), for: .touchUpInside)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -102,14 +102,18 @@ extension HIAdminAnnouncementViewController {
         self.present(confirmAlertController, animated: true, completion: nil)
     }
 
-    @objc func didSelectTopic() {
-        let alert = UIAlertController(title: "Topic", message: "Please Choose Topic", preferredStyle: .actionSheet)
-        for topic in HIAPI.Roles.allRoles {
-            alert.addAction(UIAlertAction(title: topic, style: .default, handler: { (_) in
-                self.topicButton.setTitle(topic, for: .normal)
-                self.currentTopic = topic
-            }))
+    @objc func didSelectTopic(sender: UIButton) {
+        let alert = UIAlertController(title: "Topic", message: "Please select a topic", preferredStyle: .actionSheet)
+        HIAPI.Roles.allRoles.forEach { topic in
+            alert.addAction(
+                UIAlertAction(title: topic, style: .default) { [weak self] _ in
+                    self?.topicButton.setTitle(topic, for: .normal)
+                    self?.currentTopic = topic
+                }
+            )
         }
+        alert.popoverPresentationController?.sourceRect = sender.bounds
+        alert.popoverPresentationController?.sourceView = sender
         self.present(alert, animated: true, completion: nil)
     }
 }
