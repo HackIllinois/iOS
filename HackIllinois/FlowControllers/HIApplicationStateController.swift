@@ -79,6 +79,10 @@ extension HIApplicationStateController {
             viewControllers.append(HICheckInScannerViewController())
         }
 
+        if user.roles.contains(.admin) {
+            viewControllers.append(HIAdminStatsViewController())
+        }
+
         return viewControllers
     }
 
