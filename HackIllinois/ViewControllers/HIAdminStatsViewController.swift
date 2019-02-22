@@ -72,9 +72,11 @@ extension HIAdminStatsViewController {
         HIAPI.StatsService.getStats()
             .onCompletion { [weak self] result in
                 do {
-                    let (apiStatsString, _) = try result.get()
+                    let (statsData, _) = try result.get()
+                    let object = try JSONSerialization.jsonObject(with: statsData)
+                    let prettyPrinted = try JSONSerialization.data(withJSONObject: object, options: .prettyPrinted)
                     DispatchQueue.main.async {
-                        self?.statsLabel.text = String(data: apiStatsString, encoding: .utf8) ?? ""
+                        self?.statsLabel.text = String(data: prettyPrinted, encoding: .utf8) ?? ""
                     }
                 } catch {
                     DispatchQueue.main.async {
