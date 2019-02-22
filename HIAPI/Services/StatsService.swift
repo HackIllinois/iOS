@@ -22,5 +22,3 @@ public final class StatsService: BaseService {
         return APIRequest<Data>(service: self, endpoint: "", method: .GET)
     }
 }
-
-extension String: APIReturnable {}
