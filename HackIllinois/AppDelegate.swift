@@ -17,12 +17,28 @@ import UserNotifications
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    // Handle remote notification registration.
+    func application(_ application: UIApplication,
+                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data){
+        let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+        print("token::is: \(token)")
+        
+        //Forward the token to HackIllinois AWS notifications server
+        //HIAPI.AnnouncementService.sendToken(deviceToken: token)
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         setupNavigationBarAppearance()
         setupTableViewAppearance()
         _ = HIThemeEngine.shared
-        _ = HICoreDataController.shared
         HIApplicationStateController.shared.initalize()
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+            print("PERMISSION::GRANTED")
+        }
+        
+        UIApplication.shared.registerForRemoteNotifications()
+        
         return true
     }
 
@@ -35,6 +51,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(error)
         }
     }
+
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Failed to register with error: \(error)")
+    }
+
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
