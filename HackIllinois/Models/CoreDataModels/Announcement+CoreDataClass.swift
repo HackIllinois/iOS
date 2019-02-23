@@ -20,10 +20,10 @@ public class Announcement: NSManagedObject {
     convenience init(context moc: NSManagedObjectContext, announcement: HIAPI.Announcement) {
         guard let entity = NSEntityDescription.entity(forEntityName: "Announcement", in: moc) else { fatalError() }
         self.init(entity: entity, insertInto: moc)
-        id = announcement.id
-        info = announcement.info
         title = announcement.title
+        info = announcement.info
         time = announcement.time
+        topicName = announcement.topicName
     }
 
 }

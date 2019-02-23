@@ -19,14 +19,16 @@ public struct AnnouncementContainer: Codable, APIReturnable {
 
 public struct Announcement: Codable {
     internal enum CodingKeys: String, CodingKey {
-        case id
+        //case id
         case title
-        case info = "description"
-        case time = "created"
+        case info = "body"
+        case time
+        case topicName //Attendee, Volunteer, Mentor
     }
 
-    public let id: Int16
+    //public let id: Int16
     public let title: String
     public let info: String
     public let time: Date
+    public let topicName: String
 }

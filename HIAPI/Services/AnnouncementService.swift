@@ -15,7 +15,7 @@ import APIManager
 
 public final class AnnouncementService: BaseService {
     public override static var baseURL: String {
-        return super.baseURL + "announcement/"
+        return super.baseURL + "notifications/"
     }
 
     public static func create(title: String, description: String) -> APIRequest<AnnouncementContainer> {
@@ -42,7 +42,7 @@ public final class AnnouncementService: BaseService {
 
     public static func delete(announcement: Announcement) -> APIRequest<AnnouncementContainer> {
         var params = [String: String]()
-        params["id"] = String(announcement.id)
-        return APIRequest<AnnouncementContainer>(service: self, endpoint: "", params: params, method: .DELETE)
+        var topicName = announcement.topicName
+        return APIRequest<AnnouncementContainer>(service: self, endpoint: "\(topicName)/", params: params, method: .DELETE)
     }
 }
