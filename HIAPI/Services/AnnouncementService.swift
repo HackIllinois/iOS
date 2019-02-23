@@ -17,6 +17,13 @@ public final class AnnouncementService: BaseService {
     public override static var baseURL: String {
         return super.baseURL + "notifications/"
     }
+    
+    public static func sendToken(deviceToken: String) {
+        var announcementDict = [String: Any]()
+        announcementDict["deviceToken"] = deviceToken
+        announcementDict["devices"] = "ios"
+        APIRequest<AnnouncementContainer>(service: self, endpoint: "devices/", body: announcementDict, method: .POST)
+    }
 
     public static func create(title: String, description: String) -> APIRequest<AnnouncementContainer> {
         var announcementDict = [String: Any]()
