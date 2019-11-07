@@ -30,18 +30,17 @@ struct HIAppearance: Equatable {
 
     let clear: UIColor = .clear
 
-    private static let darkBlue = #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 1)
+    private static let darkBlue = #colorLiteral(red: 0.1333333333, green: 0.168627451, blue: 0.3607843137, alpha: 1)
     private static let blue = #colorLiteral(red: 0.1215686275, green: 0.5176470588, blue: 0.6470588235, alpha: 1)
-    private static let lightBlue = #colorLiteral(red: 0.8901960784, green: 0.9647058824, blue: 1, alpha: 1)
+    private static let lightBlue = #colorLiteral(red: 0.4196078431, green: 0.6823529412, blue: 0.7725490196, alpha: 1)
     private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-    private static let coral = #colorLiteral(red: 1, green: 0.4666666667, blue: 0.4352941176, alpha: 1)
 
     fileprivate static let day = HIAppearance(
         titleText: darkBlue,
         baseText: darkBlue,
-        accent: coral,
+        accent: lightBlue,
         action: blue,
-        baseBackground: lightBlue,
+        baseBackground: white,
         contentBackground: white,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0),
@@ -54,11 +53,11 @@ struct HIAppearance: Equatable {
     )
 
     fileprivate static let night = HIAppearance(
-        titleText: lightBlue,
-        baseText: lightBlue,
-        accent: coral,
+        titleText: darkBlue,
+        baseText: darkBlue,
+        accent: lightBlue,
         action: white,
-        baseBackground: darkBlue,
+        baseBackground: white,
         contentBackground: blue,
         overlay: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.47),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
@@ -84,7 +83,8 @@ struct HIAppearance: Equatable {
         static let contentText = UIFont.systemFont(ofSize: 13, weight: .regular)
         static let contentTitle = UIFont.systemFont(ofSize: 18, weight: .light)
 
-        static let navigationSubtitle = UIFont.systemFont(ofSize: 13, weight: .medium)
+        static let navigationSubtitle = UIFont(name: "Montserrat-Medium", size: 14)
+//        static let navigationSubtitle = UIFont.systemFont(ofSize: 14, weight: .medium)
         static let navigationTitle = UIFont.systemFont(ofSize: 15, weight: .medium)
 
         static let sectionHeader = UIFont.systemFont(ofSize: 13, weight: .bold)
