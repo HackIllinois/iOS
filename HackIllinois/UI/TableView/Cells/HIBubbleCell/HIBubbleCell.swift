@@ -20,8 +20,11 @@ class HIBubbleCell: UITableViewCell {
     var bubbleView = HIView {
         $0.backgroundHIColor = \.contentBackground
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.layer.cornerRadius = 8
-        $0.layer.masksToBounds = true
+        $0.layer.cornerRadius = 10.0
+        $0.layer.masksToBounds = false
+        $0.layer.shadowColor = UIColor.purple.withAlphaComponent(0.4).cgColor
+        $0.layer.shadowOffset = CGSize(width: 1, height: 3)
+        $0.layer.shadowOpacity = 1.0
     }
 
     // MARK: - Init
