@@ -167,6 +167,7 @@ extension HIScheduleViewController {
             let date = Formatter.coreData.date(from: sections[section].name) {
 
             header.titleLabel.text = Formatter.simpleTime.string(from: date)
+            header.titleLabel.textAlignment = .center
         }
         return header
     }

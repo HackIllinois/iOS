@@ -40,24 +40,15 @@ class HIEventCell: HIBubbleCell {
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         bubbleView.addSubview(favoritedButton)
         favoritedButton.widthAnchor.constraint(equalToConstant: 58).isActive = true
-        favoritedButton.constrain(to: bubbleView, topInset: 0, bottomInset: 0, leadingInset: 0)
-
-        let disclosureIndicatorView = HITintImageView {
-            $0.tintHIColor = \.accent
-            $0.contentMode = .center
-            $0.image = #imageLiteral(resourceName: "DisclosureIndicator")
-        }
-        bubbleView.addSubview(disclosureIndicatorView)
-        disclosureIndicatorView.widthAnchor.constraint(equalToConstant: 65).isActive = true
-        disclosureIndicatorView.constrain(to: bubbleView, topInset: 0, trailingInset: 0, bottomInset: 0)
+        favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0, bottomInset: 0)
 
         // add bubble view
         contentStackView.axis = .vertical
         contentStackView.distribution = .equalSpacing
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         bubbleView.addSubview(contentStackView)
-        contentStackView.leadingAnchor.constraint(equalTo: favoritedButton.trailingAnchor).isActive = true
-        contentStackView.trailingAnchor.constraint(equalTo: disclosureIndicatorView.leadingAnchor).isActive = true
+        contentStackView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 10).isActive = true
+        contentStackView.trailingAnchor.constraint(equalTo: favoritedButton.leadingAnchor).isActive = true
         contentStackView.centerYAnchor.constraint(equalTo: bubbleView.centerYAnchor).isActive = true
         contentStackViewHeight = contentStackView.heightAnchor.constraint(equalToConstant: 0)
         contentStackViewHeight.isActive = true
@@ -88,13 +79,11 @@ extension HIEventCell {
         titleLabel.text = rhs.name
         contentStackViewHeight += titleLabel.intrinsicContentSize.height
         lhs.contentStackView.addArrangedSubview(titleLabel)
-        for location in rhs.locations {
-            guard let location = location as? Location else { continue }
-            let locationLabel = HILabel(style: .location)
-            locationLabel.text = location.name
-            contentStackViewHeight += locationLabel.intrinsicContentSize.height + 3
-            lhs.contentStackView.addArrangedSubview(locationLabel)
-        }
+        guard let description = rhs.info as? String else {return}
+        let descriptionLabel = HILabel(style: .description)
+        descriptionLabel.text = description
+        contentStackViewHeight += descriptionLabel.intrinsicContentSize.height + 3
+        lhs.contentStackView.addArrangedSubview(descriptionLabel)
         lhs.contentStackViewHeight.constant = contentStackViewHeight
     }
 }

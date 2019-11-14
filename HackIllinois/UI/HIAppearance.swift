@@ -58,7 +58,7 @@ struct HIAppearance: Equatable {
         accent: lightBlue,
         action: white,
         baseBackground: white,
-        contentBackground: blue,
+        contentBackground: white,
         overlay: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.47),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         qrTint: darkBlue,
@@ -81,10 +81,8 @@ struct HIAppearance: Equatable {
     enum Font {
         static let contentSubtitle = UIFont.systemFont(ofSize: 13, weight: .light)
         static let contentText = UIFont.systemFont(ofSize: 13, weight: .regular)
-        static let contentTitle = UIFont.systemFont(ofSize: 18, weight: .light)
-
-        static let navigationSubtitle = UIFont(name: "Montserrat-Medium", size: 14)
-//        static let navigationSubtitle = UIFont.systemFont(ofSize: 14, weight: .medium)
+        static let contentTitle = UIFont.systemFont(ofSize: 18, weight: .medium)
+        static let navigationSubtitle = UIFont.systemFont(ofSize: 14, weight: .medium)
         static let navigationTitle = UIFont.systemFont(ofSize: 15, weight: .medium)
 
         static let sectionHeader = UIFont.systemFont(ofSize: 13, weight: .bold)
