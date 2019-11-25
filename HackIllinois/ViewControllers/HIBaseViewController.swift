@@ -59,6 +59,7 @@ extension HIBaseViewController {
 // MARK: - UITableView Setup
 extension HIBaseViewController {
     @objc dynamic func setupTableView() {
+        tableView?.layer.backgroundColor = UIColor.clear.cgColor
         tableView?.delegate = self
         tableView?.dataSource = self
     }

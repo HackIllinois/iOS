@@ -97,6 +97,7 @@ extension HIHomeViewController {
 extension HIHomeViewController {
     override func loadView() {
         super.loadView()
+        view = HIView { $0.backgroundHIColor = \.baseBackground }
 
         view.addSubview(countdownTitleLabel)
         countdownTitleLabel.constrain(to: view.safeAreaLayoutGuide, topInset: 20, trailingInset: 0, leadingInset: 0)

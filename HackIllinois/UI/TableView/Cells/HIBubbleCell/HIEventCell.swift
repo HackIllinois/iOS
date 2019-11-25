@@ -43,11 +43,12 @@ class HIEventCell: HIBubbleCell {
         favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0, bottomInset: 0)
 
         // add bubble view
+        contentView.layer.backgroundColor = UIColor.clear.cgColor
         contentStackView.axis = .vertical
         contentStackView.distribution = .equalSpacing
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         bubbleView.addSubview(contentStackView)
-        contentStackView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 10).isActive = true
+        contentStackView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 16).isActive = true
         contentStackView.trailingAnchor.constraint(equalTo: favoritedButton.leadingAnchor).isActive = true
         contentStackView.centerYAnchor.constraint(equalTo: bubbleView.centerYAnchor).isActive = true
         contentStackViewHeight = contentStackView.heightAnchor.constraint(equalToConstant: 0)
