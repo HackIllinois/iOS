@@ -26,6 +26,7 @@ struct HIAppearance: Equatable {
     let emptyTableViewBackground: UIImage
     let preferredStatusBarStyle: UIStatusBarStyle
     let scrollViewIndicatorStyle: UIScrollView.IndicatorStyle
+    let transparentBackground: UIColor
     let mapBackground: UIColor
 
     let clear: UIColor = .clear
@@ -34,12 +35,14 @@ struct HIAppearance: Equatable {
     private static let blue = #colorLiteral(red: 0.1215686275, green: 0.5176470588, blue: 0.6470588235, alpha: 1)
     private static let lightBlue = #colorLiteral(red: 0.4196078431, green: 0.6823529412, blue: 0.7725490196, alpha: 1)
     private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    private static let orange = #colorLiteral(red: 0.8901960784, green: 0.3137254902, blue: 0.3450980392, alpha: 1)
+    private static let transparent = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
 
     fileprivate static let day = HIAppearance(
         titleText: darkBlue,
         baseText: darkBlue,
-        accent: lightBlue,
-        action: blue,
+        accent: orange,
+        action: white,
         baseBackground: white,
         contentBackground: white,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
@@ -49,13 +52,14 @@ struct HIAppearance: Equatable {
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewDay"),
         preferredStatusBarStyle: .default,
         scrollViewIndicatorStyle: .black,
+        transparentBackground: transparent,
         mapBackground: blue
     )
 
     fileprivate static let night = HIAppearance(
         titleText: darkBlue,
         baseText: darkBlue,
-        accent: lightBlue,
+        accent: orange,
         action: white,
         baseBackground: white,
         contentBackground: white,
@@ -66,6 +70,7 @@ struct HIAppearance: Equatable {
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewNight"),
         preferredStatusBarStyle: .lightContent,
         scrollViewIndicatorStyle: .white,
+        transparentBackground: transparent,
         mapBackground: blue
     )
 
