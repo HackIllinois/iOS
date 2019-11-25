@@ -39,7 +39,7 @@ class HIView: UIView {
                 heightAnchor.constraint(equalToConstant: 1).isActive = true
 
             case .emptyTable:
-                backgroundHIColor = \.baseBackground
+                backgroundHIColor = \.transparentBackground
                 let backgroundImageView = HIImageView {
                     $0.hiImage = \.emptyTableViewBackground
                     $0.contentMode = .scaleAspectFit

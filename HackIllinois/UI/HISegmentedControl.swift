@@ -56,10 +56,10 @@ class HISegmentedControl: UIControl {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        backgroundColor <- \.baseBackground
+        backgroundColor <- \.transparentBackground
         labels.forEach {
             $0.textColor <- \.baseText
-            $0.backgroundColor <- \.baseBackground
+            $0.backgroundColor <- \.transparentBackground
         }
         bottomView.backgroundColor <- \.baseText
         indicatorView.backgroundColor <- \.accent
