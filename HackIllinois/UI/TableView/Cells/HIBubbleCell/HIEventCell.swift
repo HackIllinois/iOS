@@ -74,6 +74,7 @@ extension HIEventCell {
     }
 
     static func <- (lhs: HIEventCell, rhs: Event) {
+        lhs.backgroundColor = UIColor.clear
         lhs.favoritedButton.isActive = rhs.favorite
         var contentStackViewHeight: CGFloat = 0
         let titleLabel = HILabel(style: .event)

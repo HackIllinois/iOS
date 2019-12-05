@@ -24,6 +24,7 @@ extension HIEventListViewController {
     override func loadView() {
         view = HITintImageView {
             $0.image = #imageLiteral(resourceName: "EventsGradient")
+            $0.translatesAutoresizingMaskIntoConstraints = true
             $0.isUserInteractionEnabled = true
         }
     }
@@ -49,7 +50,6 @@ extension HIEventListViewController {
             cell <- event
             cell.delegate = self
             cell.indexPath = indexPath
-            cell.backgroundColor = UIColor.clear
         }
         return cell
     }

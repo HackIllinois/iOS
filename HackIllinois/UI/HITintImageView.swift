@@ -22,8 +22,6 @@ class HITintImageView: UIImageView {
         super.init(frame: .zero)
         additionalConfiguration?(self)
 
-        translatesAutoresizingMaskIntoConstraints = true
-
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
     }

@@ -26,17 +26,24 @@ class HIEventDetailViewController: HIBaseViewController {
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundHIColor = \.contentBackground
+        $0.backgroundHIColor = \.transparentBackground
     }
     private let upperContainerView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundHIColor = \.contentBackground
+        $0.backgroundHIColor = \.transparentBackground
     }
     private let titleLabel = HILabel(style: .event) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor <- \.baseText
         $0.font = HIAppearance.Font.contentTitle
     }
+
+    private let timeLabel = HILabel(style: .description) {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor <- \.baseText
+        $0.font = HIAppearance.Font.contentText
+    }
+
     private let descriptionLabel = HILabel(style: .description) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor <- \.baseText
@@ -102,28 +109,35 @@ extension HIEventDetailViewController {
 // MARK: - UIViewController
 extension HIEventDetailViewController {
     override func loadView() {
-        super.loadView()
+        view = HITintImageView {
+            $0.image = #imageLiteral(resourceName: "EventsGradient")
+            $0.translatesAutoresizingMaskIntoConstraints = true
+            $0.isUserInteractionEnabled = true
+        }
 
         view.addSubview(eventDetailContainer)
-        eventDetailContainer.constrain(to: view.safeAreaLayoutGuide, topInset: 12, trailingInset: -12, leadingInset: 12)
-        eventDetailContainer.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12).isActive = true
+        eventDetailContainer.constrain(to: view.safeAreaLayoutGuide, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
 
         eventDetailContainer.addSubview(upperContainerView)
-        upperContainerView.constrain(to: eventDetailContainer, topInset: 0, trailingInset: 0, leadingInset: 0)
+        upperContainerView.constrain(to: eventDetailContainer, topInset: 10, trailingInset: 0, leadingInset: 0)
         upperContainerView.constrain(height: 63)
 
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         upperContainerView.addSubview(favoritedButton)
-        favoritedButton.constrain(to: upperContainerView, topInset: 0, bottomInset: 0, leadingInset: 0)
+        favoritedButton.constrain(to: upperContainerView, topInset: 0, trailingInset: 0, bottomInset: 0)
         favoritedButton.constrain(width: 58)
-
         upperContainerView.addSubview(titleLabel)
-        titleLabel.leadingAnchor.constraint(equalTo: favoritedButton.trailingAnchor).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: upperContainerView.trailingAnchor, constant: -8).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: favoritedButton.leadingAnchor).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor, constant: 12).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor).isActive = true
 
+        upperContainerView.addSubview(timeLabel)
+        timeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12).isActive = true
+        timeLabel.bottomAnchor.constraint(equalTo: upperContainerView.bottomAnchor).isActive = true
+        timeLabel.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor, constant: 12).isActive = true
+
         eventDetailContainer.addSubview(descriptionLabel)
-        descriptionLabel.topAnchor.constraint(equalTo: upperContainerView.bottomAnchor).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: upperContainerView.bottomAnchor, constant: 24).isActive = true
         descriptionLabel.constrain(to: eventDetailContainer, trailingInset: -12, leadingInset: 12)
         descriptionLabelHeight = descriptionLabel.heightAnchor.constraint(equalToConstant: 100)
         descriptionLabelHeight.isActive = true
@@ -132,7 +146,7 @@ extension HIEventDetailViewController {
         tableView.backgroundColor <- \.contentBackground
         tableView.translatesAutoresizingMaskIntoConstraints = false
         eventDetailContainer.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 8).isActive = true
+        tableView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20).isActive = true
         tableView.constrain(to: eventDetailContainer, trailingInset: 0, bottomInset: -6, leadingInset: 0)
         tableViewHeight = tableView.heightAnchor.constraint(equalToConstant: 0)
         tableViewHeight.isActive = true
@@ -144,6 +158,7 @@ extension HIEventDetailViewController {
         guard let event = event else { return }
         titleLabel.text = event.name
         descriptionLabel.text = event.info
+        timeLabel.text = Formatter.simpleTime.string(from: event.startTime) + " - " + Formatter.simpleTime.string(from: event.endTime)
         favoritedButton.isActive = event.favorite
 
         tableView?.reloadData()
@@ -212,7 +227,7 @@ extension HIEventDetailViewController {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 160
+        return 301
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
