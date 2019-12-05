@@ -36,6 +36,11 @@ class HIEventDetailLocationCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
 
+        contentView.layer.masksToBounds = false
+        contentView.layer.shadowColor = #colorLiteral(red: 0.1333333333, green: 0.168627451, blue: 0.3607843137, alpha: 0.3984650088)
+        contentView.layer.shadowOffset = CGSize(width: 1, height: 3)
+        contentView.layer.shadowOpacity = 1.0
+
         containerView.layer.cornerRadius = 8
         containerView.layer.masksToBounds = true
         containerView.backgroundColor <- \.baseBackground
@@ -46,29 +51,59 @@ class HIEventDetailLocationCell: UITableViewCell {
         mapView.isUserInteractionEnabled = false
         mapView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(mapView)
-        mapView.constrain(to: containerView, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        mapView.constrain(to: containerView, topInset: 0, trailingInset: 0, leadingInset: 0)
 
         blurEffectView.translatesAutoresizingMaskIntoConstraints = false
+        blurEffectView.contentView.layer.backgroundColor = UIColor.white.cgColor
         containerView.addSubview(blurEffectView)
-        blurEffectView.constrain(to: containerView, topInset: 0, trailingInset: 0, leadingInset: 0)
-        blurEffectView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        blurEffectView.constrain(to: containerView, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        blurEffectView.topAnchor.constraint(equalTo: mapView.bottomAnchor).isActive = true
+        blurEffectView.heightAnchor.constraint(equalToConstant: 100).isActive = true
 
         blurEffectView.contentView.addSubview(titleLabel)
-        titleLabel.leadingAnchor.constraint(equalTo: blurEffectView.contentView.leadingAnchor, constant: 8).isActive = true
-        titleLabel.constrain(to: blurEffectView.contentView, topInset: 0, bottomInset: 0)
+        titleLabel.leadingAnchor.constraint(equalTo: blurEffectView.contentView.leadingAnchor, constant: 16).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: blurEffectView.contentView.topAnchor, constant: 16).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
 
-        let disclosureIndicatorImageView = HITintImageView {
-            $0.tintHIColor = \.accent
-            $0.contentMode = .center
-            $0.image = #imageLiteral(resourceName: "DisclosureIndicator")
-        }
-        blurEffectView.contentView.addSubview(disclosureIndicatorImageView)
-        disclosureIndicatorImageView.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 8).isActive = true
-        disclosureIndicatorImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        disclosureIndicatorImageView.constrain(to: blurEffectView.contentView, topInset: 0, trailingInset: 0, bottomInset: 0)
+        configureDisclosureIndicatorView()
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
+    }
+
+    func configureDisclosureIndicatorView() {
+        let disclosureIndicatorStackView = UIStackView()
+        disclosureIndicatorStackView.translatesAutoresizingMaskIntoConstraints = false
+        blurEffectView.contentView.addSubview(disclosureIndicatorStackView)
+        blurEffectView.contentView.bottomAnchor.constraint(equalTo: disclosureIndicatorStackView.bottomAnchor, constant: 14).isActive = true
+        disclosureIndicatorStackView.trailingAnchor.constraint(equalTo: blurEffectView.contentView.trailingAnchor, constant: 2).isActive = true
+        disclosureIndicatorStackView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        disclosureIndicatorStackView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+
+        let disclosureIndicatorLabel = HILabel(style: .event) {
+            $0.textColor <- \.baseText
+            $0.font = HIAppearance.Font.contentTitle
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        disclosureIndicatorLabel.text = "GET DIRECTIONS"
+
+        let disclosureIndicatorImageView = HITintImageView {
+            $0.tintHIColor = \.transparentBackground
+            $0.contentMode = .left
+            $0.image = #imageLiteral(resourceName: "DisclosureIndicator")
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+
+        disclosureIndicatorStackView.addSubview(disclosureIndicatorLabel)
+        disclosureIndicatorStackView.addSubview(disclosureIndicatorImageView)
+        disclosureIndicatorLabel.widthAnchor.constraint(equalTo: disclosureIndicatorStackView.widthAnchor, multiplier: 0.8).isActive = true
+        disclosureIndicatorLabel.trailingAnchor.constraint(equalTo: disclosureIndicatorImageView.leadingAnchor, constant: 4).isActive = true
+        disclosureIndicatorLabel.leadingAnchor.constraint(equalTo: disclosureIndicatorStackView.leadingAnchor, constant: 0).isActive = true
+        disclosureIndicatorLabel.topAnchor.constraint(equalTo: disclosureIndicatorStackView.topAnchor, constant: 0).isActive = true
+        disclosureIndicatorLabel.bottomAnchor.constraint(equalTo: disclosureIndicatorStackView.bottomAnchor, constant: 0).isActive = true
+        disclosureIndicatorImageView.trailingAnchor.constraint(equalTo: disclosureIndicatorStackView.trailingAnchor, constant: 0).isActive = true
+        disclosureIndicatorImageView.topAnchor.constraint(equalTo: disclosureIndicatorStackView.topAnchor, constant: 0).isActive = true
+        disclosureIndicatorImageView.bottomAnchor.constraint(equalTo: disclosureIndicatorStackView.bottomAnchor, constant: 0).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -119,6 +154,8 @@ extension HIEventDetailLocationCell {
 // MARK: - Population
 extension HIEventDetailLocationCell {
     static func <- (lhs: HIEventDetailLocationCell, rhs: Location) {
+        lhs.backgroundColor = UIColor.clear
+        lhs.contentView.layer.backgroundColor = UIColor.clear.cgColor
         lhs.titleLabel.text = rhs.name
         let clLocation = CLLocation(latitude: rhs.latitude, longitude: rhs.longitude)
 
