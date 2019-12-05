@@ -53,7 +53,7 @@ class HILabel: UILabel {
 
         case .title:
             textHIColor = \.baseText
-            backgroundHIColor = \.clear
+            backgroundHIColor = \.transparentBackground
             textAlignment = .center
             font = HIAppearance.Font.button
 
