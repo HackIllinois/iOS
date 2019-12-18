@@ -97,9 +97,9 @@ extension HIHomeViewController {
 extension HIHomeViewController {
     override func loadView() {
         super.loadView()
-//        view = HIView { $0.backgroundHIColor = \.transparentBackground }
+
         view = HITintImageView {
-            $0.image = #imageLiteral(resourceName: "EventsGradient") //Update with home background later when asset provided
+            $0.image = #imageLiteral(resourceName: "BuildingsBackground")
             $0.isUserInteractionEnabled = true
         }
 
