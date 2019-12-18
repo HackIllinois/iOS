@@ -51,36 +51,25 @@ class HIConstants {
                 }
             }
             .launch()
-        
+
         //Not sure how to make API sync instead of async
-        while(!updated) { }
-        
+        while !updated { }
+
         return success
     }
 
-    static var EVENT_START_TIME = Date(timeIntervalSince1970: 1550872800) // Friday, February 22, 2019 4:00:00 PM GMT-06:00
-    static var HACKING_START_TIME = Date(timeIntervalSince1970: 1550898000) // Friday, February 22, 2019 11:00:00 PM GMT-06:00
-    static var HACKING_END_TIME = Date(timeIntervalSince1970: 1551024000) // Sunday, February 24, 2019 10:00:00 AM GMT-06:00
-    static var EVENT_END_TIME = Date(timeIntervalSince1970: 1551049200) // Sunday, February 24, 2019 05:00:00 PM GMT-06:00
-    static var FRIDAY_START_TIME = Date(timeIntervalSince1970: 1550815200) // Friday, February 22, 2019 12:00:00 AM GMT-06:00
-    static var FRIDAY_END_TIME = Date(timeIntervalSince1970: 1550901599) // Friday, February 22, 2019 11:59:59 PM GMT-06:00
-    static var SATURDAY_START_TIME = Date(timeIntervalSince1970: 1550901600) // Saturday, February 23, 2019 12:00:00 AM GMT-06:00
-    static var SATURDAY_END_TIME = Date(timeIntervalSince1970: 1550987999) // Saturday, February 23, 2019 11:59:59 PM GMT-06:00
-    static var SUNDAY_START_TIME = Date(timeIntervalSince1970: 1550988000) // Sunday, February 24, 2019 12:00:00 AM GMT-06:00
-    static var SUNDAY_END_TIME = Date(timeIntervalSince1970: 1551074399) // Sunday, February 24, 2019 11:59:59 PM GMT-06:00
-    
     // Times
-//    static var EVENT_START_TIME = Date(timeIntervalSince1970: 1582927200) // Friday, February 28, 2020 1550872800 4:00:00 PM GMT-06:00
-//    static var HACKING_START_TIME = Date(timeIntervalSince1970: 1582952400) // Friday, February 28, 2020 11:00:00 PM GMT-06:00
-//    static var HACKING_END_TIME = Date(timeIntervalSince1970: 1583078400) // Sunday, March 1, 2020 10:00:00 AM GMT-06:00
-//    static var EVENT_END_TIME = Date(timeIntervalSince1970: 1583103600) // Sunday, March 1, 2020 05:00:00 PM GMT-06:00
-//
-//    static var FRIDAY_START_TIME = Date(timeIntervalSince1970: 1582869600) // Friday, February 28, 2020 12:00:00 AM GMT-06:00
-//    static var FRIDAY_END_TIME = Date(timeIntervalSince1970: 1582955999) // Friday, February 28, 2020 11:59:59 PM GMT-06:00
-//    static var SATURDAY_START_TIME = Date(timeIntervalSince1970: 1582956000) // Saturday, February 29, 2020 12:00:00 AM GMT-06:00
-//    static var SATURDAY_END_TIME = Date(timeIntervalSince1970: 1583042399) // Saturday, February 29, 2020 11:59:59 PM GMT-06:00
-//    static var SUNDAY_START_TIME = Date(timeIntervalSince1970: 1583042400) // Sunday, March 1, 2020 12:00:00 AM GMT-06:00
-//    static var SUNDAY_END_TIME = Date(timeIntervalSince1970: 1583128799) // Sunday, March 1, 2020 11:59:59 PM GMT-06:006:00
+    static var EVENT_START_TIME = Date(timeIntervalSince1970: 1582927200) // Friday, February 28, 2020 1550872800 4:00:00 PM GMT-06:00
+    static var HACKING_START_TIME = Date(timeIntervalSince1970: 1582952400) // Friday, February 28, 2020 11:00:00 PM GMT-06:00
+    static var HACKING_END_TIME = Date(timeIntervalSince1970: 1583078400) // Sunday, March 1, 2020 10:00:00 AM GMT-06:00
+    static var EVENT_END_TIME = Date(timeIntervalSince1970: 1583103600) // Sunday, March 1, 2020 05:00:00 PM GMT-06:00
+
+    static var FRIDAY_START_TIME = Date(timeIntervalSince1970: 1582869600) // Friday, February 28, 2020 12:00:00 AM GMT-06:00
+    static var FRIDAY_END_TIME = Date(timeIntervalSince1970: 1582955999) // Friday, February 28, 2020 11:59:59 PM GMT-06:00
+    static var SATURDAY_START_TIME = Date(timeIntervalSince1970: 1582956000) // Saturday, February 29, 2020 12:00:00 AM GMT-06:00
+    static var SATURDAY_END_TIME = Date(timeIntervalSince1970: 1583042399) // Saturday, February 29, 2020 11:59:59 PM GMT-06:00
+    static var SUNDAY_START_TIME = Date(timeIntervalSince1970: 1583042400) // Sunday, March 1, 2020 12:00:00 AM GMT-06:00
+    static var SUNDAY_END_TIME = Date(timeIntervalSince1970: 1583128799) // Sunday, March 1, 2020 11:59:59 PM GMT-06:006:00
 
     // Keys
     static let STORED_ACCOUNT_KEY = "org.hackillinois.ios.active_account"
