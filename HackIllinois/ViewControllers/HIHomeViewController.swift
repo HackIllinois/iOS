@@ -168,7 +168,13 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
         let now = Date()
 
         //Update the HackIllinois event times based on API
-        HIConstants.shared.updateTimes()
+        if HIConstants.shared.updateTimes() == true {
+            print("Changing ", countdownDataStoreIndex)
+            countdownDataStoreIndex = 0
+        }
+
+        print("Countdown")
+        print(HIConstants.EVENT_START_TIME)
 
         staticDataStore = [
             (HIConstants.EVENT_START_TIME, "HACKILLINOIS BEGINS IN"),
@@ -179,7 +185,11 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
 
         while countdownDataStoreIndex < staticDataStore.count {
             let currDate = staticDataStore[countdownDataStoreIndex].date
+            print("currDate is ", countdownDataStoreIndex)
+            print(currDate)
+            print(now)
             if currDate > now {
+                print("Currdate greater")
                 countdownTitleLabel.text = staticDataStore[countdownDataStoreIndex].displayText
                 return currDate
             }

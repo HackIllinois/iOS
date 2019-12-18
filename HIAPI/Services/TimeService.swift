@@ -18,7 +18,7 @@ public final class TimeService: BaseService {
         return super.baseURL + "upload/blobstore/times/"
     }
 
-    public static func getTimes() -> APIRequest<Times> {
-        return APIRequest<Times>(service: self, endpoint: "", method: .GET)
+    public static func getTimes() -> APIRequest<TimeContainer> {
+        return APIRequest<TimeContainer>(service: self, endpoint: "", method: .GET)
     }
 }
