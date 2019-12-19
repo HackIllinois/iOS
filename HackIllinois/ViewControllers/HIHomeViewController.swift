@@ -62,10 +62,10 @@ class HIHomeViewController: HIEventListViewController {
 
     private var countdownDataStoreIndex = 0
     private var staticDataStore: [(date: Date, displayText: String)] = [
-        (HIConstants.EVENT_START_TIME, "HACKILLINOIS BEGINS IN"),
-        (HIConstants.HACKING_START_TIME, "HACKING BEGINS IN"),
-        (HIConstants.HACKING_END_TIME, "HACKING ENDS IN"),
-        (HIConstants.EVENT_END_TIME, "HACKILLINOIS ENDS IN")
+        (HITimeDataSource.shared.eventStart, "HACKILLINOIS BEGINS IN"),
+        (HITimeDataSource.shared.hackStart, "HACKING BEGINS IN"),
+        (HITimeDataSource.shared.hackEnd, "HACKING ENDS IN"),
+        (HITimeDataSource.shared.eventEnd, "HACKILLINOIS ENDS IN")
     ]
 
     private var timer: Timer?
@@ -167,29 +167,9 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
     func countdownToDateFor(countdownViewController: HICountdownViewController) -> Date? {
         let now = Date()
 
-        //Update the HackIllinois event times based on API
-        if HIConstants.shared.updateTimes() == true {
-            print("Changing ", countdownDataStoreIndex)
-            countdownDataStoreIndex = 0
-        }
-
-        print("Countdown")
-        print(HIConstants.EVENT_START_TIME)
-
-        staticDataStore = [
-            (HIConstants.EVENT_START_TIME, "HACKILLINOIS BEGINS IN"),
-            (HIConstants.HACKING_START_TIME, "HACKING BEGINS IN"),
-            (HIConstants.HACKING_END_TIME, "HACKING ENDS IN"),
-            (HIConstants.EVENT_END_TIME, "HACKILLINOIS ENDS IN")
-        ]
-
         while countdownDataStoreIndex < staticDataStore.count {
             let currDate = staticDataStore[countdownDataStoreIndex].date
-            print("currDate is ", countdownDataStoreIndex)
-            print(currDate)
-            print(now)
             if currDate > now {
-                print("Currdate greater")
                 countdownTitleLabel.text = staticDataStore[countdownDataStoreIndex].displayText
                 return currDate
             }

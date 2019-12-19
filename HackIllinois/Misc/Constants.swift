@@ -17,59 +17,18 @@ import HIAPI
 // MARK: - Constants
 class HIConstants {
 
-    static var shared = HIConstants()
+    // Times for HackIllinois 2020 (backup if API call doesn't work)
+    static let EVENT_START_TIME = Date(timeIntervalSince1970: 1582927200) // Friday, February 28, 2020 1550872800 4:00:00 PM GMT-06:00
+    static let HACKING_START_TIME = Date(timeIntervalSince1970: 1582952400) // Friday, February 28, 2020 11:00:00 PM GMT-06:00
+    static let HACKING_END_TIME = Date(timeIntervalSince1970: 1583078400) // Sunday, March 1, 2020 10:00:00 AM GMT-06:00
+    static let EVENT_END_TIME = Date(timeIntervalSince1970: 1583103600) // Sunday, March 1, 2020 05:00:00 PM GMT-06:00
 
-    //Returns whether times have been updated or not
-    func updateTimes() -> Bool {
-        print("Entering update times")
-        var success: Bool = false
-        var updated: Bool = false
-        // Update the times of event
-        TimeService.getTimes()
-            .onCompletion { result in
-                do {
-                    let (timeContainer, _) = try result.get()
-                    let apiEventTimes = timeContainer.eventTimes
-
-                    HIConstants.EVENT_START_TIME = apiEventTimes.eventStart
-                    HIConstants.EVENT_END_TIME = apiEventTimes.eventEnd
-                    HIConstants.HACKING_START_TIME = apiEventTimes.hackStart
-                    HIConstants.HACKING_END_TIME = apiEventTimes.hackEnd
-                    HIConstants.FRIDAY_START_TIME = apiEventTimes.fridayStart
-                    HIConstants.FRIDAY_END_TIME = apiEventTimes.fridayEnd
-                    HIConstants.SATURDAY_START_TIME = apiEventTimes.saturdayStart
-                    HIConstants.SATURDAY_END_TIME = apiEventTimes.saturdayEnd
-                    HIConstants.SUNDAY_START_TIME = apiEventTimes.sundayStart
-                    HIConstants.SUNDAY_END_TIME = apiEventTimes.sundayEnd
-                    print("HIconst updated::")
-                    print(apiEventTimes.eventStart)
-                    updated = true
-                    success = true
-                } catch {
-                    print(error)
-                    updated = true
-                }
-            }
-            .launch()
-
-        //Not sure how to make API sync instead of async
-        while !updated { }
-
-        return success
-    }
-
-    // Times
-    static var EVENT_START_TIME = Date(timeIntervalSince1970: 1582927200) // Friday, February 28, 2020 1550872800 4:00:00 PM GMT-06:00
-    static var HACKING_START_TIME = Date(timeIntervalSince1970: 1582952400) // Friday, February 28, 2020 11:00:00 PM GMT-06:00
-    static var HACKING_END_TIME = Date(timeIntervalSince1970: 1583078400) // Sunday, March 1, 2020 10:00:00 AM GMT-06:00
-    static var EVENT_END_TIME = Date(timeIntervalSince1970: 1583103600) // Sunday, March 1, 2020 05:00:00 PM GMT-06:00
-
-    static var FRIDAY_START_TIME = Date(timeIntervalSince1970: 1582869600) // Friday, February 28, 2020 12:00:00 AM GMT-06:00
-    static var FRIDAY_END_TIME = Date(timeIntervalSince1970: 1582955999) // Friday, February 28, 2020 11:59:59 PM GMT-06:00
-    static var SATURDAY_START_TIME = Date(timeIntervalSince1970: 1582956000) // Saturday, February 29, 2020 12:00:00 AM GMT-06:00
-    static var SATURDAY_END_TIME = Date(timeIntervalSince1970: 1583042399) // Saturday, February 29, 2020 11:59:59 PM GMT-06:00
-    static var SUNDAY_START_TIME = Date(timeIntervalSince1970: 1583042400) // Sunday, March 1, 2020 12:00:00 AM GMT-06:00
-    static var SUNDAY_END_TIME = Date(timeIntervalSince1970: 1583128799) // Sunday, March 1, 2020 11:59:59 PM GMT-06:006:00
+    static let FRIDAY_START_TIME = Date(timeIntervalSince1970: 1582869600) // Friday, February 28, 2020 12:00:00 AM GMT-06:00
+    static let FRIDAY_END_TIME = Date(timeIntervalSince1970: 1582955999) // Friday, February 28, 2020 11:59:59 PM GMT-06:00
+    static let SATURDAY_START_TIME = Date(timeIntervalSince1970: 1582956000) // Saturday, February 29, 2020 12:00:00 AM GMT-06:00
+    static let SATURDAY_END_TIME = Date(timeIntervalSince1970: 1583042399) // Saturday, February 29, 2020 11:59:59 PM GMT-06:00
+    static let SUNDAY_START_TIME = Date(timeIntervalSince1970: 1583042400) // Sunday, March 1, 2020 12:00:00 AM GMT-06:00
+    static let SUNDAY_END_TIME = Date(timeIntervalSince1970: 1583128799) // Sunday, March 1, 2020 11:59:59 PM GMT-06:006:00
 
     // Keys
     static let STORED_ACCOUNT_KEY = "org.hackillinois.ios.active_account"
