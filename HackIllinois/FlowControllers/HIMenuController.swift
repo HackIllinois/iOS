@@ -26,7 +26,7 @@ class HIMenuController: UIViewController {
     // MARK: - Properties
     private(set) var state = State.closed
 
-    private(set) var _tabBarController = UITabBarController()
+    private(set) var _tabBarController = HITabBarController()
 
     var overlayView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -104,8 +104,7 @@ extension HIMenuController {
 extension HIMenuController {
     override func loadView() {
         view = HIView { $0.backgroundHIColor = \.baseBackground }
-
-        _tabBarController.tabBar.isHidden = true
+        
         addChild(_tabBarController)
         _tabBarController.view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(_tabBarController.view)

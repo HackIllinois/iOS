@@ -42,6 +42,9 @@
 		954EE1D31FD0F1680078F39E /* HILoginSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */; };
 		9552D92821758E4C00A8C869 /* UIView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9552D92721758E4C00A8C869 /* UIView+AutoLayout.swift */; };
 		9564E02F2218CE6F003A8EEB /* HIMapsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9564E02E2218CE6F003A8EEB /* HIMapsDataSource.swift */; };
+		9565C90B237C9D5B00AA4237 /* HITabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9565C90A237C9D5B00AA4237 /* HITabBar.swift */; };
+		9565C90D237C9E2E00AA4237 /* HITabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9565C90C237C9E2E00AA4237 /* HITabBarItem.swift */; };
+		9565C90F237C9F6B00AA4237 /* HITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9565C90E237C9F6B00AA4237 /* HITabBarController.swift */; };
 		956F41E11FC7577500557DC7 /* HIAnnouncementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F41E01FC7577500557DC7 /* HIAnnouncementsViewController.swift */; };
 		956F41E31FC76C8E00557DC7 /* HIMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F41E21FC76C8E00557DC7 /* HIMenuController.swift */; };
 		957A4D7D21FDA71F007FDE0E /* MixTypeComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957A4D7C21FDA71F007FDE0E /* MixTypeComparable.swift */; };
@@ -188,6 +191,9 @@
 		954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILoginSelectionViewController.swift; sourceTree = "<group>"; };
 		9552D92721758E4C00A8C869 /* UIView+AutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AutoLayout.swift"; sourceTree = "<group>"; };
 		9564E02E2218CE6F003A8EEB /* HIMapsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIMapsDataSource.swift; sourceTree = "<group>"; };
+		9565C90A237C9D5B00AA4237 /* HITabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITabBar.swift; sourceTree = "<group>"; };
+		9565C90C237C9E2E00AA4237 /* HITabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITabBarItem.swift; sourceTree = "<group>"; };
+		9565C90E237C9F6B00AA4237 /* HITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITabBarController.swift; sourceTree = "<group>"; };
 		956F41E01FC7577500557DC7 /* HIAnnouncementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAnnouncementsViewController.swift; sourceTree = "<group>"; };
 		956F41E21FC76C8E00557DC7 /* HIMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIMenuController.swift; sourceTree = "<group>"; };
 		957A4D7C21FDA71F007FDE0E /* MixTypeComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixTypeComparable.swift; sourceTree = "<group>"; };
@@ -475,6 +481,7 @@
 				95CD0ED42015217E00D79DCC /* HIApplicationStateController.swift */,
 				952831A3200F2B35002C9F3E /* HILoginFlowController.swift */,
 				956F41E21FC76C8E00557DC7 /* HIMenuController.swift */,
+				9565C90E237C9F6B00AA4237 /* HITabBarController.swift */,
 			);
 			path = FlowControllers;
 			sourceTree = "<group>";
@@ -497,6 +504,8 @@
 				9523A28F2218BA2600341EBD /* HIImageView.swift */,
 				95A7D29D203D5BA4005EAEAF /* HILabel.swift */,
 				95A7D27C203D4F54005EAEAF /* HISegmentedControl.swift */,
+				9565C90A237C9D5B00AA4237 /* HITabBar.swift */,
+				9565C90C237C9E2E00AA4237 /* HITabBarItem.swift */,
 				95A7D27D203D4F54005EAEAF /* HITextField.swift */,
 				95D6DA77203F8C3900E7C982 /* HITintImageView.swift */,
 				95A7D27F203D4F54005EAEAF /* HIView.swift */,
@@ -729,6 +738,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -901,9 +911,11 @@
 				95C18DC52009618C004784B5 /* HIHomeViewController.swift in Sources */,
 				35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */,
 				9510F6A11FCB7D6E007D19DB /* Event+CoreDataClass.swift in Sources */,
+				9565C90F237C9F6B00AA4237 /* HITabBarController.swift in Sources */,
 				951827A81EA35DB800049F79 /* AppDelegate.swift in Sources */,
 				9564E02F2218CE6F003A8EEB /* HIMapsDataSource.swift in Sources */,
 				953199C91FC25CA0009F2AA1 /* HICoreDataController.swift in Sources */,
+				9565C90B237C9D5B00AA4237 /* HITabBar.swift in Sources */,
 				95A7D28D203D4F54005EAEAF /* Identifiable.swift in Sources */,
 				9521A6A820191590009059C6 /* HIEventDataSource.swift in Sources */,
 				9506926E203EE14000D7C34C /* LOTAnimationView.swift in Sources */,
@@ -918,6 +930,7 @@
 				957D7CB81FC39EA100C4332A /* Formatters.swift in Sources */,
 				95A7D296203D4F54005EAEAF /* HIEventDetailLocationCell.swift in Sources */,
 				95A7D29E203D5BA4005EAEAF /* HILabel.swift in Sources */,
+				9565C90D237C9E2E00AA4237 /* HITabBarItem.swift in Sources */,
 				956F41E31FC76C8E00557DC7 /* HIMenuController.swift in Sources */,
 				9510F6A51FCB7D6E007D19DB /* Announcement+CoreDataProperties.swift in Sources */,
 				95FC79C321E024A700715036 /* Notifications.swift in Sources */,

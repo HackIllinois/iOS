@@ -123,7 +123,7 @@ extension HIApplicationStateController {
         let menuViewControllers = viewControllersFor(user: user)
         menuController.setupMenuFor(menuViewControllers)
         menuController._tabBarController.selectedIndex = 0
-
+        
         HIEventDataSource.refresh()
         HIAnnouncementDataSource.refresh()
     }
