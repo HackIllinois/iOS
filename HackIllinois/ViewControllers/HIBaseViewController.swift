@@ -21,7 +21,7 @@ class HIBaseViewController: UIViewController {
     var refreshControl = UIRefreshControl()
     var refreshAnimation = LOTAnimationView(name: "refresh")
     var tableView: UITableView?
-    let tableBackgroundView = HIView(style: .emptyTable)
+    let tableBackgroundView = HIView()
 }
 
 // MARK: - UIViewController
