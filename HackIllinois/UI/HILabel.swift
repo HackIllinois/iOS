@@ -65,7 +65,7 @@ class HILabel: UILabel {
         case .description:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentText
+            font = HIAppearance.Font.descriptionText
             numberOfLines = 0
 
         case .loginHeader:

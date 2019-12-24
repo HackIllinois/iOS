@@ -22,7 +22,7 @@ class HIBaseViewController: UIViewController {
     var refreshControl = UIRefreshControl()
     var refreshAnimation = AnimationView(name: "refresh")
     var tableView: UITableView?
-    let tableBackgroundView = HIView(style: .emptyTable)
+    let tableBackgroundView = HIView()
 }
 
 // MARK: - UIViewController
