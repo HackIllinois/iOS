@@ -89,7 +89,7 @@ struct HIAppearance: Equatable {
         static let contentTitle = UIFont.systemFont(ofSize: 18, weight: .medium)
         static let navigationSubtitle = UIFont.systemFont(ofSize: 14, weight: .medium)
         static let navigationTitle = UIFont.systemFont(ofSize: 15, weight: .medium)
-        static let descriptionText = UIFont.systemFont(ofSize: 15, weight: .regular)
+        static let descriptionText = UIFont.systemFont(ofSize: 14, weight: .regular)
 
         static let sectionHeader = UIFont.systemFont(ofSize: 13, weight: .bold)
         static let button = UIFont.systemFont(ofSize: 15, weight: .regular)
