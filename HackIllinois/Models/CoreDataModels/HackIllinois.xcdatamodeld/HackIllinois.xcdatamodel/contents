@@ -42,6 +42,7 @@
     </entity>
     <entity name="Project" representedClassName="Project" syncable="YES">
         <attribute name="code" optional="YES" attributeType="String"/>
+        <attribute name="favorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="mentors" optional="YES" attributeType="Transformable"/>
         <attribute name="name" optional="YES" attributeType="String"/>
@@ -52,6 +53,6 @@
         <element name="Announcement" positionX="-63" positionY="72" width="128" height="105"/>
         <element name="Event" positionX="-54" positionY="36" width="128" height="178"/>
         <element name="Location" positionX="-54" positionY="108" width="128" height="118"/>
-        <element name="Project" positionX="-45" positionY="108" width="128" height="28"/>
+        <element name="Project" positionX="-45" positionY="108" width="128" height="148"/>
     </elements>
 </model>

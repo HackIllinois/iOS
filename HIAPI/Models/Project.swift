@@ -17,18 +17,9 @@ public struct ProjectContainer: Decodable, APIReturnable {
     public let projects: [Project]
 }
 
-public struct Project: Codable {
-    internal enum CodingKeys: String, CodingKey {
-        case id
-        case projectName = "name"
-        case mentors
-        case location
-        case tags
-        case code
-    }
-
+public struct Project: Decodable, APIReturnable {
     public let id: String
-    public let projectName: String
+    public let name: String
     public let mentors: [String]
     public let location: Location
     public let tags: [String]
