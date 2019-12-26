@@ -17,7 +17,7 @@ public struct ProjectContainer: Decodable, APIReturnable {
     public let projects: [Project]
 }
 
-public struct Project: Decodable, APIReturnable {
+public struct Project: Codable {
     public let id: String
     public let name: String
     public let mentors: [String]
