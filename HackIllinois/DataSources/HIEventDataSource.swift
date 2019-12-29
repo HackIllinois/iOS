@@ -113,6 +113,7 @@ final class HIEventDataSource {
 
                                 coreDataEventsToUpdate.forEach { (coreDataEvent, apiEvent) in
                                     // Update CoreData event.
+                                    coreDataEvent.id = apiEvent.id
                                     coreDataEvent.endTime = apiEvent.endTime
                                     coreDataEvent.eventType = apiEvent.eventType
                                     coreDataEvent.info = apiEvent.info
@@ -129,6 +130,7 @@ final class HIEventDataSource {
                                 apiEventsToInsert.forEach { apiEvent in
                                     // Create CoreData event.
                                     let coreDataEvent = Event(context: context)
+                                    coreDataEvent.id = apiEvent.id
                                     coreDataEvent.endTime = apiEvent.endTime
                                     coreDataEvent.eventType = apiEvent.eventType
                                     coreDataEvent.info = apiEvent.info

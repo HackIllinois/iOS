@@ -25,6 +25,7 @@ public struct EventContainer: Decodable, APIReturnable {
 
 public struct Event: Codable {
     internal enum CodingKeys: String, CodingKey {
+        case id
         case endTime
         case eventType
         case info = "description"
@@ -34,6 +35,7 @@ public struct Event: Codable {
         case startTime
     }
 
+    public let id: String
     public let endTime: Date
     // Could be made into an enum with some coredata work
     public let eventType: String
