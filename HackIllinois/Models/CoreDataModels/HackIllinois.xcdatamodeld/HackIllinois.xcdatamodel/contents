@@ -41,7 +41,7 @@
     </entity>
     <elements>
         <element name="Announcement" positionX="-63" positionY="72" width="128" height="105"/>
-        <element name="Event" positionX="-54" positionY="36" width="128" height="193"/>
+        <element name="Event" positionX="-54" positionY="36" width="128" height="180"/>
         <element name="Location" positionX="-54" positionY="108" width="128" height="105"/>
     </elements>
 </model>
