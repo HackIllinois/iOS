@@ -19,12 +19,13 @@ extension Project {
         return NSFetchRequest<Project>(entityName: "Project")
     }
 
-    @NSManaged public var code: String
+    @NSManaged public var number: String
+    @NSManaged public var room: String
+    @NSManaged public var info: String
     @NSManaged public var id: String
     @NSManaged public var mentors: [String]
     @NSManaged public var name: String
     @NSManaged public var tags: [NSObject]
-    @NSManaged public var location: Location
     @NSManaged public var favorite: Bool
 
 }

@@ -88,14 +88,6 @@ extension HIProjectCell {
         titleLabel.text = rhs.name
         contentStackViewHeight += titleLabel.intrinsicContentSize.height
         lhs.contentStackView.addArrangedSubview(titleLabel)
-        guard let location = rhs.location as? Location else {
-            lhs.contentStackViewHeight.constant = contentStackViewHeight
-            return
-        }
-        let locationLabel = HILabel(style: .location)
-        locationLabel.text = location.name
-        contentStackViewHeight += locationLabel.intrinsicContentSize.height + 3
-        lhs.contentStackView.addArrangedSubview(locationLabel)
         lhs.contentStackViewHeight.constant = contentStackViewHeight
     }
 }

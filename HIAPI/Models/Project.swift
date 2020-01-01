@@ -18,10 +18,21 @@ public struct ProjectContainer: Decodable, APIReturnable {
 }
 
 public struct Project: Codable {
+    internal enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case info = "description"
+        case mentors
+        case room
+        case tags
+        case number
+    }
+
     public let id: String
     public let name: String
+    public let info: String
     public let mentors: [String]
-    public let location: Location
+    public let room: String
     public let tags: [String]
-    public let code: String
+    public let number: String
 }

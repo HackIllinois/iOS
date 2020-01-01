@@ -75,8 +75,8 @@ extension HIProjectListViewController: HIProjectCellDelegate {
             let project = _fetchedResultsController?.object(at: indexPath) as? Project else { return }
 
         let _: APIRequest<Favorite> = projectCell.favoritedButton.isActive ?
-                HIAPI.ProjectService.unfavoriteBy(name: project.name) :
-                HIAPI.ProjectService.favoriteBy(name: project.name)
+                HIAPI.ProjectService.unfavoriteBy(id: project.id) :
+                HIAPI.ProjectService.favoriteBy(id: project.id)
     }
 }
 

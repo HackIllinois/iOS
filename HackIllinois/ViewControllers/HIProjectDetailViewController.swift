@@ -31,7 +31,7 @@ class HIProjectDetailViewController: HIBaseViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.contentBackground
     }
-    private let titleLabel = HILabel(style: .project) { //TODO: Create style for project
+    private let titleLabel = HILabel(style: .project) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor <- \.baseText
         $0.font = HIAppearance.Font.contentTitle
@@ -60,8 +60,8 @@ extension HIProjectDetailViewController {
         guard let project = project else { return }
 
         let _: APIRequest<Favorite> = sender.isActive ?
-            HIAPI.ProjectService.unfavoriteBy(name: project.name) :
-            HIAPI.ProjectService.favoriteBy(name: project.name)
+            HIAPI.ProjectService.unfavoriteBy(id: project.id) :
+            HIAPI.ProjectService.favoriteBy(id: project.id)
     }
 }
 
@@ -109,7 +109,7 @@ extension HIProjectDetailViewController {
         super.viewWillAppear(animated)
         guard let project = project else { return }
         titleLabel.text = project.name
-//        descriptionLabel.text = project.info //TODO: Update description to project
+        descriptionLabel.text = project.info //TODO: Update description to project
         favoritedButton.isActive = project.favorite
 
         tableView?.reloadData()
@@ -156,16 +156,16 @@ extension HIProjectDetailViewController {
         return 1 //Projects have one location
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: HIEventDetailLocationCell.identifier, for: indexPath)
-        if let cell = cell as? HIEventDetailLocationCell,
-            let project = project,
-            1 > indexPath.row, //TODO: Projects have one location
-            let location = project.location as? Location { //TODO: Projects have one location
-            cell <- location
-        }
-        return cell
-    }
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: HIEventDetailLocationCell.identifier, for: indexPath)
+//        if let cell = cell as? HIEventDetailLocationCell,
+//            let project = project,
+//            1 > indexPath.row, //TODO: Projects have one location
+//            let location = project.location as? Location { //TODO: Projects have one location
+//            cell <- location
+//        }
+//        return cell
+//    }
 }
 
 // MARK: - UITableViewDelegate
@@ -182,32 +182,32 @@ extension HIProjectDetailViewController {
         return CGFloat.leastNonzeroMagnitude
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let project = project,
-            1 > indexPath.row, //TODO: Projects have one location
-            let location = project.location as? Location { //TODO: Projects have one location
-            let clLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
-
-            let distance: CLLocationDistance
-            if let userLocation = CLLocationManager().location {
-                distance = userLocation.distance(from: clLocation) * 1.5
-            } else {
-                distance = 1_500
-            }
-
-            let divisor: CLLocationDistance = 50_000
-            let span = MKCoordinateSpan(latitudeDelta: distance/divisor, longitudeDelta: distance/divisor)
-
-            let options = [
-                MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: clLocation.coordinate),
-                MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: span)
-            ]
-
-            let placemark = MKPlacemark(coordinate: clLocation.coordinate, addressDictionary: nil)
-            let mapItem = MKMapItem(placemark: placemark)
-            mapItem.name = location.name
-            mapItem.openInMaps(launchOptions: options)
-        }
-        super.tableView(tableView, didSelectRowAt: indexPath)
-    }
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if let project = project,
+//            1 > indexPath.row, //TODO: Projects have one location
+//            let location = project.location as? Location { //TODO: Projects have one location
+//            let clLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+//
+//            let distance: CLLocationDistance
+//            if let userLocation = CLLocationManager().location {
+//                distance = userLocation.distance(from: clLocation) * 1.5
+//            } else {
+//                distance = 1_500
+//            }
+//
+//            let divisor: CLLocationDistance = 50_000
+//            let span = MKCoordinateSpan(latitudeDelta: distance/divisor, longitudeDelta: distance/divisor)
+//
+//            let options = [
+//                MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: clLocation.coordinate),
+//                MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: span)
+//            ]
+//
+//            let placemark = MKPlacemark(coordinate: clLocation.coordinate, addressDictionary: nil)
+//            let mapItem = MKMapItem(placemark: placemark)
+//            mapItem.name = location.name
+//            mapItem.openInMaps(launchOptions: options)
+//        }
+//        super.tableView(tableView, didSelectRowAt: indexPath)
+//    }
 }

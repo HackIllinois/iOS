@@ -33,7 +33,6 @@
         <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <relationship name="events" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="locations" inverseEntity="Event"/>
-        <relationship name="projects" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="location" inverseEntity="Project"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="name"/>
@@ -41,18 +40,18 @@
         </uniquenessConstraints>
     </entity>
     <entity name="Project" representedClassName="Project" syncable="YES">
-        <attribute name="code" optional="YES" attributeType="String"/>
         <attribute name="favorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="info" optional="YES" attributeType="String"/>
         <attribute name="mentors" optional="YES" attributeType="Transformable"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="number" optional="YES" attributeType="String"/>
         <attribute name="tags" optional="YES" attributeType="Transformable"/>
-        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="projects" inverseEntity="Location"/>
     </entity>
     <elements>
         <element name="Announcement" positionX="-63" positionY="72" width="128" height="105"/>
         <element name="Event" positionX="-54" positionY="36" width="128" height="178"/>
-        <element name="Location" positionX="-54" positionY="108" width="128" height="118"/>
+        <element name="Location" positionX="-54" positionY="108" width="128" height="103"/>
         <element name="Project" positionX="-45" positionY="108" width="128" height="148"/>
     </elements>
 </model>

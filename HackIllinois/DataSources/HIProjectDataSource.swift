@@ -49,54 +49,9 @@ final class HIProjectDataSource {
                                 let apiProjects = containedProjects.projects
                                 let apiFavorites = containedFavorites.events // Unwraps favorites based on strings (should change name to favorites)
 
-                                // 2) Compute all the unique API locations.
-                                let allLocations = apiProjects.compactMap { $0.location }
-                                var uniquinglocationDictionary = [String: HIAPI.Location]()
-                                allLocations.forEach {
-                                    uniquinglocationDictionary[$0.name] = $0
-                                }
-                                let uniqueLocations = Array(uniquinglocationDictionary.values)
-
-                                // 3) Get all CoreData locations.
-                                let locationFetchRequest = NSFetchRequest<Location>(entityName: "Location")
-                                let coreDataLocations = try context.fetch(locationFetchRequest)
-
-                                // 4) Diff the CoreData locations and API locations.
-                                let (coreDataLocationsToDelete, coreDataLocationsToUpdate, apiLocationsToInsert)
-                                    = diff(initial: coreDataLocations, final: uniqueLocations)
-
-                                // 5) Create dictionary mapping location names to CoreData locations.
-                                var coreDataLocationsDicionary = [String: Location]()
-
-                                // 6) Apply location diff to CoreData.
-                                coreDataLocationsToDelete.forEach { coreDataLocation in
-                                    // Delete CoreData location.
-                                    context.delete(coreDataLocation)
-                                }
-
-                                coreDataLocationsToUpdate.forEach { (coreDataLocation, apiLocation) in
-                                    // Update CoreData location.
-                                    coreDataLocation.latitude = apiLocation.latitude
-                                    coreDataLocation.longitude = apiLocation.longitude
-
-                                    // Add to dictionary mapping names to CoreData locations.
-                                    coreDataLocationsDicionary[coreDataLocation.name] = coreDataLocation
-                                }
-
-                                apiLocationsToInsert.forEach { apiLocation in
-                                    // Create CoreData location.
-                                    let coreDataLocation = Location(context: context)
-                                    coreDataLocation.name = apiLocation.name
-                                    coreDataLocation.latitude = apiLocation.latitude
-                                    coreDataLocation.longitude = apiLocation.longitude
-
-                                    // Add to dictionary mapping names to CoreData locations.
-                                    coreDataLocationsDicionary[coreDataLocation.name] = coreDataLocation
-                                }
-
-                                // 7) Get all CoreData locations.
-                                let eventFetchRequest = NSFetchRequest<Project>(entityName: "Project")
-                                let coreDataProjects = try context.fetch(eventFetchRequest)
+                                // 2) Get all CoreData locations.
+                                let projectFetchRequest = NSFetchRequest<Project>(entityName: "Project")
+                                let coreDataProjects = try context.fetch(projectFetchRequest)
 
                                 // 8) Diff the CoreData projects and API projects.
                                 let (
@@ -107,28 +62,30 @@ final class HIProjectDataSource {
 
                                 // 9) Apply the diff
                                 coreDataProjectsToDelete.forEach { coreDataProject in
-                                    // Delete CoreData event.
+                                    // Delete CoreData project.
                                     context.delete(coreDataProject)
                                 }
 
                                 coreDataProjectsToUpdate.forEach { (coreDataProject, apiProject) in
-                                    // Update CoreData event.
+                                    // Update CoreData project.
                                     coreDataProject.id = apiProject.id
                                     coreDataProject.name = apiProject.name
+                                    coreDataProject.info = apiProject.info
                                     coreDataProject.mentors = apiProject.mentors
-                                    guard let coreDataLocation = coreDataLocationsDicionary[apiProject.location.name] else { fatalError("Could not load location") }
-                                    coreDataProject.location = coreDataLocation
+                                    coreDataProject.room = apiProject.room
+                                    coreDataProject.number = apiProject.number
                                     coreDataProject.favorite = apiFavorites.contains(coreDataProject.id) //Favorites sorted by id
                                 }
 
                                 apiProjectsToInsert.forEach { apiProject in
-                                    // Create CoreData event.
+                                    // Create CoreData project.
                                     let coreDataProject = Project(context: context)
                                     coreDataProject.id = apiProject.id
                                     coreDataProject.name = apiProject.name
+                                    coreDataProject.info = apiProject.info
                                     coreDataProject.mentors = apiProject.mentors
-                                    guard let coreDataLocation = coreDataLocationsDicionary[apiProject.location.name] else { fatalError("Could not load location") }
-                                    coreDataProject.location = coreDataLocation
+                                    coreDataProject.room = apiProject.room
+                                    coreDataProject.number = apiProject.number
                                     coreDataProject.favorite = apiFavorites.contains(coreDataProject.id)
                                 }
 
