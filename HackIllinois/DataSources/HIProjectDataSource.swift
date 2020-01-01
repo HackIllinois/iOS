@@ -73,6 +73,7 @@ final class HIProjectDataSource {
                                     coreDataProject.info = apiProject.info
                                     coreDataProject.mentors = apiProject.mentors
                                     coreDataProject.room = apiProject.room
+                                    coreDataProject.tags = apiProject.tags
                                     coreDataProject.number = apiProject.number
                                     coreDataProject.favorite = apiFavorites.contains(coreDataProject.id) //Favorites sorted by id
                                 }
@@ -85,6 +86,7 @@ final class HIProjectDataSource {
                                     coreDataProject.info = apiProject.info
                                     coreDataProject.mentors = apiProject.mentors
                                     coreDataProject.room = apiProject.room
+                                    coreDataProject.tags = apiProject.tags
                                     coreDataProject.number = apiProject.number
                                     coreDataProject.favorite = apiFavorites.contains(coreDataProject.id)
                                 }
