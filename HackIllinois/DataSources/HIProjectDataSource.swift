@@ -47,20 +47,20 @@ final class HIProjectDataSource {
                             do {
                                 // 1) Unwrap contained data
                                 let apiProjects = containedProjects.projects
-                                let apiFavorites = containedFavorites.events // Unwraps favorites based on strings (should change name to favorites)
+                                let apiFavorites = containedFavorites.favorites // Unwraps favorites based on strings (should change name to favorites)
 
-                                // 2) Get all CoreData locations.
+                                // 2) Get all CoreData Projects.
                                 let projectFetchRequest = NSFetchRequest<Project>(entityName: "Project")
                                 let coreDataProjects = try context.fetch(projectFetchRequest)
 
-                                // 8) Diff the CoreData projects and API projects.
+                                // 3) Diff the CoreData projects and API projects.
                                 let (
                                     coreDataProjectsToDelete,
                                     coreDataProjectsToUpdate,
                                     apiProjectsToInsert
                                 ) = diff(initial: coreDataProjects, final: apiProjects)
 
-                                // 9) Apply the diff
+                                // 4) Apply the diff
                                 coreDataProjectsToDelete.forEach { coreDataProject in
                                     // Delete CoreData project.
                                     context.delete(coreDataProject)
@@ -89,7 +89,7 @@ final class HIProjectDataSource {
                                     coreDataProject.favorite = apiFavorites.contains(coreDataProject.id)
                                 }
 
-                                // 10) Save changes, call completion handler, unlock refresh
+                                // 5) Save changes, call completion handler, unlock refresh
                                 try context.save()
                                 completion?()
                                 isRefreshing = false

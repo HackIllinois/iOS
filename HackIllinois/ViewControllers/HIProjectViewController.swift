@@ -42,7 +42,7 @@ class HIProjectViewController: HIProjectListViewController {
     private let onlyFavoritesPredicate = NSPredicate(format: "favorite == YES" )
     private var dataStore: [(displayText: String, predicate: NSPredicate)] = {
         var dataStore = [(displayText: String, predicate: NSPredicate)]()
-        //TODO: Update predicates to type of project
+        //TODO: Check predicates for type of project are correct
         let webPredicate = NSPredicate(
             format: "tags CONTAINS %@",
             "WEB"

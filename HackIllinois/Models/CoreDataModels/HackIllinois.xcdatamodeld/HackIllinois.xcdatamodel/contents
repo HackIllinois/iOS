@@ -46,12 +46,13 @@
         <attribute name="mentors" optional="YES" attributeType="Transformable"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="number" optional="YES" attributeType="String"/>
+        <attribute name="room" optional="YES" attributeType="String"/>
         <attribute name="tags" optional="YES" attributeType="Transformable"/>
     </entity>
     <elements>
         <element name="Announcement" positionX="-63" positionY="72" width="128" height="105"/>
         <element name="Event" positionX="-54" positionY="36" width="128" height="178"/>
         <element name="Location" positionX="-54" positionY="108" width="128" height="103"/>
-        <element name="Project" positionX="-45" positionY="108" width="128" height="148"/>
+        <element name="Project" positionX="-45" positionY="108" width="128" height="163"/>
     </elements>
 </model>

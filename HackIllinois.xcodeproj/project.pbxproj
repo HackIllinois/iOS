@@ -18,6 +18,7 @@
 		3C26401923ADE7AA004E1DBE /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26401723ADE7AA004E1DBE /* Project+CoreDataProperties.swift */; };
 		3C26401B23ADE838004E1DBE /* ProjectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26401A23ADE838004E1DBE /* ProjectService.swift */; };
 		3C26401D23ADE8A5004E1DBE /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26401C23ADE8A5004E1DBE /* Project.swift */; };
+		3C8238DD23BC390600C632BC /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8238DC23BC390600C632BC /* Favorite.swift */; };
 		3CF8DB1123B4134C0035ECAE /* HIProjectDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DB1023B4134C0035ECAE /* HIProjectDataSource.swift */; };
 		3CF8DB1323B419980035ECAE /* HIProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DB1223B419980035ECAE /* HIProjectCell.swift */; };
 		3CF8DB1523B41D0A0035ECAE /* HIProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DB1423B41D0A0035ECAE /* HIProjectListViewController.swift */; };
@@ -169,6 +170,7 @@
 		3C26401723ADE7AA004E1DBE /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		3C26401A23ADE838004E1DBE /* ProjectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectService.swift; sourceTree = "<group>"; };
 		3C26401C23ADE8A5004E1DBE /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		3C8238DC23BC390600C632BC /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		3CF8DB1023B4134C0035ECAE /* HIProjectDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProjectDataSource.swift; sourceTree = "<group>"; };
 		3CF8DB1223B419980035ECAE /* HIProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProjectCell.swift; sourceTree = "<group>"; };
 		3CF8DB1423B41D0A0035ECAE /* HIProjectListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProjectListViewController.swift; sourceTree = "<group>"; };
@@ -610,6 +612,7 @@
 				95E3146621FAF1740092C22E /* SimpleRequest.swift */,
 				95E3146721FAF1740092C22E /* User.swift */,
 				3C26401C23ADE8A5004E1DBE /* Project.swift */,
+				3C8238DC23BC390600C632BC /* Favorite.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -977,6 +980,7 @@
 				95E3147121FAF1740092C22E /* AuthService.swift in Sources */,
 				95E3146B21FAF1740092C22E /* PassService.swift in Sources */,
 				3C26401B23ADE838004E1DBE /* ProjectService.swift in Sources */,
+				3C8238DD23BC390600C632BC /* Favorite.swift in Sources */,
 				95E3146A21FAF1740092C22E /* AnnouncementService.swift in Sources */,
 				95E3147221FAF1740092C22E /* RegistrationService.swift in Sources */,
 				95E3147421FAF1740092C22E /* SimpleRequest.swift in Sources */,
