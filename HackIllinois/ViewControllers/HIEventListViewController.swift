@@ -76,8 +76,8 @@ extension HIEventListViewController: HIEventCellDelegate {
 
         let changeFavoriteStatusRequest: APIRequest<Favorite> =
             eventCell.favoritedButton.isActive ?
-                HIAPI.EventService.unfavoriteBy(name: event.name) :
-                HIAPI.EventService.favoriteBy(name: event.name)
+                HIAPI.EventService.unfavoriteBy(id: event.id) :
+                HIAPI.EventService.favoriteBy(id: event.id)
 
         changeFavoriteStatusRequest
         .onCompletion { result in

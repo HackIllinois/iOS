@@ -15,9 +15,8 @@ import CoreData
 import HIAPI
 
 // MARK: - Constants
-class HIConstants {
-
-    // Times for HackIllinois 2020 (backup if API call doesn't work)
+struct HIConstants {
+    // Times
     static let EVENT_START_TIME = Date(timeIntervalSince1970: 1582927200) // Friday, February 28, 2020 1550872800 4:00:00 PM GMT-06:00
     static let HACKING_START_TIME = Date(timeIntervalSince1970: 1582952400) // Friday, February 28, 2020 11:00:00 PM GMT-06:00
     static let HACKING_END_TIME = Date(timeIntervalSince1970: 1583078400) // Sunday, March 1, 2020 10:00:00 AM GMT-06:00
