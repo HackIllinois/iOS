@@ -1196,7 +1196,7 @@
 /* Begin XCRemoteSwiftPackageReference section */
 		951E67F123C1C7FD00477703 /* XCRemoteSwiftPackageReference "api-manager" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:rauhul/api-manager.git";
+			repositoryURL = "https://github.com/rauhul/api-manager.git";
 			requirement = {
 				kind = exactVersion;
 				version = 0.4.0;
@@ -1204,7 +1204,7 @@
 		};
 		951E67F423C1C83B00477703 /* XCRemoteSwiftPackageReference "keychain" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:rauhul/keychain.git";
+			repositoryURL = "https://github.com/rauhul/keychain.git";
 			requirement = {
 				kind = exactVersion;
 				version = 0.2.0;

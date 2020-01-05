@@ -38,7 +38,7 @@ class HILocalNotificationController: NSObject {
             @unknown default:
                 os_log(
                     "Unknown UNAuthorizationStatus %s",
-                    log: Logger.notifactions,
+                    log: Logger.notifications,
                     type: .info,
                     String(describing: settings.authorizationStatus)
                 )
