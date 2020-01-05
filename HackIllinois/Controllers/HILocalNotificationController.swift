@@ -14,6 +14,7 @@ import Foundation
 import UserNotifications
 import UIKit
 import HIAPI
+import os
 
 class HILocalNotificationController: NSObject {
     static let shared = HILocalNotificationController()
@@ -34,6 +35,13 @@ class HILocalNotificationController: NSObject {
                     if granted { authorized?() }
                 }
             case .provisional: break
+            @unknown default:
+                os_log(
+                    "Unknown UNAuthorizationStatus %s",
+                    log: Logger.notifications,
+                    type: .info,
+                    String(describing: settings.authorizationStatus)
+                )
             }
         }
     }

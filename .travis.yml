@@ -1,13 +1,7 @@
 language: swift
 os: osx
-osx_image: xcode10.1
-
-before_install:
-  - pod repo update
+osx_image: xcode11.3
 
 script:
   - swiftlint --strict
-  - xcodebuild clean build -workspace HackIllinois.xcworkspace -scheme HackIllinois -destination "platform=iOS Simulator,OS=12.1,name=iPhone X" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO -quiet
-
-cache:
-  - cocoapods
+  - xcodebuild clean build -project HackIllinois.xcodeproj -scheme HackIllinois -destination "platform=iOS Simulator,OS=13.3,name=iPhone 11" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO -quiet
