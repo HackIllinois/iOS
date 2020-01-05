@@ -14,12 +14,13 @@ import Foundation
 import UIKit
 import CoreData
 import Lottie
+import os
 
 class HIBaseViewController: UIViewController {
     // MARK: - Properties
     var _fetchedResultsController: NSFetchedResultsController<NSManagedObject>?
     var refreshControl = UIRefreshControl()
-    var refreshAnimation = LOTAnimationView(name: "refresh")
+    var refreshAnimation = AnimationView(name: "refresh")
     var tableView: UITableView?
     let tableBackgroundView = HIView(style: .emptyTable)
 }
@@ -121,6 +122,13 @@ extension HIBaseViewController: NSFetchedResultsControllerDelegate {
         case .move:
             guard let fromIndexPath = indexPath, let toIndexPath = newIndexPath else { return }
             tableView?.moveRow(at: fromIndexPath, to: toIndexPath)
+        @unknown default:
+            os_log(
+                "Unknown NSFetchedResultsChangeType %s",
+                log: Logger.ui,
+                type: .info,
+                String(describing: type)
+            )
         }
     }
 
@@ -135,6 +143,13 @@ extension HIBaseViewController: NSFetchedResultsControllerDelegate {
             tableView?.reloadSections([sectionIndex], with: .fade)
         case .move:
             break
+        @unknown default:
+            os_log(
+                "Unknown NSFetchedResultsChangeType %s",
+                log: Logger.ui,
+                type: .info,
+                String(describing: type)
+            )
         }
     }
 
@@ -190,7 +205,7 @@ extension HIBaseViewController {
 
         // Setup refresh animation
         refreshAnimation.alpha = 0.0
-        refreshAnimation.loopAnimation = true
+        refreshAnimation.loopMode = .loop
         refreshAnimation.contentMode = .scaleAspectFit
         refreshAnimation.translatesAutoresizingMaskIntoConstraints = false
         refreshControl.addSubview(refreshAnimation)
@@ -203,7 +218,7 @@ extension HIBaseViewController {
     }
 
     @objc dynamic func refresh(_ sender: UIRefreshControl) {
-        refreshAnimation.setProgress(frame: 0)
+        refreshAnimation.currentFrame = 0
         refreshAnimation.play()
         UIViewPropertyAnimator(duration: 0.125, curve: .linear) {
             self.refreshAnimation.alpha = 1.0
