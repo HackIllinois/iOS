@@ -14,12 +14,12 @@ import UIKit
 import APIManager
 import Lottie
 import SafariServices
-import SwiftKeychainAccess
+import Keychain
 import HIAPI
 
 class HILoginFlowController: UIViewController {
     // MARK: - Properties
-    let animationView = LOTAnimationView(name: "intro")
+    let animationView = AnimationView(name: "intro")
     var shouldDisplayAnimationOnNextAppearance = true
 
     // MARK: Status Bar

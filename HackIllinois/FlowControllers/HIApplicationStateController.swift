@@ -12,7 +12,7 @@
 
 import Foundation
 import UIKit
-import SwiftKeychainAccess
+import Keychain
 
 class HIApplicationStateController {
 

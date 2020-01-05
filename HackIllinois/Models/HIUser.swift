@@ -11,7 +11,7 @@
 //
 
 import Foundation
-import SwiftKeychainAccess
+import Keychain
 import APIManager
 import HIAPI
 
