@@ -1,6 +1,5 @@
 # iOS
-master [![Build Status](https://travis-ci.com/HackIllinois/iOS.svg?branch=master)](https://travis-ci.com/HackIllinois/iOS/tree/master)  
-dev    [![Build Status](https://travis-ci.com/HackIllinois/iOS.svg?branch=dev)](https://travis-ci.com/HackIllinois/iOS/tree/dev)  
+[![Build Status](https://travis-ci.com/HackIllinois/iOS.svg?branch=dev)](https://travis-ci.com/HackIllinois/iOS/tree/dev)  
 
 The repo hosts the official iOS app for HackIllinois. If you would like to get involved please reach out HackIllinois staff.
 
