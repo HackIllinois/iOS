@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -24,8 +24,6 @@
 		3CF8DB1523B41D0A0035ECAE /* HIProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DB1423B41D0A0035ECAE /* HIProjectListViewController.swift */; };
 		3CF8DB1723B41F350035ECAE /* HIProjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DB1623B41F350035ECAE /* HIProjectDetailViewController.swift */; };
 		3CF8DB1923B42B240035ECAE /* HIProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DB1823B42B240035ECAE /* HIProjectViewController.swift */; };
-		6602C7A6DEE0178C82BE1497 /* Pods_HackIllinois.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F912C974275240F02A49C6D /* Pods_HackIllinois.framework */; };
-		9506926E203EE14000D7C34C /* LOTAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95069264203EE14000D7C34C /* LOTAnimationView.swift */; };
 		95069270203EE14000D7C34C /* img_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 95069269203EE14000D7C34C /* img_1.png */; };
 		95069271203EE14000D7C34C /* img_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 9506926A203EE14000D7C34C /* img_0.png */; };
 		95069272203EE14000D7C34C /* intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 9506926B203EE14000D7C34C /* intro.json */; };
@@ -38,6 +36,9 @@
 		951827A81EA35DB800049F79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951827981EA35DB800049F79 /* AppDelegate.swift */; };
 		951827A91EA35DB800049F79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 951827991EA35DB800049F79 /* Assets.xcassets */; };
 		951827B41EA35E8B00049F79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 951827B21EA35E8B00049F79 /* LaunchScreen.storyboard */; };
+		951E67F323C1C7FD00477703 /* APIManager in Frameworks */ = {isa = PBXBuildFile; productRef = 951E67F223C1C7FD00477703 /* APIManager */; };
+		951E67F623C1C83B00477703 /* Keychain in Frameworks */ = {isa = PBXBuildFile; productRef = 951E67F523C1C83B00477703 /* Keychain */; };
+		951E67F923C1C88200477703 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 951E67F823C1C88200477703 /* Lottie */; };
 		9521A6A820191590009059C6 /* HIEventDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521A6A720191590009059C6 /* HIEventDataSource.swift */; };
 		9521A6AA20191737009059C6 /* HIAnnouncementDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521A6A920191737009059C6 /* HIAnnouncementDataSource.swift */; };
 		9523A2902218BA2600341EBD /* HIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9523A28F2218BA2600341EBD /* HIImageView.swift */; };
@@ -111,7 +112,6 @@
 		95FC79C321E024A700715036 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC79C221E024A700715036 /* Notifications.swift */; };
 		A5163FEB221F2741003C543E /* HIAdminStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5163FEA221F2741003C543E /* HIAdminStatsViewController.swift */; };
 		A5163FED221F283C003C543E /* StatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5163FEC221F283C003C543E /* StatsService.swift */; };
-		AEEEA4AA44FBFB6459DE8BF5 /* Pods_HIAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04B5E0956897F8113C7875D /* Pods_HIAPI.framework */; };
 		D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A309BB2211175200CBA351 /* PassKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -176,9 +176,6 @@
 		3CF8DB1423B41D0A0035ECAE /* HIProjectListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProjectListViewController.swift; sourceTree = "<group>"; };
 		3CF8DB1623B41F350035ECAE /* HIProjectDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProjectDetailViewController.swift; sourceTree = "<group>"; };
 		3CF8DB1823B42B240035ECAE /* HIProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProjectViewController.swift; sourceTree = "<group>"; };
-		5F912C974275240F02A49C6D /* Pods_HackIllinois.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HackIllinois.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6ACE213775C4DAD26D29206F /* Pods-HackIllinois.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackIllinois.release.xcconfig"; path = "Pods/Target Support Files/Pods-HackIllinois/Pods-HackIllinois.release.xcconfig"; sourceTree = "<group>"; };
-		95069264203EE14000D7C34C /* LOTAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LOTAnimationView.swift; sourceTree = "<group>"; };
 		95069269203EE14000D7C34C /* img_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_1.png; sourceTree = "<group>"; };
 		9506926A203EE14000D7C34C /* img_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_0.png; sourceTree = "<group>"; };
 		9506926B203EE14000D7C34C /* intro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = intro.json; sourceTree = "<group>"; };
@@ -265,14 +262,10 @@
 		95FC79BD21E0199600715036 /* HIAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAppearance.swift; sourceTree = "<group>"; };
 		95FC79C021E0243D00715036 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		95FC79C221E024A700715036 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
-		A04B5E0956897F8113C7875D /* Pods_HIAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HIAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5163FEA221F2741003C543E /* HIAdminStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAdminStatsViewController.swift; sourceTree = "<group>"; };
 		A5163FEC221F283C003C543E /* StatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsService.swift; sourceTree = "<group>"; };
-		AF9EC66ED72062AA9232ADB3 /* Pods-HIAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HIAPI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HIAPI/Pods-HIAPI.debug.xcconfig"; sourceTree = "<group>"; };
 		D3A309BA221116A600CBA351 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };
 		D3A309BB2211175200CBA351 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
-		EC118263E461191C2C81D529 /* Pods-HIAPI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HIAPI.release.xcconfig"; path = "Pods/Target Support Files/Pods-HIAPI/Pods-HIAPI.release.xcconfig"; sourceTree = "<group>"; };
-		FB7A684A9E0518F3903C3ADC /* Pods-HackIllinois.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackIllinois.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HackIllinois/Pods-HackIllinois.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,9 +280,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				951E67F923C1C88200477703 /* Lottie in Frameworks */,
+				951E67F623C1C83B00477703 /* Keychain in Frameworks */,
 				D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */,
 				95E3143121FAD5B40092C22E /* HIAPI.framework in Frameworks */,
-				6602C7A6DEE0178C82BE1497 /* Pods_HackIllinois.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,7 +291,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEEEA4AA44FBFB6459DE8BF5 /* Pods_HIAPI.framework in Frameworks */,
+				951E67F323C1C7FD00477703 /* APIManager in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,22 +307,10 @@
 			path = Stickers;
 			sourceTree = "<group>";
 		};
-		6B0003FB1C250537E97323BE /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				6ACE213775C4DAD26D29206F /* Pods-HackIllinois.release.xcconfig */,
-				FB7A684A9E0518F3903C3ADC /* Pods-HackIllinois.debug.xcconfig */,
-				AF9EC66ED72062AA9232ADB3 /* Pods-HIAPI.debug.xcconfig */,
-				EC118263E461191C2C81D529 /* Pods-HIAPI.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		95069260203EE14000D7C34C /* Animations */ = {
 			isa = PBXGroup;
 			children = (
 				95069261203EE14000D7C34C /* Countdown */,
-				95069264203EE14000D7C34C /* LOTAnimationView.swift */,
 				952D1538220D37980041383A /* Refresh */,
 				95069267203EE14000D7C34C /* Launch */,
 			);
@@ -370,7 +352,6 @@
 				35D7CE9520380ACF00654E28 /* Stickers */,
 				95E3142B21FAD5B40092C22E /* HIAPI */,
 				951827801EA35AF100049F79 /* Products */,
-				6B0003FB1C250537E97323BE /* Pods */,
 				EAE6D26341C3ACE27256067A /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -635,8 +616,6 @@
 			isa = PBXGroup;
 			children = (
 				D3A309BB2211175200CBA351 /* PassKit.framework */,
-				5F912C974275240F02A49C6D /* Pods_HackIllinois.framework */,
-				A04B5E0956897F8113C7875D /* Pods_HIAPI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -675,11 +654,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 951827941EA35AF100049F79 /* Build configuration list for PBXNativeTarget "HackIllinois" */;
 			buildPhases = (
-				3882DB21693A6E09266712BA /* [CP] Check Pods Manifest.lock */,
 				9518277B1EA35AF100049F79 /* Sources */,
 				9518277C1EA35AF100049F79 /* Frameworks */,
 				9518277D1EA35AF100049F79 /* Resources */,
-				4BB122A7E5028FEBC4CB4FEB /* [CP] Embed Pods Frameworks */,
 				95CD0ED6201523B800D79DCC /* ShellScript */,
 				35D7CE9F20380ACF00654E28 /* Embed App Extensions */,
 				95E3143621FAD5B40092C22E /* Embed Frameworks */,
@@ -691,6 +668,10 @@
 				95E3143021FAD5B40092C22E /* PBXTargetDependency */,
 			);
 			name = HackIllinois;
+			packageProductDependencies = (
+				951E67F523C1C83B00477703 /* Keychain */,
+				951E67F823C1C88200477703 /* Lottie */,
+			);
 			productName = HackIllinois;
 			productReference = 9518277F1EA35AF100049F79 /* HackIllinois.app */;
 			productType = "com.apple.product-type.application";
@@ -699,7 +680,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 95E3143521FAD5B40092C22E /* Build configuration list for PBXNativeTarget "HIAPI" */;
 			buildPhases = (
-				D0A0F622E8017764F318A867 /* [CP] Check Pods Manifest.lock */,
 				95E3142521FAD5B30092C22E /* Headers */,
 				95E3142621FAD5B30092C22E /* Sources */,
 				95E3142721FAD5B30092C22E /* Frameworks */,
@@ -710,6 +690,9 @@
 			dependencies = (
 			);
 			name = HIAPI;
+			packageProductDependencies = (
+				951E67F223C1C7FD00477703 /* APIManager */,
+			);
 			productName = HIAPI;
 			productReference = 95E3142A21FAD5B30092C22E /* HIAPI.framework */;
 			productType = "com.apple.product-type.framework";
@@ -732,7 +715,7 @@
 					9518277E1EA35AF100049F79 = {
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = 8VNQTQM2L6;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -749,14 +732,14 @@
 					95E3142921FAD5B30092C22E = {
 						CreatedOnToolsVersion = 10.1;
 						DevelopmentTeam = 8VNQTQM2L6;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
 			buildConfigurationList = 9518277A1EA35AF100049F79 /* Build configuration list for PBXProject "HackIllinois" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				English,
@@ -764,6 +747,11 @@
 				Base,
 			);
 			mainGroup = 951827761EA35AF100049F79;
+			packageReferences = (
+				951E67F123C1C7FD00477703 /* XCRemoteSwiftPackageReference "api-manager" */,
+				951E67F423C1C83B00477703 /* XCRemoteSwiftPackageReference "keychain" */,
+				951E67F723C1C88200477703 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = 951827801EA35AF100049F79 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -811,46 +799,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3882DB21693A6E09266712BA /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HackIllinois-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4BB122A7E5028FEBC4CB4FEB /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HackIllinois/Pods-HackIllinois-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/SwiftKeychainAccess/SwiftKeychainAccess.framework",
-				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
-				"${BUILT_PRODUCTS_DIR}/APIManager/APIManager.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainAccess.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/APIManager.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HackIllinois/Pods-HackIllinois-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		95CD0ED6201523B800D79DCC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -863,28 +811,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
-		};
-		D0A0F622E8017764F318A867 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HIAPI-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -944,7 +870,6 @@
 				953199C91FC25CA0009F2AA1 /* HICoreDataController.swift in Sources */,
 				95A7D28D203D4F54005EAEAF /* Identifiable.swift in Sources */,
 				9521A6A820191590009059C6 /* HIEventDataSource.swift in Sources */,
-				9506926E203EE14000D7C34C /* LOTAnimationView.swift in Sources */,
 				95D6DA78203F8C3900E7C982 /* HITintImageView.swift in Sources */,
 				95FC79C121E0243D00715036 /* Operators.swift in Sources */,
 				95A7D294203D4F54005EAEAF /* HIDateHeader.swift in Sources */,
@@ -1150,7 +1075,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1158,7 +1084,6 @@
 		};
 		951827951EA35AF100049F79 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FB7A684A9E0518F3903C3ADC /* Pods-HackIllinois.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1166,18 +1091,20 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8VNQTQM2L6;
 				INFOPLIST_FILE = HackIllinois/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		951827961EA35AF100049F79 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6ACE213775C4DAD26D29206F /* Pods-HackIllinois.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1185,17 +1112,19 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8VNQTQM2L6;
 				INFOPLIST_FILE = HackIllinois/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
 		95E3143321FAD5B40092C22E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AF9EC66ED72062AA9232ADB3 /* Pods-HIAPI.debug.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
@@ -1212,14 +1141,18 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = HIAPI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.HIAPI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1228,7 +1161,6 @@
 		};
 		95E3143421FAD5B40092C22E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC118263E461191C2C81D529 /* Pods-HIAPI.release.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
@@ -1245,12 +1177,16 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = HIAPI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.HIAPI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1297,6 +1233,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		951E67F123C1C7FD00477703 /* XCRemoteSwiftPackageReference "api-manager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rauhul/api-manager.git";
+			requirement = {
+				kind = exactVersion;
+				version = 0.4.0;
+			};
+		};
+		951E67F423C1C83B00477703 /* XCRemoteSwiftPackageReference "keychain" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rauhul/keychain.git";
+			requirement = {
+				kind = exactVersion;
+				version = 0.2.0;
+			};
+		};
+		951E67F723C1C88200477703 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = exactVersion;
+				version = 3.1.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		951E67F223C1C7FD00477703 /* APIManager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 951E67F123C1C7FD00477703 /* XCRemoteSwiftPackageReference "api-manager" */;
+			productName = APIManager;
+		};
+		951E67F523C1C83B00477703 /* Keychain */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 951E67F423C1C83B00477703 /* XCRemoteSwiftPackageReference "keychain" */;
+			productName = Keychain;
+		};
+		951E67F823C1C88200477703 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 951E67F723C1C88200477703 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		957D7CA81FC2940800C4332A /* HackIllinois.xcdatamodeld */ = {

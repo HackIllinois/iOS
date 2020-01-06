@@ -116,6 +116,8 @@ extension HIBaseScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
             previewLayer.connection?.videoOrientation = .landscapeLeft
         case .landscapeRight:
             previewLayer.connection?.videoOrientation = .landscapeRight
+        @unknown default:
+            previewLayer.connection?.videoOrientation = .portrait
         }
     }
 
