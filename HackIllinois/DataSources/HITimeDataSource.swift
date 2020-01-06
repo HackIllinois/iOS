@@ -16,17 +16,20 @@ import HIAPI
 final class HITimeDataSource {
     static var shared = HITimeDataSource()
 
-    // Times set initially with constants as default values
-    var eventStart: Date = HIConstants.EVENT_START_TIME
-    var eventEnd: Date = HIConstants.EVENT_END_TIME
-    var hackStart: Date = HIConstants.HACKING_START_TIME
-    var hackEnd: Date = HIConstants.HACKING_END_TIME
-    var fridayStart: Date = HIConstants.FRIDAY_START_TIME
-    var fridayEnd: Date = HIConstants.FRIDAY_END_TIME
-    var saturdayStart: Date = HIConstants.SATURDAY_START_TIME
-    var saturdayEnd: Date = HIConstants.SATURDAY_END_TIME
-    var sundayStart: Date = HIConstants.SUNDAY_START_TIME
-    var sundayEnd: Date = HIConstants.SUNDAY_END_TIME
+    public static let defaultTimes = EventTimes(
+        eventStart: HIConstants.EVENT_START_TIME,
+        eventEnd: HIConstants.EVENT_END_TIME,
+        hackStart: HIConstants.HACKING_START_TIME,
+        hackEnd: HIConstants.HACKING_END_TIME,
+        fridayStart: HIConstants.FRIDAY_START_TIME,
+        fridayEnd: HIConstants.FRIDAY_END_TIME,
+        saturdayStart: HIConstants.SATURDAY_START_TIME,
+        saturdayEnd: HIConstants.SATURDAY_END_TIME,
+        sundayStart: HIConstants.SUNDAY_START_TIME,
+        sundayEnd: HIConstants.SUNDAY_END_TIME
+    )
+
+    var eventTimes = HITimeDataSource.defaultTimes
 
     private init() {
         _ = self.updateTimes()
@@ -42,21 +45,10 @@ final class HITimeDataSource {
             .onCompletion { result in
                 do {
                     let (timeContainer, _) = try result.get()
-                    let apiEventTimes = timeContainer.eventTimes
-
-                    self.eventStart = apiEventTimes.eventStart
-                    self.eventEnd = apiEventTimes.eventEnd
-                    self.hackStart = apiEventTimes.hackStart
-                    self.hackEnd = apiEventTimes.hackEnd
-                    self.fridayStart = apiEventTimes.fridayStart
-                    self.fridayEnd = apiEventTimes.fridayEnd
-                    self.saturdayStart = apiEventTimes.saturdayStart
-                    self.saturdayEnd = apiEventTimes.saturdayEnd
-                    self.sundayStart = apiEventTimes.sundayStart
-                    self.sundayEnd = apiEventTimes.sundayEnd
+                    self.eventTimes = timeContainer.eventTimes
                     success = true
                 } catch {
-                    self.setDefaultTimes()
+                    self.eventTimes = HITimeDataSource.defaultTimes
                     print(error)
                 }
                 semaphore.signal()
@@ -67,18 +59,5 @@ final class HITimeDataSource {
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
 
         return success
-    }
-
-    func setDefaultTimes() {
-        eventStart = HIConstants.EVENT_START_TIME
-        eventEnd = HIConstants.EVENT_END_TIME
-        hackStart = HIConstants.HACKING_START_TIME
-        hackEnd = HIConstants.HACKING_END_TIME
-        fridayStart = HIConstants.FRIDAY_START_TIME
-        fridayEnd = HIConstants.FRIDAY_END_TIME
-        saturdayStart = HIConstants.SATURDAY_START_TIME
-        saturdayEnd = HIConstants.SATURDAY_END_TIME
-        sundayStart = HIConstants.SUNDAY_START_TIME
-        sundayEnd = HIConstants.SUNDAY_END_TIME
     }
 }

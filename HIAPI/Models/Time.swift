@@ -40,4 +40,18 @@ public struct EventTimes: Codable {
     public let saturdayEnd: Date
     public let sundayStart: Date
     public let sundayEnd: Date
+
+    public init(eventStart: Date, eventEnd: Date, hackStart: Date, hackEnd: Date, fridayStart: Date, fridayEnd: Date,
+                saturdayStart: Date, saturdayEnd: Date, sundayStart: Date, sundayEnd: Date) {
+        self.eventStart = eventStart
+        self.eventEnd = eventEnd
+        self.hackStart = hackStart
+        self.hackEnd = hackEnd
+        self.fridayStart = fridayStart
+        self.fridayEnd = fridayEnd
+        self.saturdayStart = saturdayStart
+        self.saturdayEnd = saturdayEnd
+        self.sundayStart = sundayStart
+        self.sundayEnd = sundayEnd
+    }
 }
