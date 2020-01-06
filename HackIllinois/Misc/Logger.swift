@@ -14,6 +14,7 @@ import Foundation
 import os
 
 struct Logger {
-    static var api = OSLog(subsystem: "org.hackillinois.ios", category: "api")
-    static var ui = OSLog(subsystem: "org.hackillinois.ios", category: "ui")
+    static var api           = OSLog(subsystem: "org.hackillinois.ios", category: "api")
+    static var notifications = OSLog(subsystem: "org.hackillinois.ios", category: "notifications")
+    static var ui            = OSLog(subsystem: "org.hackillinois.ios", category: "ui")
 }
