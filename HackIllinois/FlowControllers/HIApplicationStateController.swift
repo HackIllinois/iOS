@@ -127,6 +127,7 @@ extension HIApplicationStateController {
 
         HIEventDataSource.refresh()
         HIAnnouncementDataSource.refresh()
+        HIProjectDataSource.refresh()
     }
 
     func prepareLoginControllerForDisplay() { }

@@ -23,20 +23,20 @@ public class ProjectService: BaseService {
         return APIRequest<ProjectContainer>(service: self, endpoint: "", method: .GET)
     }
 
-    public static func getAllFavorites() -> APIRequest<Favorite> {
-        return APIRequest<Favorite>(service: self, endpoint: "favorite/", method: .GET)
+    public static func getAllFavorites() -> APIRequest<ProjectFavorites> {
+        return APIRequest<ProjectFavorites>(service: self, endpoint: "favorite/", method: .GET)
     }
 
-    public static func favoriteBy(id: String) -> APIRequest<Favorite> {
+    public static func favoriteBy(id: String) -> APIRequest<ProjectFavorites> {
         var body = HTTPBody()
         body["projectId"] = id
-        return APIRequest<Favorite>(service: self, endpoint: "favorite/add/", body: body, method: .POST)
+        return APIRequest<ProjectFavorites>(service: self, endpoint: "favorite/add/", body: body, method: .POST)
     }
 
-    public static func unfavoriteBy(id: String) -> APIRequest<Favorite> {
+    public static func unfavoriteBy(id: String) -> APIRequest<ProjectFavorites> {
         var body = HTTPBody()
         body["projectId"] = id
-        return APIRequest<Favorite>(service: self, endpoint: "favorite/remove/", body: body, method: .POST)
+        return APIRequest<ProjectFavorites>(service: self, endpoint: "favorite/remove/", body: body, method: .POST)
     }
 
 }

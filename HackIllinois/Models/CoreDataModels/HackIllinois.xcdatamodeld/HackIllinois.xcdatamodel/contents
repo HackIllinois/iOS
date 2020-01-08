@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Announcement" representedClassName="Announcement" syncable="YES">
         <attribute name="info" attributeType="String"/>
         <attribute name="roles" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
@@ -40,14 +40,14 @@
         </uniquenessConstraints>
     </entity>
     <entity name="Project" representedClassName="Project" syncable="YES">
-        <attribute name="favorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="info" optional="YES" attributeType="String"/>
-        <attribute name="mentors" optional="YES" attributeType="Transformable"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="number" optional="YES" attributeType="String"/>
-        <attribute name="room" optional="YES" attributeType="String"/>
-        <attribute name="tags" optional="YES" attributeType="Transformable"/>
+        <attribute name="favorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="info" attributeType="String"/>
+        <attribute name="mentors" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="Array&lt;Any&gt;"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="number" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="room" attributeType="String"/>
+        <attribute name="tags" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="Array&lt;Any&gt;"/>
     </entity>
     <elements>
         <element name="Announcement" positionX="-63" positionY="72" width="128" height="105"/>

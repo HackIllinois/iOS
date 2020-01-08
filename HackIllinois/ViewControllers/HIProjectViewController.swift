@@ -28,7 +28,7 @@ class HIProjectViewController: HIProjectListViewController {
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
             managedObjectContext: HICoreDataController.shared.viewContext,
-            sectionNameKeyPath: "sectionIdentifier",
+            sectionNameKeyPath: nil,
             cacheName: nil
         )
 
@@ -45,21 +45,28 @@ class HIProjectViewController: HIProjectListViewController {
         //TODO: Check predicates for type of project are correct
         let webPredicate = NSPredicate(
             format: "tags CONTAINS %@",
-            "WEB"
+            "Web Development"
         )
         dataStore.append((displayText: "WEB DEV", predicate: webPredicate))
 
+        let systemsPredicate = NSPredicate(
+            format: "tags CONTAINS %@",
+            "Systems"
+        )
+        dataStore.append((displayText: "SYSTEMS", predicate: systemsPredicate))
+
         let languagePredicate = NSPredicate(
             format: "tags CONTAINS %@",
-            "LANGUAGE"
+            "Languages"
         )
         dataStore.append((displayText: "LANGUAGE", predicate: languagePredicate))
 
-        let systemsPredicate = NSPredicate(
+        let dataSciPredicate = NSPredicate(
             format: "tags CONTAINS %@",
-            "SYSTEMS"
+            "Data Science"
         )
-        dataStore.append((displayText: "SYSTEMS", predicate: systemsPredicate))
+        dataStore.append((displayText: "DATA SCIENCE", predicate: dataSciPredicate))
+
         return dataStore
     }()
 }
@@ -125,8 +132,8 @@ extension HIProjectViewController {
 
     override func viewDidLoad() {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
-        setupRefreshControl()
         super.viewDidLoad()
+        setupRefreshControl()
     }
 }
 

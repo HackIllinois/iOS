@@ -47,7 +47,7 @@ final class HIProjectDataSource {
                             do {
                                 // 1) Unwrap contained data
                                 let apiProjects = containedProjects.projects
-                                let apiFavorites = containedFavorites.favorites // Unwraps favorites based on strings (should change name to favorites)
+                                let apiFavorites = containedFavorites.projects // Unwraps favorites based on strings (should change name to favorites)
 
                                 // 2) Get all CoreData Projects.
                                 let projectFetchRequest = NSFetchRequest<Project>(entityName: "Project")
@@ -102,6 +102,7 @@ final class HIProjectDataSource {
                             }
                         }
                     } catch {
+                        print("Failed2 Projects")
                         completion?()
                         isRefreshing = false
                         print(error)
@@ -110,6 +111,8 @@ final class HIProjectDataSource {
                 .authorize(with: HIApplicationStateController.shared.user)
                 .launch()
             } catch {
+                print("Failed1 projects")
+                print(error)
                 completion?()
                 isRefreshing = false
             }

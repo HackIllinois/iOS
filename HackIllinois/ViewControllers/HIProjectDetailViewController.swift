@@ -59,7 +59,7 @@ extension HIProjectDetailViewController {
     @objc func didSelectFavoriteButton(_ sender: HIButton) {
         guard let project = project else { return }
 
-        let _: APIRequest<Favorite> = sender.isActive ?
+        let _: APIRequest<ProjectFavorites> = sender.isActive ?
             HIAPI.ProjectService.unfavoriteBy(id: project.id) :
             HIAPI.ProjectService.favoriteBy(id: project.id)
     }

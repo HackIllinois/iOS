@@ -34,5 +34,10 @@ public struct Project: Codable {
     public let mentors: [String]
     public let room: String
     public let tags: [String]
-    public let number: String
+    public let number: Int32
+}
+
+public struct ProjectFavorites: Codable, APIReturnable {
+    public let projects: Set<String>
+    public let id: String
 }

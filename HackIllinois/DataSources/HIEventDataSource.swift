@@ -47,7 +47,7 @@ final class HIEventDataSource {
                             do {
                                 // 1) Unwrap contained data
                                 let apiEvents = containedEvents.events
-                                let apiFavorites = containedFavorites.favorites
+                                let apiFavorites = containedFavorites.events
 
                                 // 2) Compute all the unique API locations.
                                 let allLocations = apiEvents.flatMap { $0.locations }
