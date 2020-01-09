@@ -109,11 +109,7 @@ extension HIEventDetailViewController {
 // MARK: - UIViewController
 extension HIEventDetailViewController {
     override func loadView() {
-        view = HITintImageView {
-            $0.image = #imageLiteral(resourceName: "EventsGradient")
-            $0.translatesAutoresizingMaskIntoConstraints = true
-            $0.isUserInteractionEnabled = true
-        }
+        super.loadView()
 
         view.addSubview(eventDetailContainer)
         eventDetailContainer.constrain(to: view.safeAreaLayoutGuide, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)

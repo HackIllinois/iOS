@@ -28,7 +28,11 @@ class HIBaseViewController: UIViewController {
 // MARK: - UIViewController
 extension HIBaseViewController {
     override func loadView() {
-        view = HIView { $0.backgroundHIColor = \.baseBackground }
+        view = HITintImageView {
+            $0.image = #imageLiteral(resourceName: "EventsGradient")
+            $0.translatesAutoresizingMaskIntoConstraints = true
+            $0.isUserInteractionEnabled = true
+        }
     }
 
     override func viewDidLoad() {

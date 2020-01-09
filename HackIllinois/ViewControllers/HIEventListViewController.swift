@@ -19,17 +19,6 @@ class HIEventListViewController: HIBaseViewController {
     let eventDetailViewController = HIEventDetailViewController()
 }
 
-// MARK: - UIViewController
-extension HIEventListViewController {
-    override func loadView() {
-        view = HITintImageView {
-            $0.image = #imageLiteral(resourceName: "EventsGradient")
-            $0.translatesAutoresizingMaskIntoConstraints = true
-            $0.isUserInteractionEnabled = true
-        }
-    }
-}
-
 // MARK: - UITableView Setup
 extension HIEventListViewController {
     override func setupTableView() {
