@@ -156,16 +156,16 @@ extension HIProjectDetailViewController {
         return 1 //Projects have one location
     }
 
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: HIEventDetailLocationCell.identifier, for: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: HIEventDetailLocationCell.identifier, for: indexPath)
 //        if let cell = cell as? HIEventDetailLocationCell,
 //            let project = project,
 //            1 > indexPath.row, //TODO: Projects have one location
 //            let location = project.location as? Location { //TODO: Projects have one location
 //            cell <- location
 //        }
-//        return cell
-//    }
+        return cell
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -182,7 +182,7 @@ extension HIProjectDetailViewController {
         return CGFloat.leastNonzeroMagnitude
     }
 
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        if let project = project,
 //            1 > indexPath.row, //TODO: Projects have one location
 //            let location = project.location as? Location { //TODO: Projects have one location
@@ -208,6 +208,6 @@ extension HIProjectDetailViewController {
 //            mapItem.name = location.name
 //            mapItem.openInMaps(launchOptions: options)
 //        }
-//        super.tableView(tableView, didSelectRowAt: indexPath)
-//    }
+        super.tableView(tableView, didSelectRowAt: indexPath)
+    }
 }
