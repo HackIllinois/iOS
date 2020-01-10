@@ -71,7 +71,7 @@ class HILoginFlowController: UIViewController {
 extension HILoginFlowController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor <- \.baseBackground
+        view.backgroundColor <- \.transparentBackground
         addChild(loginSelectionViewController)
         loginSelectionViewController.view.frame = view.frame
         loginSelectionViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]

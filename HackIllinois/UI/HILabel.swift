@@ -70,7 +70,7 @@ class HILabel: UILabel {
 
         case .loginHeader:
             textHIColor = \.accent
-            backgroundHIColor = \.baseBackground
+            backgroundHIColor = \.transparentBackground
             font = HIAppearance.Font.navigationTitle
 
         case .loginSelection:
