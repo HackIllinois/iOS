@@ -1,7 +1,7 @@
 # iOS
 [![Build Status](https://travis-ci.com/HackIllinois/iOS.svg?branch=dev)](https://travis-ci.com/HackIllinois/iOS/tree/dev)  
 
-The repo hosts the official iOS app for HackIllinois. If you would like to get involved please reach out HackIllinois staff.
+The repo hosts the official iOS app for HackIllinois. If you would like to get involved please reach out to the HackIllinois staff.
 
 ## Requirements
 1. XCode 11.0+
