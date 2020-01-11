@@ -74,9 +74,24 @@ extension HIProjectListViewController: HIProjectCellDelegate {
         guard let indexPath = projectCell.indexPath,
             let project = _fetchedResultsController?.object(at: indexPath) as? Project else { return }
 
-        let _: APIRequest<ProjectFavorites> = projectCell.favoritedButton.isActive ?
+        let changeFavoriteStatusRequest: APIRequest<ProjectFavorites> =
+            projectCell.favoritedButton.isActive ?
                 HIAPI.ProjectService.unfavoriteBy(id: project.id) :
                 HIAPI.ProjectService.favoriteBy(id: project.id)
+
+        changeFavoriteStatusRequest
+        .onCompletion { result in
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    project.favorite.toggle()
+                }
+            case .failure(let error):
+                print(error, error.localizedDescription)
+            }
+        }
+        .authorize(with: HIApplicationStateController.shared.user)
+        .launch()
     }
 }
 

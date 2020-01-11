@@ -66,9 +66,25 @@ extension HIProjectDetailViewController {
     @objc func didSelectFavoriteButton(_ sender: HIButton) {
         guard let project = project else { return }
 
-        let _: APIRequest<ProjectFavorites> = sender.isActive ?
-            HIAPI.ProjectService.unfavoriteBy(id: project.id) :
-            HIAPI.ProjectService.favoriteBy(id: project.id)
+        let changeFavoriteStatusRequest: APIRequest<ProjectFavorites> =
+            sender.isActive ?
+                HIAPI.ProjectService.unfavoriteBy(id: project.id) :
+                HIAPI.ProjectService.favoriteBy(id: project.id)
+
+        changeFavoriteStatusRequest
+        .onCompletion { result in
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    sender.isActive.toggle()
+                    project.favorite.toggle()
+                }
+            case .failure(let error):
+                print(error, error.localizedDescription)
+            }
+        }
+        .authorize(with: HIApplicationStateController.shared.user)
+        .launch()
     }
 }
 

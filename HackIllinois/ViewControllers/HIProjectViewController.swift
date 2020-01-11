@@ -63,7 +63,7 @@ class HIProjectViewController: HIProjectListViewController {
 
         let dataSciPredicate = NSPredicate(
             format: "tags CONTAINS %@",
-            "Data Science"
+            "Data Sciences"
         )
         dataStore.append((displayText: "DATA SCIENCE", predicate: dataSciPredicate))
 

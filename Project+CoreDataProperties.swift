@@ -23,9 +23,9 @@ extension Project {
     @NSManaged public var room: String
     @NSManaged public var info: String
     @NSManaged public var id: String
-    @NSManaged public var mentors: [String]
+    @NSManaged public var mentors: String
     @NSManaged public var name: String
-    @NSManaged public var tags: [String]
+    @NSManaged public var tags: String
     @NSManaged public var favorite: Bool
 
 }
