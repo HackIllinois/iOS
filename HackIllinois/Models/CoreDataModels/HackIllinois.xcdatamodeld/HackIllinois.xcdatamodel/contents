@@ -43,11 +43,11 @@
         <attribute name="favorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="id" attributeType="String"/>
         <attribute name="info" attributeType="String"/>
-        <attribute name="mentors" attributeType="String" valueTransformerName="NSSecureUnarchiveFromData" customClassName="Array&lt;Any&gt;"/>
+        <attribute name="mentors" attributeType="String" valueTransformerName=""/>
         <attribute name="name" attributeType="String"/>
         <attribute name="number" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="room" attributeType="String"/>
-        <attribute name="tags" attributeType="String" valueTransformerName="NSSecureUnarchiveFromData" customClassName="Array&lt;Any&gt;"/>
+        <attribute name="tags" attributeType="String" valueTransformerName=""/>
     </entity>
     <elements>
         <element name="Announcement" positionX="-63" positionY="72" width="128" height="105"/>
