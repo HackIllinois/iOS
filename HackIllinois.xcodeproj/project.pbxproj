@@ -42,7 +42,6 @@
 		9521A6AA20191737009059C6 /* HIAnnouncementDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521A6A920191737009059C6 /* HIAnnouncementDataSource.swift */; };
 		9523A2902218BA2600341EBD /* HIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9523A28F2218BA2600341EBD /* HIImageView.swift */; };
 		952831A4200F2B35002C9F3E /* HILoginFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952831A3200F2B35002C9F3E /* HILoginFlowController.swift */; };
-		952D153C220D37980041383A /* starfish.png in Resources */ = {isa = PBXBuildFile; fileRef = 952D153A220D37980041383A /* starfish.png */; };
 		952D153D220D37980041383A /* refresh.json in Resources */ = {isa = PBXBuildFile; fileRef = 952D153B220D37980041383A /* refresh.json */; };
 		952D1542220D453D0041383A /* countdown-60.json in Resources */ = {isa = PBXBuildFile; fileRef = 952D1540220D453D0041383A /* countdown-60.json */; };
 		952D1543220D453D0041383A /* countdown-24.json in Resources */ = {isa = PBXBuildFile; fileRef = 952D1541220D453D0041383A /* countdown-24.json */; };
@@ -192,7 +191,6 @@
 		9521A6A920191737009059C6 /* HIAnnouncementDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAnnouncementDataSource.swift; sourceTree = "<group>"; };
 		9523A28F2218BA2600341EBD /* HIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIImageView.swift; sourceTree = "<group>"; };
 		952831A3200F2B35002C9F3E /* HILoginFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HILoginFlowController.swift; sourceTree = "<group>"; };
-		952D153A220D37980041383A /* starfish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = starfish.png; sourceTree = "<group>"; };
 		952D153B220D37980041383A /* refresh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = refresh.json; sourceTree = "<group>"; };
 		952D1540220D453D0041383A /* countdown-60.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countdown-60.json"; sourceTree = "<group>"; };
 		952D1541220D453D0041383A /* countdown-24.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countdown-24.json"; sourceTree = "<group>"; };
@@ -417,18 +415,9 @@
 		952D1538220D37980041383A /* Refresh */ = {
 			isa = PBXGroup;
 			children = (
-				952D1539220D37980041383A /* images */,
 				952D153B220D37980041383A /* refresh.json */,
 			);
 			path = Refresh;
-			sourceTree = "<group>";
-		};
-		952D1539220D37980041383A /* images */ = {
-			isa = PBXGroup;
-			children = (
-				952D153A220D37980041383A /* starfish.png */,
-			);
-			path = images;
 			sourceTree = "<group>";
 		};
 		957D7CA71FC2940800C4332A /* CoreDataModels */ = {
@@ -777,7 +766,6 @@
 				95069272203EE14000D7C34C /* intro.json in Resources */,
 				952D1543220D453D0041383A /* countdown-24.json in Resources */,
 				951827A91EA35DB800049F79 /* Assets.xcassets in Resources */,
-				952D153C220D37980041383A /* starfish.png in Resources */,
 				95069270203EE14000D7C34C /* img_1.png in Resources */,
 				95315498221E5EB60047A697 /* img_2.png in Resources */,
 				952D1542220D453D0041383A /* countdown-60.json in Resources */,
