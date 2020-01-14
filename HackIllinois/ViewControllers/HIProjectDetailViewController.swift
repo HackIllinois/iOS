@@ -136,7 +136,7 @@ extension HIProjectDetailViewController {
         super.viewWillAppear(animated)
         guard let project = project else { return }
         titleLabel.text = project.name
-        descriptionLabel.text = project.info //TODO: Update description to project
+        descriptionLabel.text = project.info
         favoritedButton.isActive = project.favorite
         numberLabel.text = "#\(project.number)"
 
@@ -145,7 +145,7 @@ extension HIProjectDetailViewController {
         let targetSize = CGSize(width: descriptionLabel.frame.width, height: .greatestFiniteMagnitude)
         let neededSize = descriptionLabel.sizeThatFits(targetSize)
         descriptionLabelHeight.constant = neededSize.height
-        tableViewHeight.constant = 1 * 160 //TODO: Projects have one location
+        tableViewHeight.constant = 1 * 160 //Update in UI: Projects have one location
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -186,10 +186,11 @@ extension HIProjectDetailViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HIEventDetailLocationCell.identifier, for: indexPath)
+        //Update in UI: Projects should have an indoor location
 //        if let cell = cell as? HIEventDetailLocationCell,
 //            let project = project,
-//            1 > indexPath.row, //TODO: Projects have one location
-//            let location = project.location as? Location { //TODO: Projects have one location
+//            1 > indexPath.row, //Update in UI: Projects have one location
+//            let location = project.location as? Location {
 //            cell <- location
 //        }
         return cell
@@ -211,9 +212,10 @@ extension HIProjectDetailViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //Update in UI: Projects should have an indoor location
 //        if let project = project,
-//            1 > indexPath.row, //TODO: Projects have one location
-//            let location = project.location as? Location { //TODO: Projects have one location
+//            1 > indexPath.row,
+//            let location = project.location as? Location { 
 //            let clLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
 //
 //            let distance: CLLocationDistance
