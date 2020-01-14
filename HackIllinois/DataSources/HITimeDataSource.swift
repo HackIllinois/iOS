@@ -62,10 +62,10 @@ final class HITimeDataSource {
                 } catch {
                     self.eventTimes = HITimeDataSource.defaultTimes
                     os_log(
-                        "%s",
+                        "Unable to update event times, setting default HackIllinois 2020 times: %s",
                         log: Logger.api,
                         type: .error,
-                        error.localizedDescription
+                        String(describing: error)
                     )
                 }
                 semaphore.signal()
