@@ -13,6 +13,7 @@
 import Foundation
 import CoreData
 import HIAPI
+import os
 
 final class HIProjectDataSource {
 
@@ -98,21 +99,34 @@ final class HIProjectDataSource {
                             } catch {
                                 completion?()
                                 isRefreshing = false
-                                print(error)
+                                os_log(
+                                    "Error getting saving projects to CoreData: %s",
+                                    log: Logger.ui,
+                                    type: .error,
+                                    String(describing: error)
+                                )
                             }
                         }
                     } catch {
-                        print("Failed2 Projects")
                         completion?()
                         isRefreshing = false
-                        print(error)
+                        os_log(
+                            "Error getting project favorites: %s",
+                            log: Logger.ui,
+                            type: .error,
+                            String(describing: error)
+                        )
                     }
                 }
                 .authorize(with: HIApplicationStateController.shared.user)
                 .launch()
             } catch {
-                print("Failed1 projects")
-                print(error)
+                os_log(
+                    "Error getting projects: %s",
+                    log: Logger.ui,
+                    type: .error,
+                    String(describing: error)
+                )
                 completion?()
                 isRefreshing = false
             }
