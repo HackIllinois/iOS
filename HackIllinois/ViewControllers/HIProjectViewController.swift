@@ -47,7 +47,7 @@ class HIProjectViewController: HIProjectListViewController {
             format: "tags CONTAINS %@",
             "Web Development"
         )
-        dataStore.append((displayText: "WEB DEV", predicate: webPredicate))
+        dataStore.append((displayText: "WEB", predicate: webPredicate))
 
         let systemsPredicate = NSPredicate(
             format: "tags CONTAINS %@",
@@ -59,13 +59,13 @@ class HIProjectViewController: HIProjectListViewController {
             format: "tags CONTAINS %@",
             "Languages"
         )
-        dataStore.append((displayText: "LANGUAGE", predicate: languagePredicate))
+        dataStore.append((displayText: "LANGUAGES", predicate: languagePredicate))
 
         let dataSciPredicate = NSPredicate(
             format: "tags CONTAINS %@",
             "Data Science"
         )
-        dataStore.append((displayText: "DATA SCIENCE", predicate: dataSciPredicate))
+        dataStore.append((displayText: "DATA SCI", predicate: dataSciPredicate))
 
         return dataStore
     }()
