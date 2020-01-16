@@ -69,9 +69,11 @@ class HILabel: UILabel {
             numberOfLines = 0
 
         case .loginHeader:
-            textHIColor = \.accent
+            textHIColor = \.tit
             backgroundHIColor = \.baseBackground
-            font = HIAppearance.Font.navigationTitle
+            font = HIAppearance.Font.loginTitle
+            
+        case
 
         case .loginSelection:
             textHIColor = \.baseText

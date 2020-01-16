@@ -86,6 +86,7 @@ extension HILoginSelectionViewController {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HILoginSelectionHeader.identifier)
         if let header = header as? HILoginSelectionHeader {
             header.titleLabel.text = "LOGIN"
+            header.welcomeLabel.text = "WELCOME TO"
         }
         return header
     }
@@ -102,7 +103,7 @@ extension HILoginSelectionViewController {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 45
+        return 300
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

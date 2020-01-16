@@ -27,6 +27,8 @@ struct HIAppearance: Equatable {
     let preferredStatusBarStyle: UIStatusBarStyle
     let scrollViewIndicatorStyle: UIScrollView.IndicatorStyle
     let mapBackground: UIColor
+    let loginTitleBackground: UIColor
+    let loginLogo: UIImage
 
     let clear: UIColor = .clear
 
@@ -35,6 +37,7 @@ struct HIAppearance: Equatable {
     private static let lightBlue = #colorLiteral(red: 0.8901960784, green: 0.9647058824, blue: 1, alpha: 1)
     private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     private static let coral = #colorLiteral(red: 1, green: 0.4666666667, blue: 0.4352941176, alpha: 1)
+    private static let maroon = #colorLiteral(red: 0.6431372549, green: 0.231372549, blue: 0.3607843137, alpha: 1)
 
     fileprivate static let day = HIAppearance(
         titleText: darkBlue,
@@ -50,7 +53,9 @@ struct HIAppearance: Equatable {
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewDay"),
         preferredStatusBarStyle: .default,
         scrollViewIndicatorStyle: .black,
-        mapBackground: blue
+        mapBackground: blue,
+        loginTitleBackground: maroon,
+        loginLogo: #imageLiteral(resourceName: "LoginLogo")
     )
 
     fileprivate static let night = HIAppearance(
@@ -67,7 +72,9 @@ struct HIAppearance: Equatable {
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewNight"),
         preferredStatusBarStyle: .lightContent,
         scrollViewIndicatorStyle: .white,
-        mapBackground: blue
+        mapBackground: blue,
+        loginTitleBackground: maroon,
+        loginLogo: #imageLiteral(resourceName: "LoginLogo")
     )
 
     fileprivate static var current = day
@@ -86,6 +93,7 @@ struct HIAppearance: Equatable {
 
         static let navigationSubtitle = UIFont.systemFont(ofSize: 13, weight: .medium)
         static let navigationTitle = UIFont.systemFont(ofSize: 15, weight: .medium)
+        static let loginTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
 
         static let sectionHeader = UIFont.systemFont(ofSize: 13, weight: .bold)
         static let button = UIFont.systemFont(ofSize: 15, weight: .regular)

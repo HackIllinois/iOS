@@ -16,6 +16,7 @@ import UIKit
 class HILoginSelectionHeader: UITableViewHeaderFooterView {
     // MARK: - Properties
     var titleLabel = HILabel(style: .loginHeader)
+    var welcomeLabel = HILabel(style: .loginHeader)
 
     // MARK: - Init
     override init(reuseIdentifier: String?) {
@@ -29,8 +30,26 @@ class HILoginSelectionHeader: UITableViewHeaderFooterView {
         containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
         containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
 
+        let logoImageView = HIImageView {
+            $0.hiImage = \.loginLogo
+            $0.contentMode = .scaleAspectFit
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+
+        containerView.addSubview(logoImageView)
+        logoImageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        logoImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 50).isActive = true
+
+        containerView.addSubview(welcomeLabel)
+        welcomeLabel.textAlignment = .center
+        welcomeLabel.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+        welcomeLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 30).isActive = true
+        welcomeLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -30).isActive = true
+        welcomeLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
+
         containerView.addSubview(titleLabel)
-        titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+        titleLabel.textAlignment = .center
+        titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 250).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 30).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -30).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
