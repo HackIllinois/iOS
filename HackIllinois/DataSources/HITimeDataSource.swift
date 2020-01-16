@@ -17,30 +17,17 @@ import os
 final class HITimeDataSource {
     static var shared = HITimeDataSource()
 
-    // Event Times
-    static let EVENT_START_TIME = Date(timeIntervalSince1970: 1582927200) // Friday, February 28, 2020 4:00:00 PM GMT-06:00
-    static let HACKING_START_TIME = Date(timeIntervalSince1970: 1582952400) // Friday, February 28, 2020 11:00:00 PM GMT-06:00
-    static let HACKING_END_TIME = Date(timeIntervalSince1970: 1583078400) // Sunday, March 1, 2020 10:00:00 AM GMT-06:00
-    static let EVENT_END_TIME = Date(timeIntervalSince1970: 1583103600) // Sunday, March 1, 2020 05:00:00 PM GMT-06:00
-
-    static let FRIDAY_START_TIME = Date(timeIntervalSince1970: 1582869600) // Friday, February 28, 2020 12:00:00 AM GMT-06:00
-    static let FRIDAY_END_TIME = Date(timeIntervalSince1970: 1582955999) // Friday, February 28, 2020 11:59:59 PM GMT-06:00
-    static let SATURDAY_START_TIME = Date(timeIntervalSince1970: 1582956000) // Saturday, February 29, 2020 12:00:00 AM GMT-06:00
-    static let SATURDAY_END_TIME = Date(timeIntervalSince1970: 1583042399) // Saturday, February 29, 2020 11:59:59 PM GMT-06:00
-    static let SUNDAY_START_TIME = Date(timeIntervalSince1970: 1583042400) // Sunday, March 1, 2020 12:00:00 AM GMT-06:00
-    static let SUNDAY_END_TIME = Date(timeIntervalSince1970: 1583128799) // Sunday, March 1, 2020 11:59:59 PM GMT-06:006:00
-
     public static let defaultTimes = EventTimes(
-        eventStart: HITimeDataSource.EVENT_START_TIME,
-        eventEnd: HITimeDataSource.EVENT_END_TIME,
-        hackStart: HITimeDataSource.HACKING_START_TIME,
-        hackEnd: HITimeDataSource.HACKING_END_TIME,
-        fridayStart: HITimeDataSource.FRIDAY_START_TIME,
-        fridayEnd: HITimeDataSource.FRIDAY_END_TIME,
-        saturdayStart: HITimeDataSource.SATURDAY_START_TIME,
-        saturdayEnd: HITimeDataSource.SATURDAY_END_TIME,
-        sundayStart: HITimeDataSource.SUNDAY_START_TIME,
-        sundayEnd: HITimeDataSource.SUNDAY_END_TIME
+        eventStart: Date(timeIntervalSince1970: 1582927200), // Friday, February 28, 2020 4:00:00 PM GMT-06:00
+        eventEnd: Date(timeIntervalSince1970: 1583103600), // Sunday, March 1, 2020 05:00:00 PM GMT-06:00
+        hackStart: Date(timeIntervalSince1970: 1582952400), // Friday, February 28, 2020 11:00:00 PM
+        hackEnd: Date(timeIntervalSince1970: 1583078400), // Sunday, March 1, 2020 10:00:00 AM GMT-06:00
+        fridayStart: Date(timeIntervalSince1970: 1582869600), // Friday, February 28, 2020 12:00:00 AM
+        fridayEnd: Date(timeIntervalSince1970: 1582955999), // Friday, February 28, 2020 11:59:59 PM GMT-06:00
+        saturdayStart: Date(timeIntervalSince1970: 1582956000), // Saturday, February 29, 2020 12:00:00 AM
+        saturdayEnd: Date(timeIntervalSince1970: 1583042399), // Saturday, February 29, 2020 11:59:59 PM
+        sundayStart: Date(timeIntervalSince1970: 1583042400), // Sunday, March 1, 2020 12:00:00 AM GMT-06:00
+        sundayEnd: Date(timeIntervalSince1970: 1583128799) // Sunday, March 1, 2020 11:59:59 PM GMT-06:006:00
     )
 
     var eventTimes = HITimeDataSource.defaultTimes
