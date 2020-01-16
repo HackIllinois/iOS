@@ -45,7 +45,9 @@ class HILoginSelectionCell: UITableViewCell {
 
         contentView.addSubview(titleLabel)
         titleLabel.bottomAnchor.constraint(equalTo: separatorView.topAnchor).isActive = true
-        titleLabel.constrain(to: contentView, topInset: 0, trailingInset: 0, leadingInset: 0)
+        titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        titleLabel.constrain(width: 200, height: 36)
+//        titleLabel.constrain(to: contentView, topInset: 0, trailingInset: 0, leadingInset: 0)
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
@@ -86,10 +88,12 @@ extension HILoginSelectionCell {
 
     func setActive(_ active: Bool) {
         let finalColor = active ? activeColor : defaultColor
+        let titleColor = active ? activeColor.cgColor : UIColor.red.cgColor //TODO: Replace red with actual colors
         animator?.stopAnimation(true)
         animator = UIViewPropertyAnimator(duration: 0.2, curve: .linear)
         animator?.addAnimations { [weak self] in
             self?.backgroundColor = finalColor
+            self?.titleLabel.layer.backgroundColor = titleColor
             self?.contentView.backgroundColor = finalColor
         }
         animator?.startAnimation()

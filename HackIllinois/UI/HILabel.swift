@@ -69,17 +69,19 @@ class HILabel: UILabel {
             numberOfLines = 0
 
         case .loginHeader:
-            textHIColor = \.tit
+            textHIColor = \.loginTitleBackground
             backgroundHIColor = \.baseBackground
             font = HIAppearance.Font.loginTitle
-            
-        case
 
         case .loginSelection:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .center
             font = HIAppearance.Font.navigationSubtitle
+            layer.cornerRadius = 20.0
+            layer.borderWidth = 2.0
+            layer.borderColor = UIColor.red.cgColor //TODO: Replace red with actual colors
+            layer.backgroundColor = UIColor.red.cgColor //TODO: Replace red with actual colors
         }
         }
 
