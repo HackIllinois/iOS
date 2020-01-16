@@ -123,7 +123,7 @@ extension HIProjectViewController {
 
         let tableView = HITableView()
         view.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 5).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
@@ -158,20 +158,5 @@ extension HIProjectViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return super.numberOfSections(in: tableView)
-    }
-}
-
-// MARK: - UITableViewDataSource
-extension HIProjectViewController {
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HIDateHeader.identifier)
-        if let header = header as? HIDateHeader,
-            let sections = fetchedResultsController.sections,
-            section < sections.count,
-            let date = Formatter.coreData.date(from: sections[section].name) {
-
-            header.titleLabel.text = Formatter.simpleTime.string(from: date)
-        }
-        return header
     }
 }
