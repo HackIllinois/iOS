@@ -14,6 +14,9 @@
 		35B4A44F21E091BA001B3AF0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4A44D21E091B9001B3AF0 /* Logger.swift */; };
 		35B4A45021E091BA001B3AF0 /* HIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4A44E21E091B9001B3AF0 /* HIError.swift */; };
 		35D7CE9B20380ACF00654E28 /* Stickers.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 35D7CE9420380ACF00654E28 /* Stickers.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3C7E552723AA199900213E1F /* HITimeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E552623AA199900213E1F /* HITimeDataSource.swift */; };
+		3C8F62D4238F9639001A5DAF /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F62D3238F9639001A5DAF /* Time.swift */; };
+		3C8F62D6238F9825001A5DAF /* TimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F62D5238F9825001A5DAF /* TimeService.swift */; };
 		95069270203EE14000D7C34C /* img_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 95069269203EE14000D7C34C /* img_1.png */; };
 		95069271203EE14000D7C34C /* img_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 9506926A203EE14000D7C34C /* img_0.png */; };
 		95069272203EE14000D7C34C /* intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 9506926B203EE14000D7C34C /* intro.json */; };
@@ -155,6 +158,9 @@
 		35B4A44E21E091B9001B3AF0 /* HIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIError.swift; sourceTree = "<group>"; };
 		35D7CE9420380ACF00654E28 /* Stickers.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Stickers.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		35D7CE9820380ACF00654E28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C7E552623AA199900213E1F /* HITimeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITimeDataSource.swift; sourceTree = "<group>"; };
+		3C8F62D3238F9639001A5DAF /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
+		3C8F62D5238F9825001A5DAF /* TimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeService.swift; sourceTree = "<group>"; };
 		95069269203EE14000D7C34C /* img_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_1.png; sourceTree = "<group>"; };
 		9506926A203EE14000D7C34C /* img_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_0.png; sourceTree = "<group>"; };
 		9506926B203EE14000D7C34C /* intro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = intro.json; sourceTree = "<group>"; };
@@ -389,6 +395,7 @@
 				9521A6A720191590009059C6 /* HIEventDataSource.swift */,
 				9521A6A920191737009059C6 /* HIAnnouncementDataSource.swift */,
 				9564E02E2218CE6F003A8EEB /* HIMapsDataSource.swift */,
+				3C7E552623AA199900213E1F /* HITimeDataSource.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -541,6 +548,7 @@
 				95B12044220BEAD700E024BB /* TrackingService.swift */,
 				95E3145D21FAF1740092C22E /* UserService.swift */,
 				A5163FEC221F283C003C543E /* StatsService.swift */,
+				3C8F62D5238F9825001A5DAF /* TimeService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -553,6 +561,7 @@
 				95E3146521FAF1740092C22E /* Event.swift */,
 				95E3146621FAF1740092C22E /* SimpleRequest.swift */,
 				95E3146721FAF1740092C22E /* User.swift */,
+				3C8F62D3238F9639001A5DAF /* Time.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -701,6 +710,7 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -814,6 +824,7 @@
 				9523A2902218BA2600341EBD /* HIImageView.swift in Sources */,
 				95C18DC52009618C004784B5 /* HIHomeViewController.swift in Sources */,
 				35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */,
+				3C7E552723AA199900213E1F /* HITimeDataSource.swift in Sources */,
 				9510F6A11FCB7D6E007D19DB /* Event+CoreDataClass.swift in Sources */,
 				951827A81EA35DB800049F79 /* AppDelegate.swift in Sources */,
 				9564E02F2218CE6F003A8EEB /* HIMapsDataSource.swift in Sources */,
@@ -849,6 +860,7 @@
 				95E3147021FAF1740092C22E /* BaseService.swift in Sources */,
 				95E3147321FAF1740092C22E /* Event.swift in Sources */,
 				95E3146E21FAF1740092C22E /* EventService.swift in Sources */,
+				3C8F62D4238F9639001A5DAF /* Time.swift in Sources */,
 				95E3147621FAF1740092C22E /* Announcement.swift in Sources */,
 				95E3146C21FAF1740092C22E /* UserService.swift in Sources */,
 				95B12043220BEA9D00E024BB /* CheckInService.swift in Sources */,
@@ -859,6 +871,7 @@
 				95E3147421FAF1740092C22E /* SimpleRequest.swift in Sources */,
 				A5163FED221F283C003C543E /* StatsService.swift in Sources */,
 				95B12045220BEAD700E024BB /* TrackingService.swift in Sources */,
+				3C8F62D6238F9825001A5DAF /* TimeService.swift in Sources */,
 				95E3145921FAD71E0092C22E /* Error.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
