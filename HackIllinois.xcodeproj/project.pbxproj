@@ -14,7 +14,6 @@
 		35B4A44F21E091BA001B3AF0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4A44D21E091B9001B3AF0 /* Logger.swift */; };
 		35B4A45021E091BA001B3AF0 /* HIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4A44E21E091B9001B3AF0 /* HIError.swift */; };
 		35D7CE9B20380ACF00654E28 /* Stickers.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 35D7CE9420380ACF00654E28 /* Stickers.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-<<<<<<< HEAD
 		3C26401823ADE7AA004E1DBE /* Project+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26401623ADE7AA004E1DBE /* Project+CoreDataClass.swift */; };
 		3C26401923ADE7AA004E1DBE /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26401723ADE7AA004E1DBE /* Project+CoreDataProperties.swift */; };
 		3C26401B23ADE838004E1DBE /* ProjectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26401A23ADE838004E1DBE /* ProjectService.swift */; };
@@ -24,11 +23,9 @@
 		3CF8DB1523B41D0A0035ECAE /* HIProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DB1423B41D0A0035ECAE /* HIProjectListViewController.swift */; };
 		3CF8DB1723B41F350035ECAE /* HIProjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DB1623B41F350035ECAE /* HIProjectDetailViewController.swift */; };
 		3CF8DB1923B42B240035ECAE /* HIProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DB1823B42B240035ECAE /* HIProjectViewController.swift */; };
-=======
 		3C7E552723AA199900213E1F /* HITimeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E552623AA199900213E1F /* HITimeDataSource.swift */; };
 		3C8F62D4238F9639001A5DAF /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F62D3238F9639001A5DAF /* Time.swift */; };
 		3C8F62D6238F9825001A5DAF /* TimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F62D5238F9825001A5DAF /* TimeService.swift */; };
->>>>>>> ecf91f10050bd3e188931c3aa8bf9d360d893f6c
 		95069270203EE14000D7C34C /* img_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 95069269203EE14000D7C34C /* img_1.png */; };
 		95069271203EE14000D7C34C /* img_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 9506926A203EE14000D7C34C /* img_0.png */; };
 		95069272203EE14000D7C34C /* intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 9506926B203EE14000D7C34C /* intro.json */; };
@@ -416,11 +413,8 @@
 				9521A6A720191590009059C6 /* HIEventDataSource.swift */,
 				9521A6A920191737009059C6 /* HIAnnouncementDataSource.swift */,
 				9564E02E2218CE6F003A8EEB /* HIMapsDataSource.swift */,
-<<<<<<< HEAD
 				3CF8DB1023B4134C0035ECAE /* HIProjectDataSource.swift */,
-=======
 				3C7E552623AA199900213E1F /* HITimeDataSource.swift */,
->>>>>>> ecf91f10050bd3e188931c3aa8bf9d360d893f6c
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -579,11 +573,8 @@
 				95B12044220BEAD700E024BB /* TrackingService.swift */,
 				95E3145D21FAF1740092C22E /* UserService.swift */,
 				A5163FEC221F283C003C543E /* StatsService.swift */,
-<<<<<<< HEAD
 				3C26401A23ADE838004E1DBE /* ProjectService.swift */,
-=======
 				3C8F62D5238F9825001A5DAF /* TimeService.swift */,
->>>>>>> ecf91f10050bd3e188931c3aa8bf9d360d893f6c
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -596,11 +587,8 @@
 				95E3146521FAF1740092C22E /* Event.swift */,
 				95E3146621FAF1740092C22E /* SimpleRequest.swift */,
 				95E3146721FAF1740092C22E /* User.swift */,
-<<<<<<< HEAD
 				3C26401C23ADE8A5004E1DBE /* Project.swift */,
-=======
 				3C8F62D3238F9639001A5DAF /* Time.swift */,
->>>>>>> ecf91f10050bd3e188931c3aa8bf9d360d893f6c
 			);
 			path = Models;
 			sourceTree = "<group>";
