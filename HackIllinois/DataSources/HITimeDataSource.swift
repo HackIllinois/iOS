@@ -60,7 +60,6 @@ final class HITimeDataSource {
                     let (timeContainer, _) = try result.get()
                     self.eventTimes = timeContainer.eventTimes
                 } catch {
-                    self.eventTimes = HITimeDataSource.defaultTimes
                     os_log(
                         "Unable to update event times, setting default HackIllinois 2020 times: %s",
                         log: Logger.api,

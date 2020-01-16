@@ -11,8 +11,6 @@
 //
 
 import Foundation
-import CoreData
-import HIAPI
 
 // MARK: - Constants
 struct HIConstants {
