@@ -45,10 +45,11 @@ extension HILoginSelectionViewController {
         tableView.alwaysBounceVertical = false
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 54).isActive = true
-//        tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+        tableView.widthAnchor.constraint(equalToConstant: 220).isActive = true
+//        tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+//        tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         self.tableView = tableView
     }
 }
@@ -76,6 +77,7 @@ extension HILoginSelectionViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: HILoginSelectionCell.identifier, for: indexPath)
         if let cell = cell as? HILoginSelectionCell {
             cell.titleLabel.text = HIAPI.AuthService.OAuthProvider.all[indexPath.row].displayName
+//            cell.separatorView.isHidden = true
             if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
                 cell.separatorView.isHidden = true
             }

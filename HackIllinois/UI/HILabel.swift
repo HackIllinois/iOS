@@ -23,6 +23,7 @@ class HILabel: UILabel {
         case description
         case loginHeader
         case loginSelection
+        case viewTitle
     }
 
     // MARK: - Properties
@@ -71,6 +72,11 @@ class HILabel: UILabel {
         case .loginHeader:
             textHIColor = \.loginTitleBackground
             backgroundHIColor = \.baseBackground
+            font = HIAppearance.Font.loginTitle
+
+        case .viewTitle:
+            textHIColor = \.viewTitleColor
+            backgroundHIColor = \.clear
             font = HIAppearance.Font.loginTitle
 
         case .loginSelection:

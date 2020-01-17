@@ -41,10 +41,11 @@ class HILoginSelectionCell: UITableViewCell {
 
         separatorView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(separatorView)
-        separatorView.constrain(to: contentView, trailingInset: -24, bottomInset: 0, leadingInset: 24)
+        separatorView.constrain(to: contentView, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        separatorView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
 
         contentView.addSubview(titleLabel)
-        titleLabel.bottomAnchor.constraint(equalTo: separatorView.topAnchor).isActive = true
+//        titleLabel.bottomAnchor.constraint(equalTo: separatorView.topAnchor).isActive = true
         titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         titleLabel.constrain(width: 200, height: 36)
 //        titleLabel.constrain(to: contentView, topInset: 0, trailingInset: 0, leadingInset: 0)
@@ -92,9 +93,9 @@ extension HILoginSelectionCell {
         animator?.stopAnimation(true)
         animator = UIViewPropertyAnimator(duration: 0.2, curve: .linear)
         animator?.addAnimations { [weak self] in
-            self?.backgroundColor = finalColor
+//            self?.backgroundColor = finalColor
             self?.titleLabel.layer.backgroundColor = titleColor
-            self?.contentView.backgroundColor = finalColor
+//            self?.contentView.backgroundColor = finalColor
         }
         animator?.startAnimation()
     }

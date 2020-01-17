@@ -16,7 +16,7 @@ import UIKit
 class HILoginSelectionHeader: UITableViewHeaderFooterView {
     // MARK: - Properties
     var titleLabel = HILabel(style: .loginHeader)
-    var welcomeLabel = HILabel(style: .loginHeader)
+    var welcomeLabel = HILabel(style: .viewTitle)
 
     // MARK: - Init
     override init(reuseIdentifier: String?) {
