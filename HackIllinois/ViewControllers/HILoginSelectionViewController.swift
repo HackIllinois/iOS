@@ -70,17 +70,41 @@ extension HILoginSelectionViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return HIAPI.AuthService.OAuthProvider.all.count
+        return HIAPI.AuthService.OAuthProvider.all.count + 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        if indexPath.row == 1 {
+//            let orLabel = HILabel {
+//                $0.backgroundHIColor = \.contentBackground
+//                $0.textHIColor = \.baseText
+//                $0.font = HIAppearance.Font.contentText
+//                $0.text = "Warning, this switch allows students that have not RSVP'ed to check in."
+//            }
+//            let orLabel = HILabel(style: .loginHeader)
+//            orLabel.text = "- OR -"
+            let orCell = UITableViewCell()
+            orCell.backgroundColor = UIColor.clear
+            orCell.contentView.backgroundColor = UIColor.clear
+            orCell.backgroundView?.backgroundColor = UIColor.clear
+            orCell.textLabel?.text = "- OR -"
+            orCell.textLabel?.textAlignment = .center
+            orCell.textLabel?.backgroundColor = UIColor.clear
+            orCell.textLabel?.textColor = UIColor.red //TODO: Replace red with maroon
+            orCell.textLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+            return orCell
+        }
+
+        let increment = indexPath.row > 1 ? 1 : 0
+
         let cell = tableView.dequeueReusableCell(withIdentifier: HILoginSelectionCell.identifier, for: indexPath)
         if let cell = cell as? HILoginSelectionCell {
-            cell.titleLabel.text = HIAPI.AuthService.OAuthProvider.all[indexPath.row].displayName
+            cell.titleLabel.text = HIAPI.AuthService.OAuthProvider.all[indexPath.row - increment].displayName
 //            cell.separatorView.isHidden = true
-            if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
-                cell.separatorView.isHidden = true
-            }
+//            if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+////                cell.separatorView.isHidden = true
+//            }
         }
         return cell
     }
@@ -114,8 +138,9 @@ extension HILoginSelectionViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let increment = indexPath.row > 1 ? 1 : 0
         if let delegate = delegate {
-            let selection = HIAPI.AuthService.OAuthProvider.all[indexPath.row]
+            let selection = HIAPI.AuthService.OAuthProvider.all[indexPath.row - increment]
             delegate.loginSelectionViewController(self, didMakeLoginSelection: selection)
         }
         super.tableView(tableView, didSelectRowAt: indexPath)

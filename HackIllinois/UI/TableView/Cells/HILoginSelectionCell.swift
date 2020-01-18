@@ -22,7 +22,7 @@ class HILoginSelectionCell: UITableViewCell {
     weak var delegate: HILoginSelectionCellDelegate?
 
     var titleLabel = HILabel(style: .loginSelection)
-    var separatorView = HIView(style: .separator)
+//    var separatorView = HIView(style: .separator) TODO: Remove separator code
 
     var defaultColor: UIColor {
         return (\HIAppearance.baseBackground).value
@@ -39,15 +39,17 @@ class HILoginSelectionCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
 
-        separatorView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(separatorView)
-        separatorView.constrain(to: contentView, trailingInset: 0, bottomInset: 0, leadingInset: 0)
-        separatorView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+//        separatorView.translatesAutoresizingMaskIntoConstraints = false
+//        contentView.addSubview(separatorView)
+//        separatorView.constrain(to: contentView, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+//        separatorView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
 
         contentView.addSubview(titleLabel)
 //        titleLabel.bottomAnchor.constraint(equalTo: separatorView.topAnchor).isActive = true
         titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        titleLabel.constrain(width: 200, height: 36)
+        titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        titleLabel.widthAnchor.constraint(equalToConstant: 220).isActive = true
 //        titleLabel.constrain(to: contentView, topInset: 0, trailingInset: 0, leadingInset: 0)
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
@@ -73,7 +75,7 @@ extension HILoginSelectionCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         titleLabel.text = nil
-        separatorView.isHidden = false
+//        separatorView.isHidden = false
     }
 
     // MARK: - UITableViewCell
@@ -89,7 +91,7 @@ extension HILoginSelectionCell {
 
     func setActive(_ active: Bool) {
         let finalColor = active ? activeColor : defaultColor
-        let titleColor = active ? activeColor.cgColor : UIColor.red.cgColor //TODO: Replace red with actual colors
+        let titleColor = active ? activeColor.cgColor : UIColor.clear.cgColor //TODO: Replace red with actual colors
         animator?.stopAnimation(true)
         animator = UIViewPropertyAnimator(duration: 0.2, curve: .linear)
         animator?.addAnimations { [weak self] in

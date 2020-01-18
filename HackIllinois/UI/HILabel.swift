@@ -87,7 +87,7 @@ class HILabel: UILabel {
             layer.cornerRadius = 20.0
             layer.borderWidth = 2.0
             layer.borderColor = UIColor.red.cgColor //TODO: Replace red with actual colors
-            layer.backgroundColor = UIColor.red.cgColor //TODO: Replace red with actual colors
+            layer.backgroundColor = UIColor.clear.cgColor //TODO: Replace red with actual colors
         }
         }
 
