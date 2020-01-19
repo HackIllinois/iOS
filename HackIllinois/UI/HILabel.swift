@@ -83,7 +83,7 @@ class HILabel: UILabel {
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .center
-            font = HIAppearance.Font.navigationSubtitle
+            font = UIFont.systemFont(ofSize: 16, weight: .semibold)
             layer.cornerRadius = 20.0
             layer.borderWidth = 2.0
             layer.borderColor = UIColor.red.cgColor //TODO: Replace red with actual colors

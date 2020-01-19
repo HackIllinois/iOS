@@ -40,6 +40,7 @@ struct HIAppearance: Equatable {
     private static let coral = #colorLiteral(red: 1, green: 0.4666666667, blue: 0.4352941176, alpha: 1)
     private static let maroon = #colorLiteral(red: 0.6431372549, green: 0.231372549, blue: 0.3607843137, alpha: 1)
     private static let deepBlue = #colorLiteral(red: 0.03921568627, green: 0.03529411765, blue: 0.2470588235, alpha: 1)
+    private static let orange = #colorLiteral(red: 0.8862745098, green: 0.4078431373, blue: 0.337254902, alpha: 1)
 
     fileprivate static let day = HIAppearance(
         titleText: darkBlue,
@@ -56,7 +57,7 @@ struct HIAppearance: Equatable {
         preferredStatusBarStyle: .default,
         scrollViewIndicatorStyle: .black,
         mapBackground: blue,
-        loginTitleBackground: maroon,
+        loginTitleBackground: orange,
         loginLogo: #imageLiteral(resourceName: "LoginLogo"),
         viewTitleColor: deepBlue
     )
@@ -76,7 +77,7 @@ struct HIAppearance: Equatable {
         preferredStatusBarStyle: .lightContent,
         scrollViewIndicatorStyle: .white,
         mapBackground: blue,
-        loginTitleBackground: maroon,
+        loginTitleBackground: orange,
         loginLogo: #imageLiteral(resourceName: "LoginLogo"),
         viewTitleColor: deepBlue
     )

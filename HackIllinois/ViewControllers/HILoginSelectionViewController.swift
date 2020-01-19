@@ -41,6 +41,16 @@ class HILoginSelectionViewController: HIBaseViewController {
 extension HILoginSelectionViewController {
     override func loadView() {
         super.loadView()
+        //How to make the background transparent??
+//        let gradient = CAGradientLayer()
+//        gradient.frame = self.view.bounds
+//        gradient.colors = [
+//            UIColor(red: 48/255, green: 62/255, blue: 103/255, alpha: 1).cgColor,
+//            UIColor(red: 244/255, green: 88/255, blue: 53/255, alpha: 1).cgColor
+//        ]
+//        gradient.startPoint = CGPoint(x: 0, y:0)
+//        gradient.endPoint = CGPoint(x: 1, y:1)
+//        self.view.layer.addSublayer(gradient)
         let tableView = HITableView()
         tableView.alwaysBounceVertical = false
         view.addSubview(tableView)
@@ -91,8 +101,9 @@ extension HILoginSelectionViewController {
             orCell.textLabel?.text = "- OR -"
             orCell.textLabel?.textAlignment = .center
             orCell.textLabel?.backgroundColor = UIColor.clear
-            orCell.textLabel?.textColor = UIColor.red //TODO: Replace red with maroon
-            orCell.textLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+            orCell.textLabel?.textColor = UIColor(red: 0.643, green: 0.231, blue: 0.361, alpha: 1) //TODO: Replace red with maroon
+            orCell.textLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+            orCell.selectionStyle = .none
             return orCell
         }
 
@@ -138,6 +149,7 @@ extension HILoginSelectionViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
         let increment = indexPath.row > 1 ? 1 : 0
         if let delegate = delegate {
             let selection = HIAPI.AuthService.OAuthProvider.all[indexPath.row - increment]
