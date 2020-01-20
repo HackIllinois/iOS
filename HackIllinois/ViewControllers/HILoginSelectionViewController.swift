@@ -56,6 +56,7 @@ extension HILoginSelectionViewController {
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 54).isActive = true
         tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+        tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 100).isActive = true
         tableView.widthAnchor.constraint(equalToConstant: 220).isActive = true
 //        tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -86,14 +87,6 @@ extension HILoginSelectionViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         if indexPath.row == 1 {
-//            let orLabel = HILabel {
-//                $0.backgroundHIColor = \.contentBackground
-//                $0.textHIColor = \.baseText
-//                $0.font = HIAppearance.Font.contentText
-//                $0.text = "Warning, this switch allows students that have not RSVP'ed to check in."
-//            }
-//            let orLabel = HILabel(style: .loginHeader)
-//            orLabel.text = "- OR -"
             let orCell = UITableViewCell()
             orCell.backgroundColor = UIColor.clear
             orCell.contentView.backgroundColor = UIColor.clear
@@ -101,9 +94,9 @@ extension HILoginSelectionViewController {
             orCell.textLabel?.text = "- OR -"
             orCell.textLabel?.textAlignment = .center
             orCell.textLabel?.backgroundColor = UIColor.clear
-            orCell.textLabel?.textColor = UIColor(red: 0.643, green: 0.231, blue: 0.361, alpha: 1) //TODO: Replace red with maroon
+            orCell.textLabel?.textColor = UIColor(red: 0.643, green: 0.231, blue: 0.361, alpha: 1)
             orCell.textLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-            orCell.selectionStyle = .none
+            orCell.selectionStyle = .none // Prevents the "- OR -" cell from being clickable
             return orCell
         }
 
@@ -112,10 +105,18 @@ extension HILoginSelectionViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: HILoginSelectionCell.identifier, for: indexPath)
         if let cell = cell as? HILoginSelectionCell {
             cell.titleLabel.text = HIAPI.AuthService.OAuthProvider.all[indexPath.row - increment].displayName
-//            cell.separatorView.isHidden = true
-//            if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
-////                cell.separatorView.isHidden = true
-//            }
+            // Attendee cell
+            if indexPath.row == 0 {
+                cell.defaultColor = UIColor(red: 0.643, green: 0.231, blue: 0.361, alpha: 1)
+                cell.titleLabel.layer.borderColor = UIColor(red: 0.643, green: 0.231, blue: 0.361, alpha: 1).cgColor
+                cell.titleLabel.textColor = UIColor.white//\.attendeeText //TODO: change to white
+                cell.activeColor = UIColor.white
+                cell.activeTextColor = UIColor(red: 0.643, green: 0.231, blue: 0.361, alpha: 1)
+            } else if indexPath.row > 1 { //After "- OR -" cell roles
+                cell.defaultColor = UIColor.clear
+                cell.activeColor = UIColor(red: 0.133, green: 0.169, blue: 0.361, alpha: 1)
+                cell.defaultTextColor = UIColor(red: 0.133, green: 0.169, blue: 0.361, alpha: 1)
+            }
         }
         return cell
     }
@@ -141,7 +142,7 @@ extension HILoginSelectionViewController {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 300
+        return 350
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -149,6 +150,11 @@ extension HILoginSelectionViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        // Prevents the "- OR -" cell from being clickable
+        if indexPath.row == 1 {
+            return
+        }
 
         let increment = indexPath.row > 1 ? 1 : 0
         if let delegate = delegate {

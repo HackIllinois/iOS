@@ -49,7 +49,7 @@ class HILoginSelectionHeader: UITableViewHeaderFooterView {
 
         containerView.addSubview(titleLabel)
         titleLabel.textAlignment = .center
-        titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 250).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 230).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 30).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -30).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true

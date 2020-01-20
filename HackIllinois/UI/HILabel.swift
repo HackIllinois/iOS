@@ -24,6 +24,7 @@ class HILabel: UILabel {
         case loginHeader
         case loginSelection
         case viewTitle
+        case backgroundTitle
     }
 
     // MARK: - Properties
@@ -78,15 +79,21 @@ class HILabel: UILabel {
             textHIColor = \.viewTitleColor
             backgroundHIColor = \.clear
             font = HIAppearance.Font.loginTitle
+            
+        case .backgroundTitle:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            textAlignment = .center
+            font = HIAppearance.Font.navigationSubtitle
 
         case .loginSelection:
-            textHIColor = \.baseText
+            textHIColor = \.loginSelectionText
             backgroundHIColor = \.clear
             textAlignment = .center
             font = UIFont.systemFont(ofSize: 16, weight: .semibold)
             layer.cornerRadius = 20.0
             layer.borderWidth = 2.0
-            layer.borderColor = UIColor.red.cgColor //TODO: Replace red with actual colors
+            layer.borderColor = UIColor(red: 0.133, green: 0.169, blue: 0.361, alpha: 1).cgColor
             layer.backgroundColor = UIColor.clear.cgColor //TODO: Replace red with actual colors
         }
         }

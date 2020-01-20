@@ -30,6 +30,8 @@ struct HIAppearance: Equatable {
     let loginTitleBackground: UIColor
     let loginLogo: UIImage
     let viewTitleColor: UIColor
+    let loginSelectionText: UIColor
+    let attendeeText: UIColor
 
     let clear: UIColor = .clear
 
@@ -41,6 +43,7 @@ struct HIAppearance: Equatable {
     private static let maroon = #colorLiteral(red: 0.6431372549, green: 0.231372549, blue: 0.3607843137, alpha: 1)
     private static let deepBlue = #colorLiteral(red: 0.03921568627, green: 0.03529411765, blue: 0.2470588235, alpha: 1)
     private static let orange = #colorLiteral(red: 0.8862745098, green: 0.4078431373, blue: 0.337254902, alpha: 1)
+    private static let darkerBlue = #colorLiteral(red: 0.1333333333, green: 0.168627451, blue: 0.3607843137, alpha: 1)
 
     fileprivate static let day = HIAppearance(
         titleText: darkBlue,
@@ -59,7 +62,9 @@ struct HIAppearance: Equatable {
         mapBackground: blue,
         loginTitleBackground: orange,
         loginLogo: #imageLiteral(resourceName: "LoginLogo"),
-        viewTitleColor: deepBlue
+        viewTitleColor: deepBlue,
+        loginSelectionText: darkerBlue,
+        attendeeText: white
     )
 
     fileprivate static let night = HIAppearance(
@@ -79,7 +84,9 @@ struct HIAppearance: Equatable {
         mapBackground: blue,
         loginTitleBackground: orange,
         loginLogo: #imageLiteral(resourceName: "LoginLogo"),
-        viewTitleColor: deepBlue
+        viewTitleColor: deepBlue,
+        loginSelectionText: darkerBlue,
+        attendeeText: white
     )
 
     fileprivate static var current = day
