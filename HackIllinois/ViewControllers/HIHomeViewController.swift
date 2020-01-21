@@ -97,12 +97,6 @@ extension HIHomeViewController {
 extension HIHomeViewController {
     override func loadView() {
         super.loadView()
-
-        view = HITintImageView {
-            $0.image = #imageLiteral(resourceName: "BuildingsBackground")
-            $0.isUserInteractionEnabled = true
-        }
-
         view.addSubview(countdownTitleLabel)
         countdownTitleLabel.constrain(to: view.safeAreaLayoutGuide, topInset: 20, trailingInset: 0, leadingInset: 0)
 
@@ -135,6 +129,7 @@ extension HIHomeViewController {
     override func viewDidLoad() {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         super.viewDidLoad()
+        gradientView.image = #imageLiteral(resourceName: "BuildingsBackground")
         setupRefreshControl()
     }
 

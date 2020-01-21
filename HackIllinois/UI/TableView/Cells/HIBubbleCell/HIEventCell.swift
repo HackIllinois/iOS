@@ -36,7 +36,7 @@ class HIEventCell: HIBubbleCell {
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+        backgroundColor = UIColor.clear
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         bubbleView.addSubview(favoritedButton)
         favoritedButton.widthAnchor.constraint(equalToConstant: 58).isActive = true
@@ -74,7 +74,6 @@ extension HIEventCell {
     }
 
     static func <- (lhs: HIEventCell, rhs: Event) {
-        lhs.backgroundColor = UIColor.clear
         lhs.favoritedButton.isActive = rhs.favorite
         var contentStackViewHeight: CGFloat = 0
         let titleLabel = HILabel(style: .event)

@@ -144,7 +144,7 @@ extension HIEventDetailViewController {
         eventDetailContainer.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20).isActive = true
         tableView.constrain(to: eventDetailContainer, trailingInset: 0, bottomInset: -6, leadingInset: 0)
-        tableViewHeight = tableView.heightAnchor.constraint(equalToConstant: 0)
+        tableViewHeight = tableView.heightAnchor.constraint(equalToConstant: 100)
         tableViewHeight.isActive = true
         self.tableView = tableView
     }
@@ -223,7 +223,7 @@ extension HIEventDetailViewController {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 301
+        return 300
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
