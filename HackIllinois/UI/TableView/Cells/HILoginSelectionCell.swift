@@ -65,7 +65,6 @@ extension HILoginSelectionCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         titleLabel.text = nil
-//        separatorView.isHidden = false
     }
 
     // MARK: - UITableViewCell

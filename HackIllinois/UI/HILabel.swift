@@ -34,6 +34,8 @@ class HILabel: UILabel {
     var backgroundHIColor: HIColor?
 
     // MARK: - Init
+    // Waive swiftlint warning
+    // swiftlint:disable:next function_body_length
     init(style: Style? = nil, additionalConfiguration: ((HILabel) -> Void)? = nil) {
         self.style = style
         super.init(frame: .zero)
@@ -76,10 +78,10 @@ class HILabel: UILabel {
             font = HIAppearance.Font.loginTitle
 
         case .viewTitle:
-            textHIColor = \.viewTitleColor
+            textHIColor = \.loginSelectionText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.loginTitle
-            
+
         case .backgroundTitle:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
@@ -90,11 +92,11 @@ class HILabel: UILabel {
             textHIColor = \.loginSelectionText
             backgroundHIColor = \.clear
             textAlignment = .center
-            font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+            font = HIAppearance.Font.loginSelection
             layer.cornerRadius = 20.0
             layer.borderWidth = 2.0
-            layer.borderColor = UIColor(red: 0.133, green: 0.169, blue: 0.361, alpha: 1).cgColor
-            layer.backgroundColor = UIColor.clear.cgColor //TODO: Replace red with actual colors
+            layer.borderColor = (\HIAppearance.loginSelectionText).value.cgColor
+            layer.backgroundColor = UIColor.clear.cgColor
         }
         }
 

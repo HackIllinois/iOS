@@ -58,9 +58,7 @@ extension HILoginSelectionViewController {
         tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 100).isActive = true
         tableView.widthAnchor.constraint(equalToConstant: 220).isActive = true
-//        tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-//        tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         self.tableView = tableView
     }
 }
@@ -86,6 +84,7 @@ extension HILoginSelectionViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
+        // Non-interactible text tableviewcell for "- OR -"
         if indexPath.row == 1 {
             let orCell = UITableViewCell()
             orCell.backgroundColor = UIColor.clear
@@ -94,28 +93,28 @@ extension HILoginSelectionViewController {
             orCell.textLabel?.text = "- OR -"
             orCell.textLabel?.textAlignment = .center
             orCell.textLabel?.backgroundColor = UIColor.clear
-            orCell.textLabel?.textColor = UIColor(red: 0.643, green: 0.231, blue: 0.361, alpha: 1)
-            orCell.textLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+            orCell.textLabel?.textColor = (\HIAppearance.attendeeBackground).value
+            orCell.textLabel?.font = HIAppearance.Font.loginSelection
             orCell.selectionStyle = .none // Prevents the "- OR -" cell from being clickable
             return orCell
         }
 
-        let increment = indexPath.row > 1 ? 1 : 0
+        let adjustIndex = indexPath.row > 1 ? 1 : 0
 
         let cell = tableView.dequeueReusableCell(withIdentifier: HILoginSelectionCell.identifier, for: indexPath)
         if let cell = cell as? HILoginSelectionCell {
-            cell.titleLabel.text = HIAPI.AuthService.OAuthProvider.all[indexPath.row - increment].displayName
+            cell.titleLabel.text = HIAPI.AuthService.OAuthProvider.all[indexPath.row - adjustIndex].displayName
             // Attendee cell
             if indexPath.row == 0 {
-                cell.defaultColor = UIColor(red: 0.643, green: 0.231, blue: 0.361, alpha: 1)
-                cell.titleLabel.layer.borderColor = UIColor(red: 0.643, green: 0.231, blue: 0.361, alpha: 1).cgColor
-                cell.titleLabel.textColor = UIColor.white//\.attendeeText //TODO: change to white
+                cell.defaultColor = (\HIAppearance.attendeeBackground).value
+                cell.titleLabel.layer.borderColor = (\HIAppearance.attendeeBackground).value.cgColor
+                cell.titleLabel.textColor = UIColor.white
                 cell.activeColor = UIColor.white
-                cell.activeTextColor = UIColor(red: 0.643, green: 0.231, blue: 0.361, alpha: 1)
+                cell.activeTextColor = (\HIAppearance.attendeeBackground).value
             } else if indexPath.row > 1 { //After "- OR -" cell roles
                 cell.defaultColor = UIColor.clear
-                cell.activeColor = UIColor(red: 0.133, green: 0.169, blue: 0.361, alpha: 1)
-                cell.defaultTextColor = UIColor(red: 0.133, green: 0.169, blue: 0.361, alpha: 1)
+                cell.activeColor = (\HIAppearance.loginSelectionText).value
+                cell.defaultTextColor = (\HIAppearance.loginSelectionText).value
             }
         }
         return cell
@@ -156,9 +155,9 @@ extension HILoginSelectionViewController {
             return
         }
 
-        let increment = indexPath.row > 1 ? 1 : 0
+        let adjustIndex = indexPath.row > 1 ? 1 : 0
         if let delegate = delegate {
-            let selection = HIAPI.AuthService.OAuthProvider.all[indexPath.row - increment]
+            let selection = HIAPI.AuthService.OAuthProvider.all[indexPath.row - adjustIndex]
             delegate.loginSelectionViewController(self, didMakeLoginSelection: selection)
         }
         super.tableView(tableView, didSelectRowAt: indexPath)

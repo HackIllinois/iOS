@@ -32,6 +32,7 @@ struct HIAppearance: Equatable {
     let viewTitleColor: UIColor
     let loginSelectionText: UIColor
     let attendeeText: UIColor
+    let attendeeBackground: UIColor
 
     let clear: UIColor = .clear
 
@@ -64,7 +65,8 @@ struct HIAppearance: Equatable {
         loginLogo: #imageLiteral(resourceName: "LoginLogo"),
         viewTitleColor: deepBlue,
         loginSelectionText: darkerBlue,
-        attendeeText: white
+        attendeeText: white,
+        attendeeBackground: maroon
     )
 
     fileprivate static let night = HIAppearance(
@@ -86,7 +88,8 @@ struct HIAppearance: Equatable {
         loginLogo: #imageLiteral(resourceName: "LoginLogo"),
         viewTitleColor: deepBlue,
         loginSelectionText: darkerBlue,
-        attendeeText: white
+        attendeeText: white,
+        attendeeBackground: maroon
     )
 
     fileprivate static var current = day
@@ -106,6 +109,7 @@ struct HIAppearance: Equatable {
         static let navigationSubtitle = UIFont.systemFont(ofSize: 13, weight: .medium)
         static let navigationTitle = UIFont.systemFont(ofSize: 15, weight: .medium)
         static let loginTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
+        static let loginSelection = UIFont.systemFont(ofSize: 16, weight: .semibold)
 
         static let sectionHeader = UIFont.systemFont(ofSize: 13, weight: .bold)
         static let button = UIFont.systemFont(ofSize: 15, weight: .regular)
