@@ -124,7 +124,7 @@ final class HIEventDataSource {
                                     coreDataEvent.name = apiEvent.name
                                     coreDataEvent.sponsor = apiEvent.sponsor
                                     coreDataEvent.startTime = apiEvent.startTime
-                                    coreDataEvent.favorite = apiFavorites.contains(coreDataEvent.name)
+                                    coreDataEvent.favorite = apiFavorites.contains(coreDataEvent.id)
                                 }
 
                                 apiEventsToInsert.forEach { apiEvent in
@@ -143,7 +143,7 @@ final class HIEventDataSource {
                                     coreDataEvent.name = apiEvent.name
                                     coreDataEvent.sponsor = apiEvent.sponsor
                                     coreDataEvent.startTime = apiEvent.startTime
-                                    coreDataEvent.favorite = apiFavorites.contains(coreDataEvent.name)
+                                    coreDataEvent.favorite = apiFavorites.contains(coreDataEvent.id)
                                 }
 
                                 // 10) Save changes, call completion handler, unlock refresh
