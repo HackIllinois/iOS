@@ -68,7 +68,7 @@ struct HIAppearance: Equatable {
         qrTint: darkBlue,
         qrBackground: lightBlue,
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewNight"),
-        preferredStatusBarStyle: .lightContent,
+        preferredStatusBarStyle: .default,
         scrollViewIndicatorStyle: .white,
         transparentBackground: transparent,
         mapBackground: blue
