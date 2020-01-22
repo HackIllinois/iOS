@@ -87,11 +87,11 @@ extension HIEventCell {
             contentStackViewHeight += locationLabel.intrinsicContentSize.height + 3
             lhs.contentStackView.addArrangedSubview(locationLabel)
         }
-        guard let description = rhs.info as? String else {return}
-               let descriptionLabel = HILabel(style: .description)
-               descriptionLabel.text = description
-               contentStackViewHeight += descriptionLabel.intrinsicContentSize.height + 3
-               lhs.contentStackView.addArrangedSubview(descriptionLabel)
+        
+        let descriptionLabel = HILabel(style: .description)
+        descriptionLabel.text = rhs.info
+        contentStackViewHeight += descriptionLabel.intrinsicContentSize.height + 3
+        lhs.contentStackView.addArrangedSubview(descriptionLabel)
         lhs.contentStackViewHeight.constant = contentStackViewHeight
     }
 }
