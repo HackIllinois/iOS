@@ -87,7 +87,7 @@ extension HIEventCell {
             contentStackViewHeight += locationLabel.intrinsicContentSize.height + 3
             lhs.contentStackView.addArrangedSubview(locationLabel)
         }
-        
+
         let descriptionLabel = HILabel(style: .cellDescription)
         descriptionLabel.text = rhs.info
         contentStackViewHeight += descriptionLabel.intrinsicContentSize.height + 3

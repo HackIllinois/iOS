@@ -33,6 +33,9 @@ class HILabel: UILabel {
     var backgroundHIColor: HIColor?
 
     // MARK: - Init
+    
+    // Waive swiftlint warning
+    // swiftlint:disable:next function_body_length
     init(style: Style? = nil, additionalConfiguration: ((HILabel) -> Void)? = nil) {
         self.style = style
         super.init(frame: .zero)
@@ -68,7 +71,7 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.contentText
             numberOfLines = 0
-            
+
         case .cellDescription:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
