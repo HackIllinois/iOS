@@ -42,7 +42,7 @@ extension HIEventScannerViewController {
         let alert = UIAlertController(title: "Checking user...", message: id, preferredStyle: .alert)
         present(alert, animated: true, completion: nil)
 
-        HIAPI.TrackingService.track(name: event.name, id: id)
+        HIAPI.TrackingService.track(eventId: event.id, id: id)
         .onCompletion { (result) in
             DispatchQueue.main.async { [weak self] in
                 do {

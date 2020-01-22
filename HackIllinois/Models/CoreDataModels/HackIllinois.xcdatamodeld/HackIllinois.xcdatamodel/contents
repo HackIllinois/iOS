@@ -15,7 +15,7 @@
         <attribute name="endTime" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="eventType" attributeType="String"/>
         <attribute name="favorite" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="id" attributeType="String"/>
         <attribute name="info" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="sectionIdentifier" transient="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -24,7 +24,7 @@
         <relationship name="locations" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Location" inverseName="events" inverseEntity="Location"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
-                <constraint value="name"/>
+                <constraint value="id"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
