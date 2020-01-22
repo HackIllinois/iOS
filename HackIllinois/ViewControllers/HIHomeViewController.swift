@@ -87,7 +87,7 @@ extension HIHomeViewController {
         return dataStore[currentTab].predicate
     }
 
-    func animateReload() {
+    @objc func animateReload() {
         try? fetchedResultsController.performFetch()
         animateTableViewReload()
     }
@@ -140,11 +140,14 @@ extension HIHomeViewController {
         navigationItem.rightBarButtonItem = rightNavigationItem
 
         setupPredicateRefreshTimer()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(animateReload), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         teardownPredicateRefreshTimer()
+        NotificationCenter.default.removeObserver(self)
     }
 }
 

@@ -69,8 +69,6 @@ extension HIAnnouncementsViewController {
         super.viewWillAppear(animated)
         HIAnnouncementDataSource.refresh()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(viewWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-
         var rightNavigationItem: UIBarButtonItem?
         if HIApplicationStateController.shared.user?.roles.contains(.admin) == true {
             rightNavigationItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(presentAdminAnnouncementViewController))
@@ -80,7 +78,6 @@ extension HIAnnouncementsViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
     }
 
     @objc func viewWillEnterForeground() {
