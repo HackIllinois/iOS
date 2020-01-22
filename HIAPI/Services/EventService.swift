@@ -29,20 +29,20 @@ public class EventService: BaseService {
         return APIRequest<EventContainer>(service: self, endpoint: "", body: eventDict, method: .POST)
     }
 
-    public static func getAllFavorites() -> APIRequest<Favorite> {
-        return APIRequest<Favorite>(service: self, endpoint: "favorite/", method: .GET)
+    public static func getAllFavorites() -> APIRequest<EventFavorites> {
+        return APIRequest<EventFavorites>(service: self, endpoint: "favorite/", method: .GET)
     }
 
-    public static func favoriteBy(id: String) -> APIRequest<Favorite> {
+    public static func favoriteBy(id: String) -> APIRequest<EventFavorites> {
         var body = HTTPBody()
         body["eventId"] = id
-        return APIRequest<Favorite>(service: self, endpoint: "favorite/add/", body: body, method: .POST)
+        return APIRequest<EventFavorites>(service: self, endpoint: "favorite/add/", body: body, method: .POST)
     }
 
-    public static func unfavoriteBy(id: String) -> APIRequest<Favorite> {
+    public static func unfavoriteBy(id: String) -> APIRequest<EventFavorites> {
         var body = HTTPBody()
         body["eventId"] = id
-        return APIRequest<Favorite>(service: self, endpoint: "favorite/remove/", body: body, method: .POST)
+        return APIRequest<EventFavorites>(service: self, endpoint: "favorite/remove/", body: body, method: .POST)
     }
 
 }

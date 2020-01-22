@@ -58,7 +58,7 @@ public struct Location: Codable {
     public let name: String
 }
 
-public struct Favorite: Codable, APIReturnable {
+public struct EventFavorites: Codable, APIReturnable {
     public let events: Set<String>
     public let id: String
 }
