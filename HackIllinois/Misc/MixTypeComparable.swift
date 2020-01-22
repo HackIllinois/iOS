@@ -113,9 +113,9 @@ extension Location: MixTypeComparable {
 }
 
 extension HIAPI.Project: MixTypeComparable {
-    var comparable: String { return name }
+    var comparable: String { return id }
 }
 
 extension Project: MixTypeComparable {
-    var comparable: String { return name }
+    var comparable: String { return id }
 }

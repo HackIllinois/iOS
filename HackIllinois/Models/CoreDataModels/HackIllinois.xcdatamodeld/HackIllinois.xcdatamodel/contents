@@ -48,6 +48,11 @@
         <attribute name="number" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="room" attributeType="String"/>
         <attribute name="tags" attributeType="String" valueTransformerName=""/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <elements>
         <element name="Announcement" positionX="-63" positionY="72" width="128" height="105"/>
