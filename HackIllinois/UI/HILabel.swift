@@ -33,7 +33,7 @@ class HILabel: UILabel {
     var backgroundHIColor: HIColor?
 
     // MARK: - Init
-    
+
     // Waive swiftlint warning
     // swiftlint:disable:next function_body_length
     init(style: Style? = nil, additionalConfiguration: ((HILabel) -> Void)? = nil) {
