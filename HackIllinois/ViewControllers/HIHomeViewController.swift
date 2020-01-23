@@ -130,6 +130,7 @@ extension HIHomeViewController {
     override func viewDidLoad() {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         super.viewDidLoad()
+        gradientView.image = #imageLiteral(resourceName: "gradient-bg-with-clouds-and-buildings")
         setupRefreshControl()
     }
 

@@ -20,6 +20,7 @@ class HISegmentedControl: UIControl {
     private(set) var selectedIndex: Int = 0 {
         didSet {
             if oldValue != selectedIndex {
+                labels[oldValue].textColor <- \.baseText
                 displayNewSelectedIndex()
                 sendActions(for: .valueChanged)
             }
@@ -55,12 +56,12 @@ class HISegmentedControl: UIControl {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        backgroundColor <- \.baseBackground
+        backgroundColor <- \.transparentBackground
         labels.forEach {
             $0.textColor <- \.baseText
-            $0.backgroundColor <- \.baseBackground
+            $0.backgroundColor <- \.transparentBackground
         }
-        bottomView.backgroundColor <- \.accent
+        bottomView.backgroundColor <- \.baseText
         indicatorView.backgroundColor <- \.accent
     }
 
@@ -125,6 +126,7 @@ class HISegmentedControl: UIControl {
         let animator = UIViewPropertyAnimator(duration: 0.5, dampingRatio: 0.8)
         animator.addAnimations {
             self.indicatorView.frame.origin.x = selectedLabel.frame.origin.x
+            selectedLabel.textColor <- \.accent
         }
         animator.startAnimation()
     }
