@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Announcement" representedClassName="Announcement" syncable="YES">
         <attribute name="info" attributeType="String"/>
         <attribute name="roles" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
@@ -15,7 +15,7 @@
         <attribute name="endTime" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="eventType" attributeType="String"/>
         <attribute name="favorite" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="id" attributeType="String"/>
         <attribute name="info" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="sectionIdentifier" transient="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -24,7 +24,7 @@
         <relationship name="locations" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Location" inverseName="events" inverseEntity="Location"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
-                <constraint value="name"/>
+                <constraint value="id"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
