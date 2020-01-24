@@ -70,7 +70,7 @@ extension HIEventCell {
 // MARK: - Population
 extension HIEventCell {
     static func heightForCell(with event: Event) -> CGFloat {
-        return 73 + 21 * CGFloat(event.locations.count)
+        return 83 + 21 * CGFloat(event.locations.count)
     }
 
     static func <- (lhs: HIEventCell, rhs: Event) {
