@@ -123,6 +123,8 @@ extension HIScheduleViewController {
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        tableView.contentInset = UIEdgeInsets(top: 17, left: 0, bottom: 0, right: 0)
+        tableView.scrollIndicatorInsets = UIEdgeInsets(top: 17, left: 0, bottom: 0, right: 0)
         self.tableView = tableView
     }
 
@@ -167,6 +169,7 @@ extension HIScheduleViewController {
             let date = Formatter.coreData.date(from: sections[section].name) {
 
             header.titleLabel.text = Formatter.simpleTime.string(from: date)
+            header.titleLabel.textAlignment = .center
         }
         return header
     }
