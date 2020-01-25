@@ -22,6 +22,7 @@ class HILabel: UILabel {
         case title
         case subtitle
         case description
+        case cellDescription
         case loginHeader
         case loginSelection
     }
@@ -75,6 +76,12 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.contentText
             numberOfLines = 0
+
+        case .cellDescription:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.contentText
+            numberOfLines = 1
 
         case .loginHeader:
             textHIColor = \.accent
