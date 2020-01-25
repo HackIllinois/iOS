@@ -20,7 +20,7 @@ public final class AnnouncementService: BaseService {
 
     public static func sendToken(deviceToken: String) -> APIRequest<SimpleRequest> {
         var announcementDict = [String: Any]()
-        announcementDict["deviceToken"] = deviceToken
+        announcementDict["token"] = deviceToken
         announcementDict["platform"] = "ios"
         return APIRequest<SimpleRequest>(service: self, endpoint: "device/", body: announcementDict, method: .POST)
     }

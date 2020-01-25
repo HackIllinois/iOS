@@ -20,6 +20,7 @@ extension Event {
         return NSFetchRequest<Event>(entityName: "Event")
     }
 
+    @NSManaged public var id: String
     @NSManaged public var endTime: Date
     @NSManaged public var eventType: String
     @NSManaged public var favorite: Bool

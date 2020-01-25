@@ -14,19 +14,6 @@ import Foundation
 
 // MARK: - Constants
 struct HIConstants {
-    // Times
-    static let EVENT_START_TIME = Date(timeIntervalSince1970: 1550872800) // Friday, February 22, 2019 4:00:00 PM GMT-06:00
-    static let HACKING_START_TIME = Date(timeIntervalSince1970: 1550898000) // Friday, February 22, 2019 11:00:00 PM GMT-06:00
-    static let HACKING_END_TIME = Date(timeIntervalSince1970: 1551024000) // Sunday, February 24, 2019 10:00:00 AM GMT-06:00
-    static let EVENT_END_TIME = Date(timeIntervalSince1970: 1551049200) // Sunday, February 24, 2019 05:00:00 PM GMT-06:00
-
-    static let FRIDAY_START_TIME = Date(timeIntervalSince1970: 1550815200) // Friday, February 22, 2019 12:00:00 AM GMT-06:00
-    static let FRIDAY_END_TIME = Date(timeIntervalSince1970: 1550901599) // Friday, February 22, 2019 11:59:59 PM GMT-06:00
-    static let SATURDAY_START_TIME = Date(timeIntervalSince1970: 1550901600) // Saturday, February 23, 2019 12:00:00 AM GMT-06:00
-    static let SATURDAY_END_TIME = Date(timeIntervalSince1970: 1550987999) // Saturday, February 23, 2019 11:59:59 PM GMT-06:00
-    static let SUNDAY_START_TIME = Date(timeIntervalSince1970: 1550988000) // Sunday, February 24, 2019 12:00:00 AM GMT-06:00
-    static let SUNDAY_END_TIME = Date(timeIntervalSince1970: 1551074399) // Sunday, February 24, 2019 11:59:59 PM GMT-06:00
-
     // Keys
     static let STORED_ACCOUNT_KEY = "org.hackillinois.ios.active_account"
     static let APPLICATION_INSTALLED_KEY = "org.hackillinois.ios.application_installed"

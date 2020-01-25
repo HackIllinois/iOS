@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.72" systemVersion="18D42" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Announcement" representedClassName="Announcement" syncable="YES">
-        <attribute name="info" attributeType="String" syncable="YES"/>
-        <attribute name="roles" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="time" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="title" attributeType="String" syncable="YES"/>
+        <attribute name="info" attributeType="String"/>
+        <attribute name="roles" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="time" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" attributeType="String"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="time"/>
@@ -12,26 +12,27 @@
         </uniquenessConstraints>
     </entity>
     <entity name="Event" representedClassName="Event" syncable="YES">
-        <attribute name="endTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="eventType" attributeType="String" syncable="YES"/>
-        <attribute name="favorite" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="info" attributeType="String" syncable="YES"/>
-        <attribute name="name" attributeType="String" syncable="YES"/>
-        <attribute name="sectionIdentifier" transient="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="sponsor" attributeType="String" syncable="YES"/>
-        <attribute name="startTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="locations" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Location" inverseName="events" inverseEntity="Location" syncable="YES"/>
+        <attribute name="endTime" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="eventType" attributeType="String"/>
+        <attribute name="favorite" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="info" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="sectionIdentifier" transient="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sponsor" attributeType="String"/>
+        <attribute name="startTime" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="locations" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Location" inverseName="events" inverseEntity="Location"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
-                <constraint value="name"/>
+                <constraint value="id"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
     <entity name="Location" representedClassName="Location" syncable="YES">
-        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="name" attributeType="String" syncable="YES"/>
-        <relationship name="events" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="locations" inverseEntity="Event" syncable="YES"/>
+        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String"/>
+        <relationship name="events" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="locations" inverseEntity="Event"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="name"/>

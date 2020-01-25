@@ -14,6 +14,7 @@ import Foundation
 import UserNotifications
 import UIKit
 import HIAPI
+import os
 
 class HILocalNotificationController: NSObject {
     static let shared = HILocalNotificationController()
@@ -34,6 +35,13 @@ class HILocalNotificationController: NSObject {
                     if granted { authorized?() }
                 }
             case .provisional: break
+            @unknown default:
+                os_log(
+                    "Unknown UNAuthorizationStatus %s",
+                    log: Logger.notifications,
+                    type: .info,
+                    String(describing: settings.authorizationStatus)
+                )
             }
         }
     }
@@ -69,7 +77,7 @@ class HILocalNotificationController: NSObject {
             content.body = event.info
             content.sound = UNNotificationSound.default
 
-            let request = UNNotificationRequest(identifier: event.name, content: content, trigger: trigger)
+            let request = UNNotificationRequest(identifier: event.id, content: content, trigger: trigger)
 
             UNUserNotificationCenter.current().add(request)
         }
@@ -77,7 +85,7 @@ class HILocalNotificationController: NSObject {
 
     func unscheduleNotification(for event: Event) {
         requestAuthorization {
-            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["\(event.name)"])
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["\(event.id)"])
         }
     }
 }

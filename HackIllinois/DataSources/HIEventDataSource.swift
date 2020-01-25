@@ -113,6 +113,7 @@ final class HIEventDataSource {
 
                                 coreDataEventsToUpdate.forEach { (coreDataEvent, apiEvent) in
                                     // Update CoreData event.
+                                    coreDataEvent.id = apiEvent.id
                                     coreDataEvent.endTime = apiEvent.endTime
                                     coreDataEvent.eventType = apiEvent.eventType
                                     coreDataEvent.info = apiEvent.info
@@ -123,12 +124,13 @@ final class HIEventDataSource {
                                     coreDataEvent.name = apiEvent.name
                                     coreDataEvent.sponsor = apiEvent.sponsor
                                     coreDataEvent.startTime = apiEvent.startTime
-                                    coreDataEvent.favorite = apiFavorites.contains(coreDataEvent.name)
+                                    coreDataEvent.favorite = apiFavorites.contains(coreDataEvent.id)
                                 }
 
                                 apiEventsToInsert.forEach { apiEvent in
                                     // Create CoreData event.
                                     let coreDataEvent = Event(context: context)
+                                    coreDataEvent.id = apiEvent.id
                                     coreDataEvent.endTime = apiEvent.endTime
                                     coreDataEvent.eventType = apiEvent.eventType
                                     coreDataEvent.info = apiEvent.info
@@ -141,7 +143,7 @@ final class HIEventDataSource {
                                     coreDataEvent.name = apiEvent.name
                                     coreDataEvent.sponsor = apiEvent.sponsor
                                     coreDataEvent.startTime = apiEvent.startTime
-                                    coreDataEvent.favorite = apiFavorites.contains(coreDataEvent.name)
+                                    coreDataEvent.favorite = apiFavorites.contains(coreDataEvent.id)
                                 }
 
                                 // 10) Save changes, call completion handler, unlock refresh

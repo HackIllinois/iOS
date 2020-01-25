@@ -45,22 +45,22 @@ class HIScheduleViewController: HIEventListViewController {
         var dataStore = [(displayText: String, predicate: NSPredicate)]()
         let fridayPredicate = NSPredicate(
             format: "%@ =< startTime AND startTime < %@",
-            HIConstants.FRIDAY_START_TIME as NSDate,
-            HIConstants.FRIDAY_END_TIME as NSDate
+            HITimeDataSource.shared.eventTimes.fridayStart as NSDate,
+            HITimeDataSource.shared.eventTimes.fridayEnd as NSDate
         )
         dataStore.append((displayText: "FRIDAY", predicate: fridayPredicate))
 
         let saturdayPredicate = NSPredicate(
             format: "%@ =< startTime AND startTime < %@",
-            HIConstants.SATURDAY_START_TIME as NSDate,
-            HIConstants.SATURDAY_END_TIME as NSDate
+            HITimeDataSource.shared.eventTimes.saturdayStart as NSDate,
+            HITimeDataSource.shared.eventTimes.saturdayEnd as NSDate
         )
         dataStore.append((displayText: "SATURDAY", predicate: saturdayPredicate))
 
         let sundayPredicate = NSPredicate(
             format: "%@ =< startTime AND startTime < %@",
-            HIConstants.SUNDAY_START_TIME as NSDate,
-            HIConstants.SUNDAY_END_TIME as NSDate
+            HITimeDataSource.shared.eventTimes.sundayStart as NSDate,
+            HITimeDataSource.shared.eventTimes.sundayEnd as NSDate
         )
         dataStore.append((displayText: "SUNDAY", predicate: sundayPredicate))
         return dataStore
@@ -123,6 +123,8 @@ extension HIScheduleViewController {
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        tableView.contentInset = UIEdgeInsets(top: 17, left: 0, bottom: 0, right: 0)
+        tableView.scrollIndicatorInsets = UIEdgeInsets(top: 17, left: 0, bottom: 0, right: 0)
         self.tableView = tableView
     }
 
@@ -167,6 +169,7 @@ extension HIScheduleViewController {
             let date = Formatter.coreData.date(from: sections[section].name) {
 
             header.titleLabel.text = Formatter.simpleTime.string(from: date)
+            header.titleLabel.textAlignment = .center
         }
         return header
     }
