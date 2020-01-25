@@ -20,6 +20,7 @@ class HIProjectViewController: HIProjectListViewController {
         let fetchRequest: NSFetchRequest<Project> = Project.fetchRequest()
 
         fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "number", ascending: true),
             NSSortDescriptor(key: "name", ascending: true)
         ]
 
