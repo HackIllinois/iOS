@@ -24,7 +24,7 @@ class HIApplicationStateController {
 
     // MARK: ViewControllers
     var loginFlowController = HILoginFlowController()
-    var menuController = HIMenuController()
+    var appFlowController = HITabBarController()
 
     // MARK: - Init
     init() {
@@ -72,8 +72,9 @@ extension HIApplicationStateController {
         var viewControllers = [UIViewController]()
         viewControllers.append(HIHomeViewController())
         viewControllers.append(HIScheduleViewController())
-        viewControllers.append(HIAnnouncementsViewController())
         viewControllers.append(HIUserDetailViewController())
+        viewControllers.append(HIIndoorMapsViewController())
+        viewControllers.append(HIAnnouncementsViewController())
 
         if !user.roles.intersection([.staff, .admin]).isEmpty {
             viewControllers.append(HICheckInScannerViewController())
@@ -105,8 +106,8 @@ extension HIApplicationStateController {
     func updateWindowViewController(animated: Bool) {
         let viewController: UIViewController
         if let user = user {
-            prepareMenuControllerForDisplay(with: user)
-            viewController = menuController
+            prepareAppControllerForDisplay(with: user)
+            viewController = appFlowController
         } else {
             prepareLoginControllerForDisplay()
             viewController = loginFlowController
@@ -119,10 +120,10 @@ extension HIApplicationStateController {
         }, completion: nil)
     }
 
-    func prepareMenuControllerForDisplay(with user: HIUser) {
-        let menuViewControllers = viewControllersFor(user: user)
-        menuController.setupMenuFor(menuViewControllers)
-        menuController._tabBarController.selectedIndex = 0
+    func prepareAppControllerForDisplay(with user: HIUser) {
+        let appViewControllers = viewControllersFor(user: user)
+        appFlowController.setupMenuFor(appViewControllers)
+        appFlowController.selectedIndex = 0
 
         HIEventDataSource.refresh()
         HIAnnouncementDataSource.refresh()
