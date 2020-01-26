@@ -38,8 +38,6 @@ class HIHomeViewController: HIEventListViewController {
         return fetchedResultsController
     }()
 
-    var indoorMapsViewController = HIIndoorMapsViewController()
-
     private var currentTab = 0
 
     private var dataStore: [(displayText: String, predicate: NSPredicate)] = {
@@ -135,10 +133,6 @@ extension HIHomeViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        let rightNavigationItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MapIcon"), style: .plain, target: self, action: #selector(presentIndoorMapsViewController))
-        navigationItem.rightBarButtonItem = rightNavigationItem
-
         setupPredicateRefreshTimer()
     }
 
@@ -156,13 +150,14 @@ extension HIHomeViewController {
     }
 }
 
-// MARK: - Actions
+// MARK: - UITabBarItem Setup
 extension HIHomeViewController {
-    @objc func presentIndoorMapsViewController() {
-        navigationController?.pushViewController(indoorMapsViewController, animated: true)
+    override func setupTabBarItem() {
+        tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: "home"), tag: 0)
     }
 }
 
+// MARK: - Actions
 extension HIHomeViewController: HICountdownViewControllerDelegate {
     func countdownToDateFor(countdownViewController: HICountdownViewController) -> Date? {
         let now = Date()
