@@ -60,7 +60,7 @@ class HIProjectViewController: HIProjectListViewController {
             format: "tags CONTAINS %@",
             "Languages"
         )
-        dataStore.append((displayText: "LANGUAGES", predicate: languagePredicate))
+        dataStore.append((displayText: "LANGS", predicate: languagePredicate))
 
         let dataSciPredicate = NSPredicate(
             format: "tags CONTAINS %@",
@@ -155,9 +155,5 @@ extension HIProjectViewController {
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 15
-    }
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return super.numberOfSections(in: tableView)
     }
 }
