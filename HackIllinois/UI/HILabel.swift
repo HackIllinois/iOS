@@ -19,6 +19,7 @@ class HILabel: UILabel {
         case location
         case event
         case title
+        case eventDetailTitle
         case subtitle
         case description
         case cellDescription
@@ -54,6 +55,11 @@ class HILabel: UILabel {
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.contentTitle
+
+        case .eventDetailTitle:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.detailTitle
 
         case .title:
             textHIColor = \.baseText

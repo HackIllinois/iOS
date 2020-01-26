@@ -81,8 +81,9 @@ struct HIAppearance: Equatable {
 
     enum Font {
         static let contentSubtitle = UIFont.systemFont(ofSize: 13, weight: .light)
-        static let contentText = UIFont.systemFont(ofSize: 13, weight: .regular)
+        static let contentText = UIFont.systemFont(ofSize: 14, weight: .regular)
         static let contentTitle = UIFont.systemFont(ofSize: 18, weight: .light)
+        static let detailTitle = UIFont.systemFont(ofSize: 24, weight: .semibold)
 
         static let navigationSubtitle = UIFont.systemFont(ofSize: 13, weight: .medium)
         static let navigationTitle = UIFont.systemFont(ofSize: 15, weight: .medium)

@@ -32,10 +32,10 @@ class HIEventDetailViewController: HIBaseViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.clear
     }
-    private let titleLabel = HILabel(style: .event) {
+    private let titleLabel = HILabel(style: .eventDetailTitle) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor <- \.baseText
-        $0.font = HIAppearance.Font.contentTitle
+        $0.font = HIAppearance.Font.detailTitle
     }
 
     private let timeLabel = HILabel(style: .description) {
@@ -116,7 +116,7 @@ extension HIEventDetailViewController {
 
         eventDetailContainer.addSubview(upperContainerView)
         upperContainerView.constrain(to: eventDetailContainer, topInset: 10, trailingInset: 0, leadingInset: 0)
-        upperContainerView.constrain(height: 67)
+        upperContainerView.constrain(height: 80)
 
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         upperContainerView.addSubview(favoritedButton)
@@ -128,12 +128,12 @@ extension HIEventDetailViewController {
         titleLabel.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor).isActive = true
 
         upperContainerView.addSubview(timeLabel)
-        timeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12).isActive = true
+        timeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15).isActive = true
         timeLabel.bottomAnchor.constraint(equalTo: upperContainerView.bottomAnchor).isActive = true
         timeLabel.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor, constant: 12).isActive = true
 
         eventDetailContainer.addSubview(descriptionLabel)
-        descriptionLabel.topAnchor.constraint(equalTo: upperContainerView.bottomAnchor, constant: 24).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: upperContainerView.bottomAnchor, constant: 30).isActive = true
         descriptionLabel.constrain(to: eventDetailContainer, trailingInset: -12, leadingInset: 12)
         descriptionLabelHeight = descriptionLabel.heightAnchor.constraint(equalToConstant: 100)
         descriptionLabelHeight.isActive = true
