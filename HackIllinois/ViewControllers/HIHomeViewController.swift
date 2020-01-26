@@ -130,7 +130,6 @@ extension HIHomeViewController {
     override func viewDidLoad() {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         super.viewDidLoad()
-        gradientView.image = #imageLiteral(resourceName: "gradient-bg-with-clouds-and-buildings")
         setupRefreshControl()
     }
 
@@ -146,6 +145,14 @@ extension HIHomeViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         teardownPredicateRefreshTimer()
+    }
+}
+
+// MARK: - UIImageView Setup
+extension HIHomeViewController {
+    @objc dynamic override func setUpBackgroundView() {
+        super.setUpBackgroundView()
+        backgroundView.image = #imageLiteral(resourceName: "gradient-bg-with-clouds-and-buildings")
     }
 }
 

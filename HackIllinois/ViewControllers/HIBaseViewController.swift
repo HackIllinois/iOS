@@ -22,7 +22,7 @@ class HIBaseViewController: UIViewController {
     var refreshControl = UIRefreshControl()
     var refreshAnimation = AnimationView(name: "refresh")
     var tableView: UITableView?
-    var gradientView = UIImageView()
+    var backgroundView = UIImageView()
     let tableBackgroundView = HIView()
 }
 
@@ -52,14 +52,14 @@ extension HIBaseViewController {
 extension HIBaseViewController {
     @objc dynamic func setUpBackgroundView() {
         view.layer.backgroundColor = UIColor.clear.cgColor
-        gradientView.image = #imageLiteral(resourceName: "EventsGradient")
-        gradientView.translatesAutoresizingMaskIntoConstraints = false
-        gradientView.isUserInteractionEnabled = true
-        view.insertSubview(gradientView, at: 0)
-        gradientView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        gradientView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        gradientView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        gradientView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        backgroundView.image = #imageLiteral(resourceName: "EventsGradient")
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.isUserInteractionEnabled = true
+        view.insertSubview(backgroundView, at: 0)
+        backgroundView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        backgroundView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        backgroundView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
     }
 }
 
