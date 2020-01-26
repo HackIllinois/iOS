@@ -56,6 +56,18 @@ class HIEventDetailViewController: HIBaseViewController {
         $0.activeImage = #imageLiteral(resourceName: "Favorited")
         $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
     }
+    private let closeButton = HIButton {
+        $0.tintHIColor = \.baseText
+        $0.backgroundHIColor = \.clear
+        $0.activeImage = #imageLiteral(resourceName: "MenuClose")
+        $0.baseImage = #imageLiteral(resourceName: "MenuClose")
+    }
+    private let cameraButton = HIButton {
+        $0.tintHIColor = \.baseText
+        $0.backgroundHIColor = \.clear
+        $0.activeImage = #imageLiteral(resourceName: "Favorited")
+        $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
+    }
 
     // MARK: Constraints
     private var descriptionLabelHeight = NSLayoutConstraint()
@@ -104,6 +116,10 @@ extension HIEventDetailViewController {
             navigationController?.pushViewController(HIEventDetailViewController.scannerViewController, animated: true)
         }
     }
+
+    @objc func didSelectCloseButton(_ sender: HIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 // MARK: - UIViewController
@@ -111,8 +127,21 @@ extension HIEventDetailViewController {
     override func loadView() {
         super.loadView()
 
+        view.addSubview(closeButton)
+        closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
+        closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 15).isActive = true
+        closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
+        closeButton.constrain(height: 20)
+
+        view.addSubview(cameraButton)
+        cameraButton.addTarget(self, action: #selector(didSelectScanButton(_:)), for: .touchUpInside)
+        cameraButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 15).isActive = true
+        cameraButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).isActive = true
+        cameraButton.constrain(height: 30)
+
         view.addSubview(eventDetailContainer)
-        eventDetailContainer.constrain(to: view.safeAreaLayoutGuide, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        eventDetailContainer.topAnchor.constraint(equalTo: closeButton.bottomAnchor).isActive = true
+        eventDetailContainer.constrain(to: view.safeAreaLayoutGuide, trailingInset: 0, bottomInset: 0, leadingInset: 0)
 
         eventDetailContainer.addSubview(upperContainerView)
         upperContainerView.constrain(to: eventDetailContainer, topInset: 10, trailingInset: 0, leadingInset: 0)
