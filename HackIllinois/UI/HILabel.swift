@@ -18,6 +18,7 @@ class HILabel: UILabel {
     enum Style {
         case location
         case event
+        case project
         case title
         case subtitle
         case description
@@ -33,7 +34,6 @@ class HILabel: UILabel {
     var backgroundHIColor: HIColor?
 
     // MARK: - Init
-
     // Waive swiftlint warning
     // swiftlint:disable:next function_body_length
     init(style: Style? = nil, additionalConfiguration: ((HILabel) -> Void)? = nil) {
@@ -51,6 +51,11 @@ class HILabel: UILabel {
             font = HIAppearance.Font.contentText
 
         case .event:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.contentTitle
+
+        case .project:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.contentTitle

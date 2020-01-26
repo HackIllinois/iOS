@@ -75,6 +75,7 @@ extension HIApplicationStateController {
         viewControllers.append(HIUserDetailViewController())
         viewControllers.append(HIIndoorMapsViewController())
         viewControllers.append(HIAnnouncementsViewController())
+        viewControllers.append(HIProjectViewController())
 
         if !user.roles.intersection([.staff, .admin]).isEmpty {
             viewControllers.append(HICheckInScannerViewController())
@@ -127,6 +128,7 @@ extension HIApplicationStateController {
 
         HIEventDataSource.refresh()
         HIAnnouncementDataSource.refresh()
+        HIProjectDataSource.refresh()
     }
 
     func prepareLoginControllerForDisplay() { }
