@@ -73,6 +73,8 @@ extension HIApplicationStateController {
         viewControllers.append(HIHomeViewController())
         viewControllers.append(HIScheduleViewController())
         viewControllers.append(HIUserDetailViewController())
+        viewControllers.append(HIIndoorMapsViewController())
+        viewControllers.append(HIAnnouncementsViewController())
         viewControllers.append(HIProjectViewController())
         viewControllers.append(HIIndoorMapsViewController())
         viewControllers.append(HIAnnouncementsViewController())
