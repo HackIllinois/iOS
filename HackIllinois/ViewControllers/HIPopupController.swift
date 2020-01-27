@@ -65,7 +65,6 @@ class HIPopupController: HIBaseViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.clear
         $0.backgroundColor = .clear
-        $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBackground(_:))))
         $0.isUserInteractionEnabled = true
     }
 }
@@ -99,8 +98,13 @@ extension HIPopupController {
 extension HIPopupController {
     override func loadView() {
         super.loadView()
-
+        view.addSubview(backgroundView)
         view.addSubview(containerView)
+
+        backgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        backgroundView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        backgroundView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        backgroundView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
 
         containerView.addSubview(exitButton)
         containerView.addSubview(logoutButton)
@@ -136,6 +140,7 @@ extension HIPopupController {
         height.priority = UILayoutPriority(rawValue: 500)
         height.isActive = true
 
+        backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBackground(_:))))
         view.backgroundColor = .clear
 
     }
