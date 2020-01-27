@@ -61,6 +61,13 @@ class HIPopupController: HIBaseViewController {
         $0.numberOfLines = 0
         $0.setContentCompressionResistancePriority(.required, for: .vertical)
     }
+    private let backgroundView = HIView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundHIColor = \.clear
+        $0.backgroundColor = .clear
+        $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBackground(_:))))
+        $0.isUserInteractionEnabled = true
+    }
 }
 
 // MARK: - Actions
@@ -81,6 +88,11 @@ extension HIPopupController {
     @objc func didSelectClose(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
+
+    @objc func didSelectBackground(_ sender: UITapGestureRecognizer) {
+        print("TRYING TO DISMISS")
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 // MARK: - UIViewController
@@ -89,6 +101,7 @@ extension HIPopupController {
         super.loadView()
 
         view.addSubview(containerView)
+
         containerView.addSubview(exitButton)
         containerView.addSubview(logoutButton)
         containerView.addSubview(qrContainerView)
@@ -123,7 +136,7 @@ extension HIPopupController {
         height.priority = UILayoutPriority(rawValue: 500)
         height.isActive = true
 
-        view.backgroundColor = UIColor(hue: 1, saturation: 0, brightness: 0, alpha: 0.2)
+        view.backgroundColor = .clear
 
     }
 
@@ -142,20 +155,12 @@ extension HIPopupController {
         userNameLabel.text = user.firstName.uppercased()
     }
 }
-
 // MARK: - UIViewControllerTransitioningDelegate
-extension HIPopupController: UIViewControllerTransitioningDelegate {
-
-}
-
-// MARK: - Animator
-class PopupAnimator: NSObject, UIViewControllerAnimatedTransitioning {
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 4
+extension HIHomeViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return HIPopinAnimator()
     }
-
-    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return HIPopoutAnimator()
     }
-
 }
