@@ -33,6 +33,7 @@ extension HIBaseViewController {
         super.viewDidLoad()
         setUpBackgroundView()
         setupNavigationItem()
+        setupTabBarItem()
         setupTableView()
         try? _fetchedResultsController?.performFetch()
     }
@@ -68,6 +69,13 @@ extension HIBaseViewController {
 extension HIBaseViewController {
     @objc dynamic func setupNavigationItem() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+    }
+}
+
+// MARK: - UITabBarItem Setup
+extension HIBaseViewController {
+    @objc dynamic func setupTabBarItem() {
+        tabBarItem = UITabBarItem(title: self.title, image: nil, tag: 0)
     }
 }
 
