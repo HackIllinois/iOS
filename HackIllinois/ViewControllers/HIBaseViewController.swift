@@ -52,9 +52,10 @@ extension HIBaseViewController {
 extension HIBaseViewController {
     @objc dynamic func setUpBackgroundView() {
         view.layer.backgroundColor = UIColor.clear.cgColor
-        backgroundView.image = #imageLiteral(resourceName: "EventsGradient")
+        backgroundView.image = #imageLiteral(resourceName: "Gradient")
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.isUserInteractionEnabled = true
+        backgroundView.contentMode = .scaleAspectFill
         view.insertSubview(backgroundView, at: 0)
         backgroundView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true

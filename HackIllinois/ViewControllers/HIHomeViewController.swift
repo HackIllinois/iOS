@@ -69,6 +69,7 @@ class HIHomeViewController: HIEventListViewController {
     ]
 
     private var timer: Timer?
+    private var buildingView = UIImageView()
 }
 
 // MARK: - Actions
@@ -118,6 +119,13 @@ extension HIHomeViewController {
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        
+        buildingView.contentMode = .scaleAspectFill
+        buildingView.translatesAutoresizingMaskIntoConstraints = false
+        buildingView.isUserInteractionEnabled = true
+        view.insertSubview(buildingView, at: 1)
+        buildingView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        buildingView.topAnchor.constraint(equalTo: countdownViewController.view.centerYAnchor).isActive = true
 
         let tableView = HITableView()
         view.addSubview(tableView)
@@ -152,7 +160,9 @@ extension HIHomeViewController {
 extension HIHomeViewController {
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "gradient-bg-with-clouds-and-buildings")
+        backgroundView.image = #imageLiteral(resourceName: "HomeGradient")
+        buildingView.image = #imageLiteral(resourceName: "Buildings")
+        
     }
 }
 
