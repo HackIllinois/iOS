@@ -159,7 +159,10 @@ extension HIHomeViewController {
 // MARK: - Actions
 extension HIHomeViewController {
     @objc func presentIndoorMapsViewController() {
-        navigationController?.pushViewController(indoorMapsViewController, animated: true)
+        let popupView = HIPopupController()
+        popupView.modalPresentationStyle = .overCurrentContext
+        popupView.transitioningDelegate = self
+        self.present(popupView, animated: true)
     }
 }
 
