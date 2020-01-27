@@ -55,7 +55,7 @@ extension HIProjectListViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         projectDetailViewController.project = _fetchedResultsController?.object(at: indexPath) as? Project
-        navigationController?.pushViewController(projectDetailViewController, animated: true)
+        self.present(projectDetailViewController, animated: true, completion: nil)
         super.tableView(tableView, didSelectRowAt: indexPath)
     }
 }

@@ -21,20 +21,27 @@ class HIProjectDetailViewController: HIBaseViewController {
     var project: Project?
 
     // MARK: Views
+    private let closeButton = HIButton {
+        $0.tintHIColor = \.baseText
+        $0.backgroundHIColor = \.clear
+        $0.activeImage = #imageLiteral(resourceName: "MenuClose")
+        $0.baseImage = #imageLiteral(resourceName: "MenuClose")
+    }
+    
     private let projectDetailContainer = HIView {
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundHIColor = \.contentBackground
+        $0.backgroundHIColor = \.clear
     }
     private let upperContainerView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundHIColor = \.contentBackground
+        $0.backgroundHIColor = \.clear
     }
-    private let titleLabel = HILabel(style: .project) {
+    private let titleLabel = HILabel(style: .detailTitle) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor <- \.baseText
-        $0.font = HIAppearance.Font.contentTitle
+        $0.font = HIAppearance.Font.detailTitle
     }
 
     private let numberLabel = HILabel(style: .description) {
@@ -86,19 +93,30 @@ extension HIProjectDetailViewController {
         .authorize(with: HIApplicationStateController.shared.user)
         .launch()
     }
+    
+    @objc func didSelectCloseButton(_ sender: HIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 // MARK: - UIViewController
 extension HIProjectDetailViewController {
     override func loadView() {
         super.loadView()
+        
+        view.addSubview(closeButton)
+        closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
+        closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 15).isActive = true
+        closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
+        closeButton.constrain(height: 20)
 
         view.addSubview(projectDetailContainer)
-        projectDetailContainer.constrain(to: view.safeAreaLayoutGuide, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        projectDetailContainer.constrain(to: view.safeAreaLayoutGuide, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        projectDetailContainer.topAnchor.constraint(equalTo: closeButton.bottomAnchor).isActive = true
 
         projectDetailContainer.addSubview(upperContainerView)
         upperContainerView.constrain(to: projectDetailContainer, topInset: 10, trailingInset: 0, leadingInset: 0)
-        upperContainerView.constrain(height: 67)
+        upperContainerView.constrain(height: 80)
 
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         upperContainerView.addSubview(favoritedButton)
@@ -111,23 +129,23 @@ extension HIProjectDetailViewController {
         titleLabel.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor).isActive = true
 
         upperContainerView.addSubview(numberLabel)
-        numberLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12).isActive = true
+        numberLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15).isActive = true
         numberLabel.bottomAnchor.constraint(equalTo: upperContainerView.bottomAnchor).isActive = true
         numberLabel.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor, constant: 12).isActive = true
 
         projectDetailContainer.addSubview(descriptionLabel)
-        descriptionLabel.topAnchor.constraint(equalTo: upperContainerView.bottomAnchor, constant: 24).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: upperContainerView.bottomAnchor, constant: 30).isActive = true
         descriptionLabel.constrain(to: projectDetailContainer, trailingInset: -12, leadingInset: 12)
         descriptionLabelHeight = descriptionLabel.heightAnchor.constraint(equalToConstant: 100)
         descriptionLabelHeight.isActive = true
 
         let tableView = UITableView()
-        tableView.backgroundColor <- \.contentBackground
+        tableView.backgroundColor <- \.clear
         tableView.translatesAutoresizingMaskIntoConstraints = false
         projectDetailContainer.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20).isActive = true
         tableView.constrain(to: projectDetailContainer, trailingInset: 0, bottomInset: -6, leadingInset: 0)
-        tableViewHeight = tableView.heightAnchor.constraint(equalToConstant: 0)
+        tableViewHeight = tableView.heightAnchor.constraint(equalToConstant: 100)
         tableViewHeight.isActive = true
         self.tableView = tableView
     }
