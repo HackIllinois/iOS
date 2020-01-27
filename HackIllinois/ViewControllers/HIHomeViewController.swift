@@ -98,7 +98,7 @@ extension HIHomeViewController {
         super.loadView()
 
         view.addSubview(countdownTitleLabel)
-        countdownTitleLabel.constrain(to: view.safeAreaLayoutGuide, topInset: 20, trailingInset: 0, leadingInset: 0)
+        countdownTitleLabel.constrain(to: view.safeAreaLayoutGuide, topInset: 0, trailingInset: 0, leadingInset: 0)
 
         countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
         addChild(countdownViewController)
@@ -113,11 +113,11 @@ extension HIHomeViewController {
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
-        segmentedControl.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor).isActive = true
+        segmentedControl.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor, constant: 12).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        
+
         buildingView.contentMode = .scaleAspectFill
         buildingView.translatesAutoresizingMaskIntoConstraints = false
         buildingView.isUserInteractionEnabled = true
@@ -156,15 +156,6 @@ extension HIHomeViewController {
         super.setUpBackgroundView()
         backgroundView.image = #imageLiteral(resourceName: "HomeGradient")
         buildingView.image = #imageLiteral(resourceName: "Buildings")
-        
-    }
-}
-
-// MARK: - UINavigationItem Setup
-extension HIHomeViewController {
-    @objc dynamic override func setupNavigationItem() {
-        super.setupNavigationItem()
-        title = "HOME"
     }
 }
 

@@ -64,7 +64,7 @@ class HILabel: UILabel {
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .center
-            font = HIAppearance.Font.button
+            font = HIAppearance.Font.contentTitle
 
         case .subtitle:
             textHIColor = \.accent
