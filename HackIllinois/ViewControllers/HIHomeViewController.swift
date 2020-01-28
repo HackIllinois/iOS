@@ -38,8 +38,6 @@ class HIHomeViewController: HIEventListViewController {
         return fetchedResultsController
     }()
 
-    var indoorMapsViewController = HIIndoorMapsViewController()
-
     private var currentTab = 0
 
     private var dataStore: [(displayText: String, predicate: NSPredicate)] = {
@@ -62,10 +60,10 @@ class HIHomeViewController: HIEventListViewController {
 
     private var countdownDataStoreIndex = 0
     private var staticDataStore: [(date: Date, displayText: String)] = [
-        (HIConstants.EVENT_START_TIME, "HACKILLINOIS BEGINS IN"),
-        (HIConstants.HACKING_START_TIME, "HACKING BEGINS IN"),
-        (HIConstants.HACKING_END_TIME, "HACKING ENDS IN"),
-        (HIConstants.EVENT_END_TIME, "HACKILLINOIS ENDS IN")
+        (HITimeDataSource.shared.eventTimes.eventStart, "HACKILLINOIS BEGINS IN"),
+        (HITimeDataSource.shared.eventTimes.hackStart, "HACKING BEGINS IN"),
+        (HITimeDataSource.shared.eventTimes.hackEnd, "HACKING ENDS IN"),
+        (HITimeDataSource.shared.eventTimes.eventEnd, "HACKILLINOIS ENDS IN")
     ]
 
     private var timer: Timer?
@@ -135,10 +133,6 @@ extension HIHomeViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        let rightNavigationItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MapIcon"), style: .plain, target: self, action: #selector(presentIndoorMapsViewController))
-        navigationItem.rightBarButtonItem = rightNavigationItem
-
         setupPredicateRefreshTimer()
     }
 
@@ -153,6 +147,13 @@ extension HIHomeViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
         title = "HOME"
+    }
+}
+
+// MARK: - UITabBarItem Setup
+extension HIHomeViewController {
+    override func setupTabBarItem() {
+        tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: "home"), tag: 0)
     }
 }
 

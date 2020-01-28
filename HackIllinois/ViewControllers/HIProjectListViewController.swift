@@ -1,9 +1,9 @@
 //
-//  HIEventListViewController.swift
+//  HIProjectListViewController.swift
 //  HackIllinois
 //
-//  Created by HackIllinois Team on 1/12/18.
-//  Copyright © 2018 HackIllinois. All rights reserved.
+//  Created by HackIllinois Team on 12/25/19.
+//  Copyright © 2019 HackIllinois. All rights reserved.
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of
 //  Illinois/NCSA Open Source License. You should have received a copy of
@@ -15,16 +15,16 @@ import UIKit
 import HIAPI
 import APIManager
 
-class HIEventListViewController: HIBaseViewController {
-    let eventDetailViewController = HIEventDetailViewController()
+class HIProjectListViewController: HIBaseViewController {
+    let projectDetailViewController = HIProjectDetailViewController()
 }
 
 // MARK: - UITableView Setup
-extension HIEventListViewController {
+extension HIProjectListViewController {
     override func setupTableView() {
         if let tableView = tableView {
             tableView.register(HIDateHeader.self, forHeaderFooterViewReuseIdentifier: HIDateHeader.identifier)
-            tableView.register(HIEventCell.self, forCellReuseIdentifier: HIEventCell.identifier)
+            tableView.register(HIProjectCell.self, forCellReuseIdentifier: HIProjectCell.identifier)
             registerForPreviewing(with: self, sourceView: tableView)
         }
         super.setupTableView()
@@ -32,11 +32,11 @@ extension HIEventListViewController {
 }
 
 // MARK: - UITableViewDataSource
-extension HIEventListViewController {
+extension HIProjectListViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: HIEventCell.identifier, for: indexPath)
-        if let cell = cell as? HIEventCell, let event = _fetchedResultsController?.object(at: indexPath) as? Event {
-            cell <- event
+        let cell = tableView.dequeueReusableCell(withIdentifier: HIProjectCell.identifier, for: indexPath)
+        if let cell = cell as? HIProjectCell, let project = _fetchedResultsController?.object(at: indexPath) as? Project {
+            cell <- project
             cell.delegate = self
             cell.indexPath = indexPath
         }
@@ -45,49 +45,46 @@ extension HIEventListViewController {
 }
 
 // MARK: - UITableViewDelegate
-extension HIEventListViewController {
+extension HIProjectListViewController {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let event = _fetchedResultsController?.object(at: indexPath) as? Event else {
+        guard let project = _fetchedResultsController?.object(at: indexPath) as? Project else {
             return CGFloat.leastNonzeroMagnitude
         }
-        return HIEventCell.heightForCell(with: event)
+        return HIProjectCell.heightForCell(with: project)
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        eventDetailViewController.event = _fetchedResultsController?.object(at: indexPath) as? Event
-        navigationController?.pushViewController(eventDetailViewController, animated: true)
+        projectDetailViewController.project = _fetchedResultsController?.object(at: indexPath) as? Project
+        navigationController?.pushViewController(projectDetailViewController, animated: true)
         super.tableView(tableView, didSelectRowAt: indexPath)
     }
 }
 
 // MARK: - UIRefreshControl
-extension HIEventListViewController {
+extension HIProjectListViewController {
     override func refresh(_ sender: UIRefreshControl) {
         super.refresh(sender)
-        HIEventDataSource.refresh(completion: endRefreshing)
+        HIProjectDataSource.refresh(completion: endRefreshing)
     }
 }
 
-// MARK: - HIEventCellDelegate
-extension HIEventListViewController: HIEventCellDelegate {
-    func eventCellDidSelectFavoriteButton(_ eventCell: HIEventCell) {
-        guard let indexPath = eventCell.indexPath,
-            let event = _fetchedResultsController?.object(at: indexPath) as? Event else { return }
+// MARK: - HIProjectCellDelegate
+extension HIProjectListViewController: HIProjectCellDelegate {
+    func projectCellDidSelectFavoriteButton(_ projectCell: HIProjectCell) {
+        guard let indexPath = projectCell.indexPath,
+            let project = _fetchedResultsController?.object(at: indexPath) as? Project else { return }
 
-        let changeFavoriteStatusRequest: APIRequest<EventFavorites> =
-            eventCell.favoritedButton.isActive ?
-                HIAPI.EventService.unfavoriteBy(id: event.id) :
-                HIAPI.EventService.favoriteBy(id: event.id)
+        let changeFavoriteStatusRequest: APIRequest<ProjectFavorites> =
+            projectCell.favoritedButton.isActive ?
+                HIAPI.ProjectService.unfavoriteBy(id: project.id) :
+                HIAPI.ProjectService.favoriteBy(id: project.id)
 
         changeFavoriteStatusRequest
         .onCompletion { result in
             switch result {
             case .success:
                 DispatchQueue.main.async {
-                    event.favorite.toggle()
-                    event.favorite ?
-                        HILocalNotificationController.shared.scheduleNotification(for: event) :
-                        HILocalNotificationController.shared.unscheduleNotification(for: event)
+                    project.favorite.toggle()
                 }
             case .failure(let error):
                 print(error, error.localizedDescription)
@@ -99,16 +96,16 @@ extension HIEventListViewController: HIEventCellDelegate {
 }
 
 // MARK: - UIViewControllerPreviewingDelegate
-extension HIEventListViewController: UIViewControllerPreviewingDelegate {
+extension HIProjectListViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         guard let tableView = tableView,
             let indexPath = tableView.indexPathForRow(at: location),
-            let event = _fetchedResultsController?.object(at: indexPath) as? Event else {
+            let project = _fetchedResultsController?.object(at: indexPath) as? Project else {
                 return nil
         }
         previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
-        eventDetailViewController.event = event
-        return eventDetailViewController
+        projectDetailViewController.project = project
+        return projectDetailViewController
     }
 
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
