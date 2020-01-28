@@ -14,6 +14,17 @@ import Foundation
 import UIKit
 
 class HITabBarController: UITabBarController {
+    init() {
+        super.init(nibName: nil, bundle: nil)
+
+        object_setClass(self.tabBar, HITabBar.self)
+        (self.tabBar as? HITabBar)?.setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func setupMenuFor(_ viewControllers: [UIViewController]) {
         self.viewControllers = viewControllers.map {
             _ = $0.view // forces viewDidLoad to run, allows .title to be accessible
