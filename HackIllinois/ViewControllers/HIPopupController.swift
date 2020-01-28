@@ -89,7 +89,10 @@ extension HIPopupController {
     }
 
     @objc func didSelectBackground(_ sender: UITapGestureRecognizer) {
-        print("TRYING TO DISMISS")
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    @objc func didSwipeDown(_ sender: UISwipeGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
     }
 }
@@ -141,6 +144,9 @@ extension HIPopupController {
         height.isActive = true
 
         backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBackground(_:))))
+        let swipeDownRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeDown(_:)))
+        swipeDownRecognizer.direction = .down
+        containerView.addGestureRecognizer(swipeDownRecognizer)
         view.backgroundColor = .clear
 
     }
