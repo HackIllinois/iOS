@@ -165,7 +165,6 @@ extension HIUserDetailViewController {
 extension HIUserDetailViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
-        title = "BADGE"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "LogoutButton"), style: .plain, target: self, action: #selector(didSelectLogoutButton(_:)))
     }
 }

@@ -13,16 +13,6 @@ class HITabBar: UITabBar {
 
     private var shapeLayer: CALayer?
     private var backgroundHIColor: HIColor = \.clear
-//    var qrButton: UIButton!
-//    private var qrButton: HIButton {
-//        $0.baseImage = \.qrCodeImage
-//    }
-//    private let qrButton = HIButton {
-//        $0.tintHIColor = \.baseText
-//        $0.backgroundHIColor = \.clear
-//        $0.activeImage = #imageLiteral(resourceName: "qr-code")
-//        $0.baseImage = #imageLiteral(resourceName: "qr-code")
-//    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,6 +26,8 @@ class HITabBar: UITabBar {
     }
     
     func setup() {
+            frame = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: UIScreen.main.bounds.height - frame.height)
+        backgroundImage = UIImage()
         backgroundColor = UIColor.clear
         unselectedItemTintColor = UIColor.white
         tintColor = UIColor(red: 0.89, green: 0.314, blue: 0.345, alpha: 1)
@@ -55,13 +47,8 @@ class HITabBar: UITabBar {
         shapeLayer.fillColor = UIColor(red: 0.13, green: 0.17, blue: 0.36, alpha: 1.0).cgColor
         shapeLayer.lineWidth = 1.0
 
-//        if let oldShapeLayer = self.shapeLayer {
-//            self.layer.replaceSublayer(oldShapeLayer, with: shapeLayer)
-//        } else {
         self.layer.insertSublayer(shapeLayer, at: 0)
-//        }
 
-//        self.shapeLayer = shapeLayer
     }
 
     func setupView() {
@@ -74,6 +61,7 @@ class HITabBar: UITabBar {
         qrButton.setImage(UIImage(named:"qr-code"), for: .normal)
         qrButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         qrButton.imageView?.contentMode = .scaleAspectFill
+        qrButton.imageView?.tintColor = UIColor.white
     }
 
     func createPath() -> CGPath {
