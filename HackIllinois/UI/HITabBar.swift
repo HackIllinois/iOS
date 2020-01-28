@@ -17,12 +17,12 @@ class HITabBar: UITabBar {
 //    private var qrButton: HIButton {
 //        $0.baseImage = \.qrCodeImage
 //    }
-    private let qrButton = HIButton {
-        $0.tintHIColor = \.baseText
-        $0.backgroundHIColor = \.clear
-        $0.activeImage = #imageLiteral(resourceName: "qr-code")
-        $0.baseImage = #imageLiteral(resourceName: "qr-code")
-    }
+//    private let qrButton = HIButton {
+//        $0.tintHIColor = \.baseText
+//        $0.backgroundHIColor = \.clear
+//        $0.activeImage = #imageLiteral(resourceName: "qr-code")
+//        $0.baseImage = #imageLiteral(resourceName: "qr-code")
+//    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,7 +38,7 @@ class HITabBar: UITabBar {
     func setup() {
         backgroundColor = UIColor.clear
         unselectedItemTintColor = UIColor.white
-        tintColor = UIColor(red: 0.89, green: 0.31, blue: 0.35, alpha: 1.0)
+        tintColor = UIColor(red: 0.89, green: 0.314, blue: 0.345, alpha: 1)
         setupView()
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
@@ -66,12 +66,6 @@ class HITabBar: UITabBar {
 
     func setupView() {
         let qrButton = UIButton()
-//        let qrButton = HIButton {
-//            $0.tintHIColor = \.baseText
-//            $0.backgroundHIColor = \.clear
-//            $0.activeImage = #imageLiteral(resourceName: "qr-code")
-//            $0.baseImage = #imageLiteral(resourceName: "qr-code")
-//        }
         self.addSubview(qrButton)
         qrButton.frame.size = CGSize(width: 54, height: 54)
         qrButton.layer.cornerRadius = 28
