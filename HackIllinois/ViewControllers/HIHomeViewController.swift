@@ -161,7 +161,7 @@ extension HIHomeViewController {
     @objc func presentIndoorMapsViewController() {
         let popupView = HIPopupController()
         popupView.modalPresentationStyle = .overCurrentContext
-        popupView.transitioningDelegate = self
+        popupView.transitioningDelegate = popupView
         self.present(popupView, animated: true)
     }
 }

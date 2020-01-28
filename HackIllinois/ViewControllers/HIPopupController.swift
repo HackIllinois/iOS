@@ -167,7 +167,7 @@ extension HIPopupController {
     }
 }
 // MARK: - UIViewControllerTransitioningDelegate
-extension HIHomeViewController: UIViewControllerTransitioningDelegate {
+extension HIPopupController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return HIPopinAnimator()
     }
