@@ -131,7 +131,7 @@ extension HIApplicationStateController {
                 items[2].isEnabled = false
             }
         }
-        
+
         HIEventDataSource.refresh()
         HIAnnouncementDataSource.refresh()
         HIProjectDataSource.refresh()
