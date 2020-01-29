@@ -14,7 +14,7 @@ import Foundation
 import UIKit
 import HIAPI
 
-class HIPopupController: HIBaseViewController {
+class HIPopupViewController: HIBaseViewController {
     // MARK: - Properties
     private let containerView = HIView {
         $0.layer.cornerRadius = 8
@@ -70,7 +70,7 @@ class HIPopupController: HIBaseViewController {
 }
 
 // MARK: - Actions
-extension HIPopupController {
+extension HIPopupViewController {
     @objc func didSelectLogoutButton(_ sender: UIButton) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(
@@ -98,7 +98,7 @@ extension HIPopupController {
 }
 
 // MARK: - UIViewController
-extension HIPopupController {
+extension HIPopupViewController {
     override func loadView() {
         super.loadView()
         view.addSubview(backgroundView)
@@ -167,7 +167,7 @@ extension HIPopupController {
     }
 }
 // MARK: - UIViewControllerTransitioningDelegate
-extension HIPopupController: UIViewControllerTransitioningDelegate {
+extension HIPopupViewController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return HIPopinAnimator()
     }

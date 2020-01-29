@@ -158,15 +158,6 @@ extension HIHomeViewController {
 }
 
 // MARK: - Actions
-extension HIHomeViewController {
-    @objc func presentIndoorMapsViewController() {
-        let popupView = HIPopupController()
-        popupView.modalPresentationStyle = .overCurrentContext
-        popupView.transitioningDelegate = popupView
-        self.present(popupView, animated: true)
-    }
-}
-
 extension HIHomeViewController: HICountdownViewControllerDelegate {
     func countdownToDateFor(countdownViewController: HICountdownViewController) -> Date? {
         let now = Date()
