@@ -40,20 +40,6 @@ class HITabBarController: UITabBarController {
         //Set the tabbar to be a HITabBar
         object_setClass(self.tabBar, HITabBar.self)
         (self.tabBar as? HITabBar)?.setup()
-        
-        let qrButton = UIButton()
-        view.addSubview(qrButton)
-        qrButton.frame.size = CGSize(width: 54, height: 54)
-        qrButton.layer.cornerRadius = 28
-        qrButton.center = CGPoint(x: view.center.x, y: 0)
-        qrButton.backgroundColor = UIColor(red: 0.89, green: 0.31, blue: 0.35, alpha: 1.0)
-        qrButton.setImage(#imageLiteral(resourceName: "qr-code"), for: .normal)
-        qrButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        qrButton.imageView?.contentMode = .scaleAspectFill
-        qrButton.imageView?.tintColor = UIColor.white
-        
-        qrButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        qrButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 
     required init?(coder: NSCoder) {
