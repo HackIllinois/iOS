@@ -27,7 +27,7 @@ class HITabBar: UITabBar {
     }
 
     func setup() {
-        frame = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: UIScreen.main.bounds.height - frame.height)
+        frame = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: UIScreen.main.bounds.height - frame.height+28)
         backgroundImage = UIImage()
         backgroundColor = UIColor.clear
         unselectedItemTintColor = UIColor.white

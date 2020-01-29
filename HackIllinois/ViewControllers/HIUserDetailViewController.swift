@@ -172,6 +172,6 @@ extension HIUserDetailViewController {
 // MARK: - UITabBarItem Setup
 extension HIUserDetailViewController {
     override func setupTabBarItem() {
-        tabBarItem = UITabBarItem(title: "Badge", image:nil, tag: 0)
+        tabBarItem = UITabBarItem(title: "Badge", image: nil, tag: 0)
     }
 }
