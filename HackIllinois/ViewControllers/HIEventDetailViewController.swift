@@ -87,13 +87,13 @@ extension HIEventDetailViewController {
 
     @objc func didSelectScanButton(_ sender: UIBarButtonItem) {
         guard let event = event else { return }
-        
+
         // Check in is an event, identified by name
         if event.name.caseInsensitiveCompare("Check In") == .orderedSame {
             navigationController?.pushViewController(HIEventDetailViewController.checkInScannerViewController, animated: true)
             return
         }
-        
+
         let now = Date()
         if event.startTime.addingTimeInterval(-15*60) > now {
             let message = "The scanning period for this event has not begun; scanning begins 15 minutes before the event."
