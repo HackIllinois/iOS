@@ -2,18 +2,19 @@
 //  HITabBar.swift
 //  HackIllinois
 //
-//  Created by Alex Drewno on 11/13/19.
-//  Copyright © 2019 HackIllinois. All rights reserved.
+//  Created by HackIllinois Team on 1/26/20.
+//  Copyright © 2020 HackIllinois. All rights reserved.
+//  This file is part of the Hackillinois iOS App.
+//  The Hackillinois iOS App is open source software, released under the University of
+//  Illinois/NCSA Open Source License. You should have received a copy of
+//  this license in a file with the distribution.
 //
 
 import Foundation
 import UIKit
 
 class HITabBar: UITabBar {
-
-    private var shapeLayer: CALayer?
-    private var backgroundHIColor: HIColor = \.clear
-
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -24,9 +25,9 @@ class HITabBar: UITabBar {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func setup() {
-            frame = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: UIScreen.main.bounds.height - frame.height)
+        frame = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: UIScreen.main.bounds.height - frame.height)
         backgroundImage = UIImage()
         backgroundColor = UIColor.clear
         unselectedItemTintColor = UIColor.white
@@ -58,7 +59,7 @@ class HITabBar: UITabBar {
         qrButton.layer.cornerRadius = 28
         qrButton.center = CGPoint(x: self.center.x, y: 0)
         qrButton.backgroundColor = UIColor(red: 0.89, green: 0.31, blue: 0.35, alpha: 1.0)
-        qrButton.setImage(UIImage(named:"qr-code"), for: .normal)
+        qrButton.setImage(#imageLiteral(resourceName: "qr-code"), for: .normal)
         qrButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         qrButton.imageView?.contentMode = .scaleAspectFill
         qrButton.imageView?.tintColor = UIColor.white
