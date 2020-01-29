@@ -1,5 +1,5 @@
 //
-//  HIPopupController.swift
+//  HIPopupViewController.swift
 //  HackIllinois
 //
 //  Created by HackIllinois Team on 1/9/20.
