@@ -14,12 +14,26 @@ import Foundation
 import UIKit
 
 class HITabBar: UITabBar {
+    
+    private var qrButton : UIButton?
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
+    }
+    
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if let qrButton = qrButton {
+            let xDistance = point.x - qrButton.center.x
+            let yDistance = point.y - qrButton.center.y
+            let distance = sqrt(xDistance * xDistance + yDistance * yDistance)
+            if distance <= qrButton.frame.width / 2 {
+                return qrButton
+            }
+        }
+        return super.hitTest(point, with: event)
     }
 
     required init?(coder: NSCoder) {
@@ -29,6 +43,7 @@ class HITabBar: UITabBar {
     func setup() {
         frame = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: UIScreen.main.bounds.height - frame.height+28)
         backgroundImage = UIImage()
+        shadowImage = UIImage()
         backgroundColor = UIColor.clear
         unselectedItemTintColor = UIColor.white
         tintColor = UIColor(red: 0.89, green: 0.314, blue: 0.345, alpha: 1)
@@ -53,16 +68,18 @@ class HITabBar: UITabBar {
     }
 
     func setupView() {
-        let qrButton = UIButton()
-        self.addSubview(qrButton)
-        qrButton.frame.size = CGSize(width: 54, height: 54)
-        qrButton.layer.cornerRadius = 28
-        qrButton.center = CGPoint(x: self.center.x, y: 0)
-        qrButton.backgroundColor = UIColor(red: 0.89, green: 0.31, blue: 0.35, alpha: 1.0)
-        qrButton.setImage(#imageLiteral(resourceName: "qr-code"), for: .normal)
-        qrButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        qrButton.imageView?.contentMode = .scaleAspectFill
-        qrButton.imageView?.tintColor = UIColor.white
+        qrButton = UIButton()
+        if let qrButton = qrButton {
+            self.addSubview(qrButton)
+            qrButton.frame.size = CGSize(width: 54, height: 54)
+            qrButton.layer.cornerRadius = 28
+            qrButton.center = CGPoint(x: self.center.x, y: 0)
+            qrButton.backgroundColor = UIColor(red: 0.89, green: 0.31, blue: 0.35, alpha: 1.0)
+            qrButton.setImage(#imageLiteral(resourceName: "qr-code"), for: .normal)
+            qrButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+            qrButton.imageView?.contentMode = .scaleAspectFill
+            qrButton.imageView?.tintColor = UIColor.white
+        }
     }
 
     func createPath() -> CGPath {
