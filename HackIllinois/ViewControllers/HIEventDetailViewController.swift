@@ -65,8 +65,8 @@ class HIEventDetailViewController: HIBaseViewController {
     private let cameraButton = HIButton {
         $0.tintHIColor = \.baseText
         $0.backgroundHIColor = \.clear
-        $0.activeImage = #imageLiteral(resourceName: "Favorited")
-        $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
+        $0.activeImage = #imageLiteral(resourceName: "Camera")
+        $0.baseImage = #imageLiteral(resourceName: "Camera")
     }
 
     // MARK: Constraints
@@ -159,7 +159,8 @@ extension HIEventDetailViewController {
 
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         upperContainerView.addSubview(favoritedButton)
-        favoritedButton.constrain(to: upperContainerView, topInset: 0, trailingInset: 0, bottomInset: 0)
+        favoritedButton.constrain(to: upperContainerView, topInset: 0, bottomInset: 0)
+        favoritedButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 6).isActive = true
         favoritedButton.constrain(width: 58)
         upperContainerView.addSubview(titleLabel)
         titleLabel.trailingAnchor.constraint(equalTo: favoritedButton.leadingAnchor).isActive = true
