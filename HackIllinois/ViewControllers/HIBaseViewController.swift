@@ -22,17 +22,16 @@ class HIBaseViewController: UIViewController {
     var refreshControl = UIRefreshControl()
     var refreshAnimation = AnimationView(name: "refresh")
     var tableView: UITableView?
-    let tableBackgroundView = HIView(style: .emptyTable)
+    var backgroundView = UIImageView()
+    let tableBackgroundView = HIView()
 }
 
 // MARK: - UIViewController
 extension HIBaseViewController {
-    override func loadView() {
-        view = HIView { $0.backgroundHIColor = \.baseBackground }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpBackgroundView()
         setupNavigationItem()
         setupTabBarItem()
         setupTableView()
@@ -47,6 +46,22 @@ extension HIBaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unregisterForKeyboardNotifications()
+    }
+}
+
+// MARK: - UIImageView Setup
+extension HIBaseViewController {
+    @objc dynamic func setUpBackgroundView() {
+        view.layer.backgroundColor = UIColor.clear.cgColor
+        backgroundView.image = #imageLiteral(resourceName: "Gradient")
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.isUserInteractionEnabled = true
+        backgroundView.contentMode = .scaleAspectFill
+        view.insertSubview(backgroundView, at: 0)
+        backgroundView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        backgroundView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        backgroundView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
     }
 }
 
@@ -67,6 +82,7 @@ extension HIBaseViewController {
 // MARK: - UITableView Setup
 extension HIBaseViewController {
     @objc dynamic func setupTableView() {
+        tableView?.layer.backgroundColor = UIColor.clear.cgColor
         tableView?.delegate = self
         tableView?.dataSource = self
     }

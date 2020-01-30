@@ -29,7 +29,7 @@ class HICountdownViewController: UIViewController {
     private let hours = AnimationView(name: "countdown-24")
     private let minutes = AnimationView(name: "countdown-60")
     private let seconds = AnimationView(name: "countdown-60")
-    private let backgroundHIColor: HIColor = \.baseBackground
+    private let backgroundHIColor: HIColor = \.clear
 
     private var countdownDate: Date?
     private var dayFrame = 0
@@ -90,7 +90,7 @@ class HICountdownViewController: UIViewController {
 // MARK: - UIViewController
 extension HICountdownViewController {
     override func loadView() {
-        view = HIView { $0.backgroundHIColor = \.baseBackground }
+        view = HIView { $0.backgroundHIColor = \.clear }
 
         days.contentMode = .scaleAspectFit
         hours.contentMode = .scaleAspectFit
@@ -123,7 +123,7 @@ extension HICountdownViewController {
 
         let label = HILabel {
             $0.textHIColor = \.accent
-            $0.backgroundHIColor = \.baseBackground
+            $0.backgroundHIColor = \.clear
             $0.textAlignment = .center
             $0.font = HIAppearance.Font.glyph
             $0.text = labelString
