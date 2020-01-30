@@ -1,0 +1,6 @@
+framework module APIManager {
+  umbrella header "APIManager-umbrella.h"
+
+  export *
+  module * { export * }
+}

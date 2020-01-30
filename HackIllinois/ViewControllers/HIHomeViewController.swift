@@ -67,6 +67,7 @@ class HIHomeViewController: HIEventListViewController {
     ]
 
     private var timer: Timer?
+    private var buildingView = UIImageView()
 }
 
 // MARK: - Actions
@@ -97,7 +98,7 @@ extension HIHomeViewController {
         super.loadView()
 
         view.addSubview(countdownTitleLabel)
-        countdownTitleLabel.constrain(to: view.safeAreaLayoutGuide, topInset: 20, trailingInset: 0, leadingInset: 0)
+        countdownTitleLabel.constrain(to: view, topInset: 60, trailingInset: 0, leadingInset: 0)
 
         countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
         addChild(countdownViewController)
@@ -107,12 +108,19 @@ extension HIHomeViewController {
         countdownViewController.view.constrain(height: 150)
         countdownViewController.didMove(toParent: self)
 
+        buildingView.contentMode = .scaleAspectFill
+        buildingView.translatesAutoresizingMaskIntoConstraints = false
+        buildingView.isUserInteractionEnabled = true
+        view.insertSubview(buildingView, at: 1)
+        buildingView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        buildingView.topAnchor.constraint(equalTo: countdownViewController.view.centerYAnchor).isActive = true
+
         let items = dataStore.map { $0.displayText }
         let segmentedControl = HISegmentedControl(items: items)
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
-        segmentedControl.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor).isActive = true
+        segmentedControl.topAnchor.constraint(equalTo: buildingView.centerYAnchor, constant: 12).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 44).isActive = true
@@ -142,11 +150,11 @@ extension HIHomeViewController {
     }
 }
 
-// MARK: - UINavigationItem Setup
+// MARK: - UIImageView Setup
 extension HIHomeViewController {
-    @objc dynamic override func setupNavigationItem() {
-        super.setupNavigationItem()
-        title = "HOME"
+    @objc dynamic override func setUpBackgroundView() {
+        super.setUpBackgroundView()
+        buildingView.image = #imageLiteral(resourceName: "Buildings")
     }
 }
 

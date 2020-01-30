@@ -1,0 +1,33 @@
+PODS:
+  - APIManager (0.3.0)
+  - lottie-ios (2.5.3)
+  - SwiftKeychainAccess (0.1.2)
+
+DEPENDENCIES:
+  - APIManager (~> 0.3.0)
+  - lottie-ios (~> 2.5.2)
+  - SwiftKeychainAccess (from `https://github.com/rauhul/keychain.git`, commit `a52855150f470b1942caa4bd28754c643a9fe110`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - APIManager
+    - lottie-ios
+
+EXTERNAL SOURCES:
+  SwiftKeychainAccess:
+    :commit: a52855150f470b1942caa4bd28754c643a9fe110
+    :git: https://github.com/rauhul/keychain.git
+
+CHECKOUT OPTIONS:
+  SwiftKeychainAccess:
+    :commit: a52855150f470b1942caa4bd28754c643a9fe110
+    :git: https://github.com/rauhul/keychain.git
+
+SPEC CHECKSUMS:
+  APIManager: 9f3dc2189c29b0621ce620fe15f38e5ffdaf7be0
+  lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
+  SwiftKeychainAccess: 9c8b152dc9a2b3512d38915cd815fccf86845302
+
+PODFILE CHECKSUM: 482bae3c82d0953ffda198266d0057fd630ceef7
+
+COCOAPODS: 1.7.5
