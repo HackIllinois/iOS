@@ -154,7 +154,6 @@ extension HIHomeViewController {
 extension HIHomeViewController {
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "HomeGradient")
         buildingView.image = #imageLiteral(resourceName: "Buildings")
     }
 }
