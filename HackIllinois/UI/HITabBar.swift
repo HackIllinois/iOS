@@ -14,8 +14,8 @@ import Foundation
 import UIKit
 
 class HITabBar: UITabBar {
-    
-    private var qrButton : UIButton?
+
+    private var qrButton: UIButton?
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,7 +23,7 @@ class HITabBar: UITabBar {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
     }
-    
+
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         if let qrButton = qrButton {
             let xDistance = point.x - qrButton.center.x
