@@ -26,21 +26,34 @@ class HITabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let button = UIButton()
-        view.addSubview(button)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.frame.size = CGSize(width: 54, height: 54)
-        button.layer.cornerRadius = 28
-        button.center = CGPoint(x: view.center.x, y: 0)
-        button.backgroundColor = UIColor(red: 0.89, green: 0.31, blue: 0.35, alpha: 1.0)
-        button.setImage(#imageLiteral(resourceName: "qr-code"), for: .normal)
-        button.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        button.imageView?.contentMode = .scaleAspectFill
-        button.imageView?.tintColor = UIColor.white
-        button.addTarget(self, action: #selector(qrButtonPressed(_:)), for: .touchUpInside)
-        button.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        button.centerYAnchor.constraint(equalTo: tabBar.topAnchor, constant: 0).isActive = true
-        button.constrain(width: 54, height: 54)
+
+        //Setup QRCode Button
+        let qrButton = UIButton()
+        view.addSubview(qrButton)
+        qrButton.translatesAutoresizingMaskIntoConstraints = false
+        qrButton.frame.size = CGSize(width: 54, height: 54)
+        qrButton.layer.cornerRadius = 28
+        qrButton.center = CGPoint(x: view.center.x, y: 0)
+        qrButton.backgroundColor = UIColor(red: 0.89, green: 0.31, blue: 0.35, alpha: 1.0)
+        qrButton.setImage(#imageLiteral(resourceName: "qr-code"), for: .normal)
+        qrButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        qrButton.imageView?.contentMode = .scaleAspectFill
+        qrButton.imageView?.tintColor = UIColor.white
+
+        // Button Shadow
+        qrButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        qrButton.layer.shadowOpacity = 1
+        qrButton.layer.shadowRadius = 15
+        qrButton.layer.masksToBounds = false
+        qrButton.layer.shadowOffset = CGSize(width: 0, height: 0)
+
+        //QR Code Button Constraints
+        qrButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        qrButton.centerYAnchor.constraint(equalTo: tabBar.topAnchor, constant: 0).isActive = true
+        qrButton.constrain(width: 54, height: 54)
+
+        //QR Code Popup Action
+        qrButton.addTarget(self, action: #selector(qrButtonPressed(_:)), for: .touchUpInside)
     }
 
     @objc private func qrButtonPressed(_ sender: UIButton) {
