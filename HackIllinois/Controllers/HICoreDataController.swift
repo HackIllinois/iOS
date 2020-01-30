@@ -49,7 +49,7 @@ class HICoreDataController {
 
     public func purge() {
         performBackgroundTask { context in
-            ["Announcement", "Event"].forEach { entity in
+            ["Announcement", "Event", "Project"].forEach { entity in
                 let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
                 let batchDelete = NSBatchDeleteRequest(fetchRequest: request)
                 do {

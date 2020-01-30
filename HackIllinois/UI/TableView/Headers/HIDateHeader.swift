@@ -16,14 +16,14 @@ import UIKit
 class HIDateHeader: UITableViewHeaderFooterView {
     var titleLabel = HILabel {
         $0.textHIColor = \.baseText
-        $0.backgroundHIColor = \.baseBackground
+        $0.backgroundHIColor = \.clear
         $0.font = HIAppearance.Font.sectionHeader
     }
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
 
-        let backgroundView = HIView { $0.backgroundHIColor = \.baseBackground }
+        let backgroundView = HIView { $0.backgroundHIColor = \.clear }
         self.backgroundView = backgroundView
 
         backgroundView.addSubview(titleLabel)

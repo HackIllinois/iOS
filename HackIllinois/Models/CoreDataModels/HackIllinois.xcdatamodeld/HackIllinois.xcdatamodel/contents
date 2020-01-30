@@ -39,9 +39,25 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
+    <entity name="Project" representedClassName="Project" syncable="YES">
+        <attribute name="favorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="info" attributeType="String"/>
+        <attribute name="mentors" attributeType="String" valueTransformerName=""/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="number" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="room" attributeType="String"/>
+        <attribute name="tags" attributeType="String" valueTransformerName=""/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
     <elements>
         <element name="Announcement" positionX="-63" positionY="72" width="128" height="105"/>
-        <element name="Event" positionX="-54" positionY="36" width="128" height="180"/>
-        <element name="Location" positionX="-54" positionY="108" width="128" height="105"/>
+        <element name="Event" positionX="-54" positionY="36" width="128" height="178"/>
+        <element name="Location" positionX="-54" positionY="108" width="128" height="103"/>
+        <element name="Project" positionX="-45" positionY="108" width="128" height="163"/>
     </elements>
 </model>
