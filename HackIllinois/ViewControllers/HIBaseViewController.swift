@@ -22,18 +22,18 @@ class HIBaseViewController: UIViewController {
     var refreshControl = UIRefreshControl()
     var refreshAnimation = AnimationView(name: "refresh")
     var tableView: UITableView?
-    let tableBackgroundView = HIView(style: .emptyTable)
+    var backgroundView = UIImageView()
+    let tableBackgroundView = HIView()
 }
 
 // MARK: - UIViewController
 extension HIBaseViewController {
-    override func loadView() {
-        view = HIView { $0.backgroundHIColor = \.baseBackground }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpBackgroundView()
         setupNavigationItem()
+        setupTabBarItem()
         setupTableView()
         try? _fetchedResultsController?.performFetch()
     }
@@ -49,6 +49,22 @@ extension HIBaseViewController {
     }
 }
 
+// MARK: - UIImageView Setup
+extension HIBaseViewController {
+    @objc dynamic func setUpBackgroundView() {
+        view.layer.backgroundColor = UIColor.clear.cgColor
+        backgroundView.image = #imageLiteral(resourceName: "Gradient")
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.isUserInteractionEnabled = true
+        backgroundView.contentMode = .scaleAspectFill
+        view.insertSubview(backgroundView, at: 0)
+        backgroundView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        backgroundView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        backgroundView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+    }
+}
+
 // MARK: - UINavigationItem Setup
 extension HIBaseViewController {
     @objc dynamic func setupNavigationItem() {
@@ -56,9 +72,17 @@ extension HIBaseViewController {
     }
 }
 
+// MARK: - UITabBarItem Setup
+extension HIBaseViewController {
+    @objc dynamic func setupTabBarItem() {
+        tabBarItem = UITabBarItem(title: self.title, image: nil, tag: 0)
+    }
+}
+
 // MARK: - UITableView Setup
 extension HIBaseViewController {
     @objc dynamic func setupTableView() {
+        tableView?.layer.backgroundColor = UIColor.clear.cgColor
         tableView?.delegate = self
         tableView?.dataSource = self
     }

@@ -38,8 +38,6 @@ class HIHomeViewController: HIEventListViewController {
         return fetchedResultsController
     }()
 
-    var indoorMapsViewController = HIIndoorMapsViewController()
-
     private var currentTab = 0
 
     private var dataStore: [(displayText: String, predicate: NSPredicate)] = {
@@ -62,13 +60,14 @@ class HIHomeViewController: HIEventListViewController {
 
     private var countdownDataStoreIndex = 0
     private var staticDataStore: [(date: Date, displayText: String)] = [
-        (HIConstants.EVENT_START_TIME, "HACKILLINOIS BEGINS IN"),
-        (HIConstants.HACKING_START_TIME, "HACKING BEGINS IN"),
-        (HIConstants.HACKING_END_TIME, "HACKING ENDS IN"),
-        (HIConstants.EVENT_END_TIME, "HACKILLINOIS ENDS IN")
+        (HITimeDataSource.shared.eventTimes.eventStart, "HACKILLINOIS BEGINS IN"),
+        (HITimeDataSource.shared.eventTimes.hackStart, "HACKING BEGINS IN"),
+        (HITimeDataSource.shared.eventTimes.hackEnd, "HACKING ENDS IN"),
+        (HITimeDataSource.shared.eventTimes.eventEnd, "HACKILLINOIS ENDS IN")
     ]
 
     private var timer: Timer?
+    private var buildingView = UIImageView()
 }
 
 // MARK: - Actions
@@ -99,7 +98,7 @@ extension HIHomeViewController {
         super.loadView()
 
         view.addSubview(countdownTitleLabel)
-        countdownTitleLabel.constrain(to: view.safeAreaLayoutGuide, topInset: 20, trailingInset: 0, leadingInset: 0)
+        countdownTitleLabel.constrain(to: view, topInset: 60, trailingInset: 0, leadingInset: 0)
 
         countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
         addChild(countdownViewController)
@@ -109,12 +108,19 @@ extension HIHomeViewController {
         countdownViewController.view.constrain(height: 150)
         countdownViewController.didMove(toParent: self)
 
+        buildingView.contentMode = .scaleAspectFill
+        buildingView.translatesAutoresizingMaskIntoConstraints = false
+        buildingView.isUserInteractionEnabled = true
+        view.insertSubview(buildingView, at: 1)
+        buildingView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        buildingView.topAnchor.constraint(equalTo: countdownViewController.view.centerYAnchor).isActive = true
+
         let items = dataStore.map { $0.displayText }
         let segmentedControl = HISegmentedControl(items: items)
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
-        segmentedControl.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor).isActive = true
+        segmentedControl.topAnchor.constraint(equalTo: buildingView.centerYAnchor, constant: 12).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 44).isActive = true
@@ -135,10 +141,6 @@ extension HIHomeViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        let rightNavigationItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MapIcon"), style: .plain, target: self, action: #selector(presentIndoorMapsViewController))
-        navigationItem.rightBarButtonItem = rightNavigationItem
-
         setupPredicateRefreshTimer()
     }
 
@@ -148,21 +150,22 @@ extension HIHomeViewController {
     }
 }
 
-// MARK: - UINavigationItem Setup
+// MARK: - UIImageView Setup
 extension HIHomeViewController {
-    @objc dynamic override func setupNavigationItem() {
-        super.setupNavigationItem()
-        title = "HOME"
+    @objc dynamic override func setUpBackgroundView() {
+        super.setUpBackgroundView()
+        buildingView.image = #imageLiteral(resourceName: "Buildings")
+    }
+}
+
+// MARK: - UITabBarItem Setup
+extension HIHomeViewController {
+    override func setupTabBarItem() {
+        tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: "home"), tag: 0)
     }
 }
 
 // MARK: - Actions
-extension HIHomeViewController {
-    @objc func presentIndoorMapsViewController() {
-        navigationController?.pushViewController(indoorMapsViewController, animated: true)
-    }
-}
-
 extension HIHomeViewController: HICountdownViewControllerDelegate {
     func countdownToDateFor(countdownViewController: HICountdownViewController) -> Date? {
         let now = Date()

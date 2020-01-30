@@ -18,9 +18,11 @@ class HILabel: UILabel {
     enum Style {
         case location
         case event
+        case project
         case title
         case subtitle
         case description
+        case cellDescription
         case loginHeader
         case loginSelection
         case viewTitle
@@ -55,11 +57,16 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.contentTitle
 
+        case .project:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.contentTitle
+
         case .title:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .center
-            font = HIAppearance.Font.button
+            font = HIAppearance.Font.contentTitle
 
         case .subtitle:
             textHIColor = \.accent
@@ -69,8 +76,14 @@ class HILabel: UILabel {
         case .description:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentText
+            font = HIAppearance.Font.descriptionText
             numberOfLines = 0
+
+        case .cellDescription:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.contentText
+            numberOfLines = 1
 
         case .loginHeader:
             textHIColor = \.loginTitleBackground

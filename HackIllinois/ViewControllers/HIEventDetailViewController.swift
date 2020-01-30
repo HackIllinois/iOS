@@ -60,7 +60,7 @@ extension HIEventDetailViewController {
     @objc func didSelectFavoriteButton(_ sender: HIButton) {
         guard let event = event else { return }
 
-        let changeFavoriteStatusRequest: APIRequest<Favorite> =
+        let changeFavoriteStatusRequest: APIRequest<EventFavorites> =
             sender.isActive ?
                 HIAPI.EventService.unfavoriteBy(id: event.id) :
                 HIAPI.EventService.favoriteBy(id: event.id)
