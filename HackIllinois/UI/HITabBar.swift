@@ -14,36 +14,11 @@ import Foundation
 import UIKit
 
 class HITabBar: UITabBar {
-    // MARK: - Properties
-    private var qrButton: UIButton {
-        let button = UIButton()
-        button.backgroundColor = UIColor(red: 0.89, green: 0.31, blue: 0.35, alpha: 1.0)
-        button.setImage(#imageLiteral(resourceName: "qr-code"), for: .normal)
-        button.frame.size = CGSize(width: 54, height: 54)
-        button.layer.cornerRadius = 28
-        button.center = CGPoint(x: self.center.x, y: 0)
-        button.backgroundColor = UIColor(red: 0.89, green: 0.31, blue: 0.35, alpha: 1.0)
-        button.setImage(#imageLiteral(resourceName: "qr-code"), for: .normal)
-        button.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        button.imageView?.contentMode = .scaleAspectFill
-        button.imageView?.tintColor = UIColor.white
-        return button
-    }
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
-    }
-
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        let xDistance = point.x - qrButton.center.x
-        let yDistance = point.y - qrButton.center.y
-        let distance = sqrt(xDistance * xDistance + yDistance * yDistance)
-        if distance <= qrButton.frame.width / 2 {
-            return qrButton
-        }
-        return super.hitTest(point, with: event)
     }
 
     required init?(coder: NSCoder) {
@@ -54,10 +29,11 @@ class HITabBar: UITabBar {
         frame = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: UIScreen.main.bounds.height - frame.height+28)
         backgroundImage = UIImage()
         shadowImage = UIImage()
+        clipsToBounds = true
+        layer.borderWidth = 0
         backgroundColor = UIColor.clear
         unselectedItemTintColor = UIColor.white
         tintColor = UIColor(red: 0.89, green: 0.314, blue: 0.345, alpha: 1)
-        self.addSubview(qrButton)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
         draw(frame)
