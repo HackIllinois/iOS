@@ -28,6 +28,11 @@ class HILoginSelectionViewController: HIBaseViewController {
         $0.contentMode = .scaleAspectFit
     }
     private let welcomeHeader = HILabel(style: .viewTitle)
+    private let spacerView = HIView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.isHidden = true
+        $0.isUserInteractionEnabled = false
+    }
 
     // MARK: - Init
     convenience init(delegate: HILoginSelectionViewControllerDelegate) {
@@ -53,24 +58,30 @@ extension HILoginSelectionViewController {
         view.addSubview(welcomeHeader)
         view.addSubview(logoImage)
         view.addSubview(loginHeader)
+        view.addSubview(spacerView)
         view.addSubview(tableView)
 
         welcomeHeader.text = "WELCOME TO"
-        welcomeHeader.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 54).isActive = true
+        welcomeHeader.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 38).isActive = true
         welcomeHeader.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         welcomeHeader.heightAnchor.constraint(equalToConstant: 22).isActive = true
 
-        logoImage.topAnchor.constraint(equalTo: welcomeHeader.bottomAnchor, constant: 50).isActive = true
+        logoImage.topAnchor.constraint(equalTo: welcomeHeader.bottomAnchor, constant: 25).isActive = true
         logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 
         loginHeader.text = "LOGIN"
-        loginHeader.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 50).isActive = true
+        loginHeader.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 25).isActive = true
         loginHeader.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 
-        tableView.topAnchor.constraint(equalTo: loginHeader.bottomAnchor, constant: 54).isActive = true
+        spacerView.topAnchor.constraint(equalTo: loginHeader.bottomAnchor).isActive = true
+        spacerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+
         tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         tableView.widthAnchor.constraint(equalToConstant: 220).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tableView.heightAnchor.constraint(equalToConstant: 180).isActive = true
+        tableView.centerYAnchor.constraint(equalTo: spacerView.centerYAnchor).isActive = true
+
+        tableView.isScrollEnabled = false
         self.tableView = tableView
     }
 }
