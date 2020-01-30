@@ -143,8 +143,8 @@ extension HIEventDetailViewController {
 
         view.addSubview(closeButton)
         closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
-        closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 15).isActive = true
-        closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
+        closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
+        closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         closeButton.constrain(height: 20)
 
         setupScannerIfApplicable()
@@ -214,8 +214,8 @@ extension HIEventDetailViewController {
     func setupScannerIfApplicable() {
         if let user = HIApplicationStateController.shared.user, !user.roles.intersection([.staff, .admin]).isEmpty {
             view.addSubview(cameraButton)
-            cameraButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 15).isActive = true
-            cameraButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).isActive = true
+            cameraButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+            cameraButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
             cameraButton.constrain(height: 30)
             cameraButton.addTarget(self, action: #selector(didSelectScanner(_:)), for: .touchUpInside)
         }
