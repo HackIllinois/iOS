@@ -14,24 +14,34 @@ import Foundation
 import UIKit
 
 class HITabBar: UITabBar {
-
-    private var qrButton: UIButton?
+    // MARK: - Properties
+    private var qrButton: UIButton {
+        let button = UIButton()
+        button.backgroundColor = UIColor(red: 0.89, green: 0.31, blue: 0.35, alpha: 1.0)
+        button.setImage(#imageLiteral(resourceName: "qr-code"), for: .normal)
+        button.frame.size = CGSize(width: 54, height: 54)
+        button.layer.cornerRadius = 28
+        button.center = CGPoint(x: self.center.x, y: 0)
+        button.backgroundColor = UIColor(red: 0.89, green: 0.31, blue: 0.35, alpha: 1.0)
+        button.setImage(#imageLiteral(resourceName: "qr-code"), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        button.imageView?.contentMode = .scaleAspectFill
+        button.imageView?.tintColor = UIColor.white
+        return button
+    }
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupView()
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        if let qrButton = qrButton {
-            let xDistance = point.x - qrButton.center.x
-            let yDistance = point.y - qrButton.center.y
-            let distance = sqrt(xDistance * xDistance + yDistance * yDistance)
-            if distance <= qrButton.frame.width / 2 {
-                return qrButton
-            }
+        let xDistance = point.x - qrButton.center.x
+        let yDistance = point.y - qrButton.center.y
+        let distance = sqrt(xDistance * xDistance + yDistance * yDistance)
+        if distance <= qrButton.frame.width / 2 {
+            return qrButton
         }
         return super.hitTest(point, with: event)
     }
@@ -47,7 +57,7 @@ class HITabBar: UITabBar {
         backgroundColor = UIColor.clear
         unselectedItemTintColor = UIColor.white
         tintColor = UIColor(red: 0.89, green: 0.314, blue: 0.345, alpha: 1)
-        setupView()
+        self.addSubview(qrButton)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
         draw(frame)
@@ -65,21 +75,6 @@ class HITabBar: UITabBar {
 
         self.layer.insertSublayer(shapeLayer, at: 0)
 
-    }
-
-    func setupView() {
-        qrButton = UIButton()
-        if let qrButton = qrButton {
-            self.addSubview(qrButton)
-            qrButton.frame.size = CGSize(width: 54, height: 54)
-            qrButton.layer.cornerRadius = 28
-            qrButton.center = CGPoint(x: self.center.x, y: 0)
-            qrButton.backgroundColor = UIColor(red: 0.89, green: 0.31, blue: 0.35, alpha: 1.0)
-            qrButton.setImage(#imageLiteral(resourceName: "qr-code"), for: .normal)
-            qrButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-            qrButton.imageView?.contentMode = .scaleAspectFill
-            qrButton.imageView?.tintColor = UIColor.white
-        }
     }
 
     func createPath() -> CGPath {
