@@ -140,8 +140,6 @@ extension HIEventDetailViewController {
 
 // MARK: - UIViewController
 extension HIEventDetailViewController {
-    // Waive swiftlint warning
-    // swiftlint:disable:next function_body_length
     override func loadView() {
         super.loadView()
 
