@@ -113,8 +113,6 @@ extension HIEventDetailViewController {
             presentErrorController(title: "Sorry", message: "The scanning period for this event has ended.", dismissParentOnCompletion: false)
         } else {
             HIEventDetailViewController.scannerViewController.event = event
-            print("PUSHING EVENT \(event.name)")
-            print(navigationController)
             self.present(HIEventDetailViewController.scannerViewController, animated: true)
         }
     }
