@@ -103,6 +103,22 @@ extension HIEventDetailViewController {
         .launch()
     }
 
+    @objc func didSelectScanner(_ sender: UIButton) {
+        guard let event = event else { return }
+        let now = Date()
+        if event.startTime.addingTimeInterval(-15*60) > now {
+            let message = "The scanning period for this event has not begun; scanning begins 15 minutes before the event."
+            presentErrorController(title: "Sorry", message: message, dismissParentOnCompletion: false)
+        } else if now > event.endTime {
+            presentErrorController(title: "Sorry", message: "The scanning period for this event has ended.", dismissParentOnCompletion: false)
+        } else {
+            HIEventDetailViewController.scannerViewController.event = event
+            print("PUSHING EVENT \(event.name)")
+            print(navigationController)
+            self.present(HIEventDetailViewController.scannerViewController, animated: true)
+        }
+    }
+
     @objc func didSelectScanButton(_ sender: UIBarButtonItem) {
         guard let event = event else { return }
         let now = Date()
@@ -124,6 +140,8 @@ extension HIEventDetailViewController {
 
 // MARK: - UIViewController
 extension HIEventDetailViewController {
+    // Waive swiftlint warning
+    // swiftlint:disable:next function_body_length
     override func loadView() {
         super.loadView()
 
@@ -133,11 +151,7 @@ extension HIEventDetailViewController {
         closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
         closeButton.constrain(height: 20)
 
-        view.addSubview(cameraButton)
-        cameraButton.addTarget(self, action: #selector(didSelectScanButton(_:)), for: .touchUpInside)
-        cameraButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 15).isActive = true
-        cameraButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).isActive = true
-        cameraButton.constrain(height: 30)
+        setupScannerIfApplicable()
 
         view.addSubview(eventDetailContainer)
         eventDetailContainer.topAnchor.constraint(equalTo: closeButton.bottomAnchor).isActive = true
@@ -198,6 +212,16 @@ extension HIEventDetailViewController {
         super.viewDidAppear(animated)
         if event == nil {
             presentErrorController(title: "Uh oh", message: "Failed to load event.", dismissParentOnCompletion: true)
+        }
+    }
+
+    func setupScannerIfApplicable() {
+        if let user = HIApplicationStateController.shared.user, !user.roles.intersection([.staff, .admin]).isEmpty {
+            view.addSubview(cameraButton)
+            cameraButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 15).isActive = true
+            cameraButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).isActive = true
+            cameraButton.constrain(height: 30)
+            cameraButton.addTarget(self, action: #selector(didSelectScanner(_:)), for: .touchUpInside)
         }
     }
 }
