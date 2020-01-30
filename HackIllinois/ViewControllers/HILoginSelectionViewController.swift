@@ -138,6 +138,8 @@ extension HILoginSelectionViewController {
                 cell.activeColor = (\HIAppearance.loginSelectionText).value
                 cell.defaultTextColor = (\HIAppearance.loginSelectionText).value
             }
+            cell.backgroundColor = .clear
+            cell.contentView.backgroundColor = .clear
         }
         return cell
     }

@@ -87,7 +87,7 @@ class HILabel: UILabel {
 
         case .loginHeader:
             textHIColor = \.loginTitleBackground
-            backgroundHIColor = \.baseBackground
+            backgroundHIColor = \.clear
             font = HIAppearance.Font.loginTitle
 
         case .viewTitle:
