@@ -58,7 +58,7 @@ class HIView: UIView {
                                    constant: 0.0)
                 centerConstraint.priority = .defaultHigh
                 centerConstraint.isActive = true
-                let label = HILabel(style: .loginSelection) {
+                let label = HILabel(style: .backgroundTitle) {
                     $0.text = "CHECK BACK LATER"
                     $0.setContentCompressionResistancePriority(.required, for: .vertical)
                 }

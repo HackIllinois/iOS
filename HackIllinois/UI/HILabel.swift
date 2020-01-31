@@ -26,6 +26,8 @@ class HILabel: UILabel {
         case cellDescription
         case loginHeader
         case loginSelection
+        case viewTitle
+        case backgroundTitle
     }
 
     // MARK: - Properties
@@ -90,15 +92,29 @@ class HILabel: UILabel {
             numberOfLines = 1
 
         case .loginHeader:
-            textHIColor = \.accent
+            textHIColor = \.loginTitleBackground
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.navigationTitle
+            font = HIAppearance.Font.loginTitle
 
-        case .loginSelection:
+        case .viewTitle:
+            textHIColor = \.loginSelectionText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.loginTitle
+
+        case .backgroundTitle:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .center
             font = HIAppearance.Font.navigationSubtitle
+
+        case .loginSelection:
+            textHIColor = \.loginSelectionText
+            backgroundHIColor = \.clear
+            textAlignment = .center
+            font = HIAppearance.Font.loginSelection
+            layer.borderWidth = 2.0
+            layer.borderColor = (\HIAppearance.loginSelectionText).value.cgColor
+            layer.backgroundColor = UIColor.clear.cgColor
         }
         }
 
