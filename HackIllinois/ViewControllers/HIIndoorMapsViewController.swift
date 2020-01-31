@@ -23,6 +23,10 @@ class HIIndoorMapsViewController: HIBaseViewController {
         $0.layer.masksToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.mapBackground
+        $0.layer.shadowColor = UIColor(red: 0.42, green: 0.682, blue: 0.773, alpha: 0.5).cgColor
+        $0.layer.shadowOpacity = 1
+        $0.layer.shadowRadius = 1
+        $0.layer.shadowOffset = CGSize(width: 0, height: 2)
     }
     private let scrollView = UIScrollView(frame: .zero)
     private let mapImageView = UIImageView()
