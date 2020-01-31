@@ -111,43 +111,37 @@ extension HIProjectDetailViewController {
         closeButton.constrain(height: 20)
 
         view.addSubview(projectDetailContainer)
-        projectDetailContainer.constrain(to: view.safeAreaLayoutGuide, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        projectDetailContainer.constrain(to: view.safeAreaLayoutGuide, trailingInset: -8, bottomInset: 0, leadingInset: 8)
         projectDetailContainer.topAnchor.constraint(equalTo: closeButton.bottomAnchor).isActive = true
 
         projectDetailContainer.addSubview(upperContainerView)
         upperContainerView.constrain(to: projectDetailContainer, topInset: 10, trailingInset: 0, leadingInset: 0)
-        upperContainerView.constrain(height: 80)
-
-        favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
-        upperContainerView.addSubview(favoritedButton)
-        favoritedButton.constrain(to: upperContainerView, topInset: 0, trailingInset: 0, bottomInset: 0)
-        favoritedButton.constrain(width: 58)
-
+        upperContainerView.constrain(height: 100)
+        
         upperContainerView.addSubview(titleLabel)
-        titleLabel.trailingAnchor.constraint(equalTo: favoritedButton.leadingAnchor).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor, constant: 12).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor).isActive = true
 
+        favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
+        upperContainerView.addSubview(favoritedButton)
+        favoritedButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
+        favoritedButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
+        favoritedButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
+        favoritedButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
+        favoritedButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        favoritedButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+
         upperContainerView.addSubview(numberLabel)
-        numberLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15).isActive = true
+        numberLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
         numberLabel.bottomAnchor.constraint(equalTo: upperContainerView.bottomAnchor).isActive = true
-        numberLabel.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor, constant: 12).isActive = true
+        numberLabel.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor).isActive = true
 
         projectDetailContainer.addSubview(descriptionLabel)
         descriptionLabel.topAnchor.constraint(equalTo: upperContainerView.bottomAnchor, constant: 30).isActive = true
-        descriptionLabel.constrain(to: projectDetailContainer, trailingInset: -12, leadingInset: 12)
+        descriptionLabel.constrain(to: projectDetailContainer, trailingInset: -12)
+        descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         descriptionLabelHeight = descriptionLabel.heightAnchor.constraint(equalToConstant: 100)
         descriptionLabelHeight.isActive = true
-
-        let tableView = UITableView()
-        tableView.backgroundColor <- \.clear
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        projectDetailContainer.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20).isActive = true
-        tableView.constrain(to: projectDetailContainer, trailingInset: 0, bottomInset: -6, leadingInset: 0)
-        tableViewHeight = tableView.heightAnchor.constraint(equalToConstant: 100)
-        tableViewHeight.isActive = true
-        self.tableView = tableView
     }
 
     override func viewWillAppear(_ animated: Bool) {
