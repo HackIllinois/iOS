@@ -168,10 +168,3 @@ extension HIUserDetailViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "LogoutButton"), style: .plain, target: self, action: #selector(didSelectLogoutButton(_:)))
     }
 }
-
-// MARK: - UITabBarItem Setup
-extension HIUserDetailViewController {
-    override func setupTabBarItem() {
-        tabBarItem = UITabBarItem(title: "Badge", image: nil, tag: 0)
-    }
-}

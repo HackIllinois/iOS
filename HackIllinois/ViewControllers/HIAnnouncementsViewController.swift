@@ -89,13 +89,6 @@ extension HIAnnouncementsViewController {
     }
 }
 
-// MARK: - UITabBarItem Setup
-extension HIAnnouncementsViewController {
-    override func setupTabBarItem() {
-        // Announcements are not part of the tab bar
-    }
-}
-
 // MARK: - Actions
 extension HIAnnouncementsViewController {
     @objc func presentAdminAnnouncementViewController() {

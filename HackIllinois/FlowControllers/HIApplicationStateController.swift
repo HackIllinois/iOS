@@ -126,7 +126,7 @@ extension HIApplicationStateController {
         appFlowController.selectedIndex = 0
 
         // Disable the middle tabbar button (QR Code)
-        if let items =  appFlowController.tabBar.items {
+        if let items = appFlowController.tabBar.items {
             if items.count >= 3 {
                 items[2].isEnabled = false
             }

@@ -27,7 +27,6 @@ struct HIAppearance: Equatable {
     let preferredStatusBarStyle: UIStatusBarStyle
     let scrollViewIndicatorStyle: UIScrollView.IndicatorStyle
     let mapBackground: UIColor
-    let qrCodeImage: UIImage
 
     let clear: UIColor = .clear
 
@@ -52,8 +51,7 @@ struct HIAppearance: Equatable {
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewDay"),
         preferredStatusBarStyle: .default,
         scrollViewIndicatorStyle: .black,
-        mapBackground: blue,
-        qrCodeImage: #imageLiteral(resourceName: "qr-code")
+        mapBackground: blue
     )
 
     fileprivate static let night = HIAppearance(
@@ -70,8 +68,7 @@ struct HIAppearance: Equatable {
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewNight"),
         preferredStatusBarStyle: .default,
         scrollViewIndicatorStyle: .white,
-        mapBackground: blue,
-        qrCodeImage: #imageLiteral(resourceName: "qr-code")
+        mapBackground: blue
     )
 
     fileprivate static var current = day
