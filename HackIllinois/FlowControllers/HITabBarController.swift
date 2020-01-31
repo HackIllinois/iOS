@@ -57,7 +57,10 @@ class HITabBarController: UITabBarController {
     }
 
     @objc private func qrButtonPressed(_ sender: UIButton) {
-        print("Button Clicked")
+        let qrPopup = HIPopupViewController()
+        qrPopup.modalPresentationStyle = .overCurrentContext
+        qrPopup.transitioningDelegate = qrPopup
+        self.present(qrPopup, animated: true, completion: nil)
     }
 
     init() {
