@@ -61,7 +61,7 @@ class HIPopupViewController: HIBaseViewController {
         $0.numberOfLines = 0
         $0.setContentCompressionResistancePriority(.required, for: .vertical)
     }
-    private let backgroundView = HIView {
+    private let popupBackground = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.clear
         $0.backgroundColor = .clear
@@ -101,13 +101,13 @@ extension HIPopupViewController {
 extension HIPopupViewController {
     override func loadView() {
         super.loadView()
-        view.addSubview(backgroundView)
+        view.addSubview(popupBackground)
         view.addSubview(containerView)
 
-        backgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        backgroundView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        backgroundView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        backgroundView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        popupBackground.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        popupBackground.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        popupBackground.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        popupBackground.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
 
         containerView.addSubview(exitButton)
         containerView.addSubview(logoutButton)
@@ -124,7 +124,7 @@ extension HIPopupViewController {
         qrContainerView.bottomAnchor.constraint(equalTo: userNameLabel.topAnchor, constant: -22).isActive = true
 
         userNameLabel.constrain(to: containerView, trailingInset: -32, leadingInset: 32)
-        userNameLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -64).isActive = true
+        userNameLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -54).isActive = true
 
         qrImageView.centerXAnchor.constraint(equalTo: qrContainerView.centerXAnchor).isActive = true
         qrImageView.centerYAnchor.constraint(equalTo: qrContainerView.centerYAnchor).isActive = true
@@ -143,12 +143,13 @@ extension HIPopupViewController {
         height.priority = UILayoutPriority(rawValue: 500)
         height.isActive = true
 
-        backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBackground(_:))))
+        popupBackground.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBackground(_:))))
         let swipeDownRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeDown(_:)))
         swipeDownRecognizer.direction = .down
         containerView.addGestureRecognizer(swipeDownRecognizer)
-        view.backgroundColor = .clear
 
+        view.backgroundColor = .clear
+        self.backgroundView.isHidden = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
