@@ -1,6 +1,0 @@
-framework module SwiftKeychainAccess {
-  umbrella header "SwiftKeychainAccess-umbrella.h"
-
-  export *
-  module * { export * }
-}
