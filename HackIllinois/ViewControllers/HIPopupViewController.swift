@@ -17,7 +17,7 @@ import HIAPI
 class HIPopupViewController: HIBaseViewController {
     // MARK: - Properties
     private let containerView = HIView {
-        $0.layer.cornerRadius = 8
+        $0.layer.cornerRadius = 32
         $0.layer.masksToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.qrBackground
@@ -114,16 +114,16 @@ extension HIPopupViewController {
         qrContainerView.addSubview(qrImageView)
         containerView.addSubview(userNameLabel)
 
-        containerView.constrain(to: view.safeAreaLayoutGuide, trailingInset: -8, bottomInset: 32, leadingInset: 8)
+        containerView.constrain(to: view.safeAreaLayoutGuide, trailingInset: -8, leadingInset: 8)
         view.safeAreaLayoutGuide.bottomAnchor.constraint(greaterThanOrEqualTo: containerView.bottomAnchor, constant: 12).isActive = true
 
-        exitButton.constrain(to: containerView, topInset: 18, leadingInset: 18)
-        logoutButton.constrain(to: containerView, topInset: 18, trailingInset: -18)
-        qrContainerView.constrain(to: containerView, topInset: 50, trailingInset: -32, leadingInset: 32)
+        exitButton.constrain(to: containerView, topInset: 22, leadingInset: 32)
+        logoutButton.constrain(to: containerView, topInset: 22, trailingInset: -32)
+        qrContainerView.constrain(to: containerView, topInset: 54, trailingInset: -32, leadingInset: 32)
         qrContainerView.bottomAnchor.constraint(equalTo: userNameLabel.topAnchor, constant: -22).isActive = true
 
         userNameLabel.constrain(to: containerView, trailingInset: -32, leadingInset: 32)
-        userNameLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -54).isActive = true
+        userNameLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -32).isActive = true
 
         qrImageView.centerXAnchor.constraint(equalTo: qrContainerView.centerXAnchor).isActive = true
         qrImageView.centerYAnchor.constraint(equalTo: qrContainerView.centerYAnchor).isActive = true
