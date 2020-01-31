@@ -114,7 +114,7 @@ extension HIPopupViewController {
         qrContainerView.addSubview(qrImageView)
         containerView.addSubview(userNameLabel)
 
-        containerView.constrain(to: view.safeAreaLayoutGuide, trailingInset: -12, bottomInset: 32, leadingInset: 12)
+        containerView.constrain(to: view.safeAreaLayoutGuide, trailingInset: -8, bottomInset: 32, leadingInset: 8)
         view.safeAreaLayoutGuide.bottomAnchor.constraint(greaterThanOrEqualTo: containerView.bottomAnchor, constant: 12).isActive = true
 
         exitButton.constrain(to: containerView, topInset: 18, leadingInset: 18)
