@@ -138,14 +138,11 @@ extension HIEventDetailViewController {
 
 // MARK: - UIViewController
 extension HIEventDetailViewController {
+
     override func loadView() {
         super.loadView()
 
-        view.addSubview(closeButton)
-        closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
-        closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
-        closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
-        closeButton.constrain(height: 20)
+        setupCloseButton()
 
         setupScannerIfApplicable()
 
@@ -213,6 +210,14 @@ extension HIEventDetailViewController {
         if event == nil {
             presentErrorController(title: "Uh oh", message: "Failed to load event.", dismissParentOnCompletion: true)
         }
+    }
+
+    func setupCloseButton() {
+        view.addSubview(closeButton)
+        closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
+        closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
+        closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
+        closeButton.constrain(height: 20)
     }
 
     func setupScannerIfApplicable() {
