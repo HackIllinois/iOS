@@ -48,7 +48,6 @@ struct HIAppearance: Equatable {
     private static let darkerBlue = #colorLiteral(red: 0.1333333333, green: 0.168627451, blue: 0.3607843137, alpha: 1)
     private static let darkTeal = #colorLiteral(red: 0.0431372549, green: 0.1450980392, blue: 0.1764705882, alpha: 1)
     private static let whiteBlue = #colorLiteral(red: 0.9764705882, green: 1, blue: 1, alpha: 1)
-    private static let orange = #colorLiteral(red: 0.8901960784, green: 0.3137254902, blue: 0.3450980392, alpha: 1)
 
     fileprivate static let day = HIAppearance(
         titleText: darkBlue,
@@ -64,13 +63,13 @@ struct HIAppearance: Equatable {
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewDay"),
         preferredStatusBarStyle: .default,
         scrollViewIndicatorStyle: .black,
+        mapBackground: whiteBlue,
         loginTitleBackground: orange,
         loginLogo: #imageLiteral(resourceName: "LoginLogo"),
         viewTitleColor: deepBlue,
         loginSelectionText: darkerBlue,
         attendeeText: white,
         attendeeBackground: maroon
-        mapBackground: whiteBlue
     )
 
     fileprivate static let night = HIAppearance(
@@ -87,13 +86,13 @@ struct HIAppearance: Equatable {
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewNight"),
         preferredStatusBarStyle: .default,
         scrollViewIndicatorStyle: .white,
+        mapBackground: whiteBlue,
         loginTitleBackground: orange,
         loginLogo: #imageLiteral(resourceName: "LoginLogo"),
         viewTitleColor: deepBlue,
         loginSelectionText: darkerBlue,
         attendeeText: white,
         attendeeBackground: maroon
-        mapBackground: whiteBlue
     )
 
     fileprivate static var current = day

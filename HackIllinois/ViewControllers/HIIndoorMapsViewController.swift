@@ -92,8 +92,8 @@ extension HIIndoorMapsViewController {
         scrollView.contentOffset = .zero
         let widthScale = scrollView.bounds.width / mapImageView.bounds.width
         let heightScale = scrollView.bounds.height / mapImageView.bounds.height
-        let minScale = 1.3*min(widthScale, heightScale)
-        let maxScale = 1.3*max(widthScale, heightScale)
+        let minScale = min(widthScale, heightScale)
+        let maxScale = max(widthScale, heightScale)
         scrollView.minimumZoomScale = minScale
         scrollView.maximumZoomScale = maxScale
         scrollView.zoomScale = minScale
