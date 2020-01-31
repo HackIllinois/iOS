@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "APIManager",
+        "repositoryURL": "https://github.com/rauhul/api-manager.git",
+        "state": {
+          "branch": null,
+          "revision": "c8b6b426a4172cf1cd4568601cf36b6437d65ae8",
+          "version": "0.4.0"
+        }
+      },
+      {
+        "package": "Keychain",
+        "repositoryURL": "https://github.com/rauhul/keychain.git",
+        "state": {
+          "branch": null,
+          "revision": "5c8ad6af202395cdafaa7968af473da8bfe5c35f",
+          "version": "0.2.0"
+        }
+      },
+      {
+        "package": "Lottie",
+        "repositoryURL": "https://github.com/airbnb/lottie-ios.git",
+        "state": {
+          "branch": null,
+          "revision": "eb115967234671b725264422d82c9d1d6b226e5a",
+          "version": "3.1.5"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
