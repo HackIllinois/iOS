@@ -74,6 +74,7 @@ extension HIPopupViewController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(
             UIAlertAction(title: "Logout", style: .destructive) { _ in
+                self.dismiss(animated: true, completion: nil)
                 NotificationCenter.default.post(name: .logoutUser, object: nil)
             }
         )
