@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "hackLogo-1.png",
+      "filename" : "hackLogo@1x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "hackLogo-2.png",
+      "filename" : "hackLogo@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "hackLogo-3.png",
+      "filename" : "hackLogo@3x.png",
       "scale" : "3x"
     }
   ],
