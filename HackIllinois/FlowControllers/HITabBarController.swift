@@ -14,7 +14,7 @@ import Foundation
 import UIKit
 
 class HITabBarController: UITabBarController {
-
+    lazy var qrPopup = HIPopupViewController()
     // Animation for when a tab bar item is clicked
     private var bounceAnimation: CAKeyframeAnimation = {
         let bounceAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
@@ -57,7 +57,9 @@ class HITabBarController: UITabBarController {
     }
 
     @objc private func qrButtonPressed(_ sender: UIButton) {
-        print("Button Clicked")
+        qrPopup.modalPresentationStyle = .overCurrentContext
+        qrPopup.transitioningDelegate = qrPopup
+        self.present(qrPopup, animated: true, completion: nil)
     }
 
     init() {
