@@ -27,7 +27,7 @@ class HIProjectDetailViewController: HIBaseViewController {
         $0.activeImage = #imageLiteral(resourceName: "MenuClose")
         $0.baseImage = #imageLiteral(resourceName: "MenuClose")
     }
-    
+
     private let projectDetailContainer = HIView {
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
@@ -93,7 +93,7 @@ extension HIProjectDetailViewController {
         .authorize(with: HIApplicationStateController.shared.user)
         .launch()
     }
-    
+
     @objc func didSelectCloseButton(_ sender: HIButton) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -103,7 +103,7 @@ extension HIProjectDetailViewController {
 extension HIProjectDetailViewController {
     override func loadView() {
         super.loadView()
-        
+
         view.addSubview(closeButton)
         closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
         closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 15).isActive = true
