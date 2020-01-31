@@ -184,8 +184,9 @@ extension HIEventDetailViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         eventDetailContainer.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20).isActive = true
-        tableView.constrain(to: eventDetailContainer, trailingInset: 0, bottomInset: -6)
-        tableView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
+        tableView.constrain(to: eventDetailContainer, bottomInset: -6)
+        tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: -12).isActive = true
         tableViewHeight = tableView.heightAnchor.constraint(equalToConstant: 100)
         tableViewHeight.isActive = true
         self.tableView = tableView
