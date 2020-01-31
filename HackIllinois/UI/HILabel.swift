@@ -106,7 +106,6 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             textAlignment = .center
             font = HIAppearance.Font.loginSelection
-            layer.cornerRadius = 20.0
             layer.borderWidth = 2.0
             layer.borderColor = (\HIAppearance.loginSelectionText).value.cgColor
             layer.backgroundColor = UIColor.clear.cgColor
