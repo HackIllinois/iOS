@@ -19,9 +19,7 @@ final class HICheckInDataSource {
 
     var checkInID: String?
 
-    private init() {
-        
-    }
+    private init() { }
 
     func updateCheckInID() {
         let semaphore = DispatchSemaphore(value: 0)

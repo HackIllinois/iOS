@@ -93,7 +93,7 @@ extension HIEventDetailViewController {
             HICheckInDataSource.shared.updateCheckInID()
             return
         }
-        
+
         if event.id == checkInID {
             navigationController?.pushViewController(HIEventDetailViewController.checkInScannerViewController, animated: true)
             return
