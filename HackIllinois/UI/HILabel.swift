@@ -60,6 +60,7 @@ class HILabel: UILabel {
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.detailTitle
+            numberOfLines = 0
 
         case .project:
             textHIColor = \.baseText
