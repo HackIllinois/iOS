@@ -64,7 +64,7 @@ class HILabel: UILabel {
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .center
-            font = HIAppearance.Font.button
+            font = HIAppearance.Font.contentTitle
 
         case .subtitle:
             textHIColor = \.accent
@@ -74,7 +74,7 @@ class HILabel: UILabel {
         case .description:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentText
+            font = HIAppearance.Font.descriptionText
             numberOfLines = 0
 
         case .cellDescription:
@@ -85,7 +85,7 @@ class HILabel: UILabel {
 
         case .loginHeader:
             textHIColor = \.accent
-            backgroundHIColor = \.baseBackground
+            backgroundHIColor = \.clear
             font = HIAppearance.Font.navigationTitle
 
         case .loginSelection:
