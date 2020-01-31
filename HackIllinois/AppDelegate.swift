@@ -44,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = HICoreDataController.shared
         _ = HILocalNotificationController.shared
         HIApplicationStateController.shared.initalize()
+        HICheckInDataSource.shared.updateCheckInID()
         return true
     }
 

@@ -18,14 +18,16 @@
 		3C26401923ADE7AA004E1DBE /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26401723ADE7AA004E1DBE /* Project+CoreDataProperties.swift */; };
 		3C26401B23ADE838004E1DBE /* ProjectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26401A23ADE838004E1DBE /* ProjectService.swift */; };
 		3C26401D23ADE8A5004E1DBE /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26401C23ADE8A5004E1DBE /* Project.swift */; };
+		3C7E552723AA199900213E1F /* HITimeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E552623AA199900213E1F /* HITimeDataSource.swift */; };
+		3C8F62D4238F9639001A5DAF /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F62D3238F9639001A5DAF /* Time.swift */; };
+		3C8F62D6238F9825001A5DAF /* BlobstoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F62D5238F9825001A5DAF /* BlobstoreService.swift */; };
+		3CD7BAE723E3DC5A005DE4D7 /* CheckInEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD7BAE623E3DC5A005DE4D7 /* CheckInEvent.swift */; };
+		3CD7BAE923E3DDD3005DE4D7 /* HICheckInDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD7BAE823E3DDD3005DE4D7 /* HICheckInDataSource.swift */; };
 		3CF8DB1123B4134C0035ECAE /* HIProjectDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DB1023B4134C0035ECAE /* HIProjectDataSource.swift */; };
 		3CF8DB1323B419980035ECAE /* HIProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DB1223B419980035ECAE /* HIProjectCell.swift */; };
 		3CF8DB1523B41D0A0035ECAE /* HIProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DB1423B41D0A0035ECAE /* HIProjectListViewController.swift */; };
 		3CF8DB1723B41F350035ECAE /* HIProjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DB1623B41F350035ECAE /* HIProjectDetailViewController.swift */; };
 		3CF8DB1923B42B240035ECAE /* HIProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DB1823B42B240035ECAE /* HIProjectViewController.swift */; };
-		3C7E552723AA199900213E1F /* HITimeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E552623AA199900213E1F /* HITimeDataSource.swift */; };
-		3C8F62D4238F9639001A5DAF /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F62D3238F9639001A5DAF /* Time.swift */; };
-		3C8F62D6238F9825001A5DAF /* TimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F62D5238F9825001A5DAF /* TimeService.swift */; };
 		95069270203EE14000D7C34C /* img_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 95069269203EE14000D7C34C /* img_1.png */; };
 		95069271203EE14000D7C34C /* img_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 9506926A203EE14000D7C34C /* img_0.png */; };
 		95069272203EE14000D7C34C /* intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 9506926B203EE14000D7C34C /* intro.json */; };
@@ -172,14 +174,16 @@
 		3C26401723ADE7AA004E1DBE /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Project+CoreDataProperties.swift"; path = "HackIllinois/Models/CoreDataModels/Project+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		3C26401A23ADE838004E1DBE /* ProjectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectService.swift; sourceTree = "<group>"; };
 		3C26401C23ADE8A5004E1DBE /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		3C7E552623AA199900213E1F /* HITimeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITimeDataSource.swift; sourceTree = "<group>"; };
+		3C8F62D3238F9639001A5DAF /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
+		3C8F62D5238F9825001A5DAF /* BlobstoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlobstoreService.swift; sourceTree = "<group>"; };
+		3CD7BAE623E3DC5A005DE4D7 /* CheckInEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInEvent.swift; sourceTree = "<group>"; };
+		3CD7BAE823E3DDD3005DE4D7 /* HICheckInDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICheckInDataSource.swift; sourceTree = "<group>"; };
 		3CF8DB1023B4134C0035ECAE /* HIProjectDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProjectDataSource.swift; sourceTree = "<group>"; };
 		3CF8DB1223B419980035ECAE /* HIProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProjectCell.swift; sourceTree = "<group>"; };
 		3CF8DB1423B41D0A0035ECAE /* HIProjectListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProjectListViewController.swift; sourceTree = "<group>"; };
 		3CF8DB1623B41F350035ECAE /* HIProjectDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProjectDetailViewController.swift; sourceTree = "<group>"; };
 		3CF8DB1823B42B240035ECAE /* HIProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProjectViewController.swift; sourceTree = "<group>"; };
-		3C7E552623AA199900213E1F /* HITimeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITimeDataSource.swift; sourceTree = "<group>"; };
-		3C8F62D3238F9639001A5DAF /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
-		3C8F62D5238F9825001A5DAF /* TimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeService.swift; sourceTree = "<group>"; };
 		95069269203EE14000D7C34C /* img_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_1.png; sourceTree = "<group>"; };
 		9506926A203EE14000D7C34C /* img_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_0.png; sourceTree = "<group>"; };
 		9506926B203EE14000D7C34C /* intro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = intro.json; sourceTree = "<group>"; };
@@ -417,6 +421,7 @@
 				9564E02E2218CE6F003A8EEB /* HIMapsDataSource.swift */,
 				3CF8DB1023B4134C0035ECAE /* HIProjectDataSource.swift */,
 				3C7E552623AA199900213E1F /* HITimeDataSource.swift */,
+				3CD7BAE823E3DDD3005DE4D7 /* HICheckInDataSource.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -577,7 +582,7 @@
 				95E3145D21FAF1740092C22E /* UserService.swift */,
 				A5163FEC221F283C003C543E /* StatsService.swift */,
 				3C26401A23ADE838004E1DBE /* ProjectService.swift */,
-				3C8F62D5238F9825001A5DAF /* TimeService.swift */,
+				3C8F62D5238F9825001A5DAF /* BlobstoreService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -592,6 +597,7 @@
 				95E3146721FAF1740092C22E /* User.swift */,
 				3C26401C23ADE8A5004E1DBE /* Project.swift */,
 				3C8F62D3238F9639001A5DAF /* Time.swift */,
+				3CD7BAE623E3DC5A005DE4D7 /* CheckInEvent.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -835,6 +841,7 @@
 				9510F6A71FCB7E53007D19DB /* HIBaseScannerViewController.swift in Sources */,
 				956F41E11FC7577500557DC7 /* HIAnnouncementsViewController.swift in Sources */,
 				95A7D290203D4F54005EAEAF /* HIAnnouncementCell.swift in Sources */,
+				3CD7BAE923E3DDD3005DE4D7 /* HICheckInDataSource.swift in Sources */,
 				9515E43722093E1300BCAF92 /* HIEventScannerViewController.swift in Sources */,
 				95A7D28F203D4F54005EAEAF /* HIEventCell.swift in Sources */,
 				95FC1D1E1FCBD20E00F8AD60 /* HIUserDetailViewController.swift in Sources */,
@@ -910,7 +917,8 @@
 				95E3147421FAF1740092C22E /* SimpleRequest.swift in Sources */,
 				A5163FED221F283C003C543E /* StatsService.swift in Sources */,
 				95B12045220BEAD700E024BB /* TrackingService.swift in Sources */,
-				3C8F62D6238F9825001A5DAF /* TimeService.swift in Sources */,
+				3C8F62D6238F9825001A5DAF /* BlobstoreService.swift in Sources */,
+				3CD7BAE723E3DC5A005DE4D7 /* CheckInEvent.swift in Sources */,
 				95E3145921FAD71E0092C22E /* Error.swift in Sources */,
 				3C26401D23ADE8A5004E1DBE /* Project.swift in Sources */,
 			);

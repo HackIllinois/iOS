@@ -1,5 +1,5 @@
 //
-//  TimeService.swift
+//  BlobstoreService.swift
 //  HackIllinois
 //
 //  Created by HackIllinois Team on 11/27/19.
@@ -20,5 +20,15 @@ public final class TimeService: BaseService {
 
     public static func getTimes() -> APIRequest<TimeContainer> {
         return APIRequest<TimeContainer>(service: self, endpoint: "", method: .GET)
+    }
+}
+
+public final class CheckInEventService: BaseService {
+    public override static var baseURL: String {
+        return super.baseURL + "upload/blobstore/checkin/"
+    }
+
+    public static func getCheckInID() -> APIRequest<CheckInContainer> {
+        return APIRequest<CheckInContainer>(service: self, endpoint: "", method: .GET)
     }
 }
