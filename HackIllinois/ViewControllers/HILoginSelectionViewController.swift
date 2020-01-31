@@ -131,7 +131,7 @@ extension HILoginSelectionViewController {
                 cell.defaultColor = (\HIAppearance.attendeeBackground).value
                 cell.titleLabel.layer.borderColor = (\HIAppearance.attendeeBackground).value.cgColor
                 cell.titleLabel.textColor = UIColor.white
-                cell.activeColor = UIColor.white
+                cell.activeColor = .clear
                 cell.activeTextColor = (\HIAppearance.attendeeBackground).value
             } else if indexPath.row > 1 { //After "- OR -" cell roles
                 cell.defaultColor = UIColor.clear
@@ -140,6 +140,7 @@ extension HILoginSelectionViewController {
             }
             cell.backgroundColor = .clear
             cell.contentView.backgroundColor = .clear
+            cell.titleLabel.layer.cornerRadius = cell.frame.height*(3/8)
         }
         return cell
     }
