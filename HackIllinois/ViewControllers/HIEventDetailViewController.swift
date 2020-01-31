@@ -163,7 +163,7 @@ extension HIEventDetailViewController {
         favoritedButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
         favoritedButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
         favoritedButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
-        favoritedButton.centerXAnchor.constraint(equalTo: cameraButton.centerXAnchor).isActive = true
+        favoritedButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
 
         upperContainerView.addSubview(timeLabel)
         timeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
@@ -224,7 +224,7 @@ extension HIEventDetailViewController {
         if let user = HIApplicationStateController.shared.user, !user.roles.intersection([.staff, .admin]).isEmpty {
             view.addSubview(cameraButton)
             cameraButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-            cameraButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
+            cameraButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -14).isActive = true
             cameraButton.constrain(height: 30)
             cameraButton.addTarget(self, action: #selector(didSelectScanner(_:)), for: .touchUpInside)
         }
