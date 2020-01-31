@@ -76,6 +76,8 @@ class HITabBarController: UITabBarController {
         //Set the tabbar to be a HITabBar
         object_setClass(self.tabBar, HITabBar.self)
         (self.tabBar as? HITabBar)?.setup()
+
+        moreNavigationController.tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "DisclosureIndicator"), tag: 0)
     }
 
     required init?(coder: NSCoder) {
