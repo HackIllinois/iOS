@@ -117,7 +117,7 @@ extension HIProjectDetailViewController {
         projectDetailContainer.addSubview(upperContainerView)
         upperContainerView.constrain(to: projectDetailContainer, topInset: 10, trailingInset: 0, leadingInset: 0)
         upperContainerView.constrain(height: 100)
-        
+
         upperContainerView.addSubview(titleLabel)
         titleLabel.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor, constant: 12).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor).isActive = true
