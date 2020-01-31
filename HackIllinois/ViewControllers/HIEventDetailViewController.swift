@@ -144,8 +144,6 @@ extension HIEventDetailViewController {
 
         setupCloseButton()
 
-        setupScannerIfApplicable()
-
         view.addSubview(eventDetailContainer)
         eventDetailContainer.topAnchor.constraint(equalTo: closeButton.bottomAnchor).isActive = true
         eventDetailContainer.constrain(to: view.safeAreaLayoutGuide, trailingInset: -8, bottomInset: 0, leadingInset: 8)
@@ -158,12 +156,16 @@ extension HIEventDetailViewController {
         titleLabel.leadingAnchor.constraint(equalTo: closeButton.leadingAnchor).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor).isActive = true
 
+        setupScannerIfApplicable()
+
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         upperContainerView.addSubview(favoritedButton)
         favoritedButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
         favoritedButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
         favoritedButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
         favoritedButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
+        favoritedButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        favoritedButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
 
         upperContainerView.addSubview(timeLabel)
         timeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
@@ -224,8 +226,9 @@ extension HIEventDetailViewController {
         if let user = HIApplicationStateController.shared.user, !user.roles.intersection([.staff, .admin]).isEmpty {
             view.addSubview(cameraButton)
             cameraButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-            cameraButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -14).isActive = true
-            cameraButton.constrain(height: 30)
+            cameraButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
+            cameraButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            cameraButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
             cameraButton.addTarget(self, action: #selector(didSelectScanner(_:)), for: .touchUpInside)
         }
     }
