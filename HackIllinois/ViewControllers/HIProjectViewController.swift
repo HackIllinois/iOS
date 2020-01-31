@@ -72,6 +72,13 @@ class HIProjectViewController: HIProjectListViewController {
     }()
 }
 
+// MARK: - UITabBarItem Setup
+extension HIProjectViewController {
+    override func setupTabBarItem() {
+        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "project"), tag: 0)
+    }
+}
+
 // MARK: - Actions
 extension HIProjectViewController {
     @objc func didSelectTab(_ sender: HISegmentedControl) {

@@ -165,14 +165,6 @@ extension HIUserDetailViewController {
 extension HIUserDetailViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
-        title = "BADGE"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "LogoutButton"), style: .plain, target: self, action: #selector(didSelectLogoutButton(_:)))
-    }
-}
-
-// MARK: - UITabBarItem Setup
-extension HIUserDetailViewController {
-    override func setupTabBarItem() {
-        tabBarItem = UITabBarItem(title: "Badge", image: #imageLiteral(resourceName: "qr-code"), tag: 0)
     }
 }
