@@ -71,6 +71,8 @@ class HISegmentedControl: UIControl {
 
         let indicatorViewWidth = frame.width / CGFloat(items.count)
         indicatorView.frame = CGRect(x: 0, y: frame.height - indicatorViewHeight, width: indicatorViewWidth, height: indicatorViewHeight)
+        indicatorView.layer.cornerRadius = indicatorViewHeight / 2
+        indicatorView.layer.masksToBounds = true
         bottomView.frame = CGRect(x: 0, y: frame.height - (2 * bottomViewHeight), width: frame.width, height: bottomViewHeight)
 
         displayNewSelectedIndex()

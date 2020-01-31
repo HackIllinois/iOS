@@ -27,6 +27,12 @@ struct HIAppearance: Equatable {
     let preferredStatusBarStyle: UIStatusBarStyle
     let scrollViewIndicatorStyle: UIScrollView.IndicatorStyle
     let mapBackground: UIColor
+    let loginTitleBackground: UIColor
+    let loginLogo: UIImage
+    let viewTitleColor: UIColor
+    let loginSelectionText: UIColor
+    let attendeeText: UIColor
+    let attendeeBackground: UIColor
 
     let clear: UIColor = .clear
 
@@ -36,6 +42,10 @@ struct HIAppearance: Equatable {
     private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     private static let orange = #colorLiteral(red: 0.8901960784, green: 0.3137254902, blue: 0.3450980392, alpha: 1)
     private static let transparent = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+    private static let coral = #colorLiteral(red: 1, green: 0.4666666667, blue: 0.4352941176, alpha: 1)
+    private static let maroon = #colorLiteral(red: 0.6431372549, green: 0.231372549, blue: 0.3607843137, alpha: 1)
+    private static let deepBlue = #colorLiteral(red: 0.03921568627, green: 0.03529411765, blue: 0.2470588235, alpha: 1)
+    private static let darkerBlue = #colorLiteral(red: 0.1333333333, green: 0.168627451, blue: 0.3607843137, alpha: 1)
 
     fileprivate static let day = HIAppearance(
         titleText: darkBlue,
@@ -51,7 +61,13 @@ struct HIAppearance: Equatable {
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewDay"),
         preferredStatusBarStyle: .default,
         scrollViewIndicatorStyle: .black,
-        mapBackground: blue
+        mapBackground: blue,
+        loginTitleBackground: orange,
+        loginLogo: #imageLiteral(resourceName: "LoginLogo"),
+        viewTitleColor: deepBlue,
+        loginSelectionText: darkerBlue,
+        attendeeText: white,
+        attendeeBackground: maroon
     )
 
     fileprivate static let night = HIAppearance(
@@ -68,7 +84,13 @@ struct HIAppearance: Equatable {
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewNight"),
         preferredStatusBarStyle: .default,
         scrollViewIndicatorStyle: .white,
-        mapBackground: blue
+        mapBackground: blue,
+        loginTitleBackground: orange,
+        loginLogo: #imageLiteral(resourceName: "LoginLogo"),
+        viewTitleColor: deepBlue,
+        loginSelectionText: darkerBlue,
+        attendeeText: white,
+        attendeeBackground: maroon
     )
 
     fileprivate static var current = day
@@ -87,6 +109,8 @@ struct HIAppearance: Equatable {
         static let navigationSubtitle = UIFont.systemFont(ofSize: 14, weight: .medium)
         static let navigationTitle = UIFont.systemFont(ofSize: 15, weight: .medium)
         static let descriptionText = UIFont.systemFont(ofSize: 14, weight: .regular)
+        static let loginTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
+        static let loginSelection = UIFont.systemFont(ofSize: 16, weight: .semibold)
 
         static let sectionHeader = UIFont.systemFont(ofSize: 13, weight: .bold)
         static let button = UIFont.systemFont(ofSize: 15, weight: .regular)
