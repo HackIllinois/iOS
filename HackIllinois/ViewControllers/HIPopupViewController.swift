@@ -116,6 +116,7 @@ extension HIPopupViewController {
 
         containerView.constrain(to: view.safeAreaLayoutGuide, trailingInset: -8, leadingInset: 8)
         view.safeAreaLayoutGuide.bottomAnchor.constraint(greaterThanOrEqualTo: containerView.bottomAnchor, constant: 12).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -12).isActive = true
 
         exitButton.constrain(to: containerView, topInset: 22, leadingInset: 32)
         logoutButton.constrain(to: containerView, topInset: 22, trailingInset: -32)
