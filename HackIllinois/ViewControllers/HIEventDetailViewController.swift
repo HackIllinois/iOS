@@ -158,14 +158,7 @@ extension HIEventDetailViewController {
 
         setupScannerIfApplicable()
 
-        favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
-        upperContainerView.addSubview(favoritedButton)
-        favoritedButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
-        favoritedButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
-        favoritedButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
-        favoritedButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
-        favoritedButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        favoritedButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        setupFavoritedButton()
 
         upperContainerView.addSubview(timeLabel)
         timeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
@@ -232,6 +225,17 @@ extension HIEventDetailViewController {
             cameraButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
             cameraButton.addTarget(self, action: #selector(didSelectScanner(_:)), for: .touchUpInside)
         }
+    }
+
+    func setupFavoritedButton() {
+        favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
+        upperContainerView.addSubview(favoritedButton)
+        favoritedButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
+        favoritedButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
+        favoritedButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
+        favoritedButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
+        favoritedButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        favoritedButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
     }
 }
 
