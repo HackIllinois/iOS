@@ -134,7 +134,7 @@ extension HIProjectDetailViewController {
         upperContainerView.addSubview(numberLabel)
         numberLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
         numberLabel.bottomAnchor.constraint(equalTo: upperContainerView.bottomAnchor).isActive = true
-        numberLabel.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor).isActive = true
+        numberLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
 
         projectDetailContainer.addSubview(descriptionLabel)
         descriptionLabel.topAnchor.constraint(equalTo: upperContainerView.bottomAnchor, constant: 30).isActive = true
