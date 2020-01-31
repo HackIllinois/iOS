@@ -28,7 +28,6 @@ class HIPopupViewController: HIBaseViewController {
         $0.titleHIColor = \.qrTint
         $0.backgroundHIColor = \.qrBackground
         $0.baseImage = #imageLiteral(resourceName: "MenuClose")
-        $0.title = "  CLOSE"
         $0.titleLabel?.font = HIAppearance.Font.navigationTitle
         $0.titleLabel?.baselineAdjustment = .alignCenters
         $0.addTarget(self, action: #selector(didSelectClose(_:)), for: .touchUpInside)

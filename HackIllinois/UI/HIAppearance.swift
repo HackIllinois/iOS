@@ -64,7 +64,7 @@ struct HIAppearance: Equatable {
         overlay: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.47),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         qrTint: darkBlue,
-        qrBackground: lightBlue,
+        qrBackground: white,
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewNight"),
         preferredStatusBarStyle: .default,
         scrollViewIndicatorStyle: .white,
