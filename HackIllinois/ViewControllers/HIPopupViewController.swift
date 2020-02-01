@@ -30,13 +30,13 @@ class HIPopupViewController: HIBaseViewController {
         $0.baseImage = #imageLiteral(resourceName: "MenuClose")
         $0.titleLabel?.font = HIAppearance.Font.navigationTitle
         $0.titleLabel?.baselineAdjustment = .alignCenters
+        $0.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         $0.addTarget(self, action: #selector(didSelectClose(_:)), for: .touchUpInside)
     }
     private let logoutButton = HIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.titleHIColor = \.qrTint
         $0.tintHIColor = \.qrBackground
-        $0.baseImage = #imageLiteral(resourceName: "MenuClose")
         $0.backgroundHIColor = \.qrBackground
         $0.title = "LOG OUT"
         $0.titleLabel?.font = HIAppearance.Font.navigationTitle
