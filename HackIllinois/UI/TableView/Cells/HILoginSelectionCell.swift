@@ -23,7 +23,7 @@ class HILoginSelectionCell: UITableViewCell {
 
     var titleLabel = HILabel(style: .loginSelection)
 
-    var defaultColor: UIColor  = (\HIAppearance.baseBackground).value
+    var defaultColor: UIColor  = (\HIAppearance.clear).value
     var activeColor: UIColor = (\HIAppearance.action).value
 
     var defaultTextColor: UIColor = UIColor.white
@@ -56,7 +56,7 @@ class HILoginSelectionCell: UITableViewCell {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        contentView.backgroundColor <- \.baseBackground
+        contentView.backgroundColor <- \.clear
     }
 }
 
