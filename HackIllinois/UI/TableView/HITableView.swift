@@ -38,7 +38,7 @@ class HITableView: UITableView {
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
         indicatorStyle <- \.scrollViewIndicatorStyle
-        backgroundColor <- \.baseBackground
+        backgroundColor <- \.clear
     }
 
 }
