@@ -194,6 +194,8 @@ extension HIEventDetailViewController {
         favoritedButton.isActive = event.favorite
 
         tableView?.reloadData()
+        let indexPath = IndexPath(row: 0, section: 0)
+        tableView?.scrollToRow(at: indexPath, at: .top, animated: true)
         view.layoutIfNeeded()
         let targetSize = CGSize(width: descriptionLabel.frame.width, height: .greatestFiniteMagnitude)
         let neededSize = descriptionLabel.sizeThatFits(targetSize)
