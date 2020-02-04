@@ -76,10 +76,6 @@ extension HIApplicationStateController {
         viewControllers.append(HIIndoorMapsViewController())
         viewControllers.append(HIProjectViewController())
 
-        if !user.roles.intersection([.staff, .admin]).isEmpty {
-            viewControllers.append(HICheckInScannerViewController())
-        }
-
         if user.roles.contains(.admin) {
             viewControllers.append(HIAdminStatsViewController())
         }
