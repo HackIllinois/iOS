@@ -81,6 +81,7 @@ extension HIPopupViewController {
         alert.addAction(
             UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         )
+        alert.popoverPresentationController?.sourceView = sender
         present(alert, animated: true, completion: nil)
     }
 
