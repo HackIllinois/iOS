@@ -19,6 +19,7 @@ import APIManager
 class HIEventDetailViewController: HIBaseViewController {
     // MARK: - Properties
     private static let scannerViewController = HIEventScannerViewController()
+    private static let checkInScannerViewController = HICheckInScannerViewController()
     var event: Event?
 
     // MARK: Views
@@ -105,6 +106,12 @@ extension HIEventDetailViewController {
 
     @objc func didSelectScanner(_ sender: UIButton) {
         guard let event = event else { return }
+        
+        // Check in is an event, identified by name
+        if event.name.caseInsensitiveCompare("Check In") == .orderedSame {
+            self.present(HIEventDetailViewController.checkInScannerViewController, animated: true)
+        }
+        
         let now = Date()
         if event.startTime.addingTimeInterval(-15*60) > now {
             let message = "The scanning period for this event has not begun; scanning begins 15 minutes before the event."
