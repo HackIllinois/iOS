@@ -25,14 +25,29 @@ class HIBaseScannerViewController: HIBaseViewController {
 
     private var loadFailed = false
     var respondingToQRCodeFound = true
+
+    private let closeButton = HIButton {
+        $0.tintHIColor = \.baseText
+        $0.backgroundHIColor = \.clear
+        $0.activeImage = #imageLiteral(resourceName: "MenuClose")
+        $0.baseImage = #imageLiteral(resourceName: "MenuClose")
+    }
 }
 
 // MARK: - UIViewController
 extension HIBaseScannerViewController {
     override func loadView() {
         super.loadView()
+        view.addSubview(closeButton)
+        closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
+        closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 3).isActive = true
+        closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
+        closeButton.constrain(height: 40)
         view.addSubview(previewView)
-        previewView.constrain(to: view, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        previewView.topAnchor.constraint(equalTo: closeButton.bottomAnchor).isActive = true
+        previewView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        previewView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        previewView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         setupCaptureSession()
     }
 
@@ -69,6 +84,13 @@ extension HIBaseScannerViewController {
         coordinator.animate(alongsideTransition: { [weak self] (_) in
             self?.setFrameForPreviewLayer()
         }, completion: nil)
+    }
+}
+
+// MARK: - Actions
+extension HIBaseScannerViewController {
+    @objc func didSelectCloseButton(_ sender: HIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
