@@ -35,6 +35,7 @@ struct HIAppearance: Equatable {
     let attendeeBackground: UIColor
 
     let clear: UIColor = .clear
+    let black: UIColor = .black
 
     private static let darkBlue = #colorLiteral(red: 0.1333333333, green: 0.168627451, blue: 0.3607843137, alpha: 1)
     private static let blue = #colorLiteral(red: 0.1215686275, green: 0.5176470588, blue: 0.6470588235, alpha: 1)
@@ -104,7 +105,7 @@ struct HIAppearance: Equatable {
 
     enum Font {
         static let contentSubtitle = UIFont.systemFont(ofSize: 13, weight: .light)
-        static let contentText = UIFont.systemFont(ofSize: 13, weight: .regular)
+        static let contentText = UIFont.systemFont(ofSize: 14, weight: .regular)
         static let contentTitle = UIFont.systemFont(ofSize: 18, weight: .medium)
         static let detailTitle = UIFont.systemFont(ofSize: 24, weight: .semibold)
 
