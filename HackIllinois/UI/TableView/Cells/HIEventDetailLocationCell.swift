@@ -36,12 +36,20 @@ class HIEventDetailLocationCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
 
+        contentView.layer.masksToBounds = false
+        contentView.layer.shadowColor = #colorLiteral(red: 0.1333333333, green: 0.168627451, blue: 0.3607843137, alpha: 0.3984650088)
+        contentView.layer.shadowOffset = CGSize(width: 1, height: 3)
+        contentView.layer.shadowOpacity = 1.0
+
         containerView.layer.cornerRadius = 8
         containerView.layer.masksToBounds = true
-        containerView.backgroundColor <- \.baseBackground
+        containerView.backgroundColor <- \.clear
         containerView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(containerView)
-        containerView.constrain(to: contentView, topInset: 6, trailingInset: -12, bottomInset: -6, leadingInset: 12)
+        containerView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        containerView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12).isActive = true
+        containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6).isActive = true
 
         mapView.isUserInteractionEnabled = false
         mapView.translatesAutoresizingMaskIntoConstraints = false
@@ -119,6 +127,8 @@ extension HIEventDetailLocationCell {
 // MARK: - Population
 extension HIEventDetailLocationCell {
     static func <- (lhs: HIEventDetailLocationCell, rhs: Location) {
+        lhs.backgroundColor = UIColor.clear
+        lhs.contentView.layer.backgroundColor = UIColor.clear.cgColor
         lhs.titleLabel.text = rhs.name
         let clLocation = CLLocation(latitude: rhs.latitude, longitude: rhs.longitude)
 
