@@ -27,7 +27,7 @@ class HIBaseScannerViewController: HIBaseViewController {
     var respondingToQRCodeFound = true
 
     private let closeButton = HIButton {
-        $0.tintHIColor = \.baseText
+        $0.tintHIColor = \.action
         $0.backgroundHIColor = \.clear
         $0.activeImage = #imageLiteral(resourceName: "MenuClose")
         $0.baseImage = #imageLiteral(resourceName: "MenuClose")
@@ -38,16 +38,16 @@ class HIBaseScannerViewController: HIBaseViewController {
 extension HIBaseScannerViewController {
     override func loadView() {
         super.loadView()
+        view.addSubview(previewView)
+        previewView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        previewView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        previewView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        previewView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         view.addSubview(closeButton)
         closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
         closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 3).isActive = true
         closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         closeButton.constrain(height: 40)
-        view.addSubview(previewView)
-        previewView.topAnchor.constraint(equalTo: closeButton.bottomAnchor).isActive = true
-        previewView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        previewView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        previewView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         setupCaptureSession()
     }
 
