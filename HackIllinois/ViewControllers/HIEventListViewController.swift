@@ -55,7 +55,7 @@ extension HIEventListViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         eventDetailViewController.event = _fetchedResultsController?.object(at: indexPath) as? Event
-        navigationController?.pushViewController(eventDetailViewController, animated: true)
+        self.present(eventDetailViewController, animated: true, completion: nil)
         super.tableView(tableView, didSelectRowAt: indexPath)
     }
 }
