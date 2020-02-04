@@ -32,7 +32,7 @@ class HIEventDetailViewController: HIBaseViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.clear
     }
-    private let titleLabel = HILabel(style: .eventDetailTitle) {
+    private let titleLabel = HILabel(style: .detailTitle) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor <- \.baseText
         $0.font = HIAppearance.Font.detailTitle

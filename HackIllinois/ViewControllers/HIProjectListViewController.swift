@@ -109,6 +109,6 @@ extension HIProjectListViewController: UIViewControllerPreviewingDelegate {
     }
 
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        navigationController?.pushViewController(viewControllerToCommit, animated: true)
+        self.present(viewControllerToCommit, animated: true, completion: nil)
     }
 }

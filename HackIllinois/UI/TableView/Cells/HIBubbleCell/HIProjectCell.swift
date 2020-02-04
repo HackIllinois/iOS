@@ -70,7 +70,7 @@ extension HIProjectCell {
 // MARK: - Population
 extension HIProjectCell {
     static func heightForCell(with project: Project) -> CGFloat {
-        return 73 + 21 * 1 //Update in UI: Projects have one location
+        return 83 + 21 * 1 //Update in UI: Projects have one location
     }
 
     static func <- (lhs: HIProjectCell, rhs: Project) {
