@@ -233,7 +233,6 @@ extension HIEventDetailViewController {
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         upperContainerView.addSubview(favoritedButton)
         favoritedButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
-        favoritedButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
         favoritedButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
         favoritedButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         favoritedButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
