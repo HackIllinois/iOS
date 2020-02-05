@@ -108,7 +108,7 @@ extension HIEventDetailViewController {
         guard let event = event else { return }
 
         // Check in is an event, identified by name
-        if event.name.caseInsensitiveCompare("Check In") == .orderedSame {
+        if event.name.caseInsensitiveCompare("Check-in") == .orderedSame {
             self.present(HIEventDetailViewController.checkInScannerViewController, animated: true)
         }
 
