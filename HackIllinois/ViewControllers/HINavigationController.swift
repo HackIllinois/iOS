@@ -15,6 +15,15 @@ import UIKit
 
 class HINavigationController: UINavigationController {
 
+    var statusBarIsHidden = false
+    override var prefersStatusBarHidden: Bool {
+        return statusBarIsHidden
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return (\HIAppearance.preferredStatusBarStyle).value
+    }
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
     }
