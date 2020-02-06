@@ -15,6 +15,8 @@ import UIKit
 
 class HITabBarController: UITabBarController {
     lazy var qrPopup = HIPopupViewController()
+    private var tabBarShapeLayer: CAShapeLayer?
+
     // Animation for when a tab bar item is clicked
     private var bounceAnimation: CAKeyframeAnimation = {
         let bounceAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
@@ -26,7 +28,33 @@ class HITabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupQRCodeButton()
+        setupTabBar()
 
+        //Listen for rotations to redraw tab bar
+        NotificationCenter.default.addObserver(self, selector: #selector(redrawTabBarOnRotation), name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+
+    @objc func redrawTabBarOnRotation() {
+        DispatchQueue.main.async {
+            let tabBarFrame = self.tabBar.frame
+            self.tabBar.frame = CGRect(x: tabBarFrame.minX, y: tabBarFrame.minY, width: tabBarFrame.width, height: UIScreen.main.bounds.height - tabBarFrame.height + 28)
+            self.tabBarShapeLayer?.path = self.createPath()
+        }
+    }
+
+    @objc private func qrButtonPressed(_ sender: UIButton) {
+        qrPopup.modalPresentationStyle = .overCurrentContext
+        qrPopup.transitioningDelegate = qrPopup
+        self.present(qrPopup, animated: true, completion: nil)
+    }
+
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        moreNavigationController.tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "DisclosureIndicator"), tag: 0)
+    }
+
+    func setupQRCodeButton() {
         //Setup QRCode Button
         let qrButton = UIButton()
         view.addSubview(qrButton)
@@ -56,20 +84,86 @@ class HITabBarController: UITabBarController {
         qrButton.addTarget(self, action: #selector(qrButtonPressed(_:)), for: .touchUpInside)
     }
 
-    @objc private func qrButtonPressed(_ sender: UIButton) {
-        qrPopup.modalPresentationStyle = .overCurrentContext
-        qrPopup.transitioningDelegate = qrPopup
-        self.present(qrPopup, animated: true, completion: nil)
+    func setupTabBar() {
+        let tabBarFrame = self.tabBar.frame
+        tabBar.frame = CGRect(x: tabBarFrame.minX, y: tabBarFrame.minY, width: tabBarFrame.width, height: UIScreen.main.bounds.height - tabBarFrame.height + 28)
+        tabBar.backgroundImage = UIImage()
+        tabBar.shadowImage = UIImage()
+        tabBar.clipsToBounds = true
+        tabBar.layer.borderWidth = 0
+        tabBar.backgroundColor = UIColor.clear
+        tabBar.unselectedItemTintColor = UIColor.white
+        tabBar.tintColor = UIColor(red: 0.89, green: 0.314, blue: 0.345, alpha: 1)
+
+        addTabBarShape()
     }
 
-    init() {
-        super.init(nibName: nil, bundle: nil)
+    func addTabBarShape() {
+        tabBarShapeLayer = CAShapeLayer()
+        if let tabBarShapeLayer = tabBarShapeLayer {
+            tabBarShapeLayer.path = createPath()
+            tabBarShapeLayer.fillColor = UIColor(red: 0.13, green: 0.17, blue: 0.36, alpha: 1.0).cgColor
+            tabBarShapeLayer.lineWidth = 1.0
 
-        //Set the tabbar to be a HITabBar
-        object_setClass(self.tabBar, HITabBar.self)
-        (self.tabBar as? HITabBar)?.setup()
+            self.tabBar.layer.insertSublayer(tabBarShapeLayer, at: 0)
+        }
+    }
 
-        moreNavigationController.tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "DisclosureIndicator"), tag: 0)
+    func createPath() -> CGPath {
+        let radius: CGFloat = 32.0
+        let smallRadius: CGFloat = 8.0
+        let path = UIBezierPath()
+
+        // start top left before rounded corner
+        path.move(to: CGPoint(x: 0, y: 0 + smallRadius))
+
+        // top left rounded corner
+        path.addArc(withCenter: CGPoint(x: smallRadius, y: smallRadius),
+                    radius: smallRadius,
+                    startAngle: .pi,
+                    endAngle: 3 * .pi / 2,
+                    clockwise: true)
+
+        // start of left arc before middle arc
+        path.addLine(to: CGPoint(x: (self.tabBar.frame.width/2 - radius - smallRadius/2), y: 0))
+
+        // end of left arc before middle arc
+        path.addArc(withCenter: CGPoint(x: self.tabBar.frame.width/2 - radius - smallRadius/2, y: smallRadius/2),
+                    radius: smallRadius/2,
+                    startAngle: 3 * .pi / 2,
+                    endAngle: 0,
+                    clockwise: true)
+
+        // middle arc
+        path.addArc(withCenter: CGPoint(x: self.tabBar.frame.width/2, y: 0),
+                    radius: radius,
+                    startAngle: .pi,
+                    endAngle: 0,
+                    clockwise: false)
+
+        // right arc after middle arc
+        path.addArc(withCenter: CGPoint(x: self.tabBar.frame.width/2 + radius + smallRadius/2, y: smallRadius/2),
+                    radius: smallRadius/2,
+                    startAngle: .pi,
+                    endAngle: 3 * .pi / 2,
+                    clockwise: true)
+
+        // before top right rounded corner
+        path.addLine(to: CGPoint(x: self.tabBar.frame.width - smallRadius, y: 0))
+
+        // top right rounded corner
+        path.addArc(withCenter: CGPoint(x: self.tabBar.frame.width - smallRadius, y: smallRadius),
+                    radius: smallRadius,
+                    startAngle: 3 * .pi / 2,
+                    endAngle: 0,
+                    clockwise: true)
+
+        // finish the rest
+        path.addLine(to: CGPoint(x: self.tabBar.frame.width, y: self.tabBar.frame.height))
+        path.addLine(to: CGPoint(x: 0, y: self.tabBar.frame.height))
+        path.close()
+
+        return path.cgPath
     }
 
     required init?(coder: NSCoder) {
