@@ -47,6 +47,8 @@ struct HIAppearance: Equatable {
     private static let maroon = #colorLiteral(red: 0.6431372549, green: 0.231372549, blue: 0.3607843137, alpha: 1)
     private static let deepBlue = #colorLiteral(red: 0.03921568627, green: 0.03529411765, blue: 0.2470588235, alpha: 1)
     private static let darkerBlue = #colorLiteral(red: 0.1333333333, green: 0.168627451, blue: 0.3607843137, alpha: 1)
+    private static let darkTeal = #colorLiteral(red: 0.0431372549, green: 0.1450980392, blue: 0.1764705882, alpha: 1)
+    private static let whiteBlue = #colorLiteral(red: 0.9764705882, green: 1, blue: 1, alpha: 1)
     private static var statusBarBlack: UIStatusBarStyle {
         if #available(iOS 13, *) {
              return .darkContent
@@ -69,7 +71,7 @@ struct HIAppearance: Equatable {
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewDay"),
         preferredStatusBarStyle: statusBarBlack,
         scrollViewIndicatorStyle: .black,
-        mapBackground: blue,
+        mapBackground: whiteBlue,
         loginTitleBackground: orange,
         loginLogo: #imageLiteral(resourceName: "LoginLogo"),
         viewTitleColor: deepBlue,
@@ -92,7 +94,7 @@ struct HIAppearance: Equatable {
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewNight"),
         preferredStatusBarStyle: statusBarBlack,
         scrollViewIndicatorStyle: .white,
-        mapBackground: blue,
+        mapBackground: whiteBlue,
         loginTitleBackground: orange,
         loginLogo: #imageLiteral(resourceName: "LoginLogo"),
         viewTitleColor: deepBlue,

@@ -62,14 +62,6 @@ final class HIMapsDataSource {
             )
         )
 
-        // Kenney
-        maps.append(
-            IndoorMap(
-                name: "Kenney",
-                floors: [IndoorMap.Floor(name: "1st Floor", image: #imageLiteral(resourceName: "IndoorMapKenney"))]
-            )
-        )
-
         return maps
     }()
 }
