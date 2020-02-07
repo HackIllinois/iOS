@@ -159,8 +159,8 @@ class HITabBarController: UITabBarController {
                     clockwise: true)
 
         // finish the rest
-        path.addLine(to: CGPoint(x: self.tabBar.frame.width, y: self.tabBar.frame.height))
-        path.addLine(to: CGPoint(x: 0, y: self.tabBar.frame.height))
+        path.addLine(to: CGPoint(x: self.tabBar.frame.width, y: UIScreen.main.bounds.height))
+        path.addLine(to: CGPoint(x: 0, y: UIScreen.main.bounds.height))
         path.close()
 
         return path.cgPath
