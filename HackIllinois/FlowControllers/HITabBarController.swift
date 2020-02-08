@@ -30,16 +30,14 @@ class HITabBarController: UITabBarController {
         super.viewDidLoad()
         setupQRCodeButton()
         setupTabBar()
-
-        //Listen for rotations to redraw tab bar
-        NotificationCenter.default.addObserver(self, selector: #selector(redrawTabBarOnRotation), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
 
-    @objc func redrawTabBarOnRotation() {
-        DispatchQueue.main.async {
-            let tabBarFrame = self.tabBar.frame
-            self.tabBar.frame = CGRect(x: tabBarFrame.minX, y: tabBarFrame.minY, width: tabBarFrame.width, height: UIScreen.main.bounds.height - tabBarFrame.height + 28)
-            self.tabBarShapeLayer?.path = self.createPath()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        //Redefine the tab bar path when orientation rotated
+        if let tabBarShapeLayer = tabBarShapeLayer {
+            tabBarShapeLayer.path = createPath()
         }
     }
 
