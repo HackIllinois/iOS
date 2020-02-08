@@ -49,7 +49,7 @@ class HIBubbleCell: UITableViewCell {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        contentView.backgroundColor <- \.baseBackground
+        contentView.backgroundColor <- \.clear
     }
 
     // MARK: - UITableViewCell
