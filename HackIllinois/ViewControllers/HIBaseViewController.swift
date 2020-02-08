@@ -190,9 +190,6 @@ extension HIBaseViewController: NSFetchedResultsControllerDelegate {
                 animations: {
                     tableView.reloadData()
             })
-            if !tableView.visibleCells.isEmpty {
-                            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
-            }
         }
     }
 }
