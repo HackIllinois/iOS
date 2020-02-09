@@ -32,7 +32,11 @@ class HIProjectCell: HIBubbleCell {
     
     var tagScrollView = UIScrollView()
     var tagStackView = UIStackView()
-    
+    var spaceView = HIView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.heightAnchor.constraint(equalToConstant: 12).isActive = true
+        $0.backgroundHIColor = \.clear
+    }
     var indexPath: IndexPath?
     weak var delegate: HIProjectCellDelegate?
 
@@ -88,7 +92,7 @@ extension HIProjectCell {
 // MARK: - Population
 extension HIProjectCell {
     static func heightForCell(with project: Project) -> CGFloat {
-        return 93 + 21 * 1 //Update in UI: Projects have one location
+        return 98 + 21 * 1 //Update in UI: Projects have one location
     }
 
     static func <- (lhs: HIProjectCell, rhs: Project) {
@@ -106,6 +110,7 @@ extension HIProjectCell {
         locationLabel.text = "Meeting Room: " + rhs.room //Update in UI: Phrasing not finalized
         contentStackViewHeight += locationLabel.intrinsicContentSize.height + 3
         lhs.contentStackView.addArrangedSubview(locationLabel)
+        lhs.contentStackView.addArrangedSubview(lhs.spaceView)
         populateTagLabels(stackView: lhs.tagStackView, tagsString: rhs.tags)
         lhs.tagStackView.layoutIfNeeded()
         contentStackViewHeight += lhs.tagStackView.frame.height + 10
@@ -123,28 +128,28 @@ extension HIProjectCell {
                 $0.backgroundHIColor = \.clear
                 switch tag {
                 case "Web Development":
-                    $0.text = "Web Dev"
-                    $0.layer.backgroundColor = (\HIAppearance.webBackground).value.cgColor
-                    $0.textHIColor = (\HIAppearance.webText)
+                    $0.text = "Web Dev    "
+                    $0.layer.backgroundColor = UIColor(red: 0.42, green: 0.682, blue: 0.773, alpha: 1).cgColor
+                    $0.textHIColor = \.whiteTagFont
                 case "Systems":
-                    $0.text = "Systems"
-                    $0.layer.backgroundColor = (\HIAppearance.systemsBackground).value.cgColor
-                    $0.textHIColor = (\HIAppearance.systemsText)
+                    $0.text = "Systems    "
+                    $0.layer.backgroundColor = UIColor(red: 0.643, green: 0.231, blue: 0.361, alpha: 1).cgColor
+                    $0.textHIColor = \.whiteTagFont
                 case "Languages":
-                    $0.text = "Languages"
-                    $0.layer.backgroundColor = (\HIAppearance.langsBackground).value.cgColor
-                    $0.textHIColor = (\HIAppearance.langsText)
+                    $0.text = "Languages    "
+                    $0.layer.backgroundColor = UIColor(red: 0.659, green: 0.796, blue: 0.718, alpha: 1).cgColor
+                    $0.textHIColor = \.tagFont
                 case "Data Science":
-                    $0.text = "Data Sci"
-                    $0.layer.backgroundColor = (\HIAppearance.dataBackground).value.cgColor
-                    $0.textHIColor = (\HIAppearance.dataText)
+                    $0.text = "Data Sci    "
+                    $0.layer.backgroundColor = UIColor(red: 0.886, green: 0.545, blue: 0.475, alpha: 1).cgColor
+                    $0.textHIColor = \.tagFont
                 default:
                     $0.text = tag
-                    $0.textHIColor = \.webText
-                    $0.backgroundHIColor = \.webBackground
+                    $0.textColor = .white
+                    $0.layer.backgroundColor = UIColor.systemTeal.cgColor
                 }
             }
-            tagLabel.layer.cornerRadius = 10
+            tagLabel.layer.cornerRadius = 8.0
             stackView.addArrangedSubview(tagLabel)
         }
     }
