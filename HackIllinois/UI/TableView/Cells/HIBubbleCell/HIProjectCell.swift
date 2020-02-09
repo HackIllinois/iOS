@@ -27,6 +27,7 @@ class HIProjectCell: HIBubbleCell {
         $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
     }
 
+    var gradient = CAGradientLayer()
     var contentStackView = UIStackView()
     var contentStackViewHeight = NSLayoutConstraint()
 
@@ -63,6 +64,8 @@ class HIProjectCell: HIBubbleCell {
 
         tagScrollView.translatesAutoresizingMaskIntoConstraints = false
         tagScrollView.showsHorizontalScrollIndicator = false
+        tagScrollView.delegate = self
+
         tagStackView.translatesAutoresizingMaskIntoConstraints = false
         tagStackView.axis = .horizontal
         tagStackView.alignment = .fill
@@ -75,6 +78,12 @@ class HIProjectCell: HIBubbleCell {
         tagStackView.topAnchor.constraint(equalTo: tagScrollView.topAnchor).isActive = true
         tagStackView.bottomAnchor.constraint(equalTo: tagScrollView.bottomAnchor).isActive = true
         tagStackView.heightAnchor.constraint(equalTo: tagScrollView.heightAnchor).isActive = true
+
+        gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor, UIColor.black.cgColor, UIColor.clear.cgColor]
+        gradient.startPoint = CGPoint(x: 0, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
+        gradient.delegate = self
+        tagScrollView.layer.mask = gradient
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -86,6 +95,29 @@ class HIProjectCell: HIBubbleCell {
 extension HIProjectCell {
     @objc func didSelectFavoriteButton(_ sender: HIButton) {
         delegate?.projectCellDidSelectFavoriteButton(self)
+    }
+
+    func updateGradientBounds() {
+        gradient.frame = CGRect(
+            x: tagScrollView.contentOffset.x,
+            y: 0,
+            width: tagScrollView.bounds.width,
+            height: tagScrollView.bounds.height
+        )
+
+        let contentSize = tagScrollView.contentSize.width - tagScrollView.frame.size.width - 1
+        switch tagScrollView.contentOffset.x {
+        case let offset where offset <= 0:
+            gradient.locations = [0, 0, 0.95, 1]
+        case let offset where offset >= contentSize:
+            gradient.locations = [0, 0.05, 1, 1]
+        default:
+            gradient.locations = [0, 0.05, 0.95, 1]
+        }
+    }
+
+    override func action(for layer: CALayer, forKey event: String) -> CAAction? {
+        return NSNull()
     }
 }
 
@@ -132,5 +164,17 @@ extension HIProjectCell {
             tagStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateGradientBounds()
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+extension HIProjectCell: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        updateGradientBounds()
     }
 }
