@@ -29,7 +29,7 @@ class HIProjectCell: HIBubbleCell {
 
     var contentStackView = UIStackView()
     var contentStackViewHeight = NSLayoutConstraint()
-    
+
     var tagScrollView = UIScrollView()
     var tagStackView = UIStackView()
     var spaceView = HIView {
@@ -60,7 +60,7 @@ class HIProjectCell: HIBubbleCell {
         contentStackView.centerYAnchor.constraint(equalTo: bubbleView.centerYAnchor).isActive = true
         contentStackViewHeight = contentStackView.heightAnchor.constraint(equalToConstant: 0)
         contentStackViewHeight.isActive = true
-        
+
         tagScrollView.translatesAutoresizingMaskIntoConstraints = false
         tagScrollView.showsHorizontalScrollIndicator = false
         tagStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -69,7 +69,7 @@ class HIProjectCell: HIBubbleCell {
         tagStackView.distribution = .equalSpacing
         tagStackView.spacing = 5.0
         tagScrollView.addSubview(tagStackView)
-        
+
         tagStackView.leadingAnchor.constraint(equalTo: tagScrollView.leadingAnchor).isActive = true
         tagStackView.trailingAnchor.constraint(equalTo: tagScrollView.trailingAnchor).isActive = true
         tagStackView.topAnchor.constraint(equalTo: tagScrollView.topAnchor).isActive = true
@@ -128,7 +128,7 @@ extension HIProjectCell {
             contentStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
-        tagStackView.arrangedSubviews.forEach{ (view) in
+        tagStackView.arrangedSubviews.forEach { (view) in
             tagStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
