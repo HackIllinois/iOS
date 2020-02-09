@@ -87,6 +87,7 @@ extension HILoginFlowController {
             animationView.frame = view.frame
             animationView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
+            // Add gradient background behind animation
             animationBackgroundView.image = #imageLiteral(resourceName: "Gradient")
             animationBackgroundView.translatesAutoresizingMaskIntoConstraints = false
             animationBackgroundView.isUserInteractionEnabled = true
@@ -108,7 +109,11 @@ extension HILoginFlowController {
             setNeedsStatusBarAppearanceUpdate()
 
             animationView.play { _ in
-                self.animationBackgroundView.removeFromSuperview()
+                // Smooth out background transition into login page
+                UIView.animate(withDuration: 0.3, animations: {self.animationBackgroundView.alpha = 0.0},
+                completion: {(value: Bool) in
+                              self.animationBackgroundView.removeFromSuperview()
+                            })
                 self.animationView.removeFromSuperview()
                 self.statusBarIsHidden = false
                 UIView.animate(withDuration: 0.25) { () -> Void in
