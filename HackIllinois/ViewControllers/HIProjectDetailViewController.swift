@@ -62,6 +62,8 @@ class HIProjectDetailViewController: HIBaseViewController {
         $0.activeImage = #imageLiteral(resourceName: "Favorited")
         $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
     }
+    private let tagScrollView = UIScrollView()
+    private let tagStackView = UIStackView()
 
     // MARK: Constraints
     private var descriptionLabelHeight = NSLayoutConstraint()
@@ -114,13 +116,34 @@ extension HIProjectDetailViewController {
         projectDetailContainer.constrain(to: view.safeAreaLayoutGuide, trailingInset: -8, bottomInset: 0, leadingInset: 8)
         projectDetailContainer.topAnchor.constraint(equalTo: closeButton.bottomAnchor).isActive = true
 
+        projectDetailContainer.addSubview(tagScrollView)
+        tagScrollView.translatesAutoresizingMaskIntoConstraints = false
+        tagScrollView.leadingAnchor.constraint(equalTo: projectDetailContainer.leadingAnchor).isActive = true
+        tagScrollView.topAnchor.constraint(equalTo: projectDetailContainer.topAnchor, constant: 30).isActive = true
+        tagScrollView.trailingAnchor.constraint(equalTo: projectDetailContainer.trailingAnchor).isActive = true
+        tagScrollView.showsHorizontalScrollIndicator = false
+    
+        tagStackView.axis = .horizontal
+        tagStackView.alignment = .fill
+        tagStackView.distribution = .equalSpacing
+        tagStackView.spacing = 5.0
+        tagStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        tagScrollView.addSubview(tagStackView)
+        tagStackView.leadingAnchor.constraint(equalTo: tagScrollView.leadingAnchor).isActive = true
+        tagStackView.trailingAnchor.constraint(equalTo: tagScrollView.trailingAnchor).isActive = true
+        tagStackView.topAnchor.constraint(equalTo: tagScrollView.topAnchor).isActive = true
+        tagStackView.bottomAnchor.constraint(equalTo: tagScrollView.bottomAnchor).isActive = true
+        tagStackView.heightAnchor.constraint(equalTo: tagScrollView.heightAnchor).isActive = true
+
         projectDetailContainer.addSubview(upperContainerView)
-        upperContainerView.constrain(to: projectDetailContainer, topInset: 10, trailingInset: 0, leadingInset: 0)
+        upperContainerView.constrain(to: projectDetailContainer, trailingInset: 0, leadingInset: 0)
+        upperContainerView.topAnchor.constraint(equalTo: tagScrollView.bottomAnchor).isActive = true
         upperContainerView.constrain(height: 100)
 
         upperContainerView.addSubview(titleLabel)
         titleLabel.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor, constant: 12).isActive = true
-        titleLabel.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor).isActive = true
+        titleLabel.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor, constant: -20).isActive = true
 
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         upperContainerView.addSubview(favoritedButton)
@@ -151,6 +174,7 @@ extension HIProjectDetailViewController {
         descriptionLabel.text = project.info
         favoritedButton.isActive = project.favorite
         numberLabel.text = "#\(project.number)"
+        populateTagLabels(stackView: tagStackView, tagsString: project.tags)
 
         tableView?.reloadData()
         view.layoutIfNeeded()
@@ -164,6 +188,14 @@ extension HIProjectDetailViewController {
         super.viewDidAppear(animated)
         if project == nil {
             presentErrorController(title: "Uh oh", message: "Failed to load project.", dismissParentOnCompletion: true)
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        tagStackView.arrangedSubviews.forEach{ (view) in
+            tagStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
         }
     }
 }

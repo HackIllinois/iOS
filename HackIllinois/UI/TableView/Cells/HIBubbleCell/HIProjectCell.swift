@@ -117,42 +117,6 @@ extension HIProjectCell {
         lhs.contentStackView.addArrangedSubview(lhs.tagScrollView)
         lhs.contentStackViewHeight.constant = contentStackViewHeight
     }
-    
-    static func populateTagLabels(stackView: UIStackView, tagsString: String) {
-        let tags = tagsString.components(separatedBy: ",")
-        for tag in tags {
-            let tagLabel = HILabel {
-                $0.translatesAutoresizingMaskIntoConstraints = false
-                $0.textAlignment = .center
-                $0.font = HIAppearance.Font.contentText
-                $0.backgroundHIColor = \.clear
-                switch tag {
-                case "Web Development":
-                    $0.text = "Web Dev    "
-                    $0.layer.backgroundColor = UIColor(red: 0.42, green: 0.682, blue: 0.773, alpha: 1).cgColor
-                    $0.textHIColor = \.whiteTagFont
-                case "Systems":
-                    $0.text = "Systems    "
-                    $0.layer.backgroundColor = UIColor(red: 0.643, green: 0.231, blue: 0.361, alpha: 1).cgColor
-                    $0.textHIColor = \.whiteTagFont
-                case "Languages":
-                    $0.text = "Languages    "
-                    $0.layer.backgroundColor = UIColor(red: 0.659, green: 0.796, blue: 0.718, alpha: 1).cgColor
-                    $0.textHIColor = \.tagFont
-                case "Data Science":
-                    $0.text = "Data Sci    "
-                    $0.layer.backgroundColor = UIColor(red: 0.886, green: 0.545, blue: 0.475, alpha: 1).cgColor
-                    $0.textHIColor = \.tagFont
-                default:
-                    $0.text = tag
-                    $0.textColor = .white
-                    $0.layer.backgroundColor = UIColor.systemTeal.cgColor
-                }
-            }
-            tagLabel.layer.cornerRadius = 8.0
-            stackView.addArrangedSubview(tagLabel)
-        }
-    }
 }
 
 // MARK: - UITableViewCell
