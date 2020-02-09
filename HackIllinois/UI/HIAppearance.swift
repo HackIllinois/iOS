@@ -33,6 +33,14 @@ struct HIAppearance: Equatable {
     let loginSelectionText: UIColor
     let attendeeText: UIColor
     let attendeeBackground: UIColor
+    let webText: UIColor
+    let webBackground: UIColor
+    let systemsText: UIColor
+    let systemsBackground: UIColor
+    let langsText: UIColor
+    let langsBackground: UIColor
+    let dataText: UIColor
+    let dataBackground: UIColor
 
     let clear: UIColor = .clear
     let black: UIColor = .black
@@ -75,7 +83,15 @@ struct HIAppearance: Equatable {
         viewTitleColor: deepBlue,
         loginSelectionText: darkerBlue,
         attendeeText: white,
-        attendeeBackground: maroon
+        attendeeBackground: maroon,
+        webText: white,
+        webBackground: lightBlue,
+        systemsText: white,
+        systemsBackground: maroon,
+        langsText: white,
+        langsBackground: coral,
+        dataText: white,
+        dataBackground: darkerBlue
     )
 
     fileprivate static let night = HIAppearance(
@@ -98,7 +114,15 @@ struct HIAppearance: Equatable {
         viewTitleColor: deepBlue,
         loginSelectionText: darkerBlue,
         attendeeText: white,
-        attendeeBackground: maroon
+        attendeeBackground: maroon,
+        webText: white,
+        webBackground: lightBlue,
+        systemsText: white,
+        systemsBackground: maroon,
+        langsText: white,
+        langsBackground: coral,
+        dataText: white,
+        dataBackground: darkerBlue
     )
 
     fileprivate static var current = day

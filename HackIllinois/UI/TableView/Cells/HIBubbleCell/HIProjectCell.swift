@@ -29,7 +29,10 @@ class HIProjectCell: HIBubbleCell {
 
     var contentStackView = UIStackView()
     var contentStackViewHeight = NSLayoutConstraint()
-
+    
+    var tagScrollView = UIScrollView()
+    var tagStackView = UIStackView()
+    
     var indexPath: IndexPath?
     weak var delegate: HIProjectCellDelegate?
 
@@ -53,6 +56,21 @@ class HIProjectCell: HIBubbleCell {
         contentStackView.centerYAnchor.constraint(equalTo: bubbleView.centerYAnchor).isActive = true
         contentStackViewHeight = contentStackView.heightAnchor.constraint(equalToConstant: 0)
         contentStackViewHeight.isActive = true
+        
+        tagScrollView.translatesAutoresizingMaskIntoConstraints = false
+        tagScrollView.showsHorizontalScrollIndicator = false
+        tagStackView.translatesAutoresizingMaskIntoConstraints = false
+        tagStackView.axis = .horizontal
+        tagStackView.alignment = .fill
+        tagStackView.distribution = .equalSpacing
+        tagStackView.spacing = 5.0
+        tagScrollView.addSubview(tagStackView)
+        
+        tagStackView.leadingAnchor.constraint(equalTo: tagScrollView.leadingAnchor).isActive = true
+        tagStackView.trailingAnchor.constraint(equalTo: tagScrollView.trailingAnchor).isActive = true
+        tagStackView.topAnchor.constraint(equalTo: tagScrollView.topAnchor).isActive = true
+        tagStackView.bottomAnchor.constraint(equalTo: tagScrollView.bottomAnchor).isActive = true
+        tagStackView.heightAnchor.constraint(equalTo: tagScrollView.heightAnchor).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -70,7 +88,7 @@ extension HIProjectCell {
 // MARK: - Population
 extension HIProjectCell {
     static func heightForCell(with project: Project) -> CGFloat {
-        return 83 + 21 * 1 //Update in UI: Projects have one location
+        return 93 + 21 * 1 //Update in UI: Projects have one location
     }
 
     static func <- (lhs: HIProjectCell, rhs: Project) {
@@ -88,7 +106,47 @@ extension HIProjectCell {
         locationLabel.text = "Meeting Room: " + rhs.room //Update in UI: Phrasing not finalized
         contentStackViewHeight += locationLabel.intrinsicContentSize.height + 3
         lhs.contentStackView.addArrangedSubview(locationLabel)
+        populateTagLabels(stackView: lhs.tagStackView, tagsString: rhs.tags)
+        lhs.tagStackView.layoutIfNeeded()
+        contentStackViewHeight += lhs.tagStackView.frame.height + 10
+        lhs.contentStackView.addArrangedSubview(lhs.tagScrollView)
         lhs.contentStackViewHeight.constant = contentStackViewHeight
+    }
+    
+    static func populateTagLabels(stackView: UIStackView, tagsString: String) {
+        let tags = tagsString.components(separatedBy: ",")
+        for tag in tags {
+            let tagLabel = HILabel {
+                $0.translatesAutoresizingMaskIntoConstraints = false
+                $0.textAlignment = .center
+                $0.font = HIAppearance.Font.contentText
+                $0.backgroundHIColor = \.clear
+                switch tag {
+                case "Web Development":
+                    $0.text = "Web Dev"
+                    $0.layer.backgroundColor = (\HIAppearance.webBackground).value.cgColor
+                    $0.textHIColor = (\HIAppearance.webText)
+                case "Systems":
+                    $0.text = "Systems"
+                    $0.layer.backgroundColor = (\HIAppearance.systemsBackground).value.cgColor
+                    $0.textHIColor = (\HIAppearance.systemsText)
+                case "Languages":
+                    $0.text = "Languages"
+                    $0.layer.backgroundColor = (\HIAppearance.langsBackground).value.cgColor
+                    $0.textHIColor = (\HIAppearance.langsText)
+                case "Data Science":
+                    $0.text = "Data Sci"
+                    $0.layer.backgroundColor = (\HIAppearance.dataBackground).value.cgColor
+                    $0.textHIColor = (\HIAppearance.dataText)
+                default:
+                    $0.text = tag
+                    $0.textHIColor = \.webText
+                    $0.backgroundHIColor = \.webBackground
+                }
+            }
+            tagLabel.layer.cornerRadius = 10
+            stackView.addArrangedSubview(tagLabel)
+        }
     }
 }
 
@@ -99,6 +157,10 @@ extension HIProjectCell {
         favoritedButton.isActive = false
         contentStackView.arrangedSubviews.forEach { (view) in
             contentStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+        tagStackView.arrangedSubviews.forEach{ (view) in
+            tagStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
     }
