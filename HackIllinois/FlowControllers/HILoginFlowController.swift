@@ -21,6 +21,7 @@ class HILoginFlowController: UIViewController {
     // MARK: - Properties
     let animationView = AnimationView(name: "intro")
     var shouldDisplayAnimationOnNextAppearance = true
+    let animationBackgroundView = UIImageView()
 
     // MARK: Status Bar
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
@@ -85,6 +86,17 @@ extension HILoginFlowController {
             animationView.contentMode = .scaleAspectFill
             animationView.frame = view.frame
             animationView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+            animationBackgroundView.image = #imageLiteral(resourceName: "Gradient")
+            animationBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+            animationBackgroundView.isUserInteractionEnabled = true
+            animationBackgroundView.contentMode = .scaleAspectFill
+            view.addSubview(animationBackgroundView)
+            animationBackgroundView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            animationBackgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+            animationBackgroundView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+            animationBackgroundView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+
             view.addSubview(animationView)
         }
     }
@@ -96,6 +108,7 @@ extension HILoginFlowController {
             setNeedsStatusBarAppearanceUpdate()
 
             animationView.play { _ in
+                self.animationBackgroundView.removeFromSuperview()
                 self.animationView.removeFromSuperview()
                 self.statusBarIsHidden = false
                 UIView.animate(withDuration: 0.25) { () -> Void in
