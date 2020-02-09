@@ -111,6 +111,9 @@ extension HIProjectViewController {
     func animateReload() {
         try? fetchedResultsController.performFetch()
         animateTableViewReload()
+        if let tableView = tableView, !tableView.visibleCells.isEmpty {
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        }
     }
 }
 
