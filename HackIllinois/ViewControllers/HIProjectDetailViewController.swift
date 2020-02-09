@@ -149,7 +149,7 @@ extension HIProjectDetailViewController {
         descriptionLabelHeight = descriptionLabel.heightAnchor.constraint(equalToConstant: 100)
         descriptionLabelHeight.isActive = true
     }
-    
+
     func setupTagItems() {
         tagScrollView.translatesAutoresizingMaskIntoConstraints = false
         tagScrollView.leadingAnchor.constraint(equalTo: projectDetailContainer.leadingAnchor, constant: 12).isActive = true
