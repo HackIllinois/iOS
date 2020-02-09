@@ -92,7 +92,7 @@ extension HIProjectCell {
 // MARK: - Population
 extension HIProjectCell {
     static func heightForCell(with project: Project) -> CGFloat {
-        return 98 + 21 * 1 //Update in UI: Projects have one location
+        return 98 + 21 * 1
     }
 
     static func <- (lhs: HIProjectCell, rhs: Project) {
@@ -103,11 +103,11 @@ extension HIProjectCell {
         contentStackViewHeight += titleLabel.intrinsicContentSize.height
         lhs.contentStackView.addArrangedSubview(titleLabel)
         let roomLabel = HILabel(style: .description)
-        roomLabel.text = "Table #" + String(rhs.number) //Update in UI: Phrasing not finalized
+        roomLabel.text = "Table #" + String(rhs.number)
         contentStackViewHeight += roomLabel.intrinsicContentSize.height + 3
         lhs.contentStackView.addArrangedSubview(roomLabel)
         let locationLabel = HILabel(style: .description)
-        locationLabel.text = "Meeting Room: " + rhs.room //Update in UI: Phrasing not finalized
+        locationLabel.text = "Meeting Room: " + rhs.room
         contentStackViewHeight += locationLabel.intrinsicContentSize.height + 3
         lhs.contentStackView.addArrangedSubview(locationLabel)
         lhs.contentStackView.addArrangedSubview(lhs.spaceView)
