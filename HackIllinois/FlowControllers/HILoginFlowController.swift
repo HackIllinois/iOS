@@ -111,9 +111,9 @@ extension HILoginFlowController {
             animationView.play { _ in
                 // Smooth out background transition into login page
                 UIView.animate(withDuration: 0.3, animations: {self.animationBackgroundView.alpha = 0.0},
-                completion: {(value: Bool) in
-                              self.animationBackgroundView.removeFromSuperview()
-                            })
+                completion: { _ in
+                    self.animationBackgroundView.removeFromSuperview()
+                })
                 self.animationView.removeFromSuperview()
                 self.statusBarIsHidden = false
                 UIView.animate(withDuration: 0.25) { () -> Void in
