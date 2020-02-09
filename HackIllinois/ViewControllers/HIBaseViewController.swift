@@ -68,6 +68,7 @@ extension HIBaseViewController {
 // MARK: - UIStackView Population
 func populateTagLabels(stackView: UIStackView, tagsString: String) {
     if stackView.subviews.count != 0 { return }
+    if tagsString.isEmpty { return }
     let tags = tagsString.components(separatedBy: ",")
     let padding = "    "
     for tag in tags {
