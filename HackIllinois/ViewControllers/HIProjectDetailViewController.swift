@@ -118,9 +118,9 @@ extension HIProjectDetailViewController {
 
         projectDetailContainer.addSubview(tagScrollView)
         tagScrollView.translatesAutoresizingMaskIntoConstraints = false
-        tagScrollView.leadingAnchor.constraint(equalTo: projectDetailContainer.leadingAnchor).isActive = true
+        tagScrollView.leadingAnchor.constraint(equalTo: projectDetailContainer.leadingAnchor, constant: 12).isActive = true
         tagScrollView.topAnchor.constraint(equalTo: projectDetailContainer.topAnchor, constant: 30).isActive = true
-        tagScrollView.trailingAnchor.constraint(equalTo: projectDetailContainer.trailingAnchor).isActive = true
+        tagScrollView.trailingAnchor.constraint(equalTo: projectDetailContainer.trailingAnchor, constant: -12).isActive = true
         tagScrollView.showsHorizontalScrollIndicator = false
     
         tagStackView.axis = .horizontal
