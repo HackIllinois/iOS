@@ -65,6 +65,46 @@ extension HIBaseViewController {
     }
 }
 
+// MARK: - UIStackView Population
+func populateTagLabels(stackView: UIStackView, tagsString: String) {
+    if stackView.subviews.count != 0 { return }
+    if tagsString.isEmpty { return }
+    let tags = tagsString.components(separatedBy: ",")
+    let padding = "    "
+    for tag in tags {
+        let tagLabel = HILabel {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.textAlignment = .center
+            $0.font = HIAppearance.Font.contentText
+            $0.backgroundHIColor = \.clear
+            switch tag.uppercased() {
+            case "WEB DEVELOPMENT":
+                $0.text = "Web Dev" + padding
+                $0.layer.backgroundColor = UIColor(red: 0.42, green: 0.682, blue: 0.773, alpha: 1).cgColor
+                $0.textHIColor = \.whiteTagFont
+            case "SYSTEMS":
+                $0.text = "Systems" + padding
+                $0.layer.backgroundColor = UIColor(red: 0.643, green: 0.231, blue: 0.361, alpha: 1).cgColor
+                $0.textHIColor = \.whiteTagFont
+            case "LANGUAGES":
+                $0.text = "Languages" + padding
+                $0.layer.backgroundColor = UIColor(red: 0.659, green: 0.796, blue: 0.718, alpha: 1).cgColor
+                $0.textHIColor = \.whiteTagFont
+            case "DATA SCIENCE":
+                $0.text = "Data Sci" + padding
+                $0.layer.backgroundColor = UIColor(red: 0.886, green: 0.545, blue: 0.475, alpha: 1).cgColor
+                $0.textHIColor = \.whiteTagFont
+            default:
+                $0.text = tag + padding
+                $0.textColor = .white
+                $0.layer.backgroundColor = UIColor.systemTeal.cgColor
+            }
+        }
+        tagLabel.layer.cornerRadius = 8.0
+        stackView.addArrangedSubview(tagLabel)
+    }
+}
+
 // MARK: - UINavigationItem Setup
 extension HIBaseViewController {
     @objc dynamic func setupNavigationItem() {

@@ -62,6 +62,9 @@ class HIProjectDetailViewController: HIBaseViewController {
         $0.activeImage = #imageLiteral(resourceName: "Favorited")
         $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
     }
+    private let gradient = CAGradientLayer()
+    private let tagScrollView = UIScrollView()
+    private let tagStackView = UIStackView()
 
     // MARK: Constraints
     private var descriptionLabelHeight = NSLayoutConstraint()
@@ -97,6 +100,29 @@ extension HIProjectDetailViewController {
     @objc func didSelectCloseButton(_ sender: HIButton) {
         self.dismiss(animated: true, completion: nil)
     }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        updateGradientBounds()
+    }
+
+    func updateGradientBounds() {
+        gradient.frame = CGRect(
+            x: tagScrollView.contentOffset.x,
+            y: 0,
+            width: tagScrollView.bounds.width,
+            height: tagScrollView.bounds.height
+        )
+
+        let contentSize = tagScrollView.contentSize.width - tagScrollView.frame.size.width - 1
+        switch tagScrollView.contentOffset.x {
+        case let offset where offset <= 0:
+            gradient.locations = [0, 0, 0.95, 1]
+        case let offset where offset >= contentSize:
+            gradient.locations = [0, 0.05, 1, 1]
+        default:
+            gradient.locations = [0, 0.05, 0.95, 1]
+        }
+    }
 }
 
 // MARK: - UIViewController
@@ -114,13 +140,17 @@ extension HIProjectDetailViewController {
         projectDetailContainer.constrain(to: view.safeAreaLayoutGuide, trailingInset: -8, bottomInset: 0, leadingInset: 8)
         projectDetailContainer.topAnchor.constraint(equalTo: closeButton.bottomAnchor).isActive = true
 
+        projectDetailContainer.addSubview(tagScrollView)
+        setupTagItems()
+
         projectDetailContainer.addSubview(upperContainerView)
-        upperContainerView.constrain(to: projectDetailContainer, topInset: 10, trailingInset: 0, leadingInset: 0)
+        upperContainerView.constrain(to: projectDetailContainer, trailingInset: 0, leadingInset: 0)
+        upperContainerView.topAnchor.constraint(equalTo: tagScrollView.bottomAnchor).isActive = true
         upperContainerView.constrain(height: 100)
 
         upperContainerView.addSubview(titleLabel)
         titleLabel.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor, constant: 12).isActive = true
-        titleLabel.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor).isActive = true
+        titleLabel.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor, constant: -20).isActive = true
 
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         upperContainerView.addSubview(favoritedButton)
@@ -144,6 +174,34 @@ extension HIProjectDetailViewController {
         descriptionLabelHeight.isActive = true
     }
 
+    func setupTagItems() {
+        tagScrollView.translatesAutoresizingMaskIntoConstraints = false
+        tagScrollView.leadingAnchor.constraint(equalTo: projectDetailContainer.leadingAnchor, constant: 12).isActive = true
+        tagScrollView.topAnchor.constraint(equalTo: projectDetailContainer.topAnchor, constant: 30).isActive = true
+        tagScrollView.trailingAnchor.constraint(equalTo: projectDetailContainer.trailingAnchor, constant: -12).isActive = true
+        tagScrollView.showsHorizontalScrollIndicator = false
+        tagScrollView.delegate = self
+
+        tagStackView.axis = .horizontal
+        tagStackView.alignment = .fill
+        tagStackView.distribution = .equalSpacing
+        tagStackView.spacing = 5.0
+        tagStackView.translatesAutoresizingMaskIntoConstraints = false
+
+        tagScrollView.addSubview(tagStackView)
+        tagStackView.leadingAnchor.constraint(equalTo: tagScrollView.leadingAnchor).isActive = true
+        tagStackView.trailingAnchor.constraint(equalTo: tagScrollView.trailingAnchor).isActive = true
+        tagStackView.topAnchor.constraint(equalTo: tagScrollView.topAnchor).isActive = true
+        tagStackView.bottomAnchor.constraint(equalTo: tagScrollView.bottomAnchor).isActive = true
+        tagStackView.heightAnchor.constraint(equalTo: tagScrollView.heightAnchor).isActive = true
+
+        gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor, UIColor.black.cgColor, UIColor.clear.cgColor]
+        gradient.startPoint = CGPoint(x: 0, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
+        gradient.delegate = self
+        tagScrollView.layer.mask = gradient
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let project = project else { return }
@@ -151,9 +209,11 @@ extension HIProjectDetailViewController {
         descriptionLabel.text = project.info
         favoritedButton.isActive = project.favorite
         numberLabel.text = "#\(project.number)"
+        populateTagLabels(stackView: tagStackView, tagsString: project.tags)
 
         tableView?.reloadData()
         view.layoutIfNeeded()
+        updateGradientBounds()
         let targetSize = CGSize(width: descriptionLabel.frame.width, height: .greatestFiniteMagnitude)
         let neededSize = descriptionLabel.sizeThatFits(targetSize)
         descriptionLabelHeight.constant = neededSize.height
@@ -164,6 +224,14 @@ extension HIProjectDetailViewController {
         super.viewDidAppear(animated)
         if project == nil {
             presentErrorController(title: "Uh oh", message: "Failed to load project.", dismissParentOnCompletion: true)
+        }
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        tagStackView.arrangedSubviews.forEach { (view) in
+            tagStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
         }
     }
 }
@@ -220,5 +288,12 @@ extension HIProjectDetailViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //Update in UI: Projects should have an indoor location cell that routes to one of the buildings for outdoor maps (or routes to indoor maps?)
         super.tableView(tableView, didSelectRowAt: indexPath)
+    }
+}
+
+// MARK: - CALayerDelegate
+extension HIProjectDetailViewController: CALayerDelegate {
+    func action(for layer: CALayer, forKey event: String) -> CAAction? {
+        return NSNull()
     }
 }

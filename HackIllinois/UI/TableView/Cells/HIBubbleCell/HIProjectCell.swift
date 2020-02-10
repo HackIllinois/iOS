@@ -27,9 +27,17 @@ class HIProjectCell: HIBubbleCell {
         $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
     }
 
+    var gradient = CAGradientLayer()
     var contentStackView = UIStackView()
     var contentStackViewHeight = NSLayoutConstraint()
 
+    var tagScrollView = UIScrollView()
+    var tagStackView = UIStackView()
+    var spaceView = HIView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.heightAnchor.constraint(equalToConstant: 12).isActive = true
+        $0.backgroundHIColor = \.clear
+    }
     var indexPath: IndexPath?
     weak var delegate: HIProjectCellDelegate?
 
@@ -53,6 +61,29 @@ class HIProjectCell: HIBubbleCell {
         contentStackView.centerYAnchor.constraint(equalTo: bubbleView.centerYAnchor).isActive = true
         contentStackViewHeight = contentStackView.heightAnchor.constraint(equalToConstant: 0)
         contentStackViewHeight.isActive = true
+
+        tagScrollView.translatesAutoresizingMaskIntoConstraints = false
+        tagScrollView.showsHorizontalScrollIndicator = false
+        tagScrollView.delegate = self
+
+        tagStackView.translatesAutoresizingMaskIntoConstraints = false
+        tagStackView.axis = .horizontal
+        tagStackView.alignment = .fill
+        tagStackView.distribution = .equalSpacing
+        tagStackView.spacing = 5.0
+        tagScrollView.addSubview(tagStackView)
+
+        tagStackView.leadingAnchor.constraint(equalTo: tagScrollView.leadingAnchor).isActive = true
+        tagStackView.trailingAnchor.constraint(equalTo: tagScrollView.trailingAnchor).isActive = true
+        tagStackView.topAnchor.constraint(equalTo: tagScrollView.topAnchor).isActive = true
+        tagStackView.bottomAnchor.constraint(equalTo: tagScrollView.bottomAnchor).isActive = true
+        tagStackView.heightAnchor.constraint(equalTo: tagScrollView.heightAnchor).isActive = true
+
+        gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor, UIColor.black.cgColor, UIColor.clear.cgColor]
+        gradient.startPoint = CGPoint(x: 0, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
+        gradient.delegate = self
+        tagScrollView.layer.mask = gradient
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -65,12 +96,35 @@ extension HIProjectCell {
     @objc func didSelectFavoriteButton(_ sender: HIButton) {
         delegate?.projectCellDidSelectFavoriteButton(self)
     }
+
+    func updateGradientBounds() {
+        gradient.frame = CGRect(
+            x: tagScrollView.contentOffset.x,
+            y: 0,
+            width: tagScrollView.bounds.width,
+            height: tagScrollView.bounds.height
+        )
+
+        let contentSize = tagScrollView.contentSize.width - tagScrollView.frame.size.width - 1
+        switch tagScrollView.contentOffset.x {
+        case let offset where offset <= 0:
+            gradient.locations = [0, 0, 0.95, 1]
+        case let offset where offset >= contentSize:
+            gradient.locations = [0, 0.05, 1, 1]
+        default:
+            gradient.locations = [0, 0.05, 0.95, 1]
+        }
+    }
+
+    override func action(for layer: CALayer, forKey event: String) -> CAAction? {
+        return NSNull()
+    }
 }
 
 // MARK: - Population
 extension HIProjectCell {
     static func heightForCell(with project: Project) -> CGFloat {
-        return 83 + 21 * 1 //Update in UI: Projects have one location
+        return 98 + 21 * 1
     }
 
     static func <- (lhs: HIProjectCell, rhs: Project) {
@@ -81,13 +135,18 @@ extension HIProjectCell {
         contentStackViewHeight += titleLabel.intrinsicContentSize.height
         lhs.contentStackView.addArrangedSubview(titleLabel)
         let roomLabel = HILabel(style: .description)
-        roomLabel.text = "Table #" + String(rhs.number) //Update in UI: Phrasing not finalized
+        roomLabel.text = "Table #" + String(rhs.number)
         contentStackViewHeight += roomLabel.intrinsicContentSize.height + 3
         lhs.contentStackView.addArrangedSubview(roomLabel)
         let locationLabel = HILabel(style: .description)
-        locationLabel.text = "Meeting Room: " + rhs.room //Update in UI: Phrasing not finalized
+        locationLabel.text = "Meeting Room: " + rhs.room
         contentStackViewHeight += locationLabel.intrinsicContentSize.height + 3
         lhs.contentStackView.addArrangedSubview(locationLabel)
+        lhs.contentStackView.addArrangedSubview(lhs.spaceView)
+        populateTagLabels(stackView: lhs.tagStackView, tagsString: rhs.tags)
+        lhs.tagStackView.layoutIfNeeded()
+        contentStackViewHeight += lhs.tagStackView.frame.height + 10
+        lhs.contentStackView.addArrangedSubview(lhs.tagScrollView)
         lhs.contentStackViewHeight.constant = contentStackViewHeight
     }
 }
@@ -101,5 +160,21 @@ extension HIProjectCell {
             contentStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
+        tagStackView.arrangedSubviews.forEach { (view) in
+            tagStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateGradientBounds()
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+extension HIProjectCell: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        updateGradientBounds()
     }
 }
