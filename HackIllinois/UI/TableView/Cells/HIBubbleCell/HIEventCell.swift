@@ -70,7 +70,12 @@ extension HIEventCell {
 // MARK: - Population
 extension HIEventCell {
     static func heightForCell(with event: Event) -> CGFloat {
-        return 83 + 21 * CGFloat(event.locations.count)
+        if (event.sponsor.isEmpty) {
+            return 83 + 21 * CGFloat(event.locations.count)
+        }
+        else {
+           return 83 + 21 * CGFloat(event.locations.count + 1)
+        }
     }
 
     static func <- (lhs: HIEventCell, rhs: Event) {
@@ -80,6 +85,14 @@ extension HIEventCell {
         titleLabel.text = rhs.name
         contentStackViewHeight += titleLabel.intrinsicContentSize.height
         lhs.contentStackView.addArrangedSubview(titleLabel)
+
+        let sponsorLabel = HILabel(style: .location)
+        if (!rhs.sponsor.isEmpty) {
+            sponsorLabel.text = "Sponsor: \(rhs.sponsor)"
+        }
+        contentStackViewHeight += sponsorLabel.intrinsicContentSize.height
+        lhs.contentStackView.addArrangedSubview(sponsorLabel)
+
         for location in rhs.locations {
             guard let location = location as? Location else { continue }
             let locationLabel = HILabel(style: .location)
