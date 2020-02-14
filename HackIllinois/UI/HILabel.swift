@@ -18,6 +18,7 @@ class HILabel: UILabel {
     enum Style {
         case location
         case event
+        case sponsor
         case project
         case title
         case detailTitle
@@ -57,6 +58,11 @@ class HILabel: UILabel {
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.contentTitle
+        
+        case .sponsor:
+            textHIColor = \.attendeeBackground
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.sponsorText
 
         case .detailTitle:
             textHIColor = \.baseText
