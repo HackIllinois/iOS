@@ -88,6 +88,10 @@ extension HIEventListViewController: HIEventCellDelegate {
                     event.favorite ?
                         HILocalNotificationController.shared.scheduleNotification(for: event) :
                         HILocalNotificationController.shared.unscheduleNotification(for: event)
+                    UIView.setAnimationsEnabled(false)
+                    UIView.animate(withDuration: 0.0, animations: self.tableView!.reloadData) { _ in
+                        UIView.setAnimationsEnabled(true)
+                    }
                 }
             case .failure(let error):
                 print(error, error.localizedDescription)

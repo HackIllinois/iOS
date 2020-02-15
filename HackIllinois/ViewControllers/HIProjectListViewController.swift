@@ -85,6 +85,10 @@ extension HIProjectListViewController: HIProjectCellDelegate {
             case .success:
                 DispatchQueue.main.async {
                     project.favorite.toggle()
+                    UIView.setAnimationsEnabled(false)
+                    UIView.animate(withDuration: 0.0, animations: self.tableView!.reloadData) { _ in
+                        UIView.setAnimationsEnabled(true)
+                    }
                 }
             case .failure(let error):
                 print(error, error.localizedDescription)
