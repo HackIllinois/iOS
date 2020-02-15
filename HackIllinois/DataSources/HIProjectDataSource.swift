@@ -74,7 +74,7 @@ final class HIProjectDataSource {
                                     coreDataProject.info = apiProject.info
                                     coreDataProject.mentors = apiProject.mentors.joined(separator: ",")
                                     coreDataProject.room = apiProject.room
-                                    coreDataProject.tags = apiProject.tags.sorted(by: projectTagSorter).joined(separator: ",")
+                                    coreDataProject.tags = apiProject.tags.sorted().joined(separator: ",")
                                     coreDataProject.number = apiProject.number
                                     coreDataProject.favorite = apiFavorites.contains(coreDataProject.id) //Favorites sorted by id
                                 }
@@ -87,7 +87,7 @@ final class HIProjectDataSource {
                                     coreDataProject.info = apiProject.info
                                     coreDataProject.mentors = apiProject.mentors.joined(separator: ",")
                                     coreDataProject.room = apiProject.room
-                                    coreDataProject.tags = apiProject.tags.sorted(by: projectTagSorter).joined(separator: ",")
+                                    coreDataProject.tags = apiProject.tags.sorted().joined(separator: ",")
                                     coreDataProject.number = apiProject.number
                                     coreDataProject.favorite = apiFavorites.contains(coreDataProject.id)
                                 }
@@ -133,22 +133,5 @@ final class HIProjectDataSource {
         }
         .authorize(with: HIApplicationStateController.shared.user)
         .launch()
-    }
-
-    private static func projectTagSorter(firstTag: String, secondTag: String) -> Bool {
-        return enumerateTag(tag: firstTag) > enumerateTag(tag: secondTag)
-    }
-
-    private static func enumerateTag(tag: String) -> Int {
-        if tag.caseInsensitiveCompare("Web Development") == .orderedSame {
-            return 4
-        } else if tag.caseInsensitiveCompare("Systems") == .orderedSame {
-            return 3
-        } else if tag.caseInsensitiveCompare("Languages") == .orderedSame {
-            return 2
-        } else if tag.caseInsensitiveCompare("Data Science") == .orderedSame {
-            return 1
-        }
-        return 0
     }
 }
