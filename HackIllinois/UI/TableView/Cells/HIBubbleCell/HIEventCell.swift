@@ -85,12 +85,12 @@ extension HIEventCell {
         contentStackViewHeight += titleLabel.intrinsicContentSize.height
         lhs.contentStackView.addArrangedSubview(titleLabel)
 
-        let sponsorLabel = HILabel(style: .sponsor)
         if !rhs.sponsor.isEmpty {
+            let sponsorLabel = HILabel(style: .sponsor)
             sponsorLabel.text = "Sponsored By \(rhs.sponsor)"
+            contentStackViewHeight += sponsorLabel.intrinsicContentSize.height
+            lhs.contentStackView.addArrangedSubview(sponsorLabel)
         }
-        contentStackViewHeight += sponsorLabel.intrinsicContentSize.height
-        lhs.contentStackView.addArrangedSubview(sponsorLabel)
 
         for location in rhs.locations {
             guard let location = location as? Location else { continue }
