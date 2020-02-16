@@ -38,7 +38,7 @@ class HIEventDetailViewController: HIBaseViewController {
         $0.textColor <- \.baseText
         $0.font = HIAppearance.Font.detailTitle
     }
-    
+
     private let sponsorLabel = HILabel(style: .sponsor) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor <- \.attendeeBackground
@@ -168,7 +168,7 @@ extension HIEventDetailViewController {
         upperContainerView.addSubview(titleLabel)
         titleLabel.leadingAnchor.constraint(equalTo: closeButton.leadingAnchor).isActive = true
         titleLabel.topAnchor.constraint(equalTo: upperContainerView.topAnchor).isActive = true
-        
+
         upperContainerView.addSubview(sponsorLabel)
         sponsorLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         sponsorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
@@ -205,7 +205,7 @@ extension HIEventDetailViewController {
         super.viewWillAppear(animated)
         guard let event = event else { return }
         titleLabel.text = event.name
-        if (!event.sponsor.isEmpty) {
+        if !event.sponsor.isEmpty {
             sponsorLabel.text = "Sponsored By \(event.sponsor)"
         }
         descriptionLabel.text = event.info

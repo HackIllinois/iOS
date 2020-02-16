@@ -70,10 +70,9 @@ extension HIEventCell {
 // MARK: - Population
 extension HIEventCell {
     static func heightForCell(with event: Event) -> CGFloat {
-        if (event.sponsor.isEmpty) {
+        if event.sponsor.isEmpty {
             return 83 + 21 * CGFloat(event.locations.count)
-        }
-        else {
+        } else {
            return 83 + 21 * CGFloat(event.locations.count + 1)
         }
     }
@@ -87,7 +86,7 @@ extension HIEventCell {
         lhs.contentStackView.addArrangedSubview(titleLabel)
 
         let sponsorLabel = HILabel(style: .sponsor)
-        if (!rhs.sponsor.isEmpty) {
+        if !rhs.sponsor.isEmpty {
             sponsorLabel.text = "Sponsored By \(rhs.sponsor)"
         }
         contentStackViewHeight += sponsorLabel.intrinsicContentSize.height

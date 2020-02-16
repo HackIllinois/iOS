@@ -58,7 +58,7 @@ class HILabel: UILabel {
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.contentTitle
-        
+
         case .sponsor:
             textHIColor = \.attendeeBackground
             backgroundHIColor = \.clear
