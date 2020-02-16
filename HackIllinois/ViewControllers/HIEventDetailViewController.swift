@@ -38,6 +38,12 @@ class HIEventDetailViewController: HIBaseViewController {
         $0.textColor <- \.baseText
         $0.font = HIAppearance.Font.detailTitle
     }
+    
+    private let sponsorLabel = HILabel(style: .sponsor) {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor <- \.attendeeBackground
+        $0.font = HIAppearance.Font.sponsorText
+    }
 
     private let timeLabel = HILabel(style: .description) {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -161,15 +167,18 @@ extension HIEventDetailViewController {
 
         upperContainerView.addSubview(titleLabel)
         titleLabel.leadingAnchor.constraint(equalTo: closeButton.leadingAnchor).isActive = true
-        titleLabel.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: upperContainerView.topAnchor).isActive = true
+        
+        upperContainerView.addSubview(sponsorLabel)
+        sponsorLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
+        sponsorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
 
         setupScannerIfApplicable()
 
         setupFavoritedButton()
 
         upperContainerView.addSubview(timeLabel)
-        timeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
-        timeLabel.bottomAnchor.constraint(equalTo: upperContainerView.bottomAnchor).isActive = true
+        timeLabel.topAnchor.constraint(equalTo: sponsorLabel.bottomAnchor, constant: 5).isActive = true
         timeLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
 
         eventDetailContainer.addSubview(descriptionLabel)
@@ -196,6 +205,9 @@ extension HIEventDetailViewController {
         super.viewWillAppear(animated)
         guard let event = event else { return }
         titleLabel.text = event.name
+        if (!event.sponsor.isEmpty) {
+            sponsorLabel.text = "Sponsored By \(event.sponsor)"
+        }
         descriptionLabel.text = event.info
         timeLabel.text = Formatter.simpleTime.string(from: event.startTime) + " - " + Formatter.simpleTime.string(from: event.endTime)
         favoritedButton.isActive = event.favorite
