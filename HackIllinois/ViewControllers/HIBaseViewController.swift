@@ -79,7 +79,7 @@ func populateTagLabels(stackView: UIStackView, tagsString: String) {
             $0.backgroundHIColor = \.clear
             switch tag.uppercased() {
             case "WEB DEVELOPMENT":
-                $0.text = "Web Dev" + padding
+                $0.text = "Web" + padding
                 $0.layer.backgroundColor = UIColor(red: 0.42, green: 0.682, blue: 0.773, alpha: 1).cgColor
                 $0.textHIColor = \.whiteTagFont
             case "SYSTEMS":
@@ -91,7 +91,7 @@ func populateTagLabels(stackView: UIStackView, tagsString: String) {
                 $0.layer.backgroundColor = UIColor(red: 0.659, green: 0.796, blue: 0.718, alpha: 1).cgColor
                 $0.textHIColor = \.whiteTagFont
             case "DATA SCIENCE":
-                $0.text = "Data Sci" + padding
+                $0.text = "Data Science" + padding
                 $0.layer.backgroundColor = UIColor(red: 0.886, green: 0.545, blue: 0.475, alpha: 1).cgColor
                 $0.textHIColor = \.whiteTagFont
             default:
