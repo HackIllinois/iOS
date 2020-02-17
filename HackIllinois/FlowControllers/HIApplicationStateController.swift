@@ -75,11 +75,6 @@ extension HIApplicationStateController {
         viewControllers.append(HIUserDetailViewController())
         viewControllers.append(HIIndoorMapsViewController())
         viewControllers.append(HIProjectViewController())
-
-        if user.roles.contains(.admin) {
-            viewControllers.append(HIAdminStatsViewController())
-        }
-
         return viewControllers
     }
 
