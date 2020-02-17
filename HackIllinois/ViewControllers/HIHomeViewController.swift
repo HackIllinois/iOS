@@ -116,7 +116,7 @@ extension HIHomeViewController {
         buildingView.isUserInteractionEnabled = true
         view.insertSubview(buildingView, at: 1)
         buildingView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        buildingView.topAnchor.constraint(equalTo: countdownViewController.view.centerYAnchor).isActive = true
+        buildingView.topAnchor.constraint(equalTo: countdownViewController.view.centerYAnchor, constant: 20).isActive = true
 
         let items = dataStore.map { $0.displayText }
         let segmentedControl = HISegmentedControl(items: items)
