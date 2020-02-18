@@ -42,6 +42,30 @@ class HITabBarController: UITabBarController {
     }
 
     @objc private func qrButtonPressed(_ sender: UIButton) {
+        
+        if let user = HIApplicationStateController.shared.user {
+            if user.token.isEmpty {
+                let alert = UIAlertController(title: "Please log in to get a valid QR Code.", message: nil, preferredStyle: .alert)
+                present(alert, animated: true, completion: nil)
+                alert.addAction(
+                    UIAlertAction(title: "OK", style: .default) { _ in
+//                        self.navigationController?.popViewController(animated: true)
+                    }
+                )
+                
+                alert.addAction(
+                    UIAlertAction(title: "Logout?", style: .default) { _ in
+//                        self.navigationController?.popViewController(animated: true)
+                        NotificationCenter.default.post(name: .logoutUser, object: nil)
+                    }
+                )
+                
+//                self.present(alert, animated: true, completion: nil)
+//
+                
+            }
+        }
+        
         qrPopup.modalPresentationStyle = .overCurrentContext
         qrPopup.transitioningDelegate = qrPopup
         self.present(qrPopup, animated: true, completion: nil)
