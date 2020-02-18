@@ -29,6 +29,8 @@ class HILabel: UILabel {
         case loginSelection
         case viewTitle
         case backgroundTitle
+        case detailSubtitle
+        case detailText
     }
 
     // MARK: - Properties
@@ -68,6 +70,18 @@ class HILabel: UILabel {
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.detailTitle
+            numberOfLines = 0
+
+        case .detailSubtitle:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.detailSubtitle
+            numberOfLines = 1
+
+        case .detailText:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.detailText
             numberOfLines = 0
 
         case .project:

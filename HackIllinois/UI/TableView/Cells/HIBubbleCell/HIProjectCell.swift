@@ -139,6 +139,7 @@ extension HIProjectCell {
         contentStackViewHeight += roomLabel.intrinsicContentSize.height + 3
         lhs.contentStackView.addArrangedSubview(roomLabel)
         let locationLabel = HILabel(style: .description)
+        locationLabel.numberOfLines = 1
         locationLabel.text = "Meeting Room: " + rhs.room
         contentStackViewHeight += locationLabel.intrinsicContentSize.height + 3
         lhs.contentStackView.addArrangedSubview(locationLabel)
