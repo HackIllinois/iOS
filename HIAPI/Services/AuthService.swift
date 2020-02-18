@@ -30,7 +30,7 @@ public final class AuthService: BaseService {
             switch self {
             case .github: return "ATTENDEE"
             case .google: return "STAFF"
-            case .linkedIn: return "RECRUITER"
+            case .linkedIn: return "GUEST"
             }
         }
     }

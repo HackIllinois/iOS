@@ -39,6 +39,7 @@ final class HIEventDataSource {
         .onCompletion { result in
             do {
                 let (containedEvents, _) = try result.get()
+                let apiEvents = containedEvents.events
                 HIAPI.EventService.getAllFavorites()
                 .onCompletion { result in
                     do {
@@ -46,7 +47,6 @@ final class HIEventDataSource {
                         HICoreDataController.shared.performBackgroundTask { context -> Void in
                             do {
                                 // 1) Unwrap contained data
-                                let apiEvents = containedEvents.events
                                 let apiFavorites = containedFavorites.events
 
                                 // 2) Compute all the unique API locations.
@@ -169,7 +169,6 @@ final class HIEventDataSource {
                 isRefreshing = false
             }
         }
-        .authorize(with: HIApplicationStateController.shared.user)
         .launch()
     }
 }
