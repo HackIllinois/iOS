@@ -151,68 +151,70 @@ final class HIEventDataSource {
                     }
                 }
 
-                HIAPI.EventService.getAllFavorites()
-                .onCompletion { result in
-                    do {
-                        let (containedFavorites, _) = try result.get()
-                        HICoreDataController.shared.performBackgroundTask { context -> Void in
+                if let user = HIApplicationStateController.shared.user, !user.token.isEmpty {
+                    HIAPI.EventService.getAllFavorites()
+                    .onCompletion { result in
                         do {
-                            let apiFavorites = containedFavorites.events
-                            let eventFetchRequest = NSFetchRequest<Event>(entityName: "Event")
-                            let coreDataEvents = try context.fetch(eventFetchRequest)
+                            let (containedFavorites, _) = try result.get()
+                            HICoreDataController.shared.performBackgroundTask { context -> Void in
+                            do {
+                                let apiFavorites = containedFavorites.events
+                                let eventFetchRequest = NSFetchRequest<Event>(entityName: "Event")
+                                let coreDataEvents = try context.fetch(eventFetchRequest)
 
-                            // 8) Diff the CoreData events and API events.
-                            let (
-                                coreDataEventsToDelete,
-                                coreDataEventsToUpdate,
-                                apiEventsToInsert
-                            ) = diff(initial: coreDataEvents, final: apiEvents)
+                                // 8) Diff the CoreData events and API events.
+                                let (
+                                    coreDataEventsToDelete,
+                                    coreDataEventsToUpdate,
+                                    apiEventsToInsert
+                                ) = diff(initial: coreDataEvents, final: apiEvents)
 
-                            // 9) Apply the diff
-                            coreDataEventsToDelete.forEach { coreDataEvent in
-                                // Delete CoreData event.
-                                context.delete(coreDataEvent)
+                                // 9) Apply the diff
+                                coreDataEventsToDelete.forEach { coreDataEvent in
+                                    // Delete CoreData event.
+                                    context.delete(coreDataEvent)
+                                }
+
+                                coreDataEventsToUpdate.forEach { (coreDataEvent, _) in
+                                    coreDataEvent.favorite = apiFavorites.contains(coreDataEvent.id)
+                                }
+
+                                apiEventsToInsert.forEach { apiEvent in
+                                    // Create CoreData event.
+                                    let coreDataEvent = Event(context: context)
+                                    coreDataEvent.id = apiEvent.id
+                                    coreDataEvent.endTime = apiEvent.endTime
+                                    coreDataEvent.eventType = apiEvent.eventType
+                                    coreDataEvent.info = apiEvent.info
+                                    coreDataEvent.name = apiEvent.name
+                                    coreDataEvent.sponsor = apiEvent.sponsor
+                                    coreDataEvent.startTime = apiEvent.startTime
+                                    coreDataEvent.favorite = apiFavorites.contains(coreDataEvent.id)
+                                }
+
+                                    try context.save()
+                                    completion?()
+                                    isRefreshing = false
+                                } catch {
+                                    completion?()
+                                    isRefreshing = false
+                                    print(error)
+                                }
                             }
-
-                            coreDataEventsToUpdate.forEach { (coreDataEvent, _) in
-                                coreDataEvent.favorite = apiFavorites.contains(coreDataEvent.id)
-                            }
-
-                            apiEventsToInsert.forEach { apiEvent in
-                                // Create CoreData event.
-                                let coreDataEvent = Event(context: context)
-                                coreDataEvent.id = apiEvent.id
-                                coreDataEvent.endTime = apiEvent.endTime
-                                coreDataEvent.eventType = apiEvent.eventType
-                                coreDataEvent.info = apiEvent.info
-                                coreDataEvent.name = apiEvent.name
-                                coreDataEvent.sponsor = apiEvent.sponsor
-                                coreDataEvent.startTime = apiEvent.startTime
-                                coreDataEvent.favorite = apiFavorites.contains(coreDataEvent.id)
-                            }
-
-                                try context.save()
+                        } catch {
                                 completion?()
                                 isRefreshing = false
-                            } catch {
-                                completion?()
-                                isRefreshing = false
-                                print(error)
+                                os_log(
+                                    "Error getting event favorites: %s",
+                                    log: Logger.ui,
+                                    type: .error,
+                                    String(describing: error)
+                                )
                             }
                         }
-                    } catch {
-                            completion?()
-                            isRefreshing = false
-                            os_log(
-                                "Error getting event favorites: %s",
-                                log: Logger.ui,
-                                type: .error,
-                                String(describing: error)
-                            )
-                        }
-                    }
-                    .authorize(with: HIApplicationStateController.shared.user)
-                    .launch()
+                        .authorize(with: HIApplicationStateController.shared.user)
+                        .launch()
+                }
             } catch {
                 completion?()
                 isRefreshing = false

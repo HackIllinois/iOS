@@ -9,7 +9,6 @@
 //  Illinois/NCSA Open Source License. You should have received a copy of
 //  this license in a file with the distribution.
 //
-
 import Foundation
 import UIKit
 import HIAPI
@@ -45,12 +44,10 @@ class HIProjectCell: HIBubbleCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = UIColor.clear
-        if let user = HIApplicationStateController.shared.user, !user.token.isEmpty {
-            favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
-            bubbleView.addSubview(favoritedButton)
-            favoritedButton.widthAnchor.constraint(equalToConstant: 58).isActive = true
-            favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0, bottomInset: 0)
-        }
+        favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
+        bubbleView.addSubview(favoritedButton)
+        favoritedButton.widthAnchor.constraint(equalToConstant: 58).isActive = true
+        favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0, bottomInset: 0)
 
         // add bubble view
         contentView.layer.backgroundColor = UIColor.clear.cgColor
@@ -59,11 +56,7 @@ class HIProjectCell: HIBubbleCell {
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         bubbleView.addSubview(contentStackView)
         contentStackView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 16).isActive = true
-        if let user = HIApplicationStateController.shared.user, !user.token.isEmpty {
-            contentStackView.trailingAnchor.constraint(equalTo: favoritedButton.leadingAnchor).isActive = true
-        } else {
-            contentStackView.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -10).isActive = true
-        }
+        contentStackView.trailingAnchor.constraint(equalTo: favoritedButton.leadingAnchor).isActive = true
         contentStackView.centerYAnchor.constraint(equalTo: bubbleView.centerYAnchor).isActive = true
         contentStackViewHeight = contentStackView.heightAnchor.constraint(equalToConstant: 0)
         contentStackViewHeight.isActive = true
@@ -90,6 +83,11 @@ class HIProjectCell: HIBubbleCell {
         gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
         gradient.delegate = self
         tagScrollView.layer.mask = gradient
+
+        // Don't show favorite button for guests
+        if let user = HIApplicationStateController.shared.user, user.token.isEmpty {
+            favoritedButton.isHidden = true
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
