@@ -139,7 +139,7 @@ private extension HILoginFlowController {
             }
             return
         }
-        
+
         let loginURL = HIAPI.AuthService.oauthURL(provider: user.provider)
         loginSession = SFAuthenticationSession(url: loginURL, callbackURLScheme: nil) { [weak self] (url, error) in
             if let url = url,
