@@ -13,6 +13,7 @@
 import Foundation
 import CoreData
 import HIAPI
+import os
 
 final class HIEventDataSource {
 
@@ -40,12 +41,8 @@ final class HIEventDataSource {
             do {
                 let (containedEvents, _) = try result.get()
                 let apiEvents = containedEvents.events
-                
                 HICoreDataController.shared.performBackgroundTask { context -> Void in
                     do {
-                        // 1) Unwrap contained data
-//                        let apiFavorites = containedFavorites.events
-
                         // 2) Compute all the unique API locations.
                         let allLocations = apiEvents.flatMap { $0.locations }
                         var uniquinglocationDictionary = [String: HIAPI.Location]()
@@ -153,43 +150,69 @@ final class HIEventDataSource {
                         print(error)
                     }
                 }
-                
-//                HICoreDataController.shared.performBackgroundTask { context -> Void in
-//                do {
-//                    let coreDataEvents = try context.fetch(eventFetchRequest)
-//
-//                    // 8) Diff the CoreData events and API events.
-//                    let (
-//                        coreDataEventsToDelete,
-//                        coreDataEventsToUpdate,
-//                        apiEventsToInsert
-//                    ) = diff(initial: coreDataEvents, final: apiEvents)
-//
-//                    // 9) Apply the diff
-//                    coreDataEventsToDelete.forEach { coreDataEvent in
-//                        // Delete CoreData event.
-//                        context.delete(coreDataEvent)
-//                    }
-//
-//                    coreDataEventsToUpdate.forEach { (coreDataEvent, apiEvent) in
-//                        coreDataEvent.favorite = apiFavorites
-//                    }
-//
-//                    apiEventsToInsert.forEach { apiEvent in
-//                        // Create CoreData event.
-//                        let coreDataEvent = Event(context: context)
-//                        coreDataEvent.favorite = false
-//                    }
-//
-//                        try context.save()
-//                        completion?()
-//                        isRefreshing = false
-//                    } catch {
-//                        completion?()
-//                        isRefreshing = false
-//                        print(error)
-//                    }
-//                }
+
+                HIAPI.EventService.getAllFavorites()
+                .onCompletion { result in
+                    do {
+                        let (containedFavorites, _) = try result.get()
+                        HICoreDataController.shared.performBackgroundTask { context -> Void in
+                        do {
+                            let apiFavorites = containedFavorites.events
+                            let eventFetchRequest = NSFetchRequest<Event>(entityName: "Event")
+                            let coreDataEvents = try context.fetch(eventFetchRequest)
+
+                            // 8) Diff the CoreData events and API events.
+                            let (
+                                coreDataEventsToDelete,
+                                coreDataEventsToUpdate,
+                                apiEventsToInsert
+                            ) = diff(initial: coreDataEvents, final: apiEvents)
+
+                            // 9) Apply the diff
+                            coreDataEventsToDelete.forEach { coreDataEvent in
+                                // Delete CoreData event.
+                                context.delete(coreDataEvent)
+                            }
+
+                            coreDataEventsToUpdate.forEach { (coreDataEvent, _) in
+                                coreDataEvent.favorite = apiFavorites.contains(coreDataEvent.id)
+                            }
+
+                            apiEventsToInsert.forEach { apiEvent in
+                                // Create CoreData event.
+                                let coreDataEvent = Event(context: context)
+                                coreDataEvent.id = apiEvent.id
+                                coreDataEvent.endTime = apiEvent.endTime
+                                coreDataEvent.eventType = apiEvent.eventType
+                                coreDataEvent.info = apiEvent.info
+                                coreDataEvent.name = apiEvent.name
+                                coreDataEvent.sponsor = apiEvent.sponsor
+                                coreDataEvent.startTime = apiEvent.startTime
+                                coreDataEvent.favorite = apiFavorites.contains(coreDataEvent.id)
+                            }
+
+                                try context.save()
+                                completion?()
+                                isRefreshing = false
+                            } catch {
+                                completion?()
+                                isRefreshing = false
+                                print(error)
+                            }
+                        }
+                    } catch {
+                            completion?()
+                            isRefreshing = false
+                            os_log(
+                                "Error getting event favorites: %s",
+                                log: Logger.ui,
+                                type: .error,
+                                String(describing: error)
+                            )
+                        }
+                    }
+                    .authorize(with: HIApplicationStateController.shared.user)
+                    .launch()
             } catch {
                 completion?()
                 isRefreshing = false
