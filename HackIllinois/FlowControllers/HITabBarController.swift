@@ -48,13 +48,13 @@ class HITabBarController: UITabBarController {
             let alert = UIAlertController(title: "Please log in as an attendee to get a valid QR Code.", message: nil, preferredStyle: .alert)
             present(alert, animated: true, completion: nil)
             alert.addAction(
-                UIAlertAction(title: "Logout", style: .default) { _ in
-                    NotificationCenter.default.post(name: .logoutUser, object: nil)
-                }
+                UIAlertAction(title: "Cancel", style: .default)
             )
 
             alert.addAction(
-                UIAlertAction(title: "OK", style: .default)
+                UIAlertAction(title: "Logout", style: .default) { _ in
+                    NotificationCenter.default.post(name: .logoutUser, object: nil)
+                }
             )
             return
         }
