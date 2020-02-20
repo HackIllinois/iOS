@@ -128,6 +128,18 @@ extension HILoginFlowController {
 // MARK: - Login Flow
 private extension HILoginFlowController {
     private func attemptOAuthLogin(buildingUser user: HIUser, sender: HIBaseViewController) {
+
+        //GUEST (bypass auth)
+        if user.provider == .guest {
+            var guestUser = HIUser()
+            guestUser.firstName = "Guest"
+
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": guestUser])
+            }
+            return
+        }
+
         let loginURL = HIAPI.AuthService.oauthURL(provider: user.provider)
         loginSession = SFAuthenticationSession(url: loginURL, callbackURLScheme: nil) { [weak self] (url, error) in
             if let url = url,

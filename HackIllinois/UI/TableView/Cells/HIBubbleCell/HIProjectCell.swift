@@ -9,7 +9,6 @@
 //  Illinois/NCSA Open Source License. You should have received a copy of
 //  this license in a file with the distribution.
 //
-
 import Foundation
 import UIKit
 import HIAPI
@@ -84,6 +83,11 @@ class HIProjectCell: HIBubbleCell {
         gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
         gradient.delegate = self
         tagScrollView.layer.mask = gradient
+
+        // Don't show favorite button for guests
+        if HIApplicationStateController.shared.isGuest {
+            favoritedButton.isHidden = true
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {

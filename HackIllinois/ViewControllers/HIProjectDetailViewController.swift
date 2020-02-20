@@ -152,14 +152,16 @@ extension HIProjectDetailViewController {
         titleLabel.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor, constant: 12).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor, constant: -20).isActive = true
 
-        favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
-        upperContainerView.addSubview(favoritedButton)
-        favoritedButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
-        favoritedButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
-        favoritedButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
-        favoritedButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
-        favoritedButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        favoritedButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        if !HIApplicationStateController.shared.isGuest {
+            favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
+            upperContainerView.addSubview(favoritedButton)
+            favoritedButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
+            favoritedButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
+            favoritedButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
+            favoritedButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
+            favoritedButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            favoritedButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        }
 
         upperContainerView.addSubview(numberLabel)
         numberLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true

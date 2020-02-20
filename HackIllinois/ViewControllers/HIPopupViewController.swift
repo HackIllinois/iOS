@@ -52,6 +52,14 @@ class HIPopupViewController: HIBaseViewController {
         $0.tintHIColor = \.qrTint
         $0.contentMode = .scaleAspectFit
     }
+    private let guestLabel = HILabel {
+        $0.textHIColor = \.qrTint
+        $0.backgroundHIColor = \.qrBackground
+        $0.font = HIAppearance.Font.contentTitle
+        $0.textAlignment = .center
+        $0.numberOfLines = 0
+        $0.text = "Log in to see your QR code."
+    }
     private let userNameLabel = HILabel {
         $0.textHIColor = \.qrTint
         $0.backgroundHIColor = \.qrBackground
@@ -72,10 +80,13 @@ class HIPopupViewController: HIBaseViewController {
 extension HIPopupViewController {
     @objc func didSelectLogoutButton(_ sender: UIButton) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let actionText = HIApplicationStateController.shared.isGuest ? "Login" : "Logout"
         alert.addAction(
-            UIAlertAction(title: "Logout", style: .destructive) { _ in
+            UIAlertAction(title: actionText, style: .destructive) { _ in
                 self.dismiss(animated: true, completion: nil)
                 NotificationCenter.default.post(name: .logoutUser, object: nil)
+                self.guestLabel.removeFromSuperview()
+                self.qrImageView.removeFromSuperview()
             }
         )
         alert.addAction(
@@ -113,7 +124,6 @@ extension HIPopupViewController {
         containerView.addSubview(exitButton)
         containerView.addSubview(logoutButton)
         containerView.addSubview(qrContainerView)
-        qrContainerView.addSubview(qrImageView)
         containerView.addSubview(userNameLabel)
 
         containerView.constrain(to: view.safeAreaLayoutGuide, trailingInset: -8, leadingInset: 8)
@@ -127,23 +137,6 @@ extension HIPopupViewController {
 
         userNameLabel.constrain(to: containerView, trailingInset: -32, leadingInset: 32)
         userNameLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -32).isActive = true
-
-        qrImageView.centerXAnchor.constraint(equalTo: qrContainerView.centerXAnchor).isActive = true
-        qrImageView.centerYAnchor.constraint(equalTo: qrContainerView.centerYAnchor).isActive = true
-
-        qrImageView.topAnchor.constraint(greaterThanOrEqualTo: qrContainerView.topAnchor).isActive = true
-        qrImageView.leadingAnchor.constraint(greaterThanOrEqualTo: qrContainerView.leadingAnchor).isActive = true
-        qrContainerView.trailingAnchor.constraint(greaterThanOrEqualTo: qrImageView.trailingAnchor).isActive = true
-        qrContainerView.bottomAnchor.constraint(greaterThanOrEqualTo: qrImageView.bottomAnchor).isActive = true
-
-        qrImageView.widthAnchor.constraint(equalTo: qrImageView.heightAnchor, multiplier: 1).isActive = true
-
-        let width = qrImageView.widthAnchor.constraint(equalTo: qrContainerView.widthAnchor, multiplier: 1)
-        width.priority = UILayoutPriority(rawValue: 500)
-        width.isActive = true
-        let height = qrImageView.heightAnchor.constraint(equalTo: qrContainerView.heightAnchor, multiplier: 1)
-        height.priority = UILayoutPriority(rawValue: 500)
-        height.isActive = true
 
         popupBackground.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBackground(_:))))
         let swipeDownRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeDown(_:)))
@@ -167,6 +160,43 @@ extension HIPopupViewController {
             }
         }
         userNameLabel.text = user.firstName.uppercased()
+
+        if HIApplicationStateController.shared.isGuest {
+            DispatchQueue.main.async {
+                self.logoutButton.title = "LOG IN"
+                self.logoutButton.setTitle("LOG IN", for: .normal)
+            }
+            qrContainerView.addSubview(guestLabel)
+            guestLabel.centerXAnchor.constraint(equalTo: qrContainerView.centerXAnchor).isActive = true
+            guestLabel.centerYAnchor.constraint(equalTo: qrContainerView.centerYAnchor).isActive = true
+            guestLabel.heightAnchor.constraint(equalToConstant: max(UIScreen.main.bounds.width, UIScreen.main.bounds.height)).isActive = true
+
+            guestLabel.topAnchor.constraint(greaterThanOrEqualTo: qrContainerView.topAnchor).isActive = true
+            guestLabel.leadingAnchor.constraint(greaterThanOrEqualTo: qrContainerView.leadingAnchor).isActive = true
+            qrContainerView.trailingAnchor.constraint(greaterThanOrEqualTo: guestLabel.trailingAnchor).isActive = true
+            qrContainerView.widthAnchor.constraint(equalTo: guestLabel.heightAnchor, multiplier: 1).isActive = true
+        } else {
+            DispatchQueue.main.async {
+                self.logoutButton.title = "LOG OUT"
+                self.logoutButton.setTitle("LOG OUT", for: .normal)
+            }
+            qrContainerView.addSubview(qrImageView)
+            qrContainerView.bottomAnchor.constraint(greaterThanOrEqualTo: qrImageView.bottomAnchor).isActive = true
+            qrImageView.centerXAnchor.constraint(equalTo: qrContainerView.centerXAnchor).isActive = true
+            qrImageView.centerYAnchor.constraint(equalTo: qrContainerView.centerYAnchor).isActive = true
+
+            qrImageView.topAnchor.constraint(greaterThanOrEqualTo: qrContainerView.topAnchor).isActive = true
+            qrImageView.leadingAnchor.constraint(greaterThanOrEqualTo: qrContainerView.leadingAnchor).isActive = true
+            qrContainerView.trailingAnchor.constraint(greaterThanOrEqualTo: qrImageView.trailingAnchor).isActive = true
+            qrImageView.widthAnchor.constraint(equalTo: qrImageView.heightAnchor, multiplier: 1).isActive = true
+
+            let width = qrImageView.widthAnchor.constraint(equalTo: qrContainerView.widthAnchor, multiplier: 1)
+            width.priority = UILayoutPriority(rawValue: 500)
+            width.isActive = true
+            let height = qrImageView.heightAnchor.constraint(equalTo: qrContainerView.heightAnchor, multiplier: 1)
+            height.priority = UILayoutPriority(rawValue: 500)
+            height.isActive = true
+        }
     }
 }
 // MARK: - UIViewControllerTransitioningDelegate

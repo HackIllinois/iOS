@@ -193,6 +193,7 @@ extension HIHomeViewController {
     func setupPass() {
         guard PKPassLibrary.isPassLibraryAvailable(),
             let user = HIApplicationStateController.shared.user,
+            !HIApplicationStateController.shared.isGuest,
             let url = user.qrURL,
             !UserDefaults.standard.bool(forKey: HIConstants.PASS_PROMPTED_KEY(user: user)) else { return }
         HIAPI.PassService.getPass(qr: url.absoluteString, identifier: user.email)
