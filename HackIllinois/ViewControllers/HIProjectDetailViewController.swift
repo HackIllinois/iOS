@@ -172,6 +172,18 @@ extension HIProjectDetailViewController {
         descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         descriptionLabelHeight = descriptionLabel.heightAnchor.constraint(equalToConstant: 100)
         descriptionLabelHeight.isActive = true
+        
+        let tableView = UITableView()
+        tableView.backgroundColor <- \.clear
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        projectDetailContainer.addSubview(tableView)
+        tableView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20).isActive = true
+        tableView.constrain(to: projectDetailContainer, bottomInset: -6)
+        tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: -12).isActive = true
+        tableViewHeight = tableView.heightAnchor.constraint(equalToConstant: 100)
+        tableViewHeight.isActive = true
+        self.tableView = tableView
     }
 
     func setupTagItems() {
@@ -179,6 +191,7 @@ extension HIProjectDetailViewController {
         tagScrollView.leadingAnchor.constraint(equalTo: projectDetailContainer.leadingAnchor, constant: 12).isActive = true
         tagScrollView.topAnchor.constraint(equalTo: projectDetailContainer.topAnchor, constant: 30).isActive = true
         tagScrollView.trailingAnchor.constraint(equalTo: projectDetailContainer.trailingAnchor, constant: -12).isActive = true
+        tagScrollView.constrain(height: 16)
         tagScrollView.showsHorizontalScrollIndicator = false
         tagScrollView.delegate = self
 
@@ -248,7 +261,7 @@ extension HIProjectDetailViewController {
 extension HIProjectDetailViewController {
     override func setupTableView() {
         tableView?.alwaysBounceVertical = false
-        tableView?.register(HIEventDetailLocationCell.self, forCellReuseIdentifier: HIEventDetailLocationCell.identifier)
+        tableView?.register(HIProjectDetailLocationCell.self, forCellReuseIdentifier: HIProjectDetailLocationCell.identifier)
         super.setupTableView()
     }
 }
@@ -260,13 +273,15 @@ extension HIProjectDetailViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard project != nil else { return 0 }
-        return 1 //Projects have one location
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: HIEventDetailLocationCell.identifier, for: indexPath)
-        //Update in UI: Projects should have an indoor location with a HIProjectDetailLocationCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: HIProjectDetailLocationCell.identifier, for: indexPath)
+        if let cell = cell as? HIProjectDetailLocationCell,
+            let room = project?.room {
+            cell <- room
+        }
         return cell
     }
 }
@@ -278,7 +293,7 @@ extension HIProjectDetailViewController {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 160
+        return 300
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

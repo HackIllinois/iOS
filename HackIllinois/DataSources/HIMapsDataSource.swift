@@ -35,9 +35,9 @@ final class HIMapsDataSource {
             IndoorMap(
                 name: "Siebel",
                 floors: [
-                    IndoorMap.Floor(name: "Basement", image: #imageLiteral(resourceName: "IndoorMapSiebel1")),
-                    IndoorMap.Floor(name: "1st Floor", image: #imageLiteral(resourceName: "IndoorMapSiebel2")),
-                    IndoorMap.Floor(name: "2nd Floor", image: #imageLiteral(resourceName: "IndoorMapSiebel3"))
+                    IndoorMap.Floor(name: "Basement", image: #imageLiteral(resourceName: "IndoorMapSiebel0")),
+                    IndoorMap.Floor(name: "1st Floor", image: #imageLiteral(resourceName: "IndoorMapSiebel1")),
+                    IndoorMap.Floor(name: "2nd Floor", image: #imageLiteral(resourceName: "IndoorMapSiebel2"))
                 ]
             )
         )
