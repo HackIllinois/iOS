@@ -74,14 +74,13 @@ class HIPopupViewController: HIBaseViewController {
         $0.backgroundColor = .clear
         $0.isUserInteractionEnabled = true
     }
-    private let isGuest = HIApplicationStateController.shared.user?.token.isEmpty ?? false
 }
 
 // MARK: - Actions
 extension HIPopupViewController {
     @objc func didSelectLogoutButton(_ sender: UIButton) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let actionText = isGuest ? "Login" : "Logout"
+        let actionText = HIApplicationStateController.shared.isGuest ? "Login" : "Logout"
         alert.addAction(
             UIAlertAction(title: actionText, style: .destructive) { _ in
                 self.dismiss(animated: true, completion: nil)
@@ -162,7 +161,7 @@ extension HIPopupViewController {
         }
         userNameLabel.text = user.firstName.uppercased()
 
-        if let user = HIApplicationStateController.shared.user, user.token.isEmpty {
+        if HIApplicationStateController.shared.isGuest {
             DispatchQueue.main.async {
                 self.logoutButton.title = "LOG IN"
                 self.logoutButton.setTitle("LOG IN", for: .normal)

@@ -103,7 +103,7 @@ final class HIProjectDataSource {
                     }
                 }
 
-                if let user = HIApplicationStateController.shared.user, !user.token.isEmpty {
+                if !HIApplicationStateController.shared.isGuest {
                     HIAPI.ProjectService.getAllFavorites()
                     .onCompletion { result in
                         do {

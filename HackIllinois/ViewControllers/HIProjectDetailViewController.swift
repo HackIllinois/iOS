@@ -152,7 +152,7 @@ extension HIProjectDetailViewController {
         titleLabel.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor, constant: 12).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor, constant: -20).isActive = true
 
-        if let user = HIApplicationStateController.shared.user, !user.token.isEmpty {
+        if !HIApplicationStateController.shared.isGuest {
             favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
             upperContainerView.addSubview(favoritedButton)
             favoritedButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
