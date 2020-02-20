@@ -122,7 +122,7 @@ extension HIUserDetailViewController {
             }
         }
         userNameLabel.text = user.firstName.uppercased()
-        userInfoLabel.text = user.attendee?.diet.description ?? "NO DIETARY RESTRICTIONS"
+        //userInfoLabel.text = user.attendee?.diet.description ?? "NO DIETARY RESTRICTIONS"
         setupPass()
     }
 }
