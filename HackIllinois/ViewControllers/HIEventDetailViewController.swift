@@ -175,7 +175,7 @@ extension HIEventDetailViewController {
 
         setupScannerIfApplicable()
 
-        if let user = HIApplicationStateController.shared.user, !user.token.isEmpty {
+        if !HIApplicationStateController.shared.isGuest {
             setupFavoritedButton()
         }
 

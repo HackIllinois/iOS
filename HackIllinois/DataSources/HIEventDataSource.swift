@@ -151,7 +151,7 @@ final class HIEventDataSource {
                     }
                 }
 
-                if let user = HIApplicationStateController.shared.user, !user.token.isEmpty {
+                if !HIApplicationStateController.shared.isGuest {
                     HIAPI.EventService.getAllFavorites()
                     .onCompletion { result in
                         do {

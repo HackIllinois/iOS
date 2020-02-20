@@ -85,7 +85,7 @@ class HIProjectCell: HIBubbleCell {
         tagScrollView.layer.mask = gradient
 
         // Don't show favorite button for guests
-        if let user = HIApplicationStateController.shared.user, user.token.isEmpty {
+        if HIApplicationStateController.shared.isGuest {
             favoritedButton.isHidden = true
         }
     }
