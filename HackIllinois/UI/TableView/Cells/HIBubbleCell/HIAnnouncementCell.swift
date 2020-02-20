@@ -54,7 +54,7 @@ extension HIAnnouncementCell {
     static func <- (lhs: HIAnnouncementCell, rhs: Announcement) {
         lhs.titleLabel.text = rhs.title
         lhs.timeLabel.text  = Date.humanReadableTimeSince(rhs.time)
-        lhs.infoLabel.text  = rhs.info
+        lhs.infoLabel.text  = rhs.body
     }
 }
 

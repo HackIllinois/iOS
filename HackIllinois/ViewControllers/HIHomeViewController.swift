@@ -40,6 +40,8 @@ class HIHomeViewController: HIEventListViewController {
 
         return fetchedResultsController
     }()
+    
+    let announcementViewController = HIAnnouncementsViewController()
 
     private var currentTab = 0
 
@@ -59,6 +61,12 @@ class HIHomeViewController: HIEventListViewController {
     private lazy var countdownViewController = HICountdownViewController(delegate: self)
     private let happeningNowLabel = HILabel(style: .title) {
         $0.text = "HAPPENING NOW"
+    }
+    private let announcementButton = HIButton {
+        $0.tintHIColor = \.baseText
+        $0.backgroundHIColor = \.clear
+        $0.activeImage = #imageLiteral(resourceName: "Favorited")
+        $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
     }
 
     private var countdownDataStoreIndex = 0
@@ -95,6 +103,10 @@ extension HIHomeViewController {
         if let tableView = tableView, !tableView.visibleCells.isEmpty {
             tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
+    }
+    
+    @objc func didSelectAnnouncementButton(_ sender: HIButton) {
+        self.present(announcementViewController, animated: true, completion: nil)
     }
 }
 
@@ -162,6 +174,14 @@ extension HIHomeViewController {
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
         buildingView.image = #imageLiteral(resourceName: "Buildings")
+    }
+}
+
+// MARK: - UINavigationItem Setup
+extension HIHomeViewController {
+    @objc dynamic override func setupNavigationItem() {
+        super.setupNavigationItem()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuUnfavorited"), style: .plain, target: self, action: #selector(didSelectAnnouncementButton(_:)))
     }
 }
 
