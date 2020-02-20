@@ -129,8 +129,8 @@ extension HILoginFlowController {
 private extension HILoginFlowController {
     private func attemptOAuthLogin(buildingUser user: HIUser, sender: HIBaseViewController) {
 
-        if user.provider == .linkedIn {
-            //GUEST (bypass auth)
+        //GUEST (bypass auth)
+        if user.provider == .guest {
             var guestUser = HIUser()
             guestUser.firstName = "Guest"
 

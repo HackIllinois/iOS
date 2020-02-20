@@ -37,7 +37,7 @@ struct HIUser: Codable {
 
     // Guest login
     init() {
-        self.provider = .google
+        self.provider = .guest
     }
 }
 
