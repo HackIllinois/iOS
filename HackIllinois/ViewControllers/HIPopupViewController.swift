@@ -164,6 +164,7 @@ extension HIPopupViewController {
 
         if let user = HIApplicationStateController.shared.user, user.token.isEmpty {
             DispatchQueue.main.async {
+                self.logoutButton.title = "LOG IN"
                 self.logoutButton.setTitle("LOG IN", for: .normal)
             }
             qrContainerView.addSubview(guestLabel)
@@ -177,6 +178,7 @@ extension HIPopupViewController {
             qrContainerView.widthAnchor.constraint(equalTo: guestLabel.heightAnchor, multiplier: 1).isActive = true
         } else {
             DispatchQueue.main.async {
+                self.logoutButton.title = "LOG OUT"
                 self.logoutButton.setTitle("LOG OUT", for: .normal)
             }
             qrContainerView.addSubview(qrImageView)
