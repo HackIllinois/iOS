@@ -74,14 +74,16 @@ class HIPopupViewController: HIBaseViewController {
         $0.backgroundColor = .clear
         $0.isUserInteractionEnabled = true
     }
+    private let isGuest = HIApplicationStateController.shared.user?.token.isEmpty ?? false
 }
 
 // MARK: - Actions
 extension HIPopupViewController {
     @objc func didSelectLogoutButton(_ sender: UIButton) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let actionText = isGuest ? "Login" : "Logout"
         alert.addAction(
-            UIAlertAction(title: "Logout", style: .destructive) { _ in
+            UIAlertAction(title: actionText, style: .destructive) { _ in
                 self.dismiss(animated: true, completion: nil)
                 NotificationCenter.default.post(name: .logoutUser, object: nil)
                 self.guestLabel.removeFromSuperview()
@@ -161,6 +163,9 @@ extension HIPopupViewController {
         userNameLabel.text = user.firstName.uppercased()
 
         if let user = HIApplicationStateController.shared.user, user.token.isEmpty {
+            DispatchQueue.main.async {
+                self.logoutButton.setTitle("LOG IN", for: .normal)
+            }
             qrContainerView.addSubview(guestLabel)
             guestLabel.centerXAnchor.constraint(equalTo: qrContainerView.centerXAnchor).isActive = true
             guestLabel.centerYAnchor.constraint(equalTo: qrContainerView.centerYAnchor).isActive = true
@@ -171,6 +176,9 @@ extension HIPopupViewController {
             qrContainerView.trailingAnchor.constraint(greaterThanOrEqualTo: guestLabel.trailingAnchor).isActive = true
             qrContainerView.widthAnchor.constraint(equalTo: guestLabel.heightAnchor, multiplier: 1).isActive = true
         } else {
+            DispatchQueue.main.async {
+                self.logoutButton.setTitle("LOG OUT", for: .normal)
+            }
             qrContainerView.addSubview(qrImageView)
             qrContainerView.bottomAnchor.constraint(greaterThanOrEqualTo: qrImageView.bottomAnchor).isActive = true
             qrImageView.centerXAnchor.constraint(equalTo: qrContainerView.centerXAnchor).isActive = true
