@@ -42,23 +42,6 @@ class HITabBarController: UITabBarController {
     }
 
     @objc private func qrButtonPressed(_ sender: UIButton) {
-
-        // If user is a Guest, prevent user from accessing QR Code, prompt to log out
-        if let user = HIApplicationStateController.shared.user, user.token.isEmpty {
-            let alert = UIAlertController(title: "Please log in as an attendee to get a valid QR Code.", message: nil, preferredStyle: .alert)
-            present(alert, animated: true, completion: nil)
-            alert.addAction(
-                UIAlertAction(title: "Cancel", style: .default)
-            )
-
-            alert.addAction(
-                UIAlertAction(title: "Logout", style: .default) { _ in
-                    NotificationCenter.default.post(name: .logoutUser, object: nil)
-                }
-            )
-            return
-        }
-
         qrPopup.modalPresentationStyle = .overCurrentContext
         qrPopup.transitioningDelegate = qrPopup
         self.present(qrPopup, animated: true, completion: nil)
