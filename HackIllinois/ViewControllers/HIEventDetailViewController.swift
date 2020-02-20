@@ -162,7 +162,7 @@ extension HIEventDetailViewController {
 
         eventDetailContainer.addSubview(upperContainerView)
         upperContainerView.constrain(to: eventDetailContainer, topInset: 25, trailingInset: 0, leadingInset: 0)
-        upperContainerView.constrain(height: 100)
+        upperContainerView.constrain(height: 75)
 
         upperContainerView.addSubview(titleLabel)
         titleLabel.leadingAnchor.constraint(equalTo: closeButton.leadingAnchor).isActive = true

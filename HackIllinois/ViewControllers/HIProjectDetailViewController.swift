@@ -45,8 +45,9 @@ class HIProjectDetailViewController: HIBaseViewController {
     }
 
     private let mentorLabel = HILabel(style: .detailSubtitle) {
-           $0.translatesAutoresizingMaskIntoConstraints = false
-           $0.textColor <- \.baseText
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor <- \.baseText
+        $0.numberOfLines = 0
     }
     private let numberLabel = HILabel(style: .detailSubtitle) {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -151,11 +152,11 @@ extension HIProjectDetailViewController {
         projectDetailContainer.addSubview(upperContainerView)
         upperContainerView.constrain(to: projectDetailContainer, trailingInset: 0, leadingInset: 0)
         upperContainerView.topAnchor.constraint(equalTo: tagScrollView.bottomAnchor).isActive = true
-        upperContainerView.constrain(height: 150)
+        upperContainerView.constrain(height: 200)
 
         upperContainerView.addSubview(titleLabel)
         titleLabel.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor, constant: 12).isActive = true
-        titleLabel.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor, constant: -20).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: upperContainerView.topAnchor, constant: 15).isActive = true
 
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         upperContainerView.addSubview(favoritedButton)
@@ -166,13 +167,15 @@ extension HIProjectDetailViewController {
         favoritedButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         favoritedButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
 
+        upperContainerView.addSubview(mentorLabel)
+        mentorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
+        mentorLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
+        mentorLabel.trailingAnchor.constraint(equalTo: favoritedButton.leadingAnchor).isActive = true
+
         setupLabels()
     }
 
     func setupLabels() {
-        upperContainerView.addSubview(mentorLabel)
-        mentorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
-        mentorLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
 
         upperContainerView.addSubview(numberLabel)
         numberLabel.topAnchor.constraint(equalTo: mentorLabel.bottomAnchor, constant: 5).isActive = true

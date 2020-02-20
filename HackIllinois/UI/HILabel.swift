@@ -76,7 +76,7 @@ class HILabel: UILabel {
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.detailSubtitle
-            numberOfLines = 1
+            numberOfLines = 0
 
         case .detailText:
             textHIColor = \.baseText
