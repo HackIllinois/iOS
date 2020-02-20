@@ -34,10 +34,7 @@ class HIProjectDetailViewController: HIBaseViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.clear
     }
-    private let upperContainerView = HIView {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundHIColor = \.clear
-    }
+
     private let titleLabel = HILabel(style: .detailTitle) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor <- \.baseText
@@ -149,17 +146,12 @@ extension HIProjectDetailViewController {
         projectDetailContainer.addSubview(tagScrollView)
         setupTagItems()
 
-        projectDetailContainer.addSubview(upperContainerView)
-        upperContainerView.constrain(to: projectDetailContainer, trailingInset: 0, leadingInset: 0)
-        upperContainerView.topAnchor.constraint(equalTo: tagScrollView.bottomAnchor).isActive = true
-        upperContainerView.constrain(height: 200)
-
-        upperContainerView.addSubview(titleLabel)
-        titleLabel.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor, constant: 12).isActive = true
-        titleLabel.topAnchor.constraint(equalTo: upperContainerView.topAnchor, constant: 15).isActive = true
+        projectDetailContainer.addSubview(titleLabel)
+        titleLabel.leadingAnchor.constraint(equalTo: projectDetailContainer.leadingAnchor, constant: 12).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: tagScrollView.bottomAnchor, constant: 15).isActive = true
 
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
-        upperContainerView.addSubview(favoritedButton)
+        projectDetailContainer.addSubview(favoritedButton)
         favoritedButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
         favoritedButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
         favoritedButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
@@ -167,7 +159,7 @@ extension HIProjectDetailViewController {
         favoritedButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         favoritedButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
 
-        upperContainerView.addSubview(mentorLabel)
+        projectDetailContainer.addSubview(mentorLabel)
         mentorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
         mentorLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         mentorLabel.trailingAnchor.constraint(equalTo: favoritedButton.leadingAnchor).isActive = true
@@ -177,17 +169,16 @@ extension HIProjectDetailViewController {
 
     func setupLabels() {
 
-        upperContainerView.addSubview(numberLabel)
+        projectDetailContainer.addSubview(numberLabel)
         numberLabel.topAnchor.constraint(equalTo: mentorLabel.bottomAnchor, constant: 5).isActive = true
         numberLabel.leadingAnchor.constraint(equalTo: mentorLabel.leadingAnchor).isActive = true
 
-        upperContainerView.addSubview(locationLabel)
+        projectDetailContainer.addSubview(locationLabel)
         locationLabel.topAnchor.constraint(equalTo: numberLabel.bottomAnchor, constant: 5).isActive = true
-        locationLabel.bottomAnchor.constraint(equalTo: upperContainerView.bottomAnchor).isActive = true
         locationLabel.leadingAnchor.constraint(equalTo: numberLabel.leadingAnchor).isActive = true
 
         projectDetailContainer.addSubview(descriptionLabel)
-        descriptionLabel.topAnchor.constraint(equalTo: upperContainerView.bottomAnchor, constant: 30).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 30).isActive = true
         descriptionLabel.constrain(to: projectDetailContainer, trailingInset: -12)
         descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         descriptionLabelHeight = descriptionLabel.heightAnchor.constraint(equalToConstant: 100)
@@ -228,7 +219,7 @@ extension HIProjectDetailViewController {
         titleLabel.text = project.name
         descriptionLabel.text = project.info
         favoritedButton.isActive = project.favorite
-        mentorLabel.text = project.mentors.replacingOccurrences(of: ",", with: ", ") //let tags = tagsString.components(separatedBy: ",")
+        mentorLabel.text = "Mentor(s): \(project.mentors.replacingOccurrences(of: ",", with: ", "))"
         numberLabel.text = "Table #\(project.number)"
         locationLabel.text = "Meeting Room: \(project.room)"
         populateTagLabels(stackView: tagStackView, tagsString: project.tags)
