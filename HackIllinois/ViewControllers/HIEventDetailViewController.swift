@@ -211,6 +211,8 @@ extension HIEventDetailViewController {
         titleLabel.text = event.name
         if !event.sponsor.isEmpty {
             sponsorLabel.text = "Sponsored by \(event.sponsor)"
+        } else {
+            sponsorLabel.text = ""
         }
         descriptionLabel.text = event.info
         timeLabel.text = Formatter.simpleTime.string(from: event.startTime) + " - " + Formatter.simpleTime.string(from: event.endTime)
