@@ -126,9 +126,9 @@ extension HIProjectDetailViewController {
             gradient.locations = [0, 0.05, 0.95, 1]
         }
     }
-    
-    func convertCharToInt(c: Character) -> Int {
-        if let integer = Int(String(c)) {
+
+    func convertCharToInt(character: Character) -> Int {
+        if let integer = Int(String(character)) {
             return integer
         }
         return 999
@@ -195,7 +195,7 @@ extension HIProjectDetailViewController {
         descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         descriptionLabelHeight = descriptionLabel.heightAnchor.constraint(equalToConstant: 100)
         descriptionLabelHeight.isActive = true
-        
+
         let tableView = UITableView()
         tableView.backgroundColor <- \.clear
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -298,16 +298,14 @@ extension HIProjectDetailViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let room = project?.room {
             let words = room.split(separator: " ")
-            if (words.count == 2) {
-                if (words[0] != "Siebel" && words[0] != "ECEB") {
+            if words.count == 2 {
+                if words[0] != "Siebel" && words[0] != "ECEB" {
                     return 0
                 } else {
-                    let floor = (words[1].count > 0) ? convertCharToInt(c: Array(words[1])[0]) : 999
-                    print(floor)
-                    if (words[0] == "Siebel" && floor <= 2) {
+                    let floor = (words[1].count > 0) ? convertCharToInt(character: Array(words[1])[0]) : 999
+                    if words[0] == "Siebel" && floor <= 2 {
                         return 1
-                    }
-                    else if (words[0] == "ECEB" && (floor > 0 && floor <= 3)) {
+                    } else if words[0] == "ECEB" && floor > 0 && floor <= 3 {
                         return 1
                     }
                 }

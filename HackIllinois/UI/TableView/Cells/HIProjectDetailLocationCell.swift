@@ -51,8 +51,7 @@ class HIProjectDetailLocationCell: UITableViewCell {
         containerView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12).isActive = true
         containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6).isActive = true
-        
-        
+
         containerView.addSubview(titleLabel)
         titleLabel.constrain(to: containerView, topInset: 0, trailingInset: 0, leadingInset: 8)
         titleLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
@@ -62,7 +61,7 @@ class HIProjectDetailLocationCell: UITableViewCell {
         containerView.addSubview(mapImageView)
         mapImageView.constrain(to: containerView, trailingInset: -5, bottomInset: -5, leadingInset: 5)
         mapImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
     }
@@ -108,19 +107,7 @@ extension HIProjectDetailLocationCell {
         }
         animator?.startAnimation()
     }
-    
-    func setZoomScale() {
-        mapImageView.sizeToFit()
-        scrollView.contentOffset = .zero
-        let widthScale = scrollView.bounds.width / (mapImageView.bounds.width * 105)
-        let heightScale = scrollView.bounds.height / (mapImageView.bounds.height * 105)
-        let minScale = min(widthScale, heightScale)
-        let maxScale = max(widthScale, heightScale)
-        scrollView.minimumZoomScale = minScale
-        scrollView.maximumZoomScale = maxScale
-        scrollView.zoomScale = minScale
-//        mapImageView.center = scrollView.center
-    }
+
 }
 
 // MARK: - Population
