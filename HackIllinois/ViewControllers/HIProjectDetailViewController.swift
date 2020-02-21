@@ -126,6 +126,13 @@ extension HIProjectDetailViewController {
             gradient.locations = [0, 0.05, 0.95, 1]
         }
     }
+    
+    func convertCharToInt(c: Character) -> Int {
+        if let integer = Int(String(c)) {
+            return integer
+        }
+        return 999
+    }
 }
 
 // MARK: - UIViewController
@@ -289,14 +296,35 @@ extension HIProjectDetailViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if let room = project?.room {
+            let words = room.split(separator: " ")
+            if (words.count == 2) {
+                if (words[0] != "Siebel" && words[0] != "ECEB") {
+                    return 0
+                } else {
+                    let floor = (words[1].count > 0) ? convertCharToInt(c: Array(words[1])[0]) : 999
+                    print(floor)
+                    if (words[0] == "Siebel" && floor <= 2) {
+                        return 1
+                    }
+                    else if (words[0] == "ECEB" && (floor > 0 && floor <= 3)) {
+                        return 1
+                    }
+                }
+            } else {
+                return 0
+            }
+        } else {
+            return 0
+        }
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HIProjectDetailLocationCell.identifier, for: indexPath)
         if let cell = cell as? HIProjectDetailLocationCell,
             let room = project?.room {
-            cell <- "Siebel 1111"
+            cell <- room
         }
         return cell
     }
@@ -309,7 +337,7 @@ extension HIProjectDetailViewController {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 300
+        return 320
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
