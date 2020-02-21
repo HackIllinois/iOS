@@ -174,7 +174,9 @@ extension HIEventDetailViewController {
 
         setupScannerIfApplicable()
 
-        setupFavoritedButton()
+        if !HIApplicationStateController.shared.isGuest {
+            setupFavoritedButton()
+        }
 
         upperContainerView.addSubview(timeLabel)
         timeLabel.topAnchor.constraint(equalTo: sponsorLabel.bottomAnchor, constant: 5).isActive = true

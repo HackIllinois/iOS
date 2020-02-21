@@ -40,86 +40,144 @@ final class HIProjectDataSource {
         .onCompletion { result in
             do {
                 let (containedProjects, _) = try result.get()
-                HIAPI.ProjectService.getAllFavorites()
-                .onCompletion { result in
+                HICoreDataController.shared.performBackgroundTask { context -> Void in
                     do {
-                        let (containedFavorites, _) = try result.get()
-                        HICoreDataController.shared.performBackgroundTask { context -> Void in
-                            do {
-                                // 1) Unwrap contained data
-                                let apiProjects = containedProjects.projects
-                                let apiFavorites = containedFavorites.projects // Unwraps favorites based on strings (should change name to favorites)
+                        // 1) Unwrap contained data
+                        let apiProjects = containedProjects.projects
 
-                                // 2) Get all CoreData Projects.
-                                let projectFetchRequest = NSFetchRequest<Project>(entityName: "Project")
-                                let coreDataProjects = try context.fetch(projectFetchRequest)
+                        // 2) Get all CoreData Projects.
+                        let projectFetchRequest = NSFetchRequest<Project>(entityName: "Project")
+                        let coreDataProjects = try context.fetch(projectFetchRequest)
 
-                                // 3) Diff the CoreData projects and API projects.
-                                let (
-                                    coreDataProjectsToDelete,
-                                    coreDataProjectsToUpdate,
-                                    apiProjectsToInsert
-                                ) = diff(initial: coreDataProjects, final: apiProjects)
+                        // 3) Diff the CoreData projects and API projects.
+                        let (
+                            coreDataProjectsToDelete,
+                            coreDataProjectsToUpdate,
+                            apiProjectsToInsert
+                        ) = diff(initial: coreDataProjects, final: apiProjects)
 
-                                // 4) Apply the diff
-                                coreDataProjectsToDelete.forEach { coreDataProject in
-                                    // Delete CoreData project.
-                                    context.delete(coreDataProject)
-                                }
-
-                                coreDataProjectsToUpdate.forEach { (coreDataProject, apiProject) in
-                                    // Update CoreData project.
-                                    coreDataProject.id = apiProject.id
-                                    coreDataProject.name = apiProject.name
-                                    coreDataProject.info = apiProject.info
-                                    coreDataProject.mentors = apiProject.mentors.joined(separator: ",")
-                                    coreDataProject.room = apiProject.room
-                                    coreDataProject.tags = apiProject.tags.sorted().joined(separator: ",")
-                                    coreDataProject.number = apiProject.number
-                                    coreDataProject.favorite = apiFavorites.contains(coreDataProject.id) //Favorites sorted by id
-                                }
-
-                                apiProjectsToInsert.forEach { apiProject in
-                                    // Create CoreData project.
-                                    let coreDataProject = Project(context: context)
-                                    coreDataProject.id = apiProject.id
-                                    coreDataProject.name = apiProject.name
-                                    coreDataProject.info = apiProject.info
-                                    coreDataProject.mentors = apiProject.mentors.joined(separator: ",")
-                                    coreDataProject.room = apiProject.room
-                                    coreDataProject.tags = apiProject.tags.sorted().joined(separator: ",")
-                                    coreDataProject.number = apiProject.number
-                                    coreDataProject.favorite = apiFavorites.contains(coreDataProject.id)
-                                }
-
-                                // 5) Save changes, call completion handler, unlock refresh
-                                try context.save()
-                                completion?()
-                                isRefreshing = false
-                            } catch {
-                                completion?()
-                                isRefreshing = false
-                                os_log(
-                                    "Error getting saving projects to CoreData: %s",
-                                    log: Logger.ui,
-                                    type: .error,
-                                    String(describing: error)
-                                )
-                            }
+                        // 4) Apply the diff
+                        coreDataProjectsToDelete.forEach { coreDataProject in
+                            // Delete CoreData project.
+                            context.delete(coreDataProject)
                         }
+
+                        coreDataProjectsToUpdate.forEach { (coreDataProject, apiProject) in
+                            // Update CoreData project.
+                            coreDataProject.id = apiProject.id
+                            coreDataProject.name = apiProject.name
+                            coreDataProject.info = apiProject.info
+                            coreDataProject.mentors = apiProject.mentors.joined(separator: ",")
+                            coreDataProject.room = apiProject.room
+                            coreDataProject.tags = apiProject.tags.sorted().joined(separator: ",")
+                            coreDataProject.number = apiProject.number
+                            coreDataProject.favorite = false
+                        }
+
+                        apiProjectsToInsert.forEach { apiProject in
+                            // Create CoreData project.
+                            let coreDataProject = Project(context: context)
+                            coreDataProject.id = apiProject.id
+                            coreDataProject.name = apiProject.name
+                            coreDataProject.info = apiProject.info
+                            coreDataProject.mentors = apiProject.mentors.joined(separator: ",")
+                            coreDataProject.room = apiProject.room
+                            coreDataProject.tags = apiProject.tags.sorted().joined(separator: ",")
+                            coreDataProject.number = apiProject.number
+                            coreDataProject.favorite = false
+                        }
+
+                        // 5) Save changes, call completion handler, unlock refresh
+                        try context.save()
+                        completion?()
+                        isRefreshing = false
                     } catch {
                         completion?()
                         isRefreshing = false
                         os_log(
-                            "Error getting project favorites: %s",
+                            "Error getting saving projects to CoreData: %s",
                             log: Logger.ui,
                             type: .error,
                             String(describing: error)
                         )
                     }
                 }
-                .authorize(with: HIApplicationStateController.shared.user)
-                .launch()
+
+                if !HIApplicationStateController.shared.isGuest {
+                    HIAPI.ProjectService.getAllFavorites()
+                    .onCompletion { result in
+                        do {
+                            let (containedFavorites, _) = try result.get()
+                            HICoreDataController.shared.performBackgroundTask { context -> Void in
+                                do {
+                                    // 1) Unwrap contained data
+                                    let apiProjects = containedProjects.projects
+                                    let apiFavorites = containedFavorites.projects // Unwraps favorites based on strings (should change name to favorites)
+
+                                    // 2) Get all CoreData Projects.
+                                    let projectFetchRequest = NSFetchRequest<Project>(entityName: "Project")
+                                    let coreDataProjects = try context.fetch(projectFetchRequest)
+
+                                    // 3) Diff the CoreData projects and API projects.
+                                    let (
+                                        coreDataProjectsToDelete,
+                                        coreDataProjectsToUpdate,
+                                        apiProjectsToInsert
+                                    ) = diff(initial: coreDataProjects, final: apiProjects)
+
+                                    // 4) Apply the diff
+                                    coreDataProjectsToDelete.forEach { coreDataProject in
+                                        // Delete CoreData project.
+                                        context.delete(coreDataProject)
+                                    }
+
+                                    coreDataProjectsToUpdate.forEach { (coreDataProject, _) in
+                                        // Update CoreData project.
+                                        coreDataProject.favorite = apiFavorites.contains(coreDataProject.id) //Favorites sorted by id
+                                    }
+
+                                    apiProjectsToInsert.forEach { apiProject in
+                                        // Create CoreData project.
+                                        let coreDataProject = Project(context: context)
+                                        coreDataProject.id = apiProject.id
+                                        coreDataProject.name = apiProject.name
+                                        coreDataProject.info = apiProject.info
+                                        coreDataProject.mentors = apiProject.mentors.joined(separator: ",")
+                                        coreDataProject.room = apiProject.room
+                                        coreDataProject.tags = apiProject.tags.sorted().joined(separator: ",")
+                                        coreDataProject.number = apiProject.number
+                                        coreDataProject.favorite = apiFavorites.contains(coreDataProject.id)
+                                    }
+
+                                    // 5) Save changes, call completion handler, unlock refresh
+                                    try context.save()
+                                    completion?()
+                                    isRefreshing = false
+                                } catch {
+                                    completion?()
+                                    isRefreshing = false
+                                    os_log(
+                                        "Error getting saving projects to CoreData: %s",
+                                        log: Logger.ui,
+                                        type: .error,
+                                        String(describing: error)
+                                    )
+                                }
+                            }
+                        } catch {
+                            completion?()
+                            isRefreshing = false
+                            os_log(
+                                "Error getting project favorites: %s",
+                                log: Logger.ui,
+                                type: .error,
+                                String(describing: error)
+                            )
+                        }
+                    }
+                    .authorize(with: HIApplicationStateController.shared.user)
+                    .launch()
+                }
             } catch {
                 os_log(
                     "Error getting projects: %s",

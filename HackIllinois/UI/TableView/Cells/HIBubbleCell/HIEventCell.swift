@@ -53,6 +53,11 @@ class HIEventCell: HIBubbleCell {
         contentStackView.centerYAnchor.constraint(equalTo: bubbleView.centerYAnchor).isActive = true
         contentStackViewHeight = contentStackView.heightAnchor.constraint(equalToConstant: 0)
         contentStackViewHeight.isActive = true
+
+        // Don't show favorite button for guests
+        if HIApplicationStateController.shared.isGuest {
+            favoritedButton.isHidden = true
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {

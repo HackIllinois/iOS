@@ -34,6 +34,11 @@ struct HIUser: Codable {
     init(provider: HIAPI.AuthService.OAuthProvider) {
         self.provider = provider
     }
+
+    // Guest login
+    init() {
+        self.provider = .guest
+    }
 }
 
 // MARK: - DataConvertible

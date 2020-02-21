@@ -21,6 +21,7 @@ class HIApplicationStateController {
     // MARK: - Properties
     var window = HIWindow(frame: UIScreen.main.bounds)
     var user: HIUser?
+    var isGuest = false
 
     // MARK: ViewControllers
     var loginFlowController = HILoginFlowController()
@@ -82,6 +83,7 @@ extension HIApplicationStateController {
         guard let user = notification.userInfo?["user"] as? HIUser else { return }
         guard Keychain.default.store(user, forKey: HIConstants.STORED_ACCOUNT_KEY) else { return }
         self.user = user
+        if user.token.isEmpty { isGuest = true }
         HILocalNotificationController.shared.requestAuthorization()
         UIApplication.shared.registerForRemoteNotifications()
         updateWindowViewController(animated: true)
@@ -91,6 +93,7 @@ extension HIApplicationStateController {
         guard user != nil else { return }
         Keychain.default.removeObject(forKey: HIConstants.STORED_ACCOUNT_KEY)
         user = nil
+        isGuest = false
         updateWindowViewController(animated: true)
     }
 

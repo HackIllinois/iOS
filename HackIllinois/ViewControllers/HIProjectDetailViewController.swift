@@ -159,6 +159,10 @@ extension HIProjectDetailViewController {
         favoritedButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         favoritedButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
 
+        if HIApplicationStateController.shared.isGuest {
+            favoritedButton.isHidden = true
+        }
+
         mentorLabel.textColor <- \.attendeeBackground
         projectDetailContainer.addSubview(mentorLabel)
         mentorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true

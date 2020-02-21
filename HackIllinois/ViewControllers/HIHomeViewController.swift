@@ -13,6 +13,9 @@
 import Foundation
 import UIKit
 import CoreData
+import PassKit
+import os
+import HIAPI
 
 class HIHomeViewController: HIEventListViewController {
     // MARK: - Properties
@@ -145,6 +148,7 @@ extension HIHomeViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupPredicateRefreshTimer()
+        setupPass()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -181,6 +185,41 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
             countdownDataStoreIndex += 1
         }
         return nil
+    }
+}
+
+// MARK: - Pass/Wallet setup
+extension HIHomeViewController {
+    func setupPass() {
+        guard PKPassLibrary.isPassLibraryAvailable(),
+            let user = HIApplicationStateController.shared.user,
+            !HIApplicationStateController.shared.isGuest,
+            let url = user.qrURL,
+            !UserDefaults.standard.bool(forKey: HIConstants.PASS_PROMPTED_KEY(user: user)) else { return }
+        HIAPI.PassService.getPass(qr: url.absoluteString, identifier: user.email)
+        .onCompletion { result in
+            do {
+                let (data, _) = try result.get()
+                let pass = try PKPass(data: data)
+                guard let passVC = PKAddPassesViewController(pass: pass) else {
+                    throw HIError.passbookError
+                }
+                DispatchQueue.main.async { [weak self] in
+                    if let strongSelf = self {
+                        UserDefaults.standard.set(true, forKey: HIConstants.PASS_PROMPTED_KEY(user: user))
+                        strongSelf.present(passVC, animated: true, completion: nil)
+                    }
+                }
+            } catch {
+                os_log(
+                    "Error initializing PKPass: %s",
+                    log: Logger.ui,
+                    type: .error,
+                    String(describing: error)
+                )
+            }
+        }
+        .launch()
     }
 }
 
