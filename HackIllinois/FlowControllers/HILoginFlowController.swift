@@ -216,7 +216,7 @@ private extension HILoginFlowController {
                 if user.provider == .github && user.roles.contains(.attendee) {
                     self?.populateRegistrationData(buildingUser: user, sender: sender)
                 } else if user.provider == .google {
-                    if(user.roles.contains(.staff)) {
+                    if user.roles.contains(.staff) {
                         DispatchQueue.main.async {
                             NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
                         }
