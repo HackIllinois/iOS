@@ -20,7 +20,7 @@ class HIProjectDetailLocationCell: UITableViewCell {
     var animator: UIViewPropertyAnimator?
 
     // MARK: Views
-    let mapView = UIImageView()
+    let mapImageView = UIImageView()
     let mapAnnotation = MKPointAnnotation()
     let titleLabel = HILabel(style: .location) {
         $0.textColor <- \.baseText
@@ -30,6 +30,7 @@ class HIProjectDetailLocationCell: UITableViewCell {
 
     var blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     let containerView = UIView()
+    let scrollView = UIScrollView(frame: .zero)
 
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -51,10 +52,20 @@ class HIProjectDetailLocationCell: UITableViewCell {
         containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12).isActive = true
         containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6).isActive = true
 
-        mapView.isUserInteractionEnabled = false
-        mapView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(mapView)
-        mapView.constrain(to: containerView, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap))
+        doubleTap.numberOfTapsRequired = 2
+        scrollView.addGestureRecognizer(doubleTap)
+        scrollView.delegate = self as? UIScrollViewDelegate
+        scrollView.contentInsetAdjustmentBehavior = .never
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.backgroundColor = UIColor.white
+        containerView.addSubview(scrollView)
+        scrollView.constrain(to: containerView, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        
+//        mapImageView.isUserInteractionEnabled = false
+//        mapImageView.translatesAutoresizingMaskIntoConstraints = false
+//        containerView.addSubview(mapImageView)
+//        mapImageView.constrain(to: containerView, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
 
         blurEffectView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(blurEffectView)
@@ -64,16 +75,6 @@ class HIProjectDetailLocationCell: UITableViewCell {
         blurEffectView.contentView.addSubview(titleLabel)
         titleLabel.leadingAnchor.constraint(equalTo: blurEffectView.contentView.leadingAnchor, constant: 8).isActive = true
         titleLabel.constrain(to: blurEffectView.contentView, topInset: 0, bottomInset: 0)
-
-        let disclosureIndicatorImageView = HITintImageView {
-            $0.tintHIColor = \.accent
-            $0.contentMode = .center
-            $0.image = #imageLiteral(resourceName: "DisclosureIndicator")
-        }
-        blurEffectView.contentView.addSubview(disclosureIndicatorImageView)
-        disclosureIndicatorImageView.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 8).isActive = true
-        disclosureIndicatorImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        disclosureIndicatorImageView.constrain(to: blurEffectView.contentView, topInset: 0, trailingInset: 0, bottomInset: 0)
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
@@ -120,6 +121,19 @@ extension HIProjectDetailLocationCell {
         }
         animator?.startAnimation()
     }
+    
+    func setZoomScale() {
+        mapImageView.sizeToFit()
+        scrollView.contentOffset = .zero
+        let widthScale = scrollView.bounds.width / (mapImageView.bounds.width * 105)
+        let heightScale = scrollView.bounds.height / (mapImageView.bounds.height * 105)
+        let minScale = min(widthScale, heightScale)
+        let maxScale = max(widthScale, heightScale)
+        scrollView.minimumZoomScale = minScale
+        scrollView.maximumZoomScale = maxScale
+        scrollView.zoomScale = minScale
+//        mapImageView.center = scrollView.center
+    }
 }
 
 // MARK: - Population
@@ -131,8 +145,34 @@ extension HIProjectDetailLocationCell {
         let words = rhs.split(separator: " ")
         let building = words[0]
         let floor = Array(words[1])[0]
-        lhs.mapView.isUserInteractionEnabled = true
-        lhs.mapView.image = UIImage(named: "IndoorMap\(building)\(floor)")
-        lhs.mapView.backgroundColor = UIColor.white
+        lhs.mapImageView.isUserInteractionEnabled = true
+        lhs.mapImageView.image = UIImage(named: "IndoorMap\(building)\(floor)")
+        lhs.mapImageView.backgroundColor = UIColor.white
+        lhs.scrollView.addSubview(lhs.mapImageView)
+//        lhs.mapImageView.constrain(to: lhs.scrollView, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        lhs.scrollView.contentSize = lhs.mapImageView.bounds.size
+        lhs.setZoomScale()
+    }
+}
+
+// MARK: UIScrollViewDelegate
+extension HIProjectDetailLocationCell {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return mapImageView
+    }
+
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        let offsetX = max((scrollView.bounds.size.width - scrollView.contentSize.width) * 0.5, 0.0)
+        let offsetY = max((scrollView.bounds.size.height - scrollView.contentSize.height) * 0.5, 0.0)
+        // adjust the center of image view
+        mapImageView.center = CGPoint(x: scrollView.contentSize.width * 0.5 + offsetX, y: scrollView.contentSize.height * 0.5 + offsetY)
+    }
+
+    @objc func handleDoubleTap(recognizer: UITapGestureRecognizer) {
+        if scrollView.zoomScale > scrollView.minimumZoomScale {
+            scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
+        } else {
+            scrollView.setZoomScale(scrollView.maximumZoomScale, animated: true)
+        }
     }
 }

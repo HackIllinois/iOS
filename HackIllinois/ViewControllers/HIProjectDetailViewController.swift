@@ -197,8 +197,6 @@ extension HIProjectDetailViewController {
         tableView.constrain(to: projectDetailContainer, bottomInset: -6)
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: -12).isActive = true
-        tableViewHeight = tableView.heightAnchor.constraint(equalToConstant: 100)
-        tableViewHeight.isActive = true
         self.tableView = tableView
     }
 
@@ -298,7 +296,7 @@ extension HIProjectDetailViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: HIProjectDetailLocationCell.identifier, for: indexPath)
         if let cell = cell as? HIProjectDetailLocationCell,
             let room = project?.room {
-            cell <- room
+            cell <- "Siebel 1111"
         }
         return cell
     }
