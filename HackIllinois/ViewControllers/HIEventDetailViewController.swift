@@ -51,10 +51,9 @@ class HIEventDetailViewController: HIBaseViewController {
         $0.font = HIAppearance.Font.contentText
     }
 
-    private let descriptionLabel = HILabel(style: .description) {
+    private let descriptionLabel = HILabel(style: .detailText) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor <- \.baseText
-        $0.font = HIAppearance.Font.contentText
         $0.numberOfLines = 0
     }
     private let favoritedButton = HIButton {
@@ -162,8 +161,8 @@ extension HIEventDetailViewController {
         eventDetailContainer.constrain(to: view.safeAreaLayoutGuide, trailingInset: -8, bottomInset: 0, leadingInset: 8)
 
         eventDetailContainer.addSubview(upperContainerView)
-        upperContainerView.constrain(to: eventDetailContainer, topInset: 10, trailingInset: 0, leadingInset: 0)
-        upperContainerView.constrain(height: 100)
+        upperContainerView.constrain(to: eventDetailContainer, topInset: 25, trailingInset: 0, leadingInset: 0)
+        upperContainerView.constrain(height: 75)
 
         upperContainerView.addSubview(titleLabel)
         titleLabel.leadingAnchor.constraint(equalTo: closeButton.leadingAnchor).isActive = true

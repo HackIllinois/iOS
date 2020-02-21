@@ -34,27 +34,30 @@ class HIProjectDetailViewController: HIBaseViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.clear
     }
-    private let upperContainerView = HIView {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundHIColor = \.clear
-    }
+
     private let titleLabel = HILabel(style: .detailTitle) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor <- \.baseText
         $0.font = HIAppearance.Font.detailTitle
     }
 
-    private let numberLabel = HILabel(style: .description) {
+    private let mentorLabel = HILabel(style: .detailSubtitle) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor <- \.baseText
-        $0.font = HIAppearance.Font.contentText
+        $0.numberOfLines = 0
+    }
+    private let numberLabel = HILabel(style: .detailSubtitle) {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor <- \.baseText
+    }
+    private let locationLabel = HILabel(style: .detailSubtitle) {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor <- \.baseText
     }
 
-    private let descriptionLabel = HILabel(style: .description) {
+    private let descriptionLabel = HILabel(style: .detailText) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor <- \.baseText
-        $0.font = HIAppearance.Font.contentText
-        $0.numberOfLines = 0
     }
     private let favoritedButton = HIButton {
         $0.tintHIColor = \.baseText
@@ -143,33 +146,44 @@ extension HIProjectDetailViewController {
         projectDetailContainer.addSubview(tagScrollView)
         setupTagItems()
 
-        projectDetailContainer.addSubview(upperContainerView)
-        upperContainerView.constrain(to: projectDetailContainer, trailingInset: 0, leadingInset: 0)
-        upperContainerView.topAnchor.constraint(equalTo: tagScrollView.bottomAnchor).isActive = true
-        upperContainerView.constrain(height: 100)
+        projectDetailContainer.addSubview(titleLabel)
+        titleLabel.leadingAnchor.constraint(equalTo: projectDetailContainer.leadingAnchor, constant: 12).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: tagScrollView.bottomAnchor, constant: 15).isActive = true
 
-        upperContainerView.addSubview(titleLabel)
-        titleLabel.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor, constant: 12).isActive = true
-        titleLabel.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor, constant: -20).isActive = true
+        favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
+        projectDetailContainer.addSubview(favoritedButton)
+        favoritedButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
+        favoritedButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
+        favoritedButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
+        favoritedButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
+        favoritedButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        favoritedButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
 
-        if !HIApplicationStateController.shared.isGuest {
-            favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
-            upperContainerView.addSubview(favoritedButton)
-            favoritedButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
-            favoritedButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
-            favoritedButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
-            favoritedButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
-            favoritedButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-            favoritedButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        if HIApplicationStateController.shared.isGuest {
+            favoritedButton.isHidden = true
         }
 
-        upperContainerView.addSubview(numberLabel)
-        numberLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
-        numberLabel.bottomAnchor.constraint(equalTo: upperContainerView.bottomAnchor).isActive = true
-        numberLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
+        mentorLabel.textColor <- \.attendeeBackground
+        projectDetailContainer.addSubview(mentorLabel)
+        mentorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
+        mentorLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
+        mentorLabel.trailingAnchor.constraint(equalTo: favoritedButton.leadingAnchor).isActive = true
+
+        setupLabels()
+    }
+
+    func setupLabels() {
+
+        projectDetailContainer.addSubview(numberLabel)
+        numberLabel.topAnchor.constraint(equalTo: mentorLabel.bottomAnchor, constant: 5).isActive = true
+        numberLabel.leadingAnchor.constraint(equalTo: mentorLabel.leadingAnchor).isActive = true
+
+        projectDetailContainer.addSubview(locationLabel)
+        locationLabel.topAnchor.constraint(equalTo: numberLabel.bottomAnchor, constant: 5).isActive = true
+        locationLabel.leadingAnchor.constraint(equalTo: numberLabel.leadingAnchor).isActive = true
 
         projectDetailContainer.addSubview(descriptionLabel)
-        descriptionLabel.topAnchor.constraint(equalTo: upperContainerView.bottomAnchor, constant: 30).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 30).isActive = true
         descriptionLabel.constrain(to: projectDetailContainer, trailingInset: -12)
         descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         descriptionLabelHeight = descriptionLabel.heightAnchor.constraint(equalToConstant: 100)
@@ -210,7 +224,9 @@ extension HIProjectDetailViewController {
         titleLabel.text = project.name
         descriptionLabel.text = project.info
         favoritedButton.isActive = project.favorite
-        numberLabel.text = "#\(project.number)"
+        mentorLabel.text = "Mentor(s): \(project.mentors.replacingOccurrences(of: ",", with: ", "))"
+        numberLabel.text = "Table #\(project.number)"
+        locationLabel.text = "Meeting Room: \(project.room)"
         populateTagLabels(stackView: tagStackView, tagsString: project.tags)
 
         tableView?.reloadData()
