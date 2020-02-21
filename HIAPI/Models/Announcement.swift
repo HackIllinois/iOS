@@ -38,14 +38,14 @@ public struct Announcement: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.topic = try container.decode(String.self, forKey: .topic)
+        self.topic = try container.decode(Int32.self, forKey: .topic)
         self.title = try container.decode(String.self, forKey: .title)
         self.body = try container.decode(String.self, forKey: .body)
         let time = try container.decode(Double.self, forKey: .time)
         self.time = Date(timeIntervalSince1970: time)
     }
 
-    public let topic: String
+    public let topic: Int32
     public let title: String
     public let body: String
     public let time: Date
