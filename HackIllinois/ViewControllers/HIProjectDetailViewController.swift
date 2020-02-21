@@ -224,7 +224,7 @@ extension HIProjectDetailViewController {
         titleLabel.text = project.name
         descriptionLabel.text = project.info
         favoritedButton.isActive = project.favorite
-        mentorLabel.text = "Mentor(s): \(project.mentors.replacingOccurrences(of: ",", with: ", "))"
+        mentorLabel.text = project.mentors.replacingOccurrences(of: ",", with: ", ")
         numberLabel.text = "Table #\(project.number)"
         locationLabel.text = "Meeting Room: \(project.room)"
         populateTagLabels(stackView: tagStackView, tagsString: project.tags)
