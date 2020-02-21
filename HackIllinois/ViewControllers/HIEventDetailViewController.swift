@@ -118,11 +118,14 @@ extension HIEventDetailViewController {
         }
 
         let now = Date()
-        if event.startTime.addingTimeInterval(-15*60) > now {
-            let message = "The scanning period for this event has not begun; scanning begins 15 minutes before the event."
-            presentErrorController(title: "Sorry", message: message, dismissParentOnCompletion: false)
-        } else if now > event.endTime {
-            presentErrorController(title: "Sorry", message: "The scanning period for this event has ended.", dismissParentOnCompletion: false)
+        if event.startTime.addingTimeInterval(-15*60) > now || now > event.endTime {
+            let alertController = UIAlertController(title: "Are you sure?", message: "You are outside the scanning period for the event", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+            alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+                HIEventDetailViewController.scannerViewController.event = event
+                self.present(HIEventDetailViewController.scannerViewController, animated: true)
+            }))
+            self.present(alertController, animated: true, completion: nil)
         } else {
             HIEventDetailViewController.scannerViewController.event = event
             self.present(HIEventDetailViewController.scannerViewController, animated: true)
