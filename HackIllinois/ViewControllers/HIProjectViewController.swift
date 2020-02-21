@@ -153,7 +153,9 @@ extension HIProjectViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
         title = "PROJECTS"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuUnfavorited"), style: .plain, target: self, action: #selector(didSelectFavoritesIcon(_:)))
+        if !HIApplicationStateController.shared.isGuest {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuUnfavorited"), style: .plain, target: self, action: #selector(didSelectFavoritesIcon(_:)))
+        }
     }
 }
 

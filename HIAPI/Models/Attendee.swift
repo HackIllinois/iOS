@@ -22,17 +22,9 @@ public struct Attendee: Codable, APIReturnable {
     public let firstName: String?
     public let lastName: String?
     public let email: String
-    public let shirtSize: String
-    public let diet: DietaryRestrictions
-    public let age: Int
     public let graduationYear: Int
-    public let transportation: String
     public let school: String
     public let major: String
     public let gender: String
-    public let professionalInterest: [String]?
-    public let github: String
-    public let linkedin: String?
-    public let interests: [String]?
     public let phone: String
 }
