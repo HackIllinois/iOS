@@ -26,5 +26,4 @@ public struct Attendee: Codable, APIReturnable {
     public let school: String
     public let major: String
     public let gender: String
-    public let phone: String
 }
