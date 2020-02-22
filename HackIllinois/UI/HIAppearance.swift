@@ -65,7 +65,7 @@ struct HIAppearance: Equatable {
         baseBackground: white,
         contentBackground: white,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
-        frostedTint: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0),
+        frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         qrTint: darkBlue,
         qrBackground: white,
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewDay"),
