@@ -48,8 +48,8 @@ class HIHomeViewController: HIEventListViewController {
         let happeningNowPredicate = NSPredicate(format: "(startTime < now()) AND (endTime > now())")
         dataStore.append((displayText: "HAPPENING NOW ", predicate: happeningNowPredicate))
 
-        let inFifteenMinutes = Date(timeIntervalSinceNow: 900)
-        let upcomingPredicate = NSPredicate(format: "(startTime < %@) AND (startTime > now())", inFifteenMinutes as NSDate)
+        let inOneHour = Date(timeIntervalSinceNow: 3600)
+        let upcomingPredicate = NSPredicate(format: "(startTime < %@) AND (startTime > now())", inOneHour as NSDate)
         dataStore.append((displayText: "UPCOMING", predicate: upcomingPredicate))
 
         return dataStore
