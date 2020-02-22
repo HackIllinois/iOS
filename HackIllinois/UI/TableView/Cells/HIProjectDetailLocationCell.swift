@@ -27,10 +27,7 @@ class HIProjectDetailLocationCell: UITableViewCell {
         $0.font = HIAppearance.Font.contentSubtitle
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-
-    var blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     let containerView = UIView()
-    let scrollView = UIScrollView(frame: .zero)
 
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -77,7 +74,6 @@ class HIProjectDetailLocationCell: UITableViewCell {
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
         contentView.backgroundColor <- \.contentBackground
-        blurEffectView.backgroundColor <- \.frostedTint
     }
 }
 
