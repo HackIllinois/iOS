@@ -28,6 +28,7 @@ class HIProjectDetailLocationCell: UITableViewCell {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     let containerView = UIView()
+    var blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
 
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -49,15 +50,20 @@ class HIProjectDetailLocationCell: UITableViewCell {
         containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12).isActive = true
         containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6).isActive = true
 
-        containerView.addSubview(titleLabel)
-        titleLabel.constrain(to: containerView, topInset: 0, trailingInset: 0, leadingInset: 8)
-        titleLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(blurEffectView)
+        blurEffectView.constrain(to: containerView, topInset: 0, trailingInset: 0, leadingInset: 0)
+        blurEffectView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+
+        blurEffectView.contentView.addSubview(titleLabel)
+        titleLabel.leadingAnchor.constraint(equalTo: blurEffectView.contentView.leadingAnchor, constant: 8).isActive = true
+        titleLabel.constrain(to: blurEffectView.contentView, topInset: 0, bottomInset: 0)
 
         mapImageView.isUserInteractionEnabled = false
         mapImageView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(mapImageView)
         mapImageView.constrain(to: containerView, trailingInset: -5, bottomInset: -5, leadingInset: 5)
-        mapImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
+        mapImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
@@ -74,6 +80,7 @@ class HIProjectDetailLocationCell: UITableViewCell {
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
         contentView.backgroundColor <- \.contentBackground
+        blurEffectView.backgroundColor <- \.frostedTint
     }
 }
 
