@@ -40,7 +40,7 @@ class HIHomeViewController: HIEventListViewController {
 
         return fetchedResultsController
     }()
-    
+
     let announcementViewController = HIAnnouncementsViewController()
 
     private var currentTab = 0
@@ -104,7 +104,7 @@ extension HIHomeViewController {
             tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
     }
-    
+
     @objc func didSelectAnnouncementButton(_ sender: HIButton) {
         self.present(announcementViewController, animated: true, completion: nil)
     }

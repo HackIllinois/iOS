@@ -97,7 +97,7 @@ extension HIAnnouncementsViewController {
 
     func currentPredicate() -> NSPredicate {
         let roles = HIApplicationStateController.shared.user?.roles ?? .null
-        return NSPredicate(format: "(\(roles.rawValue) & topic) > 0")
+        return NSPredicate(format: "(\(roles.rawValue)) > 0")
     }
 }
 

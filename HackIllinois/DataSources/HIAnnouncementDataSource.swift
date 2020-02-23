@@ -104,8 +104,7 @@ final class HIAnnouncementDataSource {
             let title = data["title"] as? String,
             let body = data["body"] as? String,
             let seconds = data["time"] as? TimeInterval,
-            let role = data["topic"] as? String,
-            let topic = try? HIAPI.Roles(string: role) else { return }
+            let topic = data["topic"] as? String else { return }
             let time = Date(timeIntervalSince1970: seconds)
 
         HICoreDataController.shared.performBackgroundTask { context -> Void in
@@ -120,7 +119,7 @@ final class HIAnnouncementDataSource {
                 coreDataAnnouncement.title = title
                 coreDataAnnouncement.body = body
                 coreDataAnnouncement.time = time
-                coreDataAnnouncement.topic = Int32(topic.rawValue)
+                coreDataAnnouncement.topic = topic
 
                 // 3) Save changes, call completion handler.
                 try context.save()
