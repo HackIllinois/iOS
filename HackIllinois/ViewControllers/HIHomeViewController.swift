@@ -65,8 +65,7 @@ class HIHomeViewController: HIEventListViewController {
     private let announcementButton = HIButton {
         $0.tintHIColor = \.baseText
         $0.backgroundHIColor = \.clear
-        $0.activeImage = #imageLiteral(resourceName: "Favorited")
-        $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
+        $0.baseImage = #imageLiteral(resourceName: "Bell")
     }
 
     private var countdownDataStoreIndex = 0
@@ -114,6 +113,11 @@ extension HIHomeViewController {
 extension HIHomeViewController {
     override func loadView() {
         super.loadView()
+        view.addSubview(announcementButton)
+        announcementButton.constrain(to: view.safeAreaLayoutGuide, topInset: 15, trailingInset: -15)
+        announcementButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        announcementButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        announcementButton.addTarget(self, action: #selector(didSelectAnnouncementButton(_:)), for: .touchUpInside)
 
         view.addSubview(countdownTitleLabel)
         countdownTitleLabel.constrain(to: view, topInset: 60, trailingInset: 0, leadingInset: 0)
@@ -167,6 +171,10 @@ extension HIHomeViewController {
         super.viewWillDisappear(animated)
         teardownPredicateRefreshTimer()
     }
+    
+    override func viewDidLayoutSubviews() {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
 }
 
 // MARK: - UIImageView Setup
@@ -174,14 +182,6 @@ extension HIHomeViewController {
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
         buildingView.image = #imageLiteral(resourceName: "Buildings")
-    }
-}
-
-// MARK: - UINavigationItem Setup
-extension HIHomeViewController {
-    @objc dynamic override func setupNavigationItem() {
-        super.setupNavigationItem()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuUnfavorited"), style: .plain, target: self, action: #selector(didSelectAnnouncementButton(_:)))
     }
 }
 

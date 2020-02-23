@@ -23,6 +23,8 @@ class HIAnnouncementCell: HIBubbleCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+        backgroundColor = UIColor.clear
+        contentView.layer.backgroundColor = UIColor.clear.cgColor
         bubbleView.addSubview(titleLabel)
         titleLabel.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 10).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 23).isActive = true
