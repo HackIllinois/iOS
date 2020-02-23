@@ -213,11 +213,21 @@ private extension HILoginFlowController {
                 let (apiRolesContainer, _) = try result.get()
                 var user = user
                 user.roles = apiRolesContainer.roles
-                if user.roles.contains(.applicant) {
+                if user.provider == .github && user.roles.contains(.attendee) {
                     self?.populateRegistrationData(buildingUser: user, sender: sender)
+                } else if user.provider == .google {
+                    if user.roles.contains(.staff) {
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            sender.presentErrorController(title: "You must have a valid staff account to log in.", message: "", dismissParentOnCompletion: false)
+                        }
+                    }
                 } else {
                     DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
+                        sender.presentErrorController(title: "You must RSVP to log in.", message: "", dismissParentOnCompletion: false)
                     }
                 }
             } catch {

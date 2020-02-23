@@ -111,6 +111,7 @@
 		95FC79C321E024A700715036 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC79C221E024A700715036 /* Notifications.swift */; };
 		A5163FEB221F2741003C543E /* HIAdminStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5163FEA221F2741003C543E /* HIAdminStatsViewController.swift */; };
 		A5163FED221F283C003C543E /* StatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5163FEC221F283C003C543E /* StatsService.swift */; };
+		AC38BEA323FE3E800067ABAC /* HIProjectDetailLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38BEA223FE3E800067ABAC /* HIProjectDetailLocationCell.swift */; };
 		BCD0CA5123C4356300ADC89B /* HIPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD0CA5023C4356300ADC89B /* HIPopupViewController.swift */; };
 		BCEBD2DA23DE995700D32F5A /* HIPopupAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEBD2D923DE995700D32F5A /* HIPopupAnimator.swift */; };
 		D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A309BB2211175200CBA351 /* PassKit.framework */; };
@@ -264,6 +265,7 @@
 		95FC79C221E024A700715036 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		A5163FEA221F2741003C543E /* HIAdminStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAdminStatsViewController.swift; sourceTree = "<group>"; };
 		A5163FEC221F283C003C543E /* StatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsService.swift; sourceTree = "<group>"; };
+		AC38BEA223FE3E800067ABAC /* HIProjectDetailLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProjectDetailLocationCell.swift; sourceTree = "<group>"; };
 		BCD0CA5023C4356300ADC89B /* HIPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIPopupViewController.swift; sourceTree = "<group>"; };
 		BCEBD2D923DE995700D32F5A /* HIPopupAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HIPopupAnimator.swift; path = HackIllinois/UI/Animations/HIPopupAnimator.swift; sourceTree = SOURCE_ROOT; };
 		D3A309BA221116A600CBA351 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };
@@ -527,6 +529,7 @@
 				95C96DF2203E0C3E002FF0CB /* HIBubbleCell */,
 				95A7D288203D4F54005EAEAF /* HIEventDetailLocationCell.swift */,
 				95A7D284203D4F54005EAEAF /* HILoginSelectionCell.swift */,
+				AC38BEA223FE3E800067ABAC /* HIProjectDetailLocationCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -805,6 +808,7 @@
 				95CA9230201E60D300C46037 /* UIImage+QRCode.swift in Sources */,
 				95A7D2A0203D60E9005EAEAF /* HIBubbleCell.swift in Sources */,
 				9552D92821758E4C00A8C869 /* UIView+AutoLayout.swift in Sources */,
+				AC38BEA323FE3E800067ABAC /* HIProjectDetailLocationCell.swift in Sources */,
 				3C26401823ADE7AA004E1DBE /* Project+CoreDataClass.swift in Sources */,
 				958C863B2033C94800803F81 /* HIAdminAnnouncementViewController.swift in Sources */,
 				952831A4200F2B35002C9F3E /* HILoginFlowController.swift in Sources */,
@@ -928,7 +932,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 8VNQTQM2L6;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Stickers/Info.plist;
@@ -949,7 +953,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 8VNQTQM2L6;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Stickers/Info.plist;
@@ -1081,7 +1085,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HackIllinois/HackIllinois.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 8VNQTQM2L6;
 				INFOPLIST_FILE = HackIllinois/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1104,7 +1108,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HackIllinois/HackIllinois.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 8VNQTQM2L6;
 				INFOPLIST_FILE = HackIllinois/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1128,7 +1132,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 7;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 8VNQTQM2L6;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1165,7 +1169,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 7;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 8VNQTQM2L6;
 				DYLIB_COMPATIBILITY_VERSION = 1;

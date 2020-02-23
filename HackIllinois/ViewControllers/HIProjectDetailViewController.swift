@@ -34,27 +34,30 @@ class HIProjectDetailViewController: HIBaseViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.clear
     }
-    private let upperContainerView = HIView {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundHIColor = \.clear
-    }
+
     private let titleLabel = HILabel(style: .detailTitle) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor <- \.baseText
         $0.font = HIAppearance.Font.detailTitle
     }
 
-    private let numberLabel = HILabel(style: .description) {
+    private let mentorLabel = HILabel(style: .detailSubtitle) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor <- \.baseText
-        $0.font = HIAppearance.Font.contentText
+        $0.numberOfLines = 0
+    }
+    private let numberLabel = HILabel(style: .detailSubtitle) {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor <- \.baseText
+    }
+    private let locationLabel = HILabel(style: .detailSubtitle) {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor <- \.baseText
     }
 
-    private let descriptionLabel = HILabel(style: .description) {
+    private let descriptionLabel = HILabel(style: .detailText) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor <- \.baseText
-        $0.font = HIAppearance.Font.contentText
-        $0.numberOfLines = 0
     }
     private let favoritedButton = HIButton {
         $0.tintHIColor = \.baseText
@@ -123,6 +126,13 @@ extension HIProjectDetailViewController {
             gradient.locations = [0, 0.05, 0.95, 1]
         }
     }
+
+    func convertCharToInt(character: Character) -> Int {
+        if let integer = Int(String(character)) {
+            return integer
+        }
+        return 999
+    }
 }
 
 // MARK: - UIViewController
@@ -143,37 +153,58 @@ extension HIProjectDetailViewController {
         projectDetailContainer.addSubview(tagScrollView)
         setupTagItems()
 
-        projectDetailContainer.addSubview(upperContainerView)
-        upperContainerView.constrain(to: projectDetailContainer, trailingInset: 0, leadingInset: 0)
-        upperContainerView.topAnchor.constraint(equalTo: tagScrollView.bottomAnchor).isActive = true
-        upperContainerView.constrain(height: 100)
+        projectDetailContainer.addSubview(titleLabel)
+        titleLabel.leadingAnchor.constraint(equalTo: projectDetailContainer.leadingAnchor, constant: 12).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: tagScrollView.bottomAnchor, constant: 15).isActive = true
 
-        upperContainerView.addSubview(titleLabel)
-        titleLabel.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor, constant: 12).isActive = true
-        titleLabel.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor, constant: -20).isActive = true
+        favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
+        projectDetailContainer.addSubview(favoritedButton)
+        favoritedButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
+        favoritedButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
+        favoritedButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
+        favoritedButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
+        favoritedButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        favoritedButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
 
-        if !HIApplicationStateController.shared.isGuest {
-            favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
-            upperContainerView.addSubview(favoritedButton)
-            favoritedButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
-            favoritedButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
-            favoritedButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
-            favoritedButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
-            favoritedButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-            favoritedButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        if HIApplicationStateController.shared.isGuest {
+            favoritedButton.isHidden = true
         }
 
-        upperContainerView.addSubview(numberLabel)
-        numberLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
-        numberLabel.bottomAnchor.constraint(equalTo: upperContainerView.bottomAnchor).isActive = true
-        numberLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
+        mentorLabel.textColor <- \.attendeeBackground
+        projectDetailContainer.addSubview(mentorLabel)
+        mentorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
+        mentorLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
+        mentorLabel.trailingAnchor.constraint(equalTo: favoritedButton.leadingAnchor).isActive = true
+
+        setupLabels()
+    }
+
+    func setupLabels() {
+
+        projectDetailContainer.addSubview(numberLabel)
+        numberLabel.topAnchor.constraint(equalTo: mentorLabel.bottomAnchor, constant: 5).isActive = true
+        numberLabel.leadingAnchor.constraint(equalTo: mentorLabel.leadingAnchor).isActive = true
+
+        projectDetailContainer.addSubview(locationLabel)
+        locationLabel.topAnchor.constraint(equalTo: numberLabel.bottomAnchor, constant: 5).isActive = true
+        locationLabel.leadingAnchor.constraint(equalTo: numberLabel.leadingAnchor).isActive = true
 
         projectDetailContainer.addSubview(descriptionLabel)
-        descriptionLabel.topAnchor.constraint(equalTo: upperContainerView.bottomAnchor, constant: 30).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 30).isActive = true
         descriptionLabel.constrain(to: projectDetailContainer, trailingInset: -12)
         descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         descriptionLabelHeight = descriptionLabel.heightAnchor.constraint(equalToConstant: 100)
         descriptionLabelHeight.isActive = true
+
+        let tableView = UITableView()
+        tableView.backgroundColor <- \.clear
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        projectDetailContainer.addSubview(tableView)
+        tableView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20).isActive = true
+        tableView.constrain(to: projectDetailContainer, bottomInset: -6)
+        tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: -12).isActive = true
+        self.tableView = tableView
     }
 
     func setupTagItems() {
@@ -181,6 +212,7 @@ extension HIProjectDetailViewController {
         tagScrollView.leadingAnchor.constraint(equalTo: projectDetailContainer.leadingAnchor, constant: 12).isActive = true
         tagScrollView.topAnchor.constraint(equalTo: projectDetailContainer.topAnchor, constant: 30).isActive = true
         tagScrollView.trailingAnchor.constraint(equalTo: projectDetailContainer.trailingAnchor, constant: -12).isActive = true
+        tagScrollView.constrain(height: 16)
         tagScrollView.showsHorizontalScrollIndicator = false
         tagScrollView.delegate = self
 
@@ -210,7 +242,9 @@ extension HIProjectDetailViewController {
         titleLabel.text = project.name
         descriptionLabel.text = project.info
         favoritedButton.isActive = project.favorite
-        numberLabel.text = "#\(project.number)"
+        mentorLabel.text = project.mentors.replacingOccurrences(of: ",", with: ", ")
+        numberLabel.text = "Table #\(project.number)"
+        locationLabel.text = "Meeting Room: \(project.room)"
         populateTagLabels(stackView: tagStackView, tagsString: project.tags)
 
         tableView?.reloadData()
@@ -250,7 +284,7 @@ extension HIProjectDetailViewController {
 extension HIProjectDetailViewController {
     override func setupTableView() {
         tableView?.alwaysBounceVertical = false
-        tableView?.register(HIEventDetailLocationCell.self, forCellReuseIdentifier: HIEventDetailLocationCell.identifier)
+        tableView?.register(HIProjectDetailLocationCell.self, forCellReuseIdentifier: HIProjectDetailLocationCell.identifier)
         super.setupTableView()
     }
 }
@@ -262,13 +296,34 @@ extension HIProjectDetailViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard project != nil else { return 0 }
-        return 1 //Projects have one location
+        if let room = project?.room {
+            let words = room.split(separator: " ")
+            if words.count == 2 {
+                if words[0] != "Siebel" && words[0] != "ECEB" {
+                    return 0
+                } else {
+                    let floor = (words[1].count > 0) ? convertCharToInt(character: Array(words[1])[0]) : 999
+                    if words[0] == "Siebel" && floor <= 2 {
+                        return 1
+                    } else if words[0] == "ECEB" && floor > 0 && floor <= 3 {
+                        return 1
+                    }
+                }
+            } else {
+                return 0
+            }
+        } else {
+            return 0
+        }
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: HIEventDetailLocationCell.identifier, for: indexPath)
-        //Update in UI: Projects should have an indoor location with a HIProjectDetailLocationCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: HIProjectDetailLocationCell.identifier, for: indexPath)
+        if let cell = cell as? HIProjectDetailLocationCell,
+            let room = project?.room {
+            cell <- room
+        }
         return cell
     }
 }
@@ -280,7 +335,7 @@ extension HIProjectDetailViewController {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 160
+        return 320
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
