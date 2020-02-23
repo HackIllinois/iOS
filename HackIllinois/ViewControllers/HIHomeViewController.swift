@@ -175,7 +175,7 @@ extension HIHomeViewController {
         super.viewWillDisappear(animated)
         teardownPredicateRefreshTimer()
     }
-    
+
     override func viewDidLayoutSubviews() {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }

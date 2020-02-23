@@ -63,7 +63,7 @@ extension HIAnnouncementsViewController {
         closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
         closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
         closeButton.constrain(height: 20)
-        
+
         view.addSubview(titleLabel)
         titleLabel.leadingAnchor.constraint(equalTo: closeButton.leadingAnchor).isActive = true
         titleLabel.topAnchor.constraint(equalTo: closeButton.topAnchor, constant: 35).isActive = true
@@ -109,7 +109,7 @@ extension HIAnnouncementsViewController {
     @objc func presentAdminAnnouncementViewController() {
         navigationController?.pushViewController(adminAnnouncementViewController, animated: true)
     }
-    
+
     @objc func didSelectCloseButton(_ sender: HIButton) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -118,7 +118,7 @@ extension HIAnnouncementsViewController {
         let roles = HIApplicationStateController.shared.user?.roles ?? .null
         return NSPredicate(format: "(\(roles.rawValue)) > 0")
     }
-    
+
 }
 
 // MARK: - UITableView Setup
