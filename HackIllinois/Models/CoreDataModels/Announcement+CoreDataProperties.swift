@@ -19,9 +19,9 @@ extension Announcement {
         return NSFetchRequest<Announcement>(entityName: "Announcement")
     }
 
-    @NSManaged public var info: String
+    @NSManaged public var topic: String
+    @NSManaged public var body: String
     @NSManaged public var time: Date
     @NSManaged public var title: String
-    @NSManaged public var roles: Int32
 
 }

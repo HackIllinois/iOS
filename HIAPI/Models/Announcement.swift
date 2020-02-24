@@ -30,24 +30,23 @@ public struct AnnouncementContainer: Decodable, APIReturnable {
 
 public struct Announcement: Codable {
     internal enum CodingKeys: String, CodingKey {
+        case topic
         case title
         case body
         case time
-        case roles = "topicName"
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.topic = try container.decode(String.self, forKey: .topic)
         self.title = try container.decode(String.self, forKey: .title)
         self.body = try container.decode(String.self, forKey: .body)
         let time = try container.decode(Double.self, forKey: .time)
         self.time = Date(timeIntervalSince1970: time)
-        let role = try container.decode(String.self, forKey: .roles)
-        self.roles = try Roles(string: role)
     }
 
+    public let topic: String
     public let title: String
     public let body: String
     public let time: Date
-    public let roles: Roles
 }

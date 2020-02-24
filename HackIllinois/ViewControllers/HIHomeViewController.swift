@@ -41,6 +41,8 @@ class HIHomeViewController: HIEventListViewController {
         return fetchedResultsController
     }()
 
+    let announcementViewController = HIAnnouncementsViewController()
+
     private var currentTab = 0
 
     private var dataStore: [(displayText: String, predicate: NSPredicate)] = {
@@ -59,6 +61,11 @@ class HIHomeViewController: HIEventListViewController {
     private lazy var countdownViewController = HICountdownViewController(delegate: self)
     private let happeningNowLabel = HILabel(style: .title) {
         $0.text = "HAPPENING NOW"
+    }
+    private let announcementButton = HIButton {
+        $0.tintHIColor = \.baseText
+        $0.backgroundHIColor = \.clear
+        $0.baseImage = #imageLiteral(resourceName: "Bell")
     }
 
     private var countdownDataStoreIndex = 0
@@ -96,12 +103,25 @@ extension HIHomeViewController {
             tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
     }
+
+    @objc func didSelectAnnouncementButton(_ sender: HIButton) {
+        self.present(announcementViewController, animated: true, completion: nil)
+    }
 }
 
 // MARK: - UIViewController
 extension HIHomeViewController {
     override func loadView() {
         super.loadView()
+        view.addSubview(announcementButton)
+        announcementButton.constrain(to: view.safeAreaLayoutGuide, topInset: 15, trailingInset: -15)
+        announcementButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        announcementButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        announcementButton.addTarget(self, action: #selector(didSelectAnnouncementButton(_:)), for: .touchUpInside)
+
+        if HIApplicationStateController.shared.isGuest {
+            announcementButton.isHidden = true
+        }
 
         view.addSubview(countdownTitleLabel)
         countdownTitleLabel.constrain(to: view, topInset: 60, trailingInset: 0, leadingInset: 0)
@@ -154,6 +174,10 @@ extension HIHomeViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         teardownPredicateRefreshTimer()
+    }
+
+    override func viewDidLayoutSubviews() {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
 }
 
