@@ -119,6 +119,10 @@ extension HIHomeViewController {
         announcementButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
         announcementButton.addTarget(self, action: #selector(didSelectAnnouncementButton(_:)), for: .touchUpInside)
 
+        if HIApplicationStateController.shared.isGuest {
+            announcementButton.isHidden = true
+        }
+
         view.addSubview(countdownTitleLabel)
         countdownTitleLabel.constrain(to: view, topInset: 60, trailingInset: 0, leadingInset: 0)
 
