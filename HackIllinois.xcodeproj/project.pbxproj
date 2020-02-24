@@ -937,7 +937,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Stickers/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 2020.3;
+				MARKETING_VERSION = 2020.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios.stickers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -958,7 +958,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Stickers/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 2020.3;
+				MARKETING_VERSION = 2020.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios.stickers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1092,7 +1092,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.3;
+				MARKETING_VERSION = 2020.2.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1115,7 +1115,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.3;
+				MARKETING_VERSION = 2020.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1146,7 +1146,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.3;
+				MARKETING_VERSION = 2020.2.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.HIAPI;
@@ -1183,7 +1183,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.3;
+				MARKETING_VERSION = 2020.2.1;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.HIAPI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
