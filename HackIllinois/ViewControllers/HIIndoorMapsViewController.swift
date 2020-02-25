@@ -86,8 +86,8 @@ extension HIIndoorMapsViewController {
     func setZoomScale() {
         mapImageView.sizeToFit()
         scrollView.contentOffset = .zero
-        let widthScale = scrollView.bounds.width / mapImageView.bounds.width
-        let heightScale = scrollView.bounds.height / mapImageView.bounds.height
+        let widthScale = scrollView.bounds.width / (mapImageView.bounds.width * 1.05)
+        let heightScale = scrollView.bounds.height / (mapImageView.bounds.height * 1.05)
         let minScale = min(widthScale, heightScale)
         let maxScale = max(widthScale, heightScale)
         scrollView.minimumZoomScale = minScale
@@ -143,5 +143,12 @@ extension HIIndoorMapsViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
         title = "INDOOR MAPS"
+    }
+}
+
+// MARK: - UITabBarItem Setup
+extension HIIndoorMapsViewController {
+    override func setupTabBarItem() {
+        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "map"), tag: 0)
     }
 }

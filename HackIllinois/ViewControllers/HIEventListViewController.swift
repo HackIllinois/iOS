@@ -55,7 +55,7 @@ extension HIEventListViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         eventDetailViewController.event = _fetchedResultsController?.object(at: indexPath) as? Event
-        navigationController?.pushViewController(eventDetailViewController, animated: true)
+        self.present(eventDetailViewController, animated: true, completion: nil)
         super.tableView(tableView, didSelectRowAt: indexPath)
     }
 }
@@ -74,10 +74,10 @@ extension HIEventListViewController: HIEventCellDelegate {
         guard let indexPath = eventCell.indexPath,
             let event = _fetchedResultsController?.object(at: indexPath) as? Event else { return }
 
-        let changeFavoriteStatusRequest: APIRequest<Favorite> =
+        let changeFavoriteStatusRequest: APIRequest<EventFavorites> =
             eventCell.favoritedButton.isActive ?
-                HIAPI.EventService.unfavoriteBy(name: event.name) :
-                HIAPI.EventService.favoriteBy(name: event.name)
+                HIAPI.EventService.unfavoriteBy(id: event.id) :
+                HIAPI.EventService.favoriteBy(id: event.id)
 
         changeFavoriteStatusRequest
         .onCompletion { result in
@@ -88,6 +88,11 @@ extension HIEventListViewController: HIEventCellDelegate {
                     event.favorite ?
                         HILocalNotificationController.shared.scheduleNotification(for: event) :
                         HILocalNotificationController.shared.unscheduleNotification(for: event)
+                    self.tableView?.reloadSections(IndexSet(integer: indexPath.section), with: .fade)
+                    UIView.setAnimationsEnabled(false)
+                    UIView.animate(withDuration: 0.0, animations: self.tableView!.reloadData) { _ in
+                        UIView.setAnimationsEnabled(true)
+                    }
                 }
             case .failure(let error):
                 print(error, error.localizedDescription)
@@ -112,6 +117,6 @@ extension HIEventListViewController: UIViewControllerPreviewingDelegate {
     }
 
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        navigationController?.pushViewController(viewControllerToCommit, animated: true)
+        self.present(viewControllerToCommit, animated: true, completion: nil)
     }
 }

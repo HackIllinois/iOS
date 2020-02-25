@@ -15,6 +15,15 @@ import UIKit
 
 class HINavigationController: UINavigationController {
 
+    var statusBarIsHidden = false
+    override var prefersStatusBarHidden: Bool {
+        return statusBarIsHidden
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return (\HIAppearance.preferredStatusBarStyle).value
+    }
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
     }
@@ -37,14 +46,15 @@ class HINavigationController: UINavigationController {
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
         navigationBar.tintColor <- \.accent
-        navigationBar.barTintColor <- \.baseBackground
+        navigationBar.barTintColor <- \.clear
+        navigationBar.isTranslucent = true
         navigationBar.titleTextAttributes = [
             NSAttributedString.Key.foregroundColor: (\HIAppearance.titleText).value as Any
         ]
 
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
-        (\HIAppearance.baseBackground).value.setFill()
+        (\HIAppearance.clear).value.setFill()
         UIRectFill(rect)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

@@ -18,11 +18,19 @@ class HILabel: UILabel {
     enum Style {
         case location
         case event
+        case sponsor
+        case project
         case title
+        case detailTitle
         case subtitle
         case description
+        case cellDescription
         case loginHeader
         case loginSelection
+        case viewTitle
+        case backgroundTitle
+        case detailSubtitle
+        case detailText
     }
 
     // MARK: - Properties
@@ -32,6 +40,8 @@ class HILabel: UILabel {
     var backgroundHIColor: HIColor?
 
     // MARK: - Init
+    // Waive swiftlint warning
+    // swiftlint:disable:next function_body_length
     init(style: Style? = nil, additionalConfiguration: ((HILabel) -> Void)? = nil) {
         self.style = style
         super.init(frame: .zero)
@@ -51,11 +61,39 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.contentTitle
 
+        case .sponsor:
+            textHIColor = \.attendeeBackground
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.sponsorText
+
+        case .detailTitle:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.detailTitle
+            numberOfLines = 0
+
+        case .detailSubtitle:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.detailSubtitle
+            numberOfLines = 0
+
+        case .detailText:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.detailText
+            numberOfLines = 0
+
+        case .project:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.contentTitle
+
         case .title:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .center
-            font = HIAppearance.Font.button
+            font = HIAppearance.Font.contentTitle
 
         case .subtitle:
             textHIColor = \.accent
@@ -65,19 +103,39 @@ class HILabel: UILabel {
         case .description:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentText
+            font = HIAppearance.Font.descriptionText
             numberOfLines = 0
 
-        case .loginHeader:
-            textHIColor = \.accent
-            backgroundHIColor = \.baseBackground
-            font = HIAppearance.Font.navigationTitle
+        case .cellDescription:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.contentText
+            numberOfLines = 1
 
-        case .loginSelection:
+        case .loginHeader:
+            textHIColor = \.loginTitleBackground
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.loginTitle
+
+        case .viewTitle:
+            textHIColor = \.loginSelectionText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.loginTitle
+
+        case .backgroundTitle:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .center
             font = HIAppearance.Font.navigationSubtitle
+
+        case .loginSelection:
+            textHIColor = \.loginSelectionText
+            backgroundHIColor = \.clear
+            textAlignment = .center
+            font = HIAppearance.Font.loginSelection
+            layer.borderWidth = 2.0
+            layer.borderColor = (\HIAppearance.loginSelectionText).value.cgColor
+            layer.backgroundColor = UIColor.clear.cgColor
         }
         }
 

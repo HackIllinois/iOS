@@ -21,7 +21,10 @@ class HIBubbleCell: UITableViewCell {
         $0.backgroundHIColor = \.contentBackground
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.cornerRadius = 8
-        $0.layer.masksToBounds = true
+        $0.layer.masksToBounds = false
+        $0.layer.shadowColor = #colorLiteral(red: 0.1333333333, green: 0.168627451, blue: 0.3607843137, alpha: 0.3984650088)
+        $0.layer.shadowOffset = CGSize(width: 0, height: 3)
+        $0.layer.shadowOpacity = 1.0
     }
 
     // MARK: - Init
@@ -46,7 +49,7 @@ class HIBubbleCell: UITableViewCell {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        contentView.backgroundColor <- \.baseBackground
+        contentView.backgroundColor <- \.clear
     }
 
     // MARK: - UITableViewCell

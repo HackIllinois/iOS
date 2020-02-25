@@ -14,25 +14,26 @@ import Foundation
 import UIKit
 import CoreData
 import Lottie
+import os
 
 class HIBaseViewController: UIViewController {
     // MARK: - Properties
     var _fetchedResultsController: NSFetchedResultsController<NSManagedObject>?
     var refreshControl = UIRefreshControl()
-    var refreshAnimation = LOTAnimationView(name: "refresh")
+    var refreshAnimation = AnimationView(name: "refresh")
     var tableView: UITableView?
-    let tableBackgroundView = HIView(style: .emptyTable)
+    var backgroundView = UIImageView()
+    let tableBackgroundView = HIView()
 }
 
 // MARK: - UIViewController
 extension HIBaseViewController {
-    override func loadView() {
-        view = HIView { $0.backgroundHIColor = \.baseBackground }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpBackgroundView()
         setupNavigationItem()
+        setupTabBarItem()
         setupTableView()
         try? _fetchedResultsController?.performFetch()
     }
@@ -48,6 +49,62 @@ extension HIBaseViewController {
     }
 }
 
+// MARK: - UIImageView Setup
+extension HIBaseViewController {
+    @objc dynamic func setUpBackgroundView() {
+        view.layer.backgroundColor = UIColor.clear.cgColor
+        backgroundView.image = #imageLiteral(resourceName: "Gradient")
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.isUserInteractionEnabled = true
+        backgroundView.contentMode = .scaleAspectFill
+        view.insertSubview(backgroundView, at: 0)
+        backgroundView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        backgroundView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        backgroundView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+    }
+}
+
+// MARK: - UIStackView Population
+func populateTagLabels(stackView: UIStackView, tagsString: String) {
+    if stackView.subviews.count != 0 { return }
+    if tagsString.isEmpty { return }
+    let tags = tagsString.components(separatedBy: ",")
+    let padding = "    "
+    for tag in tags {
+        let tagLabel = HILabel {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.textAlignment = .center
+            $0.font = HIAppearance.Font.contentText
+            $0.backgroundHIColor = \.clear
+            switch tag.uppercased() {
+            case "WEB DEVELOPMENT":
+                $0.text = "Web" + padding
+                $0.layer.backgroundColor = UIColor(red: 0.42, green: 0.682, blue: 0.773, alpha: 1).cgColor
+                $0.textHIColor = \.whiteTagFont
+            case "SYSTEMS":
+                $0.text = "Systems" + padding
+                $0.layer.backgroundColor = UIColor(red: 0.643, green: 0.231, blue: 0.361, alpha: 1).cgColor
+                $0.textHIColor = \.whiteTagFont
+            case "LANGUAGES":
+                $0.text = "Languages" + padding
+                $0.layer.backgroundColor = UIColor(red: 0.659, green: 0.796, blue: 0.718, alpha: 1).cgColor
+                $0.textHIColor = \.whiteTagFont
+            case "DATA SCIENCE":
+                $0.text = "Data Science" + padding
+                $0.layer.backgroundColor = UIColor(red: 0.886, green: 0.545, blue: 0.475, alpha: 1).cgColor
+                $0.textHIColor = \.whiteTagFont
+            default:
+                $0.text = tag + padding
+                $0.textColor = .white
+                $0.layer.backgroundColor = UIColor.systemTeal.cgColor
+            }
+        }
+        tagLabel.layer.cornerRadius = 8.0
+        stackView.addArrangedSubview(tagLabel)
+    }
+}
+
 // MARK: - UINavigationItem Setup
 extension HIBaseViewController {
     @objc dynamic func setupNavigationItem() {
@@ -55,9 +112,17 @@ extension HIBaseViewController {
     }
 }
 
+// MARK: - UITabBarItem Setup
+extension HIBaseViewController {
+    @objc dynamic func setupTabBarItem() {
+        tabBarItem = UITabBarItem(title: self.title, image: nil, tag: 0)
+    }
+}
+
 // MARK: - UITableView Setup
 extension HIBaseViewController {
     @objc dynamic func setupTableView() {
+        tableView?.layer.backgroundColor = UIColor.clear.cgColor
         tableView?.delegate = self
         tableView?.dataSource = self
     }
@@ -121,6 +186,13 @@ extension HIBaseViewController: NSFetchedResultsControllerDelegate {
         case .move:
             guard let fromIndexPath = indexPath, let toIndexPath = newIndexPath else { return }
             tableView?.moveRow(at: fromIndexPath, to: toIndexPath)
+        @unknown default:
+            os_log(
+                "Unknown NSFetchedResultsChangeType %s",
+                log: Logger.ui,
+                type: .info,
+                String(describing: type)
+            )
         }
     }
 
@@ -135,6 +207,13 @@ extension HIBaseViewController: NSFetchedResultsControllerDelegate {
             tableView?.reloadSections([sectionIndex], with: .fade)
         case .move:
             break
+        @unknown default:
+            os_log(
+                "Unknown NSFetchedResultsChangeType %s",
+                log: Logger.ui,
+                type: .info,
+                String(describing: type)
+            )
         }
     }
 
@@ -190,7 +269,7 @@ extension HIBaseViewController {
 
         // Setup refresh animation
         refreshAnimation.alpha = 0.0
-        refreshAnimation.loopAnimation = true
+        refreshAnimation.loopMode = .loop
         refreshAnimation.contentMode = .scaleAspectFit
         refreshAnimation.translatesAutoresizingMaskIntoConstraints = false
         refreshControl.addSubview(refreshAnimation)
@@ -203,7 +282,7 @@ extension HIBaseViewController {
     }
 
     @objc dynamic func refresh(_ sender: UIRefreshControl) {
-        refreshAnimation.setProgress(frame: 0)
+        refreshAnimation.currentFrame = 0
         refreshAnimation.play()
         UIViewPropertyAnimator(duration: 0.125, curve: .linear) {
             self.refreshAnimation.alpha = 1.0

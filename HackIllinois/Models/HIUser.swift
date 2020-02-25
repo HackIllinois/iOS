@@ -11,7 +11,7 @@
 //
 
 import Foundation
-import SwiftKeychainAccess
+import Keychain
 import APIManager
 import HIAPI
 
@@ -33,6 +33,11 @@ struct HIUser: Codable {
 
     init(provider: HIAPI.AuthService.OAuthProvider) {
         self.provider = provider
+    }
+
+    // Guest login
+    init() {
+        self.provider = .guest
     }
 }
 

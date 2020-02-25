@@ -25,11 +25,11 @@ class HICountdownViewController: UIViewController {
     private let TOTAL_NUM_FRAMES = 1800
 
     // MARK: - Properties
-    private let days = LOTAnimationView(name: "countdown-60")
-    private let hours = LOTAnimationView(name: "countdown-24")
-    private let minutes = LOTAnimationView(name: "countdown-60")
-    private let seconds = LOTAnimationView(name: "countdown-60")
-    private let backgroundHIColor: HIColor = \.baseBackground
+    private let days = AnimationView(name: "countdown-60")
+    private let hours = AnimationView(name: "countdown-24")
+    private let minutes = AnimationView(name: "countdown-60")
+    private let seconds = AnimationView(name: "countdown-60")
+    private let backgroundHIColor: HIColor = \.clear
 
     private var countdownDate: Date?
     private var dayFrame = 0
@@ -67,7 +67,7 @@ class HICountdownViewController: UIViewController {
     }
 
     private let countdownFillColor: HIColor = \.baseText
-    private var countdownFillColorCallback: LOTColorValueCallback?
+    private var countdownFillColorCallback: ColorValueProvider?
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
@@ -76,21 +76,21 @@ class HICountdownViewController: UIViewController {
         minutes.backgroundColor <- backgroundHIColor
         seconds.backgroundColor <- backgroundHIColor
 
-        let fillColorKeypath = LOTKeypath(string: "**.Fill 1.Color")
-        let countdownFillColorCallback = LOTColorValueCallback(color: countdownFillColor.value.cgColor)
+        let fillColorKeypath = AnimationKeypath(keypath: "**.Fill 1.Color")
+        let countdownFillColorCallback = ColorValueProvider { _ in self.countdownFillColor.value.lottieColorValue }
         self.countdownFillColorCallback = countdownFillColorCallback
 
-        days.setValueDelegate(countdownFillColorCallback, for: fillColorKeypath)
-        hours.setValueDelegate(countdownFillColorCallback, for: fillColorKeypath)
-        minutes.setValueDelegate(countdownFillColorCallback, for: fillColorKeypath)
-        seconds.setValueDelegate(countdownFillColorCallback, for: fillColorKeypath)
+        days.setValueProvider(countdownFillColorCallback, keypath: fillColorKeypath)
+        hours.setValueProvider(countdownFillColorCallback, keypath: fillColorKeypath)
+        minutes.setValueProvider(countdownFillColorCallback, keypath: fillColorKeypath)
+        seconds.setValueProvider(countdownFillColorCallback, keypath: fillColorKeypath)
     }
 }
 
 // MARK: - UIViewController
 extension HICountdownViewController {
     override func loadView() {
-        view = HIView { $0.backgroundHIColor = \.baseBackground }
+        view = HIView { $0.backgroundHIColor = \.clear }
 
         days.contentMode = .scaleAspectFit
         hours.contentMode = .scaleAspectFit
@@ -117,13 +117,13 @@ extension HICountdownViewController {
         countdownStackView.addArrangedSubview(stackView(with: seconds, and: "S"))
     }
 
-    func stackView(with countDownView: LOTAnimationView, and labelString: String) -> UIStackView {
+    func stackView(with countDownView: AnimationView, and labelString: String) -> UIStackView {
         countDownView.backgroundColor <- backgroundHIColor
         countDownView.translatesAutoresizingMaskIntoConstraints = false
 
         let label = HILabel {
             $0.textHIColor = \.accent
-            $0.backgroundHIColor = \.baseBackground
+            $0.backgroundHIColor = \.clear
             $0.textAlignment = .center
             $0.font = HIAppearance.Font.glyph
             $0.text = labelString
@@ -168,15 +168,10 @@ extension HICountdownViewController {
     }
 
     func setupCounters() {
-        dayFrame = daysRemaining * FRAMES_PER_TICK
-        hourFrame = hoursRemaining * FRAMES_PER_TICK
-        minuteFrame = minutesRemaining * FRAMES_PER_TICK
-        secondFrame = secondsRemaining * FRAMES_PER_TICK
-
-        days.setProgress(frame: dayFrame)
-        hours.setProgress(frame: hourFrame)
-        minutes.setProgress(frame: minuteFrame)
-        seconds.setProgress(frame: secondFrame)
+        days.currentFrame = CGFloat(daysRemaining * FRAMES_PER_TICK)
+        hours.currentFrame = CGFloat(hoursRemaining * FRAMES_PER_TICK)
+        minutes.currentFrame = CGFloat(minutesRemaining * FRAMES_PER_TICK)
+        seconds.currentFrame = CGFloat(secondsRemaining * FRAMES_PER_TICK)
     }
 
     @objc func updateCountdown() {
@@ -190,28 +185,28 @@ extension HICountdownViewController {
         let daysStartFrame = daysEndFrame + FRAMES_PER_TICK
         if dayFrame != daysEndFrame {
             dayFrame = daysEndFrame
-            days.play(from: daysStartFrame, to: daysEndFrame)
+            days.play(fromFrame: CGFloat(daysStartFrame), toFrame: CGFloat(daysEndFrame))
         }
 
         let hoursEndFrame = hoursRemaining * FRAMES_PER_TICK
         let hoursStartFrame = hoursEndFrame + FRAMES_PER_TICK
         if hourFrame != hoursEndFrame {
             hourFrame = hoursEndFrame
-            hours.play(from: hoursStartFrame, to: hoursEndFrame)
+            hours.play(fromFrame: CGFloat(hoursStartFrame), toFrame: CGFloat(hoursEndFrame))
         }
 
         let minutesEndFrame = minutesRemaining * FRAMES_PER_TICK
         let minutesStartFrame = minutesEndFrame + FRAMES_PER_TICK
         if minuteFrame != minutesEndFrame {
             minuteFrame = minutesEndFrame
-            minutes.play(from: minutesStartFrame, to: minutesEndFrame)
+            minutes.play(fromFrame: CGFloat(minutesStartFrame), toFrame: CGFloat(minutesEndFrame))
         }
 
         let secondsEndFrame = secondsRemaining * FRAMES_PER_TICK
         let secondsStartFrame = secondsEndFrame + FRAMES_PER_TICK
         if secondFrame != secondsEndFrame {
             secondFrame = secondsEndFrame
-            seconds.play(from: secondsStartFrame, to: secondsEndFrame)
+            seconds.play(fromFrame: CGFloat(secondsStartFrame), toFrame: CGFloat(secondsEndFrame))
         }
     }
 

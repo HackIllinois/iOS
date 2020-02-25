@@ -19,6 +19,7 @@ import APIManager
 class HIEventDetailViewController: HIBaseViewController {
     // MARK: - Properties
     private static let scannerViewController = HIEventScannerViewController()
+    private static let checkInScannerViewController = HICheckInScannerViewController()
     var event: Event?
 
     // MARK: Views
@@ -26,21 +27,33 @@ class HIEventDetailViewController: HIBaseViewController {
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundHIColor = \.contentBackground
+        $0.backgroundHIColor = \.clear
     }
     private let upperContainerView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundHIColor = \.contentBackground
+        $0.backgroundHIColor = \.clear
     }
-    private let titleLabel = HILabel(style: .event) {
+    private let titleLabel = HILabel(style: .detailTitle) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor <- \.baseText
-        $0.font = HIAppearance.Font.contentTitle
+        $0.font = HIAppearance.Font.detailTitle
     }
-    private let descriptionLabel = HILabel(style: .description) {
+
+    private let sponsorLabel = HILabel(style: .sponsor) {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor <- \.attendeeBackground
+        $0.font = HIAppearance.Font.sponsorText
+    }
+
+    private let timeLabel = HILabel(style: .description) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor <- \.baseText
         $0.font = HIAppearance.Font.contentText
+    }
+
+    private let descriptionLabel = HILabel(style: .detailText) {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor <- \.baseText
         $0.numberOfLines = 0
     }
     private let favoritedButton = HIButton {
@@ -48,6 +61,18 @@ class HIEventDetailViewController: HIBaseViewController {
         $0.backgroundHIColor = \.clear
         $0.activeImage = #imageLiteral(resourceName: "Favorited")
         $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
+    }
+    private let closeButton = HIButton {
+        $0.tintHIColor = \.baseText
+        $0.backgroundHIColor = \.clear
+        $0.activeImage = #imageLiteral(resourceName: "MenuClose")
+        $0.baseImage = #imageLiteral(resourceName: "MenuClose")
+    }
+    private let cameraButton = HIButton {
+        $0.tintHIColor = \.baseText
+        $0.backgroundHIColor = \.clear
+        $0.activeImage = #imageLiteral(resourceName: "Camera")
+        $0.baseImage = #imageLiteral(resourceName: "Camera")
     }
 
     // MARK: Constraints
@@ -60,10 +85,10 @@ extension HIEventDetailViewController {
     @objc func didSelectFavoriteButton(_ sender: HIButton) {
         guard let event = event else { return }
 
-        let changeFavoriteStatusRequest: APIRequest<Favorite> =
+        let changeFavoriteStatusRequest: APIRequest<EventFavorites> =
             sender.isActive ?
-                HIAPI.EventService.unfavoriteBy(name: event.name) :
-                HIAPI.EventService.favoriteBy(name: event.name)
+                HIAPI.EventService.unfavoriteBy(id: event.id) :
+                HIAPI.EventService.favoriteBy(id: event.id)
 
         changeFavoriteStatusRequest
         .onCompletion { result in
@@ -84,6 +109,29 @@ extension HIEventDetailViewController {
         .launch()
     }
 
+    @objc func didSelectScanner(_ sender: UIButton) {
+        guard let event = event else { return }
+
+        // Check in is an event, identified by name
+        if event.name.caseInsensitiveCompare("Check-in") == .orderedSame {
+            self.present(HIEventDetailViewController.checkInScannerViewController, animated: true)
+        }
+
+        let now = Date()
+        if event.startTime.addingTimeInterval(-15*60) > now || now > event.endTime {
+            let alertController = UIAlertController(title: "Are you sure?", message: "You are outside the scanning period for the event", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+            alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+                HIEventDetailViewController.scannerViewController.event = event
+                self.present(HIEventDetailViewController.scannerViewController, animated: true)
+            }))
+            self.present(alertController, animated: true, completion: nil)
+        } else {
+            HIEventDetailViewController.scannerViewController.event = event
+            self.present(HIEventDetailViewController.scannerViewController, animated: true)
+        }
+    }
+
     @objc func didSelectScanButton(_ sender: UIBarButtonItem) {
         guard let event = event else { return }
         let now = Date()
@@ -97,44 +145,62 @@ extension HIEventDetailViewController {
             navigationController?.pushViewController(HIEventDetailViewController.scannerViewController, animated: true)
         }
     }
+
+    @objc func didSelectCloseButton(_ sender: HIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 // MARK: - UIViewController
 extension HIEventDetailViewController {
+
     override func loadView() {
         super.loadView()
 
+        setupCloseButton()
+
         view.addSubview(eventDetailContainer)
-        eventDetailContainer.constrain(to: view.safeAreaLayoutGuide, topInset: 12, trailingInset: -12, leadingInset: 12)
-        eventDetailContainer.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12).isActive = true
+        eventDetailContainer.topAnchor.constraint(equalTo: closeButton.bottomAnchor).isActive = true
+        eventDetailContainer.constrain(to: view.safeAreaLayoutGuide, trailingInset: -8, bottomInset: 0, leadingInset: 8)
 
         eventDetailContainer.addSubview(upperContainerView)
-        upperContainerView.constrain(to: eventDetailContainer, topInset: 0, trailingInset: 0, leadingInset: 0)
-        upperContainerView.constrain(height: 63)
-
-        favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
-        upperContainerView.addSubview(favoritedButton)
-        favoritedButton.constrain(to: upperContainerView, topInset: 0, bottomInset: 0, leadingInset: 0)
-        favoritedButton.constrain(width: 58)
+        upperContainerView.constrain(to: eventDetailContainer, topInset: 25, trailingInset: 0, leadingInset: 0)
+        upperContainerView.constrain(height: 75)
 
         upperContainerView.addSubview(titleLabel)
-        titleLabel.leadingAnchor.constraint(equalTo: favoritedButton.trailingAnchor).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: upperContainerView.trailingAnchor, constant: -8).isActive = true
-        titleLabel.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: closeButton.leadingAnchor).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: upperContainerView.topAnchor).isActive = true
+
+        upperContainerView.addSubview(sponsorLabel)
+        sponsorLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
+        sponsorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
+
+        setupScannerIfApplicable()
+
+        if !HIApplicationStateController.shared.isGuest {
+            setupFavoritedButton()
+        }
+
+        upperContainerView.addSubview(timeLabel)
+        timeLabel.topAnchor.constraint(equalTo: sponsorLabel.bottomAnchor, constant: 5).isActive = true
+        timeLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
 
         eventDetailContainer.addSubview(descriptionLabel)
-        descriptionLabel.topAnchor.constraint(equalTo: upperContainerView.bottomAnchor).isActive = true
-        descriptionLabel.constrain(to: eventDetailContainer, trailingInset: -12, leadingInset: 12)
+        descriptionLabel.topAnchor.constraint(equalTo: upperContainerView.bottomAnchor, constant: 30).isActive = true
+        descriptionLabel.constrain(to: eventDetailContainer, trailingInset: -12)
+        descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         descriptionLabelHeight = descriptionLabel.heightAnchor.constraint(equalToConstant: 100)
         descriptionLabelHeight.isActive = true
 
         let tableView = UITableView()
-        tableView.backgroundColor <- \.contentBackground
+        tableView.backgroundColor <- \.clear
         tableView.translatesAutoresizingMaskIntoConstraints = false
         eventDetailContainer.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 8).isActive = true
-        tableView.constrain(to: eventDetailContainer, trailingInset: 0, bottomInset: -6, leadingInset: 0)
-        tableViewHeight = tableView.heightAnchor.constraint(equalToConstant: 0)
+        tableView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20).isActive = true
+        tableView.constrain(to: eventDetailContainer, bottomInset: -6)
+        tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: -12).isActive = true
+        tableViewHeight = tableView.heightAnchor.constraint(equalToConstant: 100)
         tableViewHeight.isActive = true
         self.tableView = tableView
     }
@@ -143,10 +209,18 @@ extension HIEventDetailViewController {
         super.viewWillAppear(animated)
         guard let event = event else { return }
         titleLabel.text = event.name
+        if !event.sponsor.isEmpty {
+            sponsorLabel.text = "Sponsored by \(event.sponsor)"
+        } else {
+            sponsorLabel.text = ""
+        }
         descriptionLabel.text = event.info
+        timeLabel.text = Formatter.simpleTime.string(from: event.startTime) + " - " + Formatter.simpleTime.string(from: event.endTime)
         favoritedButton.isActive = event.favorite
 
         tableView?.reloadData()
+        let indexPath = IndexPath(row: 0, section: 0)
+        tableView?.scrollToRow(at: indexPath, at: .top, animated: true)
         view.layoutIfNeeded()
         let targetSize = CGSize(width: descriptionLabel.frame.width, height: .greatestFiniteMagnitude)
         let neededSize = descriptionLabel.sizeThatFits(targetSize)
@@ -159,6 +233,35 @@ extension HIEventDetailViewController {
         if event == nil {
             presentErrorController(title: "Uh oh", message: "Failed to load event.", dismissParentOnCompletion: true)
         }
+    }
+
+    func setupCloseButton() {
+        view.addSubview(closeButton)
+        closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
+        closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
+        closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
+        closeButton.constrain(height: 20)
+    }
+
+    func setupScannerIfApplicable() {
+        if let user = HIApplicationStateController.shared.user, !user.roles.intersection([.staff, .admin]).isEmpty {
+            view.addSubview(cameraButton)
+            cameraButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+            cameraButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
+            cameraButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            cameraButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            cameraButton.addTarget(self, action: #selector(didSelectScanner(_:)), for: .touchUpInside)
+        }
+    }
+
+    func setupFavoritedButton() {
+        favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
+        upperContainerView.addSubview(favoritedButton)
+        favoritedButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
+        favoritedButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
+        favoritedButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
+        favoritedButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        favoritedButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
     }
 }
 
@@ -212,7 +315,7 @@ extension HIEventDetailViewController {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 160
+        return 300
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

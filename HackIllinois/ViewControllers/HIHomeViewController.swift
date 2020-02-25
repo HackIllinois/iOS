@@ -13,6 +13,9 @@
 import Foundation
 import UIKit
 import CoreData
+import PassKit
+import os
+import HIAPI
 
 class HIHomeViewController: HIEventListViewController {
     // MARK: - Properties
@@ -38,8 +41,6 @@ class HIHomeViewController: HIEventListViewController {
         return fetchedResultsController
     }()
 
-    var indoorMapsViewController = HIIndoorMapsViewController()
-
     private var currentTab = 0
 
     private var dataStore: [(displayText: String, predicate: NSPredicate)] = {
@@ -47,8 +48,8 @@ class HIHomeViewController: HIEventListViewController {
         let happeningNowPredicate = NSPredicate(format: "(startTime < now()) AND (endTime > now())")
         dataStore.append((displayText: "HAPPENING NOW ", predicate: happeningNowPredicate))
 
-        let inFifteenMinutes = Date(timeIntervalSinceNow: 900)
-        let upcomingPredicate = NSPredicate(format: "(startTime < %@) AND (startTime > now())", inFifteenMinutes as NSDate)
+        let inOneHour = Date(timeIntervalSinceNow: 3600)
+        let upcomingPredicate = NSPredicate(format: "(startTime < %@) AND (startTime > now())", inOneHour as NSDate)
         dataStore.append((displayText: "UPCOMING", predicate: upcomingPredicate))
 
         return dataStore
@@ -62,13 +63,14 @@ class HIHomeViewController: HIEventListViewController {
 
     private var countdownDataStoreIndex = 0
     private var staticDataStore: [(date: Date, displayText: String)] = [
-        (HIConstants.EVENT_START_TIME, "HACKILLINOIS BEGINS IN"),
-        (HIConstants.HACKING_START_TIME, "HACKING BEGINS IN"),
-        (HIConstants.HACKING_END_TIME, "HACKING ENDS IN"),
-        (HIConstants.EVENT_END_TIME, "HACKILLINOIS ENDS IN")
+        (HITimeDataSource.shared.eventTimes.eventStart, "HACKILLINOIS BEGINS IN"),
+        (HITimeDataSource.shared.eventTimes.hackStart, "HACKING BEGINS IN"),
+        (HITimeDataSource.shared.eventTimes.hackEnd, "HACKING ENDS IN"),
+        (HITimeDataSource.shared.eventTimes.eventEnd, "HACKILLINOIS ENDS IN")
     ]
 
     private var timer: Timer?
+    private var buildingView = UIImageView()
 }
 
 // MARK: - Actions
@@ -90,6 +92,9 @@ extension HIHomeViewController {
     func animateReload() {
         try? fetchedResultsController.performFetch()
         animateTableViewReload()
+        if let tableView = tableView, !tableView.visibleCells.isEmpty {
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        }
     }
 }
 
@@ -99,7 +104,7 @@ extension HIHomeViewController {
         super.loadView()
 
         view.addSubview(countdownTitleLabel)
-        countdownTitleLabel.constrain(to: view.safeAreaLayoutGuide, topInset: 20, trailingInset: 0, leadingInset: 0)
+        countdownTitleLabel.constrain(to: view, topInset: 60, trailingInset: 0, leadingInset: 0)
 
         countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
         addChild(countdownViewController)
@@ -109,12 +114,19 @@ extension HIHomeViewController {
         countdownViewController.view.constrain(height: 150)
         countdownViewController.didMove(toParent: self)
 
+        buildingView.contentMode = .scaleAspectFill
+        buildingView.translatesAutoresizingMaskIntoConstraints = false
+        buildingView.isUserInteractionEnabled = true
+        view.insertSubview(buildingView, at: 1)
+        buildingView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        buildingView.topAnchor.constraint(equalTo: countdownViewController.view.centerYAnchor, constant: 20).isActive = true
+
         let items = dataStore.map { $0.displayText }
         let segmentedControl = HISegmentedControl(items: items)
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
-        segmentedControl.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor).isActive = true
+        segmentedControl.topAnchor.constraint(equalTo: buildingView.centerYAnchor, constant: 12).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 44).isActive = true
@@ -135,11 +147,8 @@ extension HIHomeViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        let rightNavigationItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MapIcon"), style: .plain, target: self, action: #selector(presentIndoorMapsViewController))
-        navigationItem.rightBarButtonItem = rightNavigationItem
-
         setupPredicateRefreshTimer()
+        setupPass()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -148,21 +157,22 @@ extension HIHomeViewController {
     }
 }
 
-// MARK: - UINavigationItem Setup
+// MARK: - UIImageView Setup
 extension HIHomeViewController {
-    @objc dynamic override func setupNavigationItem() {
-        super.setupNavigationItem()
-        title = "HOME"
+    @objc dynamic override func setUpBackgroundView() {
+        super.setUpBackgroundView()
+        buildingView.image = #imageLiteral(resourceName: "Buildings")
+    }
+}
+
+// MARK: - UITabBarItem Setup
+extension HIHomeViewController {
+    override func setupTabBarItem() {
+        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "home"), tag: 0)
     }
 }
 
 // MARK: - Actions
-extension HIHomeViewController {
-    @objc func presentIndoorMapsViewController() {
-        navigationController?.pushViewController(indoorMapsViewController, animated: true)
-    }
-}
-
 extension HIHomeViewController: HICountdownViewControllerDelegate {
     func countdownToDateFor(countdownViewController: HICountdownViewController) -> Date? {
         let now = Date()
@@ -175,6 +185,41 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
             countdownDataStoreIndex += 1
         }
         return nil
+    }
+}
+
+// MARK: - Pass/Wallet setup
+extension HIHomeViewController {
+    func setupPass() {
+        guard PKPassLibrary.isPassLibraryAvailable(),
+            let user = HIApplicationStateController.shared.user,
+            !HIApplicationStateController.shared.isGuest,
+            let url = user.qrURL,
+            !UserDefaults.standard.bool(forKey: HIConstants.PASS_PROMPTED_KEY(user: user)) else { return }
+        HIAPI.PassService.getPass(qr: url.absoluteString, identifier: user.email)
+        .onCompletion { result in
+            do {
+                let (data, _) = try result.get()
+                let pass = try PKPass(data: data)
+                guard let passVC = PKAddPassesViewController(pass: pass) else {
+                    throw HIError.passbookError
+                }
+                DispatchQueue.main.async { [weak self] in
+                    if let strongSelf = self {
+                        UserDefaults.standard.set(true, forKey: HIConstants.PASS_PROMPTED_KEY(user: user))
+                        strongSelf.present(passVC, animated: true, completion: nil)
+                    }
+                }
+            } catch {
+                os_log(
+                    "Error initializing PKPass: %s",
+                    log: Logger.ui,
+                    type: .error,
+                    String(describing: error)
+                )
+            }
+        }
+        .launch()
     }
 }
 

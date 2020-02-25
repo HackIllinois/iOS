@@ -36,31 +36,28 @@ class HIEventCell: HIBubbleCell {
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+        backgroundColor = UIColor.clear
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         bubbleView.addSubview(favoritedButton)
         favoritedButton.widthAnchor.constraint(equalToConstant: 58).isActive = true
-        favoritedButton.constrain(to: bubbleView, topInset: 0, bottomInset: 0, leadingInset: 0)
-
-        let disclosureIndicatorView = HITintImageView {
-            $0.tintHIColor = \.accent
-            $0.contentMode = .center
-            $0.image = #imageLiteral(resourceName: "DisclosureIndicator")
-        }
-        bubbleView.addSubview(disclosureIndicatorView)
-        disclosureIndicatorView.widthAnchor.constraint(equalToConstant: 65).isActive = true
-        disclosureIndicatorView.constrain(to: bubbleView, topInset: 0, trailingInset: 0, bottomInset: 0)
+        favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0, bottomInset: 0)
 
         // add bubble view
+        contentView.layer.backgroundColor = UIColor.clear.cgColor
         contentStackView.axis = .vertical
         contentStackView.distribution = .equalSpacing
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         bubbleView.addSubview(contentStackView)
-        contentStackView.leadingAnchor.constraint(equalTo: favoritedButton.trailingAnchor).isActive = true
-        contentStackView.trailingAnchor.constraint(equalTo: disclosureIndicatorView.leadingAnchor).isActive = true
+        contentStackView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 16).isActive = true
+        contentStackView.trailingAnchor.constraint(equalTo: favoritedButton.leadingAnchor).isActive = true
         contentStackView.centerYAnchor.constraint(equalTo: bubbleView.centerYAnchor).isActive = true
         contentStackViewHeight = contentStackView.heightAnchor.constraint(equalToConstant: 0)
         contentStackViewHeight.isActive = true
+
+        // Don't show favorite button for guests
+        if HIApplicationStateController.shared.isGuest {
+            favoritedButton.isHidden = true
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -78,7 +75,11 @@ extension HIEventCell {
 // MARK: - Population
 extension HIEventCell {
     static func heightForCell(with event: Event) -> CGFloat {
-        return 73 + 21 * CGFloat(event.locations.count)
+        if event.sponsor.isEmpty {
+            return 83 + 21 * CGFloat(event.locations.count)
+        } else {
+           return 83 + 21 * CGFloat(event.locations.count + 1)
+        }
     }
 
     static func <- (lhs: HIEventCell, rhs: Event) {
@@ -88,6 +89,14 @@ extension HIEventCell {
         titleLabel.text = rhs.name
         contentStackViewHeight += titleLabel.intrinsicContentSize.height
         lhs.contentStackView.addArrangedSubview(titleLabel)
+
+        if !rhs.sponsor.isEmpty {
+            let sponsorLabel = HILabel(style: .sponsor)
+            sponsorLabel.text = "Sponsored by \(rhs.sponsor)"
+            contentStackViewHeight += sponsorLabel.intrinsicContentSize.height
+            lhs.contentStackView.addArrangedSubview(sponsorLabel)
+        }
+
         for location in rhs.locations {
             guard let location = location as? Location else { continue }
             let locationLabel = HILabel(style: .location)
@@ -95,6 +104,11 @@ extension HIEventCell {
             contentStackViewHeight += locationLabel.intrinsicContentSize.height + 3
             lhs.contentStackView.addArrangedSubview(locationLabel)
         }
+
+        let descriptionLabel = HILabel(style: .cellDescription)
+        descriptionLabel.text = rhs.info
+        contentStackViewHeight += descriptionLabel.intrinsicContentSize.height + 3
+        lhs.contentStackView.addArrangedSubview(descriptionLabel)
         lhs.contentStackViewHeight.constant = contentStackViewHeight
     }
 }

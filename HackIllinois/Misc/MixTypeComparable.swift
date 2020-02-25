@@ -89,11 +89,11 @@ func diff<T, V>(initial collectionA: [T], final collectionB: [V])
 }
 
 extension HIAPI.Event: MixTypeComparable {
-    var comparable: String { return name }
+    var comparable: String { return id }
 }
 
 extension Event: MixTypeComparable {
-    var comparable: String { return name }
+    var comparable: String { return id }
 }
 
 extension HIAPI.Announcement: MixTypeComparable {
@@ -110,4 +110,12 @@ extension HIAPI.Location: MixTypeComparable {
 
 extension Location: MixTypeComparable {
     var comparable: String { return name }
+}
+
+extension HIAPI.Project: MixTypeComparable {
+    var comparable: String { return id }
+}
+
+extension Project: MixTypeComparable {
+    var comparable: String { return id }
 }

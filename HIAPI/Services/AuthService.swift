@@ -22,15 +22,15 @@ public final class AuthService: BaseService {
     public enum OAuthProvider: String, Codable {
         case github
         case google
-        case linkedIn = "linkedin"
+        case guest
 
-        public static let all: [OAuthProvider] = [.github, .google, .linkedIn]
+        public static let all: [OAuthProvider] = [.github, .google, .guest]
 
         public var displayName: String {
             switch self {
             case .github: return "ATTENDEE"
             case .google: return "STAFF"
-            case .linkedIn: return "RECRUITER"
+            case .guest: return "GUEST"
             }
         }
     }

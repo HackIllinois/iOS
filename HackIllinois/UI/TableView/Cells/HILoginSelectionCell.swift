@@ -22,15 +22,12 @@ class HILoginSelectionCell: UITableViewCell {
     weak var delegate: HILoginSelectionCellDelegate?
 
     var titleLabel = HILabel(style: .loginSelection)
-    var separatorView = HIView(style: .separator)
 
-    var defaultColor: UIColor {
-        return (\HIAppearance.baseBackground).value
-    }
+    var defaultColor: UIColor  = (\HIAppearance.clear).value
+    var activeColor: UIColor = (\HIAppearance.action).value
 
-    var activeColor: UIColor {
-        return (\HIAppearance.action).value
-    }
+    var defaultTextColor: UIColor = UIColor.white
+    var activeTextColor: UIColor = UIColor.white
 
     var animator: UIViewPropertyAnimator?
 
@@ -39,13 +36,11 @@ class HILoginSelectionCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
 
-        separatorView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(separatorView)
-        separatorView.constrain(to: contentView, trailingInset: -24, bottomInset: 0, leadingInset: 24)
-
         contentView.addSubview(titleLabel)
-        titleLabel.bottomAnchor.constraint(equalTo: separatorView.topAnchor).isActive = true
-        titleLabel.constrain(to: contentView, topInset: 0, trailingInset: 0, leadingInset: 0)
+        titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        titleLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
@@ -61,7 +56,7 @@ class HILoginSelectionCell: UITableViewCell {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        contentView.backgroundColor <- \.baseBackground
+        contentView.backgroundColor <- \.clear
     }
 }
 
@@ -70,7 +65,6 @@ extension HILoginSelectionCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         titleLabel.text = nil
-        separatorView.isHidden = false
     }
 
     // MARK: - UITableViewCell
@@ -86,11 +80,12 @@ extension HILoginSelectionCell {
 
     func setActive(_ active: Bool) {
         let finalColor = active ? activeColor : defaultColor
+        let textColor = active ? activeTextColor : defaultTextColor
         animator?.stopAnimation(true)
         animator = UIViewPropertyAnimator(duration: 0.2, curve: .linear)
         animator?.addAnimations { [weak self] in
-            self?.backgroundColor = finalColor
-            self?.contentView.backgroundColor = finalColor
+            self?.titleLabel.layer.backgroundColor = finalColor.cgColor
+            self?.titleLabel.textColor = textColor
         }
         animator?.startAnimation()
     }

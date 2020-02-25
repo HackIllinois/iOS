@@ -14,13 +14,14 @@ import UIKit
 import APIManager
 import Lottie
 import SafariServices
-import SwiftKeychainAccess
+import Keychain
 import HIAPI
 
 class HILoginFlowController: UIViewController {
     // MARK: - Properties
-    let animationView = LOTAnimationView(name: "intro")
+    let animationView = AnimationView(name: "intro")
     var shouldDisplayAnimationOnNextAppearance = true
+    let animationBackgroundView = UIImageView()
 
     // MARK: Status Bar
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
@@ -85,6 +86,18 @@ extension HILoginFlowController {
             animationView.contentMode = .scaleAspectFill
             animationView.frame = view.frame
             animationView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+            // Add gradient background behind animation
+            animationBackgroundView.image = #imageLiteral(resourceName: "Gradient")
+            animationBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+            animationBackgroundView.isUserInteractionEnabled = true
+            animationBackgroundView.contentMode = .scaleAspectFill
+            view.addSubview(animationBackgroundView)
+            animationBackgroundView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            animationBackgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+            animationBackgroundView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+            animationBackgroundView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+
             view.addSubview(animationView)
         }
     }
@@ -96,6 +109,11 @@ extension HILoginFlowController {
             setNeedsStatusBarAppearanceUpdate()
 
             animationView.play { _ in
+                // Smooth out background transition into login page
+                UIView.animate(withDuration: 0.3, animations: {self.animationBackgroundView.alpha = 0.0},
+                completion: { _ in
+                    self.animationBackgroundView.removeFromSuperview()
+                })
                 self.animationView.removeFromSuperview()
                 self.statusBarIsHidden = false
                 UIView.animate(withDuration: 0.25) { () -> Void in
@@ -110,6 +128,18 @@ extension HILoginFlowController {
 // MARK: - Login Flow
 private extension HILoginFlowController {
     private func attemptOAuthLogin(buildingUser user: HIUser, sender: HIBaseViewController) {
+
+        //GUEST (bypass auth)
+        if user.provider == .guest {
+            var guestUser = HIUser()
+            guestUser.firstName = "Guest"
+
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": guestUser])
+            }
+            return
+        }
+
         let loginURL = HIAPI.AuthService.oauthURL(provider: user.provider)
         loginSession = SFAuthenticationSession(url: loginURL, callbackURLScheme: nil) { [weak self] (url, error) in
             if let url = url,
@@ -183,11 +213,21 @@ private extension HILoginFlowController {
                 let (apiRolesContainer, _) = try result.get()
                 var user = user
                 user.roles = apiRolesContainer.roles
-                if user.roles.contains(.applicant) {
+                if user.provider == .github && user.roles.contains(.attendee) {
                     self?.populateRegistrationData(buildingUser: user, sender: sender)
+                } else if user.provider == .google {
+                    if user.roles.contains(.staff) {
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            sender.presentErrorController(title: "You must have a valid staff account to log in.", message: "", dismissParentOnCompletion: false)
+                        }
+                    }
                 } else {
                     DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
+                        sender.presentErrorController(title: "You must RSVP to log in.", message: "", dismissParentOnCompletion: false)
                     }
                 }
             } catch {

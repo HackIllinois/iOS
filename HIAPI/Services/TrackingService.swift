@@ -18,9 +18,9 @@ public final class TrackingService: EventService {
         return super.baseURL + "track/"
     }
 
-    public static func track(name: String, id: String) -> APIRequest<SimpleRequest> {
+    public static func track(eventId: String, id: String) -> APIRequest<SimpleRequest> {
         var body = HTTPBody()
-        body["eventName"] = name
+        body["eventId"] = eventId
         body["userId"] = id
         return APIRequest<SimpleRequest>(service: self, endpoint: "", body: body, method: .POST)
     }

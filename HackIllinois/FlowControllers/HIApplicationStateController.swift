@@ -12,7 +12,7 @@
 
 import Foundation
 import UIKit
-import SwiftKeychainAccess
+import Keychain
 
 class HIApplicationStateController {
 
@@ -21,10 +21,11 @@ class HIApplicationStateController {
     // MARK: - Properties
     var window = HIWindow(frame: UIScreen.main.bounds)
     var user: HIUser?
+    var isGuest = false
 
     // MARK: ViewControllers
     var loginFlowController = HILoginFlowController()
-    var menuController = HIMenuController()
+    var appFlowController = HITabBarController()
 
     // MARK: - Init
     init() {
@@ -72,13 +73,9 @@ extension HIApplicationStateController {
         var viewControllers = [UIViewController]()
         viewControllers.append(HIHomeViewController())
         viewControllers.append(HIScheduleViewController())
-        viewControllers.append(HIAnnouncementsViewController())
         viewControllers.append(HIUserDetailViewController())
-
-        if !user.roles.intersection([.staff, .admin]).isEmpty {
-            viewControllers.append(HICheckInScannerViewController())
-        }
-
+        viewControllers.append(HIIndoorMapsViewController())
+        viewControllers.append(HIProjectViewController())
         return viewControllers
     }
 
@@ -86,6 +83,7 @@ extension HIApplicationStateController {
         guard let user = notification.userInfo?["user"] as? HIUser else { return }
         guard Keychain.default.store(user, forKey: HIConstants.STORED_ACCOUNT_KEY) else { return }
         self.user = user
+        if user.token.isEmpty { isGuest = true }
         HILocalNotificationController.shared.requestAuthorization()
         UIApplication.shared.registerForRemoteNotifications()
         updateWindowViewController(animated: true)
@@ -95,14 +93,15 @@ extension HIApplicationStateController {
         guard user != nil else { return }
         Keychain.default.removeObject(forKey: HIConstants.STORED_ACCOUNT_KEY)
         user = nil
+        isGuest = false
         updateWindowViewController(animated: true)
     }
 
     func updateWindowViewController(animated: Bool) {
         let viewController: UIViewController
         if let user = user {
-            prepareMenuControllerForDisplay(with: user)
-            viewController = menuController
+            prepareAppControllerForDisplay(with: user)
+            viewController = appFlowController
         } else {
             prepareLoginControllerForDisplay()
             viewController = loginFlowController
@@ -115,13 +114,21 @@ extension HIApplicationStateController {
         }, completion: nil)
     }
 
-    func prepareMenuControllerForDisplay(with user: HIUser) {
-        let menuViewControllers = viewControllersFor(user: user)
-        menuController.setupMenuFor(menuViewControllers)
-        menuController._tabBarController.selectedIndex = 0
+    func prepareAppControllerForDisplay(with user: HIUser) {
+        let appViewControllers = viewControllersFor(user: user)
+        appFlowController.setupMenuFor(appViewControllers)
+        appFlowController.selectedIndex = 0
+
+        // Disable the middle tabbar button (QR Code)
+        if let items = appFlowController.tabBar.items {
+            if items.count >= 3 {
+                items[2].isEnabled = false
+            }
+        }
 
         HIEventDataSource.refresh()
         HIAnnouncementDataSource.refresh()
+        HIProjectDataSource.refresh()
     }
 
     func prepareLoginControllerForDisplay() { }
