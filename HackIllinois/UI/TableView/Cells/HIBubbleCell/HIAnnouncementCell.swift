@@ -23,6 +23,8 @@ class HIAnnouncementCell: HIBubbleCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+        backgroundColor = UIColor.clear
+        contentView.layer.backgroundColor = UIColor.clear.cgColor
         bubbleView.addSubview(titleLabel)
         titleLabel.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 10).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 23).isActive = true
@@ -54,7 +56,7 @@ extension HIAnnouncementCell {
     static func <- (lhs: HIAnnouncementCell, rhs: Announcement) {
         lhs.titleLabel.text = rhs.title
         lhs.timeLabel.text  = Date.humanReadableTimeSince(rhs.time)
-        lhs.infoLabel.text  = rhs.info
+        lhs.infoLabel.text  = rhs.body
     }
 }
 
