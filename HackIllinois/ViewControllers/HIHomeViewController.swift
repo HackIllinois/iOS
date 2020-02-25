@@ -113,11 +113,9 @@ extension HIHomeViewController {
 extension HIHomeViewController {
     override func loadView() {
         super.loadView()
-        view.addSubview(announcementButton)
-        announcementButton.constrain(to: view.safeAreaLayoutGuide, topInset: 15, trailingInset: -15)
-        announcementButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        announcementButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        self.navigationItem.rightBarButtonItem = announcementButton.toBarButtonItem()
         announcementButton.addTarget(self, action: #selector(didSelectAnnouncementButton(_:)), for: .touchUpInside)
+        announcementButton.constrain(width: 22, height: 22)
 
         if HIApplicationStateController.shared.isGuest {
             announcementButton.isHidden = true
@@ -174,10 +172,6 @@ extension HIHomeViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         teardownPredicateRefreshTimer()
-    }
-
-    override func viewDidLayoutSubviews() {
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
 }
 
