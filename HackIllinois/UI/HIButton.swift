@@ -134,3 +134,9 @@ class HIButton: UIButton {
         }
     }
 }
+
+extension HIButton {
+    func toBarButtonItem() -> UIBarButtonItem? {
+        return UIBarButtonItem(customView: self)
+    }
+}
