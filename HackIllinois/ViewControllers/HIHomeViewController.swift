@@ -115,6 +115,7 @@ extension HIHomeViewController {
         super.loadView()
         self.navigationItem.rightBarButtonItem = announcementButton.toBarButtonItem()
         announcementButton.addTarget(self, action: #selector(didSelectAnnouncementButton(_:)), for: .touchUpInside)
+        announcementButton.constrain(width: 22, height: 22)
 
         if HIApplicationStateController.shared.isGuest {
             announcementButton.isHidden = true
