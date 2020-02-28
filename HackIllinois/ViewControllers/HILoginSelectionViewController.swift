@@ -41,16 +41,6 @@ class HILoginSelectionViewController: HIBaseViewController {
 extension HILoginSelectionViewController {
     override func loadView() {
         super.loadView()
-        //How to make the background transparent??
-//        let gradient = CAGradientLayer()
-//        gradient.frame = self.view.bounds
-//        gradient.colors = [
-//            UIColor(red: 48/255, green: 62/255, blue: 103/255, alpha: 1).cgColor,
-//            UIColor(red: 244/255, green: 88/255, blue: 53/255, alpha: 1).cgColor
-//        ]
-//        gradient.startPoint = CGPoint(x: 0, y:0)
-//        gradient.endPoint = CGPoint(x: 1, y:1)
-//        self.view.layer.addSublayer(gradient)
         let tableView = HITableView()
         tableView.alwaysBounceVertical = false
         view.addSubview(tableView)
