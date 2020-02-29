@@ -180,6 +180,14 @@ extension HIBaseViewController: NSFetchedResultsControllerDelegate {
         case .delete:
             guard let deleteIndexPath = indexPath else { return }
             tableView?.deleteRows(at: [deleteIndexPath], with: .fade)
+            if let tableView = tableView {
+                DispatchQueue.main.async {
+                    UIView.setAnimationsEnabled(false)
+                    UIView.animate(withDuration: 0.0, animations: tableView.reloadData) { _ in
+                        UIView.setAnimationsEnabled(true)
+                    }
+                }
+            }
         case .update:
             guard let updateIndexPath = indexPath else { return }
             tableView?.reloadRows(at: [updateIndexPath], with: .fade)
