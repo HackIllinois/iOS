@@ -47,6 +47,11 @@ class HILoginSelectionViewController: HIBaseViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) should not be used.")
     }
+    
+    @objc dynamic override func setUpBackgroundView() {
+        super.setUpBackgroundView()
+        backgroundView.image = #imageLiteral(resourceName: "Login")
+    }
 }
 
 // MARK: - UIViewController
@@ -60,7 +65,7 @@ extension HILoginSelectionViewController {
         view.addSubview(loginHeader)
         view.addSubview(spacerView)
         view.addSubview(tableView)
-
+        
         welcomeHeader.text = "WELCOME TO"
         welcomeHeader.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 38).isActive = true
         welcomeHeader.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
