@@ -27,6 +27,7 @@ struct HIAppearance: Equatable {
     let preferredStatusBarStyle: UIStatusBarStyle
     let scrollViewIndicatorStyle: UIScrollView.IndicatorStyle
     let mapBackground: UIColor
+    let loginDefault: UIColor
     let loginTitleBackground: UIColor
     let loginLogo: UIImage
     let viewTitleColor: UIColor
@@ -49,6 +50,8 @@ struct HIAppearance: Equatable {
     private static let deepBlue = #colorLiteral(red: 0.03921568627, green: 0.03529411765, blue: 0.2470588235, alpha: 1)
     private static let darkerBlue = #colorLiteral(red: 0.1333333333, green: 0.168627451, blue: 0.3607843137, alpha: 1)
     private static let whiteBlue = #colorLiteral(red: 0.9764705882, green: 1, blue: 1, alpha: 1)
+    private static let lightCoral = #colorLiteral(red: 0.9333333333, green: 0.4235294118, blue: 0.4470588235, alpha: 1)
+    private static let nightBlue = #colorLiteral(red: 0.4352941176, green: 0.5490196078, blue: 0.7568627451, alpha: 1)
     private static var statusBarBlack: UIStatusBarStyle {
         if #available(iOS 13, *) {
              return .darkContent
@@ -72,12 +75,13 @@ struct HIAppearance: Equatable {
         preferredStatusBarStyle: statusBarBlack,
         scrollViewIndicatorStyle: .black,
         mapBackground: whiteBlue,
-        loginTitleBackground: orange,
-        loginLogo: #imageLiteral(resourceName: "LoginLogo"),
+        loginDefault: nightBlue,
+        loginTitleBackground: white,
+        loginLogo: #imageLiteral(resourceName: "HILogo"),
         viewTitleColor: deepBlue,
-        loginSelectionText: darkerBlue,
+        loginSelectionText: white,
         attendeeText: white,
-        attendeeBackground: maroon,
+        attendeeBackground: lightCoral,
         whiteTagFont: white
     )
 
@@ -96,12 +100,13 @@ struct HIAppearance: Equatable {
         preferredStatusBarStyle: statusBarBlack,
         scrollViewIndicatorStyle: .white,
         mapBackground: whiteBlue,
-        loginTitleBackground: orange,
-        loginLogo: #imageLiteral(resourceName: "LoginLogo"),
+        loginDefault: nightBlue,
+        loginTitleBackground: white,
+        loginLogo: #imageLiteral(resourceName: "HILogo"),
         viewTitleColor: deepBlue,
-        loginSelectionText: darkerBlue,
+        loginSelectionText: white,
         attendeeText: white,
-        attendeeBackground: maroon,
+        attendeeBackground: lightCoral,
         whiteTagFont: white
     )
 
@@ -126,7 +131,7 @@ struct HIAppearance: Equatable {
         static let navigationTitle = UIFont.systemFont(ofSize: 15, weight: .medium)
         static let descriptionText = UIFont.systemFont(ofSize: 14, weight: .regular)
         static let sponsorText = UIFont.systemFont(ofSize: 16, weight: .medium)
-        static let loginTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
+        static let loginTitle = UIFont.systemFont(ofSize: 24, weight: .semibold)
         static let loginSelection = UIFont.systemFont(ofSize: 16, weight: .semibold)
 
         static let sectionHeader = UIFont.systemFont(ofSize: 13, weight: .bold)
