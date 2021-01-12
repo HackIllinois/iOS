@@ -69,11 +69,13 @@ class HIHomeViewController: HIEventListViewController {
     }
 
     private var countdownDataStoreIndex = 0
-    private var staticDataStore: [(date: Date, displayText: String)] = [
-        (HITimeDataSource.shared.eventTimes.eventStart, "HACKILLINOIS BEGINS IN"),
-        (HITimeDataSource.shared.eventTimes.hackStart, "HACKING BEGINS IN"),
-        (HITimeDataSource.shared.eventTimes.hackEnd, "HACKING ENDS IN"),
-        (HITimeDataSource.shared.eventTimes.eventEnd, "HACKILLINOIS ENDS IN")
+    private var staticDataStore: [(date: Date, displayText: String, backgroundImage: UIImage?)] = [
+        (HITimeDataSource.shared.eventTimes.twoWeeksBeforeStart, "HACKILLINOIS BEGINS IN", UIImage(named: "Day")),
+        (HITimeDataSource.shared.eventTimes.oneWeekBeforeStart, "HACKILLINOIS BEGINS IN", UIImage(named: "Sunset")),
+        (HITimeDataSource.shared.eventTimes.eventStart, "HACKILLINOIS BEGINS IN", UIImage(named: "Night")),
+        (HITimeDataSource.shared.eventTimes.hackStart, "HACKING BEGINS IN", UIImage(named: "Night")),
+        (HITimeDataSource.shared.eventTimes.hackEnd, "HACKING ENDS IN", UIImage(named: "Night")),
+        (HITimeDataSource.shared.eventTimes.eventEnd, "HACKILLINOIS ENDS IN", UIImage(named: "Night"))
     ]
 
     private var timer: Timer?
@@ -179,7 +181,7 @@ extension HIHomeViewController {
 extension HIHomeViewController {
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        buildingView.image = #imageLiteral(resourceName: "Buildings")
+//        buildingView.image = #imageLiteral(resourceName: "Buildings")
     }
 }
 
@@ -198,7 +200,8 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
             let currDate = staticDataStore[countdownDataStoreIndex].date
             if currDate > now {
                 countdownTitleLabel.text = staticDataStore[countdownDataStoreIndex].displayText
-                return currDate
+                backgroundView.image = staticDataStore[countdownDataStoreIndex].backgroundImage
+                return (countdownDataStoreIndex == 0 || countdownDataStoreIndex == 1) ? HITimeDataSource.shared.eventTimes.eventStart : currDate
             }
             countdownDataStoreIndex += 1
         }

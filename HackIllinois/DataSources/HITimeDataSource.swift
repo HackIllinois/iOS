@@ -18,6 +18,8 @@ final class HITimeDataSource {
     static var shared = HITimeDataSource()
 
     public static let defaultTimes = EventTimes(
+        twoWeeksBeforeStart: Date(timeIntervalSince1970: 1610587800), // Wednesday, Jan 13, 2021 7:30 PM GMT-06:00 FOR TESTING
+        oneWeekBeforeStart: Date(timeIntervalSince1970: 1611192600), // Wednesday, Jan 18, 2021 7:30 PM GMT-06:00 FOR TESTING
         eventStart: Date(timeIntervalSince1970: 1582927200), // Friday, February 28, 2020 4:00:00 PM GMT-06:00
         eventEnd: Date(timeIntervalSince1970: 1583103600), // Sunday, March 1, 2020 05:00:00 PM GMT-06:00
         hackStart: Date(timeIntervalSince1970: 1582952400), // Friday, February 28, 2020 11:00:00 PM

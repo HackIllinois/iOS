@@ -30,6 +30,8 @@ public struct TimeContainer: Decodable, APIReturnable {
 }
 
 public struct EventTimes: Codable {
+    public let twoWeeksBeforeStart: Date
+    public let oneWeekBeforeStart: Date
     public let eventStart: Date
     public let eventEnd: Date
     public let hackStart: Date
@@ -41,8 +43,10 @@ public struct EventTimes: Codable {
     public let sundayStart: Date
     public let sundayEnd: Date
 
-    public init(eventStart: Date, eventEnd: Date, hackStart: Date, hackEnd: Date, fridayStart: Date, fridayEnd: Date,
+    public init(twoWeeksBeforeStart: Date, oneWeekBeforeStart: Date, eventStart: Date, eventEnd: Date, hackStart: Date, hackEnd: Date, fridayStart: Date, fridayEnd: Date,
                 saturdayStart: Date, saturdayEnd: Date, sundayStart: Date, sundayEnd: Date) {
+        self.twoWeeksBeforeStart = twoWeeksBeforeStart
+        self.oneWeekBeforeStart = oneWeekBeforeStart
         self.eventStart = eventStart
         self.eventEnd = eventEnd
         self.hackStart = hackStart
