@@ -34,11 +34,16 @@ struct HIAppearance: Equatable {
     let attendeeText: UIColor
     let attendeeBackground: UIColor
     let whiteTagFont: UIColor
+    
+    // New fonts added. Replace old ones?
+    let groupText: UIColor
+    let memberSearchText: UIColor
+    let groupSearchText: UIColor
 
     let clear: UIColor = .clear
     let black: UIColor = .black
 
-    private static let darkBlue = #colorLiteral(red: 0.1333333333, green: 0.168627451, blue: 0.3607843137, alpha: 1)
+    private static let darkBlue = #colorLiteral(red: 0.1326064765, green: 0.1667878032, blue: 0.3605746627, alpha: 1)
     private static let blue = #colorLiteral(red: 0.1215686275, green: 0.5176470588, blue: 0.6470588235, alpha: 1)
     private static let lightBlue = #colorLiteral(red: 0.4196078431, green: 0.6823529412, blue: 0.7725490196, alpha: 1)
     private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -49,6 +54,11 @@ struct HIAppearance: Equatable {
     private static let deepBlue = #colorLiteral(red: 0.03921568627, green: 0.03529411765, blue: 0.2470588235, alpha: 1)
     private static let darkerBlue = #colorLiteral(red: 0.1333333333, green: 0.168627451, blue: 0.3607843137, alpha: 1)
     private static let whiteBlue = #colorLiteral(red: 0.9764705882, green: 1, blue: 1, alpha: 1)
+    
+    // New colors added. Replace old ones?
+    private static let grayBlack = #colorLiteral(red: 0.1058823529, green: 0.1058823529, blue: 0.1058823529, alpha: 1)
+    private static let groupRed = #colorLiteral(red: 0.5960784314, green: 0.1137254902, blue: 0.137254902, alpha: 1)
+    private static let groupOrange = #colorLiteral(red: 0.937254902, green: 0.5176470588, blue: 0.2823529412, alpha: 1)
     private static var statusBarBlack: UIStatusBarStyle {
         if #available(iOS 13, *) {
              return .darkContent
@@ -78,7 +88,10 @@ struct HIAppearance: Equatable {
         loginSelectionText: darkerBlue,
         attendeeText: white,
         attendeeBackground: maroon,
-        whiteTagFont: white
+        whiteTagFont: white,
+        groupText: grayBlack,
+        memberSearchText: groupOrange,
+        groupSearchText: groupRed
     )
 
     fileprivate static let night = HIAppearance(
@@ -102,7 +115,10 @@ struct HIAppearance: Equatable {
         loginSelectionText: darkerBlue,
         attendeeText: white,
         attendeeBackground: maroon,
-        whiteTagFont: white
+        whiteTagFont: white,
+        groupText: grayBlack,
+        memberSearchText: groupOrange,
+        groupSearchText: groupRed
     )
 
     fileprivate static var current = day
@@ -132,6 +148,8 @@ struct HIAppearance: Equatable {
         static let sectionHeader = UIFont.systemFont(ofSize: 13, weight: .bold)
         static let button = UIFont.systemFont(ofSize: 15, weight: .regular)
         static let glyph = UIFont.systemFont(ofSize: 21, weight: .light)
+        static let groupContact = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        static let groupStatus = UIFont.systemFont(ofSize: 12, weight: .semibold)
     }
 }
 

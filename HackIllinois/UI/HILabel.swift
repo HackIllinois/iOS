@@ -31,6 +31,10 @@ class HILabel: UILabel {
         case backgroundTitle
         case detailSubtitle
         case detailText
+        case groupDescription
+        case groupContactInfo
+        case lookingForGroup
+        case lookingForMember
     }
 
     // MARK: - Properties
@@ -136,6 +140,29 @@ class HILabel: UILabel {
             layer.borderWidth = 2.0
             layer.borderColor = (\HIAppearance.loginSelectionText).value.cgColor
             layer.backgroundColor = UIColor.clear.cgColor
+        
+        // New styles for group matching
+        case .groupDescription:
+            textHIColor = \.groupText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.contentText
+            numberOfLines = 0
+            
+        case .groupContactInfo:
+            textHIColor = \.groupText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.groupContact
+            
+        case .lookingForGroup:
+            textHIColor = \.groupSearchText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.groupStatus
+            
+        case .lookingForMember:
+            textHIColor = \.memberSearchText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.groupStatus
+            
         }
         }
 
