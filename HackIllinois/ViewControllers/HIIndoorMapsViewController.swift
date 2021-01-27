@@ -149,6 +149,6 @@ extension HIIndoorMapsViewController {
 // MARK: - UITabBarItem Setup
 extension HIIndoorMapsViewController {
     override func setupTabBarItem() {
-        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "map"), tag: 0)
+        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "profile"), tag: 0)
     }
 }
