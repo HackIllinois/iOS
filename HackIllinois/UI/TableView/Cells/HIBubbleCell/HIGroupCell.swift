@@ -23,12 +23,19 @@ class HIGroupCell: HIBubbleCell {
         $0.activeImage = #imageLiteral(resourceName: "Favorited")
         $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
     }
+    var profilePicture = HIImageView {
+        $0.image = #imageLiteral(resourceName: "ProfilePic")
+    }
     
     var contentStackView = UIStackView()
     var contentStackViewHeight = NSLayoutConstraint()
+    
+    var innerHorizontalStackView = UIStackView()
+    var innerHorizontalStackViewHeight = NSLayoutConstraint()
+    
+    var innerVerticalStackView = UIStackView()
+    var innerVerticalStackViewHeight = NSLayoutConstraint()
 
-    var tagScrollView = UIScrollView()
-    var tagStackView = UIStackView()
     var spaceView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.heightAnchor.constraint(equalToConstant: 12).isActive = true
@@ -58,18 +65,27 @@ class HIGroupCell: HIBubbleCell {
         contentStackViewHeight = contentStackView.heightAnchor.constraint(equalToConstant: 0)
         contentStackViewHeight.isActive = true
 
-        tagStackView.translatesAutoresizingMaskIntoConstraints = false
-        tagStackView.axis = .horizontal
-        tagStackView.alignment = .fill
-        tagStackView.distribution = .equalSpacing
-        tagStackView.spacing = 5.0
-        tagScrollView.addSubview(tagStackView)
-
-        tagStackView.leadingAnchor.constraint(equalTo: tagScrollView.leadingAnchor).isActive = true
-        tagStackView.trailingAnchor.constraint(equalTo: tagScrollView.trailingAnchor).isActive = true
-        tagStackView.topAnchor.constraint(equalTo: tagScrollView.topAnchor).isActive = true
-        tagStackView.bottomAnchor.constraint(equalTo: tagScrollView.bottomAnchor).isActive = true
-        tagStackView.heightAnchor.constraint(equalTo: tagScrollView.heightAnchor).isActive = true
+        innerHorizontalStackView.axis = .horizontal
+        innerHorizontalStackView.distribution = .equalSpacing
+        innerHorizontalStackView.translatesAutoresizingMaskIntoConstraints = false
+        contentStackView.addSubview(innerHorizontalStackView)
+        innerHorizontalStackView.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor, constant: 16).isActive = true
+        innerHorizontalStackView.trailingAnchor.constraint(equalTo: contentStackView.trailingAnchor).isActive = true
+        innerHorizontalStackView.topAnchor.constraint(equalTo: contentStackView.topAnchor, constant: 16).isActive = true
+        innerHorizontalStackViewHeight = innerHorizontalStackView.heightAnchor.constraint(equalToConstant: 0)
+        innerHorizontalStackViewHeight.isActive = true
+        
+        innerVerticalStackView.axis = .vertical
+        innerVerticalStackView.distribution = .equalSpacing
+        innerVerticalStackView.translatesAutoresizingMaskIntoConstraints = false
+        innerHorizontalStackView.addArrangedSubview(profilePicture)
+        innerHorizontalStackView.addSubview(innerVerticalStackView)
+        innerVerticalStackView.trailingAnchor.constraint(equalTo: innerHorizontalStackView.trailingAnchor).isActive = true
+        innerVerticalStackView.topAnchor.constraint(equalTo: innerHorizontalStackView.topAnchor).isActive = true
+        innerVerticalStackView.bottomAnchor.constraint(equalTo: innerHorizontalStackView.bottomAnchor).isActive = true
+        innerVerticalStackViewHeight = innerVerticalStackView.heightAnchor.constraint(equalToConstant: 0)
+        innerVerticalStackViewHeight.isActive = true
+        
         
         // Don't show favorite button for guests
         if HIApplicationStateController.shared.isGuest {
@@ -103,24 +119,29 @@ extension HIGroupCell {
     // Calls to API should replace hard coded labels
     static func <- (lhs: HIGroupCell, rhs: Project) {
         lhs.favoritedButton.isActive = rhs.favorite
+        var innerVerticalStackViewHeight: CGFloat = 0
         var contentStackViewHeight: CGFloat = 0
+        
         let nameLabel = HILabel(style: .groupContactInfo)
         nameLabel.text = "Carter Smith"
-        contentStackViewHeight += nameLabel.intrinsicContentSize.height
-        lhs.contentStackView.addArrangedSubview(nameLabel)
+        innerVerticalStackViewHeight += nameLabel.intrinsicContentSize.height
+        lhs.innerVerticalStackView.addArrangedSubview(nameLabel)
         
-        // Add conditional when API is finished
+        // Add conditional and profile pic when API is finished
         let statusLabel = HILabel(style: .lookingForGroup)
         statusLabel.text = "Looking for Team"
-        contentStackViewHeight += statusLabel.intrinsicContentSize.height + 3
-        lhs.contentStackView.addArrangedSubview(statusLabel)
+        innerVerticalStackViewHeight += statusLabel.intrinsicContentSize.height + 3
+        lhs.innerVerticalStackView.addArrangedSubview(statusLabel)
         
         let discordLabel = HILabel(style: .groupContactInfo)
         discordLabel.text = "Discord: @HackThis"
         contentStackViewHeight += discordLabel.intrinsicContentSize.height + 3
         lhs.contentStackView.addArrangedSubview(discordLabel)
         
-        
+        let description = HILabel(style: .groupDescription)
+        description.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        contentStackViewHeight += description.intrinsicContentSize.height + 3
+        lhs.contentStackView.addArrangedSubview(description)
     }
 }
 
@@ -131,10 +152,6 @@ extension HIGroupCell {
         favoritedButton.isActive = false
         contentStackView.arrangedSubviews.forEach { (view) in
             contentStackView.removeArrangedSubview(view)
-            view.removeFromSuperview()
-        }
-        tagStackView.arrangedSubviews.forEach { (view) in
-            tagStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
     }
