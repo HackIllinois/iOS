@@ -111,18 +111,27 @@ extension HIScheduleViewController {
         super.loadView()
 
         let items = dataStore.map { $0.displayText }
-        let segmentedControl = HISegmentedControl(items: items)
+        let segmentedControl = HISegmentedControl(titles: items)
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
-        segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+
+        segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
-        segmentedControl.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        segmentedControl.heightAnchor.constraint(equalToConstant: 66).isActive = true
+
+        let separator = UIView()
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        separator.backgroundColor <- \.titleText
+        self.view.addSubview(separator)
+        separator.constrain(height: 1)
+        separator.constrain(to: view, trailingInset: 0, leadingInset: 0)
+        separator.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10).isActive = true
 
         let tableView = HITableView()
         view.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: separator.bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
@@ -135,6 +144,7 @@ extension HIScheduleViewController {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         setupRefreshControl()
         super.viewDidLoad()
+        backgroundView.image = #imageLiteral(resourceName: "scheduleBackground")
     }
 }
 
@@ -145,6 +155,12 @@ extension HIScheduleViewController {
         title = "SCHEDULE"
         if !HIApplicationStateController.shared.isGuest {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuUnfavorited"), style: .plain, target: self, action: #selector(didSelectFavoritesIcon(_:)))
+        }
+    }
+
+    override func didMove(toParent parent: UIViewController?) {
+        if let navController = navigationController as? HINavigationController {
+            navController.infoTitleIsHidden = false
         }
     }
 }
@@ -158,31 +174,7 @@ extension HIScheduleViewController {
 
 // MARK: - UITableViewDelegate
 extension HIScheduleViewController {
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 25
-    }
-
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 15
-    }
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return super.numberOfSections(in: tableView)
-    }
-}
-
-// MARK: - UITableViewDataSource
-extension HIScheduleViewController {
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HIDateHeader.identifier)
-        if let header = header as? HIDateHeader,
-            let sections = fetchedResultsController.sections,
-            section < sections.count,
-            let date = Formatter.coreData.date(from: sections[section].name) {
-
-            header.titleLabel.text = Formatter.simpleTime.string(from: date)
-            header.titleLabel.textAlignment = .center
-        }
-        return header
     }
 }
