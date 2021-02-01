@@ -14,6 +14,7 @@ import UIKit
 
 struct HIAppearance: Equatable {
     let titleText: UIColor
+    let whiteText: UIColor
     let baseText: UIColor
     let accent: UIColor
     let action: UIColor
@@ -34,6 +35,7 @@ struct HIAppearance: Equatable {
     let attendeeText: UIColor
     let attendeeBackground: UIColor
     let whiteTagFont: UIColor
+    let segmentedBackground: UIColor
 
     let clear: UIColor = .clear
     let black: UIColor = .black
@@ -49,6 +51,8 @@ struct HIAppearance: Equatable {
     private static let deepBlue = #colorLiteral(red: 0.03921568627, green: 0.03529411765, blue: 0.2470588235, alpha: 1)
     private static let darkerBlue = #colorLiteral(red: 0.1333333333, green: 0.168627451, blue: 0.3607843137, alpha: 1)
     private static let whiteBlue = #colorLiteral(red: 0.9764705882, green: 1, blue: 1, alpha: 1)
+    private static let greyWhite = #colorLiteral(red: 0.9764705882, green: 1, blue: 1, alpha: 1)
+    
     private static var statusBarBlack: UIStatusBarStyle {
         if #available(iOS 13, *) {
              return .darkContent
@@ -59,6 +63,7 @@ struct HIAppearance: Equatable {
 
     fileprivate static let day = HIAppearance(
         titleText: white,
+        whiteText: white,
         baseText: darkBlue,
         accent: orange,
         action: white,
@@ -78,11 +83,13 @@ struct HIAppearance: Equatable {
         loginSelectionText: darkerBlue,
         attendeeText: white,
         attendeeBackground: maroon,
-        whiteTagFont: white
+        whiteTagFont: white,
+        segmentedBackground: greyWhite
     )
 
     fileprivate static let night = HIAppearance(
         titleText: white,
+        whiteText: white,
         baseText: darkBlue,
         accent: orange,
         action: white,
@@ -102,7 +109,8 @@ struct HIAppearance: Equatable {
         loginSelectionText: darkerBlue,
         attendeeText: white,
         attendeeBackground: maroon,
-        whiteTagFont: white
+        whiteTagFont: white,
+        segmentedBackground: greyWhite
     )
 
     fileprivate static var current = day
@@ -129,6 +137,9 @@ struct HIAppearance: Equatable {
         static let sponsorText = UIFont.systemFont(ofSize: 16, weight: .medium)
         static let loginTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
         static let loginSelection = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        
+        static let segmentedTitle = UIFont.systemFont(ofSize: 16, weight: .regular)
+        static let segmentedNumberText = UIFont.systemFont(ofSize: 20, weight: .semibold)
 
         static let sectionHeader = UIFont.systemFont(ofSize: 13, weight: .bold)
         static let button = UIFont.systemFont(ofSize: 15, weight: .regular)
