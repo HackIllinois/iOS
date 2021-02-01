@@ -59,6 +59,7 @@ class HINavigationController: UINavigationController {
         navigationBar.addSubview(infoTitle)
         infoTitle.constrain(to: navigationBar, trailingInset: 0, bottomInset: 5, leadingInset: 0)
         infoTitle.constrain(height: 10)
+        infoTitle.translatesAutoresizingMaskIntoConstraints = false
         infoTitle.isHidden = infoTitleIsHidden
         infoTitle.text = "All times are in CST"
 
