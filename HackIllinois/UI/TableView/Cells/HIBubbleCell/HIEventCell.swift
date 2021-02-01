@@ -39,13 +39,12 @@ class HIEventCell: HIBubbleCell {
         backgroundColor = UIColor.clear
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         bubbleView.addSubview(favoritedButton)
-        favoritedButton.widthAnchor.constraint(equalToConstant: 58).isActive = true
-        favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0, bottomInset: 0)
+        favoritedButton.constrain(width: 58, height: 60)
+        favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0)
 
         // add bubble view
         contentView.layer.backgroundColor = UIColor.clear.cgColor
         contentStackView.axis = .vertical
-        contentStackView.distribution = .equalSpacing
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         bubbleView.addSubview(contentStackView)
         contentStackView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 16).isActive = true
@@ -70,25 +69,34 @@ extension HIEventCell {
     @objc func didSelectFavoriteButton(_ sender: HIButton) {
         delegate?.eventCellDidSelectFavoriteButton(self)
     }
+
+    @objc func didSelectJoinStream(_ sender: HIButton) {
+        print("JOIN STREAMM")
+    }
 }
 
 // MARK: - Population
 extension HIEventCell {
-    static func heightForCell(with event: Event) -> CGFloat {
-        if event.sponsor.isEmpty {
-            return 83 + 21 * CGFloat(event.locations.count)
-        } else {
-           return 83 + 21 * CGFloat(event.locations.count + 1)
+    static func heightForCell(with event: Event, width: CGFloat) -> CGFloat {
+        let height = 90 + 40 + HILabel.heightForView(text: event.info, font: HIAppearance.Font.eventDetails, width: width - 100)
+        if !event.sponsor.isEmpty {
+            return height + 21
         }
+        return height
     }
 
     static func <- (lhs: HIEventCell, rhs: Event) {
         lhs.favoritedButton.isActive = rhs.favorite
         var contentStackViewHeight: CGFloat = 0
+
         let titleLabel = HILabel(style: .event)
         titleLabel.text = rhs.name
-        contentStackViewHeight += titleLabel.intrinsicContentSize.height
         lhs.contentStackView.addArrangedSubview(titleLabel)
+
+        let timeLabel = HILabel(style: .eventTime)
+        timeLabel.text = Formatter.simpleTime.string(from: rhs.startTime) + " - " + Formatter.simpleTime.string(from: rhs.endTime)
+        lhs.contentStackView.addArrangedSubview(timeLabel)
+        lhs.contentStackView.setCustomSpacing(10, after: timeLabel)
 
         if !rhs.sponsor.isEmpty {
             let sponsorLabel = HILabel(style: .sponsor)
@@ -97,18 +105,37 @@ extension HIEventCell {
             lhs.contentStackView.addArrangedSubview(sponsorLabel)
         }
 
-        for location in rhs.locations {
-            guard let location = location as? Location else { continue }
-            let locationLabel = HILabel(style: .location)
-            locationLabel.text = location.name
-            contentStackViewHeight += locationLabel.intrinsicContentSize.height + 3
-            lhs.contentStackView.addArrangedSubview(locationLabel)
-        }
-
         let descriptionLabel = HILabel(style: .cellDescription)
         descriptionLabel.text = rhs.info
-        contentStackViewHeight += descriptionLabel.intrinsicContentSize.height + 3
+        let height = HILabel.heightForView(text: rhs.info, font: HIAppearance.Font.eventDetails, width: lhs.contentView.frame.width - 100)
         lhs.contentStackView.addArrangedSubview(descriptionLabel)
+        lhs.contentStackView.setCustomSpacing(10, after: descriptionLabel)
+
+        let bottomView = HIView()
+        bottomView.constrain(height: 30)
+
+        let joinButton = HIButton { (button) in
+            button.title = "Join Stream!"
+            button.titleHIColor = \.whiteText
+            button.backgroundHIColor = \.buttonBlue
+            button.titleLabel?.font = HIAppearance.Font.eventButtonText
+            button.layer.cornerRadius = 15
+        }
+        joinButton.addTarget(lhs.self, action: #selector(didSelectJoinStream(_:)), for: .touchUpInside)
+
+        let eventType = HILabel(style: .eventType)
+        eventType.text = "Mini Events"
+
+        bottomView.addSubview(joinButton)
+        bottomView.addSubview(eventType)
+        joinButton.constrain(to: bottomView, topInset: 0, bottomInset: 0, leadingInset: 0)
+        eventType.constrain(to: bottomView, topInset: 0, trailingInset: 0, bottomInset: 0)
+        joinButton.trailingAnchor.constraint(equalTo: eventType.leadingAnchor).isActive = true
+        joinButton.widthAnchor.constraint(equalTo: eventType.widthAnchor, multiplier: 1.5).isActive = true
+
+        lhs.contentStackView.addArrangedSubview(bottomView)
+
+        contentStackViewHeight += titleLabel.intrinsicContentSize.height + timeLabel.intrinsicContentSize.height + 13 + height + 3 + 40
         lhs.contentStackViewHeight.constant = contentStackViewHeight
     }
 }

@@ -18,6 +18,8 @@ class HILabel: UILabel {
     enum Style {
         case location
         case event
+        case eventTime
+        case eventType
         case sponsor
         case project
         case title
@@ -60,8 +62,19 @@ class HILabel: UILabel {
         case .event:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentTitle
+            font = HIAppearance.Font.eventTitle
+        
+        case .eventTime:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.eventTime
 
+        case .eventType:
+            textHIColor = \.accent
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.eventCategoryText
+            textAlignment = .right
+            
         case .sponsor:
             textHIColor = \.attendeeBackground
             backgroundHIColor = \.clear
@@ -110,8 +123,8 @@ class HILabel: UILabel {
         case .cellDescription:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentText
-            numberOfLines = 1
+            font = HIAppearance.Font.eventDetails
+            numberOfLines = 0
 
         case .loginHeader:
             textHIColor = \.loginTitleBackground
@@ -162,4 +175,19 @@ class HILabel: UILabel {
         textColor <- textHIColor
         backgroundColor <- backgroundHIColor
     }
+}
+
+
+// MARK: - Auto-Sizing
+extension HILabel {
+    static func heightForView(text: String, font: UIFont, width: CGFloat) -> CGFloat{
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = font
+        label.text = text
+
+        label.sizeToFit()
+        return label.frame.height
+   }
 }

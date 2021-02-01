@@ -36,12 +36,14 @@ struct HIAppearance: Equatable {
     let attendeeBackground: UIColor
     let whiteTagFont: UIColor
     let segmentedBackground: UIColor
+    let buttonBlue: UIColor
 
     let clear: UIColor = .clear
     let black: UIColor = .black
 
     private static let darkBlue = #colorLiteral(red: 0.1333333333, green: 0.168627451, blue: 0.3607843137, alpha: 1)
     private static let blue = #colorLiteral(red: 0.1215686275, green: 0.5176470588, blue: 0.6470588235, alpha: 1)
+    private static let buttonblue = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
     private static let lightBlue = #colorLiteral(red: 0.4196078431, green: 0.6823529412, blue: 0.7725490196, alpha: 1)
     private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     private static let orange = #colorLiteral(red: 0.8901960784, green: 0.3137254902, blue: 0.3450980392, alpha: 1)
@@ -84,7 +86,8 @@ struct HIAppearance: Equatable {
         attendeeText: white,
         attendeeBackground: maroon,
         whiteTagFont: white,
-        segmentedBackground: greyWhite
+        segmentedBackground: greyWhite,
+        buttonBlue: buttonblue
     )
 
     fileprivate static let night = HIAppearance(
@@ -110,7 +113,8 @@ struct HIAppearance: Equatable {
         attendeeText: white,
         attendeeBackground: maroon,
         whiteTagFont: white,
-        segmentedBackground: greyWhite
+        segmentedBackground: greyWhite,
+        buttonBlue: buttonblue
     )
 
     fileprivate static var current = day
@@ -129,6 +133,12 @@ struct HIAppearance: Equatable {
         static let detailTitle = UIFont.systemFont(ofSize: 24, weight: .semibold)
         static let detailSubtitle = UIFont.systemFont(ofSize: 16, weight: .medium)
         static let detailText = UIFont.systemFont(ofSize: 15, weight: .regular)
+        
+        static let eventTitle = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        static let eventTime = UIFont.systemFont(ofSize: 12, weight: .regular)
+        static let eventDetails = UIFont.systemFont(ofSize: 14, weight: .regular)
+        static let eventButtonText = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        static let eventCategoryText = UIFont.systemFont(ofSize: 12, weight: .semibold)
 
         static let navigationSubtitle = UIFont.systemFont(ofSize: 14, weight: .medium)
         static let navigationTitle = UIFont.systemFont(ofSize: 22, weight: .semibold)

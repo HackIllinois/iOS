@@ -50,7 +50,7 @@ extension HIEventListViewController {
         guard let event = _fetchedResultsController?.object(at: indexPath) as? Event else {
             return CGFloat.leastNonzeroMagnitude
         }
-        return HIEventCell.heightForCell(with: event)
+        return HIEventCell.heightForCell(with: event, width: tableView.frame.width)
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
