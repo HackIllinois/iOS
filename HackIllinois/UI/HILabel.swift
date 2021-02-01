@@ -31,6 +31,7 @@ class HILabel: UILabel {
         case backgroundTitle
         case detailSubtitle
         case detailText
+        case navigationInfo
     }
 
     // MARK: - Properties
@@ -136,6 +137,12 @@ class HILabel: UILabel {
             layer.borderWidth = 2.0
             layer.borderColor = (\HIAppearance.loginSelectionText).value.cgColor
             layer.backgroundColor = UIColor.clear.cgColor
+        
+        case .navigationInfo:
+            textHIColor = \.titleText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.navigationInfoText
+            textAlignment = .center
         }
         }
 

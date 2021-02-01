@@ -58,7 +58,7 @@ struct HIAppearance: Equatable {
     }
 
     fileprivate static let day = HIAppearance(
-        titleText: darkBlue,
+        titleText: white,
         baseText: darkBlue,
         accent: orange,
         action: white,
@@ -82,7 +82,7 @@ struct HIAppearance: Equatable {
     )
 
     fileprivate static let night = HIAppearance(
-        titleText: darkBlue,
+        titleText: white,
         baseText: darkBlue,
         accent: orange,
         action: white,
@@ -123,7 +123,8 @@ struct HIAppearance: Equatable {
         static let detailText = UIFont.systemFont(ofSize: 15, weight: .regular)
 
         static let navigationSubtitle = UIFont.systemFont(ofSize: 14, weight: .medium)
-        static let navigationTitle = UIFont.systemFont(ofSize: 15, weight: .medium)
+        static let navigationTitle = UIFont.systemFont(ofSize: 22, weight: .semibold)
+        static let navigationInfoText = UIFont.systemFont(ofSize: 12, weight: .regular)
         static let descriptionText = UIFont.systemFont(ofSize: 14, weight: .regular)
         static let sponsorText = UIFont.systemFont(ofSize: 16, weight: .medium)
         static let loginTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
