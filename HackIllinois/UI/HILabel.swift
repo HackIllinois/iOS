@@ -35,6 +35,7 @@ class HILabel: UILabel {
         case groupContactInfo
         case lookingForGroup
         case lookingForMember
+        case sortText
     }
 
     // MARK: - Properties
@@ -162,6 +163,11 @@ class HILabel: UILabel {
             textHIColor = \.memberSearchText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.groupStatus
+            
+        case .sortText:
+            textHIColor = \.titleText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.sortingText
             
         }
         }

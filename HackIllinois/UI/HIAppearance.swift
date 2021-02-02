@@ -39,7 +39,8 @@ struct HIAppearance: Equatable {
     let groupText: UIColor
     let memberSearchText: UIColor
     let groupSearchText: UIColor
-
+    let buttonViewBackground: UIColor
+    
     let clear: UIColor = .clear
     let black: UIColor = .black
 
@@ -59,6 +60,7 @@ struct HIAppearance: Equatable {
     private static let grayBlack = #colorLiteral(red: 0.1058823529, green: 0.1058823529, blue: 0.1058823529, alpha: 1)
     private static let groupRed = #colorLiteral(red: 0.5960784314, green: 0.1137254902, blue: 0.137254902, alpha: 1)
     private static let groupOrange = #colorLiteral(red: 0.937254902, green: 0.5176470588, blue: 0.2823529412, alpha: 1)
+    private static let buttonBlue = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
     private static var statusBarBlack: UIStatusBarStyle {
         if #available(iOS 13, *) {
              return .darkContent
@@ -68,7 +70,7 @@ struct HIAppearance: Equatable {
     }
 
     fileprivate static let day = HIAppearance(
-        titleText: darkBlue,
+        titleText: white,
         baseText: darkBlue,
         accent: orange,
         action: white,
@@ -91,11 +93,12 @@ struct HIAppearance: Equatable {
         whiteTagFont: white,
         groupText: grayBlack,
         memberSearchText: groupOrange,
-        groupSearchText: groupRed
+        groupSearchText: groupRed,
+        buttonViewBackground: buttonBlue
     )
 
     fileprivate static let night = HIAppearance(
-        titleText: darkBlue,
+        titleText: white,
         baseText: darkBlue,
         accent: orange,
         action: white,
@@ -118,7 +121,8 @@ struct HIAppearance: Equatable {
         whiteTagFont: white,
         groupText: grayBlack,
         memberSearchText: groupOrange,
-        groupSearchText: groupRed
+        groupSearchText: groupRed,
+        buttonViewBackground: buttonBlue
     )
 
     fileprivate static var current = day
@@ -139,7 +143,7 @@ struct HIAppearance: Equatable {
         static let detailText = UIFont.systemFont(ofSize: 15, weight: .regular)
 
         static let navigationSubtitle = UIFont.systemFont(ofSize: 14, weight: .medium)
-        static let navigationTitle = UIFont.systemFont(ofSize: 15, weight: .medium)
+        static let navigationTitle = UIFont.systemFont(ofSize: 24, weight: .medium)
         static let descriptionText = UIFont.systemFont(ofSize: 14, weight: .regular)
         static let sponsorText = UIFont.systemFont(ofSize: 16, weight: .medium)
         static let loginTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
@@ -150,6 +154,7 @@ struct HIAppearance: Equatable {
         static let glyph = UIFont.systemFont(ofSize: 21, weight: .light)
         static let groupContact = UIFont.systemFont(ofSize: 14, weight: .semibold)
         static let groupStatus = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        static let sortingText = UIFont.systemFont(ofSize: 14, weight: .semibold)
     }
 }
 

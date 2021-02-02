@@ -115,7 +115,6 @@ extension HIGroupCell {
     static func heightForCell(with group: Project) -> CGFloat {
         return 98 + 31
     }
-    
     // Calls to API should replace hard coded labels
     static func <- (lhs: HIGroupCell, rhs: Project) {
         lhs.favoritedButton.isActive = rhs.favorite
@@ -139,7 +138,7 @@ extension HIGroupCell {
         lhs.contentStackView.addArrangedSubview(discordLabel)
         
         let description = HILabel(style: .groupDescription)
-        description.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        description.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         contentStackViewHeight += description.intrinsicContentSize.height + 3
         lhs.contentStackView.addArrangedSubview(description)
     }
