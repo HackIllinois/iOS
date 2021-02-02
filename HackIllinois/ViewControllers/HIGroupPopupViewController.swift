@@ -13,7 +13,7 @@ import HIAPI
 class HIGroupPopupViewController: HIBaseViewController {
     // MARK: Properties
     private let containerView = HIView {
-        $0.layer.cornerRadius = 32
+        $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.qrBackground
@@ -52,6 +52,16 @@ extension HIGroupPopupViewController {
 extension HIGroupPopupViewController {
     override func loadView() {
         super.loadView()
+        view.addSubview(popupBackground)
+        view.addSubview(containerView)
+        
+        popupBackground.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        popupBackground.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        popupBackground.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        popupBackground.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        containerView.addSubview(exitButton)
+        
         
     }
 }
