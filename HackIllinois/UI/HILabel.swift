@@ -31,6 +31,12 @@ class HILabel: UILabel {
         case backgroundTitle
         case detailSubtitle
         case detailText
+        
+        case profileName
+        case profileSubtitle
+        case profileNumberFigure
+        case profileDescription
+        case profileUsername
     }
 
     // MARK: - Properties
@@ -50,93 +56,123 @@ class HILabel: UILabel {
 
         translatesAutoresizingMaskIntoConstraints = false
         if let style = style {
-        switch style {
-        case .location:
-            textHIColor = \.baseText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentText
+            switch style {
+            case .location:
+                textHIColor = \.baseText
+                backgroundHIColor = \.clear
+                font = HIAppearance.Font.contentText
 
-        case .event:
-            textHIColor = \.baseText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentTitle
+            case .event:
+                textHIColor = \.baseText
+                backgroundHIColor = \.clear
+                font = HIAppearance.Font.contentTitle
 
-        case .sponsor:
-            textHIColor = \.attendeeBackground
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.sponsorText
+            case .sponsor:
+                textHIColor = \.attendeeBackground
+                backgroundHIColor = \.clear
+                font = HIAppearance.Font.sponsorText
 
-        case .detailTitle:
-            textHIColor = \.baseText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.detailTitle
-            numberOfLines = 0
+            case .detailTitle:
+                textHIColor = \.baseText
+                backgroundHIColor = \.clear
+                font = HIAppearance.Font.detailTitle
+                numberOfLines = 0
 
-        case .detailSubtitle:
-            textHIColor = \.baseText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.detailSubtitle
-            numberOfLines = 0
+            case .detailSubtitle:
+                textHIColor = \.baseText
+                backgroundHIColor = \.clear
+                font = HIAppearance.Font.detailSubtitle
+                numberOfLines = 0
 
-        case .detailText:
-            textHIColor = \.baseText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.detailText
-            numberOfLines = 0
+            case .detailText:
+                textHIColor = \.baseText
+                backgroundHIColor = \.clear
+                font = HIAppearance.Font.detailText
+                numberOfLines = 0
 
-        case .project:
-            textHIColor = \.baseText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentTitle
+            case .project:
+                textHIColor = \.baseText
+                backgroundHIColor = \.clear
+                font = HIAppearance.Font.contentTitle
 
-        case .title:
-            textHIColor = \.baseText
-            backgroundHIColor = \.clear
-            textAlignment = .center
-            font = HIAppearance.Font.contentTitle
+            case .title:
+                textHIColor = \.baseText
+                backgroundHIColor = \.clear
+                textAlignment = .center
+                font = HIAppearance.Font.contentTitle
 
-        case .subtitle:
-            textHIColor = \.accent
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentSubtitle
+            case .subtitle:
+                textHIColor = \.accent
+                backgroundHIColor = \.clear
+                font = HIAppearance.Font.contentSubtitle
 
-        case .description:
-            textHIColor = \.baseText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.descriptionText
-            numberOfLines = 0
+            case .description:
+                textHIColor = \.baseText
+                backgroundHIColor = \.clear
+                font = HIAppearance.Font.descriptionText
+                numberOfLines = 0
 
-        case .cellDescription:
-            textHIColor = \.baseText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentText
-            numberOfLines = 1
+            case .cellDescription:
+                textHIColor = \.baseText
+                backgroundHIColor = \.clear
+                font = HIAppearance.Font.contentText
+                numberOfLines = 1
 
-        case .loginHeader:
-            textHIColor = \.loginTitleBackground
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.loginTitle
+            case .loginHeader:
+                textHIColor = \.loginTitleBackground
+                backgroundHIColor = \.clear
+                font = HIAppearance.Font.loginTitle
 
-        case .viewTitle:
-            textHIColor = \.loginSelectionText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.loginTitle
+            case .viewTitle:
+                textHIColor = \.loginSelectionText
+                backgroundHIColor = \.clear
+                font = HIAppearance.Font.loginTitle
 
-        case .backgroundTitle:
-            textHIColor = \.baseText
-            backgroundHIColor = \.clear
-            textAlignment = .center
-            font = HIAppearance.Font.navigationSubtitle
+            case .backgroundTitle:
+                textHIColor = \.baseText
+                backgroundHIColor = \.clear
+                textAlignment = .center
+                font = HIAppearance.Font.navigationSubtitle
 
-        case .loginSelection:
-            textHIColor = \.loginSelectionText
-            backgroundHIColor = \.clear
-            textAlignment = .center
-            font = HIAppearance.Font.loginSelection
-            layer.borderWidth = 2.0
-            layer.borderColor = (\HIAppearance.loginSelectionText).value.cgColor
-            layer.backgroundColor = UIColor.clear.cgColor
-        }
+            case .loginSelection:
+                textHIColor = \.loginSelectionText
+                backgroundHIColor = \.clear
+                textAlignment = .center
+                font = HIAppearance.Font.loginSelection
+                layer.borderWidth = 2.0
+                layer.borderColor = (\HIAppearance.loginSelectionText).value.cgColor
+                layer.backgroundColor = UIColor.clear.cgColor
+                
+            case .profileName: // Used to display the profile owner's name
+                textHIColor = \.whiteTagFont // May be defined for itself later
+                backgroundHIColor = \.clear
+                textAlignment = .center
+                font = HIAppearance.Font.profileName
+                
+            case .profileSubtitle: // Used to display profile subtitle, "points", and whatever that says "time zone"
+                textHIColor = \.whiteTagFont // May be defined for itself later
+                backgroundHIColor = \.clear
+                textAlignment = .center
+                font = HIAppearance.Font.profileSubtitle
+            
+            case .profileNumberFigure: // Used to display number of points and time (?)
+                textHIColor = \.whiteTagFont // May be defined for itself later
+                backgroundHIColor = \.clear
+                textAlignment = .center
+                font = HIAppearance.Font.profileNumberFigure
+            
+            case .profileDescription: // Used to display "short description"
+                textHIColor = \.whiteTagFont // May be defined for itself later
+                backgroundHIColor = \.clear
+                textAlignment = .left
+                font = HIAppearance.Font.profileDescription
+            
+            case .profileUsername: // Used to display Discord username, etc.
+                textHIColor = \.whiteTagFont // May be defined for itself later
+                backgroundHIColor = \.clear
+                textAlignment = .left
+                font = HIAppearance.Font.profileUsername
+            }
         }
 
         refreshForThemeChange()
