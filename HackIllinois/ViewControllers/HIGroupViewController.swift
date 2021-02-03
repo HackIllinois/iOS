@@ -55,11 +55,20 @@ extension HIGroupViewController {
         horizontalStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         horizontalStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         horizontalStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
-        horizontalStackView.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        horizontalStackView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
         let sortLabel = HILabel(style: .sortText)
         sortLabel.text = "Sort: "
         horizontalStackView.addSubview(sortLabel)
+        
+        let groupStatusButton = HIButton {
+            $0.layer.cornerRadius = 8
+            $0.titleLabel?.font = HIAppearance.Font.sortingText
+            $0.backgroundHIColor = \.buttonViewBackground
+            $0.titleHIColor = \.action
+            $0.title = "Group Status"
+        }
+        horizontalStackView.addSubview(groupStatusButton)
         
         let skillSortButton = HIButton {
             $0.layer.cornerRadius = 8
@@ -70,12 +79,6 @@ extension HIGroupViewController {
             $0.title = "Skills"
         }
         horizontalStackView.addSubview(skillSortButton)
-        skillSortButton.centerYAnchor.constraint(equalTo: horizontalStackView.centerYAnchor).isActive = true
-        skillSortButton.leadingAnchor.constraint(equalTo: sortLabel.trailingAnchor).isActive = true
-        skillSortButton.trailingAnchor.constraint(equalTo: horizontalStackView.trailingAnchor).isActive = true
-        skillSortButton.heightAnchor.constraint(equalToConstant: 28).isActive = true
-        skillSortButton.widthAnchor.constraint(equalToConstant: 73).isActive = true
-        
         
         let tableView = HITableView()
         view.addSubview(tableView)
@@ -89,6 +92,10 @@ extension HIGroupViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupRefreshControl()
+    }
+    
+    @objc func handleShowPopUp() {
+        view.addSubview(<#T##view: UIView##UIView#>)
     }
 }
 
