@@ -2,7 +2,7 @@
 //  HIGroupCell.swift
 //  HackIllinois
 //
-//  Created by Carter Smith on 1/19/21.
+//  Created by HackIllinois Team on 1/19/21.
 //  Copyright © 2021 HackIllinois. All rights reserved.
 //
 
