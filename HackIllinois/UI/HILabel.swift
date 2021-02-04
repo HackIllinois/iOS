@@ -37,6 +37,7 @@ class HILabel: UILabel {
         case profileNumberFigure
         case profileDescription
         case profileUsername
+        case profileInterests
     }
 
     // MARK: - Properties
@@ -172,6 +173,12 @@ class HILabel: UILabel {
                 backgroundHIColor = \.clear
                 textAlignment = .left
                 font = HIAppearance.Font.profileUsername
+            case .profileInterests:
+                textHIColor = \.whiteTagFont // May be defined for itself later
+                layer.backgroundColor = UIColor(red: 0.933, green: 0.424, blue: 0.447, alpha: 1).cgColor // Need to be modified if backgroundHIColor is strictly enforced
+                layer.cornerRadius = 15
+                textAlignment = .left
+                font = HIAppearance.Font.profileInterests
             }
         }
 

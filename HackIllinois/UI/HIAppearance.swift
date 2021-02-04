@@ -138,6 +138,7 @@ struct HIAppearance: Equatable {
         static let profileNumberFigure = UIFont(name:"Montserrat-Medium", size: 20)
         static let profileDescription = UIFont(name:"Montserrat-Regular", size: 16)
         static let profileUsername = UIFont(name:"Montserrat-Bold", size: 16)
+        static let profileInterests = UIFont(name:"Montserrat-SemiBold", size: 14) // Design team needs to decide on the font
     }
 }
 
