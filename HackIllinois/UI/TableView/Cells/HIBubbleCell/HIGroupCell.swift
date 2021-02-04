@@ -10,11 +10,6 @@ import Foundation
 import UIKit
 import HIAPI
 
-protocol HIGroupCellDelegate: class {
-    func groupCellDidSelectFavoriteButton(_ groupCell:
-        HIGroupCell)
-}
-
 class HIGroupCell: HIBubbleCell {
     // MARK: - Properties
     let favoritedButton = HIButton {
@@ -42,7 +37,7 @@ class HIGroupCell: HIBubbleCell {
         $0.backgroundHIColor = \.clear
     }
     var indexPath: IndexPath?
-    weak var delegate: HIGroupCellDelegate?
+    //weak var delegate: HIGroupCellDelegate?
     
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -100,6 +95,7 @@ class HIGroupCell: HIBubbleCell {
 
 // MARK: - Actions
 extension HIGroupCell {
+    
     @objc func didSelectFavoriteButton(_ sender: HIButton) {
         delegate?.groupCellDidSelectFavoriteButton(self)
     }
