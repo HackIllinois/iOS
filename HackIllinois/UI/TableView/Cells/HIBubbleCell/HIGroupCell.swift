@@ -37,13 +37,11 @@ class HIGroupCell: HIBubbleCell {
         $0.backgroundHIColor = \.clear
     }
     var indexPath: IndexPath?
-    //weak var delegate: HIGroupCellDelegate?
     
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = UIColor.clear
-        favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         bubbleView.addSubview(favoritedButton)
         favoritedButton.widthAnchor.constraint(equalToConstant: 58).isActive = true
         favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0, bottomInset: 0)
@@ -95,11 +93,6 @@ class HIGroupCell: HIBubbleCell {
 
 // MARK: - Actions
 extension HIGroupCell {
-    
-    @objc func didSelectFavoriteButton(_ sender: HIButton) {
-        delegate?.groupCellDidSelectFavoriteButton(self)
-    }
-    
     override func action(for layer: CALayer, forKey event: String) -> CAAction? {
         return NSNull()
     }

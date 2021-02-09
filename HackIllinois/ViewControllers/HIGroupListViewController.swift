@@ -32,7 +32,6 @@ extension HIGroupListViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: HIGroupCell.identifier, for: indexPath)
         if let cell = cell as? HIGroupCell, let group = _fetchedResultsController?.object(at: indexPath) as? Project {
             cell <- group
-            cell.delegate = self
             cell.indexPath = indexPath
         }
         return cell
