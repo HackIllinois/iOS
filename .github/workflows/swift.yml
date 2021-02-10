@@ -22,11 +22,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Display the path
-      run: ls
+      run: ls -a
       shell: bash
 
     # - name: Build
     #   run: xcodebuild clean build -project HackIllinois.xcodeproj -scheme HackIllinois -destination "platform=iOS Simulator,name=iPhone 11" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO -quiet
 
     - name: Lint Test
-      run: swiftlint --config .swiftlint.yml --strict
+      run: swiftlint lint --strict --config ./.swiftlint.yml
