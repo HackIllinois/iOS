@@ -133,12 +133,18 @@ struct HIAppearance: Equatable {
         static let button = UIFont.systemFont(ofSize: 15, weight: .regular)
         static let glyph = UIFont.systemFont(ofSize: 21, weight: .light)
         
-        static let profileName = UIFont(name:"Montserrat-SemiBold", size: 24)
-        static let profileSubtitle = UIFont(name:"Montserrat-Regular", size: 14)
-        static let profileNumberFigure = UIFont(name:"Montserrat-Medium", size: 20)
-        static let profileDescription = UIFont(name:"Montserrat-Regular", size: 16)
-        static let profileUsername = UIFont(name:"Montserrat-Bold", size: 16)
-        static let profileInterests = UIFont(name:"Montserrat-SemiBold", size: 14) // Design team needs to decide on the font
+//        static let profileName = UIFont(name: "Montserrat-SemiBold", size: 24)
+//        static let profileSubtitle = UIFont(name: "Montserrat-Regular", size: 14)
+//        static let profileNumberFigure = UIFont(name: "Montserrat-Medium", size: 20)
+//        static let profileDescription = UIFont(name: "Montserrat-Regular", size: 16)
+//        static let profileUsername = UIFont(name: "Montserrat-Bold", size: 16)
+//        static let profileInterests = UIFont(name: "Montserrat-SemiBold", size: 14) // Design team needs to decide on the font
+        static let profileName = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        static let profileSubtitle = UIFont.systemFont(ofSize: 14, weight: .regular)
+        static let profileNumberFigure = UIFont.systemFont(ofSize: 20, weight: .medium)
+        static let profileDescription = UIFont.systemFont(ofSize: 16, weight: .regular)
+        static let profileUsername = UIFont.systemFont(ofSize: 16, weight: .bold)
+        static let profileInterests = UIFont.systemFont(ofSize: 14, weight: .semibold)
     }
 }
 
