@@ -7,13 +7,27 @@ on:
     branches: [ dev, master ]
 
 jobs:
-  build:
+  lint:
 
     runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v2
-    # - name: Lint
-    #   run: swiftlint --strict
+    - name: Lint
+      run: swiftlint 
+  
+  build:
+    runs-on: macos-latest
+
+      steps:
+    
+    steps:
+    - name: Display the path
+      run: echo $PATH
+      shell: bash
+
     - name: Build
       run: xcodebuild clean build -project HackIllinois.xcodeproj -scheme HackIllinois -destination "platform=iOS Simulator,OS=13.3,name=iPhone 11" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO -quiet
+
+    - name: Lint Test
+      run: swiftlint --config .swiftlint.yml --strict
