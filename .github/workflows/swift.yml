@@ -1,0 +1,35 @@
+name: Swift Lint and Build
+
+on:
+  push:
+    branches: [ dev, master ]
+  pull_request:
+    branches: [ dev, master ]
+
+jobs:
+  # TODO: Linting does not work still since it 
+  # doesn't seem to be using the .swiftlint.yml file
+  
+  # lint:
+
+  #   runs-on: macos-latest
+
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Lint
+  #     run: swiftlint 
+
+  #   - name: Display the path
+  #     run: ls -a
+  #     shell: bash
+
+  #   - name: Lint Test
+  #     run: swiftlint lint --strict --config ./.swiftlint.yml
+
+  build:
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: xcodebuild clean build -project HackIllinois.xcodeproj -scheme HackIllinois -destination "platform=iOS Simulator,name=iPhone 11" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO -quiet
