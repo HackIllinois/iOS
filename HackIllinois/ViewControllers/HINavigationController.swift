@@ -50,7 +50,7 @@ class HINavigationController: UINavigationController {
         navigationBar.isTranslucent = true
         navigationBar.titleTextAttributes = [
             NSAttributedString.Key.foregroundColor: (\HIAppearance.titleText).value as Any,
-            NSAttributedString.Key.font: (\HIAppearance.titleText) as Any
+            NSAttributedString.Key.font: (HIAppearance.Font.contentTitle) as Any
         ]
 
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)

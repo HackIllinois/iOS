@@ -18,7 +18,7 @@ class HIGroupViewController: HIGroupListViewController {
     private var currentTab = 0
     private var onlyFavorites = false
     private let onlyFavoritesPredicate = NSPredicate(format: "favorite == YES" )
-    
+
     @objc dynamic override func setUpBackgroundView() {
             super.setUpBackgroundView()
             backgroundView.image = #imageLiteral(resourceName: "GroupMatching")
@@ -45,41 +45,46 @@ extension HIGroupViewController {
 extension HIGroupViewController {
     override func loadView() {
         super.loadView()
-        
+
         let horizontalStackView = UIStackView()
         horizontalStackView.axis = .horizontal
-        horizontalStackView.distribution = .equalSpacing
+        horizontalStackView.distribution = .fillProportionally
+        horizontalStackView.spacing = 15
         horizontalStackView.alignment = .center
         horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(horizontalStackView)
         horizontalStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        horizontalStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
-        horizontalStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
+        horizontalStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
+        horizontalStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
         horizontalStackView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        
+
         let sortLabel = HILabel(style: .sortText)
         sortLabel.text = "Sort: "
-        horizontalStackView.addSubview(sortLabel)
-        
+        horizontalStackView.addArrangedSubview(sortLabel)
+
         let groupStatusButton = HIButton {
-            $0.layer.cornerRadius = 8
+            $0.layer.cornerRadius = 15
             $0.titleLabel?.font = HIAppearance.Font.sortingText
             $0.backgroundHIColor = \.buttonViewBackground
             $0.titleHIColor = \.action
             $0.title = "Group Status"
+            $0.setImage(#imageLiteral(resourceName: "DropDown"), for: UIControl.State.normal)
+            $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: $0.frame.size.width - 15, bottom: 0, right: 0)
+            //$0.titleEdgeInsets = UIEdgeInsets(top: 0, left: ($0.imageView?.frame.width)! + 15, bottom: 0, right: 10)
         }
-        horizontalStackView.addSubview(groupStatusButton)
-        
+        horizontalStackView.addArrangedSubview(groupStatusButton)
+
         let skillSortButton = HIButton {
-            $0.layer.cornerRadius = 8
+            $0.layer.cornerRadius = 15
             $0.layer.masksToBounds = true
             $0.titleLabel?.font = HIAppearance.Font.sortingText
             $0.backgroundHIColor = \.buttonViewBackground
             $0.titleHIColor = \.action
             $0.title = "Skills"
+            $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         }
-        horizontalStackView.addSubview(skillSortButton)
-        
+        horizontalStackView.addArrangedSubview(skillSortButton)
+
         let tableView = HITableView()
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: horizontalStackView.bottomAnchor, constant: 5).isActive = true

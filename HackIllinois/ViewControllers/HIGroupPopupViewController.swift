@@ -84,11 +84,11 @@ extension HIGroupPopupViewController {
     @objc func didSelectClose(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
-    
+
     @objc func didSwipeDown(_ sender: UISwipeGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
     }
-    
+
     @objc func didSelectBackground(_ sender: UITapGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -105,15 +105,15 @@ extension HIGroupPopupViewController {
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         let selectSortLabel = HILabel(style: .sortText)
         selectSortLabel.text = "Select Skills"
-        
+
         view.addSubview(popupBackground)
         view.addSubview(containerView)
-        
+
         popupBackground.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         popupBackground.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         popupBackground.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         popupBackground.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        
+
         containerView.addSubview(exitButton)
         containerView.addSubview(contentStackView)
         containerView.constrain(to: view.safeAreaLayoutGuide, trailingInset: -8, leadingInset: 8)
@@ -121,7 +121,7 @@ extension HIGroupPopupViewController {
         containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -22).isActive = true
 
         exitButton.constrain(to: containerView, topInset: 18, leadingInset: 22)
-        
+
         contentStackView.addSubview(selectSortLabel)
         contentStackView.addSubview(button1)
         contentStackView.addSubview(button2)
@@ -130,7 +130,6 @@ extension HIGroupPopupViewController {
         contentStackView.addSubview(button5)
         contentStackView.addSubview(button6)
         contentStackView.addSubview(button7)
-        
+
     }
 }
-

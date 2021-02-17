@@ -21,13 +21,13 @@ class HIGroupCell: HIBubbleCell {
     var profilePicture = HIImageView {
         $0.image = #imageLiteral(resourceName: "ProfilePic")
     }
-    
+
     var contentStackView = UIStackView()
     var contentStackViewHeight = NSLayoutConstraint()
-    
+
     var innerHorizontalStackView = UIStackView()
     var innerHorizontalStackViewHeight = NSLayoutConstraint()
-    
+
     var innerVerticalStackView = UIStackView()
     var innerVerticalStackViewHeight = NSLayoutConstraint()
 
@@ -37,7 +37,7 @@ class HIGroupCell: HIBubbleCell {
         $0.backgroundHIColor = \.clear
     }
     var indexPath: IndexPath?
-    
+
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -45,7 +45,7 @@ class HIGroupCell: HIBubbleCell {
         bubbleView.addSubview(favoritedButton)
         favoritedButton.widthAnchor.constraint(equalToConstant: 58).isActive = true
         favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0, bottomInset: 0)
-        
+
         // add bubble view
         contentView.layer.backgroundColor = UIColor.clear.cgColor
         contentStackView.axis = .vertical
@@ -67,7 +67,7 @@ class HIGroupCell: HIBubbleCell {
         innerHorizontalStackView.topAnchor.constraint(equalTo: contentStackView.topAnchor, constant: 16).isActive = true
         innerHorizontalStackViewHeight = innerHorizontalStackView.heightAnchor.constraint(equalToConstant: 0)
         innerHorizontalStackViewHeight.isActive = true
-        
+
         innerVerticalStackView.axis = .vertical
         innerVerticalStackView.distribution = .equalSpacing
         innerVerticalStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -78,14 +78,13 @@ class HIGroupCell: HIBubbleCell {
         innerVerticalStackView.bottomAnchor.constraint(equalTo: innerHorizontalStackView.bottomAnchor).isActive = true
         innerVerticalStackViewHeight = innerVerticalStackView.heightAnchor.constraint(equalToConstant: 0)
         innerVerticalStackViewHeight.isActive = true
-        
-        
+
         // Don't show favorite button for guests
         if HIApplicationStateController.shared.isGuest {
             favoritedButton.isHidden = true
         }
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) should not be used.")
     }
@@ -109,23 +108,23 @@ extension HIGroupCell {
         lhs.favoritedButton.isActive = rhs.favorite
         var innerVerticalStackViewHeight: CGFloat = 0
         var contentStackViewHeight: CGFloat = 0
-        
+
         let nameLabel = HILabel(style: .groupContactInfo)
         nameLabel.text = "Carter Smith"
         innerVerticalStackViewHeight += nameLabel.intrinsicContentSize.height
         lhs.innerVerticalStackView.addArrangedSubview(nameLabel)
-        
+
         // Add conditional and profile pic when API is finished
         let statusLabel = HILabel(style: .lookingForGroup)
         statusLabel.text = "Looking for Team"
         innerVerticalStackViewHeight += statusLabel.intrinsicContentSize.height + 3
         lhs.innerVerticalStackView.addArrangedSubview(statusLabel)
-        
+
         let discordLabel = HILabel(style: .groupContactInfo)
         discordLabel.text = "Discord: @HackThis"
         contentStackViewHeight += discordLabel.intrinsicContentSize.height + 3
         lhs.contentStackView.addArrangedSubview(discordLabel)
-        
+
         let description = HILabel(style: .groupDescription)
         description.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         contentStackViewHeight += description.intrinsicContentSize.height + 3

@@ -34,13 +34,13 @@ struct HIAppearance: Equatable {
     let attendeeText: UIColor
     let attendeeBackground: UIColor
     let whiteTagFont: UIColor
-    
+
     // New fonts added. Replace old ones?
     let groupText: UIColor
     let memberSearchText: UIColor
     let groupSearchText: UIColor
     let buttonViewBackground: UIColor
-    
+
     let clear: UIColor = .clear
     let black: UIColor = .black
 
@@ -55,7 +55,7 @@ struct HIAppearance: Equatable {
     private static let deepBlue = #colorLiteral(red: 0.03921568627, green: 0.03529411765, blue: 0.2470588235, alpha: 1)
     private static let darkerBlue = #colorLiteral(red: 0.1333333333, green: 0.168627451, blue: 0.3607843137, alpha: 1)
     private static let whiteBlue = #colorLiteral(red: 0.9764705882, green: 1, blue: 1, alpha: 1)
-    
+
     // New colors added. Replace old ones?
     private static let grayBlack = #colorLiteral(red: 0.1058823529, green: 0.1058823529, blue: 0.1058823529, alpha: 1)
     private static let groupRed = #colorLiteral(red: 0.5960784314, green: 0.1137254902, blue: 0.137254902, alpha: 1)
