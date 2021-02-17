@@ -2,9 +2,15 @@ name: Swift Lint and Build
 
 on:
   push:
-    branches: [ dev, master ]
-  pull_request:
-    branches: [ dev, master ]
+    paths:
+      - '.github/workflows/swiftlint.yml'
+      - '.swiftlint.yml'
+      - '**/*.swift'
+
+    branches: 
+      - '**'
+
+
 
 jobs:
   # TODO: Linting does not work still since it 
@@ -25,6 +31,17 @@ jobs:
 
   #   - name: Lint Test
   #     run: swiftlint lint --strict --config ./.swiftlint.yml
+  lint:
+    runs-on: macos-latest
+
+    steps:
+        - uses: actions/checkout@v1
+        - name: GitHub Action for SwiftLint (Only files changed in the PR)
+          uses: norio-nomura/action-swiftlint@3.2.1
+          env:
+            DIFF_BASE: ${{ github.base_ref }}
+          with:
+            args: --strict
 
   build:
     runs-on: macos-latest
