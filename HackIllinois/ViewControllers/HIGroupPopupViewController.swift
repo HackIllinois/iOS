@@ -22,19 +22,20 @@ class HIGroupPopupViewController: HIBaseViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.tintHIColor = \.qrTint
         $0.titleHIColor = \.qrTint
-        $0.backgroundHIColor = \.qrBackground
+        $0.backgroundHIColor = \.clear
+        $0.activeImage = #imageLiteral(resourceName: "CloseButton")
         $0.baseImage = #imageLiteral(resourceName: "CloseButton")
         $0.titleLabel?.font = HIAppearance.Font.navigationTitle
         $0.titleLabel?.baselineAdjustment = .alignCenters
         $0.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         $0.addTarget(self, action: #selector(didSelectClose(_:)), for: .touchUpInside)
-    }
+    }/*
     private let popupBackground = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.buttonViewBackground
         $0.backgroundColor = .clear
         $0.isUserInteractionEnabled = true
-    }
+    }*/
     private let button1 = HIButton {
         $0.titleLabel?.font = HIAppearance.Font.sortingText
         $0.backgroundHIColor = \.buttonViewBackground
@@ -106,19 +107,21 @@ extension HIGroupPopupViewController {
         let selectSortLabel = HILabel(style: .sortText)
         selectSortLabel.text = "Select Skills"
 
-        view.addSubview(popupBackground)
+        //view.addSubview(popupBackground)
         view.addSubview(containerView)
-
+        /*
         popupBackground.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         popupBackground.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         popupBackground.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         popupBackground.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-
+        */
+        containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        containerView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
+        containerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
+        
         containerView.addSubview(exitButton)
         containerView.addSubview(contentStackView)
-        containerView.constrain(to: view.safeAreaLayoutGuide, trailingInset: -8, leadingInset: 8)
-        view.safeAreaLayoutGuide.bottomAnchor.constraint(greaterThanOrEqualTo: containerView.bottomAnchor, constant: 12).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -22).isActive = true
 
         exitButton.constrain(to: containerView, topInset: 18, leadingInset: 22)
 
@@ -130,6 +133,5 @@ extension HIGroupPopupViewController {
         contentStackView.addSubview(button5)
         contentStackView.addSubview(button6)
         contentStackView.addSubview(button7)
-
     }
 }

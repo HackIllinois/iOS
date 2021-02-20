@@ -39,6 +39,11 @@ extension HIGroupViewController {
             tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
     }
+    @objc func openPopup() {
+        let popupView = HIGroupPopupViewController()
+        popupView.modalPresentationStyle = .overCurrentContext
+        present(popupView, animated: true, completion: nil)
+    }
 }
 
 // MARK: - UIViewController
@@ -68,7 +73,7 @@ extension HIGroupViewController {
             $0.backgroundHIColor = \.buttonViewBackground
             $0.titleHIColor = \.action
             $0.title = "Group Status"
-            $0.setImage(#imageLiteral(resourceName: "DropDown"), for: UIControl.State.normal)
+            $0.setImage(#imageLiteral(resourceName: "DropDown"), for: .normal)
             $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: $0.frame.size.width - 15, bottom: 0, right: 0)
             //$0.titleEdgeInsets = UIEdgeInsets(top: 0, left: ($0.imageView?.frame.width)! + 15, bottom: 0, right: 10)
         }
@@ -82,6 +87,7 @@ extension HIGroupViewController {
             $0.titleHIColor = \.action
             $0.title = "Skills"
             $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+            $0.addTarget(self, action: #selector(self.openPopup), for: .touchUpInside)
         }
         horizontalStackView.addArrangedSubview(skillSortButton)
 
