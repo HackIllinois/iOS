@@ -42,6 +42,7 @@ extension HIGroupViewController {
     @objc func openPopup() {
         let popupView = HIGroupPopupViewController()
         popupView.modalPresentationStyle = .overCurrentContext
+        popupView.modalTransitionStyle = .crossDissolve
         present(popupView, animated: true, completion: nil)
     }
 }
@@ -73,7 +74,8 @@ extension HIGroupViewController {
             $0.backgroundHIColor = \.buttonViewBackground
             $0.titleHIColor = \.action
             $0.title = "Group Status"
-            $0.setImage(#imageLiteral(resourceName: "DropDown"), for: .normal)
+            //$0.activeImage = #imageLiteral(resourceName: "DropDown")
+            //$0.baseImage = #imageLiteral(resourceName: "DropDown")
             $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: $0.frame.size.width - 15, bottom: 0, right: 0)
             //$0.titleEdgeInsets = UIEdgeInsets(top: 0, left: ($0.imageView?.frame.width)! + 15, bottom: 0, right: 10)
         }

@@ -35,7 +35,7 @@ class HIGroupPopupViewController: HIBaseViewController {
         $0.backgroundHIColor = \.buttonViewBackground
         $0.backgroundColor = .clear
         $0.isUserInteractionEnabled = true
-    }*/
+    } */
     private let button1 = HIButton {
         $0.titleLabel?.font = HIAppearance.Font.sortingText
         $0.backgroundHIColor = \.buttonViewBackground
@@ -119,19 +119,20 @@ extension HIGroupPopupViewController {
         containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         containerView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
         containerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
-        
+
         containerView.addSubview(exitButton)
+        exitButton.constrain(to: containerView, topInset: 8, leadingInset: 8)
         containerView.addSubview(contentStackView)
+        contentStackView.topAnchor.constraint(equalTo: exitButton.bottomAnchor).isActive = true
+        contentStackView.leadingAnchor.constraint(equalTo: exitButton.centerXAnchor).isActive = true
 
-        exitButton.constrain(to: containerView, topInset: 18, leadingInset: 22)
-
-        contentStackView.addSubview(selectSortLabel)
-        contentStackView.addSubview(button1)
-        contentStackView.addSubview(button2)
-        contentStackView.addSubview(button3)
-        contentStackView.addSubview(button4)
-        contentStackView.addSubview(button5)
-        contentStackView.addSubview(button6)
-        contentStackView.addSubview(button7)
+        contentStackView.addArrangedSubview(selectSortLabel)
+        contentStackView.addArrangedSubview(button1)
+        contentStackView.addArrangedSubview(button2)
+        contentStackView.addArrangedSubview(button3)
+        contentStackView.addArrangedSubview(button4)
+        contentStackView.addArrangedSubview(button5)
+        contentStackView.addArrangedSubview(button6)
+        contentStackView.addArrangedSubview(button7)
     }
 }
