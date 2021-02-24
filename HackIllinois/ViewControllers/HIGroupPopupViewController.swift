@@ -20,6 +20,7 @@ class HIGroupPopupViewController: HIBaseViewController {
     }
     private let exitButton = HIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.contentHorizontalAlignment = .left
         $0.tintHIColor = \.qrTint
         $0.titleHIColor = \.qrTint
         $0.backgroundHIColor = \.clear
@@ -39,42 +40,77 @@ class HIGroupPopupViewController: HIBaseViewController {
     private let button1 = HIButton {
         $0.titleLabel?.font = HIAppearance.Font.sortingText
         $0.backgroundHIColor = \.buttonViewBackground
+        $0.setImage(#imageLiteral(resourceName: "CheckMark"), for: .selected)
+        $0.addTarget(self, action: #selector(selectedButton), for: .touchUpInside)
+        $0.contentHorizontalAlignment = .left
+        $0.semanticContentAttribute = .forceRightToLeft
+        $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         $0.titleHIColor = \.action
         $0.title = "AWS"
     }
     private let button2 = HIButton {
         $0.titleLabel?.font = HIAppearance.Font.sortingText
         $0.backgroundHIColor = \.buttonViewBackground
+        $0.setImage(#imageLiteral(resourceName: "CheckMark"), for: .selected)
+        $0.addTarget(self, action: #selector(selectedButton), for: .touchUpInside)
+        $0.contentHorizontalAlignment = .left
+        $0.semanticContentAttribute = .forceRightToLeft
+        $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         $0.titleHIColor = \.action
         $0.title = "C++"
     }
     private let button3 = HIButton {
         $0.titleLabel?.font = HIAppearance.Font.sortingText
         $0.backgroundHIColor = \.buttonViewBackground
+        $0.setImage(#imageLiteral(resourceName: "CheckMark"), for: .selected)
+        $0.addTarget(self, action: #selector(selectedButton), for: .touchUpInside)
+        $0.contentHorizontalAlignment = .left
+        $0.semanticContentAttribute = .forceRightToLeft
+        $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         $0.titleHIColor = \.action
         $0.title = "Project Management"
     }
     private let button4 = HIButton {
         $0.titleLabel?.font = HIAppearance.Font.sortingText
         $0.backgroundHIColor = \.buttonViewBackground
+        $0.setImage(#imageLiteral(resourceName: "CheckMark"), for: .selected)
+        $0.addTarget(self, action: #selector(selectedButton), for: .touchUpInside)
+        $0.contentHorizontalAlignment = .left
+        $0.semanticContentAttribute = .forceRightToLeft
+        $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         $0.titleHIColor = \.action
         $0.title = "Scikit-Learn"
     }
     private let button5 = HIButton {
         $0.titleLabel?.font = HIAppearance.Font.sortingText
         $0.backgroundHIColor = \.buttonViewBackground
+        $0.setImage(#imageLiteral(resourceName: "CheckMark"), for: .selected)
+        $0.addTarget(self, action: #selector(selectedButton), for: .touchUpInside)
+        $0.contentHorizontalAlignment = .left
+        $0.semanticContentAttribute = .forceRightToLeft
+        $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         $0.titleHIColor = \.action
         $0.title = "Python"
     }
     private let button6 = HIButton {
         $0.titleLabel?.font = HIAppearance.Font.sortingText
         $0.backgroundHIColor = \.buttonViewBackground
+        $0.setImage(#imageLiteral(resourceName: "CheckMark"), for: .selected)
+        $0.addTarget(self, action: #selector(selectedButton), for: .touchUpInside)
+        $0.contentHorizontalAlignment = .left
+        $0.semanticContentAttribute = .forceRightToLeft
+        $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         $0.titleHIColor = \.action
         $0.title = "Docker"
     }
     private let button7 = HIButton {
         $0.titleLabel?.font = HIAppearance.Font.sortingText
         $0.backgroundHIColor = \.buttonViewBackground
+        $0.setImage(#imageLiteral(resourceName: "CheckMark"), for: .selected)
+        $0.addTarget(self, action: #selector(selectedButton), for: .touchUpInside)
+        $0.contentHorizontalAlignment = .left
+        $0.semanticContentAttribute = .forceRightToLeft
+        $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         $0.titleHIColor = \.action
         $0.title = "Java"
     }
@@ -93,6 +129,9 @@ extension HIGroupPopupViewController {
     @objc func didSelectBackground(_ sender: UITapGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
     }
+    @objc func selectedButton(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+    }
 }
 
 // MARK: UIViewController
@@ -101,8 +140,8 @@ extension HIGroupPopupViewController {
         super.loadView()
         let contentStackView = UIStackView()
         contentStackView.axis = .vertical
-        contentStackView.distribution = .equalSpacing
-        contentStackView.alignment = .leading
+        contentStackView.distribution = .fillEqually
+        contentStackView.alignment = .fill
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         let selectSortLabel = HILabel(style: .sortText)
         selectSortLabel.text = "Select Skills"
@@ -124,7 +163,9 @@ extension HIGroupPopupViewController {
         exitButton.constrain(to: containerView, topInset: 8, leadingInset: 8)
         containerView.addSubview(contentStackView)
         contentStackView.topAnchor.constraint(equalTo: exitButton.bottomAnchor).isActive = true
-        contentStackView.leadingAnchor.constraint(equalTo: exitButton.centerXAnchor).isActive = true
+        contentStackView.leadingAnchor.constraint(equalTo: exitButton.leadingAnchor, constant: 8).isActive = true
+        contentStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8).isActive = true
+        contentStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
 
         contentStackView.addArrangedSubview(selectSortLabel)
         contentStackView.addArrangedSubview(button1)
