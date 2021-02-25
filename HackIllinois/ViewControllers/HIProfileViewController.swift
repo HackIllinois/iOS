@@ -52,7 +52,7 @@ class HIProfileViewController: HIBaseViewController {
     private let profileStatView = HIView() // Will be initialized in ViewController extension (.axis = .horizontal)
     // Good resource for UIStackView: https://stackoverflow.com/questions/43904070/programmatically-adding-views-to-a-uistackview
     private let profileDescriptionView = HILabel(style: .profileDescription) {
-        $0.text = "Short description about yourself or team if you're on a team.\n\n(maybe?) I am interested in:\n\nLooking for TEAM"
+        $0.text = "Short description about yourself or team if you're on a team.\n\n\n\n\n\n\n\n\n\n(maybe?) I am interested in:\n\nLooking for TEAM"
     }
     private let profileDiscordImageView = HIImageView() // May need to modify depending on its intention
     private let profileDiscordUsernameView = HILabel(style: .profileUsername) {
@@ -77,9 +77,20 @@ extension HIProfileViewController {
         // To add action
         editButton.constrain(width: 22, height: 22)
         // Setup contentView (Display summary)
-        view.addSubview(contentView)
-        contentView.constrain(to: view.safeAreaLayoutGuide, topInset: 12, trailingInset: -12, bottomInset: -12, leadingInset: 12)
-
+        let profileScrollView = UIScrollView()
+        view.addSubview(profileScrollView)
+        profileScrollView.translatesAutoresizingMaskIntoConstraints = false
+//        profileScrollView.constrain(to: view.safeAreaLayoutGuide, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        profileScrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        profileScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        profileScrollView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        profileScrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
+        profileScrollView.addSubview(contentView)
+//        contentView.constrain(to: profileScrollView, topInset: 12, trailingInset: -12, bottomInset: -12, leadingInset: 12)
+        contentView.topAnchor.constraint(equalTo: profileScrollView.topAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: profileScrollView.bottomAnchor).isActive = true
+        contentView.centerXAnchor.constraint(equalTo: profileScrollView.centerXAnchor).isActive = true
+        contentView.widthAnchor.constraint(equalTo: profileScrollView.widthAnchor).isActive = true
         contentView.addSubview(profilePictureView)
         profilePictureView.constrain(to: contentView, topInset: 0)
         profilePictureView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
@@ -94,20 +105,13 @@ extension HIProfileViewController {
         contentView.addSubview(profileStatStackView)
         loadStatView(profileStatStackView: profileStatStackView)
         // Reference: https://medium.com/swift-productions/create-a-uiscrollview-programmatically-xcode-12-swift-5-3-f799b8280e30
-        let descriptionScrollView = UIScrollView()
-        contentView.addSubview(descriptionScrollView)
-        descriptionScrollView.translatesAutoresizingMaskIntoConstraints = false
-        descriptionScrollView.topAnchor.constraint(equalTo: profileStatStackView.bottomAnchor, constant: 20).isActive = true
-        descriptionScrollView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        descriptionScrollView.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
-        descriptionScrollView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         let descriptionContentView = UIView()
-        descriptionScrollView.addSubview(descriptionContentView)
+        contentView.addSubview(descriptionContentView)
         descriptionContentView.translatesAutoresizingMaskIntoConstraints = false
-        descriptionContentView.topAnchor.constraint(equalTo: descriptionScrollView.topAnchor).isActive = true
-        descriptionContentView.bottomAnchor.constraint(equalTo: descriptionScrollView.bottomAnchor).isActive = true
-        descriptionContentView.widthAnchor.constraint(equalTo: descriptionScrollView.widthAnchor).isActive = true
-        descriptionContentView.centerXAnchor.constraint(equalTo: descriptionScrollView.centerXAnchor).isActive = true
+        descriptionContentView.topAnchor.constraint(equalTo: profileStatStackView.bottomAnchor, constant: 20).isActive = true
+        descriptionContentView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        descriptionContentView.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
+        descriptionContentView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         descriptionContentView.addSubview(profileDescriptionView)
         loadDescriptionView(descriptionContentView: descriptionContentView)
     }
