@@ -30,21 +30,29 @@ extension HIGroupListViewController {
 extension HIGroupListViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HIGroupCell.identifier, for: indexPath)
-        if let cell = cell as? HIGroupCell, let group = _fetchedResultsController?.object(at: indexPath) as? Project {
-            cell <- group
+        if let cell = cell as? HIGroupCell, let profile = _fetchedResultsController?.object(at: indexPath) as? Profile {
+            cell <- profile
             cell.indexPath = indexPath
         }
         return cell
     }
 }
 
+// MARK: - UIRefreshControl
+extension HIGroupListViewController {
+    override func refresh(_ sender: UIRefreshControl) {
+        super.refresh(sender)
+        HIProfileDataSource.refresh(teamStatus: "looking", interests: ["ML"], completion: endRefreshing)
+    }
+}
+
 // MARK: - UITableViewDelegate
 extension HIGroupListViewController {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let group = _fetchedResultsController?.object(at: indexPath) as? Project else {
+        guard let profile = _fetchedResultsController?.object(at: indexPath) as? Profile else {
             return CGFloat.leastNonzeroMagnitude
         }
-        return HIGroupCell.heightForCell(with: group)
+        return HIGroupCell.heightForCell(with: profile)
     }
 }
 

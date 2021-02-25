@@ -119,3 +119,11 @@ extension HIAPI.Project: MixTypeComparable {
 extension Project: MixTypeComparable {
     var comparable: String { return id }
 }
+
+extension HIAPI.Profile: MixTypeComparable {
+    var comparable: String { return id }
+}
+
+extension Profile: MixTypeComparable {
+    var comparable: String { return id }
+}

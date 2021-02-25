@@ -14,7 +14,27 @@ import UIKit
 import CoreData
 
 class HIGroupViewController: HIGroupListViewController {
+
     // MARK: - Properties
+    lazy var fetchedResultsController: NSFetchedResultsController<Profile> = {
+        let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
+
+        fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "firstName", ascending: true)
+        ]
+
+        let fetchedResultsController = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: HICoreDataController.shared.viewContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
+
+        fetchedResultsController.delegate = self
+
+        return fetchedResultsController
+    }()
+
     private var currentTab = 0
     private var onlyFavorites = false
     private let onlyFavoritesPredicate = NSPredicate(format: "favorite == YES" )
@@ -38,6 +58,8 @@ extension HIGroupViewController {
 // MARK: - Actions
 extension HIGroupViewController {
     func animateReload() {
+        try? fetchedResultsController.performFetch()
+        animateTableViewReload()
         if let tableView = tableView, !tableView.visibleCells.isEmpty {
             tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
@@ -131,6 +153,7 @@ extension HIGroupViewController {
     }
 
     override func viewDidLoad() {
+        _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         super.viewDidLoad()
         setupRefreshControl()
     }

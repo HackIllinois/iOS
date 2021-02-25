@@ -116,6 +116,11 @@
 		A5163FEB221F2741003C543E /* HIAdminStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5163FEA221F2741003C543E /* HIAdminStatsViewController.swift */; };
 		A5163FED221F283C003C543E /* StatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5163FEC221F283C003C543E /* StatsService.swift */; };
 		AC38BEA323FE3E800067ABAC /* HIProjectDetailLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38BEA223FE3E800067ABAC /* HIProjectDetailLocationCell.swift */; };
+		AC3B620E25E85CAD002386A2 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B620D25E85CAD002386A2 /* Profile.swift */; };
+		AC3B621025E85D18002386A2 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B620F25E85D18002386A2 /* ProfileService.swift */; };
+		AC3B621325E86053002386A2 /* Profile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B621125E86053002386A2 /* Profile+CoreDataClass.swift */; };
+		AC3B621425E86053002386A2 /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B621225E86053002386A2 /* Profile+CoreDataProperties.swift */; };
+		AC3B621625E8611C002386A2 /* HIProfileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B621525E8611C002386A2 /* HIProfileDataSource.swift */; };
 		BCD0CA5123C4356300ADC89B /* HIPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD0CA5023C4356300ADC89B /* HIPopupViewController.swift */; };
 		BCEBD2DA23DE995700D32F5A /* HIPopupAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEBD2D923DE995700D32F5A /* HIPopupAnimator.swift */; };
 		D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A309BB2211175200CBA351 /* PassKit.framework */; };
@@ -274,6 +279,11 @@
 		A5163FEA221F2741003C543E /* HIAdminStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAdminStatsViewController.swift; sourceTree = "<group>"; };
 		A5163FEC221F283C003C543E /* StatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsService.swift; sourceTree = "<group>"; };
 		AC38BEA223FE3E800067ABAC /* HIProjectDetailLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProjectDetailLocationCell.swift; sourceTree = "<group>"; };
+		AC3B620D25E85CAD002386A2 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		AC3B620F25E85D18002386A2 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		AC3B621125E86053002386A2 /* Profile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AC3B621225E86053002386A2 /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AC3B621525E8611C002386A2 /* HIProfileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProfileDataSource.swift; sourceTree = "<group>"; };
 		BCD0CA5023C4356300ADC89B /* HIPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIPopupViewController.swift; sourceTree = "<group>"; };
 		BCEBD2D923DE995700D32F5A /* HIPopupAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HIPopupAnimator.swift; path = HackIllinois/UI/Animations/HIPopupAnimator.swift; sourceTree = SOURCE_ROOT; };
 		D3A309BA221116A600CBA351 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };
@@ -414,6 +424,7 @@
 				9521A6A920191737009059C6 /* HIAnnouncementDataSource.swift */,
 				9564E02E2218CE6F003A8EEB /* HIMapsDataSource.swift */,
 				3CF8DB1023B4134C0035ECAE /* HIProjectDataSource.swift */,
+				AC3B621525E8611C002386A2 /* HIProfileDataSource.swift */,
 				3C7E552623AA199900213E1F /* HITimeDataSource.swift */,
 			);
 			path = DataSources;
@@ -438,6 +449,8 @@
 				9510F69F1FCB7D6E007D19DB /* Announcement+CoreDataProperties.swift */,
 				9510F69B1FCB7D6E007D19DB /* Event+CoreDataClass.swift */,
 				9510F69E1FCB7D6E007D19DB /* Event+CoreDataProperties.swift */,
+				AC3B621125E86053002386A2 /* Profile+CoreDataClass.swift */,
+				AC3B621225E86053002386A2 /* Profile+CoreDataProperties.swift */,
 				957D7CA81FC2940800C4332A /* HackIllinois.xcdatamodeld */,
 			);
 			path = CoreDataModels;
@@ -575,6 +588,7 @@
 				95E3146121FAF1740092C22E /* BaseService.swift */,
 				95B12042220BEA9D00E024BB /* CheckInService.swift */,
 				95E3145F21FAF1740092C22E /* EventService.swift */,
+				AC3B620F25E85D18002386A2 /* ProfileService.swift */,
 				95E3145C21FAF1740092C22E /* PassService.swift */,
 				95E3146321FAF1740092C22E /* RegistrationService.swift */,
 				95B12044220BEAD700E024BB /* TrackingService.swift */,
@@ -592,6 +606,7 @@
 				95E3146821FAF1740092C22E /* Announcement.swift */,
 				3521FFA82207C03E00634A63 /* Attendee.swift */,
 				95E3146521FAF1740092C22E /* Event.swift */,
+				AC3B620D25E85CAD002386A2 /* Profile.swift */,
 				95E3146621FAF1740092C22E /* SimpleRequest.swift */,
 				95E3146721FAF1740092C22E /* User.swift */,
 				3C26401C23ADE8A5004E1DBE /* Project.swift */,
@@ -818,6 +833,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95CA9230201E60D300C46037 /* UIImage+QRCode.swift in Sources */,
+				AC3B621325E86053002386A2 /* Profile+CoreDataClass.swift in Sources */,
 				95A7D2A0203D60E9005EAEAF /* HIBubbleCell.swift in Sources */,
 				9552D92821758E4C00A8C869 /* UIView+AutoLayout.swift in Sources */,
 				AC38BEA323FE3E800067ABAC /* HIProjectDetailLocationCell.swift in Sources */,
@@ -849,6 +865,7 @@
 				95B12041220BDDEF00E024BB /* HICheckInScannerViewController.swift in Sources */,
 				95A7D292203D4F54005EAEAF /* HILoginSelectionCell.swift in Sources */,
 				3C26401923ADE7AA004E1DBE /* Project+CoreDataProperties.swift in Sources */,
+				AC3B621625E8611C002386A2 /* HIProfileDataSource.swift in Sources */,
 				95C18DCC20096539004784B5 /* HIEventListViewController.swift in Sources */,
 				95A7D28A203D4F54005EAEAF /* HIButton.swift in Sources */,
 				95A7D28E203D4F54005EAEAF /* HIView.swift in Sources */,
@@ -868,6 +885,7 @@
 				3C7E552723AA199900213E1F /* HITimeDataSource.swift in Sources */,
 				9510F6A11FCB7D6E007D19DB /* Event+CoreDataClass.swift in Sources */,
 				951827A81EA35DB800049F79 /* AppDelegate.swift in Sources */,
+				AC3B621425E86053002386A2 /* Profile+CoreDataProperties.swift in Sources */,
 				9564E02F2218CE6F003A8EEB /* HIMapsDataSource.swift in Sources */,
 				953199C91FC25CA0009F2AA1 /* HICoreDataController.swift in Sources */,
 				95A7D28D203D4F54005EAEAF /* Identifiable.swift in Sources */,
@@ -903,6 +921,7 @@
 			files = (
 				3521FFA92207C03E00634A63 /* Attendee.swift in Sources */,
 				95E3147521FAF1740092C22E /* User.swift in Sources */,
+				AC3B621025E85D18002386A2 /* ProfileService.swift in Sources */,
 				95E3147021FAF1740092C22E /* BaseService.swift in Sources */,
 				95E3147321FAF1740092C22E /* Event.swift in Sources */,
 				95E3146E21FAF1740092C22E /* EventService.swift in Sources */,
@@ -911,6 +930,7 @@
 				95E3146C21FAF1740092C22E /* UserService.swift in Sources */,
 				95B12043220BEA9D00E024BB /* CheckInService.swift in Sources */,
 				95E3147121FAF1740092C22E /* AuthService.swift in Sources */,
+				AC3B620E25E85CAD002386A2 /* Profile.swift in Sources */,
 				95E3146B21FAF1740092C22E /* PassService.swift in Sources */,
 				3C26401B23ADE838004E1DBE /* ProjectService.swift in Sources */,
 				95E3146A21FAF1740092C22E /* AnnouncementService.swift in Sources */,

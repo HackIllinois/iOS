@@ -100,33 +100,35 @@ extension HIGroupCell {
 // MARK: - Population
 extension HIGroupCell {
     // Change 'Project' once Group model is added
-    static func heightForCell(with group: Project) -> CGFloat {
+    static func heightForCell(with group: Profile) -> CGFloat {
         return 98 + 31
     }
     // Calls to API should replace hard coded labels
-    static func <- (lhs: HIGroupCell, rhs: Project) {
-        lhs.favoritedButton.isActive = rhs.favorite
+    static func <- (lhs: HIGroupCell, rhs: Profile) {
+        print("!!!!")
+        print(rhs.firstName)
+        // lhs.favoritedButton.isActive = rhs.favorite
         var innerVerticalStackViewHeight: CGFloat = 0
         var contentStackViewHeight: CGFloat = 0
 
         let nameLabel = HILabel(style: .groupContactInfo)
-        nameLabel.text = "Carter Smith"
+        nameLabel.text = rhs.firstName + " " + rhs.lastName
         innerVerticalStackViewHeight += nameLabel.intrinsicContentSize.height
         lhs.innerVerticalStackView.addArrangedSubview(nameLabel)
 
         // Add conditional and profile pic when API is finished
         let statusLabel = HILabel(style: .lookingForGroup)
-        statusLabel.text = "Looking for Team"
+        statusLabel.text = rhs.teamStatus
         innerVerticalStackViewHeight += statusLabel.intrinsicContentSize.height + 3
         lhs.innerVerticalStackView.addArrangedSubview(statusLabel)
 
         let discordLabel = HILabel(style: .groupContactInfo)
-        discordLabel.text = "Discord: @HackThis"
+        discordLabel.text = "Discord: \(rhs.discord)"
         contentStackViewHeight += discordLabel.intrinsicContentSize.height + 3
         lhs.contentStackView.addArrangedSubview(discordLabel)
 
         let description = HILabel(style: .groupDescription)
-        description.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        description.text = rhs.description
         contentStackViewHeight += description.intrinsicContentSize.height + 3
         lhs.contentStackView.addArrangedSubview(description)
     }
