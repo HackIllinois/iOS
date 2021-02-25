@@ -31,7 +31,6 @@ class HILabel: UILabel {
         case backgroundTitle
         case detailSubtitle
         case detailText
-        
         case profileName
         case profileSubtitle
         case profileNumberFigure
@@ -143,31 +142,31 @@ class HILabel: UILabel {
                 layer.borderWidth = 2.0
                 layer.borderColor = (\HIAppearance.loginSelectionText).value.cgColor
                 layer.backgroundColor = UIColor.clear.cgColor
-                
+
             case .profileName: // Used to display the profile owner's name
                 textHIColor = \.whiteTagFont // May be defined for itself later
                 backgroundHIColor = \.clear
                 textAlignment = .center
                 font = HIAppearance.Font.profileName
-                
+
             case .profileSubtitle: // Used to display profile subtitle, "points", and whatever that says "time zone"
                 textHIColor = \.whiteTagFont // May be defined for itself later
                 backgroundHIColor = \.clear
                 textAlignment = .center
                 font = HIAppearance.Font.profileSubtitle
-            
+
             case .profileNumberFigure: // Used to display number of points and time (?)
                 textHIColor = \.whiteTagFont // May be defined for itself later
                 backgroundHIColor = \.clear
                 textAlignment = .center
                 font = HIAppearance.Font.profileNumberFigure
-            
+
             case .profileDescription: // Used to display "short description"
                 textHIColor = \.whiteTagFont // May be defined for itself later
                 backgroundHIColor = \.clear
                 textAlignment = .left
                 font = HIAppearance.Font.profileDescription
-            
+
             case .profileUsername: // Used to display Discord username, etc.
                 textHIColor = \.whiteTagFont // May be defined for itself later
                 backgroundHIColor = \.clear

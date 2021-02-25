@@ -127,16 +127,22 @@ extension HILoginFlowController {
 
 // MARK: - Login Flow
 private extension HILoginFlowController {
-    private func attemptOAuthLogin(buildingUser user: HIUser, sender: HIBaseViewController) {
+    private func attemptOAuthLogin(buildingUser user: HIUser, profile: HIProfile, sender: HIBaseViewController) {
 
         //GUEST (bypass auth)
         if user.provider == .guest {
             var guestUser = HIUser()
+            var guestProfile = HIProfile()
+            // Using test token
+            guestProfile.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyMUBnbWFpbC5jb20iLCJleHAiOjE2MjU4MjUyNDEsImlkIjoiVEVTVDEgZ2l0aHViMTkwMjM4MTIzIiwicm9sZXMiOlsiVXNlciIsIkFwcGxpY2FudCIsIkF0dGVuZGVlIl19.Ethvq5VsLFukI3TehZdTkuHHZiybqXNBxOiP04XwOjI"
             guestUser.firstName = "Guest"
+            // guestProfile.firstName = "Guest"
 
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": guestUser])
+                // NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": guestProfile])
             }
+            self.populateProfileData(buildingProfile: guestProfile, sender: sender)
             return
         }
 
@@ -148,8 +154,10 @@ private extension HILoginFlowController {
                 let code = queryItems.first(where: { $0.name == "code" })?.value,
                 code.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
                 var user = user
+                var profile = profile
                 user.oauthCode = code
-                self?.exchangeOAuthCodeForAPIToken(buildingUser: user, sender: sender)
+                profile.oauthCode = code
+                self?.exchangeOAuthCodeForAPIToken(buildingUser: user, profile: profile, sender: sender)
             } else if let error = error {
                 if (error as? SFAuthenticationError)?.code == SFAuthenticationError.canceledLogin {
                     // do nothing
@@ -164,14 +172,16 @@ private extension HILoginFlowController {
         loginSession?.start()
     }
 
-    private func exchangeOAuthCodeForAPIToken(buildingUser user: HIUser, sender: HIBaseViewController) {
+    private func exchangeOAuthCodeForAPIToken(buildingUser user: HIUser, profile: HIProfile, sender: HIBaseViewController) {
         HIAPI.AuthService.getAPIToken(provider: user.provider, code: user.oauthCode)
         .onCompletion { [weak self] result in
             do {
                 let (apiToken, _) = try result.get()
                 var user = user
+                var profile = profile
                 user.token = apiToken.token
-                self?.populateUserData(buildingUser: user, sender: sender)
+                profile.token = apiToken.token
+                self?.populateUserData(buildingUser: user, profile: profile, sender: sender)
             } catch {
                 self?.presentAuthenticationFailure(withError: error, sender: sender)
             }
@@ -179,7 +189,7 @@ private extension HILoginFlowController {
         .launch()
     }
 
-    private func populateUserData(buildingUser user: HIUser, sender: HIBaseViewController) {
+    private func populateUserData(buildingUser user: HIUser, profile: HIProfile, sender: HIBaseViewController) {
         subscribeUserToRelevantTopics(buildingUser: user, sender: sender)
         HIAPI.UserService.getUser()
         .onCompletion { [weak self] result in
@@ -191,7 +201,7 @@ private extension HILoginFlowController {
                 user.firstName = apiUser.firstName
                 user.lastName = apiUser.lastName
                 user.email = apiUser.email
-                self?.populateRoleData(buildingUser: user, sender: sender)
+                self?.populateRoleData(buildingUser: user, profile: profile, sender: sender)
             } catch {
                 self?.presentAuthenticationFailure(withError: error, sender: sender)
             }
@@ -206,20 +216,23 @@ private extension HILoginFlowController {
         .launch()
     }
 
-    private func populateRoleData(buildingUser user: HIUser, sender: HIBaseViewController) {
+    private func populateRoleData(buildingUser user: HIUser, profile: HIProfile, sender: HIBaseViewController) {
         HIAPI.AuthService.getRoles()
         .onCompletion { [weak self] result in
             do {
                 let (apiRolesContainer, _) = try result.get()
                 var user = user
+                var profile = profile
                 user.roles = apiRolesContainer.roles
+                profile.roles = apiRolesContainer.roles
                 if user.provider == .github && user.roles.contains(.attendee) {
-                    self?.populateRegistrationData(buildingUser: user, sender: sender)
+                    self?.populateRegistrationData(buildingUser: user, profile: profile, sender: sender)
                 } else if user.provider == .google {
                     if user.roles.contains(.staff) {
                         DispatchQueue.main.async {
                             NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
                         }
+                        self?.populateProfileData(buildingProfile: profile, sender: sender)
                     } else {
                         DispatchQueue.main.async {
                             sender.presentErrorController(title: "You must have a valid staff account to log in.", message: "", dismissParentOnCompletion: false)
@@ -238,22 +251,54 @@ private extension HILoginFlowController {
         .launch()
     }
 
-    private func populateRegistrationData(buildingUser user: HIUser, sender: HIBaseViewController) {
+    private func populateRegistrationData(buildingUser user: HIUser, profile: HIProfile, sender: HIBaseViewController) {
         HIAPI.RegistrationService.getAttendee()
         .onCompletion { [weak self] result in
             do {
                 let (apiAttendeeContainer, _) = try result.get()
                 var user = user
+                var profile = profile
                 user.attendee = apiAttendeeContainer.attendee
+                profile.attendee = apiAttendeeContainer.attendee
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
                 }
+                self?.populateProfileData(buildingProfile: profile, sender: sender)
             } catch {
                 self?.presentAuthenticationFailure(withError: error, sender: sender)
             }
         }
         .authorize(with: user)
         .launch()
+    }
+
+    private func populateProfileData(buildingProfile profile: HIProfile, sender: HIBaseViewController) {
+        HIAPI.ProfileService.getUserProfile()
+        .onCompletion { [weak self] result in
+            do {
+                let (apiProfile, _) = try result.get()
+                var profile = profile
+                profile.id = apiProfile.id
+                profile.firstName = apiProfile.firstName
+                profile.lastName = apiProfile.lastName
+                profile.points = apiProfile.points
+                profile.timezone = apiProfile.timezone
+                profile.info = apiProfile.info
+                profile.discord = apiProfile.discord
+                profile.avatarUrl = apiProfile.avatarUrl
+                profile.teamStatus = apiProfile.teamStatus
+                profile.interests = apiProfile.interests
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": profile])
+                }
+            } catch {
+                self?.presentAuthenticationFailure(withError: error, sender: sender)
+            }
+
+        }
+        .authorize(with: profile)
+        .launch()
+
     }
 
     private func presentAuthenticationFailure(withError error: Error, sender: HIBaseViewController) {
@@ -268,6 +313,7 @@ extension HILoginFlowController: HILoginSelectionViewControllerDelegate {
     func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController,
                                       didMakeLoginSelection selection: HIAPI.AuthService.OAuthProvider) {
         let user = HIUser(provider: selection)
-        attemptOAuthLogin(buildingUser: user, sender: loginSelectionViewController)
+        let profile = HIProfile(provider: selection)
+        attemptOAuthLogin(buildingUser: user, profile: profile, sender: loginSelectionViewController)
     }
 }

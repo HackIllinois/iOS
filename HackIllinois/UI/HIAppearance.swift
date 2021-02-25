@@ -132,7 +132,7 @@ struct HIAppearance: Equatable {
         static let sectionHeader = UIFont.systemFont(ofSize: 13, weight: .bold)
         static let button = UIFont.systemFont(ofSize: 15, weight: .regular)
         static let glyph = UIFont.systemFont(ofSize: 21, weight: .light)
-        
+
 //        static let profileName = UIFont(name: "Montserrat-SemiBold", size: 24)
 //        static let profileSubtitle = UIFont(name: "Montserrat-Regular", size: 14)
 //        static let profileNumberFigure = UIFont(name: "Montserrat-Medium", size: 20)

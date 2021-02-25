@@ -2,8 +2,12 @@
 //  HIProfileViewController.swift
 //  HackIllinois
 //
-//  Created by Hyosang Ahn on 2/1/21.
+//  Created by HackIllinois Team on 2/24/21.
 //  Copyright © 2021 HackIllinois. All rights reserved.
+//  This file is part of the Hackillinois iOS App.
+//  The Hackillinois iOS App is open source software, released under the University of
+//  Illinois/NCSA Open Source License. You should have received a copy of
+//  this license in a file with the distribution.
 //
 
 import Foundation
@@ -17,7 +21,7 @@ class HIProfileViewController: HIBaseViewController {
         $0.backgroundHIColor = \.clear
         $0.baseImage = #imageLiteral(resourceName: "Pencil")
     }
-    
+
     private let contentView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.clear
@@ -29,19 +33,19 @@ class HIProfileViewController: HIBaseViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let profileNameView = HILabel(style: .profileName) {
-        $0.text = "First Last Name"
+        $0.text = ""
     }
     private let profileSubtitleView = HILabel(style: .profileSubtitle) {
-        $0.text = "LOOKING FOR TEAM OR LOOKING FOR people"
+        $0.text = ""
     }
     private let profilePointsView = HILabel(style: .profileNumberFigure) {
-        $0.text = "0"
+        $0.text = ""
     }
     private let profilePointsSubtitleView = HILabel(style: .profileDescription) {
         $0.text = "points"
     }
     private let profileTimeView = HILabel(style: .profileNumberFigure) {
-        $0.text = "12:00am"
+        $0.text = ""
     }
     private let profileTimeSubtitleView = HILabel(style: .profileDescription) {
         $0.text = "time zone"
@@ -52,7 +56,7 @@ class HIProfileViewController: HIBaseViewController {
     private let profileStatView = HIView() // Will be initialized in ViewController extension (.axis = .horizontal)
     // Good resource for UIStackView: https://stackoverflow.com/questions/43904070/programmatically-adding-views-to-a-uistackview
     private let profileDescriptionView = HILabel(style: .profileDescription) {
-        $0.text = "Short description about yourself or team if you're on a team.\n\n\n\n\n\n\n\n\n\n(maybe?) I am interested in:\n\nLooking for TEAM"
+        $0.text = ""
     }
     private let profileDiscordImageView = HIImageView() // May need to modify depending on its intention
     private let profileDiscordUsernameView = HILabel(style: .profileUsername) {
@@ -81,7 +85,7 @@ extension HIProfileViewController {
         view.addSubview(profileScrollView)
         profileScrollView.translatesAutoresizingMaskIntoConstraints = false
 //        profileScrollView.constrain(to: view.safeAreaLayoutGuide, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
-        profileScrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        profileScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         profileScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         profileScrollView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         profileScrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
@@ -110,12 +114,13 @@ extension HIProfileViewController {
         descriptionContentView.translatesAutoresizingMaskIntoConstraints = false
         descriptionContentView.topAnchor.constraint(equalTo: profileStatStackView.bottomAnchor, constant: 20).isActive = true
         descriptionContentView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        descriptionContentView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         descriptionContentView.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
         descriptionContentView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         descriptionContentView.addSubview(profileDescriptionView)
         loadDescriptionView(descriptionContentView: descriptionContentView)
     }
-    
+
     func loadStatView(profileStatStackView: UIStackView) {
         profileStatStackView.axis = .horizontal
         profileStatStackView.distribution = .fillEqually
@@ -151,7 +156,7 @@ extension HIProfileViewController {
         profileDiscordUsernameView.numberOfLines = 0
         profileDiscordUsernameView.topAnchor.constraint(equalTo: profileDiscordImageView.topAnchor).isActive = true
         profileDiscordUsernameView.trailingAnchor.constraint(equalTo: descriptionContentView.trailingAnchor).isActive = true
-        profileDiscordImageView.trailingAnchor.constraint(equalTo: profileDiscordUsernameView.leadingAnchor, constant: -9).isActive = true
+        profileDiscordImageView.trailingAnchor.constraint(equalTo: profileDiscordUsernameView.leadingAnchor, constant: -10).isActive = true
         descriptionContentView.addSubview(profileInterestsLabelView)
         profileDiscordUsernameView.bottomAnchor.constraint(equalTo: profileInterestsLabelView.topAnchor, constant: -10).isActive = true
         descriptionContentView.addSubview(profileInterestsView)
@@ -165,6 +170,16 @@ extension HIProfileViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        guard let profile = HIApplicationStateController.shared.profile else { return }
+        view.layoutIfNeeded()
+
+        profileNameView.text = profile.firstName + " " + profile.lastName
+        profileSubtitleView.text = profile.teamStatus
+        profilePointsView.text = "\(profile.points)"
+        profileTimeView.text = profile.timezone
+        profileDescriptionView.text = profile.info
+        profileDiscordUsernameView.text = profile.discord
+
         profilePictureView.image = UIImage(named: "DefaultProfilePicture")
         profileDiscordImageView.image = UIImage(named: "DiscordLogo")
     }
