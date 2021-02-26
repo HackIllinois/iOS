@@ -23,7 +23,7 @@ class HILoginSelectionCell: UITableViewCell {
 
     var titleLabel = HILabel(style: .loginSelection)
 
-    var defaultColor: UIColor  = (\HIAppearance.clear).value
+    var defaultColor: UIColor  = (\HIAppearance.loginDefault).value
     var activeColor: UIColor = (\HIAppearance.action).value
 
     var defaultTextColor: UIColor = UIColor.white
