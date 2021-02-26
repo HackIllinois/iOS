@@ -2,8 +2,12 @@
 //  HIProfileDataSource.swift
 //  HackIllinois
 //
-//  Created by Jeff Kim on 2/25/21.
+//  Created by HackIllinois Team on 2/25/21.
 //  Copyright © 2021 HackIllinois. All rights reserved.
+//  This file is part of the Hackillinois iOS App.
+//  The Hackillinois iOS App is open source software, released under the University of
+//  Illinois/NCSA Open Source License. You should have received a copy of
+//  this license in a file with the distribution.
 //
 
 import Foundation
@@ -41,11 +45,11 @@ final class HIProfileDataSource {
                         // 1) Unwrap contained data
                         let apiProfiles = containedProfiles.profiles
 
-                        // 2) Get all CoreData Projects.
+                        // 2) Get all CoreData profiles.
                         let profileFetchRequest = NSFetchRequest<Profile>(entityName: "Profile")
                         let coreDataProfiles = try context.fetch(profileFetchRequest)
 
-                        // 3) Diff the CoreData projects and API projects.
+                        // 3) Diff the CoreData profiles and API profiles.
                         let (
                             coreDataProfilesToDelete,
                             coreDataProfilesToUpdate,
@@ -54,12 +58,12 @@ final class HIProfileDataSource {
 
                         // 4) Apply the diff
                         coreDataProfilesToDelete.forEach { coreDataProfile in
-                            // Delete CoreData project.
+                            // Delete CoreData profile.
                             context.delete(coreDataProfile)
                         }
 
                         coreDataProfilesToUpdate.forEach { (coreDataProfile, apiProfile) in
-                            // Update CoreData project.
+                            // Update CoreData profile.
                             coreDataProfile.id = apiProfile.id
                             coreDataProfile.firstName = apiProfile.firstName
                             coreDataProfile.lastName = apiProfile.lastName
@@ -73,7 +77,7 @@ final class HIProfileDataSource {
                         }
 
                         apiProfilesToInsert.forEach { apiProfile in
-                            // Create CoreData project.
+                            // Create CoreData profile.
                             let coreDataProfile = Profile(context: context)
                             coreDataProfile.id = apiProfile.id
                             coreDataProfile.firstName = apiProfile.firstName
