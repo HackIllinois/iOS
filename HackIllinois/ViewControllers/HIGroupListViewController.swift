@@ -42,7 +42,7 @@ extension HIGroupListViewController {
 extension HIGroupListViewController {
     override func refresh(_ sender: UIRefreshControl) {
         super.refresh(sender)
-        HIProfileDataSource.refresh(teamStatus: "looking", interests: ["ML"], completion: endRefreshing)
+        HIProfileDataSource.refresh(teamStatus: "", interests: [], completion: endRefreshing)
     }
 }
 

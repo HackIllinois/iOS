@@ -19,14 +19,11 @@ class HIGroupCell: HIBubbleCell {
         $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
     }
     var profilePicture = HIImageView {
-        $0.image = #imageLiteral(resourceName: "ProfilePic")
+        $0.backgroundColor = UIColor.clear
     }
 
     var contentStackView = UIStackView()
     var contentStackViewHeight = NSLayoutConstraint()
-
-    var innerHorizontalStackView = UIStackView()
-    var innerHorizontalStackViewHeight = NSLayoutConstraint()
 
     var innerVerticalStackView = UIStackView()
     var innerVerticalStackViewHeight = NSLayoutConstraint()
@@ -47,37 +44,31 @@ class HIGroupCell: HIBubbleCell {
         favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0, bottomInset: 0)
 
         // add bubble view
-        contentView.layer.backgroundColor = UIColor.clear.cgColor
-        contentStackView.axis = .vertical
-        contentStackView.distribution = .equalSpacing
-        contentStackView.translatesAutoresizingMaskIntoConstraints = false
-        bubbleView.addSubview(contentStackView)
-        contentStackView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 16).isActive = true
-        contentStackView.trailingAnchor.constraint(equalTo: favoritedButton.leadingAnchor).isActive = true
-        contentStackView.centerYAnchor.constraint(equalTo: bubbleView.centerYAnchor).isActive = true
-        contentStackViewHeight = contentStackView.heightAnchor.constraint(equalToConstant: 0)
-        contentStackViewHeight.isActive = true
+        bubbleView.addSubview(profilePicture)
+        profilePicture.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 20).isActive = true
+        profilePicture.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 20).isActive = true
+        profilePicture.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        profilePicture.heightAnchor.constraint(equalToConstant: 50).isActive = true
 
-        innerHorizontalStackView.axis = .horizontal
-        innerHorizontalStackView.distribution = .equalSpacing
-        innerHorizontalStackView.translatesAutoresizingMaskIntoConstraints = false
-        contentStackView.addSubview(innerHorizontalStackView)
-        innerHorizontalStackView.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor, constant: 16).isActive = true
-        innerHorizontalStackView.trailingAnchor.constraint(equalTo: contentStackView.trailingAnchor).isActive = true
-        innerHorizontalStackView.topAnchor.constraint(equalTo: contentStackView.topAnchor, constant: 16).isActive = true
-        innerHorizontalStackViewHeight = innerHorizontalStackView.heightAnchor.constraint(equalToConstant: 0)
-        innerHorizontalStackViewHeight.isActive = true
-
+        bubbleView.addSubview(innerVerticalStackView)
         innerVerticalStackView.axis = .vertical
         innerVerticalStackView.distribution = .equalSpacing
+        innerVerticalStackView.spacing = 5.0
         innerVerticalStackView.translatesAutoresizingMaskIntoConstraints = false
-        innerHorizontalStackView.addArrangedSubview(profilePicture)
-        innerHorizontalStackView.addSubview(innerVerticalStackView)
-        innerVerticalStackView.trailingAnchor.constraint(equalTo: innerHorizontalStackView.trailingAnchor).isActive = true
-        innerVerticalStackView.topAnchor.constraint(equalTo: innerHorizontalStackView.topAnchor).isActive = true
-        innerVerticalStackView.bottomAnchor.constraint(equalTo: innerHorizontalStackView.bottomAnchor).isActive = true
+        innerVerticalStackView.centerYAnchor.constraint(equalTo: profilePicture.centerYAnchor).isActive = true
+        innerVerticalStackView.leadingAnchor.constraint(equalTo: profilePicture.trailingAnchor, constant: 10).isActive = true
+        innerVerticalStackView.trailingAnchor.constraint(equalTo: favoritedButton.leadingAnchor).isActive = true
         innerVerticalStackViewHeight = innerVerticalStackView.heightAnchor.constraint(equalToConstant: 0)
-        innerVerticalStackViewHeight.isActive = true
+
+        bubbleView.addSubview(contentStackView)
+        contentStackView.axis = .vertical
+        contentStackView.distribution = .equalSpacing
+        contentStackView.spacing = 10.0
+        contentStackView.translatesAutoresizingMaskIntoConstraints = false
+        contentStackView.leadingAnchor.constraint(equalTo: profilePicture.leadingAnchor).isActive = true
+        contentStackView.trailingAnchor.constraint(equalTo: favoritedButton.leadingAnchor).isActive = true
+        contentStackView.topAnchor.constraint(equalTo: profilePicture.bottomAnchor, constant: 10).isActive = true
+        contentStackViewHeight = contentStackView.heightAnchor.constraint(equalToConstant: 0)
 
         // Don't show favorite button for guests
         if HIApplicationStateController.shared.isGuest {
@@ -99,24 +90,26 @@ extension HIGroupCell {
 
 // MARK: - Population
 extension HIGroupCell {
-    // Change 'Project' once Group model is added
+
     static func heightForCell(with group: Profile) -> CGFloat {
-        return 98 + 31
+        return 98 + 62
     }
-    // Calls to API should replace hard coded labels
+
     static func <- (lhs: HIGroupCell, rhs: Profile) {
-        print("!!!!")
-        print(rhs.firstName)
         // lhs.favoritedButton.isActive = rhs.favorite
         var innerVerticalStackViewHeight: CGFloat = 0
         var contentStackViewHeight: CGFloat = 0
+
+        if let url = URL(string: rhs.avatarUrl) {
+            lhs.profilePicture.downloadImage(from: url)
+        }
 
         let nameLabel = HILabel(style: .groupContactInfo)
         nameLabel.text = rhs.firstName + " " + rhs.lastName
         innerVerticalStackViewHeight += nameLabel.intrinsicContentSize.height
         lhs.innerVerticalStackView.addArrangedSubview(nameLabel)
 
-        // Add conditional and profile pic when API is finished
+        // Add conditional
         let statusLabel = HILabel(style: .lookingForGroup)
         statusLabel.text = rhs.teamStatus
         innerVerticalStackViewHeight += statusLabel.intrinsicContentSize.height + 3
@@ -128,17 +121,26 @@ extension HIGroupCell {
         lhs.contentStackView.addArrangedSubview(discordLabel)
 
         let description = HILabel(style: .groupDescription)
-        description.text = rhs.description
+        description.text = rhs.info
         contentStackViewHeight += description.intrinsicContentSize.height + 3
         lhs.contentStackView.addArrangedSubview(description)
+
+        lhs.innerVerticalStackViewHeight.constant = innerVerticalStackViewHeight
+        lhs.contentStackViewHeight.constant = contentStackViewHeight
     }
+
 }
 
 // MARK: - UITableViewCell
 extension HIGroupCell {
     override func prepareForReuse() {
         super.prepareForReuse()
+        profilePicture.image = UIImage()
         favoritedButton.isActive = false
+        innerVerticalStackView.arrangedSubviews.forEach { (view) in
+            innerVerticalStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
         contentStackView.arrangedSubviews.forEach { (view) in
             contentStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
