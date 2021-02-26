@@ -27,6 +27,7 @@ struct HIAppearance: Equatable {
     let preferredStatusBarStyle: UIStatusBarStyle
     let scrollViewIndicatorStyle: UIScrollView.IndicatorStyle
     let mapBackground: UIColor
+    let loginDefault: UIColor
     let loginTitleBackground: UIColor
     let loginLogo: UIImage
     let viewTitleColor: UIColor
@@ -55,15 +56,17 @@ struct HIAppearance: Equatable {
     private static let deepBlue = #colorLiteral(red: 0.03921568627, green: 0.03529411765, blue: 0.2470588235, alpha: 1)
     private static let darkerBlue = #colorLiteral(red: 0.1333333333, green: 0.168627451, blue: 0.3607843137, alpha: 1)
     private static let whiteBlue = #colorLiteral(red: 0.9764705882, green: 1, blue: 1, alpha: 1)
+    private static let lightCoral = #colorLiteral(red: 0.9333333333, green: 0.4235294118, blue: 0.4470588235, alpha: 1)
+    private static let nightBlue = #colorLiteral(red: 0.4352941176, green: 0.5490196078, blue: 0.7568627451, alpha: 1)
 
     // New colors added. Replace old ones?
     private static let grayBlack = #colorLiteral(red: 0.1058823529, green: 0.1058823529, blue: 0.1058823529, alpha: 1)
     private static let groupRed = #colorLiteral(red: 0.5960784314, green: 0.1137254902, blue: 0.137254902, alpha: 1)
     private static let groupOrange = #colorLiteral(red: 0.937254902, green: 0.5176470588, blue: 0.2823529412, alpha: 1)
     private static let buttonBlue = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
-    private static var statusBarBlack: UIStatusBarStyle {
+    private static var statusBarWhite: UIStatusBarStyle {
         if #available(iOS 13, *) {
-             return .darkContent
+             return .lightContent
         } else {
              return .default
         }
@@ -81,13 +84,14 @@ struct HIAppearance: Equatable {
         qrTint: darkBlue,
         qrBackground: white,
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewDay"),
-        preferredStatusBarStyle: statusBarBlack,
+        preferredStatusBarStyle: statusBarWhite,
         scrollViewIndicatorStyle: .black,
         mapBackground: whiteBlue,
-        loginTitleBackground: orange,
-        loginLogo: #imageLiteral(resourceName: "LoginLogo"),
+        loginDefault: nightBlue,
+        loginTitleBackground: white,
+        loginLogo: #imageLiteral(resourceName: "HILogo"),
         viewTitleColor: deepBlue,
-        loginSelectionText: darkerBlue,
+        loginSelectionText: white,
         attendeeText: white,
         attendeeBackground: maroon,
         whiteTagFont: white,
@@ -109,13 +113,14 @@ struct HIAppearance: Equatable {
         qrTint: darkBlue,
         qrBackground: white,
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewNight"),
-        preferredStatusBarStyle: statusBarBlack,
+        preferredStatusBarStyle: statusBarWhite,
         scrollViewIndicatorStyle: .white,
         mapBackground: whiteBlue,
-        loginTitleBackground: orange,
-        loginLogo: #imageLiteral(resourceName: "LoginLogo"),
+        loginDefault: nightBlue,
+        loginTitleBackground: white,
+        loginLogo: #imageLiteral(resourceName: "HILogo"),
         viewTitleColor: deepBlue,
-        loginSelectionText: darkerBlue,
+        loginSelectionText: white,
         attendeeText: white,
         attendeeBackground: maroon,
         whiteTagFont: white,
@@ -124,7 +129,7 @@ struct HIAppearance: Equatable {
         groupSearchText: groupRed,
         buttonViewBackground: buttonBlue
     )
-
+    
     fileprivate static var current = day
 
     static func change(to newAppearance: HIAppearance) {

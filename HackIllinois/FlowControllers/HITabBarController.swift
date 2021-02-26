@@ -90,8 +90,8 @@ class HITabBarController: UITabBarController {
         tabBar.clipsToBounds = true
         tabBar.layer.borderWidth = 0
         tabBar.backgroundColor = UIColor.clear
-        tabBar.unselectedItemTintColor = UIColor.white
-        tabBar.tintColor = UIColor(red: 0.89, green: 0.314, blue: 0.345, alpha: 1)
+        tabBar.unselectedItemTintColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
+        tabBar.tintColor = UIColor.white
 
         addTabBarShape()
     }
@@ -100,7 +100,7 @@ class HITabBarController: UITabBarController {
         tabBarShapeLayer = CAShapeLayer()
         if let tabBarShapeLayer = tabBarShapeLayer {
             tabBarShapeLayer.path = createPath()
-            tabBarShapeLayer.fillColor = UIColor(red: 0.13, green: 0.17, blue: 0.36, alpha: 1.0).cgColor
+            tabBarShapeLayer.fillColor = UIColor(red: 0.435, green: 0.549, blue: 0.757, alpha: 1.0).cgColor
             tabBarShapeLayer.lineWidth = 1.0
 
             self.tabBar.layer.insertSublayer(tabBarShapeLayer, at: 0)

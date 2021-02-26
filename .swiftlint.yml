@@ -1,6 +1,7 @@
 disabled_rules:
   - cyclomatic_complexity
   - large_tuple
+  - comment_spacing
 
 opt_in_rules:
   - file_header
