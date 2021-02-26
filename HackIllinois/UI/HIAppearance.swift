@@ -93,7 +93,7 @@ struct HIAppearance: Equatable {
         viewTitleColor: deepBlue,
         loginSelectionText: white,
         attendeeText: white,
-        attendeeBackground: maroon,
+        attendeeBackground: lightCoral,
         whiteTagFont: white,
         groupText: grayBlack,
         memberSearchText: groupOrange,
@@ -122,14 +122,14 @@ struct HIAppearance: Equatable {
         viewTitleColor: deepBlue,
         loginSelectionText: white,
         attendeeText: white,
-        attendeeBackground: maroon,
+        attendeeBackground: lightCoral,
         whiteTagFont: white,
         groupText: grayBlack,
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
         buttonViewBackground: buttonBlue
     )
-    
+
     fileprivate static var current = day
 
     static func change(to newAppearance: HIAppearance) {
