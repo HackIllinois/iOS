@@ -180,6 +180,9 @@ extension HIProfileViewController {
         guard let profile = HIApplicationStateController.shared.profile else { return }
         view.layoutIfNeeded()
 
+        if let url = URL(string: profile.avatarUrl) {
+            profilePictureView.downloadImage(from: url)
+        }
         profileNameView.text = profile.firstName + " " + profile.lastName
         profileSubtitleView.text = profile.teamStatus
         profilePointsView.text = "\(profile.points)"
@@ -187,7 +190,6 @@ extension HIProfileViewController {
         profileDescriptionView.text = profile.info
         profileDiscordUsernameView.text = profile.discord
 
-        profilePictureView.image = UIImage(named: "DefaultProfilePicture")
         profileDiscordImageView.image = UIImage(named: "DiscordLogo")
     }
 }
