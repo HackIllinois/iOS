@@ -89,7 +89,7 @@ struct HIAppearance: Equatable {
         loginSelectionText: white,
         attendeeText: white,
         attendeeBackground: lightCoral,
-        whiteTagFont: white
+        whiteTagFont: white,
         segmentedBackground: greyWhite,
         buttonBlue: buttonblue
 )
@@ -122,7 +122,7 @@ struct HIAppearance: Equatable {
         buttonBlue: buttonblue
 )
 
-    filteprivate static var current = day
+    fileprivate static var current = day
 
     static func change(to newAppearance: HIAppearance) {
         guard current != newAppearance else { return }
@@ -138,7 +138,7 @@ struct HIAppearance: Equatable {
         static let detailTitle = UIFont.systemFont(ofSize: 24, weight: .semibold)
         static let detailSubtitle = UIFont.systemFont(ofSize: 16, weight: .medium)
         static let detailText = UIFont.systemFont(ofSize: 15, weight: .regular)
-        
+
         static let eventTitle = UIFont.systemFont(ofSize: 18, weight: .semibold)
         static let eventTime = UIFont.systemFont(ofSize: 12, weight: .regular)
         static let eventDetails = UIFont.systemFont(ofSize: 14, weight: .regular)
@@ -152,7 +152,7 @@ struct HIAppearance: Equatable {
         static let sponsorText = UIFont.systemFont(ofSize: 16, weight: .medium)
         static let loginTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
         static let loginSelection = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        
+
         static let segmentedTitle = UIFont.systemFont(ofSize: 16, weight: .regular)
         static let segmentedNumberText = UIFont.systemFont(ofSize: 20, weight: .semibold)
 
