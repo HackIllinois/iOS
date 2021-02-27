@@ -73,20 +73,22 @@ extension HIGroupViewController {
     }
 
     @objc func addDropdownView(button: HIButton) {
+        view.layoutIfNeeded()
+        let frames = view.frame
         let window = UIApplication.shared.keyWindow
         transparentBackground.frame = window?.frame ?? self.view.frame
 
-        groupStatusTable.frame = CGRect(x: button.frame.origin.x, y: button.frame.origin.y + button.frame.height, width: button.frame.width, height: 0)
+        groupStatusTable.frame = CGRect(x: frames.minX, y: frames.origin.y + frames.height, width: frames.width, height: 0)
         self.view.addSubview(groupStatusTable)
+        groupStatusTable.backgroundColor = UIColor.red
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(removeDropdown))
         transparentBackground.addGestureRecognizer(tapGesture)
 
         HIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-            self.groupStatusTable.frame = CGRect(x: button.frame.origin.x, y: button.frame.origin.y + button.frame.height, width: button.frame.width, height: 200)
+            self.groupStatusTable.frame = CGRect(x: frames.minX, y: frames.origin.y + frames.height, width: frames.width, height: 200)
         }, completion: nil)
         print("Button is working")
-
     }
 
     @objc func removeDropdown() {
@@ -124,12 +126,9 @@ extension HIGroupViewController {
             $0.backgroundHIColor = \.buttonViewBackground
             $0.titleHIColor = \.action
             $0.title = "Group Status"
-            //groupStatusButton.activeImage = #imageLiteral(resourceName: "DropDown")
-            //groupStatusButton.baseImage = #imageLiteral(resourceName: "DropDown")
             $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: $0.frame.size.width - 15, bottom: 0, right: 0)
             $0.addTarget(self, action: #selector(self.addDropdownView(button:)), for: .touchUpInside)
         }
-
         horizontalStackView.addArrangedSubview(groupStatusButton)
 
         let skillSortButton = HIButton {

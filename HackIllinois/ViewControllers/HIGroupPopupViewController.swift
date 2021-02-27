@@ -34,13 +34,7 @@ class HIGroupPopupViewController: HIBaseViewController {
         $0.titleLabel?.baselineAdjustment = .alignCenters
         $0.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         $0.addTarget(self, action: #selector(didSelectClose(_:)), for: .touchUpInside)
-    }/*
-    private let popupBackground = HIView {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundHIColor = \.buttonViewBackground
-        $0.backgroundColor = .clear
-        $0.isUserInteractionEnabled = true
-    } */
+    }
     private let button1 = HIButton {
         $0.titleLabel?.font = HIAppearance.Font.sortingText
         $0.backgroundHIColor = \.buttonViewBackground
@@ -142,6 +136,10 @@ extension HIGroupPopupViewController {
 extension HIGroupPopupViewController {
     override func loadView() {
         super.loadView()
+        backgroundView.isHidden = true
+        view.backgroundColor = .clear
+        view.isOpaque = false
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBackground)))
         let contentStackView = UIStackView()
         contentStackView.axis = .vertical
         contentStackView.distribution = .fillEqually
@@ -150,14 +148,7 @@ extension HIGroupPopupViewController {
         let selectSortLabel = HILabel(style: .sortText)
         selectSortLabel.text = "Select Skills"
 
-        //view.addSubview(popupBackground)
         view.addSubview(containerView)
-        /*
-        popupBackground.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        popupBackground.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        popupBackground.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        popupBackground.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        */
         containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         containerView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
