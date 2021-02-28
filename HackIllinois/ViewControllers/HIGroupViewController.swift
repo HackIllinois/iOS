@@ -44,6 +44,8 @@ class HIGroupViewController: HIGroupListViewController {
     private var selectedButton = HIButton()
     let horizontalStackView = UIStackView()
     var buttonPresses = 0
+    private var interests = Set<String>()
+    private var selectedRows = Set<Int>()
 
     @objc dynamic override func setUpBackgroundView() {
             super.setUpBackgroundView()
@@ -71,6 +73,8 @@ extension HIGroupViewController {
         let popupView = HIGroupPopupViewController()
         popupView.modalPresentationStyle = .overCurrentContext
         popupView.modalTransitionStyle = .crossDissolve
+        popupView.delegate = self
+        popupView.selectedRows = selectedRows
         present(popupView, animated: true, completion: nil)
     }
 
@@ -88,7 +92,7 @@ extension HIGroupViewController {
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(removeDropdown))
         transparentBackground.addGestureRecognizer(tapGesture)
-        
+
         if buttonPresses % 2 != 0 {
             HIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
                 self.groupStatusTable.frame = CGRect(x: button.frame.origin.x + self.horizontalStackView.frame.origin.x, y: button.frame.origin.y + self.horizontalStackView.frame.origin.y, width: button.frame.width, height: 100)
@@ -183,5 +187,21 @@ extension HIGroupViewController {
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 15
+    }
+}
+
+// MARK: - HIGroupPopupViewDelegate
+extension HIGroupViewController: HIGroupPopupViewDelegate {
+    func updateInterests(_ groupPopupCell: HIGroupPopupCell) {
+        guard let indexPath = groupPopupCell.indexPath, let interest = groupPopupCell.interestLabel.text else { return }
+        if groupPopupCell.selectedImageView.isHidden {
+            selectedRows.insert(indexPath.row)
+            interests.insert(interest)
+        } else {
+            selectedRows.remove(indexPath.row)
+            interests.remove(interest)
+        }
+        interestParams = Array(interests)
+        HIProfileDataSource.refresh(teamStatus: teamStatusParam, interests: interestParams)
     }
 }

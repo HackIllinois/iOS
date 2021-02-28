@@ -121,6 +121,8 @@
 		AC3B621325E86053002386A2 /* Profile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B621125E86053002386A2 /* Profile+CoreDataClass.swift */; };
 		AC3B621425E86053002386A2 /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B621225E86053002386A2 /* Profile+CoreDataProperties.swift */; };
 		AC3B621625E8611C002386A2 /* HIProfileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B621525E8611C002386A2 /* HIProfileDataSource.swift */; };
+		ACBFE29825EAE79000C94732 /* HIGroupPopupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBFE29725EAE79000C94732 /* HIGroupPopupCell.swift */; };
+		ACBFE29A25EB2C9700C94732 /* HIInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBFE29925EB2C9700C94732 /* HIInterest.swift */; };
 		BCD0CA5123C4356300ADC89B /* HIPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD0CA5023C4356300ADC89B /* HIPopupViewController.swift */; };
 		BCEBD2DA23DE995700D32F5A /* HIPopupAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEBD2D923DE995700D32F5A /* HIPopupAnimator.swift */; };
 		D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A309BB2211175200CBA351 /* PassKit.framework */; };
@@ -284,6 +286,8 @@
 		AC3B621125E86053002386A2 /* Profile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AC3B621225E86053002386A2 /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AC3B621525E8611C002386A2 /* HIProfileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProfileDataSource.swift; sourceTree = "<group>"; };
+		ACBFE29725EAE79000C94732 /* HIGroupPopupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIGroupPopupCell.swift; sourceTree = "<group>"; };
+		ACBFE29925EB2C9700C94732 /* HIInterest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIInterest.swift; sourceTree = "<group>"; };
 		BCD0CA5023C4356300ADC89B /* HIPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIPopupViewController.swift; sourceTree = "<group>"; };
 		BCEBD2D923DE995700D32F5A /* HIPopupAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HIPopupAnimator.swift; path = HackIllinois/UI/Animations/HIPopupAnimator.swift; sourceTree = SOURCE_ROOT; };
 		D3A309BA221116A600CBA351 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };
@@ -413,6 +417,7 @@
 			children = (
 				957D7CA71FC2940800C4332A /* CoreDataModels */,
 				9544799B200C39870005408B /* HIUser.swift */,
+				ACBFE29925EB2C9700C94732 /* HIInterest.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -555,6 +560,7 @@
 				95A7D288203D4F54005EAEAF /* HIEventDetailLocationCell.swift */,
 				95A7D284203D4F54005EAEAF /* HILoginSelectionCell.swift */,
 				AC38BEA223FE3E800067ABAC /* HIProjectDetailLocationCell.swift */,
+				ACBFE29725EAE79000C94732 /* HIGroupPopupCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -870,11 +876,13 @@
 				95A7D28A203D4F54005EAEAF /* HIButton.swift in Sources */,
 				95A7D28E203D4F54005EAEAF /* HIView.swift in Sources */,
 				3CF8DB1323B419980035ECAE /* HIProjectCell.swift in Sources */,
+				ACBFE29A25EB2C9700C94732 /* HIInterest.swift in Sources */,
 				35B4A44F21E091BA001B3AF0 /* Logger.swift in Sources */,
 				9544799C200C39870005408B /* HIUser.swift in Sources */,
 				95A7D28B203D4F54005EAEAF /* HISegmentedControl.swift in Sources */,
 				957A4D7D21FDA71F007FDE0E /* MixTypeComparable.swift in Sources */,
 				95F5B4A0220BCFFF00C59992 /* HIIndoorMapsViewController.swift in Sources */,
+				ACBFE29825EAE79000C94732 /* HIGroupPopupCell.swift in Sources */,
 				3CF8DB1123B4134C0035ECAE /* HIProjectDataSource.swift in Sources */,
 				95A7D28C203D4F54005EAEAF /* HITextField.swift in Sources */,
 				95C18DCA20096539004784B5 /* HIEventDetailViewController.swift in Sources */,

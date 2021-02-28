@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Vector1x.png",
+      "filename" : "Checkmark@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Vector2x.png",
+      "filename" : "Checkmark@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Vector3x.png",
+      "filename" : "Checkmark@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

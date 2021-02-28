@@ -17,7 +17,7 @@ class HITableView: UITableView {
     // MARK: - Types
 
     // MARK: - Properties
-    
+
     // MARK: - Init
     init() {
         super.init(frame: .zero, style: .grouped)

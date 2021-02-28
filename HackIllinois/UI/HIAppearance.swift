@@ -41,6 +41,7 @@ struct HIAppearance: Equatable {
     let memberSearchText: UIColor
     let groupSearchText: UIColor
     let buttonViewBackground: UIColor
+    let checkmark: UIImage
 
     let clear: UIColor = .clear
     let black: UIColor = .black
@@ -98,7 +99,8 @@ struct HIAppearance: Equatable {
         groupText: grayBlack,
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
-        buttonViewBackground: buttonBlue
+        buttonViewBackground: buttonBlue,
+        checkmark: #imageLiteral(resourceName: "Checkmark")
     )
 
     fileprivate static let night = HIAppearance(
@@ -127,7 +129,8 @@ struct HIAppearance: Equatable {
         groupText: grayBlack,
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
-        buttonViewBackground: buttonBlue
+        buttonViewBackground: buttonBlue,
+        checkmark: #imageLiteral(resourceName: "Checkmark")
     )
 
     fileprivate static var current = day

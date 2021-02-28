@@ -16,7 +16,8 @@ import HIAPI
 import APIManager
 
 class HIGroupListViewController: HIBaseViewController {
-
+    var teamStatusParam = ""
+    var interestParams: [String] = []
 }
 
 // MARK: - UITableView Setup
@@ -46,7 +47,7 @@ extension HIGroupListViewController {
 extension HIGroupListViewController {
     override func refresh(_ sender: UIRefreshControl) {
         super.refresh(sender)
-        HIProfileDataSource.refresh(teamStatus: "", interests: [], completion: endRefreshing)
+        HIProfileDataSource.refresh(teamStatus: teamStatusParam, interests: interestParams, completion: endRefreshing)
     }
 }
 
