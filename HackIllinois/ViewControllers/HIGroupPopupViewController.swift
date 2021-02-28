@@ -36,7 +36,7 @@ class HIGroupPopupViewController: HIBaseViewController {
         $0.addTarget(self, action: #selector(didSelectClose(_:)), for: .touchUpInside)
     }
     private let button1 = HIButton {
-        $0.titleLabel?.font = HIAppearance.Font.sortingText
+        $0.titleLabel?.font = HIAppearance.Font.contentText
         $0.backgroundHIColor = \.buttonViewBackground
         $0.setImage(#imageLiteral(resourceName: "CheckMark"), for: .selected)
         $0.addTarget(self, action: #selector(selectedButton), for: .touchUpInside)
@@ -47,7 +47,7 @@ class HIGroupPopupViewController: HIBaseViewController {
         $0.title = "AWS"
     }
     private let button2 = HIButton {
-        $0.titleLabel?.font = HIAppearance.Font.sortingText
+        $0.titleLabel?.font = HIAppearance.Font.contentText
         $0.backgroundHIColor = \.buttonViewBackground
         $0.setImage(#imageLiteral(resourceName: "CheckMark"), for: .selected)
         $0.addTarget(self, action: #selector(selectedButton), for: .touchUpInside)
@@ -58,7 +58,7 @@ class HIGroupPopupViewController: HIBaseViewController {
         $0.title = "C++"
     }
     private let button3 = HIButton {
-        $0.titleLabel?.font = HIAppearance.Font.sortingText
+        $0.titleLabel?.font = HIAppearance.Font.contentText
         $0.backgroundHIColor = \.buttonViewBackground
         $0.setImage(#imageLiteral(resourceName: "CheckMark"), for: .selected)
         $0.addTarget(self, action: #selector(selectedButton), for: .touchUpInside)
@@ -69,7 +69,7 @@ class HIGroupPopupViewController: HIBaseViewController {
         $0.title = "Project Management"
     }
     private let button4 = HIButton {
-        $0.titleLabel?.font = HIAppearance.Font.sortingText
+        $0.titleLabel?.font = HIAppearance.Font.contentText
         $0.backgroundHIColor = \.buttonViewBackground
         $0.setImage(#imageLiteral(resourceName: "CheckMark"), for: .selected)
         $0.addTarget(self, action: #selector(selectedButton), for: .touchUpInside)
@@ -80,7 +80,7 @@ class HIGroupPopupViewController: HIBaseViewController {
         $0.title = "Scikit-Learn"
     }
     private let button5 = HIButton {
-        $0.titleLabel?.font = HIAppearance.Font.sortingText
+        $0.titleLabel?.font = HIAppearance.Font.contentText
         $0.backgroundHIColor = \.buttonViewBackground
         $0.setImage(#imageLiteral(resourceName: "CheckMark"), for: .selected)
         $0.addTarget(self, action: #selector(selectedButton), for: .touchUpInside)
@@ -91,7 +91,7 @@ class HIGroupPopupViewController: HIBaseViewController {
         $0.title = "Python"
     }
     private let button6 = HIButton {
-        $0.titleLabel?.font = HIAppearance.Font.sortingText
+        $0.titleLabel?.font = HIAppearance.Font.contentText
         $0.backgroundHIColor = \.buttonViewBackground
         $0.setImage(#imageLiteral(resourceName: "CheckMark"), for: .selected)
         $0.addTarget(self, action: #selector(selectedButton), for: .touchUpInside)
@@ -102,7 +102,7 @@ class HIGroupPopupViewController: HIBaseViewController {
         $0.title = "Docker"
     }
     private let button7 = HIButton {
-        $0.titleLabel?.font = HIAppearance.Font.sortingText
+        $0.titleLabel?.font = HIAppearance.Font.contentText
         $0.backgroundHIColor = \.buttonViewBackground
         $0.setImage(#imageLiteral(resourceName: "CheckMark"), for: .selected)
         $0.addTarget(self, action: #selector(selectedButton), for: .touchUpInside)

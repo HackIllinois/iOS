@@ -42,6 +42,8 @@ class HIGroupViewController: HIGroupListViewController {
     private let transparentBackground = HIView()
     private let groupStatusTable = HITableView()
     private var selectedButton = HIButton()
+    let horizontalStackView = UIStackView()
+    var buttonPresses = 0
 
     @objc dynamic override func setUpBackgroundView() {
             super.setUpBackgroundView()
@@ -73,22 +75,29 @@ extension HIGroupViewController {
     }
 
     @objc func addDropdownView(button: HIButton) {
+        buttonPresses += 1
         view.layoutIfNeeded()
-        let frames = view.frame
+        //let frames = button.frame
         let window = UIApplication.shared.keyWindow
         transparentBackground.frame = window?.frame ?? self.view.frame
 
-        groupStatusTable.frame = CGRect(x: frames.minX, y: frames.origin.y + frames.height, width: frames.width, height: 0)
+        groupStatusTable.frame = CGRect(x: button.frame.origin.x + horizontalStackView.frame.origin.x, y: button.frame.origin.y + horizontalStackView.frame.origin.y, width: button.frame.width, height: 0)
+        groupStatusTable.layer.cornerRadius = 15
         self.view.addSubview(groupStatusTable)
-        groupStatusTable.backgroundColor = UIColor.red
+        groupStatusTable.backgroundColor = UIColor.white
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(removeDropdown))
         transparentBackground.addGestureRecognizer(tapGesture)
-
-        HIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-            self.groupStatusTable.frame = CGRect(x: frames.minX, y: frames.origin.y + frames.height, width: frames.width, height: 200)
-        }, completion: nil)
-        print("Button is working")
+        
+        if buttonPresses % 2 != 0 {
+            HIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+                self.groupStatusTable.frame = CGRect(x: button.frame.origin.x + self.horizontalStackView.frame.origin.x, y: button.frame.origin.y + self.horizontalStackView.frame.origin.y, width: button.frame.width, height: 100)
+            }, completion: nil)
+        } else {
+            HIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+                self.groupStatusTable.frame = CGRect(x: button.frame.origin.x + self.horizontalStackView.frame.origin.x, y: button.frame.origin.y + self.horizontalStackView.frame.origin.y, width: button.frame.width, height: 0)
+            }, completion: nil)
+        }
     }
 
     @objc func removeDropdown() {
@@ -104,7 +113,6 @@ extension HIGroupViewController {
     override func loadView() {
         super.loadView()
 
-        let horizontalStackView = UIStackView()
         horizontalStackView.axis = .horizontal
         horizontalStackView.distribution = .fillProportionally
         horizontalStackView.spacing = 15
