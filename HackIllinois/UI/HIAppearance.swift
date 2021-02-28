@@ -100,7 +100,7 @@ struct HIAppearance: Equatable {
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
         buttonViewBackground: buttonBlue,
-        checkmark: #imageLiteral(resourceName: "Checkmark")
+        checkmark: #imageLiteral(resourceName: "CheckMark")
     )
 
     fileprivate static let night = HIAppearance(
@@ -130,7 +130,7 @@ struct HIAppearance: Equatable {
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
         buttonViewBackground: buttonBlue,
-        checkmark: #imageLiteral(resourceName: "Checkmark")
+        checkmark: #imageLiteral(resourceName: "CheckMark")
     )
 
     fileprivate static var current = day
