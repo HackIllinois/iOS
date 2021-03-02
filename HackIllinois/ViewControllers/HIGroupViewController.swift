@@ -196,12 +196,13 @@ extension HIGroupViewController {
 extension HIGroupViewController: HIGroupPopupViewDelegate {
     func updateInterests(_ groupPopupCell: HIGroupPopupCell) {
         guard let indexPath = groupPopupCell.indexPath, let interest = groupPopupCell.interestLabel.text else { return }
+        let modifiedInterest = interest.replacingOccurrences(of: " ", with: "%20")
         if groupPopupCell.selectedImageView.isHidden {
             selectedRows.insert(indexPath.row)
-            interests.insert(interest)
+            interests.insert(modifiedInterest)
         } else {
             selectedRows.remove(indexPath.row)
-            interests.remove(interest)
+            interests.remove(modifiedInterest)
         }
         interestParams = Array(interests)
         HIProfileDataSource.refresh(teamStatus: teamStatusParam, interests: interestParams)
