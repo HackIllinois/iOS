@@ -78,6 +78,10 @@ extension HIGroupPopupViewController {
         view.layoutIfNeeded()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        self.dismiss(animated: true, completion: nil)
+    }
+
     override func loadView() {
         super.loadView()
         view.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.7)

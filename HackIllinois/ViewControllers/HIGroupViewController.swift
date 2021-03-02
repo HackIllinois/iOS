@@ -140,7 +140,8 @@ extension HIGroupViewController {
             $0.titleHIColor = \.action
             $0.title = "Group Status"
             $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: $0.frame.size.width - 15, bottom: 0, right: 0)
-            $0.addTarget(self, action: #selector(self.updateDropdownView(button:)), for: .touchUpInside)
+            // Commented out temporarily
+            // $0.addTarget(self, action: #selector(self.updateDropdownView(button:)), for: .touchUpInside)
         }
         horizontalStackView.addArrangedSubview(groupStatusButton)
 
