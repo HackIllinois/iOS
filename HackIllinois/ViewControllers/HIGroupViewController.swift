@@ -20,6 +20,7 @@ class HIGroupViewController: HIGroupListViewController {
     lazy var fetchedResultsController: NSFetchedResultsController<Profile> = {
         let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
 
+        //TODO: Explore different ways to sort result profiles
         fetchRequest.sortDescriptors = [
             NSSortDescriptor(key: "firstName", ascending: true)
         ]
@@ -43,7 +44,7 @@ class HIGroupViewController: HIGroupListViewController {
     private let groupStatusTable = HITableView()
     private var selectedButton = HIButton()
     let horizontalStackView = UIStackView()
-    var buttonPresses = 0
+    var shouldPresentDropdown: Bool = false
     private var interests = Set<String>()
     private var selectedRows = Set<Int>()
 
@@ -78,8 +79,8 @@ extension HIGroupViewController {
         present(popupView, animated: true, completion: nil)
     }
 
-    @objc func addDropdownView(button: HIButton) {
-        buttonPresses += 1
+    @objc func updateDropdownView(button: HIButton) {
+        shouldPresentDropdown.toggle()
         view.layoutIfNeeded()
         //let frames = button.frame
         let window = UIApplication.shared.keyWindow
@@ -93,7 +94,7 @@ extension HIGroupViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(removeDropdown))
         transparentBackground.addGestureRecognizer(tapGesture)
 
-        if buttonPresses % 2 != 0 {
+        if shouldPresentDropdown {
             HIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
                 self.groupStatusTable.frame = CGRect(x: button.frame.origin.x + self.horizontalStackView.frame.origin.x, y: button.frame.origin.y + self.horizontalStackView.frame.origin.y, width: button.frame.width, height: 100)
             }, completion: nil)
@@ -139,7 +140,7 @@ extension HIGroupViewController {
             $0.titleHIColor = \.action
             $0.title = "Group Status"
             $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: $0.frame.size.width - 15, bottom: 0, right: 0)
-            $0.addTarget(self, action: #selector(self.addDropdownView(button:)), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(self.updateDropdownView(button:)), for: .touchUpInside)
         }
         horizontalStackView.addArrangedSubview(groupStatusButton)
 

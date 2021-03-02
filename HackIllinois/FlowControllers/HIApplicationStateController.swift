@@ -129,7 +129,7 @@ extension HIApplicationStateController {
         HIEventDataSource.refresh()
         HIAnnouncementDataSource.refresh()
         HIProjectDataSource.refresh()
-        HIProfileDataSource.refresh(teamStatus: "", interests: [])
+        HIProfileDataSource.refresh()
     }
 
     func prepareLoginControllerForDisplay() { }

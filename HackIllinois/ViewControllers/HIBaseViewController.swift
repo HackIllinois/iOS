@@ -180,6 +180,8 @@ extension HIBaseViewController: NSFetchedResultsControllerDelegate {
         case .delete:
             guard let deleteIndexPath = indexPath else { return }
             tableView?.deleteRows(at: [deleteIndexPath], with: .fade)
+
+            // Old Way of Resolving Index Path Conflicts
 //            if let tableView = tableView {
 //                DispatchQueue.main.async {
 //                    UIView.setAnimationsEnabled(false)
@@ -188,16 +190,20 @@ extension HIBaseViewController: NSFetchedResultsControllerDelegate {
 //                    }
 //                }
 //            }
+
         case .update:
             guard let updateIndexPath = indexPath else { return }
             tableView?.reloadRows(at: [updateIndexPath], with: .fade)
         case .move:
 //            guard let fromIndexPath = indexPath, let toIndexPath = newIndexPath else { return }
 //            tableView?.moveRow(at: fromIndexPath, to: toIndexPath)
+
+            // Current Way of Resolving Index Path Conflicts
             guard let indexPath = indexPath else { return }
             tableView?.deleteRows(at: [indexPath], with: .fade)
             guard let newIndexPath = newIndexPath else { return }
             tableView?.insertRows(at: [newIndexPath], with: .fade)
+
         @unknown default:
             os_log(
                 "Unknown NSFetchedResultsChangeType %s",

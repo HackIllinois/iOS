@@ -18,18 +18,18 @@ import os
 final class HIProfileDataSource {
 
     // Serializes access to isRefreshing.
-    private static let isRefreshineQueue = DispatchQueue(label: "org.hackillinois.org.hi_profile_data_source.is_refreshing_queue", attributes: .concurrent)
+    private static let isRefreshingQueue = DispatchQueue(label: "org.hackillinois.org.hi_profile_data_source.is_refreshing_queue", attributes: .concurrent)
     // Tracks if the DataSource is refreshing.
     private static var _isRefreshing = false
     // Setter and getter for isRefreshing.
     public static var isRefreshing: Bool {
-        get { return isRefreshineQueue.sync { _isRefreshing } }
-        set { isRefreshineQueue.sync(flags: .barrier) { _isRefreshing = newValue } }
+        get { return isRefreshingQueue.sync { _isRefreshing } }
+        set { isRefreshingQueue.sync(flags: .barrier) { _isRefreshing = newValue } }
     }
 
     // Waive swiftlint warning
     // swiftlint:disable:next function_body_length
-    static func refresh(teamStatus: String, interests: [String], completion: (() -> Void)? = nil) {
+    static func refresh(teamStatus: String = "", interests: [String] = [], completion: (() -> Void)? = nil) {
         guard !isRefreshing else {
             completion?()
             return

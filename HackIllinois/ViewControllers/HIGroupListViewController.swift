@@ -16,7 +16,7 @@ import HIAPI
 import APIManager
 
 class HIGroupListViewController: HIBaseViewController {
-    var teamStatusParam = ""
+    var teamStatusParam: String = ""
     var interestParams: [String] = []
 }
 

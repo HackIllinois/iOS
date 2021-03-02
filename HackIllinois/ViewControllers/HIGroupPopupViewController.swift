@@ -21,6 +21,7 @@ protocol HIGroupPopupViewDelegate: class {
 class HIGroupPopupViewController: UIViewController {
     // MARK: Properties
     weak var delegate: HIGroupPopupViewDelegate?
+    //TODO: Load interests from HackIllinois API
     let interests = ["AWS", "C++", "Project Management", "Python", "Docker", "Java", "ML", "Swift", "Go", "Javascript", "C", "Typescript"]
     var hiInterests: [HIInterest] = []
     let popupTableView = HITableView()
