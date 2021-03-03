@@ -21,4 +21,19 @@ public final class ProfileService: BaseService {
     public static func getUserProfile() -> APIRequest<Profile> {
         return APIRequest<Profile>(service: self, endpoint: "", headers: headers, method: .GET)
     }
+
+    public static func getMatchingProfiles(teamStatus: String, interests: [String]) -> APIRequest<ProfileContainer> {
+        var params = HTTPParameters()
+        if teamStatus.count == 0 && interests.count == 0 {
+            return APIRequest<ProfileContainer>(service: self, endpoint: "search/", headers: headers, method: .GET)
+        }
+        if teamStatus.count > 0 {
+            params["teamStatus"] = teamStatus
+        }
+        if interests.count > 0 {
+            params["interests"] = interests.joined(separator: ",")
+        }
+        return APIRequest<ProfileContainer>(service: self, endpoint: "search/", params: params, headers: headers, method: .GET)
+    }
+
 }

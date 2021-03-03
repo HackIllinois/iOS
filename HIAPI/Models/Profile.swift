@@ -13,6 +13,16 @@
 import Foundation
 import APIManager
 
+public struct ProfileContainer: Decodable, APIReturnable {
+    public let profiles: [Profile]
+
+    public init(from data: Data) throws {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
+        self = try decoder.decode(ProfileContainer.self, from: data)
+    }
+}
+
 public struct Profile: Codable, APIReturnable {
     internal enum CodingKeys: String, CodingKey {
         case id
