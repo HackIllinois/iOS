@@ -39,10 +39,17 @@ struct HIAppearance: Equatable {
     let segmentedBackground: UIColor
     let buttonBlue: UIColor
 
+    // New fonts added. Replace old ones?
+    let groupText: UIColor
+    let memberSearchText: UIColor
+    let groupSearchText: UIColor
+    let buttonViewBackground: UIColor
+    let checkmark: UIImage
+
     let clear: UIColor = .clear
     let black: UIColor = .black
 
-    private static let darkBlue = #colorLiteral(red: 0.1333333333, green: 0.168627451, blue: 0.3607843137, alpha: 1)
+    private static let darkBlue = #colorLiteral(red: 0.1326064765, green: 0.1667878032, blue: 0.3605746627, alpha: 1)
     private static let blue = #colorLiteral(red: 0.1215686275, green: 0.5176470588, blue: 0.6470588235, alpha: 1)
     private static let buttonblue = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
     private static let lightBlue = #colorLiteral(red: 0.4196078431, green: 0.6823529412, blue: 0.7725490196, alpha: 1)
@@ -58,6 +65,12 @@ struct HIAppearance: Equatable {
 
     private static let lightCoral = #colorLiteral(red: 0.9333333333, green: 0.4235294118, blue: 0.4470588235, alpha: 1)
     private static let nightBlue = #colorLiteral(red: 0.4352941176, green: 0.5490196078, blue: 0.7568627451, alpha: 1)
+
+    // New colors added. Replace old ones?
+    private static let grayBlack = #colorLiteral(red: 0.1058823529, green: 0.1058823529, blue: 0.1058823529, alpha: 1)
+    private static let groupRed = #colorLiteral(red: 0.5960784314, green: 0.1137254902, blue: 0.137254902, alpha: 1)
+    private static let groupOrange = #colorLiteral(red: 0.937254902, green: 0.5176470588, blue: 0.2823529412, alpha: 1)
+    private static let buttonBlue = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
     private static var statusBarWhite: UIStatusBarStyle {
         if #available(iOS 13, *) {
              return .lightContent
@@ -91,7 +104,12 @@ struct HIAppearance: Equatable {
         attendeeBackground: lightCoral,
         whiteTagFont: white,
         segmentedBackground: greyWhite,
-        buttonBlue: buttonblue
+        buttonBlue: buttonblue,
+        groupText: grayBlack,
+        memberSearchText: groupOrange,
+        groupSearchText: groupRed,
+        buttonViewBackground: buttonBlue,
+        checkmark: #imageLiteral(resourceName: "CheckMark")
 )
 
     fileprivate static let night = HIAppearance(
@@ -119,8 +137,13 @@ struct HIAppearance: Equatable {
         attendeeBackground: lightCoral,
         whiteTagFont: white,
         segmentedBackground: greyWhite,
-        buttonBlue: buttonblue
-)
+        buttonBlue: buttonblue,
+        groupText: grayBlack,
+        memberSearchText: groupOrange,
+        groupSearchText: groupRed,
+        buttonViewBackground: buttonBlue,
+        checkmark: #imageLiteral(resourceName: "CheckMark")
+    )
 
     fileprivate static var current = day
 
@@ -159,6 +182,9 @@ struct HIAppearance: Equatable {
         static let sectionHeader = UIFont.systemFont(ofSize: 13, weight: .bold)
         static let button = UIFont.systemFont(ofSize: 15, weight: .regular)
         static let glyph = UIFont.systemFont(ofSize: 21, weight: .light)
+        static let groupContact = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        static let groupStatus = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        static let sortingText = UIFont.systemFont(ofSize: 14, weight: .semibold)
     }
 }
 

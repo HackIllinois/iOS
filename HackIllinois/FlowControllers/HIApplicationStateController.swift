@@ -75,7 +75,7 @@ extension HIApplicationStateController {
         viewControllers.append(HIScheduleViewController())
         viewControllers.append(HIUserDetailViewController())
         viewControllers.append(HIIndoorMapsViewController())
-        viewControllers.append(HIProjectViewController())
+        viewControllers.append(HIGroupViewController())
         return viewControllers
     }
 
@@ -129,6 +129,7 @@ extension HIApplicationStateController {
         HIEventDataSource.refresh()
         HIAnnouncementDataSource.refresh()
         HIProjectDataSource.refresh()
+        HIProfileDataSource.refresh()
     }
 
     func prepareLoginControllerForDisplay() { }

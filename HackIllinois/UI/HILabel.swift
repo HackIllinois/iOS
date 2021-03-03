@@ -34,6 +34,12 @@ class HILabel: UILabel {
         case detailSubtitle
         case detailText
         case navigationInfo
+        case groupDescription
+        case groupContactInfo
+        case lookingForGroup
+        case lookingForMember
+        case sortText
+        case sortElement
     }
 
     // MARK: - Properties
@@ -156,6 +162,38 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.navigationInfoText
             textAlignment = .center
+
+        // New styles for group matching
+        case .groupDescription:
+            textHIColor = \.groupText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.contentText
+            numberOfLines = 0
+
+        case .groupContactInfo:
+            textHIColor = \.groupText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.groupContact
+
+        case .lookingForGroup:
+            textHIColor = \.groupSearchText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.groupStatus
+
+        case .lookingForMember:
+            textHIColor = \.memberSearchText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.groupStatus
+
+        case .sortText:
+            textHIColor = \.titleText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.sortingText
+
+        case .sortElement:
+            textHIColor = \.titleText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.contentText
         }
         }
 

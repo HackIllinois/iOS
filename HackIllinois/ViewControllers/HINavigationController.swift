@@ -64,6 +64,10 @@ class HINavigationController: UINavigationController {
         infoTitle.text = "All times are in CST"
 
         additionalSafeAreaInsets.top = 15
+        navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: (\HIAppearance.titleText).value as Any,
+            NSAttributedString.Key.font: (HIAppearance.Font.contentTitle) as Any
+        ]
 
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
