@@ -34,6 +34,12 @@ class HILabel: UILabel {
         case detailSubtitle
         case detailText
         case navigationInfo
+        case groupDescription
+        case groupContactInfo
+        case lookingForGroup
+        case lookingForMember
+        case sortText
+        case sortElement
     }
 
     // MARK: - Properties
@@ -63,7 +69,7 @@ class HILabel: UILabel {
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.eventTitle
-        
+
         case .eventTime:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
@@ -74,7 +80,7 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.eventCategoryText
             textAlignment = .right
-            
+
         case .sponsor:
             textHIColor = \.attendeeBackground
             backgroundHIColor = \.clear
@@ -150,12 +156,44 @@ class HILabel: UILabel {
             layer.borderWidth = 2.0
             layer.borderColor = (\HIAppearance.loginSelectionText).value.cgColor
             layer.backgroundColor = UIColor.clear.cgColor
-        
+
         case .navigationInfo:
             textHIColor = \.titleText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.navigationInfoText
             textAlignment = .center
+
+        // New styles for group matching
+        case .groupDescription:
+            textHIColor = \.groupText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.contentText
+            numberOfLines = 0
+
+        case .groupContactInfo:
+            textHIColor = \.groupText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.groupContact
+
+        case .lookingForGroup:
+            textHIColor = \.groupSearchText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.groupStatus
+
+        case .lookingForMember:
+            textHIColor = \.memberSearchText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.groupStatus
+
+        case .sortText:
+            textHIColor = \.titleText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.sortingText
+
+        case .sortElement:
+            textHIColor = \.titleText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.contentText
         }
         }
 
@@ -177,10 +215,9 @@ class HILabel: UILabel {
     }
 }
 
-
 // MARK: - Auto-Sizing
 extension HILabel {
-    static func heightForView(text: String, font: UIFont, width: CGFloat) -> CGFloat{
+    static func heightForView(text: String, font: UIFont, width: CGFloat) -> CGFloat {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
         label.numberOfLines = 0
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
