@@ -78,7 +78,7 @@ class HIGroupDetailViewController: HIBaseViewController {
 
     @objc dynamic override func setUpBackgroundView() {
             super.setUpBackgroundView()
-            backgroundView.image = #imageLiteral(resourceName: "GroupMatching")
+            backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
     }
 }
 
@@ -216,7 +216,7 @@ extension HIGroupDetailViewController {
         }
         profileInterestsView.reloadData()
 
-        profileDiscordImageView.image = UIImage(named: "DiscordLogo")
+        profileDiscordImageView.image = #imageLiteral(resourceName: "DiscordLogo")
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -242,6 +242,7 @@ extension HIGroupDetailViewController: UICollectionViewDataSource, UICollectionV
 
 extension HIGroupDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 120, height: 40)
+        let interest = interests[indexPath.row]
+        return CGSize(width: (15 * interest.count) + 30, height: 40)
     }
 }
