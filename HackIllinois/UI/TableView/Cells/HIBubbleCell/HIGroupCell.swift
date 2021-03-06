@@ -116,11 +116,30 @@ extension HIGroupCell {
         innerVerticalStackViewHeight += nameLabel.intrinsicContentSize.height
         lhs.innerVerticalStackView.addArrangedSubview(nameLabel)
 
-        // Add conditional
-        let statusLabel = HILabel(style: .lookingForGroup)
-        statusLabel.text = rhs.teamStatus
+        let statusContainer = UIView()
+        statusContainer.translatesAutoresizingMaskIntoConstraints = false
+        statusContainer.backgroundColor = .clear
+
+        let statusIndicator = HICircularView()
+        statusIndicator.translatesAutoresizingMaskIntoConstraints = false
+        //TODO: Update color based on how each team status is represented in API
+        statusIndicator.changeColor(color: \.groupSearchText)
+        statusContainer.addSubview(statusIndicator)
+        statusIndicator.topAnchor.constraint(equalTo: statusContainer.topAnchor, constant: 5).isActive = true
+        statusIndicator.leadingAnchor.constraint(equalTo: statusContainer.leadingAnchor).isActive = true
+        statusIndicator.heightAnchor.constraint(equalToConstant: 5).isActive = true
+        statusIndicator.widthAnchor.constraint(equalToConstant: 5).isActive = true
+
+        let statusLabel = HILabel(style: .groupStatus)
+        statusLabel.changeColor(color: \.groupSearchText)
+        statusLabel.text = rhs.teamStatus.capitalized
         innerVerticalStackViewHeight += statusLabel.intrinsicContentSize.height + 3
-        lhs.innerVerticalStackView.addArrangedSubview(statusLabel)
+        statusContainer.addSubview(statusLabel)
+        statusLabel.topAnchor.constraint(equalTo: statusContainer.topAnchor).isActive = true
+        statusLabel.bottomAnchor.constraint(equalTo: statusContainer.bottomAnchor).isActive = true
+        statusLabel.leadingAnchor.constraint(equalTo: statusIndicator.trailingAnchor, constant: 5).isActive = true
+        statusLabel.trailingAnchor.constraint(equalTo: statusContainer.trailingAnchor).isActive = true
+        lhs.innerVerticalStackView.addArrangedSubview(statusContainer)
 
         let discordLabel = HILabel(style: .groupContactInfo)
         discordLabel.text = "Discord: \(rhs.discord)"

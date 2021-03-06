@@ -38,7 +38,12 @@ class HIGroupDetailViewController: HIBaseViewController {
     private let profileNameView = HILabel(style: .profileName) {
         $0.text = ""
     }
-    private let profileSubtitleView = HILabel(style: .profileSubtitle) {
+    private let profileStatusContainer = UIView()
+    private let profileStatusIndicator = HICircularView {
+        $0.backgroundHIColor = \.clear
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    private let profileStatusDescriptionView = HILabel(style: .profileSubtitle) {
         $0.text = ""
     }
     private let profilePointsView = HILabel(style: .profileNumberFigure) {
@@ -121,9 +126,24 @@ extension HIGroupDetailViewController {
         profileNameView.topAnchor.constraint(equalTo: profilePictureView.bottomAnchor, constant: 12).isActive = true
         profileNameView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
 
-        contentView.addSubview(profileSubtitleView)
-        profileSubtitleView.topAnchor.constraint(equalTo: profileNameView.bottomAnchor).isActive = true
-        profileSubtitleView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        profileStatusContainer.translatesAutoresizingMaskIntoConstraints = false
+        profileStatusContainer.backgroundColor = .clear
+        contentView.addSubview(profileStatusContainer)
+        profileStatusContainer.topAnchor.constraint(equalTo: profileNameView.bottomAnchor).isActive = true
+        profileStatusContainer.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        profileStatusContainer.heightAnchor.constraint(equalToConstant: 40).isActive = true
+
+        profileStatusContainer.addSubview(profileStatusIndicator)
+        profileStatusIndicator.topAnchor.constraint(equalTo: profileStatusContainer.topAnchor, constant: 15).isActive = true
+        profileStatusIndicator.leadingAnchor.constraint(equalTo: profileStatusContainer.leadingAnchor, constant: 5).isActive = true
+        profileStatusIndicator.centerYAnchor.constraint(equalTo: profileStatusContainer.centerYAnchor).isActive = true
+        profileStatusIndicator.widthAnchor.constraint(equalToConstant: 10).isActive = true
+
+        profileStatusContainer.addSubview(profileStatusDescriptionView)
+        profileStatusDescriptionView.topAnchor.constraint(equalTo: profileStatusContainer.topAnchor).isActive = true
+        profileStatusDescriptionView.bottomAnchor.constraint(equalTo: profileStatusContainer.bottomAnchor).isActive = true
+        profileStatusDescriptionView.leadingAnchor.constraint(equalTo: profileStatusIndicator.trailingAnchor, constant: 5).isActive = true
+        profileStatusDescriptionView.trailingAnchor.constraint(equalTo: profileStatusContainer.trailingAnchor).isActive = true
 
         let profileStatStackView = UIStackView()
         contentView.addSubview(profileStatStackView)
@@ -144,7 +164,7 @@ extension HIGroupDetailViewController {
     func loadStatView(profileStatStackView: UIStackView) {
         profileStatStackView.axis = .horizontal
         profileStatStackView.distribution = .fillEqually
-        profileStatStackView.topAnchor.constraint(equalTo: profileSubtitleView.bottomAnchor, constant: 19).isActive = true
+        profileStatStackView.topAnchor.constraint(equalTo: profileStatusContainer.bottomAnchor, constant: 19).isActive = true
         profileStatStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         profileStatStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         profileStatStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -189,6 +209,8 @@ extension HIGroupDetailViewController {
         profileInterestsLabelView.heightAnchor.constraint(equalToConstant: 20).isActive = true
         profileInterestsLabelView.leadingAnchor.constraint(equalTo: profileDiscordImageView.leadingAnchor).isActive = true
 
+        profileInterestsView.alwaysBounceVertical = true
+        profileInterestsView.bounces = true
         descriptionContentView.addSubview(profileInterestsView)
         profileInterestsView.topAnchor.constraint(equalTo: profileInterestsLabelView.bottomAnchor, constant: 10).isActive = true
         profileInterestsView.bottomAnchor.constraint(equalTo: descriptionContentView.bottomAnchor).isActive = true
@@ -205,22 +227,18 @@ extension HIGroupDetailViewController {
             profilePictureView.downloadImage(from: url)
         }
         profileNameView.text = profile.firstName + " " + profile.lastName
-        profileSubtitleView.text = profile.teamStatus
+        //TODO: Update color based on how each team status is represented in API
+        if profile.teamStatus == "looking" {
+            profileStatusIndicator.changeColor(color: \.groupSearchText)
+            profileStatusDescriptionView.changeColor(color: \.groupSearchText)
+        }
+        profileStatusDescriptionView.text = profile.teamStatus.capitalized
         profilePointsView.text = "\(profile.points)"
         profileTimeView.text = profile.timezone
         profileDescriptionView.text = profile.info
         profileDiscordUsernameView.text = profile.discord
 
-        for interest in profile.interests.split(separator: ",") {
-            interests.append(String(interest))
-        }
-        profileInterestsView.reloadData()
-
         profileDiscordImageView.image = #imageLiteral(resourceName: "DiscordLogo")
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        interests.removeAll()
     }
 
 }

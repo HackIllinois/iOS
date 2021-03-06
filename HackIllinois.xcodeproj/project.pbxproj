@@ -121,6 +121,7 @@
 		AC3B621325E86053002386A2 /* Profile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B621125E86053002386A2 /* Profile+CoreDataClass.swift */; };
 		AC3B621425E86053002386A2 /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B621225E86053002386A2 /* Profile+CoreDataProperties.swift */; };
 		AC3B621625E8611C002386A2 /* HIProfileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B621525E8611C002386A2 /* HIProfileDataSource.swift */; };
+		AC681AE425F3511F00ECA895 /* HICircularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC681AE325F3511F00ECA895 /* HICircularView.swift */; };
 		AC977FCD25F194F9009C4179 /* HIGroupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC977FCC25F194F9009C4179 /* HIGroupDetailViewController.swift */; };
 		AC977FCF25F1AC84009C4179 /* HIInterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC977FCE25F1AC84009C4179 /* HIInterestCell.swift */; };
 		ACBFE29825EAE79000C94732 /* HIGroupPopupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBFE29725EAE79000C94732 /* HIGroupPopupCell.swift */; };
@@ -288,6 +289,7 @@
 		AC3B621125E86053002386A2 /* Profile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AC3B621225E86053002386A2 /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AC3B621525E8611C002386A2 /* HIProfileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProfileDataSource.swift; sourceTree = "<group>"; };
+		AC681AE325F3511F00ECA895 /* HICircularView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICircularView.swift; sourceTree = "<group>"; };
 		AC977FCC25F194F9009C4179 /* HIGroupDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIGroupDetailViewController.swift; sourceTree = "<group>"; };
 		AC977FCE25F1AC84009C4179 /* HIInterestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIInterestCell.swift; sourceTree = "<group>"; };
 		ACBFE29725EAE79000C94732 /* HIGroupPopupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIGroupPopupCell.swift; sourceTree = "<group>"; };
@@ -529,6 +531,7 @@
 				95A7D27D203D4F54005EAEAF /* HITextField.swift */,
 				95D6DA77203F8C3900E7C982 /* HITintImageView.swift */,
 				95A7D27F203D4F54005EAEAF /* HIView.swift */,
+				AC681AE325F3511F00ECA895 /* HICircularView.swift */,
 				95D791EC203E370A00C3BA62 /* HIWindow.swift */,
 				95A7D27E203D4F54005EAEAF /* Identifiable.swift */,
 				95A7D280203D4F54005EAEAF /* TableView */,
@@ -888,6 +891,7 @@
 				9544799C200C39870005408B /* HIUser.swift in Sources */,
 				95A7D28B203D4F54005EAEAF /* HISegmentedControl.swift in Sources */,
 				957A4D7D21FDA71F007FDE0E /* MixTypeComparable.swift in Sources */,
+				AC681AE425F3511F00ECA895 /* HICircularView.swift in Sources */,
 				95F5B4A0220BCFFF00C59992 /* HIIndoorMapsViewController.swift in Sources */,
 				ACBFE29825EAE79000C94732 /* HIGroupPopupCell.swift in Sources */,
 				3CF8DB1123B4134C0035ECAE /* HIProjectDataSource.swift in Sources */,

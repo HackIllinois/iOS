@@ -62,7 +62,14 @@ extension HIGroupListViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        groupDetailViewController.profile = _fetchedResultsController?.object(at: indexPath) as? Profile
+        guard let profile = _fetchedResultsController?.object(at: indexPath) as? Profile else { return }
+        var interests: [String] = []
+        for interest in profile.interests.split(separator: ",") {
+            interests.append(String(interest))
+        }
+        groupDetailViewController.profile = profile
+        groupDetailViewController.interests = interests
+        groupDetailViewController.profileInterestsView.reloadData()
         self.present(groupDetailViewController, animated: true, completion: nil)
         super.tableView(tableView, didSelectRowAt: indexPath)
     }
@@ -81,6 +88,12 @@ extension HIGroupListViewController: UIViewControllerPreviewingDelegate {
         }
         previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
         groupDetailViewController.profile = profile
+        var interests: [String] = []
+        for interest in profile.interests.split(separator: ",") {
+            interests.append(String(interest))
+        }
+        groupDetailViewController.interests = interests
+        groupDetailViewController.profileInterestsView.reloadData()
         return groupDetailViewController
     }
 

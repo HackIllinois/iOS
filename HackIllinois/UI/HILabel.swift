@@ -39,8 +39,7 @@ class HILabel: UILabel {
         case profileInterests
         case groupDescription
         case groupContactInfo
-        case lookingForGroup
-        case lookingForMember
+        case groupStatus
         case sortText
         case sortElement
     }
@@ -156,7 +155,6 @@ class HILabel: UILabel {
             font = HIAppearance.Font.profileName
 
         case .profileSubtitle: // Used to display profile subtitle, "points", and whatever that says "time zone"
-            textHIColor = \.whiteTagFont // May be defined for itself later
             backgroundHIColor = \.clear
             textAlignment = .center
             font = HIAppearance.Font.profileSubtitle
@@ -197,13 +195,7 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.groupContact
 
-        case .lookingForGroup:
-            textHIColor = \.groupSearchText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.groupStatus
-
-        case .lookingForMember:
-            textHIColor = \.memberSearchText
+        case .groupStatus:
             backgroundHIColor = \.clear
             font = HIAppearance.Font.groupStatus
 
@@ -229,6 +221,10 @@ class HILabel: UILabel {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+
+    func changeColor(color: HIColor) {
+        textColor <- color
     }
 
     // MARK: - Themeable
