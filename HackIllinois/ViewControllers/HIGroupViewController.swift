@@ -159,7 +159,6 @@ extension HIGroupViewController {
 
         let tableView = HITableView()
         view.insertSubview(tableView, belowSubview: horizontalStackView)
-        //view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: horizontalStackView.bottomAnchor, constant: 5).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
