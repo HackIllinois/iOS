@@ -90,7 +90,7 @@ extension HIGroupViewController {
         groupStatusTable.layer.cornerRadius = 15
         self.view.addSubview(groupStatusTable)
         self.view.insertSubview(groupStatusTable, belowSubview: self.horizontalStackView)
-        groupStatusTable.backgroundColor = UIColor.white
+        groupStatusTable.backgroundColor = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
 
         if buttonPresses % 2 != 0 {
             HIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
@@ -133,24 +133,33 @@ extension HIGroupViewController {
             $0.titleHIColor = \.action
             $0.title = "Group Status"
             $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: $0.frame.size.width - 15, bottom: 0, right: 0)
+            $0.layer.shadowColor = UIColor.black.cgColor
+            $0.layer.shadowOffset = .zero
+            $0.layer.shadowOpacity = 0.5
+            $0.layer.shadowRadius = 5
             $0.addTarget(self, action: #selector(self.addDropdownView(button:)), for: .touchUpInside)
         }
         horizontalStackView.addArrangedSubview(groupStatusButton)
 
         let skillSortButton = HIButton {
             $0.layer.cornerRadius = 15
-            $0.layer.masksToBounds = true
+            //$0.layer.masksToBounds = true
             $0.titleLabel?.font = HIAppearance.Font.sortingText
             $0.backgroundHIColor = \.buttonViewBackground
             $0.titleHIColor = \.action
             $0.title = "Skills"
             $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+            $0.layer.shadowColor = UIColor.black.cgColor
+            $0.layer.shadowOffset = .zero
+            $0.layer.shadowOpacity = 0.5
+            $0.layer.shadowRadius = 5
             $0.addTarget(self, action: #selector(self.openPopup), for: .touchUpInside)
         }
         horizontalStackView.addArrangedSubview(skillSortButton)
 
         let tableView = HITableView()
-        view.addSubview(tableView)
+        view.insertSubview(tableView, belowSubview: horizontalStackView)
+        //view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: horizontalStackView.bottomAnchor, constant: 5).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
