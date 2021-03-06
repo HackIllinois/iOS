@@ -35,6 +35,7 @@ struct HIAppearance: Equatable {
     let attendeeText: UIColor
     let attendeeBackground: UIColor
     let whiteTagFont: UIColor
+    let interestBackground: UIColor
 
     // New fonts added. Replace old ones?
     let groupText: UIColor
@@ -96,6 +97,7 @@ struct HIAppearance: Equatable {
         attendeeText: white,
         attendeeBackground: lightCoral,
         whiteTagFont: white,
+        interestBackground: lightCoral,
         groupText: grayBlack,
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
@@ -126,6 +128,7 @@ struct HIAppearance: Equatable {
         attendeeText: white,
         attendeeBackground: lightCoral,
         whiteTagFont: white,
+        interestBackground: lightCoral,
         groupText: grayBlack,
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
@@ -156,6 +159,13 @@ struct HIAppearance: Equatable {
         static let sponsorText = UIFont.systemFont(ofSize: 16, weight: .medium)
         static let loginTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
         static let loginSelection = UIFont.systemFont(ofSize: 16, weight: .semibold)
+
+        static let profileName = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        static let profileSubtitle = UIFont.systemFont(ofSize: 14, weight: .regular)
+        static let profileNumberFigure = UIFont.systemFont(ofSize: 20, weight: .medium)
+        static let profileDescription = UIFont.systemFont(ofSize: 16, weight: .regular)
+        static let profileUsername = UIFont.systemFont(ofSize: 16, weight: .bold)
+        static let profileInterests = UIFont.systemFont(ofSize: 14, weight: .semibold)
 
         static let sectionHeader = UIFont.systemFont(ofSize: 13, weight: .bold)
         static let button = UIFont.systemFont(ofSize: 15, weight: .regular)

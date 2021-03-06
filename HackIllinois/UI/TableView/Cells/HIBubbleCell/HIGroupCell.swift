@@ -24,6 +24,9 @@ class HIGroupCell: HIBubbleCell {
     }
     var profilePicture = HIImageView {
         $0.backgroundColor = UIColor.clear
+        $0.layer.cornerRadius = 5
+        $0.layer.masksToBounds = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
     var contentStackView = UIStackView()

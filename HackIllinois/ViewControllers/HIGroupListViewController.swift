@@ -16,6 +16,7 @@ import HIAPI
 import APIManager
 
 class HIGroupListViewController: HIBaseViewController {
+    let groupDetailViewController = HIGroupDetailViewController()
     var teamStatusParam: String = ""
     var interestParams: [String] = []
 }
@@ -24,8 +25,8 @@ class HIGroupListViewController: HIBaseViewController {
 extension HIGroupListViewController {
     override func setupTableView() {
         if let tableView = tableView {
-            // tableView.register(HIDateHeader.self, forHeaderFooterViewReuseIdentifier: HIDateHeader.identifier)
             tableView.register(HIGroupCell.self, forCellReuseIdentifier: HIGroupCell.identifier)
+            registerForPreviewing(with: self, sourceView: tableView)
         }
         super.setupTableView()
     }
@@ -59,10 +60,31 @@ extension HIGroupListViewController {
         }
         return HIGroupCell.heightForCell(with: profile)
     }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        groupDetailViewController.profile = _fetchedResultsController?.object(at: indexPath) as? Profile
+        self.present(groupDetailViewController, animated: true, completion: nil)
+        super.tableView(tableView, didSelectRowAt: indexPath)
+    }
 }
 
 // MARK: - HIGroupCellDelegate
 // Add HIGroupCellDelegate & func groupCellDidSelectFavoriteButton
 
 // MARK: - UIViewControllerPreviewingDelegate
-// Add previewingContext functionality if HIGroupDetailViewController is added
+extension HIGroupListViewController: UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let tableView = tableView,
+            let indexPath = tableView.indexPathForRow(at: location),
+            let profile = _fetchedResultsController?.object(at: indexPath) as? Profile else {
+                return nil
+        }
+        previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
+        groupDetailViewController.profile = profile
+        return groupDetailViewController
+    }
+
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        self.present(viewControllerToCommit, animated: true, completion: nil)
+    }
+}
