@@ -20,7 +20,6 @@ class HIGroupViewController: HIGroupListViewController {
     lazy var fetchedResultsController: NSFetchedResultsController<Profile> = {
         let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
 
-        //TODO: Explore different ways to sort result profiles
         fetchRequest.sortDescriptors = [
             NSSortDescriptor(key: "firstName", ascending: true)
         ]
@@ -36,7 +35,8 @@ class HIGroupViewController: HIGroupListViewController {
 
         return fetchedResultsController
     }()
-
+    let groupStatusOptions = ["Looking for Team", "Team Looking for Members"]
+    var hiGroupStatusOptions: [HIGroupStatusOptions] = []
     private var currentTab = 0
     private var onlyFavorites = false
     private let onlyFavoritesPredicate = NSPredicate(format: "favorite == YES" )
@@ -44,7 +44,7 @@ class HIGroupViewController: HIGroupListViewController {
     private let groupStatusTable = HITableView()
     private var selectedButton = HIButton()
     let horizontalStackView = UIStackView()
-    var shouldPresentDropdown: Bool = false
+    var buttonPresses = 0
     private var interests = Set<String>()
     private var selectedRows = Set<Int>()
 
@@ -79,37 +79,30 @@ extension HIGroupViewController {
         present(popupView, animated: true, completion: nil)
     }
 
-    @objc func updateDropdownView(button: HIButton) {
-        shouldPresentDropdown.toggle()
+    @objc func addDropdownView(button: HIButton) {
+        buttonPresses += 1
         view.layoutIfNeeded()
-        //let frames = button.frame
         let window = UIApplication.shared.keyWindow
         transparentBackground.frame = window?.frame ?? self.view.frame
 
-        groupStatusTable.frame = CGRect(x: button.frame.origin.x + horizontalStackView.frame.origin.x, y: button.frame.origin.y + horizontalStackView.frame.origin.y, width: button.frame.width, height: 0)
+        groupStatusTable.frame = CGRect(x: button.frame.origin.x + horizontalStackView.frame.origin.x, y:
+                                            button.frame.origin.y + horizontalStackView.frame.origin.y, width: button.frame.width, height: 0)
         groupStatusTable.layer.cornerRadius = 15
         self.view.addSubview(groupStatusTable)
+        self.view.insertSubview(groupStatusTable, belowSubview: self.horizontalStackView)
         groupStatusTable.backgroundColor = UIColor.white
 
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(removeDropdown))
-        transparentBackground.addGestureRecognizer(tapGesture)
-
-        if shouldPresentDropdown {
+        if buttonPresses % 2 != 0 {
             HIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-                self.groupStatusTable.frame = CGRect(x: button.frame.origin.x + self.horizontalStackView.frame.origin.x, y: button.frame.origin.y + self.horizontalStackView.frame.origin.y, width: button.frame.width, height: 100)
+                self.groupStatusTable.frame = CGRect(x: button.frame.origin.x + self.horizontalStackView.frame.origin.x, y:
+                                                        button.frame.origin.y + self.horizontalStackView.frame.origin.y, width: button.frame.width, height: 100)
             }, completion: nil)
         } else {
             HIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-                self.groupStatusTable.frame = CGRect(x: button.frame.origin.x + self.horizontalStackView.frame.origin.x, y: button.frame.origin.y + self.horizontalStackView.frame.origin.y, width: button.frame.width, height: 0)
+                self.groupStatusTable.frame = CGRect(x: button.frame.origin.x + self.horizontalStackView.frame.origin.x, y:
+                                                        button.frame.origin.y + self.horizontalStackView.frame.origin.y, width: button.frame.width, height: 0)
             }, completion: nil)
         }
-    }
-
-    @objc func removeDropdown() {
-        let frames = selectedButton.frame
-        HIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-            self.groupStatusTable.frame = CGRect(x: frames.origin.x, y: frames.origin.y + frames.height, width: frames.width, height: 0)
-        }, completion: nil)
     }
 }
 
@@ -140,8 +133,7 @@ extension HIGroupViewController {
             $0.titleHIColor = \.action
             $0.title = "Group Status"
             $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: $0.frame.size.width - 15, bottom: 0, right: 0)
-            // Commented out temporarily
-            // $0.addTarget(self, action: #selector(self.updateDropdownView(button:)), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(self.addDropdownView(button:)), for: .touchUpInside)
         }
         horizontalStackView.addArrangedSubview(groupStatusButton)
 
@@ -196,13 +188,12 @@ extension HIGroupViewController {
 extension HIGroupViewController: HIGroupPopupViewDelegate {
     func updateInterests(_ groupPopupCell: HIGroupPopupCell) {
         guard let indexPath = groupPopupCell.indexPath, let interest = groupPopupCell.interestLabel.text else { return }
-        let modifiedInterest = interest.replacingOccurrences(of: " ", with: "%20")
         if groupPopupCell.selectedImageView.isHidden {
             selectedRows.insert(indexPath.row)
-            interests.insert(modifiedInterest)
+            interests.insert(interest)
         } else {
             selectedRows.remove(indexPath.row)
-            interests.remove(modifiedInterest)
+            interests.remove(interest)
         }
         interestParams = Array(interests)
         HIProfileDataSource.refresh(teamStatus: teamStatusParam, interests: interestParams)
