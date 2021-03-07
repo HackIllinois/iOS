@@ -171,14 +171,14 @@ struct HIAppearance: Equatable {
 //        static let profileUsername = UIFont(name: "Montserrat-Bold", size: 16)
 //        static let profileInterests = UIFont(name: "Montserrat-SemiBold", size: 14) // Design team needs to decide on the font
         static let profileName = UIFont.systemFont(ofSize: 24, weight: .semibold)
-        static let profileSubtitle = UIFont.systemFont(ofSize: 14, weight: .regular)
+        static let profileSubtitle = UIFont.systemFont(ofSize: 14, weight: .bold)
         static let profileNumberFigure = UIFont.systemFont(ofSize: 20, weight: .medium)
         static let profileDescription = UIFont.systemFont(ofSize: 16, weight: .regular)
         static let profileUsername = UIFont.systemFont(ofSize: 16, weight: .bold)
         static let profileInterests = UIFont.systemFont(ofSize: 14, weight: .semibold)
 
         static let groupContact = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        static let groupStatus = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        static let groupStatus = UIFont.systemFont(ofSize: 12, weight: .bold)
         static let sortingText = UIFont.systemFont(ofSize: 14, weight: .semibold)
     }
 }
