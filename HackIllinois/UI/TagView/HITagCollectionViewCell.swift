@@ -20,16 +20,27 @@ class HITagCollectionViewCell: UICollectionViewCell {
 //        $0.font = UIFont(size: 14)
 //        return label
 //    }()
-    let tagLabel = HILabel(style: .profileInterests) {
-//        $0.textColor <- \.titleText
-//        $0.font = HIAppearance.Font.profileInterests
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+    var tagLabel = HILabel(style: .profileInterests)
     override func awakeFromNib() {
         super.awakeFromNib()
-//        self.layer.backgroundColor = UIColor(red: 0.933, green: 0.424, blue: 0.447, alpha: 1).cgColor
-//        self.layer.cornerRadius = 15
+        self.layer.backgroundColor = UIColor(red: 0.933, green: 0.424, blue: 0.447, alpha: 1).cgColor
+        self.layer.cornerRadius = 15
 //        self.text.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
 //        self.font = UIFont(size: 14)
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubview(tagLabel)
+        tagLabel.constrain(to: safeAreaLayoutGuide, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+    }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+}
+
+// MARK: - Population
+extension HITagCollectionViewCell {
+    static func <- (lhs: HITagCollectionViewCell, rhs: String) {
+        lhs.tagLabel.text = rhs
     }
 }

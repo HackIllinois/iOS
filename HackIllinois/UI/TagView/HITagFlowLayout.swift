@@ -39,6 +39,7 @@ class HITagFlowLayout: UICollectionViewFlowLayout {
             print("Null")
             return nil
         }
+        print("Running")
         var rows = [Row]()
         var currentRowY: CGFloat = -1
         for attribute in attributes {
