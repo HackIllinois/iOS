@@ -15,8 +15,8 @@ import UIKit
 
 class HIIndoorMapsViewController: HIBaseViewController {
     // MARK: - Properties
-    private let topSegmentedControl = HISegmentedControl(titles: HIMapsDataSource.shared.maps.map { $0.name })
-    private let bottomSegmentedControl = HISegmentedControl(titles: HIMapsDataSource.shared.maps[0].floors.map { $0.name })
+    private let topSegmentedControl = HISegmentedControl(items: HIMapsDataSource.shared.maps.map { $0.name })
+    private let bottomSegmentedControl = HISegmentedControl(items: HIMapsDataSource.shared.maps[0].floors.map { $0.name })
 
     private let contentView = HIView {
         $0.layer.cornerRadius = 8

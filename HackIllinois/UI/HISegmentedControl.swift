@@ -15,34 +15,26 @@ import UIKit
 class HISegmentedControl: UIControl {
 
     // MARK: - Properties
-    private(set) var titles: [String]
-    private(set) var nums: [Int]
+    private(set) var items: [String]
 
-    private(set) var selectedIndex: Int = 0 {
+    var selectedIndex: Int = 0 {
         didSet {
-            if oldValue != selectedIndex {
-                displayNewSelectedIndex()
-                sendActions(for: .valueChanged)
-            }
+            didSetSelectedIndex(oldValue: oldValue)
         }
     }
 
-    private var views = [UIView]()
-    private var titleLabels = [UILabel]()
-    private var numberLabels = [UILabel]()
-
-    private let titleFont = HIAppearance.Font.segmentedTitle
-    private let numberFont = HIAppearance.Font.segmentedNumberText
-
-    private let viewPadding: CGFloat = 20
-    private let indicatorCornerRadiusProp: CGFloat = 0.15
+    private var labels = [UILabel]()
+    private var font = HIAppearance.Font.navigationSubtitle
 
     private var indicatorView = UIView()
+    private var indicatorViewHeight = CGFloat(3)
+
+    private var bottomView = UIView()
+    private var bottomViewHeight = CGFloat(1)
 
     // MARK: - Init
-    init(titles: [String], nums: [Int]? = nil) {
-        self.titles = titles
-        self.nums = nums == nil ? [Int]() : nums!
+    init(items: [String]) {
+        self.items = items
         super.init(frame: .zero)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         translatesAutoresizingMaskIntoConstraints = false
@@ -61,28 +53,23 @@ class HISegmentedControl: UIControl {
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
         backgroundColor <- \.clear
-        titleLabels.forEach {
-            $0.textColor <- \.whiteText
+        labels.forEach {
+            $0.textColor <- \.baseText
             $0.backgroundColor <- \.clear
         }
-
-        numberLabels.forEach {
-            $0.textColor <- \.whiteText
-            $0.backgroundColor <- \.clear
-        }
-
-        indicatorView.backgroundColor <- \.segmentedBackground
-        indicatorView.alpha = 0.3
+        bottomView.backgroundColor <- \.baseText
+        indicatorView.backgroundColor <- \.accent
     }
 
     // MARK: - UIView
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        let indicatorViewWidth = ((frame.width - viewPadding) / CGFloat(titles.count) - viewPadding)
-        indicatorView.frame = CGRect(x: viewPadding, y: 0, width: indicatorViewWidth, height: frame.height)
-        indicatorView.layer.cornerRadius = frame.height * indicatorCornerRadiusProp
+        let indicatorViewWidth = frame.width / CGFloat(items.count)
+        indicatorView.frame = CGRect(x: 0, y: frame.height - indicatorViewHeight, width: indicatorViewWidth, height: indicatorViewHeight)
+        indicatorView.layer.cornerRadius = indicatorViewHeight / 2
         indicatorView.layer.masksToBounds = true
+        bottomView.frame = CGRect(x: 0, y: frame.height - (2 * bottomViewHeight), width: frame.width, height: bottomViewHeight)
 
         displayNewSelectedIndex()
     }
@@ -90,8 +77,8 @@ class HISegmentedControl: UIControl {
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let location = touch.location(in: self)
 
-        for (index, view) in views.enumerated() {
-            if view.frame.contains(location) {
+        for (index, label) in labels.enumerated() {
+            if label.frame.contains(location) {
                 selectedIndex = index
                 break
             }
@@ -102,94 +89,84 @@ class HISegmentedControl: UIControl {
 
     // MARK: - Label Setup
     public func update(items: [String]) {
-        self.titles = items
+        self.items = items
         selectedIndex = 0
         setupLabels()
     }
 
-    private func setupView() {
+    func setupView() {
         setupLabels()
+        addSubview(bottomView)
         addSubview(indicatorView)
     }
 
-    private func setupLabels() {
-        views.forEach { $0.removeFromSuperview() }
-        views.removeAll(keepingCapacity: true)
-        titles.indices.forEach { setupViewForItem(at: $0) }
-        constrain(views: views)
+    func setupLabels() {
+        labels.forEach { $0.removeFromSuperview() }
+        labels.removeAll(keepingCapacity: true)
+        items.indices.forEach { setupLabelForItem(at: $0) }
+        constrain(labels: labels)
     }
 
-    private func setupViewForItem(at index: Int) {
-        let view = UIView()
-        let titleLabel = UILabel()
-        let numberLabel = UILabel()
-
-        titleLabel.textAlignment = .center
-        titleLabel.font = titleFont
-        titleLabel.text = titles[index]
-        titleLabel.textColor <- \.whiteText
-
-        numberLabel.textAlignment = .center
-        numberLabel.font = numberFont
-        numberLabel.text = index < nums.count ? "\(nums[index])" : "00"
-        numberLabel.textColor <- \.whiteText
-
-        view.addSubview(titleLabel)
-        view.addSubview(numberLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        numberLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        titleLabel.constrain(to: view, topInset: 5, trailingInset: 0, leadingInset: 0)
-        numberLabel.constrain(to: view, trailingInset: 0, bottomInset: -5, leadingInset: 0)
-        numberLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0).isActive = true
-        titleLabel.heightAnchor.constraint(equalTo: numberLabel.heightAnchor).isActive = true
-
-        view.isUserInteractionEnabled = false
-        titleLabel.isUserInteractionEnabled = false
-        numberLabel.isUserInteractionEnabled = false
-
-        view.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(view)
-        views.append(view)
-        titleLabels.append(titleLabel)
-        numberLabels.append(numberLabel)
+    private func setupLabelForItem(at index: Int) {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = font
+        label.text = items[index]
+        label.textColor <- \.baseText
+        label.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(label)
+        labels.append(label)
+    }
+    
+    func didSetSelectedIndex(oldValue: Int) {
+        if oldValue != selectedIndex {
+            labels[oldValue].textColor <- \.baseText
+            displayNewSelectedIndex()
+            sendActions(for: .valueChanged)
+        }
     }
 
-    private func displayNewSelectedIndex() {
-        let selectedView = views[selectedIndex]
+    func displayNewSelectedIndex() {
+        let selectedLabel = labels[selectedIndex]
 
         let animator = UIViewPropertyAnimator(duration: 0.5, dampingRatio: 0.8)
         animator.addAnimations {
-            self.indicatorView.frame.origin.x = selectedView.frame.origin.x
+            self.indicatorView.frame.origin.x = selectedLabel.frame.origin.x
+            selectedLabel.textColor <- \.accent
         }
         animator.startAnimation()
     }
 
-    private func constrain(views: [UIView]) {
+    private func constrain(labels: [UIView]) {
 
-        for (index, view) in views.enumerated() {
+        for (index, view) in labels.enumerated() {
+            // top
+            view.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
 
-            // top and bottom
-            view.constrain(to: self, topInset: 0, bottomInset: 0)
+            // bottom
+            view.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
 
             // right
-            if index == titles.count - 1 {
-                view.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -viewPadding).isActive = true
+            if index == labels.count - 1 {
+                view.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+            } else {
+                let nextView = labels[index + 1]
+                view.rightAnchor.constraint(equalTo: nextView.leftAnchor).isActive = true
             }
 
             // left
             if index == 0 {
-                view.leftAnchor.constraint(equalTo: self.leftAnchor, constant: viewPadding).isActive = true
+                view.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
             } else {
-                let prevView = views[index - 1]
-                view.leftAnchor.constraint(equalTo: prevView.rightAnchor, constant: viewPadding).isActive = true
+                let prevView = labels[index - 1]
+                view.leftAnchor.constraint(equalTo: prevView.rightAnchor).isActive = true
             }
 
             // width
             if index != 0 {
-                let firstView = views[0]
+                let firstView = labels[0]
                 view.widthAnchor.constraint(equalTo: firstView.widthAnchor).isActive = true
             }
         }
     }
-}
+} 

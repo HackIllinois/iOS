@@ -140,7 +140,7 @@ extension HIHomeViewController {
         buildingView.topAnchor.constraint(equalTo: countdownViewController.view.centerYAnchor, constant: 20).isActive = true
 
         let items = dataStore.map { $0.displayText }
-        let segmentedControl = HISegmentedControl(titles: items)
+        let segmentedControl = HISegmentedControl(items: items)
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
