@@ -66,8 +66,9 @@ class HIProfileViewController: HIBaseViewController {
     private let profileInterestsLabelView = HILabel(style: .profileUsername) {
         $0.text = "Interests"
     }
-    private let profileInterestsView = HILabel() // Will be replaced by UICollectionView
+    private weak var profileInterestsView: UICollectionView! // Will be replaced by UICollectionView
 
+    private var interests = [] as [String] // Should be replaced by API response list
     private let userNameLabel = HILabel {
         $0.textHIColor = \.baseText
     }
@@ -121,8 +122,8 @@ extension HIProfileViewController {
         descriptionContentView.translatesAutoresizingMaskIntoConstraints = false
         descriptionContentView.topAnchor.constraint(equalTo: profileStatStackView.bottomAnchor, constant: 20).isActive = true
         descriptionContentView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        descriptionContentView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
-        descriptionContentView.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
+//        descriptionContentView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+        descriptionContentView.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -30).isActive = true
         descriptionContentView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         descriptionContentView.addSubview(profileDescriptionView)
         loadDescriptionView(descriptionContentView: descriptionContentView)
@@ -132,8 +133,8 @@ extension HIProfileViewController {
         profileStatStackView.axis = .horizontal
         profileStatStackView.distribution = .fillEqually
         profileStatStackView.topAnchor.constraint(equalTo: profileSubtitleView.bottomAnchor, constant: 19).isActive = true
-        profileStatStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        profileStatStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        profileStatStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30).isActive = true
+        profileStatStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30).isActive = true
         profileStatStackView.translatesAutoresizingMaskIntoConstraints = false
         let profilePointsStackView = UIStackView()
         profilePointsStackView.axis = .vertical
@@ -164,16 +165,38 @@ extension HIProfileViewController {
         profileDiscordUsernameView.topAnchor.constraint(equalTo: profileDiscordImageView.topAnchor).isActive = true
         profileDiscordUsernameView.trailingAnchor.constraint(equalTo: descriptionContentView.trailingAnchor).isActive = true
         profileDiscordImageView.trailingAnchor.constraint(equalTo: profileDiscordUsernameView.leadingAnchor, constant: -10).isActive = true
+//        profileDiscordImageView.bottomAnchor.constraint(equalTo: profileDiscordUsernameView.bottomAnchor).isActive = true
         descriptionContentView.addSubview(profileInterestsLabelView)
         profileDiscordUsernameView.bottomAnchor.constraint(equalTo: profileInterestsLabelView.topAnchor, constant: -10).isActive = true
+        profileInterestsLabelView.leadingAnchor.constraint(equalTo: descriptionContentView.leadingAnchor).isActive = true
+//        let profileInterestsView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+//        let interestsContentView = UIView()
+        let profileInterestsView = UICollectionView(frame: self.view.frame, collectionViewLayout: UICollectionViewFlowLayout())
         descriptionContentView.addSubview(profileInterestsView)
-        profileInterestsView.topAnchor.constraint(equalTo: profileInterestsLabelView.bottomAnchor).isActive = true
-        profileInterestsView.bottomAnchor.constraint(equalTo: descriptionContentView.bottomAnchor).isActive = true
+        profileInterestsView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            profileInterestsView.topAnchor.constraint(equalTo: profileInterestsLabelView.bottomAnchor, constant: 10),
+            profileInterestsView.bottomAnchor.constraint(equalTo: descriptionContentView.bottomAnchor),
+            profileInterestsView.leadingAnchor.constraint(equalTo: descriptionContentView.leadingAnchor),
+            profileInterestsView.trailingAnchor.constraint(equalTo: descriptionContentView.trailingAnchor)
+        ])
+//        profileInterestsView.topAnchor.constraint(equalTo: profileInterestsLabelView.bottomAnchor, constant: 10).isActive = true
+//        profileInterestsView.bottomAnchor.constraint(equalTo: descriptionContentView.bottomAnchor).isActive = true
+//        profileInterestsView.leadingAnchor.constraint(equalTo: descriptionContentView.leadingAnchor).isActive = true
+//        profileInterestsView.trailingAnchor.constraint(equalTo: descriptionContentView.trailingAnchor).isActive = true
+        self.profileInterestsView = profileInterestsView
+//        print("Interests: "interests)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupRefreshControl()
         backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
+        profileInterestsView.delegate = self
+        profileInterestsView.dataSource = self
+        let layout = HITagFlowLayout()
+        layout.estimatedItemSize = CGSize(width: 140, height: 40)
+        profileInterestsView.collectionViewLayout = layout
+        profileInterestsView.register(HITagCollectionViewCell.self, forCellWithReuseIdentifier: "HITagCollectionViewCell")
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -189,7 +212,37 @@ extension HIProfileViewController {
         profileTimeView.text = profile.timezone
         profileDescriptionView.text = profile.info
         profileDiscordUsernameView.text = profile.discord
+        interests = profile.interests
 
         profileDiscordImageView.image = UIImage(named: "DiscordLogo")
+    }
+}
+
+extension HIProfileViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ profileInterestsView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return interests.count
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print("run")
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HITagCollectionViewCell", for: indexPath)
+                as? HITagCollectionViewCell else { return HITagCollectionViewCell() }
+        cell.tagLabel.text = interests[indexPath.row]
+        cell.tagLabel.preferredMaxLayoutWidth = collectionView.frame.width - 32
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        print("kind = \(kind)")
+        if (kind == UICollectionView.elementKindSectionHeader) {
+            if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "TagCollectionReusableView", for: indexPath) as? TagCollectionReusableView {
+                return sectionHeader
+            }
+        }
+        return UICollectionReusableView()
+    }
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return interests.count
+    }
+    func collectionView(_collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: 200, height: 30)
     }
 }
