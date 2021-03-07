@@ -163,6 +163,7 @@ struct HIAppearance: Equatable {
         static let groupContact = UIFont.systemFont(ofSize: 14, weight: .semibold)
         static let groupStatus = UIFont.systemFont(ofSize: 12, weight: .semibold)
         static let sortingText = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        static let countdownText = UIFont.systemFont(ofSize: 25, weight: .bold)
     }
 }
 

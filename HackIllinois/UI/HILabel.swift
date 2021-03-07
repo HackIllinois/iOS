@@ -37,6 +37,7 @@ class HILabel: UILabel {
         case lookingForMember
         case sortText
         case sortElement
+        case countdown
     }
 
     // MARK: - Properties
@@ -174,6 +175,11 @@ class HILabel: UILabel {
             textHIColor = \.titleText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.contentText
+
+        case .countdown:
+            textHIColor = \.titleText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.countdownText
 
         }
         }

@@ -57,7 +57,7 @@ class HIHomeViewController: HIEventListViewController {
         return dataStore
     }()
 
-    private let countdownTitleLabel = HILabel(style: .title)
+    private let countdownTitleLabel = HILabel(style: .countdown)
     private lazy var countdownViewController = HICountdownViewController(delegate: self)
     private let happeningNowLabel = HILabel(style: .title) {
         $0.text = "HAPPENING NOW"
@@ -79,7 +79,6 @@ class HIHomeViewController: HIEventListViewController {
     ]
 
     private var timer: Timer?
-    private var buildingView = UIImageView()
 }
 
 // MARK: - Actions
@@ -124,29 +123,22 @@ extension HIHomeViewController {
         }
 
         view.addSubview(countdownTitleLabel)
-        countdownTitleLabel.constrain(to: view, topInset: 60, trailingInset: 0, leadingInset: 0)
+        countdownTitleLabel.constrain(to: view, topInset: UIScreen.main.bounds.height * 0.12, trailingInset: 0, leadingInset: 20)
 
         countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
         addChild(countdownViewController)
         view.addSubview(countdownViewController.view)
-        countdownViewController.view.topAnchor.constraint(equalTo: countdownTitleLabel.bottomAnchor, constant: 8).isActive = true
-        countdownViewController.view.constrain(to: view.safeAreaLayoutGuide, trailingInset: -20, leadingInset: 20)
-        countdownViewController.view.constrain(height: 150)
+        countdownViewController.view.topAnchor.constraint(equalTo: countdownTitleLabel.bottomAnchor, constant: 10).isActive = true
+        countdownViewController.view.constrain(to: view.safeAreaLayoutGuide, trailingInset: -10, leadingInset: 10)
+        countdownViewController.view.constrain(height: 200)
         countdownViewController.didMove(toParent: self)
-
-        buildingView.contentMode = .scaleAspectFill
-        buildingView.translatesAutoresizingMaskIntoConstraints = false
-        buildingView.isUserInteractionEnabled = true
-        view.insertSubview(buildingView, at: 1)
-        buildingView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        buildingView.topAnchor.constraint(equalTo: countdownViewController.view.centerYAnchor, constant: 20).isActive = true
 
         let items = dataStore.map { $0.displayText }
         let segmentedControl = HISegmentedControl(items: items)
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
-        segmentedControl.topAnchor.constraint(equalTo: buildingView.centerYAnchor, constant: 12).isActive = true
+        segmentedControl.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor, constant: 12).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 44).isActive = true
@@ -202,6 +194,8 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
                 countdownTitleLabel.text = staticDataStore[countdownDataStoreIndex].displayText
                 backgroundView.image = staticDataStore[countdownDataStoreIndex].backgroundImage
                 return (countdownDataStoreIndex == 0 || countdownDataStoreIndex == 1) ? HITimeDataSource.shared.eventTimes.eventStart : currDate
+            } else {
+                countdownTitleLabel.text = "Countdown"
             }
             countdownDataStoreIndex += 1
         }
