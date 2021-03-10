@@ -35,41 +35,31 @@ class HIGroupDetailViewController: HIBaseViewController {
         $0.layer.masksToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    private let profileNameView = HILabel(style: .profileName) {
-        $0.text = ""
-    }
+    private let profileNameView = HILabel(style: .profileName)
     private let profileStatusContainer = UIView()
     private let profileStatusIndicator = HICircularView {
         $0.backgroundHIColor = \.clear
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    private let profileStatusDescriptionView = HILabel(style: .profileSubtitle) {
-        $0.text = ""
-    }
-    private let profilePointsView = HILabel(style: .profileNumberFigure) {
-        $0.text = ""
-    }
+    private let profileStatusDescriptionView = HILabel(style: .profileSubtitle)
+    private let profilePointsView = HILabel(style: .profileNumberFigure)
     private let profilePointsSubtitleView = HILabel(style: .profileDescription) {
         $0.text = "points"
     }
-    private let profileTimeView = HILabel(style: .profileNumberFigure) {
-        $0.text = ""
-    }
+    private let profileTimeView = HILabel(style: .profileNumberFigure)
     private let profileTimeSubtitleView = HILabel(style: .profileDescription) {
         $0.text = "time zone"
     }
     private let profileStatView = HIView()
     // Good resource for UIStackView: https://stackoverflow.com/questions/43904070/programmatically-adding-views-to-a-uistackview
-    private let profileDescriptionView = HILabel(style: .profileDescription) {
-        $0.text = ""
-    }
+    private let profileDescriptionView = HILabel(style: .profileDescription)
     private let profileDiscordImageView = HIImageView() // May need to modify depending on its intention
     private let profileDiscordUsernameView = HILabel(style: .profileUsername) {
         $0.text = "Discord Username"
     } // May need to modify depending on its intention
     private let profileUsernameView = UIStackView() // Will be initialized in ViewController extension (.axis = .horizontal)
     private let profileInterestsLabelView = HILabel(style: .profileUsername) {
-        $0.text = "Interests"
+        $0.text = "Skills"
     }
     lazy var profileInterestsView: UICollectionView = {
         let profileInterestsView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -229,8 +219,8 @@ extension HIGroupDetailViewController {
         profileNameView.text = profile.firstName + " " + profile.lastName
         //TODO: Update color based on how each team status is represented in API
         if profile.teamStatus == "looking" {
-            profileStatusIndicator.changeColor(color: \.groupSearchText)
-            profileStatusDescriptionView.changeColor(color: \.groupSearchText)
+            profileStatusIndicator.changeCircleColor(color: \.groupSearchText)
+            profileStatusDescriptionView.changeTextColor(color: \.groupSearchText)
         }
         profileStatusDescriptionView.text = profile.teamStatus.capitalized
         profilePointsView.text = "\(profile.points)"

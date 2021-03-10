@@ -70,11 +70,11 @@ class HIGroupCell: HIBubbleCell {
         bubbleView.addSubview(contentStackView)
         contentStackView.axis = .vertical
         contentStackView.distribution = .equalSpacing
-        contentStackView.spacing = 10.0
+        contentStackView.spacing = 27.0
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         contentStackView.leadingAnchor.constraint(equalTo: profilePicture.leadingAnchor).isActive = true
         contentStackView.trailingAnchor.constraint(equalTo: favoritedButton.leadingAnchor).isActive = true
-        contentStackView.topAnchor.constraint(equalTo: profilePicture.bottomAnchor, constant: 10).isActive = true
+        contentStackView.topAnchor.constraint(equalTo: profilePicture.bottomAnchor, constant: 12).isActive = true
         contentStackViewHeight = contentStackView.heightAnchor.constraint(equalToConstant: 0)
 
         // Don't show favorite button for guests
@@ -99,7 +99,7 @@ extension HIGroupCell {
 extension HIGroupCell {
 
     static func heightForCell(with group: Profile) -> CGFloat {
-        return 98 + 62
+        return 155
     }
 
     static func <- (lhs: HIGroupCell, rhs: Profile) {
@@ -123,7 +123,7 @@ extension HIGroupCell {
         let statusIndicator = HICircularView()
         statusIndicator.translatesAutoresizingMaskIntoConstraints = false
         //TODO: Update color based on how each team status is represented in API
-        statusIndicator.changeColor(color: \.groupSearchText)
+        statusIndicator.changeCircleColor(color: \.groupSearchText)
         statusContainer.addSubview(statusIndicator)
         statusIndicator.topAnchor.constraint(equalTo: statusContainer.topAnchor, constant: 5).isActive = true
         statusIndicator.leadingAnchor.constraint(equalTo: statusContainer.leadingAnchor).isActive = true
@@ -131,7 +131,7 @@ extension HIGroupCell {
         statusIndicator.widthAnchor.constraint(equalToConstant: 5).isActive = true
 
         let statusLabel = HILabel(style: .groupStatus)
-        statusLabel.changeColor(color: \.groupSearchText)
+        statusLabel.changeTextColor(color: \.groupSearchText)
         statusLabel.text = rhs.teamStatus.capitalized
         innerVerticalStackViewHeight += statusLabel.intrinsicContentSize.height + 3
         statusContainer.addSubview(statusLabel)
@@ -141,10 +141,28 @@ extension HIGroupCell {
         statusLabel.trailingAnchor.constraint(equalTo: statusContainer.trailingAnchor).isActive = true
         lhs.innerVerticalStackView.addArrangedSubview(statusContainer)
 
+        let discordContainer = UIView()
+        discordContainer.translatesAutoresizingMaskIntoConstraints = false
+        discordContainer.backgroundColor = .clear
+
+        let discordImageView = HIImageView()
+        discordImageView.contentMode = .scaleAspectFit
+        discordImageView.image = #imageLiteral(resourceName: "DiscordLogo")
+        discordContainer.addSubview(discordImageView)
+        discordImageView.topAnchor.constraint(equalTo: discordContainer.topAnchor).isActive = true
+        discordImageView.leadingAnchor.constraint(equalTo: discordContainer.leadingAnchor).isActive = true
+        discordImageView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        discordImageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
+
         let discordLabel = HILabel(style: .groupContactInfo)
-        discordLabel.text = "Discord: \(rhs.discord)"
+        discordLabel.text = rhs.discord
         contentStackViewHeight += discordLabel.intrinsicContentSize.height + 3
-        lhs.contentStackView.addArrangedSubview(discordLabel)
+        discordContainer.addSubview(discordLabel)
+        discordLabel.topAnchor.constraint(equalTo: discordContainer.topAnchor).isActive = true
+        discordLabel.centerYAnchor.constraint(equalTo: discordImageView.centerYAnchor).isActive = true
+        discordLabel.leadingAnchor.constraint(equalTo: discordImageView.trailingAnchor, constant: 10).isActive = true
+        discordLabel.trailingAnchor.constraint(equalTo: discordContainer.trailingAnchor).isActive = true
+        lhs.contentStackView.addArrangedSubview(discordContainer)
 
         let description = HILabel(style: .groupDescription)
         description.text = rhs.info

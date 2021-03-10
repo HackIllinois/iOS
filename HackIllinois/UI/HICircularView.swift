@@ -23,7 +23,7 @@ class HICircularView: HIView {
 
     }
 
-    func changeColor(color: HIColor) {
+    func changeCircleColor(color: HIColor) {
         backgroundColor <- color
     }
 
