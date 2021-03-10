@@ -70,12 +70,12 @@ class HIHomeViewController: HIEventListViewController {
 
     private var countdownDataStoreIndex = 0
     private var staticDataStore: [(date: Date, displayText: String, backgroundImage: UIImage)] = [
-        (HITimeDataSource.shared.eventTimes.twoWeeksBeforeStart, "HACKILLINOIS BEGINS IN", #imageLiteral(resourceName: "Day")),
-        (HITimeDataSource.shared.eventTimes.oneWeekBeforeStart, "HACKILLINOIS BEGINS IN", #imageLiteral(resourceName: "Sunset")),
-        (HITimeDataSource.shared.eventTimes.eventStart, "HACKILLINOIS BEGINS IN", #imageLiteral(resourceName: "Night")),
-        (HITimeDataSource.shared.eventTimes.hackStart, "HACKING BEGINS IN", #imageLiteral(resourceName: "Night")),
-        (HITimeDataSource.shared.eventTimes.hackEnd, "HACKING ENDS IN", #imageLiteral(resourceName: "Night")),
-        (HITimeDataSource.shared.eventTimes.eventEnd, "HACKILLINOIS ENDS IN", #imageLiteral(resourceName: "Night"))
+        (HITimeDataSource.shared.eventTimes.twoWeeksBeforeStart, "HackIllinois Begins In", #imageLiteral(resourceName: "Day")),
+        (HITimeDataSource.shared.eventTimes.oneWeekBeforeStart, "HackIllinois Begins In", #imageLiteral(resourceName: "Sunset")),
+        (HITimeDataSource.shared.eventTimes.eventStart, "HackIllinois Begins In", #imageLiteral(resourceName: "Night")),
+        (HITimeDataSource.shared.eventTimes.hackStart, "Hacking Begins In", #imageLiteral(resourceName: "Night")),
+        (HITimeDataSource.shared.eventTimes.hackEnd, "Hacking Ends In", #imageLiteral(resourceName: "Night")),
+        (HITimeDataSource.shared.eventTimes.eventEnd, "HackIllinois Ends In", #imageLiteral(resourceName: "Night"))
     ]
 
     private var timer: Timer?

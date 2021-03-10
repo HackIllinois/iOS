@@ -186,28 +186,28 @@ extension HICountdownViewController {
             return
         }
 
-        let daysEndFrame = daysRemaining * FRAMES_PER_TICK
+        let daysEndFrame = (59 - daysRemaining) * FRAMES_PER_TICK
         let daysStartFrame = daysEndFrame + FRAMES_PER_TICK
         if dayFrame != daysEndFrame {
             dayFrame = daysEndFrame
             days.play(fromFrame: CGFloat(daysStartFrame), toFrame: CGFloat(daysEndFrame))
         }
 
-        let hoursEndFrame = hoursRemaining * FRAMES_PER_TICK
+        let hoursEndFrame = (23 - hoursRemaining) * FRAMES_PER_TICK
         let hoursStartFrame = hoursEndFrame + FRAMES_PER_TICK
         if hourFrame != hoursEndFrame {
             hourFrame = hoursEndFrame
             hours.play(fromFrame: CGFloat(hoursStartFrame), toFrame: CGFloat(hoursEndFrame))
         }
 
-        let minutesEndFrame = minutesRemaining * FRAMES_PER_TICK
+        let minutesEndFrame = (59 - minutesRemaining) * FRAMES_PER_TICK
         let minutesStartFrame = minutesEndFrame + FRAMES_PER_TICK
         if minuteFrame != minutesEndFrame {
             minuteFrame = minutesEndFrame
             minutes.play(fromFrame: CGFloat(minutesStartFrame), toFrame: CGFloat(minutesEndFrame))
         }
 
-        let secondsEndFrame = secondsRemaining * FRAMES_PER_TICK
+        let secondsEndFrame = (59 - secondsRemaining) * FRAMES_PER_TICK
         let secondsStartFrame = secondsEndFrame + FRAMES_PER_TICK
         if secondFrame != secondsEndFrame {
             secondFrame = secondsEndFrame
