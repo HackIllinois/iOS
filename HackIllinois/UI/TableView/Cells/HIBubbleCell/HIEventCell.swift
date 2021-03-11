@@ -113,13 +113,13 @@ extension HIEventCell {
 
         let bottomView = HIView()
         bottomView.constrain(height: 30)
-        
+
         let pointsView = HIView { (view) in
             view.layer.cornerRadius = 15
             view.backgroundHIColor = \.buttonBlue
             view.translatesAutoresizingMaskIntoConstraints = false
         }
-        
+
         let pointsLabel = HILabel(style: .pointsText)
         pointsView.addSubview(pointsLabel)
         pointsLabel.constrain(to: pointsView, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)

@@ -195,7 +195,7 @@ class HILabel: UILabel {
             textHIColor = \.titleText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.contentText
-        
+
         case .pointsText:
             textHIColor = \.whiteText
             backgroundHIColor = \.clear

@@ -1,9 +1,9 @@
 //
-//  HISegmentedControl.swift
+//  HIScheduleSegmentedControl.swift
 //  HackIllinois
 //
-//  Created by HackIllinois Team on 11/29/17.
-//  Copyright © 2017 HackIllinois. All rights reserved.
+//  Created by HackIllinois Team on 3/7/21.
+//  Copyright © 2021 HackIllinois. All rights reserved.
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of
 //  Illinois/NCSA Open Source License. You should have received a copy of
@@ -33,7 +33,7 @@ class HIScheduleSegmentedControl: HISegmentedControl {
     init(titles: [String], nums: [Int]? = nil) {
         self.nums = nums == nil ? [Int]() : nums!
         super.init(items: titles)
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         translatesAutoresizingMaskIntoConstraints = false
         setupView()
@@ -138,7 +138,7 @@ class HIScheduleSegmentedControl: HISegmentedControl {
         titleLabels.append(titleLabel)
         numberLabels.append(numberLabel)
     }
-    
+
     override func didSetSelectedIndex(oldValue: Int) {
         if oldValue != selectedIndex {
             displayNewSelectedIndex()
