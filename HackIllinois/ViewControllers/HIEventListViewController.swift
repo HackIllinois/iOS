@@ -25,8 +25,8 @@ extension HIEventListViewController {
         if let tableView = tableView {
             tableView.register(HIDateHeader.self, forHeaderFooterViewReuseIdentifier: HIDateHeader.identifier)
             tableView.register(HIEventCell.self, forCellReuseIdentifier: HIEventCell.identifier)
-            tableView.isUserInteractionEnabled = true
             tableView.allowsSelection = false
+            tableView.sectionHeaderHeight = 0
             registerForPreviewing(with: self, sourceView: tableView)
         }
         super.setupTableView()

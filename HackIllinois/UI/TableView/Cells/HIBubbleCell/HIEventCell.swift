@@ -89,6 +89,7 @@ extension HIEventCell {
         var contentStackViewHeight: CGFloat = 0
 
         let titleLabel = HILabel(style: .event)
+        titleLabel.numberOfLines = 0
         titleLabel.text = rhs.name
         lhs.contentStackView.addArrangedSubview(titleLabel)
 
@@ -123,14 +124,6 @@ extension HIEventCell {
         pointsView.addSubview(pointsLabel)
         pointsLabel.constrain(to: pointsView, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
         pointsLabel.text = "10 Points!"
-        
-//        let joinButton = HIButton { (button) in
-//            button.title = "Join Stream!"
-//            button.titleHIColor = \.whiteText
-//            button.backgroundHIColor = \.buttonBlue
-//            button.titleLabel?.font = HIAppearance.Font.eventButtonText
-//            button.layer.cornerRadius = 15
-//        }
 
         let eventType = HILabel(style: .eventType)
         eventType.text = "Mini Events"
