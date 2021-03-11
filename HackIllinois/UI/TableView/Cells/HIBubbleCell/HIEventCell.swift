@@ -127,7 +127,7 @@ extension HIEventCell {
 
         let eventType = HILabel(style: .eventType)
         eventType.text = rhs.eventType
-        eventType.textHIColor = getColor(for: rhs.eventType)
+        eventType.textHIColor = getTagColor(for: rhs.eventType)
         eventType.refreshForThemeChange()
 
         bottomView.addSubview(pointsView)
@@ -158,13 +158,18 @@ extension HIEventCell {
 
 // MARK: - HIColors for event type
 extension HIEventCell {
-    static func getColor(for evenType: String) -> HIColor{
-        switch (evenType){
-        case "WORKSHOP": return \.eventTypePurple
-        case "MINIEVENT": return \.eventTypeGreen
-        case "SPEAKER": return \.eventTypeRed
-        case "CHALLENGE": return \.eventTypeOrange
-        default: return \.eventTypeOrange
+    static func getTagColor(for eventType: String) -> HIColor {
+        switch eventType {
+        case "WORKSHOP":
+            return \.eventTypePurple
+        case "MINIEVENT":
+            return \.eventTypeGreen
+        case "SPEAKER":
+            return \.eventTypeRed
+        case "CHALLENGE":
+            return \.eventTypeOrange
+        default:
+            return \.eventTypeOrange
         }
     }
 }
