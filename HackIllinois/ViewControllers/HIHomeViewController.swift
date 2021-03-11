@@ -62,11 +62,11 @@ class HIHomeViewController: HIEventListViewController {
     private let happeningNowLabel = HILabel(style: .title) {
         $0.text = "HAPPENING NOW"
     }
-    private let announcementButton = HIButton {
-        $0.tintHIColor = \.baseText
-        $0.backgroundHIColor = \.clear
-        $0.baseImage = #imageLiteral(resourceName: "Bell")
-    }
+//    private let announcementButton = HIButton {
+//        $0.tintHIColor = \.baseText
+//        $0.backgroundHIColor = \.clear
+//        $0.baseImage = #imageLiteral(resourceName: "Bell")
+//    }
 
     private var countdownDataStoreIndex = 0
     private var staticDataStore: [(date: Date, displayText: String, backgroundImage: UIImage)] = [
@@ -105,22 +105,22 @@ extension HIHomeViewController {
         }
     }
 
-    @objc func didSelectAnnouncementButton(_ sender: HIButton) {
-        self.present(announcementViewController, animated: true, completion: nil)
-    }
+//    @objc func didSelectAnnouncementButton(_ sender: HIButton) {
+//        self.present(announcementViewController, animated: true, completion: nil)
+//    }
 }
 
 // MARK: - UIViewController
 extension HIHomeViewController {
     override func loadView() {
         super.loadView()
-        self.navigationItem.rightBarButtonItem = announcementButton.toBarButtonItem()
-        announcementButton.addTarget(self, action: #selector(didSelectAnnouncementButton(_:)), for: .touchUpInside)
-        announcementButton.constrain(width: 22, height: 22)
-
-        if HIApplicationStateController.shared.isGuest {
-            announcementButton.isHidden = true
-        }
+//        self.navigationItem.rightBarButtonItem = announcementButton.toBarButtonItem()
+//        announcementButton.addTarget(self, action: #selector(didSelectAnnouncementButton(_:)), for: .touchUpInside)
+//        announcementButton.constrain(width: 22, height: 22)
+//
+//        if HIApplicationStateController.shared.isGuest {
+//            announcementButton.isHidden = true
+//        }
 
         view.addSubview(countdownTitleLabel)
         countdownTitleLabel.constrain(to: view, topInset: UIScreen.main.bounds.height * 0.12, trailingInset: 0, leadingInset: 20)
