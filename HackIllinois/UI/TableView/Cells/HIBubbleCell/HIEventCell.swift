@@ -36,6 +36,7 @@ class HIEventCell: HIBubbleCell {
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+
         backgroundColor = UIColor.clear
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         bubbleView.addSubview(favoritedButton)
@@ -67,6 +68,7 @@ class HIEventCell: HIBubbleCell {
 // MARK: - Actions
 extension HIEventCell {
     @objc func didSelectFavoriteButton(_ sender: HIButton) {
+        print("Select favoriate button")
         delegate?.eventCellDidSelectFavoriteButton(self)
     }
 
@@ -113,7 +115,10 @@ extension HIEventCell {
 
         let bottomView = HIView()
         bottomView.constrain(height: 30)
-
+        
+//        let pointsView = HIView()
+        
+        
         let joinButton = HIButton { (button) in
             button.title = "Join Stream!"
             button.titleHIColor = \.whiteText

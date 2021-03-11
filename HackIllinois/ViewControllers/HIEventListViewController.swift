@@ -25,6 +25,8 @@ extension HIEventListViewController {
         if let tableView = tableView {
             tableView.register(HIDateHeader.self, forHeaderFooterViewReuseIdentifier: HIDateHeader.identifier)
             tableView.register(HIEventCell.self, forCellReuseIdentifier: HIEventCell.identifier)
+            tableView.isUserInteractionEnabled = true
+            tableView.allowsSelection = false
             registerForPreviewing(with: self, sourceView: tableView)
         }
         super.setupTableView()
@@ -54,8 +56,8 @@ extension HIEventListViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        eventDetailViewController.event = _fetchedResultsController?.object(at: indexPath) as? Event
-        self.present(eventDetailViewController, animated: true, completion: nil)
+//        eventDetailViewController.event = _fetchedResultsController?.object(at: indexPath) as? Event
+//        self.present(eventDetailViewController, animated: true, completion: nil)
         super.tableView(tableView, didSelectRowAt: indexPath)
     }
 }
