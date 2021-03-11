@@ -30,7 +30,7 @@ public struct Profile: Codable, APIReturnable {
         case lastName
         case points
         case timezone
-        case info = "Description"
+        case info = "description"
         case discord
         case avatarUrl
         case teamStatus
