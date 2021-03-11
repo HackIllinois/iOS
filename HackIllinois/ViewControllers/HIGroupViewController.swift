@@ -41,10 +41,9 @@ class HIGroupViewController: HIGroupListViewController {
     private var onlyFavorites = false
     private let onlyFavoritesPredicate = NSPredicate(format: "favorite == YES" )
     private let transparentBackground = HIView()
-    private let groupStatusTable = HITableView()
     private var selectedButton = HIButton()
     let horizontalStackView = UIStackView()
-    var buttonPresses = 0
+    var shouldPresentDropdown: Bool = false
     private var interests = Set<String>()
     private var selectedRows = Set<Int>()
 
@@ -80,7 +79,7 @@ extension HIGroupViewController {
     }
 
     @objc func addDropdownView(button: HIButton) {
-        buttonPresses += 1
+        shouldPresentDropdown.toggle()
         view.layoutIfNeeded()
         let window = UIApplication.shared.keyWindow
         transparentBackground.frame = window?.frame ?? self.view.frame
@@ -92,7 +91,7 @@ extension HIGroupViewController {
         self.view.insertSubview(groupStatusTable, belowSubview: self.horizontalStackView)
         groupStatusTable.backgroundColor = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
 
-        if buttonPresses % 2 != 0 {
+        if shouldPresentDropdown {
             HIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
                 self.groupStatusTable.frame = CGRect(x: button.frame.origin.x + self.horizontalStackView.frame.origin.x, y:
                                                         button.frame.origin.y + self.horizontalStackView.frame.origin.y, width: button.frame.width, height: 100)

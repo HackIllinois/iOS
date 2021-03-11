@@ -42,6 +42,8 @@ struct HIAppearance: Equatable {
     let groupSearchText: UIColor
     let buttonViewBackground: UIColor
     let checkmark: UIImage
+    let unselectedGroupStatus: UIImage
+    let selectedGroupStatus: UIImage
 
     let clear: UIColor = .clear
     let black: UIColor = .black
@@ -100,7 +102,9 @@ struct HIAppearance: Equatable {
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
         buttonViewBackground: buttonBlue,
-        checkmark: #imageLiteral(resourceName: "CheckMark")
+        checkmark: #imageLiteral(resourceName: "CheckMark"),
+        unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedGroupStatus"),
+        selectedGroupStatus: #imageLiteral(resourceName: "SelectedGroupStatus")
     )
 
     fileprivate static let night = HIAppearance(
@@ -130,7 +134,9 @@ struct HIAppearance: Equatable {
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
         buttonViewBackground: buttonBlue,
-        checkmark: #imageLiteral(resourceName: "CheckMark")
+        checkmark: #imageLiteral(resourceName: "CheckMark"),
+        unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedGroupStatus"),
+        selectedGroupStatus: #imageLiteral(resourceName: "SelectedGroupStatus")
     )
 
     fileprivate static var current = day
