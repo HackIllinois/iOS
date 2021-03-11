@@ -40,6 +40,7 @@ class HILabel: UILabel {
         case lookingForMember
         case sortText
         case sortElement
+        case pointsText
     }
 
     // MARK: - Properties
@@ -194,6 +195,12 @@ class HILabel: UILabel {
             textHIColor = \.titleText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.contentText
+        
+        case .pointsText:
+            textHIColor = \.whiteText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.eventButtonText
+            textAlignment = .center
         }
         }
 

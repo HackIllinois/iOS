@@ -72,9 +72,6 @@ extension HIEventCell {
         delegate?.eventCellDidSelectFavoriteButton(self)
     }
 
-    @objc func didSelectJoinStream(_ sender: HIButton) {
-        print("JOIN STREAMM")
-    }
 }
 
 // MARK: - Population
@@ -116,27 +113,34 @@ extension HIEventCell {
         let bottomView = HIView()
         bottomView.constrain(height: 30)
         
-//        let pointsView = HIView()
-        
-        
-        let joinButton = HIButton { (button) in
-            button.title = "Join Stream!"
-            button.titleHIColor = \.whiteText
-            button.backgroundHIColor = \.buttonBlue
-            button.titleLabel?.font = HIAppearance.Font.eventButtonText
-            button.layer.cornerRadius = 15
+        let pointsView = HIView { (view) in
+            view.layer.cornerRadius = 15
+            view.backgroundHIColor = \.buttonBlue
+            view.translatesAutoresizingMaskIntoConstraints = false
         }
-        joinButton.addTarget(lhs.self, action: #selector(didSelectJoinStream(_:)), for: .touchUpInside)
+        
+        let pointsLabel = HILabel(style: .pointsText)
+        pointsView.addSubview(pointsLabel)
+        pointsLabel.constrain(to: pointsView, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        pointsLabel.text = "10 Points!"
+        
+//        let joinButton = HIButton { (button) in
+//            button.title = "Join Stream!"
+//            button.titleHIColor = \.whiteText
+//            button.backgroundHIColor = \.buttonBlue
+//            button.titleLabel?.font = HIAppearance.Font.eventButtonText
+//            button.layer.cornerRadius = 15
+//        }
 
         let eventType = HILabel(style: .eventType)
         eventType.text = "Mini Events"
 
-        bottomView.addSubview(joinButton)
+        bottomView.addSubview(pointsView)
         bottomView.addSubview(eventType)
-        joinButton.constrain(to: bottomView, topInset: 0, bottomInset: 0, leadingInset: 0)
+        pointsView.constrain(to: bottomView, topInset: 0, bottomInset: 0, leadingInset: 0)
         eventType.constrain(to: bottomView, topInset: 0, trailingInset: 0, bottomInset: 0)
-        joinButton.trailingAnchor.constraint(equalTo: eventType.leadingAnchor).isActive = true
-        joinButton.widthAnchor.constraint(equalTo: eventType.widthAnchor, multiplier: 1.5).isActive = true
+        pointsView.trailingAnchor.constraint(equalTo: eventType.leadingAnchor).isActive = true
+        pointsView.widthAnchor.constraint(equalTo: eventType.widthAnchor, multiplier: 1.5).isActive = true
 
         lhs.contentStackView.addArrangedSubview(bottomView)
 
