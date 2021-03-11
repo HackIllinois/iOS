@@ -27,7 +27,9 @@ final class HITimeDataSource {
         saturdayStart: Date(timeIntervalSince1970: 1582956000), // Saturday, February 29, 2020 12:00:00 AM
         saturdayEnd: Date(timeIntervalSince1970: 1583042399), // Saturday, February 29, 2020 11:59:59 PM
         sundayStart: Date(timeIntervalSince1970: 1583042400), // Sunday, March 1, 2020 12:00:00 AM GMT-06:00
-        sundayEnd: Date(timeIntervalSince1970: 1583128799) // Sunday, March 1, 2020 11:59:59 PM GMT-06:006:00
+        sundayEnd: Date(timeIntervalSince1970: 1583128799), // Sunday, March 1, 2020 11:59:59 PM GMT-06:006:00
+        mondayStart: Date(timeIntervalSince1970: 1583042400), // Sunday, March 1, 2020 12:00:00 AM GMT-06:00
+        mondayEnd: Date(timeIntervalSince1970: 1583128799) // Sunday, March 1, 2020 11:59:59 PM GMT-06:006:00
     )
 
     var eventTimes = HITimeDataSource.defaultTimes

@@ -24,7 +24,7 @@ class HIScheduleSegmentedControl: HISegmentedControl {
     private let titleFont = HIAppearance.Font.segmentedTitle
     private let numberFont = HIAppearance.Font.segmentedNumberText
 
-    private let viewPadding: CGFloat = 20
+    private let viewPadding: CGFloat = 10
     private let indicatorCornerRadiusProp: CGFloat = 0.15
 
     private var indicatorView = UIView()
@@ -115,7 +115,7 @@ class HIScheduleSegmentedControl: HISegmentedControl {
 
         numberLabel.textAlignment = .center
         numberLabel.font = numberFont
-        numberLabel.text = index < nums.count ? "\(nums[index])" : "00"
+        numberLabel.text = index < nums.count ? (nums[index] % 10 == nums[index] ? "0" : "") + "\(nums[index])" : "00"
         numberLabel.textColor <- \.whiteText
 
         view.addSubview(titleLabel)

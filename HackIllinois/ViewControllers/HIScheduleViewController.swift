@@ -48,21 +48,28 @@ class HIScheduleViewController: HIEventListViewController {
             HITimeDataSource.shared.eventTimes.fridayStart as NSDate,
             HITimeDataSource.shared.eventTimes.fridayEnd as NSDate
         )
-        dataStore.append((displayText: "FRIDAY", predicate: fridayPredicate))
+        dataStore.append((displayText: "FRI", predicate: fridayPredicate))
 
         let saturdayPredicate = NSPredicate(
             format: "%@ =< startTime AND startTime < %@",
             HITimeDataSource.shared.eventTimes.saturdayStart as NSDate,
             HITimeDataSource.shared.eventTimes.saturdayEnd as NSDate
         )
-        dataStore.append((displayText: "SATURDAY", predicate: saturdayPredicate))
+        dataStore.append((displayText: "SAT", predicate: saturdayPredicate))
 
         let sundayPredicate = NSPredicate(
             format: "%@ =< startTime AND startTime < %@",
             HITimeDataSource.shared.eventTimes.sundayStart as NSDate,
             HITimeDataSource.shared.eventTimes.sundayEnd as NSDate
         )
-        dataStore.append((displayText: "SUNDAY", predicate: sundayPredicate))
+        dataStore.append((displayText: "SUN", predicate: sundayPredicate))
+        
+        let mondayPredicate = NSPredicate(
+            format: "%@ =< startTime AND startTime < %@",
+            HITimeDataSource.shared.eventTimes.mondayStart as NSDate,
+            HITimeDataSource.shared.eventTimes.mondayEnd as NSDate
+        )
+        dataStore.append((displayText: "MON", predicate: mondayPredicate))
         return dataStore
     }()
 }
@@ -111,7 +118,7 @@ extension HIScheduleViewController {
         super.loadView()
 
         let items = dataStore.map { $0.displayText }
-        let segmentedControl = HIScheduleSegmentedControl(titles: items)
+        let segmentedControl = HIScheduleSegmentedControl(titles: items, nums: [9, 10, 11, 12])
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
