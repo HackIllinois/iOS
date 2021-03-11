@@ -117,7 +117,7 @@ class HISegmentedControl: UIControl {
         addSubview(label)
         labels.append(label)
     }
-    
+
     func didSetSelectedIndex(oldValue: Int) {
         if oldValue != selectedIndex {
             labels[oldValue].textColor <- \.baseText
@@ -169,4 +169,4 @@ class HISegmentedControl: UIControl {
             }
         }
     }
-} 
+}

@@ -63,7 +63,7 @@ class HIScheduleViewController: HIEventListViewController {
             HITimeDataSource.shared.eventTimes.sundayEnd as NSDate
         )
         dataStore.append((displayText: "SUN", predicate: sundayPredicate))
-        
+
         let mondayPredicate = NSPredicate(
             format: "%@ =< startTime AND startTime < %@",
             HITimeDataSource.shared.eventTimes.mondayStart as NSDate,
