@@ -1,5 +1,5 @@
 //
-//  HIGroupPopupViewController.swift
+//  HIGroupStatusOptions.swift
 //  HackIllinois
 //
 //  Created by HackIllinois Team on 3/3/21.
@@ -15,7 +15,6 @@ import Foundation
 struct HIGroupStatusOptions {
     var status = ""
     var selected = false
-    
     init(name: String, selected: Bool) {
         self.status = name
         self.selected = selected

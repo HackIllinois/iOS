@@ -42,6 +42,7 @@ class HIGroupViewController: HIGroupListViewController {
     private let onlyFavoritesPredicate = NSPredicate(format: "favorite == YES" )
     private let transparentBackground = HIView()
     private var selectedButton = HIButton()
+    private let groupStatusTable = HITableView()
     let horizontalStackView = UIStackView()
     var shouldPresentDropdown: Bool = false
     private var interests = Set<String>()
