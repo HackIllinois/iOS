@@ -155,8 +155,8 @@ extension HIGroupDetailViewController {
         profileStatStackView.axis = .horizontal
         profileStatStackView.distribution = .fillEqually
         profileStatStackView.topAnchor.constraint(equalTo: profileStatusContainer.bottomAnchor, constant: 19).isActive = true
-        profileStatStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        profileStatStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        profileStatStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
+        profileStatStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
         profileStatStackView.translatesAutoresizingMaskIntoConstraints = false
 
         let profilePointsStackView = UIStackView()
