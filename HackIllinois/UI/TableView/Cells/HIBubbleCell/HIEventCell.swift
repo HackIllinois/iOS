@@ -77,7 +77,7 @@ extension HIEventCell {
 // MARK: - Population
 extension HIEventCell {
     static func heightForCell(with event: Event, width: CGFloat) -> CGFloat {
-        let height = 90 + 40 + HILabel.heightForView(text: event.info, font: HIAppearance.Font.eventDetails, width: width - 100)
+        let height = HILabel.heightForView(text: event.name, font: HIAppearance.Font.eventTitle, width: width - 98) + 90 + HILabel.heightForView(text: event.info, font: HIAppearance.Font.eventDetails, width: width - 100) + 15
         if !event.sponsor.isEmpty {
             return height + 21
         }
@@ -137,7 +137,7 @@ extension HIEventCell {
 
         lhs.contentStackView.addArrangedSubview(bottomView)
 
-        contentStackViewHeight += titleLabel.intrinsicContentSize.height + timeLabel.intrinsicContentSize.height + 13 + height + 3 + 40
+        contentStackViewHeight += HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle, width: lhs.contentView.frame.width - 98) + timeLabel.intrinsicContentSize.height + 13 + height + 3 + 40
         lhs.contentStackViewHeight.constant = contentStackViewHeight
     }
 }
