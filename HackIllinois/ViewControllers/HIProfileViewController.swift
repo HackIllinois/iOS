@@ -66,7 +66,7 @@ class HIProfileViewController: HIBaseViewController {
     } // May need to modify depending on its intention
     private let profileUsernameView = UIStackView() // Will be initialized in ViewController extension (.axis = .horizontal)
     private let profileInterestsLabelView = HILabel(style: .profileUsername) {
-        $0.text = "Interests"
+        $0.text = "Skills"
     }
     lazy var profileInterestsView: UICollectionView = {
         let profileInterestsView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -146,8 +146,8 @@ extension HIProfileViewController {
         profileStatStackView.axis = .horizontal
         profileStatStackView.distribution = .fillEqually
         profileStatStackView.topAnchor.constraint(equalTo: profileStatusContainer.bottomAnchor, constant: 19).isActive = true
-        profileStatStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        profileStatStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        profileStatStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
+        profileStatStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
         profileStatStackView.translatesAutoresizingMaskIntoConstraints = false
         let profilePointsStackView = UIStackView()
         profilePointsStackView.axis = .vertical
