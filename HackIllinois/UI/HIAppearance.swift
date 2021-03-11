@@ -45,6 +45,11 @@ struct HIAppearance: Equatable {
     let groupSearchText: UIColor
     let buttonViewBackground: UIColor
     let checkmark: UIImage
+    
+    let eventTypeGreen: UIColor
+    let eventTypeOrange: UIColor
+    let eventTypeRed: UIColor
+    let eventTypePurple: UIColor
 
     let clear: UIColor = .clear
     let black: UIColor = .black
@@ -71,6 +76,13 @@ struct HIAppearance: Equatable {
     private static let groupRed = #colorLiteral(red: 0.5960784314, green: 0.1137254902, blue: 0.137254902, alpha: 1)
     private static let groupOrange = #colorLiteral(red: 0.937254902, green: 0.5176470588, blue: 0.2823529412, alpha: 1)
     private static let buttonBlue = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
+    
+    private static let eventGreen = #colorLiteral(red: 0.1568627451, green: 0.3960784314, blue: 0.4549019608, alpha: 1)
+    private static let eventOrange = #colorLiteral(red: 0.8941176471, green: 0.4117647059, blue: 0.2901960784, alpha: 1)
+    private static let eventRed = #colorLiteral(red: 0.5960784314, green: 0.1137254902, blue: 0.137254902, alpha: 1)
+    private static let eventPurple = #colorLiteral(red: 0.3490196078, green: 0.2784313725, blue: 0.6549019608, alpha: 1)
+    
+    
     private static var statusBarWhite: UIStatusBarStyle {
         if #available(iOS 13, *) {
              return .lightContent
@@ -109,7 +121,11 @@ struct HIAppearance: Equatable {
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
         buttonViewBackground: buttonBlue,
-        checkmark: #imageLiteral(resourceName: "CheckMark")
+        checkmark: #imageLiteral(resourceName: "CheckMark"),
+        eventTypeGreen: eventGreen,
+        eventTypeOrange: eventOrange,
+        eventTypeRed: eventRed,
+        eventTypePurple: eventPurple
 )
 
     fileprivate static let night = HIAppearance(
@@ -142,7 +158,11 @@ struct HIAppearance: Equatable {
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
         buttonViewBackground: buttonBlue,
-        checkmark: #imageLiteral(resourceName: "CheckMark")
+        checkmark: #imageLiteral(resourceName: "CheckMark"),
+        eventTypeGreen: eventGreen,
+        eventTypeOrange: eventOrange,
+        eventTypeRed: eventRed,
+        eventTypePurple: eventPurple
     )
 
     fileprivate static var current = day

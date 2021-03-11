@@ -126,7 +126,9 @@ extension HIEventCell {
         pointsLabel.text = "10 Points!"
 
         let eventType = HILabel(style: .eventType)
-        eventType.text = "Mini Events"
+        eventType.text = rhs.eventType
+        eventType.textHIColor = getColor(for: rhs.eventType)
+        eventType.refreshForThemeChange()
 
         bottomView.addSubview(pointsView)
         bottomView.addSubview(eventType)
@@ -150,6 +152,19 @@ extension HIEventCell {
         contentStackView.arrangedSubviews.forEach { (view) in
             contentStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
+        }
+    }
+}
+
+// MARK: - HIColors for event type
+extension HIEventCell {
+    static func getColor(for evenType: String) -> HIColor{
+        switch (evenType){
+        case "WORKSHOP": return \.eventTypePurple
+        case "MINIEVENT": return \.eventTypeGreen
+        case "SPEAKER": return \.eventTypeRed
+        case "CHALLENGE": return \.eventTypeOrange
+        default: return \.eventTypeOrange
         }
     }
 }
