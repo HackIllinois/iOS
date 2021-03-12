@@ -151,7 +151,7 @@ extension HIScheduleViewController {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         setupRefreshControl()
         super.viewDidLoad()
-        backgroundView.image = #imageLiteral(resourceName: "scheduleBackground")
+        backgroundView.image = #imageLiteral(resourceName: "ScheduleBackground")
     }
 }
 

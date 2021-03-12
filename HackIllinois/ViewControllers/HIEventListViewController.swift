@@ -16,7 +16,8 @@ import HIAPI
 import APIManager
 
 class HIEventListViewController: HIBaseViewController {
-    let eventDetailViewController = HIEventDetailViewController()
+    // Event detail view controller will not be presented for HackIllinois 2021
+    // let eventDetailViewController = HIEventDetailViewController()
 }
 
 // MARK: - UITableView Setup
@@ -27,7 +28,7 @@ extension HIEventListViewController {
             tableView.register(HIEventCell.self, forCellReuseIdentifier: HIEventCell.identifier)
             tableView.allowsSelection = false
             tableView.sectionHeaderHeight = 0
-            registerForPreviewing(with: self, sourceView: tableView)
+            // registerForPreviewing(with: self, sourceView: tableView)
         }
         super.setupTableView()
     }
@@ -101,19 +102,19 @@ extension HIEventListViewController: HIEventCellDelegate {
 }
 
 // MARK: - UIViewControllerPreviewingDelegate
-extension HIEventListViewController: UIViewControllerPreviewingDelegate {
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        guard let tableView = tableView,
-            let indexPath = tableView.indexPathForRow(at: location),
-            let event = _fetchedResultsController?.object(at: indexPath) as? Event else {
-                return nil
-        }
-        previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
-        eventDetailViewController.event = event
-        return eventDetailViewController
-    }
-
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        self.present(viewControllerToCommit, animated: true, completion: nil)
-    }
-}
+//extension HIEventListViewController: UIViewControllerPreviewingDelegate {
+//    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+//        guard let tableView = tableView,
+//            let indexPath = tableView.indexPathForRow(at: location),
+//            let event = _fetchedResultsController?.object(at: indexPath) as? Event else {
+//                return nil
+//        }
+//        previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
+//        eventDetailViewController.event = event
+//        return eventDetailViewController
+//    }
+//
+//    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+//        self.present(viewControllerToCommit, animated: true, completion: nil)
+//    }
+//}
