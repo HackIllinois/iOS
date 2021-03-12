@@ -36,6 +36,7 @@ struct HIAppearance: Equatable {
     let attendeeText: UIColor
     let attendeeBackground: UIColor
     let whiteTagFont: UIColor
+    let interestBackground: UIColor
     let segmentedBackground: UIColor
     let buttonBlue: UIColor
 
@@ -73,7 +74,7 @@ struct HIAppearance: Equatable {
 
     // New colors added. Replace old ones?
     private static let grayBlack = #colorLiteral(red: 0.1058823529, green: 0.1058823529, blue: 0.1058823529, alpha: 1)
-    private static let groupRed = #colorLiteral(red: 0.5960784314, green: 0.1137254902, blue: 0.137254902, alpha: 1)
+    private static let groupRed = #colorLiteral(red: 0.8151133363, green: 0.1137254902, blue: 0.137254902, alpha: 1)
     private static let groupOrange = #colorLiteral(red: 0.937254902, green: 0.5176470588, blue: 0.2823529412, alpha: 1)
     private static let buttonBlue = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
 
@@ -114,6 +115,7 @@ struct HIAppearance: Equatable {
         attendeeText: white,
         attendeeBackground: lightCoral,
         whiteTagFont: white,
+        interestBackground: lightCoral,
         segmentedBackground: greyWhite,
         buttonBlue: buttonblue,
         groupText: grayBlack,
@@ -151,6 +153,7 @@ struct HIAppearance: Equatable {
         attendeeText: white,
         attendeeBackground: lightCoral,
         whiteTagFont: white,
+        interestBackground: lightCoral,
         segmentedBackground: greyWhite,
         buttonBlue: buttonblue,
         groupText: grayBlack,
@@ -195,6 +198,12 @@ struct HIAppearance: Equatable {
         static let loginTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
         static let loginSelection = UIFont.systemFont(ofSize: 16, weight: .semibold)
 
+        static let profileName = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        static let profileSubtitle = UIFont.systemFont(ofSize: 14, weight: .bold)
+        static let profileNumberFigure = UIFont.systemFont(ofSize: 20, weight: .medium)
+        static let profileDescription = UIFont.systemFont(ofSize: 16, weight: .regular)
+        static let profileUsername = UIFont.systemFont(ofSize: 16, weight: .bold)
+        static let profileInterests = UIFont.systemFont(ofSize: 14, weight: .semibold)
         static let segmentedTitle = UIFont.systemFont(ofSize: 16, weight: .regular)
         static let segmentedNumberText = UIFont.systemFont(ofSize: 20, weight: .semibold)
 
@@ -202,7 +211,7 @@ struct HIAppearance: Equatable {
         static let button = UIFont.systemFont(ofSize: 15, weight: .regular)
         static let glyph = UIFont.systemFont(ofSize: 21, weight: .light)
         static let groupContact = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        static let groupStatus = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        static let groupStatus = UIFont.systemFont(ofSize: 12, weight: .bold)
         static let sortingText = UIFont.systemFont(ofSize: 14, weight: .semibold)
     }
 }

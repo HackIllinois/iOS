@@ -51,7 +51,7 @@ class HIGroupViewController: HIGroupListViewController {
     @objc dynamic override func setUpBackgroundView() {
             super.setUpBackgroundView()
             backgroundView.image = #imageLiteral(resourceName: "GroupMatching")
-        }
+    }
 }
 
 // MARK: - UITabBarItem Setup

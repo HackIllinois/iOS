@@ -33,11 +33,16 @@ class HILabel: UILabel {
         case backgroundTitle
         case detailSubtitle
         case detailText
+        case profileName
+        case profileSubtitle
+        case profileNumberFigure
+        case profileDescription
+        case profileUsername
+        case profileInterests
         case navigationInfo
         case groupDescription
         case groupContactInfo
-        case lookingForGroup
-        case lookingForMember
+        case groupStatus
         case sortText
         case sortElement
         case pointsText
@@ -158,6 +163,41 @@ class HILabel: UILabel {
             layer.borderColor = (\HIAppearance.loginSelectionText).value.cgColor
             layer.backgroundColor = UIColor.clear.cgColor
 
+        case .profileName: // Used to display the profile owner's name
+            textHIColor = \.whiteTagFont // May be defined for itself later
+            backgroundHIColor = \.clear
+            textAlignment = .center
+            font = HIAppearance.Font.profileName
+
+        case .profileSubtitle: // Used to display profile subtitle, "points", and whatever that says "time zone"
+            backgroundHIColor = \.clear
+            textAlignment = .center
+            font = HIAppearance.Font.profileSubtitle
+
+        case .profileNumberFigure: // Used to display number of points and time (?)
+            textHIColor = \.whiteTagFont // May be defined for itself later
+            backgroundHIColor = \.clear
+            textAlignment = .center
+            font = HIAppearance.Font.profileNumberFigure
+
+        case .profileDescription: // Used to display "short description"
+            textHIColor = \.whiteTagFont // May be defined for itself later
+            backgroundHIColor = \.clear
+            textAlignment = .left
+            font = HIAppearance.Font.profileDescription
+
+        case .profileUsername: // Used to display Discord username, etc.
+            textHIColor = \.whiteTagFont // May be defined for itself later
+            backgroundHIColor = \.clear
+            textAlignment = .left
+            font = HIAppearance.Font.profileUsername
+
+        case .profileInterests:
+            textHIColor = \.whiteTagFont // May be defined for itself later
+            backgroundHIColor = \.clear
+            textAlignment = .center
+            font = HIAppearance.Font.profileInterests
+
         case .navigationInfo:
             textHIColor = \.titleText
             backgroundHIColor = \.clear
@@ -169,20 +209,14 @@ class HILabel: UILabel {
             textHIColor = \.groupText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.contentText
-            numberOfLines = 0
+            numberOfLines = 1
 
         case .groupContactInfo:
             textHIColor = \.groupText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.groupContact
 
-        case .lookingForGroup:
-            textHIColor = \.groupSearchText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.groupStatus
-
-        case .lookingForMember:
-            textHIColor = \.memberSearchText
+        case .groupStatus:
             backgroundHIColor = \.clear
             font = HIAppearance.Font.groupStatus
 
@@ -213,6 +247,10 @@ class HILabel: UILabel {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+
+    func changeTextColor(color: HIColor) {
+        textColor <- color
     }
 
     // MARK: - Themeable
