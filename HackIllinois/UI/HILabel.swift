@@ -188,7 +188,7 @@ class HILabel: UILabel {
                 textHIColor = \.groupText
                 backgroundHIColor = \.clear
                 font = HIAppearance.Font.contentText
-                numberOfLines = 0
+                numberOfLines = 1
 
             case .groupContactInfo:
                 textHIColor = \.groupText
@@ -222,7 +222,7 @@ class HILabel: UILabel {
         NotificationCenter.default.removeObserver(self)
     }
 
-    func changeColor(color: HIColor) {
+    func changeTextColor(color: HIColor) {
         textColor <- color
     }
 

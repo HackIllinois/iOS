@@ -123,6 +123,7 @@
 		AC3B621425E86053002386A2 /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B621225E86053002386A2 /* Profile+CoreDataProperties.swift */; };
 		AC3B621625E8611C002386A2 /* HIProfileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B621525E8611C002386A2 /* HIProfileDataSource.swift */; };
 		ACA63C8B25E7394D00A00D83 /* HIProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA63C8A25E7394D00A00D83 /* HIProfile.swift */; };
+		AC977FCD25F194F9009C4179 /* HIGroupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC977FCC25F194F9009C4179 /* HIGroupDetailViewController.swift */; };
 		ACBFE29825EAE79000C94732 /* HIGroupPopupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBFE29725EAE79000C94732 /* HIGroupPopupCell.swift */; };
 		ACBFE29A25EB2C9700C94732 /* HIInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBFE29925EB2C9700C94732 /* HIInterest.swift */; };
 		ACCB199D25F56DF100F88379 /* HIInterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCB199C25F56DF100F88379 /* HIInterestCell.swift */; };
@@ -292,6 +293,7 @@
 		AC3B621225E86053002386A2 /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AC3B621525E8611C002386A2 /* HIProfileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProfileDataSource.swift; sourceTree = "<group>"; };
 		ACA63C8A25E7394D00A00D83 /* HIProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProfile.swift; sourceTree = "<group>"; };
+		AC977FCC25F194F9009C4179 /* HIGroupDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIGroupDetailViewController.swift; sourceTree = "<group>"; };
 		ACBFE29725EAE79000C94732 /* HIGroupPopupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIGroupPopupCell.swift; sourceTree = "<group>"; };
 		ACBFE29925EB2C9700C94732 /* HIInterest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIInterest.swift; sourceTree = "<group>"; };
 		ACCB199C25F56DF100F88379 /* HIInterestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIInterestCell.swift; sourceTree = "<group>"; };
@@ -497,6 +499,7 @@
 				BCD0CA5023C4356300ADC89B /* HIPopupViewController.swift */,
 				3F49408625C8DBC30091CCAD /* HIGroupPopupViewController.swift */,
 				3FB82A0C25C25AE700C0B43F /* HIGroupViewController.swift */,
+				AC977FCC25F194F9009C4179 /* HIGroupDetailViewController.swift */,
 				3FB82A1025C25B3800C0B43F /* HIGroupListViewController.swift */,
 			);
 			path = ViewControllers;
@@ -934,6 +937,7 @@
 				95FC79C321E024A700715036 /* Notifications.swift in Sources */,
 				95FC79BE21E0199600715036 /* HIAppearance.swift in Sources */,
 				35B4A45021E091BA001B3AF0 /* HIError.swift in Sources */,
+				AC977FCD25F194F9009C4179 /* HIGroupDetailViewController.swift in Sources */,
 				3FC091D625B74DEA00DA23D8 /* HIGroupCell.swift in Sources */,
 				954EE1D31FD0F1680078F39E /* HILoginSelectionViewController.swift in Sources */,
 			);
