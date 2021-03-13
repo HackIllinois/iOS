@@ -26,7 +26,7 @@ class HIProfileViewController: HIBaseViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.clear
     }
-//    private let scrollView = UIScrollView(frame: .zero)
+
     private let profilePictureView = HIImageView {
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
@@ -60,10 +60,10 @@ class HIProfileViewController: HIBaseViewController {
     private let profileDescriptionView = HILabel(style: .profileDescription) {
         $0.text = ""
     }
-    private let profileDiscordImageView = HIImageView() // May need to modify depending on its intention
+    private let profileDiscordImageView = HIImageView()
     private let profileDiscordUsernameView = HILabel(style: .profileUsername) {
         $0.text = "Discord Username"
-    } // May need to modify depending on its intention
+    }
     private let profileUsernameView = UIStackView() // Will be initialized in ViewController extension (.axis = .horizontal)
     private let profileInterestsLabelView = HILabel(style: .profileUsername) {
         $0.text = "Skills"
@@ -77,7 +77,7 @@ class HIProfileViewController: HIBaseViewController {
         profileInterestsView.translatesAutoresizingMaskIntoConstraints = false
         return profileInterestsView
     }()
-    var interests: [String] = [] // Should be replaced by API response list
+    var interests: [String] = []
 
     @objc dynamic override func setUpBackgroundView() {
             super.setUpBackgroundView()

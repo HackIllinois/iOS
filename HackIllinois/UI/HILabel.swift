@@ -164,7 +164,7 @@ class HILabel: UILabel {
             layer.backgroundColor = UIColor.clear.cgColor
 
         case .profileName: // Used to display the profile owner's name
-            textHIColor = \.whiteTagFont // May be defined for itself later
+            textHIColor = \.whiteTagFont
             backgroundHIColor = \.clear
             textAlignment = .center
             font = HIAppearance.Font.profileName
@@ -175,25 +175,25 @@ class HILabel: UILabel {
             font = HIAppearance.Font.profileSubtitle
 
         case .profileNumberFigure: // Used to display number of points and time (?)
-            textHIColor = \.whiteTagFont // May be defined for itself later
+            textHIColor = \.whiteTagFont
             backgroundHIColor = \.clear
             textAlignment = .center
             font = HIAppearance.Font.profileNumberFigure
 
         case .profileDescription: // Used to display "short description"
-            textHIColor = \.whiteTagFont // May be defined for itself later
+            textHIColor = \.whiteTagFont
             backgroundHIColor = \.clear
             textAlignment = .left
             font = HIAppearance.Font.profileDescription
 
         case .profileUsername: // Used to display Discord username, etc.
-            textHIColor = \.whiteTagFont // May be defined for itself later
+            textHIColor = \.whiteTagFont
             backgroundHIColor = \.clear
             textAlignment = .left
             font = HIAppearance.Font.profileUsername
 
         case .profileInterests:
-            textHIColor = \.whiteTagFont // May be defined for itself later
+            textHIColor = \.whiteTagFont
             backgroundHIColor = \.clear
             textAlignment = .center
             font = HIAppearance.Font.profileInterests
