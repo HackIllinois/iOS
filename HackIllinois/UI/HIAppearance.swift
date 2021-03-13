@@ -198,6 +198,10 @@ struct HIAppearance: Equatable {
         static let loginTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
         static let loginSelection = UIFont.systemFont(ofSize: 16, weight: .semibold)
 
+        static let sectionHeader = UIFont.systemFont(ofSize: 13, weight: .bold)
+        static let button = UIFont.systemFont(ofSize: 15, weight: .regular)
+        static let glyph = UIFont.systemFont(ofSize: 21, weight: .light)
+
         static let profileName = UIFont.systemFont(ofSize: 24, weight: .semibold)
         static let profileSubtitle = UIFont.systemFont(ofSize: 14, weight: .bold)
         static let profileNumberFigure = UIFont.systemFont(ofSize: 20, weight: .medium)
@@ -207,9 +211,6 @@ struct HIAppearance: Equatable {
         static let segmentedTitle = UIFont.systemFont(ofSize: 16, weight: .regular)
         static let segmentedNumberText = UIFont.systemFont(ofSize: 20, weight: .semibold)
 
-        static let sectionHeader = UIFont.systemFont(ofSize: 13, weight: .bold)
-        static let button = UIFont.systemFont(ofSize: 15, weight: .regular)
-        static let glyph = UIFont.systemFont(ofSize: 21, weight: .light)
         static let groupContact = UIFont.systemFont(ofSize: 14, weight: .semibold)
         static let groupStatus = UIFont.systemFont(ofSize: 12, weight: .bold)
         static let sortingText = UIFont.systemFont(ofSize: 14, weight: .semibold)

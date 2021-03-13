@@ -1,8 +1,8 @@
 //
-//  HIGroupDetailViewController.swift
+//  HIProfileViewController.swift
 //  HackIllinois
 //
-//  Created by HackIllinois Team on 3/4/21.
+//  Created by HackIllinois Team on 2/24/21.
 //  Copyright © 2021 HackIllinois. All rights reserved.
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of
@@ -14,50 +14,56 @@ import Foundation
 import UIKit
 import CoreData
 
-class HIGroupDetailViewController: HIBaseViewController {
+class HIProfileViewController: HIBaseViewController {
     // MARK: - Properties
-    var profile: Profile?
-    var interests: [String] = []
-
-    private let closeButton = HIButton {
-        $0.tintHIColor = \.action
+    private let editButton = HIButton {
+        $0.tintHIColor = \.baseText
         $0.backgroundHIColor = \.clear
-        $0.activeImage = #imageLiteral(resourceName: "MenuClose")
-        $0.baseImage = #imageLiteral(resourceName: "MenuClose")
+        $0.baseImage = #imageLiteral(resourceName: "Pencil")
     }
 
     private let contentView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.clear
     }
-//    private let scrollView = UIScrollView(frame: .zero)
+
     private let profilePictureView = HIImageView {
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    private let profileNameView = HILabel(style: .profileName)
+    private let profileNameView = HILabel(style: .profileName) {
+        $0.text = ""
+    }
     private let profileStatusContainer = UIView()
     private let profileStatusIndicator = HICircularView {
         $0.backgroundHIColor = \.clear
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    private let profileStatusDescriptionView = HILabel(style: .profileSubtitle)
-    private let profilePointsView = HILabel(style: .profileNumberFigure)
+    private let profileStatusDescriptionView = HILabel(style: .profileSubtitle) {
+        $0.text = ""
+    }
+    private let profilePointsView = HILabel(style: .profileNumberFigure) {
+        $0.text = ""
+    }
     private let profilePointsSubtitleView = HILabel(style: .profileDescription) {
         $0.text = "points"
     }
-    private let profileTimeView = HILabel(style: .profileNumberFigure)
+    private let profileTimeView = HILabel(style: .profileNumberFigure) {
+        $0.text = ""
+    }
     private let profileTimeSubtitleView = HILabel(style: .profileDescription) {
         $0.text = "time zone"
     }
-    private let profileStatView = HIView()
+    private let profileStatView = HIView() // Will be initialized in ViewController extension (.axis = .horizontal)
     // Good resource for UIStackView: https://stackoverflow.com/questions/43904070/programmatically-adding-views-to-a-uistackview
-    private let profileDescriptionView = HILabel(style: .profileDescription)
-    private let profileDiscordImageView = HIImageView() // May need to modify depending on its intention
+    private let profileDescriptionView = HILabel(style: .profileDescription) {
+        $0.text = ""
+    }
+    private let profileDiscordImageView = HIImageView()
     private let profileDiscordUsernameView = HILabel(style: .profileUsername) {
         $0.text = "Discord Username"
-    } // May need to modify depending on its intention
+    }
     private let profileUsernameView = UIStackView() // Will be initialized in ViewController extension (.axis = .horizontal)
     private let profileInterestsLabelView = HILabel(style: .profileUsername) {
         $0.text = "Skills"
@@ -71,6 +77,7 @@ class HIGroupDetailViewController: HIBaseViewController {
         profileInterestsView.translatesAutoresizingMaskIntoConstraints = false
         return profileInterestsView
     }()
+    var interests: [String] = []
 
     @objc dynamic override func setUpBackgroundView() {
             super.setUpBackgroundView()
@@ -79,68 +86,51 @@ class HIGroupDetailViewController: HIBaseViewController {
 }
 
 // MARK: - UITabBarItem Setup
-extension HIGroupDetailViewController {
+extension HIProfileViewController {
     override func setupTabBarItem() {
         tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "profile"), tag: 0)
     }
 }
 
-// MARK: - Actions
-extension HIGroupDetailViewController {
-    @objc func didSelectCloseButton(_ sender: HIButton) {
-        self.dismiss(animated: true, completion: nil)
-    }
-}
-
 // MARK: - UIViewController
-extension HIGroupDetailViewController {
+extension HIProfileViewController {
     override func loadView() {
         super.loadView()
-        view.addSubview(closeButton)
-        closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
-        closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
-        closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
-        closeButton.constrain(height: 20)
-
+        self.navigationItem.rightBarButtonItem = editButton.toBarButtonItem()
+        // To add action
+        editButton.constrain(width: 22, height: 22)
         view.addSubview(contentView)
-        contentView.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 10).isActive = true
+        contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         contentView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
-
         contentView.addSubview(profilePictureView)
         profilePictureView.constrain(to: contentView, topInset: 0)
         profilePictureView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         profilePictureView.constrain(width: 100, height: 100)
-
         contentView.addSubview(profileNameView)
         profileNameView.topAnchor.constraint(equalTo: profilePictureView.bottomAnchor, constant: 12).isActive = true
         profileNameView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-
         profileStatusContainer.translatesAutoresizingMaskIntoConstraints = false
         profileStatusContainer.backgroundColor = .clear
         contentView.addSubview(profileStatusContainer)
         profileStatusContainer.topAnchor.constraint(equalTo: profileNameView.bottomAnchor).isActive = true
         profileStatusContainer.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         profileStatusContainer.heightAnchor.constraint(equalToConstant: 40).isActive = true
-
         profileStatusContainer.addSubview(profileStatusIndicator)
         profileStatusIndicator.topAnchor.constraint(equalTo: profileStatusContainer.topAnchor, constant: 15).isActive = true
         profileStatusIndicator.leadingAnchor.constraint(equalTo: profileStatusContainer.leadingAnchor, constant: 5).isActive = true
         profileStatusIndicator.centerYAnchor.constraint(equalTo: profileStatusContainer.centerYAnchor).isActive = true
         profileStatusIndicator.widthAnchor.constraint(equalToConstant: 10).isActive = true
-
         profileStatusContainer.addSubview(profileStatusDescriptionView)
         profileStatusDescriptionView.topAnchor.constraint(equalTo: profileStatusContainer.topAnchor).isActive = true
         profileStatusDescriptionView.bottomAnchor.constraint(equalTo: profileStatusContainer.bottomAnchor).isActive = true
         profileStatusDescriptionView.leadingAnchor.constraint(equalTo: profileStatusIndicator.trailingAnchor, constant: 5).isActive = true
         profileStatusDescriptionView.trailingAnchor.constraint(equalTo: profileStatusContainer.trailingAnchor).isActive = true
-
         let profileStatStackView = UIStackView()
         contentView.addSubview(profileStatStackView)
         loadStatView(profileStatStackView: profileStatStackView)
         // Reference: https://medium.com/swift-productions/create-a-uiscrollview-programmatically-xcode-12-swift-5-3-f799b8280e30
-
         let descriptionContentView = UIView()
         contentView.addSubview(descriptionContentView)
         descriptionContentView.translatesAutoresizingMaskIntoConstraints = false
@@ -159,7 +149,6 @@ extension HIGroupDetailViewController {
         profileStatStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
         profileStatStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
         profileStatStackView.translatesAutoresizingMaskIntoConstraints = false
-
         let profilePointsStackView = UIStackView()
         profilePointsStackView.axis = .vertical
         profilePointsStackView.distribution = .fillEqually
@@ -167,7 +156,6 @@ extension HIGroupDetailViewController {
         profileStatStackView.addArrangedSubview(profilePointsStackView)
         profilePointsStackView.addArrangedSubview(profilePointsView)
         profilePointsStackView.addArrangedSubview(profilePointsSubtitleView)
-
         let profileTimeStackView = UIStackView()
         profileTimeStackView.axis = .vertical
         profileTimeStackView.distribution = .fillEqually
@@ -181,12 +169,10 @@ extension HIGroupDetailViewController {
         profileDescriptionView.lineBreakMode = .byWordWrapping
         profileDescriptionView.numberOfLines = 0
         profileDescriptionView.constrain(to: descriptionContentView, topInset: 0, trailingInset: 0, leadingInset: 0)
-
         descriptionContentView.addSubview(profileDiscordImageView)
         profileDiscordImageView.constrain(width: 24, height: 17)
         profileDiscordImageView.topAnchor.constraint(equalTo: profileDescriptionView.bottomAnchor, constant: 29).isActive = true
         profileDiscordImageView.leadingAnchor.constraint(equalTo: descriptionContentView.leadingAnchor).isActive = true
-
         descriptionContentView.addSubview(profileDiscordUsernameView)
         profileDiscordUsernameView.lineBreakMode = .byWordWrapping
         profileDiscordUsernameView.numberOfLines = 0
@@ -194,12 +180,10 @@ extension HIGroupDetailViewController {
         profileDiscordUsernameView.trailingAnchor.constraint(equalTo: descriptionContentView.trailingAnchor).isActive = true
         profileDiscordUsernameView.leadingAnchor.constraint(equalTo: profileDiscordImageView.trailingAnchor, constant: 10).isActive = true
         profileDiscordUsernameView.bottomAnchor.constraint(equalTo: profileDiscordImageView.bottomAnchor).isActive = true
-
         descriptionContentView.addSubview(profileInterestsLabelView)
         profileInterestsLabelView.topAnchor.constraint(equalTo: profileDiscordImageView.bottomAnchor, constant: 20).isActive = true
         profileInterestsLabelView.heightAnchor.constraint(equalToConstant: 20).isActive = true
         profileInterestsLabelView.leadingAnchor.constraint(equalTo: profileDiscordImageView.leadingAnchor).isActive = true
-
         profileInterestsView.alwaysBounceVertical = true
         profileInterestsView.bounces = true
         descriptionContentView.addSubview(profileInterestsView)
@@ -211,7 +195,7 @@ extension HIGroupDetailViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        guard let profile = profile else { return }
+        guard let profile = HIApplicationStateController.shared.profile else { return }
         view.layoutIfNeeded()
 
         if let url = URL(string: profile.avatarUrl) {
@@ -228,17 +212,17 @@ extension HIGroupDetailViewController {
         profileTimeView.text = profile.timezone
         profileDescriptionView.text = profile.info
         profileDiscordUsernameView.text = profile.discord
+        interests = profile.interests
+        profileInterestsView.reloadData()
 
         profileDiscordImageView.image = #imageLiteral(resourceName: "DiscordLogo")
     }
-
 }
 
-extension HIGroupDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension HIProfileViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return interests.count
     }
-
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "interestCell", for: indexPath)
         if let cell = cell as? HIInterestCell {
@@ -249,7 +233,7 @@ extension HIGroupDetailViewController: UICollectionViewDataSource, UICollectionV
     }
 }
 
-extension HIGroupDetailViewController: UICollectionViewDelegateFlowLayout {
+extension HIProfileViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let interest = interests[indexPath.row]
         return CGSize(width: (15 * interest.count) + 30, height: 40)
