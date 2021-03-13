@@ -9,7 +9,6 @@
 //  Illinois/NCSA Open Source License. You should have received a copy of
 //  this license in a file with the distribution.
 //
-
 import Foundation
 import APIManager
 
