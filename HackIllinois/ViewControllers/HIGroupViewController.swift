@@ -103,13 +103,11 @@ extension HIGroupViewController {
         groupStatusDropdown.backgroundColor = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
         self.view.insertSubview(groupStatusDropdown, belowSubview: self.horizontalStackView)
         view.layoutIfNeeded()
-        let window = UIApplication.shared.keyWindow
-        transparentBackground.frame = window?.frame ?? self.view.frame
         /*
         groupStatusDropdown.frame = CGRect(x: 100, y: 100, width: button.frame.width, height: 100) */
-        groupStatusDropdown.topAnchor.constraint(equalTo: self.horizontalStackView.centerYAnchor).isActive = true
-        groupStatusDropdown.leadingAnchor.constraint(equalTo: self.horizontalStackView.centerXAnchor).isActive = true
-        groupStatusDropdown.trailingAnchor.constraint(equalTo: self.horizontalStackView.trailingAnchor).isActive = true
+        groupStatusDropdown.topAnchor.constraint(equalTo: button.topAnchor).isActive = true
+        groupStatusDropdown.leadingAnchor.constraint(equalTo: button.leadingAnchor).isActive = true
+        groupStatusDropdown.trailingAnchor.constraint(equalTo: button.trailingAnchor).isActive = true
         groupStatusDropdown.bottomAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
         groupStatusDropdown.addArrangedSubview(lookingForTeam)
         groupStatusDropdown.addArrangedSubview(lookingForMember)
@@ -163,7 +161,6 @@ extension HIGroupViewController {
 
         let skillSortButton = HIButton {
             $0.layer.cornerRadius = 15
-            //$0.layer.masksToBounds = true
             $0.titleLabel?.font = HIAppearance.Font.sortingText
             $0.backgroundHIColor = \.buttonViewBackground
             $0.titleHIColor = \.action
