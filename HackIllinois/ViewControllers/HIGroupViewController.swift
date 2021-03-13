@@ -35,25 +35,23 @@ class HIGroupViewController: HIGroupListViewController {
 
         return fetchedResultsController
     }()
-    private let lookingForTeam = HIButton {
-        $0.title = "Looking for Team"
-        $0.titleLabel?.font = HIAppearance.Font.groupStatus
-        $0.titleLabel?.numberOfLines = 0
-        $0.baseImage = #imageLiteral(resourceName: "UnselectedGroupStatus")
-        $0.contentHorizontalAlignment = .left
-        $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 10)
-        $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        $0.addTarget(self, action: #selector(getProfilesLookingForTeam), for: .touchUpInside)
+    private let lookingForTeamContainer = UIView()
+    private let lookingForTeamLabel = HILabel(style: .groupStatusFilter) {
+        $0.text = "Looking for Team"
     }
-    private let lookingForMember = HIButton {
-        $0.title = "Looking for Members"
-        $0.titleLabel?.font = HIAppearance.Font.groupStatus
-        $0.titleLabel?.numberOfLines = 0
-        $0.baseImage = #imageLiteral(resourceName: "UnselectedGroupStatus")
-        $0.contentHorizontalAlignment = .left
-        $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 10)
-        $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        $0.addTarget(self, action: #selector(getProfilesLookingForMember), for: .touchUpInside)
+    private let lookingForTeamSelector = HIImageView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.contentMode = .scaleAspectFit
+        $0.hiImage = \.unselectedGroupStatus
+    }
+    private let lookingForMemberContainer = UIView()
+    private let lookingForMemberLabel = HILabel(style: .groupStatusFilter) {
+        $0.text = "Looking for Members"
+    }
+    private let lookingForMemberSelector = HIImageView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.contentMode = .scaleAspectFit
+        $0.hiImage = \.unselectedGroupStatus
     }
     private let groupStatusButton = HIButton {
         $0.layer.cornerRadius = 15
@@ -141,18 +139,18 @@ extension HIGroupViewController {
     @objc func getProfilesLookingForTeam() {
         shouldActivateLookingForTeam.toggle()
         if shouldActivateLookingForTeam {
-            lookingForTeam.setImage(#imageLiteral(resourceName: "SelectedGroupStatus"), for: .normal)
+            lookingForTeamSelector.changeImage(newImage: \.selectedGroupStatus)
         } else {
-            lookingForTeam.setImage(#imageLiteral(resourceName: "UnselectedGroupStatus"), for: .normal)
+            lookingForTeamSelector.changeImage(newImage: \.unselectedGroupStatus)
         }
     }
 
     @objc func getProfilesLookingForMember() {
         shouldActivateLookingForMember.toggle()
         if shouldActivateLookingForMember {
-            lookingForMember.setImage(#imageLiteral(resourceName: "SelectedGroupStatus"), for: .normal)
+            lookingForMemberSelector.changeImage(newImage: \.selectedGroupStatus)
         } else {
-            lookingForMember.setImage(#imageLiteral(resourceName: "UnselectedGroupStatus"), for: .normal)
+            lookingForMemberSelector.changeImage(newImage: \.unselectedGroupStatus)
         }
     }
 }
@@ -183,17 +181,53 @@ extension HIGroupViewController {
         groupStatusDropdown.backgroundColor = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
         groupStatusDropdown.layer.cornerRadius = 15
         groupStatusDropdown.clipsToBounds = true
-        groupStatusDropdown.addSubview(lookingForTeam)
-        groupStatusDropdown.addSubview(lookingForMember)
-        lookingForTeam.leadingAnchor.constraint(equalTo: groupStatusButton.leadingAnchor).isActive = true
-        lookingForTeam.trailingAnchor.constraint(equalTo: groupStatusButton.trailingAnchor).isActive = true
-        lookingForTeam.topAnchor.constraint(equalTo: groupStatusButton.bottomAnchor).isActive = true
-        lookingForTeam.heightAnchor.constraint(equalToConstant: 50).isActive = true
 
-        lookingForMember.leadingAnchor.constraint(equalTo: lookingForTeam.leadingAnchor).isActive = true
-        lookingForMember.trailingAnchor.constraint(equalTo: groupStatusButton.trailingAnchor).isActive = true
-        lookingForMember.topAnchor.constraint(equalTo: lookingForTeam.bottomAnchor).isActive = true
-        lookingForMember.heightAnchor.constraint(equalTo: lookingForTeam.heightAnchor).isActive = true
+        lookingForTeamContainer.translatesAutoresizingMaskIntoConstraints = false
+        lookingForMemberContainer.translatesAutoresizingMaskIntoConstraints = false
+
+        let lookingForTeamRecognizer = UITapGestureRecognizer(target: self, action: #selector(getProfilesLookingForTeam))
+        lookingForTeamContainer.isUserInteractionEnabled = true
+        lookingForTeamContainer.addGestureRecognizer(lookingForTeamRecognizer)
+
+        let lookingForMemberRecognizer = UITapGestureRecognizer(target: self, action: #selector(getProfilesLookingForMember))
+        lookingForMemberContainer.isUserInteractionEnabled = true
+        lookingForMemberContainer.addGestureRecognizer(lookingForMemberRecognizer)
+
+        groupStatusDropdown.addSubview(lookingForTeamContainer)
+        groupStatusDropdown.addSubview(lookingForMemberContainer)
+        lookingForTeamContainer.leadingAnchor.constraint(equalTo: groupStatusButton.leadingAnchor).isActive = true
+        lookingForTeamContainer.trailingAnchor.constraint(equalTo: groupStatusButton.trailingAnchor).isActive = true
+        lookingForTeamContainer.topAnchor.constraint(equalTo: groupStatusButton.bottomAnchor).isActive = true
+        lookingForTeamContainer.heightAnchor.constraint(equalToConstant: 40).isActive = true
+
+        lookingForTeamContainer.addSubview(lookingForTeamSelector)
+        lookingForTeamContainer.addSubview(lookingForTeamLabel)
+        lookingForTeamSelector.topAnchor.constraint(equalTo: lookingForTeamContainer.topAnchor).isActive = true
+        lookingForTeamSelector.centerYAnchor.constraint(equalTo: lookingForTeamContainer.centerYAnchor).isActive = true
+        lookingForTeamSelector.leadingAnchor.constraint(equalTo: lookingForTeamContainer.leadingAnchor, constant: 5).isActive = true
+        lookingForTeamSelector.widthAnchor.constraint(equalToConstant: 20).isActive = true
+
+        lookingForTeamLabel.topAnchor.constraint(equalTo: lookingForTeamSelector.topAnchor).isActive = true
+        lookingForTeamLabel.centerYAnchor.constraint(equalTo: lookingForTeamSelector.centerYAnchor).isActive = true
+        lookingForTeamLabel.leadingAnchor.constraint(equalTo: lookingForTeamSelector.trailingAnchor, constant: 5).isActive = true
+        lookingForTeamLabel.trailingAnchor.constraint(equalTo: lookingForTeamContainer.trailingAnchor).isActive = true
+
+        lookingForMemberContainer.leadingAnchor.constraint(equalTo: lookingForTeamContainer.leadingAnchor).isActive = true
+        lookingForMemberContainer.trailingAnchor.constraint(equalTo: groupStatusButton.trailingAnchor).isActive = true
+        lookingForMemberContainer.topAnchor.constraint(equalTo: lookingForTeamContainer.bottomAnchor, constant: 5).isActive = true
+        lookingForMemberContainer.heightAnchor.constraint(equalTo: lookingForTeamContainer.heightAnchor).isActive = true
+
+        lookingForMemberContainer.addSubview(lookingForMemberSelector)
+        lookingForMemberContainer.addSubview(lookingForMemberLabel)
+        lookingForMemberSelector.topAnchor.constraint(equalTo: lookingForMemberContainer.topAnchor).isActive = true
+        lookingForMemberSelector.centerYAnchor.constraint(equalTo: lookingForMemberContainer.centerYAnchor).isActive = true
+        lookingForMemberSelector.leadingAnchor.constraint(equalTo: lookingForMemberContainer.leadingAnchor, constant: 5).isActive = true
+        lookingForMemberSelector.widthAnchor.constraint(equalToConstant: 20).isActive = true
+
+        lookingForMemberLabel.topAnchor.constraint(equalTo: lookingForMemberSelector.topAnchor).isActive = true
+        lookingForMemberLabel.centerYAnchor.constraint(equalTo: lookingForMemberSelector.centerYAnchor).isActive = true
+        lookingForMemberLabel.leadingAnchor.constraint(equalTo: lookingForMemberSelector.trailingAnchor, constant: 5).isActive = true
+        lookingForMemberLabel.trailingAnchor.constraint(equalTo: lookingForMemberContainer.trailingAnchor).isActive = true
         groupStatusDropdown.isHidden = true
 
         let tableView = HITableView()
@@ -212,7 +246,7 @@ extension HIGroupViewController {
     }
 
     override func viewDidLayoutSubviews() {
-        groupStatusDropdown.frame = CGRect(x: groupStatusButton.frame.origin.x + horizontalStackView.frame.origin.x, y: groupStatusButton.frame.origin.y + horizontalStackView.frame.origin.y, width: groupStatusButton.frame.width, height: 135)
+        groupStatusDropdown.frame = CGRect(x: groupStatusButton.frame.origin.x + horizontalStackView.frame.origin.x, y: groupStatusButton.frame.origin.y + horizontalStackView.frame.origin.y, width: groupStatusButton.frame.width, height: 120)
     }
 }
 
