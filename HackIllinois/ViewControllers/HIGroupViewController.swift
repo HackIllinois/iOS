@@ -101,25 +101,28 @@ extension HIGroupViewController {
         groupStatusDropdown.alignment = .leading
         groupStatusDropdown.translatesAutoresizingMaskIntoConstraints = false
         groupStatusDropdown.backgroundColor = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
-        self.view.addSubview(groupStatusDropdown)
         self.view.insertSubview(groupStatusDropdown, belowSubview: self.horizontalStackView)
-        
         view.layoutIfNeeded()
         let window = UIApplication.shared.keyWindow
         transparentBackground.frame = window?.frame ?? self.view.frame
-
-        groupStatusDropdown.frame = CGRect(x: button.frame.origin.x, y: button.frame.origin.y, width: button.frame.width, height: 0)
+        /*
+        groupStatusDropdown.frame = CGRect(x: 100, y: 100, width: button.frame.width, height: 100) */
+        groupStatusDropdown.topAnchor.constraint(equalTo: self.horizontalStackView.centerYAnchor).isActive = true
+        groupStatusDropdown.leadingAnchor.constraint(equalTo: self.horizontalStackView.centerXAnchor).isActive = true
+        groupStatusDropdown.trailingAnchor.constraint(equalTo: self.horizontalStackView.trailingAnchor).isActive = true
+        groupStatusDropdown.bottomAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
         groupStatusDropdown.addArrangedSubview(lookingForTeam)
         groupStatusDropdown.addArrangedSubview(lookingForMember)
+        /*
         if shouldPresentDropdown {
             HIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-                self.groupStatusDropdown.frame = CGRect(x: button.frame.origin.x, y: button.frame.origin.y, width: button.frame.width, height: 100)
+                self.groupStatusDropdown.frame = CGRect(x: 100, y: 100, width: button.frame.width, height: 100)
             }, completion: nil)
         } else {
             HIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-                self.groupStatusDropdown.frame = CGRect(x: button.frame.origin.x, y: button.frame.origin.y, width: button.frame.width, height: 0)
+                self.groupStatusDropdown.frame = CGRect(x: 100, y: 100, width: button.frame.width, height: 0)
             }, completion: nil)
-        }
+        } */
     }
 }
 
