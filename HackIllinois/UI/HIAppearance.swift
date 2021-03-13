@@ -125,12 +125,12 @@ struct HIAppearance: Equatable {
         groupSearchText: groupRed,
         buttonViewBackground: buttonBlue,
         checkmark: #imageLiteral(resourceName: "CheckMark"),
+        unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedGroupStatus"),
+        selectedGroupStatus: #imageLiteral(resourceName: "SelectedGroupStatus"),
         eventTypeGreen: eventGreen,
         eventTypeOrange: eventOrange,
         eventTypeRed: eventRed,
-        eventTypePurple: eventPurple,
-        unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedGroupStatus"),
-        selectedGroupStatus: #imageLiteral(resourceName: "SelectedGroupStatus")
+        eventTypePurple: eventPurple
     )
 
     fileprivate static let night = HIAppearance(
@@ -165,12 +165,12 @@ struct HIAppearance: Equatable {
         groupSearchText: groupRed,
         buttonViewBackground: buttonBlue,
         checkmark: #imageLiteral(resourceName: "CheckMark"),
+        unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedGroupStatus"),
+        selectedGroupStatus: #imageLiteral(resourceName: "SelectedGroupStatus"),
         eventTypeGreen: eventGreen,
         eventTypeOrange: eventOrange,
         eventTypeRed: eventRed,
         eventTypePurple: eventPurple
-        unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedGroupStatus"),
-        selectedGroupStatus: #imageLiteral(resourceName: "SelectedGroupStatus")
     )
 
     fileprivate static var current = day
