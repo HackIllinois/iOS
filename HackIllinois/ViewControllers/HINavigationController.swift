@@ -15,6 +15,13 @@ import UIKit
 
 class HINavigationController: UINavigationController {
 
+    private let infoTitle = HILabel(style: .navigationInfo, additionalConfiguration: nil)
+    var infoTitleIsHidden = true {
+        didSet {
+            infoTitle.isHidden = infoTitleIsHidden
+        }
+    }
+
     var statusBarIsHidden = false
     override var prefersStatusBarHidden: Bool {
         return statusBarIsHidden
@@ -48,6 +55,15 @@ class HINavigationController: UINavigationController {
         navigationBar.tintColor <- \.accent
         navigationBar.barTintColor <- \.clear
         navigationBar.isTranslucent = true
+
+        navigationBar.addSubview(infoTitle)
+        infoTitle.constrain(to: navigationBar, trailingInset: 0, bottomInset: 5, leadingInset: 0)
+        infoTitle.constrain(height: 10)
+        infoTitle.translatesAutoresizingMaskIntoConstraints = false
+        infoTitle.isHidden = infoTitleIsHidden
+        infoTitle.text = "All times are in CST"
+
+        additionalSafeAreaInsets.top = 15
         navigationBar.titleTextAttributes = [
             NSAttributedString.Key.foregroundColor: (\HIAppearance.titleText).value as Any,
             NSAttributedString.Key.font: (HIAppearance.Font.contentTitle) as Any

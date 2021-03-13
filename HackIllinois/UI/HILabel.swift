@@ -18,6 +18,8 @@ class HILabel: UILabel {
     enum Style {
         case location
         case event
+        case eventTime
+        case eventType
         case sponsor
         case project
         case title
@@ -37,11 +39,13 @@ class HILabel: UILabel {
         case profileDescription
         case profileUsername
         case profileInterests
+        case navigationInfo
         case groupDescription
         case groupContactInfo
         case groupStatus
         case sortText
         case sortElement
+        case pointsText
     }
 
     // MARK: - Properties
@@ -70,7 +74,18 @@ class HILabel: UILabel {
         case .event:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentTitle
+            font = HIAppearance.Font.eventTitle
+
+        case .eventTime:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.eventTime
+
+        case .eventType:
+            textHIColor = \.accent
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.eventCategoryText
+            textAlignment = .right
 
         case .sponsor:
             textHIColor = \.attendeeBackground
@@ -120,8 +135,8 @@ class HILabel: UILabel {
         case .cellDescription:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentText
-            numberOfLines = 1
+            font = HIAppearance.Font.eventDetails
+            numberOfLines = 0
 
         case .loginHeader:
             textHIColor = \.loginTitleBackground
@@ -183,6 +198,12 @@ class HILabel: UILabel {
             textAlignment = .center
             font = HIAppearance.Font.profileInterests
 
+        case .navigationInfo:
+            textHIColor = \.titleText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.navigationInfoText
+            textAlignment = .center
+
         // New styles for group matching
         case .groupDescription:
             textHIColor = \.groupText
@@ -209,6 +230,11 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.contentText
 
+        case .pointsText:
+            textHIColor = \.whiteText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.eventButtonText
+            textAlignment = .center
         }
         }
 
@@ -232,4 +258,18 @@ class HILabel: UILabel {
         textColor <- textHIColor
         backgroundColor <- backgroundHIColor
     }
+}
+
+// MARK: - Auto-Sizing
+extension HILabel {
+    static func heightForView(text: String, font: UIFont, width: CGFloat) -> CGFloat {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = font
+        label.text = text
+
+        label.sizeToFit()
+        return label.frame.height
+   }
 }
