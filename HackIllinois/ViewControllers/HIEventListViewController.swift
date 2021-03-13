@@ -27,7 +27,6 @@ extension HIEventListViewController {
             tableView.register(HIDateHeader.self, forHeaderFooterViewReuseIdentifier: HIDateHeader.identifier)
             tableView.register(HIEventCell.self, forCellReuseIdentifier: HIEventCell.identifier)
             tableView.allowsSelection = false
-            tableView.sectionHeaderHeight = 0
             // registerForPreviewing(with: self, sourceView: tableView)
         }
         super.setupTableView()
@@ -68,6 +67,7 @@ extension HIEventListViewController {
     override func refresh(_ sender: UIRefreshControl) {
         super.refresh(sender)
         HIEventDataSource.refresh(completion: endRefreshing)
+        tableView?.reloadData()
     }
 }
 

@@ -181,7 +181,31 @@ extension HIScheduleViewController {
 
 // MARK: - UITableViewDelegate
 extension HIScheduleViewController {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 25
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 15
+    }
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return super.numberOfSections(in: tableView)
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension HIScheduleViewController {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HIDateHeader.identifier)
+        if let header = header as? HIDateHeader,
+            let sections = fetchedResultsController.sections,
+            section < sections.count,
+            let date = Formatter.coreData.date(from: sections[section].name) {
+
+            header.titleLabel.text = Formatter.simpleTime.string(from: date)
+            header.titleLabel.textAlignment = .center
+        }
+        return header
     }
 }
