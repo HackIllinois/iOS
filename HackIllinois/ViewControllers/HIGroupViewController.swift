@@ -35,14 +35,27 @@ class HIGroupViewController: HIGroupListViewController {
 
         return fetchedResultsController
     }()
-    let groupStatusOptions = ["Looking for Team", "Team Looking for Members"]
-    var hiGroupStatusOptions: [HIGroupStatusOptions] = []
+    //let groupStatusOptions = ["Looking for Team", "Team Looking for Members"]
+    //var hiGroupStatusOptions: [HIGroupStatusOptions] = []
+    private let lookingForMember = HIButton {
+        $0.title = "Team Looking for Members"
+        $0.titleLabel?.font = HIAppearance.Font.groupStatus
+        $0.baseImage = #imageLiteral(resourceName: "UnselectedGroupStatus")
+        $0.activeImage = #imageLiteral(resourceName: "SelectedGroupStatus")
+    }
+    private let lookingForTeam = HIButton {
+        $0.title = "Looking for a Team"
+        $0.titleLabel?.font = HIAppearance.Font.groupStatus
+        $0.baseImage = #imageLiteral(resourceName: "UnselectedGroupStatus")
+        $0.activeImage = #imageLiteral(resourceName: "SelectedGroupStatus")
+    }
     private var currentTab = 0
     private var onlyFavorites = false
     private let onlyFavoritesPredicate = NSPredicate(format: "favorite == YES" )
     private let transparentBackground = HIView()
     private var selectedButton = HIButton()
-    private let groupStatusTable = HITableView()
+    //private let groupStatusTable = HITableView()
+    let groupStatusDropdown = UIStackView()
     let horizontalStackView = UIStackView()
     var shouldPresentDropdown: Bool = false
     private var interests = Set<String>()
@@ -81,26 +94,30 @@ extension HIGroupViewController {
 
     @objc func addDropdownView(button: HIButton) {
         shouldPresentDropdown.toggle()
+        groupStatusDropdown.layer.cornerRadius = 15
+        groupStatusDropdown.axis = .vertical
+        groupStatusDropdown.distribution = .fillProportionally
+        groupStatusDropdown.spacing = 15
+        groupStatusDropdown.alignment = .leading
+        groupStatusDropdown.translatesAutoresizingMaskIntoConstraints = false
+        groupStatusDropdown.backgroundColor = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
+        self.view.addSubview(groupStatusDropdown)
+        self.view.insertSubview(groupStatusDropdown, belowSubview: self.horizontalStackView)
+        
         view.layoutIfNeeded()
         let window = UIApplication.shared.keyWindow
         transparentBackground.frame = window?.frame ?? self.view.frame
 
-        groupStatusTable.frame = CGRect(x: button.frame.origin.x + horizontalStackView.frame.origin.x, y:
-                                            button.frame.origin.y + horizontalStackView.frame.origin.y, width: button.frame.width, height: 0)
-        groupStatusTable.layer.cornerRadius = 15
-        self.view.addSubview(groupStatusTable)
-        self.view.insertSubview(groupStatusTable, belowSubview: self.horizontalStackView)
-        groupStatusTable.backgroundColor = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
-
+        groupStatusDropdown.frame = CGRect(x: button.frame.origin.x, y: button.frame.origin.y, width: button.frame.width, height: 0)
+        groupStatusDropdown.addArrangedSubview(lookingForTeam)
+        groupStatusDropdown.addArrangedSubview(lookingForMember)
         if shouldPresentDropdown {
             HIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-                self.groupStatusTable.frame = CGRect(x: button.frame.origin.x + self.horizontalStackView.frame.origin.x, y:
-                                                        button.frame.origin.y + self.horizontalStackView.frame.origin.y, width: button.frame.width, height: 100)
+                self.groupStatusDropdown.frame = CGRect(x: button.frame.origin.x, y: button.frame.origin.y, width: button.frame.width, height: 100)
             }, completion: nil)
         } else {
             HIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-                self.groupStatusTable.frame = CGRect(x: button.frame.origin.x + self.horizontalStackView.frame.origin.x, y:
-                                                        button.frame.origin.y + self.horizontalStackView.frame.origin.y, width: button.frame.width, height: 0)
+                self.groupStatusDropdown.frame = CGRect(x: button.frame.origin.x, y: button.frame.origin.y, width: button.frame.width, height: 0)
             }, completion: nil)
         }
     }
