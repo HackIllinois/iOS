@@ -68,7 +68,6 @@ class HIEventCell: HIBubbleCell {
 // MARK: - Actions
 extension HIEventCell {
     @objc func didSelectFavoriteButton(_ sender: HIButton) {
-        print("Select favoriate button")
         delegate?.eventCellDidSelectFavoriteButton(self)
     }
 

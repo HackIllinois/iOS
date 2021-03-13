@@ -152,14 +152,12 @@ extension HIBaseViewController: UITableViewDataSource {
         } else {
             tableView.backgroundView = tableBackgroundView
         }
-//        print(sectionCount)
         return sectionCount
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sections = _fetchedResultsController?.sections else { return 0 }
         return sections[section].numberOfObjects
-//        return sections.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
