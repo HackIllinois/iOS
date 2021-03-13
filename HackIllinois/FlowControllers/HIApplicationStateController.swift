@@ -21,6 +21,7 @@ class HIApplicationStateController {
     // MARK: - Properties
     var window = HIWindow(frame: UIScreen.main.bounds)
     var user: HIUser?
+    var profile: HIProfile?
     var isGuest = false
 
     // MARK: ViewControllers
@@ -31,6 +32,7 @@ class HIApplicationStateController {
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(loginUser), name: .loginUser, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(logoutUser), name: .logoutUser, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(loginProfile), name: .loginProfile, object: nil)
     }
 
     deinit {
@@ -42,6 +44,7 @@ class HIApplicationStateController {
 
         resetPersistentDataIfNeeded()
         recoverUserIfPossible()
+        recoverProfileIfPossible()
 
         if user != nil {
             loginFlowController.shouldDisplayAnimationOnNextAppearance = false
@@ -69,12 +72,21 @@ extension HIApplicationStateController {
         self.user = user
     }
 
+    func recoverProfileIfPossible() {
+        guard Keychain.default.hasValue(forKey: HIConstants.STORED_PROFILE_KEY) else { return }
+        guard let profile = Keychain.default.retrieve(HIProfile.self, forKey: HIConstants.STORED_PROFILE_KEY) else {
+            Keychain.default.removeObject(forKey: HIConstants.STORED_PROFILE_KEY)
+            return
+        }
+        self.profile = profile
+    }
+
     func viewControllersFor(user: HIUser) -> [UIViewController] {
         var viewControllers = [UIViewController]()
         viewControllers.append(HIHomeViewController())
         viewControllers.append(HIScheduleViewController())
         viewControllers.append(HIUserDetailViewController())
-        viewControllers.append(HIIndoorMapsViewController())
+        viewControllers.append(HIProfileViewController())
         viewControllers.append(HIGroupViewController())
         return viewControllers
     }
@@ -93,8 +105,15 @@ extension HIApplicationStateController {
         guard user != nil else { return }
         Keychain.default.removeObject(forKey: HIConstants.STORED_ACCOUNT_KEY)
         user = nil
+        profile = nil
         isGuest = false
         updateWindowViewController(animated: true)
+    }
+
+    @objc func loginProfile(_ notification: Notification) {
+        guard let profile = notification.userInfo?["profile"] as? HIProfile else { return }
+        guard Keychain.default.store(profile, forKey: HIConstants.STORED_PROFILE_KEY) else { return }
+        self.profile = profile
     }
 
     func updateWindowViewController(animated: Bool) {

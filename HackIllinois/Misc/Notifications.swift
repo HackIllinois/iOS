@@ -16,4 +16,5 @@ extension Notification.Name {
     static let themeDidChange = Notification.Name("HINotificationThemeDidChange")
     static let loginUser  = Notification.Name("HIApplicationStateControllerLoginUser")
     static let logoutUser = Notification.Name("HIApplicationStateControllerLogoutUser")
+    static let loginProfile = Notification.Name("HIApplicationStateControllerLoginProfile")
 }
