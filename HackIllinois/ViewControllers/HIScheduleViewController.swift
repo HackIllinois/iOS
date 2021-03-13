@@ -48,21 +48,28 @@ class HIScheduleViewController: HIEventListViewController {
             HITimeDataSource.shared.eventTimes.fridayStart as NSDate,
             HITimeDataSource.shared.eventTimes.fridayEnd as NSDate
         )
-        dataStore.append((displayText: "FRIDAY", predicate: fridayPredicate))
+        dataStore.append((displayText: "FRI", predicate: fridayPredicate))
 
         let saturdayPredicate = NSPredicate(
             format: "%@ =< startTime AND startTime < %@",
             HITimeDataSource.shared.eventTimes.saturdayStart as NSDate,
             HITimeDataSource.shared.eventTimes.saturdayEnd as NSDate
         )
-        dataStore.append((displayText: "SATURDAY", predicate: saturdayPredicate))
+        dataStore.append((displayText: "SAT", predicate: saturdayPredicate))
 
         let sundayPredicate = NSPredicate(
             format: "%@ =< startTime AND startTime < %@",
             HITimeDataSource.shared.eventTimes.sundayStart as NSDate,
             HITimeDataSource.shared.eventTimes.sundayEnd as NSDate
         )
-        dataStore.append((displayText: "SUNDAY", predicate: sundayPredicate))
+        dataStore.append((displayText: "SUN", predicate: sundayPredicate))
+
+        let mondayPredicate = NSPredicate(
+            format: "%@ =< startTime AND startTime < %@",
+            HITimeDataSource.shared.eventTimes.mondayStart as NSDate,
+            HITimeDataSource.shared.eventTimes.mondayEnd as NSDate
+        )
+        dataStore.append((displayText: "MON", predicate: mondayPredicate))
         return dataStore
     }()
 }
@@ -111,18 +118,27 @@ extension HIScheduleViewController {
         super.loadView()
 
         let items = dataStore.map { $0.displayText }
-        let segmentedControl = HISegmentedControl(items: items)
+        let segmentedControl = HIScheduleSegmentedControl(titles: items, nums: [9, 10, 11, 12])
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
-        segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+
+        segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
-        segmentedControl.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        segmentedControl.heightAnchor.constraint(equalToConstant: 66).isActive = true
+
+        let separator = UIView()
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        separator.backgroundColor <- \.titleText
+        self.view.addSubview(separator)
+        separator.constrain(height: 1)
+        separator.constrain(to: view, trailingInset: 0, leadingInset: 0)
+        separator.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10).isActive = true
 
         let tableView = HITableView()
         view.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: separator.bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
@@ -135,6 +151,7 @@ extension HIScheduleViewController {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         setupRefreshControl()
         super.viewDidLoad()
+        backgroundView.image = #imageLiteral(resourceName: "ScheduleBackground")
     }
 }
 
@@ -145,6 +162,12 @@ extension HIScheduleViewController {
         title = "SCHEDULE"
         if !HIApplicationStateController.shared.isGuest {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuUnfavorited"), style: .plain, target: self, action: #selector(didSelectFavoritesIcon(_:)))
+        }
+    }
+
+    override func didMove(toParent parent: UIViewController?) {
+        if let navController = navigationController as? HINavigationController {
+            navController.infoTitleIsHidden = false
         }
     }
 }
