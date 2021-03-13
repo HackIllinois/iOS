@@ -9,6 +9,7 @@
 //  Illinois/NCSA Open Source License. You should have received a copy of
 //  this license in a file with the distribution.
 //
+
 import Foundation
 import APIManager
 
@@ -29,7 +30,7 @@ public struct Profile: Codable, APIReturnable {
         case lastName
         case points
         case timezone
-        case info = "Description"
+        case info = "description"
         case discord
         case avatarUrl
         case teamStatus

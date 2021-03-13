@@ -9,6 +9,7 @@
 //  Illinois/NCSA Open Source License. You should have received a copy of
 //  this license in a file with the distribution.
 //
+
 import Foundation
 import UIKit
 
@@ -17,13 +18,9 @@ class HISegmentedControl: UIControl {
     // MARK: - Properties
     private(set) var items: [String]
 
-    private(set) var selectedIndex: Int = 0 {
+    var selectedIndex: Int = 0 {
         didSet {
-            if oldValue != selectedIndex {
-                labels[oldValue].textColor <- \.baseText
-                displayNewSelectedIndex()
-                sendActions(for: .valueChanged)
-            }
+            didSetSelectedIndex(oldValue: oldValue)
         }
     }
 
@@ -98,13 +95,13 @@ class HISegmentedControl: UIControl {
         setupLabels()
     }
 
-    private func setupView() {
+    func setupView() {
         setupLabels()
         addSubview(bottomView)
         addSubview(indicatorView)
     }
 
-    private func setupLabels() {
+    func setupLabels() {
         labels.forEach { $0.removeFromSuperview() }
         labels.removeAll(keepingCapacity: true)
         items.indices.forEach { setupLabelForItem(at: $0) }
@@ -122,7 +119,15 @@ class HISegmentedControl: UIControl {
         labels.append(label)
     }
 
-    private func displayNewSelectedIndex() {
+    func didSetSelectedIndex(oldValue: Int) {
+        if oldValue != selectedIndex {
+            labels[oldValue].textColor <- \.baseText
+            displayNewSelectedIndex()
+            sendActions(for: .valueChanged)
+        }
+    }
+
+    func displayNewSelectedIndex() {
         let selectedLabel = labels[selectedIndex]
 
         let animator = UIViewPropertyAnimator(duration: 0.5, dampingRatio: 0.8)

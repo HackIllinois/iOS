@@ -14,6 +14,7 @@ import UIKit
 
 struct HIAppearance: Equatable {
     let titleText: UIColor
+    let whiteText: UIColor
     let baseText: UIColor
     let accent: UIColor
     let action: UIColor
@@ -35,6 +36,9 @@ struct HIAppearance: Equatable {
     let attendeeText: UIColor
     let attendeeBackground: UIColor
     let whiteTagFont: UIColor
+    let interestBackground: UIColor
+    let segmentedBackground: UIColor
+    let buttonBlue: UIColor
 
     // New fonts added. Replace old ones?
     let groupText: UIColor
@@ -45,11 +49,17 @@ struct HIAppearance: Equatable {
     let unselectedGroupStatus: UIImage
     let selectedGroupStatus: UIImage
 
+    let eventTypeGreen: UIColor
+    let eventTypeOrange: UIColor
+    let eventTypeRed: UIColor
+    let eventTypePurple: UIColor
+
     let clear: UIColor = .clear
     let black: UIColor = .black
 
     private static let darkBlue = #colorLiteral(red: 0.1326064765, green: 0.1667878032, blue: 0.3605746627, alpha: 1)
     private static let blue = #colorLiteral(red: 0.1215686275, green: 0.5176470588, blue: 0.6470588235, alpha: 1)
+    private static let buttonblue = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
     private static let lightBlue = #colorLiteral(red: 0.4196078431, green: 0.6823529412, blue: 0.7725490196, alpha: 1)
     private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     private static let orange = #colorLiteral(red: 0.8901960784, green: 0.3137254902, blue: 0.3450980392, alpha: 1)
@@ -59,14 +69,22 @@ struct HIAppearance: Equatable {
     private static let deepBlue = #colorLiteral(red: 0.03921568627, green: 0.03529411765, blue: 0.2470588235, alpha: 1)
     private static let darkerBlue = #colorLiteral(red: 0.1333333333, green: 0.168627451, blue: 0.3607843137, alpha: 1)
     private static let whiteBlue = #colorLiteral(red: 0.9764705882, green: 1, blue: 1, alpha: 1)
+    private static let greyWhite = #colorLiteral(red: 0.9764705882, green: 1, blue: 1, alpha: 1)
+
     private static let lightCoral = #colorLiteral(red: 0.9333333333, green: 0.4235294118, blue: 0.4470588235, alpha: 1)
     private static let nightBlue = #colorLiteral(red: 0.4352941176, green: 0.5490196078, blue: 0.7568627451, alpha: 1)
 
     // New colors added. Replace old ones?
     private static let grayBlack = #colorLiteral(red: 0.1058823529, green: 0.1058823529, blue: 0.1058823529, alpha: 1)
-    private static let groupRed = #colorLiteral(red: 0.5960784314, green: 0.1137254902, blue: 0.137254902, alpha: 1)
+    private static let groupRed = #colorLiteral(red: 0.8151133363, green: 0.1137254902, blue: 0.137254902, alpha: 1)
     private static let groupOrange = #colorLiteral(red: 0.937254902, green: 0.5176470588, blue: 0.2823529412, alpha: 1)
     private static let buttonBlue = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
+
+    private static let eventGreen = #colorLiteral(red: 0.1568627451, green: 0.3960784314, blue: 0.4549019608, alpha: 1)
+    private static let eventOrange = #colorLiteral(red: 0.8941176471, green: 0.4117647059, blue: 0.2901960784, alpha: 1)
+    private static let eventRed = #colorLiteral(red: 0.5960784314, green: 0.1137254902, blue: 0.137254902, alpha: 1)
+    private static let eventPurple = #colorLiteral(red: 0.3490196078, green: 0.2784313725, blue: 0.6549019608, alpha: 1)
+
     private static var statusBarWhite: UIStatusBarStyle {
         if #available(iOS 13, *) {
              return .lightContent
@@ -77,6 +95,7 @@ struct HIAppearance: Equatable {
 
     fileprivate static let day = HIAppearance(
         titleText: white,
+        whiteText: white,
         baseText: darkBlue,
         accent: orange,
         action: white,
@@ -98,17 +117,25 @@ struct HIAppearance: Equatable {
         attendeeText: white,
         attendeeBackground: lightCoral,
         whiteTagFont: white,
+        interestBackground: lightCoral,
+        segmentedBackground: greyWhite,
+        buttonBlue: buttonblue,
         groupText: grayBlack,
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
         buttonViewBackground: buttonBlue,
         checkmark: #imageLiteral(resourceName: "CheckMark"),
+        eventTypeGreen: eventGreen,
+        eventTypeOrange: eventOrange,
+        eventTypeRed: eventRed,
+        eventTypePurple: eventPurple,
         unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedGroupStatus"),
         selectedGroupStatus: #imageLiteral(resourceName: "SelectedGroupStatus")
     )
 
     fileprivate static let night = HIAppearance(
         titleText: white,
+        whiteText: white,
         baseText: darkBlue,
         accent: orange,
         action: white,
@@ -130,11 +157,18 @@ struct HIAppearance: Equatable {
         attendeeText: white,
         attendeeBackground: lightCoral,
         whiteTagFont: white,
+        interestBackground: lightCoral,
+        segmentedBackground: greyWhite,
+        buttonBlue: buttonblue,
         groupText: grayBlack,
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
         buttonViewBackground: buttonBlue,
         checkmark: #imageLiteral(resourceName: "CheckMark"),
+        eventTypeGreen: eventGreen,
+        eventTypeOrange: eventOrange,
+        eventTypeRed: eventRed,
+        eventTypePurple: eventPurple
         unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedGroupStatus"),
         selectedGroupStatus: #imageLiteral(resourceName: "SelectedGroupStatus")
     )
@@ -156,8 +190,15 @@ struct HIAppearance: Equatable {
         static let detailSubtitle = UIFont.systemFont(ofSize: 16, weight: .medium)
         static let detailText = UIFont.systemFont(ofSize: 15, weight: .regular)
 
+        static let eventTitle = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        static let eventTime = UIFont.systemFont(ofSize: 12, weight: .regular)
+        static let eventDetails = UIFont.systemFont(ofSize: 14, weight: .regular)
+        static let eventButtonText = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        static let eventCategoryText = UIFont.systemFont(ofSize: 12, weight: .semibold)
+
         static let navigationSubtitle = UIFont.systemFont(ofSize: 14, weight: .medium)
-        static let navigationTitle = UIFont.systemFont(ofSize: 24, weight: .medium)
+        static let navigationTitle = UIFont.systemFont(ofSize: 22, weight: .semibold)
+        static let navigationInfoText = UIFont.systemFont(ofSize: 12, weight: .regular)
         static let descriptionText = UIFont.systemFont(ofSize: 14, weight: .regular)
         static let sponsorText = UIFont.systemFont(ofSize: 16, weight: .medium)
         static let loginTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
@@ -166,8 +207,18 @@ struct HIAppearance: Equatable {
         static let sectionHeader = UIFont.systemFont(ofSize: 13, weight: .bold)
         static let button = UIFont.systemFont(ofSize: 15, weight: .regular)
         static let glyph = UIFont.systemFont(ofSize: 21, weight: .light)
+
+        static let profileName = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        static let profileSubtitle = UIFont.systemFont(ofSize: 14, weight: .bold)
+        static let profileNumberFigure = UIFont.systemFont(ofSize: 20, weight: .medium)
+        static let profileDescription = UIFont.systemFont(ofSize: 16, weight: .regular)
+        static let profileUsername = UIFont.systemFont(ofSize: 16, weight: .bold)
+        static let profileInterests = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        static let segmentedTitle = UIFont.systemFont(ofSize: 16, weight: .regular)
+        static let segmentedNumberText = UIFont.systemFont(ofSize: 20, weight: .semibold)
+
         static let groupContact = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        static let groupStatus = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        static let groupStatus = UIFont.systemFont(ofSize: 12, weight: .bold)
         static let sortingText = UIFont.systemFont(ofSize: 14, weight: .semibold)
     }
 }
