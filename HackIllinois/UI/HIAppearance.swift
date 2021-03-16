@@ -44,6 +44,7 @@ struct HIAppearance: Equatable {
     let groupText: UIColor
     let memberSearchText: UIColor
     let groupSearchText: UIColor
+    let noSearchText: UIColor
     let buttonViewBackground: UIColor
     let checkmark: UIImage
     let unselectedGroupStatus: UIImage
@@ -78,6 +79,7 @@ struct HIAppearance: Equatable {
     private static let grayBlack = #colorLiteral(red: 0.1058823529, green: 0.1058823529, blue: 0.1058823529, alpha: 1)
     private static let groupRed = #colorLiteral(red: 0.8151133363, green: 0.1137254902, blue: 0.137254902, alpha: 1)
     private static let groupOrange = #colorLiteral(red: 0.937254902, green: 0.5176470588, blue: 0.2823529412, alpha: 1)
+    private static let groupGreen = #colorLiteral(red: 0.3411764801, green: 0.7449532898, blue: 0.1686274558, alpha: 1)
     private static let buttonBlue = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
 
     private static let eventGreen = #colorLiteral(red: 0.1568627451, green: 0.3960784314, blue: 0.4549019608, alpha: 1)
@@ -123,6 +125,7 @@ struct HIAppearance: Equatable {
         groupText: grayBlack,
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
+        noSearchText: groupGreen,
         buttonViewBackground: buttonBlue,
         checkmark: #imageLiteral(resourceName: "CheckMark"),
         unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedGroupStatus"),
@@ -163,6 +166,7 @@ struct HIAppearance: Equatable {
         groupText: grayBlack,
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
+        noSearchText: groupGreen,
         buttonViewBackground: buttonBlue,
         checkmark: #imageLiteral(resourceName: "CheckMark"),
         unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedGroupStatus"),

@@ -202,10 +202,15 @@ extension HIProfileViewController {
             profilePictureView.downloadImage(from: url)
         }
         profileNameView.text = profile.firstName + " " + profile.lastName
-        //TODO: Update color based on how each team status is represented in API
-        if profile.teamStatus == "looking" {
+        if profile.teamStatus == "Looking for Team" {
             profileStatusIndicator.changeCircleColor(color: \.groupSearchText)
             profileStatusDescriptionView.changeTextColor(color: \.groupSearchText)
+        } else if profile.teamStatus == "Looking for Members" {
+            profileStatusIndicator.changeCircleColor(color: \.memberSearchText)
+            profileStatusDescriptionView.changeTextColor(color: \.memberSearchText)
+        } else {
+            profileStatusIndicator.changeCircleColor(color: \.noSearchText)
+            profileStatusDescriptionView.changeTextColor(color: \.noSearchText)
         }
         profileStatusDescriptionView.text = profile.teamStatus.capitalized
         profilePointsView.text = "\(profile.points)"
