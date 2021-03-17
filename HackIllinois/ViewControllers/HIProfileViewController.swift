@@ -69,7 +69,7 @@ class HIProfileViewController: HIBaseViewController {
         $0.text = "Skills"
     }
     lazy var profileInterestsView: UICollectionView = {
-        let profileInterestsView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let profileInterestsView = UICollectionView(frame: .zero, collectionViewLayout: HICollectionViewFlowLayout())
         profileInterestsView.backgroundColor = .clear
         profileInterestsView.register(HIInterestCell.self, forCellWithReuseIdentifier: "interestCell")
         profileInterestsView.dataSource = self
@@ -241,6 +241,7 @@ extension HIProfileViewController: UICollectionViewDataSource, UICollectionViewD
 extension HIProfileViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let interest = interests[indexPath.row]
-        return CGSize(width: (15 * interest.count) + 30, height: 40)
+        let bound = Int(collectionView.frame.width / 2)
+        return CGSize(width: min((10 * interest.count) + 27, bound), height: 40)
     }
 }
