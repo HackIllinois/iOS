@@ -17,7 +17,7 @@ import APIManager
 
 class HIGroupListViewController: HIBaseViewController {
     let groupDetailViewController = HIGroupDetailViewController()
-    var teamStatusParam: String = ""
+    var teamStatusParam: [String] = []
     var interestParams: [String] = []
 }
 

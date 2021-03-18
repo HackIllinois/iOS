@@ -22,13 +22,13 @@ public final class ProfileService: BaseService {
         return APIRequest<Profile>(service: self, endpoint: "", headers: headers, method: .GET)
     }
 
-    public static func getMatchingProfiles(teamStatus: String, interests: [String]) -> APIRequest<ProfileContainer> {
+    public static func getMatchingProfiles(teamStatus: [String], interests: [String]) -> APIRequest<ProfileContainer> {
         var params = HTTPParameters()
         if teamStatus.count == 0 && interests.count == 0 {
             return APIRequest<ProfileContainer>(service: self, endpoint: "search/", headers: headers, method: .GET)
         }
         if teamStatus.count > 0 {
-            params["teamStatus"] = teamStatus
+            params["teamStatus"] = teamStatus.joined(separator: ",")
         }
         if interests.count > 0 {
             params["interests"] = interests.joined(separator: ",")

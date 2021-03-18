@@ -91,6 +91,7 @@ class HIGroupViewController: HIGroupListViewController {
     var shouldPresentDropdown: Bool = false
     private var interests = Set<String>()
     private var selectedRows = Set<Int>()
+    private var statuses = Set<String>()
 
     @objc dynamic override func setUpBackgroundView() {
             super.setUpBackgroundView()
@@ -138,20 +139,33 @@ extension HIGroupViewController {
 
     @objc func getProfilesLookingForTeam() {
         shouldActivateLookingForTeam.toggle()
+        guard let status = lookingForTeamLabel.text else { return }
+        let modifiedStatus = status.replacingOccurrences(of: " ", with: "%20")
+
         if shouldActivateLookingForTeam {
             lookingForTeamSelector.changeImage(newImage: \.selectedGroupStatus)
+            statuses.insert(modifiedStatus)
         } else {
             lookingForTeamSelector.changeImage(newImage: \.unselectedGroupStatus)
+            statuses.remove(modifiedStatus)
         }
+        teamStatusParam = Array(statuses)
+        HIProfileDataSource.refresh(teamStatus: teamStatusParam, interests: interestParams)
     }
 
     @objc func getProfilesLookingForMember() {
         shouldActivateLookingForMember.toggle()
+        guard let status = lookingForMemberLabel.text else { return }
+        let modifiedStatus = status.replacingOccurrences(of: " ", with: "%20")
         if shouldActivateLookingForMember {
             lookingForMemberSelector.changeImage(newImage: \.selectedGroupStatus)
+            statuses.insert(modifiedStatus)
         } else {
             lookingForMemberSelector.changeImage(newImage: \.unselectedGroupStatus)
+            statuses.remove(modifiedStatus)
         }
+        teamStatusParam = Array(statuses)
+        HIProfileDataSource.refresh(teamStatus: teamStatusParam, interests: interestParams)
     }
 }
 
@@ -246,7 +260,8 @@ extension HIGroupViewController {
     }
 
     override func viewDidLayoutSubviews() {
-        groupStatusDropdown.frame = CGRect(x: groupStatusButton.frame.origin.x + horizontalStackView.frame.origin.x, y: groupStatusButton.frame.origin.y + horizontalStackView.frame.origin.y, width: groupStatusButton.frame.width, height: 120)
+        groupStatusDropdown.frame = CGRect(x: groupStatusButton.frame.origin.x + horizontalStackView.frame.origin.x,
+                                           y: groupStatusButton.frame.origin.y + horizontalStackView.frame.origin.y, width: groupStatusButton.frame.width, height: 120)
     }
 }
 
