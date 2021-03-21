@@ -20,7 +20,6 @@ class HIGroupViewController: HIGroupListViewController {
     lazy var fetchedResultsController: NSFetchedResultsController<Profile> = {
         let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
 
-        //TODO: Explore different ways to sort result profiles
         fetchRequest.sortDescriptors = [
             NSSortDescriptor(key: "firstName", ascending: true)
         ]
@@ -36,17 +35,63 @@ class HIGroupViewController: HIGroupListViewController {
 
         return fetchedResultsController
     }()
-
+    private let lookingForTeamContainer = UIView()
+    private let lookingForTeamLabel = HILabel(style: .groupStatusFilter) {
+        $0.text = "Looking For Team"
+    }
+    private let lookingForTeamSelector = HIImageView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.contentMode = .scaleAspectFit
+        $0.hiImage = \.unselectedGroupStatus
+    }
+    private let lookingForMemberContainer = UIView()
+    private let lookingForMemberLabel = HILabel(style: .groupStatusFilter) {
+        $0.text = "Looking For Members"
+    }
+    private let lookingForMemberSelector = HIImageView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.contentMode = .scaleAspectFit
+        $0.hiImage = \.unselectedGroupStatus
+    }
+    private let groupStatusButton = HIButton {
+        $0.layer.cornerRadius = 15
+        $0.titleLabel?.font = HIAppearance.Font.sortingText
+        $0.backgroundHIColor = \.buttonViewBackground
+        $0.titleHIColor = \.action
+        $0.title = "Group Status"
+        $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: $0.frame.size.width - 15, bottom: 0, right: 0)
+        $0.layer.shadowColor = UIColor.black.cgColor
+        $0.layer.shadowOffset = .zero
+        $0.layer.shadowOpacity = 0.5
+        $0.layer.shadowRadius = 5
+        $0.addTarget(self, action: #selector(animateDropdownView), for: .touchUpInside)
+    }
+    private let skillSortButton = HIButton {
+        $0.layer.cornerRadius = 15
+        $0.titleLabel?.font = HIAppearance.Font.sortingText
+        $0.backgroundHIColor = \.buttonViewBackground
+        $0.titleHIColor = \.action
+        $0.title = "Skills"
+        $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        $0.layer.shadowColor = UIColor.black.cgColor
+        $0.layer.shadowOffset = .zero
+        $0.layer.shadowOpacity = 0.5
+        $0.layer.shadowRadius = 5
+        $0.addTarget(self, action: #selector(openPopup), for: .touchUpInside)
+    }
     private var currentTab = 0
     private var onlyFavorites = false
     private let onlyFavoritesPredicate = NSPredicate(format: "favorite == YES" )
     private let transparentBackground = HIView()
-    private let groupStatusTable = HITableView()
     private var selectedButton = HIButton()
+    private let groupStatusDropdown = UIView()
     let horizontalStackView = UIStackView()
+    var shouldActivateLookingForMember: Bool = false
+    var shouldActivateLookingForTeam: Bool = false
     var shouldPresentDropdown: Bool = false
-    private var interests = Set<String>()
     private var selectedRows = Set<Int>()
+    private var interests = Set<String>()
+    private var statuses = Set<String>()
 
     @objc dynamic override func setUpBackgroundView() {
             super.setUpBackgroundView()
@@ -79,37 +124,45 @@ extension HIGroupViewController {
         present(popupView, animated: true, completion: nil)
     }
 
-    @objc func updateDropdownView(button: HIButton) {
+    @objc func animateDropdownView() {
         shouldPresentDropdown.toggle()
-        view.layoutIfNeeded()
-        //let frames = button.frame
-        let window = UIApplication.shared.keyWindow
-        transparentBackground.frame = window?.frame ?? self.view.frame
-
-        groupStatusTable.frame = CGRect(x: button.frame.origin.x + horizontalStackView.frame.origin.x, y: button.frame.origin.y + horizontalStackView.frame.origin.y, width: button.frame.width, height: 0)
-        groupStatusTable.layer.cornerRadius = 15
-        self.view.addSubview(groupStatusTable)
-        groupStatusTable.backgroundColor = UIColor.white
-
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(removeDropdown))
-        transparentBackground.addGestureRecognizer(tapGesture)
-
         if shouldPresentDropdown {
-            HIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-                self.groupStatusTable.frame = CGRect(x: button.frame.origin.x + self.horizontalStackView.frame.origin.x, y: button.frame.origin.y + self.horizontalStackView.frame.origin.y, width: button.frame.width, height: 100)
-            }, completion: nil)
+            groupStatusDropdown.isHidden = false
         } else {
-            HIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-                self.groupStatusTable.frame = CGRect(x: button.frame.origin.x + self.horizontalStackView.frame.origin.x, y: button.frame.origin.y + self.horizontalStackView.frame.origin.y, width: button.frame.width, height: 0)
-            }, completion: nil)
+            groupStatusDropdown.isHidden = true
         }
     }
 
-    @objc func removeDropdown() {
-        let frames = selectedButton.frame
-        HIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-            self.groupStatusTable.frame = CGRect(x: frames.origin.x, y: frames.origin.y + frames.height, width: frames.width, height: 0)
-        }, completion: nil)
+    @objc func getProfilesLookingForTeam() {
+        shouldActivateLookingForTeam.toggle()
+        guard let status = lookingForTeamLabel.text?.uppercased() else { return }
+        let modifiedStatus = status.replacingOccurrences(of: " ", with: "_")
+
+        if shouldActivateLookingForTeam {
+            lookingForTeamSelector.changeImage(newImage: \.selectedGroupStatus)
+            statuses.insert(modifiedStatus)
+        } else {
+            lookingForTeamSelector.changeImage(newImage: \.unselectedGroupStatus)
+            statuses.remove(modifiedStatus)
+        }
+        teamStatusParams = Array(statuses)
+        HIProfileDataSource.refresh(teamStatus: teamStatusParams, interests: interestParams)
+    }
+
+    @objc func getProfilesLookingForMember() {
+        shouldActivateLookingForMember.toggle()
+        guard let status = lookingForMemberLabel.text?.uppercased() else { return }
+        let modifiedStatus = status.replacingOccurrences(of: " ", with: "_")
+
+        if shouldActivateLookingForMember {
+            lookingForMemberSelector.changeImage(newImage: \.selectedGroupStatus)
+            statuses.insert(modifiedStatus)
+        } else {
+            lookingForMemberSelector.changeImage(newImage: \.unselectedGroupStatus)
+            statuses.remove(modifiedStatus)
+        }
+        teamStatusParams = Array(statuses)
+        HIProfileDataSource.refresh(teamStatus: teamStatusParams, interests: interestParams)
     }
 }
 
@@ -130,35 +183,66 @@ extension HIGroupViewController {
         horizontalStackView.heightAnchor.constraint(equalToConstant: 60).isActive = true
 
         let sortLabel = HILabel(style: .sortText)
-        sortLabel.text = "Sort: "
+        sortLabel.text = "Filter: "
         horizontalStackView.addArrangedSubview(sortLabel)
-
-        let groupStatusButton = HIButton {
-            $0.layer.cornerRadius = 15
-            $0.titleLabel?.font = HIAppearance.Font.sortingText
-            $0.backgroundHIColor = \.buttonViewBackground
-            $0.titleHIColor = \.action
-            $0.title = "Group Status"
-            $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: $0.frame.size.width - 15, bottom: 0, right: 0)
-            // Commented out temporarily
-            // $0.addTarget(self, action: #selector(self.updateDropdownView(button:)), for: .touchUpInside)
-        }
         horizontalStackView.addArrangedSubview(groupStatusButton)
-
-        let skillSortButton = HIButton {
-            $0.layer.cornerRadius = 15
-            $0.layer.masksToBounds = true
-            $0.titleLabel?.font = HIAppearance.Font.sortingText
-            $0.backgroundHIColor = \.buttonViewBackground
-            $0.titleHIColor = \.action
-            $0.title = "Skills"
-            $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-            $0.addTarget(self, action: #selector(self.openPopup), for: .touchUpInside)
-        }
         horizontalStackView.addArrangedSubview(skillSortButton)
 
+        view.insertSubview(groupStatusDropdown, belowSubview: horizontalStackView)
+        groupStatusDropdown.backgroundColor = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
+        groupStatusDropdown.layer.cornerRadius = 15
+        groupStatusDropdown.clipsToBounds = true
+
+        lookingForTeamContainer.translatesAutoresizingMaskIntoConstraints = false
+        lookingForMemberContainer.translatesAutoresizingMaskIntoConstraints = false
+
+        let lookingForTeamRecognizer = UITapGestureRecognizer(target: self, action: #selector(getProfilesLookingForTeam))
+        lookingForTeamContainer.isUserInteractionEnabled = true
+        lookingForTeamContainer.addGestureRecognizer(lookingForTeamRecognizer)
+
+        let lookingForMemberRecognizer = UITapGestureRecognizer(target: self, action: #selector(getProfilesLookingForMember))
+        lookingForMemberContainer.isUserInteractionEnabled = true
+        lookingForMemberContainer.addGestureRecognizer(lookingForMemberRecognizer)
+
+        groupStatusDropdown.addSubview(lookingForTeamContainer)
+        groupStatusDropdown.addSubview(lookingForMemberContainer)
+        lookingForTeamContainer.leadingAnchor.constraint(equalTo: groupStatusButton.leadingAnchor).isActive = true
+        lookingForTeamContainer.trailingAnchor.constraint(equalTo: groupStatusButton.trailingAnchor).isActive = true
+        lookingForTeamContainer.topAnchor.constraint(equalTo: groupStatusButton.bottomAnchor).isActive = true
+        lookingForTeamContainer.heightAnchor.constraint(equalToConstant: 40).isActive = true
+
+        lookingForTeamContainer.addSubview(lookingForTeamSelector)
+        lookingForTeamContainer.addSubview(lookingForTeamLabel)
+        lookingForTeamSelector.topAnchor.constraint(equalTo: lookingForTeamContainer.topAnchor).isActive = true
+        lookingForTeamSelector.centerYAnchor.constraint(equalTo: lookingForTeamContainer.centerYAnchor).isActive = true
+        lookingForTeamSelector.leadingAnchor.constraint(equalTo: lookingForTeamContainer.leadingAnchor, constant: 5).isActive = true
+        lookingForTeamSelector.widthAnchor.constraint(equalToConstant: 20).isActive = true
+
+        lookingForTeamLabel.topAnchor.constraint(equalTo: lookingForTeamSelector.topAnchor).isActive = true
+        lookingForTeamLabel.centerYAnchor.constraint(equalTo: lookingForTeamSelector.centerYAnchor).isActive = true
+        lookingForTeamLabel.leadingAnchor.constraint(equalTo: lookingForTeamSelector.trailingAnchor, constant: 5).isActive = true
+        lookingForTeamLabel.trailingAnchor.constraint(equalTo: lookingForTeamContainer.trailingAnchor).isActive = true
+
+        lookingForMemberContainer.leadingAnchor.constraint(equalTo: lookingForTeamContainer.leadingAnchor).isActive = true
+        lookingForMemberContainer.trailingAnchor.constraint(equalTo: groupStatusButton.trailingAnchor).isActive = true
+        lookingForMemberContainer.topAnchor.constraint(equalTo: lookingForTeamContainer.bottomAnchor, constant: 5).isActive = true
+        lookingForMemberContainer.heightAnchor.constraint(equalTo: lookingForTeamContainer.heightAnchor).isActive = true
+
+        lookingForMemberContainer.addSubview(lookingForMemberSelector)
+        lookingForMemberContainer.addSubview(lookingForMemberLabel)
+        lookingForMemberSelector.topAnchor.constraint(equalTo: lookingForMemberContainer.topAnchor).isActive = true
+        lookingForMemberSelector.centerYAnchor.constraint(equalTo: lookingForMemberContainer.centerYAnchor).isActive = true
+        lookingForMemberSelector.leadingAnchor.constraint(equalTo: lookingForMemberContainer.leadingAnchor, constant: 5).isActive = true
+        lookingForMemberSelector.widthAnchor.constraint(equalToConstant: 20).isActive = true
+
+        lookingForMemberLabel.topAnchor.constraint(equalTo: lookingForMemberSelector.topAnchor).isActive = true
+        lookingForMemberLabel.centerYAnchor.constraint(equalTo: lookingForMemberSelector.centerYAnchor).isActive = true
+        lookingForMemberLabel.leadingAnchor.constraint(equalTo: lookingForMemberSelector.trailingAnchor, constant: 5).isActive = true
+        lookingForMemberLabel.trailingAnchor.constraint(equalTo: lookingForMemberContainer.trailingAnchor).isActive = true
+        groupStatusDropdown.isHidden = true
+
         let tableView = HITableView()
-        view.addSubview(tableView)
+        view.insertSubview(tableView, belowSubview: groupStatusDropdown)
         tableView.topAnchor.constraint(equalTo: horizontalStackView.bottomAnchor, constant: 5).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -171,13 +255,23 @@ extension HIGroupViewController {
         super.viewDidLoad()
         setupRefreshControl()
     }
+
+    override func viewDidLayoutSubviews() {
+        groupStatusDropdown.frame = CGRect(x: groupStatusButton.frame.origin.x + horizontalStackView.frame.origin.x,
+                                           y: groupStatusButton.frame.origin.y + horizontalStackView.frame.origin.y, width: groupStatusButton.frame.width, height: 120)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        shouldPresentDropdown = false
+        groupStatusDropdown.isHidden = true
+    }
 }
 
 // MARK: - UINavigationItem Setup
 extension HIGroupViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
-        title = "Group Matching"
+        title = "GROUP MATCHING"
     }
 }
 
@@ -205,6 +299,6 @@ extension HIGroupViewController: HIGroupPopupViewDelegate {
             interests.remove(modifiedInterest)
         }
         interestParams = Array(interests)
-        HIProfileDataSource.refresh(teamStatus: teamStatusParam, interests: interestParams)
+        HIProfileDataSource.refresh(teamStatus: teamStatusParams, interests: interestParams)
     }
 }

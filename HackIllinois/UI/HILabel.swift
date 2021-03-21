@@ -46,6 +46,7 @@ class HILabel: UILabel {
         case sortText
         case sortElement
         case pointsText
+        case groupStatusFilter
     }
 
     // MARK: - Properties
@@ -235,6 +236,13 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.eventButtonText
             textAlignment = .center
+
+        case .groupStatusFilter:
+            textHIColor = \.titleText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.groupStatus
+            numberOfLines = 0
+
         }
         }
 

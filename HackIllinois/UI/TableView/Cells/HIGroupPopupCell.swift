@@ -41,7 +41,6 @@ class HIGroupPopupCell: UITableViewCell {
         selectedImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         selectedImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
         selectedImageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
-
     }
 
     required init?(coder aDecoder: NSCoder) {
