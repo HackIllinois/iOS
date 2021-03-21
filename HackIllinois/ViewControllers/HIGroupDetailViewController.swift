@@ -260,7 +260,7 @@ extension HIGroupDetailViewController: UICollectionViewDataSource {
 extension HIGroupDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let interest = interests[indexPath.row]
-        let bound = Int(collectionView.frame.width / 2)
+        let bound = Int(collectionView.frame.width)
         return CGSize(width: min((10 * interest.count) + 27, bound), height: 40)
     }
 }

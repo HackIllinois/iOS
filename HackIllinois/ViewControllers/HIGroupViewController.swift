@@ -262,7 +262,8 @@ extension HIGroupViewController {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        animateDropdownView()
+        shouldPresentDropdown = false
+        groupStatusDropdown.isHidden = true
     }
 }
 
