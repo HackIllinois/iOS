@@ -218,17 +218,18 @@ extension HIGroupDetailViewController {
             profilePictureView.downloadImage(from: url)
         }
         profileNameView.text = profile.firstName + " " + profile.lastName
-        if profile.teamStatus == "Looking for Team" {
+        let modifiedTeamStatus = profile.teamStatus.capitalized.replacingOccurrences(of: "_", with: " ")
+        if modifiedTeamStatus == "Looking For Team" {
             profileStatusIndicator.changeCircleColor(color: \.groupSearchText)
             profileStatusDescriptionView.changeTextColor(color: \.groupSearchText)
-        } else if profile.teamStatus == "Looking for Members" {
+        } else if modifiedTeamStatus == "Looking For Members" {
             profileStatusIndicator.changeCircleColor(color: \.memberSearchText)
             profileStatusDescriptionView.changeTextColor(color: \.memberSearchText)
         } else {
             profileStatusIndicator.changeCircleColor(color: \.noSearchText)
             profileStatusDescriptionView.changeTextColor(color: \.noSearchText)
         }
-        profileStatusDescriptionView.text = profile.teamStatus.capitalized
+        profileStatusDescriptionView.text = modifiedTeamStatus
         profilePointsView.text = "\(profile.points)"
         profileTimeView.text = profile.timezone
         profileDescriptionView.text = profile.info
@@ -239,7 +240,8 @@ extension HIGroupDetailViewController {
 
 }
 
-extension HIGroupDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+// MARK: - UICollectionViewDataSource
+extension HIGroupDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return interests.count
     }
@@ -254,6 +256,7 @@ extension HIGroupDetailViewController: UICollectionViewDataSource, UICollectionV
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension HIGroupDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let interest = interests[indexPath.row]

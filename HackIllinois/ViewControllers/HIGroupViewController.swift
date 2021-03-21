@@ -37,7 +37,7 @@ class HIGroupViewController: HIGroupListViewController {
     }()
     private let lookingForTeamContainer = UIView()
     private let lookingForTeamLabel = HILabel(style: .groupStatusFilter) {
-        $0.text = "Looking for Team"
+        $0.text = "Looking For Team"
     }
     private let lookingForTeamSelector = HIImageView {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -46,7 +46,7 @@ class HIGroupViewController: HIGroupListViewController {
     }
     private let lookingForMemberContainer = UIView()
     private let lookingForMemberLabel = HILabel(style: .groupStatusFilter) {
-        $0.text = "Looking for Members"
+        $0.text = "Looking For Members"
     }
     private let lookingForMemberSelector = HIImageView {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -64,7 +64,7 @@ class HIGroupViewController: HIGroupListViewController {
         $0.layer.shadowOffset = .zero
         $0.layer.shadowOpacity = 0.5
         $0.layer.shadowRadius = 5
-        $0.addTarget(self, action: #selector(addDropdownView), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(animateDropdownView), for: .touchUpInside)
     }
     private let skillSortButton = HIButton {
         $0.layer.cornerRadius = 15
@@ -89,8 +89,8 @@ class HIGroupViewController: HIGroupListViewController {
     var shouldActivateLookingForMember: Bool = false
     var shouldActivateLookingForTeam: Bool = false
     var shouldPresentDropdown: Bool = false
-    private var interests = Set<String>()
     private var selectedRows = Set<Int>()
+    private var interests = Set<String>()
     private var statuses = Set<String>()
 
     @objc dynamic override func setUpBackgroundView() {
@@ -124,23 +124,19 @@ extension HIGroupViewController {
         present(popupView, animated: true, completion: nil)
     }
 
-    @objc func addDropdownView() {
+    @objc func animateDropdownView() {
         shouldPresentDropdown.toggle()
         if shouldPresentDropdown {
-            HIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-                self.groupStatusDropdown.isHidden = false
-            }, completion: nil)
+            groupStatusDropdown.isHidden = false
         } else {
-            HIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-                self.groupStatusDropdown.isHidden = true
-            }, completion: nil)
+            groupStatusDropdown.isHidden = true
         }
     }
 
     @objc func getProfilesLookingForTeam() {
         shouldActivateLookingForTeam.toggle()
-        guard let status = lookingForTeamLabel.text else { return }
-        let modifiedStatus = status.replacingOccurrences(of: " ", with: "%20")
+        guard let status = lookingForTeamLabel.text?.uppercased() else { return }
+        let modifiedStatus = status.replacingOccurrences(of: " ", with: "_")
 
         if shouldActivateLookingForTeam {
             lookingForTeamSelector.changeImage(newImage: \.selectedGroupStatus)
@@ -149,14 +145,15 @@ extension HIGroupViewController {
             lookingForTeamSelector.changeImage(newImage: \.unselectedGroupStatus)
             statuses.remove(modifiedStatus)
         }
-        teamStatusParam = Array(statuses)
-        HIProfileDataSource.refresh(teamStatus: teamStatusParam, interests: interestParams)
+        teamStatusParams = Array(statuses)
+        HIProfileDataSource.refresh(teamStatus: teamStatusParams, interests: interestParams)
     }
 
     @objc func getProfilesLookingForMember() {
         shouldActivateLookingForMember.toggle()
-        guard let status = lookingForMemberLabel.text else { return }
-        let modifiedStatus = status.replacingOccurrences(of: " ", with: "%20")
+        guard let status = lookingForMemberLabel.text?.uppercased() else { return }
+        let modifiedStatus = status.replacingOccurrences(of: " ", with: "_")
+
         if shouldActivateLookingForMember {
             lookingForMemberSelector.changeImage(newImage: \.selectedGroupStatus)
             statuses.insert(modifiedStatus)
@@ -164,8 +161,8 @@ extension HIGroupViewController {
             lookingForMemberSelector.changeImage(newImage: \.unselectedGroupStatus)
             statuses.remove(modifiedStatus)
         }
-        teamStatusParam = Array(statuses)
-        HIProfileDataSource.refresh(teamStatus: teamStatusParam, interests: interestParams)
+        teamStatusParams = Array(statuses)
+        HIProfileDataSource.refresh(teamStatus: teamStatusParams, interests: interestParams)
     }
 }
 
@@ -263,6 +260,10 @@ extension HIGroupViewController {
         groupStatusDropdown.frame = CGRect(x: groupStatusButton.frame.origin.x + horizontalStackView.frame.origin.x,
                                            y: groupStatusButton.frame.origin.y + horizontalStackView.frame.origin.y, width: groupStatusButton.frame.width, height: 120)
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        animateDropdownView()
+    }
 }
 
 // MARK: - UINavigationItem Setup
@@ -297,6 +298,6 @@ extension HIGroupViewController: HIGroupPopupViewDelegate {
             interests.remove(modifiedInterest)
         }
         interestParams = Array(interests)
-        HIProfileDataSource.refresh(teamStatus: teamStatusParam, interests: interestParams)
+        HIProfileDataSource.refresh(teamStatus: teamStatusParams, interests: interestParams)
     }
 }

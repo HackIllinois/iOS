@@ -17,7 +17,7 @@ import APIManager
 
 class HIGroupListViewController: HIBaseViewController {
     let groupDetailViewController = HIGroupDetailViewController()
-    var teamStatusParam: [String] = []
+    var teamStatusParams: [String] = []
     var interestParams: [String] = []
 }
 
@@ -48,7 +48,7 @@ extension HIGroupListViewController {
 extension HIGroupListViewController {
     override func refresh(_ sender: UIRefreshControl) {
         super.refresh(sender)
-        HIProfileDataSource.refresh(teamStatus: teamStatusParam, interests: interestParams, completion: endRefreshing)
+        HIProfileDataSource.refresh(teamStatus: teamStatusParams, interests: interestParams, completion: endRefreshing)
     }
 }
 

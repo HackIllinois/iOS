@@ -132,17 +132,18 @@ extension HIGroupCell {
         let statusLabel = HILabel(style: .groupStatus)
         statusLabel.changeTextColor(color: \.groupSearchText)
 
-        if rhs.teamStatus == "Looking for Team" {
+        let modifiedTeamStatus = rhs.teamStatus.capitalized.replacingOccurrences(of: "_", with: " ")
+        if modifiedTeamStatus == "Looking For Team" {
             statusIndicator.changeCircleColor(color: \.groupSearchText)
             statusLabel.changeTextColor(color: \.groupSearchText)
-        } else if rhs.teamStatus == "Looking for Members" {
+        } else if modifiedTeamStatus == "Looking For Members" {
             statusIndicator.changeCircleColor(color: \.memberSearchText)
             statusLabel.changeTextColor(color: \.memberSearchText)
         } else {
             statusIndicator.changeCircleColor(color: \.noSearchText)
             statusLabel.changeTextColor(color: \.noSearchText)
         }
-        statusLabel.text = rhs.teamStatus.capitalized
+        statusLabel.text = modifiedTeamStatus
         innerVerticalStackViewHeight += statusLabel.intrinsicContentSize.height + 3
         statusContainer.addSubview(statusLabel)
         statusLabel.topAnchor.constraint(equalTo: statusContainer.topAnchor).isActive = true
