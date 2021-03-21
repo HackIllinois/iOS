@@ -16,6 +16,7 @@ import UIKit
 class HILabel: UILabel {
     // MARK: - Types
     enum Style {
+        case happeningEvents
         case location
         case event
         case eventTime
@@ -67,6 +68,11 @@ class HILabel: UILabel {
         translatesAutoresizingMaskIntoConstraints = false
         if let style = style {
         switch style {
+        case .happeningEvents:
+            textHIColor = \.titleText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.happeningEventTitle
+
         case .location:
             textHIColor = \.baseText
             backgroundHIColor = \.clear

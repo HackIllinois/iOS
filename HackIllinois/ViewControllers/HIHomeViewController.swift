@@ -45,23 +45,8 @@ class HIHomeViewController: HIEventListViewController {
 
     private var currentTab = 0
 
-    private var dataStore: [(displayText: String, predicate: NSPredicate)] = {
-        var dataStore = [(displayText: String, predicate: NSPredicate)]()
-        let happeningNowPredicate = NSPredicate(format: "(startTime < now()) AND (endTime > now())")
-        dataStore.append((displayText: "HAPPENING NOW ", predicate: happeningNowPredicate))
-
-        let inOneHour = Date(timeIntervalSinceNow: 3600)
-        let upcomingPredicate = NSPredicate(format: "(startTime < %@) AND (startTime > now())", inOneHour as NSDate)
-        dataStore.append((displayText: "UPCOMING", predicate: upcomingPredicate))
-
-        return dataStore
-    }()
-
     private let countdownTitleLabel = HILabel(style: .countdown)
     private lazy var countdownViewController = HICountdownViewController(delegate: self)
-    private let happeningNowLabel = HILabel(style: .title) {
-        $0.text = "HAPPENING NOW"
-    }
 //    private let announcementButton = HIButton {
 //        $0.tintHIColor = \.baseText
 //        $0.backgroundHIColor = \.clear
@@ -81,18 +66,13 @@ class HIHomeViewController: HIEventListViewController {
 
 // MARK: - Actions
 extension HIHomeViewController {
-    @objc func didSelectTab(_ sender: HISegmentedControl) {
-        currentTab = sender.selectedIndex
-        updatePredicate()
-        animateReload()
-    }
 
     func updatePredicate() {
         fetchedResultsController.fetchRequest.predicate = currentPredicate()
     }
 
     func currentPredicate() -> NSPredicate {
-        return dataStore[currentTab].predicate
+        return NSPredicate(format: "(startTime < now()) AND (endTime > now())")
     }
 
     func animateReload() {
@@ -131,19 +111,18 @@ extension HIHomeViewController {
         countdownViewController.view.constrain(height: 200)
         countdownViewController.didMove(toParent: self)
 
-        let items = dataStore.map { $0.displayText }
-        let segmentedControl = HISegmentedControl(items: items)
-        segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(segmentedControl)
-        segmentedControl.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor, constant: 12).isActive = true
-        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
-        segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
-        segmentedControl.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        let happeningEventsLabel = HILabel(style: .happeningEvents)
+        happeningEventsLabel.text = "Happening Now"
+        happeningEventsLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(happeningEventsLabel)
+        happeningEventsLabel.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor, constant: -20).isActive = true
+        happeningEventsLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
+        happeningEventsLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        happeningEventsLabel.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
         let tableView = HITableView()
         view.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 5).isActive = true
+        tableView.topAnchor.constraint(equalTo: happeningEventsLabel.bottomAnchor, constant: 5).isActive = true
         tableView.constrain(to: view.safeAreaLayoutGuide, trailingInset: 0, leadingInset: 0)
         tableView.constrain(to: view, bottomInset: 0)
         self.tableView = tableView
