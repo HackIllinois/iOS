@@ -29,7 +29,7 @@ final class HIProfileDataSource {
 
     // Waive swiftlint warning
     // swiftlint:disable:next function_body_length
-    static func refresh(teamStatus: String = "", interests: [String] = [], completion: (() -> Void)? = nil) {
+    static func refresh(teamStatus: [String] = [], interests: [String] = [], completion: (() -> Void)? = nil) {
         guard !isRefreshing else {
             completion?()
             return

@@ -63,7 +63,7 @@ class HIGroupDetailViewController: HIBaseViewController {
         $0.text = "Skills"
     }
     lazy var profileInterestsView: UICollectionView = {
-        let profileInterestsView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let profileInterestsView = UICollectionView(frame: .zero, collectionViewLayout: HICollectionViewFlowLayout())
         profileInterestsView.backgroundColor = .clear
         profileInterestsView.register(HIInterestCell.self, forCellWithReuseIdentifier: "interestCell")
         profileInterestsView.dataSource = self
@@ -218,12 +218,18 @@ extension HIGroupDetailViewController {
             profilePictureView.downloadImage(from: url)
         }
         profileNameView.text = profile.firstName + " " + profile.lastName
-        //TODO: Update color based on how each team status is represented in API
-        if profile.teamStatus == "looking" {
+        let modifiedTeamStatus = profile.teamStatus.capitalized.replacingOccurrences(of: "_", with: " ")
+        if modifiedTeamStatus == "Looking For Team" {
             profileStatusIndicator.changeCircleColor(color: \.groupSearchText)
             profileStatusDescriptionView.changeTextColor(color: \.groupSearchText)
+        } else if modifiedTeamStatus == "Looking For Members" {
+            profileStatusIndicator.changeCircleColor(color: \.memberSearchText)
+            profileStatusDescriptionView.changeTextColor(color: \.memberSearchText)
+        } else {
+            profileStatusIndicator.changeCircleColor(color: \.noSearchText)
+            profileStatusDescriptionView.changeTextColor(color: \.noSearchText)
         }
-        profileStatusDescriptionView.text = profile.teamStatus.capitalized
+        profileStatusDescriptionView.text = modifiedTeamStatus
         profilePointsView.text = "\(profile.points)"
         profileTimeView.text = profile.timezone
         profileDescriptionView.text = profile.info
@@ -234,7 +240,8 @@ extension HIGroupDetailViewController {
 
 }
 
-extension HIGroupDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+// MARK: - UICollectionViewDataSource
+extension HIGroupDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return interests.count
     }
@@ -249,9 +256,11 @@ extension HIGroupDetailViewController: UICollectionViewDataSource, UICollectionV
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension HIGroupDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let interest = interests[indexPath.row]
-        return CGSize(width: (15 * interest.count) + 30, height: 40)
+        let bound = Int(collectionView.frame.width)
+        return CGSize(width: min((10 * interest.count) + 27, bound), height: 40)
     }
 }
