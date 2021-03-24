@@ -156,7 +156,7 @@ extension HIHomeViewController {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
         segmentedControl.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor, constant: -20).isActive = true
-        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
+        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
         segmentedControl.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
