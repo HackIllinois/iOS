@@ -41,9 +41,11 @@ class HIHomeViewController: HIEventListViewController {
         return fetchedResultsController
     }()
 
-    let announcementViewController = HIAnnouncementsViewController()
+//    let announcementViewController = HIAnnouncementsViewController()
 
     private var currentTab = 0
+
+    private var dataStore: [String] = ["Ongoing", "Upcoming"]
 
     private let countdownTitleLabel = HILabel(style: .countdown)
     private lazy var countdownViewController = HICountdownViewController(delegate: self)
@@ -73,12 +75,24 @@ class HIHomeViewController: HIEventListViewController {
 // MARK: - Actions
 extension HIHomeViewController {
 
+    @objc func didSelectTab(_ sender: HISegmentedControl) {
+        currentTab = sender.selectedIndex
+        updatePredicate()
+        animateReload()
+    }
+
     func updatePredicate() {
         fetchedResultsController.fetchRequest.predicate = currentPredicate()
     }
 
     func currentPredicate() -> NSPredicate {
-        return NSPredicate(format: "(startTime < now()) AND (endTime > now())")
+        if currentTab == 0 {
+            return NSPredicate(format: "(startTime < now()) AND (endTime > now())")
+        } else {
+            let inTwoHours = Date(timeIntervalSinceNow: 7200)
+            let upcomingPredicate = NSPredicate(format: "(startTime < %@) AND (startTime > now())", inTwoHours as NSDate)
+            return upcomingPredicate
+        }
     }
 
     func animateReload() {
@@ -136,18 +150,27 @@ extension HIHomeViewController {
         countdownViewController.view.constrain(height: 200)
         countdownViewController.didMove(toParent: self)
 
-        let happeningEventsLabel = HILabel(style: .happeningEvents)
-        happeningEventsLabel.text = "Happening Now"
-        happeningEventsLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(happeningEventsLabel)
-        happeningEventsLabel.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor, constant: -20).isActive = true
-        happeningEventsLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-        happeningEventsLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        happeningEventsLabel.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        let items = dataStore.map { $0 }
+        let segmentedControl = HISegmentedControl(items: items)
+        segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(segmentedControl)
+        segmentedControl.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor, constant: -20).isActive = true
+        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
+        segmentedControl.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        segmentedControl.heightAnchor.constraint(equalToConstant: 44).isActive = true
+
+        let separator = UIView()
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        separator.backgroundColor <- \.titleText
+        self.view.addSubview(separator)
+        separator.constrain(height: 1)
+        separator.constrain(to: view, trailingInset: 0, leadingInset: 0)
+        separator.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10).isActive = true
 
         let tableView = HITableView()
         view.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: happeningEventsLabel.bottomAnchor, constant: 5).isActive = true
+        tableView.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 10).isActive = true
         tableView.constrain(to: view.safeAreaLayoutGuide, trailingInset: 0, leadingInset: 0)
         tableView.constrain(to: view, bottomInset: 0)
         self.tableView = tableView
