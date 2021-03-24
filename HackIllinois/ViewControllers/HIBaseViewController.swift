@@ -53,7 +53,7 @@ extension HIBaseViewController {
 extension HIBaseViewController {
     @objc dynamic func setUpBackgroundView() {
         view.layer.backgroundColor = UIColor.clear.cgColor
-        backgroundView.image = #imageLiteral(resourceName: "Gradient")
+        backgroundView.image = #imageLiteral(resourceName: "Night")
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.isUserInteractionEnabled = true
         backgroundView.contentMode = .scaleAspectFill
