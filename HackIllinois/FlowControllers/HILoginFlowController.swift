@@ -86,18 +86,6 @@ extension HILoginFlowController {
             animationView.contentMode = .scaleAspectFill
             animationView.frame = view.frame
             animationView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
-            // Add gradient background behind animation
-            animationBackgroundView.image = #imageLiteral(resourceName: "Gradient")
-            animationBackgroundView.translatesAutoresizingMaskIntoConstraints = false
-            animationBackgroundView.isUserInteractionEnabled = true
-            animationBackgroundView.contentMode = .scaleAspectFill
-            view.addSubview(animationBackgroundView)
-            animationBackgroundView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-            animationBackgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-            animationBackgroundView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-            animationBackgroundView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-
             view.addSubview(animationView)
         }
     }

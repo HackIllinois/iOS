@@ -42,6 +42,7 @@
     <entity name="Profile" representedClassName="Profile" syncable="YES">
         <attribute name="avatarUrl" attributeType="String"/>
         <attribute name="discord" attributeType="String"/>
+        <attribute name="favorite" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="firstName" attributeType="String"/>
         <attribute name="id" attributeType="String"/>
         <attribute name="info" attributeType="String"/>
@@ -70,7 +71,7 @@
         <element name="Announcement" positionX="-63" positionY="72" width="128" height="103"/>
         <element name="Event" positionX="-54" positionY="36" width="128" height="178"/>
         <element name="Location" positionX="-54" positionY="108" width="128" height="103"/>
+        <element name="Profile" positionX="-45" positionY="135" width="128" height="208"/>
         <element name="Project" positionX="-45" positionY="108" width="128" height="163"/>
-        <element name="Profile" positionX="-45" positionY="135" width="128" height="193"/>
     </elements>
 </model>

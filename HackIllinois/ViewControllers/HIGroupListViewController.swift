@@ -70,13 +70,39 @@ extension HIGroupListViewController {
         groupDetailViewController.profile = profile
         groupDetailViewController.interests = interests
         groupDetailViewController.profileInterestsView.reloadData()
+        groupDetailViewController.modalPresentationStyle = .overCurrentContext
+        groupDetailViewController.modalTransitionStyle = .crossDissolve
         self.present(groupDetailViewController, animated: true, completion: nil)
         super.tableView(tableView, didSelectRowAt: indexPath)
     }
 }
 
 // MARK: - HIGroupCellDelegate
-// Add HIGroupCellDelegate & func groupCellDidSelectFavoriteButton
+extension HIGroupListViewController: HIGroupCellDelegate {
+    func groupCellDidSelectFavoriteButton(_ groupCell: HIGroupCell) {
+        guard let indexPath = groupCell.indexPath,
+            let profile = _fetchedResultsController?.object(at: indexPath) as? Profile else { return }
+
+        let changeFavoriteStatusRequest: APIRequest<ProfileFavorites> =
+            groupCell.favoritedButton.isActive ?
+                HIAPI.ProfileService.unfavoriteBy(id: profile.id) :
+                HIAPI.ProfileService.favoriteBy(id: profile.id)
+
+        changeFavoriteStatusRequest
+        .onCompletion { result in
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    profile.favorite.toggle()
+                }
+            case .failure(let error):
+                print(error, error.localizedDescription)
+            }
+        }
+        .authorize(with: HIApplicationStateController.shared.user)
+        .launch()
+    }
+}
 
 // MARK: - UIViewControllerPreviewingDelegate
 extension HIGroupListViewController: UIViewControllerPreviewingDelegate {

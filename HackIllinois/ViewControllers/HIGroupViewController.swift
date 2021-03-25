@@ -81,7 +81,8 @@ class HIGroupViewController: HIGroupListViewController {
     }
     private var currentTab = 0
     private var onlyFavorites = false
-    private let onlyFavoritesPredicate = NSPredicate(format: "favorite == YES" )
+    private let onlyFavoritesPredicate = NSPredicate(format: "favorite == YES")
+    private let allPredicate = NSPredicate(format: "favorite == YES OR favorite == NO")
     private let transparentBackground = HIView()
     private var selectedButton = HIButton()
     private let groupStatusDropdown = UIView()
@@ -108,6 +109,26 @@ extension HIGroupViewController {
 
 // MARK: - Actions
 extension HIGroupViewController {
+
+    @objc func didSelectFavoritesIcon(_ sender: UIBarButtonItem) {
+        onlyFavorites = !onlyFavorites
+        sender.image = onlyFavorites ? #imageLiteral(resourceName: "MenuFavorited") : #imageLiteral(resourceName: "MenuUnfavorited")
+        updatePredicate()
+        animateReload()
+    }
+
+    func updatePredicate() {
+        fetchedResultsController.fetchRequest.predicate = currentPredicate()
+    }
+
+    func currentPredicate() -> NSPredicate {
+        if onlyFavorites {
+            return onlyFavoritesPredicate
+        } else {
+            return allPredicate
+        }
+    }
+
     func animateReload() {
         try? fetchedResultsController.performFetch()
         animateTableViewReload()
@@ -272,6 +293,9 @@ extension HIGroupViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
         title = "GROUP MATCHING"
+        if !HIApplicationStateController.shared.isGuest {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuUnfavorited"), style: .plain, target: self, action: #selector(didSelectFavoritesIcon(_:)))
+        }
     }
 }
 
