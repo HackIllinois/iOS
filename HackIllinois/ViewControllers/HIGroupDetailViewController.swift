@@ -219,6 +219,7 @@ extension HIGroupDetailViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        scrollView.setContentOffset(.zero, animated: true)
         guard let profile = profile else { return }
         view.layoutIfNeeded()
 

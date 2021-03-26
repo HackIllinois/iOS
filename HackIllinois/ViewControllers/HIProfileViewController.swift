@@ -204,6 +204,7 @@ extension HIProfileViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        scrollView.setContentOffset(.zero, animated: true)
         guard let profile = HIApplicationStateController.shared.profile else { return }
         view.layoutIfNeeded()
 
