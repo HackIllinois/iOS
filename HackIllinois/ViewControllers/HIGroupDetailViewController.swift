@@ -238,6 +238,10 @@ extension HIGroupDetailViewController {
         profileDiscordImageView.image = #imageLiteral(resourceName: "DiscordLogo")
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        self.dismiss(animated: true, completion: nil)
+    }
+
 }
 
 // MARK: - UICollectionViewDataSource
