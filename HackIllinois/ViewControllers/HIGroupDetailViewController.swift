@@ -30,7 +30,7 @@ class HIGroupDetailViewController: HIBaseViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.clear
     }
-//    private let scrollView = UIScrollView(frame: .zero)
+    private let scrollView = UIScrollView(frame: .zero)
     private let profilePictureView = HIImageView {
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
@@ -71,6 +71,7 @@ class HIGroupDetailViewController: HIBaseViewController {
         profileInterestsView.translatesAutoresizingMaskIntoConstraints = false
         return profileInterestsView
     }()
+    private var profileInterestsViewHeight = NSLayoutConstraint()
 
     @objc dynamic override func setUpBackgroundView() {
             super.setUpBackgroundView()
@@ -96,17 +97,26 @@ extension HIGroupDetailViewController {
 extension HIGroupDetailViewController {
     override func loadView() {
         super.loadView()
+
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(scrollView)
+        scrollView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        scrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+
         view.addSubview(closeButton)
         closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
         closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
         closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         closeButton.constrain(height: 20)
 
-        view.addSubview(contentView)
-        contentView.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 10).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        contentView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        contentView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
+        scrollView.addSubview(contentView)
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 40).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
 
         contentView.addSubview(profilePictureView)
         profilePictureView.constrain(to: contentView, topInset: 0)
@@ -200,17 +210,19 @@ extension HIGroupDetailViewController {
         profileInterestsLabelView.heightAnchor.constraint(equalToConstant: 20).isActive = true
         profileInterestsLabelView.leadingAnchor.constraint(equalTo: profileDiscordImageView.leadingAnchor).isActive = true
 
-        profileInterestsView.alwaysBounceVertical = true
-        profileInterestsView.bounces = true
+        profileInterestsView.isScrollEnabled = false
         descriptionContentView.addSubview(profileInterestsView)
         profileInterestsView.topAnchor.constraint(equalTo: profileInterestsLabelView.bottomAnchor, constant: 10).isActive = true
         profileInterestsView.bottomAnchor.constraint(equalTo: descriptionContentView.bottomAnchor).isActive = true
         profileInterestsView.leadingAnchor.constraint(equalTo: profileInterestsLabelView.leadingAnchor).isActive = true
         profileInterestsView.trailingAnchor.constraint(equalTo: descriptionContentView.trailingAnchor).isActive = true
+        profileInterestsViewHeight = profileInterestsView.heightAnchor.constraint(equalToConstant: 0)
+        profileInterestsViewHeight.isActive = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        scrollView.setContentOffset(.zero, animated: true)
         guard let profile = profile else { return }
         view.layoutIfNeeded()
 
@@ -236,6 +248,10 @@ extension HIGroupDetailViewController {
         profileDiscordUsernameView.text = profile.discord
 
         profileDiscordImageView.image = #imageLiteral(resourceName: "DiscordLogo")
+    }
+
+    override func viewDidLayoutSubviews() {
+        profileInterestsViewHeight.constant = profileInterestsView.collectionViewLayout.collectionViewContentSize.height + 20
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -265,6 +281,6 @@ extension HIGroupDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let interest = interests[indexPath.row]
         let bound = Int(collectionView.frame.width)
-        return CGSize(width: min((10 * interest.count) + 27, bound), height: 40)
+        return CGSize(width: min((10 * interest.count) + 35, bound), height: 40)
     }
 }

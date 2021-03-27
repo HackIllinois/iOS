@@ -22,6 +22,7 @@ class HIProfileViewController: HIBaseViewController {
         $0.baseImage = #imageLiteral(resourceName: "Pencil")
     }
 
+    private let scrollView = UIScrollView(frame: .zero)
     private let contentView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.clear
@@ -77,6 +78,7 @@ class HIProfileViewController: HIBaseViewController {
         profileInterestsView.translatesAutoresizingMaskIntoConstraints = false
         return profileInterestsView
     }()
+    private var profileInterestsViewHeight = NSLayoutConstraint()
     var interests: [String] = []
 
     @objc dynamic override func setUpBackgroundView() {
@@ -99,11 +101,19 @@ extension HIProfileViewController {
         self.navigationItem.rightBarButtonItem = editButton.toBarButtonItem()
         // To add action
         editButton.constrain(width: 22, height: 22)
-        view.addSubview(contentView)
-        contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        contentView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        contentView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(scrollView)
+        scrollView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        scrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        scrollView.addSubview(contentView)
+
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         contentView.addSubview(profilePictureView)
         profilePictureView.constrain(to: contentView, topInset: 0)
         profilePictureView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
@@ -184,17 +194,19 @@ extension HIProfileViewController {
         profileInterestsLabelView.topAnchor.constraint(equalTo: profileDiscordImageView.bottomAnchor, constant: 20).isActive = true
         profileInterestsLabelView.heightAnchor.constraint(equalToConstant: 20).isActive = true
         profileInterestsLabelView.leadingAnchor.constraint(equalTo: profileDiscordImageView.leadingAnchor).isActive = true
-        profileInterestsView.alwaysBounceVertical = true
-        profileInterestsView.bounces = true
+        profileInterestsView.isScrollEnabled = false
         descriptionContentView.addSubview(profileInterestsView)
         profileInterestsView.topAnchor.constraint(equalTo: profileInterestsLabelView.bottomAnchor, constant: 10).isActive = true
         profileInterestsView.bottomAnchor.constraint(equalTo: descriptionContentView.bottomAnchor).isActive = true
         profileInterestsView.leadingAnchor.constraint(equalTo: profileInterestsLabelView.leadingAnchor).isActive = true
         profileInterestsView.trailingAnchor.constraint(equalTo: descriptionContentView.trailingAnchor).isActive = true
+        profileInterestsViewHeight = profileInterestsView.heightAnchor.constraint(equalToConstant: 0)
+        profileInterestsViewHeight.isActive = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        scrollView.setContentOffset(.zero, animated: true)
         guard let profile = HIApplicationStateController.shared.profile else { return }
         view.layoutIfNeeded()
 
@@ -223,6 +235,11 @@ extension HIProfileViewController {
 
         profileDiscordImageView.image = #imageLiteral(resourceName: "DiscordLogo")
     }
+
+    override func viewDidLayoutSubviews() {
+        profileInterestsViewHeight.constant = profileInterestsView.collectionViewLayout.collectionViewContentSize.height + 20
+    }
+
 }
 
 // MARK: - UICollectionViewDataSource
@@ -245,6 +262,6 @@ extension HIProfileViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let interest = interests[indexPath.row]
         let bound = Int(collectionView.frame.width)
-        return CGSize(width: min((10 * interest.count) + 27, bound), height: 40)
+        return CGSize(width: min((10 * interest.count) + 35, bound), height: 40)
     }
 }
