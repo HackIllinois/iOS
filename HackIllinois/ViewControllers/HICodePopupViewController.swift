@@ -37,7 +37,7 @@ class HICodePopupViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.interestBackground
         $0.title = "Submit"
-        $0.titleLabel?.font = HIAppearance.Font.loginSelection
+        $0.titleLabel?.font = HIAppearance.Font.detailTitle
         $0.titleLabel?.baselineAdjustment = .alignCenters
         $0.layer.cornerRadius = 15
     }
@@ -45,18 +45,20 @@ class HICodePopupViewController: UIViewController {
         $0.placeholder = "Type your code here"
         $0.textAlignment = .center
         $0.keyboardAppearance = .dark
-        $0.font = HIAppearance.Font.contentText
+        $0.font = HIAppearance.Font.profileDescription
         $0.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     }
     private let viewLabel = HILabel {
         $0.text = "Collect your points!"
-        $0.font = HIAppearance.Font.loginSelection
+        $0.font = HIAppearance.Font.detailTitle
+        $0.backgroundHIColor = \.qrBackground
     }
+    private let popupImage = UIImage(named: "CodePopup")
     private let codeImage = HIImageView {
-        $0.image = UIImage(named: "CodePopup")
+        $0.layer.masksToBounds = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.contentMode = .scaleAspectFit
     }
-    private let contentStackView = UIStackView()
-    
 }
 
 // MARK: Actions
@@ -87,6 +89,7 @@ extension HICodePopupViewController {
     override func loadView() {
         super.loadView()
         view.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.7)
+        codeImage.image = popupImage
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didSelectBackground))
         gestureRecognizer.delegate = self
         view.addGestureRecognizer(gestureRecognizer)
@@ -98,19 +101,24 @@ extension HICodePopupViewController {
         containerView.addSubview(exitButton)
         exitButton.constrain(to: containerView, topInset: 8, leadingInset: 8)
 
-        containerView.addSubview(contentStackView)
-        contentStackView.axis = .vertical
-        contentStackView.distribution = .equalCentering
-        contentStackView.translatesAutoresizingMaskIntoConstraints = false
-        contentStackView.topAnchor.constraint(equalTo: exitButton.centerYAnchor).isActive = true
-        contentStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        contentStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        contentStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10).isActive = true
-        
-        //contentStackView.addArrangedSubview(codeImage)
-        contentStackView.addArrangedSubview(viewLabel)
-        contentStackView.addArrangedSubview(textField)
-        contentStackView.addArrangedSubview(submitButton)
+        containerView.addSubview(codeImage)
+        codeImage.constrain(to: containerView, topInset: 15)
+        codeImage.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        codeImage.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 15).isActive = true
+        codeImage.constrain(width: 125, height: 125)
+
+        containerView.addSubview(viewLabel)
+        viewLabel.topAnchor.constraint(equalTo: codeImage.bottomAnchor, constant: 20).isActive = true
+        viewLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+
+        containerView.addSubview(textField)
+        textField.topAnchor.constraint(equalTo: viewLabel.bottomAnchor, constant: 30).isActive = true
+        textField.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+
+        containerView.addSubview(submitButton)
+        submitButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -15).isActive = true
+        submitButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        submitButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.4).isActive = true
     }
 }
 
