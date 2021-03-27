@@ -14,7 +14,7 @@ import Foundation
 import UIKit
 
 class HITabBarController: UITabBarController {
-    lazy var qrPopup = HIPopupViewController()
+    lazy var qrPopup = HICodePopupViewController()
     private var tabBarShapeLayer: CAShapeLayer?
 
     // Animation for when a tab bar item is clicked
