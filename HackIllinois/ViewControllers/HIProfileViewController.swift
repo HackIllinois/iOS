@@ -78,6 +78,7 @@ class HIProfileViewController: HIBaseViewController {
         profileInterestsView.translatesAutoresizingMaskIntoConstraints = false
         return profileInterestsView
     }()
+    private var profileInterestsViewHeight = NSLayoutConstraint()
     var interests: [String] = []
 
     @objc dynamic override func setUpBackgroundView() {
@@ -199,7 +200,8 @@ extension HIProfileViewController {
         profileInterestsView.bottomAnchor.constraint(equalTo: descriptionContentView.bottomAnchor).isActive = true
         profileInterestsView.leadingAnchor.constraint(equalTo: profileInterestsLabelView.leadingAnchor).isActive = true
         profileInterestsView.trailingAnchor.constraint(equalTo: descriptionContentView.trailingAnchor).isActive = true
-        profileInterestsView.heightAnchor.constraint(equalToConstant: 500).isActive = true
+        profileInterestsViewHeight = profileInterestsView.heightAnchor.constraint(equalToConstant: 0)
+        profileInterestsViewHeight.isActive = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -233,6 +235,11 @@ extension HIProfileViewController {
 
         profileDiscordImageView.image = #imageLiteral(resourceName: "DiscordLogo")
     }
+
+    override func viewDidLayoutSubviews() {
+        profileInterestsViewHeight.constant = profileInterestsView.collectionViewLayout.collectionViewContentSize.height + 20
+    }
+
 }
 
 // MARK: - UICollectionViewDataSource
