@@ -133,6 +133,9 @@
 		BCD0CA5123C4356300ADC89B /* HIPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD0CA5023C4356300ADC89B /* HIPopupViewController.swift */; };
 		BCEBD2DA23DE995700D32F5A /* HIPopupAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEBD2D923DE995700D32F5A /* HIPopupAnimator.swift */; };
 		BF0FDA3925F4DCCD003B5DB1 /* HIScheduleSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0FDA3825F4DCCD003B5DB1 /* HIScheduleSegmentedControl.swift */; };
+		BFB1FD32261053F000500008 /* HIEditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB1FD31261053F000500008 /* HIEditProfileViewController.swift */; };
+		BFB1FD38261053FE00500008 /* HIEditProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB1FD37261053FE00500008 /* HIEditProfileDetailViewController.swift */; };
+		BFB1FD3E26105EA400500008 /* HIEditProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB1FD3D26105EA400500008 /* HIEditProfileCell.swift */; };
 		D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A309BB2211175200CBA351 /* PassKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -306,6 +309,9 @@
 		BCD0CA5023C4356300ADC89B /* HIPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIPopupViewController.swift; sourceTree = "<group>"; };
 		BCEBD2D923DE995700D32F5A /* HIPopupAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HIPopupAnimator.swift; path = HackIllinois/UI/Animations/HIPopupAnimator.swift; sourceTree = SOURCE_ROOT; };
 		BF0FDA3825F4DCCD003B5DB1 /* HIScheduleSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScheduleSegmentedControl.swift; sourceTree = "<group>"; };
+		BFB1FD31261053F000500008 /* HIEditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEditProfileViewController.swift; sourceTree = "<group>"; };
+		BFB1FD37261053FE00500008 /* HIEditProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEditProfileDetailViewController.swift; sourceTree = "<group>"; };
+		BFB1FD3D26105EA400500008 /* HIEditProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEditProfileCell.swift; sourceTree = "<group>"; };
 		D3A309BA221116A600CBA351 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };
 		D3A309BB2211175200CBA351 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -500,6 +506,8 @@
 				95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */,
 				A5163FEA221F2741003C543E /* HIAdminStatsViewController.swift */,
 				98CA2A3D25C899CF003E842A /* HIProfileViewController.swift */,
+				BFB1FD31261053F000500008 /* HIEditProfileViewController.swift */,
+				BFB1FD37261053FE00500008 /* HIEditProfileDetailViewController.swift */,
 				3CF8DB1423B41D0A0035ECAE /* HIProjectListViewController.swift */,
 				3CF8DB1623B41F350035ECAE /* HIProjectDetailViewController.swift */,
 				3CF8DB1823B42B240035ECAE /* HIProjectViewController.swift */,
@@ -584,6 +592,7 @@
 				95A7D284203D4F54005EAEAF /* HILoginSelectionCell.swift */,
 				AC38BEA223FE3E800067ABAC /* HIProjectDetailLocationCell.swift */,
 				ACBFE29725EAE79000C94732 /* HIGroupPopupCell.swift */,
+				BFB1FD3D26105EA400500008 /* HIEditProfileCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -772,14 +781,11 @@
 				TargetAttributes = {
 					35D7CE9320380ACF00654E28 = {
 						CreatedOnToolsVersion = 9.2;
-						DevelopmentTeam = 8VNQTQM2L6;
 						ProvisioningStyle = Automatic;
 					};
 					9518277E1EA35AF100049F79 = {
 						CreatedOnToolsVersion = 8.3;
-						DevelopmentTeam = 8VNQTQM2L6;
 						LastSwiftMigration = 1130;
-						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -911,6 +917,7 @@
 				95FC1D1E1FCBD20E00F8AD60 /* HIUserDetailViewController.swift in Sources */,
 				95C3BE302008B99C0008ED79 /* HIBaseViewController.swift in Sources */,
 				3CF8DB1923B42B240035ECAE /* HIProjectViewController.swift in Sources */,
+				BFB1FD3E26105EA400500008 /* HIEditProfileCell.swift in Sources */,
 				3CF8DB1523B41D0A0035ECAE /* HIProjectListViewController.swift in Sources */,
 				95CD0ED52015217E00D79DCC /* HIApplicationStateController.swift in Sources */,
 				95B12041220BDDEF00E024BB /* HICheckInScannerViewController.swift in Sources */,
@@ -925,6 +932,7 @@
 				ACBFE29A25EB2C9700C94732 /* HIInterest.swift in Sources */,
 				35B4A44F21E091BA001B3AF0 /* Logger.swift in Sources */,
 				9544799C200C39870005408B /* HIUser.swift in Sources */,
+				BFB1FD32261053F000500008 /* HIEditProfileViewController.swift in Sources */,
 				95A7D28B203D4F54005EAEAF /* HISegmentedControl.swift in Sources */,
 				957A4D7D21FDA71F007FDE0E /* MixTypeComparable.swift in Sources */,
 				95F5B4A0220BCFFF00C59992 /* HIIndoorMapsViewController.swift in Sources */,
@@ -945,6 +953,7 @@
 				95A7D28D203D4F54005EAEAF /* Identifiable.swift in Sources */,
 				9521A6A820191590009059C6 /* HIEventDataSource.swift in Sources */,
 				95D6DA78203F8C3900E7C982 /* HITintImageView.swift in Sources */,
+				BFB1FD38261053FE00500008 /* HIEditProfileDetailViewController.swift in Sources */,
 				95FC79C121E0243D00715036 /* Operators.swift in Sources */,
 				95A7D294203D4F54005EAEAF /* HIDateHeader.swift in Sources */,
 				95D6DA7A203F983700E7C982 /* HILocalNotificationController.swift in Sources */,
@@ -1025,12 +1034,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = 8VNQTQM2L6;
+				DEVELOPMENT_TEAM = MY4X4HTK85;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Stickers/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 2020.2.1;
-				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios.stickers;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hackillinoisasdf.ios.stickers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1046,12 +1055,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = 8VNQTQM2L6;
+				DEVELOPMENT_TEAM = MY4X4HTK85;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Stickers/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 2020.2.1;
-				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios.stickers;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hackillinoisasdf.ios.stickers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1176,9 +1185,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HackIllinois/HackIllinois.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = 8VNQTQM2L6;
+				DEVELOPMENT_TEAM = MY4X4HTK85;
 				INFOPLIST_FILE = HackIllinois/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1186,8 +1196,9 @@
 				);
 				MARKETING_VERSION = 2020.2.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -warn-long-expression-type-checking=150";
-				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hackillinoisasdf.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1201,14 +1212,14 @@
 				CODE_SIGN_ENTITLEMENTS = HackIllinois/HackIllinois.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = 8VNQTQM2L6;
+				DEVELOPMENT_TEAM = MY4X4HTK85;
 				INFOPLIST_FILE = HackIllinois/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2020.2.1;
-				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hackillinoisasdf.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

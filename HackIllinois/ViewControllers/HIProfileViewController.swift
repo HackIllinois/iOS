@@ -14,8 +14,12 @@ import Foundation
 import UIKit
 import CoreData
 
+//TODO: - refresh profile ever time profile opens
+
 class HIProfileViewController: HIBaseViewController {
     // MARK: - Properties
+    private let editViewController = HIEditProfileViewController()
+    
     private let editButton = HIButton {
         $0.tintHIColor = \.baseText
         $0.backgroundHIColor = \.clear
@@ -99,6 +103,8 @@ extension HIProfileViewController {
         self.navigationItem.rightBarButtonItem = editButton.toBarButtonItem()
         // To add action
         editButton.constrain(width: 22, height: 22)
+        editButton.addTarget(self, action: #selector(didSelectEditButton(_:)), for: .touchUpInside)
+        _ = editViewController.view
         view.addSubview(contentView)
         contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
@@ -246,5 +252,14 @@ extension HIProfileViewController: UICollectionViewDelegateFlowLayout {
         let interest = interests[indexPath.row]
         let bound = Int(collectionView.frame.width)
         return CGSize(width: min((10 * interest.count) + 27, bound), height: 40)
+    }
+}
+
+// MARK: - Navigation
+extension HIProfileViewController {
+    @objc func didSelectEditButton(_ sender: UIButton) {
+        if let navController = navigationController as? HINavigationController {
+            navController.pushViewController(editViewController, animated: true)
+        }
     }
 }
