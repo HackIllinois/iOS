@@ -56,6 +56,7 @@ extension HIEditProfileViewController {
         if let url = URL(string: profile.avatarUrl) {
             profileImageView.downloadImage(from: url)
         }
+        tableView?.reloadData()
     }
 
     override func viewDidLoad() {
@@ -70,10 +71,6 @@ extension HIEditProfileViewController {
 extension HIEditProfileViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
-        
-//        if !HIApplicationStateController.shared.isGuest {
-//            navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuUnfavorited"), style: .plain, target: self, action: #selector(didSelectFavoritesIcon(_:)))
-//        }
     }
 
 }
@@ -122,7 +119,7 @@ extension HIEditProfileViewController {
         let editingField = HIEditProfileDetailViewController.EditingFields(rawValue: profileItems[indexPath.row])
         let strValue = getStringFromAttributeIndex(of: indexPath.row)
         
-        editController.initializeData(editingField: editingField!, textFieldValue: strValue, characterLimit: 100, teamStatus: strValue == "LOOKING_FOR_MEMBERS" ? 1 : 0, interests: HIApplicationStateController.shared.profile?.interests)
+        editController.initializeData(editingField: editingField!, textFieldValue: strValue, characterLimit: 100, teamStatus: strValue, interests: HIApplicationStateController.shared.profile?.interests)
         
         if let navController = self.navigationController as? HINavigationController {
             navController.pushViewController(editController, animated: true)
@@ -144,7 +141,7 @@ extension HIEditProfileViewController {
         case 1:
             return profile.lastName
         case 2:
-            return profile.teamStatus
+            return profile.teamStatus.capitalized.replacingOccurrences(of: "_", with: " ")
         case 3:
             return profile.info
         case 4:

@@ -13,8 +13,7 @@
 import Foundation
 import UIKit
 import CoreData
-
-//TODO: - refresh profile ever time profile opens
+import HIAPI
 
 class HIProfileViewController: HIBaseViewController {
     // MARK: - Properties
@@ -201,9 +200,14 @@ extension HIProfileViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateProfile()
+        reloadProfile()
+    }
+    
+    func updateProfile() {
         guard let profile = HIApplicationStateController.shared.profile else { return }
         view.layoutIfNeeded()
-
+        
         if let url = URL(string: profile.avatarUrl) {
             profilePictureView.downloadImage(from: url)
         }
@@ -228,6 +232,7 @@ extension HIProfileViewController {
         profileInterestsView.reloadData()
 
         profileDiscordImageView.image = #imageLiteral(resourceName: "DiscordLogo")
+        
     }
 }
 
@@ -262,4 +267,40 @@ extension HIProfileViewController {
             navController.pushViewController(editViewController, animated: true)
         }
     }
+}
+
+// MARK: - API
+extension HIProfileViewController {
+    func reloadProfile () {
+        
+        guard let user = HIApplicationStateController.shared.user else { return }
+        HIAPI.ProfileService.getUserProfile()
+        .onCompletion { [weak self] result in
+            do {
+                let (apiProfile, _) = try result.get()
+                var profile = HIProfile()
+                profile.id = apiProfile.id
+                profile.firstName = apiProfile.firstName
+                profile.lastName = apiProfile.lastName
+                profile.points = apiProfile.points
+                profile.timezone = apiProfile.timezone
+                profile.info = apiProfile.info
+                profile.discord = apiProfile.discord
+                profile.avatarUrl = apiProfile.avatarUrl
+                profile.teamStatus = apiProfile.teamStatus
+                profile.interests = apiProfile.interests
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": profile])
+                    self?.updateProfile()
+                }
+            } catch {
+                print("Failed to reload profile with error: \(error)")
+            }
+
+        }
+        .authorize(with: user)
+        .launch()
+
+    }
+    
 }

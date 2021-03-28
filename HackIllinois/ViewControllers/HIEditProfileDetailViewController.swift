@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import HIAPI
+import APIManager
 
 class HIEditProfileDetailViewController: HIBaseViewController {
     
@@ -23,7 +25,7 @@ class HIEditProfileDetailViewController: HIBaseViewController {
 
     //TODO: Load from HackIllinois API
     let interests = ["AWS", "C++", "Project Management", "Python", "Docker", "Java", "ML", "Swift", "Go", "Javascript", "C", "Typescript"]
-    let teamStatuses = ["Looking for team", "Team looking for members"]
+    let teamStatuses = ["Looking For Team", "Looking For Members", "Not Looking"]
     var activeIndexes = [Int]()
     
     let textFieldContainerView = HIView { (view) in
@@ -123,7 +125,7 @@ extension HIEditProfileDetailViewController {
 
 // MARK: - Set Up Data
 extension HIEditProfileDetailViewController {
-    func initializeData(editingField: EditingFields, textFieldValue: String? = nil, characterLimit: Int? = nil, teamStatus: Int? = nil, interests: [String]? = nil) {
+    func initializeData(editingField: EditingFields, textFieldValue: String? = nil, characterLimit: Int? = nil, teamStatus: String? = nil, interests: [String]? = nil) {
         
         self.editingField = editingField
         
@@ -137,7 +139,9 @@ extension HIEditProfileDetailViewController {
         
         if let status = teamStatus {
             if editingField == .teamStatus {
-                self.activeIndexes = [status]
+                if teamStatuses.contains(status) {
+                    self.activeIndexes = [teamStatuses.firstIndex(of: status)!]
+                }
             }
         }
         
@@ -242,7 +246,74 @@ extension HIEditProfileDetailViewController {
 // MARK: - Handle updating API
 extension HIEditProfileDetailViewController {
     @objc func didSelectDone(_ sender: UIBarButtonItem) {
+        guard let profile = HIApplicationStateController.shared.profile else { return }
+        guard let user = HIApplicationStateController.shared.user else { return }
         
+        var profileData = [String: Any]()
+        profileData["id"] = profile.id
+        profileData["firstName"] = profile.firstName
+        profileData["lastName"] = profile.lastName
+        profileData["points"] = profile.points
+        profileData["timezone"] = profile.timezone
+        profileData["description"] = profile.info
+        profileData["discord"] = profile.discord
+        profileData["avatarURL"] = profile.avatarUrl
+        profileData["teamStatus"] = profile.teamStatus
+        profileData["interests"] = profile.interests
+        
+        if let text = textField.text {
+            switch editingField {
+            case .fName:
+                profileData["firstName"] = text
+            case .lName:
+                profileData["lastName"] = text
+            case .discord:
+                profileData["discord"] = text
+            case .bio:
+                profileData["description"] = text
+            default:
+                break
+            }
+        }
+        
+        if editingField == .interests {
+            var interests = [String]()
+            for i in 0..<activeIndexes.count{
+                interests.append(self.interests[activeIndexes[i]])
+            }
+            profileData["interests"] = interests
+        } else if editingField == .teamStatus {
+            if activeIndexes.count == 1 {
+                profileData["teamStatus"] = teamStatuses[activeIndexes[0]].uppercased().replacingOccurrences(of: " ", with: "_")
+            }
+        }
+        
+        HIAPI.ProfileService.udpateUserProfile(profileData: profileData).onCompletion { [weak self] result in
+            do {
+                let (apiProfile, _) = try result.get()
+                var profile = HIProfile()
+                profile.id = apiProfile.id
+                profile.firstName = apiProfile.firstName
+                profile.lastName = apiProfile.lastName
+                profile.points = apiProfile.points
+                profile.timezone = apiProfile.timezone
+                profile.info = apiProfile.info
+                profile.discord = apiProfile.discord
+                profile.avatarUrl = apiProfile.avatarUrl
+                profile.teamStatus = apiProfile.teamStatus
+                profile.interests = apiProfile.interests
+                DispatchQueue.main.async {
+                    self?.navigationController?.popViewController(animated: true)
+                    NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": profile])
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    self?.presentErrorController(title: "Failed to update profile", dismissParentOnCompletion: true)
+                }
+                print("Failed to reload profile with error: \(error)")
+            }
+        }
+        .authorize(with: user)
+        .launch()
     }
-    
 }
