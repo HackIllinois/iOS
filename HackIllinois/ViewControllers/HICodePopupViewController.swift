@@ -119,13 +119,13 @@ extension HICodePopupViewController {
         containerView.addSubview(textField)
         textField.topAnchor.constraint(equalTo: viewLabel.bottomAnchor, constant: 30).isActive = true
         textField.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-        
+
         containerView.addSubview(bottomLine)
         bottomLine.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 10).isActive = true
         bottomLine.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         bottomLine.heightAnchor.constraint(equalToConstant: 10).isActive = true
         //bottomLine.widthAnchor.constraint(equalTo: textField.widthAnchor).isActive = true
-        
+
         containerView.addSubview(submitButton)
         submitButton.topAnchor.constraint(equalTo: bottomLine.bottomAnchor, constant: 10).isActive = true
         //submitButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -15).isActive = true
