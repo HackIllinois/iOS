@@ -59,6 +59,9 @@ class HICodePopupViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFit
     }
+    private let bottomLine = HIView {
+        $0.backgroundHIColor = \.black
+    }
 }
 
 // MARK: Actions
@@ -90,9 +93,11 @@ extension HICodePopupViewController {
         super.loadView()
         view.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.7)
         codeImage.image = popupImage
+
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didSelectBackground))
         gestureRecognizer.delegate = self
         view.addGestureRecognizer(gestureRecognizer)
+
         view.addSubview(containerView)
         containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -114,9 +119,16 @@ extension HICodePopupViewController {
         containerView.addSubview(textField)
         textField.topAnchor.constraint(equalTo: viewLabel.bottomAnchor, constant: 30).isActive = true
         textField.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-
+        
+        containerView.addSubview(bottomLine)
+        bottomLine.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 10).isActive = true
+        bottomLine.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        bottomLine.heightAnchor.constraint(equalToConstant: 10).isActive = true
+        //bottomLine.widthAnchor.constraint(equalTo: textField.widthAnchor).isActive = true
+        
         containerView.addSubview(submitButton)
-        submitButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -15).isActive = true
+        submitButton.topAnchor.constraint(equalTo: bottomLine.bottomAnchor, constant: 10).isActive = true
+        //submitButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -15).isActive = true
         submitButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         submitButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.4).isActive = true
     }
