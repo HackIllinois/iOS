@@ -117,6 +117,7 @@
 		98CA2A3E25C899CF003E842A /* HIProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA2A3D25C899CF003E842A /* HIProfileViewController.swift */; };
 		A5163FEB221F2741003C543E /* HIAdminStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5163FEA221F2741003C543E /* HIAdminStatsViewController.swift */; };
 		A5163FED221F283C003C543E /* StatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5163FEC221F283C003C543E /* StatsService.swift */; };
+		AC0DDDDC261111B60086BDE0 /* HITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0DDDDB261111B60086BDE0 /* HITextView.swift */; };
 		AC38BEA323FE3E800067ABAC /* HIProjectDetailLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38BEA223FE3E800067ABAC /* HIProjectDetailLocationCell.swift */; };
 		AC3B620E25E85CAD002386A2 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B620D25E85CAD002386A2 /* Profile.swift */; };
 		AC3B621025E85D18002386A2 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B620F25E85D18002386A2 /* ProfileService.swift */; };
@@ -294,6 +295,7 @@
 		98CA2A3D25C899CF003E842A /* HIProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProfileViewController.swift; sourceTree = "<group>"; };
 		A5163FEA221F2741003C543E /* HIAdminStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAdminStatsViewController.swift; sourceTree = "<group>"; };
 		A5163FEC221F283C003C543E /* StatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsService.swift; sourceTree = "<group>"; };
+		AC0DDDDB261111B60086BDE0 /* HITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITextView.swift; sourceTree = "<group>"; };
 		AC38BEA223FE3E800067ABAC /* HIProjectDetailLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProjectDetailLocationCell.swift; sourceTree = "<group>"; };
 		AC3B620D25E85CAD002386A2 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		AC3B620F25E85D18002386A2 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
@@ -553,6 +555,7 @@
 				95A7D27C203D4F54005EAEAF /* HISegmentedControl.swift */,
 				BF0FDA3825F4DCCD003B5DB1 /* HIScheduleSegmentedControl.swift */,
 				95A7D27D203D4F54005EAEAF /* HITextField.swift */,
+				AC0DDDDB261111B60086BDE0 /* HITextView.swift */,
 				95D6DA77203F8C3900E7C982 /* HITintImageView.swift */,
 				95A7D27F203D4F54005EAEAF /* HIView.swift */,
 				ACCB199E25F56E5B00F88379 /* HICircularView.swift */,
@@ -924,6 +927,7 @@
 				BFB1FD3E26105EA400500008 /* HIEditProfileCell.swift in Sources */,
 				3CF8DB1523B41D0A0035ECAE /* HIProjectListViewController.swift in Sources */,
 				95CD0ED52015217E00D79DCC /* HIApplicationStateController.swift in Sources */,
+				AC0DDDDC261111B60086BDE0 /* HITextView.swift in Sources */,
 				95B12041220BDDEF00E024BB /* HICheckInScannerViewController.swift in Sources */,
 				95A7D292203D4F54005EAEAF /* HILoginSelectionCell.swift in Sources */,
 				3C26401923ADE7AA004E1DBE /* Project+CoreDataProperties.swift in Sources */,

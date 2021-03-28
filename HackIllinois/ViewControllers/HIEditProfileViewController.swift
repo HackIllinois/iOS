@@ -29,7 +29,6 @@ class HIEditProfileViewController: HIBaseViewController {
         $0.backgroundHIColor = \.clear
     }
     private var tableViewHeight = NSLayoutConstraint()
-    
 
 }
 // MARK: - UIViewController
@@ -81,8 +80,9 @@ extension HIEditProfileViewController {
         if let url = URL(string: profile.avatarUrl) {
             profileImageView.downloadImage(from: url)
         }
-        tableView?.reloadData()
         if let tableView = tableView {
+            tableView.reloadData()
+            tableView.layoutIfNeeded()
             tableView.beginUpdates()
             tableViewHeight.constant = tableView.contentSize.height + 20
             tableView.endUpdates()
@@ -107,6 +107,7 @@ extension HIEditProfileViewController {
 extension HIEditProfileViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
+        title = "Edit Profile"
     }
 
 }
@@ -153,10 +154,10 @@ extension HIEditProfileViewController {
         super.tableView(tableView, didSelectRowAt: indexPath)
 
         let editController = HIEditProfileDetailViewController()
-        let editingField = HIEditProfileDetailViewController.EditingFields(rawValue: profileItems[indexPath.row])
         let strValue = getStringFromAttributeIndex(of: indexPath.row)
-
-        editController.initializeData(editingField: editingField!, textFieldValue: strValue, characterLimit: 100, teamStatus: strValue, interests: HIApplicationStateController.shared.profile?.interests)
+        if let editingField = HIEditProfileDetailViewController.EditingField(rawValue: profileItems[indexPath.row]) {
+            editController.initializeData(editingField: editingField, textFieldValue: strValue, characterLimit: 100, teamStatus: strValue, interests: HIApplicationStateController.shared.profile?.interests)
+        }
 
         if let navController = self.navigationController as? HINavigationController {
             navController.pushViewController(editController, animated: true)
