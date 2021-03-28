@@ -39,7 +39,7 @@ class HICodePopupViewController: UIViewController {
         $0.title = "Submit"
         $0.titleLabel?.font = HIAppearance.Font.detailTitle
         $0.titleLabel?.baselineAdjustment = .alignCenters
-        $0.layer.cornerRadius = 15
+        $0.layer.cornerRadius = 20
     }
     private let textField = HITextField {
         $0.placeholder = "Type your code here"
@@ -59,9 +59,7 @@ class HICodePopupViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFit
     }
-    private let bottomLine = HIView {
-        $0.backgroundHIColor = \.black
-    }
+    private let code: String = ""
 }
 
 // MARK: Actions
@@ -76,6 +74,22 @@ extension HICodePopupViewController {
 
     @objc func didSelectBackground(_ sender: UITapGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
+    }
+
+    @objc func didSelectSubmit(_ sender: UIButton) {
+        HIAPI.EventService.checkIn(code: code)
+        .onCompletion { result in
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            case .failure(let error):
+                print(error, error.localizedDescription)
+            }
+        }
+        .authorize(with: HIApplicationStateController.shared.user)
+        .launch()
     }
 }
 
@@ -102,7 +116,7 @@ extension HICodePopupViewController {
         containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         containerView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9).isActive = true
-        containerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4).isActive = true
+        containerView.heightAnchor.constraint(equalToConstant: 284).isActive = true
         containerView.addSubview(exitButton)
         exitButton.constrain(to: containerView, topInset: 8, leadingInset: 8)
 
@@ -110,27 +124,31 @@ extension HICodePopupViewController {
         codeImage.constrain(to: containerView, topInset: 15)
         codeImage.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         codeImage.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 15).isActive = true
-        codeImage.constrain(width: 125, height: 125)
+        codeImage.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.3).isActive = true
+        codeImage.widthAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.3).isActive = true
 
         containerView.addSubview(viewLabel)
-        viewLabel.topAnchor.constraint(equalTo: codeImage.bottomAnchor, constant: 20).isActive = true
+        viewLabel.topAnchor.constraint(equalTo: codeImage.bottomAnchor, constant: 10).isActive = true
         viewLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
 
         containerView.addSubview(textField)
-        textField.topAnchor.constraint(equalTo: viewLabel.bottomAnchor, constant: 30).isActive = true
+        textField.leadingAnchor.constraint(equalTo: viewLabel.leadingAnchor, constant: -20).isActive = true
         textField.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
 
-        containerView.addSubview(bottomLine)
-        bottomLine.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 10).isActive = true
-        bottomLine.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-        bottomLine.heightAnchor.constraint(equalToConstant: 10).isActive = true
-        //bottomLine.widthAnchor.constraint(equalTo: textField.widthAnchor).isActive = true
-
         containerView.addSubview(submitButton)
-        submitButton.topAnchor.constraint(equalTo: bottomLine.bottomAnchor, constant: 10).isActive = true
-        //submitButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -15).isActive = true
+        submitButton.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 25).isActive = true
+        submitButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -15).isActive = true
         submitButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         submitButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.4).isActive = true
+        submitButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    }
+
+    override func viewDidLayoutSubviews() {
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRect(x: 0.0, y: textField.frame.height + 10, width: textField.frame.width, height: 1.0)
+        bottomLine.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.4235294118, blue: 0.4470588235, alpha: 1)
+        textField.borderStyle = UITextField.BorderStyle.none
+        textField.layer.addSublayer(bottomLine)
     }
 }
 

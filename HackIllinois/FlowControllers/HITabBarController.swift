@@ -14,7 +14,7 @@ import Foundation
 import UIKit
 
 class HITabBarController: UITabBarController {
-    lazy var qrPopup = HICodePopupViewController()
+    lazy var codePopup = HICodePopupViewController()
     private var tabBarShapeLayer: CAShapeLayer?
 
     // Animation for when a tab bar item is clicked
@@ -28,7 +28,7 @@ class HITabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupQRCodeButton()
+        setupCodePopupButton()
         setupTabBar()
     }
 
@@ -42,9 +42,9 @@ class HITabBarController: UITabBarController {
     }
 
     @objc private func qrButtonPressed(_ sender: UIButton) {
-        qrPopup.modalPresentationStyle = .overCurrentContext
-        qrPopup.transitioningDelegate = qrPopup
-        self.present(qrPopup, animated: true, completion: nil)
+        codePopup.modalPresentationStyle = .overCurrentContext
+        codePopup.modalTransitionStyle = .crossDissolve
+        self.present(codePopup, animated: true, completion: nil)
     }
 
     init() {
@@ -52,34 +52,33 @@ class HITabBarController: UITabBarController {
         moreNavigationController.tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "DisclosureIndicator"), tag: 0)
     }
 
-    func setupQRCodeButton() {
-        //Setup QRCode Button
-        let qrButton = UIButton()
-        view.addSubview(qrButton)
-        qrButton.translatesAutoresizingMaskIntoConstraints = false
-        qrButton.frame.size = CGSize(width: 54, height: 54)
-        qrButton.layer.cornerRadius = 28
-        qrButton.center = CGPoint(x: view.center.x, y: 0)
-        qrButton.backgroundColor = UIColor(red: 0.89, green: 0.31, blue: 0.35, alpha: 1.0)
-        qrButton.setImage(#imageLiteral(resourceName: "qr-code"), for: .normal)
-        qrButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        qrButton.imageView?.contentMode = .scaleAspectFill
-        qrButton.imageView?.tintColor = UIColor.white
+    func setupCodePopupButton() {
+        //Setup Code Popup Button
+        let codePopupButton = UIButton()
+        view.addSubview(codePopupButton)
+        codePopupButton.translatesAutoresizingMaskIntoConstraints = false
+        codePopupButton.frame.size = CGSize(width: 54, height: 54)
+        codePopupButton.layer.cornerRadius = 28
+        codePopupButton.center = CGPoint(x: view.center.x, y: 0)
+        codePopupButton.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.4235294118, blue: 0.4470588235, alpha: 1)
+        codePopupButton.setImage(#imageLiteral(resourceName: "CodePopupTabIcon"), for: .normal)
+        codePopupButton.imageView?.contentMode = .scaleAspectFill
+        codePopupButton.imageView?.tintColor = UIColor.white
 
         // Button Shadow
-        qrButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
-        qrButton.layer.shadowOpacity = 1
-        qrButton.layer.shadowRadius = 15
-        qrButton.layer.masksToBounds = false
-        qrButton.layer.shadowOffset = CGSize(width: 0, height: 0)
+        codePopupButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        codePopupButton.layer.shadowOpacity = 1
+        codePopupButton.layer.shadowRadius = 15
+        codePopupButton.layer.masksToBounds = false
+        codePopupButton.layer.shadowOffset = CGSize(width: 0, height: 0)
 
         //QR Code Button Constraints
-        qrButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        qrButton.centerYAnchor.constraint(equalTo: tabBar.topAnchor, constant: 0).isActive = true
-        qrButton.constrain(width: 54, height: 54)
+        codePopupButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        codePopupButton.centerYAnchor.constraint(equalTo: tabBar.topAnchor, constant: 0).isActive = true
+        codePopupButton.constrain(width: 54, height: 54)
 
         //QR Code Popup Action
-        qrButton.addTarget(self, action: #selector(qrButtonPressed(_:)), for: .touchUpInside)
+        codePopupButton.addTarget(self, action: #selector(qrButtonPressed(_:)), for: .touchUpInside)
     }
 
     func setupTabBar() {

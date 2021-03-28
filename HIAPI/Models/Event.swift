@@ -62,3 +62,9 @@ public struct EventFavorites: Codable, APIReturnable {
     public let events: Set<String>
     public let id: String
 }
+
+public struct EventCheckInStatus: Codable, APIReturnable {
+    public let newPoints: Int
+    public let totalPoints: Int
+    public let status: String
+}

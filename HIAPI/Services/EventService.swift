@@ -23,6 +23,12 @@ public class EventService: BaseService {
         return APIRequest<EventContainer>(service: self, endpoint: "", method: .GET)
     }
 
+    public static func checkIn(code: String) -> APIRequest<EventCheckInStatus> {
+        var body = HTTPBody()
+        body["code"] = code
+        return APIRequest<EventCheckInStatus>(service: self, endpoint: "checkin/", body: body, method: .POST)
+    }
+
     public static func create(event: Event) -> APIRequest<EventContainer> {
         let eventDict = [String: Any]()
         assert(false)
