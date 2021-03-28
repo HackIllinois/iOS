@@ -242,6 +242,7 @@ extension HIProfileViewController {
         profileDiscordUsernameView.text = profile.discord
         interests = profile.interests
         profileInterestsView.reloadData()
+        profileInterestsViewHeight.constant = profileInterestsView.collectionViewLayout.collectionViewContentSize.height + 20
 
         profileDiscordImageView.image = #imageLiteral(resourceName: "DiscordLogo")
 

@@ -15,24 +15,43 @@ import UIKit
 
 class HIEditProfileViewController: HIBaseViewController {
 
-    let profileImageView = HIImageView {
+    private let profileImageView = HIImageView {
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.constrain(width: 100, height: 100)
     }
 
-    let profileItems: [String] = ["First Name", "Last Name", "Team Status", "Bio", "Discord", "Interests"]
+    private let profileItems: [String] = ["First Name", "Last Name", "Team Status", "Bio", "Discord", "Interests"]
+    private let scrollView = UIScrollView(frame: .zero)
+    private let contentView = HIView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundHIColor = \.clear
+    }
+    private var tableViewHeight = NSLayoutConstraint()
+    
 
 }
 // MARK: - UIViewController
 extension HIEditProfileViewController {
     override func loadView() {
         super.loadView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(scrollView)
+        scrollView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        scrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        scrollView.addSubview(contentView)
 
-        self.view.addSubview(profileImageView)
-        profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        profileImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        contentView.addSubview(profileImageView)
+        profileImageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        profileImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
 
         let separatorView = HIView(style: nil) { (view) in
             view.backgroundHIColor = \.whiteTagFont
@@ -41,16 +60,18 @@ extension HIEditProfileViewController {
             view.alpha = 0.5
         }
 
-        self.view.addSubview(separatorView)
+        contentView.addSubview(separatorView)
         separatorView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 30).isActive = true
-        separatorView.constrain(to: self.view, trailingInset: 0, leadingInset: 0)
+        separatorView.constrain(to: contentView, trailingInset: 0, leadingInset: 0)
 
         let tableView = HITableView()
-        self.view.addSubview(tableView)
+        contentView.addSubview(tableView)
         tableView.isScrollEnabled = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 0).isActive = true
-        tableView.constrain(to: self.view, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        tableView.constrain(to: contentView, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        tableViewHeight = tableView.heightAnchor.constraint(equalToConstant: 0)
+        tableViewHeight.isActive = true
         self.tableView = tableView
     }
 
@@ -61,11 +82,24 @@ extension HIEditProfileViewController {
             profileImageView.downloadImage(from: url)
         }
         tableView?.reloadData()
+        if let tableView = tableView {
+            tableView.beginUpdates()
+            tableViewHeight.constant = tableView.contentSize.height + 20
+            tableView.endUpdates()
+        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
+    }
+
+    override func viewDidLayoutSubviews() {
+        if let tableView = tableView {
+            tableView.beginUpdates()
+            tableViewHeight.constant = tableView.contentSize.height + 20
+            tableView.endUpdates()
+        }
     }
 }
 

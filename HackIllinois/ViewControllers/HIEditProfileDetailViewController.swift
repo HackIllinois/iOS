@@ -287,7 +287,7 @@ extension HIEditProfileDetailViewController {
             for index in 0..<activeIndexes.count {
                 interests.append(self.interests[activeIndexes[index]])
             }
-            profileData["interests"] = interests
+            profileData["interests"] = interests.sorted()
         } else if editingField == .teamStatus {
             if activeIndexes.count == 1 {
                 profileData["teamStatus"] = teamStatuses[activeIndexes[0]].uppercased().replacingOccurrences(of: " ", with: "_")
