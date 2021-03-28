@@ -48,17 +48,6 @@ extension HIEditProfileViewController {
         self.tableView!.translatesAutoresizingMaskIntoConstraints = false
         self.tableView!.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 0).isActive = true
         self.tableView!.constrain(to: self.view, trailingInset: 0, bottomInset: 0, leadingInset: 0)
-
-//        let tableView = HITableView()
-//        view.addSubview(tableView)
-//        tableView.topAnchor.constraint(equalTo: separator.bottomAnchor).isActive = true
-//        tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-//        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-//        tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-//        tableView.contentInset = UIEdgeInsets(top: 17, left: 0, bottom: 0, right: 0)
-//        tableView.scrollIndicatorInsets = UIEdgeInsets(top: 17, left: 0, bottom: 0, right: 0)
-//        self.tableView = tableView
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,11 +76,6 @@ extension HIEditProfileViewController {
 //        }
     }
 
-//    override func didMove(toParent parent: UIViewController?) {
-//        if let navController = navigationController as? HINavigationController {
-//            navController.infoTitleIsHidden = false
-//        }
-//    }
 }
 
 // MARK: - UITableView
@@ -117,7 +101,7 @@ extension HIEditProfileViewController {
         let attrHeight = HILabel.heightForView(text: profileItems[indexPath.row], font: HIAppearance.Font.profileUsername, width: self.view.frame.width - 160)
         let infoHeight = HILabel.heightForView(text: getStringFromAttributeIndex(of: indexPath.row), font: HIAppearance.Font.profileDescription, width: self.view.frame.width - 160)
         
-        return max(attrHeight, infoHeight) + 40
+        return max(attrHeight, infoHeight) + 25
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -133,6 +117,18 @@ extension HIEditProfileViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         super.tableView(tableView, didSelectRowAt: indexPath)
+        
+        let editController = HIEditProfileDetailViewController()
+        let editingField = HIEditProfileDetailViewController.EditingFields(rawValue: profileItems[indexPath.row])
+        let strValue = getStringFromAttributeIndex(of: indexPath.row)
+        
+        editController.initializeData(editingField: editingField!, textFieldValue: strValue, characterLimit: 100, teamStatus: strValue == "LOOKING_FOR_MEMBERS" ? 1 : 0, interests: HIApplicationStateController.shared.profile?.interests)
+        
+        if let navController = self.navigationController as? HINavigationController {
+            navController.pushViewController(editController, animated: true)
+        }
+        
+        
     }
     
 }

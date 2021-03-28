@@ -136,6 +136,7 @@
 		BFB1FD32261053F000500008 /* HIEditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB1FD31261053F000500008 /* HIEditProfileViewController.swift */; };
 		BFB1FD38261053FE00500008 /* HIEditProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB1FD37261053FE00500008 /* HIEditProfileDetailViewController.swift */; };
 		BFB1FD3E26105EA400500008 /* HIEditProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB1FD3D26105EA400500008 /* HIEditProfileCell.swift */; };
+		BFC48F1226109E9E00AAAEB5 /* HIEditProfileDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC48F1126109E9E00AAAEB5 /* HIEditProfileDetailCell.swift */; };
 		D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A309BB2211175200CBA351 /* PassKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -312,6 +313,7 @@
 		BFB1FD31261053F000500008 /* HIEditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEditProfileViewController.swift; sourceTree = "<group>"; };
 		BFB1FD37261053FE00500008 /* HIEditProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEditProfileDetailViewController.swift; sourceTree = "<group>"; };
 		BFB1FD3D26105EA400500008 /* HIEditProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEditProfileCell.swift; sourceTree = "<group>"; };
+		BFC48F1126109E9E00AAAEB5 /* HIEditProfileDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEditProfileDetailCell.swift; sourceTree = "<group>"; };
 		D3A309BA221116A600CBA351 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };
 		D3A309BB2211175200CBA351 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -387,8 +389,8 @@
 			isa = PBXGroup;
 			children = (
 				951827971EA35DB800049F79 /* HackIllinois */,
-				35D7CE9520380ACF00654E28 /* Stickers */,
 				95E3142B21FAD5B40092C22E /* HIAPI */,
+				35D7CE9520380ACF00654E28 /* Stickers */,
 				951827801EA35AF100049F79 /* Products */,
 				EAE6D26341C3ACE27256067A /* Frameworks */,
 			);
@@ -593,6 +595,7 @@
 				AC38BEA223FE3E800067ABAC /* HIProjectDetailLocationCell.swift */,
 				ACBFE29725EAE79000C94732 /* HIGroupPopupCell.swift */,
 				BFB1FD3D26105EA400500008 /* HIEditProfileCell.swift */,
+				BFC48F1126109E9E00AAAEB5 /* HIEditProfileDetailCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -903,6 +906,7 @@
 				3F49408725C8DBC30091CCAD /* HIGroupPopupViewController.swift in Sources */,
 				95838ACA21FDCB5C00BD8F71 /* Location+CoreDataClass.swift in Sources */,
 				9521A6AA20191737009059C6 /* HIAnnouncementDataSource.swift in Sources */,
+				BFC48F1226109E9E00AAAEB5 /* HIEditProfileDetailCell.swift in Sources */,
 				95C18DCB20096539004784B5 /* HIScheduleViewController.swift in Sources */,
 				ACCB199D25F56DF100F88379 /* HIInterestCell.swift in Sources */,
 				95CCEA1F203D6B3600E3E28C /* HINavigationController.swift in Sources */,

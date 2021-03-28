@@ -14,14 +14,47 @@ import Foundation
 import UIKit
 
 class HITextField: UITextField {
+    // MARK: - Types
+    enum type {
+        case defaultTextField
+        case editProfile
+    }
+    
     // MARK: - Properties
-
+    var textHIColor: HIColor? // = \.baseText
+    var tintHIColor: HIColor? // = \.accent
+    var backgroundHIColor: HIColor? // = \.baseBackground
+    
     // MARK: - Init
-    init(additionalConfiguration: ((HITextField) -> Void)? = nil) {
+    init(style: type? = .defaultTextField, additionalConfiguration: ((HITextField) -> Void)? = nil) {
         super.init(frame: .zero)
         additionalConfiguration?(self)
 
-        font = HIAppearance.Font.navigationSubtitle
+//        font = HIAppearance.Font.navigationSubtitle
+        switch style {
+        case .defaultTextField:
+            textHIColor = \.baseText
+            tintHIColor = \.accent
+            backgroundHIColor = \.baseBackground
+        case .editProfile:
+            font = HIAppearance.Font.profileDescription.withSize(18)
+            textHIColor = \.whiteTagFont
+            tintHIColor = \.whiteTagFont
+            backgroundHIColor = \.clear
+            let bottomView = HIView { (view) in
+                view.heightAnchor.constraint(equalToConstant: 1).isActive = true
+                view.translatesAutoresizingMaskIntoConstraints = false
+                view.backgroundHIColor = \.whiteTagFont
+                view.alpha = 0.5
+            }
+            
+            self.addSubview(bottomView)
+            bottomView.constrain(to: self, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+            self.returnKeyType = .done
+            self.delegate = self
+        default:
+            break
+        }
 
         enablesReturnKeyAutomatically = true
         translatesAutoresizingMaskIntoConstraints = false
@@ -40,17 +73,27 @@ class HITextField: UITextField {
 
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
-        textColor <- \.baseText
-        tintColor <- \.accent
-        backgroundColor <- \.baseBackground
+        textColor <- textHIColor
+        tintColor <- tintHIColor
+        backgroundColor <- backgroundHIColor
 
         if let placeholder = placeholder {
             attributedPlaceholder = NSAttributedString(
                 string: placeholder,
                 attributes: [
-                    NSAttributedString.Key.foregroundColor: (\HIAppearance.baseText).value.withAlphaComponent(0.5)
+                    NSAttributedString.Key.foregroundColor: (textHIColor == nil ? \HIAppearance.baseText : textHIColor!).value.withAlphaComponent(0.5)
                 ]
             )
         }
+    }
+}
+
+
+// MARK: - Dismiss keyboard
+
+extension HITextField: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
