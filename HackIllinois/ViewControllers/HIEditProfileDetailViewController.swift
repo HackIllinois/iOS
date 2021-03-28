@@ -71,11 +71,19 @@ extension HIEditProfileDetailViewController {
         descriptionLabel.constrain(height: 50)
         descriptionLabel.topAnchor.constraint(equalTo: textFieldContainerView.topAnchor, constant: 10).isActive = true
 
+        let countConstrainView: UIView
         if editingField == .bio {
             constrainBioTextView()
+            countConstrainView = bioTextView
         } else {
             constrainSingleLineTextField()
+            countConstrainView = singleLineTextField
         }
+
+        textFieldContainerView.addSubview(characterCountLabel)
+        characterCountLabel.leadingAnchor.constraint(equalTo: countConstrainView.leadingAnchor, constant: 10).isActive = true
+        characterCountLabel.trailingAnchor.constraint(equalTo: countConstrainView.trailingAnchor).isActive = true
+        characterCountLabel.topAnchor.constraint(equalTo: countConstrainView.bottomAnchor, constant: 10).isActive = true
 
         let tableView = HITableView()
         self.view.addSubview(tableView)
@@ -98,11 +106,6 @@ extension HIEditProfileDetailViewController {
         bioTextView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 30).isActive = true
         bioTextView.delegate = self
         bioTextView.addBottomBorder()
-
-        textFieldContainerView.addSubview(characterCountLabel)
-        characterCountLabel.leadingAnchor.constraint(equalTo: bioTextView.leadingAnchor, constant: 10).isActive = true
-        characterCountLabel.trailingAnchor.constraint(equalTo: bioTextView.trailingAnchor).isActive = true
-        characterCountLabel.topAnchor.constraint(equalTo: bioTextView.bottomAnchor, constant: 10).isActive = true
     }
 
     func constrainSingleLineTextField() {
@@ -110,11 +113,6 @@ extension HIEditProfileDetailViewController {
         singleLineTextField.constrain(to: textFieldContainerView, trailingInset: -20, leadingInset: 20)
         singleLineTextField.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 30).isActive = true
         singleLineTextField.delegate = self
-
-        textFieldContainerView.addSubview(characterCountLabel)
-        characterCountLabel.leadingAnchor.constraint(equalTo: singleLineTextField.leadingAnchor, constant: 10).isActive = true
-        characterCountLabel.trailingAnchor.constraint(equalTo: singleLineTextField.trailingAnchor).isActive = true
-        characterCountLabel.topAnchor.constraint(equalTo: singleLineTextField.bottomAnchor, constant: 10).isActive = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -126,32 +124,32 @@ extension HIEditProfileDetailViewController {
         case .bio:
             descriptionText = "Short description about yourself or your team if you're on a team"
             characterLimit = 400
-            setCharacterCountForBioTextView()
+            updateCharacterCount()
         case .fName:
             descriptionText = "Add your name"
-            setCharacterCountForSingleLineTextField()
+            updateCharacterCount()
         case .lName:
             descriptionText = "Add your name"
-            setCharacterCountForSingleLineTextField()
+            updateCharacterCount()
         case .discord:
             descriptionText = "Add your Discord username"
-            setCharacterCountForSingleLineTextField()
+            updateCharacterCount()
         default:
             descriptionText = ""
-            setCharacterCountForSingleLineTextField()
+            updateCharacterCount()
         }
         descriptionLabel.text = descriptionText
     }
 
-    func setCharacterCountForBioTextView() {
-        if let fieldValue = bioTextView.text {
-            characterCountLabel.text = "\(fieldValue.count < 10 ? "0" : "")\(fieldValue.count)/\(characterLimit < 10 ? "0" : "")\(characterLimit)"
-        }
-    }
-
-    func setCharacterCountForSingleLineTextField() {
-        if let fieldValue = singleLineTextField.text {
-            characterCountLabel.text = "\(fieldValue.count < 10 ? "0" : "")\(fieldValue.count)/\(characterLimit < 10 ? "0" : "")\(characterLimit)"
+    func updateCharacterCount() {
+        if editingField == .bio{
+            if let fieldValue = bioTextView.text {
+                characterCountLabel.text = "\(fieldValue.count < 10 ? "0" : "")\(fieldValue.count)/\(characterLimit < 10 ? "0" : "")\(characterLimit)"
+            }
+        } else {
+            if let fieldValue = singleLineTextField.text {
+                characterCountLabel.text = "\(fieldValue.count < 10 ? "0" : "")\(fieldValue.count)/\(characterLimit < 10 ? "0" : "")\(characterLimit)"
+            }
         }
     }
 
@@ -282,9 +280,7 @@ extension HIEditProfileDetailViewController {
     }
 
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        if let text = textField.text {
-            characterCountLabel.text = "\(text.count < 10 ? "0" : "")\(text.count)/\(characterLimit < 10 ? "0" : "")\(characterLimit)"
-        }
+        updateCharacterCount()
     }
 }
 
@@ -298,9 +294,7 @@ extension HIEditProfileDetailViewController: UITextViewDelegate {
     }
 
     func textViewDidChangeSelection(_ textView: UITextView) {
-        if let text = textView.text {
-            characterCountLabel.text = "\(text.count < 10 ? "0" : "")\(text.count)/\(characterLimit < 10 ? "0" : "")\(characterLimit)"
-        }
+        updateCharacterCount()
     }
 }
 
