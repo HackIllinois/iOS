@@ -40,14 +40,16 @@ class HICodePopupViewController: UIViewController {
         $0.titleLabel?.font = HIAppearance.Font.detailTitle
         $0.titleLabel?.baselineAdjustment = .alignCenters
         $0.layer.cornerRadius = 20
+        $0.addTarget(self, action: #selector(didSelectSubmit(_:)), for: .touchUpInside)
     }
-    private let textField = HITextField {
+    private let codeField = HITextField {
         $0.placeholder = "Type your code here"
         $0.textAlignment = .center
         $0.keyboardAppearance = .dark
         $0.font = HIAppearance.Font.profileDescription
         $0.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     }
+    private let bottomCodeFieldLine = CALayer()
     private let viewLabel = HILabel {
         $0.text = "Collect your points!"
         $0.font = HIAppearance.Font.detailTitle
@@ -59,7 +61,6 @@ class HICodePopupViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFit
     }
-    private let code: String = ""
 }
 
 // MARK: Actions
@@ -77,19 +78,25 @@ extension HICodePopupViewController {
     }
 
     @objc func didSelectSubmit(_ sender: UIButton) {
-        HIAPI.EventService.checkIn(code: code)
-        .onCompletion { result in
-            switch result {
-            case .success:
-                DispatchQueue.main.async {
-                    self.dismiss(animated: true, completion: nil)
+        if let code = codeField.text {
+            HIAPI.EventService.checkIn(code: code)
+            .onCompletion { result in
+                switch result {
+                case .success:
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                case .failure(let error):
+                    print(error, error.localizedDescription)
                 }
-            case .failure(let error):
-                print(error, error.localizedDescription)
             }
+            .authorize(with: HIApplicationStateController.shared.user)
+            .launch()
         }
-        .authorize(with: HIApplicationStateController.shared.user)
-        .launch()
+    }
+
+    @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
     }
 }
 
@@ -100,6 +107,7 @@ extension HICodePopupViewController {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
+        codeField.text = ""
         self.dismiss(animated: true, completion: nil)
     }
 
@@ -108,9 +116,12 @@ extension HICodePopupViewController {
         view.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.7)
         codeImage.image = popupImage
 
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didSelectBackground))
-        gestureRecognizer.delegate = self
-        view.addGestureRecognizer(gestureRecognizer)
+        let backgroundGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didSelectBackground))
+        backgroundGestureRecognizer.delegate = self
+        view.addGestureRecognizer(backgroundGestureRecognizer)
+
+        let containerGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        containerView.addGestureRecognizer(containerGestureRecognizer)
 
         view.addSubview(containerView)
         containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -131,12 +142,13 @@ extension HICodePopupViewController {
         viewLabel.topAnchor.constraint(equalTo: codeImage.bottomAnchor, constant: 10).isActive = true
         viewLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
 
-        containerView.addSubview(textField)
-        textField.leadingAnchor.constraint(equalTo: viewLabel.leadingAnchor, constant: -20).isActive = true
-        textField.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        codeField.autocorrectionType = .no
+        containerView.addSubview(codeField)
+        codeField.leadingAnchor.constraint(equalTo: viewLabel.leadingAnchor, constant: -20).isActive = true
+        codeField.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
 
         containerView.addSubview(submitButton)
-        submitButton.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 25).isActive = true
+        submitButton.topAnchor.constraint(equalTo: codeField.bottomAnchor, constant: 25).isActive = true
         submitButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -15).isActive = true
         submitButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         submitButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.4).isActive = true
@@ -144,11 +156,11 @@ extension HICodePopupViewController {
     }
 
     override func viewDidLayoutSubviews() {
-        let bottomLine = CALayer()
-        bottomLine.frame = CGRect(x: 0.0, y: textField.frame.height + 10, width: textField.frame.width, height: 1.0)
-        bottomLine.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.4235294118, blue: 0.4470588235, alpha: 1)
-        textField.borderStyle = UITextField.BorderStyle.none
-        textField.layer.addSublayer(bottomLine)
+        bottomCodeFieldLine.removeFromSuperlayer()
+        bottomCodeFieldLine.frame = CGRect(x: 0.0, y: codeField.frame.height + 10, width: codeField.frame.width, height: 1.0)
+        bottomCodeFieldLine.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.4235294118, blue: 0.4470588235, alpha: 1)
+        codeField.borderStyle = UITextField.BorderStyle.none
+        codeField.layer.addSublayer(bottomCodeFieldLine)
     }
 }
 
@@ -160,15 +172,5 @@ extension HICodePopupViewController: UIGestureRecognizerDelegate {
             return false
         }
         return true
-    }
-}
-
-// MARK: - UIViewControllerTransitioningDelegate
-extension HICodePopupViewController: UIViewControllerTransitioningDelegate {
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return HIPopinAnimator()
-    }
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return HIPopoutAnimator()
     }
 }
