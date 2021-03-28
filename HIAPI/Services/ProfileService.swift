@@ -35,10 +35,9 @@ public final class ProfileService: BaseService {
         }
         return APIRequest<ProfileContainer>(service: self, endpoint: "search/", params: params, headers: headers, method: .GET)
     }
-    
-    public static func udpateUserProfile(profileData: [String : Any]) -> APIRequest<Profile> {
+
+    public static func updateUserProfile(profileData: [String: Any]) -> APIRequest<Profile> {
         return APIRequest<Profile>(service: self, endpoint: "", body: profileData, headers: headers, method: .PUT)
     }
 
 }
-

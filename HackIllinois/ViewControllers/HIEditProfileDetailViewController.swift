@@ -2,8 +2,12 @@
 //  HIEditProfileDetailViewController.swift
 //  HackIllinois
 //
-//  Created by alden lamp on 3/28/21.
+//  Created by HackIllinois Team on 3/28/21.
 //  Copyright © 2021 HackIllinois. All rights reserved.
+//  This file is part of the Hackillinois iOS App.
+//  The Hackillinois iOS App is open source software, released under the University of
+//  Illinois/NCSA Open Source License. You should have received a copy of
+//  this license in a file with the distribution.
 //
 
 import Foundation
@@ -12,7 +16,7 @@ import HIAPI
 import APIManager
 
 class HIEditProfileDetailViewController: HIBaseViewController {
-    
+
     // MARK: - Editing Fields
     enum EditingFields: String {
         case fName = "First Name"
@@ -24,29 +28,30 @@ class HIEditProfileDetailViewController: HIBaseViewController {
     }
 
     //TODO: Load from HackIllinois API
-    let interests = ["AWS", "C++", "Project Management", "Python", "Docker", "Java", "ML", "Swift", "Go", "Javascript", "C", "Typescript"]
+    // swiftlint:disable line_length
+    let interests = ["Adobe Illustrator", "Adobe InDesign", "Adobe Photoshop", "Adobe XD", "Android", "Arduino", "AWS", "Azure", "Blender", "C", "C#", "C++", "Canva", "CSS", "Digital Ocean", "Figma", "Firebase", "Flutter", "git", "GitHub", "Go", "Godot", "Google Cloud", "Haskell", "HTML", "iOS", "Java", "JavaScript", "Kotlin", "MongoDB", "MySQL", "NativeScript", "Neo4J", "PHP", "PostgreSQL", "Python", "Raspberry Pi", "React Native", "Ruby", "Rust", "Swift", "TypeScript", "Unity", "Unreal"]
     let teamStatuses = ["Looking For Team", "Looking For Members", "Not Looking"]
     var activeIndexes = [Int]()
-    
+
     let textFieldContainerView = HIView { (view) in
         view.backgroundHIColor = \.clear
         view.translatesAutoresizingMaskIntoConstraints = false
     }
-    
+
     let descriptionLabel = HILabel(style: .profileDescription) { (label) in
         label.alpha = 0.5
         label.numberOfLines = 0
     }
-    
+
     let textField = HITextField(style: .editProfile)
-    
+
     let characterCountLabel = HILabel(style: .characterCount) { (label) in
         label.constrain(height: 18)
         label.text = "00/00"
     }
-    
+
     var characterLimit = 100
-    
+
     var editingField: EditingFields!
 }
 
@@ -54,52 +59,52 @@ class HIEditProfileDetailViewController: HIBaseViewController {
 extension HIEditProfileDetailViewController {
     override func loadView() {
         super.loadView()
-        
+
         self.view.addSubview(textFieldContainerView)
         textFieldContainerView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         textFieldContainerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         textFieldContainerView.constrain(to: self.view, trailingInset: 0, leadingInset: 0)
-        
+
         textFieldContainerView.addSubview(descriptionLabel)
         descriptionLabel.constrain(to: textFieldContainerView, trailingInset: -20, leadingInset: 20)
         descriptionLabel.constrain(height: 50)
         descriptionLabel.topAnchor.constraint(equalTo: textFieldContainerView.topAnchor, constant: 10).isActive = true
-        
+
         textFieldContainerView.addSubview(textField)
         textField.constrain(to: textFieldContainerView, trailingInset: -20, leadingInset: 20)
         textField.constrain(height: 30)
         textField.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 30).isActive = true
         textField.delegate = self
-        
+
         textFieldContainerView.addSubview(characterCountLabel)
         characterCountLabel.leadingAnchor.constraint(equalTo: textField.leadingAnchor, constant: 10).isActive = true
         characterCountLabel.trailingAnchor.constraint(equalTo: textField.trailingAnchor).isActive = true
         characterCountLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 10).isActive = true
-        
-        self.tableView = HITableView()
-        setupTableView()
-        self.view.addSubview(self.tableView!)
-        self.tableView!.translatesAutoresizingMaskIntoConstraints = false
-        self.tableView!.constrain(to: self.view, trailingInset: 0, bottomInset: 0, leadingInset: 0)
-        self.tableView!.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
-        
+
+        let tableView = HITableView()
+        self.view.addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.constrain(to: self.view, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+
         if editingField == .interests || editingField == .teamStatus {
             textFieldContainerView.isHidden = true
         } else {
-            self.tableView?.isHidden = true
+            tableView.isHidden = true
         }
+        self.tableView = tableView
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         title = editingField.rawValue
-        
+
         if let fieldValue = textField.text {
             characterCountLabel.text = "\(fieldValue.count < 10 ? "0" : "")\(fieldValue.count)/\(characterLimit < 10 ? "0" : "")\(characterLimit)"
         }
-        
+
         let descriptionText: String
-        
+
         switch editingField {
         case .bio:
             descriptionText = "Short description about yourself or your team if you're on a team"
@@ -112,9 +117,9 @@ extension HIEditProfileDetailViewController {
         default:
             descriptionText = ""
         }
-        
+
         descriptionLabel.text = descriptionText
-        
+
     }
 
     override func viewDidLoad() {
@@ -126,17 +131,17 @@ extension HIEditProfileDetailViewController {
 // MARK: - Set Up Data
 extension HIEditProfileDetailViewController {
     func initializeData(editingField: EditingFields, textFieldValue: String? = nil, characterLimit: Int? = nil, teamStatus: String? = nil, interests: [String]? = nil) {
-        
+
         self.editingField = editingField
-        
+
         if let fieldValue = textFieldValue {
             self.textField.text = fieldValue
         }
-        
-        if let limit = characterLimit{
+
+        if let limit = characterLimit {
             self.characterLimit = limit
         }
-        
+
         if let status = teamStatus {
             if editingField == .teamStatus {
                 if teamStatuses.contains(status) {
@@ -144,26 +149,26 @@ extension HIEditProfileDetailViewController {
                 }
             }
         }
-        
-        if let selectedInterests = interests{
+
+        if let selectedInterests = interests {
             if editingField == .interests {
                 self.activeIndexes = [Int]()
-                for i in 0..<self.interests.count {
-                    if selectedInterests.contains(self.interests[i]) {
-                        self.activeIndexes.append(i)
+                for index in 0..<self.interests.count {
+                    if selectedInterests.contains(self.interests[index]) {
+                        self.activeIndexes.append(index)
                     }
                 }
             }
         }
     }
-    
+
 }
 
 // MARK: - UINavigationItem Setup
 extension HIEditProfileDetailViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
-        
+
         if !HIApplicationStateController.shared.isGuest {
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(didSelectDone(_:)))
         }
@@ -201,13 +206,14 @@ extension HIEditProfileDetailViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: HIEditProfileDetailCell.identifier, for: indexPath)
         if let cell = cell as? HIEditProfileDetailCell {
             cell <- ((editingField == .interests ? interests : teamStatuses)[indexPath.row], activeIndexes.contains(indexPath.row))
+            cell.selectionStyle = .none
         }
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         super.tableView(tableView, didSelectRowAt: indexPath)
-        
+
         if editingField == .interests {
             if activeIndexes.contains(indexPath.row) {
                 activeIndexes.remove(at: activeIndexes.firstIndex(of: indexPath.row)!)
@@ -230,12 +236,12 @@ extension HIEditProfileDetailViewController {
 
 // MARK: - UITextField
 extension HIEditProfileDetailViewController {
-    
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let newString = ((textField.text ?? "") as NSString).replacingCharacters(in: range, with: string)
         return newString.count <= characterLimit
     }
-    
+
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if let text = textField.text {
             characterCountLabel.text = "\(text.count < 10 ? "0" : "")\(text.count)/\(characterLimit < 10 ? "0" : "")\(characterLimit)"
@@ -248,7 +254,7 @@ extension HIEditProfileDetailViewController {
     @objc func didSelectDone(_ sender: UIBarButtonItem) {
         guard let profile = HIApplicationStateController.shared.profile else { return }
         guard let user = HIApplicationStateController.shared.user else { return }
-        
+
         var profileData = [String: Any]()
         profileData["id"] = profile.id
         profileData["firstName"] = profile.firstName
@@ -260,7 +266,7 @@ extension HIEditProfileDetailViewController {
         profileData["avatarURL"] = profile.avatarUrl
         profileData["teamStatus"] = profile.teamStatus
         profileData["interests"] = profile.interests
-        
+
         if let text = textField.text {
             switch editingField {
             case .fName:
@@ -275,11 +281,11 @@ extension HIEditProfileDetailViewController {
                 break
             }
         }
-        
+
         if editingField == .interests {
             var interests = [String]()
-            for i in 0..<activeIndexes.count{
-                interests.append(self.interests[activeIndexes[i]])
+            for index in 0..<activeIndexes.count {
+                interests.append(self.interests[activeIndexes[index]])
             }
             profileData["interests"] = interests
         } else if editingField == .teamStatus {
@@ -287,8 +293,8 @@ extension HIEditProfileDetailViewController {
                 profileData["teamStatus"] = teamStatuses[activeIndexes[0]].uppercased().replacingOccurrences(of: " ", with: "_")
             }
         }
-        
-        HIAPI.ProfileService.udpateUserProfile(profileData: profileData).onCompletion { [weak self] result in
+
+        HIAPI.ProfileService.updateUserProfile(profileData: profileData).onCompletion { [weak self] result in
             do {
                 let (apiProfile, _) = try result.get()
                 var profile = HIProfile()

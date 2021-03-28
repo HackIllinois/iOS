@@ -15,18 +15,18 @@ import UIKit
 
 class HITextField: UITextField {
     // MARK: - Types
-    enum type {
+    enum FieldType {
         case defaultTextField
         case editProfile
     }
-    
+
     // MARK: - Properties
     var textHIColor: HIColor? // = \.baseText
     var tintHIColor: HIColor? // = \.accent
     var backgroundHIColor: HIColor? // = \.baseBackground
-    
+
     // MARK: - Init
-    init(style: type? = .defaultTextField, additionalConfiguration: ((HITextField) -> Void)? = nil) {
+    init(style: FieldType? = .defaultTextField, additionalConfiguration: ((HITextField) -> Void)? = nil) {
         super.init(frame: .zero)
         additionalConfiguration?(self)
 
@@ -47,7 +47,7 @@ class HITextField: UITextField {
                 view.backgroundHIColor = \.whiteTagFont
                 view.alpha = 0.5
             }
-            
+
             self.addSubview(bottomView)
             bottomView.constrain(to: self, trailingInset: 0, bottomInset: 0, leadingInset: 0)
             self.returnKeyType = .done
@@ -88,9 +88,7 @@ class HITextField: UITextField {
     }
 }
 
-
-// MARK: - Dismiss keyboard
-
+// MARK: - UITextFieldDelegate
 extension HITextField: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

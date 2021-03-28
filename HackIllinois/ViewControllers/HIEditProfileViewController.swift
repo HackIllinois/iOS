@@ -2,22 +2,26 @@
 //  HIEditProfileViewController.swift
 //  HackIllinois
 //
-//  Created by alden lamp on 3/28/21.
+//  Created by HackIllinois Team on 3/28/21.
 //  Copyright © 2021 HackIllinois. All rights reserved.
+//  This file is part of the Hackillinois iOS App.
+//  The Hackillinois iOS App is open source software, released under the University of
+//  Illinois/NCSA Open Source License. You should have received a copy of
+//  this license in a file with the distribution.
 //
 
 import Foundation
 import UIKit
 
 class HIEditProfileViewController: HIBaseViewController {
-    
+
     let profileImageView = HIImageView {
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.constrain(width: 100, height: 100)
     }
-    
+
     let profileItems: [String] = ["First Name", "Last Name", "Team Status", "Bio", "Discord", "Interests"]
 
 }
@@ -25,31 +29,31 @@ class HIEditProfileViewController: HIBaseViewController {
 extension HIEditProfileViewController {
     override func loadView() {
         super.loadView()
-        
+
         self.view.addSubview(profileImageView)
         profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         profileImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        
+
         let separatorView = HIView(style: nil) { (view) in
             view.backgroundHIColor = \.whiteTagFont
             view.translatesAutoresizingMaskIntoConstraints = false
             view.heightAnchor.constraint(equalToConstant: 1).isActive = true
             view.alpha = 0.5
         }
-        
+
         self.view.addSubview(separatorView)
         separatorView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 30).isActive = true
         separatorView.constrain(to: self.view, trailingInset: 0, leadingInset: 0)
-        
-        self.tableView = HITableView()
-        setupTableView()
-        self.view.addSubview(self.tableView!)
-        self.tableView!.isScrollEnabled = false
-        self.tableView!.translatesAutoresizingMaskIntoConstraints = false
-        self.tableView!.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 0).isActive = true
-        self.tableView!.constrain(to: self.view, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+
+        let tableView = HITableView()
+        self.view.addSubview(tableView)
+        tableView.isScrollEnabled = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 0).isActive = true
+        tableView.constrain(to: self.view, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        self.tableView = tableView
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let profile = HIApplicationStateController.shared.profile else { return }
@@ -64,8 +68,6 @@ extension HIEditProfileViewController {
         backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
     }
 }
-
-
 
 // MARK: - UINavigationItem Setup
 extension HIEditProfileViewController {
@@ -84,57 +86,57 @@ extension HIEditProfileViewController {
         }
         super.setupTableView()
     }
-    
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return profileItems.count
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+
         let attrHeight = HILabel.heightForView(text: profileItems[indexPath.row], font: HIAppearance.Font.profileUsername, width: self.view.frame.width - 160)
         let infoHeight = HILabel.heightForView(text: getStringFromAttributeIndex(of: indexPath.row), font: HIAppearance.Font.profileDescription, width: self.view.frame.width - 160)
-        
+
         return max(attrHeight, infoHeight) + 25
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HIEditProfileCell.identifier, for: indexPath)
         if let cell = cell as? HIEditProfileCell {
             cell <- (profileItems[indexPath.row], getStringFromAttributeIndex(of: indexPath.row))
+            cell.selectionStyle = .none
             if indexPath.row == profileItems.count - 1 {
                 cell.useHalfSeparator = false
             }
         }
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         super.tableView(tableView, didSelectRowAt: indexPath)
-        
+
         let editController = HIEditProfileDetailViewController()
         let editingField = HIEditProfileDetailViewController.EditingFields(rawValue: profileItems[indexPath.row])
         let strValue = getStringFromAttributeIndex(of: indexPath.row)
-        
+
         editController.initializeData(editingField: editingField!, textFieldValue: strValue, characterLimit: 100, teamStatus: strValue, interests: HIApplicationStateController.shared.profile?.interests)
-        
+
         if let navController = self.navigationController as? HINavigationController {
             navController.pushViewController(editController, animated: true)
         }
-        
-        
+
     }
-    
+
 }
 
 // MARK: - Helper Functions
 extension HIEditProfileViewController {
     func getStringFromAttributeIndex(of attributeIndex: Int) -> String {
         guard let profile = HIApplicationStateController.shared.profile else { return ""}
-        
+
         switch attributeIndex {
         case 0:
             return profile.firstName
@@ -148,8 +150,8 @@ extension HIEditProfileViewController {
             return profile.discord
         case 5:
             var interestString = ""
-            for i in profile.interests {
-                interestString += "\(i), "
+            for interest in profile.interests {
+                interestString += "\(interest), "
             }
             return String(interestString.dropLast(2))
         default:

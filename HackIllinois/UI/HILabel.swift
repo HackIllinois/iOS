@@ -255,7 +255,7 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.groupStatus
             numberOfLines = 0
-        
+
         case .characterCount:
             textHIColor = \.whiteTagFont
             backgroundHIColor = \.clear

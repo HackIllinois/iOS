@@ -18,7 +18,7 @@ import HIAPI
 class HIProfileViewController: HIBaseViewController {
     // MARK: - Properties
     private let editViewController = HIEditProfileViewController()
-    
+
     private let editButton = HIButton {
         $0.tintHIColor = \.baseText
         $0.backgroundHIColor = \.clear
@@ -203,11 +203,11 @@ extension HIProfileViewController {
         updateProfile()
         reloadProfile()
     }
-    
+
     func updateProfile() {
         guard let profile = HIApplicationStateController.shared.profile else { return }
         view.layoutIfNeeded()
-        
+
         if let url = URL(string: profile.avatarUrl) {
             profilePictureView.downloadImage(from: url)
         }
@@ -232,7 +232,7 @@ extension HIProfileViewController {
         profileInterestsView.reloadData()
 
         profileDiscordImageView.image = #imageLiteral(resourceName: "DiscordLogo")
-        
+
     }
 }
 
@@ -272,7 +272,7 @@ extension HIProfileViewController {
 // MARK: - API
 extension HIProfileViewController {
     func reloadProfile () {
-        
+
         guard let user = HIApplicationStateController.shared.user else { return }
         HIAPI.ProfileService.getUserProfile()
         .onCompletion { [weak self] result in
@@ -302,5 +302,5 @@ extension HIProfileViewController {
         .launch()
 
     }
-    
+
 }
