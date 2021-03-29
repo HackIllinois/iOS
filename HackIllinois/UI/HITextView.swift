@@ -29,7 +29,7 @@ class HITextView: UITextView {
         tintHIColor = \.whiteTagFont
         backgroundHIColor = \.clear
 
-        self.returnKeyType = .done
+        self.returnKeyType = .default
         self.delegate = self
         enablesReturnKeyAutomatically = true
         translatesAutoresizingMaskIntoConstraints = false

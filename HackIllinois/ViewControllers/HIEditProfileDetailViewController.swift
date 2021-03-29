@@ -56,6 +56,13 @@ class HIEditProfileDetailViewController: HIBaseViewController {
     var editingField: EditingField?
 }
 
+// MARK: - Actions
+extension HIEditProfileDetailViewController {
+    @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+}
+
 // MARK: - UIViewController
 extension HIEditProfileDetailViewController {
     override func loadView() {
@@ -95,12 +102,15 @@ extension HIEditProfileDetailViewController {
             textFieldContainerView.isHidden = true
         } else {
             tableView.isHidden = true
+            let viewGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+            view.addGestureRecognizer(viewGestureRecognizer)
         }
         self.tableView = tableView
     }
 
     func constrainBioTextView() {
         bioTextView.isScrollEnabled = false
+        bioTextView.autocorrectionType = .no
         textFieldContainerView.addSubview(bioTextView)
         bioTextView.constrain(to: textFieldContainerView, trailingInset: -20, leadingInset: 20)
         bioTextView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 30).isActive = true
@@ -109,6 +119,7 @@ extension HIEditProfileDetailViewController {
     }
 
     func constrainSingleLineTextField() {
+        singleLineTextField.autocorrectionType = .no
         textFieldContainerView.addSubview(singleLineTextField)
         singleLineTextField.constrain(to: textFieldContainerView, trailingInset: -20, leadingInset: 20)
         singleLineTextField.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 30).isActive = true
@@ -181,8 +192,8 @@ extension HIEditProfileDetailViewController {
 
         if let status = teamStatus {
             if editingField == .teamStatus {
-                if teamStatuses.contains(status) {
-                    self.activeIndexes = [teamStatuses.firstIndex(of: status)!]
+                if let index = teamStatuses.firstIndex(of: status) {
+                    self.activeIndexes = [index]
                 }
             }
         }
@@ -258,8 +269,8 @@ extension HIEditProfileDetailViewController {
         super.tableView(tableView, didSelectRowAt: indexPath)
 
         if editingField == .interests {
-            if activeIndexes.contains(indexPath.row) {
-                activeIndexes.remove(at: activeIndexes.firstIndex(of: indexPath.row)!)
+            if let index = activeIndexes.firstIndex(of: indexPath.row) {
+                activeIndexes.remove(at: index)
             } else {
                 activeIndexes.append(indexPath.row)
             }

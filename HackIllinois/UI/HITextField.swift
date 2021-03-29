@@ -77,11 +77,15 @@ class HITextField: UITextField {
         tintColor <- tintHIColor
         backgroundColor <- backgroundHIColor
 
+        var placeholderHIColor: HIColor = \.baseText
+        if let textHIColor = textHIColor {
+            placeholderHIColor = textHIColor
+        }
         if let placeholder = placeholder {
             attributedPlaceholder = NSAttributedString(
                 string: placeholder,
                 attributes: [
-                    NSAttributedString.Key.foregroundColor: (textHIColor == nil ? \HIAppearance.baseText : textHIColor!).value.withAlphaComponent(0.5)
+                    NSAttributedString.Key.foregroundColor: placeholderHIColor.value.withAlphaComponent(0.5)
                 ]
             )
         }
