@@ -24,7 +24,7 @@ class HIEditProfileDetailViewController: HIBaseViewController {
         case teamStatus = "Team Status"
         case bio = "Bio"
         case discord = "Discord"
-        case interests = "Interests"
+        case interests = "Skills"
     }
 
     //TODO: Load from HackIllinois API
@@ -142,7 +142,7 @@ extension HIEditProfileDetailViewController {
     }
 
     func updateCharacterCount() {
-        if editingField == .bio{
+        if editingField == .bio {
             if let fieldValue = bioTextView.text {
                 characterCountLabel.text = "\(fieldValue.count < 10 ? "0" : "")\(fieldValue.count)/\(characterLimit < 10 ? "0" : "")\(characterLimit)"
             }
@@ -242,7 +242,13 @@ extension HIEditProfileDetailViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HIEditProfileDetailCell.identifier, for: indexPath)
         if let cell = cell as? HIEditProfileDetailCell {
-            cell <- ((editingField == .interests ? interests : teamStatuses)[indexPath.row], activeIndexes.contains(indexPath.row))
+            if editingField == .interests {
+                cell.editType = .interests
+                cell <- (interests[indexPath.row], activeIndexes.contains(indexPath.row))
+            } else {
+                cell.editType = .teamStatus
+                cell <- (teamStatuses[indexPath.row], activeIndexes.contains(indexPath.row))
+            }
             cell.selectionStyle = .none
         }
         return cell

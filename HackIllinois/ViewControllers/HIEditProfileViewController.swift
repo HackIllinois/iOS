@@ -22,7 +22,7 @@ class HIEditProfileViewController: HIBaseViewController {
         $0.constrain(width: 100, height: 100)
     }
 
-    private let profileItems: [String] = ["First Name", "Last Name", "Team Status", "Bio", "Discord", "Interests"]
+    private let profileItems: [String] = ["First Name", "Last Name", "Team Status", "Bio", "Discord", "Skills"]
     private let scrollView = UIScrollView(frame: .zero)
     private let contentView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false

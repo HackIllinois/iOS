@@ -14,18 +14,31 @@ import Foundation
 import UIKit
 
 class HIEditProfileDetailCell: UITableViewCell {
+    enum EditType: String {
+        case teamStatus = "Team Status"
+        case interests = "Skills"
+    }
     let itemTitle = HILabel(style: .profileUsername)
     let statusImageView = HIImageView { (imageView) in
         imageView.backgroundColor = UIColor.clear
         imageView.contentMode = .scaleAspectFit
     }
+    var editType: EditType?
 
     var isActive = false {
         didSet {
             if isActive {
-                statusImageView.image = #imageLiteral(resourceName: "SelectedProfileItem")
+                if editType == .teamStatus {
+                    statusImageView.image = #imageLiteral(resourceName: "SelectedRadioButton")
+                } else {
+                    statusImageView.image = #imageLiteral(resourceName: "SelectedBox")
+                }
             } else {
-                statusImageView.image = #imageLiteral(resourceName: "UnselectedProfileItem")
+                if editType == .teamStatus {
+                    statusImageView.image = #imageLiteral(resourceName: "UnselectedRadioButton")
+                } else {
+                    statusImageView.image = #imageLiteral(resourceName: "UnselectedBox")
+                }
             }
         }
     }
@@ -69,7 +82,11 @@ class HIEditProfileDetailCell: UITableViewCell {
 extension HIEditProfileDetailCell {
     static func <- (lhs: HIEditProfileDetailCell, rhs: (itemTitle: String, isActive: Bool)) {
         lhs.itemTitle.text = rhs.itemTitle
-        lhs.statusImageView.image = rhs.isActive ? #imageLiteral(resourceName: "SelectedProfileItem") : #imageLiteral(resourceName: "UnselectedProfileItem")
+        if lhs.editType == .teamStatus {
+            lhs.statusImageView.image = rhs.isActive ? #imageLiteral(resourceName: "SelectedRadioButton") : #imageLiteral(resourceName: "UnselectedRadioButton")
+        } else {
+            lhs.statusImageView.image = rhs.isActive ? #imageLiteral(resourceName: "SelectedBox") : #imageLiteral(resourceName: "UnselectedBox")
+        }
     }
 }
 
