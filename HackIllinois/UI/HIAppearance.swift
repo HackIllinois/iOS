@@ -128,8 +128,8 @@ struct HIAppearance: Equatable {
         noSearchText: groupGreen,
         buttonViewBackground: buttonBlue,
         checkmark: #imageLiteral(resourceName: "CheckMark"),
-        unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedGroupStatus"),
-        selectedGroupStatus: #imageLiteral(resourceName: "SelectedGroupStatus"),
+        unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedBox"),
+        selectedGroupStatus: #imageLiteral(resourceName: "SelectedBox"),
         eventTypeGreen: eventGreen,
         eventTypeOrange: eventOrange,
         eventTypeRed: eventRed,
@@ -169,8 +169,8 @@ struct HIAppearance: Equatable {
         noSearchText: groupGreen,
         buttonViewBackground: buttonBlue,
         checkmark: #imageLiteral(resourceName: "CheckMark"),
-        unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedGroupStatus"),
-        selectedGroupStatus: #imageLiteral(resourceName: "SelectedGroupStatus"),
+        unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedBox"),
+        selectedGroupStatus: #imageLiteral(resourceName: "SelectedBox"),
         eventTypeGreen: eventGreen,
         eventTypeOrange: eventOrange,
         eventTypeRed: eventRed,
@@ -221,6 +221,7 @@ struct HIAppearance: Equatable {
         static let profileInterests = UIFont.systemFont(ofSize: 14, weight: .semibold)
         static let segmentedTitle = UIFont.systemFont(ofSize: 16, weight: .regular)
         static let segmentedNumberText = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        static let characterCount = UIFont.systemFont(ofSize: 14, weight: .light)
 
         static let groupContact = UIFont.systemFont(ofSize: 14, weight: .semibold)
         static let groupStatus = UIFont.systemFont(ofSize: 12, weight: .bold)
