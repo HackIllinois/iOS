@@ -120,16 +120,11 @@ private extension HILoginFlowController {
         //GUEST (bypass auth)
         if user.provider == .guest {
             var guestUser = HIUser()
-            var guestProfile = HIProfile()
-            guestUser.firstName = "Guest"
-            //TODO: Change out test token
-            guestUser.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyMUBnbWFpbC5jb20iLCJleHAiOjE2MjU4MjUyNDEsImlkIjoiVEVTVDEgZ2l0aHViMTkwMjM4MTIzIiwicm9sZXMiOlsiVXNlciIsIkFwcGxpY2FudCIsIkF0dGVuZGVlIl19.Ethvq5VsLFukI3TehZdTkuHHZiybqXNBxOiP04XwOjI"
-            guestProfile.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyMUBnbWFpbC5jb20iLCJleHAiOjE2MjU4MjUyNDEsImlkIjoiVEVTVDEgZ2l0aHViMTkwMjM4MTIzIiwicm9sZXMiOlsiVXNlciIsIkFwcGxpY2FudCIsIkF0dGVuZGVlIl19.Ethvq5VsLFukI3TehZdTkuHHZiybqXNBxOiP04XwOjI"
+            guestUser.provider = .guest
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": guestUser])
-                // NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": guestProfile])
+                self.populateDefaultProfileData()
             }
-            self.populateProfileData(buildingProfile: guestProfile, sender: sender)
             return
         }
 
@@ -218,8 +213,8 @@ private extension HILoginFlowController {
                     if user.roles.contains(.staff) {
                         DispatchQueue.main.async {
                             NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
+                            self?.populateDefaultProfileData()
                         }
-                        self?.populateProfileData(buildingProfile: profile, sender: sender)
                     } else {
                         DispatchQueue.main.async {
                             sender.presentErrorController(title: "You must have a valid staff account to log in.", message: "", dismissParentOnCompletion: false)
@@ -257,6 +252,20 @@ private extension HILoginFlowController {
         }
         .authorize(with: user)
         .launch()
+    }
+
+    private func populateDefaultProfileData() {
+        var profile = HIProfile()
+        profile.firstName = "Default"
+        profile.lastName = "Account"
+        profile.points = 0
+        profile.timezone = "CDT"
+        profile.info = "This is a default account."
+        profile.discord = "N/A"
+        profile.avatarUrl = "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-0.png"
+        profile.teamStatus = "NOT_LOOKING"
+        profile.interests = []
+        NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": profile])
     }
 
     private func populateProfileData(buildingProfile profile: HIProfile, sender: HIBaseViewController) {

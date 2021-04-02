@@ -69,6 +69,10 @@ extension HIApplicationStateController {
             Keychain.default.removeObject(forKey: HIConstants.STORED_ACCOUNT_KEY)
             return
         }
+        isGuest = false
+        if user.provider == .guest || user.provider == .google {
+            isGuest = true
+        }
         self.user = user
     }
 
@@ -95,7 +99,10 @@ extension HIApplicationStateController {
         guard let user = notification.userInfo?["user"] as? HIUser else { return }
         guard Keychain.default.store(user, forKey: HIConstants.STORED_ACCOUNT_KEY) else { return }
         self.user = user
-        if user.token.isEmpty { isGuest = true }
+        isGuest = false
+        if user.provider == .guest || user.provider == .google {
+            isGuest = true
+        }
         HILocalNotificationController.shared.requestAuthorization()
         UIApplication.shared.registerForRemoteNotifications()
         updateWindowViewController(animated: true)
@@ -106,7 +113,6 @@ extension HIApplicationStateController {
         Keychain.default.removeObject(forKey: HIConstants.STORED_ACCOUNT_KEY)
         user = nil
         profile = nil
-        isGuest = false
         updateWindowViewController(animated: true)
     }
 
