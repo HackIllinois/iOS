@@ -1,23 +1,23 @@
 {
   "images" : [
     {
-      "filename" : "Rectangle 1381x.png",
       "idiom" : "universal",
+      "filename" : "SelectedBox@1x.png",
       "scale" : "1x"
     },
     {
-      "filename" : "Rectangle 1382x.png",
       "idiom" : "universal",
+      "filename" : "SelectedBox@2x.png",
       "scale" : "2x"
     },
     {
-      "filename" : "Rectangle 1383x.png",
       "idiom" : "universal",
+      "filename" : "SelectedBox@3x.png",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "author" : "xcode",
-    "version" : 1
+    "version" : 1,
+    "author" : "xcode"
   }
 }
