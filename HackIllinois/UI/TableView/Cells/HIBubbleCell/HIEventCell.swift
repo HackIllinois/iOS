@@ -97,13 +97,6 @@ extension HIEventCell {
         lhs.contentStackView.addArrangedSubview(timeLabel)
         lhs.contentStackView.setCustomSpacing(10, after: timeLabel)
 
-        if !rhs.sponsor.isEmpty {
-            let sponsorLabel = HILabel(style: .sponsor)
-            sponsorLabel.text = "Sponsored by \(rhs.sponsor)"
-            contentStackViewHeight += sponsorLabel.intrinsicContentSize.height
-            lhs.contentStackView.addArrangedSubview(sponsorLabel)
-        }
-
         let descriptionLabel = HILabel(style: .cellDescription)
         descriptionLabel.text = rhs.info
         let height = HILabel.heightForView(text: rhs.info, font: HIAppearance.Font.eventDetails, width: lhs.contentView.frame.width - 100)
@@ -122,7 +115,7 @@ extension HIEventCell {
         let pointsLabel = HILabel(style: .pointsText)
         pointsView.addSubview(pointsLabel)
         pointsLabel.constrain(to: pointsView, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
-        pointsLabel.text = "10 Points!"
+        pointsLabel.text = "\(rhs.points) Points!"
 
         let eventType = HILabel(style: .eventType)
         eventType.text = rhs.eventType

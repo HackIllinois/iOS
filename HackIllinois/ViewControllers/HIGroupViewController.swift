@@ -58,7 +58,7 @@ class HIGroupViewController: HIGroupListViewController {
         $0.titleLabel?.font = HIAppearance.Font.sortingText
         $0.backgroundHIColor = \.buttonViewBackground
         $0.titleHIColor = \.action
-        $0.title = "Group Status"
+        $0.title = "Team Status"
         $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: $0.frame.size.width - 15, bottom: 0, right: 0)
         $0.layer.shadowColor = UIColor.black.cgColor
         $0.layer.shadowOffset = .zero
@@ -292,7 +292,7 @@ extension HIGroupViewController {
 extension HIGroupViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
-        title = "GROUP MATCHING"
+        title = "Team Matching"
         if !HIApplicationStateController.shared.isGuest {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuUnfavorited"), style: .plain, target: self, action: #selector(didSelectFavoritesIcon(_:)))
         }

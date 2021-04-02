@@ -45,19 +45,16 @@ class HIGroupCell: HIBubbleCell {
     }
     var indexPath: IndexPath?
     weak var delegate: HIGroupCellDelegate?
-    static let profileDict: [String: HIImage] = ["https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-0.png": \.profile0, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-1.png": \.profile1, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-2.png": \.profile2,
-                                                 "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-3.png": \.profile3, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-4.png": \.profile4, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-5.png": \.profile5,
-                                                 "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-6.png": \.profile6, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-7.png": \.profile7, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-8.png": \.profile8,
-                                                 "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-9.png": \.profile9, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-10.png": \.profile10]
+    static let profileDict: [String: HIImage] = ["https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-0.png": \.profile0, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-1.png": \.profile1, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-2.png": \.profile2, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-3.png":\.profile3, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-4.png": \.profile4, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-5.png": \.profile5, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-6.png": \.profile6,  "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-7.png": \.profile7,  "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-8.png": \.profile8, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-9.png": \.profile9, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-10.png": \.profile10]
 
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = UIColor.clear
-        bubbleView.addSubview(favoritedButton)
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
-        favoritedButton.widthAnchor.constraint(equalToConstant: 58).isActive = true
-        favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0, bottomInset: 0)
+        bubbleView.addSubview(favoritedButton)
+        favoritedButton.constrain(width: 58, height: 60)
+        favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0)
 
         // add bubble view
         bubbleView.addSubview(profilePicture)
@@ -120,8 +117,7 @@ extension HIGroupCell {
         var innerVerticalStackViewHeight: CGFloat = 0
         var contentStackViewHeight: CGFloat = 0
 
-        if let url = URL(string: rhs.avatarUrl) {
-            let imgValue: HIImage = profileDict[url.absoluteString]!
+        if let url = URL(string: rhs.avatarUrl), let imgValue = profileDict[url.absoluteString] {
             lhs.profilePicture.changeImage(newImage: imgValue)
         }
 
