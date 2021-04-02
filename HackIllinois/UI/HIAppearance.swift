@@ -54,6 +54,7 @@ struct HIAppearance: Equatable {
     let eventTypeOrange: UIColor
     let eventTypeRed: UIColor
     let eventTypePurple: UIColor
+    let eventTypePink: UIColor
     let profile0: UIImage
     let profile1: UIImage
     let profile2: UIImage
@@ -97,6 +98,7 @@ struct HIAppearance: Equatable {
     private static let eventOrange = #colorLiteral(red: 0.8941176471, green: 0.4117647059, blue: 0.2901960784, alpha: 1)
     private static let eventRed = #colorLiteral(red: 0.5960784314, green: 0.1137254902, blue: 0.137254902, alpha: 1)
     private static let eventPurple = #colorLiteral(red: 0.3490196078, green: 0.2784313725, blue: 0.6549019608, alpha: 1)
+    private static let eventPink = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
 
     private static var statusBarWhite: UIStatusBarStyle {
         if #available(iOS 13, *) {
@@ -145,17 +147,18 @@ struct HIAppearance: Equatable {
         eventTypeOrange: eventOrange,
         eventTypeRed: eventRed,
         eventTypePurple: eventPurple,
-        profile0: #imageLiteral(resourceName: "profile-0"),
-        profile1: #imageLiteral(resourceName: "profile-1"),
-        profile2: #imageLiteral(resourceName: "profile-2"),
-        profile3: #imageLiteral(resourceName: "profile-3"),
-        profile4: #imageLiteral(resourceName: "profile-4"),
-        profile5: #imageLiteral(resourceName: "profile-5"),
-        profile6: #imageLiteral(resourceName: "profile-6"),
-        profile7: #imageLiteral(resourceName: "profile-7"),
-        profile8: #imageLiteral(resourceName: "profile-8"),
-        profile9: #imageLiteral(resourceName: "profile-9"),
-        profile10: #imageLiteral(resourceName: "profile-10")
+        eventTypePink: eventPink,
+        profile0: #imageLiteral(resourceName: "Profile0"),
+        profile1: #imageLiteral(resourceName: "Profile1"),
+        profile2: #imageLiteral(resourceName: "Profile2"),
+        profile3: #imageLiteral(resourceName: "Profile3"),
+        profile4: #imageLiteral(resourceName: "Profile4"),
+        profile5: #imageLiteral(resourceName: "Profile5"),
+        profile6: #imageLiteral(resourceName: "Profile6"),
+        profile7: #imageLiteral(resourceName: "Profile7"),
+        profile8: #imageLiteral(resourceName: "Profile8"),
+        profile9: #imageLiteral(resourceName: "Profile9"),
+        profile10: #imageLiteral(resourceName: "Profile10")
     )
 
     fileprivate static let night = HIAppearance(
@@ -197,17 +200,18 @@ struct HIAppearance: Equatable {
         eventTypeOrange: eventOrange,
         eventTypeRed: eventRed,
         eventTypePurple: eventPurple,
-        profile0: #imageLiteral(resourceName: "profile-0"),
-        profile1: #imageLiteral(resourceName: "profile-1"),
-        profile2: #imageLiteral(resourceName: "profile-2"),
-        profile3: #imageLiteral(resourceName: "profile-3"),
-        profile4: #imageLiteral(resourceName: "profile-4"),
-        profile5: #imageLiteral(resourceName: "profile-5"),
-        profile6: #imageLiteral(resourceName: "profile-6"),
-        profile7: #imageLiteral(resourceName: "profile-7"),
-        profile8: #imageLiteral(resourceName: "profile-8"),
-        profile9: #imageLiteral(resourceName: "profile-9"),
-        profile10: #imageLiteral(resourceName: "profile-10")
+        eventTypePink: eventPink,
+        profile0: #imageLiteral(resourceName: "Profile0"),
+        profile1: #imageLiteral(resourceName: "Profile1"),
+        profile2: #imageLiteral(resourceName: "Profile2"),
+        profile3: #imageLiteral(resourceName: "Profile3"),
+        profile4: #imageLiteral(resourceName: "Profile4"),
+        profile5: #imageLiteral(resourceName: "Profile5"),
+        profile6: #imageLiteral(resourceName: "Profile6"),
+        profile7: #imageLiteral(resourceName: "Profile7"),
+        profile8: #imageLiteral(resourceName: "Profile8"),
+        profile9: #imageLiteral(resourceName: "Profile9"),
+        profile10: #imageLiteral(resourceName: "Profile10")
     )
 
     fileprivate static var current = day
@@ -238,7 +242,7 @@ struct HIAppearance: Equatable {
         static let navigationTitle = UIFont.systemFont(ofSize: 22, weight: .semibold)
         static let navigationInfoText = UIFont.systemFont(ofSize: 12, weight: .regular)
         static let descriptionText = UIFont.systemFont(ofSize: 14, weight: .regular)
-        static let sponsorText = UIFont.systemFont(ofSize: 16, weight: .medium)
+        static let sponsorText = UIFont.systemFont(ofSize: 14, weight: .medium)
         static let loginTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
         static let loginSelection = UIFont.systemFont(ofSize: 16, weight: .semibold)
 

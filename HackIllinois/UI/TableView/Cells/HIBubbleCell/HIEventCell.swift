@@ -97,6 +97,13 @@ extension HIEventCell {
         lhs.contentStackView.addArrangedSubview(timeLabel)
         lhs.contentStackView.setCustomSpacing(10, after: timeLabel)
 
+        if !rhs.sponsor.isEmpty {
+            let sponsorLabel = HILabel(style: .sponsor)
+            sponsorLabel.text = "Sponsored by \(rhs.sponsor)"
+            contentStackViewHeight += sponsorLabel.intrinsicContentSize.height
+            lhs.contentStackView.addArrangedSubview(sponsorLabel)
+        }
+
         let descriptionLabel = HILabel(style: .cellDescription)
         descriptionLabel.text = rhs.info
         let height = HILabel.heightForView(text: rhs.info, font: HIAppearance.Font.eventDetails, width: lhs.contentView.frame.width - 100)
@@ -158,10 +165,10 @@ extension HIEventCell {
             return \.eventTypeGreen
         case "SPEAKER":
             return \.eventTypeRed
-        case "CHALLENGE":
+        case "OTHER":
             return \.eventTypeOrange
         default:
-            return \.eventTypeOrange
+            return \.eventTypePink
         }
     }
 }
