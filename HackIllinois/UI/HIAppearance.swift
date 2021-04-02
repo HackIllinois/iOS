@@ -54,6 +54,17 @@ struct HIAppearance: Equatable {
     let eventTypeOrange: UIColor
     let eventTypeRed: UIColor
     let eventTypePurple: UIColor
+    let profile0: UIImage
+    let profile1: UIImage
+    let profile2: UIImage
+    let profile3: UIImage
+    let profile4: UIImage
+    let profile5: UIImage
+    let profile6: UIImage
+    let profile7: UIImage
+    let profile8: UIImage
+    let profile9: UIImage
+    let profile10: UIImage
 
     let clear: UIColor = .clear
     let black: UIColor = .black
@@ -133,7 +144,18 @@ struct HIAppearance: Equatable {
         eventTypeGreen: eventGreen,
         eventTypeOrange: eventOrange,
         eventTypeRed: eventRed,
-        eventTypePurple: eventPurple
+        eventTypePurple: eventPurple,
+        profile0: #imageLiteral(resourceName: "profile-0"),
+        profile1: #imageLiteral(resourceName: "profile-1"),
+        profile2: #imageLiteral(resourceName: "profile-2"),
+        profile3: #imageLiteral(resourceName: "profile-3"),
+        profile4: #imageLiteral(resourceName: "profile-4"),
+        profile5: #imageLiteral(resourceName: "profile-5"),
+        profile6: #imageLiteral(resourceName: "profile-6"),
+        profile7: #imageLiteral(resourceName: "profile-7"),
+        profile8: #imageLiteral(resourceName: "profile-8"),
+        profile9: #imageLiteral(resourceName: "profile-9"),
+        profile10: #imageLiteral(resourceName: "profile-10")
     )
 
     fileprivate static let night = HIAppearance(
@@ -174,7 +196,18 @@ struct HIAppearance: Equatable {
         eventTypeGreen: eventGreen,
         eventTypeOrange: eventOrange,
         eventTypeRed: eventRed,
-        eventTypePurple: eventPurple
+        eventTypePurple: eventPurple,
+        profile0: #imageLiteral(resourceName: "profile-0"),
+        profile1: #imageLiteral(resourceName: "profile-1"),
+        profile2: #imageLiteral(resourceName: "profile-2"),
+        profile3: #imageLiteral(resourceName: "profile-3"),
+        profile4: #imageLiteral(resourceName: "profile-4"),
+        profile5: #imageLiteral(resourceName: "profile-5"),
+        profile6: #imageLiteral(resourceName: "profile-6"),
+        profile7: #imageLiteral(resourceName: "profile-7"),
+        profile8: #imageLiteral(resourceName: "profile-8"),
+        profile9: #imageLiteral(resourceName: "profile-9"),
+        profile10: #imageLiteral(resourceName: "profile-10")
     )
 
     fileprivate static var current = day
