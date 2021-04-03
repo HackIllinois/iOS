@@ -126,6 +126,9 @@ extension HIEventCell {
 
         let eventType = HILabel(style: .eventType)
         eventType.text = rhs.eventType
+        if rhs.eventType == "QNA" {
+            eventType.text = "COMPANY Q&A"
+        }
         eventType.textHIColor = getTagColor(for: rhs.eventType)
         eventType.refreshForThemeChange()
 
@@ -165,7 +168,7 @@ extension HIEventCell {
             return \.eventTypeGreen
         case "SPEAKER":
             return \.eventTypeRed
-        case "OTHER":
+        case "QNA":
             return \.eventTypeOrange
         default:
             return \.eventTypePink
