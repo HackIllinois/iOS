@@ -319,7 +319,7 @@ extension HIGroupViewController {
 extension HIGroupViewController: HIGroupPopupViewDelegate {
     func updateInterests(_ groupPopupCell: HIGroupPopupCell) {
         guard let indexPath = groupPopupCell.indexPath, let interest = groupPopupCell.interestLabel.text else { return }
-        let modifiedInterest = interest.replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2b")
+        let modifiedInterest = interest.replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "#", with: "%23").replacingOccurrences(of: "+", with: "%2b")
         if groupPopupCell.selectedImageView.isHidden {
             selectedRows.insert(indexPath.row)
             interests.insert(modifiedInterest)
