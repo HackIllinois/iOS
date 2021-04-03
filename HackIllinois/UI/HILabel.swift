@@ -218,7 +218,7 @@ class HILabel: UILabel {
             textHIColor = \.groupText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.contentText
-            numberOfLines = 1
+            numberOfLines = 2
 
         case .groupContactInfo:
             textHIColor = \.groupText
@@ -287,9 +287,9 @@ class HILabel: UILabel {
 
 // MARK: - Auto-Sizing
 extension HILabel {
-    static func heightForView(text: String, font: UIFont, width: CGFloat) -> CGFloat {
+    static func heightForView(text: String, font: UIFont, width: CGFloat, numLines: Int = 0) -> CGFloat {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
-        label.numberOfLines = 0
+        label.numberOfLines = numLines
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.font = font
         label.text = text

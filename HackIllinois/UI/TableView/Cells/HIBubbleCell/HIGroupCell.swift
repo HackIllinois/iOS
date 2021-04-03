@@ -108,8 +108,12 @@ extension HIGroupCell {
 // MARK: - Population
 extension HIGroupCell {
 
-    static func heightForCell(with group: Profile) -> CGFloat {
-        return 155
+    static func heightForCell(with group: Profile, width: CGFloat) -> CGFloat {
+        //BubbleView: 17
+        // ContentLeft: 20
+        //contentRight: 58
+        let labelHeight = HILabel.heightForView(text: group.info, font: HIAppearance.Font.contentText, width: width - 95, numLines: 2)
+        return 135 + labelHeight
     }
 
     static func <- (lhs: HIGroupCell, rhs: Profile) {

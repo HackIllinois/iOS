@@ -60,7 +60,7 @@ extension HIGroupListViewController {
         guard let profile = _fetchedResultsController?.object(at: indexPath) as? Profile else {
             return CGFloat.leastNonzeroMagnitude
         }
-        return HIGroupCell.heightForCell(with: profile)
+        return HIGroupCell.heightForCell(with: profile, width: tableView.frame.width)
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
