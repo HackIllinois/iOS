@@ -112,7 +112,8 @@ extension HIGroupCell {
         //BubbleView: 17
         // ContentLeft: 20
         //contentRight: 58
-        let labelHeight = HILabel.heightForView(text: group.info, font: HIAppearance.Font.contentText, width: width - 95, numLines: 2)
+        
+        let labelHeight = HILabel.heightForView(text: group.info, font: HIAppearance.Font.contentText, width: width - 102, numLines: 2)
         return 135 + labelHeight
     }
 
