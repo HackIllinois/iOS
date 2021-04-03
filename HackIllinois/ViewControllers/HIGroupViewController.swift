@@ -136,6 +136,7 @@ extension HIGroupViewController {
             tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
     }
+
     @objc func openPopup() {
         let popupView = HIGroupPopupViewController()
         popupView.modalPresentationStyle = .overCurrentContext
@@ -277,8 +278,8 @@ extension HIGroupViewController {
 
     override func viewDidLoad() {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
-        super.viewDidLoad()
         setupRefreshControl()
+        super.viewDidLoad()
     }
 
     override func viewDidLayoutSubviews() {

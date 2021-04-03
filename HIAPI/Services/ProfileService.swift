@@ -46,13 +46,13 @@ public final class ProfileService: BaseService {
 
     public static func favoriteBy(id: String) -> APIRequest<ProfileFavorites> {
         var body = HTTPBody()
-        body["profileId"] = id
+        body["id"] = id
         return APIRequest<ProfileFavorites>(service: self, endpoint: "favorite/add/", body: body, method: .POST)
     }
 
     public static func unfavoriteBy(id: String) -> APIRequest<ProfileFavorites> {
         var body = HTTPBody()
-        body["profileId"] = id
+        body["id"] = id
         return APIRequest<ProfileFavorites>(service: self, endpoint: "favorite/remove/", body: body, method: .POST)
     }
 

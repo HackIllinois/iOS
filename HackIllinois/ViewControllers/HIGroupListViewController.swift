@@ -50,6 +50,7 @@ extension HIGroupListViewController {
     override func refresh(_ sender: UIRefreshControl) {
         super.refresh(sender)
         HIProfileDataSource.refresh(teamStatus: teamStatusParams, interests: interestParams, completion: endRefreshing)
+        tableView?.reloadData()
     }
 }
 

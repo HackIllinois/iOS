@@ -50,6 +50,6 @@ public struct Profile: Codable, APIReturnable {
 }
 
 public struct ProfileFavorites: Codable, APIReturnable {
-    public let profiles: Set<String>
     public let id: String
+    public let profiles: Set<String>
 }

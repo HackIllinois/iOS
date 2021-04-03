@@ -113,7 +113,7 @@ extension HIGroupCell {
     }
 
     static func <- (lhs: HIGroupCell, rhs: Profile) {
-        // lhs.favoritedButton.isActive = rhs.favorite
+        lhs.favoritedButton.isActive = rhs.favorite
         var innerVerticalStackViewHeight: CGFloat = 0
         var contentStackViewHeight: CGFloat = 0
 

@@ -110,7 +110,9 @@ extension HIApplicationStateController {
 
     @objc func logoutUser() {
         guard user != nil else { return }
+        guard profile != nil else { return }
         Keychain.default.removeObject(forKey: HIConstants.STORED_ACCOUNT_KEY)
+        Keychain.default.removeObject(forKey: HIConstants.STORED_PROFILE_KEY)
         user = nil
         profile = nil
         updateWindowViewController(animated: true)

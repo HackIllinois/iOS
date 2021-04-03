@@ -269,7 +269,6 @@ private extension HILoginFlowController {
     }
 
     private func populateProfileData(buildingProfile profile: HIProfile, sender: HIBaseViewController) {
-        print("token: \(profile.token)")
         HIAPI.ProfileService.getUserProfile()
         .onCompletion { [weak self] result in
             do {
