@@ -49,6 +49,7 @@ class HILabel: UILabel {
         case countdown
         case pointsText
         case groupStatusFilter
+        case characterCount
     }
 
     // MARK: - Properties
@@ -255,6 +256,10 @@ class HILabel: UILabel {
             font = HIAppearance.Font.groupStatus
             numberOfLines = 0
 
+        case .characterCount:
+            textHIColor = \.whiteTagFont
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.characterCount
         }
         }
 

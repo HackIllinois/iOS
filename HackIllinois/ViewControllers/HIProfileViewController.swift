@@ -13,9 +13,12 @@
 import Foundation
 import UIKit
 import CoreData
+import HIAPI
 
 class HIProfileViewController: HIBaseViewController {
     // MARK: - Properties
+    private let editViewController = HIEditProfileViewController()
+
     private let editButton = HIButton {
         $0.tintHIColor = \.baseText
         $0.backgroundHIColor = \.clear
@@ -101,6 +104,8 @@ extension HIProfileViewController {
         self.navigationItem.rightBarButtonItem = editButton.toBarButtonItem()
         // To add action
         editButton.constrain(width: 22, height: 22)
+        editButton.addTarget(self, action: #selector(didSelectEditButton(_:)), for: .touchUpInside)
+        _ = editViewController.view
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
@@ -207,6 +212,11 @@ extension HIProfileViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         scrollView.setContentOffset(.zero, animated: true)
+        updateProfile()
+        reloadProfile()
+    }
+
+    func updateProfile() {
         guard let profile = HIApplicationStateController.shared.profile else { return }
         view.layoutIfNeeded()
 
@@ -232,8 +242,10 @@ extension HIProfileViewController {
         profileDiscordUsernameView.text = profile.discord
         interests = profile.interests
         profileInterestsView.reloadData()
+        profileInterestsViewHeight.constant = profileInterestsView.collectionViewLayout.collectionViewContentSize.height + 20
 
         profileDiscordImageView.image = #imageLiteral(resourceName: "DiscordLogo")
+
     }
 
     override func viewDidLayoutSubviews() {
@@ -264,4 +276,49 @@ extension HIProfileViewController: UICollectionViewDelegateFlowLayout {
         let bound = Int(collectionView.frame.width)
         return CGSize(width: min((10 * interest.count) + 35, bound), height: 40)
     }
+}
+
+// MARK: - Navigation
+extension HIProfileViewController {
+    @objc func didSelectEditButton(_ sender: UIButton) {
+        if let navController = navigationController as? HINavigationController {
+            navController.pushViewController(editViewController, animated: true)
+        }
+    }
+}
+
+// MARK: - API
+extension HIProfileViewController {
+    func reloadProfile () {
+
+        guard let user = HIApplicationStateController.shared.user else { return }
+        HIAPI.ProfileService.getUserProfile()
+        .onCompletion { [weak self] result in
+            do {
+                let (apiProfile, _) = try result.get()
+                var profile = HIProfile()
+                profile.id = apiProfile.id
+                profile.firstName = apiProfile.firstName
+                profile.lastName = apiProfile.lastName
+                profile.points = apiProfile.points
+                profile.timezone = apiProfile.timezone
+                profile.info = apiProfile.info
+                profile.discord = apiProfile.discord
+                profile.avatarUrl = apiProfile.avatarUrl
+                profile.teamStatus = apiProfile.teamStatus
+                profile.interests = apiProfile.interests
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": profile])
+                    self?.updateProfile()
+                }
+            } catch {
+                print("Failed to reload profile with error: \(error)")
+            }
+
+        }
+        .authorize(with: user)
+        .launch()
+
+    }
+
 }

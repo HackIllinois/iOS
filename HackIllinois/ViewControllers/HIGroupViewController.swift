@@ -250,6 +250,10 @@ extension HIGroupViewController {
         self.tableView = tableView
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        HIProfileDataSource.refresh(teamStatus: teamStatusParams, interests: interestParams, completion: endRefreshing)
+    }
+
     override func viewDidLoad() {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         super.viewDidLoad()

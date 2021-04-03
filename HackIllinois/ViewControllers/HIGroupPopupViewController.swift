@@ -22,7 +22,8 @@ class HIGroupPopupViewController: UIViewController {
     // MARK: Properties
     weak var delegate: HIGroupPopupViewDelegate?
     //TODO: Load interests from HackIllinois API
-    let interests = ["AWS", "C++", "Project Management", "Python", "Docker", "Java", "ML", "Swift", "Go", "Javascript", "C", "Typescript"]
+    // swiftlint:disable line_length
+    let interests = ["Adobe Illustrator", "Adobe InDesign", "Adobe Photoshop", "Adobe XD", "Android", "Arduino", "AWS", "Azure", "Blender", "C", "C#", "C++", "Canva", "CSS", "Digital Ocean", "Figma", "Firebase", "Flutter", "git", "GitHub", "Go", "Godot", "Google Cloud", "Haskell", "HTML", "iOS", "Java", "JavaScript", "Kotlin", "MongoDB", "MySQL", "NativeScript", "Neo4J", "PHP", "PostgreSQL", "Python", "Raspberry Pi", "React Native", "Ruby", "Rust", "Swift", "TypeScript", "Unity", "Unreal"]
     var hiInterests: [HIInterest] = []
     let popupTableView = HITableView()
     var selectedRows: Set<Int>?
