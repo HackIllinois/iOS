@@ -117,6 +117,12 @@ extension HIGroupCell {
     }
 
     static func <- (lhs: HIGroupCell, rhs: Profile) {
+        guard let profile = HIApplicationStateController.shared.profile else { return }
+        if rhs.id == profile.id {
+            lhs.favoritedButton.isHidden = true
+        } else {
+            lhs.favoritedButton.isHidden = false
+        }
         lhs.favoritedButton.isActive = rhs.favorite
         var innerVerticalStackViewHeight: CGFloat = 0
         var contentStackViewHeight: CGFloat = 0
