@@ -125,7 +125,7 @@ extension HIGroupCell {
             lhs.profilePicture.changeImage(newImage: imgValue)
         }
 
-        let nameLabel = HILabel(style: .groupContactInfo)
+        let nameLabel = HILabel(style: .groupNameInfo)
         nameLabel.text = rhs.firstName + " " + rhs.lastName
         innerVerticalStackViewHeight += nameLabel.intrinsicContentSize.height
         lhs.innerVerticalStackView.addArrangedSubview(nameLabel)
