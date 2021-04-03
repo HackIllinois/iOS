@@ -42,6 +42,7 @@ class HILabel: UILabel {
         case profileInterests
         case navigationInfo
         case groupDescription
+        case groupNameInfo
         case groupContactInfo
         case groupStatus
         case sortText
@@ -220,6 +221,11 @@ class HILabel: UILabel {
             font = HIAppearance.Font.contentText
             numberOfLines = 2
 
+        case .groupNameInfo:
+            textHIColor = \.groupText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.groupName
+            
         case .groupContactInfo:
             textHIColor = \.groupText
             backgroundHIColor = \.clear

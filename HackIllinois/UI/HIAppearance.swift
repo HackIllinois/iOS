@@ -232,7 +232,7 @@ struct HIAppearance: Equatable {
         static let detailText = UIFont.systemFont(ofSize: 15, weight: .regular)
 
         static let happeningEventTitle = UIFont.systemFont(ofSize: 25, weight: .bold)
-        static let eventTitle = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        static let eventTitle = UIFont.systemFont(ofSize: 16, weight: .semibold)
         static let eventTime = UIFont.systemFont(ofSize: 12, weight: .regular)
         static let eventDetails = UIFont.systemFont(ofSize: 14, weight: .regular)
         static let eventButtonText = UIFont.systemFont(ofSize: 14, weight: .semibold)
@@ -260,6 +260,7 @@ struct HIAppearance: Equatable {
         static let segmentedNumberText = UIFont.systemFont(ofSize: 20, weight: .semibold)
         static let characterCount = UIFont.systemFont(ofSize: 14, weight: .light)
 
+        static let groupName = UIFont.systemFont(ofSize: 16, weight: .semibold)
         static let groupContact = UIFont.systemFont(ofSize: 14, weight: .semibold)
         static let groupStatus = UIFont.systemFont(ofSize: 12, weight: .bold)
         static let sortingText = UIFont.systemFont(ofSize: 14, weight: .semibold)
