@@ -77,8 +77,8 @@ extension HIEditProfileViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let profile = HIApplicationStateController.shared.profile else { return }
-        if let url = URL(string: profile.avatarUrl) {
-            profileImageView.downloadImage(from: url)
+        if let url = URL(string: profile.avatarUrl), let imgValue = HIConstants.PROFILE_IMAGES[url.absoluteString] {
+            profileImageView.changeImage(newImage: imgValue)
         }
         if let tableView = tableView {
             tableView.reloadData()
@@ -92,6 +92,13 @@ extension HIEditProfileViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
+        if let tableView = tableView {
+            tableView.reloadData()
+            tableView.layoutIfNeeded()
+            tableView.beginUpdates()
+            tableViewHeight.constant = tableView.contentSize.height + 20
+            tableView.endUpdates()
+        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -117,7 +124,6 @@ extension HIEditProfileViewController {
     override func setupTableView() {
         if let tableView = tableView {
             tableView.register(HIEditProfileCell.self, forCellReuseIdentifier: HIEditProfileCell.identifier)
-//            registerForPreviewing(with: self, sourceView: tableView)
         }
         super.setupTableView()
     }
@@ -155,8 +161,8 @@ extension HIEditProfileViewController {
 
         let editController = HIEditProfileDetailViewController()
         let strValue = getStringFromAttributeIndex(of: indexPath.row)
-        if let editingField = HIEditProfileDetailViewController.EditingField(rawValue: profileItems[indexPath.row]) {
-            editController.initializeData(editingField: editingField, textFieldValue: strValue, characterLimit: 100, teamStatus: strValue, interests: HIApplicationStateController.shared.profile?.interests)
+        if let editingField = HIEditProfileDetailViewController.EditingField(rawValue: profileItems[indexPath.row]), let profile = HIApplicationStateController.shared.profile {
+            editController.initializeData(editingField: editingField, textFieldValue: strValue, characterLimit: 100, teamStatus: strValue, interests: profile.interests)
         }
 
         if let navController = self.navigationController as? HINavigationController {

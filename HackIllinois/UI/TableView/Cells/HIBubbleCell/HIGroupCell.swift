@@ -45,7 +45,6 @@ class HIGroupCell: HIBubbleCell {
     }
     var indexPath: IndexPath?
     weak var delegate: HIGroupCellDelegate?
-    static let profileDict: [String: HIImage] = ["https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-0.png": \.profile0, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-1.png": \.profile1, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-2.png": \.profile2, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-3.png": \.profile3, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-4.png": \.profile4, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-5.png": \.profile5, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-6.png": \.profile6, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-7.png": \.profile7, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-8.png": \.profile8, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-9.png": \.profile9, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-10.png": \.profile10]
 
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -112,7 +111,7 @@ extension HIGroupCell {
         //BubbleView: 17
         // ContentLeft: 20
         //contentRight: 58
-        
+
         let labelHeight = HILabel.heightForView(text: group.info, font: HIAppearance.Font.contentText, width: width - 102, numLines: 2)
         return 135 + labelHeight
     }
@@ -128,7 +127,7 @@ extension HIGroupCell {
         var innerVerticalStackViewHeight: CGFloat = 0
         var contentStackViewHeight: CGFloat = 0
 
-        if let url = URL(string: rhs.avatarUrl), let imgValue = profileDict[url.absoluteString] {
+        if let url = URL(string: rhs.avatarUrl), let imgValue = HIConstants.PROFILE_IMAGES[url.absoluteString] {
             lhs.profilePicture.changeImage(newImage: imgValue)
         }
 

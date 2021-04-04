@@ -27,7 +27,6 @@ class HIEditProfileDetailViewController: HIBaseViewController {
         case interests = "Skills"
     }
 
-    //TODO: Load from HackIllinois API
     // swiftlint:disable line_length
     let interests = ["Adobe Illustrator", "Adobe InDesign", "Adobe Photoshop", "Adobe XD", "Android", "Arduino", "AWS", "Azure", "Blender", "C", "C#", "C++", "Canva", "CSS", "Digital Ocean", "Figma", "Firebase", "Flutter", "git", "GitHub", "Go", "Godot", "Google Cloud", "Haskell", "HTML", "iOS", "Java", "JavaScript", "Kotlin", "MongoDB", "MySQL", "NativeScript", "Neo4J", "PHP", "PostgreSQL", "Python", "Raspberry Pi", "React Native", "Ruby", "Rust", "Swift", "TypeScript", "Unity", "Unreal"]
     let teamStatuses = ["Looking For Team", "Looking For Members", "Not Looking"]
