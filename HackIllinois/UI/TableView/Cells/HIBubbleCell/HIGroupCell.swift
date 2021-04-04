@@ -14,6 +14,9 @@ import Foundation
 import UIKit
 import HIAPI
 
+protocol HIGroupCellDelegate: class {
+    func groupCellDidSelectFavoriteButton(_ groupCell: HIGroupCell)
+}
 class HIGroupCell: HIBubbleCell {
     // MARK: - Properties
     let favoritedButton = HIButton {
@@ -41,14 +44,17 @@ class HIGroupCell: HIBubbleCell {
         $0.backgroundHIColor = \.clear
     }
     var indexPath: IndexPath?
+    weak var delegate: HIGroupCellDelegate?
+    static let profileDict: [String: HIImage] = ["https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-0.png": \.profile0, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-1.png": \.profile1, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-2.png": \.profile2, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-3.png": \.profile3, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-4.png": \.profile4, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-5.png": \.profile5, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-6.png": \.profile6, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-7.png": \.profile7, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-8.png": \.profile8, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-9.png": \.profile9, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-10.png": \.profile10]
 
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = UIColor.clear
+        favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         bubbleView.addSubview(favoritedButton)
-        favoritedButton.widthAnchor.constraint(equalToConstant: 58).isActive = true
-        favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0, bottomInset: 0)
+        favoritedButton.constrain(width: 58, height: 60)
+        favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0)
 
         // add bubble view
         bubbleView.addSubview(profilePicture)
@@ -90,6 +96,10 @@ class HIGroupCell: HIBubbleCell {
 
 // MARK: - Actions
 extension HIGroupCell {
+    @objc func didSelectFavoriteButton(_ sender: HIButton) {
+        delegate?.groupCellDidSelectFavoriteButton(self)
+    }
+
     override func action(for layer: CALayer, forKey event: String) -> CAAction? {
         return NSNull()
     }
@@ -98,20 +108,31 @@ extension HIGroupCell {
 // MARK: - Population
 extension HIGroupCell {
 
-    static func heightForCell(with group: Profile) -> CGFloat {
-        return 155
+    static func heightForCell(with group: Profile, width: CGFloat) -> CGFloat {
+        //BubbleView: 17
+        // ContentLeft: 20
+        //contentRight: 58
+        
+        let labelHeight = HILabel.heightForView(text: group.info, font: HIAppearance.Font.contentText, width: width - 102, numLines: 2)
+        return 135 + labelHeight
     }
 
     static func <- (lhs: HIGroupCell, rhs: Profile) {
-        // lhs.favoritedButton.isActive = rhs.favorite
+        guard let profile = HIApplicationStateController.shared.profile else { return }
+        if rhs.id == profile.id {
+            lhs.favoritedButton.isHidden = true
+        } else {
+            lhs.favoritedButton.isHidden = false
+        }
+        lhs.favoritedButton.isActive = rhs.favorite
         var innerVerticalStackViewHeight: CGFloat = 0
         var contentStackViewHeight: CGFloat = 0
 
-        if let url = URL(string: rhs.avatarUrl) {
-            lhs.profilePicture.downloadImage(from: url)
+        if let url = URL(string: rhs.avatarUrl), let imgValue = profileDict[url.absoluteString] {
+            lhs.profilePicture.changeImage(newImage: imgValue)
         }
 
-        let nameLabel = HILabel(style: .groupContactInfo)
+        let nameLabel = HILabel(style: .groupNameInfo)
         nameLabel.text = rhs.firstName + " " + rhs.lastName
         innerVerticalStackViewHeight += nameLabel.intrinsicContentSize.height
         lhs.innerVerticalStackView.addArrangedSubview(nameLabel)

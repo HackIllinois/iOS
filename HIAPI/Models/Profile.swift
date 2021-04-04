@@ -48,3 +48,8 @@ public struct Profile: Codable, APIReturnable {
     public let teamStatus: String
     public let interests: [String]
 }
+
+public struct ProfileFavorites: Codable, APIReturnable {
+    public let id: String
+    public let profiles: Set<String>
+}

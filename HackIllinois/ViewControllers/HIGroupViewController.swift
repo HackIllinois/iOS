@@ -58,7 +58,7 @@ class HIGroupViewController: HIGroupListViewController {
         $0.titleLabel?.font = HIAppearance.Font.sortingText
         $0.backgroundHIColor = \.buttonViewBackground
         $0.titleHIColor = \.action
-        $0.title = "Group Status"
+        $0.title = "Team Status"
         $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: $0.frame.size.width - 15, bottom: 0, right: 0)
         $0.layer.shadowColor = UIColor.black.cgColor
         $0.layer.shadowOffset = .zero
@@ -81,7 +81,8 @@ class HIGroupViewController: HIGroupListViewController {
     }
     private var currentTab = 0
     private var onlyFavorites = false
-    private let onlyFavoritesPredicate = NSPredicate(format: "favorite == YES" )
+    private let onlyFavoritesPredicate = NSPredicate(format: "favorite == YES")
+    private let allPredicate = NSPredicate(format: "favorite == YES OR favorite == NO")
     private let transparentBackground = HIView()
     private var selectedButton = HIButton()
     private let groupStatusDropdown = UIView()
@@ -108,6 +109,26 @@ extension HIGroupViewController {
 
 // MARK: - Actions
 extension HIGroupViewController {
+
+    @objc func didSelectFavoritesIcon(_ sender: UIBarButtonItem) {
+        onlyFavorites = !onlyFavorites
+        sender.image = onlyFavorites ? #imageLiteral(resourceName: "MenuFavorited") : #imageLiteral(resourceName: "MenuUnfavorited")
+        updatePredicate()
+        animateReload()
+    }
+
+    func updatePredicate() {
+        fetchedResultsController.fetchRequest.predicate = currentPredicate()
+    }
+
+    func currentPredicate() -> NSPredicate {
+        if onlyFavorites {
+            return onlyFavoritesPredicate
+        } else {
+            return allPredicate
+        }
+    }
+
     func animateReload() {
         try? fetchedResultsController.performFetch()
         animateTableViewReload()
@@ -115,6 +136,7 @@ extension HIGroupViewController {
             tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
     }
+
     @objc func openPopup() {
         let popupView = HIGroupPopupViewController()
         popupView.modalPresentationStyle = .overCurrentContext
@@ -256,8 +278,8 @@ extension HIGroupViewController {
 
     override func viewDidLoad() {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
-        super.viewDidLoad()
         setupRefreshControl()
+        super.viewDidLoad()
     }
 
     override func viewDidLayoutSubviews() {
@@ -275,7 +297,10 @@ extension HIGroupViewController {
 extension HIGroupViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
-        title = "GROUP MATCHING"
+        title = "Team Matching"
+        if !HIApplicationStateController.shared.isGuest {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuUnfavorited"), style: .plain, target: self, action: #selector(didSelectFavoritesIcon(_:)))
+        }
     }
 }
 
@@ -294,7 +319,7 @@ extension HIGroupViewController {
 extension HIGroupViewController: HIGroupPopupViewDelegate {
     func updateInterests(_ groupPopupCell: HIGroupPopupCell) {
         guard let indexPath = groupPopupCell.indexPath, let interest = groupPopupCell.interestLabel.text else { return }
-        let modifiedInterest = interest.replacingOccurrences(of: " ", with: "%20")
+        let modifiedInterest = interest.replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "#", with: "%23").replacingOccurrences(of: "+", with: "%2b")
         if groupPopupCell.selectedImageView.isHidden {
             selectedRows.insert(indexPath.row)
             interests.insert(modifiedInterest)

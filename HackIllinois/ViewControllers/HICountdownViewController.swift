@@ -135,7 +135,6 @@ extension HICountdownViewController {
         label.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         label.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         label.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.2).isActive = true
-        //TODO: Add centered animations and use stack view
         let offset = (3.0 / 94.0) * UIScreen.main.bounds.width - (57.0/47.0)
         countDownView.centerXAnchor.constraint(equalTo: label.centerXAnchor, constant: offset).isActive = true
         countDownView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true

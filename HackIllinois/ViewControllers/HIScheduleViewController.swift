@@ -159,7 +159,7 @@ extension HIScheduleViewController {
 extension HIScheduleViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
-        title = "SCHEDULE"
+        title = "Schedule"
         if !HIApplicationStateController.shared.isGuest {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuUnfavorited"), style: .plain, target: self, action: #selector(didSelectFavoritesIcon(_:)))
         }
