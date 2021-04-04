@@ -124,20 +124,18 @@ extension HIEventCell {
         pointsLabel.constrain(to: pointsView, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
         pointsLabel.text = "\(rhs.points) Points!"
 
-        let eventType = HILabel(style: .eventType)
-        eventType.text = rhs.eventType
-        if rhs.eventType == "QNA" {
-            eventType.text = "COMPANY Q&A"
-        }
-        eventType.textHIColor = getTagColor(for: rhs.eventType)
-        eventType.refreshForThemeChange()
+        let eventTypeLabel = HILabel(style: .eventType)
+        let eventType = HIEventType(type: rhs.eventType)
+        eventTypeLabel.text = String(describing: eventType)
+        eventTypeLabel.textHIColor = getTagColor(for: rhs.eventType)
+        eventTypeLabel.refreshForThemeChange()
 
         bottomView.addSubview(pointsView)
-        bottomView.addSubview(eventType)
+        bottomView.addSubview(eventTypeLabel)
         pointsView.constrain(to: bottomView, topInset: 0, bottomInset: 0, leadingInset: 0)
-        eventType.constrain(to: bottomView, topInset: 0, trailingInset: 0, bottomInset: 0)
-        pointsView.trailingAnchor.constraint(equalTo: eventType.leadingAnchor).isActive = true
-        pointsView.widthAnchor.constraint(equalTo: eventType.widthAnchor, multiplier: 1.5).isActive = true
+        eventTypeLabel.constrain(to: bottomView, topInset: 0, trailingInset: 0, bottomInset: 0)
+        pointsView.trailingAnchor.constraint(equalTo: eventTypeLabel.leadingAnchor).isActive = true
+        pointsView.widthAnchor.constraint(equalTo: eventTypeLabel.widthAnchor, multiplier: 1.5).isActive = true
 
         lhs.contentStackView.addArrangedSubview(bottomView)
 

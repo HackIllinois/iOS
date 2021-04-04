@@ -124,6 +124,7 @@
 		AC3B621325E86053002386A2 /* Profile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B621125E86053002386A2 /* Profile+CoreDataClass.swift */; };
 		AC3B621425E86053002386A2 /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B621225E86053002386A2 /* Profile+CoreDataProperties.swift */; };
 		AC3B621625E8611C002386A2 /* HIProfileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B621525E8611C002386A2 /* HIProfileDataSource.swift */; };
+		AC5E9FE326195CCF00674FCF /* HIEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5E9FE226195CCF00674FCF /* HIEventType.swift */; };
 		AC977FCD25F194F9009C4179 /* HIGroupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC977FCC25F194F9009C4179 /* HIGroupDetailViewController.swift */; };
 		ACA63C8B25E7394D00A00D83 /* HIProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA63C8A25E7394D00A00D83 /* HIProfile.swift */; };
 		ACAA717626017EC4000F42B0 /* HICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA717526017EC4000F42B0 /* HICollectionViewFlowLayout.swift */; };
@@ -302,6 +303,7 @@
 		AC3B621125E86053002386A2 /* Profile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AC3B621225E86053002386A2 /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AC3B621525E8611C002386A2 /* HIProfileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProfileDataSource.swift; sourceTree = "<group>"; };
+		AC5E9FE226195CCF00674FCF /* HIEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEventType.swift; sourceTree = "<group>"; };
 		AC977FCC25F194F9009C4179 /* HIGroupDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIGroupDetailViewController.swift; sourceTree = "<group>"; };
 		ACA63C8A25E7394D00A00D83 /* HIProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProfile.swift; sourceTree = "<group>"; };
 		ACAA717526017EC4000F42B0 /* HICollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICollectionViewFlowLayout.swift; sourceTree = "<group>"; };
@@ -446,6 +448,7 @@
 				ACA63C8A25E7394D00A00D83 /* HIProfile.swift */,
 				ACBFE29925EB2C9700C94732 /* HIInterest.swift */,
 				3FBEF38025F36239009B97CB /* HIGroupStatusOptions.swift */,
+				AC5E9FE226195CCF00674FCF /* HIEventType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -958,6 +961,7 @@
 				3C7E552723AA199900213E1F /* HITimeDataSource.swift in Sources */,
 				9510F6A11FCB7D6E007D19DB /* Event+CoreDataClass.swift in Sources */,
 				951827A81EA35DB800049F79 /* AppDelegate.swift in Sources */,
+				AC5E9FE326195CCF00674FCF /* HIEventType.swift in Sources */,
 				AC3B621425E86053002386A2 /* Profile+CoreDataProperties.swift in Sources */,
 				9564E02F2218CE6F003A8EEB /* HIMapsDataSource.swift in Sources */,
 				953199C91FC25CA0009F2AA1 /* HICoreDataController.swift in Sources */,
