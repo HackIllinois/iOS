@@ -107,11 +107,16 @@ extension HICodePopupViewController {
                             alertMessage = "Something isn't quite right."
                         }
                         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+                        if alertTitle == "Success!" {
                             alert.addAction(
                                 UIAlertAction(title: "OK", style: .default, handler: { _ in
-                                    self.dismiss(animated: true, completion: nil)
-                                })
+                                self.dismiss(animated: true, completion: nil)
+                            }))
+                        } else {
+                            alert.addAction(
+                                UIAlertAction(title: "OK", style: .default, handler: nil)
                             )
+                        }
                         self.present(alert, animated: true, completion: nil)
                     }
                 } catch {
