@@ -10,10 +10,8 @@
 		0A360882203539FF001F5F85 /* HIAdminEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */; };
 		3521FFA92207C03E00634A63 /* Attendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521FFA82207C03E00634A63 /* Attendee.swift */; };
 		35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */; };
-		3537DBAD2206B7F500D50384 /* Stickers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3537DBAC2206B7F500D50384 /* Stickers.xcassets */; };
 		35B4A44F21E091BA001B3AF0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4A44D21E091B9001B3AF0 /* Logger.swift */; };
 		35B4A45021E091BA001B3AF0 /* HIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4A44E21E091B9001B3AF0 /* HIError.swift */; };
-		35D7CE9B20380ACF00654E28 /* Stickers.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 35D7CE9420380ACF00654E28 /* Stickers.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3C26401823ADE7AA004E1DBE /* Project+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26401623ADE7AA004E1DBE /* Project+CoreDataClass.swift */; };
 		3C26401923ADE7AA004E1DBE /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26401723ADE7AA004E1DBE /* Project+CoreDataProperties.swift */; };
 		3C26401B23ADE838004E1DBE /* ProjectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26401A23ADE838004E1DBE /* ProjectService.swift */; };
@@ -144,13 +142,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		35D7CE9920380ACF00654E28 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 951827771EA35AF100049F79 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 35D7CE9320380ACF00654E28;
-			remoteInfo = Stickers;
-		};
 		95E3142F21FAD5B40092C22E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 951827771EA35AF100049F79 /* Project object */;
@@ -167,7 +158,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				35D7CE9B20380ACF00654E28 /* Stickers.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -189,11 +179,8 @@
 		0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAdminEventViewController.swift; sourceTree = "<group>"; };
 		3521FFA82207C03E00634A63 /* Attendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendee.swift; sourceTree = "<group>"; };
 		35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HICountdownViewController.swift; sourceTree = "<group>"; };
-		3537DBAC2206B7F500D50384 /* Stickers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Stickers.xcassets; sourceTree = "<group>"; };
 		35B4A44D21E091B9001B3AF0 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		35B4A44E21E091B9001B3AF0 /* HIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIError.swift; sourceTree = "<group>"; };
-		35D7CE9420380ACF00654E28 /* Stickers.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Stickers.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		35D7CE9820380ACF00654E28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C26401623ADE7AA004E1DBE /* Project+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Project+CoreDataClass.swift"; path = "HackIllinois/Models/CoreDataModels/Project+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		3C26401723ADE7AA004E1DBE /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Project+CoreDataProperties.swift"; path = "HackIllinois/Models/CoreDataModels/Project+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		3C26401A23ADE838004E1DBE /* ProjectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectService.swift; sourceTree = "<group>"; };
@@ -325,13 +312,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		29D333FC7383657348963D23 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9518277C1EA35AF100049F79 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -354,15 +334,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		35D7CE9520380ACF00654E28 /* Stickers */ = {
-			isa = PBXGroup;
-			children = (
-				3537DBAC2206B7F500D50384 /* Stickers.xcassets */,
-				35D7CE9820380ACF00654E28 /* Info.plist */,
-			);
-			path = Stickers;
-			sourceTree = "<group>";
-		};
 		95069260203EE14000D7C34C /* Animations */ = {
 			isa = PBXGroup;
 			children = (
@@ -396,7 +367,6 @@
 			children = (
 				951827971EA35DB800049F79 /* HackIllinois */,
 				95E3142B21FAD5B40092C22E /* HIAPI */,
-				35D7CE9520380ACF00654E28 /* Stickers */,
 				951827801EA35AF100049F79 /* Products */,
 				EAE6D26341C3ACE27256067A /* Frameworks */,
 			);
@@ -406,7 +376,6 @@
 			isa = PBXGroup;
 			children = (
 				9518277F1EA35AF100049F79 /* HackIllinois.app */,
-				35D7CE9420380ACF00654E28 /* Stickers.appex */,
 				95E3142A21FAD5B30092C22E /* HIAPI.framework */,
 			);
 			name = Products;
@@ -718,22 +687,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		35D7CE9320380ACF00654E28 /* Stickers */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 35D7CE9E20380ACF00654E28 /* Build configuration list for PBXNativeTarget "Stickers" */;
-			buildPhases = (
-				35D7CE9220380ACF00654E28 /* Resources */,
-				29D333FC7383657348963D23 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Stickers;
-			productName = Stickers;
-			productReference = 35D7CE9420380ACF00654E28 /* Stickers.appex */;
-			productType = "com.apple.product-type.app-extension.messages-sticker-pack";
-		};
 		9518277E1EA35AF100049F79 /* HackIllinois */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 951827941EA35AF100049F79 /* Build configuration list for PBXNativeTarget "HackIllinois" */;
@@ -748,7 +701,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				35D7CE9A20380ACF00654E28 /* PBXTargetDependency */,
 				95E3143021FAD5B40092C22E /* PBXTargetDependency */,
 			);
 			name = HackIllinois;
@@ -791,11 +743,6 @@
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = HackIllinois;
 				TargetAttributes = {
-					35D7CE9320380ACF00654E28 = {
-						CreatedOnToolsVersion = 9.2;
-						DevelopmentTeam = 8VNQTQM2L6;
-						ProvisioningStyle = Automatic;
-					};
 					9518277E1EA35AF100049F79 = {
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = 8VNQTQM2L6;
@@ -841,21 +788,12 @@
 			projectRoot = "";
 			targets = (
 				9518277E1EA35AF100049F79 /* HackIllinois */,
-				35D7CE9320380ACF00654E28 /* Stickers */,
 				95E3142921FAD5B30092C22E /* HIAPI */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		35D7CE9220380ACF00654E28 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3537DBAD2206B7F500D50384 /* Stickers.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9518277D1EA35AF100049F79 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1031,11 +969,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		35D7CE9A20380ACF00654E28 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 35D7CE9320380ACF00654E28 /* Stickers */;
-			targetProxy = 35D7CE9920380ACF00654E28 /* PBXContainerItemProxy */;
-		};
 		95E3143021FAD5B40092C22E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 95E3142921FAD5B30092C22E /* HIAPI */;
@@ -1044,48 +977,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		35D7CE9C20380ACF00654E28 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = 8VNQTQM2L6;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = Stickers/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 2020.2.1;
-				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios.stickers;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		35D7CE9D20380ACF00654E28 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = 8VNQTQM2L6;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = Stickers/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 2020.2.1;
-				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios.stickers;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		951827921EA35AF100049F79 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1318,15 +1209,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		35D7CE9E20380ACF00654E28 /* Build configuration list for PBXNativeTarget "Stickers" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				35D7CE9C20380ACF00654E28 /* Debug */,
-				35D7CE9D20380ACF00654E28 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		9518277A1EA35AF100049F79 /* Build configuration list for PBXProject "HackIllinois" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
