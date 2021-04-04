@@ -13,6 +13,7 @@
 import Foundation
 import UIKit
 import HIAPI
+import UserNotifications
 
 class HICodePopupViewController: UIViewController {
     // MARK: Properties
@@ -61,6 +62,10 @@ class HICodePopupViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFit
     }
+    private let center = UNUserNotificationCenter.current()
+    private var notifContent = UNMutableNotificationContent()
+    private let notifTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+    var notifIdentifier: String = ""
 }
 
 // MARK: Actions
@@ -83,6 +88,43 @@ extension HICodePopupViewController {
             .onCompletion { result in
                 switch result {
                 case .success:
+                    do {
+                        let (codeResult, _) = try result.get()
+                        let newPoints = codeResult.newPoints
+                        let totalPoints = codeResult.totalPoints
+                        let status = codeResult.status
+
+                        switch status {
+                        case "Success":
+                            self.notifIdentifier = UUID().uuidString
+                            self.notifContent.title = "Success!"
+                            self.notifContent.body = "You received \(newPoints) points!"
+                        case "InvalidCode":
+                            self.notifIdentifier = UUID().uuidString
+                            self.notifContent.title = "A wild error has appeared!"
+                            self.notifContent.body = "This code doesn't seem to be correct"
+                        case "InvalidTime":
+                            self.notifIdentifier = UUID().uuidString
+                            self.notifContent.title = "A wild error has appeared!"
+                            self.notifContent.body = "Make sure you have the right time"
+                        case "AlreadyCheckedIn":
+                            self.notifIdentifier = UUID().uuidString
+                            self.notifContent.title = "A wild error has appeared!"
+                            self.notifContent.body = "Looks like you're already checked in"
+                        default:
+                            self.notifIdentifier = UUID().uuidString
+                            self.notifContent.title = "A wild error has appeared!"
+                            self.notifContent.body = "Something isn't quite right"
+                        }
+                        let request = UNNotificationRequest(identifier: self.notifIdentifier, content: self.notifContent, trigger: self.notifTrigger)
+                        self.center.add(request) { (error)  in
+                            if error != nil {
+                                print(error!)
+                            }
+                        }
+                    } catch {
+                        print(error)
+                    }
                     DispatchQueue.main.async {
                         self.dismiss(animated: true, completion: nil)
                     }
