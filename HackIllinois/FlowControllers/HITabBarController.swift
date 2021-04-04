@@ -44,7 +44,16 @@ class HITabBarController: UITabBarController {
     @objc private func qrButtonPressed(_ sender: UIButton) {
         codePopup.modalPresentationStyle = .overCurrentContext
         codePopup.modalTransitionStyle = .crossDissolve
-        self.present(codePopup, animated: true, completion: nil)
+        if HIApplicationStateController.shared.isGuest {
+            let alert = UIAlertController(title: "Error!", message: "You need to log out of your current account and log in as an attendee to earn points.", preferredStyle: .alert)
+            alert.addAction(
+                UIAlertAction(title: "OK", style: .default, handler: { _ in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            self.present(codePopup, animated: true, completion: nil)
+        }
     }
 
     init() {

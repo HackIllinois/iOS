@@ -177,7 +177,6 @@ extension HICodePopupViewController {
 
         codeField.autocorrectionType = .no
         containerView.addSubview(codeField)
-        //codeField.leadingAnchor.constraint(equalTo: viewLabel.leadingAnchor, constant: -20).isActive = true
         codeField.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.7).isActive = true
         codeField.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
 
