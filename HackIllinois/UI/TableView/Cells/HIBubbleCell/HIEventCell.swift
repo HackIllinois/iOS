@@ -126,7 +126,7 @@ extension HIEventCell {
 
         let eventTypeLabel = HILabel(style: .eventType)
         let eventType = HIEventType(type: rhs.eventType)
-        eventTypeLabel.text = String(describing: eventType)
+        eventTypeLabel.text = eventType.description
         eventTypeLabel.textHIColor = getTagColor(for: rhs.eventType)
         eventTypeLabel.refreshForThemeChange()
 
