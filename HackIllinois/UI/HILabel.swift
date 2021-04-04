@@ -225,7 +225,7 @@ class HILabel: UILabel {
             textHIColor = \.groupText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.groupName
-            
+
         case .groupContactInfo:
             textHIColor = \.groupText
             backgroundHIColor = \.clear

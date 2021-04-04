@@ -221,8 +221,8 @@ extension HIProfileViewController {
         guard let profile = HIApplicationStateController.shared.profile else { return }
         view.layoutIfNeeded()
 
-        if let url = URL(string: profile.avatarUrl) {
-            profilePictureView.downloadImage(from: url)
+        if let url = URL(string: profile.avatarUrl), let imgValue = HIConstants.PROFILE_IMAGES[url.absoluteString] {
+            profilePictureView.changeImage(newImage: imgValue)
         }
         profileNameView.text = profile.firstName + " " + profile.lastName
         let modifiedTeamStatus = profile.teamStatus.capitalized.replacingOccurrences(of: "_", with: " ")
