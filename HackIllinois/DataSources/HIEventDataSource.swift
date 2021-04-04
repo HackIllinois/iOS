@@ -112,12 +112,13 @@ final class HIEventDataSource {
                             coreDataEvent.eventType = apiEvent.eventType
                             coreDataEvent.info = apiEvent.info
                             apiEvent.locations.forEach { apiLocation in
-                                guard let coreDataLocation = coreDataLocationsDicionary[apiLocation.name] else { fatalError("fuckity fuck") }
+                                guard let coreDataLocation = coreDataLocationsDicionary[apiLocation.name] else { fatalError("Event Location Error") }
                                 coreDataEvent.addToLocations(coreDataLocation)
                             }
                             coreDataEvent.name = apiEvent.name
                             coreDataEvent.sponsor = apiEvent.sponsor
                             coreDataEvent.startTime = apiEvent.startTime
+                            coreDataEvent.points = Int32(apiEvent.points)
                             coreDataEvent.favorite = false
                         }
 
@@ -130,13 +131,14 @@ final class HIEventDataSource {
                             coreDataEvent.info = apiEvent.info
                             apiEvent.locations.forEach { apiLocation in
                                 guard let coreDataLocation = coreDataLocationsDicionary[apiLocation.name] else {
-                                    fatalError("lol")
+                                    fatalError("Event Location Error")
                                 }
                                 coreDataEvent.addToLocations(coreDataLocation)
                             }
                             coreDataEvent.name = apiEvent.name
                             coreDataEvent.sponsor = apiEvent.sponsor
                             coreDataEvent.startTime = apiEvent.startTime
+                            coreDataEvent.points = Int32(apiEvent.points)
                             coreDataEvent.favorite = false
                         }
 
@@ -189,6 +191,7 @@ final class HIEventDataSource {
                                     coreDataEvent.name = apiEvent.name
                                     coreDataEvent.sponsor = apiEvent.sponsor
                                     coreDataEvent.startTime = apiEvent.startTime
+                                    coreDataEvent.points = Int32(apiEvent.points)
                                     coreDataEvent.favorite = apiFavorites.contains(coreDataEvent.id)
                                 }
 

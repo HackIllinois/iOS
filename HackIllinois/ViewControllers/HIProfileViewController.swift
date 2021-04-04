@@ -101,11 +101,12 @@ extension HIProfileViewController {
 extension HIProfileViewController {
     override func loadView() {
         super.loadView()
-        self.navigationItem.rightBarButtonItem = editButton.toBarButtonItem()
-        // To add action
-        editButton.constrain(width: 22, height: 22)
-        editButton.addTarget(self, action: #selector(didSelectEditButton(_:)), for: .touchUpInside)
-        _ = editViewController.view
+        if !HIApplicationStateController.shared.isGuest {
+            self.navigationItem.rightBarButtonItem = editButton.toBarButtonItem()
+            editButton.constrain(width: 22, height: 22)
+            editButton.addTarget(self, action: #selector(didSelectEditButton(_:)), for: .touchUpInside)
+            _ = editViewController.view
+        }
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
@@ -278,7 +279,7 @@ extension HIProfileViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-// MARK: - Navigation
+// MARK: - Actions
 extension HIProfileViewController {
     @objc func didSelectEditButton(_ sender: UIButton) {
         if let navController = navigationController as? HINavigationController {

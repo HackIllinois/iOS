@@ -97,20 +97,19 @@ extension HIGroupDetailViewController {
 extension HIGroupDetailViewController {
     override func loadView() {
         super.loadView()
+        view.addSubview(closeButton)
+        closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
+        closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
+        closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
+        closeButton.constrain(height: 25)
 
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
         scrollView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         scrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
-        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 10).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-
-        view.addSubview(closeButton)
-        closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
-        closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
-        closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
-        closeButton.constrain(height: 20)
 
         scrollView.addSubview(contentView)
         contentView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 40).isActive = true
@@ -252,6 +251,10 @@ extension HIGroupDetailViewController {
 
     override func viewDidLayoutSubviews() {
         profileInterestsViewHeight.constant = profileInterestsView.collectionViewLayout.collectionViewContentSize.height + 20
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        self.dismiss(animated: true, completion: nil)
     }
 
 }

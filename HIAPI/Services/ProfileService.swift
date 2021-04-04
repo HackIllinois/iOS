@@ -40,4 +40,20 @@ public final class ProfileService: BaseService {
         return APIRequest<Profile>(service: self, endpoint: "", body: profileData, headers: headers, method: .PUT)
     }
 
+    public static func getAllFavorites() -> APIRequest<ProfileFavorites> {
+        return APIRequest<ProfileFavorites>(service: self, endpoint: "favorite/", method: .GET)
+    }
+
+    public static func favoriteBy(id: String) -> APIRequest<ProfileFavorites> {
+        var body = HTTPBody()
+        body["id"] = id
+        return APIRequest<ProfileFavorites>(service: self, endpoint: "favorite/add/", body: body, method: .POST)
+    }
+
+    public static func unfavoriteBy(id: String) -> APIRequest<ProfileFavorites> {
+        var body = HTTPBody()
+        body["id"] = id
+        return APIRequest<ProfileFavorites>(service: self, endpoint: "favorite/remove/", body: body, method: .POST)
+    }
+
 }

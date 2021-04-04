@@ -74,6 +74,7 @@ final class HIProfileDataSource {
                             coreDataProfile.avatarUrl = apiProfile.avatarUrl
                             coreDataProfile.teamStatus = apiProfile.teamStatus
                             coreDataProfile.interests = apiProfile.interests.joined(separator: ",")
+                            coreDataProfile.favorite = false
                         }
 
                         apiProfilesToInsert.forEach { apiProfile in
@@ -89,6 +90,7 @@ final class HIProfileDataSource {
                             coreDataProfile.avatarUrl = apiProfile.avatarUrl
                             coreDataProfile.teamStatus = apiProfile.teamStatus
                             coreDataProfile.interests = apiProfile.interests.joined(separator: ",")
+                            coreDataProfile.favorite = false
                         }
 
                         // 5) Save changes, call completion handler, unlock refresh
@@ -105,6 +107,85 @@ final class HIProfileDataSource {
                             String(describing: error)
                         )
                     }
+                }
+
+                if !HIApplicationStateController.shared.isGuest {
+                    HIAPI.ProfileService.getAllFavorites()
+                    .onCompletion { result in
+                        do {
+                            let (containedFavorites, _) = try result.get()
+                            HICoreDataController.shared.performBackgroundTask { context -> Void in
+                                do {
+                                    // 1) Unwrap contained data
+                                    let apiProfiles = containedProfiles.profiles
+                                    let apiFavorites = containedFavorites.profiles // Unwraps favorites based on strings (should change name to favorites)
+
+                                    // 2) Get all CoreData Profiles.
+                                    let profileFetchRequest = NSFetchRequest<Profile>(entityName: "Profile")
+                                    let coreDataProfiles = try context.fetch(profileFetchRequest)
+
+                                    // 3) Diff the CoreData profiles and API profiles.
+                                    let (
+                                        coreDataProfilesToDelete,
+                                        coreDataProfilesToUpdate,
+                                        apiProfilesToInsert
+                                    ) = diff(initial: coreDataProfiles, final: apiProfiles)
+
+                                    // 4) Apply the diff
+                                    coreDataProfilesToDelete.forEach { coreDataProfile in
+                                        // Delete CoreData profile.
+                                        context.delete(coreDataProfile)
+                                    }
+
+                                    coreDataProfilesToUpdate.forEach { (coreDataProfile, _) in
+                                        // Update CoreData profile.
+                                        coreDataProfile.favorite = apiFavorites.contains(coreDataProfile.id) //Favorites sorted by id
+                                    }
+
+                                    apiProfilesToInsert.forEach { apiProfile in
+                                        // Create CoreData profile.
+                                        let coreDataProfile = Profile(context: context)
+                                        coreDataProfile.id = apiProfile.id
+                                        coreDataProfile.firstName = apiProfile.firstName
+                                        coreDataProfile.lastName = apiProfile.lastName
+                                        coreDataProfile.points = Int32(apiProfile.points)
+                                        coreDataProfile.timezone = apiProfile.timezone
+                                        coreDataProfile.info = apiProfile.info
+                                        coreDataProfile.discord = apiProfile.discord
+                                        coreDataProfile.avatarUrl = apiProfile.avatarUrl
+                                        coreDataProfile.teamStatus = apiProfile.teamStatus
+                                        coreDataProfile.interests = apiProfile.interests.joined(separator: ",")
+                                        coreDataProfile.favorite = apiFavorites.contains(coreDataProfile.id)
+                                    }
+
+                                    // 5) Save changes, call completion handler, unlock refresh
+                                    try context.save()
+                                    completion?()
+                                    isRefreshing = false
+                                } catch {
+                                    completion?()
+                                    isRefreshing = false
+                                    os_log(
+                                        "Error getting saving profiles to CoreData: %s",
+                                        log: Logger.ui,
+                                        type: .error,
+                                        String(describing: error)
+                                    )
+                                }
+                            }
+                        } catch {
+                            completion?()
+                            isRefreshing = false
+                            os_log(
+                                "Error getting profile favorites: %s",
+                                log: Logger.ui,
+                                type: .error,
+                                String(describing: error)
+                            )
+                        }
+                    }
+                    .authorize(with: HIApplicationStateController.shared.user)
+                    .launch()
                 }
             } catch {
                 os_log(

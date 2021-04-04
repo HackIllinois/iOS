@@ -33,6 +33,7 @@ public struct Event: Codable {
         case name
         case sponsor
         case startTime
+        case points
     }
 
     public let id: String
@@ -44,6 +45,7 @@ public struct Event: Codable {
     public let name: String
     public let sponsor: String
     public let startTime: Date
+    public let points: Int
 }
 
 public struct Location: Codable {
