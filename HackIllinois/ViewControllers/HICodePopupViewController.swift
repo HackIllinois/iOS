@@ -13,7 +13,6 @@
 import Foundation
 import UIKit
 import HIAPI
-import UserNotifications
 
 class HICodePopupViewController: UIViewController {
     // MARK: Properties
@@ -21,13 +20,13 @@ class HICodePopupViewController: UIViewController {
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundHIColor = \.qrBackground
+        $0.backgroundHIColor = \.baseBackground
     }
     private let exitButton = HIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.tintHIColor = \.qrTint
-        $0.titleHIColor = \.qrTint
-        $0.backgroundHIColor = \.qrBackground
+        $0.tintHIColor = \.baseText
+        $0.titleHIColor = \.baseText
+        $0.backgroundHIColor = \.clear
         $0.baseImage = #imageLiteral(resourceName: "MenuClose")
         $0.titleLabel?.font = HIAppearance.Font.navigationTitle
         $0.titleLabel?.baselineAdjustment = .alignCenters
@@ -37,6 +36,7 @@ class HICodePopupViewController: UIViewController {
     private let submitButton = HIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.interestBackground
+        $0.titleHIColor = \.action
         $0.title = "Submit"
         $0.titleLabel?.font = HIAppearance.Font.detailTitle
         $0.titleLabel?.baselineAdjustment = .alignCenters
@@ -48,14 +48,15 @@ class HICodePopupViewController: UIViewController {
         $0.textAlignment = .center
         $0.keyboardAppearance = .dark
         $0.font = HIAppearance.Font.profileDescription
-        $0.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        $0.textHIColor = \.baseText
+        $0.backgroundHIColor = \.clear
     }
     private let bottomCodeFieldLine = CALayer()
     private let viewLabel = HILabel {
         $0.text = "Collect your points!"
         $0.font = HIAppearance.Font.detailTitle
         $0.textHIColor = \.baseText
-        $0.backgroundHIColor = \.qrBackground
+        $0.backgroundHIColor = \.clear
     }
     private let popupImage = UIImage(named: "CodePopup")
     private let codeImage = HIImageView {

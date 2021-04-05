@@ -21,7 +21,6 @@ class HILoginFlowController: UIViewController {
     // MARK: - Properties
     let animationView = AnimationView(name: "intro")
     var shouldDisplayAnimationOnNextAppearance = true
-    let animationBackgroundView = UIImageView()
 
     // MARK: Status Bar
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
@@ -98,11 +97,10 @@ extension HILoginFlowController {
 
             animationView.play { _ in
                 // Smooth out background transition into login page
-                UIView.animate(withDuration: 0.3, animations: {self.animationBackgroundView.alpha = 0.0},
+                UIView.animate(withDuration: 1.0, animations: {self.animationView.alpha = 0.0},
                 completion: { _ in
-                    self.animationBackgroundView.removeFromSuperview()
+                    self.animationView.removeFromSuperview()
                 })
-                self.animationView.removeFromSuperview()
                 self.statusBarIsHidden = false
                 UIView.animate(withDuration: 0.25) { () -> Void in
                     self.setNeedsStatusBarAppearanceUpdate()
