@@ -54,6 +54,7 @@ class HICodePopupViewController: UIViewController {
     private let viewLabel = HILabel {
         $0.text = "Collect your points!"
         $0.font = HIAppearance.Font.detailTitle
+        $0.textHIColor = \.baseText
         $0.backgroundHIColor = \.qrBackground
     }
     private let popupImage = UIImage(named: "CodePopup")
