@@ -72,8 +72,6 @@ extension HIGroupListViewController {
         groupDetailViewController.profile = profile
         groupDetailViewController.interests = interests
         groupDetailViewController.profileInterestsView.reloadData()
-        groupDetailViewController.modalPresentationStyle = .overCurrentContext
-        groupDetailViewController.modalTransitionStyle = .crossDissolve
         self.present(groupDetailViewController, animated: true, completion: nil)
         super.tableView(tableView, didSelectRowAt: indexPath)
     }
