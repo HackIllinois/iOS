@@ -17,6 +17,7 @@ import HIAPI
 
 class HIProfileViewController: HIBaseViewController {
     // MARK: - Properties
+    private let errorView = HIErrorView(style: .profile)
     private let logoutButton = HIButton {
         $0.tintHIColor = \.titleText
         $0.backgroundHIColor = \.clear
@@ -107,6 +108,23 @@ extension HIProfileViewController {
 extension HIProfileViewController {
     override func loadView() {
         super.loadView()
+        if HIApplicationStateController.shared.isGuest {
+            layoutErrorView()
+        } else {
+            layoutProfile()
+        }
+    }
+
+    func layoutErrorView() {
+        errorView.delegate = self
+        view.addSubview(errorView)
+        errorView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        errorView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        errorView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        errorView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+    }
+
+    func layoutProfile() {
         self.navigationItem.leftBarButtonItem = logoutButton.toBarButtonItem()
         logoutButton.addTarget(self, action: #selector(didSelectLogoutButton(_:)), for: .touchUpInside)
         logoutButton.constrain(width: 25, height: 25)
@@ -346,4 +364,21 @@ extension HIProfileViewController {
 
     }
 
+}
+
+// MARK: - HIErrorViewDelegate
+extension HIProfileViewController: HIErrorViewDelegate {
+    func didSelectErrorLogout() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(
+            UIAlertAction(title: "Log Out", style: .destructive) { _ in
+                self.dismiss(animated: true, completion: nil)
+                NotificationCenter.default.post(name: .logoutUser, object: nil)
+            }
+        )
+        alert.addAction(
+            UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        )
+        present(alert, animated: true, completion: nil)
+    }
 }

@@ -36,8 +36,8 @@ class HIGroupPopupViewController: UIViewController {
     private let exitButton = HIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentHorizontalAlignment = .left
-        $0.tintHIColor = \.qrTint
-        $0.titleHIColor = \.qrTint
+        $0.tintHIColor = \.titleText
+        $0.titleHIColor = \.titleText
         $0.backgroundHIColor = \.clear
         $0.activeImage = #imageLiteral(resourceName: "CloseButton")
         $0.baseImage = #imageLiteral(resourceName: "CloseButton")

@@ -22,6 +22,7 @@ class HICodePopupViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.baseBackground
     }
+    private let errorView = HIErrorView(style: .codePopup)
     private let exitButton = HIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.tintHIColor = \.baseText
@@ -149,7 +150,6 @@ extension HICodePopupViewController {
     override func loadView() {
         super.loadView()
         view.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.7)
-        codeImage.image = popupImage
 
         let backgroundGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didSelectBackground))
         backgroundGestureRecognizer.delegate = self
@@ -158,6 +158,7 @@ extension HICodePopupViewController {
         let containerGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         containerView.addGestureRecognizer(containerGestureRecognizer)
 
+        codeImage.image = popupImage
         view.addSubview(containerView)
         containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -165,7 +166,23 @@ extension HICodePopupViewController {
         containerView.heightAnchor.constraint(equalToConstant: 284).isActive = true
         containerView.addSubview(exitButton)
         exitButton.constrain(to: containerView, topInset: 8, leadingInset: 8)
+        if HIApplicationStateController.shared.isGuest {
+            layoutErrorView()
+        } else {
+            layoutCodePopup()
+        }
+    }
 
+    func layoutErrorView() {
+        errorView.delegate = self
+        containerView.addSubview(errorView)
+        errorView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10).isActive = true
+        errorView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        errorView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+        errorView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+    }
+
+    func layoutCodePopup() {
         containerView.addSubview(codeImage)
         codeImage.constrain(to: containerView, topInset: 15)
         codeImage.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
@@ -207,5 +224,22 @@ extension HICodePopupViewController: UIGestureRecognizerDelegate {
             return false
         }
         return true
+    }
+}
+
+// MARK: - HIErrorViewDelegate
+extension HICodePopupViewController: HIErrorViewDelegate {
+    func didSelectErrorLogout() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(
+            UIAlertAction(title: "Log Out", style: .destructive) { _ in
+                self.dismiss(animated: true, completion: nil)
+                NotificationCenter.default.post(name: .logoutUser, object: nil)
+            }
+        )
+        alert.addAction(
+            UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        )
+        present(alert, animated: true, completion: nil)
     }
 }

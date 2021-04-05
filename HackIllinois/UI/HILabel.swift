@@ -52,6 +52,7 @@ class HILabel: UILabel {
         case groupStatusFilter
         case characterCount
         case error
+        case codeError
     }
 
     // MARK: - Properties
@@ -270,6 +271,13 @@ class HILabel: UILabel {
 
         case .error:
             textHIColor = \.whiteTagFont
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.detailSubtitle
+            textAlignment = .center
+            numberOfLines = 0
+
+        case .codeError:
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.detailSubtitle
             textAlignment = .center

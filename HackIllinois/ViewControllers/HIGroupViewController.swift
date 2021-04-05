@@ -35,9 +35,7 @@ class HIGroupViewController: HIGroupListViewController {
 
         return fetchedResultsController
     }()
-    private let errorLabel = HILabel(style: .error) {
-        $0.text = "You need to log out of your current account and log in as an attendee to see other profiles."
-    }
+    private let errorView = HIErrorView(style: .teamMatching)
     private let lookingForTeamContainer = UIView()
     private let lookingForTeamLabel = HILabel(style: .groupStatusFilter) {
         $0.text = "Looking For Team"
@@ -196,17 +194,19 @@ extension HIGroupViewController {
     override func loadView() {
         super.loadView()
         if HIApplicationStateController.shared.isGuest {
-            layoutErrorLabel()
+            layoutErrorView()
         } else {
             layoutProfiles()
         }
     }
 
-    func layoutErrorLabel() {
-        view.addSubview(errorLabel)
-        errorLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-        errorLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        errorLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+    func layoutErrorView() {
+        errorView.delegate = self
+        view.addSubview(errorView)
+        errorView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        errorView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        errorView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        errorView.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
 
     func layoutProfiles() {
@@ -346,5 +346,22 @@ extension HIGroupViewController: HIGroupPopupViewDelegate {
         }
         interestParams = Array(interests)
         HIProfileDataSource.refresh(teamStatus: teamStatusParams, interests: interestParams)
+    }
+}
+
+// MARK: - HIErrorViewDelegate
+extension HIGroupViewController: HIErrorViewDelegate {
+    func didSelectErrorLogout() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(
+            UIAlertAction(title: "Log Out", style: .destructive) { _ in
+                self.dismiss(animated: true, completion: nil)
+                NotificationCenter.default.post(name: .logoutUser, object: nil)
+            }
+        )
+        alert.addAction(
+            UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        )
+        present(alert, animated: true, completion: nil)
     }
 }

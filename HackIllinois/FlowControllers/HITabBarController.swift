@@ -14,7 +14,6 @@ import Foundation
 import UIKit
 
 class HITabBarController: UITabBarController {
-    lazy var codePopup = HICodePopupViewController()
     private var tabBarShapeLayer: CAShapeLayer?
 
     // Animation for when a tab bar item is clicked
@@ -41,19 +40,11 @@ class HITabBarController: UITabBarController {
         }
     }
 
-    @objc private func qrButtonPressed(_ sender: UIButton) {
+    @objc private func codePopupButtonPressed(_ sender: UIButton) {
+        let codePopup = HICodePopupViewController()
         codePopup.modalPresentationStyle = .overCurrentContext
         codePopup.modalTransitionStyle = .crossDissolve
-        if HIApplicationStateController.shared.isGuest {
-            let alert = UIAlertController(title: "Error!", message: "You need to log out of your current account and log in as an attendee to earn points.", preferredStyle: .alert)
-            alert.addAction(
-                UIAlertAction(title: "OK", style: .default, handler: { _ in
-                self.dismiss(animated: true, completion: nil)
-            }))
-            self.present(alert, animated: true, completion: nil)
-        } else {
-            self.present(codePopup, animated: true, completion: nil)
-        }
+        self.present(codePopup, animated: true, completion: nil)
     }
 
     init() {
@@ -81,13 +72,13 @@ class HITabBarController: UITabBarController {
         codePopupButton.layer.masksToBounds = false
         codePopupButton.layer.shadowOffset = CGSize(width: 0, height: 0)
 
-        //QR Code Button Constraints
+        //Code Popup Button Constraints
         codePopupButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         codePopupButton.centerYAnchor.constraint(equalTo: tabBar.topAnchor, constant: 0).isActive = true
         codePopupButton.constrain(width: 54, height: 54)
 
-        //QR Code Popup Action
-        codePopupButton.addTarget(self, action: #selector(qrButtonPressed(_:)), for: .touchUpInside)
+        //Code Popup Action
+        codePopupButton.addTarget(self, action: #selector(codePopupButtonPressed(_:)), for: .touchUpInside)
     }
 
     func setupTabBar() {
