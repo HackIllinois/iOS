@@ -51,6 +51,7 @@ class HILabel: UILabel {
         case pointsText
         case groupStatusFilter
         case characterCount
+        case error
     }
 
     // MARK: - Properties
@@ -225,7 +226,7 @@ class HILabel: UILabel {
             textHIColor = \.groupText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.groupName
-            
+
         case .groupContactInfo:
             textHIColor = \.groupText
             backgroundHIColor = \.clear
@@ -266,6 +267,14 @@ class HILabel: UILabel {
             textHIColor = \.whiteTagFont
             backgroundHIColor = \.clear
             font = HIAppearance.Font.characterCount
+
+        case .error:
+            textHIColor = \.whiteTagFont
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.detailSubtitle
+            textAlignment = .center
+            numberOfLines = 0
+
         }
         }
 

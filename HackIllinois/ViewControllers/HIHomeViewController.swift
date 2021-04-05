@@ -109,7 +109,7 @@ extension HIHomeViewController {
 
     @objc func didSelectLogoutButton(_ sender: UIButton) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let actionText = HIApplicationStateController.shared.isGuest ? "Login" : "Logout"
+        let actionText = HIApplicationStateController.shared.isGuest ? "Log In" : "Log Out"
         alert.addAction(
             UIAlertAction(title: actionText, style: .destructive) { _ in
                 self.dismiss(animated: true, completion: nil)

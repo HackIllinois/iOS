@@ -35,6 +35,9 @@ class HIGroupViewController: HIGroupListViewController {
 
         return fetchedResultsController
     }()
+    private let errorLabel = HILabel(style: .error) {
+        $0.text = "You need to log out of your current account and log in as an attendee to see other profiles."
+    }
     private let lookingForTeamContainer = UIView()
     private let lookingForTeamLabel = HILabel(style: .groupStatusFilter) {
         $0.text = "Looking For Team"
@@ -192,7 +195,21 @@ extension HIGroupViewController {
 extension HIGroupViewController {
     override func loadView() {
         super.loadView()
+        if HIApplicationStateController.shared.isGuest {
+            layoutErrorLabel()
+        } else {
+            layoutProfiles()
+        }
+    }
 
+    func layoutErrorLabel() {
+        view.addSubview(errorLabel)
+        errorLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        errorLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        errorLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+    }
+
+    func layoutProfiles() {
         horizontalStackView.axis = .horizontal
         horizontalStackView.distribution = .fillProportionally
         horizontalStackView.spacing = 15
