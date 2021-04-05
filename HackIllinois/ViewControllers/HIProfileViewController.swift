@@ -17,6 +17,12 @@ import HIAPI
 
 class HIProfileViewController: HIBaseViewController {
     // MARK: - Properties
+    private let logoutButton = HIButton {
+        $0.tintHIColor = \.titleText
+        $0.backgroundHIColor = \.clear
+        $0.baseImage = #imageLiteral(resourceName: "LogoutButton")
+        $0.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+    }
     private let editViewController = HIEditProfileViewController()
 
     private let editButton = HIButton {
@@ -101,6 +107,9 @@ extension HIProfileViewController {
 extension HIProfileViewController {
     override func loadView() {
         super.loadView()
+        self.navigationItem.leftBarButtonItem = logoutButton.toBarButtonItem()
+        logoutButton.addTarget(self, action: #selector(didSelectLogoutButton(_:)), for: .touchUpInside)
+        logoutButton.constrain(width: 25, height: 25)
         if !HIApplicationStateController.shared.isGuest {
             self.navigationItem.rightBarButtonItem = editButton.toBarButtonItem()
             editButton.constrain(width: 22, height: 22)
@@ -281,6 +290,21 @@ extension HIProfileViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - Actions
 extension HIProfileViewController {
+    @objc func didSelectLogoutButton(_ sender: UIButton) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(
+            UIAlertAction(title: "Log Out", style: .destructive) { _ in
+                self.dismiss(animated: true, completion: nil)
+                NotificationCenter.default.post(name: .logoutUser, object: nil)
+            }
+        )
+        alert.addAction(
+            UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        )
+        alert.popoverPresentationController?.sourceView = sender
+        present(alert, animated: true, completion: nil)
+    }
+
     @objc func didSelectEditButton(_ sender: UIButton) {
         if let navController = navigationController as? HINavigationController {
             navController.pushViewController(editViewController, animated: true)
