@@ -51,6 +51,11 @@ class HIEditProfileDetailViewController: HIBaseViewController {
     var characterLimit = 100
 
     var editingField: EditingField?
+
+    @objc dynamic override func setUpBackgroundView() {
+        super.setUpBackgroundView()
+        backgroundView.image = #imageLiteral(resourceName: "ScheduleBackground")
+    }
 }
 
 // MARK: - Actions
@@ -139,11 +144,6 @@ extension HIEditProfileDetailViewController {
         if let fieldValue = inputTextView.text {
             characterCountLabel.text = "\(fieldValue.count < 10 ? "0" : "")\(fieldValue.count)/\(characterLimit < 10 ? "0" : "")\(characterLimit)"
         }
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        backgroundView.image = #imageLiteral(resourceName: "ScheduleBackground")
     }
 }
 

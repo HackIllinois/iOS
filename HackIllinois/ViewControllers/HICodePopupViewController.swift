@@ -91,6 +91,9 @@ extension HICodePopupViewController {
     }
 
     @objc func didSelectSubmit(_ sender: UIButton) {
+        view.endEditing(true)
+        keyboardOpen = false
+        unregisterForKeyboardNotifications()
         if let code = codeField.text {
             HIAPI.EventService.checkIn(code: code)
             .onCompletion { result in
@@ -122,12 +125,13 @@ extension HICodePopupViewController {
                         if alertTitle == "Success!" {
                             alert.addAction(
                                 UIAlertAction(title: "OK", style: .default, handler: { _ in
-                                self.dismiss(animated: true, completion: nil)
+                                    self.dismiss(animated: true, completion: nil)
                             }))
                         } else {
                             alert.addAction(
-                                UIAlertAction(title: "OK", style: .default, handler: nil)
-                            )
+                                UIAlertAction(title: "OK", style: .default, handler: { _ in
+                                    self.registerForKeyboardNotifications()
+                            }))
                         }
                         self.present(alert, animated: true, completion: nil)
                     }
@@ -148,17 +152,17 @@ extension HICodePopupViewController {
 // MARK: UIViewController
 extension HICodePopupViewController {
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         view.layoutIfNeeded()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         codeField.text = ""
-        self.dismiss(animated: true, completion: nil)
     }
 
     override func loadView() {
         super.loadView()
-        registerForKeyboardNotifications()
 
         let backgroundGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didSelectBackground))
         backgroundGestureRecognizer.delegate = self
@@ -262,7 +266,7 @@ extension HICodePopupViewController {
         animateWithKeyboardLayout(notification: notification) { (keyboardFrame) in
             if !self.keyboardOpen {
                 self.originalContainerFrameY = self.containerView.frame.origin.y
-                self.containerView.frame.origin.y -= keyboardFrame.height / 3
+                self.containerView.frame.origin.y = keyboardFrame.minY - self.containerView.frame.height - 10
                 self.shiftedContainerFrameY = self.containerView.frame.origin.y
                 self.keyboardOpen = true
             }

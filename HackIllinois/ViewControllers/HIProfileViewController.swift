@@ -92,8 +92,8 @@ class HIProfileViewController: HIBaseViewController {
     var interests: [String] = []
 
     @objc dynamic override func setUpBackgroundView() {
-            super.setUpBackgroundView()
-            backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
+        super.setUpBackgroundView()
+        backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
     }
 }
 

@@ -30,6 +30,11 @@ class HIEditProfileViewController: HIBaseViewController {
     }
     private var tableViewHeight = NSLayoutConstraint()
 
+    @objc dynamic override func setUpBackgroundView() {
+        super.setUpBackgroundView()
+        backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
+    }
+
 }
 // MARK: - UIViewController
 extension HIEditProfileViewController {
@@ -90,7 +95,6 @@ extension HIEditProfileViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
         if let tableView = tableView {
             tableView.reloadData()
             tableView.layoutIfNeeded()

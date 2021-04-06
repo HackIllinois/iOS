@@ -72,6 +72,11 @@ class HIScheduleViewController: HIEventListViewController {
         dataStore.append((displayText: "MON", predicate: mondayPredicate))
         return dataStore
     }()
+
+    @objc dynamic override func setUpBackgroundView() {
+        super.setUpBackgroundView()
+        backgroundView.image = #imageLiteral(resourceName: "ScheduleBackground")
+    }
 }
 
 // MARK: - Actions
@@ -151,7 +156,6 @@ extension HIScheduleViewController {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         setupRefreshControl()
         super.viewDidLoad()
-        backgroundView.image = #imageLiteral(resourceName: "ScheduleBackground")
     }
 }
 

@@ -74,8 +74,8 @@ class HIGroupDetailViewController: HIBaseViewController {
     private var profileInterestsViewHeight = NSLayoutConstraint()
 
     @objc dynamic override func setUpBackgroundView() {
-            super.setUpBackgroundView()
-            backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
+        super.setUpBackgroundView()
+        backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
     }
 }
 

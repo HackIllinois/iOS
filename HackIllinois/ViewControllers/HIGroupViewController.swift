@@ -96,8 +96,8 @@ class HIGroupViewController: HIGroupListViewController {
     private var statuses = Set<String>()
 
     @objc dynamic override func setUpBackgroundView() {
-            super.setUpBackgroundView()
-            backgroundView.image = #imageLiteral(resourceName: "GroupMatching")
+        super.setUpBackgroundView()
+        backgroundView.image = #imageLiteral(resourceName: "GroupMatching")
     }
 }
 
