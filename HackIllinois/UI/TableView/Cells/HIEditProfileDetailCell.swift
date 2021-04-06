@@ -31,13 +31,14 @@ class HIEditProfileDetailCell: UITableViewCell {
                 if editType == .teamStatus {
                     statusImageView.image = #imageLiteral(resourceName: "SelectedRadioButton")
                 } else {
-                    statusImageView.image = #imageLiteral(resourceName: "SelectedBox")
+                    statusImageView.isHidden = false
+                    statusImageView.image = #imageLiteral(resourceName: "CheckMark")
                 }
             } else {
                 if editType == .teamStatus {
                     statusImageView.image = #imageLiteral(resourceName: "UnselectedRadioButton")
                 } else {
-                    statusImageView.image = #imageLiteral(resourceName: "UnselectedBox")
+                    statusImageView.isHidden = true
                 }
             }
         }
@@ -85,7 +86,12 @@ extension HIEditProfileDetailCell {
         if lhs.editType == .teamStatus {
             lhs.statusImageView.image = rhs.isActive ? #imageLiteral(resourceName: "SelectedRadioButton") : #imageLiteral(resourceName: "UnselectedRadioButton")
         } else {
-            lhs.statusImageView.image = rhs.isActive ? #imageLiteral(resourceName: "SelectedBox") : #imageLiteral(resourceName: "UnselectedBox")
+            if rhs.isActive {
+                lhs.statusImageView.isHidden = false
+                lhs.statusImageView.image = #imageLiteral(resourceName: "CheckMark")
+            } else {
+                lhs.statusImageView.isHidden = true
+            }
         }
     }
 }
