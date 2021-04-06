@@ -101,11 +101,7 @@ struct HIAppearance: Equatable {
     private static let eventPink = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
 
     private static var statusBarWhite: UIStatusBarStyle {
-        if #available(iOS 13, *) {
-             return .lightContent
-        } else {
-             return .default
-        }
+        return .lightContent
     }
 
     fileprivate static let day = HIAppearance(
