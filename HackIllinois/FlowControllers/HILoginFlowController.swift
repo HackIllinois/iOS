@@ -121,7 +121,6 @@ private extension HILoginFlowController {
             guestUser.provider = .guest
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": guestUser])
-                self.populateDefaultProfileData()
             }
             return
         }
@@ -211,7 +210,6 @@ private extension HILoginFlowController {
                     if user.roles.contains(.staff) {
                         DispatchQueue.main.async {
                             NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
-                            self?.populateDefaultProfileData()
                         }
                     } else {
                         DispatchQueue.main.async {
@@ -250,20 +248,6 @@ private extension HILoginFlowController {
         }
         .authorize(with: user)
         .launch()
-    }
-
-    private func populateDefaultProfileData() {
-        var profile = HIProfile()
-        profile.firstName = "Default"
-        profile.lastName = "Account"
-        profile.points = 0
-        profile.timezone = "CDT"
-        profile.info = "This is a default account."
-        profile.discord = "N/A"
-        profile.avatarUrl = "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-0.png"
-        profile.teamStatus = "NOT_LOOKING"
-        profile.interests = []
-        NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": profile])
     }
 
     private func populateProfileData(buildingProfile profile: HIProfile, sender: HIBaseViewController) {

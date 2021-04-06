@@ -55,8 +55,7 @@ extension HIEditProfileViewController {
         let separatorView = HIView(style: nil) { (view) in
             view.backgroundHIColor = \.whiteTagFont
             view.translatesAutoresizingMaskIntoConstraints = false
-            view.heightAnchor.constraint(equalToConstant: 1).isActive = true
-            view.alpha = 0.5
+            view.heightAnchor.constraint(equalToConstant: 1 / (UIScreen.main.scale)).isActive = true
         }
 
         contentView.addSubview(separatorView)

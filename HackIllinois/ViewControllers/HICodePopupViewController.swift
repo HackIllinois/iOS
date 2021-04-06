@@ -259,12 +259,12 @@ extension HICodePopupViewController: HIErrorViewDelegate {
 
 extension HICodePopupViewController {
     override func keyboardWillShow(_ notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if !keyboardOpen {
-                originalContainerFrameY = containerView.frame.origin.y
-                containerView.frame.origin.y -= keyboardSize.height / 3
-                shiftedContainerFrameY = containerView.frame.origin.y
-                keyboardOpen = true
+        animateWithKeyboardLayout(notification: notification) { (keyboardFrame) in
+            if !self.keyboardOpen {
+                self.originalContainerFrameY = self.containerView.frame.origin.y
+                self.containerView.frame.origin.y -= keyboardFrame.height / 3
+                self.shiftedContainerFrameY = self.containerView.frame.origin.y
+                self.keyboardOpen = true
             }
         }
     }

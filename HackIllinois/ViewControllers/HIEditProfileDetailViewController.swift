@@ -265,8 +265,8 @@ extension HIEditProfileDetailViewController: UITextViewDelegate {
         let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
         textView.frame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
         let newString = ((textView.text ?? "") as NSString).replacingCharacters(in: range, with: text)
-        let newStringComponents = newString.components(separatedBy: "\n").count - 1
-        return newString.count <= characterLimit && newStringComponents <= 2
+        let newStringComponents = newString.components(separatedBy: "\n").count
+        return newString.count <= characterLimit && newStringComponents == 1
     }
 
     func textViewDidChangeSelection(_ textView: UITextView) {
@@ -295,13 +295,13 @@ extension HIEditProfileDetailViewController {
         if let inputText = inputTextView.text {
             switch editingField {
             case .fName:
-                profileData["firstName"] = inputText
+                profileData["firstName"] = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
             case .lName:
-                profileData["lastName"] = inputText
+                profileData["lastName"] = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
             case .discord:
-                profileData["discord"] = inputText
+                profileData["discord"] = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
             case .bio:
-                profileData["description"] = inputText
+                profileData["description"] = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
             default:
                 break
             }

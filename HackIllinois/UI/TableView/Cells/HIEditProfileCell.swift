@@ -17,15 +17,13 @@ class HIEditProfileCell: UITableViewCell {
 
     let attributeLabel = HILabel(style: .profileUsername)
     let infoLabel = HILabel(style: .profileDescription) { (label) in
-        label.alpha = 0.5
         label.numberOfLines = 0
     }
 
     let separatorView = HIView(style: nil) { (view) in
         view.backgroundHIColor = \.whiteTagFont
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        view.alpha = 0.5
+        view.heightAnchor.constraint(equalToConstant: 1 / (UIScreen.main.scale)).isActive = true
     }
 
     var separatorHalfWidthAnchor = NSLayoutConstraint()
