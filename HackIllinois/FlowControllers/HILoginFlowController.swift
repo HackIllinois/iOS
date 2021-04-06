@@ -118,9 +118,12 @@ private extension HILoginFlowController {
         //GUEST (bypass auth)
         if user.provider == .guest {
             var guestUser = HIUser()
+            var guestProfile = HIProfile()
             guestUser.provider = .guest
+            guestProfile.provider = .guest
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": guestUser])
+                NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": guestProfile])
             }
             return
         }
@@ -210,6 +213,7 @@ private extension HILoginFlowController {
                     if user.roles.contains(.staff) {
                         DispatchQueue.main.async {
                             NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
+                            NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": profile])
                         }
                     } else {
                         DispatchQueue.main.async {
