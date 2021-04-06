@@ -154,6 +154,7 @@ extension HIProfileViewController {
         contentView.addSubview(profileNameView)
         profileNameView.topAnchor.constraint(equalTo: profilePictureView.bottomAnchor, constant: 12).isActive = true
         profileNameView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        profileNameView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9).isActive = true
         profileStatusContainer.translatesAutoresizingMaskIntoConstraints = false
         profileStatusContainer.backgroundColor = .clear
         contentView.addSubview(profileStatusContainer)
