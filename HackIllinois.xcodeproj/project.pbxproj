@@ -124,6 +124,8 @@
 		AC3B621425E86053002386A2 /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B621225E86053002386A2 /* Profile+CoreDataProperties.swift */; };
 		AC3B621625E8611C002386A2 /* HIProfileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B621525E8611C002386A2 /* HIProfileDataSource.swift */; };
 		AC5E9FE326195CCF00674FCF /* HIEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5E9FE226195CCF00674FCF /* HIEventType.swift */; };
+		AC607EF0261CD6E300B88798 /* Stickers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC607EEF261CD6E300B88798 /* Stickers.xcassets */; };
+		AC607EF4261CD6E300B88798 /* Stickers.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AC607EED261CD6E100B88798 /* Stickers.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AC6F15A6261BB1B400422192 /* HIErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6F15A5261BB1B400422192 /* HIErrorView.swift */; };
 		AC977FCD25F194F9009C4179 /* HIGroupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC977FCC25F194F9009C4179 /* HIGroupDetailViewController.swift */; };
 		ACA63C8B25E7394D00A00D83 /* HIProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA63C8A25E7394D00A00D83 /* HIProfile.swift */; };
@@ -153,6 +155,13 @@
 			remoteGlobalIDString = 95E3142921FAD5B30092C22E;
 			remoteInfo = HIAPI;
 		};
+		AC607EF2261CD6E300B88798 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 951827771EA35AF100049F79 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC607EEC261CD6E100B88798;
+			remoteInfo = Stickers;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -162,6 +171,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				AC607EF4261CD6E300B88798 /* Stickers.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,6 +307,9 @@
 		AC3B621225E86053002386A2 /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AC3B621525E8611C002386A2 /* HIProfileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProfileDataSource.swift; sourceTree = "<group>"; };
 		AC5E9FE226195CCF00674FCF /* HIEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEventType.swift; sourceTree = "<group>"; };
+		AC607EED261CD6E100B88798 /* Stickers.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Stickers.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC607EEF261CD6E300B88798 /* Stickers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Stickers.xcassets; sourceTree = "<group>"; };
+		AC607EF1261CD6E300B88798 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC6F15A5261BB1B400422192 /* HIErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIErrorView.swift; sourceTree = "<group>"; };
 		AC977FCC25F194F9009C4179 /* HIGroupDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIGroupDetailViewController.swift; sourceTree = "<group>"; };
 		ACA63C8A25E7394D00A00D83 /* HIProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProfile.swift; sourceTree = "<group>"; };
@@ -375,6 +388,7 @@
 			children = (
 				951827971EA35DB800049F79 /* HackIllinois */,
 				95E3142B21FAD5B40092C22E /* HIAPI */,
+				AC607EEE261CD6E100B88798 /* Stickers */,
 				951827801EA35AF100049F79 /* Products */,
 				EAE6D26341C3ACE27256067A /* Frameworks */,
 			);
@@ -385,6 +399,7 @@
 			children = (
 				9518277F1EA35AF100049F79 /* HackIllinois.app */,
 				95E3142A21FAD5B30092C22E /* HIAPI.framework */,
+				AC607EED261CD6E100B88798 /* Stickers.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -660,6 +675,15 @@
 			path = Misc;
 			sourceTree = "<group>";
 		};
+		AC607EEE261CD6E100B88798 /* Stickers */ = {
+			isa = PBXGroup;
+			children = (
+				AC607EEF261CD6E300B88798 /* Stickers.xcassets */,
+				AC607EF1261CD6E300B88798 /* Info.plist */,
+			);
+			path = Stickers;
+			sourceTree = "<group>";
+		};
 		ACAA7177260186EF000F42B0 /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -714,6 +738,7 @@
 			);
 			dependencies = (
 				95E3143021FAD5B40092C22E /* PBXTargetDependency */,
+				AC607EF3261CD6E300B88798 /* PBXTargetDependency */,
 			);
 			name = HackIllinois;
 			packageProductDependencies = (
@@ -744,6 +769,21 @@
 			productName = HIAPI;
 			productReference = 95E3142A21FAD5B30092C22E /* HIAPI.framework */;
 			productType = "com.apple.product-type.framework";
+		};
+		AC607EEC261CD6E100B88798 /* Stickers */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC607EF5261CD6E300B88798 /* Build configuration list for PBXNativeTarget "Stickers" */;
+			buildPhases = (
+				AC607EEB261CD6E100B88798 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Stickers;
+			productName = Stickers;
+			productReference = AC607EED261CD6E100B88798 /* Stickers.appex */;
+			productType = "com.apple.product-type.app-extension.messages-sticker-pack";
 		};
 /* End PBXNativeTarget section */
 
@@ -778,6 +818,9 @@
 						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
 					};
+					AC607EEC261CD6E100B88798 = {
+						CreatedOnToolsVersion = 12.4;
+					};
 				};
 			};
 			buildConfigurationList = 9518277A1EA35AF100049F79 /* Build configuration list for PBXProject "HackIllinois" */;
@@ -800,6 +843,7 @@
 			projectRoot = "";
 			targets = (
 				9518277E1EA35AF100049F79 /* HackIllinois */,
+				AC607EEC261CD6E100B88798 /* Stickers */,
 				95E3142921FAD5B30092C22E /* HIAPI */,
 			);
 		};
@@ -823,6 +867,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC607EEB261CD6E100B88798 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC607EF0261CD6E300B88798 /* Stickers.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -989,6 +1041,11 @@
 			isa = PBXTargetDependency;
 			target = 95E3142921FAD5B30092C22E /* HIAPI */;
 			targetProxy = 95E3142F21FAD5B40092C22E /* PBXContainerItemProxy */;
+		};
+		AC607EF3261CD6E300B88798 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AC607EEC261CD6E100B88798 /* Stickers */;
+			targetProxy = AC607EF2261CD6E300B88798 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1224,6 +1281,55 @@
 			};
 			name = Release;
 		};
+		AC607EF6261CD6E300B88798 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = 8VNQTQM2L6;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Stickers/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 2021.1.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios.Stickers;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		AC607EF7261CD6E300B88798 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = 8VNQTQM2L6;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Stickers/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 2021.1.1;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios.Stickers;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1250,6 +1356,15 @@
 			buildConfigurations = (
 				95E3143321FAD5B40092C22E /* Debug */,
 				95E3143421FAD5B40092C22E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC607EF5261CD6E300B88798 /* Build configuration list for PBXNativeTarget "Stickers" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC607EF6261CD6E300B88798 /* Debug */,
+				AC607EF7261CD6E300B88798 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
