@@ -18,7 +18,7 @@ final class HIInterestDataSource {
     static var shared = HIInterestDataSource()
 
     // swiftlint:disable line_length
-    public static let defaultInterestOptions = ["Adobe Illustrator", "Adobe InDesign", "Adobe Photoshop", "Adobe XD", "Android", "Arduino", "AWS", "Azure", "Blender", "C", "C#", "C++", "Canva", "CSS", "Digital Ocean", "Figma", "Firebase", "Flutter", "Git", "GitHub", "Go", "Godot", "Google Cloud", "Haskell", "HTML", "iOS", "Java", "JavaScript", "Kotlin", "MongoDB", "MySQL", "NativeScript", "Neo4J", "PHP", "PostgreSQL", "Python", "Raspberry Pi", "React Native", "Ruby", "Rust", "Swift", "TypeScript", "Unity", "Unreal"]
+    public static let defaultInterestOptions = ["Adobe Illustrator", "Adobe InDesign", "Adobe Photoshop", "Adobe XD", "Android", "Angular", "Arduino", "AWS", "Azure", "Blender", "C", "C#", "C++", "Canva", "CSS", "Digital Ocean", "Django", "Figma", "Firebase", "Flutter", "Git", "GitHub", "Go", "Godot", "Google Cloud", "Haskell", "HTML", "iOS", "Java", "JavaScript", "Kotlin", "MongoDB", "MySQL", "NativeScript", "Neo4J", "PHP", "PostgreSQL", "Python", "Raspberry Pi", "React", "React Native", "Ruby", "Rust", "Swift", "TypeScript", "Unity", "Unreal", "Vue"]
 
     var interestOptions = HIInterestDataSource.defaultInterestOptions
 

@@ -162,7 +162,7 @@ extension HIEditProfileViewController {
         let editController = HIEditProfileDetailViewController()
         let strValue = getStringFromAttributeIndex(of: indexPath.row)
         if let editingField = HIEditProfileDetailViewController.EditingField(rawValue: profileItems[indexPath.row]), let profile = HIApplicationStateController.shared.profile {
-            editController.initializeData(editingField: editingField, textFieldValue: strValue, characterLimit: 100, teamStatus: strValue, interests: profile.interests)
+            editController.initializeData(editingField: editingField, textViewValue: strValue, characterLimit: 100, teamStatus: strValue, interests: profile.interests)
         }
 
         if let navController = self.navigationController as? HINavigationController {
