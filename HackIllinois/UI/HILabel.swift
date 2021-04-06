@@ -97,7 +97,7 @@ class HILabel: UILabel {
             textHIColor = \.accent
             backgroundHIColor = \.clear
             font = HIAppearance.Font.eventCategoryText
-            textAlignment = .right
+            textAlignment = .center
 
         case .sponsor:
             textHIColor = \.attendeeBackground

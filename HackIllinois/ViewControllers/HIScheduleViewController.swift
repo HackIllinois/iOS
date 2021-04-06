@@ -132,7 +132,7 @@ extension HIScheduleViewController {
         separator.translatesAutoresizingMaskIntoConstraints = false
         separator.backgroundColor <- \.titleText
         self.view.addSubview(separator)
-        separator.constrain(height: 1)
+        separator.constrain(height: 1 / (UIScreen.main.scale))
         separator.constrain(to: view, trailingInset: 0, leadingInset: 0)
         separator.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10).isActive = true
 

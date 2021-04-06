@@ -134,7 +134,7 @@ extension HIEventCell {
         bottomView.addSubview(eventTypeLabel)
         pointsView.constrain(to: bottomView, topInset: 0, bottomInset: 0, leadingInset: 0)
         eventTypeLabel.constrain(to: bottomView, topInset: 0, trailingInset: 0, bottomInset: 0)
-        pointsView.trailingAnchor.constraint(equalTo: eventTypeLabel.leadingAnchor).isActive = true
+        pointsView.trailingAnchor.constraint(equalTo: eventTypeLabel.leadingAnchor, constant: -5).isActive = true
         pointsView.widthAnchor.constraint(equalTo: eventTypeLabel.widthAnchor, multiplier: 1.5).isActive = true
 
         lhs.contentStackView.addArrangedSubview(bottomView)

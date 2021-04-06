@@ -108,7 +108,6 @@ extension HIEditProfileDetailViewController {
 
     func constrainBioTextView() {
         bioTextView.isScrollEnabled = false
-        bioTextView.autocorrectionType = .no
         textFieldContainerView.addSubview(bioTextView)
         bioTextView.constrain(to: textFieldContainerView, trailingInset: -20, leadingInset: 20)
         bioTextView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 30).isActive = true
@@ -117,7 +116,6 @@ extension HIEditProfileDetailViewController {
     }
 
     func constrainSingleLineTextField() {
-        singleLineTextField.autocorrectionType = .no
         textFieldContainerView.addSubview(singleLineTextField)
         singleLineTextField.constrain(to: textFieldContainerView, trailingInset: -20, leadingInset: 20)
         singleLineTextField.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 30).isActive = true
