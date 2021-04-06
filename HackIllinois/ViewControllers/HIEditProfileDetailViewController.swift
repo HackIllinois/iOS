@@ -135,10 +135,10 @@ extension HIEditProfileDetailViewController {
             characterLimit = 400
             updateCharacterCount()
         case .fName:
-            descriptionText = "Add your name"
+            descriptionText = "Add your first name"
             updateCharacterCount()
         case .lName:
-            descriptionText = "Add your name"
+            descriptionText = "Add your last name"
             updateCharacterCount()
         case .discord:
             descriptionText = "Add your Discord username"
