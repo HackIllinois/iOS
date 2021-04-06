@@ -14,7 +14,7 @@ import Foundation
 import UIKit
 import HIAPI
 
-class HICodePopupViewController: UIViewController {
+class HICodePopupViewController: HIBaseViewController {
     // MARK: Properties
     private let containerView = HIView {
         $0.layer.cornerRadius = 10
@@ -22,6 +22,9 @@ class HICodePopupViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.baseBackground
     }
+    private var originalContainerFrameY: CGFloat = 0.0
+    private var shiftedContainerFrameY: CGFloat = 0.0
+    private var keyboardOpen: Bool = false
     private let errorView = HIErrorView(style: .codePopup)
     private let exitButton = HIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -64,6 +67,12 @@ class HICodePopupViewController: UIViewController {
         $0.layer.masksToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFit
+    }
+
+    @objc dynamic override func setUpBackgroundView() {
+        super.setUpBackgroundView()
+        backgroundView.image = UIImage()
+        backgroundView.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.7)
     }
 }
 
@@ -149,7 +158,7 @@ extension HICodePopupViewController {
 
     override func loadView() {
         super.loadView()
-        view.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.7)
+        registerForKeyboardNotifications()
 
         let backgroundGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didSelectBackground))
         backgroundGestureRecognizer.delegate = self
@@ -195,6 +204,7 @@ extension HICodePopupViewController {
         viewLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
 
         codeField.autocorrectionType = .no
+        codeField.delegate = self
         containerView.addSubview(codeField)
         codeField.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.7).isActive = true
         codeField.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
@@ -213,6 +223,9 @@ extension HICodePopupViewController {
         bottomCodeFieldLine.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.4235294118, blue: 0.4470588235, alpha: 1)
         codeField.borderStyle = UITextField.BorderStyle.none
         codeField.layer.addSublayer(bottomCodeFieldLine)
+        if keyboardOpen {
+            containerView.frame.origin.y = shiftedContainerFrameY
+        }
     }
 }
 
@@ -241,5 +254,23 @@ extension HICodePopupViewController: HIErrorViewDelegate {
             UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         )
         present(alert, animated: true, completion: nil)
+    }
+}
+
+extension HICodePopupViewController {
+    override func keyboardWillShow(_ notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if !keyboardOpen {
+                originalContainerFrameY = containerView.frame.origin.y
+                containerView.frame.origin.y -= keyboardSize.height / 3
+                shiftedContainerFrameY = containerView.frame.origin.y
+                keyboardOpen = true
+            }
+        }
+    }
+
+    override func keyboardWillHide(_ notification: NSNotification) {
+        containerView.frame.origin.y = originalContainerFrameY
+        keyboardOpen = false
     }
 }
