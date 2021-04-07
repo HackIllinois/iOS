@@ -370,7 +370,7 @@ extension HIProfileViewController {
 
 // MARK: - HIErrorViewDelegate
 extension HIProfileViewController: HIErrorViewDelegate {
-    func didSelectErrorLogout() {
+    func didSelectErrorLogout(_ sender: UIButton) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(
             UIAlertAction(title: "Log Out", style: .destructive) { _ in
@@ -381,6 +381,7 @@ extension HIProfileViewController: HIErrorViewDelegate {
         alert.addAction(
             UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         )
+        alert.popoverPresentationController?.sourceView = sender
         present(alert, animated: true, completion: nil)
     }
 }

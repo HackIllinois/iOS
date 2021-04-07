@@ -14,7 +14,7 @@ import Foundation
 import UIKit
 
 protocol HIErrorViewDelegate: class {
-    func didSelectErrorLogout()
+    func didSelectErrorLogout(_ sender: UIButton)
 }
 class HIErrorView: HIView {
     enum ErrorType {
@@ -84,6 +84,6 @@ class HIErrorView: HIView {
 // MARK: - Actions
 extension HIErrorView {
     @objc func didSelectLogoutButton(_ sender: UIButton) {
-        delegate?.didSelectErrorLogout()
+        delegate?.didSelectErrorLogout(sender)
     }
 }
