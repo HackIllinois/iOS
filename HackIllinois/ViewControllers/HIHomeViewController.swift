@@ -122,7 +122,11 @@ extension HIHomeViewController {
         view.addSubview(countdownViewController.view)
         countdownViewController.view.topAnchor.constraint(equalTo: countdownTitleLabel.bottomAnchor, constant: 10).isActive = true
         countdownViewController.view.constrain(to: view.safeAreaLayoutGuide, trailingInset: -10, leadingInset: 10)
-        countdownViewController.view.constrain(height: 200)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            countdownViewController.view.constrain(height: 0.34 * UIScreen.main.bounds.height)
+        } else {
+            countdownViewController.view.constrain(height: 200)
+        }
         countdownViewController.didMove(toParent: self)
 
         let items = dataStore.map { $0 }
