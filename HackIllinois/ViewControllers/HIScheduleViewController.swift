@@ -72,6 +72,11 @@ class HIScheduleViewController: HIEventListViewController {
         dataStore.append((displayText: "MON", predicate: mondayPredicate))
         return dataStore
     }()
+
+    @objc dynamic override func setUpBackgroundView() {
+        super.setUpBackgroundView()
+        backgroundView.image = #imageLiteral(resourceName: "ScheduleBackground")
+    }
 }
 
 // MARK: - Actions
@@ -132,7 +137,7 @@ extension HIScheduleViewController {
         separator.translatesAutoresizingMaskIntoConstraints = false
         separator.backgroundColor <- \.titleText
         self.view.addSubview(separator)
-        separator.constrain(height: 1)
+        separator.constrain(height: 1 / (UIScreen.main.scale))
         separator.constrain(to: view, trailingInset: 0, leadingInset: 0)
         separator.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10).isActive = true
 
@@ -151,7 +156,6 @@ extension HIScheduleViewController {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         setupRefreshControl()
         super.viewDidLoad()
-        backgroundView.image = #imageLiteral(resourceName: "ScheduleBackground")
     }
 }
 

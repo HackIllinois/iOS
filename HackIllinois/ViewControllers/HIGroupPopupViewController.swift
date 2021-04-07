@@ -22,8 +22,7 @@ class HIGroupPopupViewController: UIViewController {
     // MARK: Properties
     weak var delegate: HIGroupPopupViewDelegate?
 
-    // swiftlint:disable line_length
-    let interests = ["Adobe Illustrator", "Adobe InDesign", "Adobe Photoshop", "Adobe XD", "Android", "Arduino", "AWS", "Azure", "Blender", "C", "C#", "C++", "Canva", "CSS", "Digital Ocean", "Figma", "Firebase", "Flutter", "Git", "GitHub", "Go", "Godot", "Google Cloud", "Haskell", "HTML", "iOS", "Java", "JavaScript", "Kotlin", "MongoDB", "MySQL", "NativeScript", "Neo4J", "PHP", "PostgreSQL", "Python", "Raspberry Pi", "React Native", "Ruby", "Rust", "Swift", "TypeScript", "Unity", "Unreal"]
+    let interests = HIInterestDataSource.shared.interestOptions
     var hiInterests: [HIInterest] = []
     let popupTableView = HITableView()
     var selectedRows: Set<Int>?
@@ -37,8 +36,8 @@ class HIGroupPopupViewController: UIViewController {
     private let exitButton = HIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentHorizontalAlignment = .left
-        $0.tintHIColor = \.qrTint
-        $0.titleHIColor = \.qrTint
+        $0.tintHIColor = \.titleText
+        $0.titleHIColor = \.titleText
         $0.backgroundHIColor = \.clear
         $0.activeImage = #imageLiteral(resourceName: "CloseButton")
         $0.baseImage = #imageLiteral(resourceName: "CloseButton")

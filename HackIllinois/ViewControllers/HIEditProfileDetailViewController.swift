@@ -27,12 +27,11 @@ class HIEditProfileDetailViewController: HIBaseViewController {
         case interests = "Skills"
     }
 
-    // swiftlint:disable line_length
-    let interests = ["Adobe Illustrator", "Adobe InDesign", "Adobe Photoshop", "Adobe XD", "Android", "Arduino", "AWS", "Azure", "Blender", "C", "C#", "C++", "Canva", "CSS", "Digital Ocean", "Figma", "Firebase", "Flutter", "Git", "GitHub", "Go", "Godot", "Google Cloud", "Haskell", "HTML", "iOS", "Java", "JavaScript", "Kotlin", "MongoDB", "MySQL", "NativeScript", "Neo4J", "PHP", "PostgreSQL", "Python", "Raspberry Pi", "React Native", "Ruby", "Rust", "Swift", "TypeScript", "Unity", "Unreal"]
+    let interests = HIInterestDataSource.shared.interestOptions
     let teamStatuses = ["Looking For Team", "Looking For Members", "Not Looking"]
     var activeIndexes = [Int]()
 
-    let textFieldContainerView = HIView { (view) in
+    let inputContainerView = HIView { (view) in
         view.backgroundHIColor = \.clear
         view.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -42,8 +41,7 @@ class HIEditProfileDetailViewController: HIBaseViewController {
         label.numberOfLines = 0
     }
 
-    let singleLineTextField = HITextField(style: .editProfile)
-    let bioTextView = HITextView()
+    let inputTextView = HITextView()
 
     let characterCountLabel = HILabel(style: .characterCount) { (label) in
         label.constrain(height: 18)
@@ -53,6 +51,11 @@ class HIEditProfileDetailViewController: HIBaseViewController {
     var characterLimit = 100
 
     var editingField: EditingField?
+
+    @objc dynamic override func setUpBackgroundView() {
+        super.setUpBackgroundView()
+        backgroundView.image = #imageLiteral(resourceName: "ScheduleBackground")
+    }
 }
 
 // MARK: - Actions
@@ -67,26 +70,21 @@ extension HIEditProfileDetailViewController {
     override func loadView() {
         super.loadView()
 
-        self.view.addSubview(textFieldContainerView)
-        textFieldContainerView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
-        textFieldContainerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        textFieldContainerView.constrain(to: self.view, trailingInset: 0, leadingInset: 0)
+        self.view.addSubview(inputContainerView)
+        inputContainerView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+        inputContainerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        inputContainerView.constrain(to: self.view, trailingInset: 0, leadingInset: 0)
 
-        textFieldContainerView.addSubview(descriptionLabel)
-        descriptionLabel.constrain(to: textFieldContainerView, trailingInset: -20, leadingInset: 20)
+        inputContainerView.addSubview(descriptionLabel)
+        descriptionLabel.constrain(to: inputContainerView, trailingInset: -20, leadingInset: 20)
         descriptionLabel.constrain(height: 50)
-        descriptionLabel.topAnchor.constraint(equalTo: textFieldContainerView.topAnchor, constant: 10).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: inputContainerView.topAnchor, constant: 10).isActive = true
 
         let countConstrainView: UIView
-        if editingField == .bio {
-            constrainBioTextView()
-            countConstrainView = bioTextView
-        } else {
-            constrainSingleLineTextField()
-            countConstrainView = singleLineTextField
-        }
+        constrainInputTextView()
+        countConstrainView = inputTextView
 
-        textFieldContainerView.addSubview(characterCountLabel)
+        inputContainerView.addSubview(characterCountLabel)
         characterCountLabel.leadingAnchor.constraint(equalTo: countConstrainView.leadingAnchor, constant: 10).isActive = true
         characterCountLabel.trailingAnchor.constraint(equalTo: countConstrainView.trailingAnchor).isActive = true
         characterCountLabel.topAnchor.constraint(equalTo: countConstrainView.bottomAnchor, constant: 10).isActive = true
@@ -98,7 +96,7 @@ extension HIEditProfileDetailViewController {
         tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
 
         if editingField == .interests || editingField == .teamStatus {
-            textFieldContainerView.isHidden = true
+            inputContainerView.isHidden = true
         } else {
             tableView.isHidden = true
             let viewGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -107,22 +105,13 @@ extension HIEditProfileDetailViewController {
         self.tableView = tableView
     }
 
-    func constrainBioTextView() {
-        bioTextView.isScrollEnabled = false
-        bioTextView.autocorrectionType = .no
-        textFieldContainerView.addSubview(bioTextView)
-        bioTextView.constrain(to: textFieldContainerView, trailingInset: -20, leadingInset: 20)
-        bioTextView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 30).isActive = true
-        bioTextView.delegate = self
-        bioTextView.addBottomBorder()
-    }
-
-    func constrainSingleLineTextField() {
-        singleLineTextField.autocorrectionType = .no
-        textFieldContainerView.addSubview(singleLineTextField)
-        singleLineTextField.constrain(to: textFieldContainerView, trailingInset: -20, leadingInset: 20)
-        singleLineTextField.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 30).isActive = true
-        singleLineTextField.delegate = self
+    func constrainInputTextView() {
+        inputTextView.isScrollEnabled = false
+        inputContainerView.addSubview(inputTextView)
+        inputTextView.constrain(to: inputContainerView, trailingInset: -20, leadingInset: 20)
+        inputTextView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 30).isActive = true
+        inputTextView.delegate = self
+        inputTextView.addBottomBorder()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -132,17 +121,17 @@ extension HIEditProfileDetailViewController {
         let descriptionText: String
         switch editingField {
         case .bio:
-            descriptionText = "Short description about yourself or your team if you're on a team"
+            descriptionText = "Add a short description about yourself or your team."
             characterLimit = 400
             updateCharacterCount()
         case .fName:
-            descriptionText = "Add your name"
+            descriptionText = "Add your first name."
             updateCharacterCount()
         case .lName:
-            descriptionText = "Add your name"
+            descriptionText = "Add your last name."
             updateCharacterCount()
         case .discord:
-            descriptionText = "Add your Discord username"
+            descriptionText = "Add your Discord username."
             updateCharacterCount()
         default:
             descriptionText = ""
@@ -152,37 +141,20 @@ extension HIEditProfileDetailViewController {
     }
 
     func updateCharacterCount() {
-        if editingField == .bio {
-            if let fieldValue = bioTextView.text {
-                characterCountLabel.text = "\(fieldValue.count < 10 ? "0" : "")\(fieldValue.count)/\(characterLimit < 10 ? "0" : "")\(characterLimit)"
-            }
-        } else {
-            if let fieldValue = singleLineTextField.text {
-                characterCountLabel.text = "\(fieldValue.count < 10 ? "0" : "")\(fieldValue.count)/\(characterLimit < 10 ? "0" : "")\(characterLimit)"
-            }
+        if let fieldValue = inputTextView.text {
+            characterCountLabel.text = "\(fieldValue.count < 10 ? "0" : "")\(fieldValue.count)/\(characterLimit < 10 ? "0" : "")\(characterLimit)"
         }
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        backgroundView.image = #imageLiteral(resourceName: "ScheduleBackground")
     }
 }
 
 // MARK: - Set Up Data
 extension HIEditProfileDetailViewController {
-    func initializeData(editingField: EditingField, textFieldValue: String? = nil, characterLimit: Int? = nil, teamStatus: String? = nil, interests: [String]? = nil) {
+    func initializeData(editingField: EditingField, textViewValue: String? = nil, characterLimit: Int? = nil, teamStatus: String? = nil, interests: [String]? = nil) {
 
         self.editingField = editingField
 
-        if self.editingField == .bio {
-            if let fieldValue = textFieldValue {
-                self.bioTextView.text = fieldValue
-            }
-        } else {
-            if let fieldValue = textFieldValue {
-                self.singleLineTextField.text = fieldValue
-            }
+        if let fieldValue = textViewValue {
+            self.inputTextView.text = fieldValue
         }
 
         if let limit = characterLimit {
@@ -284,29 +256,17 @@ extension HIEditProfileDetailViewController {
         }
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
-
 }
 
-// MARK: - UITextField
-extension HIEditProfileDetailViewController {
-
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let newString = ((textField.text ?? "") as NSString).replacingCharacters(in: range, with: string)
-        return newString.count <= characterLimit
-    }
-
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        updateCharacterCount()
-    }
-}
-
+// MARK: - UITextViewDelegate
 extension HIEditProfileDetailViewController: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let fixedWidth = textView.frame.size.width
         let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
         textView.frame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
-        let newString = ((textView.text ?? "") as NSString).replacingCharacters(in: range, with: string)
-        return newString.count <= characterLimit
+        let newString = ((textView.text ?? "") as NSString).replacingCharacters(in: range, with: text)
+        let newStringComponents = newString.components(separatedBy: "\n").count
+        return newString.count <= characterLimit && newStringComponents == 1
     }
 
     func textViewDidChangeSelection(_ textView: UITextView) {
@@ -314,7 +274,7 @@ extension HIEditProfileDetailViewController: UITextViewDelegate {
     }
 }
 
-// MARK: - Handle updating API
+// MARK: - API Requests
 extension HIEditProfileDetailViewController {
     @objc func didSelectDone(_ sender: UIBarButtonItem) {
         guard let profile = HIApplicationStateController.shared.profile else { return }
@@ -332,22 +292,18 @@ extension HIEditProfileDetailViewController {
         profileData["teamStatus"] = profile.teamStatus
         profileData["interests"] = profile.interests
 
-        if editingField == .bio {
-            if let bioText = bioTextView.text {
-                profileData["description"] = bioText
-            }
-        } else {
-            if let singleLineText = singleLineTextField.text {
-                switch editingField {
-                case .fName:
-                    profileData["firstName"] = singleLineText
-                case .lName:
-                    profileData["lastName"] = singleLineText
-                case .discord:
-                    profileData["discord"] = singleLineText
-                default:
-                    break
-                }
+        if let inputText = inputTextView.text {
+            switch editingField {
+            case .fName:
+                profileData["firstName"] = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
+            case .lName:
+                profileData["lastName"] = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
+            case .discord:
+                profileData["discord"] = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
+            case .bio:
+                profileData["description"] = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
+            default:
+                break
             }
         }
 

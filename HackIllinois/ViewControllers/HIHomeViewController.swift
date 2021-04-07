@@ -54,12 +54,6 @@ class HIHomeViewController: HIEventListViewController {
 //        $0.backgroundHIColor = \.clear
 //        $0.baseImage = #imageLiteral(resourceName: "Bell")
 //    }
-    private let logoutButton = HIButton {
-        $0.tintHIColor = \.titleText
-        $0.backgroundHIColor = \.clear
-        $0.baseImage = #imageLiteral(resourceName: "LogoutButton")
-        $0.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
-    }
 
     private var countdownDataStoreIndex = 0
     private var staticDataStore: [(date: Date, displayText: String, backgroundImage: UIImage)] = [
@@ -106,22 +100,6 @@ extension HIHomeViewController {
 //    @objc func didSelectAnnouncementButton(_ sender: HIButton) {
 //        self.present(announcementViewController, animated: true, completion: nil)
 //    }
-
-    @objc func didSelectLogoutButton(_ sender: UIButton) {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let actionText = HIApplicationStateController.shared.isGuest ? "Log In" : "Log Out"
-        alert.addAction(
-            UIAlertAction(title: actionText, style: .destructive) { _ in
-                self.dismiss(animated: true, completion: nil)
-                NotificationCenter.default.post(name: .logoutUser, object: nil)
-            }
-        )
-        alert.addAction(
-            UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        )
-        alert.popoverPresentationController?.sourceView = sender
-        present(alert, animated: true, completion: nil)
-    }
 }
 
 // MARK: - UIViewController
@@ -135,9 +113,6 @@ extension HIHomeViewController {
 //        if HIApplicationStateController.shared.isGuest {
 //            announcementButton.isHidden = true
 //        }
-        self.navigationItem.leftBarButtonItem = logoutButton.toBarButtonItem()
-        logoutButton.addTarget(self, action: #selector(didSelectLogoutButton(_:)), for: .touchUpInside)
-        logoutButton.constrain(width: 25, height: 25)
 
         view.addSubview(countdownTitleLabel)
         countdownTitleLabel.constrain(to: view, topInset: UIScreen.main.bounds.height * 0.12, trailingInset: 0, leadingInset: 20)
@@ -164,7 +139,7 @@ extension HIHomeViewController {
         separator.translatesAutoresizingMaskIntoConstraints = false
         separator.backgroundColor <- \.titleText
         self.view.addSubview(separator)
-        separator.constrain(height: 1)
+        separator.constrain(height: 1 / (UIScreen.main.scale))
         separator.constrain(to: view, trailingInset: 0, leadingInset: 0)
         separator.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10).isActive = true
 

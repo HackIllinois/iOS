@@ -74,8 +74,8 @@ class HIGroupDetailViewController: HIBaseViewController {
     private var profileInterestsViewHeight = NSLayoutConstraint()
 
     @objc dynamic override func setUpBackgroundView() {
-            super.setUpBackgroundView()
-            backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
+        super.setUpBackgroundView()
+        backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
     }
 }
 
@@ -104,6 +104,7 @@ extension HIGroupDetailViewController {
         closeButton.constrain(height: 25)
 
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.alwaysBounceVertical = true
         contentView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
         scrollView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true

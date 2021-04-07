@@ -18,10 +18,10 @@ final class HITimeDataSource {
     static var shared = HITimeDataSource()
 
     public static let defaultTimes = EventTimes(
-        eventStart: Date(timeIntervalSince1970: 1617944400), // Friday, April 9, 2021 12:00:00 AM CST
-        eventEnd: Date(timeIntervalSince1970: 1618289999), // Monday, April 12, 2021 11:59:59 PM CST
-        hackStart: Date(timeIntervalSince1970: 1617980400), // Friday, April 9, 2021 10:00:00 AM CST
-        hackEnd: Date(timeIntervalSince1970: 1618239600), // Monday, April 12, 2021 10:00:00 AM CST
+        eventStart: Date(timeIntervalSince1970: 1618005600), // Friday, April 9, 2021 5:00:00 PM CST
+        eventEnd: Date(timeIntervalSince1970: 1618268400), // Monday, April 12, 2021 6:00:00 PM CST
+        hackStart: Date(timeIntervalSince1970: 1618009200), // Friday, April 9, 2021 6:00:00 PM CST
+        hackEnd: Date(timeIntervalSince1970: 1618182000), // Sunday, April 11, 2021 6:00:00 PM CST
         fridayStart: Date(timeIntervalSince1970: 1617944400), // Friday, April 9, 2021 12:00:00 AM CST
         fridayEnd: Date(timeIntervalSince1970: 1618030799), // Friday, April 9, 2021 11:59:59 PM CST
         saturdayStart: Date(timeIntervalSince1970: 1618030800), // Saturday, April 10, 2021 12:00:00 AM CST
@@ -38,7 +38,7 @@ final class HITimeDataSource {
         self.updateTimes()
     }
 
-    ///Returns whether times have been updated or not with syncronous api call to get times
+    ///Returns whether times have been updated or not with synchronous api call to get times
     func updateTimes() {
         let semaphore = DispatchSemaphore(value: 0)
 
@@ -50,7 +50,7 @@ final class HITimeDataSource {
                     self.eventTimes = timeContainer.eventTimes
                 } catch {
                     os_log(
-                        "Unable to update event times, setting default HackIllinois 2020 times: %s",
+                        "Unable to update event times, setting default HackIllinois 2021 times: %s",
                         log: Logger.api,
                         type: .error,
                         String(describing: error)
@@ -60,7 +60,7 @@ final class HITimeDataSource {
             }
             .launch()
 
-        //Syncronous API call to get times
+        //Synchronous API call to get times
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
     }
 }

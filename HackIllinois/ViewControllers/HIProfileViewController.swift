@@ -17,6 +17,13 @@ import HIAPI
 
 class HIProfileViewController: HIBaseViewController {
     // MARK: - Properties
+    private let errorView = HIErrorView(style: .profile)
+    private let logoutButton = HIButton {
+        $0.tintHIColor = \.titleText
+        $0.backgroundHIColor = \.clear
+        $0.baseImage = #imageLiteral(resourceName: "LogoutButton")
+        $0.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+    }
     private let editViewController = HIEditProfileViewController()
 
     private let editButton = HIButton {
@@ -85,8 +92,8 @@ class HIProfileViewController: HIBaseViewController {
     var interests: [String] = []
 
     @objc dynamic override func setUpBackgroundView() {
-            super.setUpBackgroundView()
-            backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
+        super.setUpBackgroundView()
+        backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
     }
 }
 
@@ -101,6 +108,26 @@ extension HIProfileViewController {
 extension HIProfileViewController {
     override func loadView() {
         super.loadView()
+        if HIApplicationStateController.shared.isGuest {
+            layoutErrorView()
+        } else {
+            layoutProfile()
+        }
+    }
+
+    func layoutErrorView() {
+        errorView.delegate = self
+        view.addSubview(errorView)
+        errorView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        errorView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        errorView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        errorView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+    }
+
+    func layoutProfile() {
+        self.navigationItem.leftBarButtonItem = logoutButton.toBarButtonItem()
+        logoutButton.addTarget(self, action: #selector(didSelectLogoutButton(_:)), for: .touchUpInside)
+        logoutButton.constrain(width: 25, height: 25)
         if !HIApplicationStateController.shared.isGuest {
             self.navigationItem.rightBarButtonItem = editButton.toBarButtonItem()
             editButton.constrain(width: 22, height: 22)
@@ -108,12 +135,13 @@ extension HIProfileViewController {
             _ = editViewController.view
         }
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.alwaysBounceVertical = true
         contentView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
         scrollView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         scrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         scrollView.addSubview(contentView)
 
         contentView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10).isActive = true
@@ -127,6 +155,7 @@ extension HIProfileViewController {
         contentView.addSubview(profileNameView)
         profileNameView.topAnchor.constraint(equalTo: profilePictureView.bottomAnchor, constant: 12).isActive = true
         profileNameView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        profileNameView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9).isActive = true
         profileStatusContainer.translatesAutoresizingMaskIntoConstraints = false
         profileStatusContainer.backgroundColor = .clear
         contentView.addSubview(profileStatusContainer)
@@ -281,6 +310,21 @@ extension HIProfileViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - Actions
 extension HIProfileViewController {
+    @objc func didSelectLogoutButton(_ sender: UIButton) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(
+            UIAlertAction(title: "Log Out", style: .destructive) { _ in
+                self.dismiss(animated: true, completion: nil)
+                NotificationCenter.default.post(name: .logoutUser, object: nil)
+            }
+        )
+        alert.addAction(
+            UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        )
+        alert.popoverPresentationController?.sourceView = sender
+        present(alert, animated: true, completion: nil)
+    }
+
     @objc func didSelectEditButton(_ sender: UIButton) {
         if let navController = navigationController as? HINavigationController {
             navController.pushViewController(editViewController, animated: true)
@@ -322,4 +366,21 @@ extension HIProfileViewController {
 
     }
 
+}
+
+// MARK: - HIErrorViewDelegate
+extension HIProfileViewController: HIErrorViewDelegate {
+    func didSelectErrorLogout() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(
+            UIAlertAction(title: "Log Out", style: .destructive) { _ in
+                self.dismiss(animated: true, completion: nil)
+                NotificationCenter.default.post(name: .logoutUser, object: nil)
+            }
+        )
+        alert.addAction(
+            UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        )
+        present(alert, animated: true, completion: nil)
+    }
 }

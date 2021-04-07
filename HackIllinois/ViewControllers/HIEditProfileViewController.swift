@@ -30,6 +30,11 @@ class HIEditProfileViewController: HIBaseViewController {
     }
     private var tableViewHeight = NSLayoutConstraint()
 
+    @objc dynamic override func setUpBackgroundView() {
+        super.setUpBackgroundView()
+        backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
+    }
+
 }
 // MARK: - UIViewController
 extension HIEditProfileViewController {
@@ -55,8 +60,7 @@ extension HIEditProfileViewController {
         let separatorView = HIView(style: nil) { (view) in
             view.backgroundHIColor = \.whiteTagFont
             view.translatesAutoresizingMaskIntoConstraints = false
-            view.heightAnchor.constraint(equalToConstant: 1).isActive = true
-            view.alpha = 0.5
+            view.heightAnchor.constraint(equalToConstant: 1 / (UIScreen.main.scale)).isActive = true
         }
 
         contentView.addSubview(separatorView)
@@ -91,7 +95,6 @@ extension HIEditProfileViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
         if let tableView = tableView {
             tableView.reloadData()
             tableView.layoutIfNeeded()
@@ -162,7 +165,7 @@ extension HIEditProfileViewController {
         let editController = HIEditProfileDetailViewController()
         let strValue = getStringFromAttributeIndex(of: indexPath.row)
         if let editingField = HIEditProfileDetailViewController.EditingField(rawValue: profileItems[indexPath.row]), let profile = HIApplicationStateController.shared.profile {
-            editController.initializeData(editingField: editingField, textFieldValue: strValue, characterLimit: 100, teamStatus: strValue, interests: profile.interests)
+            editController.initializeData(editingField: editingField, textViewValue: strValue, characterLimit: 100, teamStatus: strValue, interests: profile.interests)
         }
 
         if let navController = self.navigationController as? HINavigationController {

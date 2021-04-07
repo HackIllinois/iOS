@@ -21,7 +21,6 @@ class HILoginFlowController: UIViewController {
     // MARK: - Properties
     let animationView = AnimationView(name: "intro")
     var shouldDisplayAnimationOnNextAppearance = true
-    let animationBackgroundView = UIImageView()
 
     // MARK: Status Bar
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
@@ -98,11 +97,10 @@ extension HILoginFlowController {
 
             animationView.play { _ in
                 // Smooth out background transition into login page
-                UIView.animate(withDuration: 0.3, animations: {self.animationBackgroundView.alpha = 0.0},
+                UIView.animate(withDuration: 1.0, animations: {self.animationView.alpha = 0.0},
                 completion: { _ in
-                    self.animationBackgroundView.removeFromSuperview()
+                    self.animationView.removeFromSuperview()
                 })
-                self.animationView.removeFromSuperview()
                 self.statusBarIsHidden = false
                 UIView.animate(withDuration: 0.25) { () -> Void in
                     self.setNeedsStatusBarAppearanceUpdate()
@@ -120,10 +118,12 @@ private extension HILoginFlowController {
         //GUEST (bypass auth)
         if user.provider == .guest {
             var guestUser = HIUser()
+            var guestProfile = HIProfile()
             guestUser.provider = .guest
+            guestProfile.provider = .guest
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": guestUser])
-                self.populateDefaultProfileData()
+                NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": guestProfile])
             }
             return
         }
@@ -213,7 +213,7 @@ private extension HILoginFlowController {
                     if user.roles.contains(.staff) {
                         DispatchQueue.main.async {
                             NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
-                            self?.populateDefaultProfileData()
+                            NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": profile])
                         }
                     } else {
                         DispatchQueue.main.async {
@@ -252,20 +252,6 @@ private extension HILoginFlowController {
         }
         .authorize(with: user)
         .launch()
-    }
-
-    private func populateDefaultProfileData() {
-        var profile = HIProfile()
-        profile.firstName = "Default"
-        profile.lastName = "Account"
-        profile.points = 0
-        profile.timezone = "CDT"
-        profile.info = "This is a default account."
-        profile.discord = "N/A"
-        profile.avatarUrl = "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2021/profile-0.png"
-        profile.teamStatus = "NOT_LOOKING"
-        profile.interests = []
-        NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": profile])
     }
 
     private func populateProfileData(buildingProfile profile: HIProfile, sender: HIBaseViewController) {
