@@ -8,9 +8,6 @@
   },
   "stickers" : [
     {
-      "filename" : "sticker-0.sticker"
-    },
-    {
       "filename" : "sticker-1.sticker"
     },
     {
@@ -39,6 +36,18 @@
     },
     {
       "filename" : "sticker-10.sticker"
+    },
+    {
+      "filename" : "sticker-11.sticker"
+    },
+    {
+      "filename" : "sticker-12.sticker"
+    },
+    {
+      "filename" : "sticker-13.sticker"
+    },
+    {
+      "filename" : "sticker-14.sticker"
     }
   ]
 }
