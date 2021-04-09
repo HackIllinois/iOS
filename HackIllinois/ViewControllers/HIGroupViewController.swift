@@ -21,7 +21,7 @@ class HIGroupViewController: HIGroupListViewController {
         let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
 
         fetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: "firstName", ascending: true)
+            NSSortDescriptor(key: "id", ascending: true)
         ]
 
         let fetchedResultsController = NSFetchedResultsController(
