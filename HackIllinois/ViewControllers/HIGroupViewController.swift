@@ -20,7 +20,9 @@ class HIGroupViewController: HIGroupListViewController {
     lazy var fetchedResultsController: NSFetchedResultsController<Profile> = {
         let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
 
-        fetchRequest.sortDescriptors = []
+        fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "id", ascending: true)
+        ]
 
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
