@@ -15,7 +15,7 @@ import UIKit
 
 class HIDateHeader: UITableViewHeaderFooterView {
     var titleLabel = HILabel {
-        $0.textHIColor = \.baseText
+        $0.textHIColor = \.titleText
         $0.backgroundHIColor = \.clear
         $0.font = HIAppearance.Font.sectionHeader
     }
@@ -27,9 +27,10 @@ class HIDateHeader: UITableViewHeaderFooterView {
         self.backgroundView = backgroundView
 
         backgroundView.addSubview(titleLabel)
-        titleLabel.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor, constant: 14).isActive = true
-        titleLabel.bottomAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor, constant: -14).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 14).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -14).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {

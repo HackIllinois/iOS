@@ -36,16 +36,16 @@ class HIEventCell: HIBubbleCell {
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+
         backgroundColor = UIColor.clear
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         bubbleView.addSubview(favoritedButton)
-        favoritedButton.widthAnchor.constraint(equalToConstant: 58).isActive = true
-        favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0, bottomInset: 0)
+        favoritedButton.constrain(width: 58, height: 60)
+        favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0)
 
         // add bubble view
         contentView.layer.backgroundColor = UIColor.clear.cgColor
         contentStackView.axis = .vertical
-        contentStackView.distribution = .equalSpacing
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         bubbleView.addSubview(contentStackView)
         contentStackView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 16).isActive = true
@@ -70,25 +70,32 @@ extension HIEventCell {
     @objc func didSelectFavoriteButton(_ sender: HIButton) {
         delegate?.eventCellDidSelectFavoriteButton(self)
     }
+
 }
 
 // MARK: - Population
 extension HIEventCell {
-    static func heightForCell(with event: Event) -> CGFloat {
-        if event.sponsor.isEmpty {
-            return 83 + 21 * CGFloat(event.locations.count)
-        } else {
-           return 83 + 21 * CGFloat(event.locations.count + 1)
+    static func heightForCell(with event: Event, width: CGFloat) -> CGFloat {
+        let height = HILabel.heightForView(text: event.name, font: HIAppearance.Font.eventTitle, width: width - 98) + 90 + HILabel.heightForView(text: event.info, font: HIAppearance.Font.eventDetails, width: width - 100) + 15
+        if !event.sponsor.isEmpty {
+            return height + 21
         }
+        return height
     }
 
     static func <- (lhs: HIEventCell, rhs: Event) {
         lhs.favoritedButton.isActive = rhs.favorite
         var contentStackViewHeight: CGFloat = 0
+
         let titleLabel = HILabel(style: .event)
+        titleLabel.numberOfLines = 0
         titleLabel.text = rhs.name
-        contentStackViewHeight += titleLabel.intrinsicContentSize.height
         lhs.contentStackView.addArrangedSubview(titleLabel)
+
+        let timeLabel = HILabel(style: .eventTime)
+        timeLabel.text = Formatter.simpleTime.string(from: rhs.startTime) + " - " + Formatter.simpleTime.string(from: rhs.endTime)
+        lhs.contentStackView.addArrangedSubview(timeLabel)
+        lhs.contentStackView.setCustomSpacing(10, after: timeLabel)
 
         if !rhs.sponsor.isEmpty {
             let sponsorLabel = HILabel(style: .sponsor)
@@ -97,18 +104,42 @@ extension HIEventCell {
             lhs.contentStackView.addArrangedSubview(sponsorLabel)
         }
 
-        for location in rhs.locations {
-            guard let location = location as? Location else { continue }
-            let locationLabel = HILabel(style: .location)
-            locationLabel.text = location.name
-            contentStackViewHeight += locationLabel.intrinsicContentSize.height + 3
-            lhs.contentStackView.addArrangedSubview(locationLabel)
-        }
-
         let descriptionLabel = HILabel(style: .cellDescription)
         descriptionLabel.text = rhs.info
-        contentStackViewHeight += descriptionLabel.intrinsicContentSize.height + 3
+        let height = HILabel.heightForView(text: rhs.info, font: HIAppearance.Font.eventDetails, width: lhs.contentView.frame.width - 100)
         lhs.contentStackView.addArrangedSubview(descriptionLabel)
+        lhs.contentStackView.setCustomSpacing(10, after: descriptionLabel)
+
+        let bottomView = HIView()
+        bottomView.constrain(height: 30)
+
+        let pointsView = HIView { (view) in
+            view.layer.cornerRadius = 15
+            view.backgroundHIColor = \.buttonBlue
+            view.translatesAutoresizingMaskIntoConstraints = false
+        }
+
+        let pointsLabel = HILabel(style: .pointsText)
+        pointsView.addSubview(pointsLabel)
+        pointsLabel.constrain(to: pointsView, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        pointsLabel.text = "\(rhs.points) Points!"
+
+        let eventTypeLabel = HILabel(style: .eventType)
+        let eventType = HIEventType(type: rhs.eventType)
+        eventTypeLabel.text = eventType.description
+        eventTypeLabel.textHIColor = getTagColor(for: rhs.eventType)
+        eventTypeLabel.refreshForThemeChange()
+
+        bottomView.addSubview(pointsView)
+        bottomView.addSubview(eventTypeLabel)
+        pointsView.constrain(to: bottomView, topInset: 0, bottomInset: 0, leadingInset: 0)
+        eventTypeLabel.constrain(to: bottomView, topInset: 0, trailingInset: 0, bottomInset: 0)
+        pointsView.trailingAnchor.constraint(equalTo: eventTypeLabel.leadingAnchor, constant: -5).isActive = true
+        pointsView.widthAnchor.constraint(equalTo: eventTypeLabel.widthAnchor, multiplier: 1.2).isActive = true
+
+        lhs.contentStackView.addArrangedSubview(bottomView)
+
+        contentStackViewHeight += HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle, width: lhs.contentView.frame.width - 98) + timeLabel.intrinsicContentSize.height + 13 + height + 3 + 40
         lhs.contentStackViewHeight.constant = contentStackViewHeight
     }
 }
@@ -121,6 +152,24 @@ extension HIEventCell {
         contentStackView.arrangedSubviews.forEach { (view) in
             contentStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
+        }
+    }
+}
+
+// MARK: - HIColors for event type
+extension HIEventCell {
+    static func getTagColor(for eventType: String) -> HIColor {
+        switch eventType {
+        case "WORKSHOP":
+            return \.eventTypePurple
+        case "MINIEVENT":
+            return \.eventTypeGreen
+        case "SPEAKER":
+            return \.eventTypeRed
+        case "QNA":
+            return \.eventTypeOrange
+        default:
+            return \.eventTypePink
         }
     }
 }

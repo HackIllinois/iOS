@@ -21,6 +21,7 @@ class HIApplicationStateController {
     // MARK: - Properties
     var window = HIWindow(frame: UIScreen.main.bounds)
     var user: HIUser?
+    var profile: HIProfile?
     var isGuest = false
 
     // MARK: ViewControllers
@@ -31,6 +32,7 @@ class HIApplicationStateController {
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(loginUser), name: .loginUser, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(logoutUser), name: .logoutUser, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(loginProfile), name: .loginProfile, object: nil)
     }
 
     deinit {
@@ -42,6 +44,7 @@ class HIApplicationStateController {
 
         resetPersistentDataIfNeeded()
         recoverUserIfPossible()
+        recoverProfileIfPossible()
 
         if user != nil {
             loginFlowController.shouldDisplayAnimationOnNextAppearance = false
@@ -66,16 +69,29 @@ extension HIApplicationStateController {
             Keychain.default.removeObject(forKey: HIConstants.STORED_ACCOUNT_KEY)
             return
         }
+        isGuest = false
+        if user.provider == .guest || user.provider == .google {
+            isGuest = true
+        }
         self.user = user
+    }
+
+    func recoverProfileIfPossible() {
+        guard Keychain.default.hasValue(forKey: HIConstants.STORED_PROFILE_KEY) else { return }
+        guard let profile = Keychain.default.retrieve(HIProfile.self, forKey: HIConstants.STORED_PROFILE_KEY) else {
+            Keychain.default.removeObject(forKey: HIConstants.STORED_PROFILE_KEY)
+            return
+        }
+        self.profile = profile
     }
 
     func viewControllersFor(user: HIUser) -> [UIViewController] {
         var viewControllers = [UIViewController]()
         viewControllers.append(HIHomeViewController())
         viewControllers.append(HIScheduleViewController())
-        viewControllers.append(HIUserDetailViewController())
-        viewControllers.append(HIIndoorMapsViewController())
-        viewControllers.append(HIProjectViewController())
+        viewControllers.append(HICodePopupViewController())
+        viewControllers.append(HIProfileViewController())
+        viewControllers.append(HIGroupViewController())
         return viewControllers
     }
 
@@ -83,7 +99,10 @@ extension HIApplicationStateController {
         guard let user = notification.userInfo?["user"] as? HIUser else { return }
         guard Keychain.default.store(user, forKey: HIConstants.STORED_ACCOUNT_KEY) else { return }
         self.user = user
-        if user.token.isEmpty { isGuest = true }
+        isGuest = false
+        if user.provider == .guest || user.provider == .google {
+            isGuest = true
+        }
         HILocalNotificationController.shared.requestAuthorization()
         UIApplication.shared.registerForRemoteNotifications()
         updateWindowViewController(animated: true)
@@ -91,10 +110,18 @@ extension HIApplicationStateController {
 
     @objc func logoutUser() {
         guard user != nil else { return }
+        guard profile != nil else { return }
         Keychain.default.removeObject(forKey: HIConstants.STORED_ACCOUNT_KEY)
+        Keychain.default.removeObject(forKey: HIConstants.STORED_PROFILE_KEY)
         user = nil
-        isGuest = false
+        profile = nil
         updateWindowViewController(animated: true)
+    }
+
+    @objc func loginProfile(_ notification: Notification) {
+        guard let profile = notification.userInfo?["profile"] as? HIProfile else { return }
+        guard Keychain.default.store(profile, forKey: HIConstants.STORED_PROFILE_KEY) else { return }
+        self.profile = profile
     }
 
     func updateWindowViewController(animated: Bool) {
@@ -129,6 +156,7 @@ extension HIApplicationStateController {
         HIEventDataSource.refresh()
         HIAnnouncementDataSource.refresh()
         HIProjectDataSource.refresh()
+        HIProfileDataSource.refresh()
     }
 
     func prepareLoginControllerForDisplay() { }

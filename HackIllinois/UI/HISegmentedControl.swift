@@ -9,6 +9,7 @@
 //  Illinois/NCSA Open Source License. You should have received a copy of
 //  this license in a file with the distribution.
 //
+
 import Foundation
 import UIKit
 
@@ -17,18 +18,18 @@ class HISegmentedControl: UIControl {
     // MARK: - Properties
     private(set) var items: [String]
 
-    private(set) var selectedIndex: Int = 0 {
+    var selectedIndex: Int = 0 {
         didSet {
-            if oldValue != selectedIndex {
-                labels[oldValue].textColor <- \.baseText
-                displayNewSelectedIndex()
-                sendActions(for: .valueChanged)
-            }
+            didSetSelectedIndex(oldValue: oldValue)
         }
     }
 
+    private var views = [UIView]()
     private var labels = [UILabel]()
-    private var font = HIAppearance.Font.navigationSubtitle
+    private let font = HIAppearance.Font.segmentedTitle
+
+    private let viewPadding: CGFloat = 10
+    private let indicatorCornerRadiusProp: CGFloat = 0.15
 
     private var indicatorView = UIView()
     private var indicatorViewHeight = CGFloat(3)
@@ -58,22 +59,22 @@ class HISegmentedControl: UIControl {
     @objc func refreshForThemeChange() {
         backgroundColor <- \.clear
         labels.forEach {
-            $0.textColor <- \.baseText
+            $0.textColor <- \.whiteText
             $0.backgroundColor <- \.clear
         }
-        bottomView.backgroundColor <- \.baseText
-        indicatorView.backgroundColor <- \.accent
+
+        indicatorView.backgroundColor <- \.segmentedBackground
+        indicatorView.alpha = 0.3
     }
 
     // MARK: - UIView
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        let indicatorViewWidth = frame.width / CGFloat(items.count)
-        indicatorView.frame = CGRect(x: 0, y: frame.height - indicatorViewHeight, width: indicatorViewWidth, height: indicatorViewHeight)
-        indicatorView.layer.cornerRadius = indicatorViewHeight / 2
+        let indicatorViewWidth = ((frame.width - viewPadding) / CGFloat(items.count) - viewPadding)
+        indicatorView.frame = CGRect(x: viewPadding, y: 0, width: indicatorViewWidth, height: frame.height)
+        indicatorView.layer.cornerRadius = frame.height * indicatorCornerRadiusProp
         indicatorView.layer.masksToBounds = true
-        bottomView.frame = CGRect(x: 0, y: frame.height - (2 * bottomViewHeight), width: frame.width, height: bottomViewHeight)
 
         displayNewSelectedIndex()
     }
@@ -81,8 +82,8 @@ class HISegmentedControl: UIControl {
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let location = touch.location(in: self)
 
-        for (index, label) in labels.enumerated() {
-            if label.frame.contains(location) {
+        for (index, view) in views.enumerated() {
+            if view.frame.contains(location) {
                 selectedIndex = index
                 break
             }
@@ -98,69 +99,81 @@ class HISegmentedControl: UIControl {
         setupLabels()
     }
 
-    private func setupView() {
+    func setupView() {
         setupLabels()
-        addSubview(bottomView)
         addSubview(indicatorView)
     }
 
-    private func setupLabels() {
-        labels.forEach { $0.removeFromSuperview() }
-        labels.removeAll(keepingCapacity: true)
-        items.indices.forEach { setupLabelForItem(at: $0) }
-        constrain(labels: labels)
+    func setupLabels() {
+        views.forEach { $0.removeFromSuperview() }
+        views.removeAll(keepingCapacity: true)
+        items.indices.forEach { setupViewForItem(at: $0) }
+        constrain(views: views)
     }
 
-    private func setupLabelForItem(at index: Int) {
+    private func setupViewForItem(at index: Int) {
+        let view = UIView()
         let label = UILabel()
+
         label.textAlignment = .center
         label.font = font
         label.text = items[index]
-        label.textColor <- \.baseText
+        label.textColor <- \.whiteText
+
+        view.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(label)
+
+        label.constrain(to: view, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+
+        view.isUserInteractionEnabled = false
+        label.isUserInteractionEnabled = false
+
+        view.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(view)
+        views.append(view)
         labels.append(label)
     }
 
-    private func displayNewSelectedIndex() {
-        let selectedLabel = labels[selectedIndex]
+    func didSetSelectedIndex(oldValue: Int) {
+        if oldValue != selectedIndex {
+            displayNewSelectedIndex()
+            sendActions(for: .valueChanged)
+        }
+    }
+
+    func displayNewSelectedIndex() {
+        let selectedView = views[selectedIndex]
 
         let animator = UIViewPropertyAnimator(duration: 0.5, dampingRatio: 0.8)
         animator.addAnimations {
-            self.indicatorView.frame.origin.x = selectedLabel.frame.origin.x
-            selectedLabel.textColor <- \.accent
+            self.indicatorView.frame.origin.x = selectedView.frame.origin.x
         }
         animator.startAnimation()
     }
 
-    private func constrain(labels: [UIView]) {
+    private func constrain(views: [UIView]) {
 
-        for (index, view) in labels.enumerated() {
-            // top
-            view.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        for (index, view) in views.enumerated() {
 
-            // bottom
-            view.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+            // top and bottom
+            view.constrain(to: self, topInset: 0, bottomInset: 0)
 
             // right
-            if index == labels.count - 1 {
-                view.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-            } else {
-                let nextView = labels[index + 1]
-                view.rightAnchor.constraint(equalTo: nextView.leftAnchor).isActive = true
+            if index == items.count - 1 {
+                view.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -viewPadding).isActive = true
             }
 
             // left
             if index == 0 {
-                view.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+                view.leftAnchor.constraint(equalTo: self.leftAnchor, constant: viewPadding).isActive = true
             } else {
-                let prevView = labels[index - 1]
-                view.leftAnchor.constraint(equalTo: prevView.rightAnchor).isActive = true
+                let prevView = views[index - 1]
+                view.leftAnchor.constraint(equalTo: prevView.rightAnchor, constant: viewPadding).isActive = true
             }
 
             // width
             if index != 0 {
-                let firstView = labels[0]
+                let firstView = views[0]
                 view.widthAnchor.constraint(equalTo: firstView.widthAnchor).isActive = true
             }
         }

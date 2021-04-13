@@ -21,8 +21,7 @@ protocol HICountdownViewControllerDelegate: class {
 class HICountdownViewController: UIViewController {
 
     // MARK: - Constants
-    private let FRAMES_PER_TICK = 30
-    private let TOTAL_NUM_FRAMES = 1800
+    private let FRAMES_PER_TICK = 8
 
     // MARK: - Properties
     private let days = AnimationView(name: "countdown-60")
@@ -111,33 +110,38 @@ extension HICountdownViewController {
         countdownStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         countdownStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
 
-        countdownStackView.addArrangedSubview(stackView(with: days, and: "D"))
-        countdownStackView.addArrangedSubview(stackView(with: hours, and: "H"))
-        countdownStackView.addArrangedSubview(stackView(with: minutes, and: "M"))
-        countdownStackView.addArrangedSubview(stackView(with: seconds, and: "S"))
+        countdownStackView.addArrangedSubview(containerView(with: days, and: "Days"))
+        countdownStackView.addArrangedSubview(containerView(with: hours, and: "Hours"))
+        countdownStackView.addArrangedSubview(containerView(with: minutes, and: "Minutes"))
+        // countdownStackView.addArrangedSubview(containerView(with: seconds, and: "S"))
     }
 
-    func stackView(with countDownView: AnimationView, and labelString: String) -> UIStackView {
+    func containerView(with countDownView: AnimationView, and labelString: String) -> UIView {
         countDownView.backgroundColor <- backgroundHIColor
         countDownView.translatesAutoresizingMaskIntoConstraints = false
 
         let label = HILabel {
-            $0.textHIColor = \.accent
+            $0.textHIColor = \.titleText
             $0.backgroundHIColor = \.clear
             $0.textAlignment = .center
             $0.font = HIAppearance.Font.glyph
             $0.text = labelString
         }
 
-        let stackView = UIStackView()
-        stackView.distribution = .fillProportionally
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(countDownView)
-        stackView.addArrangedSubview(label)
+        let containerView = UIView()
+        containerView.addSubview(label)
+        containerView.addSubview(countDownView)
+        label.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
+        label.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        label.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+        label.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.2).isActive = true
+        let offset = (3.0 / 94.0) * UIScreen.main.bounds.width - (57.0/47.0)
+        countDownView.centerXAnchor.constraint(equalTo: label.centerXAnchor, constant: offset).isActive = true
+        countDownView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        countDownView.topAnchor.constraint(equalTo: label.bottomAnchor).isActive = true
+        countDownView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
 
-        countDownView.widthAnchor.constraint(equalTo: label.widthAnchor, multiplier: 2.3).isActive = true
-
-        return stackView
+        return containerView
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -168,10 +172,10 @@ extension HICountdownViewController {
     }
 
     func setupCounters() {
-        days.currentFrame = CGFloat(daysRemaining * FRAMES_PER_TICK)
-        hours.currentFrame = CGFloat(hoursRemaining * FRAMES_PER_TICK)
-        minutes.currentFrame = CGFloat(minutesRemaining * FRAMES_PER_TICK)
-        seconds.currentFrame = CGFloat(secondsRemaining * FRAMES_PER_TICK)
+        days.currentFrame = CGFloat((59 - daysRemaining) * FRAMES_PER_TICK)
+        hours.currentFrame = CGFloat((23 - hoursRemaining) * FRAMES_PER_TICK)
+        minutes.currentFrame = CGFloat((59 - minutesRemaining) * FRAMES_PER_TICK)
+        seconds.currentFrame = CGFloat((59 - secondsRemaining) * FRAMES_PER_TICK)
     }
 
     @objc func updateCountdown() {
@@ -181,28 +185,28 @@ extension HICountdownViewController {
             return
         }
 
-        let daysEndFrame = daysRemaining * FRAMES_PER_TICK
+        let daysEndFrame = (59 - daysRemaining) * FRAMES_PER_TICK
         let daysStartFrame = daysEndFrame + FRAMES_PER_TICK
         if dayFrame != daysEndFrame {
             dayFrame = daysEndFrame
             days.play(fromFrame: CGFloat(daysStartFrame), toFrame: CGFloat(daysEndFrame))
         }
 
-        let hoursEndFrame = hoursRemaining * FRAMES_PER_TICK
+        let hoursEndFrame = (23 - hoursRemaining) * FRAMES_PER_TICK
         let hoursStartFrame = hoursEndFrame + FRAMES_PER_TICK
         if hourFrame != hoursEndFrame {
             hourFrame = hoursEndFrame
             hours.play(fromFrame: CGFloat(hoursStartFrame), toFrame: CGFloat(hoursEndFrame))
         }
 
-        let minutesEndFrame = minutesRemaining * FRAMES_PER_TICK
+        let minutesEndFrame = (59 - minutesRemaining) * FRAMES_PER_TICK
         let minutesStartFrame = minutesEndFrame + FRAMES_PER_TICK
         if minuteFrame != minutesEndFrame {
             minuteFrame = minutesEndFrame
             minutes.play(fromFrame: CGFloat(minutesStartFrame), toFrame: CGFloat(minutesEndFrame))
         }
 
-        let secondsEndFrame = secondsRemaining * FRAMES_PER_TICK
+        let secondsEndFrame = (59 - secondsRemaining) * FRAMES_PER_TICK
         let secondsStartFrame = secondsEndFrame + FRAMES_PER_TICK
         if secondFrame != secondsEndFrame {
             secondFrame = secondsEndFrame

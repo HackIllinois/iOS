@@ -33,6 +33,7 @@ public struct Event: Codable {
         case name
         case sponsor
         case startTime
+        case points
     }
 
     public let id: String
@@ -44,6 +45,7 @@ public struct Event: Codable {
     public let name: String
     public let sponsor: String
     public let startTime: Date
+    public let points: Int
 }
 
 public struct Location: Codable {
@@ -61,4 +63,10 @@ public struct Location: Codable {
 public struct EventFavorites: Codable, APIReturnable {
     public let events: Set<String>
     public let id: String
+}
+
+public struct EventCheckInStatus: Codable, APIReturnable {
+    public let newPoints: Int
+    public let totalPoints: Int
+    public let status: String
 }

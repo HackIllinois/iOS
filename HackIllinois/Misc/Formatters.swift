@@ -21,6 +21,7 @@ extension Formatter {
 
     static let simpleTime: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.timeZone = TimeZone(abbreviation: "CST")
         formatter.dateFormat = "h:mm a"
         return formatter
     }()

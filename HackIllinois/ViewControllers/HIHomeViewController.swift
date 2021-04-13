@@ -41,47 +41,34 @@ class HIHomeViewController: HIEventListViewController {
         return fetchedResultsController
     }()
 
-    let announcementViewController = HIAnnouncementsViewController()
+//    let announcementViewController = HIAnnouncementsViewController()
 
     private var currentTab = 0
 
-    private var dataStore: [(displayText: String, predicate: NSPredicate)] = {
-        var dataStore = [(displayText: String, predicate: NSPredicate)]()
-        let happeningNowPredicate = NSPredicate(format: "(startTime < now()) AND (endTime > now())")
-        dataStore.append((displayText: "HAPPENING NOW ", predicate: happeningNowPredicate))
+    private var dataStore: [String] = ["Ongoing", "Upcoming"]
 
-        let inOneHour = Date(timeIntervalSinceNow: 3600)
-        let upcomingPredicate = NSPredicate(format: "(startTime < %@) AND (startTime > now())", inOneHour as NSDate)
-        dataStore.append((displayText: "UPCOMING", predicate: upcomingPredicate))
-
-        return dataStore
-    }()
-
-    private let countdownTitleLabel = HILabel(style: .title)
+    private let countdownTitleLabel = HILabel(style: .countdown)
     private lazy var countdownViewController = HICountdownViewController(delegate: self)
-    private let happeningNowLabel = HILabel(style: .title) {
-        $0.text = "HAPPENING NOW"
-    }
-    private let announcementButton = HIButton {
-        $0.tintHIColor = \.baseText
-        $0.backgroundHIColor = \.clear
-        $0.baseImage = #imageLiteral(resourceName: "Bell")
-    }
+//    private let announcementButton = HIButton {
+//        $0.tintHIColor = \.baseText
+//        $0.backgroundHIColor = \.clear
+//        $0.baseImage = #imageLiteral(resourceName: "Bell")
+//    }
 
     private var countdownDataStoreIndex = 0
-    private var staticDataStore: [(date: Date, displayText: String)] = [
-        (HITimeDataSource.shared.eventTimes.eventStart, "HACKILLINOIS BEGINS IN"),
-        (HITimeDataSource.shared.eventTimes.hackStart, "HACKING BEGINS IN"),
-        (HITimeDataSource.shared.eventTimes.hackEnd, "HACKING ENDS IN"),
-        (HITimeDataSource.shared.eventTimes.eventEnd, "HACKILLINOIS ENDS IN")
+    private var staticDataStore: [(date: Date, displayText: String, backgroundImage: UIImage)] = [
+        (HITimeDataSource.shared.eventTimes.eventStart, "HackIllinois Begins In", #imageLiteral(resourceName: "Night")),
+        (HITimeDataSource.shared.eventTimes.hackStart, "Hacking Begins In", #imageLiteral(resourceName: "Night")),
+        (HITimeDataSource.shared.eventTimes.hackEnd, "Hacking Ends In", #imageLiteral(resourceName: "Night")),
+        (HITimeDataSource.shared.eventTimes.eventEnd, "HackIllinois Ends In", #imageLiteral(resourceName: "Night"))
     ]
 
     private var timer: Timer?
-    private var buildingView = UIImageView()
 }
 
 // MARK: - Actions
 extension HIHomeViewController {
+
     @objc func didSelectTab(_ sender: HISegmentedControl) {
         currentTab = sender.selectedIndex
         updatePredicate()
@@ -93,7 +80,13 @@ extension HIHomeViewController {
     }
 
     func currentPredicate() -> NSPredicate {
-        return dataStore[currentTab].predicate
+        if currentTab == 0 {
+            return NSPredicate(format: "(startTime < now()) AND (endTime > now())")
+        } else {
+            let inTwoHours = Date(timeIntervalSinceNow: 7200)
+            let upcomingPredicate = NSPredicate(format: "(startTime < %@) AND (startTime > now())", inTwoHours as NSDate)
+            return upcomingPredicate
+        }
     }
 
     func animateReload() {
@@ -104,54 +97,59 @@ extension HIHomeViewController {
         }
     }
 
-    @objc func didSelectAnnouncementButton(_ sender: HIButton) {
-        self.present(announcementViewController, animated: true, completion: nil)
-    }
+//    @objc func didSelectAnnouncementButton(_ sender: HIButton) {
+//        self.present(announcementViewController, animated: true, completion: nil)
+//    }
 }
 
 // MARK: - UIViewController
 extension HIHomeViewController {
     override func loadView() {
         super.loadView()
-        self.navigationItem.rightBarButtonItem = announcementButton.toBarButtonItem()
-        announcementButton.addTarget(self, action: #selector(didSelectAnnouncementButton(_:)), for: .touchUpInside)
-        announcementButton.constrain(width: 22, height: 22)
-
-        if HIApplicationStateController.shared.isGuest {
-            announcementButton.isHidden = true
-        }
+//        self.navigationItem.rightBarButtonItem = announcementButton.toBarButtonItem()
+//        announcementButton.addTarget(self, action: #selector(didSelectAnnouncementButton(_:)), for: .touchUpInside)
+//        announcementButton.constrain(width: 22, height: 22)
+//
+//        if HIApplicationStateController.shared.isGuest {
+//            announcementButton.isHidden = true
+//        }
 
         view.addSubview(countdownTitleLabel)
-        countdownTitleLabel.constrain(to: view, topInset: 60, trailingInset: 0, leadingInset: 0)
+        countdownTitleLabel.constrain(to: view, topInset: UIScreen.main.bounds.height * 0.12, trailingInset: 0, leadingInset: 20)
 
         countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
         addChild(countdownViewController)
         view.addSubview(countdownViewController.view)
-        countdownViewController.view.topAnchor.constraint(equalTo: countdownTitleLabel.bottomAnchor, constant: 8).isActive = true
-        countdownViewController.view.constrain(to: view.safeAreaLayoutGuide, trailingInset: -20, leadingInset: 20)
-        countdownViewController.view.constrain(height: 150)
+        countdownViewController.view.topAnchor.constraint(equalTo: countdownTitleLabel.bottomAnchor, constant: 10).isActive = true
+        countdownViewController.view.constrain(to: view.safeAreaLayoutGuide, trailingInset: -10, leadingInset: 10)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            countdownViewController.view.constrain(height: 0.34 * UIScreen.main.bounds.height)
+        } else {
+            countdownViewController.view.constrain(height: 200)
+        }
         countdownViewController.didMove(toParent: self)
 
-        buildingView.contentMode = .scaleAspectFill
-        buildingView.translatesAutoresizingMaskIntoConstraints = false
-        buildingView.isUserInteractionEnabled = true
-        view.insertSubview(buildingView, at: 1)
-        buildingView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        buildingView.topAnchor.constraint(equalTo: countdownViewController.view.centerYAnchor, constant: 20).isActive = true
-
-        let items = dataStore.map { $0.displayText }
+        let items = dataStore.map { $0 }
         let segmentedControl = HISegmentedControl(items: items)
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
-        segmentedControl.topAnchor.constraint(equalTo: buildingView.centerYAnchor, constant: 12).isActive = true
-        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
-        segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
+        segmentedControl.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor, constant: -20).isActive = true
+        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        segmentedControl.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 44).isActive = true
+
+        let separator = UIView()
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        separator.backgroundColor <- \.titleText
+        self.view.addSubview(separator)
+        separator.constrain(height: 1 / (UIScreen.main.scale))
+        separator.constrain(to: view, trailingInset: 0, leadingInset: 0)
+        separator.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10).isActive = true
 
         let tableView = HITableView()
         view.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 5).isActive = true
+        tableView.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 10).isActive = true
         tableView.constrain(to: view.safeAreaLayoutGuide, trailingInset: 0, leadingInset: 0)
         tableView.constrain(to: view, bottomInset: 0)
         self.tableView = tableView
@@ -179,7 +177,7 @@ extension HIHomeViewController {
 extension HIHomeViewController {
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        buildingView.image = #imageLiteral(resourceName: "Buildings")
+//        buildingView.image = #imageLiteral(resourceName: "Buildings")
     }
 }
 
@@ -198,7 +196,10 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
             let currDate = staticDataStore[countdownDataStoreIndex].date
             if currDate > now {
                 countdownTitleLabel.text = staticDataStore[countdownDataStoreIndex].displayText
-                return currDate
+                backgroundView.image = staticDataStore[countdownDataStoreIndex].backgroundImage
+                return (countdownDataStoreIndex == 0 || countdownDataStoreIndex == 1) ? HITimeDataSource.shared.eventTimes.eventStart : currDate
+            } else {
+                countdownTitleLabel.text = "Countdown"
             }
             countdownDataStoreIndex += 1
         }

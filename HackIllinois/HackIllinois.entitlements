@@ -3,10 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>aps-environment</key>
-	<string>development</string>
-	<key>com.apple.developer.pass-type-identifiers</key>
-	<array>
-		<string>$(TeamIdentifierPrefix)*</string>
-	</array>
+	<string>production</string>
 </dict>
 </plist>

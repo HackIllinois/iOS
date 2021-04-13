@@ -40,4 +40,8 @@ class HIImageView: UIImageView {
     @objc func refreshForThemeChange() {
         image <- hiImage
     }
+
+    func changeImage(newImage: HIImage) {
+        image <- newImage
+    }
 }

@@ -16,8 +16,11 @@ import UIKit
 class HILabel: UILabel {
     // MARK: - Types
     enum Style {
+        case happeningEvents
         case location
         case event
+        case eventTime
+        case eventType
         case sponsor
         case project
         case title
@@ -31,6 +34,25 @@ class HILabel: UILabel {
         case backgroundTitle
         case detailSubtitle
         case detailText
+        case profileName
+        case profileSubtitle
+        case profileNumberFigure
+        case profileDescription
+        case profileUsername
+        case profileInterests
+        case navigationInfo
+        case groupDescription
+        case groupNameInfo
+        case groupContactInfo
+        case groupStatus
+        case sortText
+        case sortElement
+        case countdown
+        case pointsText
+        case groupStatusFilter
+        case characterCount
+        case error
+        case codeError
     }
 
     // MARK: - Properties
@@ -51,6 +73,11 @@ class HILabel: UILabel {
         translatesAutoresizingMaskIntoConstraints = false
         if let style = style {
         switch style {
+        case .happeningEvents:
+            textHIColor = \.titleText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.happeningEventTitle
+
         case .location:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
@@ -59,7 +86,18 @@ class HILabel: UILabel {
         case .event:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentTitle
+            font = HIAppearance.Font.eventTitle
+
+        case .eventTime:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.eventTime
+
+        case .eventType:
+            textHIColor = \.accent
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.eventCategoryText
+            textAlignment = .center
 
         case .sponsor:
             textHIColor = \.attendeeBackground
@@ -109,8 +147,8 @@ class HILabel: UILabel {
         case .cellDescription:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentText
-            numberOfLines = 1
+            font = HIAppearance.Font.eventDetails
+            numberOfLines = 0
 
         case .loginHeader:
             textHIColor = \.loginTitleBackground
@@ -136,6 +174,115 @@ class HILabel: UILabel {
             layer.borderWidth = 2.0
             layer.borderColor = (\HIAppearance.loginSelectionText).value.cgColor
             layer.backgroundColor = UIColor.clear.cgColor
+
+        case .profileName: // Used to display the profile owner's name
+            textHIColor = \.whiteTagFont
+            backgroundHIColor = \.clear
+            textAlignment = .center
+            font = HIAppearance.Font.profileName
+
+        case .profileSubtitle: // Used to display profile subtitle, "points", and whatever that says "time zone"
+            backgroundHIColor = \.clear
+            textAlignment = .center
+            font = HIAppearance.Font.profileSubtitle
+
+        case .profileNumberFigure: // Used to display number of points and time (?)
+            textHIColor = \.whiteTagFont
+            backgroundHIColor = \.clear
+            textAlignment = .center
+            font = HIAppearance.Font.profileNumberFigure
+
+        case .profileDescription: // Used to display "short description"
+            textHIColor = \.whiteTagFont
+            backgroundHIColor = \.clear
+            textAlignment = .left
+            font = HIAppearance.Font.profileDescription
+
+        case .profileUsername: // Used to display Discord username, etc.
+            textHIColor = \.whiteTagFont
+            backgroundHIColor = \.clear
+            textAlignment = .left
+            font = HIAppearance.Font.profileUsername
+
+        case .profileInterests:
+            textHIColor = \.whiteTagFont
+            backgroundHIColor = \.clear
+            textAlignment = .center
+            font = HIAppearance.Font.profileInterests
+
+        case .navigationInfo:
+            textHIColor = \.titleText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.navigationInfoText
+            textAlignment = .center
+
+        // New styles for group matching
+        case .groupDescription:
+            textHIColor = \.groupText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.contentText
+            numberOfLines = 2
+
+        case .groupNameInfo:
+            textHIColor = \.groupText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.groupName
+
+        case .groupContactInfo:
+            textHIColor = \.groupText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.groupContact
+
+        case .groupStatus:
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.groupStatus
+
+        case .sortText:
+            textHIColor = \.titleText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.sortingText
+
+        case .sortElement:
+            textHIColor = \.titleText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.contentText
+
+        case .countdown:
+            textHIColor = \.titleText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.countdownText
+
+        case .pointsText:
+            textHIColor = \.whiteText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.eventButtonText
+            textAlignment = .center
+
+        case .groupStatusFilter:
+            textHIColor = \.titleText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.groupStatus
+            numberOfLines = 0
+
+        case .characterCount:
+            textHIColor = \.whiteTagFont
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.characterCount
+
+        case .error:
+            textHIColor = \.whiteTagFont
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.detailSubtitle
+            textAlignment = .center
+            numberOfLines = 0
+
+        case .codeError:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.detailSubtitle
+            textAlignment = .center
+            numberOfLines = 0
+
         }
         }
 
@@ -150,9 +297,27 @@ class HILabel: UILabel {
         NotificationCenter.default.removeObserver(self)
     }
 
+    func changeTextColor(color: HIColor) {
+        textColor <- color
+    }
+
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
         textColor <- textHIColor
         backgroundColor <- backgroundHIColor
     }
+}
+
+// MARK: - Auto-Sizing
+extension HILabel {
+    static func heightForView(text: String, font: UIFont, width: CGFloat, numLines: Int = 0) -> CGFloat {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
+        label.numberOfLines = numLines
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = font
+        label.text = text
+
+        label.sizeToFit()
+        return label.frame.height
+   }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="18G103" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Announcement" representedClassName="Announcement" syncable="YES">
         <attribute name="body" attributeType="String"/>
         <attribute name="time" attributeType="Date" usesScalarValueType="NO"/>
@@ -18,6 +18,7 @@
         <attribute name="id" attributeType="String"/>
         <attribute name="info" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
+        <attribute name="points" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="sectionIdentifier" transient="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="sponsor" attributeType="String"/>
         <attribute name="startTime" attributeType="Date" usesScalarValueType="NO"/>
@@ -39,6 +40,19 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
+    <entity name="Profile" representedClassName="Profile" syncable="YES">
+        <attribute name="avatarUrl" attributeType="String"/>
+        <attribute name="discord" attributeType="String"/>
+        <attribute name="favorite" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="firstName" attributeType="String"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="info" attributeType="String"/>
+        <attribute name="interests" attributeType="String"/>
+        <attribute name="lastName" attributeType="String"/>
+        <attribute name="points" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="teamStatus" attributeType="String"/>
+        <attribute name="timezone" attributeType="String"/>
+    </entity>
     <entity name="Project" representedClassName="Project" syncable="YES">
         <attribute name="favorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="id" attributeType="String"/>
@@ -56,8 +70,9 @@
     </entity>
     <elements>
         <element name="Announcement" positionX="-63" positionY="72" width="128" height="103"/>
-        <element name="Event" positionX="-54" positionY="36" width="128" height="178"/>
+        <element name="Event" positionX="-54" positionY="36" width="128" height="208"/>
         <element name="Location" positionX="-54" positionY="108" width="128" height="103"/>
+        <element name="Profile" positionX="-45" positionY="135" width="128" height="208"/>
         <element name="Project" positionX="-45" positionY="108" width="128" height="163"/>
     </elements>
 </model>
