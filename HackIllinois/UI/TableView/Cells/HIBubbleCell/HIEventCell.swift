@@ -26,7 +26,7 @@ class HIEventCell: HIBubbleCell {
         $0.activeImage = #imageLiteral(resourceName: "Favorited")
         $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
     }
-
+    
     var contentStackView = UIStackView()
     var contentStackViewHeight = NSLayoutConstraint()
 
@@ -76,7 +76,7 @@ extension HIEventCell {
 // MARK: - Population
 extension HIEventCell {
     static func heightForCell(with event: Event, width: CGFloat) -> CGFloat {
-        let height = HILabel.heightForView(text: event.name, font: HIAppearance.Font.eventTitle, width: width - 98) + 90 + HILabel.heightForView(text: event.info, font: HIAppearance.Font.eventDetails, width: width - 100) + 15
+        let height = HILabel.heightForView(text: event.name, font: HIAppearance.Font.eventTitle, width: width - 98) + 90 + HILabel.heightForView(text: trimText(text: event.info, length: getMaxDescriptionTextLength()), font: HIAppearance.Font.eventDetails, width: width - 100) + 15
         if !event.sponsor.isEmpty {
             return height + 21
         }
@@ -105,8 +105,9 @@ extension HIEventCell {
         }
 
         let descriptionLabel = HILabel(style: .cellDescription)
-        descriptionLabel.text = rhs.info
-        let height = HILabel.heightForView(text: rhs.info, font: HIAppearance.Font.eventDetails, width: lhs.contentView.frame.width - 100)
+        let descriptionText = trimText(text: rhs.info, length: getMaxDescriptionTextLength())
+        descriptionLabel.text = descriptionText
+        let height = HILabel.heightForView(text: descriptionText, font: HIAppearance.Font.eventDetails, width: lhs.contentView.frame.width - 100)
         lhs.contentStackView.addArrangedSubview(descriptionLabel)
         lhs.contentStackView.setCustomSpacing(10, after: descriptionLabel)
 
@@ -171,5 +172,21 @@ extension HIEventCell {
         default:
             return \.eventTypePink
         }
+    }
+}
+
+// MARK: - Used for trimming the event description
+extension HIEventCell {
+    
+    static func getMaxDescriptionTextLength() -> Int {
+        return 150
+    }
+
+    static func trimText(text: String, length: Int) -> String {
+        if (text.count >= length) {
+            let index = text.index(text.startIndex, offsetBy: length)
+            return String(text[..<index]) + "..."
+        }
+        return text;
     }
 }

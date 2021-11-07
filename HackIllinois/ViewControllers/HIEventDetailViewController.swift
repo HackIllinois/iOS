@@ -35,7 +35,7 @@ class HIEventDetailViewController: HIBaseViewController {
     }
     private let titleLabel = HILabel(style: .detailTitle) {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor <- \.baseText
+        $0.textColor <- \.whiteText
         $0.font = HIAppearance.Font.detailTitle
     }
 
@@ -47,29 +47,29 @@ class HIEventDetailViewController: HIBaseViewController {
 
     private let timeLabel = HILabel(style: .description) {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor <- \.baseText
+        $0.textColor <- \.whiteText
         $0.font = HIAppearance.Font.contentText
     }
 
     private let descriptionLabel = HILabel(style: .detailText) {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor <- \.baseText
+        $0.textColor <- \.whiteText
         $0.numberOfLines = 0
     }
     private let favoritedButton = HIButton {
-        $0.tintHIColor = \.baseText
+        $0.tintHIColor = \.whiteText
         $0.backgroundHIColor = \.clear
         $0.activeImage = #imageLiteral(resourceName: "Favorited")
         $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
     }
     private let closeButton = HIButton {
-        $0.tintHIColor = \.baseText
+        $0.tintHIColor = \.whiteText
         $0.backgroundHIColor = \.clear
         $0.activeImage = #imageLiteral(resourceName: "MenuClose")
         $0.baseImage = #imageLiteral(resourceName: "MenuClose")
     }
     private let cameraButton = HIButton {
-        $0.tintHIColor = \.baseText
+        $0.tintHIColor = \.whiteText
         $0.backgroundHIColor = \.clear
         $0.activeImage = #imageLiteral(resourceName: "Camera")
         $0.baseImage = #imageLiteral(resourceName: "Camera")
@@ -208,7 +208,9 @@ extension HIEventDetailViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let event = event else { return }
-        titleLabel.text = event.name
+        
+        titleLabel.text = event.name;
+                        
         if !event.sponsor.isEmpty {
             sponsorLabel.text = "Sponsored by \(event.sponsor)"
         } else {
@@ -219,8 +221,10 @@ extension HIEventDetailViewController {
         favoritedButton.isActive = event.favorite
 
         tableView?.reloadData()
-        let indexPath = IndexPath(row: 0, section: 0)
-        tableView?.scrollToRow(at: indexPath, at: .top, animated: true)
+        /* Caused table view error, no need to scroll to top row */
+        
+//        let indexPath = IndexPath(row: 0, section: 0)
+//        tableView?.scrollToRow(at: indexPath, at: .top, animated: true)
         view.layoutIfNeeded()
         let targetSize = CGSize(width: descriptionLabel.frame.width, height: .greatestFiniteMagnitude)
         let neededSize = descriptionLabel.sizeThatFits(targetSize)

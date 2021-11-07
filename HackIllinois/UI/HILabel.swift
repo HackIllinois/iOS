@@ -105,7 +105,7 @@ class HILabel: UILabel {
             font = HIAppearance.Font.sponsorText
 
         case .detailTitle:
-            textHIColor = \.baseText
+            textHIColor = \.whiteText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.detailTitle
             numberOfLines = 0

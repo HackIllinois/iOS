@@ -23,7 +23,7 @@ class HIEventDetailLocationCell: UITableViewCell {
     let mapView = MKMapView()
     let mapAnnotation = MKPointAnnotation()
     let titleLabel = HILabel(style: .location) {
-        $0.textColor <- \.baseText
+        $0.textColor <- \.whiteText
         $0.font = HIAppearance.Font.contentSubtitle
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
