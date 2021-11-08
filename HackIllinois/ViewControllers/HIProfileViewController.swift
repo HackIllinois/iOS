@@ -43,6 +43,11 @@ class HIProfileViewController: HIBaseViewController {
         $0.layer.masksToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
+    private let qrImageView = HITintImageView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.tintHIColor = \.qrTint
+        $0.contentMode = .scaleAspectFit
+    }
     private let profileNameView = HILabel(style: .profileName) {
         $0.text = ""
     }
@@ -148,12 +153,17 @@ extension HIProfileViewController {
         contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        contentView.addSubview(profilePictureView)
-        profilePictureView.constrain(to: contentView, topInset: 0)
-        profilePictureView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        profilePictureView.constrain(width: 100, height: 100)
+//        contentView.addSubview(profilePictureView)
+//        profilePictureView.constrain(to: contentView, topInset: 0)
+//        profilePictureView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+//        profilePictureView.constrain(width: 100, height: 100)
+        contentView.addSubview(qrImageView)
+        qrImageView.constrain(to: contentView, topInset: 0)
+        qrImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        qrImageView.constrain(width: 100, height: 100)
         contentView.addSubview(profileNameView)
-        profileNameView.topAnchor.constraint(equalTo: profilePictureView.bottomAnchor, constant: 12).isActive = true
+//        profileNameView.topAnchor.constraint(equalTo: profilePictureView.bottomAnchor, constant: 12).isActive = true
+        profileNameView.topAnchor.constraint(equalTo: qrImageView.bottomAnchor, constant: 12).isActive = true
         profileNameView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         profileNameView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9).isActive = true
         profileStatusContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -248,10 +258,19 @@ extension HIProfileViewController {
 
     func updateProfile() {
         guard let profile = HIApplicationStateController.shared.profile else { return }
+        guard let user = HIApplicationStateController.shared.user, let qrUrl = user.qrURL else { return }
         view.layoutIfNeeded()
 
         if let url = URL(string: profile.avatarUrl), let imgValue = HIConstants.PROFILE_IMAGES[url.absoluteString] {
             profilePictureView.changeImage(newImage: imgValue)
+        }
+        
+        let size = max(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
+        DispatchQueue.global(qos: .userInitiated).async {
+            let qrImage = UIImage(qrString: qrUrl.absoluteString, size: size)?.withRenderingMode(.alwaysTemplate)
+            DispatchQueue.main.async {
+                self.qrImageView.image = qrImage
+            }
         }
         profileNameView.text = profile.firstName + " " + profile.lastName
         let modifiedTeamStatus = profile.teamStatus.capitalized.replacingOccurrences(of: "_", with: " ")
