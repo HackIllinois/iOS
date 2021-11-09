@@ -41,10 +41,10 @@ class HITabBarController: UITabBarController {
     }
 
     @objc private func codePopupButtonPressed(_ sender: UIButton) {
-        let codePopup = HICodePopupViewController()
-        codePopup.modalPresentationStyle = .overCurrentContext
-        codePopup.modalTransitionStyle = .crossDissolve
-        self.present(codePopup, animated: true, completion: nil)
+        let scanQRCodePopup = HICodePopupViewController()
+        scanQRCodePopup.modalPresentationStyle = .overCurrentContext
+        scanQRCodePopup.modalTransitionStyle = .crossDissolve
+        self.present(scanQRCodePopup, animated: true, completion: nil)
     }
 
     init() {

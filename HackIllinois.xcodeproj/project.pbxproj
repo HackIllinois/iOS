@@ -31,6 +31,7 @@
 		3FB82A1125C25B3800C0B43F /* HIGroupListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB82A1025C25B3800C0B43F /* HIGroupListViewController.swift */; };
 		3FBEF38125F36239009B97CB /* HIGroupStatusOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBEF38025F36239009B97CB /* HIGroupStatusOptions.swift */; };
 		3FC091D625B74DEA00DA23D8 /* HIGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC091D525B74DEA00DA23D8 /* HIGroupCell.swift */; };
+		60EAF98B273B1AC4002CD205 /* HIScanQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EAF98A273B1AC4002CD205 /* HIScanQRCodeViewController.swift */; };
 		950AD60A23DE362B00463AF2 /* HITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950AD60923DE362B00463AF2 /* HITabBarController.swift */; };
 		9510F6A01FCB7D6E007D19DB /* Announcement+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9510F69A1FCB7D6E007D19DB /* Announcement+CoreDataClass.swift */; };
 		9510F6A11FCB7D6E007D19DB /* Event+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9510F69B1FCB7D6E007D19DB /* Event+CoreDataClass.swift */; };
@@ -214,6 +215,7 @@
 		3FB82A1025C25B3800C0B43F /* HIGroupListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIGroupListViewController.swift; sourceTree = "<group>"; };
 		3FBEF38025F36239009B97CB /* HIGroupStatusOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIGroupStatusOptions.swift; sourceTree = "<group>"; };
 		3FC091D525B74DEA00DA23D8 /* HIGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIGroupCell.swift; sourceTree = "<group>"; };
+		60EAF98A273B1AC4002CD205 /* HIScanQRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScanQRCodeViewController.swift; sourceTree = "<group>"; };
 		950AD60923DE362B00463AF2 /* HITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITabBarController.swift; sourceTree = "<group>"; };
 		9510F69A1FCB7D6E007D19DB /* Announcement+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Announcement+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9510F69B1FCB7D6E007D19DB /* Event+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -519,6 +521,7 @@
 				AC977FCC25F194F9009C4179 /* HIGroupDetailViewController.swift */,
 				3FB82A1025C25B3800C0B43F /* HIGroupListViewController.swift */,
 				3F8CC87A260BBE9000528ED2 /* HICodePopupViewController.swift */,
+				60EAF98A273B1AC4002CD205 /* HIScanQRCodeViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -989,6 +992,7 @@
 				BCD0CA5123C4356300ADC89B /* HIPopupViewController.swift in Sources */,
 				95A7D296203D4F54005EAEAF /* HIEventDetailLocationCell.swift in Sources */,
 				98CA2A3E25C899CF003E842A /* HIProfileViewController.swift in Sources */,
+				60EAF98B273B1AC4002CD205 /* HIScanQRCodeViewController.swift in Sources */,
 				95A7D29E203D5BA4005EAEAF /* HILabel.swift in Sources */,
 				956F41E31FC76C8E00557DC7 /* HIMenuController.swift in Sources */,
 				9510F6A51FCB7D6E007D19DB /* Announcement+CoreDataProperties.swift in Sources */,
