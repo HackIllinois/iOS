@@ -180,10 +180,6 @@ extension HIEventDetailViewController {
         favoritedButton.isActive = event.favorite
 
         tableView?.reloadData()
-        /* Caused table view error, no need to scroll to top row */
-        
-//        let indexPath = IndexPath(row: 0, section: 0)
-//        tableView?.scrollToRow(at: indexPath, at: .top, animated: true)
         view.layoutIfNeeded()
         let targetSize = CGSize(width: descriptionLabel.frame.width, height: .greatestFiniteMagnitude)
         let neededSize = descriptionLabel.sizeThatFits(targetSize)
