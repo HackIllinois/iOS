@@ -18,8 +18,6 @@ import APIManager
 
 class HIEventDetailViewController: HIBaseViewController {
     // MARK: - Properties
-    private static let scannerViewController = HIEventScannerViewController()
-    private static let checkInScannerViewController = HICheckInScannerViewController()
     var event: Event?
 
     // MARK: Views
@@ -109,43 +107,6 @@ extension HIEventDetailViewController {
         .launch()
     }
 
-//    @objc func didSelectScanner(_ sender: UIButton) {
-//        guard let event = event else { return }
-//
-//        // Check in is an event, identified by name
-//        if event.name.caseInsensitiveCompare("Check-in") == .orderedSame {
-//            self.present(HIEventDetailViewController.checkInScannerViewController, animated: true)
-//        }
-//
-//        let now = Date()
-//        if event.startTime.addingTimeInterval(-15*60) > now || now > event.endTime {
-//            let alertController = UIAlertController(title: "Are you sure?", message: "You are outside the scanning period for the event", preferredStyle: .alert)
-//            alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
-//            alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
-//                HIEventDetailViewController.scannerViewController.event = event
-//                self.present(HIEventDetailViewController.scannerViewController, animated: true)
-//            }))
-//            self.present(alertController, animated: true, completion: nil)
-//        } else {
-//            HIEventDetailViewController.scannerViewController.event = event
-//            self.present(HIEventDetailViewController.scannerViewController, animated: true)
-//        }
-//    }
-//
-//    @objc func didSelectScanButton(_ sender: UIBarButtonItem) {
-//        guard let event = event else { return }
-//        let now = Date()
-//        if event.startTime.addingTimeInterval(-15*60) > now {
-//            let message = "The scanning period for this event has not begun; scanning begins 15 minutes before the event."
-//            presentErrorController(title: "Sorry", message: message, dismissParentOnCompletion: false)
-//        } else if now > event.endTime {
-//            presentErrorController(title: "Sorry", message: "The scanning period for this event has ended.", dismissParentOnCompletion: false)
-//        } else {
-//            HIEventDetailViewController.scannerViewController.event = event
-//            navigationController?.pushViewController(HIEventDetailViewController.scannerViewController, animated: true)
-//        }
-//    }
-
     @objc func didSelectCloseButton(_ sender: HIButton) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -174,8 +135,6 @@ extension HIEventDetailViewController {
         upperContainerView.addSubview(sponsorLabel)
         sponsorLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         sponsorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
-
-//        setupScannerIfApplicable()
 
         if !HIApplicationStateController.shared.isGuest {
             setupFavoritedButton()
@@ -247,17 +206,6 @@ extension HIEventDetailViewController {
         closeButton.constrain(height: 20)
     }
 
-//    func setupScannerIfApplicable() {
-//        if let user = HIApplicationStateController.shared.user, !user.roles.intersection([.staff, .admin]).isEmpty {
-//            view.addSubview(cameraButton)
-//            cameraButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-//            cameraButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
-//            cameraButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-//            cameraButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
-//            cameraButton.addTarget(self, action: #selector(didSelectScanner(_:)), for: .touchUpInside)
-//        }
-//    }
-
     func setupFavoritedButton() {
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         upperContainerView.addSubview(favoritedButton)
@@ -274,9 +222,6 @@ extension HIEventDetailViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
         title = "EVENT DETAILS"
-//        if let user = HIApplicationStateController.shared.user, !user.roles.intersection([.staff, .admin]).isEmpty {
-//            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(didSelectScanButton(_:)))
-//        }
     }
 }
 
