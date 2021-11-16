@@ -14,6 +14,7 @@ import Foundation
 import UIKit
 import CoreData
 import HIAPI
+import CoreImage.CIFilterBuiltins
 
 class HIProfileViewController: HIBaseViewController {
     // MARK: - Properties
@@ -267,9 +268,25 @@ extension HIProfileViewController {
         
         let size = max(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
         DispatchQueue.global(qos: .userInitiated).async {
-            let qrImage = UIImage(qrString: qrUrl.absoluteString, size: size)?.withRenderingMode(.alwaysTemplate)
+            
+//            let qrImage = UIImage(qrString: user.id, size: size)?.withRenderingMode(.alwaysTemplate)
+            
+            let qrFilter = CIFilter(name: "CIQRCodeGenerator")
+            let data = user.id.data(using: .isoLatin1, allowLossyConversion: false)
+            qrFilter!.setValue(data, forKey: "inputMessage")
+            qrFilter!.setValue("H", forKey: "inputCorrectionLevel")
+
+            let qrTransform = CGAffineTransform(scaleX: 40, y: 40)
+            let qrImage = qrFilter?.outputImage?.transformed(by: qrTransform)
+            
+//            let targetSize = CGSize(width: 150, height: 150)
+            
+            let logo = UIImage(named: "DefaultProfilePicture")!
+            
+            let combinedImage = qrImage!.combined(with: CIImage(cgImage: logo.cgImage!))
+
             DispatchQueue.main.async {
-                self.qrImageView.image = qrImage
+                self.qrImageView.image = UIImage(ciImage: combinedImage!)
             }
         }
         profileNameView.text = profile.firstName + " " + profile.lastName
@@ -402,5 +419,49 @@ extension HIProfileViewController: HIErrorViewDelegate {
         )
         alert.popoverPresentationController?.sourceView = sender
         present(alert, animated: true, completion: nil)
+    }
+}
+
+//https://www.avanderlee.com/swift/qr-code-generation-swift/
+extension CIImage {
+
+    /// Combines the current image with the given image centered.
+    func combined(with image: CIImage) -> CIImage? {
+        guard let combinedFilter = CIFilter(name: "CISourceOverCompositing") else { return nil }
+        let centerTransform = CGAffineTransform(translationX: extent.midX - (image.extent.size.width / 2), y: extent.midY - (image.extent.size.height / 2))
+        combinedFilter.setValue(image.transformed(by: centerTransform), forKey: "inputImage")
+        combinedFilter.setValue(self, forKey: "inputBackgroundImage")
+        return combinedFilter.outputImage!
+    }
+}
+
+//https://www.advancedswift.com/resize-uiimage-no-stretching-swift/
+extension UIImage {
+    func scalePreservingAspectRatio(targetSize: CGSize) -> UIImage {
+        // Determine the scale factor that preserves aspect ratio
+        let widthRatio = targetSize.width / size.width
+        let heightRatio = targetSize.height / size.height
+        
+        let scaleFactor = min(widthRatio, heightRatio)
+        
+        // Compute the new image size that preserves aspect ratio
+        let scaledImageSize = CGSize(
+            width: size.width * scaleFactor,
+            height: size.height * scaleFactor
+        )
+
+        // Draw and return the resized UIImage
+        let renderer = UIGraphicsImageRenderer(
+            size: scaledImageSize
+        )
+
+        let scaledImage = renderer.image { _ in
+            self.draw(in: CGRect(
+                origin: .zero,
+                size: scaledImageSize
+            ))
+        }
+        
+        return scaledImage
     }
 }
