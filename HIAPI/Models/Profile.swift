@@ -53,3 +53,27 @@ public struct ProfileFavorites: Codable, APIReturnable {
     public let id: String
     public let profiles: Set<String>
 }
+
+public struct LeaderboardProfileContainer: Decodable, APIReturnable {
+    public let leaderboardProfiles: [LeaderboardProfile]
+    
+    public init(from data: Data) throws {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
+        self = try decoder.decode(LeaderboardProfileContainer.self, from: data)
+    }
+}
+
+public struct LeaderboardProfile: Codable, APIReturnable {
+    internal enum CodingKeys: String, CodingKey {
+        case id
+        case firstName
+        case lastName
+        case points
+    }
+    
+    public let id: String
+    public let firstName: String
+    public let lastName: String
+    public let points: Int
+}
