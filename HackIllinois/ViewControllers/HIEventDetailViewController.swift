@@ -203,17 +203,9 @@ extension HIEventDetailViewController {
     }
 
     func setupFavoritedButton() {
-        print("setting uo")
-        if let user = HIApplicationStateController.shared.user, !user.roles.intersection([.attendee]).isEmpty {
-            print("we in")
+        if let user = HIApplicationStateController.shared.user, !user.roles.isDisjoint(with: [.attendee]) {
             view.addSubview(favoritedButton)
-//            favoritedButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
-//            favoritedButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
-//            favoritedButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-//            favoritedButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
-            
             favoritedButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-//            favoritedButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
             favoritedButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
             favoritedButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
             favoritedButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
