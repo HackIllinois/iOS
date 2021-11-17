@@ -180,7 +180,7 @@ extension HIEventCell {
     
     // Returns the maximum number of characters allowed for the event description
     static func getMaxDescriptionTextLength() -> Int {
-        return 200
+        return 150
     }
 
     static func trimText(text: String, length: Int) -> String {
