@@ -203,13 +203,22 @@ extension HIEventDetailViewController {
     }
 
     func setupFavoritedButton() {
-        favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
-        upperContainerView.addSubview(favoritedButton)
-        favoritedButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
-        favoritedButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
-        favoritedButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
-        favoritedButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        favoritedButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        print("setting uo")
+        if let user = HIApplicationStateController.shared.user, !user.roles.intersection([.attendee]).isEmpty {
+            print("we in")
+            view.addSubview(favoritedButton)
+//            favoritedButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
+//            favoritedButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
+//            favoritedButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+//            favoritedButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            
+            favoritedButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+//            favoritedButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+            favoritedButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
+            favoritedButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            favoritedButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
+        }
     }
 }
 
