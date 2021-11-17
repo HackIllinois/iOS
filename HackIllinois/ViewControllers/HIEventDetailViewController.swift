@@ -130,12 +130,14 @@ extension HIEventDetailViewController {
 
         upperContainerView.addSubview(titleLabel)
         titleLabel.leadingAnchor.constraint(equalTo: closeButton.leadingAnchor).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         titleLabel.topAnchor.constraint(equalTo: upperContainerView.topAnchor).isActive = true
-
+        
         upperContainerView.addSubview(sponsorLabel)
         sponsorLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         sponsorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
-
+        
+        // Only attendees can favorite events
         if !HIApplicationStateController.shared.isGuest {
             setupFavoritedButton()
         }
@@ -168,6 +170,7 @@ extension HIEventDetailViewController {
         super.viewWillAppear(animated)
         guard let event = event else { return }
         titleLabel.text = event.name;
+        
         if !event.sponsor.isEmpty {
             sponsorLabel.text = "Sponsored by \(event.sponsor)"
         } else {
@@ -201,14 +204,12 @@ extension HIEventDetailViewController {
     }
 
     func setupFavoritedButton() {
-        if let user = HIApplicationStateController.shared.user, !user.roles.isDisjoint(with: [.attendee]) {
-            view.addSubview(favoritedButton)
-            favoritedButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-            favoritedButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
-            favoritedButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-            favoritedButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
-            favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
-        }
+        view.addSubview(favoritedButton)
+        favoritedButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        favoritedButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
+        favoritedButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        favoritedButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
     }
 }
 

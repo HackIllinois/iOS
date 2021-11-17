@@ -117,7 +117,7 @@ class HILabel: UILabel {
             numberOfLines = 0
 
         case .detailText:
-            textHIColor = \.baseText
+            textHIColor = \.whiteText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.detailText
             numberOfLines = 0
@@ -139,7 +139,7 @@ class HILabel: UILabel {
             font = HIAppearance.Font.contentSubtitle
 
         case .description:
-            textHIColor = \.baseText
+            textHIColor = \.whiteText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.descriptionText
             numberOfLines = 0
