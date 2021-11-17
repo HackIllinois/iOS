@@ -167,9 +167,7 @@ extension HIEventDetailViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let event = event else { return }
-        
         titleLabel.text = event.name;
-                        
         if !event.sponsor.isEmpty {
             sponsorLabel.text = "Sponsored by \(event.sponsor)"
         } else {
