@@ -727,11 +727,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 951827941EA35AF100049F79 /* Build configuration list for PBXNativeTarget "HackIllinois" */;
 			buildPhases = (
-				1C16D81827449A5B004E1C51 /* Run Swift Lint */,
 				9518277B1EA35AF100049F79 /* Sources */,
 				9518277C1EA35AF100049F79 /* Frameworks */,
 				9518277D1EA35AF100049F79 /* Resources */,
-				95CD0ED6201523B800D79DCC /* ShellScript */,
+				1C4BDBAA2744A032003BB3BB /* ShellScript */,
 				35D7CE9F20380ACF00654E28 /* Embed App Extensions */,
 				95E3143621FAD5B40092C22E /* Embed Frameworks */,
 			);
@@ -882,7 +881,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1C16D81827449A5B004E1C51 /* Run Swift Lint */ = {
+		1C4BDBAA2744A032003BB3BB /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -891,27 +890,13 @@
 			);
 			inputPaths = (
 			);
-			name = "Run Swift Lint";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		95CD0ED6201523B800D79DCC /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
