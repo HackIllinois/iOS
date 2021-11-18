@@ -276,12 +276,12 @@ extension HIProfileViewController {
             qrFilter!.setValue(data, forKey: "inputMessage")
             qrFilter!.setValue("H", forKey: "inputCorrectionLevel")
 
-            let qrTransform = CGAffineTransform(scaleX: 40, y: 40)
+            let qrTransform = CGAffineTransform(scaleX: 15, y: 15)
             let qrImage = qrFilter?.outputImage?.transformed(by: qrTransform)
             
 //            let targetSize = CGSize(width: 150, height: 150)
             
-            let logo = UIImage(named: "DefaultProfilePicture")!
+            let logo = UIImage(named: "HILetter")!
             
             let combinedImage = qrImage!.combined(with: CIImage(cgImage: logo.cgImage!))
 
