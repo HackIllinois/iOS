@@ -21,7 +21,8 @@ class HICarouselView: UIView {
     
     struct CarouselData {
         let image: UIImage?
-        let text: String
+        let titleText: String
+        let descriptionText: String
     }
     
     // MARK: - Subviews
@@ -56,7 +57,7 @@ class HICarouselView: UIView {
             delegate?.currentPageDidChange(to: currentPage)
         }
     }
-    
+        
     // MARK: - Initializers
     
     init(pages: Int, delegate: CarouselViewDelegate?) {
@@ -76,13 +77,8 @@ class HICarouselView: UIView {
 private extension HICarouselView {
     func setupUI() {
         backgroundColor = .clear
-        setupCollectionView()
         setupPageControl()
-        setupContinueButton()
-    }
-    
-    func setupContinueButton() {
-        
+        setupCollectionView()
     }
     
     func setupCollectionView() {
@@ -96,7 +92,7 @@ private extension HICarouselView {
         
         addSubview(carouselCollectionView)
         carouselCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        carouselCollectionView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        carouselCollectionView.bottomAnchor.constraint(equalTo: pageControl.topAnchor, constant: -50).isActive = true
         carouselCollectionView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         carouselCollectionView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         carouselCollectionView.heightAnchor.constraint(equalToConstant: 450).isActive = true
@@ -128,9 +124,10 @@ extension HICarouselView: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HICarouselCell.cellId, for: indexPath) as? HICarouselCell else { return UICollectionViewCell() }
         
         let image = carouselData[indexPath.row].image
-        let text = carouselData[indexPath.row].text
-        
-        cell.configure(image: image, text: text)
+        let titleText = carouselData[indexPath.row].titleText
+        let descriptionText = carouselData[indexPath.row].descriptionText
+
+        cell.configure(image: image, titleText: titleText, descriptionText: descriptionText)
         
         return cell
     }

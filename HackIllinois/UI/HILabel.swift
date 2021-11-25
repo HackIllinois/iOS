@@ -53,6 +53,8 @@ class HILabel: UILabel {
         case characterCount
         case error
         case codeError
+        case onboardingDescription
+        case onboardingTitle
     }
 
     // MARK: - Properties
@@ -280,6 +282,20 @@ class HILabel: UILabel {
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.detailSubtitle
+            textAlignment = .center
+            numberOfLines = 0
+            
+        case .onboardingDescription:
+            textHIColor = \.whiteText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.onboardingDescription
+            textAlignment = .center
+            numberOfLines = 0
+            
+        case .onboardingTitle:
+            textHIColor = \.whiteText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.onboardingTitle
             textAlignment = .center
             numberOfLines = 0
 

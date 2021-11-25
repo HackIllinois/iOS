@@ -14,10 +14,11 @@ import UIKit
 
 class HICarouselCell: UICollectionViewCell {
     //source: https://medium.com/swlh/swift-carousel-759800aa2952
-    // MARK: - SubViews
+    // MARK: - Subviews
         
     private lazy var imageView = UIImageView()
-    private lazy var textLabel = UILabel()
+    private lazy var titleLabel = HILabel(style: .onboardingTitle)
+    private lazy var descriptionLabel = HILabel(style: .onboardingDescription)
     
     // MARK: - Properties
     
@@ -41,33 +42,39 @@ private extension HICarouselCell {
     func setupUI() {
         backgroundColor = .clear
         
+        
+        addSubview(descriptionLabel)
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
+        descriptionLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
+        descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        descriptionLabel.numberOfLines = 0
+        descriptionLabel.textAlignment = .center
+        
+        addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
+        titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -16).isActive = true
+        titleLabel.numberOfLines = 0
+        titleLabel.textAlignment = .center
+        
         addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -16).isActive = true
         imageView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 300).isActive = true
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 24
-        
-        addSubview(textLabel)
-        textLabel.translatesAutoresizingMaskIntoConstraints = false
-        textLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16).isActive = true
-        textLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
-        textLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
-        textLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
-        textLabel.numberOfLines = 0
-        textLabel.textAlignment = .center
-        textLabel.font = .systemFont(ofSize: 18)
-        textLabel.textColor = .white
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true    
     }
 }
 
 // MARK: - Public
 extension HICarouselCell {
-    public func configure(image: UIImage?, text: String) {
+    public func configure(image: UIImage?, titleText: String, descriptionText: String) {
         imageView.image = image
-        textLabel.text = text
+        titleLabel.text = titleText
+        descriptionLabel.text = descriptionText
     }
 }
