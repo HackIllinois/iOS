@@ -27,7 +27,8 @@ class HIApplicationStateController {
     // MARK: ViewControllers
     var loginFlowController = HILoginFlowController()
     var appFlowController = HITabBarController()
-
+    var onboardingViewController = HIOnboardingViewController()
+    
     // MARK: - Init
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(loginUser), name: .loginUser, object: nil)
@@ -128,7 +129,7 @@ extension HIApplicationStateController {
         let viewController: UIViewController
         if let user = user {
             prepareAppControllerForDisplay(with: user)
-            viewController = appFlowController
+            viewController = onboardingViewController
         } else {
             prepareLoginControllerForDisplay()
             viewController = loginFlowController
