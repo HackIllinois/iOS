@@ -14,7 +14,7 @@ import Foundation
 
 import UIKit
 
-class HIOnboardingViewController: UIViewController {    
+class HIOnboardingViewController: HIBaseViewController {    
     //source: https://medium.com/swlh/swift-carousel-759800aa2952
     // MARK: - Subviews
     
@@ -38,6 +38,14 @@ class HIOnboardingViewController: UIViewController {
         $0.layer.shadowOpacity = 0.5
         $0.layer.shadowRadius = 5
     }
+    
+    @objc dynamic override func setUpBackgroundView() {
+        super.setUpBackgroundView()
+        backgroundView.image = #imageLiteral(resourceName: "Login")
+    }
+}
+
+extension HIOnboardingViewController {
     
     // MARK: - Life Cycle
     
@@ -81,19 +89,6 @@ private extension HIOnboardingViewController {
         carouselView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         carouselView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         carouselView.bottomAnchor.constraint(equalTo: getStartedButton.topAnchor).isActive = true
-        
-        guard let background = UIImage(named: "Login") else {
-           return
-       }
-
-        var imageView : UIImageView!
-        imageView = UIImageView(frame: view.bounds)
-        imageView.contentMode =  .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.image = background
-        imageView.center = view.center
-        view.addSubview(imageView)
-        self.view.sendSubviewToBack(imageView)
     }
 }
 
@@ -101,14 +96,10 @@ private extension HIOnboardingViewController {
 
 extension HIOnboardingViewController: CarouselViewDelegate {
     func currentPageDidChange(to page: Int) {
+        // Used for changing the background color based on the carousel page
 //        UIView.animate(withDuration: 0.7) {
 //            self.view.backgroundColor = self.backgroundColors[page]
 //        }
-//        guard let backgroundImage = UIImage(named: "Login") else {
-//               return
-//           }
-//
-//        self.view.backgroundColor = UIColor(patternImage: backgroundImage)
     }
 }
 
