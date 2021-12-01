@@ -280,29 +280,26 @@ extension HIProfileViewController {
 
             let qrTransform = CGAffineTransform(scaleX: 9, y: 9)
             let qrImage = qrFilter?.outputImage?.transformed(by: qrTransform)
-            
+
             let maskToAlphaFilter = CIFilter(name: "CIMaskToAlpha")
             maskToAlphaFilter?.setDefaults()
             maskToAlphaFilter?.setValue(qrImage, forKey: kCIInputImageKey)
-            
+
             let result = maskToAlphaFilter?.outputImage
-            
+
             let logo = UIImage(named: "HILetter")!
-            let whiteBackground = UIImage(named: "White Square")!.round(10)
+            let whiteBackground = UIImage(named: "White Square")!.round(25)
             let combinedImage = result!.inverted!.tinted(using: #colorLiteral(red: 0.4196078431, green: 0.6823529412, blue: 0.7725490196, alpha: 1))!.combined(with: CIImage(cgImage: whiteBackground.cgImage!))
-            
+
             let qrTransform2 = CGAffineTransform(scaleX: 2.5, y: 2.5)
 
-            let scaled = combinedImage?.transformed(by: qrTransform2)
-            
-            let combined2 = scaled?.combined(with: CIImage(cgImage: logo.cgImage!))
+            let scaled = combinedImage!.transformed(by: qrTransform2)
+
+            let combined2 = scaled.combined(with: CIImage(cgImage: logo.cgImage!))
             
             DispatchQueue.main.async {
                 self.qrImageView.image = UIImage(ciImage: combined2!)
             }
-            
-            
-            
         }
         profileNameView.text = profile.firstName + " " + profile.lastName
         let modifiedTeamStatus = profile.teamStatus.capitalized.replacingOccurrences(of: "_", with: " ")
