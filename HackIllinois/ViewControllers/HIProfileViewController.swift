@@ -288,7 +288,7 @@ extension HIProfileViewController {
             let result = maskToAlphaFilter?.outputImage
 
             let logo = UIImage(named: "HILetter")!
-            let whiteBackground = UIImage(named: "White Square")!.round(25)
+            let whiteBackground = UIImage(named: "White Square")!
             let combinedImage = result!.inverted!.tinted(using: #colorLiteral(red: 0.4196078431, green: 0.6823529412, blue: 0.7725490196, alpha: 1))!.combined(with: CIImage(cgImage: whiteBackground.cgImage!))
 
             let qrTransform2 = CGAffineTransform(scaleX: 2.5, y: 2.5)
@@ -296,6 +296,8 @@ extension HIProfileViewController {
             let scaled = combinedImage!.transformed(by: qrTransform2)
 
             let combined2 = scaled.combined(with: CIImage(cgImage: logo.cgImage!))
+            
+            let rounded = UIImage(ciImage: combined2!).round(5)
             
             DispatchQueue.main.async {
                 self.qrImageView.image = UIImage(ciImage: combined2!)
