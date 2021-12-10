@@ -261,7 +261,6 @@ struct HIAppearance: Equatable {
         static let groupStatus = UIFont.systemFont(ofSize: 12, weight: .bold)
         static let sortingText = UIFont.systemFont(ofSize: 14, weight: .semibold)
         static let countdownText = UIFont.systemFont(ofSize: 25, weight: .bold)
-        
         static let onboardingGetStartedText = UIFont.systemFont(ofSize: 25, weight: .semibold)
         static let onboardingTitle = UIFont.systemFont(ofSize: 30, weight: .bold)
         static let onboardingDescription = UIFont.systemFont(ofSize: 20, weight: .regular)
