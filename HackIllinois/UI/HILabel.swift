@@ -284,14 +284,12 @@ class HILabel: UILabel {
             font = HIAppearance.Font.detailSubtitle
             textAlignment = .center
             numberOfLines = 0
-            
         case .onboardingDescription:
             textHIColor = \.whiteText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.onboardingDescription
             textAlignment = .center
             numberOfLines = 0
-            
         case .onboardingTitle:
             textHIColor = \.whiteText
             backgroundHIColor = \.clear

@@ -8,10 +8,11 @@
 //  The Hackillinois iOS App is open source software, released under the University of
 //  Illinois/NCSA Open Source License. You should have received a copy of
 //  this license in a file with the distribution.
+//
 
 import Foundation
-
 import UIKit
+
 class HIOnboardingViewController: HIBaseViewController {
     //source: https://medium.com/swlh/swift-carousel-759800aa2952
     // MARK: - Subviews
@@ -78,8 +79,6 @@ private extension HIOnboardingViewController {
 
 extension HIOnboardingViewController {
     @objc func didSelectGetStarted(_ sender: HIButton) {
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: .getStarted, object: nil)
-        }
+        NotificationCenter.default.post(name: .getStarted, object: nil)
     }
 }
