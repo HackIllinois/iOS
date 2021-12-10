@@ -74,15 +74,15 @@ private extension HICarouselView {
         carouselCollectionView.collectionViewLayout = carouselLayout
         addSubview(carouselCollectionView)
         carouselCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        carouselCollectionView.bottomAnchor.constraint(equalTo: pageControl.topAnchor, constant: -50).isActive = true
+        carouselCollectionView.bottomAnchor.constraint(equalTo: pageControl.topAnchor, constant: 0).isActive = true
         carouselCollectionView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         carouselCollectionView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        carouselCollectionView.heightAnchor.constraint(equalToConstant: 450).isActive = true
+        carouselCollectionView.topAnchor.constraint(equalTo: topAnchor).isActive = true
     }
     func setupPageControl() {
         addSubview(pageControl)
         pageControl.translatesAutoresizingMaskIntoConstraints = false
-        pageControl.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50).isActive = true
+        pageControl.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
         pageControl.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         pageControl.widthAnchor.constraint(equalToConstant: 150).isActive = true
         pageControl.heightAnchor.constraint(equalToConstant: 50).isActive = true

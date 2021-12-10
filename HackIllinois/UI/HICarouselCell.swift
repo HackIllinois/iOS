@@ -43,21 +43,22 @@ private extension HICarouselCell {
         descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         descriptionLabel.numberOfLines = 0
         descriptionLabel.textAlignment = .center
-        addSubview(titleLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
-        titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
-        titleLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -16).isActive = true
-        titleLabel.numberOfLines = 0
-        titleLabel.textAlignment = .center
-        addSubview(imageView)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -16).isActive = true
-        imageView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 300).isActive = true
-        imageView.contentMode = .scaleAspectFit
-        imageView.clipsToBounds = true
+        //TODO: understand how to move labels down, make image fill up whole space and acale appropriately
+//        addSubview(titleLabel)
+//        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+//        titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
+//        titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
+//        titleLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -16).isActive = true
+//        titleLabel.numberOfLines = 0
+//        titleLabel.textAlignment = .center
+//        addSubview(imageView)
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+//        imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -16).isActive = true
+//        imageView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+//        imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+//        imageView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+//        imageView.contentMode = .scaleAspectFit
+//        imageView.clipsToBounds = true
     }
 }
 
