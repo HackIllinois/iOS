@@ -11,22 +11,14 @@
 
 import Foundation
 import UIKit
-import UIKit
-
-protocol CarouselViewDelegate: class {
-    func currentPageDidChange(to page: Int)
-}
 
 class HICarouselView: UIView {
-    
     struct CarouselData {
         let image: UIImage?
         let titleText: String
         let descriptionText: String
     }
-    
     // MARK: - Subviews
-    
     private lazy var carouselCollectionView: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collection.showsHorizontalScrollIndicator = false
@@ -37,36 +29,27 @@ class HICarouselView: UIView {
         collection.backgroundColor = .clear
         return collection
     }()
-    
     private lazy var pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.pageIndicatorTintColor = .gray
         pageControl.currentPageIndicatorTintColor = .white
         return pageControl
     }()
-    
-    
     // MARK: - Properties
-    
     private var pages: Int
-    private weak var delegate: CarouselViewDelegate?
+
     private var carouselData = [CarouselData]()
     private var currentPage = 0 {
         didSet {
             pageControl.currentPage = currentPage
-            delegate?.currentPageDidChange(to: currentPage)
         }
     }
-        
     // MARK: - Initializers
-    
-    init(pages: Int, delegate: CarouselViewDelegate?) {
+    init(pages: Int) {
         self.pages = pages
-        self.delegate = delegate
         super.init(frame: .zero)
         setupUI()
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -80,7 +63,6 @@ private extension HICarouselView {
         setupPageControl()
         setupCollectionView()
     }
-    
     func setupCollectionView() {
         let cellPadding = (frame.width - 300) / 2
         let carouselLayout = UICollectionViewFlowLayout()
@@ -89,7 +71,6 @@ private extension HICarouselView {
         carouselLayout.sectionInset = .init(top: 0, left: cellPadding, bottom: 0, right: cellPadding)
         carouselLayout.minimumLineSpacing = cellPadding * 2
         carouselCollectionView.collectionViewLayout = carouselLayout
-        
         addSubview(carouselCollectionView)
         carouselCollectionView.translatesAutoresizingMaskIntoConstraints = false
         carouselCollectionView.bottomAnchor.constraint(equalTo: pageControl.topAnchor, constant: -50).isActive = true
@@ -97,7 +78,6 @@ private extension HICarouselView {
         carouselCollectionView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         carouselCollectionView.heightAnchor.constraint(equalToConstant: 450).isActive = true
     }
-    
     func setupPageControl() {
         addSubview(pageControl)
         pageControl.translatesAutoresizingMaskIntoConstraints = false
@@ -115,20 +95,16 @@ extension HICarouselView: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return carouselData.count
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HICarouselCell.cellId, for: indexPath) as? HICarouselCell else { return UICollectionViewCell() }
-        
         let image = carouselData[indexPath.row].image
         let titleText = carouselData[indexPath.row].titleText
         let descriptionText = carouselData[indexPath.row].descriptionText
 
         cell.configure(image: image, titleText: titleText, descriptionText: descriptionText)
-        
         return cell
     }
 }
@@ -139,11 +115,9 @@ extension HICarouselView: UICollectionViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         currentPage = getCurrentPage()
     }
-    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         currentPage = getCurrentPage()
     }
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         currentPage = getCurrentPage()
     }
@@ -160,23 +134,20 @@ extension HICarouselView {
         carouselLayout.sectionInset = .init(top: 0, left: cellPadding, bottom: 0, right: cellPadding)
         carouselLayout.minimumLineSpacing = cellPadding * 2
         carouselCollectionView.collectionViewLayout = carouselLayout
-        
         carouselData = data
         carouselCollectionView.reloadData()
     }
 }
 
-// MARKK: - Helpers
+// MARK: - Helpers
 
 private extension HICarouselView {
     func getCurrentPage() -> Int {
-        
         let visibleRect = CGRect(origin: carouselCollectionView.contentOffset, size: carouselCollectionView.bounds.size)
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
         if let visibleIndexPath = carouselCollectionView.indexPathForItem(at: visiblePoint) {
             return visibleIndexPath.row
         }
-        
         return currentPage
     }
 }

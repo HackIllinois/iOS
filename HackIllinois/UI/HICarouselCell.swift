@@ -1,4 +1,3 @@
-//
 //  HICarouselCell.swift
 //  HackIllinois
 //
@@ -15,15 +14,11 @@ import UIKit
 class HICarouselCell: UICollectionViewCell {
     //source: https://medium.com/swlh/swift-carousel-759800aa2952
     // MARK: - Subviews
-        
     private lazy var imageView = UIImageView()
     private lazy var titleLabel = HILabel(style: .onboardingTitle)
     private lazy var descriptionLabel = HILabel(style: .onboardingDescription)
-    
     // MARK: - Properties
-    
     static let cellId = "CarouselCell"
-    
     // MARK: - Initializer
     
     override init(frame: CGRect) {
@@ -41,8 +36,6 @@ class HICarouselCell: UICollectionViewCell {
 private extension HICarouselCell {
     func setupUI() {
         backgroundColor = .clear
-        
-        
         addSubview(descriptionLabel)
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
@@ -50,7 +43,6 @@ private extension HICarouselCell {
         descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         descriptionLabel.numberOfLines = 0
         descriptionLabel.textAlignment = .center
-        
         addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
@@ -58,7 +50,6 @@ private extension HICarouselCell {
         titleLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -16).isActive = true
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
-        
         addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -16).isActive = true
@@ -66,7 +57,7 @@ private extension HICarouselCell {
         imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 300).isActive = true
         imageView.contentMode = .scaleAspectFit
-        imageView.clipsToBounds = true    
+        imageView.clipsToBounds = true
     }
 }
 
