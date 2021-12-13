@@ -70,9 +70,7 @@ private extension HICarouselView {
         carouselCollectionView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0).isActive = true
         carouselCollectionView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         carouselCollectionView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        //TODO: figure this out
     }
-    
     func setupPageControl() {
         addSubview(pageControl)
         pageControl.translatesAutoresizingMaskIntoConstraints = false

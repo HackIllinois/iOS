@@ -19,10 +19,6 @@ class HICarouselCell: UICollectionViewCell {
     private lazy var imageView = UIImageView()
     private lazy var titleLabel = HILabel(style: .onboardingTitle)
     private lazy var descriptionLabel = HILabel(style: .onboardingDescription)
-    
-//    let descriptionTextView = HITextView()
-//    let titleTextView = HITextView()
-
     // MARK: - Properties
     static let cellId = "CarouselCell"
     // MARK: - Initializer
@@ -63,8 +59,6 @@ private extension HICarouselCell {
         titleLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: 0).isActive = true
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
-//        titleLabel.isEditable = false
-//        titleLabel.isScrollEnabled = false
     }
     func setUpDescription() {
         addSubview(descriptionLabel)
@@ -72,13 +66,10 @@ private extension HICarouselCell {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.textAlignment = .center
         descriptionLabel.numberOfLines = 0
-//        descriptionLabel.isEditable = false
-//        descriptionLabel.isScrollEnabled = false
         descriptionLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
         descriptionLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
         descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
-    
 }
 
 // MARK: - Public

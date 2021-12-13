@@ -50,8 +50,9 @@ class HIApplicationStateController {
         if user != nil {
             loginFlowController.shouldDisplayAnimationOnNextAppearance = false
         }
-
-        updateWindowViewController(animated: false, showOnboarding: true)
+        UserDefaults.standard.set(true, forKey: HIConstants.APPLICATION_INSTALLED_KEY)
+        let shouldShowOnboarding = UserDefaults.standard.object(forKey: HIConstants.SHOULD_SHOW_ONBOARDING_KEY) as? Bool ?? true
+        updateWindowViewController(animated: false, shouldShowOnboarding: shouldShowOnboarding)
     }
 }
 
@@ -106,7 +107,7 @@ extension HIApplicationStateController {
         }
         HILocalNotificationController.shared.requestAuthorization()
         UIApplication.shared.registerForRemoteNotifications()
-        updateWindowViewController(animated: true, showOnboarding: true)
+        updateWindowViewController(animated: true, shouldShowOnboarding: false)
     }
 
     @objc func logoutUser() {
@@ -116,7 +117,7 @@ extension HIApplicationStateController {
         Keychain.default.removeObject(forKey: HIConstants.STORED_PROFILE_KEY)
         user = nil
         profile = nil
-        updateWindowViewController(animated: true, showOnboarding: false)
+        updateWindowViewController(animated: true, shouldShowOnboarding: false)
     }
 
     @objc func loginProfile(_ notification: Notification) {
@@ -125,20 +126,20 @@ extension HIApplicationStateController {
         self.profile = profile
     }
     @objc func getStarted(_ notification: Notification) {
-        updateWindowViewController(animated: true, showOnboarding: false)
+        updateWindowViewController(animated: true, shouldShowOnboarding: false)
+        // No longer need to show onboarding
+        UserDefaults.standard.set(false, forKey: HIConstants.SHOULD_SHOW_ONBOARDING_KEY)
     }
 
-    func updateWindowViewController(animated: Bool, showOnboarding: Bool) {
+    func updateWindowViewController(animated: Bool, shouldShowOnboarding: Bool) {
         let viewController: UIViewController
-        if let user = user {
-            if showOnboarding {
-                viewController = onboardingViewController
-            } else {
-                prepareAppControllerForDisplay(with: user)
-                viewController = appFlowController
-            }
+        
+        if shouldShowOnboarding {
+            viewController = onboardingViewController
+        } else if let user = user {
+            prepareAppControllerForDisplay(with: user)
+            viewController = appFlowController
         } else {
-            prepareLoginControllerForDisplay()
             viewController = loginFlowController
         }
 
@@ -166,6 +167,4 @@ extension HIApplicationStateController {
         HIProjectDataSource.refresh()
         HIProfileDataSource.refresh()
     }
-
-    func prepareLoginControllerForDisplay() { }
 }
