@@ -65,20 +65,14 @@ private extension HICarouselView {
         setupCollectionView()
     }
     func setupCollectionView() {
-        let cellPadding = (frame.width - 300) / 2
-        let carouselLayout = UICollectionViewFlowLayout()
-        carouselLayout.scrollDirection = .horizontal
-        carouselLayout.itemSize = .init(width: 300, height: 400)
-        carouselLayout.sectionInset = .init(top: 0, left: cellPadding, bottom: 0, right: cellPadding)
-        carouselLayout.minimumLineSpacing = cellPadding * 2
-        carouselCollectionView.collectionViewLayout = carouselLayout
         addSubview(carouselCollectionView)
         carouselCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        carouselCollectionView.bottomAnchor.constraint(equalTo: pageControl.topAnchor, constant: 0).isActive = true
+        carouselCollectionView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0).isActive = true
         carouselCollectionView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         carouselCollectionView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        carouselCollectionView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        //TODO: figure this out
     }
+    
     func setupPageControl() {
         addSubview(pageControl)
         pageControl.translatesAutoresizingMaskIntoConstraints = false
@@ -128,14 +122,16 @@ extension HICarouselView: UICollectionViewDelegate {
 
 extension HICarouselView {
     public func configureView(with data: [CarouselData]) {
+        print(frame.height)
         let cellPadding = (frame.width - 300) / 2
         let carouselLayout = UICollectionViewFlowLayout()
         carouselLayout.scrollDirection = .horizontal
-        carouselLayout.itemSize = .init(width: 300, height: 400)
+        carouselLayout.itemSize = .init(width: 300, height: frame.height * 0.85)
         carouselLayout.sectionInset = .init(top: 0, left: cellPadding, bottom: 0, right: cellPadding)
         carouselLayout.minimumLineSpacing = cellPadding * 2
         carouselCollectionView.collectionViewLayout = carouselLayout
         carouselData = data
+        carouselCollectionView.heightAnchor.constraint(equalToConstant: frame.height).isActive = true
         carouselCollectionView.reloadData()
     }
 }

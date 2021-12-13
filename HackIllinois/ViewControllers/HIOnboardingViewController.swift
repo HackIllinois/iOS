@@ -44,7 +44,7 @@ extension HIOnboardingViewController {
         super.viewDidLoad()
         carouselView = HICarouselView(pages: 5)
         carouselData.append(.init(image: UIImage(named: "HILogo"), titleText: "", descriptionText: "Swipe to see what our app has to offer!"))
-        carouselData.append(.init(image: UIImage(named: "Day"), titleText: "Check-In", descriptionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"))
+        carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Check-In", descriptionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"))
         carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Scan for Points", descriptionText: "Lorem ipsum dolor sit amet, conse"))
         carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Get Notified", descriptionText: "Lorem ipsum dolor sit amet, consectet"))
         carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Win Prizes", descriptionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"))
@@ -70,7 +70,7 @@ private extension HIOnboardingViewController {
         guard let carouselView = carouselView else { return }
         view.addSubview(carouselView)
         carouselView.translatesAutoresizingMaskIntoConstraints = false
-        carouselView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        carouselView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
         carouselView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         carouselView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         carouselView.bottomAnchor.constraint(equalTo: getStartedButton.topAnchor).isActive = true

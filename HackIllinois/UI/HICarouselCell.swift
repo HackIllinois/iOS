@@ -19,6 +19,10 @@ class HICarouselCell: UICollectionViewCell {
     private lazy var imageView = UIImageView()
     private lazy var titleLabel = HILabel(style: .onboardingTitle)
     private lazy var descriptionLabel = HILabel(style: .onboardingDescription)
+    
+//    let descriptionTextView = HITextView()
+//    let titleTextView = HITextView()
+
     // MARK: - Properties
     static let cellId = "CarouselCell"
     // MARK: - Initializer
@@ -36,30 +40,45 @@ class HICarouselCell: UICollectionViewCell {
 private extension HICarouselCell {
     func setupUI() {
         backgroundColor = .clear
-        addSubview(descriptionLabel)
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
-        descriptionLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
-        descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        descriptionLabel.numberOfLines = 0
-        descriptionLabel.textAlignment = .center
-        //TODO: understand how to move labels down, make image fill up whole space and acale appropriately
-//        addSubview(titleLabel)
-//        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-//        titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
-//        titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
-//        titleLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -16).isActive = true
-//        titleLabel.numberOfLines = 0
-//        titleLabel.textAlignment = .center
-//        addSubview(imageView)
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//        imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -16).isActive = true
-//        imageView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-//        imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-//        imageView.heightAnchor.constraint(equalToConstant: 300).isActive = true
-//        imageView.contentMode = .scaleAspectFit
-//        imageView.clipsToBounds = true
+        setUpDescription()
+        setUpTitle()
+        setUpImage()
     }
+    func setUpImage() {
+        addSubview(imageView)
+        print(frame.height)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -25).isActive = true
+        imageView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: frame.height * 0.75).isActive = true
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+    }
+    func setUpTitle() {
+        addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
+        titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: 0).isActive = true
+        titleLabel.textAlignment = .center
+        titleLabel.numberOfLines = 0
+//        titleLabel.isEditable = false
+//        titleLabel.isScrollEnabled = false
+    }
+    func setUpDescription() {
+        addSubview(descriptionLabel)
+        descriptionLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.textAlignment = .center
+        descriptionLabel.numberOfLines = 0
+//        descriptionLabel.isEditable = false
+//        descriptionLabel.isScrollEnabled = false
+        descriptionLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
+        descriptionLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
+        descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    }
+    
 }
 
 // MARK: - Public
