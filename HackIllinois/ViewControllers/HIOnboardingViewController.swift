@@ -43,7 +43,7 @@ extension HIOnboardingViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         carouselView = HICarouselView(pages: 5)
-        carouselData.append(.init(image: UIImage(named: "HILogo"), titleText: "", descriptionText: "Swipe to see what our app has to offer!"))
+        carouselData.append(.init(image: UIImage(named: "HILogo"), titleText: "Welcome!", descriptionText: "Swipe to see what our app has to offer!"))
         carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Check-In", descriptionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"))
         carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Scan for Points", descriptionText: "Lorem ipsum dolor sit amet, conse"))
         carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Get Notified", descriptionText: "Lorem ipsum dolor sit amet, consectet"))
