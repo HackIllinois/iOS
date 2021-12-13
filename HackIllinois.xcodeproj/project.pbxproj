@@ -361,6 +361,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C63EE672768078C00D60653 /* CarouselView */ = {
+			isa = PBXGroup;
+			children = (
+				1C9045CD274F03A200DDA74E /* HICarouselCell.swift */,
+				1C9045D1274F048A00DDA74E /* HICarouselView.swift */,
+			);
+			path = CarouselView;
+			sourceTree = "<group>";
+		};
 		95069260203EE14000D7C34C /* Animations */ = {
 			isa = PBXGroup;
 			children = (
@@ -554,9 +563,10 @@
 			isa = PBXGroup;
 			children = (
 				95069260203EE14000D7C34C /* Animations */,
+				1C63EE672768078C00D60653 /* CarouselView */,
+				ACAA7177260186EF000F42B0 /* CollectionView */,
 				95FC79BD21E0199600715036 /* HIAppearance.swift */,
 				95A7D27B203D4F54005EAEAF /* HIButton.swift */,
-				1C9045CD274F03A200DDA74E /* HICarouselCell.swift */,
 				9523A28F2218BA2600341EBD /* HIImageView.swift */,
 				95A7D29D203D5BA4005EAEAF /* HILabel.swift */,
 				95A7D27C203D4F54005EAEAF /* HISegmentedControl.swift */,
@@ -569,9 +579,7 @@
 				AC6F15A5261BB1B400422192 /* HIErrorView.swift */,
 				95D791EC203E370A00C3BA62 /* HIWindow.swift */,
 				95A7D27E203D4F54005EAEAF /* Identifiable.swift */,
-				ACAA7177260186EF000F42B0 /* CollectionView */,
 				95A7D280203D4F54005EAEAF /* TableView */,
-				1C9045D1274F048A00DDA74E /* HICarouselView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";

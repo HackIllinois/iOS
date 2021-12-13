@@ -50,6 +50,7 @@ class HIApplicationStateController {
         if user != nil {
             onboardingViewController.shouldDisplayAnimationOnNextAppearance = false
         }
+
         UserDefaults.standard.set(true, forKey: HIConstants.APPLICATION_INSTALLED_KEY)
         let shouldShowOnboarding = UserDefaults.standard.object(forKey: HIConstants.SHOULD_SHOW_ONBOARDING_KEY) as? Bool ?? true
         updateWindowViewController(animated: false, shouldShowOnboarding: shouldShowOnboarding)
