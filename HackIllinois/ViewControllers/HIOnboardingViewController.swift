@@ -12,11 +12,15 @@
 
 import Foundation
 import UIKit
+import Lottie
 
 class HIOnboardingViewController: HIBaseViewController {
     //source: https://medium.com/swlh/swift-carousel-759800aa2952
     // MARK: - Subviews
     private var carouselView: HICarouselView?
+    let animationView = AnimationView(name: "intro")
+    var shouldDisplayAnimationOnNextAppearance = true
+
     // MARK: - Properties
     private var carouselData = [HICarouselView.CarouselData]()
     let getStartedButton = HIButton {
@@ -50,9 +54,35 @@ extension HIOnboardingViewController {
         carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Win Prizes", descriptionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"))
         setupUI()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if shouldDisplayAnimationOnNextAppearance {
+            animationView.contentMode = .scaleAspectFill
+            animationView.frame = view.frame
+            animationView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            view.addSubview(animationView)
+        }
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         carouselView?.configureView(with: carouselData)
+        if shouldDisplayAnimationOnNextAppearance {
+//            statusBarIsHidden = true
+//            setNeedsStatusBarAppearanceUpdate()
+
+            animationView.play { _ in
+                // Smooth out background transition into login page
+                UIView.animate(withDuration: 1.0, animations: {self.animationView.alpha = 0.0},
+                completion: { _ in
+                    self.animationView.removeFromSuperview()
+                })
+//                self.statusBarIsHidden = false
+                UIView.animate(withDuration: 0.25) { () -> Void in
+                    self.setNeedsStatusBarAppearanceUpdate()
+                }
+            }
+            shouldDisplayAnimationOnNextAppearance = false
+        }
     }
 }
 

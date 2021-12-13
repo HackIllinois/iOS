@@ -44,7 +44,7 @@ private extension HICarouselCell {
         addSubview(imageView)
         print(frame.height)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -25).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -15).isActive = true
         imageView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: frame.height * 0.75).isActive = true

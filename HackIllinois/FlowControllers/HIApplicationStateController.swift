@@ -48,7 +48,7 @@ class HIApplicationStateController {
         recoverProfileIfPossible()
 
         if user != nil {
-            loginFlowController.shouldDisplayAnimationOnNextAppearance = false
+            onboardingViewController.shouldDisplayAnimationOnNextAppearance = false
         }
         UserDefaults.standard.set(true, forKey: HIConstants.APPLICATION_INSTALLED_KEY)
         let shouldShowOnboarding = UserDefaults.standard.object(forKey: HIConstants.SHOULD_SHOW_ONBOARDING_KEY) as? Bool ?? true
@@ -133,7 +133,6 @@ extension HIApplicationStateController {
 
     func updateWindowViewController(animated: Bool, shouldShowOnboarding: Bool) {
         let viewController: UIViewController
-        
         if shouldShowOnboarding {
             viewController = onboardingViewController
         } else if let user = user {
