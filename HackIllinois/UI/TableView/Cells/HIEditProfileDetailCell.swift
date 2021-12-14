@@ -95,12 +95,3 @@ extension HIEditProfileDetailCell {
         }
     }
 }
-
-//// MARK: - UITableViewCell
-//extension HIEditProfileCell {
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//        interestLabel.text = ""
-//        selectedImageView.isHidden = false
-//    }
-//}
