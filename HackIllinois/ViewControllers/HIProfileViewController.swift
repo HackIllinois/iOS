@@ -154,20 +154,11 @@ extension HIProfileViewController {
         contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-//        contentView.addSubview(profilePictureView)
-//        profilePictureView.constrain(to: contentView, topInset: 0)
-//        profilePictureView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-//        profilePictureView.constrain(width: 100, height: 100)
         contentView.addSubview(qrImageView)
         qrImageView.constrain(to: contentView, topInset: 0)
         qrImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         qrImageView.constrain(width: 250, height: 250)
-//
-//        qrImageView.layer.cornerRadius = 15
-//        qrImageView.layer.masksToBounds = true
-//
         contentView.addSubview(profileNameView)
-//        profileNameView.topAnchor.constraint(equalTo: profilePictureView.bottomAnchor, constant: 12).isActive = true
         profileNameView.topAnchor.constraint(equalTo: qrImageView.bottomAnchor, constant: 12).isActive = true
         profileNameView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         profileNameView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9).isActive = true
