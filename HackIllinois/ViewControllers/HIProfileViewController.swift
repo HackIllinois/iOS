@@ -263,45 +263,20 @@ extension HIProfileViewController {
 
     func updateProfile() {
         guard let profile = HIApplicationStateController.shared.profile else { return }
-        guard let user = HIApplicationStateController.shared.user, let qrUrl = user.qrURL else { return }
+        guard let user = HIApplicationStateController.shared.user else { return }
         view.layoutIfNeeded()
 
         if let url = URL(string: profile.avatarUrl), let imgValue = HIConstants.PROFILE_IMAGES[url.absoluteString] {
             profilePictureView.changeImage(newImage: imgValue)
         }
-        
-        let size = max(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
-        DispatchQueue.global(qos: .userInitiated).async {
-                        
-            let qrFilter = CIFilter(name: "CIQRCodeGenerator")
-            let data = user.id.data(using: .isoLatin1, allowLossyConversion: false)
-            qrFilter!.setValue(data, forKey: "inputMessage")
-            qrFilter!.setValue("H", forKey: "inputCorrectionLevel")
-
-            let qrTransform = CGAffineTransform(scaleX: 9, y: 9)
-            let qrImage = qrFilter?.outputImage?.transformed(by: qrTransform)
-
-            let maskToAlphaFilter = CIFilter(name: "CIMaskToAlpha")
-            maskToAlphaFilter?.setDefaults()
-            maskToAlphaFilter?.setValue(qrImage, forKey: kCIInputImageKey)
-
-            let result = maskToAlphaFilter?.outputImage
-
-            let logo = UIImage(named: "HILetter")!
-            let whiteBackground = UIImage(named: "White Square")!
-            let combinedImage = result!.inverted!.tinted(using: #colorLiteral(red: 0.4196078431, green: 0.6823529412, blue: 0.7725490196, alpha: 1))!.combined(with: CIImage(cgImage: whiteBackground.cgImage!))
-
-            let qrTransform2 = CGAffineTransform(scaleX: 2.5, y: 2.5)
-
-            let scaled = combinedImage!.transformed(by: qrTransform2)
-
-            let combined2 = scaled.combined(with: CIImage(cgImage: logo.cgImage!))
-            
-            let rounded = UIImage(ciImage: combined2!).round(5)
-            
-            DispatchQueue.main.async {
-                self.qrImageView.image = UIImage(ciImage: combined2!)
-            }
+        // Generate a QR Code with the user's id
+        if let logo = UIImage(named: "QR Code Logo"), let whiteBackground = UIImage(named: "QR Code Background") {
+            // Custom QR Code with logo
+            self.qrImageView.image = UIImage.init(qrString: user.id, color: #colorLiteral(red: 0.4196078431, green: 0.6823529412, blue: 0.7725490196, alpha: 1), backgroundImage: whiteBackground, logo: logo)
+        } else {
+            // Regular, black QR Code
+            let size = max(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
+            self.qrImageView.image = UIImage.init(qrString: user.id, size: size)
         }
         profileNameView.text = profile.firstName + " " + profile.lastName
         let modifiedTeamStatus = profile.teamStatus.capitalized.replacingOccurrences(of: "_", with: " ")
@@ -433,91 +408,5 @@ extension HIProfileViewController: HIErrorViewDelegate {
         )
         alert.popoverPresentationController?.sourceView = sender
         present(alert, animated: true, completion: nil)
-    }
-}
-
-//https://www.avanderlee.com/swift/qr-code-generation-swift/
-extension CIImage {
-
-    /// Combines the current image with the given image centered.
-    func combined(with image: CIImage) -> CIImage? {
-        guard let combinedFilter = CIFilter(name: "CISourceOverCompositing") else { return nil }
-        let centerTransform = CGAffineTransform(translationX: extent.midX - (image.extent.size.width / 2), y: extent.midY - (image.extent.size.height / 2))
-        combinedFilter.setValue(image.transformed(by: centerTransform), forKey: "inputImage")
-        combinedFilter.setValue(self, forKey: "inputBackgroundImage")
-        return combinedFilter.outputImage!
-    }
-    /// Inverts the colors and creates a transparent image by converting the mask to alpha.
-    /// Input image should be black and white.
-    var transparent: CIImage? {
-        return inverted?.blackTransparent
-    }
-
-    /// Inverts the colors.
-    var inverted: CIImage? {
-        guard let invertedColorFilter = CIFilter(name: "CIColorInvert") else { return nil }
-
-        invertedColorFilter.setValue(self, forKey: "inputImage")
-        return invertedColorFilter.outputImage
-    }
-
-    /// Converts all black to transparent.
-    var blackTransparent: CIImage? {
-        guard let blackTransparentFilter = CIFilter(name: "CIMaskToAlpha") else { return nil }
-        blackTransparentFilter.setValue(self, forKey: "inputImage")
-        return blackTransparentFilter.outputImage
-    }
-
-    /// Applies the given color as a tint color.
-    func tinted(using color: UIColor) -> CIImage?
-    {
-        guard
-            let transparentQRImage = transparent,
-            let filter = CIFilter(name: "CIMultiplyCompositing"),
-            let colorFilter = CIFilter(name: "CIConstantColorGenerator") else { return nil }
-
-        let ciColor = CIColor(color: color)
-        colorFilter.setValue(ciColor, forKey: kCIInputColorKey)
-        let colorImage = colorFilter.outputImage
-
-        filter.setValue(colorImage, forKey: kCIInputImageKey)
-        filter.setValue(transparentQRImage, forKey: kCIInputBackgroundImageKey)
-
-        return filter.outputImage!
-    }
-}
-
-// https://gist.github.com/brownsoo/1b772612b54c4dc58d88ae71aec19552
-public extension UIImage {
-  func round(_ radius: CGFloat) -> UIImage {
-        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        let renderer = UIGraphicsImageRenderer(size: rect.size)
-        let result = renderer.image { c in
-            let rounded = UIBezierPath(roundedRect: rect, cornerRadius: radius)
-            rounded.addClip()
-            if let cgImage = self.cgImage {
-                UIImage(cgImage: cgImage, scale: self.scale, orientation: self.imageOrientation).draw(in: rect)
-            }
-        }
-        return result
-    }
-    func circle() -> UIImage {
-        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        let renderer = UIGraphicsImageRenderer(size: rect.size)
-        let result = renderer.image { c in
-            let isPortrait = size.height > size.width
-            let isLandscape = size.width > size.height
-            let breadth = min(size.width, size.height)
-            let breadthSize = CGSize(width: breadth, height: breadth)
-            let breadthRect = CGRect(origin: .zero, size: breadthSize)
-            let origin = CGPoint(x: isLandscape ? floor((size.width - size.height) / 2) : 0,
-                                 y: isPortrait  ? floor((size.height - size.width) / 2) : 0)
-            let circle = UIBezierPath(ovalIn: breadthRect)
-            circle.addClip()
-            if let cgImage = self.cgImage?.cropping(to: CGRect(origin: origin, size: breadthSize)) {
-                UIImage(cgImage: cgImage, scale: self.scale, orientation: self.imageOrientation).draw(in: rect)
-            }
-        }
-        return result
     }
 }

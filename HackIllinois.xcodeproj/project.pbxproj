@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A360882203539FF001F5F85 /* HIAdminEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */; };
+		1C63EE6927680DF500D60653 /* CIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C63EE6827680DF500D60653 /* CIImage.swift */; };
 		3521FFA92207C03E00634A63 /* Attendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521FFA82207C03E00634A63 /* Attendee.swift */; };
 		35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */; };
 		35B4A44F21E091BA001B3AF0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4A44D21E091B9001B3AF0 /* Logger.swift */; };
@@ -191,6 +192,7 @@
 
 /* Begin PBXFileReference section */
 		0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAdminEventViewController.swift; sourceTree = "<group>"; };
+		1C63EE6827680DF500D60653 /* CIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIImage.swift; sourceTree = "<group>"; };
 		3521FFA82207C03E00634A63 /* Attendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendee.swift; sourceTree = "<group>"; };
 		35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HICountdownViewController.swift; sourceTree = "<group>"; };
 		35B4A44D21E091B9001B3AF0 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -539,6 +541,7 @@
 			children = (
 				9552D92721758E4C00A8C869 /* UIView+AutoLayout.swift */,
 				95CA922F201E60D300C46037 /* UIImage+QRCode.swift */,
+				1C63EE6827680DF500D60653 /* CIImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -996,6 +999,7 @@
 				BCEBD2DA23DE995700D32F5A /* HIPopupAnimator.swift in Sources */,
 				95FC79C321E024A700715036 /* Notifications.swift in Sources */,
 				95FC79BE21E0199600715036 /* HIAppearance.swift in Sources */,
+				1C63EE6927680DF500D60653 /* CIImage.swift in Sources */,
 				35B4A45021E091BA001B3AF0 /* HIError.swift in Sources */,
 				AC977FCD25F194F9009C4179 /* HIGroupDetailViewController.swift in Sources */,
 				3FC091D625B74DEA00DA23D8 /* HIGroupCell.swift in Sources */,
