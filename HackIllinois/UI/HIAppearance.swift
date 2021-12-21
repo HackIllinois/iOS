@@ -83,7 +83,7 @@ struct HIAppearance: Equatable {
     private static let salmon = #colorLiteral(red: 0.9490196078, green: 0.6078431373, blue: 0.4705882353, alpha: 1)
     private static let yellowWhite = #colorLiteral(red: 0.9647058824, green: 0.9568627451, blue: 0.831372549, alpha: 1)
 
-    // Hack 2021 color palette
+    // Hack 2021 color palette - they needed to be removed
     private static let darkBlue = #colorLiteral(red: 0.1326064765, green: 0.1667878032, blue: 0.3605746627, alpha: 1)
     private static let blue = #colorLiteral(red: 0.1215686275, green: 0.5176470588, blue: 0.6470588235, alpha: 1)
     private static let buttonblue = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
