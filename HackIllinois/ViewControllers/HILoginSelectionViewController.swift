@@ -64,7 +64,7 @@ extension HILoginSelectionViewController {
         view.addSubview(spacerView)
         view.addSubview(tableView)
 
-        welcomeHeader.text = "Welcome to"
+        welcomeHeader.text = "WELCOME TO"
         welcomeHeader.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 120).isActive = true
         welcomeHeader.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         welcomeHeader.heightAnchor.constraint(equalToConstant: 22).isActive = true
@@ -112,14 +112,16 @@ extension HILoginSelectionViewController {
             titleCell.backgroundView?.backgroundColor = UIColor.clear
             titleCell.textLabel?.textAlignment = .center
             titleCell.textLabel?.backgroundColor = UIColor.clear
-            titleCell.textLabel?.textColor = UIColor.white
             titleCell.selectionStyle = .none // Prevents the "- OR -" cell from being clickable
             if indexPath.row == 0 {
-                titleCell.textLabel?.text = "Login"
+                titleCell.textLabel?.text = "LOGIN"
                 titleCell.textLabel?.font = HIAppearance.Font.loginTitle
+                titleCell.textLabel?.textColor = (\HIAppearance.loginTitleBackground).value
+
             } else {
                 titleCell.textLabel?.text = "- OR -"
-                titleCell.textLabel?.font = HIAppearance.Font.loginSelection
+                titleCell.textLabel?.font = HIAppearance.Font.loginOrTitle
+                titleCell.textLabel?.textColor = (\HIAppearance.loginSelectionText).value
             }
             return titleCell
         }
@@ -136,10 +138,11 @@ extension HILoginSelectionViewController {
                 cell.activeTextColor = (\HIAppearance.attendeeBackground).value
             } else if indexPath.row > 2 { //After "- OR -" cell roles
                 cell.titleLabel.text = HIAPI.AuthService.OAuthProvider.all[indexPath.row - 2].displayName
-                cell.defaultColor = (\HIAppearance.loginDefault).value
+                cell.defaultColor = .clear
                 cell.titleLabel.layer.borderColor = (\HIAppearance.loginDefault).value.cgColor
                 cell.activeTextColor = (\HIAppearance.loginDefault).value
             }
+            cell.defaultTextColor = (\HIAppearance.attendeeText).value
             cell.backgroundColor = .clear
             cell.contentView.backgroundColor = .clear
             cell.titleLabel.layer.cornerRadius = cell.frame.height*(3/8)

@@ -1,23 +1,23 @@
 {
   "images" : [
     {
+      "filename" : "vertical-2.png",
       "idiom" : "universal",
-      "filename" : "HILogo@1x.png",
       "scale" : "1x"
     },
     {
+      "filename" : "vertical-1.png",
       "idiom" : "universal",
-      "filename" : "HILogo@2x.png",
       "scale" : "2x"
     },
     {
+      "filename" : "vertical.png",
       "idiom" : "universal",
-      "filename" : "HILogo@3x.png",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }
