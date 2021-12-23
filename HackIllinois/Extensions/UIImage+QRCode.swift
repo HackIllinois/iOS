@@ -52,7 +52,6 @@ extension UIImage {
         guard let maskToAlphaFilter = CIFilter(name: "CIMaskToAlpha") else { return nil }
         maskToAlphaFilter.setDefaults()
         maskToAlphaFilter.setValue(initialScaledQRCode, forKey: kCIInputImageKey)
-        
         // Add background to the center of the QR Code
         guard let simpleQRCode = maskToAlphaFilter.outputImage,
               let backgroundCGImage = backgroundImage.cgImage,

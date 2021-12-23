@@ -21,7 +21,7 @@ extension CIImage {
         let centerTransform = CGAffineTransform(translationX: extent.midX - (image.extent.size.width / 2), y: extent.midY - (image.extent.size.height / 2))
         combinedFilter.setValue(image.transformed(by: centerTransform), forKey: "inputImage")
         combinedFilter.setValue(self, forKey: "inputBackgroundImage")
-        return combinedFilter.outputImage!
+        return combinedFilter.outputImage
     }
     /// Inverts the colors and creates a transparent image by converting the mask to alpha.
     /// Input image should be black and white.

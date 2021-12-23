@@ -39,11 +39,6 @@ class HIProfileViewController: HIBaseViewController {
         $0.backgroundHIColor = \.clear
     }
 
-    private let profilePictureView = HIImageView {
-        $0.layer.cornerRadius = 8
-        $0.layer.masksToBounds = true
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
     private let qrImageView = HITintImageView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.tintHIColor = \.qrTint
@@ -257,17 +252,20 @@ extension HIProfileViewController {
         guard let user = HIApplicationStateController.shared.user else { return }
         view.layoutIfNeeded()
 
-        if let url = URL(string: profile.avatarUrl), let imgValue = HIConstants.PROFILE_IMAGES[url.absoluteString] {
-            profilePictureView.changeImage(newImage: imgValue)
-        }
         // Generate a QR Code with the user's id
-        if let logo = UIImage(named: "QRCodeLogo"), let whiteBackground = UIImage(named: "QRCodeBackground") {
-            // Custom QR Code with logo
-            self.qrImageView.image = UIImage.init(qrString: user.id, qrCodeColor: (\HIAppearance.qrTint).value, backgroundImage: whiteBackground, logo: logo)
-        } else {
-            // Regular, black QR Code
-            let size = max(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
-            self.qrImageView.image = UIImage.init(qrString: user.id, size: size)
+        DispatchQueue.global(qos: .userInitiated).async {
+            let qrImage: UIImage!
+            if let logo = UIImage(named: "QRCodeLogo"), let whiteBackground = UIImage(named: "QRCodeBackground") {
+                // Custom QR Code with logo
+                qrImage = UIImage.init(qrString: user.id, qrCodeColor: (\HIAppearance.qrTint).value, backgroundImage: whiteBackground, logo: logo)
+            } else {
+                // Regular, black QR Code
+                let size = max(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
+                qrImage = UIImage.init(qrString: user.id, size: size)
+            }
+            DispatchQueue.main.async {
+                self.qrImageView.image = qrImage
+            }
         }
         profileNameView.text = profile.firstName + " " + profile.lastName
         let modifiedTeamStatus = profile.teamStatus.capitalized.replacingOccurrences(of: "_", with: " ")
