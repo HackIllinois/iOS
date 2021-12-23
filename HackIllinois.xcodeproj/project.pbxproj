@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0A360882203539FF001F5F85 /* HIAdminEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */; };
+		1C9045CE274F03A200DDA74E /* HICarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9045CD274F03A200DDA74E /* HICarouselCell.swift */; };
+		1C9045D2274F048A00DDA74E /* HICarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9045D1274F048A00DDA74E /* HICarouselView.swift */; };
+		1C9045D4274F065F00DDA74E /* HIOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */; };
 		3521FFA92207C03E00634A63 /* Attendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521FFA82207C03E00634A63 /* Attendee.swift */; };
 		35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */; };
 		35B4A44F21E091BA001B3AF0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4A44D21E091B9001B3AF0 /* Logger.swift */; };
@@ -191,6 +194,9 @@
 
 /* Begin PBXFileReference section */
 		0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAdminEventViewController.swift; sourceTree = "<group>"; };
+		1C9045CD274F03A200DDA74E /* HICarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICarouselCell.swift; sourceTree = "<group>"; };
+		1C9045D1274F048A00DDA74E /* HICarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICarouselView.swift; sourceTree = "<group>"; };
+		1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIOnboardingViewController.swift; sourceTree = "<group>"; };
 		3521FFA82207C03E00634A63 /* Attendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendee.swift; sourceTree = "<group>"; };
 		35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HICountdownViewController.swift; sourceTree = "<group>"; };
 		35B4A44D21E091B9001B3AF0 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -355,6 +361,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C63EE672768078C00D60653 /* CarouselView */ = {
+			isa = PBXGroup;
+			children = (
+				1C9045CD274F03A200DDA74E /* HICarouselCell.swift */,
+				1C9045D1274F048A00DDA74E /* HICarouselView.swift */,
+			);
+			path = CarouselView;
+			sourceTree = "<group>";
+		};
 		95069260203EE14000D7C34C /* Animations */ = {
 			isa = PBXGroup;
 			children = (
@@ -519,6 +534,7 @@
 				AC977FCC25F194F9009C4179 /* HIGroupDetailViewController.swift */,
 				3FB82A1025C25B3800C0B43F /* HIGroupListViewController.swift */,
 				3F8CC87A260BBE9000528ED2 /* HICodePopupViewController.swift */,
+				1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -547,6 +563,8 @@
 			isa = PBXGroup;
 			children = (
 				95069260203EE14000D7C34C /* Animations */,
+				1C63EE672768078C00D60653 /* CarouselView */,
+				ACAA7177260186EF000F42B0 /* CollectionView */,
 				95FC79BD21E0199600715036 /* HIAppearance.swift */,
 				95A7D27B203D4F54005EAEAF /* HIButton.swift */,
 				9523A28F2218BA2600341EBD /* HIImageView.swift */,
@@ -561,7 +579,6 @@
 				AC6F15A5261BB1B400422192 /* HIErrorView.swift */,
 				95D791EC203E370A00C3BA62 /* HIWindow.swift */,
 				95A7D27E203D4F54005EAEAF /* Identifiable.swift */,
-				ACAA7177260186EF000F42B0 /* CollectionView */,
 				95A7D280203D4F54005EAEAF /* TableView */,
 			);
 			path = UI;
@@ -949,6 +966,7 @@
 				95B12041220BDDEF00E024BB /* HICheckInScannerViewController.swift in Sources */,
 				95A7D292203D4F54005EAEAF /* HILoginSelectionCell.swift in Sources */,
 				3C26401923ADE7AA004E1DBE /* Project+CoreDataProperties.swift in Sources */,
+				1C9045D2274F048A00DDA74E /* HICarouselView.swift in Sources */,
 				AC3B621625E8611C002386A2 /* HIProfileDataSource.swift in Sources */,
 				BF0FDA3925F4DCCD003B5DB1 /* HIScheduleSegmentedControl.swift in Sources */,
 				95C18DCC20096539004784B5 /* HIEventListViewController.swift in Sources */,
@@ -991,10 +1009,12 @@
 				0A360882203539FF001F5F85 /* HIAdminEventViewController.swift in Sources */,
 				957D7CB81FC39EA100C4332A /* Formatters.swift in Sources */,
 				BCD0CA5123C4356300ADC89B /* HIPopupViewController.swift in Sources */,
+				1C9045CE274F03A200DDA74E /* HICarouselCell.swift in Sources */,
 				95A7D296203D4F54005EAEAF /* HIEventDetailLocationCell.swift in Sources */,
 				98CA2A3E25C899CF003E842A /* HIProfileViewController.swift in Sources */,
 				95A7D29E203D5BA4005EAEAF /* HILabel.swift in Sources */,
 				956F41E31FC76C8E00557DC7 /* HIMenuController.swift in Sources */,
+				1C9045D4274F065F00DDA74E /* HIOnboardingViewController.swift in Sources */,
 				9510F6A51FCB7D6E007D19DB /* Announcement+CoreDataProperties.swift in Sources */,
 				3FB82A0D25C25AE700C0B43F /* HIGroupViewController.swift in Sources */,
 				BCEBD2DA23DE995700D32F5A /* HIPopupAnimator.swift in Sources */,

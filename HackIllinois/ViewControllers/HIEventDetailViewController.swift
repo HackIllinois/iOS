@@ -132,11 +132,9 @@ extension HIEventDetailViewController {
         titleLabel.leadingAnchor.constraint(equalTo: closeButton.leadingAnchor).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         titleLabel.topAnchor.constraint(equalTo: upperContainerView.topAnchor).isActive = true
-        
         upperContainerView.addSubview(sponsorLabel)
         sponsorLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         sponsorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
-        
         // Only attendees can favorite events
         if !HIApplicationStateController.shared.isGuest {
             setupFavoritedButton()
@@ -169,8 +167,7 @@ extension HIEventDetailViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let event = event else { return }
-        titleLabel.text = event.name;
-        
+        titleLabel.text = event.name
         if !event.sponsor.isEmpty {
             sponsorLabel.text = "Sponsored by \(event.sponsor)"
         } else {
