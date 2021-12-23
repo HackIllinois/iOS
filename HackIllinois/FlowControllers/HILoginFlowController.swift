@@ -19,8 +19,6 @@ import HIAPI
 
 class HILoginFlowController: UIViewController {
     // MARK: - Properties
-    let animationView = AnimationView(name: "intro")
-    var shouldDisplayAnimationOnNextAppearance = true
 
     // MARK: Status Bar
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
@@ -77,37 +75,6 @@ extension HILoginFlowController {
         loginSelectionViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(loginSelectionViewController.view)
         loginSelectionViewController.didMove(toParent: self)
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if shouldDisplayAnimationOnNextAppearance {
-            animationView.contentMode = .scaleAspectFill
-            animationView.frame = view.frame
-            animationView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            view.addSubview(animationView)
-        }
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if shouldDisplayAnimationOnNextAppearance {
-            statusBarIsHidden = true
-            setNeedsStatusBarAppearanceUpdate()
-
-            animationView.play { _ in
-                // Smooth out background transition into login page
-                UIView.animate(withDuration: 1.0, animations: {self.animationView.alpha = 0.0},
-                completion: { _ in
-                    self.animationView.removeFromSuperview()
-                })
-                self.statusBarIsHidden = false
-                UIView.animate(withDuration: 0.25) { () -> Void in
-                    self.setNeedsStatusBarAppearanceUpdate()
-                }
-            }
-            shouldDisplayAnimationOnNextAppearance = false
-        }
     }
 }
 

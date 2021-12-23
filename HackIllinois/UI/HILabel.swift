@@ -53,6 +53,8 @@ class HILabel: UILabel {
         case characterCount
         case error
         case codeError
+        case onboardingDescription
+        case onboardingTitle
     }
 
     // MARK: - Properties
@@ -105,7 +107,7 @@ class HILabel: UILabel {
             font = HIAppearance.Font.sponsorText
 
         case .detailTitle:
-            textHIColor = \.baseText
+            textHIColor = \.whiteText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.detailTitle
             numberOfLines = 0
@@ -117,7 +119,7 @@ class HILabel: UILabel {
             numberOfLines = 0
 
         case .detailText:
-            textHIColor = \.baseText
+            textHIColor = \.whiteText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.detailText
             numberOfLines = 0
@@ -139,7 +141,7 @@ class HILabel: UILabel {
             font = HIAppearance.Font.contentSubtitle
 
         case .description:
-            textHIColor = \.baseText
+            textHIColor = \.whiteText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.descriptionText
             numberOfLines = 0
@@ -280,6 +282,18 @@ class HILabel: UILabel {
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.detailSubtitle
+            textAlignment = .center
+            numberOfLines = 0
+        case .onboardingDescription:
+            textHIColor = \.whiteText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.onboardingDescription
+            textAlignment = .center
+            numberOfLines = 0
+        case .onboardingTitle:
+            textHIColor = \.whiteText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.onboardingTitle
             textAlignment = .center
             numberOfLines = 0
 

@@ -18,6 +18,7 @@ struct HIConstants {
     static let STORED_ACCOUNT_KEY = "org.hackillinois.ios.active_account"
     static let STORED_PROFILE_KEY = "org.hackillinois.ios.active_profile"
     static let APPLICATION_INSTALLED_KEY = "org.hackillinois.ios.application_installed"
+    static let SHOULD_SHOW_ONBOARDING_KEY = "org.hackillinois.ios.should_show_onboarding"
     static func PASS_PROMPTED_KEY(user: HIUser) -> String {
         return "org.hackillinois.ios.pass_prompted_\(user.id)"
     }
