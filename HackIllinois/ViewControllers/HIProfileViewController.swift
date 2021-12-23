@@ -261,7 +261,7 @@ extension HIProfileViewController {
             profilePictureView.changeImage(newImage: imgValue)
         }
         // Generate a QR Code with the user's id
-        if let logo = UIImage(named: "QR Code Logo"), let whiteBackground = UIImage(named: "QR Code Background") {
+        if let logo = UIImage(named: "QRCodeLogo"), let whiteBackground = UIImage(named: "QRCodeBackground") {
             // Custom QR Code with logo
             self.qrImageView.image = UIImage.init(qrString: user.id, qrCodeColor: (\HIAppearance.qrTint).value, backgroundImage: whiteBackground, logo: logo)
         } else {
