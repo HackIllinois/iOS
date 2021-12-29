@@ -38,4 +38,49 @@ extension UIImage {
 
         self.init(cgImage: cgImage)
     }
+    convenience init?(qrString: String, qrCodeColor: UIColor, backgroundImage: UIImage, logo: UIImage) {
+        // Create simple QR Code
+        guard let qrFilter = CIFilter(name: "CIQRCodeGenerator"),
+              let data = qrString.data(using: .isoLatin1, allowLossyConversion: false)
+            else { return nil }
+        qrFilter.setDefaults()
+        qrFilter.setValue(data, forKey: "inputMessage")
+        // Increased error correction to 30% since the middle portion of the code will be covered.
+        qrFilter.setValue("H", forKey: "inputCorrectionLevel")
+        let firstScaleTransform = CGAffineTransform(scaleX: 9, y: 9)
+        let initialScaledQRCode = qrFilter.outputImage?.transformed(by: firstScaleTransform)
+        guard let maskToAlphaFilter = CIFilter(name: "CIMaskToAlpha") else { return nil }
+        maskToAlphaFilter.setDefaults()
+        maskToAlphaFilter.setValue(initialScaledQRCode, forKey: kCIInputImageKey)
+        // Add background to the center of the QR Code
+        guard let simpleQRCode = maskToAlphaFilter.outputImage,
+              let backgroundCGImage = backgroundImage.cgImage,
+              let invertedQRCode = simpleQRCode.inverted,
+              let tintedQRCode = invertedQRCode.tinted(using: qrCodeColor),
+              let backgroundQRCode = tintedQRCode.combined(with: CIImage(cgImage: backgroundCGImage))
+        else { return nil }
+        let secondScaleTransform = CGAffineTransform(scaleX: 2.5, y: 2.5)
+        let scaledBackgroundQRCode = backgroundQRCode.transformed(by: secondScaleTransform)
+        // Add logo on top of the round background
+        guard let logoCGImage = logo.cgImage,
+              let customQRCode = scaledBackgroundQRCode.combined(with: CIImage(cgImage: logoCGImage))
+            else { return nil }
+        self.init(ciImage: customQRCode)
+    }
+}
+
+// https://gist.github.com/brownsoo/1b772612b54c4dc58d88ae71aec19552
+public extension UIImage {
+  func round(_ radius: CGFloat) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        let renderer = UIGraphicsImageRenderer(size: rect.size)
+        let result = renderer.image { _ in
+            let rounded = UIBezierPath(roundedRect: rect, cornerRadius: radius)
+            rounded.addClip()
+            if let cgImage = self.cgImage {
+                UIImage(cgImage: cgImage, scale: self.scale, orientation: self.imageOrientation).draw(in: rect)
+            }
+        }
+        return result
+    }
 }
