@@ -45,7 +45,7 @@ extension UIImage {
             else { return nil }
         qrFilter.setDefaults()
         qrFilter.setValue(data, forKey: "inputMessage")
-        // Bump up error correction
+        // Increased error correction to 30% since the middle portion of the code will be covered.
         qrFilter.setValue("H", forKey: "inputCorrectionLevel")
         let firstScaleTransform = CGAffineTransform(scaleX: 9, y: 9)
         let initialScaledQRCode = qrFilter.outputImage?.transformed(by: firstScaleTransform)
