@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Sky.png",
+      "filename" : "Login@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Sky-1.png",
+      "filename" : "Login@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Sky-2.png",
+      "filename" : "Login@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

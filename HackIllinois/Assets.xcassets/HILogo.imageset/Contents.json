@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "vertical-2.png",
+      "filename" : "HILogo@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "vertical-1.png",
+      "filename" : "HILogo@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "vertical.png",
+      "filename" : "HILogo@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
