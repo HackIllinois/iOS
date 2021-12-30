@@ -253,7 +253,7 @@ struct HIAppearance: Equatable {
         static let sponsorText = UIFont.systemFont(ofSize: 14, weight: .medium)
         static let loginTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
         static let loginOrTitle = UIFont.systemFont(ofSize: 16, weight: .bold)
-        static let loginSelection = UIFont.systemFont(ofSize: 16, weight: .regular)
+        static let loginSelection = UIFont.systemFont(ofSize: 16, weight: .semibold)
 
         static let sectionHeader = UIFont.systemFont(ofSize: 13, weight: .bold)
         static let button = UIFont.systemFont(ofSize: 15, weight: .regular)
