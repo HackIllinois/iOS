@@ -126,7 +126,7 @@ struct HIAppearance: Equatable {
         contentBackground: white,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
-        qrTint: darkBlue,
+        qrTint: lightBlue,
         qrBackground: white,
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewDay"),
         preferredStatusBarStyle: statusBarWhite,
@@ -179,7 +179,7 @@ struct HIAppearance: Equatable {
         contentBackground: white,
         overlay: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.47),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
-        qrTint: darkBlue,
+        qrTint: lightBlue,
         qrBackground: white,
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewNight"),
         preferredStatusBarStyle: statusBarWhite,
@@ -274,6 +274,10 @@ struct HIAppearance: Equatable {
         static let groupStatus = UIFont.systemFont(ofSize: 12, weight: .bold)
         static let sortingText = UIFont.systemFont(ofSize: 14, weight: .semibold)
         static let countdownText = UIFont.systemFont(ofSize: 25, weight: .bold)
+        static let onboardingGetStartedText = UIFont.systemFont(ofSize: 25, weight: .semibold)
+        static let onboardingTitle = UIFont.systemFont(ofSize: 30, weight: .bold)
+        static let onboardingDescription = UIFont.systemFont(ofSize: 20, weight: .regular)
+
     }
 }
 
