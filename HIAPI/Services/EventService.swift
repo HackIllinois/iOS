@@ -28,6 +28,12 @@ public class EventService: BaseService {
         body["code"] = code
         return APIRequest<EventCheckInStatus>(service: self, endpoint: "checkin/", body: body, method: .POST)
     }
+    public static func track(eventId: String, userId: String) ->APIRequest<EventTrack> {
+        var body = HTTPBody()
+        body["eventId"] = eventId
+        body["userId"] = userId
+        return APIRequest<EventTrack>(service: self, endpoint: "track/", body: body, method: .POST)
+    }
 
     public static func create(event: Event) -> APIRequest<EventContainer> {
         let eventDict = [String: Any]()

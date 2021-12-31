@@ -70,3 +70,18 @@ public struct EventCheckInStatus: Codable, APIReturnable {
     public let totalPoints: Int
     public let status: String
 }
+
+public struct EventTracker: Codable {
+    public let eventId: String
+    public let users: [String]
+}
+
+public struct UserTracker: Codable {
+    public let userId: String
+    public let events: [String]
+}
+
+public struct EventTrack: Codable, APIReturnable {
+    public let eventTracker: EventTracker
+    public let userTracker: UserTracker
+}
