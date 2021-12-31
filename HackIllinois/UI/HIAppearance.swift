@@ -69,16 +69,28 @@ struct HIAppearance: Equatable {
 
     let clear: UIColor = .clear
     let black: UIColor = .black
+    // Hack 2022 color palette
+    private static let darkRed = #colorLiteral(red: 0.6039215686, green: 0.1411764706, blue: 0.168627451, alpha: 1)
+    private static let tan = #colorLiteral(red: 0.9098039216, green: 0.8431372549, blue: 0.6470588235, alpha: 1)
+    private static let orange = #colorLiteral(red: 0.9294117647, green: 0.6078431373, blue: 0.1294117647, alpha: 1)
+    private static let darkOrange = #colorLiteral(red: 0.7882352941, green: 0.4117647059, blue: 0.1568627451, alpha: 1)
+    private static let lightBlueGreen = #colorLiteral(red: 0.8470588235, green: 0.9254901961, blue: 0.8470588235, alpha: 1)
+    private static let maroon = #colorLiteral(red: 0.6392156863, green: 0.2941176471, blue: 0.2588235294, alpha: 1)
+    private static let lightRed = #colorLiteral(red: 0.9019607843, green: 0.5960784314, blue: 0.5568627451, alpha: 1)
+    private static let yellowGreen = #colorLiteral(red: 0.7882352941, green: 0.8117647059, blue: 0.462745098, alpha: 1)
+    private static let green = #colorLiteral(red: 0.4705882353, green: 0.6745098039, blue: 0.2588235294, alpha: 1)
+    private static let lightBlack = #colorLiteral(red: 0.03137254902, green: 0.08235294118, blue: 0.1058823529, alpha: 1)
+    private static let salmon = #colorLiteral(red: 0.9490196078, green: 0.6078431373, blue: 0.4705882353, alpha: 1)
+    private static let yellowWhite = #colorLiteral(red: 0.9647058824, green: 0.9568627451, blue: 0.831372549, alpha: 1)
 
+    // Hack 2021 color palette - they needed to be removed
     private static let darkBlue = #colorLiteral(red: 0.1326064765, green: 0.1667878032, blue: 0.3605746627, alpha: 1)
     private static let blue = #colorLiteral(red: 0.1215686275, green: 0.5176470588, blue: 0.6470588235, alpha: 1)
     private static let buttonblue = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
     private static let lightBlue = #colorLiteral(red: 0.4196078431, green: 0.6823529412, blue: 0.7725490196, alpha: 1)
     private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-    private static let orange = #colorLiteral(red: 0.8901960784, green: 0.3137254902, blue: 0.3450980392, alpha: 1)
     private static let transparent = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     private static let coral = #colorLiteral(red: 1, green: 0.4666666667, blue: 0.4352941176, alpha: 1)
-    private static let maroon = #colorLiteral(red: 0.6431372549, green: 0.231372549, blue: 0.3607843137, alpha: 1)
     private static let deepBlue = #colorLiteral(red: 0.03921568627, green: 0.03529411765, blue: 0.2470588235, alpha: 1)
     private static let darkerBlue = #colorLiteral(red: 0.1333333333, green: 0.168627451, blue: 0.3607843137, alpha: 1)
     private static let whiteBlue = #colorLiteral(red: 0.9764705882, green: 1, blue: 1, alpha: 1)
@@ -87,7 +99,7 @@ struct HIAppearance: Equatable {
     private static let lightCoral = #colorLiteral(red: 0.9333333333, green: 0.4235294118, blue: 0.4470588235, alpha: 1)
     private static let nightBlue = #colorLiteral(red: 0.4352941176, green: 0.5490196078, blue: 0.7568627451, alpha: 1)
 
-    // New colors added. Replace old ones?
+    // Colors from past years - they needed to be removed
     private static let grayBlack = #colorLiteral(red: 0.1058823529, green: 0.1058823529, blue: 0.1058823529, alpha: 1)
     private static let groupRed = #colorLiteral(red: 0.9886462091, green: 0.1137254902, blue: 0.137254902, alpha: 1)
     private static let groupOrange = #colorLiteral(red: 0.937254902, green: 0.5176470588, blue: 0.2823529412, alpha: 1)
@@ -120,13 +132,13 @@ struct HIAppearance: Equatable {
         preferredStatusBarStyle: statusBarWhite,
         scrollViewIndicatorStyle: .black,
         mapBackground: whiteBlue,
-        loginDefault: nightBlue,
-        loginTitleBackground: white,
+        loginDefault: lightBlack,
+        loginTitleBackground: lightBlack,
         loginLogo: #imageLiteral(resourceName: "HILogo"),
         viewTitleColor: deepBlue,
-        loginSelectionText: white,
-        attendeeText: white,
-        attendeeBackground: lightCoral,
+        loginSelectionText: lightBlack,
+        attendeeText: lightBlack,
+        attendeeBackground: yellowGreen,
         whiteTagFont: white,
         interestBackground: lightCoral,
         segmentedBackground: greyWhite,
@@ -173,13 +185,13 @@ struct HIAppearance: Equatable {
         preferredStatusBarStyle: statusBarWhite,
         scrollViewIndicatorStyle: .white,
         mapBackground: whiteBlue,
-        loginDefault: nightBlue,
-        loginTitleBackground: white,
+        loginDefault: lightBlack,
+        loginTitleBackground: lightBlack,
         loginLogo: #imageLiteral(resourceName: "HILogo"),
         viewTitleColor: deepBlue,
-        loginSelectionText: white,
-        attendeeText: white,
-        attendeeBackground: lightCoral,
+        loginSelectionText: lightBlack,
+        attendeeText: lightBlack,
+        attendeeBackground: yellowGreen,
         whiteTagFont: white,
         interestBackground: lightCoral,
         segmentedBackground: greyWhite,
@@ -240,6 +252,7 @@ struct HIAppearance: Equatable {
         static let descriptionText = UIFont.systemFont(ofSize: 14, weight: .regular)
         static let sponsorText = UIFont.systemFont(ofSize: 14, weight: .medium)
         static let loginTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
+        static let loginOrTitle = UIFont.systemFont(ofSize: 16, weight: .bold)
         static let loginSelection = UIFont.systemFont(ofSize: 16, weight: .semibold)
 
         static let sectionHeader = UIFont.systemFont(ofSize: 13, weight: .bold)

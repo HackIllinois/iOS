@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Login@1x-2.png",
+      "filename" : "Login@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Login@2x-2.png",
+      "filename" : "Login@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Login@3x-2.png",
+      "filename" : "Login@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
