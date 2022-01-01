@@ -14,6 +14,8 @@ import Foundation
 import UIKit
 import AVKit
 import CoreData
+import HIAPI
+import APIManager
 
 class HIScanQRCodeViewController: HIBaseViewController {
     private var captureSession: AVCaptureSession?
@@ -37,9 +39,8 @@ class HIScanQRCodeViewController: HIBaseViewController {
         $0.activeImage = #imageLiteral(resourceName: "MenuClose")
         $0.baseImage = #imageLiteral(resourceName: "MenuClose")
     }
-    private var selectedRows = Set<Int>()
-    private var interests = Set<String>()
-    private var statuses = Set<String>()
+    private var isInitialCheckin = false
+    private var selectedEvent: Event?
 }
 
 // MARK: - UIViewController
@@ -72,12 +73,15 @@ extension HIScanQRCodeViewController {
             DispatchQueue.main.async { [weak self] in
                 self?.captureSession?.startRunning()
             }
-            let popupView = HIEventPopupViewController()
-            popupView.modalPresentationStyle = .overCurrentContext
-            popupView.modalTransitionStyle = .crossDissolve
-            popupView.delegate = self
-            popupView.selectedRows = selectedRows
-            present(popupView, animated: true, completion: nil)
+            if let user = HIApplicationStateController.shared.user {
+                if user.roles.contains(.staff) {
+                    let popupView = HIEventPopupViewController()
+                    popupView.modalPresentationStyle = .overCurrentContext
+                    popupView.modalTransitionStyle = .crossDissolve
+                    popupView.delegate = self
+                    present(popupView, animated: true, completion: nil)
+                }
+            }
         }
     }
 
@@ -110,16 +114,11 @@ extension HIScanQRCodeViewController {
 
 // MARK: - HIGroupPopupViewDelegate
 extension HIScanQRCodeViewController: HIEventPopupViewDelegate {
-    func updateInterests(_ groupPopupCell: HIGroupPopupCell) {
-        guard let indexPath = groupPopupCell.indexPath, let interest = groupPopupCell.interestLabel.text else { return }
-        let modifiedInterest = interest.replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "#", with: "%23").replacingOccurrences(of: "+", with: "%2b")
-        if groupPopupCell.selectedImageView.isHidden {
-            selectedRows.insert(indexPath.row)
-            interests.insert(modifiedInterest)
-        } else {
-            selectedRows.remove(indexPath.row)
-            interests.remove(modifiedInterest)
-        }
+    func setIsInitialCheckin(_ value: Bool) {
+        isInitialCheckin = value
+    }
+    func setSelectedEvent(_ event: Event) {
+        selectedEvent = event
     }
 }
 
@@ -175,15 +174,110 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         guard respondingToQRCodeFound else { return }
         let meta = metadataObjects.first as? AVMetadataMachineReadableCodeObject
-        let code = meta?.stringValue
-        let url = URL(string: code ?? "")
+        let code = meta?.stringValue ?? ""
+//        let url = URL(string: code ?? "")
         respondingToQRCodeFound = false
-        // Note: Need to figure out what to do with this QR Code data next.
+        if let user = HIApplicationStateController.shared.user {
+            if user.roles.contains(.staff) {
+                if isInitialCheckin {
+                    HIAPI.CheckInService.checkIn(id: code, override: false)
+                    .onCompletion { (result) in
+                        DispatchQueue.main.async { [weak self] in
+                            do {
+                                let (simpleRequest, _) = try result.get()
+                                if let error = simpleRequest.message {
+                                    print("An error has occurred")
+                                } else {
+                                    print("Success!")
+                                }
+                            } catch APIRequestError.invalidHTTPReponse(code: let code, description: let description) {
+                                print("Bad Response \(code) \(description)")
+                            } catch {
+                                print("Unknown Error")
+                            }
+                        }
+                    }
+                    .authorize(with: HIApplicationStateController.shared.user)
+                    .launch()
+                } else {
+                    if let event = selectedEvent {
+                        HIAPI.EventService.track(eventId: event.id, userId: code)
+                        .onCompletion { (result) in
+                            DispatchQueue.main.async { [weak self] in
+                                do {
+                                    let (simpleRequest, _) = try result.get()
+                                    if simpleRequest.eventTracker.eventId == "" {
+                                        print("Error")
+                                    } else {
+                                        print("Success")
+                                    }
+                                } catch APIRequestError.invalidHTTPReponse(code: let code, description: let description) {
+                                    print("Bad Response \(code) \(description)")
+                                } catch {
+                                    print("Unknown Error")
+                                }
+                            }
+                        }
+                        .authorize(with: HIApplicationStateController.shared.user)
+                        .launch()
+                    }
+                }
+            } else {
+                //Is attendee
+                HIAPI.EventService.checkIn(code: code)
+                    .onCompletion { result in
+                        do {
+                            let (codeResult, _) = try result.get()
+                            let newPoints = codeResult.newPoints
+                            let status = codeResult.status
+                            DispatchQueue.main.async {
+                                var alertTitle = ""
+                                var alertMessage = ""
+                                switch status {
+                                case "Success":
+                                    alertTitle = "Success!"
+                                    alertMessage = "You received \(newPoints) points!"
+                                case "InvalidCode":
+                                    alertTitle = "Error!"
+                                    alertMessage = "This code doesn't seem to be correct."
+                                case "InvalidTime":
+                                    alertTitle = "Error!"
+                                    alertMessage = "Make sure you have the right time."
+                                case "AlreadyCheckedIn":
+                                    alertTitle = "Error!"
+                                    alertMessage = "Looks like you're already checked in."
+                                default:
+                                    alertTitle = "Error!"
+                                    alertMessage = "Something isn't quite right."
+                                }
+                                let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+                                if alertTitle == "Success!" {
+                                    alert.addAction(
+                                        UIAlertAction(title: "OK", style: .default, handler: { _ in
+                                            self.dismiss(animated: true, completion: nil)
+                                    }))
+                                } else {
+                                    alert.addAction(
+                                        UIAlertAction(title: "OK", style: .default, handler: { _ in
+                                            self.registerForKeyboardNotifications()
+                                    }))
+                                }
+                                self.present(alert, animated: true, completion: nil)
+                            }
+                        } catch {
+                            print(error, error.localizedDescription)
+                        }
+                    }
+                    .authorize(with: HIApplicationStateController.shared.user)
+                    .launch()
+            }
+        }
     }
 }
 
-protocol HIEventPopupViewDelegate: class {
-    func updateInterests(_ groupPopupCell: HIGroupPopupCell)
+protocol HIEventPopupViewDelegate: AnyObject {
+    func setIsInitialCheckin(_ value: Bool)
+    func setSelectedEvent(_ event: Event)
 }
 
 class HIEventPopupViewController: UIViewController {
@@ -195,7 +289,6 @@ class HIEventPopupViewController: UIViewController {
     var selectedRows: Set<Int>?
     var events: [Event] = []
     var names: [String] = []
-    var selectedEvent: Event?
 
     private let containerView = HIView {
         $0.layer.cornerRadius = 10
@@ -241,6 +334,7 @@ extension HIEventPopupViewController {
                 let eventFetchRequest = NSFetchRequest<Event>(entityName: "Event")
                 self.events = try context.fetch(eventFetchRequest)
                 self.names = self.events.map { $0.name }
+                self.names.insert("Initial Checkin", at: 0)
             }
             catch {}
         }
@@ -324,7 +418,6 @@ extension HIEventPopupViewController: UITableViewDataSource {
         }
         return cell
     }
-
 }
 
 // MARK: - UITableViewDelegate
@@ -334,8 +427,11 @@ extension HIEventPopupViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedEvent = events[indexPath.row]
+        if indexPath.row == 0 {
+            delegate?.setIsInitialCheckin(true)
+        } else {
+            delegate?.setSelectedEvent(events[indexPath.row-1])
+        }
         dismiss(animated: true)
-        tableView.reloadData()
     }
 }
