@@ -16,8 +16,7 @@ import HIAPI
 import APIManager
 
 class HIEventListViewController: HIBaseViewController {
-    // Event detail view controller will not be presented for HackIllinois 2021
-    // let eventDetailViewController = HIEventDetailViewController()
+    let eventDetailViewController = HIEventDetailViewController()
 }
 
 // MARK: - UITableView Setup
@@ -26,8 +25,7 @@ extension HIEventListViewController {
         if let tableView = tableView {
             tableView.register(HIDateHeader.self, forHeaderFooterViewReuseIdentifier: HIDateHeader.identifier)
             tableView.register(HIEventCell.self, forCellReuseIdentifier: HIEventCell.identifier)
-            tableView.allowsSelection = false
-            // registerForPreviewing(with: self, sourceView: tableView)
+            registerForPreviewing(with: self, sourceView: tableView)
         }
         super.setupTableView()
     }
@@ -56,8 +54,8 @@ extension HIEventListViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        eventDetailViewController.event = _fetchedResultsController?.object(at: indexPath) as? Event
-//        self.present(eventDetailViewController, animated: true, completion: nil)
+        eventDetailViewController.event = _fetchedResultsController?.object(at: indexPath) as? Event
+        self.present(eventDetailViewController, animated: true, completion: nil)
         super.tableView(tableView, didSelectRowAt: indexPath)
     }
 }
@@ -67,7 +65,6 @@ extension HIEventListViewController {
     override func refresh(_ sender: UIRefreshControl) {
         super.refresh(sender)
         HIEventDataSource.refresh(completion: endRefreshing)
-        tableView?.reloadData()
     }
 }
 
@@ -102,19 +99,19 @@ extension HIEventListViewController: HIEventCellDelegate {
 }
 
 // MARK: - UIViewControllerPreviewingDelegate
-//extension HIEventListViewController: UIViewControllerPreviewingDelegate {
-//    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-//        guard let tableView = tableView,
-//            let indexPath = tableView.indexPathForRow(at: location),
-//            let event = _fetchedResultsController?.object(at: indexPath) as? Event else {
-//                return nil
-//        }
-//        previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
-//        eventDetailViewController.event = event
-//        return eventDetailViewController
-//    }
-//
-//    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-//        self.present(viewControllerToCommit, animated: true, completion: nil)
-//    }
-//}
+extension HIEventListViewController: UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let tableView = tableView,
+            let indexPath = tableView.indexPathForRow(at: location),
+            let event = _fetchedResultsController?.object(at: indexPath) as? Event else {
+                return nil
+        }
+        previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
+        eventDetailViewController.event = event
+        return eventDetailViewController
+    }
+
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        self.present(viewControllerToCommit, animated: true, completion: nil)
+    }
+}

@@ -14,7 +14,7 @@ import Foundation
 import UIKit
 import HIAPI
 
-protocol HIEventCellDelegate: class {
+protocol HIEventCellDelegate: AnyObject {
     func eventCellDidSelectFavoriteButton(_ eventCell: HIEventCell)
 }
 
@@ -26,7 +26,6 @@ class HIEventCell: HIBubbleCell {
         $0.activeImage = #imageLiteral(resourceName: "Favorited")
         $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
     }
-
     var contentStackView = UIStackView()
     var contentStackViewHeight = NSLayoutConstraint()
 
@@ -76,7 +75,9 @@ extension HIEventCell {
 // MARK: - Population
 extension HIEventCell {
     static func heightForCell(with event: Event, width: CGFloat) -> CGFloat {
-        let height = HILabel.heightForView(text: event.name, font: HIAppearance.Font.eventTitle, width: width - 98) + 90 + HILabel.heightForView(text: event.info, font: HIAppearance.Font.eventDetails, width: width - 100) + 15
+        let heightFromEventName = HILabel.heightForView(text: event.name, font: HIAppearance.Font.eventTitle, width: width - 98)
+        let heightFromEventInfo = HILabel.heightForView(text: trimText(text: event.info, length: getMaxDescriptionTextLength()), font: HIAppearance.Font.eventDetails, width: width - 100)
+        let height = heightFromEventName + heightFromEventInfo + 90 + 15
         if !event.sponsor.isEmpty {
             return height + 21
         }
@@ -105,8 +106,9 @@ extension HIEventCell {
         }
 
         let descriptionLabel = HILabel(style: .cellDescription)
-        descriptionLabel.text = rhs.info
-        let height = HILabel.heightForView(text: rhs.info, font: HIAppearance.Font.eventDetails, width: lhs.contentView.frame.width - 100)
+        let descriptionText = trimText(text: rhs.info, length: getMaxDescriptionTextLength())
+        descriptionLabel.text = descriptionText
+        let height = HILabel.heightForView(text: descriptionText, font: HIAppearance.Font.eventDetails, width: lhs.contentView.frame.width - 100)
         lhs.contentStackView.addArrangedSubview(descriptionLabel)
         lhs.contentStackView.setCustomSpacing(10, after: descriptionLabel)
 
@@ -138,8 +140,9 @@ extension HIEventCell {
         pointsView.widthAnchor.constraint(equalTo: eventTypeLabel.widthAnchor, multiplier: 1.2).isActive = true
 
         lhs.contentStackView.addArrangedSubview(bottomView)
-
-        contentStackViewHeight += HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle, width: lhs.contentView.frame.width - 98) + timeLabel.intrinsicContentSize.height + 13 + height + 3 + 40
+        let textHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle, width: lhs.contentView.frame.width - 98)
+        contentStackViewHeight += textHeight
+        contentStackViewHeight += timeLabel.intrinsicContentSize.height + 13 + height + 3 + 40
         lhs.contentStackViewHeight.constant = contentStackViewHeight
     }
 }
@@ -171,5 +174,21 @@ extension HIEventCell {
         default:
             return \.eventTypePink
         }
+    }
+}
+
+// MARK: - Used for trimming the event description
+extension HIEventCell {
+    // Returns the maximum number of characters allowed for the event description
+    static func getMaxDescriptionTextLength() -> Int {
+        return 150
+    }
+
+    static func trimText(text: String, length: Int) -> String {
+        if text.count >= length {
+            let index = text.index(text.startIndex, offsetBy: length)
+            return String(text[..<index]) + "..."
+        }
+        return text
     }
 }
