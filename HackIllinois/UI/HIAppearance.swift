@@ -69,6 +69,7 @@ struct HIAppearance: Equatable {
 
     let clear: UIColor = .clear
     let black: UIColor = .black
+    let white: UIColor = .white
 
     private static let darkBlue = #colorLiteral(red: 0.1326064765, green: 0.1667878032, blue: 0.3605746627, alpha: 1)
     private static let blue = #colorLiteral(red: 0.1215686275, green: 0.5176470588, blue: 0.6470588235, alpha: 1)
