@@ -14,6 +14,7 @@ import Foundation
 import UIKit
 import AVKit
 import CoreData
+import APIManager
 import HIAPI
 
 class HIScanQRCodeViewController: HIBaseViewController {
