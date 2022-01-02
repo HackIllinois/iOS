@@ -47,7 +47,7 @@ extension UIImage {
         qrFilter.setValue(data, forKey: "inputMessage")
         // Increased error correction to 30% since the middle portion of the code will be covered.
         qrFilter.setValue("H", forKey: "inputCorrectionLevel")
-        let firstScaleTransform = CGAffineTransform(scaleX: 9, y: 9)
+        let firstScaleTransform = CGAffineTransform(scaleX: 8, y: 8)
         let initialScaledQRCode = qrFilter.outputImage?.transformed(by: firstScaleTransform)
         guard let maskToAlphaFilter = CIFilter(name: "CIMaskToAlpha") else { return nil }
         maskToAlphaFilter.setDefaults()
@@ -59,7 +59,7 @@ extension UIImage {
               let tintedQRCode = invertedQRCode.tinted(using: qrCodeColor),
               let backgroundQRCode = tintedQRCode.combined(with: CIImage(cgImage: backgroundCGImage))
         else { return nil }
-        let secondScaleTransform = CGAffineTransform(scaleX: 2.5, y: 2.5)
+        let secondScaleTransform = CGAffineTransform(scaleX: 3.5, y: 3.5)
         let scaledBackgroundQRCode = backgroundQRCode.transformed(by: secondScaleTransform)
         // Add logo on top of the round background
         guard let logoCGImage = logo.cgImage,
