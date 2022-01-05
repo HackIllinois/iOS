@@ -88,12 +88,8 @@ class HITabBarController: UITabBarController {
         tabBar.clipsToBounds = true
         tabBar.layer.borderWidth = 0
         tabBar.backgroundColor = UIColor.clear
-        tabBar.unselectedItemTintColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
+        tabBar.unselectedItemTintColor = (\HIAppearance.navbarTabTint).value
         tabBar.tintColor = (\HIAppearance.navbarTabTint).value
-        
-        tabBar.selectionIndicatorImage = UIImage().createSelectionIndicator(color: .blue, size: CGSize(width: tabBar.frame.width/4.0, height: tabBar.frame.height), lineWidth: 3.0)
-        
-
         addTabBarShape()
     }
 
@@ -174,16 +170,5 @@ class HITabBarController: UITabBarController {
             _ = $0.view // forces viewDidLoad to run, allows .title to be accessible
             return HINavigationController(rootViewController: $0)
         }
-    }
-}
-
-extension UIImage {
-    func createSelectionIndicator(color: UIColor, size: CGSize, lineWidth: CGFloat) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(size, false, 0)
-        color.setFill()
-        UIRectFill(CGRect(x: 0, y: size.height - lineWidth, width: size.width, height: lineWidth))
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image!
     }
 }

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Home@1x.png",
+      "filename" : "HomeSelected@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Home@2x.png",
+      "filename" : "HomeSelected@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Home@3x.png",
+      "filename" : "HomeSelected@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
@@ -19,8 +19,5 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "template-rendering-intent" : "template"
   }
 }
