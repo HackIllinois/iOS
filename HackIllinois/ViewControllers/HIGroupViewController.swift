@@ -104,7 +104,7 @@ class HIGroupViewController: HIGroupListViewController {
 // MARK: - UITabBarItem Setup
 extension HIGroupViewController {
     override func setupTabBarItem() {
-        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "leaderboard"), selectedImage: #imageLiteral(resourceName: "LeaderboardSelected"))
+        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "Leaderboard"), selectedImage: #imageLiteral(resourceName: "LeaderboardSelected"))
     }
 }
 
