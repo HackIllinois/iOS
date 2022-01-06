@@ -57,6 +57,6 @@ public final class ProfileService: BaseService {
     }
     
     public static func getLeaderboard() -> APIRequest<LeaderboardProfileContainer> {
-        return APIRequest<LeaderboardProfileContainer>(service: self, endpoint: "leaderboard/?limit=25", method: .GET)
+        return APIRequest<LeaderboardProfileContainer>(service: self, endpoint: "leaderboard/?limit=15", method: .GET)
     }
 }

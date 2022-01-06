@@ -127,3 +127,7 @@ extension HIAPI.Profile: MixTypeComparable {
 extension Profile: MixTypeComparable {
     var comparable: String { return id }
 }
+
+extension HIAPI.LeaderboardProfile: MixTypeComparable {
+    var comparable: String { return id }
+}

@@ -29,6 +29,8 @@ final class HIProfileDataSource {
 
     // Waive swiftlint warning
     // swiftlint:disable:next function_body_length
+    
+    /*
     static func refresh(teamStatus: [String] = [], interests: [String] = [], completion: (() -> Void)? = nil) {
         guard !isRefreshing else {
             completion?()
@@ -199,6 +201,75 @@ final class HIProfileDataSource {
             }
         }
         .authorize(with: HIApplicationStateController.shared.user)
+        .launch()
+    } */
+    
+    static func refresh(completion: (() -> Void)? = nil) {
+        guard !isRefreshing else {
+            completion?()
+            return
+        }
+        isRefreshing = true
+
+        HIAPI.ProfileService.getLeaderboard()
+        .onCompletion { result in
+            do {
+                let (containedProfiles, _) = try result.get()
+    
+                // 1) Unwrap contained data
+                let apiProfiles = containedProfiles.leaderboardProfiles
+                HICoreDataController.shared.performBackgroundTask { context -> Void in
+                    do {
+
+                        // 2) Get all CoreData locations.
+                        let leaderboardProfileFetchRequest = NSFetchRequest<Profile>(entityName: "Profile")
+                        let coreDataLeaderboardProfiles = try context.fetch(leaderboardProfileFetchRequest)
+
+                        // 3) Diff the CoreData profiles and API profiles.
+                        let (
+                            coreDataProfilesToDelete,
+                            coreDataProfilesToUpdate,
+                            apiProfilesToInsert
+                        ) = diff(initial: coreDataLeaderboardProfiles, final: apiProfiles)
+                        
+                        // 4) Apply diff
+                        coreDataProfilesToDelete.forEach { coreDataProfile in
+                            // Delete CoreData location.
+                            context.delete(coreDataProfile)
+                        }
+
+                        coreDataProfilesToUpdate.forEach { (coreDataProfile, apiProfile) in
+                            // Update CoreData profile.
+                            coreDataProfile.id = apiProfile.id
+                            coreDataProfile.firstName = apiProfile.firstName
+                            coreDataProfile.lastName = apiProfile.lastName
+                            coreDataProfile.points = Int32(apiProfile.points)
+                        }
+
+                        apiProfilesToInsert.forEach { apiProfile in
+                            // Create CoreData profile.
+                            let coreDataProfile = Profile(context: context)
+                            coreDataProfile.id = apiProfile.id
+                            coreDataProfile.firstName = apiProfile.firstName
+                            coreDataProfile.lastName = apiProfile.lastName
+                            coreDataProfile.points = Int32(apiProfile.points)
+                        }
+
+                        // 5) Save changes, call completion handler, unlock refresh
+                        try context.save()
+                        completion?()
+                        isRefreshing = false
+                    } catch {
+                        completion?()
+                        isRefreshing = false
+                        print(error)
+                    }
+                }
+            } catch {
+                completion?()
+                isRefreshing = false
+            }
+        }
         .launch()
     }
 }
