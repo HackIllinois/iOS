@@ -203,7 +203,7 @@ final class HIProfileDataSource {
         .authorize(with: HIApplicationStateController.shared.user)
         .launch()
     } */
-    
+
     static func refresh(completion: (() -> Void)? = nil) {
         guard !isRefreshing else {
             completion?()
@@ -215,7 +215,7 @@ final class HIProfileDataSource {
         .onCompletion { result in
             do {
                 let (containedProfiles, _) = try result.get()
-    
+
                 // 1) Unwrap contained data
                 let apiProfiles = containedProfiles.leaderboardProfiles
                 HICoreDataController.shared.performBackgroundTask { context -> Void in
@@ -231,7 +231,7 @@ final class HIProfileDataSource {
                             coreDataProfilesToUpdate,
                             apiProfilesToInsert
                         ) = diff(initial: coreDataLeaderboardProfiles, final: apiProfiles)
-                        
+
                         // 4) Apply diff
                         coreDataProfilesToDelete.forEach { coreDataProfile in
                             // Delete CoreData location.
@@ -270,6 +270,7 @@ final class HIProfileDataSource {
                 isRefreshing = false
             }
         }
+        .authorize(with: HIApplicationStateController.shared.user)
         .launch()
     }
 }
