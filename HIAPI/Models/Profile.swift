@@ -56,7 +56,7 @@ public struct ProfileFavorites: Codable, APIReturnable {
 
 public struct LeaderboardProfileContainer: Decodable, APIReturnable {
     public let leaderboardProfiles: [LeaderboardProfile]
-    
+
     public init(from data: Data) throws {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .secondsSince1970
@@ -71,7 +71,7 @@ public struct LeaderboardProfile: Codable, APIReturnable {
         case lastName
         case points
     }
-    
+
     public let id: String
     public let firstName: String
     public let lastName: String
