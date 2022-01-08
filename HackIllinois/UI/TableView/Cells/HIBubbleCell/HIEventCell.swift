@@ -117,7 +117,7 @@ extension HIEventCell {
 
         let pointsView = HIView { (view) in
             view.layer.cornerRadius = 15
-            view.backgroundHIColor = \.buttonBlue
+            view.backgroundHIColor = \.buttonGreen
             view.translatesAutoresizingMaskIntoConstraints = false
         }
 

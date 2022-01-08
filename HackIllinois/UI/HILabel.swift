@@ -255,7 +255,7 @@ class HILabel: UILabel {
             font = HIAppearance.Font.countdownText
 
         case .pointsText:
-            textHIColor = \.whiteText
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.eventButtonText
             textAlignment = .center

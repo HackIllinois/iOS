@@ -38,7 +38,7 @@ struct HIAppearance: Equatable {
     let whiteTagFont: UIColor
     let interestBackground: UIColor
     let segmentedBackground: UIColor
-    let buttonBlue: UIColor
+    let buttonGreen: UIColor
     let favoriteStarTint: UIColor
 
     // New fonts added. Replace old ones?
@@ -143,7 +143,7 @@ struct HIAppearance: Equatable {
         whiteTagFont: white,
         interestBackground: lightCoral,
         segmentedBackground: greyWhite,
-        buttonBlue: buttonblue,
+        buttonGreen: yellowGreen,
         favoriteStarTint: orange,
         groupText: grayBlack,
         memberSearchText: groupOrange,
@@ -197,7 +197,7 @@ struct HIAppearance: Equatable {
         whiteTagFont: white,
         interestBackground: lightCoral,
         segmentedBackground: greyWhite,
-        buttonBlue: buttonblue,
+        buttonGreen: yellowGreen,
         favoriteStarTint: orange,
         groupText: grayBlack,
         memberSearchText: groupOrange,
@@ -246,14 +246,14 @@ struct HIAppearance: Equatable {
         static let eventTitle = UIFont.systemFont(ofSize: 16, weight: .semibold)
         static let eventTime = UIFont.systemFont(ofSize: 12, weight: .regular)
         static let eventDetails = UIFont.systemFont(ofSize: 14, weight: .regular)
-        static let eventButtonText = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        static let eventButtonText = UIFont.systemFont(ofSize: 14, weight: .regular)
         static let eventCategoryText = UIFont.systemFont(ofSize: 12, weight: .semibold)
 
         static let navigationSubtitle = UIFont.systemFont(ofSize: 14, weight: .medium)
         static let navigationTitle = UIFont.systemFont(ofSize: 22, weight: .semibold)
         static let navigationInfoText = UIFont.systemFont(ofSize: 12, weight: .regular)
         static let descriptionText = UIFont.systemFont(ofSize: 16, weight: .regular)
-        static let sponsorText = UIFont.systemFont(ofSize: 18, weight: .medium)
+        static let sponsorText = UIFont.systemFont(ofSize: 18, weight: .regular)
         static let loginTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
         static let loginOrTitle = UIFont.systemFont(ofSize: 16, weight: .bold)
         static let loginSelection = UIFont.systemFont(ofSize: 16, weight: .semibold)
