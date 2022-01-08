@@ -31,21 +31,12 @@ class HIEventDetailViewController: HIBaseViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.clear
     }
-    private let titleLabel = HILabel(style: .detailTitle) {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+    private let titleLabel = HILabel(style: .detailTitle)
 
-    private let sponsorLabel = HILabel(style: .sponsor) {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+    private let sponsorLabel = HILabel(style: .sponsor)
+    private let timeLabel = HILabel(style: .description)
 
-    private let timeLabel = HILabel(style: .description) {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
-
-    private let descriptionLabel = HILabel(style: .detailText) {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+    private let descriptionLabel = HILabel(style: .detailText)
     private let favoritedButton = HIButton {
         $0.tintHIColor = \.favoriteStarTint
         $0.backgroundHIColor = \.clear
@@ -127,8 +118,8 @@ extension HIEventDetailViewController {
 
         upperContainerView.addSubview(timeLabel)
         timeLabel.topAnchor.constraint(equalTo: sponsorLabel.bottomAnchor, constant: 5).isActive = true
-        timeLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
-
+        timeLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: 15).isActive = true
+        
         eventDetailContainer.addSubview(descriptionLabel)
         descriptionLabel.topAnchor.constraint(equalTo: upperContainerView.bottomAnchor, constant: 30).isActive = true
         descriptionLabel.constrain(to: eventDetailContainer, trailingInset: -12)
