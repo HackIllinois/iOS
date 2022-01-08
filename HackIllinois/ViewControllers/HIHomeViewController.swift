@@ -105,19 +105,10 @@ extension HIHomeViewController {
 extension HIHomeViewController {
     override func loadView() {
         super.loadView()
-//        self.navigationItem.rightBarButtonItem = announcementButton.toBarButtonItem()
-//        announcementButton.addTarget(self, action: #selector(didSelectAnnouncementButton(_:)), for: .touchUpInside)
-//        announcementButton.constrain(width: 22, height: 22)
-//
-//        if HIApplicationStateController.shared.isGuest {
-//            announcementButton.isHidden = true
-//        }
-
         countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
         addChild(countdownViewController)
         view.addSubview(countdownViewController.view)
         countdownViewController.view.constrain(to: view, topInset: UIScreen.main.bounds.height * 0.12, trailingInset: 0, leadingInset: 20)
-        countdownViewController.view.constrain(to: view.safeAreaLayoutGuide, trailingInset: -10, leadingInset: 10)
         if UIDevice.current.userInterfaceIdiom == .pad {
             countdownViewController.view.constrain(height: 0.34 * UIScreen.main.bounds.height)
         } else {
