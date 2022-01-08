@@ -33,49 +33,34 @@ class HIEventDetailViewController: HIBaseViewController {
     }
     private let titleLabel = HILabel(style: .detailTitle) {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor <- \.whiteText
-        $0.font = HIAppearance.Font.detailTitle
     }
 
     private let sponsorLabel = HILabel(style: .sponsor) {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor <- \.attendeeBackground
-        $0.font = HIAppearance.Font.sponsorText
     }
 
     private let timeLabel = HILabel(style: .description) {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor <- \.whiteText
-        $0.font = HIAppearance.Font.contentText
     }
 
     private let descriptionLabel = HILabel(style: .detailText) {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor <- \.whiteText
-        $0.numberOfLines = 0
     }
     private let favoritedButton = HIButton {
-        $0.tintHIColor = \.whiteText
+        $0.tintHIColor = \.favoriteStarTint
         $0.backgroundHIColor = \.clear
         $0.activeImage = #imageLiteral(resourceName: "Favorited")
         $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
     }
     private let closeButton = HIButton {
-        $0.tintHIColor = \.whiteText
+        $0.tintHIColor = \.baseText
         $0.backgroundHIColor = \.clear
         $0.activeImage = #imageLiteral(resourceName: "MenuClose")
         $0.baseImage = #imageLiteral(resourceName: "MenuClose")
     }
-    private let cameraButton = HIButton {
-        $0.tintHIColor = \.whiteText
-        $0.backgroundHIColor = \.clear
-        $0.activeImage = #imageLiteral(resourceName: "Camera")
-        $0.baseImage = #imageLiteral(resourceName: "Camera")
-    }
 
     // MARK: Constraints
     private var descriptionLabelHeight = NSLayoutConstraint()
-    private var tableViewHeight = NSLayoutConstraint()
 }
 
 // MARK: - Actions
@@ -150,18 +135,6 @@ extension HIEventDetailViewController {
         descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         descriptionLabelHeight = descriptionLabel.heightAnchor.constraint(equalToConstant: 100)
         descriptionLabelHeight.isActive = true
-
-        let tableView = UITableView()
-        tableView.backgroundColor <- \.clear
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        eventDetailContainer.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20).isActive = true
-        tableView.constrain(to: eventDetailContainer, bottomInset: -6)
-        tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: -12).isActive = true
-        tableViewHeight = tableView.heightAnchor.constraint(equalToConstant: 100)
-        tableViewHeight.isActive = true
-        self.tableView = tableView
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -177,12 +150,10 @@ extension HIEventDetailViewController {
         timeLabel.text = Formatter.simpleTime.string(from: event.startTime) + " - " + Formatter.simpleTime.string(from: event.endTime)
         favoritedButton.isActive = event.favorite
 
-        tableView?.reloadData()
         view.layoutIfNeeded()
         let targetSize = CGSize(width: descriptionLabel.frame.width, height: .greatestFiniteMagnitude)
         let neededSize = descriptionLabel.sizeThatFits(targetSize)
         descriptionLabelHeight.constant = neededSize.height
-        tableViewHeight.constant = CGFloat(event.locations.count) * 160
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -218,78 +189,11 @@ extension HIEventDetailViewController {
     }
 }
 
-// MARK: - UITableView Setup
+// MARK: - UIImageView Setup
 extension HIEventDetailViewController {
-    override func setupTableView() {
-        tableView?.alwaysBounceVertical = false
-        tableView?.register(HIEventDetailLocationCell.self, forCellReuseIdentifier: HIEventDetailLocationCell.identifier)
-        super.setupTableView()
+    @objc dynamic override func setUpBackgroundView() {
+        super.setUpBackgroundView()
+        backgroundView.image = #imageLiteral(resourceName: "EventDetailBackground")
     }
 }
 
-// MARK: - UITableViewDataSource
-extension HIEventDetailViewController {
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let event = event else { return 0 }
-        return event.locations.count
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: HIEventDetailLocationCell.identifier, for: indexPath)
-        if let cell = cell as? HIEventDetailLocationCell,
-            let event = event,
-            event.locations.count > indexPath.row,
-            let location = event.locations.allObjects[indexPath.row] as? Location {
-            cell <- location
-        }
-        return cell
-    }
-}
-
-// MARK: - UITableViewDelegate
-extension HIEventDetailViewController {
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat.leastNonzeroMagnitude
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 300
-    }
-
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return CGFloat.leastNonzeroMagnitude
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let event = event,
-            event.locations.count > indexPath.row,
-            let location = event.locations.allObjects[indexPath.row] as? Location {
-            let clLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
-
-            let distance: CLLocationDistance
-            if let userLocation = CLLocationManager().location {
-                distance = userLocation.distance(from: clLocation) * 1.5
-            } else {
-                distance = 1_500
-            }
-
-            let divisor: CLLocationDistance = 50_000
-            let span = MKCoordinateSpan(latitudeDelta: distance/divisor, longitudeDelta: distance/divisor)
-
-            let options = [
-                MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: clLocation.coordinate),
-                MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: span)
-            ]
-
-            let placemark = MKPlacemark(coordinate: clLocation.coordinate, addressDictionary: nil)
-            let mapItem = MKMapItem(placemark: placemark)
-            mapItem.name = location.name
-            mapItem.openInMaps(launchOptions: options)
-        }
-        super.tableView(tableView, didSelectRowAt: indexPath)
-    }
-}

@@ -102,12 +102,12 @@ class HILabel: UILabel {
             textAlignment = .center
 
         case .sponsor:
-            textHIColor = \.attendeeBackground
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.sponsorText
 
         case .detailTitle:
-            textHIColor = \.whiteText
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.detailTitle
             numberOfLines = 0
@@ -119,7 +119,7 @@ class HILabel: UILabel {
             numberOfLines = 0
 
         case .detailText:
-            textHIColor = \.whiteText
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.detailText
             numberOfLines = 0
@@ -141,7 +141,7 @@ class HILabel: UILabel {
             font = HIAppearance.Font.contentSubtitle
 
         case .description:
-            textHIColor = \.whiteText
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.descriptionText
             numberOfLines = 0

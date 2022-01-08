@@ -39,6 +39,7 @@ struct HIAppearance: Equatable {
     let interestBackground: UIColor
     let segmentedBackground: UIColor
     let buttonBlue: UIColor
+    let favoriteStarTint: UIColor
 
     // New fonts added. Replace old ones?
     let groupText: UIColor
@@ -143,6 +144,7 @@ struct HIAppearance: Equatable {
         interestBackground: lightCoral,
         segmentedBackground: greyWhite,
         buttonBlue: buttonblue,
+        favoriteStarTint: orange,
         groupText: grayBlack,
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
@@ -196,6 +198,7 @@ struct HIAppearance: Equatable {
         interestBackground: lightCoral,
         segmentedBackground: greyWhite,
         buttonBlue: buttonblue,
+        favoriteStarTint: orange,
         groupText: grayBlack,
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
