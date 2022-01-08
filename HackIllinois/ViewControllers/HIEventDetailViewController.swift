@@ -33,6 +33,7 @@ class HIEventDetailViewController: HIBaseViewController {
     }
     private let titleLabel = HILabel(style: .detailTitle)
     private let sponsorLabel = HILabel(style: .sponsor)
+    private let eventTypeLabel = HILabel(style: .eventType)
     private let timeLabel = HILabel(style: .description)
     private let descriptionLabel = HILabel(style: .detailText)
     let pointsView = HIView { (view) in
@@ -102,6 +103,7 @@ extension HIEventDetailViewController {
         setupCloseButton()
         setupContainers()
         setupTitle()
+        setupEventType()
         setupSponsor()
         // Only attendees can favorite events
         if !HIApplicationStateController.shared.isGuest {
@@ -125,6 +127,7 @@ extension HIEventDetailViewController {
         timeLabel.text = Formatter.simpleTime.string(from: event.startTime) + " - " + Formatter.simpleTime.string(from: event.endTime)
         favoritedButton.isActive = event.favorite
         pointsLabel.text = " + \(event.points) pts  "
+        eventTypeLabel.text = event.eventType
         view.layoutIfNeeded()
         let targetSize = CGSize(width: descriptionLabel.frame.width, height: .greatestFiniteMagnitude)
         let neededSize = descriptionLabel.sizeThatFits(targetSize)
@@ -146,10 +149,15 @@ extension HIEventDetailViewController {
         upperContainerView.constrain(to: eventDetailContainer, topInset: 25, trailingInset: 0, leadingInset: 0)
         upperContainerView.constrain(height: 75)
     }
+    func setupEventType() {
+        upperContainerView.addSubview(eventTypeLabel)
+        eventTypeLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
+        eventTypeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
+    }
     func setupSponsor() {
         upperContainerView.addSubview(sponsorLabel)
         sponsorLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
-        sponsorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
+        sponsorLabel.topAnchor.constraint(equalTo: eventTypeLabel.bottomAnchor, constant: 5).isActive = true
     }
     func setupTitle() {
         upperContainerView.addSubview(titleLabel)
@@ -160,7 +168,7 @@ extension HIEventDetailViewController {
     func setupTime() {
         upperContainerView.addSubview(timeImageView)
         timeImageView.translatesAutoresizingMaskIntoConstraints = false
-        timeImageView.topAnchor.constraint(equalTo: sponsorLabel.bottomAnchor, constant: 5).isActive = true
+        timeImageView.topAnchor.constraint(equalTo: sponsorLabel.bottomAnchor, constant: 10).isActive = true
         timeImageView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
 
         upperContainerView.addSubview(timeLabel)
@@ -176,7 +184,7 @@ extension HIEventDetailViewController {
     }
     func setupDescription() {
         eventDetailContainer.addSubview(descriptionLabel)
-        descriptionLabel.topAnchor.constraint(equalTo: upperContainerView.bottomAnchor, constant: 15).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 15).isActive = true
         descriptionLabel.constrain(to: eventDetailContainer, trailingInset: -12)
         descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         descriptionLabelHeight = descriptionLabel.heightAnchor.constraint(equalToConstant: 100)
