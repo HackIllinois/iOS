@@ -118,7 +118,7 @@ extension HIEventDetailViewController {
 
         upperContainerView.addSubview(timeLabel)
         timeLabel.topAnchor.constraint(equalTo: sponsorLabel.bottomAnchor, constant: 5).isActive = true
-        timeLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: 15).isActive = true
+        timeLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: 0).isActive = true
         
         eventDetailContainer.addSubview(descriptionLabel)
         descriptionLabel.topAnchor.constraint(equalTo: upperContainerView.bottomAnchor, constant: 30).isActive = true

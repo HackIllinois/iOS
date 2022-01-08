@@ -131,7 +131,6 @@ extension HIProfileViewController {
         qrBackground.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         qrBackground.constrain(width: 250, height: 250)
         qrBackground.addSubview(qrImageView)
-        qrImageView.constrain(to: qrBackground, topInset: 0)
         qrImageView.centerYAnchor.constraint(equalTo: qrBackground.centerYAnchor).isActive = true
         qrImageView.centerXAnchor.constraint(equalTo: qrBackground.centerXAnchor).isActive = true
         qrImageView.constrain(width: 200, height: 200)
