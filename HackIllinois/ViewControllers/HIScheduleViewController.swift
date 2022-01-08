@@ -156,6 +156,7 @@ extension HIScheduleViewController {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         setupRefreshControl()
         super.viewDidLoad()
+        super.setCustomTitle(customTitle: "Schedule")
     }
 }
 
@@ -163,7 +164,6 @@ extension HIScheduleViewController {
 extension HIScheduleViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
-        title = "Schedule"
         if !HIApplicationStateController.shared.isGuest {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuUnfavorited"), style: .plain, target: self, action: #selector(didSelectFavoritesIcon(_:)))
         }
@@ -179,7 +179,7 @@ extension HIScheduleViewController {
 // MARK: - UITabBarItem Setup
 extension HIScheduleViewController {
     override func setupTabBarItem() {
-        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "schedule"), tag: 0)
+        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "Home"), tag: 0)
     }
 }
 

@@ -23,14 +23,14 @@ class HILabel: UILabel {
         case eventType
         case sponsor
         case project
-        case title
+        case viewTitle
         case detailTitle
         case subtitle
         case description
         case cellDescription
         case loginHeader
         case loginSelection
-        case viewTitle
+        case welcomeTitle
         case backgroundTitle
         case detailSubtitle
         case detailText
@@ -129,11 +129,11 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.contentTitle
 
-        case .title:
+        case .viewTitle:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .center
-            font = HIAppearance.Font.contentTitle
+            font = HIAppearance.Font.viewTitle
 
         case .subtitle:
             textHIColor = \.accent
@@ -157,7 +157,7 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.loginTitle
 
-        case .viewTitle:
+        case .welcomeTitle:
             textHIColor = \.loginSelectionText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.loginTitle
