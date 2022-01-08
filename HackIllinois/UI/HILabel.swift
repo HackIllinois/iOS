@@ -216,7 +216,7 @@ class HILabel: UILabel {
             textHIColor = \.titleText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.navigationInfoText
-            textAlignment = .center
+            textAlignment = .left
 
         // New styles for group matching
         case .groupDescription:

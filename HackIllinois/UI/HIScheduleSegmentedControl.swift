@@ -53,12 +53,12 @@ class HIScheduleSegmentedControl: HISegmentedControl {
     @objc override func refreshForThemeChange() {
         backgroundColor <- \.clear
         titleLabels.forEach {
-            $0.textColor <- \.whiteText
+            $0.textColor <- \.baseText
             $0.backgroundColor <- \.clear
         }
 
         numberLabels.forEach {
-            $0.textColor <- \.whiteText
+            $0.textColor <- \.baseText
             $0.backgroundColor <- \.clear
         }
 
