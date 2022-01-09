@@ -215,16 +215,13 @@ final class HIProfileDataSource {
         .onCompletion { result in
             do {
                 let (containedProfiles, _) = try result.get()
-
-                // 1) Unwrap contained data
-                let apiProfiles = containedProfiles.profiles
                 HICoreDataController.shared.performBackgroundTask { context -> Void in
                     do {
-
+                        // 1) Unwrap contained data
+                        let apiProfiles = containedProfiles.leaderboardProfiles
                         // 2) Get all CoreData profiles.
-                        let leaderboardProfileFetchRequest = NSFetchRequest<Profile>(entityName: "Profile")
+                        let leaderboardProfileFetchRequest = NSFetchRequest<LeaderboardProfile>(entityName: "LeaderboardProfile")
                         let coreDataLeaderboardProfiles = try context.fetch(leaderboardProfileFetchRequest)
-
                         // 3) Diff the CoreData profiles and API profiles.
                         let (
                             coreDataProfilesToDelete,
