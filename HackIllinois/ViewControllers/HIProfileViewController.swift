@@ -14,6 +14,7 @@ import Foundation
 import UIKit
 import CoreData
 import HIAPI
+import CoreImage.CIFilterBuiltins
 
 class HIProfileViewController: HIBaseViewController {
     // MARK: - Properties
@@ -38,11 +39,12 @@ class HIProfileViewController: HIBaseViewController {
         $0.backgroundHIColor = \.clear
     }
 
-    private let profilePictureView = HIImageView {
-        $0.layer.cornerRadius = 8
-        $0.layer.masksToBounds = true
+    private let qrImageView = HITintImageView {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.tintHIColor = \.qrTint
+        $0.contentMode = .scaleAspectFit
     }
+    private let qrBackground = HIView(style: .qrBackground)
     private let profileNameView = HILabel(style: .profileName) {
         $0.text = ""
     }
@@ -123,17 +125,18 @@ extension HIProfileViewController {
         errorView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
         errorView.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
-
-    func layoutProfile() {
-        self.navigationItem.leftBarButtonItem = logoutButton.toBarButtonItem()
-        logoutButton.addTarget(self, action: #selector(didSelectLogoutButton(_:)), for: .touchUpInside)
-        logoutButton.constrain(width: 25, height: 25)
-        if !HIApplicationStateController.shared.isGuest {
-            self.navigationItem.rightBarButtonItem = editButton.toBarButtonItem()
-            editButton.constrain(width: 22, height: 22)
-            editButton.addTarget(self, action: #selector(didSelectEditButton(_:)), for: .touchUpInside)
-            _ = editViewController.view
-        }
+    func layoutQRCode() {
+        contentView.addSubview(qrBackground)
+        qrBackground.constrain(to: contentView, topInset: 0)
+        qrBackground.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        qrBackground.constrain(width: 250, height: 250)
+        qrBackground.addSubview(qrImageView)
+        qrImageView.constrain(to: qrBackground, topInset: 0)
+        qrImageView.centerYAnchor.constraint(equalTo: qrBackground.centerYAnchor).isActive = true
+        qrImageView.centerXAnchor.constraint(equalTo: qrBackground.centerXAnchor).isActive = true
+        qrImageView.constrain(width: 200, height: 200)
+    }
+    func layoutScrollView() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.alwaysBounceVertical = true
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -143,19 +146,46 @@ extension HIProfileViewController {
         scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         scrollView.addSubview(contentView)
-
+    }
+    func layoutButtons() {
+        self.navigationItem.leftBarButtonItem = logoutButton.toBarButtonItem()
+        logoutButton.addTarget(self, action: #selector(didSelectLogoutButton(_:)), for: .touchUpInside)
+        logoutButton.constrain(width: 25, height: 25)
+        if !HIApplicationStateController.shared.isGuest {
+            self.navigationItem.rightBarButtonItem = editButton.toBarButtonItem()
+            editButton.constrain(width: 22, height: 22)
+            editButton.addTarget(self, action: #selector(didSelectEditButton(_:)), for: .touchUpInside)
+            _ = editViewController.view
+        }
+    }
+    func layoutContentView() {
         contentView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10).isActive = true
         contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        contentView.addSubview(profilePictureView)
-        profilePictureView.constrain(to: contentView, topInset: 0)
-        profilePictureView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        profilePictureView.constrain(width: 100, height: 100)
+    }
+    func layoutDescription() {
+        // Reference: https://medium.com/swift-productions/create-a-uiscrollview-programmatically-xcode-12-swift-5-3-f799b8280e30
+        let profileStatStackView = UIStackView()
+        contentView.addSubview(profileStatStackView)
+        loadStatView(profileStatStackView: profileStatStackView)
+        let descriptionContentView = UIView()
+        contentView.addSubview(descriptionContentView)
+        descriptionContentView.translatesAutoresizingMaskIntoConstraints = false
+        descriptionContentView.topAnchor.constraint(equalTo: profileStatStackView.bottomAnchor, constant: 20).isActive = true
+        descriptionContentView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        descriptionContentView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+        descriptionContentView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        descriptionContentView.addSubview(profileDescriptionView)
+        loadDescriptionView(descriptionContentView: descriptionContentView)
+    }
+    func layoutProfileNameView() {
         contentView.addSubview(profileNameView)
-        profileNameView.topAnchor.constraint(equalTo: profilePictureView.bottomAnchor, constant: 12).isActive = true
+        profileNameView.topAnchor.constraint(equalTo: qrBackground.bottomAnchor, constant: 12).isActive = true
         profileNameView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         profileNameView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9).isActive = true
+    }
+    func layoutProfileStatus() {
         profileStatusContainer.translatesAutoresizingMaskIntoConstraints = false
         profileStatusContainer.backgroundColor = .clear
         contentView.addSubview(profileStatusContainer)
@@ -172,21 +202,16 @@ extension HIProfileViewController {
         profileStatusDescriptionView.bottomAnchor.constraint(equalTo: profileStatusContainer.bottomAnchor).isActive = true
         profileStatusDescriptionView.leadingAnchor.constraint(equalTo: profileStatusIndicator.trailingAnchor, constant: 5).isActive = true
         profileStatusDescriptionView.trailingAnchor.constraint(equalTo: profileStatusContainer.trailingAnchor).isActive = true
-        let profileStatStackView = UIStackView()
-        contentView.addSubview(profileStatStackView)
-        loadStatView(profileStatStackView: profileStatStackView)
-        // Reference: https://medium.com/swift-productions/create-a-uiscrollview-programmatically-xcode-12-swift-5-3-f799b8280e30
-        let descriptionContentView = UIView()
-        contentView.addSubview(descriptionContentView)
-        descriptionContentView.translatesAutoresizingMaskIntoConstraints = false
-        descriptionContentView.topAnchor.constraint(equalTo: profileStatStackView.bottomAnchor, constant: 20).isActive = true
-        descriptionContentView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        descriptionContentView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
-        descriptionContentView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        descriptionContentView.addSubview(profileDescriptionView)
-        loadDescriptionView(descriptionContentView: descriptionContentView)
     }
-
+    func layoutProfile() {
+        layoutButtons()
+        layoutScrollView()
+        layoutContentView()
+        layoutQRCode()
+        layoutProfileNameView()
+        layoutProfileStatus()
+        layoutDescription()
+    }
     func loadStatView(profileStatStackView: UIStackView) {
         profileStatStackView.axis = .horizontal
         profileStatStackView.distribution = .fillEqually
@@ -248,10 +273,23 @@ extension HIProfileViewController {
 
     func updateProfile() {
         guard let profile = HIApplicationStateController.shared.profile else { return }
+        guard let user = HIApplicationStateController.shared.user else { return }
         view.layoutIfNeeded()
 
-        if let url = URL(string: profile.avatarUrl), let imgValue = HIConstants.PROFILE_IMAGES[url.absoluteString] {
-            profilePictureView.changeImage(newImage: imgValue)
+        // Generate a QR Code with the user's id
+        DispatchQueue.global(qos: .userInitiated).async {
+            let qrImage: UIImage!
+            if let logo = UIImage(named: "QRCodeLogo"), let whiteBackground = UIImage(named: "QRCodeBackground") {
+                // Custom QR Code with logo
+                qrImage = UIImage.init(qrString: user.id, qrCodeColor: (\HIAppearance.qrTint).value, backgroundImage: whiteBackground, logo: logo)
+            } else {
+                // Regular, black QR Code
+                let size = max(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
+                qrImage = UIImage.init(qrString: user.id, size: size)
+            }
+            DispatchQueue.main.async {
+                self.qrImageView.image = qrImage
+            }
         }
         profileNameView.text = profile.firstName + " " + profile.lastName
         let modifiedTeamStatus = profile.teamStatus.capitalized.replacingOccurrences(of: "_", with: " ")
