@@ -228,7 +228,6 @@ final class HIProfileDataSource {
                             coreDataProfilesToUpdate,
                             apiProfilesToInsert
                         ) = diff(initial: coreDataLeaderboardProfiles, final: apiProfiles)
-
                         // 4) Apply diff
                         coreDataProfilesToDelete.forEach { coreDataProfile in
                             // Delete CoreData location.
