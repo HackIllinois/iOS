@@ -40,7 +40,7 @@ class HIScanQRCodeViewController: HIBaseViewController {
         $0.baseImage = #imageLiteral(resourceName: "MenuClose")
     }
     private var isInitialCheckin = false
-    private var selectedEvent: Event?
+    private var selectedEvent: String?
 }
 
 // MARK: - UIViewController
@@ -117,8 +117,8 @@ extension HIScanQRCodeViewController: HIEventPopupViewDelegate {
     func setIsInitialCheckin(_ value: Bool) {
         isInitialCheckin = value
     }
-    func setSelectedEvent(_ event: Event) {
-        selectedEvent = event
+    func setSelectedEvent(_ id: String) {
+        selectedEvent = id
     }
 }
 
@@ -186,7 +186,7 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                             do {
                                 let (simpleRequest, _) = try result.get()
                                 if let error = simpleRequest.message {
-                                    print("An error has occurred")
+                                    print("An error has occurred \(error)")
                                 } else {
                                     print("Success!")
                                 }
@@ -201,7 +201,7 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                     .launch()
                 } else {
                     if let event = selectedEvent {
-                        HIAPI.EventService.track(eventId: event.id, userId: code)
+                        HIAPI.EventService.track(eventId: event, userId: code)
                         .onCompletion { (result) in
                             DispatchQueue.main.async { [weak self] in
                                 do {

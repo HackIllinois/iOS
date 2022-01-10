@@ -12,7 +12,7 @@ import CoreData
 
 protocol HIEventPopupViewDelegate: AnyObject {
     func setIsInitialCheckin(_ value: Bool)
-    func setSelectedEvent(_ event: Event)
+    func setSelectedEvent(_ event: String)
 }
 
 class HIEventPopupViewController: UIViewController {
@@ -24,6 +24,7 @@ class HIEventPopupViewController: UIViewController {
     var selectedRows: Set<Int>?
     var events: [Event] = []
     var names: [String] = []
+    var eventIds: [String] = []
 
     private let containerView = HIView {
         $0.layer.cornerRadius = 10
@@ -75,6 +76,7 @@ extension HIEventPopupViewController {
                 self.events = try context.fetch(eventFetchRequest)
                 self.names = self.events.map { $0.name }
                 self.names.insert("Initial Checkin", at: 0)
+                self.eventIds = self.events.map { $0.id }
             }
             catch {}
         }
@@ -172,7 +174,7 @@ extension HIEventPopupViewController: UITableViewDelegate {
         if indexPath.row == 0 {
             delegate?.setIsInitialCheckin(true)
         } else {
-            delegate?.setSelectedEvent(events[indexPath.row-1])
+            delegate?.setSelectedEvent(eventIds[indexPath.row-1])
         }
         dismiss(animated: true)
     }
