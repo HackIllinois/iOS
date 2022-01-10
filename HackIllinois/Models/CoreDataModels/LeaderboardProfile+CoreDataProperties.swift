@@ -24,3 +24,4 @@ extension LeaderboardProfile {
     @NSManaged public var lastName: String
     @NSManaged public var points: Int32
 }
+

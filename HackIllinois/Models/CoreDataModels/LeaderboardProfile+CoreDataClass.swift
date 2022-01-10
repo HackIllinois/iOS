@@ -17,3 +17,4 @@ import CoreData
 public class LeaderboardProfile: NSManagedObject {
 
 }
+

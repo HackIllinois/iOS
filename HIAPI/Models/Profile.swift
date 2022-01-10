@@ -55,7 +55,7 @@ public struct ProfileFavorites: Codable, APIReturnable {
 }
 
 public struct LeaderboardProfileContainer: Decodable, APIReturnable {
-    public let leaderboardProfiles: [LeaderboardProfile]
+    public let profiles: [LeaderboardProfile]
 
     public init(from data: Data) throws {
         let decoder = JSONDecoder()

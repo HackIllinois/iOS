@@ -218,7 +218,7 @@ final class HIProfileDataSource {
                 HICoreDataController.shared.performBackgroundTask { context -> Void in
                     do {
                         // 1) Unwrap contained data
-                        let apiProfiles = containedProfiles.leaderboardProfiles
+                        let apiProfiles = containedProfiles.profiles
                         // 2) Get all CoreData profiles.
                         let leaderboardProfileFetchRequest = NSFetchRequest<LeaderboardProfile>(entityName: "LeaderboardProfile")
                         let coreDataLeaderboardProfiles = try context.fetch(leaderboardProfileFetchRequest)
@@ -234,7 +234,6 @@ final class HIProfileDataSource {
                             // Delete CoreData location.
                             context.delete(coreDataProfile)
                         }
-
                         coreDataProfilesToUpdate.forEach { (coreDataProfile, apiProfile) in
                             // Update CoreData profile.
                             coreDataProfile.id = apiProfile.id
@@ -257,12 +256,23 @@ final class HIProfileDataSource {
                         completion?()
                         isRefreshing = false
                     } catch {
+                        os_log(
+                            "Error getting profiles catch #1: %s",
+                            log: Logger.ui,
+                            type: .error,
+                            String(describing: error)
+                        )
                         completion?()
                         isRefreshing = false
-                        print(error)
                     }
                 }
             } catch {
+                os_log(
+                    "Error getting profiles catch #2: %s",
+                    log: Logger.ui,
+                    type: .error,
+                    String(describing: error)
+                )
                 completion?()
                 isRefreshing = false
             }
