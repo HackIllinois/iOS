@@ -17,8 +17,8 @@ import CoreData
 class HILeaderboardViewController: HILeaderboardListViewController {
      // MARK: - Properties
 
-    lazy var fetchedResultsController: NSFetchedResultsController<Profile> = {
-        let fetchRequest: NSFetchRequest<Profile> = Profile.fetchRequest()
+    lazy var fetchedResultsController: NSFetchedResultsController<LeaderboardProfile> = {
+        let fetchRequest: NSFetchRequest<LeaderboardProfile> = LeaderboardProfile.fetchRequest()
 
         fetchRequest.sortDescriptors = [
             NSSortDescriptor(key: "id", ascending: true)
@@ -110,6 +110,10 @@ extension HILeaderboardViewController {
         self.tableView = tableView
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        HIProfileDataSource.refresh(completion: endRefreshing)
+    }
+
     override func viewDidLoad() {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         setupRefreshControl()
@@ -151,5 +155,13 @@ extension HILeaderboardViewController: HIErrorViewDelegate {
         )
         alert.popoverPresentationController?.sourceView = sender
         present(alert, animated: true, completion: nil)
+    }
+}
+
+// MARK: - UIRefreshControl
+extension HILeaderboardViewController {
+    override func refresh(_ sender: UIRefreshControl) {
+        super.refresh(sender)
+        HIProfileDataSource.refresh(completion: endRefreshing)
     }
 }

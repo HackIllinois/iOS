@@ -67,17 +67,17 @@ extension HILeaderboardCell {
 extension HILeaderboardCell {
 
     // TODO: Make height of cell dynamic if needed
-    static func heightForCell(with group: Profile, width: CGFloat) -> CGFloat {
+    static func heightForCell(with group: LeaderboardProfile, width: CGFloat) -> CGFloat {
         return 100
     }
 
-    static func <- (lhs: HILeaderboardCell, rhs: Profile) {
+    static func <- (lhs: HILeaderboardCell, rhs: LeaderboardProfile) {
         /*guard let profile = HIApplicationStateController.shared.profile else { return } */
 
         var innerVerticalStackViewHeight: CGFloat = 0
 
         let nameLabel = HILabel(style:  .groupNameInfo)
-        nameLabel.text = "Carter" // Change later
+        nameLabel.text = ""
         innerVerticalStackViewHeight += nameLabel.intrinsicContentSize.height
         lhs.innerVerticalStackView.addArrangedSubview(nameLabel)
         lhs.innerVerticalStackViewHeight.constant = innerVerticalStackViewHeight

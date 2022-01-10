@@ -133,5 +133,5 @@ extension HIAPI.LeaderboardProfile: MixTypeComparable {
 }
 
 extension LeaderboardProfile: MixTypeComparable {
-    var comparable: String { return id }
+    var comparable: String { return id ?? "" }
 }

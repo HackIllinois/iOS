@@ -32,8 +32,8 @@ extension HILeaderboardListViewController {
 extension HILeaderboardListViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HILeaderboardCell.identifier, for: indexPath)
-        if let cell = cell as? HILeaderboardCell, let profile = _fetchedResultsController?.object(at: indexPath) as? Profile {
-            cell <- profile
+        if let cell = cell as? HILeaderboardCell, let leaderboardProfile = _fetchedResultsController?.object(at: indexPath) as? LeaderboardProfile {
+            cell <- leaderboardProfile
            // cell.delegate = self
             cell.indexPath = indexPath
         }
@@ -44,9 +44,9 @@ extension HILeaderboardListViewController {
 // MARK: - UITableViewDelegate
 extension HILeaderboardListViewController {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let profile = _fetchedResultsController?.object(at: indexPath) as? Profile else {
+        guard let leaderboardProfile = _fetchedResultsController?.object(at: indexPath) as? LeaderboardProfile else {
             return CGFloat.leastNonzeroMagnitude
         }
-        return HILeaderboardCell.heightForCell(with: profile, width: tableView.frame.width)
+        return HILeaderboardCell.heightForCell(with: leaderboardProfile, width: tableView.frame.width)
     }
 }

@@ -244,7 +244,7 @@ final class HIProfileDataSource {
 
                         apiProfilesToInsert.forEach { apiProfile in
                             // Create CoreData profile.
-                            let coreDataProfile = Profile(context: context)
+                            let coreDataProfile = LeaderboardProfile(context: context)
                             coreDataProfile.id = apiProfile.id
                             coreDataProfile.firstName = apiProfile.firstName
                             coreDataProfile.lastName = apiProfile.lastName
