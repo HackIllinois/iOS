@@ -47,11 +47,11 @@ class HIApplicationStateController {
         recoverUserIfPossible()
         recoverProfileIfPossible()
 
-        onboardingViewController.shouldDisplayAnimationOnNextAppearance = user == nil
+        onboardingViewController.shouldDisplayAnimationOnNextAppearance = true
 
         UserDefaults.standard.set(true, forKey: HIConstants.APPLICATION_INSTALLED_KEY)
         let shouldShowOnboarding = UserDefaults.standard.object(forKey: HIConstants.SHOULD_SHOW_ONBOARDING_KEY) as? Bool ?? true
-        updateWindowViewController(animated: false, shouldShowOnboarding: shouldShowOnboarding)
+        updateWindowViewController(animated: false, shouldShowOnboarding: true)
     }
 }
 
