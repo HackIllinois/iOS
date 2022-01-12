@@ -18,7 +18,7 @@ class HIOnboardingViewController: HIBaseViewController {
     //source: https://medium.com/swlh/swift-carousel-759800aa2952
     // MARK: - Subviews
     private var carouselView: HICarouselView?
-    let animationView = AnimationView(name: "intro")
+    let animationView = AnimationView(name: "LightVespaText")
     var shouldDisplayAnimationOnNextAppearance = true
 
     // MARK: - Properties
@@ -38,7 +38,7 @@ class HIOnboardingViewController: HIBaseViewController {
     }
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "Login")
+        backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
     }
 }
 

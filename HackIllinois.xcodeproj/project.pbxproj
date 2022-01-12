@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0A360882203539FF001F5F85 /* HIAdminEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */; };
 		1C63EE6927680DF500D60653 /* CIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C63EE6827680DF500D60653 /* CIImage.swift */; };
+		1C7561A3278E96600004D739 /* DarkVespaText.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C7561A2278E96600004D739 /* DarkVespaText.json */; };
+		1C7561A5278E96750004D739 /* LightVespaText.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C7561A4278E96750004D739 /* LightVespaText.json */; };
 		1C9045CE274F03A200DDA74E /* HICarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9045CD274F03A200DDA74E /* HICarouselCell.swift */; };
 		1C9045D2274F048A00DDA74E /* HICarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9045D1274F048A00DDA74E /* HICarouselView.swift */; };
 		1C9045D4274F065F00DDA74E /* HIOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */; };
@@ -196,6 +198,8 @@
 /* Begin PBXFileReference section */
 		0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAdminEventViewController.swift; sourceTree = "<group>"; };
 		1C63EE6827680DF500D60653 /* CIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIImage.swift; sourceTree = "<group>"; };
+		1C7561A2278E96600004D739 /* DarkVespaText.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DarkVespaText.json; sourceTree = "<group>"; };
+		1C7561A4278E96750004D739 /* LightVespaText.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LightVespaText.json; sourceTree = "<group>"; };
 		1C9045CD274F03A200DDA74E /* HICarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICarouselCell.swift; sourceTree = "<group>"; };
 		1C9045D1274F048A00DDA74E /* HICarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICarouselView.swift; sourceTree = "<group>"; };
 		1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIOnboardingViewController.swift; sourceTree = "<group>"; };
@@ -395,6 +399,8 @@
 		95069267203EE14000D7C34C /* Launch */ = {
 			isa = PBXGroup;
 			children = (
+				1C7561A4278E96750004D739 /* LightVespaText.json */,
+				1C7561A2278E96600004D739 /* DarkVespaText.json */,
 				3C2C250923EFD3C500EA3194 /* intro.json */,
 			);
 			path = Launch;
@@ -876,10 +882,12 @@
 			files = (
 				952D153D220D37980041383A /* refresh.json in Resources */,
 				952D1543220D453D0041383A /* countdown-24.json in Resources */,
+				1C7561A3278E96600004D739 /* DarkVespaText.json in Resources */,
 				3C2C250A23EFD3C500EA3194 /* intro.json in Resources */,
 				951827A91EA35DB800049F79 /* Assets.xcassets in Resources */,
 				952D1542220D453D0041383A /* countdown-60.json in Resources */,
 				951827B41EA35E8B00049F79 /* LaunchScreen.storyboard in Resources */,
+				1C7561A5278E96750004D739 /* LightVespaText.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
