@@ -102,7 +102,7 @@ class HIProfileViewController: HIBaseViewController {
 // MARK: - UITabBarItem Setup
 extension HIProfileViewController {
     override func setupTabBarItem() {
-        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "Profile"), selectedImage: #imageLiteral(resourceName: "ProfileSelected"))
+        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "profile"), selectedImage: #imageLiteral(resourceName: "ProfileSelected"))
     }
 }
 
