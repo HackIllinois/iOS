@@ -41,17 +41,17 @@ class HITabBarController: UITabBarController {
     }
 
     @objc private func codePopupButtonPressed(_ sender: UIButton) {
-        if let user = HIApplicationStateController.shared.user {
-            if (user.roles.contains(.staff) || user.roles.contains(.null)) {
-                let notEnabledAlert = UIAlertController(title: "This feature hasn't been enabled yet!", message: "", preferredStyle: .alert)
-                let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                notEnabledAlert.addAction(cancel)
-                self.present(notEnabledAlert, animated: true)
-            } else {
+        if let user = HIApplicationStateController.shared.profile {
+            if user.attendee != nil {
                 let scanQRCodePopup = HIScanQRCodeViewController()
                 scanQRCodePopup.modalPresentationStyle = .overFullScreen
                 scanQRCodePopup.modalTransitionStyle = .crossDissolve
                 self.present(scanQRCodePopup, animated: true, completion: nil)
+            } else {
+                let notEnabledAlert = UIAlertController(title: "This feature hasn't been enabled yet!", message: "", preferredStyle: .alert)
+                let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                notEnabledAlert.addAction(cancel)
+                self.present(notEnabledAlert, animated: true)
             }
         }
     }
