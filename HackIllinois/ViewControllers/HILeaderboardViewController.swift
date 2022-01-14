@@ -38,7 +38,7 @@ class HILeaderboardViewController: HILeaderboardListViewController {
 
     private let errorView = HIErrorView(style: .teamMatching) // Change error view later
 
-    // Handle the leaderbaord header with stack view
+    // Handle the leaderboard header with stack view
     let horizontalStackView = UIStackView()
 
     @objc dynamic override func setUpBackgroundView() {
@@ -102,7 +102,6 @@ extension HILeaderboardViewController {
         // Add tableView to handle leaderboard
         let tableView = HITableView()
         view.addSubview(tableView)
-        //view.insertSubview(tableView, belowSubview: horizontalStackView)
         tableView.topAnchor.constraint(equalTo: horizontalStackView.bottomAnchor, constant: 5).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true

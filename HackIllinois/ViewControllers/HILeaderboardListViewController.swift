@@ -34,7 +34,6 @@ extension HILeaderboardListViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: HILeaderboardCell.identifier, for: indexPath)
         if let cell = cell as? HILeaderboardCell, let leaderboardProfile = _fetchedResultsController?.object(at: indexPath) as? LeaderboardProfile {
             cell <- leaderboardProfile
-           // cell.delegate = self
             cell.indexPath = indexPath
         }
         return cell
