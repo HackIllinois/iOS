@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "schedule@1x.png",
+      "filename" : "QRCode@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "schedule@2x.png",
+      "filename" : "QRCode@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "schedule@3x.png",
+      "filename" : "QRCode@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
