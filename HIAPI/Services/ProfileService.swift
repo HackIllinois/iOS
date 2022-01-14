@@ -56,7 +56,7 @@ public final class ProfileService: BaseService {
         return APIRequest<ProfileFavorites>(service: self, endpoint: "favorite/remove/", body: body, method: .POST)
     }
 
-    public static func getLeaderboard() -> APIRequest<LeaderboardProfileContainer> {
-        return APIRequest<LeaderboardProfileContainer>(service: self, endpoint: "leaderboard/?limit=15", headers: headers, method: .GET)
+    public static func getLeaderboard(num: Int) -> APIRequest<LeaderboardProfileContainer> {
+        return APIRequest<LeaderboardProfileContainer>(service: self, endpoint: "leaderboard/?limit=\(num)", headers: headers, method: .GET)
     }
 }

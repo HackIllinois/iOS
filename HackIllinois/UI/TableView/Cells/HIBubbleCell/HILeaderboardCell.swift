@@ -25,7 +25,6 @@ class HILeaderboardCell: HIBubbleCell {
     var innerVerticalStackView = UIStackView()
     var innerVerticalStackViewHeight = NSLayoutConstraint()
     var indexPath: IndexPath?
-    //weak var delegate: HILeaderboardCellDelegate?
 
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -66,17 +65,15 @@ extension HILeaderboardCell {
 // MARK: - Population
 extension HILeaderboardCell {
 
-    // TODO: Make height of cell dynamic if needed
     static func heightForCell(with group: LeaderboardProfile, width: CGFloat) -> CGFloat {
         return 100
     }
 
     static func <- (lhs: HILeaderboardCell, rhs: LeaderboardProfile) {
-        /*guard let profile = HIApplicationStateController.shared.profile else { return } */
 
         var innerVerticalStackViewHeight: CGFloat = 0
 
-        let nameLabel = HILabel(style:  .groupNameInfo)
+        let nameLabel = HILabel(style: .groupNameInfo)
         nameLabel.text = ""
         innerVerticalStackViewHeight += nameLabel.intrinsicContentSize.height
         lhs.innerVerticalStackView.addArrangedSubview(nameLabel)

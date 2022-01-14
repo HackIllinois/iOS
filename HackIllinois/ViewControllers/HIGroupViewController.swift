@@ -170,7 +170,6 @@ extension HIGroupViewController {
         }
         teamStatusParams = Array(statuses)
         // HIProfileDataSource.refresh(teamStatus: teamStatusParams, interests: interestParams) - Old implementation
-        
     }
 
     @objc func getProfilesLookingForMember() {
