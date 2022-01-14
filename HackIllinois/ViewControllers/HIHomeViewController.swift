@@ -170,7 +170,7 @@ extension HIHomeViewController {
 // MARK: - UITabBarItem Setup
 extension HIHomeViewController {
     override func setupTabBarItem() {
-        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "home"), tag: 0)
+        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "home"), selectedImage: #imageLiteral(resourceName: "HomeSelected"))
     }
 }
 

@@ -185,7 +185,7 @@ extension HIEventDetailViewController {
     func setupDescription() {
         eventDetailContainer.addSubview(descriptionLabel)
         descriptionLabel.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 15).isActive = true
-        descriptionLabel.constrain(to: eventDetailContainer, trailingInset: -12)
+        descriptionLabel.constrain(to: eventDetailContainer, trailingInset: 0)
         descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         descriptionLabelHeight = descriptionLabel.heightAnchor.constraint(equalToConstant: 100)
         descriptionLabelHeight.isActive = true
