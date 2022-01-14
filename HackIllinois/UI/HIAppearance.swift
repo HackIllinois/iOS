@@ -22,6 +22,9 @@ struct HIAppearance: Equatable {
     let contentBackground: UIColor
     let overlay: UIColor
     let frostedTint: UIColor
+    let codePopupTab: UIColor
+    let navbarBackground: UIColor
+    let navbarTabTint: UIColor
     let qrTint: UIColor
     let qrBackground: UIColor
     let emptyTableViewBackground: UIImage
@@ -126,6 +129,9 @@ struct HIAppearance: Equatable {
         contentBackground: white,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
+        codePopupTab: orange,
+        navbarBackground: green,
+        navbarTabTint: yellowWhite,
         qrTint: lightBlack,
         qrBackground: tan,
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewDay"),
@@ -179,6 +185,9 @@ struct HIAppearance: Equatable {
         contentBackground: white,
         overlay: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.47),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
+        codePopupTab: orange,
+        navbarBackground: green,
+        navbarTabTint: yellowWhite,
         qrTint: lightBlack,
         qrBackground: tan,
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewNight"),
