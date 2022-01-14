@@ -22,7 +22,7 @@ class HIEventCell: HIBubbleCell {
     // MARK: - Properties
     let favoritedButton = HIButton {
         $0.tintHIColor = \.baseText
-        $0.backgroundHIColor = \.clear
+        $0.backgroundHIColor = \.eventBackground
         $0.activeImage = #imageLiteral(resourceName: "Favorited")
         $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
     }
@@ -47,6 +47,7 @@ class HIEventCell: HIBubbleCell {
         contentStackView.axis = .vertical
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         bubbleView.addSubview(contentStackView)
+        
         contentStackView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 16).isActive = true
         contentStackView.trailingAnchor.constraint(equalTo: favoritedButton.leadingAnchor).isActive = true
         contentStackView.centerYAnchor.constraint(equalTo: bubbleView.centerYAnchor).isActive = true

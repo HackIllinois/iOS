@@ -48,6 +48,13 @@ class HIHomeViewController: HIEventListViewController {
     private var dataStore: [String] = ["Ongoing", "Upcoming"]
 
     private lazy var countdownViewController = HICountdownViewController(delegate: self)
+    
+    private let countdownFrameView = HIView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        let viewImage = #imageLiteral(resourceName: "Chicken")
+//        $0.backgroundColor = UIColor(patternImage: viewImage)
+        $0.layer.contents = viewImage.cgImage
+    }
 //    private let announcementButton = HIButton {
 //        $0.tintHIColor = \.baseText
 //        $0.backgroundHIColor = \.clear
@@ -82,8 +89,9 @@ extension HIHomeViewController {
         if currentTab == 0 {
             return NSPredicate(format: "(startTime < now()) AND (endTime > now())")
         } else {
-            let inTwoHours = Date(timeIntervalSinceNow: 7200)
-            let upcomingPredicate = NSPredicate(format: "(startTime < %@) AND (startTime > now())", inTwoHours as NSDate)
+            let inTwoHours = Date(timeIntervalSinceNow: 300000000)
+//            let upcomingPredicate = NSPredicate(format: "(startTime < %@) AND (startTime > now())", inTwoHours as NSDate)
+            let upcomingPredicate = NSPredicate(format: "(startTime < %@)", inTwoHours as NSDate)
             return upcomingPredicate
         }
     }
@@ -105,10 +113,31 @@ extension HIHomeViewController {
 extension HIHomeViewController {
     override func loadView() {
         super.loadView()
+//        let countdownFrame = UIImageView()
+//        countdownFrame.image = #imageLiteral(resourceName: "Chicken.png")
+//        countdownFrame.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(countdownFrameView)
+        countdownFrameView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8).isActive = true
+        countdownFrameView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
+        countdownFrameView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 31).isActive = true
+//        if countdownFrameView.frame.size.width > countdownFrameView.frame.size.height {
+//            countdownFrameView.contentMode = UIViewContentModeScaleAspectFit
+//        }
+        countdownFrameView.heightAnchor.constraint(equalTo: countdownFrameView.widthAnchor, multiplier: 283.0/329.0).isActive = true
+//        NSLayoutConstraint(item: countdownFrameView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: countdownFrameView, attribute: NSLayoutConstraint.Attribute.)
+        let subCountdownFrameView = HIView {
+            $0.backgroundHIColor = \.countdownFrameBackground
+            $0.layer.cornerRadius = 15
+        }
+        subCountdownFrameView.view.translatesAutoresizingMaskIntoConstraints = false
+        countdownFrameView.addSubview(subCountdownFrameView)
+        
+        
         countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        addChild(countdownViewController)
-        view.addSubview(countdownViewController.view)
-        countdownViewController.view.constrain(to: view, topInset: UIScreen.main.bounds.height * 0.12, trailingInset: 0, leadingInset: 20)
+//        addChild(countdownViewController)
+        countdownFrameView.addSubview(countdownViewController.view)
+        countdownViewController.view.constrain(to: countdownFrameView, trailingInset: 0, leadingInset: 0)
+        countdownViewController.view.centerYAnchor.constraint(equalTo: countdownFrameView.centerYAnchor, constant: 100).isActive = true
         if UIDevice.current.userInterfaceIdiom == .pad {
             countdownViewController.view.constrain(height: 0.34 * UIScreen.main.bounds.height)
         } else {
@@ -121,7 +150,7 @@ extension HIHomeViewController {
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
-        segmentedControl.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor, constant: -20).isActive = true
+        segmentedControl.topAnchor.constraint(equalTo: countdownFrameView.bottomAnchor, constant: 20).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
         segmentedControl.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 44).isActive = true
@@ -164,13 +193,14 @@ extension HIHomeViewController {
 extension HIHomeViewController {
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
+        backgroundView.image = #imageLiteral(resourceName: "ScheduleBackground")
     }
 }
 
 // MARK: - UITabBarItem Setup
 extension HIHomeViewController {
     override func setupTabBarItem() {
-        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "Home"), tag: 0)
+        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "home"), tag: 0)
     }
 }
 
@@ -184,7 +214,7 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
                 super.setCustomTitle(customTitle: staticDataStore[countdownDataStoreIndex].displayText)
                 return (countdownDataStoreIndex == 0 || countdownDataStoreIndex == 1) ? HITimeDataSource.shared.eventTimes.eventStart : currDate
             } else {
-                super.setCustomTitle(customTitle: "Countdown")
+                super.setCustomTitle(customTitle: "What's Cooking?")
             }
             countdownDataStoreIndex += 1
         }

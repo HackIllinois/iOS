@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "matching@1x.png",
+      "filename" : "Chicken.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "matching@2x.png",
+      "filename" : "Chicken-2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "matching@3x.png",
+      "filename" : "Chicken-3.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

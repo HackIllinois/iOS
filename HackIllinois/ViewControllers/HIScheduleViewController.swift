@@ -171,7 +171,7 @@ extension HIScheduleViewController {
 // MARK: - UITabBarItem Setup
 extension HIScheduleViewController {
     override func setupTabBarItem() {
-        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "Home"), tag: 0)
+        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "home"), tag: 0)
     }
 }
 

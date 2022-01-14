@@ -24,6 +24,8 @@ struct HIAppearance: Equatable {
     let frostedTint: UIColor
     let qrTint: UIColor
     let qrBackground: UIColor
+    let countdownFrameBackground: UIColor
+    let eventBackground: UIColor
     let emptyTableViewBackground: UIImage
     let preferredStatusBarStyle: UIStatusBarStyle
     let scrollViewIndicatorStyle: UIScrollView.IndicatorStyle
@@ -124,11 +126,13 @@ struct HIAppearance: Equatable {
         accent: orange,
         action: white,
         baseBackground: white,
-        contentBackground: white,
+        contentBackground: yellowWhite,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         qrTint: lightBlack,
         qrBackground: tan,
+        countdownFrameBackground: tan,
+        eventBackground: yellowWhite,
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewDay"),
         preferredStatusBarStyle: statusBarWhite,
         scrollViewIndicatorStyle: .black,
@@ -183,6 +187,8 @@ struct HIAppearance: Equatable {
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         qrTint: lightBlack,
         qrBackground: tan,
+        countdownFrameBackground: tan,
+        eventBackground: yellowWhite,
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewNight"),
         preferredStatusBarStyle: statusBarWhite,
         scrollViewIndicatorStyle: .white,
