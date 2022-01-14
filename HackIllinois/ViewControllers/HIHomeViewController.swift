@@ -131,13 +131,16 @@ extension HIHomeViewController {
         }
         subCountdownFrameView.translatesAutoresizingMaskIntoConstraints = false
         countdownFrameView.addSubview(subCountdownFrameView)
-        
+        subCountdownFrameView.topAnchor.constraint(equalTo: countdownFrameView.topAnchor, constant: 145).isActive = true
+        subCountdownFrameView.trailingAnchor.constraint(equalTo: countdownFrameView.trailingAnchor, constant: -50).isActive = true
+        subCountdownFrameView.bottomAnchor.constraint(equalTo: countdownFrameView.bottomAnchor, constant: -39).isActive = true
+        subCountdownFrameView.leadingAnchor.constraint(equalTo: countdownFrameView.leadingAnchor, constant: 48).isActive = true
         
         countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
 //        addChild(countdownViewController)
-        countdownFrameView.addSubview(countdownViewController.view)
-        countdownViewController.view.constrain(to: countdownFrameView, trailingInset: 0, leadingInset: 0)
-        countdownViewController.view.centerYAnchor.constraint(equalTo: countdownFrameView.centerYAnchor, constant: 100).isActive = true
+        subCountdownFrameView.addSubview(countdownViewController.view)
+        countdownViewController.view.constrain(to: subCountdownFrameView, topInset: 30, trailingInset: 0, bottomInset: 10, leadingInset: 0)
+//        countdownViewController.view.centerYAnchor.constraint(equalTo: countdownFrameView.centerYAnchor, constant: 100).isActive = true
         if UIDevice.current.userInterfaceIdiom == .pad {
             countdownViewController.view.constrain(height: 0.34 * UIScreen.main.bounds.height)
         } else {
