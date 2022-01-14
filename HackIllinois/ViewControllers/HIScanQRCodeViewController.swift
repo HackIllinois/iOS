@@ -39,8 +39,6 @@ class HIScanQRCodeViewController: HIBaseViewController {
         $0.activeImage = #imageLiteral(resourceName: "MenuClose")
         $0.baseImage = #imageLiteral(resourceName: "MenuClose")
     }
-    private var isInitialCheckin = false
-    private var selectedEvent: String?
 }
 
 // MARK: - UIViewController
@@ -73,15 +71,6 @@ extension HIScanQRCodeViewController {
             DispatchQueue.main.async { [weak self] in
                 self?.captureSession?.startRunning()
             }
-            if let user = HIApplicationStateController.shared.user {
-                if user.roles.contains(.staff) {
-                    let popupView = HIEventPopupViewController()
-                    popupView.modalPresentationStyle = .overCurrentContext
-                    popupView.modalTransitionStyle = .crossDissolve
-                    popupView.delegate = self
-                    present(popupView, animated: true, completion: nil)
-                }
-            }
         }
     }
 
@@ -109,16 +98,6 @@ extension HIScanQRCodeViewController {
 extension HIScanQRCodeViewController {
     @objc func didSelectCloseButton(_ sender: HIButton) {
         self.dismiss(animated: true, completion: nil)
-    }
-}
-
-// MARK: - HIGroupPopupViewDelegate
-extension HIScanQRCodeViewController: HIEventPopupViewDelegate {
-    func setIsInitialCheckin(_ value: Bool) {
-        isInitialCheckin = value
-    }
-    func setSelectedEvent(_ id: String) {
-        selectedEvent = id
     }
 }
 
@@ -175,102 +154,52 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         guard respondingToQRCodeFound else { return }
         let meta = metadataObjects.first as? AVMetadataMachineReadableCodeObject
         let code = meta?.stringValue ?? ""
-//        let url = URL(string: code ?? "")
         respondingToQRCodeFound = false
-        if let user = HIApplicationStateController.shared.user {
-            if user.roles.contains(.staff) {
-                if isInitialCheckin {
-                    HIAPI.CheckInService.checkIn(id: code, override: false)
-                    .onCompletion { (result) in
-                        DispatchQueue.main.async { [weak self] in
-                            do {
-                                let (simpleRequest, _) = try result.get()
-                                if let error = simpleRequest.message {
-                                    print("An error has occurred \(error)")
-                                } else {
-                                    print("Success!")
-                                }
-                            } catch APIRequestError.invalidHTTPReponse(code: let code, description: let description) {
-                                print("Bad Response \(code) \(description)")
-                            } catch {
-                                print("Unknown Error")
-                            }
+        HIAPI.EventService.checkIn(code: code)
+            .onCompletion { result in
+                do {
+                    let (codeResult, _) = try result.get()
+                    let newPoints = codeResult.newPoints
+                    let status = codeResult.status
+                    DispatchQueue.main.async {
+                        var alertTitle = ""
+                        var alertMessage = ""
+                        switch status {
+                        case "Success":
+                            alertTitle = "Success!"
+                            alertMessage = "You received \(newPoints) points!"
+                        case "InvalidCode":
+                            alertTitle = "Error!"
+                            alertMessage = "This code doesn't seem to be correct."
+                        case "InvalidTime":
+                            alertTitle = "Error!"
+                            alertMessage = "Make sure you have the right time."
+                        case "AlreadyCheckedIn":
+                            alertTitle = "Error!"
+                            alertMessage = "Looks like you're already checked in."
+                        default:
+                            alertTitle = "Error!"
+                            alertMessage = "Something isn't quite right."
                         }
-                    }
-                    .authorize(with: HIApplicationStateController.shared.user)
-                    .launch()
-                } else {
-                    if let event = selectedEvent {
-                        HIAPI.EventService.track(eventId: event, userId: code)
-                        .onCompletion { (result) in
-                            DispatchQueue.main.async { [weak self] in
-                                do {
-                                    let (simpleRequest, _) = try result.get()
-                                    if simpleRequest.eventTracker.eventId == "" {
-                                        print("Error")
-                                    } else {
-                                        print("Success")
-                                    }
-                                } catch APIRequestError.invalidHTTPReponse(code: let code, description: let description) {
-                                    print("Bad Response \(code) \(description)")
-                                } catch {
-                                    print("Unknown Error")
-                                }
-                            }
+                        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+                        if alertTitle == "Success!" {
+                            alert.addAction(
+                                UIAlertAction(title: "OK", style: .default, handler: { _ in
+                                    self.dismiss(animated: true, completion: nil)
+                            }))
+                        } else {
+                            alert.addAction(
+                                UIAlertAction(title: "OK", style: .default, handler: { _ in
+                                    self.registerForKeyboardNotifications()
+                            }))
                         }
-                        .authorize(with: HIApplicationStateController.shared.user)
-                        .launch()
+                        self.present(alert, animated: true, completion: nil)
                     }
+                } catch {
+                    print(error, error.localizedDescription)
                 }
-            } else {
-                //Is attendee
-                HIAPI.EventService.checkIn(code: code)
-                    .onCompletion { result in
-                        do {
-                            let (codeResult, _) = try result.get()
-                            let newPoints = codeResult.newPoints
-                            let status = codeResult.status
-                            DispatchQueue.main.async {
-                                var alertTitle = ""
-                                var alertMessage = ""
-                                switch status {
-                                case "Success":
-                                    alertTitle = "Success!"
-                                    alertMessage = "You received \(newPoints) points!"
-                                case "InvalidCode":
-                                    alertTitle = "Error!"
-                                    alertMessage = "This code doesn't seem to be correct."
-                                case "InvalidTime":
-                                    alertTitle = "Error!"
-                                    alertMessage = "Make sure you have the right time."
-                                case "AlreadyCheckedIn":
-                                    alertTitle = "Error!"
-                                    alertMessage = "Looks like you're already checked in."
-                                default:
-                                    alertTitle = "Error!"
-                                    alertMessage = "Something isn't quite right."
-                                }
-                                let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-                                if alertTitle == "Success!" {
-                                    alert.addAction(
-                                        UIAlertAction(title: "OK", style: .default, handler: { _ in
-                                            self.dismiss(animated: true, completion: nil)
-                                    }))
-                                } else {
-                                    alert.addAction(
-                                        UIAlertAction(title: "OK", style: .default, handler: { _ in
-                                            self.registerForKeyboardNotifications()
-                                    }))
-                                }
-                                self.present(alert, animated: true, completion: nil)
-                            }
-                        } catch {
-                            print(error, error.localizedDescription)
-                        }
-                    }
-                    .authorize(with: HIApplicationStateController.shared.user)
-                    .launch()
             }
-        }
+            .authorize(with: HIApplicationStateController.shared.user)
+            .launch()
     }
 }
