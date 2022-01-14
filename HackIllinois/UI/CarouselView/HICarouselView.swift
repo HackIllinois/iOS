@@ -120,7 +120,6 @@ extension HICarouselView: UICollectionViewDelegate {
 
 extension HICarouselView {
     public func configureView(with data: [CarouselData]) {
-        print(frame.height)
         let cellPadding = (frame.width - 300) / 2
         let carouselLayout = UICollectionViewFlowLayout()
         carouselLayout.scrollDirection = .horizontal
