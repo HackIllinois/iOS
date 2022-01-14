@@ -86,7 +86,8 @@ extension HILeaderboardViewController {
     }
 
     func layoutProfiles() {
-        // horizontalStackView to handle any labels, buttons, searching functionality if needed
+
+        // Use horizontalStackView to handle any labels, buttons, searching functionality if needed
         horizontalStackView.axis = .horizontal
         horizontalStackView.distribution = .fillProportionally
         horizontalStackView.spacing = 15
