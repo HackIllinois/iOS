@@ -129,7 +129,7 @@ extension HIHomeViewController {
             $0.backgroundHIColor = \.countdownFrameBackground
             $0.layer.cornerRadius = 15
         }
-        subCountdownFrameView.view.translatesAutoresizingMaskIntoConstraints = false
+        subCountdownFrameView.translatesAutoresizingMaskIntoConstraints = false
         countdownFrameView.addSubview(subCountdownFrameView)
         
         
