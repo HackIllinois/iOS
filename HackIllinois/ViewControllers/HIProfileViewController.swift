@@ -211,6 +211,7 @@ extension HIProfileViewController {
         layoutProfileNameView()
         layoutProfileStatus()
         layoutDescription()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadProfile), name: Notification.Name("QRCodeSuccessfullyScanned"), object: nil)
     }
     func loadStatView(profileStatStackView: UIStackView) {
         profileStatStackView.axis = .horizontal
@@ -372,7 +373,7 @@ extension HIProfileViewController {
 
 // MARK: - API
 extension HIProfileViewController {
-    func reloadProfile () {
+    @objc func reloadProfile () {
 
         guard let user = HIApplicationStateController.shared.user else { return }
         HIAPI.ProfileService.getUserProfile()

@@ -36,8 +36,8 @@ class HIScanQRCodeViewController: HIBaseViewController {
     private let closeButton = HIButton {
         $0.tintHIColor = \.action
         $0.backgroundHIColor = \.clear
-        $0.activeImage = #imageLiteral(resourceName: "MenuClose")
-        $0.baseImage = #imageLiteral(resourceName: "MenuClose")
+        $0.activeImage = #imageLiteral(resourceName: "DarkCloseButton")
+        $0.baseImage = #imageLiteral(resourceName: "DarkCloseButton")
     }
 }
 
@@ -193,6 +193,7 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                                     self.dismiss(animated: true, completion: nil)
                                     //Dismisses view controller
                                     self.didSelectCloseButton(self.closeButton)
+                                    NotificationCenter.default.post(name: Notification.Name("QRCodeSuccessfullyScanned"), object: nil)
                             }))
                         } else {
                             alert.addAction(
