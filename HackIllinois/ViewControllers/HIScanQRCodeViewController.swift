@@ -52,9 +52,10 @@ extension HIScanQRCodeViewController {
         containerView.addSubview(previewView)
         view.addSubview(closeButton)
         closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
-        closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 3).isActive = true
-        closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
-        closeButton.constrain(height: 40)
+        closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8).isActive = true
+        closeButton.constrain(width: 60, height: 60)
+        closeButton.imageView?.contentMode = .scaleToFill
         setupCaptureSession()
     }
 
@@ -171,21 +172,27 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                         case "InvalidCode":
                             alertTitle = "Error!"
                             alertMessage = "This code doesn't seem to be correct."
+                            self.respondingToQRCodeFound = true
                         case "InvalidTime":
                             alertTitle = "Error!"
                             alertMessage = "Make sure you have the right time."
+                            self.respondingToQRCodeFound = true
                         case "AlreadyCheckedIn":
                             alertTitle = "Error!"
                             alertMessage = "Looks like you're already checked in."
+                            self.respondingToQRCodeFound = true
                         default:
                             alertTitle = "Error!"
                             alertMessage = "Something isn't quite right."
+                            self.respondingToQRCodeFound = true
                         }
                         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
                         if alertTitle == "Success!" {
                             alert.addAction(
                                 UIAlertAction(title: "OK", style: .default, handler: { _ in
                                     self.dismiss(animated: true, completion: nil)
+                                    //Dismisses view controller
+                                    self.didSelectCloseButton(self.closeButton)
                             }))
                         } else {
                             alert.addAction(

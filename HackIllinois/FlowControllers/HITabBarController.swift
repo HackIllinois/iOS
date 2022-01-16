@@ -42,7 +42,7 @@ class HITabBarController: UITabBarController {
 
     @objc private func codePopupButtonPressed(_ sender: UIButton) {
         if HIApplicationStateController.shared.isGuest {
-            let notEnabledAlert = UIAlertController(title: "This feature hasn't been enabled yet!", message: "", preferredStyle: .alert)
+            let notEnabledAlert = UIAlertController(title: "You need to log out of your current account and log in as an attendee to check in to events.", message: "", preferredStyle: .alert)
             let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             notEnabledAlert.addAction(cancel)
             self.present(notEnabledAlert, animated: true)
