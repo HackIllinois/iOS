@@ -99,7 +99,7 @@ class HILabel: UILabel {
             textHIColor = \.accent
             backgroundHIColor = \.clear
             font = HIAppearance.Font.eventCategoryText
-            textAlignment = .center
+//            textAlignment = .center
 
         case .sponsor:
             textHIColor = \.baseText

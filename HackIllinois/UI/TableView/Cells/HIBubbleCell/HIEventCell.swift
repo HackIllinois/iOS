@@ -26,6 +26,8 @@ class HIEventCell: HIBubbleCell {
         $0.activeImage = #imageLiteral(resourceName: "Favorited")
         $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
     }
+    
+    var headerView = UIStackView()
     var contentStackView = UIStackView()
     var contentStackViewHeight = NSLayoutConstraint()
 
@@ -38,21 +40,40 @@ class HIEventCell: HIBubbleCell {
 
         backgroundColor = UIColor.clear
         favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
-        bubbleView.addSubview(favoritedButton)
-        favoritedButton.constrain(width: 58, height: 60)
-        favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0)
+//        bubbleView.addSubview(favoritedButton)
+//        favoritedButton.constrain(width: 58, height: 60)
+//        favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0)
 
         // add bubble view
         contentView.layer.backgroundColor = UIColor.clear.cgColor
+        
+        headerView.axis = .vertical
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        bubbleView.addSubview(headerView)
+        headerView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 16).isActive = true
+        headerView.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 16).isActive = true
+//        headerView.trailingAnchor.constraint(equalTo: contentStackView.trailingAnchor).isActive = true
+        
+        
+        bubbleView.addSubview(favoritedButton)
+        favoritedButton.constrain(width: 58, height: 60)
+        favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0)
+        favoritedButton.leadingAnchor.constraint(equalTo: headerView.trailingAnchor).isActive = true
+        favoritedButton.bottomAnchor.constraint(lessThanOrEqualTo: headerView.bottomAnchor).isActive = true
+        
         contentStackView.axis = .vertical
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         bubbleView.addSubview(contentStackView)
         
-        contentStackView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 16).isActive = true
-        contentStackView.trailingAnchor.constraint(equalTo: favoritedButton.leadingAnchor).isActive = true
-        contentStackView.centerYAnchor.constraint(equalTo: bubbleView.centerYAnchor).isActive = true
+        contentStackView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor).isActive = true
+        contentStackView.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -16).isActive = true
+//        contentStackView.centerYAnchor.constraint(equalTo: bubbleView.centerYAnchor).isActive = true
+        contentStackView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 4).isActive = true
+        contentStackView.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor).isActive = true
         contentStackViewHeight = contentStackView.heightAnchor.constraint(equalToConstant: 0)
         contentStackViewHeight.isActive = true
+        
+        
 
         // Don't show favorite button for guests
         if HIApplicationStateController.shared.isGuest {
@@ -92,30 +113,57 @@ extension HIEventCell {
         let titleLabel = HILabel(style: .event)
         titleLabel.numberOfLines = 0
         titleLabel.text = rhs.name
-        lhs.contentStackView.addArrangedSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        lhs.headerView.addArrangedSubview(titleLabel)
+        lhs.headerView.setCustomSpacing(4, after: titleLabel)
+//        titleLabel.constrain(to: lhs.headerView, topInset: 0, trailingInset: 0, leadingInset: 0)
+        
+        let eventTypeLabel = HILabel(style: .cellDescription)
+        let eventType = HIEventType(type: rhs.eventType)
+        eventTypeLabel.text = eventType.description
+        eventTypeLabel.textHIColor = getTagColor(for: rhs.eventType)
+        eventTypeLabel.refreshForThemeChange()
+        eventTypeLabel.translatesAutoresizingMaskIntoConstraints = false
+        lhs.headerView.addArrangedSubview(eventTypeLabel)
+//        eventTypeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4).isActive = true
+//        eventTypeLabel.constrain(to: lhs.headerView, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+//        eventTypeLabel.constrain(height: 20)
+        
+        let titleHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle, width: lhs.contentView.frame.width - 137) // Can test for a more accurate constant
+        lhs.headerView.constrain(height: titleHeight + 20)
+        
+        if !rhs.sponsor.isEmpty {
+            let sponsorLabel = HILabel(style: .cellDescription)
+            sponsorLabel.text = "Sponsored by \(rhs.sponsor)"
+            contentStackViewHeight += sponsorLabel.intrinsicContentSize.height
+            sponsorLabel.constrain(height: 20)
+            lhs.contentStackView.addArrangedSubview(sponsorLabel)
+            lhs.contentStackView.setCustomSpacing(10, after: sponsorLabel)
+        }
+        
+        let upperContainerView = HIView {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.backgroundHIColor = \.clear
+        }
+        lhs.contentStackView.addArrangedSubview(upperContainerView)
+        
+//        upperContainerView.constrain(height: 20)
+        let timeImageView = UIImageView(image: #imageLiteral(resourceName: "Clock"))
+        upperContainerView.addSubview(timeImageView)
+        timeImageView.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor).isActive = true
+        timeImageView.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor).isActive = true
+//        timeImageView.constrain(width: 10, height: 10)
+        
 
         let timeLabel = HILabel(style: .eventTime)
         timeLabel.text = Formatter.simpleTime.string(from: rhs.startTime) + " - " + Formatter.simpleTime.string(from: rhs.endTime)
-        lhs.contentStackView.addArrangedSubview(timeLabel)
-        lhs.contentStackView.setCustomSpacing(10, after: timeLabel)
-
-        if !rhs.sponsor.isEmpty {
-            let sponsorLabel = HILabel(style: .sponsor)
-            sponsorLabel.text = "Sponsored by \(rhs.sponsor)"
-            contentStackViewHeight += sponsorLabel.intrinsicContentSize.height
-            lhs.contentStackView.addArrangedSubview(sponsorLabel)
-        }
-
-        let descriptionLabel = HILabel(style: .cellDescription)
-        let descriptionText = trimText(text: rhs.info, length: getMaxDescriptionTextLength())
-        descriptionLabel.text = descriptionText
-        let height = HILabel.heightForView(text: descriptionText, font: HIAppearance.Font.eventDetails, width: lhs.contentView.frame.width - 100)
-        lhs.contentStackView.addArrangedSubview(descriptionLabel)
-        lhs.contentStackView.setCustomSpacing(10, after: descriptionLabel)
-
-        let bottomView = HIView()
-        bottomView.constrain(height: 30)
-
+        upperContainerView.addSubview(timeLabel)
+        timeLabel.leadingAnchor.constraint(equalTo: timeImageView.trailingAnchor, constant: 5).isActive = true
+        timeLabel.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor).isActive = true
+        timeLabel.heightAnchor.constraint(equalTo: upperContainerView.heightAnchor).isActive = true
+//        lhs.headerView.addArrangedSubview(timeLabel)
+//        lhs.headerView.setCustomSpacing(10, after: timeLabel)
+        
         let pointsView = HIView { (view) in
             view.layer.cornerRadius = 15
             view.backgroundHIColor = \.buttonGreen
@@ -124,23 +172,40 @@ extension HIEventCell {
 
         let pointsLabel = HILabel(style: .pointsText)
         pointsView.addSubview(pointsLabel)
-        pointsLabel.constrain(to: pointsView, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
-        pointsLabel.text = "\(rhs.points) Points!"
+        pointsLabel.constrain(to: pointsView, topInset: 4, trailingInset: -8, bottomInset: -4, leadingInset: 8)
+        pointsLabel.text = "+ \(rhs.points) pts"
+        
+        upperContainerView.addSubview(pointsView)
+        pointsView.leadingAnchor.constraint(equalTo: timeLabel.trailingAnchor, constant: 5).isActive = true
+        pointsView.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor).isActive = true
+//        pointsView.heightAnchor.constraint(equalTo: upperContainerView.heightAnchor).isActive = true
+        
+        
 
-        let eventTypeLabel = HILabel(style: .eventType)
-        let eventType = HIEventType(type: rhs.eventType)
-        eventTypeLabel.text = eventType.description
-        eventTypeLabel.textHIColor = getTagColor(for: rhs.eventType)
-        eventTypeLabel.refreshForThemeChange()
+        
 
-        bottomView.addSubview(pointsView)
-        bottomView.addSubview(eventTypeLabel)
-        pointsView.constrain(to: bottomView, topInset: 0, bottomInset: 0, leadingInset: 0)
-        eventTypeLabel.constrain(to: bottomView, topInset: 0, trailingInset: 0, bottomInset: 0)
-        pointsView.trailingAnchor.constraint(equalTo: eventTypeLabel.leadingAnchor, constant: -5).isActive = true
-        pointsView.widthAnchor.constraint(equalTo: eventTypeLabel.widthAnchor, multiplier: 1.2).isActive = true
+        let descriptionLabel = HILabel(style: .cellDescription)
+        let descriptionText = trimText(text: rhs.info, length: getMaxDescriptionTextLength())
+        descriptionLabel.text = descriptionText
+        let height = HILabel.heightForView(text: descriptionText, font: HIAppearance.Font.eventDetails, width: lhs.contentView.frame.width - 100)
+        lhs.contentStackView.addArrangedSubview(descriptionLabel)
+        lhs.contentStackView.setCustomSpacing(10, after: descriptionLabel)
 
-        lhs.contentStackView.addArrangedSubview(bottomView)
+//        let bottomView = HIView()
+//        bottomView.constrain(height: 30)
+
+        
+
+        
+
+//        bottomView.addSubview(pointsView)
+//        bottomView.addSubview(eventTypeLabel)
+//        pointsView.constrain(to: bottomView, topInset: 0, bottomInset: 0, leadingInset: 0)
+//        eventTypeLabel.constrain(to: bottomView, topInset: 0, trailingInset: 0, bottomInset: 0)
+//        pointsView.trailingAnchor.constraint(equalTo: eventTypeLabel.leadingAnchor, constant: -5).isActive = true
+//        pointsView.widthAnchor.constraint(equalTo: eventTypeLabel.widthAnchor, multiplier: 1.2).isActive = true
+//
+//        lhs.contentStackView.addArrangedSubview(bottomView)
         let textHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle, width: lhs.contentView.frame.width - 98)
         contentStackViewHeight += textHeight
         contentStackViewHeight += timeLabel.intrinsicContentSize.height + 13 + height + 3 + 40
@@ -153,6 +218,10 @@ extension HIEventCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         favoritedButton.isActive = false
+        headerView.subviews.forEach {(view) in
+            headerView.willRemoveSubview(view)
+            view.removeFromSuperview()
+        }
         contentStackView.arrangedSubviews.forEach { (view) in
             contentStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
