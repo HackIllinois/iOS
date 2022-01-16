@@ -104,7 +104,7 @@ class HIGroupViewController: HIGroupListViewController {
 // MARK: - UITabBarItem Setup
 extension HIGroupViewController {
     override func setupTabBarItem() {
-        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "matching"), tag: 0)
+        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "leaderboard"), selectedImage: #imageLiteral(resourceName: "LeaderboardSelected"))
     }
 }
 
@@ -169,7 +169,7 @@ extension HIGroupViewController {
             statuses.remove(modifiedStatus)
         }
         teamStatusParams = Array(statuses)
-        HIProfileDataSource.refresh(teamStatus: teamStatusParams, interests: interestParams)
+        // HIProfileDataSource.refresh(teamStatus: teamStatusParams, interests: interestParams) - Old implementation
     }
 
     @objc func getProfilesLookingForMember() {
@@ -185,7 +185,7 @@ extension HIGroupViewController {
             statuses.remove(modifiedStatus)
         }
         teamStatusParams = Array(statuses)
-        HIProfileDataSource.refresh(teamStatus: teamStatusParams, interests: interestParams)
+        // HIProfileDataSource.refresh(teamStatus: teamStatusParams, interests: interestParams) - Old implementation
     }
 }
 
@@ -290,7 +290,7 @@ extension HIGroupViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        HIProfileDataSource.refresh(teamStatus: teamStatusParams, interests: interestParams, completion: endRefreshing)
+        // HIProfileDataSource.refresh(teamStatus: teamStatusParams, interests: interestParams, completion: endRefreshing) - Old implementaton
     }
 
     override func viewDidLoad() {
@@ -345,7 +345,7 @@ extension HIGroupViewController: HIGroupPopupViewDelegate {
             interests.remove(modifiedInterest)
         }
         interestParams = Array(interests)
-        HIProfileDataSource.refresh(teamStatus: teamStatusParams, interests: interestParams)
+        // HIProfileDataSource.refresh(teamStatus: teamStatusParams, interests: interestParams) - Old Implementatiion
     }
 }
 

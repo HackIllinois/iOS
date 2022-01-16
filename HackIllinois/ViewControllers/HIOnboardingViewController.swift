@@ -18,7 +18,7 @@ class HIOnboardingViewController: HIBaseViewController {
     //source: https://medium.com/swlh/swift-carousel-759800aa2952
     // MARK: - Subviews
     private var carouselView: HICarouselView?
-    let animationView = AnimationView(name: "intro")
+    let animationView = AnimationView(name: "DarkVespaText")
     var shouldDisplayAnimationOnNextAppearance = true
 
     // MARK: - Properties
@@ -53,11 +53,15 @@ extension HIOnboardingViewController {
         carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Get Notified", descriptionText: "Lorem ipsum dolor sit amet, consectet"))
         carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Win Prizes", descriptionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"))
         setupUI()
+        let viewAlphaValue = shouldDisplayAnimationOnNextAppearance ? 0.0 : 1.0
+
+        carouselView?.alpha = viewAlphaValue
+        getStartedButton.alpha = viewAlphaValue
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if shouldDisplayAnimationOnNextAppearance {
-            animationView.contentMode = .scaleAspectFill
+            animationView.contentMode = .scaleAspectFit
             animationView.frame = view.frame
             animationView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             view.addSubview(animationView)
@@ -67,16 +71,14 @@ extension HIOnboardingViewController {
         super.viewDidAppear(animated)
         carouselView?.configureView(with: carouselData)
         if shouldDisplayAnimationOnNextAppearance {
-//            statusBarIsHidden = true
-//            setNeedsStatusBarAppearanceUpdate()
+            setNeedsStatusBarAppearanceUpdate()
 
             animationView.play { _ in
                 // Smooth out background transition into login page
-                UIView.animate(withDuration: 1.0, animations: {self.animationView.alpha = 0.0},
+                UIView.animate(withDuration: 1.0, animations: {self.animationView.alpha = 0.0; self.carouselView?.alpha = 1.0; self.getStartedButton.alpha = 1.0},
                 completion: { _ in
                     self.animationView.removeFromSuperview()
                 })
-//                self.statusBarIsHidden = false
                 UIView.animate(withDuration: 0.25) { () -> Void in
                     self.setNeedsStatusBarAppearanceUpdate()
                 }
