@@ -47,6 +47,7 @@ class HIHomeViewController: HIEventListViewController {
 
     private var dataStore: [String] = ["Ongoing", "Upcoming"]
 
+    private let countdownTitleLabel = HILabel(style: .countdown)
     private lazy var countdownViewController = HICountdownViewController(delegate: self)
 //    private let announcementButton = HIButton {
 //        $0.tintHIColor = \.baseText
@@ -55,11 +56,11 @@ class HIHomeViewController: HIEventListViewController {
 //    }
 
     private var countdownDataStoreIndex = 0
-    private var staticDataStore: [(date: Date, displayText: String)] = [
-        (HITimeDataSource.shared.eventTimes.eventStart, "HackIllinois Begins In"),
-        (HITimeDataSource.shared.eventTimes.hackStart, "Hacking Begins In"),
-        (HITimeDataSource.shared.eventTimes.hackEnd, "Hacking Ends In"),
-        (HITimeDataSource.shared.eventTimes.eventEnd, "HackIllinois Ends In")
+    private var staticDataStore: [(date: Date, displayText: String, backgroundImage: UIImage)] = [
+        (HITimeDataSource.shared.eventTimes.eventStart, "HackIllinois Begins In", #imageLiteral(resourceName: "Night")),
+        (HITimeDataSource.shared.eventTimes.hackStart, "Hacking Begins In", #imageLiteral(resourceName: "Night")),
+        (HITimeDataSource.shared.eventTimes.hackEnd, "Hacking Ends In", #imageLiteral(resourceName: "Night")),
+        (HITimeDataSource.shared.eventTimes.eventEnd, "HackIllinois Ends In", #imageLiteral(resourceName: "Night"))
     ]
 
     private var timer: Timer?
@@ -105,10 +106,22 @@ extension HIHomeViewController {
 extension HIHomeViewController {
     override func loadView() {
         super.loadView()
+//        self.navigationItem.rightBarButtonItem = announcementButton.toBarButtonItem()
+//        announcementButton.addTarget(self, action: #selector(didSelectAnnouncementButton(_:)), for: .touchUpInside)
+//        announcementButton.constrain(width: 22, height: 22)
+//
+//        if HIApplicationStateController.shared.isGuest {
+//            announcementButton.isHidden = true
+//        }
+
+        view.addSubview(countdownTitleLabel)
+        countdownTitleLabel.constrain(to: view, topInset: UIScreen.main.bounds.height * 0.12, trailingInset: 0, leadingInset: 20)
+
         countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
         addChild(countdownViewController)
         view.addSubview(countdownViewController.view)
-        countdownViewController.view.constrain(to: view, topInset: UIScreen.main.bounds.height * 0.12, trailingInset: 0, leadingInset: 20)
+        countdownViewController.view.topAnchor.constraint(equalTo: countdownTitleLabel.bottomAnchor, constant: 10).isActive = true
+        countdownViewController.view.constrain(to: view.safeAreaLayoutGuide, trailingInset: -10, leadingInset: 10)
         if UIDevice.current.userInterfaceIdiom == .pad {
             countdownViewController.view.constrain(height: 0.34 * UIScreen.main.bounds.height)
         } else {
@@ -164,6 +177,7 @@ extension HIHomeViewController {
 extension HIHomeViewController {
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
+//        buildingView.image = #imageLiteral(resourceName: "Buildings")
     }
 }
 
@@ -181,10 +195,11 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
         while countdownDataStoreIndex < staticDataStore.count {
             let currDate = staticDataStore[countdownDataStoreIndex].date
             if currDate > now {
-                super.setCustomTitle(customTitle: staticDataStore[countdownDataStoreIndex].displayText)
+                countdownTitleLabel.text = staticDataStore[countdownDataStoreIndex].displayText
+                backgroundView.image = staticDataStore[countdownDataStoreIndex].backgroundImage
                 return (countdownDataStoreIndex == 0 || countdownDataStoreIndex == 1) ? HITimeDataSource.shared.eventTimes.eventStart : currDate
             } else {
-                super.setCustomTitle(customTitle: "Countdown")
+                countdownTitleLabel.text = "Countdown"
             }
             countdownDataStoreIndex += 1
         }

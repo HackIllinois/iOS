@@ -27,6 +27,8 @@ struct HIAppearance: Equatable {
     let navbarTabTint: UIColor
     let qrTint: UIColor
     let qrBackground: UIColor
+    let countdownFrameBackground: UIColor
+    let eventBackground: UIColor
     let emptyTableViewBackground: UIImage
     let preferredStatusBarStyle: UIStatusBarStyle
     let scrollViewIndicatorStyle: UIScrollView.IndicatorStyle
@@ -53,12 +55,6 @@ struct HIAppearance: Equatable {
     let checkmark: UIImage
     let unselectedGroupStatus: UIImage
     let selectedGroupStatus: UIImage
-
-    let eventTypeGreen: UIColor
-    let eventTypeOrange: UIColor
-    let eventTypeRed: UIColor
-    let eventTypePurple: UIColor
-    let eventTypePink: UIColor
     let profile0: UIImage
     let profile1: UIImage
     let profile2: UIImage
@@ -86,7 +82,6 @@ struct HIAppearance: Equatable {
     private static let lightBlack = #colorLiteral(red: 0.03137254902, green: 0.08235294118, blue: 0.1058823529, alpha: 1)
     private static let salmon = #colorLiteral(red: 0.9490196078, green: 0.6078431373, blue: 0.4705882353, alpha: 1)
     private static let yellowWhite = #colorLiteral(red: 0.9647058824, green: 0.9568627451, blue: 0.831372549, alpha: 1)
-
     // Hack 2021 color palette - they needed to be removed
     private static let darkBlue = #colorLiteral(red: 0.1326064765, green: 0.1667878032, blue: 0.3605746627, alpha: 1)
     private static let blue = #colorLiteral(red: 0.1215686275, green: 0.5176470588, blue: 0.6470588235, alpha: 1)
@@ -127,7 +122,7 @@ struct HIAppearance: Equatable {
         accent: orange,
         action: white,
         baseBackground: white,
-        contentBackground: white,
+        contentBackground: yellowWhite,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         codePopupTab: orange,
@@ -135,6 +130,8 @@ struct HIAppearance: Equatable {
         navbarTabTint: yellowWhite,
         qrTint: lightBlack,
         qrBackground: tan,
+        countdownFrameBackground: tan,
+        eventBackground: yellowWhite,
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewDay"),
         preferredStatusBarStyle: statusBarWhite,
         scrollViewIndicatorStyle: .black,
@@ -159,11 +156,6 @@ struct HIAppearance: Equatable {
         checkmark: #imageLiteral(resourceName: "CheckMark"),
         unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedBox"),
         selectedGroupStatus: #imageLiteral(resourceName: "SelectedBox"),
-        eventTypeGreen: eventGreen,
-        eventTypeOrange: eventOrange,
-        eventTypeRed: eventRed,
-        eventTypePurple: eventPurple,
-        eventTypePink: eventPink,
         profile0: #imageLiteral(resourceName: "Profile0"),
         profile1: #imageLiteral(resourceName: "Profile1"),
         profile2: #imageLiteral(resourceName: "Profile2"),
@@ -184,7 +176,7 @@ struct HIAppearance: Equatable {
         accent: orange,
         action: white,
         baseBackground: white,
-        contentBackground: white,
+        contentBackground: yellowWhite,
         overlay: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.47),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         codePopupTab: orange,
@@ -192,6 +184,8 @@ struct HIAppearance: Equatable {
         navbarTabTint: yellowWhite,
         qrTint: lightBlack,
         qrBackground: tan,
+        countdownFrameBackground: tan,
+        eventBackground: yellowWhite,
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewNight"),
         preferredStatusBarStyle: statusBarWhite,
         scrollViewIndicatorStyle: .white,
@@ -216,11 +210,6 @@ struct HIAppearance: Equatable {
         checkmark: #imageLiteral(resourceName: "CheckMark"),
         unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedBox"),
         selectedGroupStatus: #imageLiteral(resourceName: "SelectedBox"),
-        eventTypeGreen: eventGreen,
-        eventTypeOrange: eventOrange,
-        eventTypeRed: eventRed,
-        eventTypePurple: eventPurple,
-        eventTypePink: eventPink,
         profile0: #imageLiteral(resourceName: "Profile0"),
         profile1: #imageLiteral(resourceName: "Profile1"),
         profile2: #imageLiteral(resourceName: "Profile2"),
@@ -253,8 +242,8 @@ struct HIAppearance: Equatable {
         static let viewTitle = UIFont.systemFont(ofSize: 28, weight: .semibold)
         static let happeningEventTitle = UIFont.systemFont(ofSize: 25, weight: .bold)
         static let eventTitle = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        static let eventTime = UIFont.systemFont(ofSize: 12, weight: .regular)
-        static let eventDetails = UIFont.systemFont(ofSize: 14, weight: .regular)
+        static let eventTime = UIFont.systemFont(ofSize: 15, weight: .regular)
+        static let eventDetails = UIFont.systemFont(ofSize: 15, weight: .regular)
         static let eventButtonText = UIFont.systemFont(ofSize: 14, weight: .regular)
         static let eventCategoryText = UIFont.systemFont(ofSize: 18, weight: .regular)
 

@@ -96,10 +96,9 @@ class HILabel: UILabel {
             font = HIAppearance.Font.eventTime
 
         case .eventType:
-            textHIColor = \.accent
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.eventCategoryText
-            textAlignment = .center
 
         case .sponsor:
             textHIColor = \.baseText

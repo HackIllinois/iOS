@@ -127,7 +127,7 @@ extension HIEventDetailViewController {
         timeLabel.text = Formatter.simpleTime.string(from: event.startTime) + " - " + Formatter.simpleTime.string(from: event.endTime)
         favoritedButton.isActive = event.favorite
         pointsLabel.text = " + \(event.points) pts  "
-        eventTypeLabel.text = event.eventType
+        eventTypeLabel.text = event.eventType.lowercased().capitalized
         view.layoutIfNeeded()
         let targetSize = CGSize(width: descriptionLabel.frame.width, height: .greatestFiniteMagnitude)
         let neededSize = descriptionLabel.sizeThatFits(targetSize)
