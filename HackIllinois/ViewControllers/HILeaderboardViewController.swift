@@ -50,7 +50,7 @@ class HILeaderboardViewController: HILeaderboardListViewController {
 // MARK: - UITabBarItem Setup
 extension HILeaderboardViewController {
     override func setupTabBarItem() {
-        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "matching"), tag: 0)
+        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "leaderboard"), selectedImage: #imageLiteral(resourceName: "LeaderboardSelected"))
     }
 }
 
