@@ -49,8 +49,8 @@ class HIEventCell: HIBubbleCell {
         bubbleView.addSubview(favoritedButton)
         favoritedButton.constrain(width: 58, height: 60)
         favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0)
-//        favoritedButton.leadingAnchor.constraint(equalTo: headerView.trailingAnchor).isActive = true
-//        favoritedButton.bottomAnchor.constraint(lessThanOrEqualTo: headerView.bottomAnchor).isActive = true
+        favoritedButton.leadingAnchor.constraint(equalTo: headerView.trailingAnchor).isActive = true
+        favoritedButton.bottomAnchor.constraint(lessThanOrEqualTo: headerView.bottomAnchor).isActive = true
         contentStackView.axis = .vertical
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         bubbleView.addSubview(contentStackView)
