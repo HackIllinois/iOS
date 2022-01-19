@@ -25,8 +25,7 @@ struct HIAppearance: Equatable {
     let codePopupTab: UIColor
     let navbarBackground: UIColor
     let navbarTabTint: UIColor
-    let qrTint: UIColor
-    let qrBackground: UIColor
+    let profileContainerTint: UIColor
     let emptyTableViewBackground: UIImage
     let preferredStatusBarStyle: UIStatusBarStyle
     let scrollViewIndicatorStyle: UIScrollView.IndicatorStyle
@@ -122,7 +121,7 @@ struct HIAppearance: Equatable {
     fileprivate static let day = HIAppearance(
         titleText: white,
         whiteText: white,
-        baseText: darkBlue,
+        baseText: lightBlack,
         accent: orange,
         action: white,
         baseBackground: white,
@@ -132,8 +131,7 @@ struct HIAppearance: Equatable {
         codePopupTab: orange,
         navbarBackground: green,
         navbarTabTint: yellowWhite,
-        qrTint: lightBlack,
-        qrBackground: tan,
+        profileContainerTint: yellowWhite,
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewDay"),
         preferredStatusBarStyle: statusBarWhite,
         scrollViewIndicatorStyle: .black,
@@ -178,7 +176,7 @@ struct HIAppearance: Equatable {
     fileprivate static let night = HIAppearance(
         titleText: white,
         whiteText: white,
-        baseText: darkBlue,
+        baseText: lightBlack,
         accent: orange,
         action: white,
         baseBackground: white,
@@ -188,8 +186,7 @@ struct HIAppearance: Equatable {
         codePopupTab: orange,
         navbarBackground: green,
         navbarTabTint: yellowWhite,
-        qrTint: lightBlack,
-        qrBackground: tan,
+        profileContainerTint: yellowWhite,
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewNight"),
         preferredStatusBarStyle: statusBarWhite,
         scrollViewIndicatorStyle: .white,

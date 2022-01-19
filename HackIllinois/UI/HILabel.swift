@@ -178,7 +178,7 @@ class HILabel: UILabel {
             layer.backgroundColor = UIColor.clear.cgColor
 
         case .profileName: // Used to display the profile owner's name
-            textHIColor = \.whiteTagFont
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .center
             font = HIAppearance.Font.profileName

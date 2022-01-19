@@ -17,7 +17,6 @@ class HIView: UIView {
     // MARK: - Types
     enum Style {
         case separator
-        case qrBackground
         case emptyTable
     }
 
@@ -38,14 +37,6 @@ class HIView: UIView {
                 backgroundHIColor = \.accent
                 translatesAutoresizingMaskIntoConstraints = false
                 heightAnchor.constraint(equalToConstant: 1).isActive = true
-            case .qrBackground:
-                layer.cornerRadius = 15
-                translatesAutoresizingMaskIntoConstraints = false
-                backgroundHIColor = \.qrBackground
-                layer.shadowColor = UIColor.black.cgColor
-                layer.shadowOffset = CGSize(width: 0, height: 5)
-                layer.shadowOpacity = 0.5
-                layer.shadowRadius = 4.0
             case .emptyTable:
                 backgroundHIColor = \.baseBackground
                 let backgroundImageView = HIImageView {
