@@ -25,23 +25,28 @@ class HIProfileViewController: HIBaseViewController {
         $0.baseImage = #imageLiteral(resourceName: "LogoutButton")
     }
     private let editViewController = HIEditProfileViewController()
-    private let scrollView = UIScrollView(frame: .zero)
     private let contentView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundHIColor = \.profileContainerTint
+        $0.backgroundHIColor = \.clear
+        $0.layer.cornerRadius = 25
     }
     private let profilePictureView = HIImageView {
-            $0.layer.cornerRadius = 8
-            $0.layer.masksToBounds = true
-            $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.layer.cornerRadius = 8
+        $0.layer.masksToBounds = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let profileNameView = HILabel(style: .profileName) {
         $0.text = ""
     }
-    private let profilePointsView = HILabel(style: .profileNumberFigure) {
+    private let profilePointsView = HIView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundHIColor = \.profileContainerTint
+        $0.layer.cornerRadius = 25
+    }
+    private let profilePointsLabel = HILabel(style: .profileNumberFigure) {
         $0.text = ""
     }
-    private let profileTierView = HILabel(style: .profileDescription) {
+    private let profileTierLabel = HILabel(style: .profileDescription) {
         $0.text = "Current Tier"
     }
     private let profileUsernameView = UIStackView() // Will be initialized in ViewController extension (.axis = .horizontal)
@@ -75,7 +80,6 @@ extension HIProfileViewController {
     }
     func layoutProfile() {
         layoutButtons()
-        layoutScrollView()
         layoutContentView()
         layoutProfileNameView()
         layoutProfilePicture()
@@ -89,43 +93,37 @@ extension HIProfileViewController {
         errorView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
         errorView.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
-    func layoutScrollView() {
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.alwaysBounceVertical = true
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(scrollView)
-        scrollView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        scrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
-        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        scrollView.addSubview(contentView)
-    }
     func layoutButtons() {
         self.navigationItem.rightBarButtonItem = logoutButton.toBarButtonItem()
         logoutButton.constrain(width: 25, height: 25)
         logoutButton.addTarget(self, action: #selector(didSelectLogoutButton(_:)), for: .touchUpInside)
     }
     func layoutContentView() {
-        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
-        contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
-        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        view.addSubview(contentView)
+        contentView.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "ProfileContainer"))
+        contentView.backgroundColor = UIColor.blue
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        contentView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.75).isActive = true
+        contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -75).isActive = true
     }
     func layoutPoints() {
-        // Reference: https://medium.com/swift-productions/create-a-uiscrollview-programmatically-xcode-12-swift-5-3-f799b8280e30
-        
-        
-        
+        contentView.addSubview(profilePointsView)
+        profilePointsView.topAnchor.constraint(equalTo: profilePictureView.bottomAnchor, constant: 25).isActive = true
+        profilePointsView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        profilePointsView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.72).isActive = true
+        profilePointsView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -25).isActive = true
     }
     func layoutProfileNameView() {
         contentView.addSubview(profileNameView)
-        profileNameView.constrain(to: contentView, topInset: 0)
+        profileNameView.constrain(to: contentView, topInset: 50)
         profileNameView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         profileNameView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9).isActive = true
     }
     func layoutProfilePicture() {
         contentView.addSubview(profilePictureView)
-        profilePictureView.topAnchor.constraint(equalTo: profileNameView.bottomAnchor, constant: 12).isActive = true
+        profilePictureView.topAnchor.constraint(equalTo: profileNameView.bottomAnchor, constant: 25).isActive = true
         profilePictureView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         profilePictureView.constrain(width: 250, height: 250)
 
@@ -133,7 +131,6 @@ extension HIProfileViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        scrollView.setContentOffset(.zero, animated: true)
         updateProfile()
         reloadProfile()
     }
@@ -146,7 +143,7 @@ extension HIProfileViewController {
                     profilePictureView.changeImage(newImage: imgValue)
                 }
         profileNameView.text = profile.firstName + " " + profile.lastName
-        profilePointsView.text = "\(profile.points)"
+        profilePointsLabel.text = "\(profile.points)"
 
     }
 
