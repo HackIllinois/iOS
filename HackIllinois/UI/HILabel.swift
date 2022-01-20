@@ -272,7 +272,7 @@ class HILabel: UILabel {
             font = HIAppearance.Font.characterCount
 
         case .error:
-            textHIColor = \.whiteTagFont
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.detailSubtitle
             textAlignment = .center
