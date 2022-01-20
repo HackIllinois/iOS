@@ -285,13 +285,13 @@ class HILabel: UILabel {
             textAlignment = .center
             numberOfLines = 0
         case .onboardingDescription:
-            textHIColor = \.whiteText
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.onboardingDescription
             textAlignment = .center
             numberOfLines = 0
         case .onboardingTitle:
-            textHIColor = \.whiteText
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.onboardingTitle
             textAlignment = .center
