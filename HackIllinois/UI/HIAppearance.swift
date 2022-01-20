@@ -120,6 +120,13 @@ struct HIAppearance: Equatable {
     private static var statusBarWhite: UIStatusBarStyle {
         return .lightContent
     }
+    private static var statusBarBlack: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            return .default
+        }
+    }
 
     fileprivate static let day = HIAppearance(
         titleText: white,
@@ -137,7 +144,7 @@ struct HIAppearance: Equatable {
         qrTint: lightBlack,
         qrBackground: tan,
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewDay"),
-        preferredStatusBarStyle: statusBarWhite,
+        preferredStatusBarStyle: statusBarBlack,
         scrollViewIndicatorStyle: .black,
         mapBackground: whiteBlue,
         loginDefault: lightBlack,
@@ -193,7 +200,7 @@ struct HIAppearance: Equatable {
         qrTint: lightBlack,
         qrBackground: tan,
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewNight"),
-        preferredStatusBarStyle: statusBarWhite,
+        preferredStatusBarStyle: statusBarBlack,
         scrollViewIndicatorStyle: .white,
         mapBackground: whiteBlue,
         loginDefault: lightBlack,
