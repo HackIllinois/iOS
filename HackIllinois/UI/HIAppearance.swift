@@ -72,6 +72,8 @@ struct HIAppearance: Equatable {
 
     let clear: UIColor = .clear
     let black: UIColor = .black
+    let white: UIColor = .white
+
     // Hack 2022 color palette
     private static let darkRed = #colorLiteral(red: 0.6039215686, green: 0.1411764706, blue: 0.168627451, alpha: 1)
     private static let tan = #colorLiteral(red: 0.9098039216, green: 0.8431372549, blue: 0.6470588235, alpha: 1)
