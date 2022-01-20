@@ -28,7 +28,7 @@ class HIProfileViewController: HIBaseViewController {
     private let contentView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.clear
-        $0.layer.cornerRadius = 25
+        $0.layer.cornerRadius = 15
     }
     private let profilePictureView = HIImageView {
         $0.layer.cornerRadius = 8
@@ -46,7 +46,7 @@ class HIProfileViewController: HIBaseViewController {
     private let profilePointsLabel = HILabel(style: .profileNumberFigure) {
         $0.text = ""
     }
-    private let profileTierLabel = HILabel(style: .profileDescription) {
+    private let profileTierLabel = HILabel(style: .profileTier) {
         $0.text = "Current Tier"
     }
     private let profileUsernameView = UIStackView() // Will be initialized in ViewController extension (.axis = .horizontal)
@@ -84,6 +84,7 @@ extension HIProfileViewController {
         layoutProfileNameView()
         layoutProfilePicture()
         layoutPoints()
+        contentView.bottomAnchor.constraint(equalTo: profilePointsView.bottomAnchor, constant: 75).isActive = true
     }
     func layoutErrorView() {
         errorView.delegate = self
@@ -100,20 +101,29 @@ extension HIProfileViewController {
     }
     func layoutContentView() {
         view.addSubview(contentView)
-        contentView.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "ProfileContainer"))
-        contentView.backgroundColor = UIColor.blue
+        contentView.layer.contents = #imageLiteral(resourceName: "ProfileContainer").cgImage
+
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.75).isActive = true
-        contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -75).isActive = true
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            contentView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        } else {
+            contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
+        }
     }
     func layoutPoints() {
         contentView.addSubview(profilePointsView)
-        profilePointsView.topAnchor.constraint(equalTo: profilePictureView.bottomAnchor, constant: 25).isActive = true
+        profilePointsView.topAnchor.constraint(equalTo: profilePictureView.bottomAnchor, constant: 35).isActive = true
         profilePointsView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         profilePointsView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.72).isActive = true
-        profilePointsView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -25).isActive = true
+        profilePointsView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        profilePointsView.addSubview(profileTierLabel)
+        profileTierLabel.centerYAnchor.constraint(equalTo: profilePointsView.centerYAnchor, constant: -15).isActive = true
+        profileTierLabel.centerXAnchor.constraint(equalTo: profilePointsView.centerXAnchor).isActive = true
+        profilePointsView.addSubview(profilePointsLabel)
+        profilePointsLabel.centerYAnchor.constraint(equalTo: profilePointsView.centerYAnchor, constant: 15).isActive = true
+        profilePointsLabel.centerXAnchor.constraint(equalTo: profilePointsView.centerXAnchor).isActive = true
     }
     func layoutProfileNameView() {
         contentView.addSubview(profileNameView)
@@ -123,10 +133,10 @@ extension HIProfileViewController {
     }
     func layoutProfilePicture() {
         contentView.addSubview(profilePictureView)
-        profilePictureView.topAnchor.constraint(equalTo: profileNameView.bottomAnchor, constant: 25).isActive = true
+        profilePictureView.topAnchor.constraint(equalTo: profileNameView.bottomAnchor, constant: 35).isActive = true
         profilePictureView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        profilePictureView.constrain(width: 250, height: 250)
-
+        profilePictureView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.75).isActive = true
+        profilePictureView.heightAnchor.constraint(equalTo: profilePictureView.widthAnchor).isActive = true
     }
 
     override func viewWillAppear(_ animated: Bool) {

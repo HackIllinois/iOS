@@ -142,7 +142,7 @@ extension HIEditProfileViewController {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
         let attrHeight = HILabel.heightForView(text: profileItems[indexPath.row], font: HIAppearance.Font.profileUsername, width: self.view.frame.width - 160)
-        let infoHeight = HILabel.heightForView(text: getStringFromAttributeIndex(of: indexPath.row), font: HIAppearance.Font.profileDescription, width: self.view.frame.width - 160)
+        let infoHeight = HILabel.heightForView(text: getStringFromAttributeIndex(of: indexPath.row), font: HIAppearance.Font.profileTier, width: self.view.frame.width - 160)
 
         return max(attrHeight, infoHeight) + 25
     }

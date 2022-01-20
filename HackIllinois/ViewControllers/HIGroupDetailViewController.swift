@@ -44,16 +44,16 @@ class HIGroupDetailViewController: HIBaseViewController {
     }
     private let profileStatusDescriptionView = HILabel(style: .profileSubtitle)
     private let profilePointsView = HILabel(style: .profileNumberFigure)
-    private let profilePointsSubtitleView = HILabel(style: .profileDescription) {
+    private let profilePointsSubtitleView = HILabel(style: .profileTier) {
         $0.text = "points"
     }
     private let profileTimeView = HILabel(style: .profileNumberFigure)
-    private let profileTimeSubtitleView = HILabel(style: .profileDescription) {
+    private let profileTimeSubtitleView = HILabel(style: .profileTier) {
         $0.text = "time zone"
     }
     private let profileStatView = HIView()
     // Good resource for UIStackView: https://stackoverflow.com/questions/43904070/programmatically-adding-views-to-a-uistackview
-    private let profileDescriptionView = HILabel(style: .profileDescription)
+    private let profileDescriptionView = HILabel(style: .profileTier)
     private let profileDiscordImageView = HIImageView() // May need to modify depending on its intention
     private let profileDiscordUsernameView = HILabel(style: .profileUsername) {
         $0.text = "Discord Username"

@@ -37,7 +37,7 @@ class HITextField: UITextField {
             tintHIColor = \.accent
             backgroundHIColor = \.baseBackground
         case .editProfile:
-            font = HIAppearance.Font.profileDescription.withSize(18)
+            font = HIAppearance.Font.profileTier.withSize(18)
             textHIColor = \.whiteTagFont
             tintHIColor = \.whiteTagFont
             backgroundHIColor = \.clear
