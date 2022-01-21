@@ -49,8 +49,6 @@ class HIProfileViewController: HIBaseViewController {
     private let profileTierLabel = HILabel(style: .profileTier) {
         $0.text = "Current Tier"
     }
-    private let profileUsernameView = UIStackView() // Will be initialized in ViewController extension (.axis = .horizontal)
-
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
         backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
@@ -153,7 +151,7 @@ extension HIProfileViewController {
                     profilePictureView.changeImage(newImage: imgValue)
                 }
         profileNameView.text = profile.firstName + " " + profile.lastName
-        profilePointsLabel.text = "\(profile.points)"
+        profilePointsLabel.text = "\(profile.points) Points"
 
     }
 
