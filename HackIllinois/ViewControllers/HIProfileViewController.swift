@@ -30,6 +30,7 @@ class HIProfileViewController: HIBaseViewController {
         $0.backgroundHIColor = \.clear
         $0.layer.cornerRadius = 15
     }
+    private let scrollView = UIScrollView(frame: .zero)
     private let profilePictureView = HIImageView {
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
@@ -78,6 +79,7 @@ extension HIProfileViewController {
     }
     func layoutProfile() {
         layoutButtons()
+        layoutScrollView()
         layoutContentView()
         layoutProfileNameView()
         layoutProfilePicture()
@@ -92,23 +94,35 @@ extension HIProfileViewController {
         errorView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
         errorView.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
+    func layoutScrollView() {
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.alwaysBounceVertical = true
+        view.addSubview(scrollView)
+        scrollView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        scrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+    
     func layoutButtons() {
         self.navigationItem.rightBarButtonItem = logoutButton.toBarButtonItem()
         logoutButton.constrain(width: 25, height: 25)
         logoutButton.addTarget(self, action: #selector(didSelectLogoutButton(_:)), for: .touchUpInside)
     }
     func layoutContentView() {
-        view.addSubview(contentView)
+        scrollView.addSubview(contentView)
+        
         contentView.layer.contents = #imageLiteral(resourceName: "ProfileContainer").cgImage
 
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        contentView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.75).isActive = true
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            contentView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
-        } else {
-            contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
-        }
+        contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.75).isActive = true
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 25).isActive = true
+//        if UIDevice.current.userInterfaceIdiom == .pad {
+//            contentView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+//        } else {
+//            contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
+//        }
     }
     func layoutPoints() {
         contentView.addSubview(profilePointsView)
@@ -139,6 +153,7 @@ extension HIProfileViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        scrollView.setContentOffset(.zero, animated: true)
         updateProfile()
         reloadProfile()
     }
