@@ -51,7 +51,7 @@ class HICodePopupViewController: HIBaseViewController {
         $0.placeholder = "Type your code here"
         $0.textAlignment = .center
         $0.keyboardAppearance = .dark
-        $0.font = HIAppearance.Font.profileDescription
+        $0.font = HIAppearance.Font.profileTier
         $0.textHIColor = \.baseText
         $0.backgroundHIColor = \.clear
     }

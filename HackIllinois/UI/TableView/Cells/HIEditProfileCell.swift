@@ -16,7 +16,7 @@ import UIKit
 class HIEditProfileCell: UITableViewCell {
 
     let attributeLabel = HILabel(style: .profileUsername)
-    let infoLabel = HILabel(style: .profileDescription) { (label) in
+    let infoLabel = HILabel(style: .profileTier) { (label) in
         label.numberOfLines = 0
     }
 
