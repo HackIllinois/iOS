@@ -97,13 +97,14 @@ extension HIProfileViewController {
     func layoutScrollView() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.alwaysBounceVertical = true
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
         scrollView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         scrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        scrollView.addSubview(contentView)
     }
-    
     func layoutButtons() {
         self.navigationItem.rightBarButtonItem = logoutButton.toBarButtonItem()
         logoutButton.constrain(width: 25, height: 25)
@@ -111,18 +112,15 @@ extension HIProfileViewController {
     }
     func layoutContentView() {
         scrollView.addSubview(contentView)
-        
-        contentView.layer.contents = #imageLiteral(resourceName: "ProfileContainer").cgImage
-
-        contentView.translatesAutoresizingMaskIntoConstraints = false
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            contentView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor).isActive = true
+        } else {
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 25).isActive = true
+        }
+        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.75).isActive = true
-        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 25).isActive = true
-//        if UIDevice.current.userInterfaceIdiom == .pad {
-//            contentView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
-//        } else {
-//            contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
-//        }
+        contentView.layer.contents = #imageLiteral(resourceName: "ProfileContainer").cgImage
     }
     func layoutPoints() {
         contentView.addSubview(profilePointsView)
