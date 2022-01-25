@@ -89,7 +89,7 @@ extension HIHomeViewController {
         if currentTab == 0 {
             return NSPredicate(format: "(startTime < now()) AND (endTime > now())")
         } else {
-            let inTwoHours = Date(timeIntervalSinceNow: 300000000)
+            let inTwoHours = Date(timeIntervalSinceNow: 2700)
 //            let upcomingPredicate = NSPredicate(format: "(startTime < %@) AND (startTime > now())", inTwoHours as NSDate)
             let upcomingPredicate = NSPredicate(format: "(startTime < %@)", inTwoHours as NSDate)
             return upcomingPredicate
@@ -125,27 +125,21 @@ extension HIHomeViewController {
 //        }
         countdownFrameView.heightAnchor.constraint(equalTo: countdownFrameView.widthAnchor, multiplier: 283.0/329.0).isActive = true
 //        NSLayoutConstraint(item: countdownFrameView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: countdownFrameView, attribute: NSLayoutConstraint.Attribute.)
-        let subCountdownFrameView = HIView {
-            $0.backgroundHIColor = \.countdownFrameBackground
-            $0.layer.cornerRadius = 15
-        }
-        subCountdownFrameView.translatesAutoresizingMaskIntoConstraints = false
-        countdownFrameView.addSubview(subCountdownFrameView)
-        subCountdownFrameView.topAnchor.constraint(equalTo: countdownFrameView.topAnchor, constant: 145).isActive = true
-        subCountdownFrameView.trailingAnchor.constraint(equalTo: countdownFrameView.trailingAnchor, constant: -50).isActive = true
-        subCountdownFrameView.bottomAnchor.constraint(equalTo: countdownFrameView.bottomAnchor, constant: -39).isActive = true
-        subCountdownFrameView.leadingAnchor.constraint(equalTo: countdownFrameView.leadingAnchor, constant: 48).isActive = true
+        
         
         countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
 //        addChild(countdownViewController)
-        subCountdownFrameView.addSubview(countdownViewController.view)
-        countdownViewController.view.constrain(to: subCountdownFrameView, topInset: 30, trailingInset: 0, bottomInset: 10, leadingInset: 0)
-//        countdownViewController.view.centerYAnchor.constraint(equalTo: countdownFrameView.centerYAnchor, constant: 100).isActive = true
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            countdownViewController.view.constrain(height: 0.34 * UIScreen.main.bounds.height)
-        } else {
-            countdownViewController.view.constrain(height: 200)
-        }
+        countdownFrameView.addSubview(countdownViewController.view)
+        countdownViewController.view.constrain(to: countdownFrameView, topInset: 180, trailingInset: -50, bottomInset: -10, leadingInset: 40)
+//        countdownViewController.view.centerXAnchor.constraint(equalTo: countdownFrameView.centerXAnchor).isActive = true
+        
+//        countdownViewController.view.centerYAnchor.constraint(equalTo: countdownFrameView.centerYAnchor, constant: 0).isActive = true
+        
+//        if UIDevice.current.userInterfaceIdiom == .pad {
+//            countdownViewController.view.constrain(height: 0.34 * UIScreen.main.bounds.height)
+//        } else {
+//            countdownViewController.view.constrain(height: 200)
+//        }
         countdownViewController.didMove(toParent: self)
 
         let items = dataStore.map { $0 }

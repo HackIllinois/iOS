@@ -21,8 +21,8 @@ protocol HIEventCellDelegate: AnyObject {
 class HIEventCell: HIBubbleCell {
     // MARK: - Properties
     let favoritedButton = HIButton {
-        $0.tintHIColor = \.baseText
-        $0.backgroundHIColor = \.eventBackground
+        $0.tintHIColor = \.accent
+        $0.backgroundHIColor = \.favoriteStarTint
         $0.activeImage = #imageLiteral(resourceName: "Favorited")
         $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
     }
@@ -50,7 +50,7 @@ class HIEventCell: HIBubbleCell {
         headerView.axis = .vertical
         headerView.translatesAutoresizingMaskIntoConstraints = false
         bubbleView.addSubview(headerView)
-        headerView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 16).isActive = true
+        headerView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 17).isActive = true
         headerView.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 16).isActive = true
 //        headerView.trailingAnchor.constraint(equalTo: contentStackView.trailingAnchor).isActive = true
         
@@ -59,7 +59,7 @@ class HIEventCell: HIBubbleCell {
         favoritedButton.constrain(width: 58, height: 60)
         favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0)
         favoritedButton.leadingAnchor.constraint(equalTo: headerView.trailingAnchor).isActive = true
-        favoritedButton.bottomAnchor.constraint(lessThanOrEqualTo: headerView.bottomAnchor).isActive = true
+//        favoritedButton.bottomAnchor.constraint(lessThanOrEqualTo: headerView.bottomAnchor).isActive = true
         
         contentStackView.axis = .vertical
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -68,10 +68,10 @@ class HIEventCell: HIBubbleCell {
         contentStackView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor).isActive = true
         contentStackView.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -16).isActive = true
 //        contentStackView.centerYAnchor.constraint(equalTo: bubbleView.centerYAnchor).isActive = true
-        contentStackView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 4).isActive = true
-        contentStackView.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor).isActive = true
-        contentStackViewHeight = contentStackView.heightAnchor.constraint(equalToConstant: 0)
-        contentStackViewHeight.isActive = true
+        contentStackView.topAnchor.constraint(equalTo: favoritedButton.bottomAnchor, constant: 4).isActive = true
+        contentStackView.bottomAnchor.constraint(greaterThanOrEqualTo: bubbleView.bottomAnchor).isActive = true
+//        contentStackViewHeight = contentStackView.heightAnchor.constraint(equalToConstant: 0)
+//        contentStackViewHeight.isActive = true
         
         
 
@@ -130,6 +130,7 @@ extension HIEventCell {
 //        eventTypeLabel.constrain(height: 20)
         
         let titleHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle, width: lhs.contentView.frame.width - 137) // Can test for a more accurate constant
+        titleLabel.constrain(height: titleHeight)
         lhs.headerView.constrain(height: titleHeight + 20)
         
         if !rhs.sponsor.isEmpty {
@@ -143,7 +144,7 @@ extension HIEventCell {
         
         let upperContainerView = HIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.backgroundHIColor = \.clear
+//            $0.backgroundHIColor = \.clear
         }
         lhs.contentStackView.addArrangedSubview(upperContainerView)
         
@@ -209,7 +210,7 @@ extension HIEventCell {
         let textHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle, width: lhs.contentView.frame.width - 98)
         contentStackViewHeight += textHeight
         contentStackViewHeight += timeLabel.intrinsicContentSize.height + 13 + height + 3 + 40
-        lhs.contentStackViewHeight.constant = contentStackViewHeight
+//        lhs.contentStackViewHeight.constant = contentStackViewHeight
     }
 }
 
@@ -251,7 +252,7 @@ extension HIEventCell {
 extension HIEventCell {
     // Returns the maximum number of characters allowed for the event description
     static func getMaxDescriptionTextLength() -> Int {
-        return 150
+        return 50
     }
 
     static func trimText(text: String, length: Int) -> String {

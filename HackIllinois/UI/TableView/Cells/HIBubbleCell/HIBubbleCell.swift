@@ -37,6 +37,7 @@ class HIBubbleCell: UITableViewCell {
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
+        
     }
 
     required init?(coder aDecoder: NSCoder) {
