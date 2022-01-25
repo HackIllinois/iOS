@@ -70,6 +70,10 @@ struct HIAppearance: Equatable {
     let profile9: UIImage
     let profile10: UIImage
 
+    let leaderboardText: UIColor
+    let leaderboardBackgroundOne: UIColor
+    let leaderboardBackgroundTwo: UIColor
+
     let clear: UIColor = .clear
     let black: UIColor = .black
     // Hack 2022 color palette
@@ -172,7 +176,10 @@ struct HIAppearance: Equatable {
         profile7: #imageLiteral(resourceName: "Profile7"),
         profile8: #imageLiteral(resourceName: "Profile8"),
         profile9: #imageLiteral(resourceName: "Profile9"),
-        profile10: #imageLiteral(resourceName: "Profile10")
+        profile10: #imageLiteral(resourceName: "Profile10"),
+        leaderboardText: lightBlack,
+        leaderboardBackgroundOne: yellowWhite,
+        leaderboardBackgroundTwo: tan
     )
 
     fileprivate static let night = HIAppearance(
@@ -228,7 +235,10 @@ struct HIAppearance: Equatable {
         profile7: #imageLiteral(resourceName: "Profile7"),
         profile8: #imageLiteral(resourceName: "Profile8"),
         profile9: #imageLiteral(resourceName: "Profile9"),
-        profile10: #imageLiteral(resourceName: "Profile10")
+        profile10: #imageLiteral(resourceName: "Profile10"),
+        leaderboardText: lightBlack,
+        leaderboardBackgroundOne: yellowWhite,
+        leaderboardBackgroundTwo: tan
     )
 
     fileprivate static var current = day
@@ -286,6 +296,10 @@ struct HIAppearance: Equatable {
         static let onboardingGetStartedText = UIFont.systemFont(ofSize: 25, weight: .semibold)
         static let onboardingTitle = UIFont.systemFont(ofSize: 30, weight: .bold)
         static let onboardingDescription = UIFont.systemFont(ofSize: 20, weight: .regular)
+        
+        static let leaderboardPoints = UIFont.systemFont(ofSize: 16, weight: .regular)
+        static let leaderboardName = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        static let leaderboardRank = UIFont.systemFont(ofSize: 24, weight: .bold)
 
     }
 }

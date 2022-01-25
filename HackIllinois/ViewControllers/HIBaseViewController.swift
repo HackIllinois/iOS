@@ -9,7 +9,6 @@
 //  Illinois/NCSA Open Source License. You should have received a copy of
 //  this license in a file with the distribution.
 //
-
 import Foundation
 import UIKit
 import CoreData
@@ -105,6 +104,16 @@ func populateTagLabels(stackView: UIStackView, tagsString: String) {
     }
 }
 
+// MARK: - HILabel Setup
+extension HIBaseViewController {
+    @objc func setCustomTitle(customTitle: String) {
+        let label = HILabel(style: .viewTitle)
+        label.text = customTitle
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
+        self.navigationItem.leftItemsSupplementBackButton = true
+    }
+}
+
 // MARK: - UINavigationItem Setup
 extension HIBaseViewController {
     @objc dynamic func setupNavigationItem() {
@@ -190,14 +199,12 @@ extension HIBaseViewController: NSFetchedResultsControllerDelegate {
 //                    }
 //                }
 //            }
-
         case .update:
             guard let updateIndexPath = indexPath else { return }
             tableView?.reloadRows(at: [updateIndexPath], with: .fade)
         case .move:
 //            guard let fromIndexPath = indexPath, let toIndexPath = newIndexPath else { return }
 //            tableView?.moveRow(at: fromIndexPath, to: toIndexPath)
-
             // Current Way of Resolving Index Path Conflicts
             guard let indexPath = indexPath else { return }
             tableView?.deleteRows(at: [indexPath], with: .fade)

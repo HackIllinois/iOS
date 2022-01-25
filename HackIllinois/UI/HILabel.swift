@@ -55,6 +55,9 @@ class HILabel: UILabel {
         case codeError
         case onboardingDescription
         case onboardingTitle
+        case leaderboardRank
+        case leaderboardName
+        case leaderboardPoints
     }
 
     // MARK: - Properties
@@ -296,6 +299,23 @@ class HILabel: UILabel {
             font = HIAppearance.Font.onboardingTitle
             textAlignment = .center
             numberOfLines = 0
+
+        // Leaderboard label fonts
+        case .leaderboardRank:
+            textHIColor = \.leaderboardText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.leaderboardRank
+            layer.shadowOffset = CGSize(width: 2, height: 2)
+            layer.shadowRadius = 2.0
+            layer.shadowOpacity = 0.25
+        case .leaderboardName:
+            textHIColor = \.leaderboardText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.leaderboardName
+        case .leaderboardPoints:
+            textHIColor = \.leaderboardText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.leaderboardPoints
 
         }
         }

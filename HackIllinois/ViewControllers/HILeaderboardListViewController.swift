@@ -43,9 +43,8 @@ extension HILeaderboardListViewController {
 // MARK: - UITableViewDelegate
 extension HILeaderboardListViewController {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let leaderboardProfile = _fetchedResultsController?.object(at: indexPath) as? LeaderboardProfile else {
-            return CGFloat.leastNonzeroMagnitude
-        }
-        return HILeaderboardCell.heightForCell(with: leaderboardProfile, width: tableView.frame.width)
+        let tHeight = tableView.frame.height
+        let temp = tHeight / 10
+        return temp > 60 ? temp : 60
     }
 }
