@@ -314,9 +314,9 @@ class HILabel: UILabel {
             font = HIAppearance.Font.leaderboardName
         case .leaderboardPoints:
             textHIColor = \.leaderboardText
-            backgroundHIColor = \.clear
+            backgroundHIColor = \.pointsBackground
             font = HIAppearance.Font.leaderboardPoints
-
+            layer.cornerRadius = 100
         }
         }
 

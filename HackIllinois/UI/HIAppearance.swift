@@ -73,6 +73,7 @@ struct HIAppearance: Equatable {
     let leaderboardText: UIColor
     let leaderboardBackgroundOne: UIColor
     let leaderboardBackgroundTwo: UIColor
+    let pointsBackground: UIColor
 
     let clear: UIColor = .clear
     let black: UIColor = .black
@@ -179,7 +180,8 @@ struct HIAppearance: Equatable {
         profile10: #imageLiteral(resourceName: "Profile10"),
         leaderboardText: lightBlack,
         leaderboardBackgroundOne: yellowWhite,
-        leaderboardBackgroundTwo: tan
+        leaderboardBackgroundTwo: tan,
+        pointsBackground: yellowGreen
     )
 
     fileprivate static let night = HIAppearance(
@@ -238,7 +240,8 @@ struct HIAppearance: Equatable {
         profile10: #imageLiteral(resourceName: "Profile10"),
         leaderboardText: lightBlack,
         leaderboardBackgroundOne: yellowWhite,
-        leaderboardBackgroundTwo: tan
+        leaderboardBackgroundTwo: tan,
+        pointsBackground: yellowGreen
     )
 
     fileprivate static var current = day

@@ -38,7 +38,7 @@ class HIOnboardingViewController: HIBaseViewController {
     }
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "Login")
+        backgroundView.image = #imageLiteral(resourceName: "GroupMatching")
     }
 }
 
