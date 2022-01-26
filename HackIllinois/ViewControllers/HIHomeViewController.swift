@@ -130,7 +130,7 @@ extension HIHomeViewController {
         countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
 //        addChild(countdownViewController)
         countdownFrameView.addSubview(countdownViewController.view)
-        countdownViewController.view.constrain(to: countdownFrameView, topInset: 180, trailingInset: -50, bottomInset: -10, leadingInset: 40)
+        countdownViewController.view.constrain(to: countdownFrameView, topInset: 155, trailingInset: -50, bottomInset: -10, leadingInset: 40)
 //        countdownViewController.view.centerXAnchor.constraint(equalTo: countdownFrameView.centerXAnchor).isActive = true
         
 //        countdownViewController.view.centerYAnchor.constraint(equalTo: countdownFrameView.centerYAnchor, constant: 0).isActive = true
@@ -208,10 +208,11 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
         while countdownDataStoreIndex < staticDataStore.count {
             let currDate = staticDataStore[countdownDataStoreIndex].date
             if currDate > now {
-                super.setCustomTitle(customTitle: staticDataStore[countdownDataStoreIndex].displayText)
+//                super.setCustomTitle(customTitle: staticDataStore[countdownDataStoreIndex].displayText)
+                super.setCustomTitle(customTitle: "What's Cooking?")
                 return (countdownDataStoreIndex == 0 || countdownDataStoreIndex == 1) ? HITimeDataSource.shared.eventTimes.eventStart : currDate
             } else {
-                super.setCustomTitle(customTitle: "What's Cooking?")
+                super.setCustomTitle(customTitle: "HackIllinois Begins In:")
             }
             countdownDataStoreIndex += 1
         }

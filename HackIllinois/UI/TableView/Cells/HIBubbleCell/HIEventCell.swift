@@ -68,7 +68,8 @@ class HIEventCell: HIBubbleCell {
         contentStackView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor).isActive = true
         contentStackView.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -16).isActive = true
 //        contentStackView.centerYAnchor.constraint(equalTo: bubbleView.centerYAnchor).isActive = true
-        contentStackView.topAnchor.constraint(equalTo: favoritedButton.bottomAnchor, constant: 4).isActive = true
+//        contentStackView.topAnchor.constraint(greaterThanOrEqualTo: favoritedButton.bottomAnchor, constant: 4).isActive = true
+        contentStackView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 4).isActive = true
         contentStackView.bottomAnchor.constraint(greaterThanOrEqualTo: bubbleView.bottomAnchor).isActive = true
 //        contentStackViewHeight = contentStackView.heightAnchor.constraint(equalToConstant: 0)
 //        contentStackViewHeight.isActive = true
@@ -101,7 +102,7 @@ extension HIEventCell {
         let heightFromEventInfo = HILabel.heightForView(text: trimText(text: event.info, length: getMaxDescriptionTextLength()), font: HIAppearance.Font.eventDetails, width: width - 100)
         let height = heightFromEventName + heightFromEventInfo + 90 + 15
         if !event.sponsor.isEmpty {
-            return height + 21
+            return height + 20
         }
         return height
     }
@@ -256,10 +257,11 @@ extension HIEventCell {
     }
 
     static func trimText(text: String, length: Int) -> String {
-        if text.count >= length {
-            let index = text.index(text.startIndex, offsetBy: length)
-            return String(text[..<index]) + "..."
+        let textNoLineBreaks = text.components(separatedBy: .newlines).joined()
+        if textNoLineBreaks.count >= length {
+            let index = textNoLineBreaks.index(textNoLineBreaks.startIndex, offsetBy: length)
+            return String(textNoLineBreaks[..<index]) + "..."
         }
-        return text
+        return textNoLineBreaks
     }
 }
