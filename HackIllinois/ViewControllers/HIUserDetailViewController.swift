@@ -22,28 +22,21 @@ class HIUserDetailViewController: HIBaseViewController {
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundHIColor = \.qrBackground
     }
     private let qrContainerView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundHIColor = \.qrBackground
     }
     private let qrImageView = HITintImageView {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.tintHIColor = \.qrTint
         $0.contentMode = .scaleAspectFit
     }
     private let userNameLabel = HILabel {
-        $0.textHIColor = \.qrTint
-        $0.backgroundHIColor = \.qrBackground
         $0.font = HIAppearance.Font.navigationTitle
         $0.textAlignment = .center
         $0.numberOfLines = 0
         $0.setContentCompressionResistancePriority(.required, for: .vertical)
     }
     private let userInfoLabel = HILabel {
-        $0.textHIColor = \.qrTint
-        $0.backgroundHIColor = \.qrBackground
         $0.font = HIAppearance.Font.contentText
         $0.textAlignment = .center
         $0.numberOfLines = 0

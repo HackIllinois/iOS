@@ -36,7 +36,7 @@ class HIEditProfileDetailViewController: HIBaseViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    let descriptionLabel = HILabel(style: .profileDescription) { (label) in
+    let descriptionLabel = HILabel(style: .profileTier) { (label) in
         label.alpha = 0.5
         label.numberOfLines = 0
     }

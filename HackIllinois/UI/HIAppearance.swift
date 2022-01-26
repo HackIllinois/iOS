@@ -25,8 +25,7 @@ struct HIAppearance: Equatable {
     let codePopupTab: UIColor
     let navbarBackground: UIColor
     let navbarTabTint: UIColor
-    let qrTint: UIColor
-    let qrBackground: UIColor
+    let profileContainerTint: UIColor
     let emptyTableViewBackground: UIImage
     let preferredStatusBarStyle: UIStatusBarStyle
     let scrollViewIndicatorStyle: UIScrollView.IndicatorStyle
@@ -77,6 +76,8 @@ struct HIAppearance: Equatable {
 
     let clear: UIColor = .clear
     let black: UIColor = .black
+    let white: UIColor = .white
+
     // Hack 2022 color palette
     private static let darkRed = #colorLiteral(red: 0.6039215686, green: 0.1411764706, blue: 0.168627451, alpha: 1)
     private static let tan = #colorLiteral(red: 0.9098039216, green: 0.8431372549, blue: 0.6470588235, alpha: 1)
@@ -123,11 +124,18 @@ struct HIAppearance: Equatable {
     private static var statusBarWhite: UIStatusBarStyle {
         return .lightContent
     }
+    private static var statusBarBlack: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            return .default
+        }
+    }
 
     fileprivate static let day = HIAppearance(
         titleText: white,
         whiteText: white,
-        baseText: darkBlue,
+        baseText: lightBlack,
         accent: orange,
         action: white,
         baseBackground: white,
@@ -137,10 +145,9 @@ struct HIAppearance: Equatable {
         codePopupTab: orange,
         navbarBackground: green,
         navbarTabTint: yellowWhite,
-        qrTint: lightBlack,
-        qrBackground: tan,
+        profileContainerTint: yellowWhite,
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewDay"),
-        preferredStatusBarStyle: statusBarWhite,
+        preferredStatusBarStyle: statusBarBlack,
         scrollViewIndicatorStyle: .black,
         mapBackground: whiteBlue,
         loginDefault: lightBlack,
@@ -151,14 +158,14 @@ struct HIAppearance: Equatable {
         attendeeText: lightBlack,
         attendeeBackground: yellowGreen,
         whiteTagFont: white,
-        interestBackground: lightCoral,
+        interestBackground: orange,
         segmentedBackground: greyWhite,
         buttonBlue: buttonblue,
         groupText: grayBlack,
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
         noSearchText: groupGreen,
-        buttonViewBackground: buttonBlue,
+        buttonViewBackground: green,
         checkmark: #imageLiteral(resourceName: "CheckMark"),
         unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedBox"),
         selectedGroupStatus: #imageLiteral(resourceName: "SelectedBox"),
@@ -187,7 +194,7 @@ struct HIAppearance: Equatable {
     fileprivate static let night = HIAppearance(
         titleText: white,
         whiteText: white,
-        baseText: darkBlue,
+        baseText: lightBlack,
         accent: orange,
         action: white,
         baseBackground: white,
@@ -197,10 +204,9 @@ struct HIAppearance: Equatable {
         codePopupTab: orange,
         navbarBackground: green,
         navbarTabTint: yellowWhite,
-        qrTint: lightBlack,
-        qrBackground: tan,
+        profileContainerTint: yellowWhite,
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewNight"),
-        preferredStatusBarStyle: statusBarWhite,
+        preferredStatusBarStyle: statusBarBlack,
         scrollViewIndicatorStyle: .white,
         mapBackground: whiteBlue,
         loginDefault: lightBlack,
@@ -211,14 +217,14 @@ struct HIAppearance: Equatable {
         attendeeText: lightBlack,
         attendeeBackground: yellowGreen,
         whiteTagFont: white,
-        interestBackground: lightCoral,
+        interestBackground: orange,
         segmentedBackground: greyWhite,
         buttonBlue: buttonblue,
         groupText: grayBlack,
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
         noSearchText: groupGreen,
-        buttonViewBackground: buttonBlue,
+        buttonViewBackground: green,
         checkmark: #imageLiteral(resourceName: "CheckMark"),
         unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedBox"),
         selectedGroupStatus: #imageLiteral(resourceName: "SelectedBox"),
@@ -283,8 +289,8 @@ struct HIAppearance: Equatable {
 
         static let profileName = UIFont.systemFont(ofSize: 24, weight: .semibold)
         static let profileSubtitle = UIFont.systemFont(ofSize: 14, weight: .bold)
-        static let profileNumberFigure = UIFont.systemFont(ofSize: 20, weight: .medium)
-        static let profileDescription = UIFont.systemFont(ofSize: 16, weight: .regular)
+        static let profileNumberFigure = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        static let profileTier = UIFont.systemFont(ofSize: 18, weight: .regular)
         static let profileUsername = UIFont.systemFont(ofSize: 16, weight: .bold)
         static let profileInterests = UIFont.systemFont(ofSize: 14, weight: .semibold)
         static let segmentedTitle = UIFont.systemFont(ofSize: 16, weight: .regular)
