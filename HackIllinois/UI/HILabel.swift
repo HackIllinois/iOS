@@ -37,7 +37,7 @@ class HILabel: UILabel {
         case profileName
         case profileSubtitle
         case profileNumberFigure
-        case profileDescription
+        case profileTier
         case profileUsername
         case profileInterests
         case navigationInfo
@@ -178,7 +178,7 @@ class HILabel: UILabel {
             layer.backgroundColor = UIColor.clear.cgColor
 
         case .profileName: // Used to display the profile owner's name
-            textHIColor = \.whiteTagFont
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .center
             font = HIAppearance.Font.profileName
@@ -189,16 +189,16 @@ class HILabel: UILabel {
             font = HIAppearance.Font.profileSubtitle
 
         case .profileNumberFigure: // Used to display number of points and time (?)
-            textHIColor = \.whiteTagFont
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .center
             font = HIAppearance.Font.profileNumberFigure
 
-        case .profileDescription: // Used to display "short description"
-            textHIColor = \.whiteTagFont
+        case .profileTier: // Used to display "short description"
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .left
-            font = HIAppearance.Font.profileDescription
+            font = HIAppearance.Font.profileTier
 
         case .profileUsername: // Used to display Discord username, etc.
             textHIColor = \.whiteTagFont
@@ -272,7 +272,7 @@ class HILabel: UILabel {
             font = HIAppearance.Font.characterCount
 
         case .error:
-            textHIColor = \.whiteTagFont
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.detailSubtitle
             textAlignment = .center
@@ -285,13 +285,13 @@ class HILabel: UILabel {
             textAlignment = .center
             numberOfLines = 0
         case .onboardingDescription:
-            textHIColor = \.whiteText
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.onboardingDescription
             textAlignment = .center
             numberOfLines = 0
         case .onboardingTitle:
-            textHIColor = \.whiteText
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.onboardingTitle
             textAlignment = .center

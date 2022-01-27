@@ -27,7 +27,7 @@ class HITabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCodePopupButton()
+        setupQRScanButton()
         setupTabBar()
     }
 
@@ -40,11 +40,18 @@ class HITabBarController: UITabBarController {
         }
     }
 
-    @objc private func codePopupButtonPressed(_ sender: UIButton) {
-        let codePopup = HICodePopupViewController()
-        codePopup.modalPresentationStyle = .overCurrentContext
-        codePopup.modalTransitionStyle = .crossDissolve
-        self.present(codePopup, animated: true, completion: nil)
+    @objc private func qrScannerPopupButtonPressed(_ sender: UIButton) {
+        if HIApplicationStateController.shared.isGuest {
+            let notEnabledAlert = UIAlertController(title: "You need to log out of your current account and log in as an attendee to check in to events.", message: "", preferredStyle: .alert)
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            notEnabledAlert.addAction(cancel)
+            self.present(notEnabledAlert, animated: true)
+        } else {
+            let scanQRCodePopup = HIScanQRCodeViewController()
+            scanQRCodePopup.modalPresentationStyle = .overFullScreen
+            scanQRCodePopup.modalTransitionStyle = .crossDissolve
+            self.present(scanQRCodePopup, animated: true, completion: nil)
+        }
     }
 
     init() {
@@ -52,33 +59,32 @@ class HITabBarController: UITabBarController {
         moreNavigationController.tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "DisclosureIndicator"), tag: 0)
     }
 
-    func setupCodePopupButton() {
-        //Setup Code Popup Button
-        let codePopupButton = UIButton()
-        view.addSubview(codePopupButton)
-        codePopupButton.translatesAutoresizingMaskIntoConstraints = false
-        codePopupButton.frame.size = CGSize(width: 54, height: 54)
-        codePopupButton.layer.cornerRadius = 28
-        codePopupButton.center = CGPoint(x: view.center.x, y: 0)
-        codePopupButton.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.4235294118, blue: 0.4470588235, alpha: 1)
-        codePopupButton.setImage(#imageLiteral(resourceName: "CodePopupTabIcon"), for: .normal)
-        codePopupButton.imageView?.contentMode = .scaleAspectFill
-        codePopupButton.imageView?.tintColor = UIColor.white
+    func setupQRScanButton() {
+        //Setup QR Scanner Popup Button
+        let qrScannerPopupButton = UIButton()
+        view.addSubview(qrScannerPopupButton)
+        qrScannerPopupButton.translatesAutoresizingMaskIntoConstraints = false
+        qrScannerPopupButton.frame.size = CGSize(width: 54, height: 54)
+        qrScannerPopupButton.layer.cornerRadius = 28
+        qrScannerPopupButton.center = CGPoint(x: view.center.x, y: 0)
+        qrScannerPopupButton.backgroundColor = (\HIAppearance.codePopupTab).value
+        qrScannerPopupButton.setImage(#imageLiteral(resourceName: "QRScannerPopupTabIcon"), for: .normal)
+        qrScannerPopupButton.imageView?.contentMode = .scaleAspectFill
 
         // Button Shadow
-        codePopupButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
-        codePopupButton.layer.shadowOpacity = 1
-        codePopupButton.layer.shadowRadius = 15
-        codePopupButton.layer.masksToBounds = false
-        codePopupButton.layer.shadowOffset = CGSize(width: 0, height: 0)
+        qrScannerPopupButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        qrScannerPopupButton.layer.shadowOpacity = 1
+        qrScannerPopupButton.layer.shadowRadius = 15
+        qrScannerPopupButton.layer.masksToBounds = false
+        qrScannerPopupButton.layer.shadowOffset = CGSize(width: 0, height: 0)
 
-        //Code Popup Button Constraints
-        codePopupButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        codePopupButton.centerYAnchor.constraint(equalTo: tabBar.topAnchor, constant: 0).isActive = true
-        codePopupButton.constrain(width: 54, height: 54)
+        //QR Scanner PopupButton Constraints
+        qrScannerPopupButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        qrScannerPopupButton.centerYAnchor.constraint(equalTo: tabBar.topAnchor, constant: 0).isActive = true
+        qrScannerPopupButton.constrain(width: 54, height: 54)
 
-        //Code Popup Action
-        codePopupButton.addTarget(self, action: #selector(codePopupButtonPressed(_:)), for: .touchUpInside)
+        //QR Scanner PopupAction
+        qrScannerPopupButton.addTarget(self, action: #selector(qrScannerPopupButtonPressed(_:)), for: .touchUpInside)
     }
 
     func setupTabBar() {
@@ -89,9 +95,8 @@ class HITabBarController: UITabBarController {
         tabBar.clipsToBounds = true
         tabBar.layer.borderWidth = 0
         tabBar.backgroundColor = UIColor.clear
-        tabBar.unselectedItemTintColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
-        tabBar.tintColor = UIColor.white
-
+        tabBar.unselectedItemTintColor = (\HIAppearance.navbarTabTint).value
+        tabBar.tintColor = (\HIAppearance.navbarTabTint).value
         addTabBarShape()
     }
 
@@ -99,7 +104,7 @@ class HITabBarController: UITabBarController {
         tabBarShapeLayer = CAShapeLayer()
         if let tabBarShapeLayer = tabBarShapeLayer {
             tabBarShapeLayer.path = createPath()
-            tabBarShapeLayer.fillColor = UIColor(red: 0.435, green: 0.549, blue: 0.757, alpha: 1.0).cgColor
+            tabBarShapeLayer.fillColor = (\HIAppearance.navbarBackground).value.cgColor
             tabBarShapeLayer.lineWidth = 1.0
 
             self.tabBar.layer.insertSublayer(tabBarShapeLayer, at: 0)

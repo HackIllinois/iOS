@@ -18,23 +18,18 @@ class HIOnboardingViewController: HIBaseViewController {
     //source: https://medium.com/swlh/swift-carousel-759800aa2952
     // MARK: - Subviews
     private var carouselView: HICarouselView?
-    let animationView = AnimationView(name: "intro")
+    let animationView = AnimationView(name: "DarkVespaText")
     var shouldDisplayAnimationOnNextAppearance = true
 
     // MARK: - Properties
     private var carouselData = [HICarouselView.CarouselData]()
     let getStartedButton = HIButton {
-        $0.title = "Get Started"
-        $0.layer.cornerRadius = 8
+        $0.layer.cornerRadius = 25
         $0.titleLabel?.font = HIAppearance.Font.onboardingGetStartedText
         $0.backgroundHIColor = \.buttonViewBackground
-        $0.titleHIColor = \.action
+        $0.titleHIColor = \.whiteText
         $0.title = "Get Started"
         $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        $0.layer.shadowColor = UIColor.black.cgColor
-        $0.layer.shadowOffset = .zero
-        $0.layer.shadowOpacity = 0.5
-        $0.layer.shadowRadius = 5
     }
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
@@ -47,17 +42,21 @@ extension HIOnboardingViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         carouselView = HICarouselView(pages: 5)
-        carouselData.append(.init(image: UIImage(named: "HILogo"), titleText: "Welcome!", descriptionText: "Swipe to see what our app has to offer!"))
+        carouselData.append(.init(image: #imageLiteral(resourceName: "OnboardingOne"), titleText: "Welcome!", descriptionText: "Swipe to see what our app has to offer!"))
         carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Check-In", descriptionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"))
         carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Scan for Points", descriptionText: "Lorem ipsum dolor sit amet, conse"))
         carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Get Notified", descriptionText: "Lorem ipsum dolor sit amet, consectet"))
         carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Win Prizes", descriptionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"))
         setupUI()
+        let viewAlphaValue = shouldDisplayAnimationOnNextAppearance ? 0.0 : 1.0
+
+        carouselView?.alpha = viewAlphaValue
+        getStartedButton.alpha = viewAlphaValue
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if shouldDisplayAnimationOnNextAppearance {
-            animationView.contentMode = .scaleAspectFill
+            animationView.contentMode = .scaleAspectFit
             animationView.frame = view.frame
             animationView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             view.addSubview(animationView)
@@ -67,16 +66,14 @@ extension HIOnboardingViewController {
         super.viewDidAppear(animated)
         carouselView?.configureView(with: carouselData)
         if shouldDisplayAnimationOnNextAppearance {
-//            statusBarIsHidden = true
-//            setNeedsStatusBarAppearanceUpdate()
+            setNeedsStatusBarAppearanceUpdate()
 
             animationView.play { _ in
                 // Smooth out background transition into login page
-                UIView.animate(withDuration: 1.0, animations: {self.animationView.alpha = 0.0},
+                UIView.animate(withDuration: 1.0, animations: {self.animationView.alpha = 0.0; self.carouselView?.alpha = 1.0; self.getStartedButton.alpha = 1.0},
                 completion: { _ in
                     self.animationView.removeFromSuperview()
                 })
-//                self.statusBarIsHidden = false
                 UIView.animate(withDuration: 0.25) { () -> Void in
                     self.setNeedsStatusBarAppearanceUpdate()
                 }

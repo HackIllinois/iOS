@@ -94,7 +94,7 @@ extension HIApplicationStateController {
         viewControllers.append(HIScheduleViewController())
         viewControllers.append(HICodePopupViewController())
         viewControllers.append(HIProfileViewController())
-        viewControllers.append(HIGroupViewController())
+        viewControllers.append(HILeaderboardViewController())
         return viewControllers
     }
 

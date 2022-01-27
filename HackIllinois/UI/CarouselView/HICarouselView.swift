@@ -33,7 +33,7 @@ class HICarouselView: UIView {
     private lazy var pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.pageIndicatorTintColor = .gray
-        pageControl.currentPageIndicatorTintColor = .white
+        pageControl.currentPageIndicatorTintColor = .black
         return pageControl
     }()
     // MARK: - Properties
@@ -120,7 +120,6 @@ extension HICarouselView: UICollectionViewDelegate {
 
 extension HICarouselView {
     public func configureView(with data: [CarouselData]) {
-        print(frame.height)
         let cellPadding = (frame.width - 300) / 2
         let carouselLayout = UICollectionViewFlowLayout()
         carouselLayout.scrollDirection = .horizontal
