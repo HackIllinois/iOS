@@ -32,7 +32,7 @@ class HILeaderboardCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
-        //backgroundColor = UIColor.clear
+        backgroundColor = UIColor.clear
         contentView.addSubview(cellView)
         cellView.constrain(to: safeAreaLayoutGuide, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
 
