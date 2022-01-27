@@ -1,29 +1,17 @@
 {
   "images" : [
     {
-<<<<<<< HEAD:HackIllinois/Assets.xcassets/TabBarIcons/matching.imageset/Contents.json
-      "filename" : "matching@1x.png",
-=======
       "filename" : "OnboardingOne@1x.png",
->>>>>>> dev:HackIllinois/Assets.xcassets/Onboarding/OnboardingOne.imageset/Contents.json
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-<<<<<<< HEAD:HackIllinois/Assets.xcassets/TabBarIcons/matching.imageset/Contents.json
-      "filename" : "matching@2x.png",
-=======
       "filename" : "OnboardingOne@2x.png",
->>>>>>> dev:HackIllinois/Assets.xcassets/Onboarding/OnboardingOne.imageset/Contents.json
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-<<<<<<< HEAD:HackIllinois/Assets.xcassets/TabBarIcons/matching.imageset/Contents.json
-      "filename" : "matching@3x.png",
-=======
       "filename" : "OnboardingOne@3x.png",
->>>>>>> dev:HackIllinois/Assets.xcassets/Onboarding/OnboardingOne.imageset/Contents.json
       "idiom" : "universal",
       "scale" : "3x"
     }

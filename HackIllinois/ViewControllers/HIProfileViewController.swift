@@ -59,11 +59,7 @@ class HIProfileViewController: HIBaseViewController {
 // MARK: - UITabBarItem Setup
 extension HIProfileViewController {
     override func setupTabBarItem() {
-<<<<<<< HEAD
-        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "UnselectedRadioButton"), tag: 0)
-=======
         tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "profile"), selectedImage: #imageLiteral(resourceName: "ProfileSelected"))
->>>>>>> dev
     }
 }
 
@@ -98,19 +94,6 @@ extension HIProfileViewController {
         errorView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
         errorView.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
-<<<<<<< HEAD
-    func layoutQRCode() {
-        contentView.addSubview(qrBackground)
-        qrBackground.constrain(to: contentView, topInset: 0)
-        qrBackground.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        qrBackground.constrain(width: 250, height: 250)
-        qrBackground.addSubview(qrImageView)
-        qrImageView.centerYAnchor.constraint(equalTo: qrBackground.centerYAnchor).isActive = true
-        qrImageView.centerXAnchor.constraint(equalTo: qrBackground.centerXAnchor).isActive = true
-        qrImageView.constrain(width: 200, height: 200)
-    }
-=======
->>>>>>> dev
     func layoutScrollView() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.alwaysBounceVertical = true

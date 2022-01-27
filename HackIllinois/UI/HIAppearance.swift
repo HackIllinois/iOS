@@ -22,17 +22,12 @@ struct HIAppearance: Equatable {
     let contentBackground: UIColor
     let overlay: UIColor
     let frostedTint: UIColor
-<<<<<<< HEAD
-    let qrTint: UIColor
-    let qrBackground: UIColor
     let countdownFrameBackground: UIColor
     let eventBackground: UIColor
-=======
     let codePopupTab: UIColor
     let navbarBackground: UIColor
     let navbarTabTint: UIColor
     let profileContainerTint: UIColor
->>>>>>> dev
     let emptyTableViewBackground: UIImage
     let preferredStatusBarStyle: UIStatusBarStyle
     let scrollViewIndicatorStyle: UIScrollView.IndicatorStyle
@@ -145,17 +140,12 @@ struct HIAppearance: Equatable {
         contentBackground: yellowWhite,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
-<<<<<<< HEAD
-        qrTint: lightBlack,
-        qrBackground: tan,
         countdownFrameBackground: tan,
         eventBackground: yellowWhite,
-=======
         codePopupTab: orange,
         navbarBackground: green,
         navbarTabTint: yellowWhite,
         profileContainerTint: yellowWhite,
->>>>>>> dev
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewDay"),
         preferredStatusBarStyle: statusBarBlack,
         scrollViewIndicatorStyle: .black,
@@ -168,16 +158,11 @@ struct HIAppearance: Equatable {
         attendeeText: lightBlack,
         attendeeBackground: yellowGreen,
         whiteTagFont: white,
-<<<<<<< HEAD
-        interestBackground: lightCoral,
-        segmentedBackground: tan,
+        interestBackground: yellowGreen,
+        segmentedBackground: .clear,
         buttonGreen: yellowGreen,
         favoriteStarTint: .clear,
-=======
-        interestBackground: orange,
-        segmentedBackground: greyWhite,
-        buttonBlue: buttonblue,
->>>>>>> dev
+//        buttonBlue: buttonblue,
         groupText: grayBlack,
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
@@ -214,17 +199,12 @@ struct HIAppearance: Equatable {
         contentBackground: yellowWhite,
         overlay: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.47),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
-<<<<<<< HEAD
-        qrTint: lightBlack,
-        qrBackground: tan,
         countdownFrameBackground: tan,
         eventBackground: yellowWhite,
-=======
         codePopupTab: orange,
         navbarBackground: green,
         navbarTabTint: yellowWhite,
         profileContainerTint: yellowWhite,
->>>>>>> dev
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewNight"),
         preferredStatusBarStyle: statusBarBlack,
         scrollViewIndicatorStyle: .white,
@@ -237,16 +217,11 @@ struct HIAppearance: Equatable {
         attendeeText: lightBlack,
         attendeeBackground: yellowGreen,
         whiteTagFont: white,
-<<<<<<< HEAD
-        interestBackground: lightCoral,
-        segmentedBackground: tan,
+        interestBackground: yellowGreen,
+        segmentedBackground: .clear,
         buttonGreen: yellowGreen,
         favoriteStarTint: .clear,
-=======
-        interestBackground: orange,
-        segmentedBackground: greyWhite,
-        buttonBlue: buttonblue,
->>>>>>> dev
+//        buttonBlue: buttonblue,
         groupText: grayBlack,
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
