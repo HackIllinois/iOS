@@ -44,7 +44,7 @@ class HIEventDetailViewController: HIBaseViewController {
     private let pointsLabel = HILabel(style: .pointsText)
     private let timeImageView = UIImageView(image: #imageLiteral(resourceName: "Clock"))
     private let favoritedButton = HIButton {
-        $0.tintHIColor = \.favoriteStarTint
+        $0.tintHIColor = \.accent
         $0.backgroundHIColor = \.clear
         $0.activeImage = #imageLiteral(resourceName: "Favorited")
         $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
