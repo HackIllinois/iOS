@@ -22,7 +22,7 @@ class HILeaderboardCell: UITableViewCell {
     let pointsLabel = HILabel(style: .leaderboardPoints)
 
     var cellView = HIView {
-        $0.backgroundHIColor = \.contentBackground
+        //$0.backgroundHIColor = \.leaderboardBackgroundOne
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.masksToBounds = false
@@ -32,7 +32,7 @@ class HILeaderboardCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
-        backgroundColor = UIColor.clear
+        //backgroundColor = UIColor.clear
         contentView.addSubview(cellView)
         cellView.constrain(to: safeAreaLayoutGuide, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
 

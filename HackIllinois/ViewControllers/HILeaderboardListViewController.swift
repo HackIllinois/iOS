@@ -35,7 +35,15 @@ extension HILeaderboardListViewController {
         if let cell = cell as? HILeaderboardCell, let leaderboardProfile = _fetchedResultsController?.object(at: indexPath) as? LeaderboardProfile {
             cell <- leaderboardProfile
             cell.indexPath = indexPath
+            cell.rankLabel.text = "\((indexPath.row) + 1)"
+            if indexPath.row % 2 == 0 {
+                //cell.cellView.backgroundHIColor = \.leaderboardBackgroundTwo
+                cell.cellView.backgroundHIColor = \.pointsBackground
+            } else {
+                cell.cellView.backgroundHIColor = \.leaderboardBackgroundTwo
+            }
         }
+        
         return cell
     }
 }

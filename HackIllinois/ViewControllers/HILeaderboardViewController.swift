@@ -110,10 +110,12 @@ extension HILeaderboardViewController {
                 willDisplay cell: HILeaderboardCell,
                 forRowAt indexPath: IndexPath) {
         if indexPath.row % 2 == 0 {
-            cell.backgroundColor = #colorLiteral(red: 0.968627451, green: 0.9568627451, blue: 0.8274509804, alpha: 1)
+            //cell.backgroundColor = #colorLiteral(red: 0.968627451, green: 0.9568627451, blue: 0.8274509804, alpha: 1)
+            cell.cellView.backgroundHIColor = \.leaderboardBackgroundOne
         } else {
-            cell.backgroundColor = #colorLiteral(red: 0.9098039216, green: 0.8431372549, blue: 0.6470588235, alpha: 1)
+            cell.cellView.backgroundHIColor = \.leaderboardBackgroundTwo
         }
+        cell.rankLabel.text = "\((indexPath.row) + 1)"
     }
 }
 
