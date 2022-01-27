@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0A360882203539FF001F5F85 /* HIAdminEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */; };
 		1C63EE6927680DF500D60653 /* CIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C63EE6827680DF500D60653 /* CIImage.swift */; };
+		1C7561A3278E96600004D739 /* DarkVespaText.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C7561A2278E96600004D739 /* DarkVespaText.json */; };
+		1C7561A5278E96750004D739 /* LightVespaText.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C7561A4278E96750004D739 /* LightVespaText.json */; };
 		1C9045CE274F03A200DDA74E /* HICarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9045CD274F03A200DDA74E /* HICarouselCell.swift */; };
 		1C9045D2274F048A00DDA74E /* HICarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9045D1274F048A00DDA74E /* HICarouselView.swift */; };
 		1C9045D4274F065F00DDA74E /* HIOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */; };
@@ -20,7 +22,6 @@
 		3C26401923ADE7AA004E1DBE /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26401723ADE7AA004E1DBE /* Project+CoreDataProperties.swift */; };
 		3C26401B23ADE838004E1DBE /* ProjectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26401A23ADE838004E1DBE /* ProjectService.swift */; };
 		3C26401D23ADE8A5004E1DBE /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26401C23ADE8A5004E1DBE /* Project.swift */; };
-		3C2C250A23EFD3C500EA3194 /* intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 3C2C250923EFD3C500EA3194 /* intro.json */; };
 		3C7E552723AA199900213E1F /* HITimeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E552623AA199900213E1F /* HITimeDataSource.swift */; };
 		3C8F62D4238F9639001A5DAF /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F62D3238F9639001A5DAF /* Time.swift */; };
 		3C8F62D6238F9825001A5DAF /* TimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F62D5238F9825001A5DAF /* TimeService.swift */; };
@@ -34,7 +35,11 @@
 		3FB82A0D25C25AE700C0B43F /* HIGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB82A0C25C25AE700C0B43F /* HIGroupViewController.swift */; };
 		3FB82A1125C25B3800C0B43F /* HIGroupListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB82A1025C25B3800C0B43F /* HIGroupListViewController.swift */; };
 		3FBEF38125F36239009B97CB /* HIGroupStatusOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBEF38025F36239009B97CB /* HIGroupStatusOptions.swift */; };
+		3FBFA7AB27335554001FFF28 /* HILeaderboardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFA7AA27335554001FFF28 /* HILeaderboardListViewController.swift */; };
+		3FBFA7B127335800001FFF28 /* HILeaderboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFA7B027335800001FFF28 /* HILeaderboardCell.swift */; };
+		3FBFA7B527335ABC001FFF28 /* HILeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFA7B427335ABC001FFF28 /* HILeaderboardViewController.swift */; };
 		3FC091D625B74DEA00DA23D8 /* HIGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC091D525B74DEA00DA23D8 /* HIGroupCell.swift */; };
+		60EAF98B273B1AC4002CD205 /* HIScanQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EAF98A273B1AC4002CD205 /* HIScanQRCodeViewController.swift */; };
 		950AD60A23DE362B00463AF2 /* HITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950AD60923DE362B00463AF2 /* HITabBarController.swift */; };
 		9510F6A01FCB7D6E007D19DB /* Announcement+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9510F69A1FCB7D6E007D19DB /* Announcement+CoreDataClass.swift */; };
 		9510F6A11FCB7D6E007D19DB /* Event+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9510F69B1FCB7D6E007D19DB /* Event+CoreDataClass.swift */; };
@@ -196,6 +201,8 @@
 /* Begin PBXFileReference section */
 		0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAdminEventViewController.swift; sourceTree = "<group>"; };
 		1C63EE6827680DF500D60653 /* CIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIImage.swift; sourceTree = "<group>"; };
+		1C7561A2278E96600004D739 /* DarkVespaText.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DarkVespaText.json; sourceTree = "<group>"; };
+		1C7561A4278E96750004D739 /* LightVespaText.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LightVespaText.json; sourceTree = "<group>"; };
 		1C9045CD274F03A200DDA74E /* HICarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICarouselCell.swift; sourceTree = "<group>"; };
 		1C9045D1274F048A00DDA74E /* HICarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICarouselView.swift; sourceTree = "<group>"; };
 		1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIOnboardingViewController.swift; sourceTree = "<group>"; };
@@ -207,7 +214,6 @@
 		3C26401723ADE7AA004E1DBE /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Project+CoreDataProperties.swift"; path = "HackIllinois/Models/CoreDataModels/Project+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		3C26401A23ADE838004E1DBE /* ProjectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectService.swift; sourceTree = "<group>"; };
 		3C26401C23ADE8A5004E1DBE /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
-		3C2C250923EFD3C500EA3194 /* intro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = intro.json; sourceTree = "<group>"; };
 		3C7E552623AA199900213E1F /* HITimeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITimeDataSource.swift; sourceTree = "<group>"; };
 		3C8F62D3238F9639001A5DAF /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		3C8F62D5238F9825001A5DAF /* TimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeService.swift; sourceTree = "<group>"; };
@@ -221,7 +227,11 @@
 		3FB82A0C25C25AE700C0B43F /* HIGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIGroupViewController.swift; sourceTree = "<group>"; };
 		3FB82A1025C25B3800C0B43F /* HIGroupListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIGroupListViewController.swift; sourceTree = "<group>"; };
 		3FBEF38025F36239009B97CB /* HIGroupStatusOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIGroupStatusOptions.swift; sourceTree = "<group>"; };
+		3FBFA7AA27335554001FFF28 /* HILeaderboardListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILeaderboardListViewController.swift; sourceTree = "<group>"; };
+		3FBFA7B027335800001FFF28 /* HILeaderboardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILeaderboardCell.swift; sourceTree = "<group>"; };
+		3FBFA7B427335ABC001FFF28 /* HILeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILeaderboardViewController.swift; sourceTree = "<group>"; };
 		3FC091D525B74DEA00DA23D8 /* HIGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIGroupCell.swift; sourceTree = "<group>"; };
+		60EAF98A273B1AC4002CD205 /* HIScanQRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScanQRCodeViewController.swift; sourceTree = "<group>"; };
 		950AD60923DE362B00463AF2 /* HITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITabBarController.swift; sourceTree = "<group>"; };
 		9510F69A1FCB7D6E007D19DB /* Announcement+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Announcement+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9510F69B1FCB7D6E007D19DB /* Event+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -395,7 +405,8 @@
 		95069267203EE14000D7C34C /* Launch */ = {
 			isa = PBXGroup;
 			children = (
-				3C2C250923EFD3C500EA3194 /* intro.json */,
+				1C7561A4278E96750004D739 /* LightVespaText.json */,
+				1C7561A2278E96600004D739 /* DarkVespaText.json */,
 			);
 			path = Launch;
 			sourceTree = "<group>";
@@ -536,7 +547,10 @@
 				AC977FCC25F194F9009C4179 /* HIGroupDetailViewController.swift */,
 				3FB82A1025C25B3800C0B43F /* HIGroupListViewController.swift */,
 				3F8CC87A260BBE9000528ED2 /* HICodePopupViewController.swift */,
+				60EAF98A273B1AC4002CD205 /* HIScanQRCodeViewController.swift */,
 				1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */,
+				3FBFA7AA27335554001FFF28 /* HILeaderboardListViewController.swift */,
+				3FBFA7B427335ABC001FFF28 /* HILeaderboardViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -605,6 +619,7 @@
 				95A7D281203D4F54005EAEAF /* HIEventCell.swift */,
 				3CF8DB1223B419980035ECAE /* HIProjectCell.swift */,
 				3FC091D525B74DEA00DA23D8 /* HIGroupCell.swift */,
+				3FBFA7B027335800001FFF28 /* HILeaderboardCell.swift */,
 			);
 			path = HIBubbleCell;
 			sourceTree = "<group>";
@@ -876,10 +891,11 @@
 			files = (
 				952D153D220D37980041383A /* refresh.json in Resources */,
 				952D1543220D453D0041383A /* countdown-24.json in Resources */,
-				3C2C250A23EFD3C500EA3194 /* intro.json in Resources */,
+				1C7561A3278E96600004D739 /* DarkVespaText.json in Resources */,
 				951827A91EA35DB800049F79 /* Assets.xcassets in Resources */,
 				952D1542220D453D0041383A /* countdown-60.json in Resources */,
 				951827B41EA35E8B00049F79 /* LaunchScreen.storyboard in Resources */,
+				1C7561A5278E96750004D739 /* LightVespaText.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -952,6 +968,7 @@
 				ACCB199D25F56DF100F88379 /* HIInterestCell.swift in Sources */,
 				95CCEA1F203D6B3600E3E28C /* HINavigationController.swift in Sources */,
 				957D7CAC1FC2940800C4332A /* HackIllinois.xcdatamodeld in Sources */,
+				3FBFA7AB27335554001FFF28 /* HILeaderboardListViewController.swift in Sources */,
 				A5163FEB221F2741003C543E /* HIAdminStatsViewController.swift in Sources */,
 				9510F6A71FCB7E53007D19DB /* HIBaseScannerViewController.swift in Sources */,
 				956F41E11FC7577500557DC7 /* HIAnnouncementsViewController.swift in Sources */,
@@ -1011,14 +1028,17 @@
 				9510F6A01FCB7D6E007D19DB /* Announcement+CoreDataClass.swift in Sources */,
 				0A360882203539FF001F5F85 /* HIAdminEventViewController.swift in Sources */,
 				957D7CB81FC39EA100C4332A /* Formatters.swift in Sources */,
+				3FBFA7B127335800001FFF28 /* HILeaderboardCell.swift in Sources */,
 				BCD0CA5123C4356300ADC89B /* HIPopupViewController.swift in Sources */,
 				1C9045CE274F03A200DDA74E /* HICarouselCell.swift in Sources */,
 				95A7D296203D4F54005EAEAF /* HIEventDetailLocationCell.swift in Sources */,
 				98CA2A3E25C899CF003E842A /* HIProfileViewController.swift in Sources */,
+				60EAF98B273B1AC4002CD205 /* HIScanQRCodeViewController.swift in Sources */,
 				95A7D29E203D5BA4005EAEAF /* HILabel.swift in Sources */,
 				956F41E31FC76C8E00557DC7 /* HIMenuController.swift in Sources */,
 				1C9045D4274F065F00DDA74E /* HIOnboardingViewController.swift in Sources */,
 				9510F6A51FCB7D6E007D19DB /* Announcement+CoreDataProperties.swift in Sources */,
+				3FBFA7B527335ABC001FFF28 /* HILeaderboardViewController.swift in Sources */,
 				3FB82A0D25C25AE700C0B43F /* HIGroupViewController.swift in Sources */,
 				BCEBD2DA23DE995700D32F5A /* HIPopupAnimator.swift in Sources */,
 				95FC79C321E024A700715036 /* Notifications.swift in Sources */,
