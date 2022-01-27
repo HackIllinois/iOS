@@ -10,7 +10,6 @@
 //  this license in a file with the distribution.
 //
 
-
 import Foundation
 import UIKit
 import MapKit
@@ -21,13 +20,6 @@ class HILeaderboardCell: UITableViewCell {
     let nameLabel = HILabel(style: .leaderboardName)
     let rankLabel = HILabel(style: .leaderboardRank)
     let pointsLabel = HILabel(style: .leaderboardPoints)
-
-    var bubbleView = HIView {
-        $0.backgroundHIColor = \.pointsBackground
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.layer.cornerRadius = 20
-        $0.layer.masksToBounds = false
-    }
 
     var cellView = HIView {
         $0.backgroundHIColor = \.contentBackground
@@ -77,17 +69,14 @@ extension HILeaderboardCell {
         lhs.rankLabel.text = "\((lhs.indexPath?.row ?? 100) + 1)"
 
         lhs.horizontalStackView.addArrangedSubview(lhs.rankLabel)
+        lhs.rankLabel.centerYAnchor.constraint(equalTo: lhs.safeAreaLayoutGuide.centerYAnchor).isActive = true
+
         lhs.horizontalStackView.addArrangedSubview(lhs.nameLabel)
+        lhs.nameLabel.centerYAnchor.constraint(equalTo: lhs.safeAreaLayoutGuide.centerYAnchor).isActive = true
+
         lhs.horizontalStackView.addArrangedSubview(lhs.pointsLabel)
         lhs.pointsLabel.heightAnchor.constraint(equalTo: lhs.contentView.heightAnchor, multiplier: 0.45).isActive = true
-/*
-        lhs.bubbleView.heightAnchor.constraint(equalTo: lhs.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4).isActive = true
-        lhs.bubbleView.addSubview(lhs.pointsLabel)
-
-        lhs.pointsLabel.topAnchor.constraint(equalTo: lhs.bubbleView.topAnchor).isActive = true
-        lhs.pointsLabel.leadingAnchor.constraint(equalTo: lhs.bubbleView.leadingAnchor).isActive = true
-        lhs.pointsLabel.centerXAnchor.constraint(equalTo: lhs.bubbleView.centerXAnchor).isActive = true
-        lhs.pointsLabel.centerYAnchor.constraint(equalTo: lhs.bubbleView.centerYAnchor).isActive = true */
+        lhs.pointsLabel.centerYAnchor.constraint(equalTo: lhs.safeAreaLayoutGuide.centerYAnchor).isActive = true
     }
 }
 
