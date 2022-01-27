@@ -18,6 +18,16 @@ import MapKit
 class HILeaderboardCell: UITableViewCell {
     var horizontalStackView = UIStackView()
     var indexPath: IndexPath?
+    let nameLabel = HILabel(style: .leaderboardName)
+    let rankLabel = HILabel(style: .leaderboardRank)
+    let pointsLabel = HILabel(style: .leaderboardPoints)
+
+    var bubbleView = HIView {
+        $0.backgroundHIColor = \.pointsBackground
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.layer.cornerRadius = 20
+        $0.layer.masksToBounds = false
+    }
 
     var cellView = HIView {
         $0.backgroundHIColor = \.contentBackground
@@ -33,8 +43,6 @@ class HILeaderboardCell: UITableViewCell {
         backgroundColor = UIColor.clear
         contentView.addSubview(cellView)
         cellView.constrain(to: safeAreaLayoutGuide, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
-        //cellView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.85).isActive = true
-        //cellView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
 
         cellView.addSubview(horizontalStackView)
         horizontalStackView.axis = .horizontal
@@ -59,16 +67,27 @@ extension HILeaderboardCell {
     }
 
     static func <- (lhs: HILeaderboardCell, rhs: LeaderboardProfile) {
-        let nameLabel = HILabel(style: .leaderboardName)
-        let rankLabel = HILabel(style: .leaderboardRank)
-        let pointsLabel = HILabel(style: .leaderboardPoints)
+        lhs.pointsLabel.textAlignment = .center
+        lhs.pointsLabel.backgroundHIColor = \.pointsBackground
+        lhs.pointsLabel.layer.masksToBounds = true
+        lhs.pointsLabel.layer.cornerRadius = lhs.contentView.frame.height * 0.45 / 2
 
-        nameLabel.text = "\(rhs.firstName!) \(rhs.lastName!)"
-        pointsLabel.text = "\(rhs.points) pts"
-        rankLabel.text = "\((lhs.indexPath?.row ?? 100) + 1)"
-        lhs.horizontalStackView.addArrangedSubview(rankLabel)
-        lhs.horizontalStackView.addArrangedSubview(nameLabel)
-        lhs.horizontalStackView.addArrangedSubview(pointsLabel)
+        lhs.nameLabel.text = "\(rhs.firstName!) \(rhs.lastName!)"
+        lhs.pointsLabel.text = "\(rhs.points) pts"
+        lhs.rankLabel.text = "\((lhs.indexPath?.row ?? 100) + 1)"
+
+        lhs.horizontalStackView.addArrangedSubview(lhs.rankLabel)
+        lhs.horizontalStackView.addArrangedSubview(lhs.nameLabel)
+        lhs.horizontalStackView.addArrangedSubview(lhs.pointsLabel)
+        lhs.pointsLabel.heightAnchor.constraint(equalTo: lhs.contentView.heightAnchor, multiplier: 0.45).isActive = true
+/*
+        lhs.bubbleView.heightAnchor.constraint(equalTo: lhs.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4).isActive = true
+        lhs.bubbleView.addSubview(lhs.pointsLabel)
+
+        lhs.pointsLabel.topAnchor.constraint(equalTo: lhs.bubbleView.topAnchor).isActive = true
+        lhs.pointsLabel.leadingAnchor.constraint(equalTo: lhs.bubbleView.leadingAnchor).isActive = true
+        lhs.pointsLabel.centerXAnchor.constraint(equalTo: lhs.bubbleView.centerXAnchor).isActive = true
+        lhs.pointsLabel.centerYAnchor.constraint(equalTo: lhs.bubbleView.centerYAnchor).isActive = true */
     }
 }
 

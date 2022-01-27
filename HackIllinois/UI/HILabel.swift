@@ -316,7 +316,6 @@ class HILabel: UILabel {
             textHIColor = \.leaderboardText
             backgroundHIColor = \.pointsBackground
             font = HIAppearance.Font.leaderboardPoints
-            layer.cornerRadius = 100
         }
         }
 

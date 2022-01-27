@@ -105,6 +105,16 @@ extension HILeaderboardViewController {
         setCustomTitle(customTitle: "Leaderboard")
         super.viewDidLoad()
     }
+
+     func tableView(_ tableView: HITableView,
+                willDisplay cell: HILeaderboardCell,
+                forRowAt indexPath: IndexPath) {
+        if indexPath.row % 2 == 0 {
+            cell.backgroundColor = #colorLiteral(red: 0.968627451, green: 0.9568627451, blue: 0.8274509804, alpha: 1)
+        } else {
+            cell.backgroundColor = #colorLiteral(red: 0.9098039216, green: 0.8431372549, blue: 0.6470588235, alpha: 1)
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate
