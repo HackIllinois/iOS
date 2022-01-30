@@ -16,7 +16,6 @@ import CoreData
 
 class HILeaderboardViewController: HILeaderboardListViewController {
      // MARK: - Properties
-
     lazy var fetchedResultsController: NSFetchedResultsController<LeaderboardProfile> = {
         let fetchRequest: NSFetchRequest<LeaderboardProfile> = LeaderboardProfile.fetchRequest()
 
@@ -36,7 +35,7 @@ class HILeaderboardViewController: HILeaderboardListViewController {
         return fetchedResultsController
     }()
 
-    private let errorView = HIErrorView(style: .teamMatching) // Change error view later
+    private let errorView = HIErrorView(style: .teamMatching)
 
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
@@ -88,11 +87,12 @@ extension HILeaderboardViewController {
         view.addSubview(tableView)
         tableView.layer.cornerRadius = 8
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
-        //tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -55).isActive = true
         tableView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.90).isActive = true
         tableView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.85).isActive = true
         tableView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         self.tableView = tableView
+        let topIndexPath = IndexPath(row: 0, section: 0)
+        tableView.insertRows(at: [topIndexPath], with: .automatic)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -104,18 +104,6 @@ extension HILeaderboardViewController {
         setupRefreshControl()
         setCustomTitle(customTitle: "Leaderboard")
         super.viewDidLoad()
-    }
-
-     func tableView(_ tableView: HITableView,
-                willDisplay cell: HILeaderboardCell,
-                forRowAt indexPath: IndexPath) {
-        if indexPath.row % 2 == 0 {
-            //cell.backgroundColor = #colorLiteral(red: 0.968627451, green: 0.9568627451, blue: 0.8274509804, alpha: 1)
-            cell.cellView.backgroundHIColor = \.leaderboardBackgroundOne
-        } else {
-            cell.cellView.backgroundHIColor = \.leaderboardBackgroundTwo
-        }
-        cell.rankLabel.text = "\((indexPath.row) + 1)"
     }
 }
 

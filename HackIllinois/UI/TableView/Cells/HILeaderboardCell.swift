@@ -65,8 +65,8 @@ extension HILeaderboardCell {
         lhs.pointsLabel.layer.cornerRadius = lhs.contentView.frame.height * 0.45 / 2
 
         lhs.nameLabel.text = "\(rhs.firstName!) \(rhs.lastName!)"
-        lhs.pointsLabel.text = "\(rhs.points) pts"
-        lhs.rankLabel.text = "\((lhs.indexPath?.row ?? 100) + 1)"
+        lhs.pointsLabel.text = " \(rhs.points) pts "
+        lhs.pointsLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
 
         lhs.horizontalStackView.addArrangedSubview(lhs.rankLabel)
         lhs.rankLabel.centerYAnchor.constraint(equalTo: lhs.safeAreaLayoutGuide.centerYAnchor).isActive = true
