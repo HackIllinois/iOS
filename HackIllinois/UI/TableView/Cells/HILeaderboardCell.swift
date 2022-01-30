@@ -22,7 +22,6 @@ class HILeaderboardCell: UITableViewCell {
     let pointsLabel = HILabel(style: .leaderboardPoints)
 
     var cellView = HIView {
-        //$0.backgroundHIColor = \.leaderboardBackgroundOne
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.masksToBounds = false
