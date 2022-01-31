@@ -99,6 +99,11 @@ extension HIEventCell {
 extension HIEventCell {
     static func heightForCell(with event: Event, width: CGFloat) -> CGFloat {
         let heightFromEventName = HILabel.heightForView(text: event.name, font: HIAppearance.Font.eventTitle, width: width - 137)
+//        var heightFromHeader = heightFromEventName + 4 + 17
+//        if (heightFromHeader < 60) {
+//            heightFromHeader = 60;
+//        }
+        let heightFromHeader = (heightFromEventName + 4 + 17 < 60) ? 60 : heightFromEventName + 4 + 17
         let heightFromEventInfo = HILabel.heightForView(text: trimText(text: event.info, length: getMaxDescriptionTextLength()), font: HIAppearance.Font.eventDetails, width: width - 100)
         let height = heightFromEventName + heightFromEventInfo + 90 + 15
         if !event.sponsor.isEmpty {
@@ -131,14 +136,17 @@ extension HIEventCell {
 //        eventTypeLabel.constrain(height: 20)
         
         let titleHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle, width: lhs.contentView.frame.width - 137) // Can test for a more accurate constant
+//        lhs.headerView.constrain(height: titleHeight + 25)
+//        lhs.headerView.heightAnchor.constraint(lessThanOrEqualTo: titleHeight).isActive = true
+
         titleLabel.constrain(height: titleHeight)
-        lhs.headerView.constrain(height: titleHeight + 20)
-        
+        eventTypeLabel.constrain(height: 20)
+                
         if !rhs.sponsor.isEmpty {
             let sponsorLabel = HILabel(style: .cellDescription)
             sponsorLabel.text = "Sponsored by \(rhs.sponsor)"
             contentStackViewHeight += sponsorLabel.intrinsicContentSize.height
-            sponsorLabel.constrain(height: 20)
+            sponsorLabel.constrain(height: 15)
             lhs.contentStackView.addArrangedSubview(sponsorLabel)
             lhs.contentStackView.setCustomSpacing(10, after: sponsorLabel)
         }

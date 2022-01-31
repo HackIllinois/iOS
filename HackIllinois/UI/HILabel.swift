@@ -55,6 +55,7 @@ class HILabel: UILabel {
         case codeError
         case onboardingDescription
         case onboardingTitle
+        case clock
     }
 
     // MARK: - Properties
@@ -296,6 +297,13 @@ class HILabel: UILabel {
             font = HIAppearance.Font.onboardingTitle
             textAlignment = .center
             numberOfLines = 0
+        case .clock:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.clockText
+            textAlignment = .center
+            numberOfLines = 1
+            
 
         }
         }

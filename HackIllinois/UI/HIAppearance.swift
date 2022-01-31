@@ -271,6 +271,7 @@ struct HIAppearance: Equatable {
         static let eventDetails = UIFont.systemFont(ofSize: 14, weight: .regular)
         static let eventButtonText = UIFont.systemFont(ofSize: 14, weight: .regular)
         static let eventCategoryText = UIFont.systemFont(ofSize: 18, weight: .regular)
+        static let clockText = UIFont.systemFont(ofSize: 48, weight: .semibold)
 
         static let navigationSubtitle = UIFont.systemFont(ofSize: 14, weight: .medium)
         static let navigationTitle = UIFont.systemFont(ofSize: 22, weight: .semibold)

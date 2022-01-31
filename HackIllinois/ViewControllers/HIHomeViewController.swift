@@ -119,7 +119,7 @@ extension HIHomeViewController {
         view.addSubview(countdownFrameView)
         countdownFrameView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8).isActive = true
         countdownFrameView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
-        countdownFrameView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 31).isActive = true
+        countdownFrameView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 35).isActive = true
 //        if countdownFrameView.frame.size.width > countdownFrameView.frame.size.height {
 //            countdownFrameView.contentMode = UIViewContentModeScaleAspectFit
 //        }
@@ -130,7 +130,8 @@ extension HIHomeViewController {
         countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
 //        addChild(countdownViewController)
         countdownFrameView.addSubview(countdownViewController.view)
-        countdownViewController.view.constrain(to: countdownFrameView, topInset: 155, trailingInset: -50, bottomInset: -10, leadingInset: 40)
+        countdownViewController.view.constrain(to: countdownFrameView, topInset: 145, bottomInset: -50)
+        countdownViewController.view.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
 //        countdownViewController.view.centerXAnchor.constraint(equalTo: countdownFrameView.centerXAnchor).isActive = true
         
 //        countdownViewController.view.centerYAnchor.constraint(equalTo: countdownFrameView.centerYAnchor, constant: 0).isActive = true
@@ -143,7 +144,7 @@ extension HIHomeViewController {
         countdownViewController.didMove(toParent: self)
 
         let items = dataStore.map { $0 }
-        let segmentedControl = HISegmentedControl(items: items)
+        let segmentedControl = HIHomeSegmentedControl(status: items)
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
@@ -154,7 +155,7 @@ extension HIHomeViewController {
 
         let separator = UIView()
         separator.translatesAutoresizingMaskIntoConstraints = false
-        separator.backgroundColor <- \.titleText
+        separator.backgroundColor <- \.clear
         self.view.addSubview(separator)
         separator.constrain(height: 1 / (UIScreen.main.scale))
         separator.constrain(to: view, trailingInset: 0, leadingInset: 0)
