@@ -43,13 +43,13 @@
       "size" : "74x55"
     },
     {
-      "filename" : "Logo_1024@1x.png",
+      "filename" : "Logo_1024.png",
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"
     },
     {
-      "filename" : "Logo_27_20_2x.png",
+      "filename" : "Logo_27_20@2x.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
