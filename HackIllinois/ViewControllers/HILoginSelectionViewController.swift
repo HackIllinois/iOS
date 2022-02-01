@@ -77,7 +77,7 @@ extension HILoginSelectionViewController {
 
         tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         tableView.widthAnchor.constraint(equalToConstant: 220).isActive = true
-        tableView.heightAnchor.constraint(equalToConstant: 220).isActive = true
+        tableView.heightAnchor.constraint(equalToConstant: 240).isActive = true
         tableView.centerYAnchor.constraint(equalTo: spacerView.centerYAnchor).isActive = true
 
         tableView.isScrollEnabled = false
