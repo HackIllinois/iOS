@@ -65,7 +65,7 @@ extension HILoginSelectionViewController {
         view.addSubview(tableView)
 
         welcomeHeader.text = "WELCOME TO"
-        welcomeHeader.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 120).isActive = true
+        welcomeHeader.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60).isActive = true
         welcomeHeader.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         welcomeHeader.heightAnchor.constraint(equalToConstant: 22).isActive = true
 
