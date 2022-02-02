@@ -25,7 +25,7 @@
       "size" : "60x45"
     },
     {
-      "filename" : "Logo_29@2x-1.png",
+      "filename" : "Logo_29_29.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "29x29"
@@ -43,13 +43,13 @@
       "size" : "74x55"
     },
     {
-      "filename" : "Logo_1024@1x.png",
+      "filename" : "Logo_1024.png",
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"
     },
     {
-      "filename" : "Logo_27_20_2x.png",
+      "filename" : "Logo_27_20@2x.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
@@ -77,7 +77,7 @@
       "size" : "32x24"
     },
     {
-      "filename" : "Logo_1024_768@1x.png",
+      "filename" : "Logo_1024_768.png",
       "idiom" : "ios-marketing",
       "platform" : "ios",
       "scale" : "1x",
