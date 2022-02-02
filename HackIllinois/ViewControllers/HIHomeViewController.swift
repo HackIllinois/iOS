@@ -117,6 +117,7 @@ extension HIHomeViewController {
 //        countdownFrame.image = #imageLiteral(resourceName: "Chicken.png")
 //        countdownFrame.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(countdownFrameView)
+        countdownFrameView.translatesAutoresizingMaskIntoConstraints = false
         countdownFrameView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8).isActive = true
         countdownFrameView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
         countdownFrameView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 35).isActive = true
@@ -130,7 +131,10 @@ extension HIHomeViewController {
         countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
 //        addChild(countdownViewController)
         countdownFrameView.addSubview(countdownViewController.view)
-        countdownViewController.view.constrain(to: countdownFrameView, topInset: 145, bottomInset: -50)
+//        countdownViewController.view.constrain(to: countdownFrameView, topInset: 145, bottomInset: -50)
+
+        countdownViewController.view.topAnchor.constraint(equalTo: countdownFrameView.centerYAnchor, constant: 10).isActive = true
+        countdownViewController.view.heightAnchor.constraint(equalTo: countdownFrameView.heightAnchor, multiplier: 0.3).isActive = true
         countdownViewController.view.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
 //        countdownViewController.view.centerXAnchor.constraint(equalTo: countdownFrameView.centerXAnchor).isActive = true
         
