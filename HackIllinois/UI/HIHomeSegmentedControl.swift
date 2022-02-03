@@ -1,5 +1,5 @@
 //
-//  HIScheduleSegmentedControl.swift
+//  HIHomeSegmentedControl.swift
 //  HackIllinois
 //
 //  Created by HackIllinois Team on 1/30/21.

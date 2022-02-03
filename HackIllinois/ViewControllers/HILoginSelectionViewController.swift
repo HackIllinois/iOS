@@ -49,7 +49,7 @@ class HILoginSelectionViewController: HIBaseViewController {
 
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "AppBackground")
+        backgroundView.image = #imageLiteral(resourceName: "Login")
     }
 }
 

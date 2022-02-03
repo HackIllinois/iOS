@@ -305,8 +305,6 @@ class HILabel: UILabel {
             font = HIAppearance.Font.clockText
             textAlignment = .center
             numberOfLines = 1
-            
-
         // Leaderboard label fonts
         case .leaderboardRank:
             textHIColor = \.leaderboardText

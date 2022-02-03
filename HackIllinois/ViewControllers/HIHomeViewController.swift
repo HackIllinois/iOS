@@ -46,7 +46,6 @@ class HIHomeViewController: HIEventListViewController {
     private var dataStore: [String] = ["Ongoing", "Upcoming"]
 
     private lazy var countdownViewController = HICountdownViewController(delegate: self)
-    
     private let countdownFrameView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         let viewImage = #imageLiteral(resourceName: "Chicken")
