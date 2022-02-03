@@ -122,22 +122,15 @@ extension HIEventCell {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         lhs.headerView.addArrangedSubview(titleLabel)
         lhs.headerView.setCustomSpacing(4, after: titleLabel)
-//        titleLabel.constrain(to: lhs.headerView, topInset: 0, trailingInset: 0, leadingInset: 0)
-        
+     
         let eventTypeLabel = HILabel(style: .cellDescription)
         let eventType = HIEventType(type: rhs.eventType)
-        eventTypeLabel.text = eventType.description
-        eventTypeLabel.textHIColor = getTagColor(for: rhs.eventType)
+        eventTypeLabel.text = eventType.description.lowercased().capitalized
         eventTypeLabel.refreshForThemeChange()
         eventTypeLabel.translatesAutoresizingMaskIntoConstraints = false
         lhs.headerView.addArrangedSubview(eventTypeLabel)
-//        eventTypeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4).isActive = true
-//        eventTypeLabel.constrain(to: lhs.headerView, trailingInset: 0, bottomInset: 0, leadingInset: 0)
-//        eventTypeLabel.constrain(height: 20)
         
-        let titleHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle, width: lhs.contentView.frame.width - 137) // Can test for a more accurate constant
-//        lhs.headerView.constrain(height: titleHeight + 25)
-//        lhs.headerView.heightAnchor.constraint(lessThanOrEqualTo: titleHeight).isActive = true
+        let titleHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle, width: lhs.contentView.frame.width - 137)
 
         titleLabel.constrain(height: titleHeight)
         eventTypeLabel.constrain(height: 20)
@@ -153,27 +146,21 @@ extension HIEventCell {
         
         let upperContainerView = HIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.backgroundHIColor = \.clear
         }
         lhs.contentStackView.addArrangedSubview(upperContainerView)
         
-//        upperContainerView.constrain(height: 20)
         let timeImageView = UIImageView(image: #imageLiteral(resourceName: "Clock"))
         upperContainerView.addSubview(timeImageView)
         timeImageView.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor).isActive = true
         timeImageView.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor).isActive = true
-//        timeImageView.constrain(width: 10, height: 10)
         
-
         let timeLabel = HILabel(style: .eventTime)
         timeLabel.text = Formatter.simpleTime.string(from: rhs.startTime) + " - " + Formatter.simpleTime.string(from: rhs.endTime)
         upperContainerView.addSubview(timeLabel)
         timeLabel.leadingAnchor.constraint(equalTo: timeImageView.trailingAnchor, constant: 5).isActive = true
         timeLabel.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor).isActive = true
         timeLabel.heightAnchor.constraint(equalTo: upperContainerView.heightAnchor).isActive = true
-//        lhs.headerView.addArrangedSubview(timeLabel)
-//        lhs.headerView.setCustomSpacing(10, after: timeLabel)
-        
+
         let pointsView = HIView { (view) in
             view.layer.cornerRadius = 15
             view.backgroundHIColor = \.buttonGreen
@@ -188,11 +175,6 @@ extension HIEventCell {
         upperContainerView.addSubview(pointsView)
         pointsView.leadingAnchor.constraint(equalTo: timeLabel.trailingAnchor, constant: 5).isActive = true
         pointsView.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor).isActive = true
-//        pointsView.heightAnchor.constraint(equalTo: upperContainerView.heightAnchor).isActive = true
-        
-        
-
-        
 
         let descriptionLabel = HILabel(style: .cellDescription)
         let descriptionText = trimText(text: rhs.info, length: getMaxDescriptionTextLength())
@@ -201,25 +183,9 @@ extension HIEventCell {
         lhs.contentStackView.addArrangedSubview(descriptionLabel)
         lhs.contentStackView.setCustomSpacing(10, after: descriptionLabel)
 
-//        let bottomView = HIView()
-//        bottomView.constrain(height: 30)
-
-        
-
-        
-
-//        bottomView.addSubview(pointsView)
-//        bottomView.addSubview(eventTypeLabel)
-//        pointsView.constrain(to: bottomView, topInset: 0, bottomInset: 0, leadingInset: 0)
-//        eventTypeLabel.constrain(to: bottomView, topInset: 0, trailingInset: 0, bottomInset: 0)
-//        pointsView.trailingAnchor.constraint(equalTo: eventTypeLabel.leadingAnchor, constant: -5).isActive = true
-//        pointsView.widthAnchor.constraint(equalTo: eventTypeLabel.widthAnchor, multiplier: 1.2).isActive = true
-//
-//        lhs.contentStackView.addArrangedSubview(bottomView)
         let textHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle, width: lhs.contentView.frame.width - 98)
         contentStackViewHeight += textHeight
         contentStackViewHeight += timeLabel.intrinsicContentSize.height + 13 + height + 3 + 40
-//        lhs.contentStackViewHeight.constant = contentStackViewHeight
     }
 }
 

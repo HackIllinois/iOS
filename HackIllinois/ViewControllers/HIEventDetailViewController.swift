@@ -109,7 +109,7 @@ extension HIEventDetailViewController {
         if !HIApplicationStateController.shared.isGuest {
             setupFavoritedButton()
         }
-                setupTime()
+        setupTime()
         setupPoints()
         setupDescription()
     }

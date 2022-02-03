@@ -41,8 +41,6 @@ class HIHomeViewController: HIEventListViewController {
         return fetchedResultsController
     }()
 
-//    let announcementViewController = HIAnnouncementsViewController()
-
     private var currentTab = 0
 
     private var dataStore: [String] = ["Ongoing", "Upcoming"]
@@ -52,14 +50,8 @@ class HIHomeViewController: HIEventListViewController {
     private let countdownFrameView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         let viewImage = #imageLiteral(resourceName: "Chicken")
-//        $0.backgroundColor = UIColor(patternImage: viewImage)
         $0.layer.contents = viewImage.cgImage
     }
-//    private let announcementButton = HIButton {
-//        $0.tintHIColor = \.baseText
-//        $0.backgroundHIColor = \.clear
-//        $0.baseImage = #imageLiteral(resourceName: "Bell")
-//    }
 
     private var countdownDataStoreIndex = 0
     private var staticDataStore: [(date: Date, displayText: String)] = [
@@ -89,9 +81,8 @@ extension HIHomeViewController {
         if currentTab == 0 {
             return NSPredicate(format: "(startTime < now()) AND (endTime > now())")
         } else {
-            let inTwoHours = Date(timeIntervalSinceNow: 2700)
-//            let upcomingPredicate = NSPredicate(format: "(startTime < %@) AND (startTime > now())", inTwoHours as NSDate)
-            let upcomingPredicate = NSPredicate(format: "(startTime < %@)", inTwoHours as NSDate)
+            let inTwoHours = Date(timeIntervalSinceNow: 7200)
+            let upcomingPredicate = NSPredicate(format: "(startTime < %@) AND (startTime > now())", inTwoHours as NSDate)
             return upcomingPredicate
         }
     }
@@ -103,48 +94,31 @@ extension HIHomeViewController {
             tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
     }
-
-//    @objc func didSelectAnnouncementButton(_ sender: HIButton) {
-//        self.present(announcementViewController, animated: true, completion: nil)
-//    }
 }
 
 // MARK: - UIViewController
 extension HIHomeViewController {
     override func loadView() {
         super.loadView()
-//        let countdownFrame = UIImageView()
-//        countdownFrame.image = #imageLiteral(resourceName: "Chicken.png")
-//        countdownFrame.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(countdownFrameView)
         countdownFrameView.translatesAutoresizingMaskIntoConstraints = false
         countdownFrameView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8).isActive = true
-        countdownFrameView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
-        countdownFrameView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 35).isActive = true
-//        if countdownFrameView.frame.size.width > countdownFrameView.frame.size.height {
-//            countdownFrameView.contentMode = UIViewContentModeScaleAspectFit
-//        }
-        countdownFrameView.heightAnchor.constraint(equalTo: countdownFrameView.widthAnchor, multiplier: 283.0/329.0).isActive = true
-//        NSLayoutConstraint(item: countdownFrameView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: countdownFrameView, attribute: NSLayoutConstraint.Attribute.)
-        
-        
-        countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
-//        addChild(countdownViewController)
-        countdownFrameView.addSubview(countdownViewController.view)
-//        countdownViewController.view.constrain(to: countdownFrameView, topInset: 145, bottomInset: -50)
+        countdownFrameView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        var countdownFrameConstant = 1.0
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            countdownFrameConstant = 1.2
+        } else if UIScreen.main.bounds.width < 375.0 {
+            countdownFrameConstant = 0.9
+        }
+        print(UIScreen.main.bounds.width)
+        countdownFrameView.widthAnchor.constraint(equalToConstant: 329 * countdownFrameConstant).isActive = true
+        countdownFrameView.heightAnchor.constraint(equalToConstant: 283 * countdownFrameConstant).isActive = true
 
+        countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        countdownFrameView.addSubview(countdownViewController.view)
         countdownViewController.view.topAnchor.constraint(equalTo: countdownFrameView.centerYAnchor, constant: 10).isActive = true
         countdownViewController.view.heightAnchor.constraint(equalTo: countdownFrameView.heightAnchor, multiplier: 0.3).isActive = true
         countdownViewController.view.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-//        countdownViewController.view.centerXAnchor.constraint(equalTo: countdownFrameView.centerXAnchor).isActive = true
-        
-//        countdownViewController.view.centerYAnchor.constraint(equalTo: countdownFrameView.centerYAnchor, constant: 0).isActive = true
-        
-//        if UIDevice.current.userInterfaceIdiom == .pad {
-//            countdownViewController.view.constrain(height: 0.34 * UIScreen.main.bounds.height)
-//        } else {
-//            countdownViewController.view.constrain(height: 200)
-//        }
         countdownViewController.didMove(toParent: self)
 
         let items = dataStore.map { $0 }
@@ -213,7 +187,6 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
         while countdownDataStoreIndex < staticDataStore.count {
             let currDate = staticDataStore[countdownDataStoreIndex].date
             if currDate > now {
-//                super.setCustomTitle(customTitle: staticDataStore[countdownDataStoreIndex].displayText)
                 super.setCustomTitle(customTitle: "What's Cooking?")
                 return (countdownDataStoreIndex == 0 || countdownDataStoreIndex == 1) ? HITimeDataSource.shared.eventTimes.eventStart : currDate
             } else {

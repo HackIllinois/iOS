@@ -16,12 +16,9 @@ import UIKit
 class HIHomeSegmentedControl: HISegmentedControl {
 
     // MARK: - Properties
-//    private(set) var nums: [Int]
-//    private(set) var statusId: [Int]
 
     private var views = [UIView]()
     private var titleLabels = [UILabel]()
-//    private var numberLabels = [UILabel]()
 
     private let titleFont = HIAppearance.Font.segmentedTitle
     private let numberFont = HIAppearance.Font.segmentedNumberText
@@ -33,7 +30,6 @@ class HIHomeSegmentedControl: HISegmentedControl {
 
     // MARK: - Init
     init(status: [String]) {
-//        self.nums = nums == nil ? [Int]() : nums!
         super.init(items: status)
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
@@ -57,11 +53,6 @@ class HIHomeSegmentedControl: HISegmentedControl {
             $0.textColor <- \.baseText
             $0.backgroundColor <- \.clear
         }
-
-//        numberLabels.forEach {
-//            $0.textColor <- \.baseText
-//            $0.backgroundColor <- \.clear
-//        }
     }
 
     // MARK: - UIView
@@ -69,7 +60,7 @@ class HIHomeSegmentedControl: HISegmentedControl {
         super.layoutSubviews()
 
         let indicatorViewWidth = ((frame.width - viewPadding) / CGFloat(items.count) - viewPadding)
-        indicatorView.frame = CGRect(x: viewPadding, y: 25, width: indicatorViewWidth, height: frame.height)
+        indicatorView.frame = CGRect(x: viewPadding, y: 50, width: indicatorViewWidth, height: 7)
         indicatorView.layer.cornerRadius = frame.height * indicatorCornerRadiusProp
         indicatorView.layer.masksToBounds = true
         indicatorView.contentMode = .scaleAspectFit
@@ -105,37 +96,22 @@ class HIHomeSegmentedControl: HISegmentedControl {
     private func setupViewForItem(at index: Int) {
         let view = UIView()
         let titleLabel = UILabel()
-//        let numberLabel = UILabel()
 
         titleLabel.textAlignment = .center
         titleLabel.font = numberFont
         titleLabel.text = items[index]
         titleLabel.textColor <- \.whiteText
 
-//        numberLabel.textAlignment = .center
-//        numberLabel.font = numberFont
-//        numberLabel.text = index < nums.count ? (nums[index] % 10 == nums[index] ? "0" : "") + "\(nums[index])" : "00"
-//        numberLabel.textColor <- \.whiteText
-
         view.addSubview(titleLabel)
-//        view.addSubview(numberLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-//        numberLabel.translatesAutoresizingMaskIntoConstraints = false
-
         titleLabel.constrain(to: view, topInset: 5, trailingInset: 0, bottomInset: -5, leadingInset: 0)
-//        numberLabel.constrain(to: view, trailingInset: 0, bottomInset: -5, leadingInset: 0)
-//        numberLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0).isActive = true
-//        titleLabel.heightAnchor.constraint(equalTo: numberLabel.heightAnchor).isActive = true
-
         view.isUserInteractionEnabled = false
         titleLabel.isUserInteractionEnabled = false
-//        numberLabel.isUserInteractionEnabled = false
 
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
         views.append(view)
         titleLabels.append(titleLabel)
-//        numberLabels.append(numberLabel)
     }
 
     override func didSetSelectedIndex(oldValue: Int) {
