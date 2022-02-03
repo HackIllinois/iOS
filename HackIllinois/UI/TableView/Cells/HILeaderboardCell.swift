@@ -73,6 +73,7 @@ extension HILeaderboardCell {
 
         lhs.horizontalStackView.addArrangedSubview(lhs.pointsLabel)
         lhs.pointsLabel.centerYAnchor.constraint(equalTo: lhs.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        lhs.pointsLabel.widthAnchor.constraint(equalTo: lhs.cellView.widthAnchor, multiplier: 0.30).isActive = true
     }
 }
 
