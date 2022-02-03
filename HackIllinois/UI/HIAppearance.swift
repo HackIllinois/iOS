@@ -22,11 +22,11 @@ struct HIAppearance: Equatable {
     let contentBackground: UIColor
     let overlay: UIColor
     let frostedTint: UIColor
+    let countdownFrameBackground: UIColor
+    let eventBackground: UIColor
     let codePopupTab: UIColor
     let navbarBackground: UIColor
     let navbarTabTint: UIColor
-    let countdownFrameBackground: UIColor
-    let eventBackground: UIColor
     let profileContainerTint: UIColor
     let emptyTableViewBackground: UIImage
     let preferredStatusBarStyle: UIStatusBarStyle
@@ -44,7 +44,6 @@ struct HIAppearance: Equatable {
     let segmentedBackground: UIColor
     let buttonGreen: UIColor
     let favoriteStarBackground: UIColor
-
     // New fonts added. Replace old ones?
     let groupText: UIColor
     let memberSearchText: UIColor
@@ -65,6 +64,11 @@ struct HIAppearance: Equatable {
     let profile8: UIImage
     let profile9: UIImage
     let profile10: UIImage
+
+    let leaderboardText: UIColor
+    let leaderboardBackgroundOne: UIColor
+    let leaderboardBackgroundTwo: UIColor
+    let pointsBackground: UIColor
 
     let clear: UIColor = .clear
     let black: UIColor = .black
@@ -133,11 +137,11 @@ struct HIAppearance: Equatable {
         contentBackground: yellowWhite,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
+        countdownFrameBackground: tan,
+        eventBackground: yellowWhite,
         codePopupTab: orange,
         navbarBackground: green,
         navbarTabTint: yellowWhite,
-        countdownFrameBackground: tan,
-        eventBackground: yellowWhite,
         profileContainerTint: yellowWhite,
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewDay"),
         preferredStatusBarStyle: statusBarBlack,
@@ -173,7 +177,11 @@ struct HIAppearance: Equatable {
         profile7: #imageLiteral(resourceName: "Profile7"),
         profile8: #imageLiteral(resourceName: "Profile8"),
         profile9: #imageLiteral(resourceName: "Profile9"),
-        profile10: #imageLiteral(resourceName: "Profile10")
+        profile10: #imageLiteral(resourceName: "Profile10"),
+        leaderboardText: lightBlack,
+        leaderboardBackgroundOne: yellowWhite,
+        leaderboardBackgroundTwo: tan,
+        pointsBackground: yellowGreen
     )
 
     fileprivate static let night = HIAppearance(
@@ -186,11 +194,11 @@ struct HIAppearance: Equatable {
         contentBackground: yellowWhite,
         overlay: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.47),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
+        countdownFrameBackground: tan,
+        eventBackground: yellowWhite,
         codePopupTab: orange,
         navbarBackground: green,
         navbarTabTint: yellowWhite,
-        countdownFrameBackground: tan,
-        eventBackground: yellowWhite,
         profileContainerTint: yellowWhite,
         emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewNight"),
         preferredStatusBarStyle: statusBarBlack,
@@ -226,7 +234,11 @@ struct HIAppearance: Equatable {
         profile7: #imageLiteral(resourceName: "Profile7"),
         profile8: #imageLiteral(resourceName: "Profile8"),
         profile9: #imageLiteral(resourceName: "Profile9"),
-        profile10: #imageLiteral(resourceName: "Profile10")
+        profile10: #imageLiteral(resourceName: "Profile10"),
+        leaderboardText: lightBlack,
+        leaderboardBackgroundOne: yellowWhite,
+        leaderboardBackgroundTwo: tan,
+        pointsBackground: yellowGreen
     )
 
     fileprivate static var current = day
@@ -249,10 +261,10 @@ struct HIAppearance: Equatable {
         static let happeningEventTitle = UIFont.systemFont(ofSize: 25, weight: .bold)
         static let eventTitle = UIFont.systemFont(ofSize: 18, weight: .semibold)
         static let eventTime = UIFont.systemFont(ofSize: 15, weight: .regular)
-        static let eventDetails = UIFont.systemFont(ofSize: 15, weight: .regular)
+        static let eventDetails = UIFont.systemFont(ofSize: 16, weight: .regular)
         static let eventButtonText = UIFont.systemFont(ofSize: 14, weight: .regular)
         static let eventCategoryText = UIFont.systemFont(ofSize: 16, weight: .regular)
-
+        static let clockText = UIFont.systemFont(ofSize: 48, weight: .semibold)
         static let navigationSubtitle = UIFont.systemFont(ofSize: 14, weight: .medium)
         static let navigationTitle = UIFont.systemFont(ofSize: 22, weight: .semibold)
         static let navigationInfoText = UIFont.systemFont(ofSize: 12, weight: .regular)
@@ -284,6 +296,9 @@ struct HIAppearance: Equatable {
         static let onboardingGetStartedText = UIFont.systemFont(ofSize: 25, weight: .semibold)
         static let onboardingTitle = UIFont.systemFont(ofSize: 30, weight: .bold)
         static let onboardingDescription = UIFont.systemFont(ofSize: 20, weight: .regular)
+        static let leaderboardPoints = UIFont.systemFont(ofSize: 16, weight: .regular)
+        static let leaderboardName = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        static let leaderboardRank = UIFont.systemFont(ofSize: 24, weight: .bold)
 
     }
 }

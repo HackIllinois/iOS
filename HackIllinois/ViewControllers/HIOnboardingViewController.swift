@@ -33,7 +33,7 @@ class HIOnboardingViewController: HIBaseViewController {
     }
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "Login")
+        backgroundView.image = #imageLiteral(resourceName: "GroupMatching")
     }
 }
 
@@ -50,8 +50,8 @@ extension HIOnboardingViewController {
         setupUI()
         let viewAlphaValue = shouldDisplayAnimationOnNextAppearance ? 0.0 : 1.0
 
-        carouselView?.alpha = viewAlphaValue
-        getStartedButton.alpha = viewAlphaValue
+        carouselView?.alpha = CGFloat(viewAlphaValue)
+        getStartedButton.alpha = CGFloat(viewAlphaValue)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

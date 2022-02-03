@@ -1,9 +1,9 @@
 //
-//  HISegmentedControl.swift
+//  HIScheduleSegmentedControl.swift
 //  HackIllinois
 //
-//  Created by HackIllinois Team on 11/29/17.
-//  Copyright © 2017 HackIllinois. All rights reserved.
+//  Created by HackIllinois Team on 1/30/21.
+//  Copyright © 2021 HackIllinois. All rights reserved.
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of
 //  Illinois/NCSA Open Source License. You should have received a copy of
@@ -13,34 +13,25 @@
 import Foundation
 import UIKit
 
-class HISegmentedControl: UIControl {
+class HIHomeSegmentedControl: HISegmentedControl {
 
     // MARK: - Properties
-    private(set) var items: [String]
-
-    var selectedIndex: Int = 0 {
-        didSet {
-            didSetSelectedIndex(oldValue: oldValue)
-        }
-    }
 
     private var views = [UIView]()
-    private var labels = [UILabel]()
-    private let font = HIAppearance.Font.segmentedTitle
+    private var titleLabels = [UILabel]()
+
+    private let titleFont = HIAppearance.Font.segmentedTitle
+    private let numberFont = HIAppearance.Font.segmentedNumberText
 
     private let viewPadding: CGFloat = 10
     private let indicatorCornerRadiusProp: CGFloat = 0.15
 
-    private var indicatorView = UIView()
-    private var indicatorViewHeight = CGFloat(3)
-
-    private var bottomView = UIView()
-    private var bottomViewHeight = CGFloat(1)
+    private var indicatorView = UIImageView(image: #imageLiteral(resourceName: "Indicator"))
 
     // MARK: - Init
-    init(items: [String]) {
-        self.items = items
-        super.init(frame: .zero)
+    init(status: [String]) {
+        super.init(items: status)
+
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         translatesAutoresizingMaskIntoConstraints = false
         setupView()
@@ -56,15 +47,12 @@ class HISegmentedControl: UIControl {
     }
 
     // MARK: - Themeable
-    @objc func refreshForThemeChange() {
+    @objc override func refreshForThemeChange() {
         backgroundColor <- \.clear
-        labels.forEach {
+        titleLabels.forEach {
             $0.textColor <- \.baseText
             $0.backgroundColor <- \.clear
         }
-
-        indicatorView.backgroundColor <- \.segmentedBackground
-        indicatorView.alpha = 0.3
     }
 
     // MARK: - UIView
@@ -72,10 +60,10 @@ class HISegmentedControl: UIControl {
         super.layoutSubviews()
 
         let indicatorViewWidth = ((frame.width - viewPadding) / CGFloat(items.count) - viewPadding)
-        indicatorView.frame = CGRect(x: viewPadding, y: 0, width: indicatorViewWidth, height: frame.height)
+        indicatorView.frame = CGRect(x: viewPadding, y: 50, width: indicatorViewWidth, height: 7)
         indicatorView.layer.cornerRadius = frame.height * indicatorCornerRadiusProp
         indicatorView.layer.masksToBounds = true
-
+        indicatorView.contentMode = .scaleAspectFit
         displayNewSelectedIndex()
     }
 
@@ -92,19 +80,13 @@ class HISegmentedControl: UIControl {
         return false
     }
 
-    // MARK: - Label Setup
-    public func update(items: [String]) {
-        self.items = items
-        selectedIndex = 0
-        setupLabels()
-    }
-
-    func setupView() {
+    // MARK: - View Setup
+    override func setupView() {
         setupLabels()
         addSubview(indicatorView)
     }
 
-    func setupLabels() {
+    override func setupLabels() {
         views.forEach { $0.removeFromSuperview() }
         views.removeAll(keepingCapacity: true)
         items.indices.forEach { setupViewForItem(at: $0) }
@@ -113,35 +95,33 @@ class HISegmentedControl: UIControl {
 
     private func setupViewForItem(at index: Int) {
         let view = UIView()
-        let label = UILabel()
+        let titleLabel = UILabel()
 
-        label.textAlignment = .center
-        label.font = font
-        label.text = items[index]
-        label.textColor <- \.whiteText
+        titleLabel.textAlignment = .center
+        titleLabel.font = numberFont
+        titleLabel.text = items[index]
+        titleLabel.textColor <- \.whiteText
 
-        view.addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
-
-        label.constrain(to: view, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
-
+        view.addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.constrain(to: view, topInset: 5, trailingInset: 0, bottomInset: -5, leadingInset: 0)
         view.isUserInteractionEnabled = false
-        label.isUserInteractionEnabled = false
+        titleLabel.isUserInteractionEnabled = false
 
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
         views.append(view)
-        labels.append(label)
+        titleLabels.append(titleLabel)
     }
 
-    func didSetSelectedIndex(oldValue: Int) {
+    override func didSetSelectedIndex(oldValue: Int) {
         if oldValue != selectedIndex {
             displayNewSelectedIndex()
             sendActions(for: .valueChanged)
         }
     }
 
-    func displayNewSelectedIndex() {
+    override func displayNewSelectedIndex() {
         let selectedView = views[selectedIndex]
 
         let animator = UIViewPropertyAnimator(duration: 0.5, dampingRatio: 0.8)

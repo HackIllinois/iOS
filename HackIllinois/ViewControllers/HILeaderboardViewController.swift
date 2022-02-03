@@ -16,7 +16,6 @@ import CoreData
 
 class HILeaderboardViewController: HILeaderboardListViewController {
      // MARK: - Properties
-
     lazy var fetchedResultsController: NSFetchedResultsController<LeaderboardProfile> = {
         let fetchRequest: NSFetchRequest<LeaderboardProfile> = LeaderboardProfile.fetchRequest()
 
@@ -36,21 +35,18 @@ class HILeaderboardViewController: HILeaderboardListViewController {
         return fetchedResultsController
     }()
 
-    private let errorView = HIErrorView(style: .teamMatching) // Change error view later
-
-    // Handle the leaderboard header with stack view
-    let horizontalStackView = UIStackView()
+    private let errorView = HIErrorView(style: .teamMatching)
 
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "GroupMatching")
+        backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
     }
 }
 
 // MARK: - UITabBarItem Setup
 extension HILeaderboardViewController {
     override func setupTabBarItem() {
-        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "leaderboard"), selectedImage: #imageLiteral(resourceName: "LeaderboardSelected"))
+        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "leaderboard"), selectedImage: UIImage(named: "LeaderboardSelected"))
     }
 }
 
@@ -86,27 +82,14 @@ extension HILeaderboardViewController {
     }
 
     func layoutProfiles() {
-
-        // Use horizontalStackView to handle any labels, buttons, searching functionality if needed
-        horizontalStackView.axis = .horizontal
-        horizontalStackView.distribution = .fillProportionally
-        horizontalStackView.spacing = 15
-        horizontalStackView.alignment = .center
-        horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
-        horizontalStackView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        view.addSubview(horizontalStackView)
-        horizontalStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        horizontalStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
-        horizontalStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
-        horizontalStackView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-
         // Add tableView to handle leaderboard
         let tableView = HITableView()
         view.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: horizontalStackView.bottomAnchor, constant: 5).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        tableView.layer.cornerRadius = 8
+        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
+        tableView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.90).isActive = true
+        tableView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.85).isActive = true
+        tableView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         self.tableView = tableView
     }
 
@@ -117,15 +100,8 @@ extension HILeaderboardViewController {
     override func viewDidLoad() {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         setupRefreshControl()
+        setCustomTitle(customTitle: "Leaderboard")
         super.viewDidLoad()
-    }
-}
-
-// MARK: - UINavigationItem Setup
-extension HILeaderboardViewController {
-    @objc dynamic override func setupNavigationItem() {
-        super.setupNavigationItem()
-        title = "Leaderboard"
     }
 }
 

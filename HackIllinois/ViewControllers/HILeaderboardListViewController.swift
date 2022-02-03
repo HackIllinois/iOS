@@ -35,7 +35,14 @@ extension HILeaderboardListViewController {
         if let cell = cell as? HILeaderboardCell, let leaderboardProfile = _fetchedResultsController?.object(at: indexPath) as? LeaderboardProfile {
             cell <- leaderboardProfile
             cell.indexPath = indexPath
+            cell.rankLabel.text = "\((indexPath.row) + 1)"
+            if indexPath.row % 2 == 0 {
+                cell.backgroundColor = #colorLiteral(red: 0.968627451, green: 0.9568627451, blue: 0.8274509804, alpha: 1)
+            } else {
+                cell.backgroundColor =  #colorLiteral(red: 0.9098039216, green: 0.8431372549, blue: 0.6470588235, alpha: 1)
+            }
         }
+
         return cell
     }
 }
@@ -43,9 +50,8 @@ extension HILeaderboardListViewController {
 // MARK: - UITableViewDelegate
 extension HILeaderboardListViewController {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let leaderboardProfile = _fetchedResultsController?.object(at: indexPath) as? LeaderboardProfile else {
-            return CGFloat.leastNonzeroMagnitude
-        }
-        return HILeaderboardCell.heightForCell(with: leaderboardProfile, width: tableView.frame.width)
+        let tHeight = tableView.frame.height
+        let rHeight = tHeight / 10
+        return rHeight
     }
 }

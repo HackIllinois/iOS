@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "indicator@1.png",
+      "filename" : "EventDetailBackground@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "indicator@2.png",
+      "filename" : "EventDetailBackground@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "indicator@3.png",
+      "filename" : "EventDetailBackground@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

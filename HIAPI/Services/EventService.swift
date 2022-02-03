@@ -42,13 +42,13 @@ public class EventService: BaseService {
     public static func favoriteBy(id: String) -> APIRequest<EventFavorites> {
         var body = HTTPBody()
         body["eventId"] = id
-        return APIRequest<EventFavorites>(service: self, endpoint: "favorite/add/", body: body, method: .POST)
+        return APIRequest<EventFavorites>(service: self, endpoint: "favorite/", body: body, method: .POST)
     }
 
     public static func unfavoriteBy(id: String) -> APIRequest<EventFavorites> {
         var body = HTTPBody()
         body["eventId"] = id
-        return APIRequest<EventFavorites>(service: self, endpoint: "favorite/remove/", body: body, method: .POST)
+        return APIRequest<EventFavorites>(service: self, endpoint: "favorite/", body: body, method: .DELETE)
     }
 
 }
