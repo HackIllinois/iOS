@@ -619,7 +619,6 @@
 				95A7D281203D4F54005EAEAF /* HIEventCell.swift */,
 				3CF8DB1223B419980035ECAE /* HIProjectCell.swift */,
 				3FC091D525B74DEA00DA23D8 /* HIGroupCell.swift */,
-				3FBFA7B027335800001FFF28 /* HILeaderboardCell.swift */,
 			);
 			path = HIBubbleCell;
 			sourceTree = "<group>";
@@ -629,6 +628,7 @@
 			children = (
 				95C96DF2203E0C3E002FF0CB /* HIBubbleCell */,
 				95A7D288203D4F54005EAEAF /* HIEventDetailLocationCell.swift */,
+				3FBFA7B027335800001FFF28 /* HILeaderboardCell.swift */,
 				95A7D284203D4F54005EAEAF /* HILoginSelectionCell.swift */,
 				AC38BEA223FE3E800067ABAC /* HIProjectDetailLocationCell.swift */,
 				ACBFE29725EAE79000C94732 /* HIGroupPopupCell.swift */,
@@ -1224,7 +1224,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2021.1.2;
+				MARKETING_VERSION = 2022.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1247,7 +1247,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2021.1.2;
+				MARKETING_VERSION = 2022.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
