@@ -20,7 +20,7 @@ class HILeaderboardViewController: HILeaderboardListViewController {
         let fetchRequest: NSFetchRequest<LeaderboardProfile> = LeaderboardProfile.fetchRequest()
 
         fetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: "id", ascending: true)
+            NSSortDescriptor(key: "points", ascending: false)
         ]
 
         let fetchedResultsController = NSFetchedResultsController(
