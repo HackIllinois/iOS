@@ -41,8 +41,6 @@ class HILeaderboardCell: UITableViewCell {
         horizontalStackView.spacing = 5.0
         horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
         horizontalStackView.heightAnchor.constraint(equalTo: cellView.heightAnchor, multiplier: 0.45).isActive = true
-//        horizontalStackView.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 10).isActive = true
-//        horizontalStackView.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: -10).isActive = true
         horizontalStackView.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: 10).isActive = true
         horizontalStackView.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -10).isActive = true
     }
@@ -74,7 +72,6 @@ extension HILeaderboardCell {
         lhs.nameLabel.centerYAnchor.constraint(equalTo: lhs.safeAreaLayoutGuide.centerYAnchor).isActive = true
 
         lhs.horizontalStackView.addArrangedSubview(lhs.pointsLabel)
-        //lhs.pointsLabel.heightAnchor.constraint(equalTo: lhs.contentView.heightAnchor, multiplier: 0.45).isActive = true
         lhs.pointsLabel.centerYAnchor.constraint(equalTo: lhs.safeAreaLayoutGuide.centerYAnchor).isActive = true
     }
 }

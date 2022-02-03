@@ -35,8 +35,6 @@ class HILeaderboardViewController: HILeaderboardListViewController {
         return fetchedResultsController
     }()
 
-    private let errorView = HIErrorView(style: .teamMatching)
-
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
         backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
@@ -65,20 +63,7 @@ extension HILeaderboardViewController {
 extension HILeaderboardViewController {
     override func loadView() {
         super.loadView()
-        if HIApplicationStateController.shared.isGuest {
-            layoutErrorView()
-        } else {
-            layoutProfiles()
-        }
-    }
-
-    func layoutErrorView() {
-        errorView.delegate = self
-        view.addSubview(errorView)
-        errorView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-        errorView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        errorView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
-        errorView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        layoutProfiles()
     }
 
     func layoutProfiles() {
