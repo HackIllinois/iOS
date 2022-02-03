@@ -26,7 +26,7 @@ class HILoginSelectionViewController: HIBaseViewController {
         $0.hiImage = \.loginLogo
         $0.contentMode = .scaleAspectFit
     }
-    private let welcomeHeader = HILabel(style: .viewTitle)
+    private let welcomeHeader = HILabel(style: .welcomeTitle)
     private let spacerView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.isHidden = true

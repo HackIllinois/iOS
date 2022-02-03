@@ -22,6 +22,8 @@ struct HIAppearance: Equatable {
     let contentBackground: UIColor
     let overlay: UIColor
     let frostedTint: UIColor
+    let countdownFrameBackground: UIColor
+    let eventBackground: UIColor
     let codePopupTab: UIColor
     let navbarBackground: UIColor
     let navbarTabTint: UIColor
@@ -40,7 +42,8 @@ struct HIAppearance: Equatable {
     let whiteTagFont: UIColor
     let interestBackground: UIColor
     let segmentedBackground: UIColor
-    let buttonBlue: UIColor
+    let buttonGreen: UIColor
+    let favoriteStarTint: UIColor
 
     // New fonts added. Replace old ones?
     let groupText: UIColor
@@ -133,15 +136,17 @@ struct HIAppearance: Equatable {
     }
 
     fileprivate static let day = HIAppearance(
-        titleText: white,
+        titleText: lightBlack,
         whiteText: white,
         baseText: lightBlack,
         accent: orange,
         action: white,
         baseBackground: white,
-        contentBackground: white,
+        contentBackground: yellowWhite,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
+        countdownFrameBackground: tan,
+        eventBackground: yellowWhite,
         codePopupTab: orange,
         navbarBackground: green,
         navbarTabTint: yellowWhite,
@@ -158,9 +163,10 @@ struct HIAppearance: Equatable {
         attendeeText: lightBlack,
         attendeeBackground: yellowGreen,
         whiteTagFont: white,
-        interestBackground: orange,
-        segmentedBackground: greyWhite,
-        buttonBlue: buttonblue,
+        interestBackground: yellowGreen,
+        segmentedBackground: .clear,
+        buttonGreen: yellowGreen,
+        favoriteStarTint: .clear,
         groupText: grayBlack,
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
@@ -192,15 +198,17 @@ struct HIAppearance: Equatable {
     )
 
     fileprivate static let night = HIAppearance(
-        titleText: white,
+        titleText: lightBlack,
         whiteText: white,
         baseText: lightBlack,
         accent: orange,
         action: white,
         baseBackground: white,
-        contentBackground: white,
+        contentBackground: yellowWhite,
         overlay: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.47),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
+        countdownFrameBackground: tan,
+        eventBackground: yellowWhite,
         codePopupTab: orange,
         navbarBackground: green,
         navbarTabTint: yellowWhite,
@@ -217,9 +225,10 @@ struct HIAppearance: Equatable {
         attendeeText: lightBlack,
         attendeeBackground: yellowGreen,
         whiteTagFont: white,
-        interestBackground: orange,
-        segmentedBackground: greyWhite,
-        buttonBlue: buttonblue,
+        interestBackground: yellowGreen,
+        segmentedBackground: .clear,
+        buttonGreen: yellowGreen,
+        favoriteStarTint: .clear,
         groupText: grayBlack,
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
@@ -265,20 +274,21 @@ struct HIAppearance: Equatable {
         static let contentTitle = UIFont.systemFont(ofSize: 18, weight: .medium)
         static let detailTitle = UIFont.systemFont(ofSize: 24, weight: .semibold)
         static let detailSubtitle = UIFont.systemFont(ofSize: 16, weight: .medium)
-        static let detailText = UIFont.systemFont(ofSize: 15, weight: .regular)
-
+        static let detailText = UIFont.systemFont(ofSize: 16, weight: .regular)
+        static let viewTitle = UIFont.systemFont(ofSize: 28, weight: .semibold)
         static let happeningEventTitle = UIFont.systemFont(ofSize: 25, weight: .bold)
         static let eventTitle = UIFont.systemFont(ofSize: 16, weight: .semibold)
         static let eventTime = UIFont.systemFont(ofSize: 12, weight: .regular)
         static let eventDetails = UIFont.systemFont(ofSize: 14, weight: .regular)
-        static let eventButtonText = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        static let eventCategoryText = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        static let eventButtonText = UIFont.systemFont(ofSize: 14, weight: .regular)
+        static let eventCategoryText = UIFont.systemFont(ofSize: 18, weight: .regular)
+        static let clockText = UIFont.systemFont(ofSize: 48, weight: .semibold)
 
         static let navigationSubtitle = UIFont.systemFont(ofSize: 14, weight: .medium)
         static let navigationTitle = UIFont.systemFont(ofSize: 22, weight: .semibold)
         static let navigationInfoText = UIFont.systemFont(ofSize: 12, weight: .regular)
-        static let descriptionText = UIFont.systemFont(ofSize: 14, weight: .regular)
-        static let sponsorText = UIFont.systemFont(ofSize: 14, weight: .medium)
+        static let descriptionText = UIFont.systemFont(ofSize: 16, weight: .regular)
+        static let sponsorText = UIFont.systemFont(ofSize: 18, weight: .regular)
         static let loginTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
         static let loginOrTitle = UIFont.systemFont(ofSize: 16, weight: .bold)
         static let loginSelection = UIFont.systemFont(ofSize: 16, weight: .semibold)

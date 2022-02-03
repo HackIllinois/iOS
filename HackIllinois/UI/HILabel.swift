@@ -23,14 +23,14 @@ class HILabel: UILabel {
         case eventType
         case sponsor
         case project
-        case title
+        case viewTitle
         case detailTitle
         case subtitle
         case description
         case cellDescription
         case loginHeader
         case loginSelection
-        case viewTitle
+        case welcomeTitle
         case backgroundTitle
         case detailSubtitle
         case detailText
@@ -55,6 +55,7 @@ class HILabel: UILabel {
         case codeError
         case onboardingDescription
         case onboardingTitle
+        case clock
         case leaderboardRank
         case leaderboardName
         case leaderboardPoints
@@ -102,15 +103,14 @@ class HILabel: UILabel {
             textHIColor = \.accent
             backgroundHIColor = \.clear
             font = HIAppearance.Font.eventCategoryText
-            textAlignment = .center
 
         case .sponsor:
-            textHIColor = \.attendeeBackground
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.sponsorText
 
         case .detailTitle:
-            textHIColor = \.whiteText
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.detailTitle
             numberOfLines = 0
@@ -122,7 +122,7 @@ class HILabel: UILabel {
             numberOfLines = 0
 
         case .detailText:
-            textHIColor = \.whiteText
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.detailText
             numberOfLines = 0
@@ -132,11 +132,11 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.contentTitle
 
-        case .title:
+        case .viewTitle:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .center
-            font = HIAppearance.Font.contentTitle
+            font = HIAppearance.Font.viewTitle
 
         case .subtitle:
             textHIColor = \.accent
@@ -144,7 +144,7 @@ class HILabel: UILabel {
             font = HIAppearance.Font.contentSubtitle
 
         case .description:
-            textHIColor = \.whiteText
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.descriptionText
             numberOfLines = 0
@@ -160,7 +160,7 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.loginTitle
 
-        case .viewTitle:
+        case .welcomeTitle:
             textHIColor = \.loginSelectionText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.loginTitle
@@ -219,7 +219,7 @@ class HILabel: UILabel {
             textHIColor = \.titleText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.navigationInfoText
-            textAlignment = .center
+            textAlignment = .left
 
         // New styles for group matching
         case .groupDescription:
@@ -258,7 +258,7 @@ class HILabel: UILabel {
             font = HIAppearance.Font.countdownText
 
         case .pointsText:
-            textHIColor = \.whiteText
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.eventButtonText
             textAlignment = .center
@@ -299,6 +299,13 @@ class HILabel: UILabel {
             font = HIAppearance.Font.onboardingTitle
             textAlignment = .center
             numberOfLines = 0
+        case .clock:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.clockText
+            textAlignment = .center
+            numberOfLines = 1
+            
 
         // Leaderboard label fonts
         case .leaderboardRank:

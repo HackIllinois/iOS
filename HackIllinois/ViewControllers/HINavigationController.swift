@@ -57,7 +57,7 @@ class HINavigationController: UINavigationController {
         navigationBar.isTranslucent = true
 
         navigationBar.addSubview(infoTitle)
-        infoTitle.constrain(to: navigationBar, trailingInset: 0, bottomInset: 5, leadingInset: 0)
+        infoTitle.constrain(to: navigationBar, trailingInset: 0, bottomInset: 5, leadingInset: 20)
         infoTitle.constrain(height: 10)
         infoTitle.translatesAutoresizingMaskIntoConstraints = false
         infoTitle.isHidden = infoTitleIsHidden

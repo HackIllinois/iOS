@@ -2,7 +2,7 @@
 //  HIScheduleSegmentedControl.swift
 //  HackIllinois
 //
-//  Created by HackIllinois Team on 3/7/21.
+//  Created by HackIllinois Team on 1/30/21.
 //  Copyright © 2021 HackIllinois. All rights reserved.
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of
@@ -13,14 +13,12 @@
 import Foundation
 import UIKit
 
-class HIScheduleSegmentedControl: HISegmentedControl {
+class HIHomeSegmentedControl: HISegmentedControl {
 
     // MARK: - Properties
-    private(set) var nums: [Int]
 
     private var views = [UIView]()
     private var titleLabels = [UILabel]()
-    private var numberLabels = [UILabel]()
 
     private let titleFont = HIAppearance.Font.segmentedTitle
     private let numberFont = HIAppearance.Font.segmentedNumberText
@@ -31,9 +29,8 @@ class HIScheduleSegmentedControl: HISegmentedControl {
     private var indicatorView = UIImageView(image: #imageLiteral(resourceName: "Indicator"))
 
     // MARK: - Init
-    init(titles: [String], nums: [Int]? = nil) {
-        self.nums = nums == nil ? [Int]() : nums!
-        super.init(items: titles)
+    init(status: [String]) {
+        super.init(items: status)
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         translatesAutoresizingMaskIntoConstraints = false
@@ -56,11 +53,6 @@ class HIScheduleSegmentedControl: HISegmentedControl {
             $0.textColor <- \.baseText
             $0.backgroundColor <- \.clear
         }
-
-        numberLabels.forEach {
-            $0.textColor <- \.baseText
-            $0.backgroundColor <- \.clear
-        }
     }
 
     // MARK: - UIView
@@ -68,7 +60,7 @@ class HIScheduleSegmentedControl: HISegmentedControl {
         super.layoutSubviews()
 
         let indicatorViewWidth = ((frame.width - viewPadding) / CGFloat(items.count) - viewPadding)
-        indicatorView.frame = CGRect(x: viewPadding, y: 35, width: indicatorViewWidth, height: frame.height)
+        indicatorView.frame = CGRect(x: viewPadding, y: 50, width: indicatorViewWidth, height: 7)
         indicatorView.layer.cornerRadius = frame.height * indicatorCornerRadiusProp
         indicatorView.layer.masksToBounds = true
         indicatorView.contentMode = .scaleAspectFit
@@ -104,37 +96,22 @@ class HIScheduleSegmentedControl: HISegmentedControl {
     private func setupViewForItem(at index: Int) {
         let view = UIView()
         let titleLabel = UILabel()
-        let numberLabel = UILabel()
 
         titleLabel.textAlignment = .center
-        titleLabel.font = titleFont
+        titleLabel.font = numberFont
         titleLabel.text = items[index]
         titleLabel.textColor <- \.whiteText
 
-        numberLabel.textAlignment = .center
-        numberLabel.font = numberFont
-        numberLabel.text = index < nums.count ? (nums[index] % 10 == nums[index] ? "0" : "") + "\(nums[index])" : "00"
-        numberLabel.textColor <- \.whiteText
-
         view.addSubview(titleLabel)
-        view.addSubview(numberLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        numberLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        titleLabel.constrain(to: view, topInset: 5, trailingInset: 0, leadingInset: 0)
-        numberLabel.constrain(to: view, trailingInset: 0, bottomInset: -5, leadingInset: 0)
-        numberLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0).isActive = true
-        titleLabel.heightAnchor.constraint(equalTo: numberLabel.heightAnchor).isActive = true
-
+        titleLabel.constrain(to: view, topInset: 5, trailingInset: 0, bottomInset: -5, leadingInset: 0)
         view.isUserInteractionEnabled = false
         titleLabel.isUserInteractionEnabled = false
-        numberLabel.isUserInteractionEnabled = false
 
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
         views.append(view)
         titleLabels.append(titleLabel)
-        numberLabels.append(numberLabel)
     }
 
     override func didSetSelectedIndex(oldValue: Int) {

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ScheduleBackground@1x.png",
+      "filename" : "indicator@1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ScheduleBackground@2x.png",
+      "filename" : "indicator@2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ScheduleBackground@3x.png",
+      "filename" : "indicator@3.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
