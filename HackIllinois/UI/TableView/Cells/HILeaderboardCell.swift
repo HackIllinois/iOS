@@ -63,7 +63,6 @@ extension HILeaderboardCell {
         lhs.pointsLabel.backgroundHIColor = \.pointsBackground
         lhs.pointsLabel.layer.masksToBounds = true
         lhs.pointsLabel.layer.cornerRadius = lhs.contentView.frame.height * 0.45 / 2
-
         lhs.nameLabel.text = "\(rhs.firstName!) \(rhs.lastName!)"
         lhs.pointsLabel.text = " \(rhs.points) pts "
         lhs.pointsLabel.setContentCompressionResistancePriority(.required, for: .horizontal)

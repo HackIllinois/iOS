@@ -311,7 +311,7 @@ class HILabel: UILabel {
         case .leaderboardName:
             textHIColor = \.leaderboardText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.leaderboardName
+            font = HIAppearance.Font.leaderboardPoints
         case .leaderboardPoints:
             textHIColor = \.leaderboardText
             backgroundHIColor = \.pointsBackground
