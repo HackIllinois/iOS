@@ -44,7 +44,7 @@ class HIEventDetailViewController: HIBaseViewController {
     private let pointsLabel = HILabel(style: .pointsText)
     private let timeImageView = UIImageView(image: #imageLiteral(resourceName: "Clock"))
     private let favoritedButton = HIButton {
-        $0.tintHIColor = \.favoriteStarTint
+        $0.tintHIColor = \.accent
         $0.backgroundHIColor = \.clear
         $0.activeImage = #imageLiteral(resourceName: "Favorited")
         $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
@@ -127,7 +127,7 @@ extension HIEventDetailViewController {
         timeLabel.text = Formatter.simpleTime.string(from: event.startTime) + " - " + Formatter.simpleTime.string(from: event.endTime)
         favoritedButton.isActive = event.favorite
         pointsLabel.text = " + \(event.points) pts  "
-        eventTypeLabel.text = event.eventType
+        eventTypeLabel.text = event.eventType.lowercased().capitalized
         view.layoutIfNeeded()
         let targetSize = CGSize(width: descriptionLabel.frame.width, height: .greatestFiniteMagnitude)
         let neededSize = descriptionLabel.sizeThatFits(targetSize)
@@ -185,7 +185,7 @@ extension HIEventDetailViewController {
     func setupDescription() {
         eventDetailContainer.addSubview(descriptionLabel)
         descriptionLabel.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 15).isActive = true
-        descriptionLabel.constrain(to: eventDetailContainer, trailingInset: -12)
+        descriptionLabel.constrain(to: eventDetailContainer, trailingInset: 0)
         descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         descriptionLabelHeight = descriptionLabel.heightAnchor.constraint(equalToConstant: 100)
         descriptionLabelHeight.isActive = true
@@ -220,7 +220,6 @@ extension HIEventDetailViewController {
 // MARK: - UIImageView Setup
 extension HIEventDetailViewController {
     @objc dynamic override func setUpBackgroundView() {
-        super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "EventDetailBackground")
+        view.layer.backgroundColor = (\HIAppearance.contentBackground).value.cgColor
     }
 }

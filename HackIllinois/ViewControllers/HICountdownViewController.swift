@@ -24,7 +24,6 @@ class HICountdownViewController: UIViewController {
     private let FRAMES_PER_TICK = 8
 
     // MARK: - Properties
-    
     private let days = HILabel(style: .clock)
     private let hours = HILabel(style: .clock)
     private let minutes = HILabel(style: .clock)
@@ -75,7 +74,6 @@ class HICountdownViewController: UIViewController {
         hours.backgroundColor <- backgroundHIColor
         minutes.backgroundColor <- backgroundHIColor
         seconds.backgroundColor <- backgroundHIColor
-        
         let countdownFillColorCallback = ColorValueProvider { _ in self.countdownFillColor.value.lottieColorValue }
         self.countdownFillColorCallback = countdownFillColorCallback
     }
@@ -120,7 +118,6 @@ extension HICountdownViewController {
         let containerView = UIView()
         containerView.addSubview(label)
         containerView.addSubview(countDownView)
-        
         label.constrain(to: containerView, topInset: 0, trailingInset: 0, leadingInset: 0)
         countDownView.constrain(to: containerView, trailingInset: 0, bottomInset: 0, leadingInset: 0)
         label.bottomAnchor.constraint(equalTo: countDownView.topAnchor).isActive = true

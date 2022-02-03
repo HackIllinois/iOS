@@ -100,7 +100,7 @@ class HILabel: UILabel {
             font = HIAppearance.Font.eventTime
 
         case .eventType:
-            textHIColor = \.accent
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.eventCategoryText
 
@@ -305,8 +305,6 @@ class HILabel: UILabel {
             font = HIAppearance.Font.clockText
             textAlignment = .center
             numberOfLines = 1
-            
-
         // Leaderboard label fonts
         case .leaderboardRank:
             textHIColor = \.leaderboardText

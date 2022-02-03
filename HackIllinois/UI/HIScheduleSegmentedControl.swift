@@ -68,8 +68,7 @@ class HIScheduleSegmentedControl: HISegmentedControl {
         super.layoutSubviews()
 
         let indicatorViewWidth = ((frame.width - viewPadding) / CGFloat(items.count) - viewPadding)
-        indicatorView.frame = CGRect(x: viewPadding, y: 35, width: indicatorViewWidth, height: frame.height)
-        indicatorView.layer.cornerRadius = frame.height * indicatorCornerRadiusProp
+        indicatorView.frame = CGRect(x: viewPadding, y: 60, width: indicatorViewWidth, height: 7)
         indicatorView.layer.masksToBounds = true
         indicatorView.contentMode = .scaleAspectFit
         displayNewSelectedIndex()

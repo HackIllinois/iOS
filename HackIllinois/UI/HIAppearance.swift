@@ -43,8 +43,7 @@ struct HIAppearance: Equatable {
     let interestBackground: UIColor
     let segmentedBackground: UIColor
     let buttonGreen: UIColor
-    let favoriteStarTint: UIColor
-
+    let favoriteStarBackground: UIColor
     // New fonts added. Replace old ones?
     let groupText: UIColor
     let memberSearchText: UIColor
@@ -54,12 +53,6 @@ struct HIAppearance: Equatable {
     let checkmark: UIImage
     let unselectedGroupStatus: UIImage
     let selectedGroupStatus: UIImage
-
-    let eventTypeGreen: UIColor
-    let eventTypeOrange: UIColor
-    let eventTypeRed: UIColor
-    let eventTypePurple: UIColor
-    let eventTypePink: UIColor
     let profile0: UIImage
     let profile1: UIImage
     let profile2: UIImage
@@ -94,7 +87,6 @@ struct HIAppearance: Equatable {
     private static let lightBlack = #colorLiteral(red: 0.03137254902, green: 0.08235294118, blue: 0.1058823529, alpha: 1)
     private static let salmon = #colorLiteral(red: 0.9490196078, green: 0.6078431373, blue: 0.4705882353, alpha: 1)
     private static let yellowWhite = #colorLiteral(red: 0.9647058824, green: 0.9568627451, blue: 0.831372549, alpha: 1)
-
     // Hack 2021 color palette - they needed to be removed
     private static let darkBlue = #colorLiteral(red: 0.1326064765, green: 0.1667878032, blue: 0.3605746627, alpha: 1)
     private static let blue = #colorLiteral(red: 0.1215686275, green: 0.5176470588, blue: 0.6470588235, alpha: 1)
@@ -140,7 +132,7 @@ struct HIAppearance: Equatable {
         whiteText: white,
         baseText: lightBlack,
         accent: orange,
-        action: white,
+        action: tan,
         baseBackground: white,
         contentBackground: yellowWhite,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
@@ -163,10 +155,10 @@ struct HIAppearance: Equatable {
         attendeeText: lightBlack,
         attendeeBackground: yellowGreen,
         whiteTagFont: white,
-        interestBackground: yellowGreen,
-        segmentedBackground: .clear,
+        interestBackground: orange,
+        segmentedBackground: greyWhite,
         buttonGreen: yellowGreen,
-        favoriteStarTint: .clear,
+        favoriteStarBackground: yellowWhite,
         groupText: grayBlack,
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
@@ -175,11 +167,6 @@ struct HIAppearance: Equatable {
         checkmark: #imageLiteral(resourceName: "CheckMark"),
         unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedBox"),
         selectedGroupStatus: #imageLiteral(resourceName: "SelectedBox"),
-        eventTypeGreen: eventGreen,
-        eventTypeOrange: eventOrange,
-        eventTypeRed: eventRed,
-        eventTypePurple: eventPurple,
-        eventTypePink: eventPink,
         profile0: #imageLiteral(resourceName: "Profile0"),
         profile1: #imageLiteral(resourceName: "Profile1"),
         profile2: #imageLiteral(resourceName: "Profile2"),
@@ -202,7 +189,7 @@ struct HIAppearance: Equatable {
         whiteText: white,
         baseText: lightBlack,
         accent: orange,
-        action: white,
+        action: tan,
         baseBackground: white,
         contentBackground: yellowWhite,
         overlay: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.47),
@@ -225,10 +212,10 @@ struct HIAppearance: Equatable {
         attendeeText: lightBlack,
         attendeeBackground: yellowGreen,
         whiteTagFont: white,
-        interestBackground: yellowGreen,
-        segmentedBackground: .clear,
+        interestBackground: orange,
+        segmentedBackground: greyWhite,
         buttonGreen: yellowGreen,
-        favoriteStarTint: .clear,
+        favoriteStarBackground: yellowWhite,
         groupText: grayBlack,
         memberSearchText: groupOrange,
         groupSearchText: groupRed,
@@ -237,11 +224,6 @@ struct HIAppearance: Equatable {
         checkmark: #imageLiteral(resourceName: "CheckMark"),
         unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedBox"),
         selectedGroupStatus: #imageLiteral(resourceName: "SelectedBox"),
-        eventTypeGreen: eventGreen,
-        eventTypeOrange: eventOrange,
-        eventTypeRed: eventRed,
-        eventTypePurple: eventPurple,
-        eventTypePink: eventPink,
         profile0: #imageLiteral(resourceName: "Profile0"),
         profile1: #imageLiteral(resourceName: "Profile1"),
         profile2: #imageLiteral(resourceName: "Profile2"),
@@ -277,18 +259,17 @@ struct HIAppearance: Equatable {
         static let detailText = UIFont.systemFont(ofSize: 16, weight: .regular)
         static let viewTitle = UIFont.systemFont(ofSize: 28, weight: .semibold)
         static let happeningEventTitle = UIFont.systemFont(ofSize: 25, weight: .bold)
-        static let eventTitle = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        static let eventTime = UIFont.systemFont(ofSize: 12, weight: .regular)
-        static let eventDetails = UIFont.systemFont(ofSize: 14, weight: .regular)
+        static let eventTitle = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        static let eventTime = UIFont.systemFont(ofSize: 15, weight: .regular)
+        static let eventDetails = UIFont.systemFont(ofSize: 16, weight: .regular)
         static let eventButtonText = UIFont.systemFont(ofSize: 14, weight: .regular)
-        static let eventCategoryText = UIFont.systemFont(ofSize: 18, weight: .regular)
+        static let eventCategoryText = UIFont.systemFont(ofSize: 16, weight: .regular)
         static let clockText = UIFont.systemFont(ofSize: 48, weight: .semibold)
-
         static let navigationSubtitle = UIFont.systemFont(ofSize: 14, weight: .medium)
         static let navigationTitle = UIFont.systemFont(ofSize: 22, weight: .semibold)
         static let navigationInfoText = UIFont.systemFont(ofSize: 12, weight: .regular)
         static let descriptionText = UIFont.systemFont(ofSize: 16, weight: .regular)
-        static let sponsorText = UIFont.systemFont(ofSize: 18, weight: .regular)
+        static let sponsorText = UIFont.systemFont(ofSize: 16, weight: .regular)
         static let loginTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
         static let loginOrTitle = UIFont.systemFont(ofSize: 16, weight: .bold)
         static let loginSelection = UIFont.systemFont(ofSize: 16, weight: .semibold)
