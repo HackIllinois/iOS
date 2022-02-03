@@ -220,7 +220,6 @@ extension HIEventDetailViewController {
 // MARK: - UIImageView Setup
 extension HIEventDetailViewController {
     @objc dynamic override func setUpBackgroundView() {
-        super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "EventDetailBackground")
+        view.layer.backgroundColor = (\HIAppearance.contentBackground).value.cgColor
     }
 }
