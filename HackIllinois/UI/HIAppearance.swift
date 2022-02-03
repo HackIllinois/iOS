@@ -305,7 +305,6 @@ struct HIAppearance: Equatable {
         static let onboardingGetStartedText = UIFont.systemFont(ofSize: 25, weight: .semibold)
         static let onboardingTitle = UIFont.systemFont(ofSize: 30, weight: .bold)
         static let onboardingDescription = UIFont.systemFont(ofSize: 20, weight: .regular)
-        
         static let leaderboardPoints = UIFont.systemFont(ofSize: 16, weight: .regular)
         static let leaderboardName = UIFont.systemFont(ofSize: 14, weight: .semibold)
         static let leaderboardRank = UIFont.systemFont(ofSize: 24, weight: .bold)
