@@ -110,7 +110,6 @@ extension HIHomeViewController {
         } else if UIScreen.main.bounds.width < 375.0 {
             countdownFrameConstant = 0.9
         }
-        print(UIScreen.main.bounds.width)
         countdownFrameView.widthAnchor.constraint(equalToConstant: 329 * countdownFrameConstant).isActive = true
         countdownFrameView.heightAnchor.constraint(equalToConstant: 283 * countdownFrameConstant).isActive = true
 
