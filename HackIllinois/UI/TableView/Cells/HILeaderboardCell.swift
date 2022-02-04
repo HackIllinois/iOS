@@ -67,6 +67,7 @@ extension HILeaderboardCell {
 
         lhs.horizontalStackView.addArrangedSubview(lhs.rankLabel)
         lhs.rankLabel.centerYAnchor.constraint(equalTo: lhs.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        lhs.rankLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
 
         lhs.horizontalStackView.addArrangedSubview(lhs.nameLabel)
         lhs.nameLabel.centerYAnchor.constraint(equalTo: lhs.safeAreaLayoutGuide.centerYAnchor).isActive = true
