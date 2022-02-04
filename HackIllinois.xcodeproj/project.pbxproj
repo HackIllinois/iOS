@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		083C643327A7457000087018 /* HIHomeSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C643227A7457000087018 /* HIHomeSegmentedControl.swift */; };
 		0A360882203539FF001F5F85 /* HIAdminEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */; };
 		1C63EE6927680DF500D60653 /* CIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C63EE6827680DF500D60653 /* CIImage.swift */; };
 		1C7561A3278E96600004D739 /* DarkVespaText.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C7561A2278E96600004D739 /* DarkVespaText.json */; };
@@ -198,6 +199,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		083C643227A7457000087018 /* HIHomeSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIHomeSegmentedControl.swift; sourceTree = "<group>"; };
 		0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAdminEventViewController.swift; sourceTree = "<group>"; };
 		1C63EE6827680DF500D60653 /* CIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIImage.swift; sourceTree = "<group>"; };
 		1C7561A2278E96600004D739 /* DarkVespaText.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DarkVespaText.json; sourceTree = "<group>"; };
@@ -585,6 +587,7 @@
 				95A7D29D203D5BA4005EAEAF /* HILabel.swift */,
 				95A7D27C203D4F54005EAEAF /* HISegmentedControl.swift */,
 				BF0FDA3825F4DCCD003B5DB1 /* HIScheduleSegmentedControl.swift */,
+				083C643227A7457000087018 /* HIHomeSegmentedControl.swift */,
 				95A7D27D203D4F54005EAEAF /* HITextField.swift */,
 				AC0DDDDB261111B60086BDE0 /* HITextView.swift */,
 				95D6DA77203F8C3900E7C982 /* HITintImageView.swift */,
@@ -944,6 +947,7 @@
 				95A7D2A0203D60E9005EAEAF /* HIBubbleCell.swift in Sources */,
 				9552D92821758E4C00A8C869 /* UIView+AutoLayout.swift in Sources */,
 				ACB53AED261B8ACD007B1643 /* HIInterestDataSource.swift in Sources */,
+				083C643327A7457000087018 /* HIHomeSegmentedControl.swift in Sources */,
 				3FBEF38125F36239009B97CB /* HIGroupStatusOptions.swift in Sources */,
 				AC38BEA323FE3E800067ABAC /* HIProjectDetailLocationCell.swift in Sources */,
 				3F8CC87B260BBE9000528ED2 /* HICodePopupViewController.swift in Sources */,

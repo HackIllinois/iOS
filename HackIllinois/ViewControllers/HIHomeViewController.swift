@@ -41,26 +41,23 @@ class HIHomeViewController: HIEventListViewController {
         return fetchedResultsController
     }()
 
-//    let announcementViewController = HIAnnouncementsViewController()
-
     private var currentTab = 0
 
     private var dataStore: [String] = ["Ongoing", "Upcoming"]
 
-    private let countdownTitleLabel = HILabel(style: .countdown)
     private lazy var countdownViewController = HICountdownViewController(delegate: self)
-//    private let announcementButton = HIButton {
-//        $0.tintHIColor = \.baseText
-//        $0.backgroundHIColor = \.clear
-//        $0.baseImage = #imageLiteral(resourceName: "Bell")
-//    }
+    private let countdownFrameView = HIView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        let viewImage = #imageLiteral(resourceName: "Chicken")
+        $0.layer.contents = viewImage.cgImage
+    }
 
     private var countdownDataStoreIndex = 0
-    private var staticDataStore: [(date: Date, displayText: String, backgroundImage: UIImage)] = [
-        (HITimeDataSource.shared.eventTimes.eventStart, "HackIllinois Begins In", #imageLiteral(resourceName: "Night")),
-        (HITimeDataSource.shared.eventTimes.hackStart, "Hacking Begins In", #imageLiteral(resourceName: "Night")),
-        (HITimeDataSource.shared.eventTimes.hackEnd, "Hacking Ends In", #imageLiteral(resourceName: "Night")),
-        (HITimeDataSource.shared.eventTimes.eventEnd, "HackIllinois Ends In", #imageLiteral(resourceName: "Night"))
+    private var staticDataStore: [(date: Date, displayText: String)] = [
+        (HITimeDataSource.shared.eventTimes.eventStart, "HackIllinois Begins In"),
+        (HITimeDataSource.shared.eventTimes.hackStart, "Hacking Begins In"),
+        (HITimeDataSource.shared.eventTimes.hackEnd, "Hacking Ends In"),
+        (HITimeDataSource.shared.eventTimes.eventEnd, "HackIllinois Ends In")
     ]
 
     private var timer: Timer?
@@ -96,52 +93,45 @@ extension HIHomeViewController {
             tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
     }
-
-//    @objc func didSelectAnnouncementButton(_ sender: HIButton) {
-//        self.present(announcementViewController, animated: true, completion: nil)
-//    }
 }
 
 // MARK: - UIViewController
 extension HIHomeViewController {
     override func loadView() {
         super.loadView()
-//        self.navigationItem.rightBarButtonItem = announcementButton.toBarButtonItem()
-//        announcementButton.addTarget(self, action: #selector(didSelectAnnouncementButton(_:)), for: .touchUpInside)
-//        announcementButton.constrain(width: 22, height: 22)
-//
-//        if HIApplicationStateController.shared.isGuest {
-//            announcementButton.isHidden = true
-//        }
-
-        view.addSubview(countdownTitleLabel)
-        countdownTitleLabel.constrain(to: view, topInset: UIScreen.main.bounds.height * 0.12, trailingInset: 0, leadingInset: 20)
+        view.addSubview(countdownFrameView)
+        countdownFrameView.translatesAutoresizingMaskIntoConstraints = false
+        countdownFrameView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8).isActive = true
+        countdownFrameView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        var countdownFrameConstant = 1.0
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            countdownFrameConstant = 1.2
+        } else if UIScreen.main.bounds.width < 375.0 {
+            countdownFrameConstant = 0.9
+        }
+        countdownFrameView.widthAnchor.constraint(equalToConstant: 329 * countdownFrameConstant).isActive = true
+        countdownFrameView.heightAnchor.constraint(equalToConstant: 283 * countdownFrameConstant).isActive = true
 
         countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        addChild(countdownViewController)
-        view.addSubview(countdownViewController.view)
-        countdownViewController.view.topAnchor.constraint(equalTo: countdownTitleLabel.bottomAnchor, constant: 10).isActive = true
-        countdownViewController.view.constrain(to: view.safeAreaLayoutGuide, trailingInset: -10, leadingInset: 10)
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            countdownViewController.view.constrain(height: 0.34 * UIScreen.main.bounds.height)
-        } else {
-            countdownViewController.view.constrain(height: 200)
-        }
+        countdownFrameView.addSubview(countdownViewController.view)
+        countdownViewController.view.topAnchor.constraint(equalTo: countdownFrameView.centerYAnchor, constant: 10).isActive = true
+        countdownViewController.view.heightAnchor.constraint(equalTo: countdownFrameView.heightAnchor, multiplier: 0.3).isActive = true
+        countdownViewController.view.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         countdownViewController.didMove(toParent: self)
 
         let items = dataStore.map { $0 }
-        let segmentedControl = HISegmentedControl(items: items)
+        let segmentedControl = HIHomeSegmentedControl(status: items)
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
-        segmentedControl.topAnchor.constraint(equalTo: countdownViewController.view.bottomAnchor, constant: -20).isActive = true
+        segmentedControl.topAnchor.constraint(equalTo: countdownFrameView.bottomAnchor, constant: 20).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
         segmentedControl.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
         let separator = UIView()
         separator.translatesAutoresizingMaskIntoConstraints = false
-        separator.backgroundColor <- \.titleText
+        separator.backgroundColor <- \.clear
         self.view.addSubview(separator)
         separator.constrain(height: 1 / (UIScreen.main.scale))
         separator.constrain(to: view, trailingInset: 0, leadingInset: 0)
@@ -177,7 +167,7 @@ extension HIHomeViewController {
 extension HIHomeViewController {
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-//        buildingView.image = #imageLiteral(resourceName: "Buildings")
+        backgroundView.image = #imageLiteral(resourceName: "ScheduleBackground")
     }
 }
 
@@ -195,11 +185,10 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
         while countdownDataStoreIndex < staticDataStore.count {
             let currDate = staticDataStore[countdownDataStoreIndex].date
             if currDate > now {
-                countdownTitleLabel.text = staticDataStore[countdownDataStoreIndex].displayText
-                backgroundView.image = staticDataStore[countdownDataStoreIndex].backgroundImage
+                super.setCustomTitle(customTitle: "What's Cooking?")
                 return (countdownDataStoreIndex == 0 || countdownDataStoreIndex == 1) ? HITimeDataSource.shared.eventTimes.eventStart : currDate
             } else {
-                countdownTitleLabel.text = "Countdown"
+                super.setCustomTitle(customTitle: "HackIllinois Begins In:")
             }
             countdownDataStoreIndex += 1
         }

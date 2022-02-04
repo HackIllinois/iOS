@@ -24,10 +24,10 @@ class HICountdownViewController: UIViewController {
     private let FRAMES_PER_TICK = 8
 
     // MARK: - Properties
-    private let days = AnimationView(name: "countdown-60")
-    private let hours = AnimationView(name: "countdown-24")
-    private let minutes = AnimationView(name: "countdown-60")
-    private let seconds = AnimationView(name: "countdown-60")
+    private let days = HILabel(style: .clock)
+    private let hours = HILabel(style: .clock)
+    private let minutes = HILabel(style: .clock)
+    private let seconds = HILabel(style: .clock)
     private let backgroundHIColor: HIColor = \.clear
 
     private var countdownDate: Date?
@@ -74,15 +74,8 @@ class HICountdownViewController: UIViewController {
         hours.backgroundColor <- backgroundHIColor
         minutes.backgroundColor <- backgroundHIColor
         seconds.backgroundColor <- backgroundHIColor
-
-        let fillColorKeypath = AnimationKeypath(keypath: "**.Fill 1.Color")
         let countdownFillColorCallback = ColorValueProvider { _ in self.countdownFillColor.value.lottieColorValue }
         self.countdownFillColorCallback = countdownFillColorCallback
-
-        days.setValueProvider(countdownFillColorCallback, keypath: fillColorKeypath)
-        hours.setValueProvider(countdownFillColorCallback, keypath: fillColorKeypath)
-        minutes.setValueProvider(countdownFillColorCallback, keypath: fillColorKeypath)
-        seconds.setValueProvider(countdownFillColorCallback, keypath: fillColorKeypath)
     }
 }
 
@@ -96,11 +89,6 @@ extension HICountdownViewController {
         minutes.contentMode = .scaleAspectFit
         seconds.contentMode = .scaleAspectFit
 
-        days.animationSpeed = 2.0
-        hours.animationSpeed = 2.0
-        minutes.animationSpeed = 2.0
-        seconds.animationSpeed = 2.0
-
         let countdownStackView = UIStackView()
         countdownStackView.distribution = .fillEqually
         countdownStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -113,10 +101,9 @@ extension HICountdownViewController {
         countdownStackView.addArrangedSubview(containerView(with: days, and: "Days"))
         countdownStackView.addArrangedSubview(containerView(with: hours, and: "Hours"))
         countdownStackView.addArrangedSubview(containerView(with: minutes, and: "Minutes"))
-        // countdownStackView.addArrangedSubview(containerView(with: seconds, and: "S"))
     }
 
-    func containerView(with countDownView: AnimationView, and labelString: String) -> UIView {
+    func containerView(with countDownView: HILabel, and labelString: String) -> UIView {
         countDownView.backgroundColor <- backgroundHIColor
         countDownView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -131,15 +118,9 @@ extension HICountdownViewController {
         let containerView = UIView()
         containerView.addSubview(label)
         containerView.addSubview(countDownView)
-        label.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        label.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        label.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        label.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.2).isActive = true
-        let offset = (3.0 / 94.0) * UIScreen.main.bounds.width - (57.0/47.0)
-        countDownView.centerXAnchor.constraint(equalTo: label.centerXAnchor, constant: offset).isActive = true
-        countDownView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        countDownView.topAnchor.constraint(equalTo: label.bottomAnchor).isActive = true
-        countDownView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+        label.constrain(to: containerView, topInset: 0, trailingInset: 0, leadingInset: 0)
+        countDownView.constrain(to: containerView, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        label.bottomAnchor.constraint(equalTo: countDownView.topAnchor).isActive = true
 
         return containerView
     }
@@ -172,10 +153,10 @@ extension HICountdownViewController {
     }
 
     func setupCounters() {
-        days.currentFrame = CGFloat((59 - daysRemaining) * FRAMES_PER_TICK)
-        hours.currentFrame = CGFloat((23 - hoursRemaining) * FRAMES_PER_TICK)
-        minutes.currentFrame = CGFloat((59 - minutesRemaining) * FRAMES_PER_TICK)
-        seconds.currentFrame = CGFloat((59 - secondsRemaining) * FRAMES_PER_TICK)
+        days.text = String(format: "%02d", (daysRemaining))
+        hours.text = String(format: "%02d", (hoursRemaining))
+        minutes.text = String(format: "%02d", (minutesRemaining))
+        seconds.text = String(format: "%02d", (secondsRemaining))
     }
 
     @objc func updateCountdown() {
@@ -183,34 +164,6 @@ extension HICountdownViewController {
         guard timeDifference > 0 else {
             countdownDate = delegate?.countdownToDateFor(countdownViewController: self)
             return
-        }
-
-        let daysEndFrame = (59 - daysRemaining) * FRAMES_PER_TICK
-        let daysStartFrame = daysEndFrame + FRAMES_PER_TICK
-        if dayFrame != daysEndFrame {
-            dayFrame = daysEndFrame
-            days.play(fromFrame: CGFloat(daysStartFrame), toFrame: CGFloat(daysEndFrame))
-        }
-
-        let hoursEndFrame = (23 - hoursRemaining) * FRAMES_PER_TICK
-        let hoursStartFrame = hoursEndFrame + FRAMES_PER_TICK
-        if hourFrame != hoursEndFrame {
-            hourFrame = hoursEndFrame
-            hours.play(fromFrame: CGFloat(hoursStartFrame), toFrame: CGFloat(hoursEndFrame))
-        }
-
-        let minutesEndFrame = (59 - minutesRemaining) * FRAMES_PER_TICK
-        let minutesStartFrame = minutesEndFrame + FRAMES_PER_TICK
-        if minuteFrame != minutesEndFrame {
-            minuteFrame = minutesEndFrame
-            minutes.play(fromFrame: CGFloat(minutesStartFrame), toFrame: CGFloat(minutesEndFrame))
-        }
-
-        let secondsEndFrame = (59 - secondsRemaining) * FRAMES_PER_TICK
-        let secondsStartFrame = secondsEndFrame + FRAMES_PER_TICK
-        if secondFrame != secondsEndFrame {
-            secondFrame = secondsEndFrame
-            seconds.play(fromFrame: CGFloat(secondsStartFrame), toFrame: CGFloat(secondsEndFrame))
         }
     }
 

@@ -33,7 +33,7 @@ class HIOnboardingViewController: HIBaseViewController {
     }
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "GroupMatching")
+        backgroundView.image = #imageLiteral(resourceName: "Login")
     }
 }
 
@@ -44,9 +44,9 @@ extension HIOnboardingViewController {
         carouselView = HICarouselView(pages: 5)
         carouselData.append(.init(image: #imageLiteral(resourceName: "OnboardingOne"), titleText: "Welcome!", descriptionText: "Swipe to see what our app has to offer!"))
         carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Check-In", descriptionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"))
-        carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Scan for Points", descriptionText: "Lorem ipsum dolor sit amet, conse"))
+        carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Scan for Points", descriptionText: "Lorem ipsum dolor sit amet, conse, consectetur adipiscing elit"))
         carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Get Notified", descriptionText: "Lorem ipsum dolor sit amet, consectet"))
-        carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Win Prizes", descriptionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"))
+        carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Win Prizes", descriptionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, consectetur adipiscing elit"))
         setupUI()
         let viewAlphaValue = shouldDisplayAnimationOnNextAppearance ? 0.0 : 1.0
 
