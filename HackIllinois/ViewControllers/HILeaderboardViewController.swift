@@ -20,7 +20,8 @@ class HILeaderboardViewController: HILeaderboardListViewController {
         let fetchRequest: NSFetchRequest<LeaderboardProfile> = LeaderboardProfile.fetchRequest()
 
         fetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: "id", ascending: true)
+            NSSortDescriptor(key: "points", ascending: false),
+            NSSortDescriptor(key: "firstName", ascending: true)
         ]
 
         let fetchedResultsController = NSFetchedResultsController(
@@ -34,8 +35,6 @@ class HILeaderboardViewController: HILeaderboardListViewController {
 
         return fetchedResultsController
     }()
-
-    private let errorView = HIErrorView(style: .teamMatching)
 
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
@@ -65,20 +64,7 @@ extension HILeaderboardViewController {
 extension HILeaderboardViewController {
     override func loadView() {
         super.loadView()
-        if HIApplicationStateController.shared.isGuest {
-            layoutErrorView()
-        } else {
-            layoutProfiles()
-        }
-    }
-
-    func layoutErrorView() {
-        errorView.delegate = self
-        view.addSubview(errorView)
-        errorView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-        errorView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        errorView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
-        errorView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        layoutProfiles()
     }
 
     func layoutProfiles() {
@@ -113,24 +99,6 @@ extension HILeaderboardViewController {
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 15
-    }
-}
-
-// MARK: - HIErrorViewDelegate
-extension HILeaderboardViewController: HIErrorViewDelegate {
-    func didSelectErrorLogout(_ sender: UIButton) {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(
-            UIAlertAction(title: "Log Out", style: .destructive) { _ in
-                self.dismiss(animated: true, completion: nil)
-                NotificationCenter.default.post(name: .logoutUser, object: nil)
-            }
-        )
-        alert.addAction(
-            UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        )
-        alert.popoverPresentationController?.sourceView = sender
-        present(alert, animated: true, completion: nil)
     }
 }
 

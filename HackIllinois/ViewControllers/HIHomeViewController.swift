@@ -103,14 +103,16 @@ extension HIHomeViewController {
         countdownFrameView.translatesAutoresizingMaskIntoConstraints = false
         countdownFrameView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8).isActive = true
         countdownFrameView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        var countdownFrameConstant = 1.0
+        var countdownFrameConstant: CGFloat = 1.0
         if UIDevice.current.userInterfaceIdiom == .pad {
             countdownFrameConstant = 1.2
         } else if UIScreen.main.bounds.width < 375.0 {
             countdownFrameConstant = 0.9
         }
-        countdownFrameView.widthAnchor.constraint(equalToConstant: 329 * countdownFrameConstant).isActive = true
-        countdownFrameView.heightAnchor.constraint(equalToConstant: 283 * countdownFrameConstant).isActive = true
+        let widthConstant: CGFloat = 329 * countdownFrameConstant
+        let heightConstant: CGFloat = 283 * countdownFrameConstant
+        countdownFrameView.widthAnchor.constraint(equalToConstant: widthConstant).isActive = true
+        countdownFrameView.heightAnchor.constraint(equalToConstant: heightConstant).isActive = true
 
         countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
         countdownFrameView.addSubview(countdownViewController.view)
