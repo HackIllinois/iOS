@@ -20,7 +20,8 @@ class HILeaderboardViewController: HILeaderboardListViewController {
         let fetchRequest: NSFetchRequest<LeaderboardProfile> = LeaderboardProfile.fetchRequest()
 
         fetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: "points", ascending: false)
+            NSSortDescriptor(key: "points", ascending: false),
+            NSSortDescriptor(key: "firstName", ascending: true)
         ]
 
         let fetchedResultsController = NSFetchedResultsController(
@@ -98,24 +99,6 @@ extension HILeaderboardViewController {
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 15
-    }
-}
-
-// MARK: - HIErrorViewDelegate
-extension HILeaderboardViewController: HIErrorViewDelegate {
-    func didSelectErrorLogout(_ sender: UIButton) {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(
-            UIAlertAction(title: "Log Out", style: .destructive) { _ in
-                self.dismiss(animated: true, completion: nil)
-                NotificationCenter.default.post(name: .logoutUser, object: nil)
-            }
-        )
-        alert.addAction(
-            UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        )
-        alert.popoverPresentationController?.sourceView = sender
-        present(alert, animated: true, completion: nil)
     }
 }
 
