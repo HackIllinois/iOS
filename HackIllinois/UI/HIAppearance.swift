@@ -22,8 +22,6 @@ struct HIAppearance: Equatable {
     let contentBackground: UIColor
     let overlay: UIColor
     let frostedTint: UIColor
-    let countdownFrameBackground: UIColor
-    let eventBackground: UIColor
     let codePopupTab: UIColor
     let navbarBackground: UIColor
     let navbarTabTint: UIColor
@@ -44,9 +42,6 @@ struct HIAppearance: Equatable {
     let segmentedBackground: UIColor
     // New fonts added. Replace old ones?
     let buttonViewBackground: UIColor
-    let checkmark: UIImage
-    let unselectedGroupStatus: UIImage
-    let selectedGroupStatus: UIImage
     let profile0: UIImage
     let profile1: UIImage
     let profile2: UIImage
@@ -106,8 +101,6 @@ struct HIAppearance: Equatable {
         contentBackground: yellowWhite,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
-        countdownFrameBackground: tan,
-        eventBackground: yellowWhite,
         codePopupTab: orange,
         navbarBackground: green,
         navbarTabTint: yellowWhite,
@@ -127,9 +120,6 @@ struct HIAppearance: Equatable {
         favoriteStarBackground: yellowWhite,
         segmentedBackground: white,
         buttonViewBackground: green,
-        checkmark: #imageLiteral(resourceName: "CheckMark"),
-        unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedBox"),
-        selectedGroupStatus: #imageLiteral(resourceName: "SelectedBox"),
         profile0: #imageLiteral(resourceName: "Profile0"),
         profile1: #imageLiteral(resourceName: "Profile1"),
         profile2: #imageLiteral(resourceName: "Profile2"),
@@ -157,8 +147,6 @@ struct HIAppearance: Equatable {
         contentBackground: yellowWhite,
         overlay: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.47),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
-        countdownFrameBackground: tan,
-        eventBackground: yellowWhite,
         codePopupTab: orange,
         navbarBackground: green,
         navbarTabTint: yellowWhite,
@@ -178,9 +166,6 @@ struct HIAppearance: Equatable {
         favoriteStarBackground: yellowWhite,
         segmentedBackground: white,
         buttonViewBackground: green,
-        checkmark: #imageLiteral(resourceName: "CheckMark"),
-        unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedBox"),
-        selectedGroupStatus: #imageLiteral(resourceName: "SelectedBox"),
         profile0: #imageLiteral(resourceName: "Profile0"),
         profile1: #imageLiteral(resourceName: "Profile1"),
         profile2: #imageLiteral(resourceName: "Profile2"),
@@ -245,9 +230,6 @@ struct HIAppearance: Equatable {
         static let segmentedNumberText = UIFont.systemFont(ofSize: 20, weight: .semibold)
         static let characterCount = UIFont.systemFont(ofSize: 14, weight: .light)
 
-        static let groupName = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        static let groupContact = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        static let groupStatus = UIFont.systemFont(ofSize: 12, weight: .bold)
         static let sortingText = UIFont.systemFont(ofSize: 14, weight: .semibold)
         static let countdownText = UIFont.systemFont(ofSize: 25, weight: .bold)
         static let onboardingGetStartedText = UIFont.systemFont(ofSize: 25, weight: .semibold)
