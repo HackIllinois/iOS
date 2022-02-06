@@ -41,15 +41,10 @@ class HILabel: UILabel {
         case profileUsername
         case profileInterests
         case navigationInfo
-        case groupDescription
-        case groupNameInfo
-        case groupContactInfo
-        case groupStatus
         case sortText
         case sortElement
         case countdown
         case pointsText
-        case groupStatusFilter
         case characterCount
         case error
         case codeError
@@ -222,26 +217,7 @@ class HILabel: UILabel {
             textAlignment = .left
 
         // New styles for group matching
-        case .groupDescription:
-            textHIColor = \.groupText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentText
-            numberOfLines = 2
-
-        case .groupNameInfo:
-            textHIColor = \.groupText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.groupName
-
-        case .groupContactInfo:
-            textHIColor = \.groupText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.groupContact
-
-        case .groupStatus:
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.groupStatus
-
+            
         case .sortText:
             textHIColor = \.titleText
             backgroundHIColor = \.clear
@@ -262,12 +238,6 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.eventButtonText
             textAlignment = .center
-
-        case .groupStatusFilter:
-            textHIColor = \.titleText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.groupStatus
-            numberOfLines = 0
 
         case .characterCount:
             textHIColor = \.whiteTagFont
