@@ -79,7 +79,6 @@ struct HIAppearance: Equatable {
     private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     private static let transparent = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
 
-
     private static var statusBarWhite: UIStatusBarStyle {
         return .lightContent
     }
@@ -228,9 +227,7 @@ struct HIAppearance: Equatable {
         static let profileInterests = UIFont.systemFont(ofSize: 14, weight: .semibold)
         static let segmentedTitle = UIFont.systemFont(ofSize: 16, weight: .regular)
         static let segmentedNumberText = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        static let characterCount = UIFont.systemFont(ofSize: 14, weight: .light)
 
-        static let sortingText = UIFont.systemFont(ofSize: 14, weight: .semibold)
         static let countdownText = UIFont.systemFont(ofSize: 25, weight: .bold)
         static let onboardingGetStartedText = UIFont.systemFont(ofSize: 25, weight: .semibold)
         static let onboardingTitle = UIFont.systemFont(ofSize: 30, weight: .bold)

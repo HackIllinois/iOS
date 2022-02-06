@@ -16,7 +16,6 @@ import UIKit
 class HILabel: UILabel {
     // MARK: - Types
     enum Style {
-        case happeningEvents
         case location
         case event
         case eventTime
@@ -41,11 +40,8 @@ class HILabel: UILabel {
         case profileUsername
         case profileInterests
         case navigationInfo
-        case sortText
-        case sortElement
         case countdown
         case pointsText
-        case characterCount
         case error
         case codeError
         case onboardingDescription
@@ -74,10 +70,6 @@ class HILabel: UILabel {
         translatesAutoresizingMaskIntoConstraints = false
         if let style = style {
         switch style {
-        case .happeningEvents:
-            textHIColor = \.titleText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.happeningEventTitle
 
         case .location:
             textHIColor = \.baseText
@@ -216,18 +208,6 @@ class HILabel: UILabel {
             font = HIAppearance.Font.navigationInfoText
             textAlignment = .left
 
-        // New styles for group matching
-            
-        case .sortText:
-            textHIColor = \.titleText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.sortingText
-
-        case .sortElement:
-            textHIColor = \.titleText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentText
-
         case .countdown:
             textHIColor = \.titleText
             backgroundHIColor = \.clear
@@ -238,11 +218,6 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.eventButtonText
             textAlignment = .center
-
-        case .characterCount:
-            textHIColor = \.whiteTagFont
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.characterCount
 
         case .error:
             textHIColor = \.baseText
