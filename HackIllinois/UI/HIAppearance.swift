@@ -144,15 +144,15 @@ struct HIAppearance: Equatable {
         action: tan,
         baseBackground: white,
         contentBackground: yellowWhite,
-        overlay: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.47),
+        overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         codePopupTab: orange,
         navbarBackground: green,
         navbarTabTint: yellowWhite,
         profileContainerTint: yellowWhite,
-        emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewNight"),
+        emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewDay"),
         preferredStatusBarStyle: statusBarBlack,
-        scrollViewIndicatorStyle: .white,
+        scrollViewIndicatorStyle: .black,
         loginDefault: lightBlack,
         loginTitleBackground: lightBlack,
         loginLogo: #imageLiteral(resourceName: "HILogo"),
@@ -235,7 +235,6 @@ struct HIAppearance: Equatable {
         static let leaderboardPoints = UIFont.systemFont(ofSize: 16, weight: .regular)
         static let leaderboardName = UIFont.systemFont(ofSize: 14, weight: .semibold)
         static let leaderboardRank = UIFont.systemFont(ofSize: 24, weight: .bold)
-
     }
 }
 
