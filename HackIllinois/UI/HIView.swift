@@ -17,7 +17,6 @@ class HIView: UIView {
     // MARK: - Types
     enum Style {
         case separator
-        case emptyTable
     }
 
     // MARK: - Properties
@@ -37,34 +36,6 @@ class HIView: UIView {
                 backgroundHIColor = \.accent
                 translatesAutoresizingMaskIntoConstraints = false
                 heightAnchor.constraint(equalToConstant: 1).isActive = true
-            case .emptyTable:
-                backgroundHIColor = \.baseBackground
-                let backgroundImageView = HIImageView {
-                    $0.hiImage = \.emptyTableViewBackground
-                    $0.contentMode = .scaleAspectFit
-                    $0.translatesAutoresizingMaskIntoConstraints = false
-                }
-                addSubview(backgroundImageView)
-                backgroundImageView.widthAnchor.constraint(equalToConstant: 180).isActive = true
-                backgroundImageView.heightAnchor.constraint(equalTo: backgroundImageView.widthAnchor).isActive = true
-                backgroundImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-                let centerConstraint = NSLayoutConstraint(item: backgroundImageView,
-                                   attribute: .centerY,
-                                   relatedBy: .equal,
-                                   toItem: self,
-                                   attribute: .centerY,
-                                   multiplier: 0.66,
-                                   constant: 0.0)
-                centerConstraint.priority = .defaultHigh
-                centerConstraint.isActive = true
-                let label = HILabel(style: .backgroundTitle) {
-                    $0.text = "CHECK BACK LATER"
-                    $0.setContentCompressionResistancePriority(.required, for: .vertical)
-                }
-                addSubview(label)
-                label.topAnchor.constraint(greaterThanOrEqualTo: topAnchor, constant: 12).isActive = true
-                label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-                label.bottomAnchor.constraint(equalTo: backgroundImageView.topAnchor).isActive = true
             }
         }
         refreshForThemeChange()

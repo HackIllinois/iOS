@@ -26,7 +26,6 @@ struct HIAppearance: Equatable {
     let navbarBackground: UIColor
     let navbarTabTint: UIColor
     let profileContainerTint: UIColor
-    let emptyTableViewBackground: UIImage
     let preferredStatusBarStyle: UIStatusBarStyle
     let scrollViewIndicatorStyle: UIScrollView.IndicatorStyle
     let loginDefault: UIColor
@@ -104,7 +103,6 @@ struct HIAppearance: Equatable {
         navbarBackground: green,
         navbarTabTint: yellowWhite,
         profileContainerTint: yellowWhite,
-        emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewDay"),
         preferredStatusBarStyle: statusBarBlack,
         scrollViewIndicatorStyle: .black,
         loginDefault: lightBlack,
@@ -150,7 +148,6 @@ struct HIAppearance: Equatable {
         navbarBackground: green,
         navbarTabTint: yellowWhite,
         profileContainerTint: yellowWhite,
-        emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewDay"),
         preferredStatusBarStyle: statusBarBlack,
         scrollViewIndicatorStyle: .black,
         loginDefault: lightBlack,
