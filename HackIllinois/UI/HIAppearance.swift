@@ -110,11 +110,6 @@ struct HIAppearance: Equatable {
     private static let groupGreen = #colorLiteral(red: 0.3411764801, green: 0.7449532898, blue: 0.1686274558, alpha: 1)
     private static let buttonBlue = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
 
-    private static let eventGreen = #colorLiteral(red: 0.1568627451, green: 0.3960784314, blue: 0.4549019608, alpha: 1)
-    private static let eventOrange = #colorLiteral(red: 0.8941176471, green: 0.4117647059, blue: 0.2901960784, alpha: 1)
-    private static let eventRed = #colorLiteral(red: 0.5960784314, green: 0.1137254902, blue: 0.137254902, alpha: 1)
-    private static let eventPurple = #colorLiteral(red: 0.3490196078, green: 0.2784313725, blue: 0.6549019608, alpha: 1)
-    private static let eventPink = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
 
     private static var statusBarWhite: UIStatusBarStyle {
         return .lightContent

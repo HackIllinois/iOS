@@ -24,7 +24,6 @@ class HIProfileViewController: HIBaseViewController {
         $0.backgroundHIColor = \.clear
         $0.baseImage = #imageLiteral(resourceName: "LogoutButton")
     }
-    private let editViewController = HIEditProfileViewController()
     private let contentView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.clear

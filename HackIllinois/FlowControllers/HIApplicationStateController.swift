@@ -51,7 +51,7 @@ class HIApplicationStateController {
 
         UserDefaults.standard.set(true, forKey: HIConstants.APPLICATION_INSTALLED_KEY)
         let shouldShowOnboarding = UserDefaults.standard.object(forKey: HIConstants.SHOULD_SHOW_ONBOARDING_KEY) as? Bool ?? true
-        updateWindowViewController(animated: false, shouldShowOnboarding: true)
+        updateWindowViewController(animated: false, shouldShowOnboarding: shouldShowOnboarding)
     }
 }
 
@@ -90,7 +90,7 @@ extension HIApplicationStateController {
         var viewControllers = [UIViewController]()
         viewControllers.append(HIHomeViewController())
         viewControllers.append(HIScheduleViewController())
-        viewControllers.append(HICodePopupViewController())
+        viewControllers.append(HIScanQRCodeViewController())
         viewControllers.append(HIProfileViewController())
         viewControllers.append(HILeaderboardViewController())
         return viewControllers
