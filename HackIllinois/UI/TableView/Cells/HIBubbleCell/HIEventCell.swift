@@ -113,7 +113,7 @@ extension HIEventCell {
             let sponsorLabel = HILabel(style: .cellDescription)
             sponsorLabel.text = "Sponsored by \(rhs.sponsor)"
             contentStackViewHeight += sponsorLabel.intrinsicContentSize.height
-            sponsorLabel.constrain(height: 15)
+            sponsorLabel.constrain(height: 25)
             lhs.contentStackView.addArrangedSubview(sponsorLabel)
             lhs.contentStackView.setCustomSpacing(10, after: sponsorLabel)
         }

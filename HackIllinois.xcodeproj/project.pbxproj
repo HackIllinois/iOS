@@ -519,6 +519,7 @@
 		95A7D279203D4F54005EAEAF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				95A7D280203D4F54005EAEAF /* TableView */,
 				95069260203EE14000D7C34C /* Animations */,
 				1C63EE672768078C00D60653 /* CarouselView */,
 				ACAA7177260186EF000F42B0 /* CollectionView */,
@@ -537,7 +538,6 @@
 				AC6F15A5261BB1B400422192 /* HIErrorView.swift */,
 				95D791EC203E370A00C3BA62 /* HIWindow.swift */,
 				95A7D27E203D4F54005EAEAF /* Identifiable.swift */,
-				95A7D280203D4F54005EAEAF /* TableView */,
 			);
 			path = UI;
 			sourceTree = "<group>";
