@@ -16,7 +16,6 @@ import UIKit
 class HILabel: UILabel {
     // MARK: - Types
     enum Style {
-        case happeningEvents
         case location
         case event
         case eventTime
@@ -41,16 +40,8 @@ class HILabel: UILabel {
         case profileUsername
         case profileInterests
         case navigationInfo
-        case groupDescription
-        case groupNameInfo
-        case groupContactInfo
-        case groupStatus
-        case sortText
-        case sortElement
         case countdown
         case pointsText
-        case groupStatusFilter
-        case characterCount
         case error
         case codeError
         case onboardingDescription
@@ -79,10 +70,6 @@ class HILabel: UILabel {
         translatesAutoresizingMaskIntoConstraints = false
         if let style = style {
         switch style {
-        case .happeningEvents:
-            textHIColor = \.titleText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.happeningEventTitle
 
         case .location:
             textHIColor = \.baseText
@@ -221,37 +208,6 @@ class HILabel: UILabel {
             font = HIAppearance.Font.navigationInfoText
             textAlignment = .left
 
-        // New styles for group matching
-        case .groupDescription:
-            textHIColor = \.groupText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentText
-            numberOfLines = 2
-
-        case .groupNameInfo:
-            textHIColor = \.groupText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.groupName
-
-        case .groupContactInfo:
-            textHIColor = \.groupText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.groupContact
-
-        case .groupStatus:
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.groupStatus
-
-        case .sortText:
-            textHIColor = \.titleText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.sortingText
-
-        case .sortElement:
-            textHIColor = \.titleText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentText
-
         case .countdown:
             textHIColor = \.titleText
             backgroundHIColor = \.clear
@@ -262,17 +218,6 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.eventButtonText
             textAlignment = .center
-
-        case .groupStatusFilter:
-            textHIColor = \.titleText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.groupStatus
-            numberOfLines = 0
-
-        case .characterCount:
-            textHIColor = \.whiteTagFont
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.characterCount
 
         case .error:
             textHIColor = \.baseText

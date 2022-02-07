@@ -28,7 +28,7 @@ class HIErrorView: HIView {
     var logoutButton = HIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.interestBackground
-        $0.titleHIColor = \.action
+        $0.titleHIColor = \.white
         $0.title = "Log Out"
         $0.titleLabel?.font = HIAppearance.Font.detailSubtitle
         $0.titleLabel?.baselineAdjustment = .alignCenters

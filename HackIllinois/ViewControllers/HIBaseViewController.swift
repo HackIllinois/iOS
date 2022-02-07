@@ -52,7 +52,7 @@ extension HIBaseViewController {
 extension HIBaseViewController {
     @objc dynamic func setUpBackgroundView() {
         view.layer.backgroundColor = UIColor.clear.cgColor
-        backgroundView.image = #imageLiteral(resourceName: "Night")
+        backgroundView.image = #imageLiteral(resourceName: "ScheduleBackground")
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.isUserInteractionEnabled = true
         backgroundView.contentMode = .scaleAspectFill

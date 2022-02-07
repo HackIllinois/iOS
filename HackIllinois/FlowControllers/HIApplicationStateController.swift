@@ -90,7 +90,7 @@ extension HIApplicationStateController {
         var viewControllers = [UIViewController]()
         viewControllers.append(HIHomeViewController())
         viewControllers.append(HIScheduleViewController())
-        viewControllers.append(HICodePopupViewController())
+        viewControllers.append(HIScanQRCodeViewController())
         viewControllers.append(HIProfileViewController())
         viewControllers.append(HILeaderboardViewController())
         return viewControllers

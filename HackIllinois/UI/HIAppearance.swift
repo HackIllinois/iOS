@@ -22,37 +22,25 @@ struct HIAppearance: Equatable {
     let contentBackground: UIColor
     let overlay: UIColor
     let frostedTint: UIColor
-    let countdownFrameBackground: UIColor
-    let eventBackground: UIColor
     let codePopupTab: UIColor
     let navbarBackground: UIColor
     let navbarTabTint: UIColor
     let profileContainerTint: UIColor
-    let emptyTableViewBackground: UIImage
     let preferredStatusBarStyle: UIStatusBarStyle
     let scrollViewIndicatorStyle: UIScrollView.IndicatorStyle
-    let mapBackground: UIColor
     let loginDefault: UIColor
     let loginTitleBackground: UIColor
     let loginLogo: UIImage
-    let viewTitleColor: UIColor
     let loginSelectionText: UIColor
     let attendeeText: UIColor
     let attendeeBackground: UIColor
     let whiteTagFont: UIColor
     let interestBackground: UIColor
-    let segmentedBackground: UIColor
     let buttonGreen: UIColor
     let favoriteStarBackground: UIColor
+    let segmentedBackground: UIColor
     // New fonts added. Replace old ones?
-    let groupText: UIColor
-    let memberSearchText: UIColor
-    let groupSearchText: UIColor
-    let noSearchText: UIColor
     let buttonViewBackground: UIColor
-    let checkmark: UIImage
-    let unselectedGroupStatus: UIImage
-    let selectedGroupStatus: UIImage
     let profile0: UIImage
     let profile1: UIImage
     let profile2: UIImage
@@ -87,34 +75,8 @@ struct HIAppearance: Equatable {
     private static let lightBlack = #colorLiteral(red: 0.03137254902, green: 0.08235294118, blue: 0.1058823529, alpha: 1)
     private static let salmon = #colorLiteral(red: 0.9490196078, green: 0.6078431373, blue: 0.4705882353, alpha: 1)
     private static let yellowWhite = #colorLiteral(red: 0.9647058824, green: 0.9568627451, blue: 0.831372549, alpha: 1)
-    // Hack 2021 color palette - they needed to be removed
-    private static let darkBlue = #colorLiteral(red: 0.1326064765, green: 0.1667878032, blue: 0.3605746627, alpha: 1)
-    private static let blue = #colorLiteral(red: 0.1215686275, green: 0.5176470588, blue: 0.6470588235, alpha: 1)
-    private static let buttonblue = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
-    private static let lightBlue = #colorLiteral(red: 0.4196078431, green: 0.6823529412, blue: 0.7725490196, alpha: 1)
     private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     private static let transparent = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
-    private static let coral = #colorLiteral(red: 1, green: 0.4666666667, blue: 0.4352941176, alpha: 1)
-    private static let deepBlue = #colorLiteral(red: 0.03921568627, green: 0.03529411765, blue: 0.2470588235, alpha: 1)
-    private static let darkerBlue = #colorLiteral(red: 0.1333333333, green: 0.168627451, blue: 0.3607843137, alpha: 1)
-    private static let whiteBlue = #colorLiteral(red: 0.9764705882, green: 1, blue: 1, alpha: 1)
-    private static let greyWhite = #colorLiteral(red: 0.9764705882, green: 1, blue: 1, alpha: 1)
-
-    private static let lightCoral = #colorLiteral(red: 0.9333333333, green: 0.4235294118, blue: 0.4470588235, alpha: 1)
-    private static let nightBlue = #colorLiteral(red: 0.4352941176, green: 0.5490196078, blue: 0.7568627451, alpha: 1)
-
-    // Colors from past years - they needed to be removed
-    private static let grayBlack = #colorLiteral(red: 0.1058823529, green: 0.1058823529, blue: 0.1058823529, alpha: 1)
-    private static let groupRed = #colorLiteral(red: 0.9886462091, green: 0.1137254902, blue: 0.137254902, alpha: 1)
-    private static let groupOrange = #colorLiteral(red: 0.937254902, green: 0.5176470588, blue: 0.2823529412, alpha: 1)
-    private static let groupGreen = #colorLiteral(red: 0.3411764801, green: 0.7449532898, blue: 0.1686274558, alpha: 1)
-    private static let buttonBlue = #colorLiteral(red: 0.231372549, green: 0.4078431373, blue: 0.6509803922, alpha: 1)
-
-    private static let eventGreen = #colorLiteral(red: 0.1568627451, green: 0.3960784314, blue: 0.4549019608, alpha: 1)
-    private static let eventOrange = #colorLiteral(red: 0.8941176471, green: 0.4117647059, blue: 0.2901960784, alpha: 1)
-    private static let eventRed = #colorLiteral(red: 0.5960784314, green: 0.1137254902, blue: 0.137254902, alpha: 1)
-    private static let eventPurple = #colorLiteral(red: 0.3490196078, green: 0.2784313725, blue: 0.6549019608, alpha: 1)
-    private static let eventPink = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
 
     private static var statusBarWhite: UIStatusBarStyle {
         return .lightContent
@@ -137,36 +99,24 @@ struct HIAppearance: Equatable {
         contentBackground: yellowWhite,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
-        countdownFrameBackground: tan,
-        eventBackground: yellowWhite,
         codePopupTab: orange,
         navbarBackground: green,
         navbarTabTint: yellowWhite,
         profileContainerTint: yellowWhite,
-        emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewDay"),
         preferredStatusBarStyle: statusBarBlack,
         scrollViewIndicatorStyle: .black,
-        mapBackground: whiteBlue,
         loginDefault: lightBlack,
         loginTitleBackground: lightBlack,
         loginLogo: #imageLiteral(resourceName: "HILogo"),
-        viewTitleColor: deepBlue,
         loginSelectionText: lightBlack,
         attendeeText: lightBlack,
         attendeeBackground: yellowGreen,
         whiteTagFont: white,
         interestBackground: orange,
-        segmentedBackground: greyWhite,
         buttonGreen: yellowGreen,
         favoriteStarBackground: yellowWhite,
-        groupText: grayBlack,
-        memberSearchText: groupOrange,
-        groupSearchText: groupRed,
-        noSearchText: groupGreen,
+        segmentedBackground: white,
         buttonViewBackground: green,
-        checkmark: #imageLiteral(resourceName: "CheckMark"),
-        unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedBox"),
-        selectedGroupStatus: #imageLiteral(resourceName: "SelectedBox"),
         profile0: #imageLiteral(resourceName: "Profile0"),
         profile1: #imageLiteral(resourceName: "Profile1"),
         profile2: #imageLiteral(resourceName: "Profile2"),
@@ -192,38 +142,26 @@ struct HIAppearance: Equatable {
         action: tan,
         baseBackground: white,
         contentBackground: yellowWhite,
-        overlay: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.47),
+        overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
-        countdownFrameBackground: tan,
-        eventBackground: yellowWhite,
         codePopupTab: orange,
         navbarBackground: green,
         navbarTabTint: yellowWhite,
         profileContainerTint: yellowWhite,
-        emptyTableViewBackground: #imageLiteral(resourceName: "EmptyTableViewNight"),
         preferredStatusBarStyle: statusBarBlack,
-        scrollViewIndicatorStyle: .white,
-        mapBackground: whiteBlue,
+        scrollViewIndicatorStyle: .black,
         loginDefault: lightBlack,
         loginTitleBackground: lightBlack,
         loginLogo: #imageLiteral(resourceName: "HILogo"),
-        viewTitleColor: deepBlue,
         loginSelectionText: lightBlack,
         attendeeText: lightBlack,
         attendeeBackground: yellowGreen,
         whiteTagFont: white,
         interestBackground: orange,
-        segmentedBackground: greyWhite,
         buttonGreen: yellowGreen,
         favoriteStarBackground: yellowWhite,
-        groupText: grayBlack,
-        memberSearchText: groupOrange,
-        groupSearchText: groupRed,
-        noSearchText: groupGreen,
+        segmentedBackground: white,
         buttonViewBackground: green,
-        checkmark: #imageLiteral(resourceName: "CheckMark"),
-        unselectedGroupStatus: #imageLiteral(resourceName: "UnselectedBox"),
-        selectedGroupStatus: #imageLiteral(resourceName: "SelectedBox"),
         profile0: #imageLiteral(resourceName: "Profile0"),
         profile1: #imageLiteral(resourceName: "Profile1"),
         profile2: #imageLiteral(resourceName: "Profile2"),
@@ -286,12 +224,7 @@ struct HIAppearance: Equatable {
         static let profileInterests = UIFont.systemFont(ofSize: 14, weight: .semibold)
         static let segmentedTitle = UIFont.systemFont(ofSize: 16, weight: .regular)
         static let segmentedNumberText = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        static let characterCount = UIFont.systemFont(ofSize: 14, weight: .light)
 
-        static let groupName = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        static let groupContact = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        static let groupStatus = UIFont.systemFont(ofSize: 12, weight: .bold)
-        static let sortingText = UIFont.systemFont(ofSize: 14, weight: .semibold)
         static let countdownText = UIFont.systemFont(ofSize: 25, weight: .bold)
         static let onboardingGetStartedText = UIFont.systemFont(ofSize: 25, weight: .semibold)
         static let onboardingTitle = UIFont.systemFont(ofSize: 30, weight: .bold)
@@ -299,7 +232,6 @@ struct HIAppearance: Equatable {
         static let leaderboardPoints = UIFont.systemFont(ofSize: 16, weight: .regular)
         static let leaderboardName = UIFont.systemFont(ofSize: 14, weight: .semibold)
         static let leaderboardRank = UIFont.systemFont(ofSize: 24, weight: .bold)
-
     }
 }
 

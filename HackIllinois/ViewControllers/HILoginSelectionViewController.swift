@@ -75,7 +75,7 @@ extension HILoginSelectionViewController {
             welcomeHeader.heightAnchor.constraint(equalToConstant: 22).isActive = true
         } else {
             welcomeHeader.text = "WELCOME TO"
-            welcomeHeader.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60).isActive = true
+            welcomeHeader.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80).isActive = true
             welcomeHeader.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             welcomeHeader.heightAnchor.constraint(equalToConstant: 22).isActive = true
 
