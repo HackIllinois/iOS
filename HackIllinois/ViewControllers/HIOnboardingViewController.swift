@@ -42,11 +42,12 @@ extension HIOnboardingViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         carouselView = HICarouselView(pages: 5)
-        carouselData.append(.init(image: #imageLiteral(resourceName: "OnboardingOne"), titleText: "Welcome!", descriptionText: "Swipe to see what our app has to offer!"))
-        carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Check-In", descriptionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"))
-        carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Scan for Points", descriptionText: "Lorem ipsum dolor sit amet, conse, consectetur adipiscing elit"))
-        carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Get Notified", descriptionText: "Lorem ipsum dolor sit amet, consectet"))
-        carouselData.append(.init(image: UIImage(named: "ProfileBackground"), titleText: "Win Prizes", descriptionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, consectetur adipiscing elit"))
+        carouselData.append(.init(image: #imageLiteral(resourceName: "Onboarding0"), titleText: "Welcome!", descriptionText: "Swipe to see what our app has to offer!"))
+        carouselData.append(.init(image: UIImage(named: "Onboarding1"), titleText: "Countdown", descriptionText: "See how much time you have left to hack!"))
+        carouselData.append(.init(image: UIImage(named: "Onboarding2"), titleText: "Schedule", descriptionText: "See the times and details of all of our events."))
+        carouselData.append(.init(image: UIImage(named: "Onboarding3"), titleText: "Scan for Points", descriptionText: "Scan QR codes at events to obtain points!"))
+        carouselData.append(.init(image: UIImage(named: "Onboarding4"), titleText: "Profile", descriptionText: "View your points, tier, and other personal information."))
+        carouselData.append(.init(image: UIImage(named: "Onboarding5"), titleText: "Leaderboard", descriptionText: "See who is leading HackIllinois 2022 in points earned!"))
         setupUI()
         let viewAlphaValue = shouldDisplayAnimationOnNextAppearance ? 0.0 : 1.0
 
