@@ -41,17 +41,10 @@ class HITabBarController: UITabBarController {
     }
 
     @objc private func qrScannerPopupButtonPressed(_ sender: UIButton) {
-        if HIApplicationStateController.shared.isGuest {
-            let notEnabledAlert = UIAlertController(title: "You need to log out of your current account and log in as an attendee to check in to events.", message: "", preferredStyle: .alert)
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            notEnabledAlert.addAction(cancel)
-            self.present(notEnabledAlert, animated: true)
-        } else {
-            let scanQRCodePopup = HIScanQRCodeViewController()
-            scanQRCodePopup.modalPresentationStyle = .overFullScreen
-            scanQRCodePopup.modalTransitionStyle = .crossDissolve
-            self.present(scanQRCodePopup, animated: true, completion: nil)
-        }
+        let scanQRCodePopup = HIScanQRCodeViewController()
+        scanQRCodePopup.modalPresentationStyle = .overFullScreen
+        scanQRCodePopup.modalTransitionStyle = .crossDissolve
+        self.present(scanQRCodePopup, animated: true, completion: nil)
     }
 
     init() {
