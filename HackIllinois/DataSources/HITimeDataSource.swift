@@ -18,18 +18,16 @@ final class HITimeDataSource {
     static var shared = HITimeDataSource()
 
     public static let defaultTimes = EventTimes(
-        eventStart: Date(timeIntervalSince1970: 1618005600), // Friday, April 9, 2021 5:00:00 PM CST
-        eventEnd: Date(timeIntervalSince1970: 1618268400), // Monday, April 12, 2021 6:00:00 PM CST
-        hackStart: Date(timeIntervalSince1970: 1618009200), // Friday, April 9, 2021 6:00:00 PM CST
-        hackEnd: Date(timeIntervalSince1970: 1618182000), // Sunday, April 11, 2021 6:00:00 PM CST
-        fridayStart: Date(timeIntervalSince1970: 1617944400), // Friday, April 9, 2021 12:00:00 AM CST
-        fridayEnd: Date(timeIntervalSince1970: 1618030799), // Friday, April 9, 2021 11:59:59 PM CST
-        saturdayStart: Date(timeIntervalSince1970: 1618030800), // Saturday, April 10, 2021 12:00:00 AM CST
-        saturdayEnd: Date(timeIntervalSince1970: 1618117199), // Saturday, April 10, 2021 11:59:59 PM CST
-        sundayStart: Date(timeIntervalSince1970: 1618117200), // Sunday, April 11, 2021 12:00:00 AM CST
-        sundayEnd: Date(timeIntervalSince1970: 1618203599), // Sunday, April 11, 2021 11:59:59 PM CST
-        mondayStart: Date(timeIntervalSince1970: 1618203600), // Monday, April 12, 2021 12:00:00 AM CST
-        mondayEnd: Date(timeIntervalSince1970: 1618289999) // Monday, April 12, 2021 11:59:59 PM CST
+        eventStart: Date(timeIntervalSince1970: 1645833600), // Friday, February 25, 2021 6:00:00 PM CST
+        eventEnd: Date(timeIntervalSince1970: 1645999200), // Sunday, February 27, 2021 4:00:00 PM CST
+        hackStart: Date(timeIntervalSince1970: 1645837200), // Friday, February 25, 2021 7:00:00 PM CST
+        hackEnd: Date(timeIntervalSince1970: 1645977600), // Sunday, February 27, 2021 10:00:00 AM CST
+        fridayStart: Date(timeIntervalSince1970: 1645768800), // Friday, February 25, 2021 12:00:00 AM CST
+        fridayEnd: Date(timeIntervalSince1970: 1645855199), // Friday, February 25, 2021 11:59:59 PM CST
+        saturdayStart: Date(timeIntervalSince1970: 1645855200), // Saturday, February 26, 2021 12:00:00 AM CST
+        saturdayEnd: Date(timeIntervalSince1970: 1645941599), // Saturday, February 26, 2021 11:59:59 PM CST
+        sundayStart: Date(timeIntervalSince1970: 1645941600), // Sunday, February 27, 2021 12:00:00 AM CST
+        sundayEnd: Date(timeIntervalSince1970: 1646027999) // Sunday, February 27, 2021 11:59:59 PM CST
     )
 
     var eventTimes = HITimeDataSource.defaultTimes

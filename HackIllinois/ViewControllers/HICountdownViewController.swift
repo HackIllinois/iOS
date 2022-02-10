@@ -98,9 +98,14 @@ extension HICountdownViewController {
         countdownStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         countdownStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
 
-        countdownStackView.addArrangedSubview(containerView(with: days, and: "Days"))
-        countdownStackView.addArrangedSubview(containerView(with: hours, and: "Hours"))
-        countdownStackView.addArrangedSubview(containerView(with: minutes, and: "Minutes"))
+        let daysContent = containerView(with: days, and: "Days")
+        countdownStackView.addArrangedSubview(daysContent)
+        let hoursContent = containerView(with: hours, and: "Hours")
+        countdownStackView.addArrangedSubview(hoursContent)
+        countdownStackView.setCustomSpacing(10, after: daysContent)
+        let minutesContent = containerView(with: minutes, and: "Minutes")
+        countdownStackView.addArrangedSubview(minutesContent)
+        countdownStackView.setCustomSpacing(10, after: hoursContent)
     }
 
     func containerView(with countDownView: HILabel, and labelString: String) -> UIView {
