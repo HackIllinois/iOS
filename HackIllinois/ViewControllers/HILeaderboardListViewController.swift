@@ -41,6 +41,14 @@ extension HILeaderboardListViewController {
             } else {
                 cell.backgroundColor =  #colorLiteral(red: 0.9098039216, green: 0.8431372549, blue: 0.6470588235, alpha: 1)
             }
+            // Round certain corners based on row
+            if indexPath.row == 0 {
+                cell.layer.cornerRadius = 8
+                cell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+            } else if indexPath.row == 9 {
+                cell.layer.cornerRadius = 8
+                cell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+            }
         }
 
         return cell
