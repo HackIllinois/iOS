@@ -188,9 +188,11 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
             let currDate = staticDataStore[countdownDataStoreIndex].date
             let displayText = staticDataStore[countdownDataStoreIndex].displayText
             if currDate > now {
+                // Displays before and during the event
                 super.setCustomTitle(customTitle: displayText)
                 return currDate
             } else {
+                // Displays after the event ends
                 super.setCustomTitle(customTitle: "What's Cooking?")
             }
             countdownDataStoreIndex += 1
