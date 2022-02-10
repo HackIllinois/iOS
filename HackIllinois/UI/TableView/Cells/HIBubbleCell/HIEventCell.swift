@@ -176,11 +176,12 @@ extension HIEventCell {
 extension HIEventCell {
     // Returns the maximum number of characters allowed for the event description
     static func getMaxDescriptionTextLength() -> Int {
-        return 50
+        return 65
     }
 
     static func trimText(text: String, length: Int) -> String {
-        let textNoLineBreaks = text.components(separatedBy: .newlines).joined()
+//        let textNoLineBreaks = text.components(separatedBy: .newlines).joined()
+        let textNoLineBreaks = text
         if textNoLineBreaks.count >= length {
             let index = textNoLineBreaks.index(textNoLineBreaks.startIndex, offsetBy: length)
             return String(textNoLineBreaks[..<index]) + "..."
