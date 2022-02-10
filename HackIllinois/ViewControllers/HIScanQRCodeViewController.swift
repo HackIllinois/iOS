@@ -55,10 +55,6 @@ extension HIScanQRCodeViewController {
         if HIApplicationStateController.shared.isGuest {
             let background = #imageLiteral(resourceName: "ProfileBackground")
             let imageView: UIImageView = UIImageView(frame: view.bounds)
-            imageView.contentMode =  UIView.ContentMode.scaleAspectFill
-            imageView.clipsToBounds = true
-            imageView.image = background
-            imageView.center = containerView.center
             view.addSubview(imageView)
             view.sendSubviewToBack(imageView)
             layoutErrorView()
@@ -78,7 +74,7 @@ extension HIScanQRCodeViewController {
             presentErrorController(
                 title: "Scanning not supported",
                 message: "Your device does not support scanning a code from an item. Please use a device with a camera.",
-                dismissParentOnCompletion: false
+                dismissParentOnCompletion: true
             )
         } else if captureSession?.isRunning == false {
             previewLayer?.frame = view.layer.bounds
