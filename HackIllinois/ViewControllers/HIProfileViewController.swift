@@ -53,6 +53,8 @@ class HIProfileViewController: HIBaseViewController {
         super.setUpBackgroundView()
         backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
     }
+    
+    private var tiers: [Tier] = []
 }
 
 // MARK: - UITabBarItem Setup
@@ -164,7 +166,14 @@ extension HIProfileViewController {
                 }
         profileNameView.text = profile.firstName + " " + profile.lastName
         profilePointsLabel.text = "\(profile.points) Points"
-
+        if tiers.count > 0 {
+            for tier in tiers {
+                print(tier.name)
+                if profile.points > tier.threshold {
+                    profileTierLabel.text = tier.name
+                }
+            }
+        }
     }
 
 }
@@ -219,7 +228,17 @@ extension HIProfileViewController {
         }
         .authorize(with: user)
         .launch()
-
+        
+        HIAPI.ProfileService.getTiers()
+            .onCompletion { [weak self] result in
+                do {
+                    let (tiersList, _) = try result.get()
+                    self?.tiers = tiersList.tiers
+                    self?.updateProfile()
+                } catch {
+                    print("An error has occurred \(error)")
+                }
+            }
     }
 
 }
