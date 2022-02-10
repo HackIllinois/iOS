@@ -81,8 +81,7 @@ extension HIEventCell {
     static func heightForCell(with event: Event, width: CGFloat) -> CGFloat {
         let heightFromEventName = HILabel.heightForView(text: event.name, font: HIAppearance.Font.eventTitle, width: width - 137)
         let heightFromHeader = (heightFromEventName + 4 + 17 < 60) ? 60 : heightFromEventName + 4 + 17
-        let heightFromEventInfo = HILabel.heightForView(text: trimText(text: event.info, length: getMaxDescriptionTextLength()), font: HIAppearance.Font.eventDetails, width: width - 100)
-        let height = heightFromEventName + heightFromEventInfo + 90 + 15
+        let height = heightFromEventName + 40 + 90 + 15
         if !event.sponsor.isEmpty {
             return height + 20
         }
@@ -145,14 +144,14 @@ extension HIEventCell {
         pointsView.leadingAnchor.constraint(equalTo: timeLabel.trailingAnchor, constant: 5).isActive = true
         pointsView.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor).isActive = true
         let descriptionLabel = HILabel(style: .cellDescription)
-        let descriptionText = trimText(text: rhs.info, length: getMaxDescriptionTextLength())
+        descriptionLabel.numberOfLines = 2
+        let descriptionText = rhs.info
         descriptionLabel.text = descriptionText
-        let height = HILabel.heightForView(text: descriptionText, font: HIAppearance.Font.eventDetails, width: lhs.contentView.frame.width - 100)
         lhs.contentStackView.addArrangedSubview(descriptionLabel)
         lhs.contentStackView.setCustomSpacing(10, after: descriptionLabel)
         let textHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle, width: lhs.contentView.frame.width - 98)
         contentStackViewHeight += textHeight
-        contentStackViewHeight += timeLabel.intrinsicContentSize.height + 13 + height + 3 + 40
+        contentStackViewHeight += timeLabel.intrinsicContentSize.height + 13 + 40 + 3 + 40
     }
 }
 
@@ -169,23 +168,5 @@ extension HIEventCell {
             contentStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
-    }
-}
-
-// MARK: - Used for trimming the event description
-extension HIEventCell {
-    // Returns the maximum number of characters allowed for the event description
-    static func getMaxDescriptionTextLength() -> Int {
-        return 65
-    }
-
-    static func trimText(text: String, length: Int) -> String {
-//        let textNoLineBreaks = text.components(separatedBy: .newlines).joined()
-        let textNoLineBreaks = text
-        if textNoLineBreaks.count >= length {
-            let index = textNoLineBreaks.index(textNoLineBreaks.startIndex, offsetBy: length)
-            return String(textNoLineBreaks[..<index]) + "..."
-        }
-        return textNoLineBreaks
     }
 }
