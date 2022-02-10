@@ -39,24 +39,33 @@ class HIScanQRCodeViewController: HIBaseViewController {
         $0.activeImage = #imageLiteral(resourceName: "DarkCloseButton")
         $0.baseImage = #imageLiteral(resourceName: "DarkCloseButton")
     }
+    private let errorView = HIErrorView(style: .codePopup)
 }
 
 // MARK: - UIViewController
 extension HIScanQRCodeViewController {
     override func loadView() {
         super.loadView()
-        view.addSubview(containerView)
-        view.bringSubviewToFront(containerView)
-        containerView.constrain(to: view, topInset: 0, bottomInset: 0)
-        containerView.constrain(to: view, trailingInset: 0, leadingInset: 0)
-        containerView.addSubview(previewView)
         view.addSubview(closeButton)
         closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
         closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8).isActive = true
         closeButton.constrain(width: 60, height: 60)
         closeButton.imageView?.contentMode = .scaleToFill
-        setupCaptureSession()
+        if HIApplicationStateController.shared.isGuest {
+            let background = #imageLiteral(resourceName: "ProfileBackground")
+            let imageView: UIImageView = UIImageView(frame: view.bounds)
+            view.addSubview(imageView)
+            view.sendSubviewToBack(imageView)
+            layoutErrorView()
+        } else {
+            view.addSubview(containerView)
+            view.bringSubviewToFront(containerView)
+            containerView.constrain(to: view, topInset: 0, bottomInset: 0)
+            containerView.constrain(to: view, trailingInset: 0, leadingInset: 0)
+            containerView.addSubview(previewView)
+            setupCaptureSession()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -65,7 +74,7 @@ extension HIScanQRCodeViewController {
             presentErrorController(
                 title: "Scanning not supported",
                 message: "Your device does not support scanning a code from an item. Please use a device with a camera.",
-                dismissParentOnCompletion: false
+                dismissParentOnCompletion: true
             )
         } else if captureSession?.isRunning == false {
             previewLayer?.frame = view.layer.bounds
@@ -93,12 +102,38 @@ extension HIScanQRCodeViewController {
             self?.setFrameForPreviewLayer()
         }, completion: nil)
     }
+    func layoutErrorView() {
+        errorView.delegate = self
+        view.addSubview(errorView)
+        errorView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+        errorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        errorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        errorView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+    }
 }
 
 // MARK: - Actions
 extension HIScanQRCodeViewController {
     @objc func didSelectCloseButton(_ sender: HIButton) {
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - HIErrorViewDelegate
+extension HIScanQRCodeViewController: HIErrorViewDelegate {
+    func didSelectErrorLogout(_ sender: UIButton) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(
+            UIAlertAction(title: "Log Out", style: .destructive) { _ in
+                self.dismiss(animated: true, completion: nil)
+                NotificationCenter.default.post(name: .logoutUser, object: nil)
+            }
+        )
+        alert.addAction(
+            UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        )
+        alert.popoverPresentationController?.sourceView = sender
+        present(alert, animated: true, completion: nil)
     }
 }
 
