@@ -46,7 +46,7 @@ private extension HICarouselCell {
         imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: 0).isActive = true
         imageView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: frame.height * 0.75).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: frame.height * 0.65).isActive = true
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
     }
