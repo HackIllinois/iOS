@@ -70,7 +70,7 @@ private extension HICarouselCell {
         if UIDevice.current.userInterfaceIdiom == .pad {
             descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -100).isActive = true
         } else {
-            descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+            descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -25).isActive = true
         }
     }
 }
