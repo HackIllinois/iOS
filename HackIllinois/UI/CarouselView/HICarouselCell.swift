@@ -46,7 +46,7 @@ private extension HICarouselCell {
         imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -20).isActive = true
         imageView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: frame.height * 0.75).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: frame.height * 0.65).isActive = true
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
     }
@@ -68,7 +68,7 @@ private extension HICarouselCell {
         descriptionLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
         descriptionLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
         if UIDevice.current.userInterfaceIdiom == .pad {
-            descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50).isActive = true
+            descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -100).isActive = true
         } else {
             descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         }
