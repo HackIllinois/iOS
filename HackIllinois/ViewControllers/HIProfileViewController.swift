@@ -140,15 +140,13 @@ extension HIProfileViewController {
         profilePointsLabel.centerXAnchor.constraint(equalTo: profilePointsView.centerXAnchor).isActive = true
     }
     func layoutProfileDiscordView() {
+        contentView.addSubview(profileDiscordView)
+        profileDiscordView.topAnchor.constraint(equalTo: profileNameView.bottomAnchor, constant: 5).isActive = true
+        profileDiscordView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 10).isActive = true
         contentView.addSubview(discordImageView)
         discordImageView.translatesAutoresizingMaskIntoConstraints = false
         discordImageView.topAnchor.constraint(equalTo: profileNameView.bottomAnchor, constant: 5).isActive = true
-        discordImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: -42).isActive = true
-        discordImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        discordImageView.contentMode = .scaleAspectFit
-        contentView.addSubview(profileDiscordView)
-        profileDiscordView.topAnchor.constraint(equalTo: profileNameView.bottomAnchor, constant: 5).isActive = true
-        profileDiscordView.leadingAnchor.constraint(equalTo: discordImageView.trailingAnchor, constant: -5).isActive = true
+        discordImageView.trailingAnchor.constraint(equalTo: profileDiscordView.leadingAnchor, constant: -3).isActive = true
     }
     func layoutProfileNameView() {
         contentView.addSubview(profileNameView)
