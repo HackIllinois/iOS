@@ -147,7 +147,7 @@ extension HIProfileViewController {
 
         contentView.addSubview(profileDiscordView)
         profileDiscordView.topAnchor.constraint(equalTo: profileNameView.bottomAnchor, constant: 5).isActive = true
-        profileDiscordView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 15).isActive = true
+        profileDiscordView.leadingAnchor.constraint(equalTo: discordImageView.leadingAnchor, constant: 15).isActive = true
         profileDiscordView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9).isActive = true
     }
     func layoutProfileNameView() {

@@ -67,13 +67,11 @@ public struct LeaderboardProfileContainer: Decodable, APIReturnable {
 public struct LeaderboardProfile: Codable, APIReturnable {
     internal enum CodingKeys: String, CodingKey {
         case id
-        case firstName
-        case lastName
+        case discord
         case points
     }
 
     public let id: String
-    public let firstName: String
-    public let lastName: String
+    public let discord: String
     public let points: Int
 }
