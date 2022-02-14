@@ -70,41 +70,16 @@ public struct LeaderboardProfile: Codable, APIReturnable {
     public let points: Int
 }
 
-//public struct TiersContainer: Decodable, APIReturnable {
-//    public let tiers: [Tier]
-//
-//    public init(from data: Data) throws {
-//        let decoder = JSONDecoder()
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        self = try? decoder.decode([Tier].self, from: data)
-////        self = try decoder.decode(TiersContainer.self, from: data)
-//    }
-//}
-
 public struct TiersContainer: Decodable, APIReturnable {
     public let tiers: [Tier]
-    
-    public init(from decoder: Decoder) throws {
-        var container = try decoder.unkeyedContainer()
-        let tiers = try container.decode([Tier].self)
+    public init(from data: Data) throws {
+        let decoder = JSONDecoder()
+        let tiers = try decoder.decode([Tier].self, from: data)
         self.tiers = tiers
     }
-
-//    enum CodingKeys: String, CodingKey {
-//        case tiers
-//    }
-//
-//    public init (from decoder :Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        tiers = try container.decode([Tier].self, forKey: .tiers)
-//    }
 }
 
 public struct Tier: Codable, APIReturnable {
-//    internal enum CodingKeys: String, CodingKey {
-//        case name
-//        case threshold
-//    }
     public let name: String
     public let threshold: Int
 }

@@ -51,7 +51,7 @@ class HIProfileViewController: HIBaseViewController {
         $0.text = ""
     }
     private let profileTierLabel = HILabel(style: .profileTier) {
-        $0.text = "Current Tier"
+        $0.text = ""
     }
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
@@ -181,14 +181,10 @@ extension HIProfileViewController {
         profileNameView.text = profile.firstName + " " + profile.lastName
         profilePointsLabel.text = "\(profile.points) Points"
         
-        print("tiers")
-        print(tiers)
-        
         if tiers.count > 0 {
             for tier in tiers {
-                print(tier.name)
                 if profile.points > tier.threshold {
-                    profileTierLabel.text = tier.name
+                    profileTierLabel.text = "Tier: \(tier.name.capitalized)"
                 }
             }
         }
@@ -248,10 +244,10 @@ extension HIProfileViewController {
             .onCompletion { [weak self] result in
                 do {
                     let (tiersList, _) = try result.get()
-                    print("tiers list")
-                    print(tiersList)
                     self?.tiers = tiersList.tiers
-                    self?.updateProfile()
+                    DispatchQueue.main.async {
+                        self?.updateProfile()
+                    }
                 } catch {
                     print("An error has occurred \(error)")
                 }
