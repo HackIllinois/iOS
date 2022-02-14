@@ -69,3 +69,17 @@ public struct LeaderboardProfile: Codable, APIReturnable {
     public let discord: String
     public let points: Int
 }
+
+public struct TiersContainer: Decodable, APIReturnable {
+    public let tiers: [Tier]
+    public init(from data: Data) throws {
+        let decoder = JSONDecoder()
+        let tiers = try decoder.decode([Tier].self, from: data)
+        self.tiers = tiers
+    }
+}
+
+public struct Tier: Codable, APIReturnable {
+    public let name: String
+    public let threshold: Int
+}

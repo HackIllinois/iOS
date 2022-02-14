@@ -59,4 +59,7 @@ public final class ProfileService: BaseService {
     public static func getLeaderboard(num: Int) -> APIRequest<LeaderboardProfileContainer> {
         return APIRequest<LeaderboardProfileContainer>(service: self, endpoint: "leaderboard/?limit=\(num)", headers: headers, method: .GET)
     }
+    public static func getTiers() -> APIRequest<TiersContainer> {
+        return APIRequest<TiersContainer>(service: self, endpoint: "tier/threshold/", headers: headers, method: .GET)
+    }
 }

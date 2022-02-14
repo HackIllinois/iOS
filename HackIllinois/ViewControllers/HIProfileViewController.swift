@@ -51,12 +51,13 @@ class HIProfileViewController: HIBaseViewController {
         $0.text = ""
     }
     private let profileTierLabel = HILabel(style: .profileTier) {
-        $0.text = "Current Tier"
+        $0.text = ""
     }
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
         backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
     }
+    private var tiers: [Tier] = []
 }
 
 // MARK: - UITabBarItem Setup
@@ -89,6 +90,7 @@ extension HIProfileViewController {
         layoutProfilePicture()
         layoutPoints()
         contentView.bottomAnchor.constraint(equalTo: profilePointsView.bottomAnchor, constant: 75).isActive = true
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadProfile), name: .qrCodeSuccessfulScan, object: nil)
     }
     func layoutErrorView() {
         errorView.delegate = self
@@ -178,6 +180,15 @@ extension HIProfileViewController {
                 }
         profileNameView.text = profile.firstName + " " + profile.lastName
         profilePointsLabel.text = "\(profile.points) Points"
+        if tiers.count > 0 {
+            var max_threshold = 0
+            for tier in tiers where (profile.points >= tier.threshold && tier.threshold >= max_threshold) {
+                profileTierLabel.text = "Tier: \(tier.name.capitalized)"
+                max_threshold = tier.threshold
+            }
+        } else {
+            profileTierLabel.text = "Tier: None"
+        }
         profileDiscordView.text = profile.discord
         discordImageView.image = #imageLiteral(resourceName: "Discord")
     }
@@ -205,8 +216,7 @@ extension HIProfileViewController {
 
 // MARK: - API
 extension HIProfileViewController {
-    func reloadProfile () {
-
+    @objc func reloadProfile () {
         guard let user = HIApplicationStateController.shared.user else { return }
         HIAPI.ProfileService.getUserProfile()
         .onCompletion { [weak self] result in
@@ -231,7 +241,19 @@ extension HIProfileViewController {
         }
         .authorize(with: user)
         .launch()
-
+        HIAPI.ProfileService.getTiers()
+            .onCompletion { [weak self] result in
+                do {
+                    let (tiersList, _) = try result.get()
+                    self?.tiers = tiersList.tiers
+                    DispatchQueue.main.async {
+                        self?.updateProfile()
+                    }
+                } catch {
+                    print("An error has occurred \(error)")
+                }
+            }
+            .launch()
     }
 
 }
