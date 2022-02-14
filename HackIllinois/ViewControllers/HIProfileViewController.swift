@@ -90,7 +90,7 @@ extension HIProfileViewController {
         layoutProfilePicture()
         layoutPoints()
         contentView.bottomAnchor.constraint(equalTo: profilePointsView.bottomAnchor, constant: 75).isActive = true
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadProfile), name: Notification.Name("QRCodeSuccessfullyScanned"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadProfile), name: .qrCodeSuccessfulScan, object: nil)
     }
     func layoutErrorView() {
         errorView.delegate = self

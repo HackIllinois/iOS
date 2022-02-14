@@ -228,7 +228,7 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                                     self.dismiss(animated: true, completion: nil)
                                     //Dismisses view controller
                                     self.didSelectCloseButton(self.closeButton)
-                                    NotificationCenter.default.post(name: Notification.Name("QRCodeSuccessfullyScanned"), object: nil)
+                                    NotificationCenter.default.post(name: .qrCodeSuccessfulScan, object: nil)
                             }))
                         } else {
                             alert.addAction(
