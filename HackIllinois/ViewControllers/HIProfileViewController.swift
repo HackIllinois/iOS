@@ -181,7 +181,7 @@ extension HIProfileViewController {
         profilePointsLabel.text = "\(profile.points) Points"
         if tiers.count > 0 {
             var max_threshold = 0
-            for tier in tiers where (profile.points > tier.threshold && tier.threshold > max_threshold) {
+            for tier in tiers where (profile.points >= tier.threshold && tier.threshold >= max_threshold) {
                 profileTierLabel.text = "Tier: \(tier.name.capitalized)"
                 max_threshold = tier.threshold
             }
