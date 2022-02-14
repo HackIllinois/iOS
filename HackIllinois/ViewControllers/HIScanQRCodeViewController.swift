@@ -46,12 +46,6 @@ class HIScanQRCodeViewController: HIBaseViewController {
 extension HIScanQRCodeViewController {
     override func loadView() {
         super.loadView()
-        view.addSubview(closeButton)
-        closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
-        closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8).isActive = true
-        closeButton.constrain(width: 60, height: 60)
-        closeButton.imageView?.contentMode = .scaleToFill
         if HIApplicationStateController.shared.isGuest {
             let background = #imageLiteral(resourceName: "ProfileBackground")
             let imageView: UIImageView = UIImageView(frame: view.bounds)
@@ -66,6 +60,12 @@ extension HIScanQRCodeViewController {
             containerView.addSubview(previewView)
             setupCaptureSession()
         }
+        view.addSubview(closeButton)
+        closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
+        closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8).isActive = true
+        closeButton.constrain(width: 60, height: 60)
+        closeButton.imageView?.contentMode = .scaleToFill
     }
 
     override func viewDidAppear(_ animated: Bool) {
