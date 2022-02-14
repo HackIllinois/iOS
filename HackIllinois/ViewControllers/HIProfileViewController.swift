@@ -183,6 +183,8 @@ extension HIProfileViewController {
             for tier in tiers where (profile.points > tier.threshold) {
                 profileTierLabel.text = "Tier: \(tier.name.capitalized)"
             }
+        } else {
+            profileTierLabel.text = "Tier: None"
         }
         profileDiscordView.text = profile.discord
         discordImageView.image = #imageLiteral(resourceName: "Discord")
