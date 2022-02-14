@@ -180,10 +180,8 @@ extension HIProfileViewController {
         profileNameView.text = profile.firstName + " " + profile.lastName
         profilePointsLabel.text = "\(profile.points) Points"
         if tiers.count > 0 {
-            for tier in tiers {
-                if profile.points > tier.threshold {
-                    profileTierLabel.text = "Tier: \(tier.name.capitalized)"
-                }
+            for tier in tiers where (profile.points > tier.threshold) {
+                profileTierLabel.text = "Tier: \(tier.name.capitalized)"
             }
         }
         profileDiscordView.text = profile.discord
