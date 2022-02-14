@@ -38,6 +38,10 @@ class HIProfileViewController: HIBaseViewController {
     private let profileNameView = HILabel(style: .profileName) {
         $0.text = ""
     }
+    private let discordImageView = HIImageView()
+    private let profileDiscordView = HILabel(style: .profileSubtitle) {
+        $0.text = ""
+    }
     private let profilePointsView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundHIColor = \.profileContainerTint
@@ -83,6 +87,7 @@ extension HIProfileViewController {
         layoutScrollView()
         layoutContentView()
         layoutProfileNameView()
+        layoutProfileDiscordView()
         layoutProfilePicture()
         layoutPoints()
         contentView.bottomAnchor.constraint(equalTo: profilePointsView.bottomAnchor, constant: 75).isActive = true
@@ -136,6 +141,15 @@ extension HIProfileViewController {
         profilePointsLabel.centerYAnchor.constraint(equalTo: profilePointsView.centerYAnchor, constant: 15).isActive = true
         profilePointsLabel.centerXAnchor.constraint(equalTo: profilePointsView.centerXAnchor).isActive = true
     }
+    func layoutProfileDiscordView() {
+        contentView.addSubview(profileDiscordView)
+        profileDiscordView.topAnchor.constraint(equalTo: profileNameView.bottomAnchor, constant: 5).isActive = true
+        profileDiscordView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 10).isActive = true
+        contentView.addSubview(discordImageView)
+        discordImageView.translatesAutoresizingMaskIntoConstraints = false
+        discordImageView.topAnchor.constraint(equalTo: profileNameView.bottomAnchor, constant: 5).isActive = true
+        discordImageView.trailingAnchor.constraint(equalTo: profileDiscordView.leadingAnchor, constant: -3).isActive = true
+    }
     func layoutProfileNameView() {
         contentView.addSubview(profileNameView)
         profileNameView.constrain(to: contentView, topInset: 50)
@@ -144,7 +158,7 @@ extension HIProfileViewController {
     }
     func layoutProfilePicture() {
         contentView.addSubview(profilePictureView)
-        profilePictureView.topAnchor.constraint(equalTo: profileNameView.bottomAnchor, constant: 35).isActive = true
+        profilePictureView.topAnchor.constraint(equalTo: profileDiscordView.bottomAnchor, constant: 35).isActive = true
         profilePictureView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         profilePictureView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.75).isActive = true
         profilePictureView.heightAnchor.constraint(equalTo: profilePictureView.widthAnchor).isActive = true
@@ -166,6 +180,10 @@ extension HIProfileViewController {
                 }
         profileNameView.text = profile.firstName + " " + profile.lastName
         profilePointsLabel.text = "\(profile.points) Points"
+        
+        print("tiers")
+        print(tiers)
+        
         if tiers.count > 0 {
             for tier in tiers {
                 print(tier.name)
@@ -174,6 +192,8 @@ extension HIProfileViewController {
                 }
             }
         }
+        profileDiscordView.text = profile.discord
+        discordImageView.image = #imageLiteral(resourceName: "Discord")
     }
 
 }
@@ -200,7 +220,6 @@ extension HIProfileViewController {
 // MARK: - API
 extension HIProfileViewController {
     func reloadProfile () {
-
         guard let user = HIApplicationStateController.shared.user else { return }
         HIAPI.ProfileService.getUserProfile()
         .onCompletion { [weak self] result in
@@ -212,11 +231,8 @@ extension HIProfileViewController {
                 profile.lastName = apiProfile.lastName
                 profile.points = apiProfile.points
                 profile.timezone = apiProfile.timezone
-                profile.info = apiProfile.info
                 profile.discord = apiProfile.discord
                 profile.avatarUrl = apiProfile.avatarUrl
-                profile.teamStatus = apiProfile.teamStatus
-                profile.interests = apiProfile.interests
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": profile])
                     self?.updateProfile()
@@ -228,17 +244,19 @@ extension HIProfileViewController {
         }
         .authorize(with: user)
         .launch()
-        
         HIAPI.ProfileService.getTiers()
             .onCompletion { [weak self] result in
                 do {
                     let (tiersList, _) = try result.get()
+                    print("tiers list")
+                    print(tiersList)
                     self?.tiers = tiersList.tiers
                     self?.updateProfile()
                 } catch {
                     print("An error has occurred \(error)")
                 }
             }
+            .launch()
     }
 
 }

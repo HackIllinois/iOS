@@ -120,10 +120,11 @@ extension HICarouselView: UICollectionViewDelegate {
 
 extension HICarouselView {
     public func configureView(with data: [CarouselData]) {
-        let cellPadding = (frame.width - 300) / 2
+        let cellWidth: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 500 : 300
+        let cellPadding = (frame.width - cellWidth) / 2
         let carouselLayout = UICollectionViewFlowLayout()
         carouselLayout.scrollDirection = .horizontal
-        carouselLayout.itemSize = .init(width: 300, height: frame.height * 0.85)
+        carouselLayout.itemSize = .init(width: cellWidth, height: frame.height * 0.85)
         carouselLayout.sectionInset = .init(top: 0, left: cellPadding, bottom: 0, right: cellPadding)
         carouselLayout.minimumLineSpacing = cellPadding * 2
         carouselCollectionView.collectionViewLayout = carouselLayout

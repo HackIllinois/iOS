@@ -61,6 +61,6 @@ public final class ProfileService: BaseService {
     }
     
     public static func getTiers() -> APIRequest<TiersContainer> {
-        return APIRequest<TiersContainer>(service: self, endpoint: "tier/threshold", headers: headers, method: .GET)
+        return APIRequest<TiersContainer>(service: self, endpoint: "tier/threshold/", headers: headers, method: .GET)
     }
 }

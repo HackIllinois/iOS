@@ -74,22 +74,16 @@ extension HILoginSelectionViewController {
             welcomeHeader.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             welcomeHeader.heightAnchor.constraint(equalToConstant: 22).isActive = true
         } else {
-            welcomeHeader.text = "WELCOME TO"
-            welcomeHeader.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80).isActive = true
-            welcomeHeader.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            welcomeHeader.heightAnchor.constraint(equalToConstant: 22).isActive = true
-
-            logoImage.topAnchor.constraint(equalTo: welcomeHeader.bottomAnchor, constant: 25).isActive = true
-            logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-
-            view.addSubview(spacerView)
-            spacerView.topAnchor.constraint(equalTo: logoImage.bottomAnchor).isActive = true
-            spacerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-
             tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
             tableView.widthAnchor.constraint(equalToConstant: 220).isActive = true
             tableView.heightAnchor.constraint(equalToConstant: 240).isActive = true
-            tableView.centerYAnchor.constraint(equalTo: spacerView.centerYAnchor).isActive = true
+            tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 175).isActive = true
+            logoImage.bottomAnchor.constraint(equalTo: tableView.topAnchor, constant: -50).isActive = true
+            logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            welcomeHeader.text = "WELCOME TO"
+            welcomeHeader.bottomAnchor.constraint(equalTo: logoImage.topAnchor, constant: -25).isActive = true
+            welcomeHeader.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            welcomeHeader.heightAnchor.constraint(equalToConstant: 22).isActive = true
         }
 
         tableView.isScrollEnabled = false

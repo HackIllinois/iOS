@@ -64,12 +64,6 @@ class HIScheduleViewController: HIEventListViewController {
         )
         dataStore.append((displayText: "SUN", predicate: sundayPredicate))
 
-        let mondayPredicate = NSPredicate(
-            format: "%@ =< startTime AND startTime < %@",
-            HITimeDataSource.shared.eventTimes.mondayStart as NSDate,
-            HITimeDataSource.shared.eventTimes.mondayEnd as NSDate
-        )
-        dataStore.append((displayText: "MON", predicate: mondayPredicate))
         return dataStore
     }()
 
@@ -123,7 +117,7 @@ extension HIScheduleViewController {
         super.loadView()
 
         let items = dataStore.map { $0.displayText }
-        let segmentedControl = HIScheduleSegmentedControl(titles: items, nums: [9, 10, 11, 12])
+        let segmentedControl = HIScheduleSegmentedControl(titles: items, nums: [25, 26, 27])
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
