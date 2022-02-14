@@ -26,11 +26,8 @@ struct HIProfile: Codable {
     var lastName = ""
     var points = 0
     var timezone = ""
-    var info = ""
     var discord = ""
     var avatarUrl = ""
-    var teamStatus = ""
-    var interests = [""]
 
     init(provider: HIAPI.AuthService.OAuthProvider) {
         self.provider = provider

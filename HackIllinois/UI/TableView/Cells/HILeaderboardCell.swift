@@ -58,8 +58,9 @@ extension HILeaderboardCell {
         lhs.pointsLabel.layer.cornerRadius = lhs.contentView.frame.height * 0.45 / 2
         lhs.pointsLabel.text = " \(rhs.points) pts "
         lhs.pointsLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
-
-        lhs.nameLabel.text = "\(rhs.firstName!) \(rhs.lastName!)"
+        
+        let discord = rhs.discord ?? ""
+        lhs.nameLabel.text = discord
         lhs.nameLabel.textAlignment = .left
 
         lhs.rankLabel.centerYAnchor.constraint(equalTo: lhs.cellView.centerYAnchor).isActive = true

@@ -21,7 +21,7 @@ class HILeaderboardViewController: HILeaderboardListViewController {
 
         fetchRequest.sortDescriptors = [
             NSSortDescriptor(key: "points", ascending: false),
-            NSSortDescriptor(key: "firstName", ascending: true)
+            NSSortDescriptor(key: "discord", ascending: true)
         ]
 
         let fetchedResultsController = NSFetchedResultsController(

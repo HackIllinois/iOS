@@ -43,7 +43,7 @@ private extension HICarouselCell {
     func setUpImage() {
         addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -20).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: 0).isActive = true
         imageView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: frame.height * 0.65).isActive = true
@@ -70,7 +70,7 @@ private extension HICarouselCell {
         if UIDevice.current.userInterfaceIdiom == .pad {
             descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -100).isActive = true
         } else {
-            descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+            descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -25).isActive = true
         }
     }
 }

@@ -232,11 +232,8 @@ private extension HILoginFlowController {
                 profile.lastName = apiProfile.lastName
                 profile.points = apiProfile.points
                 profile.timezone = apiProfile.timezone
-                profile.info = apiProfile.info
                 profile.discord = apiProfile.discord
                 profile.avatarUrl = apiProfile.avatarUrl
-                profile.teamStatus = apiProfile.teamStatus
-                profile.interests = apiProfile.interests
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": profile])
                 }

@@ -30,11 +30,8 @@ public struct Profile: Codable, APIReturnable {
         case lastName
         case points
         case timezone
-        case info = "description"
         case discord
         case avatarUrl
-        case teamStatus
-        case interests
     }
 
     public let id: String
@@ -42,11 +39,8 @@ public struct Profile: Codable, APIReturnable {
     public let lastName: String
     public let points: Int
     public let timezone: String
-    public let info: String
     public let discord: String
     public let avatarUrl: String
-    public let teamStatus: String
-    public let interests: [String]
 }
 
 public struct ProfileFavorites: Codable, APIReturnable {
@@ -67,13 +61,11 @@ public struct LeaderboardProfileContainer: Decodable, APIReturnable {
 public struct LeaderboardProfile: Codable, APIReturnable {
     internal enum CodingKeys: String, CodingKey {
         case id
-        case firstName
-        case lastName
+        case discord
         case points
     }
 
     public let id: String
-    public let firstName: String
-    public let lastName: String
+    public let discord: String
     public let points: Int
 }

@@ -59,16 +59,14 @@ final class HIProfileDataSource {
                         coreDataProfilesToUpdate.forEach { (coreDataProfile, apiProfile) in
                             // Update CoreData profile.
                             coreDataProfile.id = apiProfile.id
-                            coreDataProfile.firstName = apiProfile.firstName
-                            coreDataProfile.lastName = apiProfile.lastName
+                            coreDataProfile.discord = apiProfile.discord
                             coreDataProfile.points = Int32(apiProfile.points)
                         }
                         apiProfilesToInsert.forEach { apiProfile in
                             // Create CoreData profile.
                             let coreDataProfile = LeaderboardProfile(context: context)
                             coreDataProfile.id = apiProfile.id
-                            coreDataProfile.firstName = apiProfile.firstName
-                            coreDataProfile.lastName = apiProfile.lastName
+                            coreDataProfile.discord = apiProfile.discord
                             coreDataProfile.points = Int32(apiProfile.points)
                         }
 
