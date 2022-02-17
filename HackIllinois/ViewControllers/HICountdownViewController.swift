@@ -165,6 +165,7 @@ extension HICountdownViewController {
     }
 
     @objc func updateCountdown() {
+        setupCounters()
         updateTimeDifference()
         guard timeDifference > 0 else {
             countdownDate = delegate?.countdownToDateFor(countdownViewController: self)

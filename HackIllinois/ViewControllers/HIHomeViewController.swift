@@ -194,6 +194,7 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
             if currDate > now {
                 // Displays before and during the event
                 super.setCustomTitle(customTitle: displayText)
+                print(currDate)
                 return currDate
             } else {
                 // Displays after the event ends
@@ -201,6 +202,7 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
             }
             countdownDataStoreIndex += 1
         }
+        print("returning nil")
         return nil
     }
 }
