@@ -107,7 +107,12 @@ extension HICountdownViewController {
         countdownStackView.addArrangedSubview(minutesContent)
         countdownStackView.setCustomSpacing(10, after: hoursContent)
     }
-
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        startUpCountdown()
+    }
+    
     func containerView(with countDownView: HILabel, and labelString: String) -> UIView {
         countDownView.backgroundColor <- backgroundHIColor
         countDownView.translatesAutoresizingMaskIntoConstraints = false
@@ -132,11 +137,13 @@ extension HICountdownViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        startUpCountdown()
+        print("view appeared")
+//        startUpCountdown()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        print("teared")
         tearDownCountdown()
     }
 }
@@ -165,6 +172,8 @@ extension HICountdownViewController {
     }
 
     @objc func updateCountdown() {
+        print("countdown")
+        print(secondsRemaining)
         setupCounters()
         updateTimeDifference()
         guard timeDifference > 0 else {

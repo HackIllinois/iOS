@@ -103,28 +103,7 @@ extension HIHomeViewController {
 extension HIHomeViewController {
     override func loadView() {
         super.loadView()
-        view.addSubview(countdownFrameView)
-        countdownFrameView.translatesAutoresizingMaskIntoConstraints = false
-        countdownFrameView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8).isActive = true
-        countdownFrameView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        var countdownFrameConstant: CGFloat = 1.0
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            countdownFrameConstant = 1.2
-        } else if UIScreen.main.bounds.width < 375.0 {
-            countdownFrameConstant = 0.9
-        }
-        let widthConstant: CGFloat = 329 * countdownFrameConstant
-        let heightConstant: CGFloat = 283 * countdownFrameConstant
-        countdownFrameView.widthAnchor.constraint(equalToConstant: widthConstant).isActive = true
-        countdownFrameView.heightAnchor.constraint(equalToConstant: heightConstant).isActive = true
-
-        countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        countdownFrameView.addSubview(countdownViewController.view)
-        countdownViewController.view.topAnchor.constraint(equalTo: countdownFrameView.centerYAnchor, constant: 10).isActive = true
-        countdownViewController.view.heightAnchor.constraint(equalTo: countdownFrameView.heightAnchor, multiplier: 0.3).isActive = true
-        countdownViewController.view.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        countdownViewController.didMove(toParent: self)
-
+        setUpCountdown()
         let items = dataStore.map { $0 }
         let segmentedControl = HIHomeSegmentedControl(status: items)
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
@@ -161,6 +140,29 @@ extension HIHomeViewController {
         super.viewWillAppear(animated)
         setupPredicateRefreshTimer()
         setupPass()
+    }
+    func setUpCountdown() {
+        view.addSubview(countdownFrameView)
+        countdownFrameView.translatesAutoresizingMaskIntoConstraints = false
+        countdownFrameView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8).isActive = true
+        countdownFrameView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        var countdownFrameConstant: CGFloat = 1.0
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            countdownFrameConstant = 1.2
+        } else if UIScreen.main.bounds.width < 375.0 {
+            countdownFrameConstant = 0.9
+        }
+        let widthConstant: CGFloat = 329 * countdownFrameConstant
+        let heightConstant: CGFloat = 283 * countdownFrameConstant
+        countdownFrameView.widthAnchor.constraint(equalToConstant: widthConstant).isActive = true
+        countdownFrameView.heightAnchor.constraint(equalToConstant: heightConstant).isActive = true
+
+        countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        countdownFrameView.addSubview(countdownViewController.view)
+        countdownViewController.view.topAnchor.constraint(equalTo: countdownFrameView.centerYAnchor, constant: 10).isActive = true
+        countdownViewController.view.heightAnchor.constraint(equalTo: countdownFrameView.heightAnchor, multiplier: 0.3).isActive = true
+        countdownViewController.view.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        countdownViewController.didMove(toParent: self)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
