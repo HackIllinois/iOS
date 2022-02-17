@@ -241,6 +241,7 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                 } catch {
                     print(error, error.localizedDescription)
                 }
+                sleep(2)
             }
             .authorize(with: HIApplicationStateController.shared.user)
             .launch()

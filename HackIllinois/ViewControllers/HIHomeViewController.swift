@@ -138,6 +138,7 @@ extension HIHomeViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        countdownViewController.startUpCountdown()
         setupPredicateRefreshTimer()
         setupPass()
     }
