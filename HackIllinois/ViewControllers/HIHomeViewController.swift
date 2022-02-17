@@ -43,7 +43,7 @@ class HIHomeViewController: HIEventListViewController {
 
     private var currentTab = 0
 
-    private var dataStore: [String] = ["Ongoing", "Upcoming"]
+    private var dataStore: [String] = ["Ongoing", "Upcoming", "Async"]
 
     private lazy var countdownViewController = HICountdownViewController(delegate: self)
     private let countdownFrameView = HIView {
@@ -79,9 +79,13 @@ extension HIHomeViewController {
     func currentPredicate() -> NSPredicate {
         if currentTab == 0 {
             return NSPredicate(format: "(startTime < now()) AND (endTime > now())")
-        } else {
+        } else if currentTab == 1 {
             let inTwoHours = Date(timeIntervalSinceNow: 7200)
             let upcomingPredicate = NSPredicate(format: "(startTime < %@) AND (startTime > now())", inTwoHours as NSDate)
+            return upcomingPredicate
+        } else {
+            let inTweleveDays = Date(timeIntervalSinceNow: 7200*7*24)
+            let upcomingPredicate = NSPredicate(format: "(startTime < %@) AND (startTime > now())", inTweleveDays as NSDate)
             return upcomingPredicate
         }
     }
