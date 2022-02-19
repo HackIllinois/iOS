@@ -30,6 +30,7 @@ extension Event {
     @NSManaged public var sponsor: String
     @NSManaged public var startTime: Date
     @NSManaged public var points: Int32
+    @NSManaged public var isAsync: Bool
 
     @objc dynamic var sectionIdentifier: Date {
         let excessComponents: Set<Calendar.Component> = [.second, .nanosecond]

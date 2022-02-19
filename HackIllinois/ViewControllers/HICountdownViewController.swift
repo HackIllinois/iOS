@@ -164,8 +164,6 @@ extension HICountdownViewController {
     }
 
     @objc func updateCountdown() {
-        print("countdown")
-        print(secondsRemaining)
         setupCounters()
         updateTimeDifference()
         guard timeDifference > 0 else {

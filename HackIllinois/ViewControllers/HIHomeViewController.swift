@@ -84,8 +84,7 @@ extension HIHomeViewController {
             let upcomingPredicate = NSPredicate(format: "(startTime < %@) AND (startTime > now())", inTwoHours as NSDate)
             return upcomingPredicate
         } else {
-            let inTweleveDays = Date(timeIntervalSinceNow: 7200*7*24)
-            let upcomingPredicate = NSPredicate(format: "(startTime < %@) AND (startTime > now())", inTweleveDays as NSDate)
+            let upcomingPredicate = NSPredicate(format: "isAsync == %@", NSNumber(value: true))
             return upcomingPredicate
         }
     }
