@@ -125,7 +125,13 @@ extension HIEventCell {
         timeImageView.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor).isActive = true
         timeImageView.centerYAnchor.constraint(equalTo: upperContainerView.centerYAnchor).isActive = true
         let timeLabel = HILabel(style: .eventTime)
-        timeLabel.text = Formatter.simpleTime.string(from: rhs.startTime) + " - " + Formatter.simpleTime.string(from: rhs.endTime)
+        // We can check for async events by checking if the event start and end time is 1970-01-01 00:00:00 +0000
+        if rhs.startTime.timeIntervalSince1970 == 0 || rhs.endTime.timeIntervalSince1970 == 0 {
+            // Default text for async events
+            timeLabel.text = HIConstants.ASYNC_EVENT_TIME_TEXT
+        } else {
+            timeLabel.text = Formatter.simpleTime.string(from: rhs.startTime) + " - " + Formatter.simpleTime.string(from: rhs.endTime)
+        }
         upperContainerView.addSubview(timeLabel)
         timeLabel.leadingAnchor.constraint(equalTo: timeImageView.trailingAnchor, constant: 5).isActive = true
         timeLabel.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor).isActive = true
