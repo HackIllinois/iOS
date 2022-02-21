@@ -135,7 +135,7 @@ extension HIEventCell {
         upperContainerView.addSubview(timeLabel)
         timeLabel.leadingAnchor.constraint(equalTo: timeImageView.trailingAnchor, constant: 5).isActive = true
         timeLabel.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor).isActive = true
-        timeLabel.heightAnchor.constraint(equalTo: upperContainerView.heightAnchor).isActive = true
+        timeLabel.heightAnchor.constraint(equalTo: upperContainerView.heightAnchor, constant: 7).isActive = true
         let pointsView = HIView { (view) in
             view.layer.cornerRadius = 12
             view.backgroundHIColor = \.buttonGreen
