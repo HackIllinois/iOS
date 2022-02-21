@@ -175,6 +175,7 @@ class HILabel: UILabel {
 
         case .profileSubtitle: // Used to display profile subtitle, "points", and whatever that says "time zone"
             backgroundHIColor = \.clear
+            textHIColor = \.baseText
             textAlignment = .center
             font = HIAppearance.Font.profileSubtitle
 

@@ -101,6 +101,7 @@ class HIHomeSegmentedControl: HISegmentedControl {
         titleLabel.font = numberFont
         titleLabel.text = items[index]
         titleLabel.textColor <- \.whiteText
+        titleLabel.adjustsFontSizeToFitWidth = true
 
         view.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

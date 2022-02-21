@@ -124,7 +124,12 @@ extension HIEventDetailViewController {
             sponsorLabel.text = ""
         }
         descriptionLabel.text = event.info
-        timeLabel.text = Formatter.simpleTime.string(from: event.startTime) + " - " + Formatter.simpleTime.string(from: event.endTime)
+        if event.startTime.timeIntervalSince1970 == 0 || event.endTime.timeIntervalSince1970 == 0 {
+            // Default text for async events
+            timeLabel.text = HIConstants.ASYNC_EVENT_TIME_TEXT
+        } else {
+            timeLabel.text = Formatter.simpleTime.string(from: event.startTime) + " - " + Formatter.simpleTime.string(from: event.endTime)
+        }
         favoritedButton.isActive = event.favorite
         pointsLabel.text = "+ \(event.points) pts     "
         eventTypeLabel.text = event.eventType.lowercased().capitalized

@@ -132,7 +132,6 @@ extension HICountdownViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        startUpCountdown()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -165,6 +164,7 @@ extension HICountdownViewController {
     }
 
     @objc func updateCountdown() {
+        setupCounters()
         updateTimeDifference()
         guard timeDifference > 0 else {
             countdownDate = delegate?.countdownToDateFor(countdownViewController: self)

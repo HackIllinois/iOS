@@ -17,6 +17,7 @@
         <attribute name="favorite" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" attributeType="String"/>
         <attribute name="info" attributeType="String"/>
+        <attribute name="isAsync" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="points" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="sectionIdentifier" transient="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -75,7 +76,7 @@
     </entity>
     <elements>
         <element name="Announcement" positionX="-63" positionY="72" width="128" height="103"/>
-        <element name="Event" positionX="-54" positionY="36" width="128" height="208"/>
+        <element name="Event" positionX="-54" positionY="36" width="128" height="209"/>
         <element name="LeaderboardProfile" positionX="-45" positionY="171" width="128" height="74"/>
         <element name="Location" positionX="-54" positionY="108" width="128" height="103"/>
         <element name="Profile" positionX="-45" positionY="135" width="128" height="208"/>

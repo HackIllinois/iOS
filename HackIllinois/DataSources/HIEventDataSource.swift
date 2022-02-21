@@ -117,6 +117,7 @@ final class HIEventDataSource {
                             }
                             coreDataEvent.name = apiEvent.name
                             coreDataEvent.sponsor = apiEvent.sponsor
+                            coreDataEvent.isAsync = apiEvent.isAsync
                             coreDataEvent.startTime = apiEvent.startTime
                             coreDataEvent.points = Int32(apiEvent.points)
                             coreDataEvent.favorite = false
@@ -140,6 +141,7 @@ final class HIEventDataSource {
                             coreDataEvent.startTime = apiEvent.startTime
                             coreDataEvent.points = Int32(apiEvent.points)
                             coreDataEvent.favorite = false
+                            coreDataEvent.isAsync = apiEvent.isAsync
                         }
 
                         // 10) Save changes, call completion handler, unlock refresh

@@ -34,6 +34,7 @@ public struct Event: Codable {
         case sponsor
         case startTime
         case points
+        case isAsync
     }
 
     public let id: String
@@ -46,6 +47,7 @@ public struct Event: Codable {
     public let sponsor: String
     public let startTime: Date
     public let points: Int
+    public let isAsync: Bool
 }
 
 public struct Location: Codable {
