@@ -34,6 +34,7 @@ public struct Event: Codable {
         case sponsor
         case startTime
         case points
+        case isAsync
     }
 
     public let id: String
@@ -46,6 +47,7 @@ public struct Event: Codable {
     public let sponsor: String
     public let startTime: Date
     public let points: Int
+    public let isAsync: Bool
 }
 
 public struct Location: Codable {
@@ -69,4 +71,9 @@ public struct EventCheckInStatus: Codable, APIReturnable {
     public let newPoints: Int
     public let totalPoints: Int
     public let status: String
+}
+
+public struct EventTracker: Codable {
+    public let eventId: String
+    public let users: [String]
 }

@@ -16,7 +16,7 @@ import UIKit
 class HIEditProfileCell: UITableViewCell {
 
     let attributeLabel = HILabel(style: .profileUsername)
-    let infoLabel = HILabel(style: .profileDescription) { (label) in
+    let infoLabel = HILabel(style: .profileTier) { (label) in
         label.numberOfLines = 0
     }
 
@@ -84,12 +84,3 @@ extension HIEditProfileCell {
         lhs.infoLabel.text = rhs.info
     }
 }
-
-//// MARK: - UITableViewCell
-//extension HIEditProfileCell {
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//        interestLabel.text = ""
-//        selectedImageView.isHidden = false
-//    }
-//}

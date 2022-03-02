@@ -30,11 +30,8 @@ public struct Profile: Codable, APIReturnable {
         case lastName
         case points
         case timezone
-        case info = "description"
         case discord
         case avatarUrl
-        case teamStatus
-        case interests
     }
 
     public let id: String
@@ -42,14 +39,47 @@ public struct Profile: Codable, APIReturnable {
     public let lastName: String
     public let points: Int
     public let timezone: String
-    public let info: String
     public let discord: String
     public let avatarUrl: String
-    public let teamStatus: String
-    public let interests: [String]
 }
 
 public struct ProfileFavorites: Codable, APIReturnable {
     public let id: String
     public let profiles: Set<String>
+}
+
+public struct LeaderboardProfileContainer: Decodable, APIReturnable {
+    public let profiles: [LeaderboardProfile]
+
+    public init(from data: Data) throws {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
+        self = try decoder.decode(LeaderboardProfileContainer.self, from: data)
+    }
+}
+
+public struct LeaderboardProfile: Codable, APIReturnable {
+    internal enum CodingKeys: String, CodingKey {
+        case id
+        case discord
+        case points
+    }
+
+    public let id: String
+    public let discord: String
+    public let points: Int
+}
+
+public struct TiersContainer: Decodable, APIReturnable {
+    public let tiers: [Tier]
+    public init(from data: Data) throws {
+        let decoder = JSONDecoder()
+        let tiers = try decoder.decode([Tier].self, from: data)
+        self.tiers = tiers
+    }
+}
+
+public struct Tier: Codable, APIReturnable {
+    public let name: String
+    public let threshold: Int
 }

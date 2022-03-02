@@ -27,12 +27,13 @@ class HIApplicationStateController {
     // MARK: ViewControllers
     var loginFlowController = HILoginFlowController()
     var appFlowController = HITabBarController()
-
+    var onboardingViewController = HIOnboardingViewController()
     // MARK: - Init
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(loginUser), name: .loginUser, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(logoutUser), name: .logoutUser, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(loginProfile), name: .loginProfile, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(getStarted), name: .getStarted, object: nil)
     }
 
     deinit {
@@ -46,11 +47,11 @@ class HIApplicationStateController {
         recoverUserIfPossible()
         recoverProfileIfPossible()
 
-        if user != nil {
-            loginFlowController.shouldDisplayAnimationOnNextAppearance = false
-        }
+        onboardingViewController.shouldDisplayAnimationOnNextAppearance = user == nil
 
-        updateWindowViewController(animated: false)
+        UserDefaults.standard.set(true, forKey: HIConstants.APPLICATION_INSTALLED_KEY)
+        let shouldShowOnboarding = UserDefaults.standard.object(forKey: HIConstants.SHOULD_SHOW_ONBOARDING_KEY) as? Bool ?? true
+        updateWindowViewController(animated: false, shouldShowOnboarding: shouldShowOnboarding)
     }
 }
 
@@ -89,9 +90,9 @@ extension HIApplicationStateController {
         var viewControllers = [UIViewController]()
         viewControllers.append(HIHomeViewController())
         viewControllers.append(HIScheduleViewController())
-        viewControllers.append(HICodePopupViewController())
+        viewControllers.append(HIScanQRCodeViewController())
         viewControllers.append(HIProfileViewController())
-        viewControllers.append(HIGroupViewController())
+        viewControllers.append(HILeaderboardViewController())
         return viewControllers
     }
 
@@ -105,7 +106,7 @@ extension HIApplicationStateController {
         }
         HILocalNotificationController.shared.requestAuthorization()
         UIApplication.shared.registerForRemoteNotifications()
-        updateWindowViewController(animated: true)
+        updateWindowViewController(animated: true, shouldShowOnboarding: false)
     }
 
     @objc func logoutUser() {
@@ -115,7 +116,7 @@ extension HIApplicationStateController {
         Keychain.default.removeObject(forKey: HIConstants.STORED_PROFILE_KEY)
         user = nil
         profile = nil
-        updateWindowViewController(animated: true)
+        updateWindowViewController(animated: true, shouldShowOnboarding: false)
     }
 
     @objc func loginProfile(_ notification: Notification) {
@@ -123,14 +124,20 @@ extension HIApplicationStateController {
         guard Keychain.default.store(profile, forKey: HIConstants.STORED_PROFILE_KEY) else { return }
         self.profile = profile
     }
+    @objc func getStarted(_ notification: Notification) {
+        updateWindowViewController(animated: true, shouldShowOnboarding: false)
+        // No longer need to show onboarding
+        UserDefaults.standard.set(false, forKey: HIConstants.SHOULD_SHOW_ONBOARDING_KEY)
+    }
 
-    func updateWindowViewController(animated: Bool) {
+    func updateWindowViewController(animated: Bool, shouldShowOnboarding: Bool) {
         let viewController: UIViewController
-        if let user = user {
+        if shouldShowOnboarding {
+            viewController = onboardingViewController
+        } else if let user = user {
             prepareAppControllerForDisplay(with: user)
             viewController = appFlowController
         } else {
-            prepareLoginControllerForDisplay()
             viewController = loginFlowController
         }
 
@@ -158,6 +165,4 @@ extension HIApplicationStateController {
         HIProjectDataSource.refresh()
         HIProfileDataSource.refresh()
     }
-
-    func prepareLoginControllerForDisplay() { }
 }

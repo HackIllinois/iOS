@@ -16,43 +16,40 @@ import UIKit
 class HILabel: UILabel {
     // MARK: - Types
     enum Style {
-        case happeningEvents
         case location
         case event
         case eventTime
         case eventType
         case sponsor
         case project
-        case title
+        case viewTitle
         case detailTitle
         case subtitle
         case description
         case cellDescription
         case loginHeader
         case loginSelection
-        case viewTitle
+        case welcomeTitle
         case backgroundTitle
         case detailSubtitle
         case detailText
         case profileName
         case profileSubtitle
         case profileNumberFigure
-        case profileDescription
+        case profileTier
         case profileUsername
         case profileInterests
         case navigationInfo
-        case groupDescription
-        case groupNameInfo
-        case groupContactInfo
-        case groupStatus
-        case sortText
-        case sortElement
         case countdown
         case pointsText
-        case groupStatusFilter
-        case characterCount
         case error
         case codeError
+        case onboardingDescription
+        case onboardingTitle
+        case clock
+        case leaderboardRank
+        case leaderboardName
+        case leaderboardPoints
     }
 
     // MARK: - Properties
@@ -73,10 +70,6 @@ class HILabel: UILabel {
         translatesAutoresizingMaskIntoConstraints = false
         if let style = style {
         switch style {
-        case .happeningEvents:
-            textHIColor = \.titleText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.happeningEventTitle
 
         case .location:
             textHIColor = \.baseText
@@ -94,13 +87,12 @@ class HILabel: UILabel {
             font = HIAppearance.Font.eventTime
 
         case .eventType:
-            textHIColor = \.accent
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.eventCategoryText
-            textAlignment = .center
 
         case .sponsor:
-            textHIColor = \.attendeeBackground
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.sponsorText
 
@@ -127,11 +119,11 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.contentTitle
 
-        case .title:
+        case .viewTitle:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .center
-            font = HIAppearance.Font.contentTitle
+            font = HIAppearance.Font.viewTitle
 
         case .subtitle:
             textHIColor = \.accent
@@ -155,7 +147,7 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.loginTitle
 
-        case .viewTitle:
+        case .welcomeTitle:
             textHIColor = \.loginSelectionText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.loginTitle
@@ -176,27 +168,28 @@ class HILabel: UILabel {
             layer.backgroundColor = UIColor.clear.cgColor
 
         case .profileName: // Used to display the profile owner's name
-            textHIColor = \.whiteTagFont
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .center
             font = HIAppearance.Font.profileName
 
         case .profileSubtitle: // Used to display profile subtitle, "points", and whatever that says "time zone"
             backgroundHIColor = \.clear
+            textHIColor = \.baseText
             textAlignment = .center
             font = HIAppearance.Font.profileSubtitle
 
         case .profileNumberFigure: // Used to display number of points and time (?)
-            textHIColor = \.whiteTagFont
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .center
             font = HIAppearance.Font.profileNumberFigure
 
-        case .profileDescription: // Used to display "short description"
-            textHIColor = \.whiteTagFont
+        case .profileTier: // Used to display "short description"
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .left
-            font = HIAppearance.Font.profileDescription
+            font = HIAppearance.Font.profileTier
 
         case .profileUsername: // Used to display Discord username, etc.
             textHIColor = \.whiteTagFont
@@ -214,38 +207,7 @@ class HILabel: UILabel {
             textHIColor = \.titleText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.navigationInfoText
-            textAlignment = .center
-
-        // New styles for group matching
-        case .groupDescription:
-            textHIColor = \.groupText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentText
-            numberOfLines = 2
-
-        case .groupNameInfo:
-            textHIColor = \.groupText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.groupName
-
-        case .groupContactInfo:
-            textHIColor = \.groupText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.groupContact
-
-        case .groupStatus:
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.groupStatus
-
-        case .sortText:
-            textHIColor = \.titleText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.sortingText
-
-        case .sortElement:
-            textHIColor = \.titleText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentText
+            textAlignment = .left
 
         case .countdown:
             textHIColor = \.titleText
@@ -253,24 +215,13 @@ class HILabel: UILabel {
             font = HIAppearance.Font.countdownText
 
         case .pointsText:
-            textHIColor = \.whiteText
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.eventButtonText
             textAlignment = .center
 
-        case .groupStatusFilter:
-            textHIColor = \.titleText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.groupStatus
-            numberOfLines = 0
-
-        case .characterCount:
-            textHIColor = \.whiteTagFont
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.characterCount
-
         case .error:
-            textHIColor = \.whiteTagFont
+            textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.detailSubtitle
             textAlignment = .center
@@ -282,7 +233,40 @@ class HILabel: UILabel {
             font = HIAppearance.Font.detailSubtitle
             textAlignment = .center
             numberOfLines = 0
-
+        case .onboardingDescription:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.onboardingDescription
+            textAlignment = .center
+            numberOfLines = 0
+        case .onboardingTitle:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.onboardingTitle
+            textAlignment = .center
+            numberOfLines = 0
+        case .clock:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.clockText
+            textAlignment = .center
+            numberOfLines = 1
+        // Leaderboard label fonts
+        case .leaderboardRank:
+            textHIColor = \.leaderboardText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.leaderboardRank
+            layer.shadowOffset = CGSize(width: 2, height: 2)
+            layer.shadowRadius = 2.0
+            layer.shadowOpacity = 0.25
+        case .leaderboardName:
+            textHIColor = \.leaderboardText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.leaderboardPoints
+        case .leaderboardPoints:
+            textHIColor = \.leaderboardText
+            backgroundHIColor = \.pointsBackground
+            font = HIAppearance.Font.leaderboardPoints
         }
         }
 

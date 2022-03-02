@@ -17,4 +17,7 @@ extension Notification.Name {
     static let loginUser  = Notification.Name("HIApplicationStateControllerLoginUser")
     static let logoutUser = Notification.Name("HIApplicationStateControllerLogoutUser")
     static let loginProfile = Notification.Name("HIApplicationStateControllerLoginProfile")
+    static let getStarted = Notification.Name("HIApplicationGetStarted")
+    static let qrCodeSuccessfulScan = Notification.Name("QRCodeSuccessfullyScanned")
+
 }

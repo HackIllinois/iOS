@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A360882203539FF001F5F85 /* HIAdminEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */; };
+		083C643327A7457000087018 /* HIHomeSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C643227A7457000087018 /* HIHomeSegmentedControl.swift */; };
+		1C63EE6927680DF500D60653 /* CIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C63EE6827680DF500D60653 /* CIImage.swift */; };
+		1C7561A3278E96600004D739 /* DarkVespaText.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C7561A2278E96600004D739 /* DarkVespaText.json */; };
+		1C7561A5278E96750004D739 /* LightVespaText.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C7561A4278E96750004D739 /* LightVespaText.json */; };
+		1C9045CE274F03A200DDA74E /* HICarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9045CD274F03A200DDA74E /* HICarouselCell.swift */; };
+		1C9045D2274F048A00DDA74E /* HICarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9045D1274F048A00DDA74E /* HICarouselView.swift */; };
+		1C9045D4274F065F00DDA74E /* HIOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */; };
 		3521FFA92207C03E00634A63 /* Attendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521FFA82207C03E00634A63 /* Attendee.swift */; };
 		35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */; };
 		35B4A44F21E091BA001B3AF0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4A44D21E091B9001B3AF0 /* Logger.swift */; };
@@ -16,21 +22,16 @@
 		3C26401923ADE7AA004E1DBE /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26401723ADE7AA004E1DBE /* Project+CoreDataProperties.swift */; };
 		3C26401B23ADE838004E1DBE /* ProjectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26401A23ADE838004E1DBE /* ProjectService.swift */; };
 		3C26401D23ADE8A5004E1DBE /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26401C23ADE8A5004E1DBE /* Project.swift */; };
-		3C2C250A23EFD3C500EA3194 /* intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 3C2C250923EFD3C500EA3194 /* intro.json */; };
 		3C7E552723AA199900213E1F /* HITimeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E552623AA199900213E1F /* HITimeDataSource.swift */; };
 		3C8F62D4238F9639001A5DAF /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F62D3238F9639001A5DAF /* Time.swift */; };
 		3C8F62D6238F9825001A5DAF /* TimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F62D5238F9825001A5DAF /* TimeService.swift */; };
 		3CF8DB1123B4134C0035ECAE /* HIProjectDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DB1023B4134C0035ECAE /* HIProjectDataSource.swift */; };
 		3CF8DB1323B419980035ECAE /* HIProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DB1223B419980035ECAE /* HIProjectCell.swift */; };
-		3CF8DB1523B41D0A0035ECAE /* HIProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DB1423B41D0A0035ECAE /* HIProjectListViewController.swift */; };
-		3CF8DB1723B41F350035ECAE /* HIProjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DB1623B41F350035ECAE /* HIProjectDetailViewController.swift */; };
-		3CF8DB1923B42B240035ECAE /* HIProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8DB1823B42B240035ECAE /* HIProjectViewController.swift */; };
-		3F49408725C8DBC30091CCAD /* HIGroupPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F49408625C8DBC30091CCAD /* HIGroupPopupViewController.swift */; };
-		3F8CC87B260BBE9000528ED2 /* HICodePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8CC87A260BBE9000528ED2 /* HICodePopupViewController.swift */; };
-		3FB82A0D25C25AE700C0B43F /* HIGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB82A0C25C25AE700C0B43F /* HIGroupViewController.swift */; };
-		3FB82A1125C25B3800C0B43F /* HIGroupListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB82A1025C25B3800C0B43F /* HIGroupListViewController.swift */; };
 		3FBEF38125F36239009B97CB /* HIGroupStatusOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBEF38025F36239009B97CB /* HIGroupStatusOptions.swift */; };
-		3FC091D625B74DEA00DA23D8 /* HIGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC091D525B74DEA00DA23D8 /* HIGroupCell.swift */; };
+		3FBFA7AB27335554001FFF28 /* HILeaderboardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFA7AA27335554001FFF28 /* HILeaderboardListViewController.swift */; };
+		3FBFA7B127335800001FFF28 /* HILeaderboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFA7B027335800001FFF28 /* HILeaderboardCell.swift */; };
+		3FBFA7B527335ABC001FFF28 /* HILeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFA7B427335ABC001FFF28 /* HILeaderboardViewController.swift */; };
+		60EAF98B273B1AC4002CD205 /* HIScanQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EAF98A273B1AC4002CD205 /* HIScanQRCodeViewController.swift */; };
 		950AD60A23DE362B00463AF2 /* HITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950AD60923DE362B00463AF2 /* HITabBarController.swift */; };
 		9510F6A01FCB7D6E007D19DB /* Announcement+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9510F69A1FCB7D6E007D19DB /* Announcement+CoreDataClass.swift */; };
 		9510F6A11FCB7D6E007D19DB /* Event+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9510F69B1FCB7D6E007D19DB /* Event+CoreDataClass.swift */; };
@@ -56,14 +57,12 @@
 		954EE1D31FD0F1680078F39E /* HILoginSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */; };
 		9552D92821758E4C00A8C869 /* UIView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9552D92721758E4C00A8C869 /* UIView+AutoLayout.swift */; };
 		9564E02F2218CE6F003A8EEB /* HIMapsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9564E02E2218CE6F003A8EEB /* HIMapsDataSource.swift */; };
-		956F41E11FC7577500557DC7 /* HIAnnouncementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F41E01FC7577500557DC7 /* HIAnnouncementsViewController.swift */; };
 		956F41E31FC76C8E00557DC7 /* HIMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956F41E21FC76C8E00557DC7 /* HIMenuController.swift */; };
 		957A4D7D21FDA71F007FDE0E /* MixTypeComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957A4D7C21FDA71F007FDE0E /* MixTypeComparable.swift */; };
 		957D7CAC1FC2940800C4332A /* HackIllinois.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 957D7CA81FC2940800C4332A /* HackIllinois.xcdatamodeld */; };
 		957D7CB81FC39EA100C4332A /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957D7CB71FC39EA100C4332A /* Formatters.swift */; };
 		95838AC921FDCB5C00BD8F71 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95838AC721FDCB5C00BD8F71 /* Location+CoreDataProperties.swift */; };
 		95838ACA21FDCB5C00BD8F71 /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95838AC821FDCB5C00BD8F71 /* Location+CoreDataClass.swift */; };
-		958C863B2033C94800803F81 /* HIAdminAnnouncementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958C863A2033C94800803F81 /* HIAdminAnnouncementViewController.swift */; };
 		95A7D28A203D4F54005EAEAF /* HIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7D27B203D4F54005EAEAF /* HIButton.swift */; };
 		95A7D28B203D4F54005EAEAF /* HISegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7D27C203D4F54005EAEAF /* HISegmentedControl.swift */; };
 		95A7D28C203D4F54005EAEAF /* HITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7D27D203D4F54005EAEAF /* HITextField.swift */; };
@@ -78,7 +77,6 @@
 		95A7D29C203D595F005EAEAF /* HITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7D29B203D595F005EAEAF /* HITableView.swift */; };
 		95A7D29E203D5BA4005EAEAF /* HILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7D29D203D5BA4005EAEAF /* HILabel.swift */; };
 		95A7D2A0203D60E9005EAEAF /* HIBubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7D29F203D60E9005EAEAF /* HIBubbleCell.swift */; };
-		95B12041220BDDEF00E024BB /* HICheckInScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B12040220BDDEF00E024BB /* HICheckInScannerViewController.swift */; };
 		95B12043220BEA9D00E024BB /* CheckInService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B12042220BEA9D00E024BB /* CheckInService.swift */; };
 		95B12045220BEAD700E024BB /* TrackingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B12044220BEAD700E024BB /* TrackingService.swift */; };
 		95C18DC52009618C004784B5 /* HIHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C18DC42009618C004784B5 /* HIHomeViewController.swift */; };
@@ -108,16 +106,12 @@
 		95E3147421FAF1740092C22E /* SimpleRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146621FAF1740092C22E /* SimpleRequest.swift */; };
 		95E3147521FAF1740092C22E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146721FAF1740092C22E /* User.swift */; };
 		95E3147621FAF1740092C22E /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3146821FAF1740092C22E /* Announcement.swift */; };
-		95F5B4A0220BCFFF00C59992 /* HIIndoorMapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F5B49F220BCFFF00C59992 /* HIIndoorMapsViewController.swift */; };
-		95FC1D1E1FCBD20E00F8AD60 /* HIUserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */; };
 		95FC79BE21E0199600715036 /* HIAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC79BD21E0199600715036 /* HIAppearance.swift */; };
 		95FC79C121E0243D00715036 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC79C021E0243D00715036 /* Operators.swift */; };
 		95FC79C321E024A700715036 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC79C221E024A700715036 /* Notifications.swift */; };
 		98CA2A3E25C899CF003E842A /* HIProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA2A3D25C899CF003E842A /* HIProfileViewController.swift */; };
-		A5163FEB221F2741003C543E /* HIAdminStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5163FEA221F2741003C543E /* HIAdminStatsViewController.swift */; };
 		A5163FED221F283C003C543E /* StatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5163FEC221F283C003C543E /* StatsService.swift */; };
 		AC0DDDDC261111B60086BDE0 /* HITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0DDDDB261111B60086BDE0 /* HITextView.swift */; };
-		AC38BEA323FE3E800067ABAC /* HIProjectDetailLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38BEA223FE3E800067ABAC /* HIProjectDetailLocationCell.swift */; };
 		AC3B620E25E85CAD002386A2 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B620D25E85CAD002386A2 /* Profile.swift */; };
 		AC3B621025E85D18002386A2 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B620F25E85D18002386A2 /* ProfileService.swift */; };
 		AC3B621325E86053002386A2 /* Profile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B621125E86053002386A2 /* Profile+CoreDataClass.swift */; };
@@ -127,23 +121,17 @@
 		AC607EF0261CD6E300B88798 /* Stickers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC607EEF261CD6E300B88798 /* Stickers.xcassets */; };
 		AC607EF4261CD6E300B88798 /* Stickers.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AC607EED261CD6E100B88798 /* Stickers.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AC6F15A6261BB1B400422192 /* HIErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6F15A5261BB1B400422192 /* HIErrorView.swift */; };
-		AC977FCD25F194F9009C4179 /* HIGroupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC977FCC25F194F9009C4179 /* HIGroupDetailViewController.swift */; };
 		ACA63C8B25E7394D00A00D83 /* HIProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA63C8A25E7394D00A00D83 /* HIProfile.swift */; };
 		ACAA717626017EC4000F42B0 /* HICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA717526017EC4000F42B0 /* HICollectionViewFlowLayout.swift */; };
 		ACB53AE7261B874A007B1643 /* Interest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB53AE6261B874A007B1643 /* Interest.swift */; };
 		ACB53AEA261B8789007B1643 /* InterestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB53AE9261B8789007B1643 /* InterestService.swift */; };
 		ACB53AED261B8ACD007B1643 /* HIInterestDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB53AEC261B8ACD007B1643 /* HIInterestDataSource.swift */; };
-		ACBFE29825EAE79000C94732 /* HIGroupPopupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBFE29725EAE79000C94732 /* HIGroupPopupCell.swift */; };
 		ACBFE29A25EB2C9700C94732 /* HIInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBFE29925EB2C9700C94732 /* HIInterest.swift */; };
 		ACCB199D25F56DF100F88379 /* HIInterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCB199C25F56DF100F88379 /* HIInterestCell.swift */; };
 		ACCB199F25F56E5B00F88379 /* HICircularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCB199E25F56E5B00F88379 /* HICircularView.swift */; };
-		BCD0CA5123C4356300ADC89B /* HIPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD0CA5023C4356300ADC89B /* HIPopupViewController.swift */; };
 		BCEBD2DA23DE995700D32F5A /* HIPopupAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEBD2D923DE995700D32F5A /* HIPopupAnimator.swift */; };
 		BF0FDA3925F4DCCD003B5DB1 /* HIScheduleSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0FDA3825F4DCCD003B5DB1 /* HIScheduleSegmentedControl.swift */; };
-		BFB1FD32261053F000500008 /* HIEditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB1FD31261053F000500008 /* HIEditProfileViewController.swift */; };
-		BFB1FD38261053FE00500008 /* HIEditProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB1FD37261053FE00500008 /* HIEditProfileDetailViewController.swift */; };
 		BFB1FD3E26105EA400500008 /* HIEditProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB1FD3D26105EA400500008 /* HIEditProfileCell.swift */; };
-		BFC48F1226109E9E00AAAEB5 /* HIEditProfileDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC48F1126109E9E00AAAEB5 /* HIEditProfileDetailCell.swift */; };
 		D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A309BB2211175200CBA351 /* PassKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -190,7 +178,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAdminEventViewController.swift; sourceTree = "<group>"; };
+		083C643227A7457000087018 /* HIHomeSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIHomeSegmentedControl.swift; sourceTree = "<group>"; };
+		1C63EE6827680DF500D60653 /* CIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIImage.swift; sourceTree = "<group>"; };
+		1C7561A2278E96600004D739 /* DarkVespaText.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DarkVespaText.json; sourceTree = "<group>"; };
+		1C7561A4278E96750004D739 /* LightVespaText.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LightVespaText.json; sourceTree = "<group>"; };
+		1C9045CD274F03A200DDA74E /* HICarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICarouselCell.swift; sourceTree = "<group>"; };
+		1C9045D1274F048A00DDA74E /* HICarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICarouselView.swift; sourceTree = "<group>"; };
+		1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIOnboardingViewController.swift; sourceTree = "<group>"; };
 		3521FFA82207C03E00634A63 /* Attendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendee.swift; sourceTree = "<group>"; };
 		35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HICountdownViewController.swift; sourceTree = "<group>"; };
 		35B4A44D21E091B9001B3AF0 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -199,21 +193,16 @@
 		3C26401723ADE7AA004E1DBE /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Project+CoreDataProperties.swift"; path = "HackIllinois/Models/CoreDataModels/Project+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		3C26401A23ADE838004E1DBE /* ProjectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectService.swift; sourceTree = "<group>"; };
 		3C26401C23ADE8A5004E1DBE /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
-		3C2C250923EFD3C500EA3194 /* intro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = intro.json; sourceTree = "<group>"; };
 		3C7E552623AA199900213E1F /* HITimeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITimeDataSource.swift; sourceTree = "<group>"; };
 		3C8F62D3238F9639001A5DAF /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		3C8F62D5238F9825001A5DAF /* TimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeService.swift; sourceTree = "<group>"; };
 		3CF8DB1023B4134C0035ECAE /* HIProjectDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProjectDataSource.swift; sourceTree = "<group>"; };
 		3CF8DB1223B419980035ECAE /* HIProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProjectCell.swift; sourceTree = "<group>"; };
-		3CF8DB1423B41D0A0035ECAE /* HIProjectListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProjectListViewController.swift; sourceTree = "<group>"; };
-		3CF8DB1623B41F350035ECAE /* HIProjectDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProjectDetailViewController.swift; sourceTree = "<group>"; };
-		3CF8DB1823B42B240035ECAE /* HIProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProjectViewController.swift; sourceTree = "<group>"; };
-		3F49408625C8DBC30091CCAD /* HIGroupPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIGroupPopupViewController.swift; sourceTree = "<group>"; };
-		3F8CC87A260BBE9000528ED2 /* HICodePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICodePopupViewController.swift; sourceTree = "<group>"; };
-		3FB82A0C25C25AE700C0B43F /* HIGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIGroupViewController.swift; sourceTree = "<group>"; };
-		3FB82A1025C25B3800C0B43F /* HIGroupListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIGroupListViewController.swift; sourceTree = "<group>"; };
 		3FBEF38025F36239009B97CB /* HIGroupStatusOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIGroupStatusOptions.swift; sourceTree = "<group>"; };
-		3FC091D525B74DEA00DA23D8 /* HIGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIGroupCell.swift; sourceTree = "<group>"; };
+		3FBFA7AA27335554001FFF28 /* HILeaderboardListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILeaderboardListViewController.swift; sourceTree = "<group>"; };
+		3FBFA7B027335800001FFF28 /* HILeaderboardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILeaderboardCell.swift; sourceTree = "<group>"; };
+		3FBFA7B427335ABC001FFF28 /* HILeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILeaderboardViewController.swift; sourceTree = "<group>"; };
+		60EAF98A273B1AC4002CD205 /* HIScanQRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScanQRCodeViewController.swift; sourceTree = "<group>"; };
 		950AD60923DE362B00463AF2 /* HITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITabBarController.swift; sourceTree = "<group>"; };
 		9510F69A1FCB7D6E007D19DB /* Announcement+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Announcement+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9510F69B1FCB7D6E007D19DB /* Event+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -239,14 +228,12 @@
 		954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILoginSelectionViewController.swift; sourceTree = "<group>"; };
 		9552D92721758E4C00A8C869 /* UIView+AutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AutoLayout.swift"; sourceTree = "<group>"; };
 		9564E02E2218CE6F003A8EEB /* HIMapsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIMapsDataSource.swift; sourceTree = "<group>"; };
-		956F41E01FC7577500557DC7 /* HIAnnouncementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAnnouncementsViewController.swift; sourceTree = "<group>"; };
 		956F41E21FC76C8E00557DC7 /* HIMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIMenuController.swift; sourceTree = "<group>"; };
 		957A4D7C21FDA71F007FDE0E /* MixTypeComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixTypeComparable.swift; sourceTree = "<group>"; };
 		957D7CA91FC2940800C4332A /* HackIllinois.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HackIllinois.xcdatamodel; sourceTree = "<group>"; };
 		957D7CB71FC39EA100C4332A /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
 		95838AC721FDCB5C00BD8F71 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		95838AC821FDCB5C00BD8F71 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
-		958C863A2033C94800803F81 /* HIAdminAnnouncementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIAdminAnnouncementViewController.swift; sourceTree = "<group>"; };
 		95A7D27B203D4F54005EAEAF /* HIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIButton.swift; sourceTree = "<group>"; };
 		95A7D27C203D4F54005EAEAF /* HISegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HISegmentedControl.swift; sourceTree = "<group>"; };
 		95A7D27D203D4F54005EAEAF /* HITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HITextField.swift; sourceTree = "<group>"; };
@@ -261,7 +248,6 @@
 		95A7D29B203D595F005EAEAF /* HITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITableView.swift; sourceTree = "<group>"; };
 		95A7D29D203D5BA4005EAEAF /* HILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILabel.swift; sourceTree = "<group>"; };
 		95A7D29F203D60E9005EAEAF /* HIBubbleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIBubbleCell.swift; sourceTree = "<group>"; };
-		95B12040220BDDEF00E024BB /* HICheckInScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICheckInScannerViewController.swift; sourceTree = "<group>"; };
 		95B12042220BEA9D00E024BB /* CheckInService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInService.swift; sourceTree = "<group>"; };
 		95B12044220BEAD700E024BB /* TrackingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingService.swift; sourceTree = "<group>"; };
 		95C18DC42009618C004784B5 /* HIHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIHomeViewController.swift; sourceTree = "<group>"; };
@@ -291,16 +277,12 @@
 		95E3146621FAF1740092C22E /* SimpleRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleRequest.swift; sourceTree = "<group>"; };
 		95E3146721FAF1740092C22E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		95E3146821FAF1740092C22E /* Announcement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Announcement.swift; sourceTree = "<group>"; };
-		95F5B49F220BCFFF00C59992 /* HIIndoorMapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIIndoorMapsViewController.swift; sourceTree = "<group>"; };
-		95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIUserDetailViewController.swift; sourceTree = "<group>"; };
 		95FC79BD21E0199600715036 /* HIAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAppearance.swift; sourceTree = "<group>"; };
 		95FC79C021E0243D00715036 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		95FC79C221E024A700715036 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		98CA2A3D25C899CF003E842A /* HIProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProfileViewController.swift; sourceTree = "<group>"; };
-		A5163FEA221F2741003C543E /* HIAdminStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAdminStatsViewController.swift; sourceTree = "<group>"; };
 		A5163FEC221F283C003C543E /* StatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsService.swift; sourceTree = "<group>"; };
 		AC0DDDDB261111B60086BDE0 /* HITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HITextView.swift; sourceTree = "<group>"; };
-		AC38BEA223FE3E800067ABAC /* HIProjectDetailLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProjectDetailLocationCell.swift; sourceTree = "<group>"; };
 		AC3B620D25E85CAD002386A2 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		AC3B620F25E85D18002386A2 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		AC3B621125E86053002386A2 /* Profile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -311,23 +293,17 @@
 		AC607EEF261CD6E300B88798 /* Stickers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Stickers.xcassets; sourceTree = "<group>"; };
 		AC607EF1261CD6E300B88798 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC6F15A5261BB1B400422192 /* HIErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIErrorView.swift; sourceTree = "<group>"; };
-		AC977FCC25F194F9009C4179 /* HIGroupDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIGroupDetailViewController.swift; sourceTree = "<group>"; };
 		ACA63C8A25E7394D00A00D83 /* HIProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIProfile.swift; sourceTree = "<group>"; };
 		ACAA717526017EC4000F42B0 /* HICollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		ACB53AE6261B874A007B1643 /* Interest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interest.swift; sourceTree = "<group>"; };
 		ACB53AE9261B8789007B1643 /* InterestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestService.swift; sourceTree = "<group>"; };
 		ACB53AEC261B8ACD007B1643 /* HIInterestDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIInterestDataSource.swift; sourceTree = "<group>"; };
-		ACBFE29725EAE79000C94732 /* HIGroupPopupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIGroupPopupCell.swift; sourceTree = "<group>"; };
 		ACBFE29925EB2C9700C94732 /* HIInterest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIInterest.swift; sourceTree = "<group>"; };
 		ACCB199C25F56DF100F88379 /* HIInterestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIInterestCell.swift; sourceTree = "<group>"; };
 		ACCB199E25F56E5B00F88379 /* HICircularView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICircularView.swift; sourceTree = "<group>"; };
-		BCD0CA5023C4356300ADC89B /* HIPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIPopupViewController.swift; sourceTree = "<group>"; };
 		BCEBD2D923DE995700D32F5A /* HIPopupAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HIPopupAnimator.swift; path = HackIllinois/UI/Animations/HIPopupAnimator.swift; sourceTree = SOURCE_ROOT; };
 		BF0FDA3825F4DCCD003B5DB1 /* HIScheduleSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScheduleSegmentedControl.swift; sourceTree = "<group>"; };
-		BFB1FD31261053F000500008 /* HIEditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEditProfileViewController.swift; sourceTree = "<group>"; };
-		BFB1FD37261053FE00500008 /* HIEditProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEditProfileDetailViewController.swift; sourceTree = "<group>"; };
 		BFB1FD3D26105EA400500008 /* HIEditProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEditProfileCell.swift; sourceTree = "<group>"; };
-		BFC48F1126109E9E00AAAEB5 /* HIEditProfileDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEditProfileDetailCell.swift; sourceTree = "<group>"; };
 		D3A309BA221116A600CBA351 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };
 		D3A309BB2211175200CBA351 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -355,6 +331,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C63EE672768078C00D60653 /* CarouselView */ = {
+			isa = PBXGroup;
+			children = (
+				1C9045CD274F03A200DDA74E /* HICarouselCell.swift */,
+				1C9045D1274F048A00DDA74E /* HICarouselView.swift */,
+			);
+			path = CarouselView;
+			sourceTree = "<group>";
+		};
 		95069260203EE14000D7C34C /* Animations */ = {
 			isa = PBXGroup;
 			children = (
@@ -378,7 +363,8 @@
 		95069267203EE14000D7C34C /* Launch */ = {
 			isa = PBXGroup;
 			children = (
-				3C2C250923EFD3C500EA3194 /* intro.json */,
+				1C7561A4278E96750004D739 /* LightVespaText.json */,
+				1C7561A2278E96600004D739 /* DarkVespaText.json */,
 			);
 			path = Launch;
 			sourceTree = "<group>";
@@ -490,35 +476,21 @@
 		957DB2E41FC2435100F8C45E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				958C863A2033C94800803F81 /* HIAdminAnnouncementViewController.swift */,
-				0A360881203539FF001F5F85 /* HIAdminEventViewController.swift */,
-				956F41E01FC7577500557DC7 /* HIAnnouncementsViewController.swift */,
 				9510F6A61FCB7E53007D19DB /* HIBaseScannerViewController.swift */,
 				95C3BE2F2008B99C0008ED79 /* HIBaseViewController.swift */,
-				95B12040220BDDEF00E024BB /* HICheckInScannerViewController.swift */,
 				35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */,
 				95C18DC720096539004784B5 /* HIEventDetailViewController.swift */,
 				95C18DC920096539004784B5 /* HIEventListViewController.swift */,
 				9515E43622093E1300BCAF92 /* HIEventScannerViewController.swift */,
 				95C18DC42009618C004784B5 /* HIHomeViewController.swift */,
-				95F5B49F220BCFFF00C59992 /* HIIndoorMapsViewController.swift */,
 				954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */,
 				95CCEA1E203D6B3600E3E28C /* HINavigationController.swift */,
 				95C18DC820096539004784B5 /* HIScheduleViewController.swift */,
-				95FC1D1D1FCBD20E00F8AD60 /* HIUserDetailViewController.swift */,
-				A5163FEA221F2741003C543E /* HIAdminStatsViewController.swift */,
 				98CA2A3D25C899CF003E842A /* HIProfileViewController.swift */,
-				BFB1FD31261053F000500008 /* HIEditProfileViewController.swift */,
-				BFB1FD37261053FE00500008 /* HIEditProfileDetailViewController.swift */,
-				3CF8DB1423B41D0A0035ECAE /* HIProjectListViewController.swift */,
-				3CF8DB1623B41F350035ECAE /* HIProjectDetailViewController.swift */,
-				3CF8DB1823B42B240035ECAE /* HIProjectViewController.swift */,
-				BCD0CA5023C4356300ADC89B /* HIPopupViewController.swift */,
-				3F49408625C8DBC30091CCAD /* HIGroupPopupViewController.swift */,
-				3FB82A0C25C25AE700C0B43F /* HIGroupViewController.swift */,
-				AC977FCC25F194F9009C4179 /* HIGroupDetailViewController.swift */,
-				3FB82A1025C25B3800C0B43F /* HIGroupListViewController.swift */,
-				3F8CC87A260BBE9000528ED2 /* HICodePopupViewController.swift */,
+				60EAF98A273B1AC4002CD205 /* HIScanQRCodeViewController.swift */,
+				1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */,
+				3FBFA7AA27335554001FFF28 /* HILeaderboardListViewController.swift */,
+				3FBFA7B427335ABC001FFF28 /* HILeaderboardViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -539,6 +511,7 @@
 			children = (
 				9552D92721758E4C00A8C869 /* UIView+AutoLayout.swift */,
 				95CA922F201E60D300C46037 /* UIImage+QRCode.swift */,
+				1C63EE6827680DF500D60653 /* CIImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -546,13 +519,17 @@
 		95A7D279203D4F54005EAEAF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				95A7D280203D4F54005EAEAF /* TableView */,
 				95069260203EE14000D7C34C /* Animations */,
+				1C63EE672768078C00D60653 /* CarouselView */,
+				ACAA7177260186EF000F42B0 /* CollectionView */,
 				95FC79BD21E0199600715036 /* HIAppearance.swift */,
 				95A7D27B203D4F54005EAEAF /* HIButton.swift */,
 				9523A28F2218BA2600341EBD /* HIImageView.swift */,
 				95A7D29D203D5BA4005EAEAF /* HILabel.swift */,
 				95A7D27C203D4F54005EAEAF /* HISegmentedControl.swift */,
 				BF0FDA3825F4DCCD003B5DB1 /* HIScheduleSegmentedControl.swift */,
+				083C643227A7457000087018 /* HIHomeSegmentedControl.swift */,
 				95A7D27D203D4F54005EAEAF /* HITextField.swift */,
 				AC0DDDDB261111B60086BDE0 /* HITextView.swift */,
 				95D6DA77203F8C3900E7C982 /* HITintImageView.swift */,
@@ -561,8 +538,6 @@
 				AC6F15A5261BB1B400422192 /* HIErrorView.swift */,
 				95D791EC203E370A00C3BA62 /* HIWindow.swift */,
 				95A7D27E203D4F54005EAEAF /* Identifiable.swift */,
-				ACAA7177260186EF000F42B0 /* CollectionView */,
-				95A7D280203D4F54005EAEAF /* TableView */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -584,7 +559,6 @@
 				95A7D29F203D60E9005EAEAF /* HIBubbleCell.swift */,
 				95A7D281203D4F54005EAEAF /* HIEventCell.swift */,
 				3CF8DB1223B419980035ECAE /* HIProjectCell.swift */,
-				3FC091D525B74DEA00DA23D8 /* HIGroupCell.swift */,
 			);
 			path = HIBubbleCell;
 			sourceTree = "<group>";
@@ -594,11 +568,9 @@
 			children = (
 				95C96DF2203E0C3E002FF0CB /* HIBubbleCell */,
 				95A7D288203D4F54005EAEAF /* HIEventDetailLocationCell.swift */,
+				3FBFA7B027335800001FFF28 /* HILeaderboardCell.swift */,
 				95A7D284203D4F54005EAEAF /* HILoginSelectionCell.swift */,
-				AC38BEA223FE3E800067ABAC /* HIProjectDetailLocationCell.swift */,
-				ACBFE29725EAE79000C94732 /* HIGroupPopupCell.swift */,
 				BFB1FD3D26105EA400500008 /* HIEditProfileCell.swift */,
-				BFC48F1126109E9E00AAAEB5 /* HIEditProfileDetailCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -730,7 +702,7 @@
 				9518277B1EA35AF100049F79 /* Sources */,
 				9518277C1EA35AF100049F79 /* Frameworks */,
 				9518277D1EA35AF100049F79 /* Resources */,
-				95CD0ED6201523B800D79DCC /* ShellScript */,
+				1C4BDBAA2744A032003BB3BB /* ShellScript */,
 				35D7CE9F20380ACF00654E28 /* Embed App Extensions */,
 				95E3143621FAD5B40092C22E /* Embed Frameworks */,
 			);
@@ -856,10 +828,11 @@
 			files = (
 				952D153D220D37980041383A /* refresh.json in Resources */,
 				952D1543220D453D0041383A /* countdown-24.json in Resources */,
-				3C2C250A23EFD3C500EA3194 /* intro.json in Resources */,
+				1C7561A3278E96600004D739 /* DarkVespaText.json in Resources */,
 				951827A91EA35DB800049F79 /* Assets.xcassets in Resources */,
 				952D1542220D453D0041383A /* countdown-60.json in Resources */,
 				951827B41EA35E8B00049F79 /* LaunchScreen.storyboard in Resources */,
+				1C7561A5278E96750004D739 /* LightVespaText.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -881,18 +854,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		95CD0ED6201523B800D79DCC /* ShellScript */ = {
+		1C4BDBAA2744A032003BB3BB /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
+			);
+			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -907,44 +884,35 @@
 				95A7D2A0203D60E9005EAEAF /* HIBubbleCell.swift in Sources */,
 				9552D92821758E4C00A8C869 /* UIView+AutoLayout.swift in Sources */,
 				ACB53AED261B8ACD007B1643 /* HIInterestDataSource.swift in Sources */,
+				083C643327A7457000087018 /* HIHomeSegmentedControl.swift in Sources */,
 				3FBEF38125F36239009B97CB /* HIGroupStatusOptions.swift in Sources */,
-				AC38BEA323FE3E800067ABAC /* HIProjectDetailLocationCell.swift in Sources */,
-				3F8CC87B260BBE9000528ED2 /* HICodePopupViewController.swift in Sources */,
 				ACA63C8B25E7394D00A00D83 /* HIProfile.swift in Sources */,
 				3C26401823ADE7AA004E1DBE /* Project+CoreDataClass.swift in Sources */,
-				958C863B2033C94800803F81 /* HIAdminAnnouncementViewController.swift in Sources */,
 				952831A4200F2B35002C9F3E /* HILoginFlowController.swift in Sources */,
 				95A7D295203D4F54005EAEAF /* HILoginSelectionHeader.swift in Sources */,
 				9510F6A41FCB7D6E007D19DB /* Event+CoreDataProperties.swift in Sources */,
 				AC6F15A6261BB1B400422192 /* HIErrorView.swift in Sources */,
 				95E313E121FAB8D10092C22E /* Constants.swift in Sources */,
 				95838AC921FDCB5C00BD8F71 /* Location+CoreDataProperties.swift in Sources */,
-				3FB82A1125C25B3800C0B43F /* HIGroupListViewController.swift in Sources */,
-				3F49408725C8DBC30091CCAD /* HIGroupPopupViewController.swift in Sources */,
 				95838ACA21FDCB5C00BD8F71 /* Location+CoreDataClass.swift in Sources */,
 				9521A6AA20191737009059C6 /* HIAnnouncementDataSource.swift in Sources */,
-				BFC48F1226109E9E00AAAEB5 /* HIEditProfileDetailCell.swift in Sources */,
 				95C18DCB20096539004784B5 /* HIScheduleViewController.swift in Sources */,
 				ACCB199D25F56DF100F88379 /* HIInterestCell.swift in Sources */,
 				95CCEA1F203D6B3600E3E28C /* HINavigationController.swift in Sources */,
 				957D7CAC1FC2940800C4332A /* HackIllinois.xcdatamodeld in Sources */,
-				A5163FEB221F2741003C543E /* HIAdminStatsViewController.swift in Sources */,
+				3FBFA7AB27335554001FFF28 /* HILeaderboardListViewController.swift in Sources */,
 				9510F6A71FCB7E53007D19DB /* HIBaseScannerViewController.swift in Sources */,
-				956F41E11FC7577500557DC7 /* HIAnnouncementsViewController.swift in Sources */,
 				95A7D290203D4F54005EAEAF /* HIAnnouncementCell.swift in Sources */,
 				9515E43722093E1300BCAF92 /* HIEventScannerViewController.swift in Sources */,
 				95A7D28F203D4F54005EAEAF /* HIEventCell.swift in Sources */,
 				ACAA717626017EC4000F42B0 /* HICollectionViewFlowLayout.swift in Sources */,
-				95FC1D1E1FCBD20E00F8AD60 /* HIUserDetailViewController.swift in Sources */,
 				95C3BE302008B99C0008ED79 /* HIBaseViewController.swift in Sources */,
-				3CF8DB1923B42B240035ECAE /* HIProjectViewController.swift in Sources */,
 				BFB1FD3E26105EA400500008 /* HIEditProfileCell.swift in Sources */,
-				3CF8DB1523B41D0A0035ECAE /* HIProjectListViewController.swift in Sources */,
 				95CD0ED52015217E00D79DCC /* HIApplicationStateController.swift in Sources */,
 				AC0DDDDC261111B60086BDE0 /* HITextView.swift in Sources */,
-				95B12041220BDDEF00E024BB /* HICheckInScannerViewController.swift in Sources */,
 				95A7D292203D4F54005EAEAF /* HILoginSelectionCell.swift in Sources */,
 				3C26401923ADE7AA004E1DBE /* Project+CoreDataProperties.swift in Sources */,
+				1C9045D2274F048A00DDA74E /* HICarouselView.swift in Sources */,
 				AC3B621625E8611C002386A2 /* HIProfileDataSource.swift in Sources */,
 				BF0FDA3925F4DCCD003B5DB1 /* HIScheduleSegmentedControl.swift in Sources */,
 				95C18DCC20096539004784B5 /* HIEventListViewController.swift in Sources */,
@@ -954,15 +922,11 @@
 				ACBFE29A25EB2C9700C94732 /* HIInterest.swift in Sources */,
 				35B4A44F21E091BA001B3AF0 /* Logger.swift in Sources */,
 				9544799C200C39870005408B /* HIUser.swift in Sources */,
-				BFB1FD32261053F000500008 /* HIEditProfileViewController.swift in Sources */,
 				95A7D28B203D4F54005EAEAF /* HISegmentedControl.swift in Sources */,
 				957A4D7D21FDA71F007FDE0E /* MixTypeComparable.swift in Sources */,
-				95F5B4A0220BCFFF00C59992 /* HIIndoorMapsViewController.swift in Sources */,
-				ACBFE29825EAE79000C94732 /* HIGroupPopupCell.swift in Sources */,
 				3CF8DB1123B4134C0035ECAE /* HIProjectDataSource.swift in Sources */,
 				95A7D28C203D4F54005EAEAF /* HITextField.swift in Sources */,
 				95C18DCA20096539004784B5 /* HIEventDetailViewController.swift in Sources */,
-				3CF8DB1723B41F350035ECAE /* HIProjectDetailViewController.swift in Sources */,
 				9523A2902218BA2600341EBD /* HIImageView.swift in Sources */,
 				95C18DC52009618C004784B5 /* HIHomeViewController.swift in Sources */,
 				35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */,
@@ -976,7 +940,6 @@
 				95A7D28D203D4F54005EAEAF /* Identifiable.swift in Sources */,
 				9521A6A820191590009059C6 /* HIEventDataSource.swift in Sources */,
 				95D6DA78203F8C3900E7C982 /* HITintImageView.swift in Sources */,
-				BFB1FD38261053FE00500008 /* HIEditProfileDetailViewController.swift in Sources */,
 				95FC79C121E0243D00715036 /* Operators.swift in Sources */,
 				95A7D294203D4F54005EAEAF /* HIDateHeader.swift in Sources */,
 				95D6DA7A203F983700E7C982 /* HILocalNotificationController.swift in Sources */,
@@ -984,21 +947,22 @@
 				950AD60A23DE362B00463AF2 /* HITabBarController.swift in Sources */,
 				95A7D29C203D595F005EAEAF /* HITableView.swift in Sources */,
 				9510F6A01FCB7D6E007D19DB /* Announcement+CoreDataClass.swift in Sources */,
-				0A360882203539FF001F5F85 /* HIAdminEventViewController.swift in Sources */,
 				957D7CB81FC39EA100C4332A /* Formatters.swift in Sources */,
-				BCD0CA5123C4356300ADC89B /* HIPopupViewController.swift in Sources */,
+				3FBFA7B127335800001FFF28 /* HILeaderboardCell.swift in Sources */,
+				1C9045CE274F03A200DDA74E /* HICarouselCell.swift in Sources */,
 				95A7D296203D4F54005EAEAF /* HIEventDetailLocationCell.swift in Sources */,
 				98CA2A3E25C899CF003E842A /* HIProfileViewController.swift in Sources */,
+				60EAF98B273B1AC4002CD205 /* HIScanQRCodeViewController.swift in Sources */,
 				95A7D29E203D5BA4005EAEAF /* HILabel.swift in Sources */,
 				956F41E31FC76C8E00557DC7 /* HIMenuController.swift in Sources */,
+				1C9045D4274F065F00DDA74E /* HIOnboardingViewController.swift in Sources */,
 				9510F6A51FCB7D6E007D19DB /* Announcement+CoreDataProperties.swift in Sources */,
-				3FB82A0D25C25AE700C0B43F /* HIGroupViewController.swift in Sources */,
+				3FBFA7B527335ABC001FFF28 /* HILeaderboardViewController.swift in Sources */,
 				BCEBD2DA23DE995700D32F5A /* HIPopupAnimator.swift in Sources */,
 				95FC79C321E024A700715036 /* Notifications.swift in Sources */,
 				95FC79BE21E0199600715036 /* HIAppearance.swift in Sources */,
+				1C63EE6927680DF500D60653 /* CIImage.swift in Sources */,
 				35B4A45021E091BA001B3AF0 /* HIError.swift in Sources */,
-				AC977FCD25F194F9009C4179 /* HIGroupDetailViewController.swift in Sources */,
-				3FC091D625B74DEA00DA23D8 /* HIGroupCell.swift in Sources */,
 				954EE1D31FD0F1680078F39E /* HILoginSelectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1176,7 +1140,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2021.1.2;
+				MARKETING_VERSION = 2022.1.2;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1199,7 +1163,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2021.1.2;
+				MARKETING_VERSION = 2022.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

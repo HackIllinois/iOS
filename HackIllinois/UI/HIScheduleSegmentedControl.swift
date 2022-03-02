@@ -28,7 +28,7 @@ class HIScheduleSegmentedControl: HISegmentedControl {
     private let viewPadding: CGFloat = 10
     private let indicatorCornerRadiusProp: CGFloat = 0.15
 
-    private var indicatorView = UIView()
+    private var indicatorView = UIImageView(image: #imageLiteral(resourceName: "Indicator"))
 
     // MARK: - Init
     init(titles: [String], nums: [Int]? = nil) {
@@ -53,17 +53,14 @@ class HIScheduleSegmentedControl: HISegmentedControl {
     @objc override func refreshForThemeChange() {
         backgroundColor <- \.clear
         titleLabels.forEach {
-            $0.textColor <- \.whiteText
+            $0.textColor <- \.baseText
             $0.backgroundColor <- \.clear
         }
 
         numberLabels.forEach {
-            $0.textColor <- \.whiteText
+            $0.textColor <- \.baseText
             $0.backgroundColor <- \.clear
         }
-
-        indicatorView.backgroundColor <- \.segmentedBackground
-        indicatorView.alpha = 0.3
     }
 
     // MARK: - UIView
@@ -71,10 +68,9 @@ class HIScheduleSegmentedControl: HISegmentedControl {
         super.layoutSubviews()
 
         let indicatorViewWidth = ((frame.width - viewPadding) / CGFloat(items.count) - viewPadding)
-        indicatorView.frame = CGRect(x: viewPadding, y: 0, width: indicatorViewWidth, height: frame.height)
-        indicatorView.layer.cornerRadius = frame.height * indicatorCornerRadiusProp
+        indicatorView.frame = CGRect(x: viewPadding, y: 60, width: indicatorViewWidth, height: 7)
         indicatorView.layer.masksToBounds = true
-
+        indicatorView.contentMode = .scaleAspectFit
         displayNewSelectedIndex()
     }
 

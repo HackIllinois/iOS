@@ -64,12 +64,6 @@ class HIScheduleViewController: HIEventListViewController {
         )
         dataStore.append((displayText: "SUN", predicate: sundayPredicate))
 
-        let mondayPredicate = NSPredicate(
-            format: "%@ =< startTime AND startTime < %@",
-            HITimeDataSource.shared.eventTimes.mondayStart as NSDate,
-            HITimeDataSource.shared.eventTimes.mondayEnd as NSDate
-        )
-        dataStore.append((displayText: "MON", predicate: mondayPredicate))
         return dataStore
     }()
 
@@ -123,7 +117,7 @@ extension HIScheduleViewController {
         super.loadView()
 
         let items = dataStore.map { $0.displayText }
-        let segmentedControl = HIScheduleSegmentedControl(titles: items, nums: [9, 10, 11, 12])
+        let segmentedControl = HIScheduleSegmentedControl(titles: items, nums: [25, 26, 27])
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
@@ -133,17 +127,9 @@ extension HIScheduleViewController {
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 66).isActive = true
 
-        let separator = UIView()
-        separator.translatesAutoresizingMaskIntoConstraints = false
-        separator.backgroundColor <- \.titleText
-        self.view.addSubview(separator)
-        separator.constrain(height: 1 / (UIScreen.main.scale))
-        separator.constrain(to: view, trailingInset: 0, leadingInset: 0)
-        separator.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10).isActive = true
-
         let tableView = HITableView()
         view.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: separator.bottomAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
@@ -156,6 +142,7 @@ extension HIScheduleViewController {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         setupRefreshControl()
         super.viewDidLoad()
+        super.setCustomTitle(customTitle: "Schedule")
     }
 }
 
@@ -163,7 +150,6 @@ extension HIScheduleViewController {
 extension HIScheduleViewController {
     @objc dynamic override func setupNavigationItem() {
         super.setupNavigationItem()
-        title = "Schedule"
         if !HIApplicationStateController.shared.isGuest {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuUnfavorited"), style: .plain, target: self, action: #selector(didSelectFavoritesIcon(_:)))
         }
@@ -179,7 +165,7 @@ extension HIScheduleViewController {
 // MARK: - UITabBarItem Setup
 extension HIScheduleViewController {
     override func setupTabBarItem() {
-        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "schedule"), tag: 0)
+        tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "schedule"), selectedImage: #imageLiteral(resourceName: "ScheduleSelected"))
     }
 }
 

@@ -59,7 +59,7 @@ class HISegmentedControl: UIControl {
     @objc func refreshForThemeChange() {
         backgroundColor <- \.clear
         labels.forEach {
-            $0.textColor <- \.whiteText
+            $0.textColor <- \.baseText
             $0.backgroundColor <- \.clear
         }
 
