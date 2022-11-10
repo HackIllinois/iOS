@@ -399,6 +399,7 @@
 		951827971EA35DB800049F79 /* HackIllinois */ = {
 			isa = PBXGroup;
 			children = (
+				E1E4A5D4291C9BF700780BA1 /* SwiftUI */,
 				D3A309BA221116A600CBA351 /* HackIllinois.entitlements */,
 				957DB2E41FC2435100F8C45E /* ViewControllers */,
 				957DB2E91FC2453100F8C45E /* FlowControllers */,
@@ -491,7 +492,6 @@
 				95C18DC42009618C004784B5 /* HIHomeViewController.swift */,
 				954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */,
 				95CCEA1E203D6B3600E3E28C /* HINavigationController.swift */,
-				E1E4A5D4291C9BF700780BA1 /* SwiftUI */,
 				95C18DC820096539004784B5 /* HIScheduleViewController.swift */,
 				98CA2A3D25C899CF003E842A /* HIProfileViewController.swift */,
 				60EAF98A273B1AC4002CD205 /* HIScanQRCodeViewController.swift */,
