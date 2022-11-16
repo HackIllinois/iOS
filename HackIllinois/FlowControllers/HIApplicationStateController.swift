@@ -134,12 +134,12 @@ extension HIApplicationStateController {
     func updateWindowViewController(animated: Bool, shouldShowOnboarding: Bool) {
         let viewController: UIViewController
         if shouldShowOnboarding {
-            if #available(iOS 14.0, *) {
-                viewController = UIHostingController(rootView: HIOnboardingView())
-            } else {
-                viewController = onboardingViewController
-            }
-//            viewController = onboardingViewController
+            //            if #available(iOS 14.0, *) {
+            viewController = UIHostingController(rootView: HIOnboardingView())
+            //            } else {
+            //                viewController = onboardingViewController
+            //            }
+            //            viewController = onboardingViewController
         } else if let user = user {
             prepareAppControllerForDisplay(with: user)
             viewController = appFlowController
