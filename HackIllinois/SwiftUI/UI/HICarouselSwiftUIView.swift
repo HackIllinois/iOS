@@ -15,7 +15,6 @@ struct CarouselData: Hashable{
     let descriptionText: String
 }
 
-@available(iOS 14.0, *)
 struct HICarouselSwiftUIView: View {
     var carouselData : [CarouselData]
     
@@ -23,7 +22,7 @@ struct HICarouselSwiftUIView: View {
         TabView {
             ForEach(carouselData, id: \.self) { carousel in
                 VStack {
-                    Image(uiImage: carousel.image!) // force unwrap?? prob nah...?
+                    Image(uiImage: carousel.image!)
                         .resizable()
                         .scaledToFit()
                         .frame(height: UIDevice.current.userInterfaceIdiom == .pad ? 600: 360)
@@ -40,7 +39,6 @@ struct HICarouselSwiftUIView: View {
     }
 }
 // MARK: - SwiftUI => HILabel
-@available(iOS 14.0, *)
 struct HILableSUI : UIViewRepresentable {
     var text: String
     var style: HILabel.Style?
@@ -55,7 +53,6 @@ struct HILableSUI : UIViewRepresentable {
     }
 }
 
-//@available(iOS 14.0, *)
 //struct CarouselSwiftUIView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        HICarouselSwiftUIView()

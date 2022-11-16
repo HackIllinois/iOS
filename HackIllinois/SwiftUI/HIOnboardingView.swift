@@ -11,60 +11,46 @@ import SwiftUI
 import UIKit
 import Lottie
 
-@available(iOS 14.0, *)
 struct HIOnboardingView: View {
     
-    var data : [CarouselData] = UIDevice.current.userInterfaceIdiom == .pad ? [
-        CarouselData(image: #imageLiteral(resourceName: "Onboarding0"), titleText: "Welcome!", descriptionText: "Swipe to see what our app has to offer!"),
-        CarouselData(image: UIImage(named: "iPadOnboarding0"), titleText: "Countdown", descriptionText: "See how much time you have left to hack!"),
-        CarouselData(image: UIImage(named: "iPadOnboarding1"), titleText: "Schedule", descriptionText: "See the times and details of all of our events."),
-        CarouselData(image: UIImage(named: "iPadOnboarding2"), titleText: "Scan for Points", descriptionText: "Scan QR codes at events to obtain points!"),
-        CarouselData(image: UIImage(named: "iPadOnboarding3"), titleText: "Profile", descriptionText: "View your points, tier, and other personal information."),
-        CarouselData(image: UIImage(named: "iPadOnboarding4"), titleText: "Leaderboard", descriptionText: "See who is leading HackIllinois 2022 in points earned!"),
-    ] : [
-        CarouselData(image: #imageLiteral(resourceName: "Onboarding0"), titleText: "Welcome!", descriptionText: "Swipe to see what our app has to offer!"),
-        CarouselData(image: UIImage(named: "Onboarding1"), titleText: "Countdown", descriptionText: "See how much time you have left to hack!"),
-        CarouselData(image: UIImage(named: "Onboarding2"), titleText: "Schedule", descriptionText: "See the times and details of all of our events."),
-        CarouselData(image: UIImage(named: "Onboarding3"), titleText: "Scan for Points", descriptionText: "Scan QR codes at events to obtain points!"),
-        CarouselData(image: UIImage(named: "Onboarding4"), titleText: "Profile", descriptionText: "View your points, tier, and other personal information."),
-        CarouselData(image: UIImage(named: "Onboarding5"), titleText: "Leaderboard", descriptionText: "See who is leading HackIllinois 2022 in points earned!"),
-    ]
-    @State var shouldDisplayAnimationOnNextAppearance = true
+    @StateObject private var viewModel = HIOnboardingViewModel()
     
     var body: some View {
         ZStack {
             Image("Login")
                 .resizable()
                 .ignoresSafeArea()
-            if shouldDisplayAnimationOnNextAppearance {
-                LottieView()
-                    .onAppear{
-                    Timer.scheduledTimer(withTimeInterval: 4, repeats: false) { timer in
-                        withAnimation(.easeInOut(duration: 1)) {
-                            self.shouldDisplayAnimationOnNextAppearance.toggle()
-                        }
-                    }
-                }
+                .zIndex(-1)
+            if viewModel.shouldDisplayAnimationOnNextAppearance {
+                LottieView(shouldDisplayAnimationOnNextAppearance: $viewModel.shouldDisplayAnimationOnNextAppearance)
             } else {
                 VStack {
                     Spacer()
-                    HICarouselSwiftUIView(carouselData: data)
-                    HIButtonSUI()
-                        .frame(width: 350, height: 50)
-                        .onTapGesture {
-                            NotificationCenter.default.post(name: .getStarted, object: nil)
-                        }
+                    
+                    HICarouselSwiftUIView(carouselData: viewModel.data)
+                    
+                    Button("Get Started") {
+                        NotificationCenter.default.post(name: .getStarted, object: nil)
+                    }
+                    .padding()
+                    .font(.title3.bold())
+                    .frame(width: 350, height: 50)
+                    .foregroundColor(.white)
+                    .background(Color(red: 130/255, green: 171/255, blue: 79/255))
+                    .clipShape(Capsule())
+                    
                     Spacer()
                 }
             }
-            
         }
     }
 }
 
 // MARK: - SwiftUI => LottieView
-@available(iOS 14.0, *)
 struct LottieView: UIViewRepresentable {
+    
+    @Binding var shouldDisplayAnimationOnNextAppearance : Bool
+    
     func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView(frame: .zero)
         let animationView = AnimationView(name: "DarkVespaText")
@@ -72,34 +58,17 @@ struct LottieView: UIViewRepresentable {
         animationView.frame = view.frame
         animationView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(animationView)
-        animationView.play()
+        animationView.play { _ in
+            withAnimation(.easeInOut(duration: 1)) {
+                shouldDisplayAnimationOnNextAppearance.toggle()
+            }
+        }
         return view
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) { return }
 }
 
-
-
-// MARK: - SwiftUI => HIButton
-@available(iOS 14.0, *)
-struct HIButtonSUI : UIViewRepresentable {
-    func makeUIView(context: Context) -> UIButton {
-        let startButton = HIButton {
-            $0.layer.cornerRadius = 25
-            $0.titleLabel?.font = HIAppearance.Font.onboardingGetStartedText
-            $0.backgroundHIColor = \.buttonViewBackground
-            $0.titleHIColor = \.whiteText
-            $0.title = "Get Started"
-            $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        }
-        return startButton
-    }
-    
-    func updateUIView(_ uiView: UIButton, context: Context) { return }
-}
-
-@available(iOS 14.0, *)
 struct HIOnboardingView_Previews: PreviewProvider {
     static var previews: some View {
         HIOnboardingView()
