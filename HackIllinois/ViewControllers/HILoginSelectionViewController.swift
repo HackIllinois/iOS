@@ -14,7 +14,7 @@ import Foundation
 import UIKit
 import HIAPI
 
-protocol HILoginSelectionViewControllerDelegate: class {
+protocol HILoginSelectionViewControllerDelegate: AnyObject {
     func loginSelectionViewController(_ loginSelectionViewController: HILoginSelectionViewController, didMakeLoginSelection selection: HIAPI.AuthService.OAuthProvider)
 }
 
