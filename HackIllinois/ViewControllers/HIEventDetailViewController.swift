@@ -15,11 +15,12 @@ import UIKit
 import MapKit
 import HIAPI
 import APIManager
+import GoogleMaps
 
 class HIEventDetailViewController: HIBaseViewController {
     // MARK: - Properties
     var event: Event?
-
+    
     // MARK: Views
     private let eventDetailContainer = HIView {
         $0.layer.cornerRadius = 8
@@ -32,9 +33,17 @@ class HIEventDetailViewController: HIBaseViewController {
         $0.backgroundHIColor = \.clear
     }
     private let titleLabel = HILabel(style: .detailTitle)
-    private let sponsorLabel = HILabel(style: .sponsor)
+    
     private let eventTypeLabel = HILabel(style: .eventType)
+    
+    private let sponsorLabel = HILabel(style: .sponsor)
+    
+    private let timeImageView = UIImageView(image: UIImage(named: "Clock"))
     private let timeLabel = HILabel(style: .description)
+    
+    private let locationLabel = HILabel(style:.location)
+    private let locationImageView = UIImageView(image: UIImage(named: "Marker"))
+    
     private let descriptionLabel = HILabel(style: .detailText)
     let pointsView = HIView { (view) in
         view.layer.cornerRadius = 8
@@ -42,7 +51,6 @@ class HIEventDetailViewController: HIBaseViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
     }
     private let pointsLabel = HILabel(style: .pointsText)
-    private let timeImageView = UIImageView(image: #imageLiteral(resourceName: "Clock"))
     private let favoritedButton = HIButton {
         $0.tintHIColor = \.accent
         $0.backgroundHIColor = \.clear
@@ -55,40 +63,48 @@ class HIEventDetailViewController: HIBaseViewController {
         $0.activeImage = #imageLiteral(resourceName: "MenuClose")
         $0.baseImage = #imageLiteral(resourceName: "MenuClose")
     }
-
+    
+    private var mapView : GMSMapView!
+    
+    private let mapContainerView = HIView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundHIColor = \.clear
+    }
+    
     // MARK: Constraints
     private var descriptionLabelHeight = NSLayoutConstraint()
+    
 }
 
 // MARK: - Actions
 extension HIEventDetailViewController {
     @objc func didSelectFavoriteButton(_ sender: HIButton) {
         guard let event = event else { return }
-
+        
         let changeFavoriteStatusRequest: APIRequest<EventFavorites> =
-            sender.isActive ?
-                HIAPI.EventService.unfavoriteBy(id: event.id) :
-                HIAPI.EventService.favoriteBy(id: event.id)
-
+        sender.isActive ?
+        HIAPI.EventService.unfavoriteBy(id: event.id) :
+        HIAPI.EventService.favoriteBy(id: event.id)
+        
         changeFavoriteStatusRequest
-        .onCompletion { result in
-            switch result {
-            case .success:
-                DispatchQueue.main.async {
-                    sender.isActive.toggle()
-                    event.favorite.toggle()
-                    event.favorite ?
+            .onCompletion { result in
+                switch result {
+                case .success:
+                    DispatchQueue.main.async {
+                        sender.isActive.toggle()
+                        event.favorite.toggle()
+                        event.favorite ?
                         HILocalNotificationController.shared.scheduleNotification(for: event) :
                         HILocalNotificationController.shared.unscheduleNotification(for: event)
+                    }
+                case .failure(let error):
+                    print(error, error.localizedDescription)
                 }
-            case .failure(let error):
-                print(error, error.localizedDescription)
             }
-        }
-        .authorize(with: HIApplicationStateController.shared.user)
-        .launch()
+            .authorize(with: HIApplicationStateController.shared.user)
+            .launch()
     }
-
+    
     @objc func didSelectCloseButton(_ sender: HIButton) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -96,10 +112,10 @@ extension HIEventDetailViewController {
 
 // MARK: - UIViewController
 extension HIEventDetailViewController {
-
+    
     override func loadView() {
         super.loadView()
-
+        
         setupCloseButton()
         setupContainers()
         setupTitle()
@@ -111,9 +127,11 @@ extension HIEventDetailViewController {
         }
         setupTime()
         setupPoints()
+        setupLocation()
+        setupMap()
         setupDescription()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let event = event else { return }
@@ -130,6 +148,9 @@ extension HIEventDetailViewController {
         } else {
             timeLabel.text = Formatter.simpleTime.string(from: event.startTime) + " - " + Formatter.simpleTime.string(from: event.endTime)
         }
+        //
+        locationLabel.text = "Siebel Center for Computer Science 2024"
+        //
         favoritedButton.isActive = event.favorite
         pointsLabel.text = "+ \(event.points) pts     "
         eventTypeLabel.text = event.eventType.lowercased().capitalized
@@ -137,8 +158,24 @@ extension HIEventDetailViewController {
         let targetSize = CGSize(width: descriptionLabel.frame.width, height: .greatestFiniteMagnitude)
         let neededSize = descriptionLabel.sizeThatFits(targetSize)
         descriptionLabelHeight.constant = neededSize.height
+        
+        // MARK: GoogleMap Setup
+        let newcamera = GMSCameraPosition.camera(withLatitude: 40.11406157923977, longitude: -88.22530808862882, zoom: 18.0)
+        mapView.animate(to: newcamera)
+        
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: 40.113882445333154, longitude: -88.22491715718857)
+        marker.title = "Test Location"
+        marker.map = mapView
+        print(event)
+//
+//        // Creates a marker in the center of the map.
+//        let marker = GMSMarker()
+//        marker.position = CLLocationCoordinate2D(latitude: 40.113882445333154, longitude: -88.22491715718857)
+//        marker.title = "Test Location"
+//        marker.map = map
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if event == nil {
@@ -149,10 +186,10 @@ extension HIEventDetailViewController {
         view.addSubview(eventDetailContainer)
         eventDetailContainer.topAnchor.constraint(equalTo: closeButton.bottomAnchor).isActive = true
         eventDetailContainer.constrain(to: view.safeAreaLayoutGuide, trailingInset: -8, bottomInset: 0, leadingInset: 8)
-
+        
         eventDetailContainer.addSubview(upperContainerView)
         upperContainerView.constrain(to: eventDetailContainer, topInset: 25, trailingInset: 0, leadingInset: 0)
-        upperContainerView.constrain(height: 75)
+        upperContainerView.constrain(height: 95)
     }
     func setupEventType() {
         upperContainerView.addSubview(eventTypeLabel)
@@ -189,13 +226,41 @@ extension HIEventDetailViewController {
     }
     func setupDescription() {
         eventDetailContainer.addSubview(descriptionLabel)
-        descriptionLabel.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 15).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: mapContainerView.bottomAnchor, constant: 15).isActive = true
         descriptionLabel.constrain(to: eventDetailContainer, trailingInset: 0)
         descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         descriptionLabelHeight = descriptionLabel.heightAnchor.constraint(equalToConstant: 100)
         descriptionLabelHeight.isActive = true
     }
+    
+    func setupLocation() {
+        upperContainerView.addSubview(locationImageView)
+        locationImageView.translatesAutoresizingMaskIntoConstraints = false
+        locationImageView.topAnchor.constraint(equalTo: timeImageView.bottomAnchor, constant: 10).isActive = true
+        locationImageView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
 
+        upperContainerView.addSubview(locationLabel)
+        locationLabel.centerYAnchor.constraint(equalTo: locationImageView.centerYAnchor).isActive = true
+        locationLabel.leadingAnchor.constraint(equalTo: locationImageView.leadingAnchor, constant: 20).isActive = true
+    }
+    
+    func setupMap() {
+        eventDetailContainer.addSubview(mapContainerView)
+        mapContainerView.topAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: 15).isActive = true
+        mapContainerView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
+        mapContainerView.constrain(height: 300)
+        
+        let camera = GMSCameraPosition.camera(withLatitude: 40.113882445333154, longitude: -88.22491715718857, zoom: 18.0)
+        let mapID = GMSMapID(identifier: "66c463c9a421326e")
+        mapView = GMSMapView(frame: CGRect(x: 0, y: 0, width: view.bounds.width - 23, height: 300), mapID: mapID , camera: camera)
+        mapView.isUserInteractionEnabled = true
+        
+        mapContainerView.layer.cornerRadius = 20
+        mapView.layer.cornerRadius = 20
+        
+        mapContainerView.addSubview(mapView)
+    }
+    
     func setupCloseButton() {
         view.addSubview(closeButton)
         closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
@@ -203,7 +268,7 @@ extension HIEventDetailViewController {
         closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         closeButton.constrain(height: 20)
     }
-
+    
     func setupFavoritedButton() {
         view.addSubview(favoritedButton)
         favoritedButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
