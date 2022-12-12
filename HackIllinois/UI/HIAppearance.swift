@@ -74,7 +74,7 @@ struct HIAppearance: Equatable {
     private static let green = #colorLiteral(red: 0.4705882353, green: 0.6745098039, blue: 0.2588235294, alpha: 1)
     private static let lightBlack = #colorLiteral(red: 0.03137254902, green: 0.08235294118, blue: 0.1058823529, alpha: 1)
     private static let salmon = #colorLiteral(red: 0.9490196078, green: 0.6078431373, blue: 0.4705882353, alpha: 1)
-    private static let yellowWhite = #colorLiteral(red: 0.9647058824, green: 0.9568627451, blue: 0.831372549, alpha: 1)
+    private static let yellowWhite = #colorLiteral(red: 0.7882352941, green: 0.8235294118, blue: 0.8980392157, alpha: 1)
     private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     private static let transparent = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
 
