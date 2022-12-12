@@ -60,6 +60,8 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>GoogleMap_API_KEY</key>
+	<string>3up3r_s3cr3t!_k3y</string>
 	<key>UISupportedInterfaceOrientations~iphone</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
