@@ -309,7 +309,7 @@
 		BF0FDA3825F4DCCD003B5DB1 /* HIScheduleSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScheduleSegmentedControl.swift; sourceTree = "<group>"; };
 		BFB1FD3D26105EA400500008 /* HIEditProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEditProfileCell.swift; sourceTree = "<group>"; };
 		D3A309BA221116A600CBA351 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };
-		D3A309BB2211175200CBA351 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framewor
+		D3A309BB2211175200CBA351 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
 		E1E4A5DC291C9F3F00780BA1 /* HILabelSUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HILabelSUI.swift; sourceTree = "<group>"; };
 		E1E4A5D6291C9BF700780BA1 /* HICarouselSwiftUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HICarouselSwiftUIView.swift; sourceTree = "<group>"; };
 		E1E4A5D7291C9BF700780BA1 /* HIOnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIOnboardingView.swift; sourceTree = "<group>"; };
