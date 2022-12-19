@@ -14,7 +14,7 @@ import Foundation
 import UIKit
 import HIAPI
 
-protocol HIProjectCellDelegate: class {
+protocol HIProjectCellDelegate: AnyObject {
     func projectCellDidSelectFavoriteButton(_ projectCell: HIProjectCell)
 }
 

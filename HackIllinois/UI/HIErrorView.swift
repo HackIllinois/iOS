@@ -13,7 +13,7 @@
 import Foundation
 import UIKit
 
-protocol HIErrorViewDelegate: class {
+protocol HIErrorViewDelegate: AnyObject {
     func didSelectErrorLogout(_ sender: UIButton)
 }
 class HIErrorView: HIView {

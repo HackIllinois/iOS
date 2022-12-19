@@ -14,7 +14,7 @@ import Foundation
 import UIKit
 import Lottie
 
-protocol HICountdownViewControllerDelegate: class {
+protocol HICountdownViewControllerDelegate: AnyObject {
     func countdownToDateFor(countdownViewController: HICountdownViewController) -> Date?
 }
 
