@@ -57,7 +57,13 @@ struct HIAppearance: Equatable {
     let leaderboardBackgroundOne: UIColor
     let leaderboardBackgroundTwo: UIColor
     let pointsBackground: UIColor
+    
+    let profileCardBackground: UIColor
+    let profileCardVegetarian: UIColor
+    let profileCardNut: UIColor
+    let profileBaseText: UIColor
 
+    
     let clear: UIColor = .clear
     let black: UIColor = .black
     let white: UIColor = .white
@@ -78,6 +84,13 @@ struct HIAppearance: Equatable {
     private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     private static let transparent = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
 
+    // Hack 2023 color palette
+    private static let lightBlue = #colorLiteral(red: 0.7848680019, green: 0.8248175979, blue: 0.9054575562, alpha: 1)
+    private static let vegetarian = #colorLiteral(red: 0.2156862745, green: 0.8705882353, blue: 0.8039215686, alpha: 1)
+    private static let nut = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1)
+    private static let profileBaseText = #colorLiteral(red: 0.1137254902, green: 0.1490196078, blue: 0.2666666667, alpha: 1)
+    
+    
     private static var statusBarWhite: UIStatusBarStyle {
         return .lightContent
     }
@@ -131,7 +144,11 @@ struct HIAppearance: Equatable {
         leaderboardText: lightBlack,
         leaderboardBackgroundOne: yellowWhite,
         leaderboardBackgroundTwo: tan,
-        pointsBackground: yellowGreen
+        pointsBackground: yellowGreen,
+        profileCardBackground: lightBlue,
+        profileCardVegetarian: vegetarian,
+        profileCardNut: nut,
+        profileBaseText: profileBaseText
     )
 
     fileprivate static let night = HIAppearance(
@@ -176,7 +193,11 @@ struct HIAppearance: Equatable {
         leaderboardText: lightBlack,
         leaderboardBackgroundOne: yellowWhite,
         leaderboardBackgroundTwo: tan,
-        pointsBackground: yellowGreen
+        pointsBackground: yellowGreen,
+        profileCardBackground: lightBlue,
+        profileCardVegetarian: vegetarian,
+        profileCardNut: nut,
+        profileBaseText: profileBaseText
     )
 
     fileprivate static var current = day
@@ -195,7 +216,7 @@ struct HIAppearance: Equatable {
         static let detailTitle = UIFont.systemFont(ofSize: 24, weight: .semibold)
         static let detailSubtitle = UIFont.systemFont(ofSize: 16, weight: .medium)
         static let detailText = UIFont.systemFont(ofSize: 16, weight: .regular)
-        static let viewTitle = UIFont.systemFont(ofSize: 28, weight: .semibold)
+        static let viewTitle = UIFont.systemFont(ofSize: 24, weight: .semibold)
         static let happeningEventTitle = UIFont.systemFont(ofSize: 25, weight: .bold)
         static let eventTitle = UIFont.systemFont(ofSize: 18, weight: .semibold)
         static let eventTime = UIFont.systemFont(ofSize: 15, weight: .regular)

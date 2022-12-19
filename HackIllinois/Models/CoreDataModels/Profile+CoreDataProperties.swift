@@ -27,6 +27,7 @@ extension Profile {
     @NSManaged public var info: String
     @NSManaged public var discord: String
     @NSManaged public var avatarUrl: String
+    @NSManaged public var dietaryRestrictions: [String]
     @NSManaged public var teamStatus: String
     @NSManaged public var interests: String
     @NSManaged public var favorite: Bool

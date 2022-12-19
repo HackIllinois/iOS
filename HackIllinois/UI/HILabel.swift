@@ -121,7 +121,7 @@ class HILabel: UILabel {
             font = HIAppearance.Font.contentTitle
 
         case .viewTitle:
-            textHIColor = \.baseText
+            textHIColor = \.white
             backgroundHIColor = \.clear
             textAlignment = .center
             font = HIAppearance.Font.viewTitle

@@ -32,6 +32,7 @@ public struct Profile: Codable, APIReturnable {
         case timezone
         case discord
         case avatarUrl
+        case dietaryRestrictions
     }
 
     public let id: String
@@ -41,6 +42,7 @@ public struct Profile: Codable, APIReturnable {
     public let timezone: String
     public let discord: String
     public let avatarUrl: String
+    public let dietaryRestrictions: [String]
 }
 
 public struct ProfileFavorites: Codable, APIReturnable {
