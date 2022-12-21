@@ -13,7 +13,7 @@
 import Foundation
 import UIKit
 
-protocol HILoginSelectionCellDelegate: class {
+protocol HILoginSelectionCellDelegate: AnyObject {
 
 }
 
