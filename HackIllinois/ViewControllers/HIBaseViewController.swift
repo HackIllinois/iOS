@@ -353,12 +353,17 @@ extension HIBaseViewController {
         let keyboardFrame = keyboardFrameValue.cgRectValue
 
         layout?(keyboardFrame)
-
-        UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationDuration(duration)
-        UIView.setAnimationCurve(curve)
-        view.layoutIfNeeded()
-        UIView.commitAnimations()
+//        UIView.beginAnimations(nil, context: nil)
+//        UIView.setAnimationDuration(duration)
+//        UIView.setAnimationCurve(curve)
+//        view.layoutIfNeeded()
+//        UIView.commitAnimations()
+        #warning("Not tested")
+        let animator = UIViewPropertyAnimator(duration: duration, curve: curve)
+        animator.addAnimations {
+            self.view.layoutIfNeeded()
+        }
+        animator.startAnimation()
     }
 }
 
