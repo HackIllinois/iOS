@@ -43,7 +43,7 @@ struct HIOnboardingView: View {
 
 // MARK: - SwiftUI => LottieView
 struct LottieView: UIViewRepresentable {
-    @Binding var shouldDisplayAnimationOnNextAppearance : Bool
+    @Binding var shouldDisplayAnimationOnNextAppearance: Bool
     func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView(frame: .zero)
         let animationView = LottieAnimationView(name: "DarkVespaText")

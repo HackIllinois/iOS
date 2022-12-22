@@ -16,7 +16,7 @@ struct CarouselData: Hashable {
 }
 
 struct HICarouselSwiftUIView: View {
-    var carouselData : [CarouselData]
+    var carouselData: [CarouselData]
     var body: some View {
         TabView {
             ForEach(carouselData, id: \.self) { carousel in
@@ -38,7 +38,7 @@ struct HICarouselSwiftUIView: View {
     }
 }
 // MARK: - SwiftUI => HILabel
-struct HILableSUI : UIViewRepresentable {
+struct HILableSUI: UIViewRepresentable {
     var text: String
     var style: HILabel.Style?
     func makeUIView(context: Context) -> UILabel {
