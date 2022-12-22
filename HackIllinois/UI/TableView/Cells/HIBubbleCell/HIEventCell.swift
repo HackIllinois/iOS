@@ -105,7 +105,8 @@ extension HIEventCell {
         eventTypeLabel.refreshForThemeChange()
         eventTypeLabel.translatesAutoresizingMaskIntoConstraints = false
         lhs.headerView.addArrangedSubview(eventTypeLabel)
-        let titleHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle, width: lhs.contentView.frame.width - 137) // Can test for a more accurate constant
+        // Can test for a more accurate constant
+        let titleHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle, width: lhs.contentView.frame.width - 137)
         titleLabel.constrain(height: titleHeight)
         eventTypeLabel.constrain(height: 20)
         if !rhs.sponsor.isEmpty {

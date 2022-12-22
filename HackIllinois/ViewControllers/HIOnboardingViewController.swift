@@ -48,7 +48,8 @@ extension HIOnboardingViewController {
             carouselData.append(.init(image: UIImage(named: "iPadOnboarding1"), titleText: "Schedule", descriptionText: "See the times and details of all of our events."))
             carouselData.append(.init(image: UIImage(named: "iPadOnboarding2"), titleText: "Scan for Points", descriptionText: "Scan QR codes at events to obtain points!"))
             carouselData.append(.init(image: UIImage(named: "iPadOnboarding3"), titleText: "Profile", descriptionText: "View your points, tier, and other personal information."))
-            carouselData.append(.init(image: UIImage(named: "iPadOnboarding4"), titleText: "Leaderboard", descriptionText: "See who is leading HackIllinois 2022 in points earned!"))
+            carouselData.append(.init(image: UIImage(named: "iPadOnboarding4"), titleText: "Leaderboard",
+                                          descriptionText: "See who is leading HackIllinois 2022 in points earned!"))
         } else {
             carouselData.append(.init(image: #imageLiteral(resourceName: "Onboarding0"), titleText: "Welcome!", descriptionText: "Swipe to see what our app has to offer!"))
             carouselData.append(.init(image: UIImage(named: "Onboarding1"), titleText: "Countdown", descriptionText: "See how much time you have left to hack!"))
