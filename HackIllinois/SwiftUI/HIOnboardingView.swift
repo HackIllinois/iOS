@@ -12,9 +12,7 @@ import UIKit
 import Lottie
 
 struct HIOnboardingView: View {
-    
     @StateObject private var viewModel = HIOnboardingViewModel()
-    
     var body: some View {
         ZStack {
             Image("Login")
@@ -26,9 +24,7 @@ struct HIOnboardingView: View {
             } else {
                 VStack {
                     Spacer()
-                    
                     HICarouselSwiftUIView(carouselData: viewModel.data)
-                    
                     Button("Get Started") {
                         NotificationCenter.default.post(name: .getStarted, object: nil)
                     }
@@ -38,7 +34,6 @@ struct HIOnboardingView: View {
                     .foregroundColor(.white)
                     .background(Color(red: 130/255, green: 171/255, blue: 79/255))
                     .clipShape(Capsule())
-                    
                     Spacer()
                 }
             }
@@ -48,9 +43,7 @@ struct HIOnboardingView: View {
 
 // MARK: - SwiftUI => LottieView
 struct LottieView: UIViewRepresentable {
-    
     @Binding var shouldDisplayAnimationOnNextAppearance : Bool
-    
     func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView(frame: .zero)
         let animationView = LottieAnimationView(name: "DarkVespaText")
@@ -65,7 +58,6 @@ struct LottieView: UIViewRepresentable {
         }
         return view
     }
-    
     func updateUIView(_ uiView: UIViewType, context: Context) { return }
 }
 

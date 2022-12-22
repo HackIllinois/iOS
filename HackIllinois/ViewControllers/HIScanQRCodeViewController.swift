@@ -174,7 +174,6 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
 
         #warning("Not Tested")
         let interfaceOrientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation
-        
         switch interfaceOrientation {
         case .portrait, .unknown:
             previewLayer.connection?.videoOrientation = .portrait

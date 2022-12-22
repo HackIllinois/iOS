@@ -128,10 +128,8 @@ extension HIBaseScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
         previewLayer.frame = previewView.layer.bounds
 
         guard previewLayer.connection?.isVideoOrientationSupported == true else { return }
-        
         #warning ("Not tested")
         let interfaceOrientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation
-        
         switch interfaceOrientation {
         case .portrait, .unknown:
             previewLayer.connection?.videoOrientation = .portrait
