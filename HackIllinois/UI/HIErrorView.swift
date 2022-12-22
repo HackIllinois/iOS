@@ -33,7 +33,7 @@ class HIErrorView: HIView {
         $0.titleLabel?.font = HIAppearance.Font.detailSubtitle
         $0.titleLabel?.baselineAdjustment = .alignCenters
         $0.layer.cornerRadius = 20
-        $0.addTarget(self, action: #selector(didSelectLogoutButton(_:)), for: .touchUpInside)
+        $0.addTarget(HIErrorView.self, action: #selector(didSelectLogoutButton(_:)), for: .touchUpInside)
     }
 
     // MARK: - Init

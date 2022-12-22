@@ -47,7 +47,7 @@ extension HIScanQRCodeViewController {
     override func loadView() {
         super.loadView()
         if HIApplicationStateController.shared.isGuest {
-            let background = #imageLiteral(resourceName: "ProfileBackground")
+//            let background = #imageLiteral(resourceName: "ProfileBackground")
             let imageView: UIImageView = UIImageView(frame: view.bounds)
             view.addSubview(imageView)
             view.sendSubviewToBack(imageView)

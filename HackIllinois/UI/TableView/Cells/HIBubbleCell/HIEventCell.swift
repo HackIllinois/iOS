@@ -80,7 +80,7 @@ extension HIEventCell {
 extension HIEventCell {
     static func heightForCell(with event: Event, width: CGFloat) -> CGFloat {
         let heightFromEventName = HILabel.heightForView(text: event.name, font: HIAppearance.Font.eventTitle, width: width - 137)
-        let heightFromHeader = (heightFromEventName + 4 + 17 < 60) ? 60 : heightFromEventName + 4 + 17
+//        let heightFromHeader = (heightFromEventName + 4 + 17 < 60) ? 60 : heightFromEventName + 4 + 17
         let height = heightFromEventName + 40 + 90 + 15
         if !event.sponsor.isEmpty {
             return height + 20
