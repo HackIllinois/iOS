@@ -18,11 +18,11 @@ protocol MixTypeComparable: Comparable {
 }
 
 extension MixTypeComparable {
-    static func <<Other>(lhs: Self, rhs: Other) -> Bool where Other: MixTypeComparable, Self.ComparableType == Other.ComparableType {
+    static func < <Other>(lhs: Self, rhs: Other) -> Bool where Other: MixTypeComparable, Self.ComparableType == Other.ComparableType {
         return lhs.comparable < rhs.comparable
     }
 
-    static func ==<Other>(lhs: Self, rhs: Other) -> Bool where Other: MixTypeComparable, Self.ComparableType == Other.ComparableType {
+    static func == <Other>(lhs: Self, rhs: Other) -> Bool where Other: MixTypeComparable, Self.ComparableType == Other.ComparableType {
         return lhs.comparable == rhs.comparable
     }
 }
