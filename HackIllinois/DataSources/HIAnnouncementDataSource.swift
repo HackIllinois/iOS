@@ -28,7 +28,7 @@ final class HIAnnouncementDataSource {
     }
 
     // Waive swiftlint warning
-    // swiftlint:disable:next function_body_length
+    // swiftlint:disable:next 
     static func refresh(completion: (() -> Void)? = nil) {
         guard !isRefreshing else {
             completion?()
