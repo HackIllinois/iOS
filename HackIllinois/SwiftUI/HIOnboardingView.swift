@@ -53,7 +53,7 @@ struct LottieView: UIViewRepresentable {
     
     func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView(frame: .zero)
-        let animationView = AnimationView(name: "DarkVespaText")
+        let animationView = LottieAnimationView(name: "DarkVespaText")
         animationView.contentMode = .scaleAspectFit
         animationView.frame = view.frame
         animationView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

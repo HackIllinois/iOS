@@ -19,7 +19,7 @@ class HIBaseViewController: UIViewController {
     // MARK: - Properties
     var _fetchedResultsController: NSFetchedResultsController<NSManagedObject>?
     var refreshControl = UIRefreshControl()
-    var refreshAnimation = AnimationView(name: "refresh")
+    var refreshAnimation = LottieAnimationView(name: "refresh")
     var tableView: UITableView?
     var backgroundView = UIImageView()
     let tableBackgroundView = HIView()

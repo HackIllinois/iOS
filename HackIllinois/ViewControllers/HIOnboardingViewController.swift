@@ -18,7 +18,7 @@ class HIOnboardingViewController: HIBaseViewController {
     //source: https://medium.com/swlh/swift-carousel-759800aa2952
     // MARK: - Subviews
     private var carouselView: HICarouselView?
-    let animationView = AnimationView(name: "DarkVespaText")
+    let animationView = LottieAnimationView(name: "DarkVespaText")
     var shouldDisplayAnimationOnNextAppearance = true
 
     // MARK: - Properties
