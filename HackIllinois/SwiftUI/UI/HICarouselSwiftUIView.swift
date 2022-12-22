@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-struct CarouselData: Hashable{
+struct CarouselData: Hashable {
     let image: UIImage?
     let titleText: String
     let descriptionText: String
