@@ -23,8 +23,21 @@ struct HIConstants {
         return "org.hackillinois.ios.pass_prompted_\(user.id)"
     }
     // Images
+    private static let url = "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2022/"
+
     static let PROFILE_IMAGES: [String: HIImage] = [
-        "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2022/profile-0.png": \.profile0, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2022/profile-1.png": \.profile1, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2022/profile-2.png": \.profile2, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2022/profile-3.png": \.profile3, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2022/profile-4.png": \.profile4, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2022/profile-5.png": \.profile5, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2022/profile-6.png": \.profile6, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2022/profile-7.png": \.profile7, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2022/profile-8.png": \.profile8, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2022/profile-9.png": \.profile9, "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2022/profile-10.png": \.profile10]
+        "\(url)profile-0.png": \.profile0,
+        "\(url)profile-1.png": \.profile1,
+        "\(url)/profile-2.png": \.profile2,
+        "\(url)/profile-3.png": \.profile3,
+        "\(url)/profile-4.png": \.profile4,
+        "\(url)/profile-5.png": \.profile5,
+        "\(url)/profile-6.png": \.profile6,
+        "\(url)/profile-7.png": \.profile7,
+        "\(url)/profile-8.png": \.profile8,
+        "\(url)/profile-9.png": \.profile9,
+        "\(url)/profile-10.png": \.profile10
+    ]
     static let LEADERBOARD_PROFILE_LIMIT = 10
     static let MAX_EVENT_DESCRIPTION_LENGTH = 75
     static let ASYNC_EVENT_TIME_TEXT = "All Day"
