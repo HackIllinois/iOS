@@ -80,7 +80,7 @@ extension HIEventCell {
 extension HIEventCell {
     static func heightForCell(with event: Event, width: CGFloat) -> CGFloat {
         let heightFromEventName = HILabel.heightForView(text: event.name, font: HIAppearance.Font.eventTitle, width: width - 137)
-        let heightFromHeader = (heightFromEventName + 4 + 17 < 60) ? 60 : heightFromEventName + 4 + 17
+//        let heightFromHeader = (heightFromEventName + 4 + 17 < 60) ? 60 : heightFromEventName + 4 + 17
         let height = heightFromEventName + 40 + 90 + 15
         if !event.sponsor.isEmpty {
             return height + 20
@@ -105,7 +105,8 @@ extension HIEventCell {
         eventTypeLabel.refreshForThemeChange()
         eventTypeLabel.translatesAutoresizingMaskIntoConstraints = false
         lhs.headerView.addArrangedSubview(eventTypeLabel)
-        let titleHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle, width: lhs.contentView.frame.width - 137) // Can test for a more accurate constant
+        // Can test for a more accurate constant
+        let titleHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle, width: lhs.contentView.frame.width - 137)
         titleLabel.constrain(height: titleHeight)
         eventTypeLabel.constrain(height: 20)
         if !rhs.sponsor.isEmpty {

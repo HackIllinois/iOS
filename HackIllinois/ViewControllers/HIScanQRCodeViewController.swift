@@ -47,7 +47,7 @@ extension HIScanQRCodeViewController {
     override func loadView() {
         super.loadView()
         if HIApplicationStateController.shared.isGuest {
-            let background = #imageLiteral(resourceName: "ProfileBackground")
+//            let background = #imageLiteral(resourceName: "ProfileBackground")
             let imageView: UIImageView = UIImageView(frame: view.bounds)
             view.addSubview(imageView)
             view.sendSubviewToBack(imageView)
@@ -172,7 +172,9 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
 
         guard previewLayer.connection?.isVideoOrientationSupported == true else { return }
 
-        switch UIApplication.shared.statusBarOrientation {
+        #warning("Not Tested")
+        let interfaceOrientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation
+        switch interfaceOrientation {
         case .portrait, .unknown:
             previewLayer.connection?.videoOrientation = .portrait
         case .portraitUpsideDown:
@@ -181,6 +183,8 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
             previewLayer.connection?.videoOrientation = .landscapeLeft
         case .landscapeRight:
             previewLayer.connection?.videoOrientation = .landscapeRight
+        case .none:
+            break
         @unknown default:
             previewLayer.connection?.videoOrientation = .portrait
         }
