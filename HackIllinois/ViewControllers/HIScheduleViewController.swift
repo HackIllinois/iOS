@@ -122,7 +122,7 @@ extension HIScheduleViewController {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
 
-        segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
+        segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 66).isActive = true
@@ -142,7 +142,7 @@ extension HIScheduleViewController {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         setupRefreshControl()
         super.viewDidLoad()
-        super.setCustomTitle(customTitle: "Schedule")
+        super.setCustomTitle(customTitle: "SCHEDULE")
     }
 }
 
@@ -194,7 +194,10 @@ extension HIScheduleViewController {
             let date = Formatter.coreData.date(from: sections[section].name) {
 
             header.titleLabel.text = Formatter.simpleTime.string(from: date)
+            header.titleLabel.textColor = .white
             header.titleLabel.textAlignment = .center
+            header.titleLabel.font = HIAppearance.Font.glyph
+
         }
         return header
     }

@@ -20,10 +20,10 @@ class HIHomeSegmentedControl: HISegmentedControl {
     private var views = [UIView]()
     private var titleLabels = [UILabel]()
 
-    private let titleFont = HIAppearance.Font.segmentedTitle
+    private let titleFont = HIAppearance.Font.homeSegmentedTitle
     private let numberFont = HIAppearance.Font.segmentedNumberText
 
-    private let viewPadding: CGFloat = 10
+    private let viewPadding: CGFloat = 35
     private let indicatorCornerRadiusProp: CGFloat = 0.15
 
     private var indicatorView = UIImageView(image: #imageLiteral(resourceName: "Indicator"))
@@ -50,7 +50,7 @@ class HIHomeSegmentedControl: HISegmentedControl {
     @objc override func refreshForThemeChange() {
         backgroundColor <- \.clear
         titleLabels.forEach {
-            $0.textColor <- \.baseText
+            $0.textColor <- \.white
             $0.backgroundColor <- \.clear
         }
     }
@@ -64,6 +64,7 @@ class HIHomeSegmentedControl: HISegmentedControl {
         indicatorView.layer.cornerRadius = frame.height * indicatorCornerRadiusProp
         indicatorView.layer.masksToBounds = true
         indicatorView.contentMode = .scaleAspectFit
+        indicatorView.contentMode = .center
         displayNewSelectedIndex()
     }
 
@@ -98,7 +99,7 @@ class HIHomeSegmentedControl: HISegmentedControl {
         let titleLabel = UILabel()
 
         titleLabel.textAlignment = .center
-        titleLabel.font = numberFont
+        titleLabel.font = titleFont
         titleLabel.text = items[index]
         titleLabel.textColor <- \.whiteText
         titleLabel.adjustsFontSizeToFitWidth = true

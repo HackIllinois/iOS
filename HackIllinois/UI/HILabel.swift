@@ -50,6 +50,10 @@ class HILabel: UILabel {
         case leaderboardRank
         case leaderboardName
         case leaderboardPoints
+        case neonCountdown
+        case newSponsor
+        case newLocation
+        case newTime
     }
 
     // MARK: - Properties
@@ -70,6 +74,10 @@ class HILabel: UILabel {
         translatesAutoresizingMaskIntoConstraints = false
         if let style = style {
         switch style {
+        case .neonCountdown:
+            textHIColor = \.neonCountdownText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.newCountdownText
 
         case .location:
             textHIColor = \.baseText
@@ -114,13 +122,13 @@ class HILabel: UILabel {
             font = HIAppearance.Font.detailText
             numberOfLines = 0
 
-        case .project:
-            textHIColor = \.baseText
+        case .project: // "Schedule"
+            textHIColor = \.white
             backgroundHIColor = \.clear
             font = HIAppearance.Font.contentTitle
 
-        case .viewTitle:
-            textHIColor = \.baseText
+        case .viewTitle: // "What's cooking"
+            textHIColor = \.whiteText
             backgroundHIColor = \.clear
             textAlignment = .center
             font = HIAppearance.Font.viewTitle
@@ -203,8 +211,8 @@ class HILabel: UILabel {
             textAlignment = .center
             font = HIAppearance.Font.profileInterests
 
-        case .navigationInfo:
-            textHIColor = \.titleText
+        case .navigationInfo: // "All times are in CDT"
+            textHIColor = \.white
             backgroundHIColor = \.clear
             font = HIAppearance.Font.navigationInfoText
             textAlignment = .left
@@ -215,7 +223,7 @@ class HILabel: UILabel {
             font = HIAppearance.Font.countdownText
 
         case .pointsText:
-            textHIColor = \.baseText
+            textHIColor = \.white
             backgroundHIColor = \.clear
             font = HIAppearance.Font.eventButtonText
             textAlignment = .center
@@ -246,7 +254,7 @@ class HILabel: UILabel {
             textAlignment = .center
             numberOfLines = 0
         case .clock:
-            textHIColor = \.baseText
+            textHIColor = \.whiteText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.clockText
             textAlignment = .center
@@ -267,6 +275,18 @@ class HILabel: UILabel {
             textHIColor = \.leaderboardText
             backgroundHIColor = \.pointsBackground
             font = HIAppearance.Font.leaderboardPoints
+        case .newTime:
+            textHIColor = \.black
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.timeText
+        case .newSponsor:
+            textHIColor = \.black
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.bubbleSponsorText
+        case .newLocation:
+            textHIColor = \.black
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.locationText
         }
         }
 
