@@ -60,7 +60,7 @@ class HIHomeSegmentedControl: HISegmentedControl {
         super.layoutSubviews()
 
         let indicatorViewWidth = ((frame.width - viewPadding) / CGFloat(items.count) - viewPadding)
-        indicatorView.frame = CGRect(x: viewPadding, y: 50, width: indicatorViewWidth, height: 7)
+        indicatorView.frame = CGRect(x: viewPadding, y: 45, width: indicatorViewWidth, height: 4)
         indicatorView.layer.cornerRadius = frame.height * indicatorCornerRadiusProp
         indicatorView.layer.masksToBounds = true
         indicatorView.contentMode = .scaleAspectFit

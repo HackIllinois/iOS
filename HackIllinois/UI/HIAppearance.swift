@@ -40,6 +40,7 @@ struct HIAppearance: Equatable {
     let buttonGreen: UIColor
     let buttonPink: UIColor
     let buttonBlue: UIColor
+    let buttonDarkBlue: UIColor
     let favoriteStarBackground: UIColor
     let segmentedBackground: UIColor
     // New fonts added. Replace old ones?
@@ -132,6 +133,7 @@ struct HIAppearance: Equatable {
         buttonGreen: yellowGreen,
         buttonPink: pink,
         buttonBlue: blue,
+        buttonDarkBlue: darkBlue,
         favoriteStarBackground: yellowWhite,
         segmentedBackground: white,
         buttonViewBackground: green,
@@ -180,6 +182,7 @@ struct HIAppearance: Equatable {
         buttonGreen: yellowGreen,
         buttonPink: pink,
         buttonBlue: blue,
+        buttonDarkBlue: darkBlue,
         favoriteStarBackground: yellowWhite,
         segmentedBackground: white,
         buttonViewBackground: green,

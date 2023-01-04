@@ -192,7 +192,7 @@ extension HIScheduleViewController {
             let sections = fetchedResultsController.sections,
             section < sections.count,
             let date = Formatter.coreData.date(from: sections[section].name) {
-
+            
             header.titleLabel.text = Formatter.simpleTime.string(from: date)
             header.titleLabel.textColor = .white
             header.titleLabel.textAlignment = .center
