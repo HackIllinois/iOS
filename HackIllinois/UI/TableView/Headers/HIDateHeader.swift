@@ -31,26 +31,14 @@ class HIDateHeader: UITableViewHeaderFooterView {
 
         let backgroundView = HIView { $0.backgroundHIColor = \.clear }
         self.backgroundView = backgroundView
-
-        var con: CGFloat = 2.25
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            con = 5.0
-        } else if UIScreen.main.bounds.width < 375.0 {
-            con = 1.1
-        }
-        
         backgroundView.addSubview(testView)
         testView.addSubview(titleLabel)
+        testView.constrain(width: 80)
+        testView.constrain(height: 28)
         testView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: -8).isActive = true
-        testView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 68 * con).isActive = true
+        testView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
         testView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
-        testView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -68 * con).isActive = true
-        titleLabel.constrain(to: testView, topInset: 4, trailingInset: -16, bottomInset: -4, leadingInset: 16)
-        //backgroundView.addSubview(titleLabel)
-        /*titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: -14).isActive = true
-        titleLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 14).isActive = true
-        titleLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -14).isActive = true*/
+        titleLabel.constrain(to: testView, topInset: 4, trailingInset: -5, bottomInset: -4, leadingInset: 5)
     }
 
     required init?(coder aDecoder: NSCoder) {

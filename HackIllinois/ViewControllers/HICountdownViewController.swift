@@ -104,10 +104,11 @@ extension HICountdownViewController {
         countdownStackView.addArrangedSubview(daysContent)
         let hoursContent = containerView(with: "HOURS", and: hours)
         countdownStackView.addArrangedSubview(hoursContent)
-        countdownStackView.setCustomSpacing(10, after: daysContent)
         let minutesContent = containerView(with: "MINUTES", and: minutes)
         countdownStackView.addArrangedSubview(minutesContent)
-        countdownStackView.setCustomSpacing(10, after: hoursContent)
+        countdownStackView.setCustomSpacing(30, after: daysContent)
+        countdownStackView.setCustomSpacing(30, after: hoursContent)
+        countdownStackView.setCustomSpacing(30, after: minutesContent)
     }
     func containerView(with labelString: String, and countDownView: HILabel) -> UIView {
         countDownView.backgroundColor <- backgroundHIColor
@@ -124,14 +125,14 @@ extension HICountdownViewController {
         let strokeTextAttributes = [
             NSAttributedString.Key.strokeColor: yellowish,
             NSAttributedString.Key.foregroundColor: UIColor.clear,
-            NSAttributedString.Key.strokeWidth: 4.0,
-            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 48)]
+            NSAttributedString.Key.strokeWidth: 5.0,
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 48, weight: UIFont.Weight(rawValue: 900) )]
             as [NSAttributedString.Key: Any]
 
         countDownView.attributedText = NSMutableAttributedString(string: "Test", attributes: strokeTextAttributes)
         countDownView.layer.shadowColor = yellowish.cgColor
         countDownView.layer.shadowRadius = 3.0
-        countDownView.layer.shadowOpacity = 70.0
+        countDownView.layer.shadowOpacity = 100.0
         countDownView.layer.masksToBounds = false
         countDownView.layer.shouldRasterize = true
         countDownView.layer.shadowOffset = .zero

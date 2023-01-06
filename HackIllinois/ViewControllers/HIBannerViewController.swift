@@ -32,7 +32,6 @@ extension HIBannerViewController {
     }
     
     func bannerView(with labelString: String) -> UIView {
-        //bannerView.backgroundColor <- backgroundHIColor
 
         let label = HILabel {
             $0.textHIColor = \.whiteText

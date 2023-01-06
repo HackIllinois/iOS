@@ -185,7 +185,7 @@ extension HIEventCell {
         }
         let locationImageView = UIImageView(image: #imageLiteral(resourceName: "LocationSign"))
         let locationLabel = HILabel(style: .newLocation)
-        locationLabel.text = "Place"
+        locationLabel.text = "Location"
         bottomContainerView.addSubview(locationImageView)
         bottomContainerView.addSubview(locationLabel)
         if !rhs.sponsor.isEmpty {

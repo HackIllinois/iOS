@@ -219,7 +219,7 @@ struct HIAppearance: Equatable {
         static let detailTitle = UIFont.systemFont(ofSize: 24, weight: .semibold)
         static let detailSubtitle = UIFont.systemFont(ofSize: 16, weight: .medium)
         static let detailText = UIFont.systemFont(ofSize: 16, weight: .regular)
-        static let viewTitle = UIFont.systemFont(ofSize: 28, weight: .semibold)
+        static let viewTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
         static let happeningEventTitle = UIFont.systemFont(ofSize: 25, weight: .bold)
         static let eventTitle = UIFont.systemFont(ofSize: 18, weight: .semibold)
         static let eventTime = UIFont.systemFont(ofSize: 15, weight: .regular)
