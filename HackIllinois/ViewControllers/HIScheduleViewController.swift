@@ -123,8 +123,8 @@ extension HIScheduleViewController {
         view.addSubview(segmentedControl)
 
         segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8).isActive = true
-        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
-        segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
+        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: -34).isActive = true
+        segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 34).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 66).isActive = true
 
         let tableView = HITableView()
@@ -142,7 +142,7 @@ extension HIScheduleViewController {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         setupRefreshControl()
         super.viewDidLoad()
-        super.setCustomTitle(customTitle: "SCHEDULE")
+        super.setCustomTitle(customTitle: "  SCHEDULE")
     }
 }
 
@@ -172,7 +172,7 @@ extension HIScheduleViewController {
 // MARK: - UITableViewDelegate
 extension HIScheduleViewController {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 25
+        return 30
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

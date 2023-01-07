@@ -25,7 +25,7 @@ class HIScheduleSegmentedControl: HISegmentedControl {
     private let titleFont = HIAppearance.Font.segmentedTitle
     private let numberFont = HIAppearance.Font.segmentedNumberText
 
-    private let viewPadding: CGFloat = 34
+    private let viewPadding: CGFloat = 65
     private let indicatorCornerRadiusProp: CGFloat = 0.15
 
     private var indicatorView = UIImageView(image: #imageLiteral(resourceName: "Indicator"))
@@ -68,7 +68,7 @@ class HIScheduleSegmentedControl: HISegmentedControl {
         super.layoutSubviews()
 
         let indicatorViewWidth = ((frame.width - viewPadding) / CGFloat(items.count) - viewPadding)
-        indicatorView.frame = CGRect(x: viewPadding, y: 65, width: indicatorViewWidth, height: 4)
+        indicatorView.frame = CGRect(x: viewPadding, y: 68, width: indicatorViewWidth, height: 4)
         indicatorView.layer.masksToBounds = true
         indicatorView.contentMode = .scaleAspectFit
         indicatorView.contentMode = .center
@@ -122,7 +122,7 @@ class HIScheduleSegmentedControl: HISegmentedControl {
         numberLabel.translatesAutoresizingMaskIntoConstraints = false
 
         titleLabel.constrain(to: view, topInset: 5, trailingInset: 0, leadingInset: 0)
-        numberLabel.constrain(to: view, trailingInset: 0, bottomInset: -8, leadingInset: 0)
+        numberLabel.constrain(to: view, trailingInset: 0, bottomInset: -4, leadingInset: 0)
         numberLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0).isActive = true
         titleLabel.heightAnchor.constraint(equalTo: numberLabel.heightAnchor).isActive = true
 

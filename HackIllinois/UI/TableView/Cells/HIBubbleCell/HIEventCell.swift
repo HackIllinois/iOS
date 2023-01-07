@@ -159,14 +159,14 @@ extension HIEventCell {
         lhs.headerView.addArrangedSubview(eventTypeView)
         lhs.headerView.setCustomSpacing(8, after: eventTypeView)
     
-        pointsView.leadingAnchor.constraint(equalTo: eventTypeView.trailingAnchor, constant: 5).isActive = true
+        pointsView.leadingAnchor.constraint(equalTo: eventTypeView.trailingAnchor, constant: 8).isActive = true
         pointsView.centerYAnchor.constraint(equalTo: eventTypeView.centerYAnchor).isActive = true
         pointsView.constrain(height: 20)
         
         upperContainerView.addSubview(timeImageView)
         upperContainerView.addSubview(timeLabel)
         
-        timeLabel.leadingAnchor.constraint(equalTo: timeImageView.trailingAnchor, constant: 5).isActive = true
+        timeLabel.leadingAnchor.constraint(equalTo: timeImageView.trailingAnchor, constant: 9).isActive = true
         timeLabel.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor).isActive = true
         
         let sponsorImageView = UIImageView(image: #imageLiteral(resourceName: "Vector"))
@@ -179,13 +179,17 @@ extension HIEventCell {
             middleContainerView.addSubview(sponsorLabel)
             sponsorImageView.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor, constant: 22).isActive = true
     
-            sponsorLabel.leadingAnchor.constraint(equalTo: sponsorImageView.trailingAnchor, constant: 5).isActive = true
+            sponsorLabel.leadingAnchor.constraint(equalTo: sponsorImageView.trailingAnchor, constant: 9).isActive = true
             sponsorLabel.centerYAnchor.constraint(equalTo: sponsorImageView.centerYAnchor).isActive = true
             lhs.contentStackView.setCustomSpacing(8, after: sponsorImageView)
         }
         let locationImageView = UIImageView(image: #imageLiteral(resourceName: "LocationSign"))
         let locationLabel = HILabel(style: .newLocation)
-        locationLabel.text = "Location"
+        for location in rhs.locations {
+            guard let location = location as? Location else { continue }
+            locationLabel.text = "\(location.name)"
+            print("Success")
+        }
         bottomContainerView.addSubview(locationImageView)
         bottomContainerView.addSubview(locationLabel)
         if !rhs.sponsor.isEmpty {

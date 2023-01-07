@@ -66,7 +66,7 @@ struct HIAppearance: Equatable {
     let black: UIColor = .black
     let white: UIColor = .white
 
-    // Hack 2022 color palette
+    //Hack 2022 color palette
     private static let darkRed = #colorLiteral(red: 0.6039215686, green: 0.1411764706, blue: 0.168627451, alpha: 1)
     private static let tan = #colorLiteral(red: 0.9098039216, green: 0.8431372549, blue: 0.6470588235, alpha: 1)
     private static let orange = #colorLiteral(red: 0.9294117647, green: 0.6078431373, blue: 0.1294117647, alpha: 1)
@@ -79,8 +79,6 @@ struct HIAppearance: Equatable {
     private static let lightBlack = #colorLiteral(red: 0.03137254902, green: 0.08235294118, blue: 0.1058823529, alpha: 1)
     private static let salmon = #colorLiteral(red: 0.9490196078, green: 0.6078431373, blue: 0.4705882353, alpha: 1)
     private static let yellowWhite = #colorLiteral(red: 0.9647058824, green: 0.9568627451, blue: 0.831372549, alpha: 1)
-    private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-    private static let transparent = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     
     // Hack 2023 color palette
     private static let lightYellow = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1)
@@ -88,9 +86,10 @@ struct HIAppearance: Equatable {
     private static let pink = #colorLiteral(red: 0.9960784314, green: 0.4392156863, blue: 0.5960784314, alpha: 1)
     private static let mediumOrange = #colorLiteral(red: 0.9764705882, green: 0.5843137255, blue: 0.3411764706, alpha: 1)
     private static let teal = #colorLiteral(red: 0.2156862745, green: 0.8705882353, blue: 0.8039215686, alpha: 1)
-    private static let lightBlue = #colorLiteral(red: 0.7882352941, green: 0.8235294118, blue: 0.8980392157, alpha: 1)
-    private static let white2 = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    private static let lightBlue = #colorLiteral(red: 0.7921568627, green: 0.8235294118, blue: 0.8980392157, alpha: 1)
+    private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     private static let darkBlue = #colorLiteral(red: 0.05098039216, green: 0.2196078431, blue: 0.4862745098, alpha: 1)
+    private static let transparent = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     private static let transparent2 = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     
 

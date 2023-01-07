@@ -33,12 +33,12 @@ class HIDateHeader: UITableViewHeaderFooterView {
         self.backgroundView = backgroundView
         backgroundView.addSubview(testView)
         testView.addSubview(titleLabel)
-        testView.constrain(width: 80)
-        testView.constrain(height: 28)
+        testView.constrain(width: 100)
+        testView.constrain(height: 30)
         testView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: -8).isActive = true
         testView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
         testView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
-        titleLabel.constrain(to: testView, topInset: 4, trailingInset: -5, bottomInset: -4, leadingInset: 5)
+        titleLabel.constrain(to: testView, topInset: 4, trailingInset: -8, bottomInset: -4, leadingInset: 8)
     }
 
     required init?(coder aDecoder: NSCoder) {

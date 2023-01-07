@@ -61,7 +61,6 @@ class HINavigationController: UINavigationController {
         infoTitle.constrain(height: 10)
         infoTitle.translatesAutoresizingMaskIntoConstraints = false
         infoTitle.isHidden = infoTitleIsHidden
-        //infoTitle.text = "All times are in CDT"
 
         additionalSafeAreaInsets.top = 15
         navigationBar.titleTextAttributes = [
