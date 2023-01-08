@@ -42,7 +42,7 @@ class HIEventDetailViewController: HIBaseViewController {
     private let timeLabel = HILabel(style: .description)
     
     private let locationLabel = HILabel(style:.location)
-    private let locationImageView = UIImageView(image: UIImage(named: "Marker"))
+    private let locationImageView = UIImageView(image: UIImage(named: "marker"))
     
     private let descriptionLabel = HILabel(style: .detailText)
     let pointsView = HIView { (view) in
@@ -63,13 +63,11 @@ class HIEventDetailViewController: HIBaseViewController {
         $0.activeImage = #imageLiteral(resourceName: "MenuClose")
         $0.baseImage = #imageLiteral(resourceName: "MenuClose")
     }
-    
-    private var mapView : GMSMapView!
-    
-    private let mapContainerView = HIView {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundHIColor = \.clear
-    }
+    private var mapView: GMSMapView!
+//    private let mapContainerView = HIView {
+//        $0.translatesAutoresizingMaskIntoConstraints = false
+//        $0.backgroundHIColor = \.clear
+//    }
     
     // MARK: Constraints
     private var descriptionLabelHeight = NSLayoutConstraint()
@@ -226,13 +224,12 @@ extension HIEventDetailViewController {
     }
     func setupDescription() {
         eventDetailContainer.addSubview(descriptionLabel)
-        descriptionLabel.topAnchor.constraint(equalTo: mapContainerView.bottomAnchor, constant: 15).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: mapView.bottomAnchor, constant: 15).isActive = true
         descriptionLabel.constrain(to: eventDetailContainer, trailingInset: 0)
         descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         descriptionLabelHeight = descriptionLabel.heightAnchor.constraint(equalToConstant: 100)
         descriptionLabelHeight.isActive = true
     }
-    
     func setupLocation() {
         upperContainerView.addSubview(locationImageView)
         locationImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -243,24 +240,18 @@ extension HIEventDetailViewController {
         locationLabel.centerYAnchor.constraint(equalTo: locationImageView.centerYAnchor).isActive = true
         locationLabel.leadingAnchor.constraint(equalTo: locationImageView.leadingAnchor, constant: 20).isActive = true
     }
-    
     func setupMap() {
-        eventDetailContainer.addSubview(mapContainerView)
-        mapContainerView.topAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: 15).isActive = true
-        mapContainerView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
-        mapContainerView.constrain(height: 300)
-        
         let camera = GMSCameraPosition.camera(withLatitude: 40.113882445333154, longitude: -88.22491715718857, zoom: 18.0)
         let mapID = GMSMapID(identifier: "66c463c9a421326e")
-        mapView = GMSMapView(frame: CGRect(x: 0, y: 0, width: view.bounds.width - 23, height: 300), mapID: mapID , camera: camera)
-        mapView.isUserInteractionEnabled = true
-        
-        mapContainerView.layer.cornerRadius = 20
+        mapView = GMSMapView(frame: self.view.bounds, mapID: mapID, camera: camera)
+        eventDetailContainer.addSubview(mapView)
+        mapView.translatesAutoresizingMaskIntoConstraints = false
+        mapView.leadingAnchor.constraint(equalTo: eventDetailContainer.leadingAnchor).isActive = true
+        mapView.trailingAnchor.constraint(equalTo: eventDetailContainer.trailingAnchor).isActive = true
+        mapView.topAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: 15).isActive = true
+        mapView.constrain(height: 300)
         mapView.layer.cornerRadius = 20
-        
-        mapContainerView.addSubview(mapView)
     }
-    
     func setupCloseButton() {
         view.addSubview(closeButton)
         closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
@@ -268,7 +259,6 @@ extension HIEventDetailViewController {
         closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
         closeButton.constrain(height: 20)
     }
-    
     func setupFavoritedButton() {
         view.addSubview(favoritedButton)
         favoritedButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
