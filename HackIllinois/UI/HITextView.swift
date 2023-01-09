@@ -24,7 +24,7 @@ class HITextView: UITextView {
     init() {
         super.init(frame: .zero, textContainer: nil)
 
-        font = HIAppearance.Font.profileTier.withSize(18)
+        font = HIAppearance.Font.profileTier!.withSize(18)
         textHIColor = \.whiteTagFont
         tintHIColor = \.whiteTagFont
         backgroundHIColor = \.clear

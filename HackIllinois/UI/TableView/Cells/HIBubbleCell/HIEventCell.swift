@@ -79,7 +79,7 @@ extension HIEventCell {
 // MARK: - Population
 extension HIEventCell {
     static func heightForCell(with event: Event, width: CGFloat) -> CGFloat {
-        let heightFromEventName = HILabel.heightForView(text: event.name, font: HIAppearance.Font.eventTitle, width: width - 137)
+        let heightFromEventName = HILabel.heightForView(text: event.name, font: HIAppearance.Font.eventTitle!, width: width - 137)
 //        let heightFromHeader = (heightFromEventName + 4 + 17 < 60) ? 60 : heightFromEventName + 4 + 17
         let height = heightFromEventName + 40 + 90 + 15
         if !event.sponsor.isEmpty {
@@ -106,7 +106,7 @@ extension HIEventCell {
         eventTypeLabel.translatesAutoresizingMaskIntoConstraints = false
         lhs.headerView.addArrangedSubview(eventTypeLabel)
         // Can test for a more accurate constant
-        let titleHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle, width: lhs.contentView.frame.width - 137)
+        let titleHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle!, width: lhs.contentView.frame.width - 137)
         titleLabel.constrain(height: titleHeight)
         eventTypeLabel.constrain(height: 20)
         if !rhs.sponsor.isEmpty {
@@ -156,7 +156,7 @@ extension HIEventCell {
         descriptionLabel.text = descriptionText
         lhs.contentStackView.addArrangedSubview(descriptionLabel)
         lhs.contentStackView.setCustomSpacing(10, after: descriptionLabel)
-        let textHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle, width: lhs.contentView.frame.width - 98)
+        let textHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle!, width: lhs.contentView.frame.width - 98)
         contentStackViewHeight += textHeight
         contentStackViewHeight += timeLabel.intrinsicContentSize.height + 13 + 40 + 3 + 40
     }
