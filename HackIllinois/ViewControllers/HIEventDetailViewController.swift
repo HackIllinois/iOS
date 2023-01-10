@@ -64,10 +64,10 @@ class HIEventDetailViewController: HIBaseViewController {
         $0.baseImage = #imageLiteral(resourceName: "MenuClose")
     }
     private var mapView: GMSMapView!
-//    private let mapContainerView = HIView {
-//        $0.translatesAutoresizingMaskIntoConstraints = false
-//        $0.backgroundHIColor = \.clear
-//    }
+    //    private let mapContainerView = HIView {
+    //        $0.translatesAutoresizingMaskIntoConstraints = false
+    //        $0.backgroundHIColor = \.clear
+    //    }
     
     // MARK: Constraints
     private var descriptionLabelHeight = NSLayoutConstraint()
@@ -146,9 +146,6 @@ extension HIEventDetailViewController {
         } else {
             timeLabel.text = Formatter.simpleTime.string(from: event.startTime) + " - " + Formatter.simpleTime.string(from: event.endTime)
         }
-        //
-        locationLabel.text = "Siebel Center for Computer Science 2024"
-        //
         favoritedButton.isActive = event.favorite
         pointsLabel.text = "+ \(event.points) pts     "
         eventTypeLabel.text = event.eventType.lowercased().capitalized
@@ -156,22 +153,21 @@ extension HIEventDetailViewController {
         let targetSize = CGSize(width: descriptionLabel.frame.width, height: .greatestFiniteMagnitude)
         let neededSize = descriptionLabel.sizeThatFits(targetSize)
         descriptionLabelHeight.constant = neededSize.height
-        
+        locationLabel.text = "Online"
         // MARK: GoogleMap Setup
-        let newcamera = GMSCameraPosition.camera(withLatitude: 40.11406157923977, longitude: -88.22530808862882, zoom: 18.0)
-        mapView.animate(to: newcamera)
-        
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: 40.113882445333154, longitude: -88.22491715718857)
-        marker.title = "Test Location"
-        marker.map = mapView
-        print(event)
-//
-//        // Creates a marker in the center of the map.
-//        let marker = GMSMarker()
-//        marker.position = CLLocationCoordinate2D(latitude: 40.113882445333154, longitude: -88.22491715718857)
-//        marker.title = "Test Location"
-//        marker.map = map
+        for case let loc as Location in event.locations {
+            //
+            locationLabel.text = loc.name
+            //
+            DispatchQueue.main.async { [self] in
+                let newcamera = GMSCameraPosition.camera(withLatitude: loc.latitude, longitude: loc.longitude, zoom: 18.0)
+                mapView.camera = newcamera
+                let marker = GMSMarker()
+                marker.title = loc.name
+                marker.position = CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude)
+                marker.map = mapView
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -210,7 +206,7 @@ extension HIEventDetailViewController {
         timeImageView.translatesAutoresizingMaskIntoConstraints = false
         timeImageView.topAnchor.constraint(equalTo: sponsorLabel.bottomAnchor, constant: 10).isActive = true
         timeImageView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
-
+        
         upperContainerView.addSubview(timeLabel)
         timeLabel.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor).isActive = true
         timeLabel.leadingAnchor.constraint(equalTo: timeImageView.leadingAnchor, constant: 20).isActive = true
@@ -235,7 +231,6 @@ extension HIEventDetailViewController {
         locationImageView.translatesAutoresizingMaskIntoConstraints = false
         locationImageView.topAnchor.constraint(equalTo: timeImageView.bottomAnchor, constant: 10).isActive = true
         locationImageView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
-
         upperContainerView.addSubview(locationLabel)
         locationLabel.centerYAnchor.constraint(equalTo: locationImageView.centerYAnchor).isActive = true
         locationLabel.leadingAnchor.constraint(equalTo: locationImageView.leadingAnchor, constant: 20).isActive = true
@@ -243,7 +238,8 @@ extension HIEventDetailViewController {
     func setupMap() {
         let camera = GMSCameraPosition.camera(withLatitude: 40.113882445333154, longitude: -88.22491715718857, zoom: 18.0)
         let mapID = GMSMapID(identifier: "66c463c9a421326e")
-        mapView = GMSMapView(frame: self.view.bounds, mapID: mapID, camera: camera)
+        mapView = GMSMapView(frame: .zero, mapID: mapID, camera: camera)
+//        mapView = GMSMapView(frame: .zero, camera: camera)
         eventDetailContainer.addSubview(mapView)
         mapView.translatesAutoresizingMaskIntoConstraints = false
         mapView.leadingAnchor.constraint(equalTo: eventDetailContainer.leadingAnchor).isActive = true
