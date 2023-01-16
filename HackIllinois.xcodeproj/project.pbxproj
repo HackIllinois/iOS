@@ -346,6 +346,7 @@
 		DF3706592925DE57000B4278 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		DF37065B2925DE5D000B4278 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DF37065D2925DE66000B4278 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DF7191672975D9ED00080E09 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -470,6 +471,7 @@
 				951827A41EA35DB800049F79 /* Models */,
 				9544799D200C3CE40005408B /* Tests.playground */,
 				95A7D279203D4F54005EAEAF /* UI */,
+				DF7191672975D9ED00080E09 /* Config.xcconfig */,
 			);
 			path = HackIllinois;
 			sourceTree = "<group>";
@@ -1096,6 +1098,7 @@
 /* Begin XCBuildConfiguration section */
 		951827921EA35AF100049F79 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF7191672975D9ED00080E09 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1156,6 +1159,7 @@
 		};
 		951827931EA35AF100049F79 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF7191672975D9ED00080E09 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

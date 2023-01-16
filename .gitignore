@@ -30,5 +30,8 @@ xcuserdata
 *.hmap
 *.ipa
 
-# OS X cache files
+## OS X cache files
 *.DS_Store
+
+## Config Files for API_SEC
+*.xcconfig
