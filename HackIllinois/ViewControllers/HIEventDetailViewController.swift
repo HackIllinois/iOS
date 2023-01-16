@@ -237,9 +237,10 @@ extension HIEventDetailViewController {
     }
     func setupMap() {
         let camera = GMSCameraPosition.camera(withLatitude: 40.113882445333154, longitude: -88.22491715718857, zoom: 18.0)
-        let mapID = GMSMapID(identifier: "66c463c9a421326e")
-        mapView = GMSMapView(frame: .zero, mapID: mapID, camera: camera)
-//        mapView = GMSMapView(frame: .zero, camera: camera)
+//        let mapID = GMSMapID(identifier: "66c463c9a421326e")
+//        mapView = GMSMapView(frame: .zero, mapID: mapID, camera: camera)
+        // Map without nightmode
+        mapView = GMSMapView(frame: .zero, camera: camera)
         eventDetailContainer.addSubview(mapView)
         mapView.translatesAutoresizingMaskIntoConstraints = false
         mapView.leadingAnchor.constraint(equalTo: eventDetailContainer.leadingAnchor).isActive = true
