@@ -153,7 +153,8 @@ extension HIEventDetailViewController {
         let targetSize = CGSize(width: descriptionLabel.frame.width, height: .greatestFiniteMagnitude)
         let neededSize = descriptionLabel.sizeThatFits(targetSize)
         descriptionLabelHeight.constant = neededSize.height
-        locationLabel.text = "Online"
+        // Default text for online events
+        locationLabel.text = HIConstants.ONLINE_EVENT_LOCATION_TEXT
         // MARK: GoogleMap Setup
         for case let loc as Location in event.locations {
             //
