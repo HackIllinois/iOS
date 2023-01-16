@@ -138,7 +138,7 @@ extension HIEventCell {
         timeLabel.heightAnchor.constraint(equalTo: upperContainerView.heightAnchor, constant: 7).isActive = true
         let pointsView = HIView { (view) in
             view.layer.cornerRadius = 12
-            view.backgroundHIColor = \.buttonGreen
+            view.backgroundHIColor = \.buttonMagenta
             view.translatesAutoresizingMaskIntoConstraints = false
         }
 

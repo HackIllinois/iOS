@@ -34,6 +34,11 @@ class HIEventDetailViewController: HIBaseViewController {
     }
     private let titleLabel = HILabel(style: .detailTitle)
     
+    private let eventTypeView = HIView { (view) in
+        view.layer.cornerRadius = 8
+        view.backgroundHIColor = \.buttonDarkBlueGreen
+        view.translatesAutoresizingMaskIntoConstraints = false
+    }
     private let eventTypeLabel = HILabel(style: .eventType)
     
     private let sponsorLabel = HILabel(style: .sponsor)
@@ -47,7 +52,7 @@ class HIEventDetailViewController: HIBaseViewController {
     private let descriptionLabel = HILabel(style: .detailText)
     let pointsView = HIView { (view) in
         view.layer.cornerRadius = 8
-        view.backgroundHIColor = \.buttonGreen
+        view.backgroundHIColor = \.buttonMagenta
         view.translatesAutoresizingMaskIntoConstraints = false
     }
     private let pointsLabel = HILabel(style: .pointsText)
@@ -148,7 +153,7 @@ extension HIEventDetailViewController {
         }
         favoritedButton.isActive = event.favorite
         pointsLabel.text = "+ \(event.points) pts     "
-        eventTypeLabel.text = event.eventType.lowercased().capitalized
+        eventTypeLabel.text = "   \(event.eventType.lowercased().capitalized)   "
         view.layoutIfNeeded()
         let targetSize = CGSize(width: descriptionLabel.frame.width, height: .greatestFiniteMagnitude)
         let neededSize = descriptionLabel.sizeThatFits(targetSize)
@@ -187,9 +192,11 @@ extension HIEventDetailViewController {
         upperContainerView.constrain(height: 95)
     }
     func setupEventType() {
-        upperContainerView.addSubview(eventTypeLabel)
-        eventTypeLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
-        eventTypeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
+        upperContainerView.addSubview(eventTypeView)
+        eventTypeView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
+        eventTypeView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
+        eventTypeView.addSubview(eventTypeLabel)
+        eventTypeLabel.constrain(to: eventTypeView, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
     }
     func setupSponsor() {
         upperContainerView.addSubview(sponsorLabel)
@@ -214,8 +221,8 @@ extension HIEventDetailViewController {
     }
     func setupPoints() {
         upperContainerView.addSubview(pointsView)
-        pointsView.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor).isActive = true
-        pointsView.leadingAnchor.constraint(equalTo: timeLabel.trailingAnchor, constant: 10).isActive = true
+        pointsView.centerYAnchor.constraint(equalTo: eventTypeView.centerYAnchor).isActive = true
+        pointsView.leadingAnchor.constraint(equalTo: eventTypeView.trailingAnchor, constant: 10).isActive = true
         pointsView.addSubview(pointsLabel)
         pointsLabel.constrain(to: pointsView, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
     }

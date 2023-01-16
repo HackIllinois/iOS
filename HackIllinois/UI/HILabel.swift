@@ -87,9 +87,9 @@ class HILabel: UILabel {
             font = HIAppearance.Font.eventTime
 
         case .eventType:
-            textHIColor = \.baseText
+            textHIColor = \.whiteText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.eventCategoryText
+            font = HIAppearance.Font.eventButtonText
 
         case .sponsor:
             textHIColor = \.baseText
@@ -215,7 +215,7 @@ class HILabel: UILabel {
             font = HIAppearance.Font.countdownText
 
         case .pointsText:
-            textHIColor = \.baseText
+            textHIColor = \.whiteText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.eventButtonText
             textAlignment = .center
