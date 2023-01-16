@@ -36,7 +36,8 @@ struct HIAppearance: Equatable {
     let attendeeBackground: UIColor
     let whiteTagFont: UIColor
     let interestBackground: UIColor
-    let buttonGreen: UIColor
+    let buttonMagenta: UIColor
+    let buttonDarkBlueGreen: UIColor
     let favoriteStarBackground: UIColor
     let segmentedBackground: UIColor
     // New fonts added. Replace old ones?
@@ -75,8 +76,13 @@ struct HIAppearance: Equatable {
     private static let lightBlack = #colorLiteral(red: 0.03137254902, green: 0.08235294118, blue: 0.1058823529, alpha: 1)
     private static let salmon = #colorLiteral(red: 0.9490196078, green: 0.6078431373, blue: 0.4705882353, alpha: 1)
     private static let yellowWhite = #colorLiteral(red: 0.7882352941, green: 0.8235294118, blue: 0.8980392157, alpha: 1)
-    private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     private static let transparent = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+    
+    // Hack 2023 color palette
+    private static let magenta = #colorLiteral(red: 0.9960784314, green: 0.4392156863, blue: 0.5960784314, alpha: 1)
+    private static let darkBlueGreeen = #colorLiteral(red: 0.03137254902, green: 0.5450980392, blue: 0.7568627451, alpha: 1)
+    private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+
 
     private static var statusBarWhite: UIStatusBarStyle {
         return .lightContent
@@ -113,7 +119,8 @@ struct HIAppearance: Equatable {
         attendeeBackground: yellowGreen,
         whiteTagFont: white,
         interestBackground: orange,
-        buttonGreen: yellowGreen,
+        buttonMagenta: magenta,
+        buttonDarkBlueGreen: darkBlueGreeen,
         favoriteStarBackground: yellowWhite,
         segmentedBackground: white,
         buttonViewBackground: green,
@@ -158,7 +165,8 @@ struct HIAppearance: Equatable {
         attendeeBackground: yellowGreen,
         whiteTagFont: white,
         interestBackground: orange,
-        buttonGreen: yellowGreen,
+        buttonMagenta: magenta,
+        buttonDarkBlueGreen: darkBlueGreeen,
         favoriteStarBackground: yellowWhite,
         segmentedBackground: white,
         buttonViewBackground: green,
