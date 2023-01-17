@@ -18,9 +18,9 @@ import UIKit
 //}
 
 extension UITableViewCell: Identifiable {
-    static var identifier: String = String(describing: self)
+    static var identifier: String = String(describing: UITableViewCell.self)
 }
 
 extension UITableViewHeaderFooterView: Identifiable {
-    static var identifier: String = String(describing: self)
+    static var identifier: String = String(describing: UITableViewHeaderFooterView.self)
 }

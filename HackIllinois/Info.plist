@@ -39,6 +39,10 @@
 	<string>Used to scan in attendees for events </string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Used to display your current location in maps</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Montserrat-VariableFont_wght.ttf</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

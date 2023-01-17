@@ -25,7 +25,8 @@ extension HIEventListViewController {
         if let tableView = tableView {
             tableView.register(HIDateHeader.self, forHeaderFooterViewReuseIdentifier: HIDateHeader.identifier)
             tableView.register(HIEventCell.self, forCellReuseIdentifier: HIEventCell.identifier)
-            registerForPreviewing(with: self, sourceView: tableView)
+            #warning("I don't think this is being used. Related to 3D touch and previewing")
+//            registerForPreviewing(with: self, sourceView: tableView)
         }
         super.setupTableView()
     }
@@ -85,9 +86,11 @@ extension HIEventListViewController: HIEventCellDelegate {
             case .success:
                 DispatchQueue.main.async {
                     event.favorite.toggle()
-                    event.favorite ?
-                        HILocalNotificationController.shared.scheduleNotification(for: event) :
+                    if event.favorite {
+                        HILocalNotificationController.shared.scheduleNotification(for: event)
+                    } else {
                         HILocalNotificationController.shared.unscheduleNotification(for: event)
+                    }
                 }
             case .failure(let error):
                 print(error, error.localizedDescription)
@@ -98,20 +101,21 @@ extension HIEventListViewController: HIEventCellDelegate {
     }
 }
 
+#warning("I don't think this is being used. Related to 3D touch and previewing")
 // MARK: - UIViewControllerPreviewingDelegate
-extension HIEventListViewController: UIViewControllerPreviewingDelegate {
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        guard let tableView = tableView,
-            let indexPath = tableView.indexPathForRow(at: location),
-            let event = _fetchedResultsController?.object(at: indexPath) as? Event else {
-                return nil
-        }
-        previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
-        eventDetailViewController.event = event
-        return eventDetailViewController
-    }
-
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        self.present(viewControllerToCommit, animated: true, completion: nil)
-    }
-}
+//extension HIEventListViewController: UIViewControllerPreviewingDelegate {
+//    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+//        guard let tableView = tableView,
+//            let indexPath = tableView.indexPathForRow(at: location),
+//            let event = _fetchedResultsController?.object(at: indexPath) as? Event else {
+//                return nil
+//        }
+//        previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
+//        eventDetailViewController.event = event
+//        return eventDetailViewController
+//    }
+//
+//    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+//        self.present(viewControllerToCommit, animated: true, completion: nil)
+//    }
+//}
