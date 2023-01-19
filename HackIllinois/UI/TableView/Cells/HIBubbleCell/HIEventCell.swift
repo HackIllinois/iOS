@@ -86,7 +86,7 @@ extension HIEventCell {
 // MARK: - Population
 extension HIEventCell {
     static func heightForCell(with event: Event, width: CGFloat) -> CGFloat {
-        let heightFromEventName = HILabel.heightForView(text: event.name, font: HIAppearance.Font.eventTitle, width: width - 137)
+        let heightFromEventName = HILabel.heightForView(text: event.name, font: HIAppearance.Font.eventTitle!, width: width - 137)
         //let heightFromHeader = (heightFromEventName + 4 + 17 < 60) ? 60 : heightFromEventName + 4 + 17
         var heightConstant: CGFloat = 1.3
         if (UIDevice.current.userInterfaceIdiom == .pad) {
@@ -128,11 +128,22 @@ extension HIEventCell {
         eventTypeLabel.textHIColor = \.baseText
         eventTypeLabel.refreshForThemeChange()
         eventTypeLabel.translatesAutoresizingMaskIntoConstraints = false
-        let titleHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle, width: lhs.contentView.frame.width - 137) // Can test for a more accurate constant
+        let titleHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle!, width: lhs.contentView.frame.width - 137) // Can test for a more accurate constant
         if (UIDevice.current.userInterfaceIdiom == .pad) {
             titleLabel.constrain(height: titleHeight + 20)
         } else {
             titleLabel.constrain(height: titleHeight)
+/*
+        lhs.headerView.addArrangedSubview(eventTypeLabel)
+    
+        eventTypeLabel.constrain(height: 20)
+        if !rhs.sponsor.isEmpty {
+            let sponsorLabel = HILabel(style: .cellDescription)
+            sponsorLabel.text = "Sponsored by \(rhs.sponsor)"
+            contentStackViewHeight += sponsorLabel.intrinsicContentSize.height
+            sponsorLabel.constrain(height: 25)
+            lhs.contentStackView.addArrangedSubview(sponsorLabel)
+            lhs.contentStackView.setCustomSpacing(10, after: sponsorLabel)*/
         }
         let upperContainerView = HIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -249,7 +260,8 @@ extension HIEventCell {
         if (UIDevice.current.userInterfaceIdiom == .pad) {
             descriptionLabel.trailingAnchor.constraint(equalTo: lhs.contentStackView.trailingAnchor, constant: -40).isActive = true
         }
-        let textHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle, width: lhs.contentView.frame.width - 98)
+        let textHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle!, width: lhs.contentView.frame.width - 98)
+        lhs.contentStackView.setCustomSpacing(10, after: descriptionLabel)
         contentStackViewHeight += textHeight
         contentStackViewHeight += timeLabel.intrinsicContentSize.height + locationLabel.intrinsicContentSize.height + 13 + 40 + 3 + 40
     }

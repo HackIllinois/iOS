@@ -14,6 +14,7 @@ import UIKit
 import CoreLocation
 import UserNotifications
 import HIAPI
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

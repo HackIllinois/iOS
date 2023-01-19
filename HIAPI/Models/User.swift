@@ -28,7 +28,7 @@ public struct RolesContainer: Codable, APIReturnable {
 public struct Roles: OptionSet, Codable {
     public let rawValue: Int
 
-    public static let null = Roles(rawValue: 0)
+    public static let null = Roles([])
     public static let user = Roles(rawValue: 1 << 0)
     public static let applicant = Roles(rawValue: 1 << 1)
     public static let attendee = Roles(rawValue: 1 << 2)

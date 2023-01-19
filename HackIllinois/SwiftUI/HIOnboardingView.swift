@@ -2,8 +2,12 @@
 //  HIOnboardingView.swift
 //  HackIllinois
 //
-//  Created by Louis Qian on 10/29/22.
+//  Created by HackIllinois Team on 10/29/22.
 //  Copyright © 2022 HackIllinois. All rights reserved.
+//  This file is part of the Hackillinois iOS App.
+//  The Hackillinois iOS App is open source software, released under the University of
+//  Illinois/NCSA Open Source License. You should have received a copy of
+//  this license in a file with the distribution.
 //
 
 import Foundation
@@ -12,9 +16,7 @@ import UIKit
 import Lottie
 
 struct HIOnboardingView: View {
-    
     @StateObject private var viewModel = HIOnboardingViewModel()
-    
     var body: some View {
         ZStack {
             Image("Login")
@@ -26,9 +28,7 @@ struct HIOnboardingView: View {
             } else {
                 VStack {
                     Spacer()
-                    
                     HICarouselSwiftUIView(carouselData: viewModel.data)
-                    
                     Button("Get Started") {
                         NotificationCenter.default.post(name: .getStarted, object: nil)
                     }
@@ -38,7 +38,6 @@ struct HIOnboardingView: View {
                     .foregroundColor(.white)
                     .background(Color(red: 130/255, green: 171/255, blue: 79/255))
                     .clipShape(Capsule())
-                    
                     Spacer()
                 }
             }
@@ -48,12 +47,10 @@ struct HIOnboardingView: View {
 
 // MARK: - SwiftUI => LottieView
 struct LottieView: UIViewRepresentable {
-    
-    @Binding var shouldDisplayAnimationOnNextAppearance : Bool
-    
+    @Binding var shouldDisplayAnimationOnNextAppearance: Bool
     func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView(frame: .zero)
-        let animationView = AnimationView(name: "DarkVespaText")
+        let animationView = LottieAnimationView(name: "DarkVespaText")
         animationView.contentMode = .scaleAspectFit
         animationView.frame = view.frame
         animationView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -65,7 +62,6 @@ struct LottieView: UIViewRepresentable {
         }
         return view
     }
-    
     func updateUIView(_ uiView: UIViewType, context: Context) { return }
 }
 

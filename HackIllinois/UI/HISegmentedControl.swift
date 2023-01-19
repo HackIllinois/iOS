@@ -82,11 +82,9 @@ class HISegmentedControl: UIControl {
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let location = touch.location(in: self)
 
-        for (index, view) in views.enumerated() {
-            if view.frame.contains(location) {
+        for (index, view) in views.enumerated() where view.frame.contains(location) {
                 selectedIndex = index
                 break
-            }
         }
 
         return false

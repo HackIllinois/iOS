@@ -35,6 +35,8 @@ class HILocalNotificationController: NSObject {
                     if granted { authorized?() }
                 }
             case .provisional: break
+            case .ephemeral:
+                break
             @unknown default:
                 os_log(
                     "Unknown UNAuthorizationStatus %s",
