@@ -106,9 +106,13 @@ extension HICountdownViewController {
         countdownStackView.addArrangedSubview(hoursContent)
         let minutesContent = containerView(with: "MINUTES", and: minutes)
         countdownStackView.addArrangedSubview(minutesContent)
-        countdownStackView.setCustomSpacing(30, after: daysContent)
-        countdownStackView.setCustomSpacing(30, after: hoursContent)
-        countdownStackView.setCustomSpacing(30, after: minutesContent)
+        var countdownSpacingConstant: CGFloat = 30
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            countdownSpacingConstant = 60
+        }
+        countdownStackView.setCustomSpacing(countdownSpacingConstant, after: daysContent)
+        countdownStackView.setCustomSpacing(countdownSpacingConstant, after: hoursContent)
+        countdownStackView.setCustomSpacing(countdownSpacingConstant, after: minutesContent)
     }
     func containerView(with labelString: String, and countDownView: HILabel) -> UIView {
         countDownView.backgroundColor <- backgroundHIColor
@@ -118,7 +122,11 @@ extension HICountdownViewController {
             $0.textHIColor = \.whiteText
             $0.backgroundHIColor = \.clear
             $0.textAlignment = .center
-            $0.font = HIAppearance.Font.glyph
+            if (UIDevice.current.userInterfaceIdiom == .pad) {
+                $0.font = HIAppearance.Font.timeIndicator
+            } else {
+                $0.font = HIAppearance.Font.glyph
+            }
             $0.text = labelString
         }
         let yellowish = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1)
@@ -128,8 +136,19 @@ extension HICountdownViewController {
             NSAttributedString.Key.strokeWidth: 5.0,
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 48, weight: UIFont.Weight(rawValue: 900) )]
             as [NSAttributedString.Key: Any]
-
-        countDownView.attributedText = NSMutableAttributedString(string: "Test", attributes: strokeTextAttributes)
+        
+        let iPadStrokeTextAttributes = [
+            NSAttributedString.Key.strokeColor: yellowish,
+            NSAttributedString.Key.foregroundColor: UIColor.clear,
+            NSAttributedString.Key.strokeWidth: 5.0,
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 90, weight: UIFont.Weight(rawValue: 900) )]
+            as [NSAttributedString.Key: Any]
+        
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            countDownView.attributedText = NSMutableAttributedString(string: "Test", attributes: iPadStrokeTextAttributes)
+        } else {
+            countDownView.attributedText = NSMutableAttributedString(string: "Test", attributes: strokeTextAttributes)
+        }
         countDownView.layer.shadowColor = yellowish.cgColor
         countDownView.layer.shadowRadius = 3.0
         countDownView.layer.shadowOpacity = 100.0

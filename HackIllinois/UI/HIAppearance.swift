@@ -117,7 +117,7 @@ struct HIAppearance: Equatable {
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         codePopupTab: white,
         navbarBackground: darkBlue,
-        navbarTabTint: lightBlue,
+        navbarTabTint: white,
         profileContainerTint: yellowWhite,
         preferredStatusBarStyle: statusBarBlack,
         scrollViewIndicatorStyle: .black,
@@ -166,7 +166,7 @@ struct HIAppearance: Equatable {
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         codePopupTab: white,
         navbarBackground: darkBlue,
-        navbarTabTint: lightBlue,
+        navbarTabTint: white,
         profileContainerTint: yellowWhite,
         preferredStatusBarStyle: statusBarBlack,
         scrollViewIndicatorStyle: .black,
@@ -260,6 +260,19 @@ struct HIAppearance: Equatable {
         static let leaderboardPoints = UIFont.systemFont(ofSize: 16, weight: .regular)
         static let leaderboardName = UIFont.systemFont(ofSize: 14, weight: .semibold)
         static let leaderboardRank = UIFont.systemFont(ofSize: 24, weight: .bold)
+        
+        //IPAD FONTS
+        static let glyphPad = UIFont.systemFont(ofSize: 24, weight: .bold)
+        static let timeIndicator = UIFont.systemFont(ofSize: 32, weight: .bold)
+        static let homeSegmentedTitlePad = UIFont.systemFont(ofSize: 40, weight: .bold)
+        static let viewTitlePad = UIFont.systemFont(ofSize: 48, weight: .bold)
+        static let scheduleSegmentedNumberPad = UIFont.systemFont(ofSize: 36, weight: .semibold)
+        static let scheduleSegmentedPad = UIFont.systemFont(ofSize: 32, weight: .semibold)
+        static let eventTitlePad = UIFont.systemFont(ofSize: 36, weight: .bold)
+        static let timeTextPad = UIFont.systemFont(ofSize: 28, weight: .semibold)
+        static let locationTextPad = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        static let sponsorTextPad = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        static let detailTextPad = UIFont.systemFont(ofSize: 24, weight: .regular)
     }
 }
 

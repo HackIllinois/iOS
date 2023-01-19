@@ -38,6 +38,9 @@ extension HIBannerViewController {
             $0.backgroundHIColor = \.clear
             $0.textAlignment = .center
             $0.font = HIAppearance.Font.glyph
+            if (UIDevice.current.userInterfaceIdiom == .pad) {
+                $0.font = HIAppearance.Font.glyphPad
+            }
             $0.text = labelString
         }
 

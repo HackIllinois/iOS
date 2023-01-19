@@ -70,6 +70,9 @@ class HIScheduleViewController: HIEventListViewController {
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
         backgroundView.image = #imageLiteral(resourceName: "ScheduleBackground")
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            backgroundView.image = #imageLiteral(resourceName: "BackgroundPad")
+        }
     }
 }
 
@@ -121,12 +124,17 @@ extension HIScheduleViewController {
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
+        
+        var segmentedControlConstant: CGFloat = 0.0
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            segmentedControlConstant = 40.0
+        }
 
-        segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8).isActive = true
+        segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8 + segmentedControlConstant).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: -34).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 34).isActive = true
-        segmentedControl.heightAnchor.constraint(equalToConstant: 66).isActive = true
-
+        segmentedControl.heightAnchor.constraint(equalToConstant: 66 + segmentedControlConstant).isActive = true
+        
         let tableView = HITableView()
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10).isActive = true
@@ -172,7 +180,11 @@ extension HIScheduleViewController {
 // MARK: - UITableViewDelegate
 extension HIScheduleViewController {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            return 40
+        } else {
+            return 30
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -196,7 +208,11 @@ extension HIScheduleViewController {
             header.titleLabel.text = Formatter.simpleTime.string(from: date)
             header.titleLabel.textColor = .white
             header.titleLabel.textAlignment = .center
-            header.titleLabel.font = HIAppearance.Font.glyph
+            if (UIDevice.current.userInterfaceIdiom == .pad) {
+                header.titleLabel.font = HIAppearance.Font.timeIndicator
+            } else {
+                header.titleLabel.font = HIAppearance.Font.glyph
+            }
 
         }
         return header

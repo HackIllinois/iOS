@@ -54,6 +54,7 @@ class HILabel: UILabel {
         case newSponsor
         case newLocation
         case newTime
+        
     }
 
     // MARK: - Properties
@@ -87,7 +88,11 @@ class HILabel: UILabel {
         case .event:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.eventTitle
+            if (UIDevice.current.userInterfaceIdiom == .pad) {
+                font = HIAppearance.Font.eventTitlePad
+            } else {
+                font = HIAppearance.Font.eventTitle
+            }
 
         case .eventTime:
             textHIColor = \.baseText
@@ -131,7 +136,11 @@ class HILabel: UILabel {
             textHIColor = \.whiteText
             backgroundHIColor = \.clear
             textAlignment = .center
-            font = HIAppearance.Font.viewTitle
+            if (UIDevice.current.userInterfaceIdiom == .pad) {
+                font = HIAppearance.Font.viewTitlePad
+            } else {
+                font = HIAppearance.Font.viewTitle
+            }
 
         case .subtitle:
             textHIColor = \.accent
@@ -147,7 +156,11 @@ class HILabel: UILabel {
         case .cellDescription:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.eventDetails
+            if (UIDevice.current.userInterfaceIdiom == .pad) {
+                font = HIAppearance.Font.detailTextPad
+            } else {
+                font = HIAppearance.Font.eventDetails
+            }
             numberOfLines = 0
 
         case .loginHeader:
@@ -225,7 +238,11 @@ class HILabel: UILabel {
         case .pointsText:
             textHIColor = \.white
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.eventButtonText
+            if (UIDevice.current.userInterfaceIdiom == .pad) {
+                font = HIAppearance.Font.glyphPad
+            } else {
+                font = HIAppearance.Font.eventButtonText
+            }
             textAlignment = .center
 
         case .error:
@@ -241,24 +258,28 @@ class HILabel: UILabel {
             font = HIAppearance.Font.detailSubtitle
             textAlignment = .center
             numberOfLines = 0
+            
         case .onboardingDescription:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.onboardingDescription
             textAlignment = .center
             numberOfLines = 0
+            
         case .onboardingTitle:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.onboardingTitle
             textAlignment = .center
             numberOfLines = 0
+            
         case .clock:
             textHIColor = \.whiteText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.clockText
             textAlignment = .center
             numberOfLines = 1
+            
         // Leaderboard label fonts
         case .leaderboardRank:
             textHIColor = \.leaderboardText
@@ -267,26 +288,44 @@ class HILabel: UILabel {
             layer.shadowOffset = CGSize(width: 2, height: 2)
             layer.shadowRadius = 2.0
             layer.shadowOpacity = 0.25
+            
         case .leaderboardName:
             textHIColor = \.leaderboardText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.leaderboardPoints
+            
         case .leaderboardPoints:
             textHIColor = \.leaderboardText
             backgroundHIColor = \.pointsBackground
             font = HIAppearance.Font.leaderboardPoints
+            
         case .newTime:
             textHIColor = \.black
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.timeText
+            if (UIDevice.current.userInterfaceIdiom == .pad) {
+                font = HIAppearance.Font.timeTextPad
+            } else {
+                font = HIAppearance.Font.timeText
+            }
+            
         case .newSponsor:
             textHIColor = \.black
             backgroundHIColor = \.clear
             font = HIAppearance.Font.bubbleSponsorText
+            if (UIDevice.current.userInterfaceIdiom == .pad) {
+                font = HIAppearance.Font.sponsorTextPad
+            } else {
+                font = HIAppearance.Font.bubbleSponsorText
+            }
+            
         case .newLocation:
             textHIColor = \.black
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.locationText
+            if (UIDevice.current.userInterfaceIdiom == .pad) {
+                font = HIAppearance.Font.locationTextPad
+            } else {
+                font = HIAppearance.Font.locationText
+            }
         }
         }
 

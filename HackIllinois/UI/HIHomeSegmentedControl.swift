@@ -12,6 +12,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 class HIHomeSegmentedControl: HISegmentedControl {
 
@@ -21,9 +22,10 @@ class HIHomeSegmentedControl: HISegmentedControl {
     private var titleLabels = [UILabel]()
 
     private let titleFont = HIAppearance.Font.homeSegmentedTitle
+    private let titleFontPad = HIAppearance.Font.homeSegmentedTitlePad
     private let numberFont = HIAppearance.Font.segmentedNumberText
 
-    private let viewPadding: CGFloat = 35
+    private var viewPadding: CGFloat = 35
     private let indicatorCornerRadiusProp: CGFloat = 0.15
 
     private var indicatorView = UIImageView(image: #imageLiteral(resourceName: "Indicator"))
@@ -58,13 +60,17 @@ class HIHomeSegmentedControl: HISegmentedControl {
     // MARK: - UIView
     override func layoutSubviews() {
         super.layoutSubviews()
-
+        
         let indicatorViewWidth = ((frame.width - viewPadding) / CGFloat(items.count) - viewPadding)
-        indicatorView.frame = CGRect(x: viewPadding, y: 45, width: indicatorViewWidth, height: 4)
+        var indicatorViewConstant: CGFloat = 4
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            indicatorViewConstant = 6
+        }
+        indicatorView.frame = CGRect(x: indicatorViewWidth, y: 40 + indicatorViewConstant, width: indicatorViewWidth, height: indicatorViewConstant)
         indicatorView.layer.cornerRadius = frame.height * indicatorCornerRadiusProp
         indicatorView.layer.masksToBounds = true
-        indicatorView.contentMode = .scaleAspectFit
         indicatorView.contentMode = .center
+        indicatorView.contentMode = .scaleAspectFit
         displayNewSelectedIndex()
     }
 
@@ -97,12 +103,16 @@ class HIHomeSegmentedControl: HISegmentedControl {
     private func setupViewForItem(at index: Int) {
         let view = UIView()
         let titleLabel = UILabel()
-
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            titleLabel.font = titleFontPad
+        } else {
+            titleLabel.font = titleFont
+        }
         titleLabel.textAlignment = .center
-        titleLabel.font = titleFont
+
         titleLabel.text = items[index]
         titleLabel.textColor <- \.whiteText
-        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.adjustsFontSizeToFitWidth = false
 
         view.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

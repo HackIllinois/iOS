@@ -21,6 +21,9 @@ class HIBubbleCell: UITableViewCell {
         $0.backgroundHIColor = \.contentBackground
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.cornerRadius = 20
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            $0.layer.cornerRadius = 40
+        }
         $0.layer.masksToBounds = false
         $0.layer.shadowColor = #colorLiteral(red: 0.1333333333, green: 0.168627451, blue: 0.3607843137, alpha: 0.3984650088)
         $0.layer.shadowOffset = CGSize(width: 0, height: 3)

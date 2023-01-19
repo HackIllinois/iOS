@@ -23,7 +23,9 @@ class HIScheduleSegmentedControl: HISegmentedControl {
     private var numberLabels = [UILabel]()
 
     private let titleFont = HIAppearance.Font.segmentedTitle
+    private let titleFontPad = HIAppearance.Font.scheduleSegmentedPad
     private let numberFont = HIAppearance.Font.segmentedNumberText
+    private let numberFontPad = HIAppearance.Font.scheduleSegmentedNumberPad
 
     private let viewPadding: CGFloat = 65
     private let indicatorCornerRadiusProp: CGFloat = 0.15
@@ -66,9 +68,12 @@ class HIScheduleSegmentedControl: HISegmentedControl {
     // MARK: - UIView
     override func layoutSubviews() {
         super.layoutSubviews()
-
+        var indicatorConstant: CGFloat = 0.0
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            indicatorConstant = 50.0
+        }
         let indicatorViewWidth = ((frame.width - viewPadding) / CGFloat(items.count) - viewPadding)
-        indicatorView.frame = CGRect(x: viewPadding, y: 68, width: indicatorViewWidth, height: 4)
+        indicatorView.frame = CGRect(x: viewPadding, y: 68 + indicatorConstant, width: indicatorViewWidth, height: 4 + (indicatorConstant / 6))
         indicatorView.layer.masksToBounds = true
         indicatorView.contentMode = .scaleAspectFit
         indicatorView.contentMode = .center
@@ -107,12 +112,17 @@ class HIScheduleSegmentedControl: HISegmentedControl {
         let numberLabel = UILabel()
 
         titleLabel.textAlignment = .center
-        titleLabel.font = titleFont
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            titleLabel.font = titleFontPad
+            numberLabel.font = numberFontPad
+        } else {
+            titleLabel.font = titleFont
+            numberLabel.font = numberFont
+        }
         titleLabel.text = items[index]
         titleLabel.textColor <- \.whiteText
 
         numberLabel.textAlignment = .center
-        numberLabel.font = numberFont
         numberLabel.text = index < nums.count ? (nums[index] % 10 == nums[index] ? "0" : "") + "\(nums[index])" : "00"
         numberLabel.textColor <- \.whiteText
 
@@ -120,10 +130,14 @@ class HIScheduleSegmentedControl: HISegmentedControl {
         view.addSubview(numberLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         numberLabel.translatesAutoresizingMaskIntoConstraints = false
-
+        
+        var segmentedControlConstant = 0.0
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            segmentedControlConstant = 24.0
+        }
         titleLabel.constrain(to: view, topInset: 5, trailingInset: 0, leadingInset: 0)
         numberLabel.constrain(to: view, trailingInset: 0, bottomInset: -4, leadingInset: 0)
-        numberLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0).isActive = true
+        numberLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: segmentedControlConstant).isActive = true
         titleLabel.heightAnchor.constraint(equalTo: numberLabel.heightAnchor).isActive = true
 
         view.isUserInteractionEnabled = false

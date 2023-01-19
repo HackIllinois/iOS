@@ -32,13 +32,18 @@ class HIDateHeader: UITableViewHeaderFooterView {
         let backgroundView = HIView { $0.backgroundHIColor = \.clear }
         self.backgroundView = backgroundView
         backgroundView.addSubview(testView)
+        
+        var spacingConstant: CGFloat = 1.0
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            spacingConstant = 2.0
+        }
         testView.addSubview(titleLabel)
-        testView.constrain(width: 100)
-        testView.constrain(height: 30)
+        testView.constrain(width: 100 * spacingConstant)
+        testView.constrain(height: 30 * spacingConstant)
         testView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: -8).isActive = true
         testView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
         testView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
-        titleLabel.constrain(to: testView, topInset: 4, trailingInset: -8, bottomInset: -4, leadingInset: 8)
+        titleLabel.constrain(to: testView, topInset: 4 * spacingConstant, trailingInset: -8 * spacingConstant, bottomInset: -4 * spacingConstant, leadingInset: 8 * spacingConstant)
     }
 
     required init?(coder aDecoder: NSCoder) {

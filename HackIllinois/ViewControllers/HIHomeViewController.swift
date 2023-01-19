@@ -54,8 +54,13 @@ class HIHomeViewController: HIEventListViewController {
     
     private let bannerFrameView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        let bannerImage = #imageLiteral(resourceName: "Banner")
-        $0.layer.contents = bannerImage.cgImage
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let bannerImage = #imageLiteral(resourceName: "BannerPad")
+            $0.layer.contents = bannerImage.cgImage
+        } else {
+            let bannerImage = #imageLiteral(resourceName: "Banner")
+            $0.layer.contents = bannerImage.cgImage
+        }
     }
 
     private var countdownDataStoreIndex = 0
@@ -116,8 +121,14 @@ extension HIHomeViewController {
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
-    
-        segmentedControl.topAnchor.constraint(equalTo: bannerFrameView.bottomAnchor, constant: 125).isActive = true
+        
+        var segmentedControlConstant = 1.0
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            segmentedControlConstant = 2.0
+        }  else if UIScreen.main.bounds.width < 375.0 {
+            segmentedControlConstant = 0.9
+        }
+        segmentedControl.topAnchor.constraint(equalTo: bannerFrameView.bottomAnchor, constant: 124 * segmentedControlConstant).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: -30).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 30).isActive = true
         segmentedControl.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
@@ -154,14 +165,14 @@ extension HIHomeViewController {
     func setUpCountdown() {
         view.addSubview(countdownFrameView)
         countdownFrameView.translatesAutoresizingMaskIntoConstraints = false
-        countdownFrameView.topAnchor.constraint(equalTo: bannerFrameView.bottomAnchor, constant: 73).isActive = true
-        countdownFrameView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         var countdownFrameConstant: CGFloat = 1.0
         if UIDevice.current.userInterfaceIdiom == .pad {
-            countdownFrameConstant = 1.2
+            countdownFrameConstant = 1.7
         } else if UIScreen.main.bounds.width < 375.0 {
             countdownFrameConstant = 0.9
         }
+        countdownFrameView.topAnchor.constraint(equalTo: bannerFrameView.bottomAnchor, constant: 77 * countdownFrameConstant).isActive = true
+        countdownFrameView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         let widthConstant: CGFloat = 329 * countdownFrameConstant
         let heightConstant: CGFloat = 283 * countdownFrameConstant
         countdownFrameView.widthAnchor.constraint(equalToConstant: widthConstant).isActive = true
@@ -182,20 +193,26 @@ extension HIHomeViewController {
         bannerFrameView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
         bannerFrameView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         var bannerFrameConstant: CGFloat = 1.0
+        var bannerFrameTopAnchorConstant: CGFloat = 1.0
+        var bannerFrameHeightConstant: CGFloat = 1.0
         if UIDevice.current.userInterfaceIdiom == .pad {
-            bannerFrameConstant = 1.7
+            bannerFrameConstant = -0.5
+            bannerFrameTopAnchorConstant = 1.9
+            bannerFrameHeightConstant = 1.2
         } else if UIScreen.main.bounds.width < 375.0 {
             bannerFrameConstant = 0.9
+            bannerFrameTopAnchorConstant = 0.9
+            bannerFrameHeightConstant = 0.9
         }
-        bannerFrameView.topAnchor.constraint(equalTo: view.topAnchor, constant: 35).isActive = true
+        bannerFrameView.topAnchor.constraint(equalTo: view.topAnchor, constant: 31.5 * bannerFrameTopAnchorConstant).isActive = true
         let widthConstant: CGFloat = 290
-        let heightConstant: CGFloat = 90 * bannerFrameConstant
+        let heightConstant: CGFloat = 85 * bannerFrameHeightConstant
         bannerFrameView.widthAnchor.constraint(equalToConstant: widthConstant).isActive = true
         bannerFrameView.heightAnchor.constraint(equalToConstant: heightConstant).isActive = true
         
         bannerViewController.view.translatesAutoresizingMaskIntoConstraints = false
         bannerFrameView.addSubview(bannerViewController.view)
-        bannerViewController.view.topAnchor.constraint(equalTo: bannerFrameView.centerYAnchor, constant: 12 * bannerFrameConstant).isActive = true
+        bannerViewController.view.topAnchor.constraint(equalTo: bannerFrameView.centerYAnchor, constant: 10.0 * bannerFrameConstant).isActive = true
         bannerViewController.view.heightAnchor.constraint(equalTo: bannerFrameView.heightAnchor, multiplier: 0.3).isActive = true
         bannerViewController.view.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         bannerViewController.didMove(toParent: self)
@@ -212,7 +229,10 @@ extension HIHomeViewController {
 extension HIHomeViewController {
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "ScheduleBackground")
+        backgroundView.image = #imageLiteral(resourceName: "HomeBackground")
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            backgroundView.image = #imageLiteral(resourceName: "BackgroundPad")
+        }
     }
 }
 
