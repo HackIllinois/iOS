@@ -205,15 +205,16 @@ extension HIHomeViewController {
             bannerFrameHeightConstant = 0.9
         }
         bannerFrameView.topAnchor.constraint(equalTo: view.topAnchor, constant: 31.5 * bannerFrameTopAnchorConstant).isActive = true
-        let widthConstant: CGFloat = 290
+        //let widthConstant: CGFloat = 290
         let heightConstant: CGFloat = 85 * bannerFrameHeightConstant
-        bannerFrameView.widthAnchor.constraint(equalToConstant: widthConstant).isActive = true
+        //bannerFrameView.widthAnchor.constraint(equalToConstant: widthConstant).isActive = true
         bannerFrameView.heightAnchor.constraint(equalToConstant: heightConstant).isActive = true
         
         bannerViewController.view.translatesAutoresizingMaskIntoConstraints = false
         bannerFrameView.addSubview(bannerViewController.view)
         bannerViewController.view.topAnchor.constraint(equalTo: bannerFrameView.centerYAnchor, constant: 10.0 * bannerFrameConstant).isActive = true
-        bannerViewController.view.heightAnchor.constraint(equalTo: bannerFrameView.heightAnchor, multiplier: 0.3).isActive = true
+        //bannerViewController.view.heightAnchor.constraint(equalTo: bannerFrameView.heightAnchor).isActive = true
+        //bannerViewController.view.heightAnchor.constraint(equalTo: bannerFrameView.heightAnchor, multiplier: 0.3).isActive = true
         bannerViewController.view.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         bannerViewController.didMove(toParent: self)
         

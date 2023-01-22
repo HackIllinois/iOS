@@ -38,8 +38,8 @@ class HIDateHeader: UITableViewHeaderFooterView {
             spacingConstant = 2.0
         }
         testView.addSubview(titleLabel)
-        testView.constrain(width: 100 * spacingConstant)
-        testView.constrain(height: 30 * spacingConstant)
+        //testView.constrain(width: 100 * spacingConstant)
+        //testView.constrain(height: 30 * spacingConstant)
         testView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: -8).isActive = true
         testView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
         testView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true

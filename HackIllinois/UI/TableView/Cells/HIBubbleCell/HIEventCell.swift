@@ -214,11 +214,13 @@ extension HIEventCell {
         timeLabel.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor).isActive = true
         
         var sponsorImageView = UIImageView(image: #imageLiteral(resourceName: "Vector"))
+        sponsorImageView.translatesAutoresizingMaskIntoConstraints = false
         if (UIDevice.current.userInterfaceIdiom == .pad) {
             sponsorImageView = UIImageView(image: #imageLiteral(resourceName: "SponsorPad"))
         }
         if !rhs.sponsor.isEmpty {
             let sponsorLabel = HILabel(style: .newSponsor)
+            sponsorLabel.translatesAutoresizingMaskIntoConstraints = false
             sponsorLabel.text = "\(rhs.sponsor)"
             contentStackViewHeight += sponsorLabel.intrinsicContentSize.height
             sponsorLabel.constrain(height: 18 * bubbleConstant)
@@ -243,10 +245,12 @@ extension HIEventCell {
         bottomContainerView.addSubview(locationLabel)
         if !rhs.sponsor.isEmpty {
             locationImageView.centerYAnchor.constraint(equalTo: sponsorImageView.centerYAnchor, constant: (stackViewSpacing * 2.5) + 14).isActive = true
-            locationImageView.leftAnchor.constraint(equalTo: sponsorImageView.leftAnchor, constant: 1.5 * bubbleConstant).isActive = true
+            //locationImageView.centerXAnchor.constraint(equalTo: sponsorImageView.centerXAnchor).isActive = true
+            //locationImageView.leftAnchor.constraint(equalTo: sponsorImageView.leftAnchor, constant: 1.5 * bubbleConstant).isActive = true
         } else {
             locationImageView.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor, constant: (stackViewSpacing * 2.5) + 14).isActive = true
-            locationImageView.leftAnchor.constraint(equalTo: timeImageView.leftAnchor, constant: 1.5 * bubbleConstant).isActive = true
+            //locationImageView.centerXAnchor.constraint(equalTo: timeImageView.centerXAnchor).isActive = true
+            //locationImageView.leftAnchor.constraint(equalTo: timeImageView.leftAnchor, constant: 1.5 * bubbleConstant).isActive = true
         }
         locationLabel.leadingAnchor.constraint(equalTo: timeLabel.leadingAnchor).isActive = true
         locationLabel.centerYAnchor.constraint(equalTo: locationImageView.centerYAnchor).isActive = true
