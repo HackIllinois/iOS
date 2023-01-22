@@ -18,101 +18,137 @@ struct HIProfileCardView: View {
     let dietaryRestrictions: [String]
     let points: Int
     let tier: String
+    let wave: String
     let background = (\HIAppearance.profileCardBackground).value
     let baseText = (\HIAppearance.profileBaseText).value
+    let id: String
+    let isIpad = UIDevice.current.userInterfaceIdiom == .pad
     @State var showingQR = true
     var body: some View {
-        ZStack {
-            Rectangle()
-                .frame(width: 322, height: 569)
-                .cornerRadius(20)
-                .foregroundColor(Color(background))
-            VStack(spacing: 0) {
-                Text("\(firstName) \(lastName)")
-                    .foregroundColor(Color(baseText))
-                    .padding(16)
-                HStack(spacing: 8) {
-                    Rectangle()
-                        .frame(width: 89, height: 24)
-                        .cornerRadius(20)
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 8)
-                        .overlay(
-                            Text("\(points) pts")
-                                .font(.caption)
-                                .foregroundColor(Color(baseText))
-                        )
-                    Rectangle()
-                        .frame(width: 89, height: 24)
-                        .cornerRadius(20)
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 8)
-                        .overlay(
-                            Text(tier)
-                                .font(.caption)
-                                .foregroundColor(Color(baseText))
-                        )
-                }
-                
-                Image(showingQR ? "TicketBack" : "TicketFront")
+        ScrollView {
+            ZStack {
+                Rectangle()
+                    .frame(width: isIpad ? UIScreen.main.bounds.width - 56 * 2 : UIScreen.main.bounds.width - 32 * 2 ,
+                           height: isIpad ? 978 : 569)
+                    .cornerRadius(UIDevice.current.userInterfaceIdiom == .pad ? 40 : 20)
+                    .foregroundColor(Color(background))
+                VStack(spacing: 0) {
+                    Text("\(firstName) \(lastName)")
+                        .font(Font(HIAppearance.Font.profileName ?? .systemFont(ofSize: 20)))
+                        .foregroundColor(Color(baseText))
+                        .padding(isIpad ? 32 : 16)
+                    HStack(spacing: isIpad ? 16 : 8) {
+                        Rectangle()
+                            .frame(width: isIpad ? 146 : 73, height: isIpad ? 48 : 24)
+                            .cornerRadius(isIpad ? 40 : 20)
+                            .foregroundColor(.white)
+                            .overlay(
+                                Text("\(points) pts")
+                                    .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 12)))
+                                    .foregroundColor(Color(baseText))
+                            )
+                        Rectangle()
+                            .frame(width: isIpad ? 204 : 102, height: isIpad ? 48 : 24)
+                            .cornerRadius(isIpad ? 40 : 20)
+                            .foregroundColor(.white)
+                            .overlay(
+                                Text(tier)
+                                    .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 12)))
+                                    .foregroundColor(Color(baseText))
+                            )
+                        
+                        Rectangle()
+                            .frame(width: isIpad ? 136 : 68, height: isIpad ? 48 : 24)
+                            .cornerRadius(isIpad ? 40 : 20)
+                            .foregroundColor(.white)
+                            .overlay(
+                                Text("Wave \(wave)")
+                                    .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 12)))
+                                    .foregroundColor(Color(baseText))
+                            )
+                    }
+                    
+                    ZStack {
+                        Image(showingQR ? "TicketBack" : "TicketFront")
+                            .resizable()
+                            .frame(width: isIpad ? 298 : 190.6, height: isIpad ? 544 : 347.67)
+                            .padding(isIpad ? 48 : 24)
+                        if showingQR {
+                            Image(uiImage: UIImage(data: getQRCodeDate(text: id)!)!)
+                                .resizable()
+                                .frame(width: isIpad ? 200 : 132, height: isIpad ? 200 : 132)
+                        }
+                    }
                     .onTapGesture {
                         showingQR.toggle()
                     }
-                    .padding(24)
-                
-                VStack(spacing: 16) {
-                    Text("Dietary Restrictions")
-                    HStack {
-                        ForEach(dietaryRestrictions, id: \.self) { diet in
-                            Rectangle()
-                                .frame(width: 85, height: 24)
-                                .cornerRadius(20)
-                                .foregroundColor(Color(dietColor(diet: diet)))
-                                .padding(.horizontal, 8)
-                                .overlay(
-                                    Text(diet)
-                                        .font(.caption)
-                                        .foregroundColor(Color(baseText))
-                                )
+                    VStack(spacing: isIpad ? 32 : 16) {
+                        Text("Dietary Restrictions")
+                            .font(Font(HIAppearance.Font.profileDietaryRestrictions ?? .systemFont(ofSize: 16)))
+                        HStack(spacing: isIpad ? 16 : 8) {
+                            ForEach(dietaryRestrictions, id: \.self) { diet in
+                                Rectangle()
+                                    .frame(width: isIpad ? 204 : 92, height: isIpad ? 48 : 24)
+                                    .cornerRadius(isIpad ? 40 : 20)
+                                    .foregroundColor(Color(dietColor(diet: diet)))
+                                    .overlay(
+                                        Text(dietString(diet: diet))
+                                            .font(Font(HIAppearance.Font.profileDietaryRestrictionsLabel ?? .systemFont(ofSize: 12)))
+                                            .foregroundColor(Color(baseText))
+                                    )
+                            }
                         }
                     }
                 }
             }
+            .padding(.top, 24)
         }
     }
-}
-
-func dietColor(diet: String) -> UIColor {
-    switch (diet) {
-    case "vegetarian":
-        return (\HIAppearance.profileCardVegetarian).value
-    case "vegan":
-        return UIColor.white
-    case "nopeanut":
-        return (\HIAppearance.profileCardNut).value
-    case "nogluten":
-        return UIColor.white
-    case "dairy":
-        return UIColor.white
-    default:
-        return UIColor.white
+    
+    func getQRCodeDate(text: String) -> Data? {
+        print(text)
+        guard let filter = CIFilter(name: "CIQRCodeGenerator") else { return nil }
+        let data = text.data(using: .ascii, allowLossyConversion: false)
+        filter.setValue(data, forKey: "inputMessage")
+        guard let ciimage = filter.outputImage else { return nil }
+        let transform = CGAffineTransform(scaleX: 10, y: 10)
+        let scaledCIImage = ciimage.transformed(by: transform)
+        let uiimage = UIImage(ciImage: scaledCIImage)
+        return uiimage.pngData()!
     }
-}
-
-func dietString(diet: String) -> String {
-    switch (diet) {
-    case "vegetarian":
-        return "Vegetarian"
-    case "vegan":
-        return "Vegan"
-    case "nopeanut":
-        return "Nut Allergy"
-    case "nogluten":
-        return "Gluten Free"
-    case "dairy":
-        return "Dairy Free"
-    default:
-        return ""
+    
+    func dietColor(diet: String) -> UIColor {
+        switch (diet) {
+        case "vegetarian":
+            return (\HIAppearance.profileCardVegetarian).value
+        case "vegan":
+            return UIColor.white
+        case "nopeanut":
+            return (\HIAppearance.profileCardNut).value
+        case "nogluten":
+            return UIColor.white
+        case "dairy":
+            return UIColor.white
+        default:
+            return UIColor.white
+        }
+    }
+    
+    func dietString(diet: String) -> String {
+        switch (diet) {
+        case "vegetarian":
+            return "Vegetarian"
+        case "vegan":
+            return "Vegan"
+        case "nopeanut":
+            return "Nut Allergy"
+        case "nogluten":
+            return "Gluten Free"
+        case "dairy":
+            return "Dairy Free"
+        default:
+            return ""
+        }
     }
 }
 
@@ -122,6 +158,9 @@ struct HIProfileCardView_Previews: PreviewProvider {
                           lastName: "last",
                           dietaryRestrictions: ["vegetarian", "nopeanut"],
                           points: 100,
-                          tier: "no tier")
+                          tier: "no tier",
+                          wave: "4",
+                          id: "https://www.hackillinois.org"
+        )
     }
 }

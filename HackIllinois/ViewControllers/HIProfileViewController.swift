@@ -22,6 +22,11 @@ class HIProfileViewController: HIBaseViewController {
     private var profile = HIProfile()
     private var profileTier = ""
 //    private let errorView = HIErrorView(style: .profile)
+    private let logoutButton = HIButton {
+        $0.tintHIColor = \.baseText
+        $0.backgroundHIColor = \.clear
+        $0.baseImage = #imageLiteral(resourceName: "LogoutButton")
+    }
 
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
@@ -52,29 +57,48 @@ extension HIProfileViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.setCustomTitle(customTitle: "Profile")
+        super.setCustomTitle(customTitle: "PROFILE")
     }
     
     func layoutProfileCard() {
-        let hostingController = UIHostingController(rootView: HIProfileCardView(firstName: profile.firstName,
-                                                                                lastName: profile.lastName,
-                                                                                dietaryRestrictions: profile.dietaryRestrictions,
-                                                                                points: profile.points,
-                                                                                tier: profileTier
+//        let hostingController = UIHostingController(rootView: HIProfileCardView(firstName: profile.firstName,
+//                                                                                lastName: profile.lastName,
+//                                                                                dietaryRestrictions: profile.dietaryRestrictions,
+//                                                                                wave: "4",
+//                                                                                points: profile.points,
+//                                                                                tier: profileTier,
+//                                                                                id: profile.id
+//                                                                               ))
+        
+        let hostingController = UIHostingController(rootView: HIProfileCardView(firstName: "Bob",
+                                                                                lastName: "Ross",
+                                                                                dietaryRestrictions: ["vegetarian","vegan"],
+                                                                                points: 100,
+                                                                                tier: "some tier",
+                                                                                wave: "4",
+                                                                                id: "SOMEID"
                                                                                ))
         addChild(hostingController)
         hostingController.view.backgroundColor = .clear
         hostingController.view.frame = view.bounds
         view.addSubview(hostingController.view)
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateProfile()
-        reloadProfile()
-        layoutProfileCard()
+//
+//    func layoutErrorView() {
+//        errorView.delegate = self
+//        view.addSubview(errorView)
+//        errorView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+//        errorView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+//        errorView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+//        errorView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+//    }
+    
+    func layoutLogOutButton() {
+        self.navigationItem.rightBarButtonItem = logoutButton.toBarButtonItem()
+        logoutButton.constrain(width: 25, height: 25)
+        logoutButton.addTarget(self, action: #selector(didSelectLogoutButton(_:)), for: .touchUpInside)
     }
-
+    
     func updateProfile() {
 //        guard let profile = HIApplicationStateController.shared.profile else { return }
 //        view.layoutIfNeeded()
@@ -93,12 +117,36 @@ extension HIProfileViewController {
 //        } else {
 //            profileTierLabel.text = "Tier: None"
 //        }
-//        profileDiscordView.text = profile.discord
-//        discordImageView.image = #imageLiteral(resourceName: "Discord")
+
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateProfile()
+        reloadProfile()
+        layoutProfileCard()
+        layoutLogOutButton()
     }
 
 }
 
+// MARK: - Actions
+extension HIProfileViewController {
+    @objc func didSelectLogoutButton(_ sender: UIButton) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(
+            UIAlertAction(title: "Log Out", style: .destructive) { _ in
+                self.dismiss(animated: true, completion: nil)
+                NotificationCenter.default.post(name: .logoutUser, object: nil)
+            }
+        )
+        alert.addAction(
+            UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        )
+        alert.popoverPresentationController?.sourceView = sender
+        present(alert, animated: true, completion: nil)
+    }
+
+}
 
 // MARK: - API
 extension HIProfileViewController {
@@ -138,7 +186,6 @@ extension HIProfileViewController {
             }
             .launch()
     }
-
 }
 
 // MARK: - HIErrorViewDelegate

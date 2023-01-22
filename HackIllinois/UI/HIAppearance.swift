@@ -240,15 +240,19 @@ struct HIAppearance: Equatable {
         static let button = UIFont(name: "MontserratRoman-Regular", size: 15)
         static let glyph = UIFont(name: "MontserratRoman-Bold", size: 16)
 
-        static let profileName = UIFont(name: "MontserratRoman-SemiBold", size: 24)
-        static let profileSubtitle = UIFont(name: "MontserratRoman-Regular", size: 14)
+        static let profileName = UIFont(name: "MontserratRoman-Bold", size: 20)
+        static let profileSubtitle = UIFont(name: "MontserratRoman-Bold", size: 12)
+        static let profileDietaryRestrictions = UIFont(name: "MontserratRoman-SemiBold", size: 16)
+        static let profileDietaryRestrictionsLabel = UIFont(name: "MontserratRoman-Bold", size: 12)
+        
         static let profileNumberFigure = UIFont(name: "MontserratRoman-SemiBold", size: 24)
-        static let profileTier = UIFont(name: "MontserratRoman-Regular", size: 18)
+        static let profileTier = UIFont(name: "MontserratRoman-Bold", size: 18)
         static let profileUsername = UIFont(name: "MontserratRoman-Bold", size: 16)
         static let profileInterests = UIFont(name: "MontserratRoman-SemiBold", size: 14)
         static let segmentedTitle = UIFont(name: "MontserratRoman-Bold", size: 16)
         static let homeSegmentedTitle = UIFont(name: "MontserratRoman-Bold", size: 24)
         static let segmentedNumberText = UIFont(name: "MontserratRoman-SemiBold", size: 18)
+       
 
         static let countdownText = UIFont(name: "MontserratRoman-Bold", size: 25)
         static let newCountdownText = UIFont(name: "MontserratRoman-Bold", size: 48)
