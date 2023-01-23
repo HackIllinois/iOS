@@ -124,9 +124,8 @@ extension HIScheduleViewController {
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
-        
         var segmentedControlConstant: CGFloat = 0.0
-        if (UIDevice.current.userInterfaceIdiom == .pad) {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             segmentedControlConstant = 40.0
         }
 
@@ -134,7 +133,6 @@ extension HIScheduleViewController {
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: -34).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 34).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 66 + segmentedControlConstant).isActive = true
-        
         let tableView = HITableView()
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10).isActive = true
@@ -180,7 +178,7 @@ extension HIScheduleViewController {
 // MARK: - UITableViewDelegate
 extension HIScheduleViewController {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (UIDevice.current.userInterfaceIdiom == .pad) {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             return 40
         } else {
             return 30
@@ -204,11 +202,10 @@ extension HIScheduleViewController {
             let sections = fetchedResultsController.sections,
             section < sections.count,
             let date = Formatter.coreData.date(from: sections[section].name) {
-            
             header.titleLabel.text = Formatter.simpleTime.string(from: date)
             header.titleLabel.textColor = .white
             header.titleLabel.textAlignment = .center
-            if (UIDevice.current.userInterfaceIdiom == .pad) {
+            if UIDevice.current.userInterfaceIdiom == .pad {
                 header.titleLabel.font = HIAppearance.Font.timeIndicator
             } else {
                 header.titleLabel.font = HIAppearance.Font.glyph

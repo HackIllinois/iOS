@@ -19,11 +19,9 @@ class HIDateHeader: UITableViewHeaderFooterView {
         $0.backgroundHIColor = \.clear
         $0.font = HIAppearance.Font.sectionHeader
     }
-    
-    let testView = HIView { (view) in
+    let dateView = HIView { (view) in
         view.layer.cornerRadius = 10
         view.backgroundHIColor = \.buttonDarkBlue
-        view.translatesAutoresizingMaskIntoConstraints = false
     }
 
     override init(reuseIdentifier: String?) {
@@ -31,19 +29,17 @@ class HIDateHeader: UITableViewHeaderFooterView {
 
         let backgroundView = HIView { $0.backgroundHIColor = \.clear }
         self.backgroundView = backgroundView
-        backgroundView.addSubview(testView)
-        
+        backgroundView.addSubview(dateView)
+        dateView.translatesAutoresizingMaskIntoConstraints = false
         var spacingConstant: CGFloat = 1.0
-        if (UIDevice.current.userInterfaceIdiom == .pad) {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             spacingConstant = 2.0
         }
-        testView.addSubview(titleLabel)
-        //testView.constrain(width: 100 * spacingConstant)
-        //testView.constrain(height: 30 * spacingConstant)
-        testView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: -8).isActive = true
-        testView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
-        testView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
-        titleLabel.constrain(to: testView, topInset: 4 * spacingConstant, trailingInset: -8 * spacingConstant, bottomInset: -4 * spacingConstant, leadingInset: 8 * spacingConstant)
+        dateView.addSubview(titleLabel)
+        dateView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: -8).isActive = true
+        dateView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
+        dateView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
+        titleLabel.constrain(to: dateView, topInset: 4 * spacingConstant, trailingInset: -8 * spacingConstant, bottomInset: -4 * spacingConstant, leadingInset: 8 * spacingConstant)
     }
 
     required init?(coder aDecoder: NSCoder) {

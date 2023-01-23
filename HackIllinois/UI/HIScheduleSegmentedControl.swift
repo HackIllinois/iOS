@@ -69,7 +69,7 @@ class HIScheduleSegmentedControl: HISegmentedControl {
     override func layoutSubviews() {
         super.layoutSubviews()
         var indicatorConstant: CGFloat = 0.0
-        if (UIDevice.current.userInterfaceIdiom == .pad) {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             indicatorConstant = 50.0
         }
         let indicatorViewWidth = ((frame.width - viewPadding) / CGFloat(items.count) - viewPadding)
@@ -110,7 +110,7 @@ class HIScheduleSegmentedControl: HISegmentedControl {
         let numberLabel = UILabel()
 
         titleLabel.textAlignment = .center
-        if (UIDevice.current.userInterfaceIdiom == .pad) {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             titleLabel.font = titleFontPad
             numberLabel.font = numberFontPad
         } else {
@@ -128,9 +128,8 @@ class HIScheduleSegmentedControl: HISegmentedControl {
         view.addSubview(numberLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         numberLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         var segmentedControlConstant = 0.0
-        if (UIDevice.current.userInterfaceIdiom == .pad) {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             segmentedControlConstant = 24.0
         }
         titleLabel.constrain(to: view, topInset: 5, trailingInset: 0, leadingInset: 0)
@@ -142,9 +141,9 @@ class HIScheduleSegmentedControl: HISegmentedControl {
         titleLabel.isUserInteractionEnabled = false
         numberLabel.isUserInteractionEnabled = false
 
-        view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
         views.append(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
         titleLabels.append(titleLabel)
         numberLabels.append(numberLabel)
     }

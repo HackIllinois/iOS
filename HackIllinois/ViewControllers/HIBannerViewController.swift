@@ -4,6 +4,10 @@
 //
 //  Created by HackIllinois Team on 12/30/22.
 //  Copyright © 2022 HackIllinois. All rights reserved.
+//  This file is part of the Hackillinois iOS App.
+//  The Hackillinois iOS App is open source software, released under the University of
+//  Illinois/NCSA Open Source License. You should have received a copy of
+//  this license in a file with the distribution.
 //
 
 import Foundation
@@ -18,19 +22,16 @@ extension HIBannerViewController {
         view = HIView { $0.backgroundHIColor = \.clear }
 
         let bannerStackView = UIStackView()
+        view.addSubview(bannerStackView)
         bannerStackView.distribution = .fillEqually
         bannerStackView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(bannerStackView)
         bannerStackView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         bannerStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         bannerStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         bannerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        
-
         let daysContent = bannerView(with: "HACKILLINOIS BEGINS IN")
         bannerStackView.addArrangedSubview(daysContent)
     }
-    
     func bannerView(with labelString: String) -> UIView {
 
         let label = HILabel {
@@ -38,7 +39,7 @@ extension HIBannerViewController {
             $0.backgroundHIColor = \.clear
             $0.textAlignment = .center
             $0.font = HIAppearance.Font.glyph
-            if (UIDevice.current.userInterfaceIdiom == .pad) {
+            if UIDevice.current.userInterfaceIdiom == .pad {
                 $0.font = HIAppearance.Font.glyphPad
             }
             $0.text = labelString
@@ -57,5 +58,3 @@ extension HIBannerViewController {
         super.viewWillAppear(animated)
     }
 }
-
-

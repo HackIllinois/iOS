@@ -108,7 +108,6 @@ func populateTagLabels(stackView: UIStackView, tagsString: String) {
 extension HIBaseViewController {
     @objc func setCustomTitle(customTitle: String) {
         let label = HILabel(style: .viewTitle)
-        
         label.text = customTitle
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
         self.navigationItem.leftItemsSupplementBackButton = true

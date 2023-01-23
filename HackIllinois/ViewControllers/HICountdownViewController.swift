@@ -98,8 +98,6 @@ extension HICountdownViewController {
         countdownStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         countdownStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         countdownStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        
-
         let daysContent = containerView(with: "DAYS", and: days)
         countdownStackView.addArrangedSubview(daysContent)
         let hoursContent = containerView(with: "HOURS", and: hours)
@@ -107,7 +105,7 @@ extension HICountdownViewController {
         let minutesContent = containerView(with: "MINUTES", and: minutes)
         countdownStackView.addArrangedSubview(minutesContent)
         var countdownSpacingConstant: CGFloat = 30
-        if (UIDevice.current.userInterfaceIdiom == .pad) {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             countdownSpacingConstant = 60
         }
         countdownStackView.setCustomSpacing(countdownSpacingConstant, after: daysContent)
@@ -122,7 +120,7 @@ extension HICountdownViewController {
             $0.textHIColor = \.whiteText
             $0.backgroundHIColor = \.clear
             $0.textAlignment = .center
-            if (UIDevice.current.userInterfaceIdiom == .pad) {
+            if UIDevice.current.userInterfaceIdiom == .pad {
                 $0.font = HIAppearance.Font.timeIndicator
             } else {
                 $0.font = HIAppearance.Font.glyph
@@ -136,15 +134,13 @@ extension HICountdownViewController {
             NSAttributedString.Key.strokeWidth: 5.0,
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 48, weight: UIFont.Weight(rawValue: 900) )]
             as [NSAttributedString.Key: Any]
-        
         let iPadStrokeTextAttributes = [
             NSAttributedString.Key.strokeColor: yellowish,
             NSAttributedString.Key.foregroundColor: UIColor.clear,
             NSAttributedString.Key.strokeWidth: 5.0,
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 90, weight: UIFont.Weight(rawValue: 900) )]
             as [NSAttributedString.Key: Any]
-        
-        if (UIDevice.current.userInterfaceIdiom == .pad) {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             countDownView.attributedText = NSMutableAttributedString(string: "Test", attributes: iPadStrokeTextAttributes)
         } else {
             countDownView.attributedText = NSMutableAttributedString(string: "Test", attributes: strokeTextAttributes)
@@ -197,7 +193,6 @@ extension HICountdownViewController {
         hours.text = String(format: "%02d", (hoursRemaining))
         minutes.text = String(format: "%02d", (minutesRemaining))
         seconds.text = String(format: "%02d", (secondsRemaining))
-        
         days.textAlignment = .center
         hours.textAlignment = .center
         minutes.textAlignment = .center

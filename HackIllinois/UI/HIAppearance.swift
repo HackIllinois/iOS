@@ -79,7 +79,6 @@ struct HIAppearance: Equatable {
     private static let lightBlack = #colorLiteral(red: 0.03137254902, green: 0.08235294118, blue: 0.1058823529, alpha: 1)
     private static let salmon = #colorLiteral(red: 0.9490196078, green: 0.6078431373, blue: 0.4705882353, alpha: 1)
     private static let yellowWhite = #colorLiteral(red: 0.9647058824, green: 0.9568627451, blue: 0.831372549, alpha: 1)
-    
     // Hack 2023 color palette
     private static let lightYellow = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1)
     private static let blue = #colorLiteral(red: 0.03137254902, green: 0.5450980392, blue: 0.7568627451, alpha: 1)
@@ -91,8 +90,6 @@ struct HIAppearance: Equatable {
     private static let darkBlue = #colorLiteral(red: 0.05098039216, green: 0.2196078431, blue: 0.4862745098, alpha: 1)
     private static let transparent = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     private static let transparent2 = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
-    
-
     private static var statusBarWhite: UIStatusBarStyle {
         return .lightContent
     }
@@ -207,62 +204,10 @@ struct HIAppearance: Equatable {
     static func change(to newAppearance: HIAppearance) {
         guard current != newAppearance else { return }
         current = newAppearance
-
         NotificationCenter.default.post(name: .themeDidChange, object: nil)
     }
 
     enum Font {
-/*<<<<<<< HEAD
-        static let contentSubtitle = UIFont.systemFont(ofSize: 13, weight: .light)
-        static let contentText = UIFont.systemFont(ofSize: 14, weight: .regular)
-        static let contentTitle = UIFont.systemFont(ofSize: 18, weight: .medium)
-        static let detailTitle = UIFont.systemFont(ofSize: 24, weight: .semibold)
-        static let detailSubtitle = UIFont.systemFont(ofSize: 16, weight: .medium)
-        static let detailText = UIFont.systemFont(ofSize: 16, weight: .regular)
-        static let viewTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
-        static let happeningEventTitle = UIFont.systemFont(ofSize: 25, weight: .bold)
-        static let eventTitle = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        static let eventTime = UIFont.systemFont(ofSize: 15, weight: .regular)
-        static let eventDetails = UIFont.systemFont(ofSize: 14, weight: .regular)
-        static let eventButtonText = UIFont.systemFont(ofSize: 12, weight: .semibold)
-        static let eventCategoryText = UIFont.systemFont(ofSize: 16, weight: .regular)
-        static let clockText = UIFont.systemFont(ofSize: 48, weight: .semibold)
-        static let navigationSubtitle = UIFont.systemFont(ofSize: 14, weight: .medium)
-        static let navigationTitle = UIFont.systemFont(ofSize: 22, weight: .semibold)
-        static let navigationInfoText = UIFont.systemFont(ofSize: 12, weight: .regular)
-        static let descriptionText = UIFont.systemFont(ofSize: 16, weight: .regular)
-        static let timeText = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        static let locationText = UIFont.systemFont(ofSize: 12, weight: .semibold)
-        static let bubbleSponsorText = UIFont.systemFont(ofSize: 12, weight: .semibold)
-        static let sponsorText = UIFont.systemFont(ofSize: 16, weight: .regular)
-        static let loginTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
-        static let loginOrTitle = UIFont.systemFont(ofSize: 16, weight: .bold)
-        static let loginSelection = UIFont.systemFont(ofSize: 16, weight: .semibold)
-
-        static let sectionHeader = UIFont.systemFont(ofSize: 13, weight: .bold)
-        static let button = UIFont.systemFont(ofSize: 15, weight: .regular)
-        static let glyph = UIFont.systemFont(ofSize: 16, weight: .bold)
-
-        static let profileName = UIFont.systemFont(ofSize: 24, weight: .semibold)
-        static let profileSubtitle = UIFont.systemFont(ofSize: 14, weight: .regular)
-        static let profileNumberFigure = UIFont.systemFont(ofSize: 24, weight: .semibold)
-        static let profileTier = UIFont.systemFont(ofSize: 18, weight: .regular)
-        static let profileUsername = UIFont.systemFont(ofSize: 16, weight: .bold)
-        static let profileInterests = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        static let segmentedTitle = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        static let homeSegmentedTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
-        static let segmentedNumberText = UIFont.systemFont(ofSize: 18, weight: .semibold)
-
-        static let countdownText = UIFont.systemFont(ofSize: 25, weight: .bold)
-        static let newCountdownText = UIFont.systemFont(ofSize: 48, weight: .bold)
-        static let onboardingGetStartedText = UIFont.systemFont(ofSize: 25, weight: .semibold)
-        static let onboardingTitle = UIFont.systemFont(ofSize: 30, weight: .bold)
-        static let onboardingDescription = UIFont.systemFont(ofSize: 20, weight: .regular)
-        static let leaderboardPoints = UIFont.systemFont(ofSize: 16, weight: .regular)
-        static let leaderboardName = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        static let leaderboardRank = UIFont.systemFont(ofSize: 24, weight: .bold)
-        */
-        //IPAD FONTS
         static let glyphPad = UIFont.systemFont(ofSize: 24, weight: .bold)
         static let timeIndicator = UIFont.systemFont(ofSize: 32, weight: .bold)
         static let homeSegmentedTitlePad = UIFont.systemFont(ofSize: 40, weight: .bold)
@@ -274,7 +219,6 @@ struct HIAppearance: Equatable {
         static let locationTextPad = UIFont.systemFont(ofSize: 24, weight: .semibold)
         static let sponsorTextPad = UIFont.systemFont(ofSize: 24, weight: .semibold)
         static let detailTextPad = UIFont.systemFont(ofSize: 24, weight: .regular)
-//=======
         static let contentSubtitle = UIFont(name: "MontserratRoman-Light", size: 13)
         static let contentText = UIFont(name: "MontserratRoman-Regular", size: 14)
         static let contentTitle = UIFont(name: "MontserratRoman-Medium", size: 18)
@@ -314,7 +258,6 @@ struct HIAppearance: Equatable {
         static let segmentedTitle = UIFont(name: "MontserratRoman-Bold", size: 16)
         static let homeSegmentedTitle = UIFont(name: "MontserratRoman-Bold", size: 24)
         static let segmentedNumberText = UIFont(name: "MontserratRoman-SemiBold", size: 18)
-
         static let countdownText = UIFont(name: "MontserratRoman-Bold", size: 25)
         static let newCountdownText = UIFont(name: "MontserratRoman-Bold", size: 48)
         static let onboardingGetStartedText = UIFont(name: "MontserratRoman-SemiBold", size: 25)
@@ -323,7 +266,6 @@ struct HIAppearance: Equatable {
         static let leaderboardPoints = UIFont(name: "MontserratRoman-Regular", size: 16)
         static let leaderboardName = UIFont(name: "MontserratRoman-SemiBold", size: 14)
         static let leaderboardRank = UIFont(name: "MontserratRoman-Bold", size: 24)
-//>>>>>>> dev
     }
 }
 
@@ -421,7 +363,6 @@ class HIThemeEngine {
     private init() {
         startUpTimer()
     }
-
     deinit {
         tearDownTimer()
     }
@@ -437,7 +378,6 @@ class HIThemeEngine {
         )
         timer?.fire()
     }
-
     @objc func updateThemeIfNeeded() {
         let calendar = Calendar.current
         let now = Date()
@@ -452,7 +392,6 @@ class HIThemeEngine {
         }
         HIAppearance.change(to: newAppearance)
     }
-
     func tearDownTimer() {
         timer?.invalidate()
         timer = nil

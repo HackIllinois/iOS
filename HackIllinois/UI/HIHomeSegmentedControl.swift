@@ -60,10 +60,9 @@ class HIHomeSegmentedControl: HISegmentedControl {
     // MARK: - UIView
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         let indicatorViewWidth = ((frame.width - viewPadding) / CGFloat(items.count) - viewPadding)
         var indicatorViewConstant: CGFloat = 4
-        if (UIDevice.current.userInterfaceIdiom == .pad) {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             indicatorViewConstant = 6
         }
         indicatorView.frame = CGRect(x: indicatorViewWidth, y: 40 + indicatorViewConstant, width: indicatorViewWidth, height: indicatorViewConstant)
@@ -101,7 +100,7 @@ class HIHomeSegmentedControl: HISegmentedControl {
     private func setupViewForItem(at index: Int) {
         let view = UIView()
         let titleLabel = UILabel()
-        if (UIDevice.current.userInterfaceIdiom == .pad) {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             titleLabel.font = titleFontPad
         } else {
             titleLabel.font = titleFont
@@ -117,9 +116,9 @@ class HIHomeSegmentedControl: HISegmentedControl {
         titleLabel.constrain(to: view, topInset: 5, trailingInset: 0, bottomInset: -5, leadingInset: 0)
         view.isUserInteractionEnabled = false
         titleLabel.isUserInteractionEnabled = false
-
-        view.translatesAutoresizingMaskIntoConstraints = false
+        
         addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
         views.append(view)
         titleLabels.append(titleLabel)
     }
