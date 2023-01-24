@@ -28,7 +28,6 @@ struct HIProfile: Codable {
     var timezone = ""
     var discord = ""
     var avatarUrl = ""
-    var dietaryRestrictions: [String] = []
 
     init(provider: HIAPI.AuthService.OAuthProvider) {
         self.provider = provider

@@ -21,7 +21,9 @@ class HIProfileViewController: HIBaseViewController {
     // MARK: - Properties
     private var profile = HIProfile()
     private var profileTier = ""
-//    private let errorView = HIErrorView(style: .profile)
+    var addedProfileCard = false
+    private var profileCardController: UIHostingController<HIProfileCardView>?
+    private let errorView = HIErrorView(style: .profile)
     private let logoutButton = HIButton {
         $0.tintHIColor = \.baseText
         $0.backgroundHIColor = \.clear
@@ -46,13 +48,12 @@ extension HIProfileViewController {
 extension HIProfileViewController {
     override func loadView() {
         super.loadView()
-        /* TEMPORARY SO IT SHOWS NO ERROR VIEW
         if HIApplicationStateController.shared.isGuest {
             layoutErrorView()
         } else {
-         */
-           // layoutProfile()
-        //}
+            updateProfile()
+            reloadProfile()
+        }
         
     }
     override func viewDidLoad() {
@@ -60,38 +61,37 @@ extension HIProfileViewController {
         super.setCustomTitle(customTitle: "PROFILE")
     }
     
-    func layoutProfileCard() {
-//        let hostingController = UIHostingController(rootView: HIProfileCardView(firstName: profile.firstName,
-//                                                                                lastName: profile.lastName,
-//                                                                                dietaryRestrictions: profile.dietaryRestrictions,
-//                                                                                wave: "4",
-//                                                                                points: profile.points,
-//                                                                                tier: profileTier,
-//                                                                                id: profile.id
-//                                                                               ))
-        
-        let hostingController = UIHostingController(rootView: HIProfileCardView(firstName: "Bob",
-                                                                                lastName: "Ross",
-                                                                                dietaryRestrictions: ["vegetarian","vegan"],
-                                                                                points: 100,
-                                                                                tier: "some tier",
+    func updateProfileCard() {
+        if addedProfileCard == true {
+            profileCardController?.view.removeFromSuperview()
+            view.willRemoveSubview(profileCardController!.view)
+            profileCardController?.removeFromParent()
+        }
+        profileCardController = UIHostingController(rootView: HIProfileCardView(firstName: profile.firstName,
+                                                                                lastName: profile.lastName,
+                                                                                dietaryRestrictions: [],
+                                                                                points: profile.points,
+                                                                                tier: profileTier,
                                                                                 wave: "4",
-                                                                                id: "SOMEID"
+                                                                                id: profile.id
                                                                                ))
-        addChild(hostingController)
-        hostingController.view.backgroundColor = .clear
-        hostingController.view.frame = view.bounds
-        view.addSubview(hostingController.view)
+        
+        addChild(profileCardController!)
+        
+        profileCardController!.view.backgroundColor = .clear
+        profileCardController!.view.frame = view.bounds
+        view.addSubview(profileCardController!.view)
+        addedProfileCard = true
     }
-//
-//    func layoutErrorView() {
-//        errorView.delegate = self
-//        view.addSubview(errorView)
-//        errorView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-//        errorView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-//        errorView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
-//        errorView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-//    }
+
+    func layoutErrorView() {
+        errorView.delegate = self
+        view.addSubview(errorView)
+        errorView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        errorView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        errorView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        errorView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+    }
     
     func layoutLogOutButton() {
         self.navigationItem.rightBarButtonItem = logoutButton.toBarButtonItem()
@@ -100,30 +100,20 @@ extension HIProfileViewController {
     }
     
     func updateProfile() {
-//        guard let profile = HIApplicationStateController.shared.profile else { return }
-//        view.layoutIfNeeded()
-//
-//        if let url = URL(string: profile.avatarUrl), let imgValue = HIConstants.PROFILE_IMAGES[url.absoluteString] {
-//                    profilePictureView.changeImage(newImage: imgValue)
-//                }
-//        profileNameView.text = profile.firstName + " " + profile.lastName
-//        profilePointsLabel.text = "\(profile.points) pts"
-//        if tiers.count > 0 {
-//            var max_threshold = 0
-//            for tier in tiers where (profile.points >= tier.threshold && tier.threshold >= max_threshold) {
-//                profileTierLabel.text = "\(tier.name.capitalized) Tier"
-//                max_threshold = tier.threshold
-//            }
-//        } else {
-//            profileTierLabel.text = "Tier: None"
-//        }
+        updateProfileCard()
+        if tiers.count > 0 {
+            var max_threshold = 0
+            for tier in tiers where (profile.points >= tier.threshold && tier.threshold >= max_threshold) {
+                profileTier = "\(tier.name.capitalized) Tier"
+                max_threshold = tier.threshold
+            }
+        } else {
+            profileTier = "Tier: None"
+        }
 
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateProfile()
-        reloadProfile()
-        layoutProfileCard()
         layoutLogOutButton()
     }
 
@@ -148,6 +138,7 @@ extension HIProfileViewController {
 
 }
 
+// https://api.hackillinois.org/profile/registration/attendee/a2cc7f7945e436a6ea5c4182db9a7828
 // MARK: - API
 extension HIProfileViewController {
     @objc func reloadProfile () {
@@ -160,7 +151,6 @@ extension HIProfileViewController {
                 self?.profile.firstName = apiProfile.firstName
                 self?.profile.lastName = apiProfile.lastName
                 self?.profile.points = apiProfile.points
-                self?.profile.dietaryRestrictions = apiProfile.dietaryRestrictions
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": self?.profile])
                     self?.updateProfile()
@@ -177,6 +167,21 @@ extension HIProfileViewController {
                 do {
                     let (tiersList, _) = try result.get()
                     self?.tiers = tiersList.tiers
+                    DispatchQueue.main.async {
+                        self?.updateProfile()
+                    }
+                } catch {
+                    print("An error has occurred \(error)")
+                }
+            }
+            .launch()
+        
+        HIAPI.ProfileService.getDietaryRestrictions()
+            .onCompletion { [weak self] result in
+                do {
+                    let (data, _) = try result.get()
+                    
+                    print(data)
                     DispatchQueue.main.async {
                         self?.updateProfile()
                     }
