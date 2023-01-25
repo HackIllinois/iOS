@@ -31,15 +31,12 @@ class HIDateHeader: UITableViewHeaderFooterView {
         self.backgroundView = backgroundView
         backgroundView.addSubview(dateView)
         dateView.translatesAutoresizingMaskIntoConstraints = false
-        var spacingConstant: CGFloat = 1.0
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            spacingConstant = 2.0
-        }
+        var spaceConstant: CGFloat = 1.0
         dateView.addSubview(titleLabel)
         dateView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: -8).isActive = true
         dateView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
         dateView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
-        titleLabel.constrain(to: dateView, topInset: 4 * spacingConstant, trailingInset: -8 * spacingConstant, bottomInset: -4 * spacingConstant, leadingInset: 8 * spacingConstant)
+        titleLabel.constrain(to: dateView, topInset: 4 * spaceConstant, trailingInset: -16 * spaceConstant, bottomInset: -4 * spaceConstant, leadingInset: 16 * spaceConstant)
     }
 
     required init?(coder aDecoder: NSCoder) {

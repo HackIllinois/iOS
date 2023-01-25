@@ -87,6 +87,9 @@ extension HIScheduleViewController {
     @objc func didSelectFavoritesIcon(_ sender: UIBarButtonItem) {
         onlyFavorites = !onlyFavorites
         sender.image = onlyFavorites ? #imageLiteral(resourceName: "MenuFavorited") : #imageLiteral(resourceName: "MenuUnfavorited")
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            sender.image = onlyFavorites ? #imageLiteral(resourceName: "FavoritedPad") : #imageLiteral(resourceName: "UnFavoritedPad")
+        }
         updatePredicate()
         animateReload()
     }
@@ -135,7 +138,7 @@ extension HIScheduleViewController {
         segmentedControl.heightAnchor.constraint(equalToConstant: 66 + segmentedControlConstant).isActive = true
         let tableView = HITableView()
         view.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10).isActive = true
+        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 20).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
@@ -158,6 +161,9 @@ extension HIScheduleViewController {
         super.setupNavigationItem()
         if !HIApplicationStateController.shared.isGuest {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuUnfavorited"), style: .plain, target: self, action: #selector(didSelectFavoritesIcon(_:)))
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "UnFavoritedPad"), style: .plain, target: self, action: #selector(didSelectFavoritesIcon(_:)))
+            }
         }
     }
 
@@ -179,7 +185,7 @@ extension HIScheduleViewController {
 extension HIScheduleViewController {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if UIDevice.current.userInterfaceIdiom == .pad {
-            return 40
+            return 60
         } else {
             return 30
         }

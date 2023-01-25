@@ -156,7 +156,7 @@ extension HICountdownViewController {
         containerView.addSubview(label)
         containerView.addSubview(countDownView)
         label.constrain(to: containerView, topInset: 0, trailingInset: 0, leadingInset: 0)
-        //countDownView.constrain(to: containerView, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        countDownView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         countDownView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -4).isActive = true
 
         return containerView

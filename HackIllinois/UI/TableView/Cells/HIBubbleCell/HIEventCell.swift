@@ -25,6 +25,10 @@ class HIEventCell: HIBubbleCell {
         $0.backgroundHIColor = \.clear
         $0.activeImage = #imageLiteral(resourceName: "Favorited")
         $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            $0.activeImage = #imageLiteral(resourceName: "FavoritedPad")
+            $0.baseImage = #imageLiteral(resourceName: "UnFavoritedPad")
+        }
     }
     var headerView = UIStackView()
     var contentStackView = UIStackView()
@@ -64,7 +68,7 @@ class HIEventCell: HIBubbleCell {
         contentStackView.bottomAnchor.constraint(greaterThanOrEqualTo: bubbleView.bottomAnchor, constant: -16 * headerSpacingConstant).isActive = true
         // Don't show favorite button for guests
         if HIApplicationStateController.shared.isGuest {
-            favoritedButton.isHidden = false // CHANGE BACK TO TRUE
+            favoritedButton.isHidden = true
         }
     }
 
@@ -85,37 +89,37 @@ extension HIEventCell {
 extension HIEventCell {
     static func heightForCell(with event: Event, width: CGFloat) -> CGFloat {
         let heightFromEventName = HILabel.heightForView(text: event.name, font: HIAppearance.Font.eventTitle!, width: width - 137)
-        var heightConstant: CGFloat = 1.3
+        var heightConstant: CGFloat = 1.6
         if UIDevice.current.userInterfaceIdiom == .pad {
-            heightConstant = 10.0
+            heightConstant = 11.0
         }
         let height = heightFromEventName + 160
         if !event.sponsor.isEmpty {
             return height + (20 * heightConstant)
         }
         if UIDevice.current.userInterfaceIdiom == .pad {
-            return height + (20 * (heightConstant / 1.3))
+            return height + (22 * (heightConstant / 1.45))
         }
-        return height
+        return height + 5
     }
     static func <- (lhs: HIEventCell, rhs: Event) {
         lhs.favoritedButton.isActive = rhs.favorite
         var contentStackViewHeight: CGFloat = 0.0
         var eventCellSpacing: CGFloat = 8.0
-        var stackViewSpacing: CGFloat = 3.5
+        var stackViewSpacing: CGFloat = 4.7
         var bubbleConstant: CGFloat = 1.0
         var locationImageView = UIImageView(image: #imageLiteral(resourceName: "LocationSign"))
         var timeImageView = UIImageView(image: #imageLiteral(resourceName: "Clock"))
         var sponsorImageView = UIImageView(image: #imageLiteral(resourceName: "Vector"))
         let titleLabel = HILabel(style: .event)
-        //titleLabel.numberOfLines = 0
+        titleLabel.numberOfLines = 2
         lhs.headerView.addArrangedSubview(titleLabel)
         titleLabel.text = rhs.name
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        //titleLabel.translatesAutoresizingMaskIntoConstraints = false
         lhs.headerView.setCustomSpacing(9, after: titleLabel)
         if UIDevice.current.userInterfaceIdiom == .pad {
             eventCellSpacing = 12.0
-            stackViewSpacing = 12.0
+            stackViewSpacing = 15.0
             bubbleConstant = 2.0
             locationImageView = UIImageView(image: #imageLiteral(resourceName: "VectorPad"))
             timeImageView = UIImageView(image: #imageLiteral(resourceName: "TimePad"))
@@ -123,9 +127,10 @@ extension HIEventCell {
             lhs.headerView.setCustomSpacing(18, after: titleLabel)
             titleLabel.constrain(height: HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle!, width: lhs.contentView.frame.width - 137) + 20)
         }
-        let titleHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle!, width: lhs.contentView.frame.width - 137)
-        titleLabel.constrain(width: lhs.contentView.frame.width - 120, height: titleHeight)
-        let eventType = HIEventType(type: rhs.eventType)
+        titleLabel.constrain(width: 240 * bubbleConstant * bubbleConstant)
+        //let titleHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle!, width: lhs.contentView.frame.width - 137)
+        //titleLabel.constrain(width: lhs.contentView.frame.width - 120, height: HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle!, width: lhs.contentView.frame.width - 137))
+        //let eventType = HIEventType(type: rhs.eventType)
         let upperContainerView = HIView {
             lhs.contentStackView.addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -160,7 +165,7 @@ extension HIEventCell {
         lhs.headerView.addArrangedSubview(eventTypeView)
         eventTypeView.addSubview(typeLabel)
         typeLabel.constrain(to: eventTypeView, topInset: 4, trailingInset: -8, bottomInset: -4, leadingInset: 8)
-        typeLabel.text = eventType.description.lowercased().capitalized
+        typeLabel.text = rhs.eventType.description.lowercased().capitalized
         eventTypeView.constrain(height: 20 * bubbleConstant)
         pointsView.constrain(height: 20 * bubbleConstant)
         pointsView.leadingAnchor.constraint(equalTo: eventTypeView.trailingAnchor, constant: 8 * bubbleConstant).isActive = true
@@ -188,22 +193,20 @@ extension HIEventCell {
             //print("Success")
         }
         middleContainerView.addSubview(locationImageView)
+        locationImageView.translatesAutoresizingMaskIntoConstraints = false
         middleContainerView.addSubview(locationLabel)
         if !rhs.sponsor.isEmpty {
             locationImageView.centerYAnchor.constraint(equalTo: sponsorImageView.centerYAnchor, constant: (stackViewSpacing * 2.5) + 14).isActive = true
         } else {
             locationImageView.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor, constant: (stackViewSpacing * 2.5) + 14).isActive = true
         }
+        locationImageView.centerXAnchor.constraint(equalTo: timeImageView.centerXAnchor).isActive = true
         locationLabel.leadingAnchor.constraint(equalTo: timeLabel.leadingAnchor).isActive = true
         locationLabel.centerYAnchor.constraint(equalTo: locationImageView.centerYAnchor).isActive = true
-        //lhs.contentStackView.setCustomSpacing((stackViewSpacing * 2.5) + 14, after: locationImageView)
         let descriptionLabel = HILabel(style: .cellDescription)
         descriptionLabel.numberOfLines = 2
         descriptionLabel.text = "\(rhs.info)"
         lhs.contentStackView.addArrangedSubview(descriptionLabel)
-        /*if UIDevice.current.userInterfaceIdiom == .pad {
-            descriptionLabel.trailingAnchor.constraint(equalTo: lhs.contentStackView.trailingAnchor, constant: -40).isActive = true
-        }*/
         contentStackViewHeight += HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle!, width: lhs.contentView.frame.width - 98)
         contentStackViewHeight += timeLabel.intrinsicContentSize.height + locationLabel.intrinsicContentSize.height + 13 + 40 + 3 + 40
     }

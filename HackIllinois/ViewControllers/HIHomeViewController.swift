@@ -126,8 +126,8 @@ extension HIHomeViewController {
         }
         segmentedControl.topAnchor.constraint(equalTo: bannerFrameView.bottomAnchor, constant: 124 * segmentedControlConstant).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: -30).isActive = true
-        segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 30).isActive = true
-        segmentedControl.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 20).isActive = true
+        //segmentedControl.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
         let separator = UIView()
@@ -173,7 +173,6 @@ extension HIHomeViewController {
         let heightConstant: CGFloat = 283 * countdownFrameConstant
         countdownFrameView.widthAnchor.constraint(equalToConstant: widthConstant).isActive = true
         countdownFrameView.heightAnchor.constraint(equalToConstant: heightConstant).isActive = true
-        
         countdownFrameView.addSubview(countdownViewController.view)
         countdownViewController.view.translatesAutoresizingMaskIntoConstraints = false
         countdownViewController.view.topAnchor.constraint(equalTo: countdownFrameView.topAnchor).isActive = true
@@ -201,7 +200,7 @@ extension HIHomeViewController {
         }
         bannerFrameView.topAnchor.constraint(equalTo: view.topAnchor, constant: 31.5 * bannerFrameTopAnchorConstant).isActive = true
         //let widthConstant: CGFloat = 290
-        let heightConstant: CGFloat = 85 * bannerFrameHeightConstant
+        let heightConstant: CGFloat = 84 * bannerFrameHeightConstant
         //bannerFrameView.widthAnchor.constraint(equalToConstant: widthConstant).isActive = true
         bannerFrameView.heightAnchor.constraint(equalToConstant: heightConstant).isActive = true
         bannerFrameView.addSubview(bannerViewController.view)

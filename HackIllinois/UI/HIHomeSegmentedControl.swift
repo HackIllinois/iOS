@@ -116,7 +116,6 @@ class HIHomeSegmentedControl: HISegmentedControl {
         titleLabel.constrain(to: view, topInset: 5, trailingInset: 0, bottomInset: -5, leadingInset: 0)
         view.isUserInteractionEnabled = false
         titleLabel.isUserInteractionEnabled = false
-        
         addSubview(view)
         view.translatesAutoresizingMaskIntoConstraints = false
         views.append(view)
