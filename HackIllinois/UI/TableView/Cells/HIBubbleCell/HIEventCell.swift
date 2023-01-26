@@ -115,7 +115,6 @@ extension HIEventCell {
         titleLabel.numberOfLines = 2
         lhs.headerView.addArrangedSubview(titleLabel)
         titleLabel.text = rhs.name
-        //titleLabel.translatesAutoresizingMaskIntoConstraints = false
         lhs.headerView.setCustomSpacing(9, after: titleLabel)
         if UIDevice.current.userInterfaceIdiom == .pad {
             eventCellSpacing = 12.0
@@ -125,12 +124,8 @@ extension HIEventCell {
             timeImageView = UIImageView(image: #imageLiteral(resourceName: "TimePad"))
             sponsorImageView = UIImageView(image: #imageLiteral(resourceName: "SponsorPad"))
             lhs.headerView.setCustomSpacing(18, after: titleLabel)
-            titleLabel.constrain(height: HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle!, width: lhs.contentView.frame.width - 137) + 20)
         }
-        //titleLabel.constrain(width: 270 * bubbleConstant * bubbleConstant)
-        //let titleHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle!, width: lhs.contentView.frame.width - 137)
-        titleLabel.constrain(width: lhs.contentView.frame.width - 120, height: HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle!, width: lhs.contentView.frame.width - 137))
-        //let eventType = HIEventType(type: rhs.eventType)
+        titleLabel.constrain(width: lhs.contentView.frame.width - 120, height: (HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle!, width: lhs.contentView.frame.width - 137)) * bubbleConstant)
         let upperContainerView = HIView {
             lhs.contentStackView.addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -159,7 +154,7 @@ extension HIEventCell {
         let pointsLabel = HILabel(style: .pointsText)
         upperContainerView.addSubview(pointsView)
         pointsView.addSubview(pointsLabel)
-        pointsLabel.constrain(to: pointsView, topInset: 4, trailingInset: -8, bottomInset: -4, leadingInset: 8)
+        pointsLabel.constrain(to: pointsView, topInset: 4, trailingInset: -8 * bubbleConstant, bottomInset: -4, leadingInset: 8 * bubbleConstant)
         pointsLabel.text = "+ \(rhs.points) pts"
         let typeLabel = HILabel(style: .pointsText)
         lhs.headerView.addArrangedSubview(eventTypeView)
@@ -181,7 +176,6 @@ extension HIEventCell {
             sponsorImageView.translatesAutoresizingMaskIntoConstraints = false
             sponsorLabel.text = "\(rhs.sponsor)"
             contentStackViewHeight += sponsorLabel.intrinsicContentSize.height
-            sponsorLabel.constrain(height: 18 * bubbleConstant)
             sponsorImageView.bottomAnchor.constraint(equalTo: timeImageView.bottomAnchor, constant: (stackViewSpacing * 2.5) + 14).isActive = true
             sponsorLabel.leadingAnchor.constraint(equalTo: sponsorImageView.trailingAnchor, constant: eventCellSpacing + 1).isActive = true
             sponsorLabel.centerYAnchor.constraint(equalTo: sponsorImageView.centerYAnchor).isActive = true
