@@ -154,6 +154,7 @@
 		DF37065A2925DE57000B4278 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706592925DE57000B4278 /* QuartzCore.framework */; };
 		DF37065C2925DE5D000B4278 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37065B2925DE5D000B4278 /* SystemConfiguration.framework */; };
 		DF37065E2925DE66000B4278 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37065D2925DE66000B4278 /* UIKit.framework */; };
+		DFA502C429823A680088D0DF /* Hack_PopcornCart_Transparent.json in Resources */ = {isa = PBXBuildFile; fileRef = DFA502C329823A680088D0DF /* Hack_PopcornCart_Transparent.json */; };
 		E1E4A5D9291C9BF800780BA1 /* HICarouselSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E4A5D6291C9BF700780BA1 /* HICarouselSwiftUIView.swift */; };
 		E1E4A5DA291C9BF800780BA1 /* HIOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E4A5D7291C9BF700780BA1 /* HIOnboardingView.swift */; };
 		E1E4A5DB291C9BF800780BA1 /* HIOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E4A5D8291C9BF700780BA1 /* HIOnboardingViewModel.swift */; };
@@ -351,6 +352,7 @@
 		DF3706592925DE57000B4278 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		DF37065B2925DE5D000B4278 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DF37065D2925DE66000B4278 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DFA502C329823A680088D0DF /* Hack_PopcornCart_Transparent.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Hack_PopcornCart_Transparent.json; sourceTree = "<group>"; };
 		E1E4A5D6291C9BF700780BA1 /* HICarouselSwiftUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HICarouselSwiftUIView.swift; sourceTree = "<group>"; };
 		E1E4A5D7291C9BF700780BA1 /* HIOnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIOnboardingView.swift; sourceTree = "<group>"; };
 		E1E4A5D8291C9BF700780BA1 /* HIOnboardingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIOnboardingViewModel.swift; sourceTree = "<group>"; };
@@ -768,6 +770,7 @@
 		E1E4A5D5291C9BF700780BA1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				DFA502C329823A680088D0DF /* Hack_PopcornCart_Transparent.json */,
 				E1E4A5D6291C9BF700780BA1 /* HICarouselSwiftUIView.swift */,
 			);
 			path = UI;
@@ -943,6 +946,7 @@
 				952D153D220D37980041383A /* refresh.json in Resources */,
 				952D1543220D453D0041383A /* countdown-24.json in Resources */,
 				1C7561A3278E96600004D739 /* DarkVespaText.json in Resources */,
+				DFA502C429823A680088D0DF /* Hack_PopcornCart_Transparent.json in Resources */,
 				951827A91EA35DB800049F79 /* Assets.xcassets in Resources */,
 				952D1542220D453D0041383A /* countdown-60.json in Resources */,
 				951827B41EA35E8B00049F79 /* LaunchScreen.storyboard in Resources */,
