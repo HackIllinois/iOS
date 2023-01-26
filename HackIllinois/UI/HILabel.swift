@@ -79,7 +79,11 @@ class HILabel: UILabel {
         case .event:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.eventTitle
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                font = HIAppearance.Font.eventTitlePad
+            } else {
+                font = HIAppearance.Font.eventTitle
+            }
 
         case .eventTime:
             textHIColor = \.baseText
@@ -123,7 +127,11 @@ class HILabel: UILabel {
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .center
-            font = HIAppearance.Font.viewTitle
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                font = HIAppearance.Font.viewTitlePad
+            } else {
+                font = HIAppearance.Font.viewTitle
+            }
 
         case .subtitle:
             textHIColor = \.accent
@@ -139,8 +147,11 @@ class HILabel: UILabel {
         case .cellDescription:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.eventDetails
-            numberOfLines = 0
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                font = HIAppearance.Font.detailTextPad
+            } else {
+                font = HIAppearance.Font.eventDetails
+            }
 
         case .loginHeader:
             textHIColor = \.loginTitleBackground
@@ -171,31 +182,51 @@ class HILabel: UILabel {
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .center
-            font = HIAppearance.Font.profileName
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                font = HIAppearance.Font.profileNamePad
+            } else {
+                font = HIAppearance.Font.profileName
+            }
 
         case .profileSubtitle: // Used to display profile subtitle, "points", and whatever that says "time zone"
             backgroundHIColor = \.clear
             textHIColor = \.baseText
             textAlignment = .center
-            font = HIAppearance.Font.profileSubtitle
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                font = HIAppearance.Font.profileSubtitlePad
+            } else {
+                font = HIAppearance.Font.profileSubtitle
+            }
 
         case .profileNumberFigure: // Used to display number of points and time (?)
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .center
-            font = HIAppearance.Font.profileNumberFigure
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                font = HIAppearance.Font.profileNumberFigurePad
+            } else {
+                font = HIAppearance.Font.profileNumberFigure
+            }
 
         case .profileTier: // Used to display "short description"
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             textAlignment = .left
-            font = HIAppearance.Font.profileTier
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                font = HIAppearance.Font.profileTierPad
+            } else {
+                font = HIAppearance.Font.profileTier
+            }
 
         case .profileUsername: // Used to display Discord username, etc.
             textHIColor = \.whiteTagFont
             backgroundHIColor = \.clear
             textAlignment = .left
-            font = HIAppearance.Font.profileUsername
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                font = HIAppearance.Font.profileUsernamePad
+            } else {
+                font = HIAppearance.Font.profileUsername
+            }
 
         case .profileInterests:
             textHIColor = \.whiteTagFont
@@ -217,7 +248,11 @@ class HILabel: UILabel {
         case .pointsText:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.eventButtonText
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                font = HIAppearance.Font.glyphPad
+            } else {
+                font = HIAppearance.Font.eventButtonText
+            }
             textAlignment = .center
 
         case .error:

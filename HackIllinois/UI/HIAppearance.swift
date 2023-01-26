@@ -189,6 +189,17 @@ struct HIAppearance: Equatable {
     }
 
     enum Font {
+        static let glyphPad = UIFont(name: "MontserratRoman-Bold", size: 24)
+        static let timeIndicator = UIFont(name: "MontserratRoman-Bold", size: 32)
+        static let homeSegmentedTitlePad = UIFont(name: "MontserratRoman-Bold", size: 40)
+        static let viewTitlePad = UIFont(name: "MontserratRoman-Bold", size: 48)
+        static let scheduleSegmentedNumberPad = UIFont(name: "MontserratRoman-SemiBold", size: 36)
+        static let scheduleSegmentedPad = UIFont(name: "MontserratRoman-SemiBold", size: 32)
+        static let eventTitlePad = UIFont(name: "MontserratRoman-Bold", size: 36)
+        static let timeTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 28)
+        static let locationTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 24)
+        static let sponsorTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 24)
+        static let detailTextPad = UIFont(name: "MontserratRoman-Regular", size: 24)
         static let contentSubtitle = UIFont(name: "MontserratRoman-Light", size: 13)
         static let contentText = UIFont(name: "MontserratRoman-Regular", size: 14)
         static let contentTitle = UIFont(name: "MontserratRoman-Medium", size: 18)
@@ -228,7 +239,6 @@ struct HIAppearance: Equatable {
         static let segmentedTitle = UIFont(name: "MontserratRoman-Bold", size: 16)
         static let homeSegmentedTitle = UIFont(name: "MontserratRoman-Bold", size: 24)
         static let segmentedNumberText = UIFont(name: "MontserratRoman-SemiBold", size: 18)
-
         static let countdownText = UIFont(name: "MontserratRoman-Bold", size: 25)
         static let newCountdownText = UIFont(name: "MontserratRoman-Bold", size: 48)
         static let onboardingGetStartedText = UIFont(name: "MontserratRoman-SemiBold", size: 25)
@@ -237,6 +247,16 @@ struct HIAppearance: Equatable {
         static let leaderboardPoints = UIFont(name: "MontserratRoman-Regular", size: 16)
         static let leaderboardName = UIFont(name: "MontserratRoman-SemiBold", size: 14)
         static let leaderboardRank = UIFont(name: "MontserratRoman-Bold", size: 24)
+        
+        static let profileNamePad = UIFont(name: "MontserratRoman-SemiBold", size: 40)
+        static let profileSubtitlePad = UIFont(name: "MontserratRoman-Bold", size: 24)
+        static let profileDietaryRestrictions = UIFont(name: "MontserratRoman-SemiBold", size: 16)
+        static let profileDietaryRestrictionsLabel = UIFont(name: "MontserratRoman-Bold", size: 12)
+        static let profileDietaryRestrictionsPad = UIFont(name: "MontserratRoman-SemiBold", size: 32)
+        static let profileDietaryRestrictionsLabelPad = UIFont(name: "MontserratRoman-Bold", size: 24)
+        static let profileNumberFigurePad = UIFont(name: "MontserratRoman-SemiBold", size: 48)
+        static let profileTierPad = UIFont(name: "MontserratRoman-Bold", size: 18)
+        static let profileUsernamePad = UIFont(name: "MontserratRoman-Bold", size: 32)
     }
 }
 
