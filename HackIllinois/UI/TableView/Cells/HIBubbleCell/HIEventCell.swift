@@ -127,7 +127,7 @@ extension HIEventCell {
             lhs.headerView.setCustomSpacing(18, after: titleLabel)
             titleLabel.constrain(height: HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle!, width: lhs.contentView.frame.width - 137) + 20)
         }
-        titleLabel.constrain(width: 240 * bubbleConstant * bubbleConstant)
+        titleLabel.constrain(width: 260 * bubbleConstant * bubbleConstant)
         //let titleHeight = HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle!, width: lhs.contentView.frame.width - 137)
         //titleLabel.constrain(width: lhs.contentView.frame.width - 120, height: HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle!, width: lhs.contentView.frame.width - 137))
         //let eventType = HIEventType(type: rhs.eventType)
