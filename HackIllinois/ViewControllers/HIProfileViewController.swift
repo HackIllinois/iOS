@@ -21,7 +21,8 @@ class HIProfileViewController: HIBaseViewController {
     // MARK: - Properties
     private var profile = HIProfile()
     private var profileTier = ""
-    var addedProfileCard = false
+    private var addedProfileCard = false
+    private var dietaryRestrictions = [String]()
     private var profileCardController: UIHostingController<HIProfileCardView>?
     private let errorView = HIErrorView(style: .profile)
     private let logoutButton = HIButton {
@@ -48,12 +49,12 @@ extension HIProfileViewController {
 extension HIProfileViewController {
     override func loadView() {
         super.loadView()
-        if HIApplicationStateController.shared.isGuest {
-            layoutErrorView()
-        } else {
+//        if HIApplicationStateController.shared.isGuest {
+//            layoutErrorView()
+//        } else {
             updateProfile()
             reloadProfile()
-        }
+        //}
         
     }
     override func viewDidLoad() {
@@ -69,7 +70,7 @@ extension HIProfileViewController {
         }
         profileCardController = UIHostingController(rootView: HIProfileCardView(firstName: profile.firstName,
                                                                                 lastName: profile.lastName,
-                                                                                dietaryRestrictions: [],
+                                                                                dietaryRestrictions: dietaryRestrictions,
                                                                                 points: profile.points,
                                                                                 tier: profileTier,
                                                                                 wave: "4",
@@ -176,12 +177,12 @@ extension HIProfileViewController {
             }
             .launch()
         
-        HIAPI.ProfileService.getDietaryRestrictions()
+        HIAPI.RegistrationService.getAttendee()
             .onCompletion { [weak self] result in
                 do {
-                    let (data, _) = try result.get()
-                    
-                    print(data)
+                    let (apiAttendeeContainer, _) = try result.get()
+
+                    let dietaryRestrictions = apiAttendeeContainer.attendee.dietary ?? []
                     DispatchQueue.main.async {
                         self?.updateProfile()
                     }
@@ -189,6 +190,7 @@ extension HIProfileViewController {
                     print("An error has occurred \(error)")
                 }
             }
+            .authorize(with: user)
             .launch()
     }
 }

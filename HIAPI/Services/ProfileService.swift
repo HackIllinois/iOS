@@ -22,10 +22,6 @@ public final class ProfileService: BaseService {
         return APIRequest<Profile>(service: self, endpoint: "", headers: headers, method: .GET)
     }
     
-    public static func getDietaryRestrictions() -> APIRequest<DietaryRestrictions> {
-        return APIRequest<DietaryRestrictions>(service: self, endpoint: "registration/attendee/", headers: headers, method: .GET)
-    }
-    
     public static func getMatchingProfiles(teamStatus: [String], interests: [String]) -> APIRequest<ProfileContainer> {
         var params = HTTPParameters()
         if teamStatus.count == 0 && interests.count == 0 {

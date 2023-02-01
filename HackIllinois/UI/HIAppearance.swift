@@ -60,10 +60,15 @@ struct HIAppearance: Equatable {
     
     let profileCardBackground: UIColor
     let profileCardVegetarian: UIColor
-    let profileCardNut: UIColor
-    let profileBaseText: UIColor
+    let profileCardVegan: UIColor
+    let profileCardGlutenFree: UIColor
+    let profileCardLactoseIntolerant: UIColor
+    let profileCardOther: UIColor
+    let profileCardNone: UIColor
 
     
+    let profileBaseText: UIColor
+
     let clear: UIColor = .clear
     let black: UIColor = .black
     let white: UIColor = .white
@@ -87,10 +92,13 @@ struct HIAppearance: Equatable {
     // Hack 2023 color palette
     private static let lightBlue = #colorLiteral(red: 0.7848680019, green: 0.8248175979, blue: 0.9054575562, alpha: 1)
     private static let vegetarian = #colorLiteral(red: 0.2156862745, green: 0.8705882353, blue: 0.8039215686, alpha: 1)
-    private static let nut = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1)
+    private static let vegan = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1)
+    private static let glutenfree = #colorLiteral(red: 0.9764705882, green: 0.5843137255, blue: 0.3411764706, alpha: 1)
+    private static let lactoseintolerant = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    private static let other = #colorLiteral(red: 0.9960784314, green: 0.6392156863, blue: 0.6666666667, alpha: 1)
+    private static let none = #colorLiteral(red: 0.1137254902, green: 0.1490196078, blue: 0.2666666667, alpha: 1)
     private static let profileBaseText = #colorLiteral(red: 0.1137254902, green: 0.1490196078, blue: 0.2666666667, alpha: 1)
-    
-    
+
     private static var statusBarWhite: UIStatusBarStyle {
         return .lightContent
     }
@@ -147,10 +155,14 @@ struct HIAppearance: Equatable {
         pointsBackground: yellowGreen,
         profileCardBackground: lightBlue,
         profileCardVegetarian: vegetarian,
-        profileCardNut: nut,
+        profileCardVegan: profileBaseText,
+        profileCardGlutenFree: glutenfree,
+        profileCardLactoseIntolerant: lactoseintolerant,
+        profileCardOther: other,
+        profileCardNone: none,
         profileBaseText: profileBaseText
     )
-
+    
     fileprivate static let night = HIAppearance(
         titleText: lightBlack,
         whiteText: white,
@@ -196,7 +208,11 @@ struct HIAppearance: Equatable {
         pointsBackground: yellowGreen,
         profileCardBackground: lightBlue,
         profileCardVegetarian: vegetarian,
-        profileCardNut: nut,
+        profileCardVegan: vegan,
+        profileCardGlutenFree: glutenfree,
+        profileCardLactoseIntolerant: lactoseintolerant,
+        profileCardOther: other,
+        profileCardNone: none,
         profileBaseText: profileBaseText
     )
 
@@ -240,13 +256,14 @@ struct HIAppearance: Equatable {
         static let button = UIFont(name: "MontserratRoman-Regular", size: 15)
         static let glyph = UIFont(name: "MontserratRoman-Bold", size: 16)
 
-        static let profileName = UIFont(name: "MontserratRoman-Bold", size: 20)
-        static let profileSubtitle = UIFont(name: "MontserratRoman-Bold", size: 12)
-        static let profileDietaryRestrictions = UIFont(name: "MontserratRoman-SemiBold", size: 16)
-        static let profileDietaryRestrictionsLabel = UIFont(name: "MontserratRoman-Bold", size: 12)
+        static let profileName = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 40 : 20)
+        static let profileSubtitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 12)
+        static let profileDietaryRestrictions = UIFont(name: "MontserratRoman-SemiBold", size: UIDevice.current.userInterfaceIdiom == .pad ? 32 : 16)
+        static let profileDietaryRestrictionsLabel = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 12)
+        static let profileTier = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 36 : 18)
+ 
         
         static let profileNumberFigure = UIFont(name: "MontserratRoman-SemiBold", size: 24)
-        static let profileTier = UIFont(name: "MontserratRoman-Bold", size: 18)
         static let profileUsername = UIFont(name: "MontserratRoman-Bold", size: 16)
         static let profileInterests = UIFont(name: "MontserratRoman-SemiBold", size: 14)
         static let segmentedTitle = UIFont(name: "MontserratRoman-Bold", size: 16)
