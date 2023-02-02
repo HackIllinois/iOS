@@ -15,44 +15,22 @@ import UIKit
 import CoreData
 import HIAPI
 import CoreImage.CIFilterBuiltins
+import SwiftUI
 
 class HIProfileViewController: HIBaseViewController {
     // MARK: - Properties
+    private var profile = HIProfile()
+    private var profileTier = ""
+    private var addedProfileCard = false
+    private var dietaryRestrictions = [String]()
+    private var profileCardController: UIHostingController<HIProfileCardView>?
     private let errorView = HIErrorView(style: .profile)
     private let logoutButton = HIButton {
         $0.tintHIColor = \.baseText
         $0.backgroundHIColor = \.clear
         $0.baseImage = #imageLiteral(resourceName: "LogoutButton")
     }
-    private let contentView = HIView {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundHIColor = \.clear
-        $0.layer.cornerRadius = 15
-    }
-    private let scrollView = UIScrollView(frame: .zero)
-    private let profilePictureView = HIImageView {
-        $0.layer.cornerRadius = 8
-        $0.layer.masksToBounds = true
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
-    private let profileNameView = HILabel(style: .profileName) {
-        $0.text = ""
-    }
-    private let discordImageView = HIImageView()
-    private let profileDiscordView = HILabel(style: .profileSubtitle) {
-        $0.text = ""
-    }
-    private let profilePointsView = HIView {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundHIColor = \.profileContainerTint
-        $0.layer.cornerRadius = 25
-    }
-    private let profilePointsLabel = HILabel(style: .profileNumberFigure) {
-        $0.text = ""
-    }
-    private let profileTierLabel = HILabel(style: .profileTier) {
-        $0.text = ""
-    }
+
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
         backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
@@ -74,24 +52,39 @@ extension HIProfileViewController {
         if HIApplicationStateController.shared.isGuest {
             layoutErrorView()
         } else {
-            layoutProfile()
+            updateProfile()
+            reloadProfile()
         }
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.setCustomTitle(customTitle: "Profile")
+        super.setCustomTitle(customTitle: "PROFILE")
     }
-    func layoutProfile() {
-        layoutButtons()
-        layoutScrollView()
-        layoutContentView()
-        layoutProfileNameView()
-        layoutProfileDiscordView()
-        layoutProfilePicture()
-        layoutPoints()
-        contentView.bottomAnchor.constraint(equalTo: profilePointsView.bottomAnchor, constant: 75).isActive = true
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadProfile), name: .qrCodeSuccessfulScan, object: nil)
+    
+    func updateProfileCard() {
+        if addedProfileCard == true {
+            profileCardController?.view.removeFromSuperview()
+            view.willRemoveSubview(profileCardController!.view)
+            profileCardController?.removeFromParent()
+        }
+        profileCardController = UIHostingController(rootView: HIProfileCardView(firstName: profile.firstName,
+                                                                                lastName: profile.lastName,
+                                                                                dietaryRestrictions: dietaryRestrictions,
+                                                                                points: profile.points,
+                                                                                tier: profileTier,
+                                                                                wave: "4",
+                                                                                id: profile.id
+                                                                               ))
+        
+        addChild(profileCardController!)
+        
+        profileCardController!.view.backgroundColor = .clear
+        profileCardController!.view.frame = view.bounds
+        view.addSubview(profileCardController!.view)
+        addedProfileCard = true
     }
+
     func layoutErrorView() {
         errorView.delegate = self
         view.addSubview(errorView)
@@ -100,97 +93,29 @@ extension HIProfileViewController {
         errorView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
         errorView.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
-    func layoutScrollView() {
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.alwaysBounceVertical = true
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(scrollView)
-        scrollView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        scrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
-        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        scrollView.addSubview(contentView)
-    }
-    func layoutButtons() {
+    
+    func layoutLogOutButton() {
         self.navigationItem.rightBarButtonItem = logoutButton.toBarButtonItem()
         logoutButton.constrain(width: 25, height: 25)
         logoutButton.addTarget(self, action: #selector(didSelectLogoutButton(_:)), for: .touchUpInside)
     }
-    func layoutContentView() {
-        scrollView.addSubview(contentView)
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            contentView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor).isActive = true
-        } else {
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 25).isActive = true
-        }
-        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
-        contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
-        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.75).isActive = true
-        contentView.layer.contents = #imageLiteral(resourceName: "ProfileContainer").cgImage
-    }
-    func layoutPoints() {
-        contentView.addSubview(profilePointsView)
-        profilePointsView.topAnchor.constraint(equalTo: profilePictureView.bottomAnchor, constant: 35).isActive = true
-        profilePointsView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        profilePointsView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.72).isActive = true
-        profilePointsView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        profilePointsView.addSubview(profileTierLabel)
-        profileTierLabel.centerYAnchor.constraint(equalTo: profilePointsView.centerYAnchor, constant: -15).isActive = true
-        profileTierLabel.centerXAnchor.constraint(equalTo: profilePointsView.centerXAnchor).isActive = true
-        profilePointsView.addSubview(profilePointsLabel)
-        profilePointsLabel.centerYAnchor.constraint(equalTo: profilePointsView.centerYAnchor, constant: 15).isActive = true
-        profilePointsLabel.centerXAnchor.constraint(equalTo: profilePointsView.centerXAnchor).isActive = true
-    }
-    func layoutProfileDiscordView() {
-        contentView.addSubview(profileDiscordView)
-        profileDiscordView.topAnchor.constraint(equalTo: profileNameView.bottomAnchor, constant: 5).isActive = true
-        profileDiscordView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 10).isActive = true
-        contentView.addSubview(discordImageView)
-        discordImageView.translatesAutoresizingMaskIntoConstraints = false
-        discordImageView.topAnchor.constraint(equalTo: profileNameView.bottomAnchor, constant: 5).isActive = true
-        discordImageView.trailingAnchor.constraint(equalTo: profileDiscordView.leadingAnchor, constant: -3).isActive = true
-    }
-    func layoutProfileNameView() {
-        contentView.addSubview(profileNameView)
-        profileNameView.constrain(to: contentView, topInset: 50)
-        profileNameView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        profileNameView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9).isActive = true
-    }
-    func layoutProfilePicture() {
-        contentView.addSubview(profilePictureView)
-        profilePictureView.topAnchor.constraint(equalTo: profileDiscordView.bottomAnchor, constant: 35).isActive = true
-        profilePictureView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        profilePictureView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.75).isActive = true
-        profilePictureView.heightAnchor.constraint(equalTo: profilePictureView.widthAnchor).isActive = true
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        scrollView.setContentOffset(.zero, animated: true)
-        updateProfile()
-        reloadProfile()
-    }
-
+    
     func updateProfile() {
-        guard let profile = HIApplicationStateController.shared.profile else { return }
-        view.layoutIfNeeded()
-
-        if let url = URL(string: profile.avatarUrl), let imgValue = HIConstants.PROFILE_IMAGES[url.absoluteString] {
-                    profilePictureView.changeImage(newImage: imgValue)
-                }
-        profileNameView.text = profile.firstName + " " + profile.lastName
-        profilePointsLabel.text = "\(profile.points) Points"
+        updateProfileCard()
         if tiers.count > 0 {
             var max_threshold = 0
             for tier in tiers where (profile.points >= tier.threshold && tier.threshold >= max_threshold) {
-                profileTierLabel.text = "Tier: \(tier.name.capitalized)"
+                profileTier = "\(tier.name.capitalized) Tier"
                 max_threshold = tier.threshold
             }
         } else {
-            profileTierLabel.text = "Tier: None"
+            profileTier = "Tier: None"
         }
-        profileDiscordView.text = profile.discord
-        discordImageView.image = #imageLiteral(resourceName: "Discord")
+
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        layoutLogOutButton()
     }
 
 }
@@ -214,6 +139,7 @@ extension HIProfileViewController {
 
 }
 
+// https://api.hackillinois.org/profile/registration/attendee/a2cc7f7945e436a6ea5c4182db9a7828
 // MARK: - API
 extension HIProfileViewController {
     @objc func reloadProfile () {
@@ -222,16 +148,12 @@ extension HIProfileViewController {
         .onCompletion { [weak self] result in
             do {
                 let (apiProfile, _) = try result.get()
-                var profile = HIProfile()
-                profile.id = apiProfile.id
-                profile.firstName = apiProfile.firstName
-                profile.lastName = apiProfile.lastName
-                profile.points = apiProfile.points
-                profile.timezone = apiProfile.timezone
-                profile.discord = apiProfile.discord
-                profile.avatarUrl = apiProfile.avatarUrl
+                self?.profile.id = apiProfile.id
+                self?.profile.firstName = apiProfile.firstName
+                self?.profile.lastName = apiProfile.lastName
+                self?.profile.points = apiProfile.points
                 DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": profile])
+                    NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": self?.profile])
                     self?.updateProfile()
                 }
             } catch {
@@ -254,8 +176,23 @@ extension HIProfileViewController {
                 }
             }
             .launch()
-    }
+        
+        HIAPI.RegistrationService.getAttendee()
+            .onCompletion { [weak self] result in
+                do {
+                    let (apiAttendeeContainer, _) = try result.get()
 
+                    let dietaryRestrictions = apiAttendeeContainer.attendee.dietary ?? []
+                    DispatchQueue.main.async {
+                        self?.updateProfile()
+                    }
+                } catch {
+                    print("An error has occurred \(error)")
+                }
+            }
+            .authorize(with: user)
+            .launch()
+    }
 }
 
 // MARK: - HIErrorViewDelegate

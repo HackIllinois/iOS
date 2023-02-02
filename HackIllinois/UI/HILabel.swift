@@ -39,6 +39,7 @@ class HILabel: UILabel {
         case profileTier
         case profileUsername
         case profileInterests
+        case profileDietaryRestrictions
         case navigationInfo
         case countdown
         case pointsText
@@ -222,6 +223,12 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             textAlignment = .center
             font = HIAppearance.Font.profileInterests
+        
+        case .profileDietaryRestrictions:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            textAlignment = .center
+            font = HIAppearance.Font.profileDietaryRestrictions
 
         case .navigationInfo: // "All times are in CDT"
             textHIColor = \.white
