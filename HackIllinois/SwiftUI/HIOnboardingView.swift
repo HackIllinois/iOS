@@ -36,8 +36,9 @@ struct HIOnboardingView: View {
                     .font(.title3.bold())
                     .frame(width: 350, height: 50)
                     .foregroundColor(.white)
-                    .background(Color(red: 130/255, green: 171/255, blue: 79/255))
-                    .clipShape(Capsule())
+                    .background(Color.clear)
+                    .overlay(RoundedRectangle(cornerRadius: 20)
+                        .stroke(.white, lineWidth: 5))
                     Spacer()
                 }
             }
