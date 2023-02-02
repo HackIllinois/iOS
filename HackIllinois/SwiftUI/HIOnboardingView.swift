@@ -29,12 +29,12 @@ struct HIOnboardingView: View {
                 VStack {
                     Spacer()
                     HICarouselSwiftUIView(carouselData: viewModel.data)
-                    Button("Get Started") {
+                    Button("GET STARTED") {
                         NotificationCenter.default.post(name: .getStarted, object: nil)
                     }
                     .padding()
                     .font(.title3.bold())
-                    .frame(width: 200, height: 36)
+                    .frame(width: 350, height: 50)
                     .foregroundColor(.white)
                     .background(Color.clear)
                     .overlay(RoundedRectangle(cornerRadius: 20)

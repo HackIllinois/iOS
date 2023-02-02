@@ -36,6 +36,7 @@ struct HICarouselSwiftUIView: View {
                         .bold()
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
+                        .padding(.top, 20)
                 }
             }
         }.tabViewStyle(.page)
