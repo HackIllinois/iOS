@@ -34,7 +34,7 @@ struct HIOnboardingView: View {
                     }
                     .padding()
                     .font(.title3.bold())
-                    .frame(width: 350, height: 50)
+                    .frame(width: 200, height: 36)
                     .foregroundColor(.white)
                     .background(Color.clear)
                     .overlay(RoundedRectangle(cornerRadius: 20)

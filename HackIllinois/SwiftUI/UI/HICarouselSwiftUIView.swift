@@ -34,6 +34,7 @@ struct HICarouselSwiftUIView: View {
                         .frame(width: 20, height: 20)
                     Text(carousel.descriptionText)
                         .bold()
+                        .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                 }
             }

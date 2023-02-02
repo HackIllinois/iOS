@@ -240,7 +240,7 @@ class HILabel: UILabel {
             textAlignment = .center
             numberOfLines = 0
         case .onboardingTitle:
-            textHIColor = \.baseText
+            textHIColor = \.whiteText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.onboardingTitle
             textAlignment = .center
