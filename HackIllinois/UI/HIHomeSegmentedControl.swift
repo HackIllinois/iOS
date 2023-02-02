@@ -12,6 +12,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 class HIHomeSegmentedControl: HISegmentedControl {
 
@@ -20,10 +21,11 @@ class HIHomeSegmentedControl: HISegmentedControl {
     private var views = [UIView]()
     private var titleLabels = [UILabel]()
 
-    private let titleFont = HIAppearance.Font.segmentedTitle
+    private let titleFont = HIAppearance.Font.homeSegmentedTitle
+    private let titleFontPad = HIAppearance.Font.homeSegmentedTitlePad
     private let numberFont = HIAppearance.Font.segmentedNumberText
 
-    private let viewPadding: CGFloat = 10
+    private var viewPadding: CGFloat = 35
     private let indicatorCornerRadiusProp: CGFloat = 0.15
 
     private var indicatorView = UIImageView(image: #imageLiteral(resourceName: "Indicator"))
@@ -50,7 +52,7 @@ class HIHomeSegmentedControl: HISegmentedControl {
     @objc override func refreshForThemeChange() {
         backgroundColor <- \.clear
         titleLabels.forEach {
-            $0.textColor <- \.baseText
+            $0.textColor <- \.white
             $0.backgroundColor <- \.clear
         }
     }
@@ -58,11 +60,15 @@ class HIHomeSegmentedControl: HISegmentedControl {
     // MARK: - UIView
     override func layoutSubviews() {
         super.layoutSubviews()
-
         let indicatorViewWidth = ((frame.width - viewPadding) / CGFloat(items.count) - viewPadding)
-        indicatorView.frame = CGRect(x: viewPadding, y: 50, width: indicatorViewWidth, height: 7)
+        var indicatorViewConstant: CGFloat = 4
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            indicatorViewConstant = 6
+        }
+        indicatorView.frame = CGRect(x: indicatorViewWidth, y: 40 + indicatorViewConstant, width: indicatorViewWidth, height: indicatorViewConstant)
         indicatorView.layer.cornerRadius = frame.height * indicatorCornerRadiusProp
         indicatorView.layer.masksToBounds = true
+        indicatorView.contentMode = .center
         indicatorView.contentMode = .scaleAspectFit
         displayNewSelectedIndex()
     }
@@ -94,21 +100,24 @@ class HIHomeSegmentedControl: HISegmentedControl {
     private func setupViewForItem(at index: Int) {
         let view = UIView()
         let titleLabel = UILabel()
-
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            titleLabel.font = titleFontPad
+        } else {
+            titleLabel.font = titleFont
+        }
         titleLabel.textAlignment = .center
-        titleLabel.font = numberFont
+
         titleLabel.text = items[index]
         titleLabel.textColor <- \.whiteText
-        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.adjustsFontSizeToFitWidth = false
 
         view.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.constrain(to: view, topInset: 5, trailingInset: 0, bottomInset: -5, leadingInset: 0)
         view.isUserInteractionEnabled = false
         titleLabel.isUserInteractionEnabled = false
-
-        view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
         views.append(view)
         titleLabels.append(titleLabel)
     }
