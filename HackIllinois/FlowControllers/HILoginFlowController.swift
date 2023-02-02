@@ -67,6 +67,14 @@ class HILoginFlowController: UIViewController {
     }
 }
 
+// add ASWebAuthenticationPresentationContextProviding to the class
+extension HILoginFlowController: ASWebAuthenticationPresentationContextProviding {
+    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        let window = UIApplication.shared.windows.first { $0.isKeyWindow }
+        return window ?? ASPresentationAnchor()
+    }
+}
+
 // MARK: - UIViewController
 extension HILoginFlowController {
     override func viewDidLoad() {
@@ -120,8 +128,10 @@ private extension HILoginFlowController {
                 self?.presentAuthenticationFailure(withError: error, sender: sender)
             }
         }
+        loginSession?.presentationContextProvider = self
         loginSession?.start()
     }
+    
 
     private func exchangeOAuthCodeForAPIToken(buildingUser user: HIUser, profile: HIProfile, sender: HIBaseViewController) {
         HIAPI.AuthService.getAPIToken(provider: user.provider, code: user.oauthCode)

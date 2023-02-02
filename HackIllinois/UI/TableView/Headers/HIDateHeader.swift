@@ -19,18 +19,24 @@ class HIDateHeader: UITableViewHeaderFooterView {
         $0.backgroundHIColor = \.clear
         $0.font = HIAppearance.Font.sectionHeader
     }
+    let dateView = HIView { (view) in
+        view.layer.cornerRadius = 10
+        view.backgroundHIColor = \.buttonDarkBlue
+    }
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
 
         let backgroundView = HIView { $0.backgroundHIColor = \.clear }
         self.backgroundView = backgroundView
-
-        backgroundView.addSubview(titleLabel)
-        titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
-        titleLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 14).isActive = true
-        titleLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -14).isActive = true
+        backgroundView.addSubview(dateView)
+        dateView.translatesAutoresizingMaskIntoConstraints = false
+        var spaceConstant: CGFloat = 1.0
+        dateView.addSubview(titleLabel)
+        dateView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: -8).isActive = true
+        dateView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
+        dateView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
+        titleLabel.constrain(to: dateView, topInset: 4 * spaceConstant, trailingInset: -16 * spaceConstant, bottomInset: -4 * spaceConstant, leadingInset: 16 * spaceConstant)
     }
 
     required init?(coder aDecoder: NSCoder) {
