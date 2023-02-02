@@ -102,7 +102,6 @@ struct HIAppearance: Equatable {
     private static let transparent = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
 
     // Hack 2023 color palette
-    private static let lightBlue = #colorLiteral(red: 0.7848680019, green: 0.8248175979, blue: 0.9054575562, alpha: 1)
     private static let vegetarian = #colorLiteral(red: 0.2156862745, green: 0.8705882353, blue: 0.8039215686, alpha: 1)
     private static let vegan = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1)
     private static let glutenfree = #colorLiteral(red: 0.9764705882, green: 0.5843137255, blue: 0.3411764706, alpha: 1)
