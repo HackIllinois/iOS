@@ -135,7 +135,6 @@ struct HIProfileCardView: View {
     }
     
     func getQRCodeDate(text: String) -> Data? {
-        print(text)
         guard let filter = CIFilter(name: "CIQRCodeGenerator") else { return nil }
         let data = text.data(using: .ascii, allowLossyConversion: false)
         filter.setValue(data, forKey: "inputMessage")
