@@ -23,9 +23,11 @@ class HIScheduleSegmentedControl: HISegmentedControl {
     private var numberLabels = [UILabel]()
 
     private let titleFont = HIAppearance.Font.segmentedTitle
+    private let titleFontPad = HIAppearance.Font.scheduleSegmentedPad
     private let numberFont = HIAppearance.Font.segmentedNumberText
+    private let numberFontPad = HIAppearance.Font.scheduleSegmentedNumberPad
 
-    private let viewPadding: CGFloat = 10
+    private let viewPadding: CGFloat = 65
     private let indicatorCornerRadiusProp: CGFloat = 0.15
 
     private var indicatorView = UIImageView(image: #imageLiteral(resourceName: "Indicator"))
@@ -53,12 +55,12 @@ class HIScheduleSegmentedControl: HISegmentedControl {
     @objc override func refreshForThemeChange() {
         backgroundColor <- \.clear
         titleLabels.forEach {
-            $0.textColor <- \.baseText
+            $0.textColor <- \.white
             $0.backgroundColor <- \.clear
         }
 
         numberLabels.forEach {
-            $0.textColor <- \.baseText
+            $0.textColor <- \.white
             $0.backgroundColor <- \.clear
         }
     }
@@ -66,11 +68,15 @@ class HIScheduleSegmentedControl: HISegmentedControl {
     // MARK: - UIView
     override func layoutSubviews() {
         super.layoutSubviews()
-
+        var indicatorConstant: CGFloat = 0.0
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            indicatorConstant = 50.0
+        }
         let indicatorViewWidth = ((frame.width - viewPadding) / CGFloat(items.count) - viewPadding)
-        indicatorView.frame = CGRect(x: viewPadding, y: 60, width: indicatorViewWidth, height: 7)
+        indicatorView.frame = CGRect(x: viewPadding, y: 68 + indicatorConstant, width: indicatorViewWidth, height: 4 + (indicatorConstant / 6))
         indicatorView.layer.masksToBounds = true
         indicatorView.contentMode = .scaleAspectFit
+        indicatorView.contentMode = .center
         displayNewSelectedIndex()
     }
 
@@ -104,12 +110,17 @@ class HIScheduleSegmentedControl: HISegmentedControl {
         let numberLabel = UILabel()
 
         titleLabel.textAlignment = .center
-        titleLabel.font = titleFont
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            titleLabel.font = titleFontPad
+            numberLabel.font = numberFontPad
+        } else {
+            titleLabel.font = titleFont
+            numberLabel.font = numberFont
+        }
         titleLabel.text = items[index]
         titleLabel.textColor <- \.whiteText
 
         numberLabel.textAlignment = .center
-        numberLabel.font = numberFont
         numberLabel.text = index < nums.count ? (nums[index] % 10 == nums[index] ? "0" : "") + "\(nums[index])" : "00"
         numberLabel.textColor <- \.whiteText
 
@@ -117,19 +128,22 @@ class HIScheduleSegmentedControl: HISegmentedControl {
         view.addSubview(numberLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         numberLabel.translatesAutoresizingMaskIntoConstraints = false
-
+        var segmentedControlConstant = 0.0
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            segmentedControlConstant = 24.0
+        }
         titleLabel.constrain(to: view, topInset: 5, trailingInset: 0, leadingInset: 0)
-        numberLabel.constrain(to: view, trailingInset: 0, bottomInset: -5, leadingInset: 0)
-        numberLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0).isActive = true
+        numberLabel.constrain(to: view, trailingInset: 0, bottomInset: -4, leadingInset: 0)
+        numberLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: segmentedControlConstant).isActive = true
         titleLabel.heightAnchor.constraint(equalTo: numberLabel.heightAnchor).isActive = true
 
         view.isUserInteractionEnabled = false
         titleLabel.isUserInteractionEnabled = false
         numberLabel.isUserInteractionEnabled = false
 
-        view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
         views.append(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
         titleLabels.append(titleLabel)
         numberLabels.append(numberLabel)
     }
