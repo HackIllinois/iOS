@@ -135,6 +135,7 @@
 		D134D30F296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D134D30E296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf */; };
 		D14D3AE3295FBDA200EB7995 /* HIBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */; };
 		D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A309BB2211175200CBA351 /* PassKit.framework */; };
+		E170038A29679D08009B99A8 /* HIProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E170038929679D08009B99A8 /* HIProfileCardView.swift */; };
 		DF3706382925DDAA000B4278 /* GoogleMapsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706372925DDAA000B4278 /* GoogleMapsBase.framework */; };
 		DF37063B2925DDB8000B4278 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706392925DDB7000B4278 /* GoogleMaps.framework */; };
 		DF37063C2925DDB8000B4278 /* GoogleMapsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37063A2925DDB8000B4278 /* GoogleMapsCore.framework */; };
@@ -333,6 +334,7 @@
 		D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIBannerViewController.swift; sourceTree = "<group>"; };
 		D3A309BA221116A600CBA351 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };
 		D3A309BB2211175200CBA351 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
+		E170038929679D08009B99A8 /* HIProfileCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIProfileCardView.swift; sourceTree = "<group>"; };
 		DF3706372925DDAA000B4278 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsBase.framework; sourceTree = "<group>"; };
 		DF3706392925DDB7000B4278 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		DF37063A2925DDB8000B4278 /* GoogleMapsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsCore.framework; sourceTree = "<group>"; };
@@ -563,6 +565,7 @@
 				95CCEA1E203D6B3600E3E28C /* HINavigationController.swift */,
 				95C18DC820096539004784B5 /* HIScheduleViewController.swift */,
 				98CA2A3D25C899CF003E842A /* HIProfileViewController.swift */,
+				E170038929679D08009B99A8 /* HIProfileCardView.swift */,
 				60EAF98A273B1AC4002CD205 /* HIScanQRCodeViewController.swift */,
 				1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */,
 				3FBFA7AA27335554001FFF28 /* HILeaderboardListViewController.swift */,
@@ -1026,6 +1029,7 @@
 				9515E43722093E1300BCAF92 /* HIEventScannerViewController.swift in Sources */,
 				95A7D28F203D4F54005EAEAF /* HIEventCell.swift in Sources */,
 				ACAA717626017EC4000F42B0 /* HICollectionViewFlowLayout.swift in Sources */,
+				E170038A29679D08009B99A8 /* HIProfileCardView.swift in Sources */,
 				95C3BE302008B99C0008ED79 /* HIBaseViewController.swift in Sources */,
 				BFB1FD3E26105EA400500008 /* HIEditProfileCell.swift in Sources */,
 				95CD0ED52015217E00D79DCC /* HIApplicationStateController.swift in Sources */,

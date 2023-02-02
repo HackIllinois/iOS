@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ProfileContainer.png",
+      "filename" : "Ticket.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ProfileContainer@2x.png",
+      "filename" : "Ticket@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ProfileContainer@3x.png",
+      "filename" : "Ticket@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
