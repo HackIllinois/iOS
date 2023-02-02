@@ -13,6 +13,7 @@
 import UIKit
 
 struct HIAppearance: Equatable {
+    let neonCountdownText: UIColor
     let titleText: UIColor
     let whiteText: UIColor
     let baseText: UIColor
@@ -37,6 +38,9 @@ struct HIAppearance: Equatable {
     let whiteTagFont: UIColor
     let interestBackground: UIColor
     let buttonGreen: UIColor
+    let buttonPink: UIColor
+    let buttonBlue: UIColor
+    let buttonDarkBlue: UIColor
     let favoriteStarBackground: UIColor
     let segmentedBackground: UIColor
     // New fonts added. Replace old ones?
@@ -62,7 +66,7 @@ struct HIAppearance: Equatable {
     let black: UIColor = .black
     let white: UIColor = .white
 
-    // Hack 2022 color palette
+    //Hack 2022 color palette
     private static let darkRed = #colorLiteral(red: 0.6039215686, green: 0.1411764706, blue: 0.168627451, alpha: 1)
     private static let tan = #colorLiteral(red: 0.9098039216, green: 0.8431372549, blue: 0.6470588235, alpha: 1)
     private static let orange = #colorLiteral(red: 0.9294117647, green: 0.6078431373, blue: 0.1294117647, alpha: 1)
@@ -75,33 +79,42 @@ struct HIAppearance: Equatable {
     private static let lightBlack = #colorLiteral(red: 0.03137254902, green: 0.08235294118, blue: 0.1058823529, alpha: 1)
     private static let salmon = #colorLiteral(red: 0.9490196078, green: 0.6078431373, blue: 0.4705882353, alpha: 1)
     private static let yellowWhite = #colorLiteral(red: 0.9647058824, green: 0.9568627451, blue: 0.831372549, alpha: 1)
+    // Hack 2023 color palette
+    private static let lightYellow = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1)
+    private static let blue = #colorLiteral(red: 0.03137254902, green: 0.5450980392, blue: 0.7568627451, alpha: 1)
+    private static let pink = #colorLiteral(red: 0.9960784314, green: 0.4392156863, blue: 0.5960784314, alpha: 1)
+    private static let mediumOrange = #colorLiteral(red: 0.9764705882, green: 0.5843137255, blue: 0.3411764706, alpha: 1)
+    private static let teal = #colorLiteral(red: 0.2156862745, green: 0.8705882353, blue: 0.8039215686, alpha: 1)
+    private static let lightBlue = #colorLiteral(red: 0.7921568627, green: 0.8235294118, blue: 0.8980392157, alpha: 1)
     private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    private static let darkBlue = #colorLiteral(red: 0.05098039216, green: 0.2196078431, blue: 0.4862745098, alpha: 1)
     private static let transparent = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
-
+    private static let transparent2 = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     private static var statusBarWhite: UIStatusBarStyle {
         return .lightContent
     }
     private static var statusBarBlack: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
-            return .darkContent
+            return .lightContent
         } else {
-            return .default
+            return .lightContent
         }
     }
 
     fileprivate static let day = HIAppearance(
+        neonCountdownText: lightYellow,
         titleText: lightBlack,
         whiteText: white,
         baseText: lightBlack,
         accent: orange,
         action: tan,
         baseBackground: white,
-        contentBackground: yellowWhite,
+        contentBackground: lightBlue,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
-        codePopupTab: orange,
-        navbarBackground: green,
-        navbarTabTint: yellowWhite,
+        codePopupTab: white,
+        navbarBackground: darkBlue,
+        navbarTabTint: white,
         profileContainerTint: yellowWhite,
         preferredStatusBarStyle: statusBarBlack,
         scrollViewIndicatorStyle: .black,
@@ -114,6 +127,9 @@ struct HIAppearance: Equatable {
         whiteTagFont: white,
         interestBackground: orange,
         buttonGreen: yellowGreen,
+        buttonPink: pink,
+        buttonBlue: blue,
+        buttonDarkBlue: darkBlue,
         favoriteStarBackground: yellowWhite,
         segmentedBackground: white,
         buttonViewBackground: green,
@@ -135,18 +151,19 @@ struct HIAppearance: Equatable {
     )
 
     fileprivate static let night = HIAppearance(
+        neonCountdownText: lightYellow,
         titleText: lightBlack,
         whiteText: white,
         baseText: lightBlack,
         accent: orange,
         action: tan,
         baseBackground: white,
-        contentBackground: yellowWhite,
+        contentBackground: lightBlue,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
-        codePopupTab: orange,
-        navbarBackground: green,
-        navbarTabTint: yellowWhite,
+        codePopupTab: white,
+        navbarBackground: darkBlue,
+        navbarTabTint: white,
         profileContainerTint: yellowWhite,
         preferredStatusBarStyle: statusBarBlack,
         scrollViewIndicatorStyle: .black,
@@ -159,6 +176,9 @@ struct HIAppearance: Equatable {
         whiteTagFont: white,
         interestBackground: orange,
         buttonGreen: yellowGreen,
+        buttonPink: pink,
+        buttonBlue: blue,
+        buttonDarkBlue: darkBlue,
         favoriteStarBackground: yellowWhite,
         segmentedBackground: white,
         buttonViewBackground: green,
@@ -184,7 +204,6 @@ struct HIAppearance: Equatable {
     static func change(to newAppearance: HIAppearance) {
         guard current != newAppearance else { return }
         current = newAppearance
-
         NotificationCenter.default.post(name: .themeDidChange, object: nil)
     }
 
@@ -354,7 +373,6 @@ class HIThemeEngine {
     private init() {
         startUpTimer()
     }
-
     deinit {
         tearDownTimer()
     }
@@ -370,7 +388,6 @@ class HIThemeEngine {
         )
         timer?.fire()
     }
-
     @objc func updateThemeIfNeeded() {
         let calendar = Calendar.current
         let now = Date()
@@ -385,7 +402,6 @@ class HIThemeEngine {
         }
         HIAppearance.change(to: newAppearance)
     }
-
     func tearDownTimer() {
         timer?.invalidate()
         timer = nil
