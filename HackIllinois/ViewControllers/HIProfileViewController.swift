@@ -49,12 +49,12 @@ extension HIProfileViewController {
 extension HIProfileViewController {
     override func loadView() {
         super.loadView()
-//        if HIApplicationStateController.shared.isGuest {
-//            layoutErrorView()
-//        } else {
+        if HIApplicationStateController.shared.isGuest {
+            layoutErrorView()
+        } else {
             updateProfile()
             reloadProfile()
-        //}
+        }
         
     }
     override func viewDidLoad() {
