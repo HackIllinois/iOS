@@ -16,6 +16,7 @@ import AVKit
 import CoreData
 import APIManager
 import HIAPI
+import SwiftUI
 
 class HIScanQRCodeViewController: HIBaseViewController {
     private var captureSession: AVCaptureSession?
@@ -29,10 +30,10 @@ class HIScanQRCodeViewController: HIBaseViewController {
     private var previewLayer: AVCaptureVideoPreviewLayer?
     let hapticGenerator = UINotificationFeedbackGenerator()
     private let pickerView = UIPickerView()
-
+    
     private var loadFailed = false
     var respondingToQRCodeFound = true
-
+    
     private let closeButton = HIButton {
         $0.tintHIColor = \.action
         $0.backgroundHIColor = \.clear
@@ -46,20 +47,32 @@ class HIScanQRCodeViewController: HIBaseViewController {
 extension HIScanQRCodeViewController {
     override func loadView() {
         super.loadView()
-        if HIApplicationStateController.shared.isGuest {
-//            let background = #imageLiteral(resourceName: "ProfileBackground")
-            let imageView: UIImageView = UIImageView(frame: view.bounds)
-            view.addSubview(imageView)
-            view.sendSubviewToBack(imageView)
-            layoutErrorView()
-        } else {
-            view.addSubview(containerView)
-            view.bringSubviewToFront(containerView)
-            containerView.constrain(to: view, topInset: 0, bottomInset: 0)
-            containerView.constrain(to: view, trailingInset: 0, leadingInset: 0)
-            containerView.addSubview(previewView)
-            setupCaptureSession()
-        }
+        //        if HIApplicationStateController.shared.isGuest {
+        ////            let background = #imageLiteral(resourceName: "ProfileBackground")
+        //            let imageView: UIImageView = UIImageView(frame: view.bounds)
+        //            view.addSubview(imageView)
+        //            view.sendSubviewToBack(imageView)
+        //            layoutErrorView()
+        //        } else {
+        
+        // if is staff: /vGET /auth/roles/
+        
+        var staffButtonController = UIHostingController(rootView: HIStaffButtonView(events: [])) // add in events from api
+
+        addChild(staffButtonController)
+        
+        staffButtonController.view.backgroundColor = .clear
+        staffButtonController.view.frame = view.bounds
+        view.addSubview(staffButtonController.view)
+        
+    
+        view.addSubview(containerView)
+        view.bringSubviewToFront(containerView)
+        containerView.constrain(to: view, topInset: 0, bottomInset: 0)
+        containerView.constrain(to: view, trailingInset: 0, leadingInset: 0)
+        containerView.addSubview(previewView)
+        setupCaptureSession()
+        // }
         view.addSubview(closeButton)
         closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
         closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -67,7 +80,7 @@ extension HIScanQRCodeViewController {
         closeButton.constrain(width: 60, height: 60)
         closeButton.imageView?.contentMode = .scaleToFill
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if loadFailed {
@@ -83,11 +96,11 @@ extension HIScanQRCodeViewController {
             }
         }
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if captureSession?.isRunning == true {
@@ -96,7 +109,7 @@ extension HIScanQRCodeViewController {
             }
         }
     }
-
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animate(alongsideTransition: { [weak self] (_) in
             self?.setFrameForPreviewLayer()
@@ -142,37 +155,37 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
     func setupCaptureSession() {
         captureSession = AVCaptureSession()
         let metadataOutput = AVCaptureMetadataOutput()
-
+        
         guard
             let captureSession = captureSession,
             let videoCaptureDevice = AVCaptureDevice.default(for: .video),
             let videoInput = try? AVCaptureDeviceInput(device: videoCaptureDevice),
             captureSession.canAddInput(videoInput),
             captureSession.canAddOutput(metadataOutput) else {
-                loadFailed = true
-                return
+            loadFailed = true
+            return
         }
-
+        
         captureSession.addInput(videoInput)
         captureSession.addOutput(metadataOutput)
         metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
         metadataOutput.metadataObjectTypes = [.qr]
-
+        
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.videoGravity = .resizeAspectFill
         self.previewLayer = previewLayer
         setFrameForPreviewLayer()
         previewView.layer.addSublayer(previewLayer)
     }
-
+    
     func setFrameForPreviewLayer() {
         guard let previewLayer = previewLayer else { return }
-
+        
         previewLayer.frame = previewView.layer.bounds
-
+        
         guard previewLayer.connection?.isVideoOrientationSupported == true else { return }
-
-        #warning("Not Tested")
+        
+#warning("Not Tested")
         let interfaceOrientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation
         switch interfaceOrientation {
         case .portrait, .unknown:
@@ -189,11 +202,14 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
             previewLayer.connection?.videoOrientation = .portrait
         }
     }
-
+    
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         guard respondingToQRCodeFound else { return }
         let meta = metadataObjects.first as? AVMetadataMachineReadableCodeObject
         let code = meta?.stringValue ?? ""
+        print(code)
+        // if this is the jwt token: let userid = decode(token: code)
+        
         respondingToQRCodeFound = false
         HIAPI.EventService.checkIn(code: code)
             .onCompletion { result in
@@ -233,12 +249,12 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                                     //Dismisses view controller
                                     self.didSelectCloseButton(self.closeButton)
                                     NotificationCenter.default.post(name: .qrCodeSuccessfulScan, object: nil)
-                            }))
+                                }))
                         } else {
                             alert.addAction(
                                 UIAlertAction(title: "OK", style: .default, handler: { _ in
                                     self.registerForKeyboardNotifications()
-                            }))
+                                }))
                         }
                         self.present(alert, animated: true, completion: nil)
                     }
@@ -249,5 +265,40 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
             }
             .authorize(with: HIApplicationStateController.shared.user)
             .launch()
+    }
+    
+
+    // with eventId of event clicke, POST /event/staff/checkin/ endpoint with userToken and eventId.
+// on sucess of api: Display message depending on the response (Success = pull user's dietary restrictions and display on staff's screen vs. InvalidCode, ExpiredOrProspective, AlreadyCheckedIn).
+
+// Camera view that scans attendee's QR code and retrieves JWT TOKEN
+
+//                token valid only for 20 seconds
+//                jwt decode <token>
+//                retrieve userid
+//                use this uiserid to checkin!
+    func decode(_ token: String) -> [String: AnyObject]? {
+        let string = token.components(separatedBy: ".")
+        let toDecode = string[1] as String
+
+
+        var stringtoDecode: String = toDecode.replacingOccurrences(of: "-", with: "+") // 62nd char of encoding
+        stringtoDecode = stringtoDecode.replacingOccurrences(of: "_", with: "/") // 63rd char of encoding
+        switch (stringtoDecode.utf16.count % 4) {
+        case 2: stringtoDecode = "\(stringtoDecode)=="
+        case 3: stringtoDecode = "\(stringtoDecode)="
+        default: // nothing to do stringtoDecode can stay the same
+            print("")
+        }
+        let dataToDecode = Data(base64Encoded: stringtoDecode, options: [])
+        let base64DecodedString = NSString(data: dataToDecode!, encoding: String.Encoding.utf8.rawValue)
+
+        var values: [String: AnyObject]?
+        if let string = base64DecodedString {
+            if let data = string.data(using: String.Encoding.utf8.rawValue, allowLossyConversion: true) {
+                values = try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as? [String : AnyObject]
+            }
+        }
+        return values
     }
 }

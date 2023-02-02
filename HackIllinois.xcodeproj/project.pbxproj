@@ -155,6 +155,7 @@
 		DF37065A2925DE57000B4278 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706592925DE57000B4278 /* QuartzCore.framework */; };
 		DF37065C2925DE5D000B4278 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37065B2925DE5D000B4278 /* SystemConfiguration.framework */; };
 		DF37065E2925DE66000B4278 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37065D2925DE66000B4278 /* UIKit.framework */; };
+		E1BF5E7A298B462F00A98390 /* HIStaffButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BF5E79298B462F00A98390 /* HIStaffButtonView.swift */; };
 		E1E4A5D9291C9BF800780BA1 /* HICarouselSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E4A5D6291C9BF700780BA1 /* HICarouselSwiftUIView.swift */; };
 		E1E4A5DA291C9BF800780BA1 /* HIOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E4A5D7291C9BF700780BA1 /* HIOnboardingView.swift */; };
 		E1E4A5DB291C9BF800780BA1 /* HIOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E4A5D8291C9BF700780BA1 /* HIOnboardingViewModel.swift */; };
@@ -353,6 +354,7 @@
 		DF3706592925DE57000B4278 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		DF37065B2925DE5D000B4278 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DF37065D2925DE66000B4278 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E1BF5E79298B462F00A98390 /* HIStaffButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIStaffButtonView.swift; sourceTree = "<group>"; };
 		E1E4A5D6291C9BF700780BA1 /* HICarouselSwiftUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HICarouselSwiftUIView.swift; sourceTree = "<group>"; };
 		E1E4A5D7291C9BF700780BA1 /* HIOnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIOnboardingView.swift; sourceTree = "<group>"; };
 		E1E4A5D8291C9BF700780BA1 /* HIOnboardingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIOnboardingViewModel.swift; sourceTree = "<group>"; };
@@ -564,6 +566,7 @@
 				95C18DC820096539004784B5 /* HIScheduleViewController.swift */,
 				98CA2A3D25C899CF003E842A /* HIProfileViewController.swift */,
 				60EAF98A273B1AC4002CD205 /* HIScanQRCodeViewController.swift */,
+				E1BF5E79298B462F00A98390 /* HIStaffButtonView.swift */,
 				1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */,
 				3FBFA7AA27335554001FFF28 /* HILeaderboardListViewController.swift */,
 				3FBFA7B427335ABC001FFF28 /* HILeaderboardViewController.swift */,
@@ -1059,6 +1062,7 @@
 				AC5E9FE326195CCF00674FCF /* HIEventType.swift in Sources */,
 				AC3B621425E86053002386A2 /* Profile+CoreDataProperties.swift in Sources */,
 				9564E02F2218CE6F003A8EEB /* HIMapsDataSource.swift in Sources */,
+				E1BF5E7A298B462F00A98390 /* HIStaffButtonView.swift in Sources */,
 				953199C91FC25CA0009F2AA1 /* HICoreDataController.swift in Sources */,
 				95A7D28D203D4F54005EAEAF /* Identifiable.swift in Sources */,
 				9521A6A820191590009059C6 /* HIEventDataSource.swift in Sources */,

@@ -266,6 +266,8 @@ struct HIAppearance: Equatable {
         static let leaderboardPoints = UIFont(name: "MontserratRoman-Regular", size: 16)
         static let leaderboardName = UIFont(name: "MontserratRoman-SemiBold", size: 14)
         static let leaderboardRank = UIFont(name: "MontserratRoman-Bold", size: 24)
+        
+        static let QRCheckInFont = UIFont(name: "MontserratRoman-SemiBold", size: 14)
     }
 }
 
