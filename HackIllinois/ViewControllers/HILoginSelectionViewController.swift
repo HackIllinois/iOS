@@ -49,7 +49,7 @@ class HILoginSelectionViewController: HIBaseViewController {
 
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "Login")
+        backgroundView.image = UIImage(named: "LoginBackground")
     }
 }
 
@@ -78,10 +78,12 @@ extension HILoginSelectionViewController {
             tableView.widthAnchor.constraint(equalToConstant: 220).isActive = true
             tableView.heightAnchor.constraint(equalToConstant: 240).isActive = true
             tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 175).isActive = true
-            logoImage.bottomAnchor.constraint(equalTo: tableView.topAnchor, constant: -50).isActive = true
+            logoImage.bottomAnchor.constraint(equalTo: tableView.topAnchor, constant: -20).isActive = true
             logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//            logoImage.widthAnchor.constraint(equalToConstant: 220).isActive = true
+            logoImage.heightAnchor.constraint(equalToConstant: 250).isActive = true
             welcomeHeader.text = "WELCOME TO"
-            welcomeHeader.bottomAnchor.constraint(equalTo: logoImage.topAnchor, constant: -25).isActive = true
+            welcomeHeader.bottomAnchor.constraint(equalTo: logoImage.topAnchor, constant: -15).isActive = true
             welcomeHeader.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             welcomeHeader.heightAnchor.constraint(equalToConstant: 22).isActive = true
         }
