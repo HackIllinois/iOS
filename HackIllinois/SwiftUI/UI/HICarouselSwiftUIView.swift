@@ -60,7 +60,8 @@ struct HITabIndicator: View {
                 ZStack {
                     if current == index {
                         Circle()
-                            .fill(Color.white)
+                            .stroke(Color.white, lineWidth: 3)
+                            .background(Circle().fill(.white))
                     } else {
                         Circle()
                             .fill(Color.clear)
