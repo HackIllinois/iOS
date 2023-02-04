@@ -75,10 +75,10 @@ struct HIAppearance: Equatable {
     private static let lightBlack = #colorLiteral(red: 0.03137254902, green: 0.08235294118, blue: 0.1058823529, alpha: 1)
     private static let salmon = #colorLiteral(red: 0.9490196078, green: 0.6078431373, blue: 0.4705882353, alpha: 1)
     private static let yellowWhite = #colorLiteral(red: 0.9647058824, green: 0.9568627451, blue: 0.831372549, alpha: 1)
-    private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     private static let transparent = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     
     // Hack 2023 color palette
+    private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     private static let darknavy = #colorLiteral(red: 0.1137254902, green: 0.1490196078, blue: 0.2666666667, alpha: 1)
 
     private static var statusBarWhite: UIStatusBarStyle {
@@ -153,12 +153,12 @@ struct HIAppearance: Equatable {
         profileContainerTint: yellowWhite,
         preferredStatusBarStyle: statusBarBlack,
         scrollViewIndicatorStyle: .black,
-        loginDefault: lightBlack,
+        loginDefault: white,
         loginTitleBackground: white,
         loginLogo: #imageLiteral(resourceName: "HILogo"),
-        loginSelectionText: lightBlack,
-        attendeeText: lightBlack,
-        attendeeBackground: yellowGreen,
+        loginSelectionText: white,
+        attendeeText: white,
+        attendeeBackground: darknavy,
         whiteTagFont: white,
         interestBackground: orange,
         buttonGreen: yellowGreen,
