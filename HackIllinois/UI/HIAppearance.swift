@@ -291,7 +291,6 @@ struct HIAppearance: Equatable {
         static let profileDietaryRestrictions = UIFont(name: "MontserratRoman-SemiBold", size: UIDevice.current.userInterfaceIdiom == .pad ? 32 : 16)
         static let profileDietaryRestrictionsLabel = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 12)
         static let profileTier = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 36 : 18)
- 
         
         static let profileNumberFigure = UIFont(name: "MontserratRoman-SemiBold", size: 24)
         static let profileUsername = UIFont(name: "MontserratRoman-Bold", size: 16)
