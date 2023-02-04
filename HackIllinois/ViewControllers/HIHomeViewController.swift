@@ -62,11 +62,12 @@ class HIHomeViewController: HIEventListViewController {
     }
 
     private var countdownDataStoreIndex = 0
+    // changed to upper case for 2023 designs 
     private var staticDataStore: [(date: Date, displayText: String)] = [
-        (HITimeDataSource.shared.eventTimes.eventStart, "HackIllinois Begins In"),
-        (HITimeDataSource.shared.eventTimes.hackStart, "Hacking Begins In"),
-        (HITimeDataSource.shared.eventTimes.hackEnd, "Hacking Ends In"),
-        (HITimeDataSource.shared.eventTimes.eventEnd, "HackIllinois Ends In")
+        (HITimeDataSource.shared.eventTimes.eventStart, "HACKILLINOIS BEGINS IN"),
+        (HITimeDataSource.shared.eventTimes.hackStart, "HACKING BEGINS IN"),
+        (HITimeDataSource.shared.eventTimes.hackEnd, "HACKING ENDS IN"),
+        (HITimeDataSource.shared.eventTimes.eventEnd, "HACKILLINOIS ENDS IN")
     ]
 
     private var timer: Timer?
