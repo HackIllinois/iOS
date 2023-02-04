@@ -39,8 +39,8 @@ class HILoginSelectionCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        titleLabel.heightAnchor.constraint(equalToConstant: 36).isActive = true
-        titleLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: UIDevice.current.userInterfaceIdiom == .pad ? 60 : 36).isActive = true
+        titleLabel.widthAnchor.constraint(equalToConstant: UIDevice.current.userInterfaceIdiom == .pad ? 355 : 200).isActive = true
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
         refreshForThemeChange()
