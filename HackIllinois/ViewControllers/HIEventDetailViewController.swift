@@ -35,27 +35,31 @@ class HIEventDetailViewController: HIBaseViewController {
     private let titleLabel = HILabel(style: .detailTitle)
     
     private let eventTypeView = HIView { (view) in
-        view.layer.cornerRadius = 8
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            view.layer.cornerRadius = 12
+        } else {
+            view.layer.cornerRadius = 8
+        }
         view.backgroundHIColor = \.buttonDarkBlueGreen
         view.translatesAutoresizingMaskIntoConstraints = false
     }
     private let eventTypeLabel = HILabel(style: .eventType)
-    
     private let sponsorLabel = HILabel(style: .sponsor)
-    
     private let timeImageView = UIImageView(image: UIImage(named: "Clock"))
     private let timeLabel = HILabel(style: .description)
-    
     private let locationLabel = HILabel(style:.location)
     private let locationImageView = UIImageView(image: UIImage(named: "LocationSign"))
-    
     private let descriptionLabel = HILabel(style: .detailText)
     let pointsView = HIView { (view) in
-        view.layer.cornerRadius = 8
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            view.layer.cornerRadius = 12
+        } else {
+            view.layer.cornerRadius = 8
+        }
         view.backgroundHIColor = \.buttonMagenta
         view.translatesAutoresizingMaskIntoConstraints = false
     }
-    private let pointsLabel = HILabel(style: .pointsText)
+    private let pointsLabel = HILabel(style: .eventType)
     private let favoritedButton = HIButton {
         $0.tintHIColor = \.accent
         $0.backgroundHIColor = \.clear
@@ -152,7 +156,7 @@ extension HIEventDetailViewController {
             timeLabel.text = Formatter.simpleTime.string(from: event.startTime) + " - " + Formatter.simpleTime.string(from: event.endTime)
         }
         favoritedButton.isActive = event.favorite
-        pointsLabel.text = "+ \(event.points) pts     "
+        pointsLabel.text = "  + \(event.points) pts  "
         eventTypeLabel.text = "   \(event.eventType.lowercased().capitalized)   "
         view.layoutIfNeeded()
         let targetSize = CGSize(width: descriptionLabel.frame.width, height: .greatestFiniteMagnitude)

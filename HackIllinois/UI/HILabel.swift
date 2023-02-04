@@ -83,7 +83,11 @@ class HILabel: UILabel {
         case .location:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentText
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                font = HIAppearance.Font.contentTextPad
+            } else {
+                font = HIAppearance.Font.contentText
+            }
 
         case .event:
             textHIColor = \.baseText
@@ -150,7 +154,11 @@ class HILabel: UILabel {
         case .description:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.descriptionText
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                font = HIAppearance.Font.descriptionTextPad
+            } else {
+                font = HIAppearance.Font.descriptionText
+            }
             numberOfLines = 0
 
         case .cellDescription:
