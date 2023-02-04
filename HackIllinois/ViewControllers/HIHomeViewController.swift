@@ -245,7 +245,8 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
             let displayText = staticDataStore[countdownDataStoreIndex].displayText
             if currDate > now {
                 // Displays before and during the event
-                super.setCustomTitle(customTitle: displayText)
+//                super.setCustomTitle(customTitle: displayText)
+                bannerViewController.updateLabel(with: displayText)
                 return currDate
             } else {
                 // Displays after the event ends
