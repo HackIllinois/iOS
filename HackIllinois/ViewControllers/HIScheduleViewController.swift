@@ -123,7 +123,7 @@ extension HIScheduleViewController {
         super.loadView()
 
         let items = dataStore.map { $0.displayText }
-        let segmentedControl = HIScheduleSegmentedControl(titles: items, nums: [25, 26, 27])
+        let segmentedControl = HIScheduleSegmentedControl(titles: items, nums: [24, 25, 26])
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
