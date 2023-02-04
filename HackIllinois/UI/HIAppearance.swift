@@ -31,6 +31,7 @@ struct HIAppearance: Equatable {
     let loginDefault: UIColor
     let loginTitleBackground: UIColor
     let loginLogo: UIImage
+    let loginLogoPad: UIImage
     let loginSelectionText: UIColor
     let attendeeText: UIColor
     let attendeeBackground: UIColor
@@ -111,6 +112,7 @@ struct HIAppearance: Equatable {
         loginDefault: white,
         loginTitleBackground: white,
         loginLogo: #imageLiteral(resourceName: "HILogo"),
+        loginLogoPad: UIImage(named: "LoginLogoPad")!,
         loginSelectionText: white,
         attendeeText: white,
         attendeeBackground: darknavy,
@@ -156,6 +158,7 @@ struct HIAppearance: Equatable {
         loginDefault: white,
         loginTitleBackground: white,
         loginLogo: #imageLiteral(resourceName: "HILogo"),
+        loginLogoPad: UIImage(named: "LoginLogoPad")!,
         loginSelectionText: white,
         attendeeText: white,
         attendeeBackground: darknavy,
@@ -214,9 +217,10 @@ struct HIAppearance: Equatable {
         static let locationText = UIFont(name: "MontserratRoman-SemiBold", size: 12)
         static let bubbleSponsorText = UIFont(name: "MontserratRoman-SemiBold", size: 12)
         static let sponsorText = UIFont(name: "MontserratRoman-Regular", size: 16)
-        static let loginTitle = UIFont(name: "MontserratRoman-Bold", size: 24)
-        static let loginOrTitle = UIFont(name: "MontserratRoman-Bold", size: 16)
-        static let loginSelection = UIFont(name: "MontserratRoman-SemiBold", size: 16)
+        static let welcomeTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 40: 24)
+        static let loginTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 32: 24)
+        static let loginOrTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 20 : 16)
+        static let loginSelection = UIFont(name: "MontserratRoman-SemiBold", size: UIDevice.current.userInterfaceIdiom == .pad ? 26: 16)
 
         static let sectionHeader = UIFont(name: "MontserratRoman-Bold", size: 13)
         static let button = UIFont(name: "MontserratRoman-Regular", size: 15)

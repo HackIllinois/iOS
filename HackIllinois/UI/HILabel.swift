@@ -150,7 +150,7 @@ class HILabel: UILabel {
         case .welcomeTitle:
             textHIColor = \.loginSelectionText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.loginTitle
+            font = HIAppearance.Font.welcomeTitle
 
         case .backgroundTitle:
             textHIColor = \.baseText
