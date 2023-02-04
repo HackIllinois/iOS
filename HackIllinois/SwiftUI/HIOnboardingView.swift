@@ -24,13 +24,19 @@ struct HIOnboardingView: View {
                 .ignoresSafeArea()
                 .zIndex(-1)
             if viewModel.shouldDisplayAnimationOnNextAppearance {
-                LottieView(shouldDisplayAnimationOnNextAppearance: $viewModel.shouldDisplayAnimationOnNextAppearance)
+                VStack {
+                    LottieView(shouldDisplayAnimationOnNextAppearance: $viewModel.shouldDisplayAnimationOnNextAppearance)
+                }
             } else {
                 VStack {
                     Spacer()
                     HICarouselSwiftUIView(carouselData: viewModel.data)
-                    Button("GET STARTED") {
+                    Button {
                         NotificationCenter.default.post(name: .getStarted, object: nil)
+                    }label: {
+                        Text("GET STARTED")
+                            .font(.title2.bold())
+                            .tracking(3)
                     }
                     .padding()
                     .font(.title3.bold())
