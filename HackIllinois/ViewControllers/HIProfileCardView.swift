@@ -11,6 +11,7 @@
 //
 
 import SwiftUI
+import HIAPI
 
 struct HIProfileCardView: View {
     let firstName: String
@@ -18,7 +19,7 @@ struct HIProfileCardView: View {
     let dietaryRestrictions: [String]
     let points: Int
     let tier: String
-    let wave: String
+    let foodWave: Int
     let background = (\HIAppearance.profileCardBackground).value
     let baseText = (\HIAppearance.profileBaseText).value
     let id: String
@@ -27,7 +28,9 @@ struct HIProfileCardView: View {
     @State var ticketRotation = 0.0
     @State var contentRotation = 0.0
     @State var flipping = false
-
+    @State var startFetchingQR = false
+    @State var qrInfo = ""
+    
     var body: some View {
         ScrollView {
             ZStack {
@@ -66,7 +69,7 @@ struct HIProfileCardView: View {
                             .cornerRadius(isIpad ? 40 : 20)
                             .foregroundColor(.white)
                             .overlay(
-                                Text("Wave \(wave)")
+                                Text("Wave \(foodWave)")
                                     .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 12)))
                                     .foregroundColor(Color(baseText))
                             )
@@ -78,7 +81,7 @@ struct HIProfileCardView: View {
                                     .resizable()
                                     .frame(width: isIpad ? 298 : 190.6, height: isIpad ? 544 : 347.67)
                                     .padding(isIpad ? 48 : 24)
-                                Image(uiImage: UIImage(data: getQRCodeDate(text: id)!)!)
+                                Image(uiImage: UIImage(data: getQRCodeDate(text: qrInfo)!)!)
                                     .resizable()
                                     .frame(width: isIpad ? 200 : 132, height: isIpad ? 200 : 132)
                                 
@@ -132,10 +135,16 @@ struct HIProfileCardView: View {
             }
             .padding(.top, 24)
         }
+        .onAppear {
+            startFetchingQR = true
+            QRFetchLoop()
+        }
+        .onDisappear {
+            startFetchingQR = false
+        }
     }
     
     func getQRCodeDate(text: String) -> Data? {
-        print(text)
         guard let filter = CIFilter(name: "CIQRCodeGenerator") else { return nil }
         let data = text.data(using: .ascii, allowLossyConversion: false)
         filter.setValue(data, forKey: "inputMessage")
@@ -179,7 +188,37 @@ struct HIProfileCardView: View {
             
             flipped.toggle()
         }
-    }}
+    }
+    
+    func QRFetchLoop() {
+        if startFetchingQR {
+            getQRInfo()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
+                QRFetchLoop()
+            }
+        }
+    }
+
+    func getQRInfo() {
+        guard let user = HIApplicationStateController.shared.user else { return }
+        
+        HIAPI.UserService.getQR()
+            .onCompletion { result in
+                do {
+                    let (qr, _) = try result.get()
+                    DispatchQueue.main.async {
+                        self.qrInfo = qr.qrInfo
+                    }
+                } catch {
+                    print("An error has occurred \(error)")
+                }
+            }
+            .authorize(with: user)
+            .launch()
+    }
+    
+    
+}
 
 struct HIProfileCardView_Previews: PreviewProvider {
     static var previews: some View {
@@ -188,7 +227,7 @@ struct HIProfileCardView_Previews: PreviewProvider {
                           dietaryRestrictions: ["vegetarian", "nopeanut"],
                           points: 100,
                           tier: "no tier",
-                          wave: "4",
+                          foodWave: 1,
                           id: "https://www.hackillinois.org"
         )
     }

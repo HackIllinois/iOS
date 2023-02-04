@@ -73,7 +73,7 @@ extension HIProfileViewController {
                                                                                 dietaryRestrictions: dietaryRestrictions,
                                                                                 points: profile.points,
                                                                                 tier: profileTier,
-                                                                                wave: "4",
+                                                                                foodWave: profile.foodWave,
                                                                                 id: profile.id
                                                                                ))
         
@@ -152,6 +152,8 @@ extension HIProfileViewController {
                 self?.profile.firstName = apiProfile.firstName
                 self?.profile.lastName = apiProfile.lastName
                 self?.profile.points = apiProfile.points
+                self?.profile.foodWave = apiProfile.foodWave
+                
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": self?.profile])
                     self?.updateProfile()
