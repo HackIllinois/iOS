@@ -151,7 +151,7 @@ extension HIScheduleViewController {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         setupRefreshControl()
         super.viewDidLoad()
-        super.setCustomTitle(customTitle: "  SCHEDULE")
+        super.setCustomTitle(customTitle: "SCHEDULE")
     }
 }
 

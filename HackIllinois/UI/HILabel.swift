@@ -291,9 +291,6 @@ class HILabel: UILabel {
             textHIColor = \.leaderboardText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.leaderboardRank
-            layer.shadowOffset = CGSize(width: 2, height: 2)
-            layer.shadowRadius = 2.0
-            layer.shadowOpacity = 0.25
             
         case .leaderboardName:
             textHIColor = \.leaderboardText

@@ -71,7 +71,6 @@ extension HILeaderboardViewController {
         // Add tableView to handle leaderboard
         let tableView = HITableView()
         view.addSubview(tableView)
-        tableView.layer.cornerRadius = 8
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
         tableView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.90).isActive = true
         tableView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.85).isActive = true
@@ -86,7 +85,7 @@ extension HILeaderboardViewController {
     override func viewDidLoad() {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         setupRefreshControl()
-        setCustomTitle(customTitle: "Leaderboard")
+        setCustomTitle(customTitle: "LEADERBOARD")
         super.viewDidLoad()
     }
 }
