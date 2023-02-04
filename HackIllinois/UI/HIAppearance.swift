@@ -41,6 +41,8 @@ struct HIAppearance: Equatable {
     let buttonPink: UIColor
     let buttonBlue: UIColor
     let buttonDarkBlue: UIColor
+    let buttonMagenta: UIColor
+    let buttonDarkBlueGreen: UIColor
     let favoriteStarBackground: UIColor
     let segmentedBackground: UIColor
     // New fonts added. Replace old ones?
@@ -100,8 +102,8 @@ struct HIAppearance: Equatable {
     private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     private static let darkBlue = #colorLiteral(red: 0.05098039216, green: 0.2196078431, blue: 0.4862745098, alpha: 1)
     private static let transparent = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
-
-    // Hack 2023 color palette
+    private static let magenta = #colorLiteral(red: 0.9960784314, green: 0.4392156863, blue: 0.5960784314, alpha: 1)
+    private static let darkBlueGreeen = #colorLiteral(red: 0.03137254902, green: 0.5450980392, blue: 0.7568627451, alpha: 1)
     private static let vegetarian = #colorLiteral(red: 0.2156862745, green: 0.8705882353, blue: 0.8039215686, alpha: 1)
     private static let vegan = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1)
     private static let glutenfree = #colorLiteral(red: 0.9764705882, green: 0.5843137255, blue: 0.3411764706, alpha: 1)
@@ -151,6 +153,8 @@ struct HIAppearance: Equatable {
         buttonPink: pink,
         buttonBlue: blue,
         buttonDarkBlue: darkBlue,
+        buttonMagenta: magenta,
+        buttonDarkBlueGreen: darkBlueGreeen,
         favoriteStarBackground: yellowWhite,
         segmentedBackground: white,
         buttonViewBackground: green,
@@ -208,6 +212,8 @@ struct HIAppearance: Equatable {
         buttonPink: pink,
         buttonBlue: blue,
         buttonDarkBlue: darkBlue,
+        buttonMagenta: magenta,
+        buttonDarkBlueGreen: darkBlueGreeen,
         favoriteStarBackground: yellowWhite,
         segmentedBackground: white,
         buttonViewBackground: green,

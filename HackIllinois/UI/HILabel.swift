@@ -100,9 +100,9 @@ class HILabel: UILabel {
             font = HIAppearance.Font.eventTime
 
         case .eventType:
-            textHIColor = \.baseText
+            textHIColor = \.whiteText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.eventCategoryText
+            font = HIAppearance.Font.eventButtonText
 
         case .sponsor:
             textHIColor = \.baseText
