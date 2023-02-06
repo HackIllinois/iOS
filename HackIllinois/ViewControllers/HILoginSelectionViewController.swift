@@ -23,7 +23,11 @@ class HILoginSelectionViewController: HIBaseViewController {
     weak var delegate: HILoginSelectionViewControllerDelegate?
     private let logoImage = HIImageView {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.hiImage = \.loginLogo
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            $0.hiImage = \.loginLogoPad
+        } else {
+            $0.hiImage = \.loginLogo
+        }
         $0.contentMode = .scaleAspectFit
     }
     private let welcomeHeader = HILabel(style: .welcomeTitle)
@@ -49,7 +53,11 @@ class HILoginSelectionViewController: HIBaseViewController {
 
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "Login")
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            backgroundView.image = UIImage(named: "LoginBackgroundPad")
+        } else {
+            backgroundView.image = UIImage(named: "LoginBackgroundPhone")
+        }
     }
 }
 
@@ -64,24 +72,26 @@ extension HILoginSelectionViewController {
         view.addSubview(tableView)
         if UIDevice.current.userInterfaceIdiom == .pad {
             tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
-            tableView.widthAnchor.constraint(equalToConstant: 220).isActive = true
-            tableView.heightAnchor.constraint(equalToConstant: 240).isActive = true
-            tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 100).isActive = true
-            logoImage.bottomAnchor.constraint(equalTo: tableView.topAnchor, constant: -50).isActive = true
+            tableView.widthAnchor.constraint(equalToConstant: 700).isActive = true
+            tableView.heightAnchor.constraint(equalToConstant: 370).isActive = true
+            tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 150).isActive = true
+            logoImage.bottomAnchor.constraint(equalTo: tableView.topAnchor, constant: -20).isActive = true
             logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            logoImage.heightAnchor.constraint(equalToConstant: 250).isActive = true
             welcomeHeader.text = "WELCOME TO"
             welcomeHeader.bottomAnchor.constraint(equalTo: logoImage.topAnchor, constant: -25).isActive = true
             welcomeHeader.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            welcomeHeader.heightAnchor.constraint(equalToConstant: 22).isActive = true
+            welcomeHeader.heightAnchor.constraint(equalToConstant: 30).isActive = true
         } else {
             tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
             tableView.widthAnchor.constraint(equalToConstant: 220).isActive = true
             tableView.heightAnchor.constraint(equalToConstant: 240).isActive = true
             tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 175).isActive = true
-            logoImage.bottomAnchor.constraint(equalTo: tableView.topAnchor, constant: -50).isActive = true
+            logoImage.bottomAnchor.constraint(equalTo: tableView.topAnchor, constant: -20).isActive = true
             logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            logoImage.heightAnchor.constraint(equalToConstant: 250).isActive = true
             welcomeHeader.text = "WELCOME TO"
-            welcomeHeader.bottomAnchor.constraint(equalTo: logoImage.topAnchor, constant: -25).isActive = true
+            welcomeHeader.bottomAnchor.constraint(equalTo: logoImage.topAnchor, constant: -15).isActive = true
             welcomeHeader.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             welcomeHeader.heightAnchor.constraint(equalToConstant: 22).isActive = true
         }
@@ -164,11 +174,11 @@ extension HILoginSelectionViewController {
 // MARK: - UITableViewDelegate
 extension HILoginSelectionViewController {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 45
+        return UIDevice.current.userInterfaceIdiom == .pad ? 70 : 45
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 30
+        return 40
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

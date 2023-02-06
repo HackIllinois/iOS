@@ -32,6 +32,7 @@ struct HIAppearance: Equatable {
     let loginDefault: UIColor
     let loginTitleBackground: UIColor
     let loginLogo: UIImage
+    let loginLogoPad: UIImage
     let loginSelectionText: UIColor
     let attendeeText: UIColor
     let attendeeBackground: UIColor
@@ -92,6 +93,7 @@ struct HIAppearance: Equatable {
     private static let lightBlack = #colorLiteral(red: 0.03137254902, green: 0.08235294118, blue: 0.1058823529, alpha: 1)
     private static let salmon = #colorLiteral(red: 0.9490196078, green: 0.6078431373, blue: 0.4705882353, alpha: 1)
     private static let yellowWhite = #colorLiteral(red: 0.9647058824, green: 0.9568627451, blue: 0.831372549, alpha: 1)
+
     // Hack 2023 color palette
     private static let lightYellow = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1)
     private static let blue = #colorLiteral(red: 0.03137254902, green: 0.5450980392, blue: 0.7568627451, alpha: 1)
@@ -104,6 +106,7 @@ struct HIAppearance: Equatable {
     private static let transparent = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     private static let magenta = #colorLiteral(red: 0.9960784314, green: 0.4392156863, blue: 0.5960784314, alpha: 1)
     private static let darkBlueGreeen = #colorLiteral(red: 0.03137254902, green: 0.5450980392, blue: 0.7568627451, alpha: 1)
+    private static let darknavy = #colorLiteral(red: 0.1137254902, green: 0.1490196078, blue: 0.2666666667, alpha: 1)
     private static let vegetarian = #colorLiteral(red: 0.2156862745, green: 0.8705882353, blue: 0.8039215686, alpha: 1)
     private static let vegan = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1)
     private static let glutenfree = #colorLiteral(red: 0.9764705882, green: 0.5843137255, blue: 0.3411764706, alpha: 1)
@@ -141,12 +144,13 @@ struct HIAppearance: Equatable {
         profileContainerTint: yellowWhite,
         preferredStatusBarStyle: statusBarBlack,
         scrollViewIndicatorStyle: .black,
-        loginDefault: lightBlack,
-        loginTitleBackground: lightBlack,
+        loginDefault: white,
+        loginTitleBackground: white,
         loginLogo: #imageLiteral(resourceName: "HILogo"),
-        loginSelectionText: lightBlack,
-        attendeeText: lightBlack,
-        attendeeBackground: yellowGreen,
+        loginLogoPad: UIImage(named: "LoginLogoPad")!,
+        loginSelectionText: white,
+        attendeeText: white,
+        attendeeBackground: darknavy,
         whiteTagFont: white,
         interestBackground: orange,
         buttonGreen: yellowGreen,
@@ -200,12 +204,13 @@ struct HIAppearance: Equatable {
         profileContainerTint: yellowWhite,
         preferredStatusBarStyle: statusBarBlack,
         scrollViewIndicatorStyle: .black,
-        loginDefault: lightBlack,
-        loginTitleBackground: lightBlack,
+        loginDefault: white,
+        loginTitleBackground: white,
         loginLogo: #imageLiteral(resourceName: "HILogo"),
-        loginSelectionText: lightBlack,
-        attendeeText: lightBlack,
-        attendeeBackground: yellowGreen,
+        loginLogoPad: UIImage(named: "LoginLogoPad")!,
+        loginSelectionText: white,
+        attendeeText: white,
+        attendeeBackground: darknavy,
         whiteTagFont: white,
         interestBackground: orange,
         buttonGreen: yellowGreen,
@@ -286,9 +291,10 @@ struct HIAppearance: Equatable {
         static let locationText = UIFont(name: "MontserratRoman-SemiBold", size: 12)
         static let bubbleSponsorText = UIFont(name: "MontserratRoman-SemiBold", size: 12)
         static let sponsorText = UIFont(name: "MontserratRoman-Regular", size: 16)
-        static let loginTitle = UIFont(name: "MontserratRoman-Bold", size: 24)
-        static let loginOrTitle = UIFont(name: "MontserratRoman-Bold", size: 16)
-        static let loginSelection = UIFont(name: "MontserratRoman-SemiBold", size: 16)
+        static let welcomeTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 40: 24)
+        static let loginTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 32: 24)
+        static let loginOrTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 20 : 16)
+        static let loginSelection = UIFont(name: "MontserratRoman-SemiBold", size: UIDevice.current.userInterfaceIdiom == .pad ? 26: 16)
 
         static let sectionHeader = UIFont(name: "MontserratRoman-Bold", size: 13)
         static let button = UIFont(name: "MontserratRoman-Regular", size: 15)

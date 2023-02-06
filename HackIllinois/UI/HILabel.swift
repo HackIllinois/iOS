@@ -179,7 +179,7 @@ class HILabel: UILabel {
         case .welcomeTitle:
             textHIColor = \.loginSelectionText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.loginTitle
+            font = HIAppearance.Font.welcomeTitle
 
         case .backgroundTitle:
             textHIColor = \.baseText
@@ -281,7 +281,7 @@ class HILabel: UILabel {
             numberOfLines = 0
             
         case .onboardingTitle:
-            textHIColor = \.baseText
+            textHIColor = \.whiteText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.onboardingTitle
             textAlignment = .center
