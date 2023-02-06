@@ -49,29 +49,26 @@ class HIScanQRCodeViewController: HIBaseViewController {
 extension HIScanQRCodeViewController {
     override func loadView() {
         super.loadView()
-        if HIApplicationStateController.shared.isGuest {
+        guard let user = HIApplicationStateController.shared.user else { return }
+        if HIApplicationStateController.shared.isGuest &&  !user.roles.contains(.staff) {
             let background = #imageLiteral(resourceName: "ProfileBackground")
             let imageView: UIImageView = UIImageView(frame: view.bounds)
             view.addSubview(imageView)
             view.sendSubviewToBack(imageView)
             layoutErrorView()
         } else {
-            guard let user = HIApplicationStateController.shared.user else { return }
             if user.roles.contains(.staff) {
                 let observable = HIStaffButtonViewObservable()
                 observable.onSelectEventId = { [weak self] in
                     print(observable.selectedEventId)
                     self?.selectedEventID = observable.selectedEventId
                 }
-                var staffButtonController = UIHostingController(rootView: HIStaffButtonView(events: [], observable: observable)) // add in events from api
-                
+                var staffButtonController = UIHostingController(rootView: HIStaffButtonView(observable: observable))
                 addChild(staffButtonController)
-                
                 staffButtonController.view.backgroundColor = .clear
                 staffButtonController.view.frame = view.bounds
                 view.addSubview(staffButtonController.view)
             }
-            
             view.addSubview(containerView)
             view.bringSubviewToFront(containerView)
             containerView.constrain(to: view, topInset: 0, bottomInset: 0)

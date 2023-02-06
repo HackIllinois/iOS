@@ -36,6 +36,9 @@ public class EventService: BaseService {
         return APIRequest<EventCheckInStatus>(service: self, endpoint: "staff/checkin/", body: body, method: .POST)
     }
     
+    public static func getStaffCheckInEvents() -> APIRequest<EventContainer> {
+        return APIRequest<EventContainer>(service: self, endpoint: "filter/?displayOnStaffCheckin=true", body: body, method: .POST)
+    }
 
     public static func create(event: Event) -> APIRequest<EventContainer> {
         let eventDict = [String: Any]()

@@ -136,10 +136,8 @@ extension HIProfileViewController {
         alert.popoverPresentationController?.sourceView = sender
         present(alert, animated: true, completion: nil)
     }
-
 }
 
-// https://api.hackillinois.org/profile/registration/attendee/a2cc7f7945e436a6ea5c4182db9a7828
 // MARK: - API
 extension HIProfileViewController {
     @objc func reloadProfile () {
@@ -183,7 +181,6 @@ extension HIProfileViewController {
             .onCompletion { [weak self] result in
                 do {
                     let (apiAttendeeContainer, _) = try result.get()
-
                     let dietaryRestrictions = apiAttendeeContainer.attendee.dietary ?? []
                     DispatchQueue.main.async {
                         self?.updateProfile()
