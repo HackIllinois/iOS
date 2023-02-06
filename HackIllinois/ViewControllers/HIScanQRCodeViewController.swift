@@ -41,8 +41,8 @@ class HIScanQRCodeViewController: HIBaseViewController {
         $0.baseImage = #imageLiteral(resourceName: "DarkCloseButton")
     }
     private let errorView = HIErrorView(style: .codePopup)
-    
     private var selectedEventID = ""
+    private let currentUserIDlabel = HILabel(style: .detailTitle)
 }
 
 // MARK: - UIViewController
@@ -57,24 +57,33 @@ extension HIScanQRCodeViewController {
             view.sendSubviewToBack(imageView)
             layoutErrorView()
         } else {
-            if user.roles.contains(.staff) {
-                let observable = HIStaffButtonViewObservable()
-                observable.onSelectEventId = { [weak self] in
-                    print(observable.selectedEventId)
-                    self?.selectedEventID = observable.selectedEventId
-                }
-                var staffButtonController = UIHostingController(rootView: HIStaffButtonView(observable: observable))
-                addChild(staffButtonController)
-                staffButtonController.view.backgroundColor = .clear
-                staffButtonController.view.frame = view.bounds
-                view.addSubview(staffButtonController.view)
-            }
             view.addSubview(containerView)
             view.bringSubviewToFront(containerView)
             containerView.constrain(to: view, topInset: 0, bottomInset: 0)
             containerView.constrain(to: view, trailingInset: 0, leadingInset: 0)
             containerView.addSubview(previewView)
             setupCaptureSession()
+            
+            if user.roles.contains(.staff) {
+                let observable = HIStaffButtonViewObservable()
+                observable.onSelectEventId = { [weak self] in
+                    print(observable.selectedEventId)
+                    self?.selectedEventID = observable.selectedEventId
+                }
+                
+                view.addSubview(currentUserIDlabel)
+                currentUserIDlabel.text = "HELLLLLOo"
+                currentUserIDlabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+                currentUserIDlabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
+                
+                var staffButtonController = UIHostingController(rootView: HIStaffButtonView(observable: observable))
+                addChild(staffButtonController)
+                staffButtonController.view.backgroundColor = .clear
+                staffButtonController.view.frame = CGRect(x: 0, y: 50, width: Int(view.frame.maxX), height: 40)
+                view.addSubview(staffButtonController.view)
+                staffButtonController.view.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+                
+            }
         }
         view.addSubview(closeButton)
         closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
@@ -213,6 +222,13 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         
         guard let user = HIApplicationStateController.shared.user else { return }
         if user.roles.contains(.staff) {
+            if let qrInfo = decode(code) {
+                if let userId = qrInfo["userId"] {
+                    currentUserIDlabel.text = userId as? String
+                }
+            }
+            // for anything not food
+            /*
             if let range = code.range(of: "userToken=") {
                 let userToken = code[range.upperBound...]
                 respondingToQRCodeFound = false
@@ -270,6 +286,7 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                     .authorize(with: HIApplicationStateController.shared.user)
                     .launch()
             }
+             */
         } else {
             respondingToQRCodeFound = false
             HIAPI.EventService.checkIn(code: code)
@@ -331,6 +348,7 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
     
     func decode(_ token: String) -> [String: AnyObject]? {
         let string = token.components(separatedBy: ".")
+        if string.count == 1 { return nil }
         let toDecode = string[1] as String
         
         var stringtoDecode: String = toDecode.replacingOccurrences(of: "-", with: "+") // 62nd char of encoding

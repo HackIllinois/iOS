@@ -30,7 +30,6 @@ public struct Profile: Codable, APIReturnable {
         case lastName
         case points
         case foodWave
-        case timezone
         case discord
         case avatarUrl
     }
@@ -40,7 +39,6 @@ public struct Profile: Codable, APIReturnable {
     public let lastName: String
     public let points: Int
     public let foodWave: Int
-    public let timezone: String
     public let discord: String
     public let avatarUrl: String
 }

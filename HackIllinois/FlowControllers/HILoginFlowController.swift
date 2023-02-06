@@ -243,7 +243,6 @@ private extension HILoginFlowController {
                 profile.firstName = apiProfile.firstName
                 profile.lastName = apiProfile.lastName
                 profile.points = apiProfile.points
-                profile.timezone = apiProfile.timezone
                 profile.discord = apiProfile.discord
                 profile.avatarUrl = apiProfile.avatarUrl
                 DispatchQueue.main.async {

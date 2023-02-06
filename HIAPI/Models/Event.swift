@@ -35,6 +35,8 @@ public struct Event: Codable {
         case startTime
         case points
         case isAsync
+        case isPrivate
+        case displayOnStaffCheckIn
     }
 
     public let id: String
@@ -48,6 +50,8 @@ public struct Event: Codable {
     public let startTime: Date
     public let points: Int
     public let isAsync: Bool
+    public let isPrivate: Bool // only shows for a staff ... so get event specific role?
+    public let displayOnStaffCheckIn: Bool
 }
 
 public struct Location: Codable {
