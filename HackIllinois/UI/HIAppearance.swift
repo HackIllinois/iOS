@@ -168,9 +168,9 @@ struct HIAppearance: Equatable {
         profile9: #imageLiteral(resourceName: "Profile9"),
         profile10: #imageLiteral(resourceName: "Profile10"),
         leaderboardText: lightBlack,
-        leaderboardBackgroundOne: yellowWhite,
-        leaderboardBackgroundTwo: tan,
-        pointsBackground: yellowGreen,
+        leaderboardBackgroundOne: lightBlue,
+        leaderboardBackgroundTwo: lightBlue,
+        pointsBackground: white,
         profileCardBackground: lightBlue,
         profileCardVegetarian: vegetarian,
         profileCardVegan: profileBaseText,
@@ -226,9 +226,9 @@ struct HIAppearance: Equatable {
         profile9: #imageLiteral(resourceName: "Profile9"),
         profile10: #imageLiteral(resourceName: "Profile10"),
         leaderboardText: lightBlack,
-        leaderboardBackgroundOne: yellowWhite,
-        leaderboardBackgroundTwo: tan,
-        pointsBackground: yellowGreen,
+        leaderboardBackgroundOne: lightBlue,
+        leaderboardBackgroundTwo: lightBlue,
+        pointsBackground: white,
         profileCardBackground: lightBlue,
         profileCardVegetarian: vegetarian,
         profileCardVegan: vegan,
@@ -310,8 +310,8 @@ struct HIAppearance: Equatable {
         static let onboardingGetStartedText = UIFont(name: "MontserratRoman-SemiBold", size: 25)
         static let onboardingTitle = UIFont(name: "MontserratRoman-Bold", size: 30)
         static let onboardingDescription = UIFont(name: "MontserratRoman-Regular", size: 20)
-        static let leaderboardPoints = UIFont(name: "MontserratRoman-Regular", size: 16)
-        static let leaderboardName = UIFont(name: "MontserratRoman-SemiBold", size: 14)
+        static let leaderboardPoints = UIFont(name: "MontserratRoman-Semibold", size: 12)
+        static let leaderboardName = UIFont(name: "MontserratRoman-SemiBold", size: 16)
         static let leaderboardRank = UIFont(name: "MontserratRoman-Bold", size: 24)
     }
 }
