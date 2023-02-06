@@ -41,4 +41,5 @@ struct HIConstants {
     static let LEADERBOARD_PROFILE_LIMIT = 10
     static let MAX_EVENT_DESCRIPTION_LENGTH = 75
     static let ASYNC_EVENT_TIME_TEXT = "All Day"
+    static let ONLINE_EVENT_LOCATION_TEXT = "Online"
 }
