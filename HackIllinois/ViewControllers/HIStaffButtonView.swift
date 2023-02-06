@@ -11,33 +11,34 @@ import SwiftUI
 struct HIStaffButtonView: View {
     var events: [CheckInEvent]
     var highlightedID = ""
+    @ObservedObject var observable: HIStaffButtonViewObservable
     var body: some View {
-        ForEach(events, id: \.eventID) { event in
-           
-            Button(action: {
-                // sets the currentID
-                // highlights that image
-                   }) {
-                       Text(event.eventName)
-                          // .foregroundColor(event.eventID == highlightedID ? HIAppearan  : .white)
-                           .font(Font(HIAppearance.Font.QRCheckInFont ?? .systemFont(ofSize: 14)))
-                           .padding()
-                           .background(
-                            RoundedRectangle(cornerRadius: 10)
-                               .stroke(Color.white, lineWidth: 2)
-                               .background(event.eventID == highlightedID ? Color.white : Color.clear)
-                           )
-                   }
+        ScrollView {
+            LazyVGrid(columns: columns, spacing: 20) {
+                ForEach(events, id: \.eventID) { event in
+                    Button(action: {
+                        observable.selectedEventId = highlightedID
+                        observable.onSelectEventId
+                    }) {
+                        Text(event.eventName)
+                            .foregroundColor(event.eventID == highlightedID ? .white : Color((\HIAppearance.profileBaseText).value))
+                            .font(Font(HIAppearance.Font.QRCheckInFont ?? .systemFont(ofSize: 14)))
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.white, lineWidth: 2)
+                                    .background(event.eventID == highlightedID ? Color((\HIAppearance.profileBaseText).value) : Color.white)
+                            )
+                    }
+                }
+            }
         }
-        
     }
-   
 }
 
-struct HIStaffButtonView_Previews: PreviewProvider {
-    static var previews: some View {
-        HIStaffButtonView(events: [CheckInEvent(eventName: "event", eventID: "id")])
-    }
+class HIStaffButtonViewObservable: ObservableObject {
+    @Published var selectedEventId: String = ""
+    var onSelectEventId: (()->Void)!
 }
 
 struct CheckInEvent {

@@ -123,7 +123,7 @@ struct HIProfileCardView: View {
                                         .cornerRadius(isIpad ? 40 : 20)
                                         .foregroundColor(Color(dietColor(diet: diet)))
                                         .overlay(
-                                            Text(diet)
+                                            Text(dietString(diet: diet))
                                                 .font(Font(HIAppearance.Font.profileDietaryRestrictionsLabel ?? .systemFont(ofSize: 12)))
                                                 .foregroundColor(Color(baseText))
                                         )
@@ -153,6 +153,27 @@ struct HIProfileCardView: View {
         let scaledCIImage = ciimage.transformed(by: transform)
         let uiimage = UIImage(ciImage: scaledCIImage)
         return uiimage.pngData()!
+    }
+    
+    func dietString(diet: String) -> String {
+        switch (diet) {
+        case "Vegetarian":
+            return "Vegetarian"
+        case "Vegan":
+            return "Vegan"
+        case "Gluten-Free":
+            return "Gluten-Free"
+        case "Lactose-Intolerant":
+            return "Dairy Free"
+        case "Other":
+            return "Other"
+        case "None":
+            return "None"
+        case "":
+            return ""
+        default:
+            return ""
+        }
     }
     
     func dietColor(diet: String) -> UIColor {
@@ -185,7 +206,6 @@ struct HIProfileCardView: View {
         }
         withAnimation(Animation.linear(duration: 0.001).delay(animationTime / 2)) {
             contentRotation += 180
-            
             flipped.toggle()
         }
     }
@@ -198,7 +218,7 @@ struct HIProfileCardView: View {
             }
         }
     }
-
+    
     func getQRInfo() {
         guard let user = HIApplicationStateController.shared.user else { return }
         
@@ -216,8 +236,6 @@ struct HIProfileCardView: View {
             .authorize(with: user)
             .launch()
     }
-    
-    
 }
 
 struct HIProfileCardView_Previews: PreviewProvider {
