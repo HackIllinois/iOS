@@ -248,17 +248,17 @@ struct HIAppearance: Equatable {
     }
 
     enum Font {
-        static let glyphPad = UIFont.systemFont(ofSize: 24, weight: .bold)
-        static let timeIndicator = UIFont.systemFont(ofSize: 32, weight: .bold)
-        static let homeSegmentedTitlePad = UIFont.systemFont(ofSize: 40, weight: .bold)
-        static let viewTitlePad = UIFont.systemFont(ofSize: 48, weight: .bold)
-        static let scheduleSegmentedNumberPad = UIFont.systemFont(ofSize: 36, weight: .semibold)
-        static let scheduleSegmentedPad = UIFont.systemFont(ofSize: 32, weight: .semibold)
-        static let eventTitlePad = UIFont.systemFont(ofSize: 36, weight: .bold)
-        static let timeTextPad = UIFont.systemFont(ofSize: 28, weight: .semibold)
-        static let locationTextPad = UIFont.systemFont(ofSize: 24, weight: .semibold)
-        static let sponsorTextPad = UIFont.systemFont(ofSize: 24, weight: .semibold)
-        static let detailTextPad = UIFont.systemFont(ofSize: 24, weight: .regular)
+        static let glyphPad = UIFont(name: "MontserratRoman-Bold", size: 24)
+        static let timeIndicator = UIFont(name: "MontserratRoman-Bold", size: 32)
+        static let homeSegmentedTitlePad = UIFont(name: "MontserratRoman-Bold", size: 40)
+        static let viewTitlePad = UIFont(name: "MontserratRoman-Bold", size: 48)
+        static let scheduleSegmentedNumberPad = UIFont(name: "MontserratRoman-SemiBold", size: 36)
+        static let scheduleSegmentedPad = UIFont(name: "MontserratRoman-SemiBold", size: 32)
+        static let eventTitlePad = UIFont(name: "MontserratRoman-Bold", size: 36)
+        static let timeTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 28)
+        static let locationTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 24)
+        static let sponsorTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 24)
+        static let detailTextPad = UIFont(name: "MontserratRoman-Regular", size: 24)
         static let contentSubtitle = UIFont(name: "MontserratRoman-Light", size: 13)
         static let contentText = UIFont(name: "MontserratRoman-Regular", size: 14)
         static let contentTitle = UIFont(name: "MontserratRoman-Medium", size: 18)
@@ -313,6 +313,9 @@ struct HIAppearance: Equatable {
         static let leaderboardPoints = UIFont(name: "MontserratRoman-Regular", size: 16)
         static let leaderboardName = UIFont(name: "MontserratRoman-SemiBold", size: 14)
         static let leaderboardRank = UIFont(name: "MontserratRoman-Bold", size: 24)
+        static let leaderboardPointsPad = UIFont(name: "MontserratRoman-Bold", size: 24)
+        static let leaderboardNamePad = UIFont(name: "MontserratRoman-SemiBold", size: 32)
+        static let leaderboardRankPad = UIFont(name: "MontserratRoman-Bold", size: 48)
     }
 }
 
