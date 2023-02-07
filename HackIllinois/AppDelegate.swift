@@ -18,24 +18,10 @@ import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    
-    private var apiKey: String {
-        get {
-            // 1
-            guard let filePath = Bundle.main.path(forResource: "Info", ofType: "plist") else {
-                fatalError("Couldn't find file 'Info.plist'.")
-            }
-            // 2
-            let plist = NSDictionary(contentsOfFile: filePath)
-            guard let value = plist?.object(forKey: "GoogleMap_API_KEY") as? String else {
-                fatalError("Couldn't find key 'GoogleMap_API_KEY' in 'Info.plist'.")
-            }
-            print("Successfully loaded APIKey!")
-            return value
-        }
-    }
-    
+    private var obfuscatedApiKey: [UInt8] = [92, 213, 228, 193, 244, 27, 239, 139, 188, 14, 85, 191, 47, 237, 55, 13, 85, 89, 111, 212, 35, 80, 45, 104, 189, 229,
+                                   33, 32, 70, 63, 90, 163, 173, 232, 167, 90, 203, 22, 169, 29, 156, 158, 160, 167, 98,
+                                   174, 239, 247, 118, 96, 207, 104, 180, 14, 90, 58, 61, 89, 186, 89, 7, 114, 25, 255, 141,
+                                   115, 113, 117, 78, 10, 150, 197, 161, 158, 98, 129, 87, 228]
     // Handle remote notification registration.
     func application(_ application: UIApplication,
                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -61,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = HIThemeEngine.shared
         _ = HICoreDataController.shared
         _ = HILocalNotificationController.shared
-        GMSServices.provideAPIKey(apiKey)
+        GMSServices.provideAPIKey(String(bytes: obfuscatedApiKey.deobfuscated, encoding: .utf8)!)
         HIApplicationStateController.shared.initalize()
         return true
     }
