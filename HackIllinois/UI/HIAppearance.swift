@@ -64,7 +64,7 @@ struct HIAppearance: Equatable {
     let leaderboardBackgroundOne: UIColor
     let leaderboardBackgroundTwo: UIColor
     let pointsBackground: UIColor
-    
+
     let profileCardBackground: UIColor
     let profileCardVegetarian: UIColor
     let profileCardVegan: UIColor
@@ -73,7 +73,7 @@ struct HIAppearance: Equatable {
     let profileCardOther: UIColor
     let profileCardNone: UIColor
 
-    
+
     let profileBaseText: UIColor
 
     let clear: UIColor = .clear
@@ -186,7 +186,7 @@ struct HIAppearance: Equatable {
         profileCardNone: none,
         profileBaseText: profileBaseText
     )
-    
+
     fileprivate static let night = HIAppearance(
         neonCountdownText: lightYellow,
         titleText: lightBlack,
@@ -305,17 +305,17 @@ struct HIAppearance: Equatable {
         static let profileDietaryRestrictions = UIFont(name: "MontserratRoman-SemiBold", size: UIDevice.current.userInterfaceIdiom == .pad ? 32 : 16)
         static let profileDietaryRestrictionsLabel = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 12)
         static let profileTier = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 36 : 18)
- 
-        
+
+
         static let profileNumberFigure = UIFont(name: "MontserratRoman-SemiBold", size: 24)
         static let profileUsername = UIFont(name: "MontserratRoman-Bold", size: 16)
         static let profileInterests = UIFont(name: "MontserratRoman-SemiBold", size: 14)
         static let segmentedTitle = UIFont(name: "MontserratRoman-Bold", size: 16)
         static let homeSegmentedTitle = UIFont(name: "MontserratRoman-Bold", size: 24)
         static let segmentedNumberText = UIFont(name: "MontserratRoman-SemiBold", size: 18)
-       
+
         static let QRCheckInFont = UIFont(name: "MontserratRoman-SemiBold", size: 14)
-        
+
         static let countdownText = UIFont(name: "MontserratRoman-Bold", size: 25)
         static let newCountdownText = UIFont(name: "MontserratRoman-Bold", size: 48)
         static let onboardingGetStartedText = UIFont(name: "MontserratRoman-SemiBold", size: 25)

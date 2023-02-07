@@ -30,10 +30,8 @@ class HIScanQRCodeViewController: HIBaseViewController {
     private var previewLayer: AVCaptureVideoPreviewLayer?
     let hapticGenerator = UINotificationFeedbackGenerator()
     private let pickerView = UIPickerView()
-    
     private var loadFailed = false
     var respondingToQRCodeFound = true
-    
     private let closeButton = HIButton {
         $0.tintHIColor = \.action
         $0.backgroundHIColor = \.clear
@@ -63,26 +61,22 @@ extension HIScanQRCodeViewController {
             containerView.constrain(to: view, trailingInset: 0, leadingInset: 0)
             containerView.addSubview(previewView)
             setupCaptureSession()
-            
             if user.roles.contains(.staff) {
                 let observable = HIStaffButtonViewObservable()
                 observable.onSelectEventId = { [weak self] in
                     print(observable.selectedEventId)
                     self?.selectedEventID = observable.selectedEventId
                 }
-                
                 view.addSubview(currentUserIDlabel)
                 currentUserIDlabel.text = "HELLLLLOo"
                 currentUserIDlabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
                 currentUserIDlabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
-                
                 var staffButtonController = UIHostingController(rootView: HIStaffButtonView(observable: observable))
                 addChild(staffButtonController)
                 staffButtonController.view.backgroundColor = .clear
                 staffButtonController.view.frame = CGRect(x: 0, y: 50, width: Int(view.frame.maxX), height: 40)
                 view.addSubview(staffButtonController.view)
                 staffButtonController.view.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-                
             }
         }
         view.addSubview(closeButton)
@@ -92,7 +86,7 @@ extension HIScanQRCodeViewController {
         closeButton.constrain(width: 60, height: 60)
         closeButton.imageView?.contentMode = .scaleToFill
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if loadFailed {
@@ -108,11 +102,11 @@ extension HIScanQRCodeViewController {
             }
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if captureSession?.isRunning == true {
@@ -121,7 +115,7 @@ extension HIScanQRCodeViewController {
             }
         }
     }
-    
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animate(alongsideTransition: { [weak self] (_) in
             self?.setFrameForPreviewLayer()
@@ -167,7 +161,6 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
     func setupCaptureSession() {
         captureSession = AVCaptureSession()
         let metadataOutput = AVCaptureMetadataOutput()
-        
         guard
             let captureSession = captureSession,
             let videoCaptureDevice = AVCaptureDevice.default(for: .video),
@@ -177,26 +170,21 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
             loadFailed = true
             return
         }
-        
         captureSession.addInput(videoInput)
         captureSession.addOutput(metadataOutput)
         metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
         metadataOutput.metadataObjectTypes = [.qr]
-        
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.videoGravity = .resizeAspectFill
         self.previewLayer = previewLayer
         setFrameForPreviewLayer()
         previewView.layer.addSublayer(previewLayer)
     }
-    
+
     func setFrameForPreviewLayer() {
         guard let previewLayer = previewLayer else { return }
-        
         previewLayer.frame = previewView.layer.bounds
-        
         guard previewLayer.connection?.isVideoOrientationSupported == true else { return }
-        
 #warning("Not Tested")
         let interfaceOrientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation
         switch interfaceOrientation {
@@ -214,12 +202,12 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
             previewLayer.connection?.videoOrientation = .portrait
         }
     }
-    
+
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         guard respondingToQRCodeFound else { return }
         let meta = metadataObjects.first as? AVMetadataMachineReadableCodeObject
         let code = meta?.stringValue ?? ""
-        
+
         guard let user = HIApplicationStateController.shared.user else { return }
         if user.roles.contains(.staff) {
             if let qrInfo = decode(code) {
@@ -345,12 +333,11 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                 .launch()
         }
     }
-    
+
     func decode(_ token: String) -> [String: AnyObject]? {
         let string = token.components(separatedBy: ".")
         if string.count == 1 { return nil }
         let toDecode = string[1] as String
-        
         var stringtoDecode: String = toDecode.replacingOccurrences(of: "-", with: "+") // 62nd char of encoding
         stringtoDecode = stringtoDecode.replacingOccurrences(of: "_", with: "/") // 63rd char of encoding
         switch (stringtoDecode.utf16.count % 4) {

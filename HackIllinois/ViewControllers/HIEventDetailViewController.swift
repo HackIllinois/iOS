@@ -20,7 +20,7 @@ import GoogleMaps
 class HIEventDetailViewController: HIBaseViewController {
     // MARK: - Properties
     var event: Event?
-    
+
     // MARK: Views
     private let eventDetailContainer = HIView {
         $0.layer.cornerRadius = 8
@@ -33,7 +33,7 @@ class HIEventDetailViewController: HIBaseViewController {
         $0.backgroundHIColor = \.clear
     }
     private let titleLabel = HILabel(style: .detailTitle)
-    
+
     private let eventTypeView = HIView { (view) in
         if UIDevice.current.userInterfaceIdiom == .pad {
             view.layer.cornerRadius = 12
@@ -77,22 +77,22 @@ class HIEventDetailViewController: HIBaseViewController {
     //        $0.translatesAutoresizingMaskIntoConstraints = false
     //        $0.backgroundHIColor = \.clear
     //    }
-    
+
     // MARK: Constraints
     private var descriptionLabelHeight = NSLayoutConstraint()
-    
+
 }
 
 // MARK: - Actions
 extension HIEventDetailViewController {
     @objc func didSelectFavoriteButton(_ sender: HIButton) {
         guard let event = event else { return }
-        
+
         let changeFavoriteStatusRequest: APIRequest<EventFavorites> =
         sender.isActive ?
         HIAPI.EventService.unfavoriteBy(id: event.id) :
         HIAPI.EventService.favoriteBy(id: event.id)
-        
+
         changeFavoriteStatusRequest
             .onCompletion { result in
                 switch result {
@@ -111,7 +111,7 @@ extension HIEventDetailViewController {
             .authorize(with: HIApplicationStateController.shared.user)
             .launch()
     }
-    
+
     @objc func didSelectCloseButton(_ sender: HIButton) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -119,10 +119,10 @@ extension HIEventDetailViewController {
 
 // MARK: - UIViewController
 extension HIEventDetailViewController {
-    
+
     override func loadView() {
         super.loadView()
-        
+
         setupCloseButton()
         setupContainers()
         setupTitle()
@@ -138,7 +138,7 @@ extension HIEventDetailViewController {
         setupMap()
         setupDescription()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let event = event else { return }
@@ -179,7 +179,7 @@ extension HIEventDetailViewController {
             }
         }
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if event == nil {
@@ -190,7 +190,7 @@ extension HIEventDetailViewController {
         view.addSubview(eventDetailContainer)
         eventDetailContainer.topAnchor.constraint(equalTo: closeButton.bottomAnchor).isActive = true
         eventDetailContainer.constrain(to: view.safeAreaLayoutGuide, trailingInset: -8, bottomInset: 0, leadingInset: 8)
-        
+
         eventDetailContainer.addSubview(upperContainerView)
         upperContainerView.constrain(to: eventDetailContainer, topInset: 25, trailingInset: 0, leadingInset: 0)
         upperContainerView.constrain(height: 95)
@@ -218,7 +218,7 @@ extension HIEventDetailViewController {
         timeImageView.translatesAutoresizingMaskIntoConstraints = false
         timeImageView.topAnchor.constraint(equalTo: sponsorLabel.bottomAnchor, constant: 10).isActive = true
         timeImageView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
-        
+
         upperContainerView.addSubview(timeLabel)
         timeLabel.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor).isActive = true
         timeLabel.leadingAnchor.constraint(equalTo: timeImageView.leadingAnchor, constant: 20).isActive = true

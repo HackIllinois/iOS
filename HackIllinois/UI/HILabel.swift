@@ -231,7 +231,7 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             textAlignment = .center
             font = HIAppearance.Font.profileInterests
-        
+
         case .profileDietaryRestrictions:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
@@ -272,28 +272,28 @@ class HILabel: UILabel {
             font = HIAppearance.Font.detailSubtitle
             textAlignment = .center
             numberOfLines = 0
-            
+
         case .onboardingDescription:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.onboardingDescription
             textAlignment = .center
             numberOfLines = 0
-            
+
         case .onboardingTitle:
             textHIColor = \.whiteText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.onboardingTitle
             textAlignment = .center
             numberOfLines = 0
-            
+
         case .clock:
             textHIColor = \.whiteText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.clockText
             textAlignment = .center
             numberOfLines = 1
-            
+
         // Leaderboard label fonts
         case .leaderboardRank:
             textHIColor = \.leaderboardText
@@ -303,7 +303,7 @@ class HILabel: UILabel {
             } else {
                 font = HIAppearance.Font.leaderboardRank
             }
-            
+
         case .leaderboardName:
             textHIColor = \.leaderboardText
             backgroundHIColor = \.clear
@@ -312,7 +312,7 @@ class HILabel: UILabel {
             } else {
                 font = HIAppearance.Font.leaderboardName
             }
-            
+
         case .leaderboardPoints:
             textHIColor = \.leaderboardText
             backgroundHIColor = \.pointsBackground
@@ -321,7 +321,7 @@ class HILabel: UILabel {
             } else {
                 font = HIAppearance.Font.leaderboardPoints
             }
-            
+
         case .newTime:
             textHIColor = \.black
             backgroundHIColor = \.clear
@@ -330,7 +330,7 @@ class HILabel: UILabel {
             } else {
                 font = HIAppearance.Font.timeText
             }
-            
+
         case .newSponsor:
             textHIColor = \.black
             backgroundHIColor = \.clear
@@ -340,7 +340,7 @@ class HILabel: UILabel {
             } else {
                 font = HIAppearance.Font.bubbleSponsorText
             }
-            
+
         case .newLocation:
             textHIColor = \.black
             backgroundHIColor = \.clear

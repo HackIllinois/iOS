@@ -55,13 +55,12 @@ extension HIProfileViewController {
             updateProfile()
             reloadProfile()
         }
-        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         super.setCustomTitle(customTitle: "PROFILE")
     }
-    
+
     func updateProfileCard() {
         if addedProfileCard == true {
             profileCardController?.view.removeFromSuperview()
@@ -78,7 +77,6 @@ extension HIProfileViewController {
                                                                                ))
         
         addChild(profileCardController!)
-        
         profileCardController!.view.backgroundColor = .clear
         profileCardController!.view.frame = view.bounds
         view.addSubview(profileCardController!.view)
@@ -93,13 +91,13 @@ extension HIProfileViewController {
         errorView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
         errorView.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
-    
+
     func layoutLogOutButton() {
         self.navigationItem.rightBarButtonItem = logoutButton.toBarButtonItem()
         logoutButton.constrain(width: 25, height: 25)
         logoutButton.addTarget(self, action: #selector(didSelectLogoutButton(_:)), for: .touchUpInside)
     }
-    
+
     func updateProfile() {
         updateProfileCard()
         if tiers.count > 0 {
@@ -111,13 +109,11 @@ extension HIProfileViewController {
         } else {
             profileTier = "Tier: None"
         }
-
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         layoutLogOutButton()
     }
-
 }
 
 // MARK: - Actions
@@ -151,7 +147,6 @@ extension HIProfileViewController {
                 self?.profile.lastName = apiProfile.lastName
                 self?.profile.points = apiProfile.points
                 self?.profile.foodWave = apiProfile.foodWave
-                
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": self?.profile])
                     self?.updateProfile()
@@ -159,7 +154,6 @@ extension HIProfileViewController {
             } catch {
                 print("Failed to reload profile with error: \(error)")
             }
-
         }
         .authorize(with: user)
         .launch()
@@ -176,7 +170,7 @@ extension HIProfileViewController {
                 }
             }
             .launch()
-        
+
         HIAPI.RegistrationService.getAttendee()
             .onCompletion { [weak self] result in
                 do {
