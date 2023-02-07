@@ -86,7 +86,7 @@ extension HILeaderboardViewController {
     override func viewDidLoad() {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         setupRefreshControl()
-        setCustomTitle(customTitle: "Leaderboard")
+        setCustomTitle(customTitle: "LEADERBOARD")
         super.viewDidLoad()
     }
 }

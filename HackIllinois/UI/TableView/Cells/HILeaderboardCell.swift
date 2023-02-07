@@ -63,17 +63,16 @@ extension HILeaderboardCell {
         lhs.nameLabel.textAlignment = .left
 
         lhs.rankLabel.centerYAnchor.constraint(equalTo: lhs.cellView.centerYAnchor).isActive = true
-        lhs.rankLabel.leadingAnchor.constraint(equalTo: lhs.cellView.leadingAnchor, constant: 15).isActive = true
+        lhs.rankLabel.leadingAnchor.constraint(equalTo: lhs.cellView.leadingAnchor, constant: 25).isActive = true
         lhs.rankLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
 
         lhs.pointsLabel.centerYAnchor.constraint(equalTo: lhs.cellView.centerYAnchor).isActive = true
-        lhs.pointsLabel.widthAnchor.constraint(equalTo: lhs.cellView.widthAnchor, multiplier: 0.30).isActive = true
-        lhs.pointsLabel.trailingAnchor.constraint(equalTo: lhs.cellView.trailingAnchor, constant: -15).isActive = true
-        lhs.pointsLabel.heightAnchor.constraint(equalTo: lhs.cellView.heightAnchor, multiplier: 0.45).isActive = true
+        lhs.pointsLabel.widthAnchor.constraint(equalTo: lhs.cellView.widthAnchor, multiplier: 0.24).isActive = true
+        lhs.pointsLabel.trailingAnchor.constraint(equalTo: lhs.cellView.trailingAnchor, constant: -25).isActive = true
+        lhs.pointsLabel.heightAnchor.constraint(equalTo: lhs.cellView.heightAnchor, multiplier: 0.38).isActive = true
 
         lhs.nameLabel.centerYAnchor.constraint(equalTo: lhs.cellView.centerYAnchor).isActive = true
-        lhs.nameLabel.leadingAnchor.constraint(equalTo: lhs.rankLabel.trailingAnchor, constant: 15).isActive = true
-        lhs.nameLabel.trailingAnchor.constraint(equalTo: lhs.pointsLabel.leadingAnchor, constant: -15).isActive = true
+        lhs.nameLabel.leadingAnchor.constraint(equalTo: lhs.cellView.leadingAnchor, constant: 75).isActive = true
     }
 }
 

@@ -24,20 +24,27 @@ struct HIOnboardingView: View {
                 .ignoresSafeArea()
                 .zIndex(-1)
             if viewModel.shouldDisplayAnimationOnNextAppearance {
-                LottieView(shouldDisplayAnimationOnNextAppearance: $viewModel.shouldDisplayAnimationOnNextAppearance)
+                VStack {
+                    LottieView(shouldDisplayAnimationOnNextAppearance: $viewModel.shouldDisplayAnimationOnNextAppearance)
+                }
             } else {
                 VStack {
                     Spacer()
                     HICarouselSwiftUIView(carouselData: viewModel.data)
-                    Button("Get Started") {
+                    Button {
                         NotificationCenter.default.post(name: .getStarted, object: nil)
+                    }label: {
+                        Text("GET STARTED")
+                            .font(.title2.bold())
+                            .tracking(3)
                     }
                     .padding()
                     .font(.title3.bold())
                     .frame(width: 350, height: 50)
                     .foregroundColor(.white)
-                    .background(Color(red: 130/255, green: 171/255, blue: 79/255))
-                    .clipShape(Capsule())
+                    .background(Color.clear)
+                    .overlay(RoundedRectangle(cornerRadius: 20)
+                        .stroke(.white, lineWidth: 5))
                     Spacer()
                 }
             }
@@ -50,7 +57,7 @@ struct LottieView: UIViewRepresentable {
     @Binding var shouldDisplayAnimationOnNextAppearance: Bool
     func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView(frame: .zero)
-        let animationView = LottieAnimationView(name: "DarkVespaText")
+        let animationView = LottieAnimationView(name: "Hack_PopcornCart_Transparent")
         animationView.contentMode = .scaleAspectFit
         animationView.frame = view.frame
         animationView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

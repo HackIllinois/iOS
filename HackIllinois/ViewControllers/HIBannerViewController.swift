@@ -15,6 +15,15 @@ import UIKit
 
 class HIBannerViewController: UIViewController {
     private let backgroundHIColor: HIColor = \.clear
+    private let label = HILabel {
+        $0.textHIColor = \.whiteText
+        $0.backgroundHIColor = \.clear
+        $0.textAlignment = .center
+        $0.font = HIAppearance.Font.glyph
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            $0.font = HIAppearance.Font.glyphPad
+        }
+    }
 }
 
 extension HIBannerViewController {
@@ -29,29 +38,19 @@ extension HIBannerViewController {
         bannerStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         bannerStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         bannerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        let daysContent = bannerView(with: "HACKILLINOIS BEGINS IN")
+        let daysContent = bannerView(with: label)
         bannerStackView.addArrangedSubview(daysContent)
     }
-    func bannerView(with labelString: String) -> UIView {
-
-        let label = HILabel {
-            $0.textHIColor = \.whiteText
-            $0.backgroundHIColor = \.clear
-            $0.textAlignment = .center
-            $0.font = HIAppearance.Font.glyph
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                $0.font = HIAppearance.Font.glyphPad
-            }
-            $0.text = labelString
-        }
-
+    func bannerView(with label: HILabel) -> UIView {
         let bannerView = UIView()
         bannerView.addSubview(label)
         label.constrain(to: bannerView, topInset: 0, trailingInset: 0, leadingInset: 0)
         bannerView.constrain(to: bannerView, trailingInset: 0, bottomInset: 0, leadingInset: 0)
         bannerView.bottomAnchor.constraint(equalTo: label.topAnchor).isActive = true
-
         return bannerView
+    }
+    public func updateLabel(with text: String) {
+        label.text = text
     }
 
     override func viewWillAppear(_ animated: Bool) {

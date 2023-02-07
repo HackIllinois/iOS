@@ -83,7 +83,11 @@ class HILabel: UILabel {
         case .location:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.contentText
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                font = HIAppearance.Font.contentTextPad
+            } else {
+                font = HIAppearance.Font.contentText
+            }
 
         case .event:
             textHIColor = \.baseText
@@ -100,9 +104,9 @@ class HILabel: UILabel {
             font = HIAppearance.Font.eventTime
 
         case .eventType:
-            textHIColor = \.baseText
+            textHIColor = \.whiteText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.eventCategoryText
+            font = HIAppearance.Font.eventButtonText
 
         case .sponsor:
             textHIColor = \.baseText
@@ -150,7 +154,11 @@ class HILabel: UILabel {
         case .description:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.descriptionText
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                font = HIAppearance.Font.descriptionTextPad
+            } else {
+                font = HIAppearance.Font.descriptionText
+            }
             numberOfLines = 0
 
         case .cellDescription:
@@ -171,7 +179,7 @@ class HILabel: UILabel {
         case .welcomeTitle:
             textHIColor = \.loginSelectionText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.loginTitle
+            font = HIAppearance.Font.welcomeTitle
 
         case .backgroundTitle:
             textHIColor = \.baseText
@@ -273,7 +281,7 @@ class HILabel: UILabel {
             numberOfLines = 0
             
         case .onboardingTitle:
-            textHIColor = \.baseText
+            textHIColor = \.whiteText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.onboardingTitle
             textAlignment = .center
@@ -290,20 +298,29 @@ class HILabel: UILabel {
         case .leaderboardRank:
             textHIColor = \.leaderboardText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.leaderboardRank
-            layer.shadowOffset = CGSize(width: 2, height: 2)
-            layer.shadowRadius = 2.0
-            layer.shadowOpacity = 0.25
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                font = HIAppearance.Font.leaderboardRankPad
+            } else {
+                font = HIAppearance.Font.leaderboardRank
+            }
             
         case .leaderboardName:
             textHIColor = \.leaderboardText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.leaderboardPoints
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                font = HIAppearance.Font.leaderboardNamePad
+            } else {
+                font = HIAppearance.Font.leaderboardName
+            }
             
         case .leaderboardPoints:
             textHIColor = \.leaderboardText
             backgroundHIColor = \.pointsBackground
-            font = HIAppearance.Font.leaderboardPoints
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                font = HIAppearance.Font.leaderboardPointsPad
+            } else {
+                font = HIAppearance.Font.leaderboardPoints
+            }
             
         case .newTime:
             textHIColor = \.black
