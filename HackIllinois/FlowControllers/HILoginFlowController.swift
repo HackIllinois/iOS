@@ -131,7 +131,6 @@ private extension HILoginFlowController {
         loginSession?.presentationContextProvider = self
         loginSession?.start()
     }
-    
 
     private func exchangeOAuthCodeForAPIToken(buildingUser user: HIUser, profile: HIProfile, sender: HIBaseViewController) {
         HIAPI.AuthService.getAPIToken(provider: user.provider, code: user.oauthCode)

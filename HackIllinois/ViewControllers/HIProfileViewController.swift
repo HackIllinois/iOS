@@ -175,7 +175,7 @@ extension HIProfileViewController {
             .onCompletion { [weak self] result in
                 do {
                     let (apiAttendeeContainer, _) = try result.get()
-                    let dietaryRestrictions = apiAttendeeContainer.attendee.dietary ?? []
+                    self?.dietaryRestrictions = apiAttendeeContainer.attendee.dietary ?? []
                     DispatchQueue.main.async {
                         self?.updateProfile()
                     }

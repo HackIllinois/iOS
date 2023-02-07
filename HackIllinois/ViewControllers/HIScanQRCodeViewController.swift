@@ -71,7 +71,7 @@ extension HIScanQRCodeViewController {
                 currentUserIDlabel.text = "HELLLLLOo"
                 currentUserIDlabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
                 currentUserIDlabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
-                var staffButtonController = UIHostingController(rootView: HIStaffButtonView(observable: observable))
+                let staffButtonController = UIHostingController(rootView: HIStaffButtonView(observable: observable))
                 addChild(staffButtonController)
                 staffButtonController.view.backgroundColor = .clear
                 staffButtonController.view.frame = CGRect(x: 0, y: 50, width: Int(view.frame.maxX), height: 40)
@@ -348,7 +348,6 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         }
         let dataToDecode = Data(base64Encoded: stringtoDecode, options: [])
         let base64DecodedString = NSString(data: dataToDecode!, encoding: String.Encoding.utf8.rawValue)
-        
         var values: [String: AnyObject]?
         if let string = base64DecodedString {
             if let data = string.data(using: String.Encoding.utf8.rawValue, allowLossyConversion: true) {

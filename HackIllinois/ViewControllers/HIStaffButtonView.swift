@@ -40,7 +40,7 @@ struct HIStaffButtonView: View {
             getStaffEvents()
         }
     }
-    
+
     func getStaffEvents() {
         HIAPI.EventService.getStaffCheckInEvents()
             .onCompletion { result in
@@ -59,5 +59,5 @@ struct HIStaffButtonView: View {
 
 class HIStaffButtonViewObservable: ObservableObject {
     @Published var selectedEventId: String = ""
-    var onSelectEventId: (()->Void)!
+    var onSelectEventId: (() -> Void)!
 }
