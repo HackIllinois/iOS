@@ -298,17 +298,29 @@ class HILabel: UILabel {
         case .leaderboardRank:
             textHIColor = \.leaderboardText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.leaderboardRank
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                font = HIAppearance.Font.leaderboardRankPad
+            } else {
+                font = HIAppearance.Font.leaderboardRank
+            }
             
         case .leaderboardName:
             textHIColor = \.leaderboardText
             backgroundHIColor = \.clear
-            font = HIAppearance.Font.leaderboardName
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                font = HIAppearance.Font.leaderboardNamePad
+            } else {
+                font = HIAppearance.Font.leaderboardName
+            }
             
         case .leaderboardPoints:
             textHIColor = \.leaderboardText
             backgroundHIColor = \.pointsBackground
-            font = HIAppearance.Font.leaderboardPoints
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                font = HIAppearance.Font.leaderboardPointsPad
+            } else {
+                font = HIAppearance.Font.leaderboardPoints
+            }
             
         case .newTime:
             textHIColor = \.black
