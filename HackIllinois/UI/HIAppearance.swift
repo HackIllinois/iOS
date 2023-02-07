@@ -314,7 +314,8 @@ struct HIAppearance: Equatable {
         static let homeSegmentedTitle = UIFont(name: "MontserratRoman-Bold", size: 24)
         static let segmentedNumberText = UIFont(name: "MontserratRoman-SemiBold", size: 18)
        
-
+        static let QRCheckInFont = UIFont(name: "MontserratRoman-SemiBold", size: 14)
+        
         static let countdownText = UIFont(name: "MontserratRoman-Bold", size: 25)
         static let newCountdownText = UIFont(name: "MontserratRoman-Bold", size: 48)
         static let onboardingGetStartedText = UIFont(name: "MontserratRoman-SemiBold", size: 25)
