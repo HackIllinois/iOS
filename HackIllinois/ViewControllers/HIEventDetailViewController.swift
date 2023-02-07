@@ -47,7 +47,7 @@ class HIEventDetailViewController: HIBaseViewController {
     private let sponsorLabel = HILabel(style: .sponsor)
     private let timeImageView = UIImageView(image: UIImage(named: "Clock"))
     private let timeLabel = HILabel(style: .description)
-    private let locationLabel = HILabel(style:.location)
+    private let locationLabel = HILabel(style: .location)
     private let locationImageView = UIImageView(image: UIImage(named: "LocationSign"))
     private let descriptionLabel = HILabel(style: .detailText)
     let pointsView = HIView { (view) in
@@ -100,9 +100,11 @@ extension HIEventDetailViewController {
                     DispatchQueue.main.async {
                         sender.isActive.toggle()
                         event.favorite.toggle()
-                        event.favorite ?
-                        HILocalNotificationController.shared.scheduleNotification(for: event) :
-                        HILocalNotificationController.shared.unscheduleNotification(for: event)
+                        if event.favorite {
+                            HILocalNotificationController.shared.scheduleNotification(for: event)
+                        } else {
+                            HILocalNotificationController.shared.unscheduleNotification(for: event)
+                        }
                     }
                 case .failure(let error):
                     print(error, error.localizedDescription)
