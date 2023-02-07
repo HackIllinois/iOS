@@ -340,7 +340,7 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         let toDecode = string[1] as String
         var stringtoDecode: String = toDecode.replacingOccurrences(of: "-", with: "+") // 62nd char of encoding
         stringtoDecode = stringtoDecode.replacingOccurrences(of: "_", with: "/") // 63rd char of encoding
-        switch (stringtoDecode.utf16.count % 4) {
+        switch stringtoDecode.utf16.count % 4 {
         case 2: stringtoDecode = "\(stringtoDecode)=="
         case 3: stringtoDecode = "\(stringtoDecode)="
         default: // nothing to do stringtoDecode can stay the same
@@ -351,7 +351,7 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         var values: [String: AnyObject]?
         if let string = base64DecodedString {
             if let data = string.data(using: String.Encoding.utf8.rawValue, allowLossyConversion: true) {
-                values = try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as? [String : AnyObject]
+                values = try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: AnyObject]
             }
         }
         return values
