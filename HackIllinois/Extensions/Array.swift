@@ -19,4 +19,3 @@ extension Array where Element == UInt8 {
         return zip(pre, post).map(^)
     }
 }
-
