@@ -135,7 +135,6 @@
 		D134D30F296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D134D30E296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf */; };
 		D14D3AE3295FBDA200EB7995 /* HIBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */; };
 		D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A309BB2211175200CBA351 /* PassKit.framework */; };
-		E170038A29679D08009B99A8 /* HIProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E170038929679D08009B99A8 /* HIProfileCardView.swift */; };
 		DF3706382925DDAA000B4278 /* GoogleMapsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706372925DDAA000B4278 /* GoogleMapsBase.framework */; };
 		DF37063B2925DDB8000B4278 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706392925DDB7000B4278 /* GoogleMaps.framework */; };
 		DF37063C2925DDB8000B4278 /* GoogleMapsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37063A2925DDB8000B4278 /* GoogleMapsCore.framework */; };
@@ -156,7 +155,9 @@
 		DF37065A2925DE57000B4278 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706592925DE57000B4278 /* QuartzCore.framework */; };
 		DF37065C2925DE5D000B4278 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37065B2925DE5D000B4278 /* SystemConfiguration.framework */; };
 		DF37065E2925DE66000B4278 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37065D2925DE66000B4278 /* UIKit.framework */; };
+		DF5B27C5299197E80034A8B9 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5B27C4299197E80034A8B9 /* Array.swift */; };
 		DFA502C429823A680088D0DF /* Hack_PopcornCart_Transparent.json in Resources */ = {isa = PBXBuildFile; fileRef = DFA502C329823A680088D0DF /* Hack_PopcornCart_Transparent.json */; };
+		E170038A29679D08009B99A8 /* HIProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E170038929679D08009B99A8 /* HIProfileCardView.swift */; };
 		E1E4A5D9291C9BF800780BA1 /* HICarouselSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E4A5D6291C9BF700780BA1 /* HICarouselSwiftUIView.swift */; };
 		E1E4A5DA291C9BF800780BA1 /* HIOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E4A5D7291C9BF700780BA1 /* HIOnboardingView.swift */; };
 		E1E4A5DB291C9BF800780BA1 /* HIOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E4A5D8291C9BF700780BA1 /* HIOnboardingViewModel.swift */; };
@@ -335,7 +336,6 @@
 		D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIBannerViewController.swift; sourceTree = "<group>"; };
 		D3A309BA221116A600CBA351 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };
 		D3A309BB2211175200CBA351 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
-		E170038929679D08009B99A8 /* HIProfileCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIProfileCardView.swift; sourceTree = "<group>"; };
 		DF3706372925DDAA000B4278 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsBase.framework; sourceTree = "<group>"; };
 		DF3706392925DDB7000B4278 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		DF37063A2925DDB8000B4278 /* GoogleMapsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsCore.framework; sourceTree = "<group>"; };
@@ -356,7 +356,9 @@
 		DF3706592925DE57000B4278 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		DF37065B2925DE5D000B4278 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DF37065D2925DE66000B4278 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DF5B27C4299197E80034A8B9 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		DFA502C329823A680088D0DF /* Hack_PopcornCart_Transparent.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Hack_PopcornCart_Transparent.json; sourceTree = "<group>"; };
+		E170038929679D08009B99A8 /* HIProfileCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIProfileCardView.swift; sourceTree = "<group>"; };
 		E1E4A5D6291C9BF700780BA1 /* HICarouselSwiftUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HICarouselSwiftUIView.swift; sourceTree = "<group>"; };
 		E1E4A5D7291C9BF700780BA1 /* HIOnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIOnboardingView.swift; sourceTree = "<group>"; };
 		E1E4A5D8291C9BF700780BA1 /* HIOnboardingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIOnboardingViewModel.swift; sourceTree = "<group>"; };
@@ -593,6 +595,7 @@
 				9552D92721758E4C00A8C869 /* UIView+AutoLayout.swift */,
 				95CA922F201E60D300C46037 /* UIImage+QRCode.swift */,
 				1C63EE6827680DF500D60653 /* CIImage.swift */,
+				DF5B27C4299197E80034A8B9 /* Array.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1033,6 +1036,7 @@
 				9515E43722093E1300BCAF92 /* HIEventScannerViewController.swift in Sources */,
 				95A7D28F203D4F54005EAEAF /* HIEventCell.swift in Sources */,
 				ACAA717626017EC4000F42B0 /* HICollectionViewFlowLayout.swift in Sources */,
+				DF5B27C5299197E80034A8B9 /* Array.swift in Sources */,
 				E170038A29679D08009B99A8 /* HIProfileCardView.swift in Sources */,
 				95C3BE302008B99C0008ED79 /* HIBaseViewController.swift in Sources */,
 				BFB1FD3E26105EA400500008 /* HIEditProfileCell.swift in Sources */,
