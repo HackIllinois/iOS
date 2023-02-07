@@ -35,7 +35,7 @@ struct HIProfileCardView: View {
         ScrollView {
             ZStack {
                 Rectangle()
-                    .frame(width: isIpad ? UIScreen.main.bounds.width - 56 * 2 : UIScreen.main.bounds.width - 32 * 2 ,
+                    .frame(width: isIpad ? UIScreen.main.bounds.width - 56 * 2 : UIScreen.main.bounds.width - 32 * 2,
                            height: isIpad ? 978 : 569)
                     .cornerRadius(UIDevice.current.userInterfaceIdiom == .pad ? 40 : 20)
                     .foregroundColor(Color(background))
@@ -154,7 +154,7 @@ struct HIProfileCardView: View {
     }
 
     func dietString(diet: String) -> String {
-        switch (diet) {
+        switch diet {
         case "Vegetarian":
             return "Vegetarian"
         case "Vegan":
@@ -175,7 +175,7 @@ struct HIProfileCardView: View {
     }
 
     func dietColor(diet: String) -> UIColor {
-        switch (diet) {
+        switch diet {
         case "Vegetarian":
             return (\HIAppearance.profileCardVegetarian).value
         case "Vegan":

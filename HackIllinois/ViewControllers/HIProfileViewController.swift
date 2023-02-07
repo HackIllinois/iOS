@@ -75,7 +75,7 @@ extension HIProfileViewController {
                                                                                 foodWave: profile.foodWave,
                                                                                 id: profile.id
                                                                                ))
-        
+
         addChild(profileCardController!)
         profileCardController!.view.backgroundColor = .clear
         profileCardController!.view.frame = view.bounds
