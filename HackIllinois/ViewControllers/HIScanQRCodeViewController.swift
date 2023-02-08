@@ -207,7 +207,6 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         guard respondingToQRCodeFound else { return }
         let meta = metadataObjects.first as? AVMetadataMachineReadableCodeObject
         let code = meta?.stringValue ?? ""
-
         guard let user = HIApplicationStateController.shared.user else { return }
         if user.roles.contains(.staff) {
             if let qrInfo = decode(code) {
@@ -351,7 +350,7 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         var values: [String: AnyObject]?
         if let string = base64DecodedString {
             if let data = string.data(using: String.Encoding.utf8.rawValue, allowLossyConversion: true) {
-                values = try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: AnyObject]
+                values = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: AnyObject]
             }
         }
         return values
