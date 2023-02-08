@@ -26,7 +26,7 @@ struct HIProfileCardView: View {
     @State var flipped: Bool = false
     @State var ticketRotation = 0.0
     @State var contentRotation = 0.0
-    @State var flipping = false
+    @State var flipping = false // test
 
     var body: some View {
         ScrollView {
