@@ -11,6 +11,7 @@
 //
 
 import SwiftUI
+import HIAPI
 
 struct HIProfileCardView: View {
     let firstName: String
@@ -18,7 +19,7 @@ struct HIProfileCardView: View {
     let dietaryRestrictions: [String]
     let points: Int
     let tier: String
-    let wave: String
+    let foodWave: Int
     let background = (\HIAppearance.profileCardBackground).value
     let baseText = (\HIAppearance.profileBaseText).value
     let id: String
@@ -27,12 +28,14 @@ struct HIProfileCardView: View {
     @State var ticketRotation = 0.0
     @State var contentRotation = 0.0
     @State var flipping = false
+    @State var startFetchingQR = false
+    @State var qrInfo = ""
 
     var body: some View {
         ScrollView {
             ZStack {
                 Rectangle()
-                    .frame(width: isIpad ? UIScreen.main.bounds.width - 56 * 2 : UIScreen.main.bounds.width - 32 * 2 ,
+                    .frame(width: isIpad ? UIScreen.main.bounds.width - 56 * 2 : UIScreen.main.bounds.width - 32 * 2,
                            height: isIpad ? 978 : 569)
                     .cornerRadius(UIDevice.current.userInterfaceIdiom == .pad ? 40 : 20)
                     .foregroundColor(Color(background))
@@ -60,13 +63,13 @@ struct HIProfileCardView: View {
                                     .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 12)))
                                     .foregroundColor(Color(baseText))
                             )
-                        
+
                         Rectangle()
                             .frame(width: isIpad ? 136 : 68, height: isIpad ? 48 : 24)
                             .cornerRadius(isIpad ? 40 : 20)
                             .foregroundColor(.white)
                             .overlay(
-                                Text("Wave \(wave)")
+                                Text("Wave \(foodWave)")
                                     .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 12)))
                                     .foregroundColor(Color(baseText))
                             )
@@ -78,17 +81,15 @@ struct HIProfileCardView: View {
                                     .resizable()
                                     .frame(width: isIpad ? 298 : 190.6, height: isIpad ? 544 : 347.67)
                                     .padding(isIpad ? 48 : 24)
-                                Image(uiImage: UIImage(data: getQRCodeDate(text: id)!)!)
+                                Image(uiImage: UIImage(data: getQRCodeDate(text: qrInfo)!)!)
                                     .resizable()
                                     .frame(width: isIpad ? 200 : 132, height: isIpad ? 200 : 132)
-                                
                             }
                         } else {
                             Image("TicketFront")
                                 .resizable()
                                 .frame(width: isIpad ? 298 : 190.6, height: isIpad ? 544 : 347.67)
                                 .padding(isIpad ? 48 : 24)
-                            
                         }
                     }
                     .rotation3DEffect(.degrees(contentRotation), axis: (x: 0, y: 1, z: 0))
@@ -98,7 +99,7 @@ struct HIProfileCardView: View {
                         }
                     }
                     .rotation3DEffect(.degrees(ticketRotation), axis: (x: 0, y: 1, z: 0))
-                    
+
                     VStack(spacing: isIpad ? 32 : 16) {
                         Text("Dietary Restrictions")
                             .font(Font(HIAppearance.Font.profileDietaryRestrictions ?? .systemFont(ofSize: 16)))
@@ -120,7 +121,7 @@ struct HIProfileCardView: View {
                                         .cornerRadius(isIpad ? 40 : 20)
                                         .foregroundColor(Color(dietColor(diet: diet)))
                                         .overlay(
-                                            Text(diet)
+                                            Text(dietString(diet: diet))
                                                 .font(Font(HIAppearance.Font.profileDietaryRestrictionsLabel ?? .systemFont(ofSize: 12)))
                                                 .foregroundColor(Color(baseText))
                                         )
@@ -132,10 +133,16 @@ struct HIProfileCardView: View {
             }
             .padding(.top, 24)
         }
+        .onAppear {
+            startFetchingQR = true
+            QRFetchLoop()
+        }
+        .onDisappear {
+            startFetchingQR = false
+        }
     }
-    
+
     func getQRCodeDate(text: String) -> Data? {
-        print(text)
         guard let filter = CIFilter(name: "CIQRCodeGenerator") else { return nil }
         let data = text.data(using: .ascii, allowLossyConversion: false)
         filter.setValue(data, forKey: "inputMessage")
@@ -145,9 +152,30 @@ struct HIProfileCardView: View {
         let uiimage = UIImage(ciImage: scaledCIImage)
         return uiimage.pngData()!
     }
-    
+
+    func dietString(diet: String) -> String {
+        switch diet {
+        case "Vegetarian":
+            return "Vegetarian"
+        case "Vegan":
+            return "Vegan"
+        case "Gluten-Free":
+            return "Gluten-Free"
+        case "Lactose-Intolerant":
+            return "Dairy Free"
+        case "Other":
+            return "Other"
+        case "None":
+            return "None"
+        case "":
+            return ""
+        default:
+            return ""
+        }
+    }
+
     func dietColor(diet: String) -> UIColor {
-        switch (diet) {
+        switch diet {
         case "Vegetarian":
             return (\HIAppearance.profileCardVegetarian).value
         case "Vegan":
@@ -166,7 +194,7 @@ struct HIProfileCardView: View {
             return (\HIAppearance.profileCardNone).value
         }
     }
-    
+
     func flipFlashcard() {
         let animationTime = 0.5
         flipping = true
@@ -176,10 +204,37 @@ struct HIProfileCardView: View {
         }
         withAnimation(Animation.linear(duration: 0.001).delay(animationTime / 2)) {
             contentRotation += 180
-            
             flipped.toggle()
         }
-    }}
+    }
+
+    func QRFetchLoop() {
+        if startFetchingQR {
+            getQRInfo()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
+                QRFetchLoop()
+            }
+        }
+    }
+
+    func getQRInfo() {
+        guard let user = HIApplicationStateController.shared.user else { return }
+
+        HIAPI.UserService.getQR()
+            .onCompletion { result in
+                do {
+                    let (qr, _) = try result.get()
+                    DispatchQueue.main.async {
+                        self.qrInfo = qr.qrInfo
+                    }
+                } catch {
+                    print("An error has occurred \(error)")
+                }
+            }
+            .authorize(with: user)
+            .launch()
+    }
+}
 
 struct HIProfileCardView_Previews: PreviewProvider {
     static var previews: some View {
@@ -188,7 +243,7 @@ struct HIProfileCardView_Previews: PreviewProvider {
                           dietaryRestrictions: ["vegetarian", "nopeanut"],
                           points: 100,
                           tier: "no tier",
-                          wave: "4",
+                          foodWave: 1,
                           id: "https://www.hackillinois.org"
         )
     }

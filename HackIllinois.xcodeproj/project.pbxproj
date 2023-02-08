@@ -155,6 +155,7 @@
 		DF37065A2925DE57000B4278 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706592925DE57000B4278 /* QuartzCore.framework */; };
 		DF37065C2925DE5D000B4278 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37065B2925DE5D000B4278 /* SystemConfiguration.framework */; };
 		DF37065E2925DE66000B4278 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37065D2925DE66000B4278 /* UIKit.framework */; };
+		E1BF5E7A298B462F00A98390 /* HIStaffButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BF5E79298B462F00A98390 /* HIStaffButtonView.swift */; };
 		DF5B27C5299197E80034A8B9 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5B27C4299197E80034A8B9 /* Array.swift */; };
 		DFA502C429823A680088D0DF /* Hack_PopcornCart_Transparent.json in Resources */ = {isa = PBXBuildFile; fileRef = DFA502C329823A680088D0DF /* Hack_PopcornCart_Transparent.json */; };
 		E170038A29679D08009B99A8 /* HIProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E170038929679D08009B99A8 /* HIProfileCardView.swift */; };
@@ -356,6 +357,7 @@
 		DF3706592925DE57000B4278 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		DF37065B2925DE5D000B4278 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DF37065D2925DE66000B4278 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E1BF5E79298B462F00A98390 /* HIStaffButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIStaffButtonView.swift; sourceTree = "<group>"; };
 		DF5B27C4299197E80034A8B9 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		DFA502C329823A680088D0DF /* Hack_PopcornCart_Transparent.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Hack_PopcornCart_Transparent.json; sourceTree = "<group>"; };
 		E170038929679D08009B99A8 /* HIProfileCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIProfileCardView.swift; sourceTree = "<group>"; };
@@ -571,6 +573,7 @@
 				98CA2A3D25C899CF003E842A /* HIProfileViewController.swift */,
 				E170038929679D08009B99A8 /* HIProfileCardView.swift */,
 				60EAF98A273B1AC4002CD205 /* HIScanQRCodeViewController.swift */,
+				E1BF5E79298B462F00A98390 /* HIStaffButtonView.swift */,
 				1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */,
 				3FBFA7AA27335554001FFF28 /* HILeaderboardListViewController.swift */,
 				3FBFA7B427335ABC001FFF28 /* HILeaderboardViewController.swift */,
@@ -1071,6 +1074,7 @@
 				AC5E9FE326195CCF00674FCF /* HIEventType.swift in Sources */,
 				AC3B621425E86053002386A2 /* Profile+CoreDataProperties.swift in Sources */,
 				9564E02F2218CE6F003A8EEB /* HIMapsDataSource.swift in Sources */,
+				E1BF5E7A298B462F00A98390 /* HIStaffButtonView.swift in Sources */,
 				953199C91FC25CA0009F2AA1 /* HICoreDataController.swift in Sources */,
 				95A7D28D203D4F54005EAEAF /* Identifiable.swift in Sources */,
 				9521A6A820191590009059C6 /* HIEventDataSource.swift in Sources */,

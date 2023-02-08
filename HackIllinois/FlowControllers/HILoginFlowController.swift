@@ -131,7 +131,6 @@ private extension HILoginFlowController {
         loginSession?.presentationContextProvider = self
         loginSession?.start()
     }
-    
 
     private func exchangeOAuthCodeForAPIToken(buildingUser user: HIUser, profile: HIProfile, sender: HIBaseViewController) {
         HIAPI.AuthService.getAPIToken(provider: user.provider, code: user.oauthCode)
@@ -243,7 +242,6 @@ private extension HILoginFlowController {
                 profile.firstName = apiProfile.firstName
                 profile.lastName = apiProfile.lastName
                 profile.points = apiProfile.points
-                profile.timezone = apiProfile.timezone
                 profile.discord = apiProfile.discord
                 profile.avatarUrl = apiProfile.avatarUrl
                 DispatchQueue.main.async {

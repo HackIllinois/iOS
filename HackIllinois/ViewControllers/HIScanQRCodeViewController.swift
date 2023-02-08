@@ -16,6 +16,7 @@ import AVKit
 import CoreData
 import APIManager
 import HIAPI
+import SwiftUI
 
 class HIScanQRCodeViewController: HIBaseViewController {
     private var captureSession: AVCaptureSession?
@@ -29,10 +30,8 @@ class HIScanQRCodeViewController: HIBaseViewController {
     private var previewLayer: AVCaptureVideoPreviewLayer?
     let hapticGenerator = UINotificationFeedbackGenerator()
     private let pickerView = UIPickerView()
-
     private var loadFailed = false
     var respondingToQRCodeFound = true
-
     private let closeButton = HIButton {
         $0.tintHIColor = \.action
         $0.backgroundHIColor = \.clear
@@ -40,14 +39,17 @@ class HIScanQRCodeViewController: HIBaseViewController {
         $0.baseImage = #imageLiteral(resourceName: "DarkCloseButton")
     }
     private let errorView = HIErrorView(style: .codePopup)
+    private var selectedEventID = ""
+    private let currentUserIDlabel = HILabel(style: .detailTitle)
 }
 
 // MARK: - UIViewController
 extension HIScanQRCodeViewController {
     override func loadView() {
         super.loadView()
-        if HIApplicationStateController.shared.isGuest {
-//            let background = #imageLiteral(resourceName: "ProfileBackground")
+        guard let user = HIApplicationStateController.shared.user else { return }
+        if HIApplicationStateController.shared.isGuest &&  !user.roles.contains(.staff) {
+            let background = #imageLiteral(resourceName: "ProfileBackground")
             let imageView: UIImageView = UIImageView(frame: view.bounds)
             view.addSubview(imageView)
             view.sendSubviewToBack(imageView)
@@ -59,6 +61,23 @@ extension HIScanQRCodeViewController {
             containerView.constrain(to: view, trailingInset: 0, leadingInset: 0)
             containerView.addSubview(previewView)
             setupCaptureSession()
+            if user.roles.contains(.staff) {
+                let observable = HIStaffButtonViewObservable()
+                observable.onSelectEventId = { [weak self] in
+                    print(observable.selectedEventId)
+                    self?.selectedEventID = observable.selectedEventId
+                }
+                view.addSubview(currentUserIDlabel)
+                currentUserIDlabel.text = "HELLLLLOo"
+                currentUserIDlabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+                currentUserIDlabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
+                let staffButtonController = UIHostingController(rootView: HIStaffButtonView(observable: observable))
+                addChild(staffButtonController)
+                staffButtonController.view.backgroundColor = .clear
+                staffButtonController.view.frame = CGRect(x: 0, y: 50, width: Int(view.frame.maxX), height: 40)
+                view.addSubview(staffButtonController.view)
+                staffButtonController.view.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            }
         }
         view.addSubview(closeButton)
         closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
@@ -142,22 +161,19 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
     func setupCaptureSession() {
         captureSession = AVCaptureSession()
         let metadataOutput = AVCaptureMetadataOutput()
-
         guard
             let captureSession = captureSession,
             let videoCaptureDevice = AVCaptureDevice.default(for: .video),
             let videoInput = try? AVCaptureDeviceInput(device: videoCaptureDevice),
             captureSession.canAddInput(videoInput),
             captureSession.canAddOutput(metadataOutput) else {
-                loadFailed = true
-                return
+            loadFailed = true
+            return
         }
-
         captureSession.addInput(videoInput)
         captureSession.addOutput(metadataOutput)
         metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
         metadataOutput.metadataObjectTypes = [.qr]
-
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.videoGravity = .resizeAspectFill
         self.previewLayer = previewLayer
@@ -167,12 +183,9 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
 
     func setFrameForPreviewLayer() {
         guard let previewLayer = previewLayer else { return }
-
         previewLayer.frame = previewView.layer.bounds
-
         guard previewLayer.connection?.isVideoOrientationSupported == true else { return }
-
-        #warning("Not Tested")
+#warning("Not Tested")
         let interfaceOrientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation
         switch interfaceOrientation {
         case .portrait, .unknown:
@@ -194,60 +207,152 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         guard respondingToQRCodeFound else { return }
         let meta = metadataObjects.first as? AVMetadataMachineReadableCodeObject
         let code = meta?.stringValue ?? ""
-        respondingToQRCodeFound = false
-        HIAPI.EventService.checkIn(code: code)
-            .onCompletion { result in
-                do {
-                    let (codeResult, _) = try result.get()
-                    let newPoints = codeResult.newPoints
-                    let status = codeResult.status
-                    DispatchQueue.main.async {
-                        var alertTitle = ""
-                        var alertMessage = ""
-                        switch status {
-                        case "Success":
-                            alertTitle = "Success!"
-                            alertMessage = "You received \(newPoints) points!"
-                        case "InvalidCode":
-                            alertTitle = "Error!"
-                            alertMessage = "This code doesn't seem to be correct."
-                            self.respondingToQRCodeFound = true
-                        case "InvalidTime":
-                            alertTitle = "Error!"
-                            alertMessage = "Make sure you have the right time."
-                            self.respondingToQRCodeFound = true
-                        case "AlreadyCheckedIn":
-                            alertTitle = "Error!"
-                            alertMessage = "Looks like you're already checked in."
-                            self.respondingToQRCodeFound = true
-                        default:
-                            alertTitle = "Error!"
-                            alertMessage = "Something isn't quite right."
-                            self.respondingToQRCodeFound = true
-                        }
-                        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-                        if alertTitle == "Success!" {
-                            alert.addAction(
-                                UIAlertAction(title: "OK", style: .default, handler: { _ in
-                                    self.dismiss(animated: true, completion: nil)
-                                    //Dismisses view controller
-                                    self.didSelectCloseButton(self.closeButton)
-                                    NotificationCenter.default.post(name: .qrCodeSuccessfulScan, object: nil)
-                            }))
-                        } else {
-                            alert.addAction(
-                                UIAlertAction(title: "OK", style: .default, handler: { _ in
-                                    self.registerForKeyboardNotifications()
-                            }))
-                        }
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                } catch {
-                    print(error, error.localizedDescription)
+        guard let user = HIApplicationStateController.shared.user else { return }
+        if user.roles.contains(.staff) {
+            if let qrInfo = decode(code) {
+                if let userId = qrInfo["userId"] {
+                    currentUserIDlabel.text = userId as? String
                 }
-                sleep(2)
             }
-            .authorize(with: HIApplicationStateController.shared.user)
-            .launch()
+            // for anything not food
+            /*
+            if let range = code.range(of: "userToken=") {
+                let userToken = code[range.upperBound...]
+                respondingToQRCodeFound = false
+                HIAPI.EventService.staffCheckIn(userToken: String(userToken), eventId: selectedEventID)
+                    .onCompletion { result in
+                        do {
+                            let (codeResult, _) = try result.get()
+                            let status = codeResult.status
+                            DispatchQueue.main.async {
+                                var alertTitle = ""
+                                var alertMessage = ""
+                                switch status {
+                                case "Success":
+                                    alertTitle = "Success!"
+                                    alertMessage = "Success!"
+                                case "InvalidEventId":
+                                    alertTitle = "Error!"
+                                    alertMessage = "Invalid Event ID"
+                                    self.respondingToQRCodeFound = true
+                                case "BadUserToken":
+                                    alertTitle = "Error!"
+                                    alertMessage = "BadUserToken"
+                                    self.respondingToQRCodeFound = true
+                                case "AlreadyCheckedIn":
+                                    alertTitle = "Error!"
+                                    alertMessage = "Looks like you're already checked in."
+                                    self.respondingToQRCodeFound = true
+                                default:
+                                    alertTitle = "Error!"
+                                    alertMessage = "Something isn't quite right."
+                                    self.respondingToQRCodeFound = true
+                                }
+                                let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+                                if alertTitle == "Success!" {
+                                    alert.addAction(
+                                        UIAlertAction(title: "OK", style: .default, handler: { _ in
+                                            self.dismiss(animated: true, completion: nil)
+                                            //Dismisses view controller
+                                            self.didSelectCloseButton(self.closeButton)
+                                            NotificationCenter.default.post(name: .qrCodeSuccessfulScan, object: nil)
+                                        }))
+                                } else {
+                                    alert.addAction(
+                                        UIAlertAction(title: "OK", style: .default, handler: { _ in
+                                            self.registerForKeyboardNotifications()
+                                        }))
+                                }
+                                self.present(alert, animated: true, completion: nil)
+                            }
+                        } catch {
+                            print(error, error.localizedDescription)
+                        }
+                        sleep(2)
+                    }
+                    .authorize(with: HIApplicationStateController.shared.user)
+                    .launch()
+            }
+             */
+        } else {
+            respondingToQRCodeFound = false
+            HIAPI.EventService.checkIn(code: code)
+                .onCompletion { result in
+                    do {
+                        let (codeResult, _) = try result.get()
+                        let newPoints = codeResult.newPoints
+                        let status = codeResult.status
+                        DispatchQueue.main.async {
+                            var alertTitle = ""
+                            var alertMessage = ""
+                            switch status {
+                            case "Success":
+                                alertTitle = "Success!"
+                                alertMessage = "You received \(newPoints) points!"
+                            case "InvalidCode":
+                                alertTitle = "Error!"
+                                alertMessage = "This code doesn't seem to be correct."
+                                self.respondingToQRCodeFound = true
+                            case "InvalidTime":
+                                alertTitle = "Error!"
+                                alertMessage = "Make sure you have the right time."
+                                self.respondingToQRCodeFound = true
+                            case "AlreadyCheckedIn":
+                                alertTitle = "Error!"
+                                alertMessage = "Looks like you're already checked in."
+                                self.respondingToQRCodeFound = true
+                            default:
+                                alertTitle = "Error!"
+                                alertMessage = "Something isn't quite right."
+                                self.respondingToQRCodeFound = true
+                            }
+                            let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+                            if alertTitle == "Success!" {
+                                alert.addAction(
+                                    UIAlertAction(title: "OK", style: .default, handler: { _ in
+                                        self.dismiss(animated: true, completion: nil)
+                                        //Dismisses view controller
+                                        self.didSelectCloseButton(self.closeButton)
+                                        NotificationCenter.default.post(name: .qrCodeSuccessfulScan, object: nil)
+                                    }))
+                            } else {
+                                alert.addAction(
+                                    UIAlertAction(title: "OK", style: .default, handler: { _ in
+                                        self.registerForKeyboardNotifications()
+                                    }))
+                            }
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    } catch {
+                        print(error, error.localizedDescription)
+                    }
+                    sleep(2)
+                }
+                .authorize(with: HIApplicationStateController.shared.user)
+                .launch()
+        }
+    }
+
+    func decode(_ token: String) -> [String: AnyObject]? {
+        let string = token.components(separatedBy: ".")
+        if string.count == 1 { return nil }
+        let toDecode = string[1] as String
+        var stringtoDecode: String = toDecode.replacingOccurrences(of: "-", with: "+") // 62nd char of encoding
+        stringtoDecode = stringtoDecode.replacingOccurrences(of: "_", with: "/") // 63rd char of encoding
+        switch stringtoDecode.utf16.count % 4 {
+        case 2: stringtoDecode = "\(stringtoDecode)=="
+        case 3: stringtoDecode = "\(stringtoDecode)="
+        default: // nothing to do stringtoDecode can stay the same
+            print("")
+        }
+        let dataToDecode = Data(base64Encoded: stringtoDecode, options: [])
+        let base64DecodedString = NSString(data: dataToDecode!, encoding: String.Encoding.utf8.rawValue)
+        var values: [String: AnyObject]?
+        if let string = base64DecodedString {
+            if let data = string.data(using: String.Encoding.utf8.rawValue, allowLossyConversion: true) {
+                values = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: AnyObject]
+            }
+        }
+        return values
     }
 }

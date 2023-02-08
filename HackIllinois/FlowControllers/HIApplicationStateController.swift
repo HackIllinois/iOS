@@ -14,7 +14,6 @@ import Foundation
 import UIKit
 import SwiftUI
 import Keychain
-import SwiftUI
 
 class HIApplicationStateController {
     static var shared = HIApplicationStateController()
@@ -83,7 +82,6 @@ extension HIApplicationStateController {
         viewControllers.append(HIScheduleViewController())
         viewControllers.append(HIScanQRCodeViewController())
         viewControllers.append(HIProfileViewController())
-        
         viewControllers.append(HILeaderboardViewController())
         return viewControllers
     }

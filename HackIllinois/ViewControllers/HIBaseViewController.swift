@@ -113,7 +113,7 @@ extension HIBaseViewController {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 30))
         view.bounds = view.bounds.offsetBy(dx: -24, dy: 0)
         view.addSubview(label)
-        
+
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: view)
         self.navigationItem.leftItemsSupplementBackButton = true
     }

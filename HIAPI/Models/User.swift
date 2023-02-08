@@ -93,6 +93,11 @@ fileprivate extension Optional where Wrapped == String {
     }
 }
 
+public struct QRData: Codable, APIReturnable {
+    public let id: String
+    public let qrInfo: String
+}
+
 public struct DietaryRestrictions: OptionSet, Codable, APIReturnable {
     public let rawValue: Int
 
