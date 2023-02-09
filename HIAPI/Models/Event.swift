@@ -23,7 +23,17 @@ public struct EventContainer: Decodable, APIReturnable {
     }
 }
 
-public struct Event: Codable {
+public struct StaffEventContainer: Decodable, APIReturnable {
+    public let events: [StaffEvent]
+
+    public init(from data: Data) throws {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
+        self = try decoder.decode(StaffEventContainer.self, from: data)
+    }
+}
+
+public struct StaffEvent: Codable {
     internal enum CodingKeys: String, CodingKey {
         case id
         case endTime
@@ -52,6 +62,34 @@ public struct Event: Codable {
     public let isAsync: Bool
     public let isPrivate: Bool // only shows for a staff ... so get event specific role?
     public let displayOnStaffCheckIn: Bool
+}
+
+
+public struct Event: Codable {
+    internal enum CodingKeys: String, CodingKey {
+        case id
+        case endTime
+        case eventType
+        case info = "description"
+        case locations
+        case name
+        case sponsor
+        case startTime
+        case points
+        case isAsync
+    }
+
+    public let id: String
+    public let endTime: Date
+    // Could be made into an enum with some coredata work
+    public let eventType: String
+    public let info: String
+    public let locations: [Location]
+    public let name: String
+    public let sponsor: String
+    public let startTime: Date
+    public let points: Int
+    public let isAsync: Bool
 }
 
 public struct Location: Codable {

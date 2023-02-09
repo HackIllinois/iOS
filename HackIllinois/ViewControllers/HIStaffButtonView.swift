@@ -10,7 +10,7 @@ import SwiftUI
 import HIAPI
 
 struct HIStaffButtonView: View {
-    @State var events = [HIAPI.Event]()
+    @State var events = [HIAPI.StaffEvent]()
     @State var highlightedID = ""
     @ObservedObject var observable: HIStaffButtonViewObservable
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
@@ -53,6 +53,7 @@ struct HIStaffButtonView: View {
                     print("An error has occurred \(error)")
                 }
             }
+            .authorize(with: HIApplicationStateController.shared.user)
             .launch()
     }
 }
