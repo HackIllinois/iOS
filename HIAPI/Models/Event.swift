@@ -46,12 +46,11 @@ public struct StaffEvent: Codable {
         case points
         case isAsync
         case isPrivate
-        case displayOnStaffCheckIn
+        case displayOnStaffCheckin
     }
 
-    public let id: String
+    public var id: String
     public let endTime: Date
-    // Could be made into an enum with some coredata work
     public let eventType: String
     public let info: String
     public let locations: [Location]
@@ -60,8 +59,8 @@ public struct StaffEvent: Codable {
     public let startTime: Date
     public let points: Int
     public let isAsync: Bool
-    public let isPrivate: Bool // only shows for a staff ... so get event specific role?
-    public let displayOnStaffCheckIn: Bool
+    public let isPrivate: Bool
+    public let displayOnStaffCheckin: Bool
 }
 
 

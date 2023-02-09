@@ -13,24 +13,25 @@ struct HIStaffButtonView: View {
     @State var events = [HIAPI.StaffEvent]()
     @State var highlightedID = ""
     @ObservedObject var observable: HIStaffButtonViewObservable
-    let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+    let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: columns, spacing: 20) {
+            LazyVGrid(columns: columns, spacing: 10) {
                 ForEach(events, id: \.id) { event in
                     Button(action: {
                         highlightedID = event.id
                         observable.selectedEventId = event.id
-                        observable.onSelectEventId
                     }) {
                         Text(event.name)
                             .foregroundColor(event.id == highlightedID ? .white : Color((\HIAppearance.profileBaseText).value))
                             .font(Font(HIAppearance.Font.QRCheckInFont ?? .systemFont(ofSize: 14)))
-                            .padding()
+                            .padding(4)
+                            .cornerRadius(10)
                             .background(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.white, lineWidth: 2)
                                     .background(event.id == highlightedID ? Color((\HIAppearance.profileBaseText).value) : Color.white)
+                                    .cornerRadius(10)
                             )
                     }
                 }
@@ -42,7 +43,7 @@ struct HIStaffButtonView: View {
     }
 
     func getStaffEvents() {
-        HIAPI.EventService.getStaffCheckInEvents()
+        HIAPI.EventService.getStaffCheckInEvents(authToken: HIApplicationStateController.shared.user?.token ?? "")
             .onCompletion { result in
                 do {
                     let (containedEvents, _) = try result.get()
@@ -53,12 +54,10 @@ struct HIStaffButtonView: View {
                     print("An error has occurred \(error)")
                 }
             }
-            .authorize(with: HIApplicationStateController.shared.user)
             .launch()
     }
 }
 
 class HIStaffButtonViewObservable: ObservableObject {
     @Published var selectedEventId: String = ""
-    var onSelectEventId: (() -> Void)!
 }
