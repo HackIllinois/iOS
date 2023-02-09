@@ -42,7 +42,6 @@ class HIScanQRCodeViewController: HIBaseViewController {
     private let errorView = HIErrorView(style: .codePopup)
     private var selectedEventID = ""
     private var cancellables = Set<AnyCancellable>()
-    
 }
 
 // MARK: - UIViewController
@@ -82,7 +81,7 @@ extension HIScanQRCodeViewController {
         closeButton.constrain(width: 60, height: 60)
         closeButton.imageView?.contentMode = .scaleToFill
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if loadFailed {
@@ -98,11 +97,11 @@ extension HIScanQRCodeViewController {
             }
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if captureSession?.isRunning == true {
@@ -111,7 +110,7 @@ extension HIScanQRCodeViewController {
             }
         }
     }
-    
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animate(alongsideTransition: { [weak self] (_) in
             self?.setFrameForPreviewLayer()
@@ -176,7 +175,7 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         setFrameForPreviewLayer()
         previewView.layer.addSublayer(previewLayer)
     }
-    
+
     func setFrameForPreviewLayer() {
         guard let previewLayer = previewLayer else { return }
         previewLayer.frame = previewView.layer.bounds
@@ -198,7 +197,92 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
             previewLayer.connection?.videoOrientation = .portrait
         }
     }
-    
+
+    func handleCheckInAlert(status: String, newPoints: Int) {
+        var alertTitle = ""
+        var alertMessage = ""
+        switch status {
+        case "Success":
+            alertTitle = "Success!"
+            alertMessage = "You received \(newPoints) points!"
+        case "InvalidCode":
+            alertTitle = "Error!"
+            alertMessage = "This code doesn't seem to be correct."
+            self.respondingToQRCodeFound = true
+        case "InvalidTime":
+            alertTitle = "Error!"
+            alertMessage = "Make sure you have the right time."
+            self.respondingToQRCodeFound = true
+        case "AlreadyCheckedIn":
+            alertTitle = "Error!"
+            alertMessage = "Looks like you're already checked in."
+            self.respondingToQRCodeFound = true
+        default:
+            alertTitle = "Error!"
+            alertMessage = "Something isn't quite right."
+            self.respondingToQRCodeFound = true
+        }
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        if alertTitle == "Success!" {
+            alert.addAction(
+                UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    self.dismiss(animated: true, completion: nil)
+                    //Dismisses view controller
+                    self.didSelectCloseButton(self.closeButton)
+                    NotificationCenter.default.post(name: .qrCodeSuccessfulScan, object: nil)
+                }))
+        } else {
+            alert.addAction(
+                UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    self.registerForKeyboardNotifications()
+                }))
+        }
+        self.present(alert, animated: true, completion: nil)
+
+    }
+
+    func handleStaffCheckInAlert(status: String) {
+        var alertTitle = ""
+        var alertMessage = ""
+        switch status {
+        case "Success":
+            alertTitle = "Success!"
+            alertMessage = "Success!"
+        case "InvalidEventId":
+            alertTitle = "Error!"
+            alertMessage = "Invalid Event ID"
+            self.respondingToQRCodeFound = true
+        case "BadUserToken":
+            alertTitle = "Error!"
+            alertMessage = "BadUserToken"
+            self.respondingToQRCodeFound = true
+        case "AlreadyCheckedIn":
+            alertTitle = "Error!"
+            alertMessage = "Looks like you're already checked in."
+            self.respondingToQRCodeFound = true
+        default:
+            alertTitle = "Error!"
+            alertMessage = "Something isn't quite right."
+            self.respondingToQRCodeFound = true
+        }
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        if alertTitle == "Success!" {
+            alert.addAction(
+                UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    self.dismiss(animated: true, completion: nil)
+                    //Dismisses view controller
+                    self.didSelectCloseButton(self.closeButton)
+                    NotificationCenter.default.post(name: .qrCodeSuccessfulScan, object: nil)
+                }))
+        } else {
+            alert.addAction(
+                UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    self.registerForKeyboardNotifications()
+                }))
+        }
+        self.present(alert, animated: true, completion: nil)
+    }
+
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         guard respondingToQRCodeFound else { return }
         let meta = metadataObjects.first as? AVMetadataMachineReadableCodeObject
@@ -213,47 +297,8 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                         .onCompletion { result in
                             do {
                                 let (codeResult, _) = try result.get()
-                                let status = codeResult.status
                                 DispatchQueue.main.async {
-                                    var alertTitle = ""
-                                    var alertMessage = ""
-                                    switch status {
-                                    case "Success":
-                                        alertTitle = "Success!"
-                                        alertMessage = "Success!"
-                                    case "InvalidEventId":
-                                        alertTitle = "Error!"
-                                        alertMessage = "Invalid Event ID"
-                                        self.respondingToQRCodeFound = true
-                                    case "BadUserToken":
-                                        alertTitle = "Error!"
-                                        alertMessage = "BadUserToken"
-                                        self.respondingToQRCodeFound = true
-                                    case "AlreadyCheckedIn":
-                                        alertTitle = "Error!"
-                                        alertMessage = "Looks like you're already checked in."
-                                        self.respondingToQRCodeFound = true
-                                    default:
-                                        alertTitle = "Error!"
-                                        alertMessage = "Something isn't quite right."
-                                        self.respondingToQRCodeFound = true
-                                    }
-                                    let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-                                    if alertTitle == "Success!" {
-                                        alert.addAction(
-                                            UIAlertAction(title: "OK", style: .default, handler: { _ in
-                                                self.dismiss(animated: true, completion: nil)
-                                                //Dismisses view controller
-                                                self.didSelectCloseButton(self.closeButton)
-                                                NotificationCenter.default.post(name: .qrCodeSuccessfulScan, object: nil)
-                                            }))
-                                    } else {
-                                        alert.addAction(
-                                            UIAlertAction(title: "OK", style: .default, handler: { _ in
-                                                self.registerForKeyboardNotifications()
-                                            }))
-                                    }
-                                    self.present(alert, animated: true, completion: nil)
+                                    self.handleStaffCheckInAlert(status: codeResult.status)
                                 }
                             } catch {
                                 print(error, error.localizedDescription)
@@ -270,48 +315,10 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                 .onCompletion { result in
                     do {
                         let (codeResult, _) = try result.get()
-                        let newPoints = codeResult.newPoints
+                        
                         let status = codeResult.status
                         DispatchQueue.main.async {
-                            var alertTitle = ""
-                            var alertMessage = ""
-                            switch status {
-                            case "Success":
-                                alertTitle = "Success!"
-                                alertMessage = "You received \(newPoints) points!"
-                            case "InvalidCode":
-                                alertTitle = "Error!"
-                                alertMessage = "This code doesn't seem to be correct."
-                                self.respondingToQRCodeFound = true
-                            case "InvalidTime":
-                                alertTitle = "Error!"
-                                alertMessage = "Make sure you have the right time."
-                                self.respondingToQRCodeFound = true
-                            case "AlreadyCheckedIn":
-                                alertTitle = "Error!"
-                                alertMessage = "Looks like you're already checked in."
-                                self.respondingToQRCodeFound = true
-                            default:
-                                alertTitle = "Error!"
-                                alertMessage = "Something isn't quite right."
-                                self.respondingToQRCodeFound = true
-                            }
-                            let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-                            if alertTitle == "Success!" {
-                                alert.addAction(
-                                    UIAlertAction(title: "OK", style: .default, handler: { _ in
-                                        self.dismiss(animated: true, completion: nil)
-                                        //Dismisses view controller
-                                        self.didSelectCloseButton(self.closeButton)
-                                        NotificationCenter.default.post(name: .qrCodeSuccessfulScan, object: nil)
-                                    }))
-                            } else {
-                                alert.addAction(
-                                    UIAlertAction(title: "OK", style: .default, handler: { _ in
-                                        self.registerForKeyboardNotifications()
-                                    }))
-                            }
-                            self.present(alert, animated: true, completion: nil)
+                            self.handleCheckInAlert(status: codeResult.status, newPoints: codeResult.newPoints)
                         }
                     } catch {
                         print(error, error.localizedDescription)
