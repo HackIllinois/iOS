@@ -260,14 +260,14 @@ class HILabel: UILabel {
             textAlignment = .center
 
         case .error:
-            textHIColor = \.baseText
+            textHIColor = \.white
             backgroundHIColor = \.clear
             font = HIAppearance.Font.detailSubtitle
             textAlignment = .center
             numberOfLines = 0
 
         case .codeError:
-            textHIColor = \.baseText
+            textHIColor = \.white
             backgroundHIColor = \.clear
             font = HIAppearance.Font.detailSubtitle
             textAlignment = .center

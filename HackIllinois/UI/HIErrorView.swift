@@ -60,11 +60,11 @@ class HIErrorView: HIView {
         errorLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         errorLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
 
-        self.addSubview(logoutButton)
+        /*self.addSubview(logoutButton)
         logoutButton.topAnchor.constraint(equalTo: errorLabel.bottomAnchor, constant: 10).isActive = true
         logoutButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         logoutButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5).isActive = true
-        logoutButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        logoutButton.heightAnchor.constraint(equalToConstant: 40).isActive = true*/
 
         translatesAutoresizingMaskIntoConstraints = false
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)
