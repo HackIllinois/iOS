@@ -51,9 +51,9 @@ extension HILeaderboardCell {
     }
 
     static func <- (lhs: HILeaderboardCell, rhs: LeaderboardProfile) {
-        let padConstant = 1.0
+        var padConstant = 1.0
         if UIDevice.current.userInterfaceIdiom == .pad {
-            let padConstant = 3.0
+            padConstant = 2.0
         }
         lhs.rankLabel.textAlignment = .center
         lhs.pointsLabel.textAlignment = .center
@@ -67,7 +67,7 @@ extension HILeaderboardCell {
         lhs.nameLabel.textAlignment = .left
 
         lhs.rankLabel.centerYAnchor.constraint(equalTo: lhs.cellView.centerYAnchor).isActive = true
-        lhs.rankLabel.leadingAnchor.constraint(equalTo: lhs.cellView.leadingAnchor, constant: 25).isActive = true
+        lhs.rankLabel.leadingAnchor.constraint(equalTo: lhs.cellView.leadingAnchor, constant: 25 * padConstant).isActive = true
         lhs.rankLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
 
         lhs.pointsLabel.centerYAnchor.constraint(equalTo: lhs.cellView.centerYAnchor).isActive = true

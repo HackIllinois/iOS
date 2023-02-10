@@ -69,10 +69,14 @@ extension HILeaderboardViewController {
 
     func layoutProfiles() {
         // Add tableView to handle leaderboard
+        var padConstant = 1.0
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            padConstant = 2.0
+        }
         let tableView = HITableView()
         view.addSubview(tableView)
         tableView.layer.cornerRadius = 8
-        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
+        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15 * padConstant).isActive = true
         tableView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.90).isActive = true
         tableView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.85).isActive = true
         tableView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
