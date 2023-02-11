@@ -24,7 +24,7 @@ struct HIProfileCardView: View {
     let baseText = (\HIAppearance.profileBaseText).value
     let id: String
     let isIpad = UIDevice.current.userInterfaceIdiom == .pad
-    @State var flipped: Bool = true
+    @State var flipped: Bool = false
     @State var ticketRotation = 0.0
     @State var contentRotation = 0.0
     @State var flipping = false
