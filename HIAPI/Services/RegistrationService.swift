@@ -21,4 +21,9 @@ public final class RegistrationService: BaseService {
     public static func getAttendee() -> APIRequest<AttendeeContainer> {
         return APIRequest<AttendeeContainer>(service: self, endpoint: "", method: .GET)
     }
+    
+    public static func getAttendeeRegistrationUserID(userID: String) -> APIRequest<Attendee> {
+        
+        return APIRequest<Attendee>(service: self, endpoint: "attendee/" + userID + "/", method: .GET)
+    }
 }
