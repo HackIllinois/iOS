@@ -24,7 +24,7 @@ struct HIProfileCardView: View {
     let baseText = (\HIAppearance.profileBaseText).value
     let id: String
     let isIpad = UIDevice.current.userInterfaceIdiom == .pad
-    @State var flipped: Bool = false
+    @State var flipped: Bool = true
     @State var ticketRotation = 0.0
     @State var contentRotation = 0.0
     @State var flipping = false
@@ -77,19 +77,19 @@ struct HIProfileCardView: View {
                     ZStack {
                         if flipped {
                             ZStack {
-                                Image("TicketBack")
+                                Image("TicketFront")
                                     .resizable()
                                     .frame(width: isIpad ? 298 : 190.6, height: isIpad ? 544 : 347.67)
                                     .padding(isIpad ? 48 : 24)
-                                Image(uiImage: UIImage(data: getQRCodeDate(text: qrInfo)!)!)
-                                    .resizable()
-                                    .frame(width: isIpad ? 200 : 132, height: isIpad ? 200 : 132)
                             }
                         } else {
-                            Image("TicketFront")
+                            Image("TicketBack")
                                 .resizable()
                                 .frame(width: isIpad ? 298 : 190.6, height: isIpad ? 544 : 347.67)
                                 .padding(isIpad ? 48 : 24)
+                            Image(uiImage: UIImage(data: getQRCodeDate(text: qrInfo)!)!)
+                                .resizable()
+                                .frame(width: isIpad ? 200 : 132, height: isIpad ? 200 : 132)
                         }
                     }
                     .rotation3DEffect(.degrees(contentRotation), axis: (x: 0, y: 1, z: 0))
@@ -219,7 +219,6 @@ struct HIProfileCardView: View {
 
     func getQRInfo() {
         guard let user = HIApplicationStateController.shared.user else { return }
-
         HIAPI.UserService.getQR()
             .onCompletion { result in
                 do {

@@ -51,6 +51,10 @@ extension HILeaderboardCell {
     }
 
     static func <- (lhs: HILeaderboardCell, rhs: LeaderboardProfile) {
+        var padConstant = 1.0
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            padConstant = 2.0
+        }
         lhs.rankLabel.textAlignment = .center
         lhs.pointsLabel.textAlignment = .center
         lhs.pointsLabel.backgroundHIColor = \.pointsBackground
@@ -63,7 +67,7 @@ extension HILeaderboardCell {
         lhs.nameLabel.textAlignment = .left
 
         lhs.rankLabel.centerYAnchor.constraint(equalTo: lhs.cellView.centerYAnchor).isActive = true
-        lhs.rankLabel.leadingAnchor.constraint(equalTo: lhs.cellView.leadingAnchor, constant: 25).isActive = true
+        lhs.rankLabel.leadingAnchor.constraint(equalTo: lhs.cellView.leadingAnchor, constant: 25 * padConstant).isActive = true
         lhs.rankLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
 
         lhs.pointsLabel.centerYAnchor.constraint(equalTo: lhs.cellView.centerYAnchor).isActive = true
@@ -72,7 +76,13 @@ extension HILeaderboardCell {
         lhs.pointsLabel.heightAnchor.constraint(equalTo: lhs.cellView.heightAnchor, multiplier: 0.38).isActive = true
 
         lhs.nameLabel.centerYAnchor.constraint(equalTo: lhs.cellView.centerYAnchor).isActive = true
-        lhs.nameLabel.leadingAnchor.constraint(equalTo: lhs.cellView.leadingAnchor, constant: 75).isActive = true
+        lhs.nameLabel.leadingAnchor.constraint(equalTo: lhs.rankLabel.leadingAnchor, constant: 50 * padConstant).isActive = true
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+        } else {
+            lhs.nameLabel.constrain(width: lhs.contentView.frame.width - 185, height: (HILabel.heightForView(text: discord, font: HIAppearance.Font.leaderboardPoints!, width: lhs.contentView.frame.width - 185)))
+            lhs.nameLabel.numberOfLines = 1
+        }
     }
 }
 
