@@ -25,7 +25,7 @@ struct HIProfileCardView: View {
     let id: String
     let isIpad = UIDevice.current.userInterfaceIdiom == .pad
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
-    @State var flipped: Bool = true
+    @State var flipped: Bool = false
     @State var ticketRotation = 0.0
     @State var contentRotation = 0.0
     @State var flipping = false
