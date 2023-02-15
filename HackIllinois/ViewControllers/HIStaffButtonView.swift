@@ -41,7 +41,6 @@ struct HIStaffButtonView: View {
             getStaffEvents()
         }
     }
-
     func getStaffEvents() {
         HIAPI.EventService.getStaffCheckInEvents(authToken: HIApplicationStateController.shared.user?.token ?? "")
             .onCompletion { result in
