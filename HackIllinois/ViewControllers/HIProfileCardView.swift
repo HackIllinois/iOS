@@ -24,6 +24,7 @@ struct HIProfileCardView: View {
     let baseText = (\HIAppearance.profileBaseText).value
     let id: String
     let isIpad = UIDevice.current.userInterfaceIdiom == .pad
+    let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @State var flipped: Bool = true
     @State var ticketRotation = 0.0
     @State var contentRotation = 0.0
@@ -103,12 +104,12 @@ struct HIProfileCardView: View {
                     VStack(spacing: isIpad ? 32 : 16) {
                         Text("Dietary Restrictions")
                             .font(Font(HIAppearance.Font.profileDietaryRestrictions ?? .systemFont(ofSize: 16)))
-                        HStack(spacing: isIpad ? 16 : 8) {
+                        LazyVGrid(columns: columns) {
                             if dietaryRestrictions.isEmpty {
                                 Rectangle()
                                     .frame(width: isIpad ? 204 : 92, height: isIpad ? 48 : 24)
                                     .cornerRadius(isIpad ? 40 : 20)
-                                    .foregroundColor(Color(dietColor(diet: "None")))
+                                    .foregroundColor(dietTextColor(diet: "None"))
                                     .overlay(
                                         Text("None")
                                             .font(Font(HIAppearance.Font.profileDietaryRestrictionsLabel ?? .systemFont(ofSize: 12)))
@@ -119,15 +120,16 @@ struct HIProfileCardView: View {
                                     Rectangle()
                                         .frame(width: isIpad ? 204 : 92, height: isIpad ? 48 : 24)
                                         .cornerRadius(isIpad ? 40 : 20)
-                                        .foregroundColor(Color(dietColor(diet: diet)))
+                                        .foregroundColor(Color(dietBackgroundColor(diet: diet)))
                                         .overlay(
                                             Text(dietString(diet: diet))
                                                 .font(Font(HIAppearance.Font.profileDietaryRestrictionsLabel ?? .systemFont(ofSize: 12)))
-                                                .foregroundColor(Color(baseText))
+                                                .foregroundColor(dietTextColor(diet: diet))
                                         )
                                 }
                             }
                         }
+                        .frame(width: isIpad ? UIScreen.main.bounds.width - 56 * 3.5 : UIScreen.main.bounds.width - 32 * 3.5)
                     }
                 }
             }
@@ -168,13 +170,24 @@ struct HIProfileCardView: View {
         case "None":
             return "None"
         case "":
-            return ""
+            return "None"
         default:
-            return ""
+            return "Custom"
+        }
+    }
+    
+    func dietTextColor(diet: String) -> Color {
+        switch diet {
+        case "Vegetarian", "Vegan", "Gluten-Free", "Lactose-Intolerant", "Other":
+            return Color(baseText)
+        case "None", "":
+            return .white
+        default:
+            return .white
         }
     }
 
-    func dietColor(diet: String) -> UIColor {
+    func dietBackgroundColor(diet: String) -> UIColor {
         switch diet {
         case "Vegetarian":
             return (\HIAppearance.profileCardVegetarian).value
@@ -186,9 +199,7 @@ struct HIProfileCardView: View {
             return (\HIAppearance.profileCardLactoseIntolerant).value
         case "Other":
             return (\HIAppearance.profileCardOther).value
-        case "None":
-            return (\HIAppearance.profileCardNone).value
-        case "":
+        case "None" , "":
             return (\HIAppearance.profileCardNone).value
         default:
             return (\HIAppearance.profileCardNone).value
@@ -239,7 +250,7 @@ struct HIProfileCardView_Previews: PreviewProvider {
     static var previews: some View {
         HIProfileCardView(firstName: "first",
                           lastName: "last",
-                          dietaryRestrictions: ["vegetarian", "nopeanut"],
+                          dietaryRestrictions: ["Vegetarian", "Lactose-Intolerant", "None", "no beef"],
                           points: 100,
                           tier: "no tier",
                           foodWave: 1,
