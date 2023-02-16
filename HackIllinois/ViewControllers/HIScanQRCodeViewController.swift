@@ -36,15 +36,15 @@ class HIScanQRCodeViewController: HIBaseViewController {
     private let closeButton = HIButton {
         $0.tintHIColor = \.action
         $0.backgroundHIColor = \.clear
-        $0.activeImage = #imageLiteral(resourceName: "DarkCloseButton")
-        $0.baseImage = #imageLiteral(resourceName: "DarkCloseButton")
+        $0.activeImage = #imageLiteral(resourceName: "CloseButton")
+        $0.baseImage = #imageLiteral(resourceName: "CloseButton")
     }
     private let errorView = HIErrorView(style: .codePopup)
     private var selectedEventID = ""
     private var cancellables = Set<AnyCancellable>()
     var currentUserID = ""
-    var currentUserNameLabel = HILabel(style: .detailTitle)
-    var userDietaryRestrictionsLabel = HILabel(style: .description)
+    var currentUserName = ""
+    var dietaryString = ""
 }
 
 // MARK: - UIViewController
@@ -73,19 +73,8 @@ extension HIScanQRCodeViewController {
                 let staffButtonController = UIHostingController(rootView: HIStaffButtonView(observable: observable))
                 addChild(staffButtonController)
                 staffButtonController.view.backgroundColor = .clear
-                staffButtonController.view.frame = CGRect(x: 0, y: 200, width: Int(view.frame.maxX), height: 500)
+                staffButtonController.view.frame = CGRect(x: 0, y: 100, width: Int(view.frame.maxX), height: 600)
                 view.addSubview(staffButtonController.view)
-
-                view.addSubview(currentUserNameLabel)
-                currentUserNameLabel.text = ""
-                currentUserNameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 60).isActive = true
-                currentUserNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-
-                view.addSubview(userDietaryRestrictionsLabel)
-                userDietaryRestrictionsLabel.text = ""
-                userDietaryRestrictionsLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 60).isActive = true
-                userDietaryRestrictionsLabel.numberOfLines = 3
-                userDietaryRestrictionsLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
             }
         }
         view.addSubview(closeButton)
@@ -261,7 +250,7 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         switch status {
         case "Success":
             alertTitle = "Success!"
-            alertMessage = "Success!"
+            alertMessage = "Name: \(currentUserName)\n Diet: \(dietaryString)"
         case "InvalidEventId":
             alertTitle = "Error!"
             alertMessage = "Invalid Event ID"
@@ -304,14 +293,13 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                 do {
                     let (apiAttendeeContainer, _) = try result.get()
                     DispatchQueue.main.async { [self] in
-                        var dietaryString = ""
+                        dietaryString = ""
                         for diet in apiAttendeeContainer.dietary ?? [] {
                             dietaryString += diet + ", "
                         }
                         guard let first = apiAttendeeContainer.firstName else { return }
                         guard let last = apiAttendeeContainer.lastName else { return }
-                        currentUserNameLabel.text = first + " " + last
-                        userDietaryRestrictionsLabel.text! = dietaryString
+                        currentUserName = first + " " + last
                     }
                 } catch {
                     print("An error has occurred \(error)")
