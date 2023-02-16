@@ -98,7 +98,10 @@ extension HIEventCell {
             return height + (20 * heightConstant)
         }
         if UIDevice.current.userInterfaceIdiom == .pad {
-            return height + (22 * (heightConstant / 1.45))
+            return height + (22 * (heightConstant / 1.40))
+        }
+        if event.info.count <= 40 {
+            return height - 15
         }
         return height + 5
     }
@@ -114,6 +117,7 @@ extension HIEventCell {
         let titleLabel = HILabel(style: .event)
         titleLabel.numberOfLines = 2
         lhs.headerView.addArrangedSubview(titleLabel)
+        
         titleLabel.text = rhs.name
         lhs.headerView.setCustomSpacing(9, after: titleLabel)
         if UIDevice.current.userInterfaceIdiom == .pad {
@@ -125,7 +129,7 @@ extension HIEventCell {
             sponsorImageView = UIImageView(image: #imageLiteral(resourceName: "SponsorPad"))
             lhs.headerView.setCustomSpacing(18, after: titleLabel)
         }
-        titleLabel.constrain(width: lhs.contentView.frame.width - 120, height: (HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle!, width: lhs.contentView.frame.width - 137)) * bubbleConstant)
+        titleLabel.constrain(width: lhs.contentView.frame.width - 100, height: (HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle!, width: lhs.contentView.frame.width - 137)) * bubbleConstant)
         let upperContainerView = HIView {
             lhs.contentStackView.addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false

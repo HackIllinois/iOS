@@ -73,7 +73,6 @@ struct HIAppearance: Equatable {
     let profileCardOther: UIColor
     let profileCardNone: UIColor
 
-
     let profileBaseText: UIColor
 
     let clear: UIColor = .clear
