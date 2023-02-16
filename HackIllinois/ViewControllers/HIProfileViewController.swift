@@ -18,6 +18,9 @@ import CoreImage.CIFilterBuiltins
 import SwiftUI
 
 class HIProfileViewController: HIBaseViewController {
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     // MARK: - Properties
     private var profile = HIProfile()
     private var profileTier = ""
@@ -47,6 +50,7 @@ extension HIProfileViewController {
 
 // MARK: - UIViewController
 extension HIProfileViewController {
+
     override func loadView() {
         super.loadView()
         guard let user = HIApplicationStateController.shared.user else { return }
@@ -62,7 +66,7 @@ extension HIProfileViewController {
         super.viewDidLoad()
         super.setCustomTitle(customTitle: "PROFILE")
     }
-    
+
     func updateProfileCard() {
         if addedProfileCard == true {
             profileCardController?.view.removeFromSuperview()

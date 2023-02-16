@@ -150,7 +150,6 @@ struct HIProfileCardView: View {
         .onAppear {
             startFetchingQR = true
             QRFetchLoop()
-            print("HELLLO")
         }
         .onDisappear {
             startFetchingQR = false

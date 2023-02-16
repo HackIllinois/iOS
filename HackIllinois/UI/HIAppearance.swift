@@ -179,7 +179,7 @@ struct HIAppearance: Equatable {
         pointsBackground: white,
         profileCardBackground: lightBlue,
         profileCardVegetarian: vegetarian,
-        profileCardVegan: profileBaseText,
+        profileCardVegan: vegan,
         profileCardGlutenFree: glutenfree,
         profileCardLactoseIntolerant: lactoseintolerant,
         profileCardOther: other,
