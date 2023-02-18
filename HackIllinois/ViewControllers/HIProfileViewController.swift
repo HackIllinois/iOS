@@ -18,6 +18,9 @@ import CoreImage.CIFilterBuiltins
 import SwiftUI
 
 class HIProfileViewController: HIBaseViewController {
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     // MARK: - Properties
     private var profile = HIProfile()
     private var profileTier = ""
@@ -47,13 +50,16 @@ extension HIProfileViewController {
 
 // MARK: - UIViewController
 extension HIProfileViewController {
+
     override func loadView() {
         super.loadView()
-        if HIApplicationStateController.shared.isGuest {
+        guard let user = HIApplicationStateController.shared.user else { return }
+        if HIApplicationStateController.shared.isGuest || user.roles.contains(.staff) {
             layoutErrorView()
         } else {
             updateProfile()
             reloadProfile()
+            NotificationCenter.default.addObserver(self, selector: #selector(updateOnCheckin), name: .qrCodeSuccessfulScan, object: nil)
         }
     }
     override func viewDidLoad() {
@@ -98,6 +104,13 @@ extension HIProfileViewController {
         logoutButton.addTarget(self, action: #selector(didSelectLogoutButton(_:)), for: .touchUpInside)
     }
 
+    @objc func updateOnCheckin(_ notification: Notification) {
+        guard let user = HIApplicationStateController.shared.user else { return }
+        if !HIApplicationStateController.shared.isGuest && !user.roles.contains(.staff) {
+            reloadProfile()
+        }
+    }
+
     func updateProfile() {
         updateProfileCard()
         if tiers.count > 0 {
@@ -112,7 +125,11 @@ extension HIProfileViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        guard let user = HIApplicationStateController.shared.user else { return }
         layoutLogOutButton()
+        if !HIApplicationStateController.shared.isGuest && !user.roles.contains(.staff) {
+            reloadProfile()
+        }
     }
 }
 

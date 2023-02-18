@@ -24,7 +24,6 @@ struct HIProfileCardView: View {
     let baseText = (\HIAppearance.profileBaseText).value
     let id: String
     let isIpad = UIDevice.current.userInterfaceIdiom == .pad
-    let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @State var flipped: Bool = false
     @State var ticketRotation = 0.0
     @State var contentRotation = 0.0
@@ -37,11 +36,11 @@ struct HIProfileCardView: View {
             ZStack {
                 Rectangle()
                     .frame(width: isIpad ? UIScreen.main.bounds.width - 56 * 2 : UIScreen.main.bounds.width - 32 * 2,
-                           height: isIpad ? 978 : 569)
+                           height: isIpad ? 978 + 80 : 569 + 40)
                     .cornerRadius(UIDevice.current.userInterfaceIdiom == .pad ? 40 : 20)
                     .foregroundColor(Color(background))
                 VStack(spacing: 0) {
-                    Text("\(firstName) \(lastName)")
+                    Text(formatName())
                         .font(Font(HIAppearance.Font.profileName ?? .systemFont(ofSize: 20)))
                         .foregroundColor(Color(baseText))
                         .padding(isIpad ? 32 : 16)
@@ -104,28 +103,40 @@ struct HIProfileCardView: View {
                     VStack(spacing: isIpad ? 32 : 16) {
                         Text("Dietary Restrictions")
                             .font(Font(HIAppearance.Font.profileDietaryRestrictions ?? .systemFont(ofSize: 16)))
-                        LazyVGrid(columns: columns) {
-                            if dietaryRestrictions.isEmpty {
-                                Rectangle()
-                                    .frame(width: isIpad ? 204 : 92, height: isIpad ? 48 : 24)
-                                    .cornerRadius(isIpad ? 40 : 20)
-                                    .foregroundColor(dietTextColor(diet: "None"))
-                                    .overlay(
-                                        Text("None")
-                                            .font(Font(HIAppearance.Font.profileDietaryRestrictionsLabel ?? .systemFont(ofSize: 12)))
-                                            .foregroundColor(.white)
-                                    )
-                            } else {
+                            .foregroundColor(Color(baseText))
+                        
+                        
+                        VStack {
+                            HStack(spacing: 4) {
                                 ForEach(dietaryRestrictions, id: \.self) { diet in
-                                    Rectangle()
-                                        .frame(width: isIpad ? 204 : 92, height: isIpad ? 48 : 24)
-                                        .cornerRadius(isIpad ? 40 : 20)
-                                        .foregroundColor(Color(dietBackgroundColor(diet: diet)))
-                                        .overlay(
-                                            Text(dietString(diet: diet))
-                                                .font(Font(HIAppearance.Font.profileDietaryRestrictionsLabel ?? .systemFont(ofSize: 12)))
-                                                .foregroundColor(dietTextColor(diet: diet))
-                                        )
+                                    let index = dietaryRestrictions.firstIndex(of: diet) ?? 0
+                                    if index < 3 {
+                                        Rectangle()
+                                            .frame(width: isIpad ? 204 : 92, height: isIpad ? 48 : 24)
+                                            .cornerRadius(isIpad ? 40 : 20)
+                                            .foregroundColor(Color(dietBackgroundColor(diet: diet)))
+                                            .overlay(
+                                                Text(dietString(diet: diet))
+                                                    .font(Font(HIAppearance.Font.profileDietaryRestrictionsLabel ?? .systemFont(ofSize: 12)))
+                                                    .foregroundColor(dietTextColor(diet: diet))
+                                            )
+                                    }
+                                }
+                            }
+                            HStack(spacing: 4) {
+                                ForEach(dietaryRestrictions, id: \.self) { diet in
+                                    let index = dietaryRestrictions.firstIndex(of: diet) ?? 0
+                                    if index > 2 {
+                                        Rectangle()
+                                            .frame(width: isIpad ? 204 : 92, height: isIpad ? 48 : 24)
+                                            .cornerRadius(isIpad ? 40 : 20)
+                                            .foregroundColor(Color(dietBackgroundColor(diet: diet)))
+                                            .overlay(
+                                                Text(dietString(diet: diet))
+                                                    .font(Font(HIAppearance.Font.profileDietaryRestrictionsLabel ?? .systemFont(ofSize: 12)))
+                                                    .foregroundColor(dietTextColor(diet: diet))
+                                            )
+                                    }
                                 }
                             }
                         }
@@ -135,12 +146,21 @@ struct HIProfileCardView: View {
             }
             .padding(.top, 24)
         }
+        .preferredColorScheme(.dark)
         .onAppear {
             startFetchingQR = true
             QRFetchLoop()
         }
         .onDisappear {
             startFetchingQR = false
+        }
+    }
+
+    func formatName() -> String {
+        if lastName.count + firstName.count > 20 {
+            return firstName + " " + lastName.prefix(1) + "."
+        } else {
+            return firstName + " " + lastName
         }
     }
 
@@ -175,7 +195,7 @@ struct HIProfileCardView: View {
             return "Custom"
         }
     }
-    
+
     func dietTextColor(diet: String) -> Color {
         switch diet {
         case "Vegetarian", "Vegan", "Gluten-Free", "Lactose-Intolerant", "Other":
