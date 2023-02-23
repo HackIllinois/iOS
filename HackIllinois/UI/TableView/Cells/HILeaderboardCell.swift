@@ -79,8 +79,9 @@ extension HILeaderboardCell {
         lhs.nameLabel.leadingAnchor.constraint(equalTo: lhs.rankLabel.leadingAnchor, constant: 50 * padConstant).isActive = true
         
         if UIDevice.current.userInterfaceIdiom == .pad {
+            lhs.nameLabel.constrain(width: lhs.contentView.frame.width, height: 40.0)
         } else {
-            lhs.nameLabel.constrain(width: lhs.contentView.frame.width - 185, height: (HILabel.heightForView(text: discord, font: HIAppearance.Font.leaderboardPoints!, width: lhs.contentView.frame.width - 185)))
+            lhs.nameLabel.constrain(width: lhs.contentView.frame.width - 185, height: 20.0)
             lhs.nameLabel.numberOfLines = 1
         }
     }
