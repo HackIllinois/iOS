@@ -286,7 +286,7 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         self.present(alert, animated: true, completion: nil)
     }
 
-    func getUserIdData(userID: String) {
+    func staffCheckIn(userID: String, status: String) {
         guard let user = HIApplicationStateController.shared.user else { return }
         HIAPI.RegistrationService.getAttendeeRegistrationUserID(userID: userID)
             .onCompletion { result in
@@ -300,6 +300,7 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                         guard let first = apiAttendeeContainer.firstName else { return }
                         guard let last = apiAttendeeContainer.lastName else { return }
                         currentUserName = first + " " + last
+                        self.handleStaffCheckInAlert(status: status)
                     }
                 } catch {
                     print("An error has occurred \(error)")
@@ -316,12 +317,6 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         guard let user = HIApplicationStateController.shared.user else { return }
         if user.roles.contains(.staff) {
             if selectedEventID != "" {
-                if let qrInfo = decode(code) {
-                    if let userId = qrInfo["userId"] {
-                        currentUserID = userId as? String ?? ""
-                        getUserIdData(userID: currentUserID)
-                    }
-                }
                 if let range = code.range(of: "userToken=") {
                     let userToken = code[range.upperBound...]
                     respondingToQRCodeFound = false
@@ -329,8 +324,13 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                         .onCompletion { result in
                             do {
                                 let (codeResult, _) = try result.get()
-                                DispatchQueue.main.async {
-                                    self.handleStaffCheckInAlert(status: codeResult.status)
+                                DispatchQueue.main.async { [self] in
+                                    if let qrInfo = self.decode(code) {
+                                        if let userId = qrInfo["userId"] {
+                                            currentUserID = userId as? String ?? ""
+                                            staffCheckIn(userID: currentUserID, status: codeResult.status)
+                                        }
+                                    }
                                 }
                             } catch {
                                 print(error, error.localizedDescription)
