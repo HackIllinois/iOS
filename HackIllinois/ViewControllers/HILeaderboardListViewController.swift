@@ -39,7 +39,7 @@ extension HILeaderboardListViewController {
             cell.backgroundColor = #colorLiteral(red: 0.7882352941, green: 0.8235294118, blue: 0.8980392157, alpha: 1)
             tableView.separatorStyle = .singleLine
             tableView.separatorInset = UIEdgeInsets()
-            tableView.separatorColor = UIColor.black
+            tableView.separatorColor = #colorLiteral(red: 0.04009541315, green: 0.1307413591, blue: 0.3802352191, alpha: 1)
             // Round certain corners based on row
             if indexPath.row == 0 {
                 cell.layer.cornerRadius = 20
