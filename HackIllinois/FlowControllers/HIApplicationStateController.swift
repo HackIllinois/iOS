@@ -39,6 +39,7 @@ class HIApplicationStateController {
     func initalize() {
         window.makeKeyAndVisible()
         resetPersistentDataIfNeeded()
+        reset2023IfNeeded()
         recoverUserIfPossible()
         recoverProfileIfPossible()
         onboardingViewController.shouldDisplayAnimationOnNextAppearance = user == nil
@@ -50,6 +51,15 @@ class HIApplicationStateController {
 
 // MARK: - API
 extension HIApplicationStateController {
+    func reset2023IfNeeded() {
+        let didReset = UserDefaults.standard.object(forKey: "didReset2023") as? Bool ?? false
+        if !didReset {
+            _ = Keychain.default.purge()
+            HICoreDataController.shared.purge()
+            UserDefaults.standard.set(true, forKey: "didReset2023")
+            logoutUser()
+        }
+    }
     func resetPersistentDataIfNeeded() {
         guard !UserDefaults.standard.bool(forKey: HIConstants.APPLICATION_INSTALLED_KEY) else { return }
         _ = Keychain.default.purge()
