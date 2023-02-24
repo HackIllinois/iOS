@@ -166,11 +166,13 @@ extension HIEventDetailViewController {
         descriptionLabelHeight.constant = neededSize.height
         // Default text for online events
         locationLabel.text = HIConstants.ONLINE_EVENT_LOCATION_TEXT
+        // check if this event has a location
+        if event.locations.count > 0 {
+            // concatenate all location names
+            locationLabel.text = event.locations.map { ($0 as AnyObject).name }.joined(separator: ", ")
+        }
         // MARK: GoogleMap Setup
         for case let loc as Location in event.locations {
-            //
-            locationLabel.text = loc.name
-            //
             DispatchQueue.main.async { [self] in
                 let newcamera = GMSCameraPosition.camera(withLatitude: loc.latitude, longitude: loc.longitude, zoom: 18.0)
                 mapView.camera = newcamera
