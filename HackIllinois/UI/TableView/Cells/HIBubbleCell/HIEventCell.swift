@@ -181,11 +181,13 @@ extension HIEventCell {
             sponsorLabel.centerYAnchor.constraint(equalTo: sponsorImageView.centerYAnchor).isActive = true
         }
         let locationLabel = HILabel(style: .newLocation)
-        for location in rhs.locations {
-            guard let location = location as? Location else { continue }
-            locationLabel.text = "\(location.name)"
-            //print("Success")
-        }
+        locationLabel.text = rhs.locations.map({ ($0 as AnyObject).name }).joined(separator: ", ")
+        // for location in rhs.locations {
+        //     guard let location = location as? Location else { continue }
+        //     // c
+        //     locationLabel.text = "\(location.name)"
+        //     //print("Success")
+        // }
         middleContainerView.addSubview(locationImageView)
         locationImageView.translatesAutoresizingMaskIntoConstraints = false
         middleContainerView.addSubview(locationLabel)
