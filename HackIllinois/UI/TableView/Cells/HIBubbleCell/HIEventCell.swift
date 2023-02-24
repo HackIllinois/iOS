@@ -181,6 +181,7 @@ extension HIEventCell {
             sponsorLabel.centerYAnchor.constraint(equalTo: sponsorImageView.centerYAnchor).isActive = true
         }
         let locationLabel = HILabel(style: .newLocation)
+        locationLabel.text = "Online"
         for location in rhs.locations {
             guard let location = location as? Location else { continue }
             locationLabel.text = "\(location.name)"
