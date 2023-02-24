@@ -33,10 +33,10 @@ class HIEventCell: HIBubbleCell {
     var headerView = UIStackView()
     var contentStackView = UIStackView()
     var contentStackViewHeight = NSLayoutConstraint()
-
+    
     var indexPath: IndexPath?
     weak var delegate: HIEventCellDelegate?
-
+    
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -57,7 +57,7 @@ class HIEventCell: HIBubbleCell {
         bubbleView.addSubview(favoritedButton)
         favoritedButton.constrain(width: 58 * headerSpacingConstant, height: 50 * headerSpacingConstant)
         favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0)
-
+        
         bubbleView.addSubview(contentStackView)
         contentStackView.axis = .vertical
         contentStackView.alignment = .leading
@@ -71,7 +71,7 @@ class HIEventCell: HIBubbleCell {
             favoritedButton.isHidden = true
         }
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) should not be used.")
     }
@@ -82,7 +82,7 @@ extension HIEventCell {
     @objc func didSelectFavoriteButton(_ sender: HIButton) {
         delegate?.eventCellDidSelectFavoriteButton(self)
     }
-
+    
 }
 
 // MARK: - Population
@@ -181,13 +181,10 @@ extension HIEventCell {
             sponsorLabel.centerYAnchor.constraint(equalTo: sponsorImageView.centerYAnchor).isActive = true
         }
         let locationLabel = HILabel(style: .newLocation)
-        locationLabel.text = rhs.locations.map({ ($0 as AnyObject).name }).joined(separator: ", ")
-        // for location in rhs.locations {
-        //     guard let location = location as? Location else { continue }
-        //     // c
-        //     locationLabel.text = "\(location.name)"
-        //     //print("Success")
-        // }
+        locationLabel.text = "Online"
+        if rhs.locations.count > 0 {
+            locationLabel.text = rhs.locations.map({ ($0 as AnyObject).name }).joined(separator: ", ")
+        }
         middleContainerView.addSubview(locationImageView)
         locationImageView.translatesAutoresizingMaskIntoConstraints = false
         middleContainerView.addSubview(locationLabel)
