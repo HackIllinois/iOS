@@ -251,7 +251,8 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
                 return currDate
             } else {
                 // Displays after the event ends
-                super.setCustomTitle(customTitle: "")
+//                super.setCustomTitle(customTitle: "MEMORIES MADE")
+                bannerViewController.updateLabel(with: "MEMORIES MADE")
             }
             countdownDataStoreIndex += 1
         }
