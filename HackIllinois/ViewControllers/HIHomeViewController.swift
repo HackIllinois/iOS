@@ -50,6 +50,7 @@ class HIHomeViewController: HIEventListViewController {
     private let countdownFrameView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
+    
     private let bannerFrameView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         if UIDevice.current.userInterfaceIdiom == .pad {
@@ -145,6 +146,11 @@ extension HIHomeViewController {
         tableView.constrain(to: view.safeAreaLayoutGuide, trailingInset: 0, leadingInset: 0)
         tableView.constrain(to: view, bottomInset: 0)
         self.tableView = tableView
+        
+        tableView.addLeftAndRightSwipeGestureRecognizers(
+            target: segmentedControl,
+            selector: #selector(segmentedControl.handleSwipeGesture(_:))
+        )
     }
 
     override func viewDidLoad() {
