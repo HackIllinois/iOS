@@ -307,6 +307,7 @@ class HILabel: UILabel {
         case .leaderboardName:
             textHIColor = \.leaderboardText
             backgroundHIColor = \.clear
+            lineBreakMode = .byTruncatingTail
             if UIDevice.current.userInterfaceIdiom == .pad {
                 font = HIAppearance.Font.leaderboardNamePad
             } else {
