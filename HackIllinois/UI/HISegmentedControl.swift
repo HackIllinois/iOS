@@ -176,4 +176,15 @@ class HISegmentedControl: UIControl {
             }
         }
     }
+    
+    // MARK: - Gesture Support
+    @objc func handleSwipeGesture(_ gesture: UISwipeGestureRecognizer) {
+        if gesture.direction == .left && selectedIndex < items.count - 1 {
+            selectedIndex += 1
+        }
+
+        if gesture.direction == .right && selectedIndex > 0 {
+            selectedIndex -= 1
+        }
+    }
 }

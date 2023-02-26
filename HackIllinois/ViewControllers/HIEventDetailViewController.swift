@@ -190,6 +190,7 @@ extension HIEventDetailViewController {
             presentErrorController(title: "Uh oh", message: "Failed to load event.", dismissParentOnCompletion: true)
         }
     }
+
     func setupContainers() {
         view.addSubview(eventDetailContainer)
         eventDetailContainer.topAnchor.constraint(equalTo: closeButton.bottomAnchor).isActive = true

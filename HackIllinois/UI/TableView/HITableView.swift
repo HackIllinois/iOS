@@ -40,5 +40,23 @@ class HITableView: UITableView {
         indicatorStyle <- \.scrollViewIndicatorStyle
         backgroundColor <- \.clear
     }
+    
+    // MARK: - Swipe Gesture Support
+    func addLeftAndRightSwipeGestureRecognizers(target: Any?, selector: Selector?) {
+        let leftGestureRecognizer = UISwipeGestureRecognizer(
+            target: target,
+            action: selector
+        )
+        leftGestureRecognizer.direction = .left
+        
+        let rightGestureRecognizer = UISwipeGestureRecognizer(
+            target: target,
+            action: selector
+        )
+        rightGestureRecognizer.direction = .right
+        
+        self.addGestureRecognizer(leftGestureRecognizer)
+        self.addGestureRecognizer(rightGestureRecognizer)
+    }
 
 }
