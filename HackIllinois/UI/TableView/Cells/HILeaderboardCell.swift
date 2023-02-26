@@ -20,6 +20,15 @@ class HILeaderboardCell: UITableViewCell {
     let nameLabel = HILabel(style: .leaderboardName)
     let rankLabel = HILabel(style: .leaderboardRank)
     let pointsLabel = HILabel(style: .leaderboardPoints)
+    
+    // iOS 16 TableView did not respect separator inset for
+    // first and last rows, add managed equivalent
+    let separatorView: UIView = {
+        let separatorView = UIView()
+        separatorView.backgroundColor = #colorLiteral(red: 0.04009541315, green: 0.1307413591, blue: 0.3802352191, alpha: 1)
+        separatorView.translatesAutoresizingMaskIntoConstraints = false
+        return separatorView
+    }()
 
     var cellView = HIView {
         $0.clipsToBounds = true
@@ -45,6 +54,7 @@ class HILeaderboardCell: UITableViewCell {
         cellView.addSubview(rankLabel)
         cellView.addSubview(pointsLabel)
         cellView.addSubview(nameLabel)
+        cellView.addSubview(separatorView)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -95,6 +105,11 @@ extension HILeaderboardCell {
         lhs.nameLabel.leadingAnchor.constraint(equalTo: lhs.rankLabel.trailingAnchor, constant: padConstant).isActive = true
         lhs.nameLabel.trailingAnchor.constraint(equalTo: lhs.pointsLabel.leadingAnchor, constant: -10).isActive = true
         lhs.nameLabel.numberOfLines = 1
+        
+        lhs.separatorView.leadingAnchor.constraint(equalTo: lhs.cellView.leadingAnchor).isActive = true
+        lhs.separatorView.trailingAnchor.constraint(equalTo: lhs.cellView.trailingAnchor).isActive = true
+        lhs.separatorView.bottomAnchor.constraint(equalTo: lhs.cellView.bottomAnchor).isActive = true
+        lhs.separatorView.heightAnchor.constraint(equalToConstant: 1/UIScreen.main.scale).isActive = true
     }
 }
 

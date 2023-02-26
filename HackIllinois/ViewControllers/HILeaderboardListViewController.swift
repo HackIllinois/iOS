@@ -16,14 +16,7 @@ import HIAPI
 import APIManager
 
 class HILeaderboardListViewController: HIBaseViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        tableView?.separatorStyle = .singleLine
-        tableView?.separatorColor = #colorLiteral(red: 0.04009541315, green: 0.1307413591, blue: 0.3802352191, alpha: 1)
-        tableView?.separatorInset = HILeaderboardCell.padding
-        tableView?.tableFooterView = UIView()
-    }
+
 }
 
 // MARK: - UITableView Setup
@@ -53,11 +46,14 @@ extension HILeaderboardListViewController {
             if indexPath.row == 0 {
                 cell.cellView.layer.cornerRadius = 20
                 cell.cellView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+                cell.separatorView.isHidden = false
             } else if indexPath.row == 9 {
                 cell.cellView.layer.cornerRadius = 20
                 cell.cellView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+                cell.separatorView.isHidden = true
             } else {
                 cell.cellView.layer.cornerRadius = 0
+                cell.separatorView.isHidden = false
             }
         }
 
