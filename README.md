@@ -6,7 +6,7 @@ The repo hosts the official iOS app for HackIllinois. If you would like to get i
 ## Requirements
 1. XCode 13.0+
 2. Swift 5.0+
-3. iOS 11.0+
+3. iOS 13.0+
 
 ## Installation #
 
