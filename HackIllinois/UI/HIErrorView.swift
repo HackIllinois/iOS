@@ -13,7 +13,7 @@
 import Foundation
 import UIKit
 
-protocol HIErrorViewDelegate: class {
+protocol HIErrorViewDelegate: AnyObject {
     func didSelectErrorLogout(_ sender: UIButton)
 }
 class HIErrorView: HIView {
@@ -33,7 +33,7 @@ class HIErrorView: HIView {
         $0.titleLabel?.font = HIAppearance.Font.detailSubtitle
         $0.titleLabel?.baselineAdjustment = .alignCenters
         $0.layer.cornerRadius = 20
-        $0.addTarget(self, action: #selector(didSelectLogoutButton(_:)), for: .touchUpInside)
+        $0.addTarget(HIErrorView.self, action: #selector(didSelectLogoutButton(_:)), for: .touchUpInside)
     }
 
     // MARK: - Init
@@ -60,11 +60,11 @@ class HIErrorView: HIView {
         errorLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         errorLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
 
-        self.addSubview(logoutButton)
+        /*self.addSubview(logoutButton)
         logoutButton.topAnchor.constraint(equalTo: errorLabel.bottomAnchor, constant: 10).isActive = true
         logoutButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         logoutButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5).isActive = true
-        logoutButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        logoutButton.heightAnchor.constraint(equalToConstant: 40).isActive = true*/
 
         translatesAutoresizingMaskIntoConstraints = false
         NotificationCenter.default.addObserver(self, selector: #selector(refreshForThemeChange), name: .themeDidChange, object: nil)

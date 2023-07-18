@@ -59,7 +59,7 @@ class HISegmentedControl: UIControl {
     @objc func refreshForThemeChange() {
         backgroundColor <- \.clear
         labels.forEach {
-            $0.textColor <- \.baseText
+            $0.textColor <- \.white
             $0.backgroundColor <- \.clear
         }
 
@@ -82,11 +82,9 @@ class HISegmentedControl: UIControl {
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let location = touch.location(in: self)
 
-        for (index, view) in views.enumerated() {
-            if view.frame.contains(location) {
+        for (index, view) in views.enumerated() where view.frame.contains(location) {
                 selectedIndex = index
                 break
-            }
         }
 
         return false

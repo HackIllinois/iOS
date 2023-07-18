@@ -11,12 +11,14 @@
 //
 
 import UIKit
+import AuthenticationServices
 import APIManager
 import Lottie
 import SafariServices
 import Keychain
 import HIAPI
 
+#warning("ASWebAuthticationSession not tested")
 class HILoginFlowController: UIViewController {
     // MARK: - Properties
 
@@ -35,7 +37,7 @@ class HILoginFlowController: UIViewController {
     }
 
     // prevents the login session from going out of scope during presentation
-    var loginSession: SFAuthenticationSession?
+    var loginSession: ASWebAuthenticationSession?
 
     // MARK: ViewControllers
     lazy var loginSelectionViewController = HILoginSelectionViewController(delegate: self)
@@ -62,6 +64,14 @@ class HILoginFlowController: UIViewController {
     // MARK: - Themeable
     @objc func refreshForThemeChange() {
         setNeedsStatusBarAppearanceUpdate()
+    }
+}
+
+// add ASWebAuthenticationPresentationContextProviding to the class
+extension HILoginFlowController: ASWebAuthenticationPresentationContextProviding {
+    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        let window = UIApplication.shared.windows.first { $0.isKeyWindow }
+        return window ?? ASPresentationAnchor()
     }
 }
 
@@ -96,7 +106,7 @@ private extension HILoginFlowController {
         }
 
         let loginURL = HIAPI.AuthService.oauthURL(provider: user.provider)
-        loginSession = SFAuthenticationSession(url: loginURL, callbackURLScheme: nil) { [weak self] (url, error) in
+        loginSession = ASWebAuthenticationSession(url: loginURL, callbackURLScheme: nil) { [weak self] (url, error) in
             if let url = url,
                 let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
                 let queryItems = components.queryItems,
@@ -108,7 +118,7 @@ private extension HILoginFlowController {
                 profile.oauthCode = code
                 self?.exchangeOAuthCodeForAPIToken(buildingUser: user, profile: profile, sender: sender)
             } else if let error = error {
-                if (error as? SFAuthenticationError)?.code == SFAuthenticationError.canceledLogin {
+                if (error as? ASWebAuthenticationSessionError)?.code == ASWebAuthenticationSessionError.canceledLogin {
                     // do nothing
                 } else {
                     self?.presentAuthenticationFailure(withError: error, sender: sender)
@@ -118,6 +128,7 @@ private extension HILoginFlowController {
                 self?.presentAuthenticationFailure(withError: error, sender: sender)
             }
         }
+        loginSession?.presentationContextProvider = self
         loginSession?.start()
     }
 
@@ -231,7 +242,6 @@ private extension HILoginFlowController {
                 profile.firstName = apiProfile.firstName
                 profile.lastName = apiProfile.lastName
                 profile.points = apiProfile.points
-                profile.timezone = apiProfile.timezone
                 profile.discord = apiProfile.discord
                 profile.avatarUrl = apiProfile.avatarUrl
                 DispatchQueue.main.async {

@@ -19,7 +19,7 @@ class HIBaseViewController: UIViewController {
     // MARK: - Properties
     var _fetchedResultsController: NSFetchedResultsController<NSManagedObject>?
     var refreshControl = UIRefreshControl()
-    var refreshAnimation = AnimationView(name: "refresh")
+    var refreshAnimation = LottieAnimationView(name: "refresh")
     var tableView: UITableView?
     var backgroundView = UIImageView()
     let tableBackgroundView = HIView()
@@ -109,7 +109,12 @@ extension HIBaseViewController {
     @objc func setCustomTitle(customTitle: String) {
         let label = HILabel(style: .viewTitle)
         label.text = customTitle
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
+
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 30))
+        view.bounds = view.bounds.offsetBy(dx: -24, dy: 0)
+        view.addSubview(label)
+
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: view)
         self.navigationItem.leftItemsSupplementBackButton = true
     }
 }
@@ -353,12 +358,17 @@ extension HIBaseViewController {
         let keyboardFrame = keyboardFrameValue.cgRectValue
 
         layout?(keyboardFrame)
-
-        UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationDuration(duration)
-        UIView.setAnimationCurve(curve)
-        view.layoutIfNeeded()
-        UIView.commitAnimations()
+//        UIView.beginAnimations(nil, context: nil)
+//        UIView.setAnimationDuration(duration)
+//        UIView.setAnimationCurve(curve)
+//        view.layoutIfNeeded()
+//        UIView.commitAnimations()
+        #warning("Not tested")
+        let animator = UIViewPropertyAnimator(duration: duration, curve: curve)
+        animator.addAnimations {
+            self.view.layoutIfNeeded()
+        }
+        animator.startAnimation()
     }
 }
 

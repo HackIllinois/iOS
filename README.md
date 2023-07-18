@@ -6,7 +6,7 @@ The repo hosts the official iOS app for HackIllinois. If you would like to get i
 ## Requirements
 1. XCode 13.0+
 2. Swift 5.0+
-3. iOS 11.0+
+3. iOS 13.0+
 
 ## Installation #
 
@@ -20,7 +20,7 @@ open Hackillinois.xcodeproj
 Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and [open a pull request](https://github.com/HackIllinois/ios/compare/).
 
 ### master
-Master only hosts versions of the Hackillinois application released to TestFlight or the App Store. Currently 2022.1.2.
+Master only hosts versions of the Hackillinois application released to TestFlight or the App Store. Currently 2023.2.0.
 
 ### dev
 Dev hosts a semi-stable version of the next release and all work should be done on branches off dev and commited via PR's.

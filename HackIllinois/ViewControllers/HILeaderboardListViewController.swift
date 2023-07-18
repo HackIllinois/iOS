@@ -36,18 +36,19 @@ extension HILeaderboardListViewController {
             cell <- leaderboardProfile
             cell.indexPath = indexPath
             cell.rankLabel.text = "\((indexPath.row) + 1)"
-            if indexPath.row % 2 == 0 {
-                cell.backgroundColor = #colorLiteral(red: 0.968627451, green: 0.9568627451, blue: 0.8274509804, alpha: 1)
-            } else {
-                cell.backgroundColor =  #colorLiteral(red: 0.9098039216, green: 0.8431372549, blue: 0.6470588235, alpha: 1)
-            }
+            cell.backgroundColor = #colorLiteral(red: 0.7882352941, green: 0.8235294118, blue: 0.8980392157, alpha: 1)
+            tableView.separatorStyle = .singleLine
+            tableView.separatorInset = UIEdgeInsets()
+            tableView.separatorColor = #colorLiteral(red: 0.04009541315, green: 0.1307413591, blue: 0.3802352191, alpha: 1)
             // Round certain corners based on row
             if indexPath.row == 0 {
-                cell.layer.cornerRadius = 8
+                cell.layer.cornerRadius = 20
                 cell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
             } else if indexPath.row == 9 {
-                cell.layer.cornerRadius = 8
+                cell.layer.cornerRadius = 20
                 cell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+            } else {
+                cell.layer.cornerRadius = 0
             }
         }
 

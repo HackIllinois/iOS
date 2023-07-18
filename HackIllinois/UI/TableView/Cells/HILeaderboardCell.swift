@@ -51,6 +51,10 @@ extension HILeaderboardCell {
     }
 
     static func <- (lhs: HILeaderboardCell, rhs: LeaderboardProfile) {
+        var padConstant = 1.0
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            padConstant = 2.0
+        }
         lhs.rankLabel.textAlignment = .center
         lhs.pointsLabel.textAlignment = .center
         lhs.pointsLabel.backgroundHIColor = \.pointsBackground
@@ -63,17 +67,23 @@ extension HILeaderboardCell {
         lhs.nameLabel.textAlignment = .left
 
         lhs.rankLabel.centerYAnchor.constraint(equalTo: lhs.cellView.centerYAnchor).isActive = true
-        lhs.rankLabel.leadingAnchor.constraint(equalTo: lhs.cellView.leadingAnchor, constant: 15).isActive = true
+        lhs.rankLabel.leadingAnchor.constraint(equalTo: lhs.cellView.leadingAnchor, constant: 25 * padConstant).isActive = true
         lhs.rankLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
 
         lhs.pointsLabel.centerYAnchor.constraint(equalTo: lhs.cellView.centerYAnchor).isActive = true
-        lhs.pointsLabel.widthAnchor.constraint(equalTo: lhs.cellView.widthAnchor, multiplier: 0.30).isActive = true
-        lhs.pointsLabel.trailingAnchor.constraint(equalTo: lhs.cellView.trailingAnchor, constant: -15).isActive = true
-        lhs.pointsLabel.heightAnchor.constraint(equalTo: lhs.cellView.heightAnchor, multiplier: 0.45).isActive = true
+        lhs.pointsLabel.widthAnchor.constraint(equalTo: lhs.cellView.widthAnchor, multiplier: 0.24).isActive = true
+        lhs.pointsLabel.trailingAnchor.constraint(equalTo: lhs.cellView.trailingAnchor, constant: -25).isActive = true
+        lhs.pointsLabel.heightAnchor.constraint(equalTo: lhs.cellView.heightAnchor, multiplier: 0.38).isActive = true
 
         lhs.nameLabel.centerYAnchor.constraint(equalTo: lhs.cellView.centerYAnchor).isActive = true
-        lhs.nameLabel.leadingAnchor.constraint(equalTo: lhs.rankLabel.trailingAnchor, constant: 15).isActive = true
-        lhs.nameLabel.trailingAnchor.constraint(equalTo: lhs.pointsLabel.leadingAnchor, constant: -15).isActive = true
+        lhs.nameLabel.leadingAnchor.constraint(equalTo: lhs.rankLabel.leadingAnchor, constant: 50 * padConstant).isActive = true
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            lhs.nameLabel.constrain(width: lhs.contentView.frame.width, height: 40.0)
+        } else {
+            lhs.nameLabel.constrain(width: lhs.contentView.frame.width - 185, height: 20.0)
+            lhs.nameLabel.numberOfLines = 1
+        }
     }
 }
 

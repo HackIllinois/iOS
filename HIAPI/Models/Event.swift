@@ -23,6 +23,47 @@ public struct EventContainer: Decodable, APIReturnable {
     }
 }
 
+public struct StaffEventContainer: Decodable, APIReturnable {
+    public let events: [StaffEvent]
+
+    public init(from data: Data) throws {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
+        self = try decoder.decode(StaffEventContainer.self, from: data)
+    }
+}
+
+public struct StaffEvent: Codable {
+    internal enum CodingKeys: String, CodingKey {
+        case id
+        case endTime
+        case eventType
+        case info = "description"
+        case locations
+        case name
+        case sponsor
+        case startTime
+        case points
+        case isAsync
+        case isPrivate
+        case displayOnStaffCheckin
+    }
+
+    public var id: String
+    public let endTime: Date
+    public let eventType: String
+    public let info: String
+    public let locations: [Location]
+    public let name: String
+    public let sponsor: String
+    public let startTime: Date
+    public let points: Int
+    public let isAsync: Bool
+    public let isPrivate: Bool
+    public let displayOnStaffCheckin: Bool
+}
+
+
 public struct Event: Codable {
     internal enum CodingKeys: String, CodingKey {
         case id

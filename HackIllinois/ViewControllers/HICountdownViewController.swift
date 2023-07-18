@@ -12,9 +12,10 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 import Lottie
 
-protocol HICountdownViewControllerDelegate: class {
+protocol HICountdownViewControllerDelegate: AnyObject {
     func countdownToDateFor(countdownViewController: HICountdownViewController) -> Date?
 }
 
@@ -24,10 +25,10 @@ class HICountdownViewController: UIViewController {
     private let FRAMES_PER_TICK = 8
 
     // MARK: - Properties
-    private let days = HILabel(style: .clock)
-    private let hours = HILabel(style: .clock)
-    private let minutes = HILabel(style: .clock)
-    private let seconds = HILabel(style: .clock)
+    private let days = HILabel(style: .neonCountdown)
+    private let hours = HILabel(style: .neonCountdown)
+    private let minutes = HILabel(style: .neonCountdown)
+    private let seconds = HILabel(style: .neonCountdown)
     private let backgroundHIColor: HIColor = \.clear
 
     private var countdownDate: Date?
@@ -97,35 +98,66 @@ extension HICountdownViewController {
         countdownStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         countdownStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         countdownStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-
-        let daysContent = containerView(with: days, and: "Days")
+        let daysContent = containerView(with: "DAYS", and: days)
         countdownStackView.addArrangedSubview(daysContent)
-        let hoursContent = containerView(with: hours, and: "Hours")
+        let hoursContent = containerView(with: "HOURS", and: hours)
         countdownStackView.addArrangedSubview(hoursContent)
-        countdownStackView.setCustomSpacing(10, after: daysContent)
-        let minutesContent = containerView(with: minutes, and: "Minutes")
+        let minutesContent = containerView(with: "MINUTES", and: minutes)
         countdownStackView.addArrangedSubview(minutesContent)
-        countdownStackView.setCustomSpacing(10, after: hoursContent)
+        var countdownSpacingConstant: CGFloat = 30
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            countdownSpacingConstant = 60
+        }
+        countdownStackView.setCustomSpacing(countdownSpacingConstant, after: daysContent)
+        countdownStackView.setCustomSpacing(countdownSpacingConstant, after: hoursContent)
+        countdownStackView.setCustomSpacing(countdownSpacingConstant, after: minutesContent)
     }
-
-    func containerView(with countDownView: HILabel, and labelString: String) -> UIView {
+    func containerView(with labelString: String, and countDownView: HILabel) -> UIView {
         countDownView.backgroundColor <- backgroundHIColor
         countDownView.translatesAutoresizingMaskIntoConstraints = false
 
         let label = HILabel {
-            $0.textHIColor = \.titleText
+            $0.textHIColor = \.whiteText
             $0.backgroundHIColor = \.clear
             $0.textAlignment = .center
-            $0.font = HIAppearance.Font.glyph
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                $0.font = HIAppearance.Font.timeIndicator
+            } else {
+                $0.font = HIAppearance.Font.glyph
+            }
             $0.text = labelString
         }
+        let yellowish = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1)
+        let strokeTextAttributes = [
+            NSAttributedString.Key.strokeColor: yellowish,
+            NSAttributedString.Key.foregroundColor: UIColor.clear,
+            NSAttributedString.Key.strokeWidth: 5.0,
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 48, weight: UIFont.Weight(rawValue: 900) )]
+            as [NSAttributedString.Key: Any]
+        let iPadStrokeTextAttributes = [
+            NSAttributedString.Key.strokeColor: yellowish,
+            NSAttributedString.Key.foregroundColor: UIColor.clear,
+            NSAttributedString.Key.strokeWidth: 5.0,
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 90, weight: UIFont.Weight(rawValue: 900) )]
+            as [NSAttributedString.Key: Any]
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            countDownView.attributedText = NSMutableAttributedString(string: "Test", attributes: iPadStrokeTextAttributes)
+        } else {
+            countDownView.attributedText = NSMutableAttributedString(string: "Test", attributes: strokeTextAttributes)
+        }
+        countDownView.layer.shadowColor = yellowish.cgColor
+        countDownView.layer.shadowRadius = 3.0
+        countDownView.layer.shadowOpacity = 100.0
+        countDownView.layer.masksToBounds = false
+        countDownView.layer.shouldRasterize = true
+        countDownView.layer.shadowOffset = .zero
 
         let containerView = UIView()
         containerView.addSubview(label)
         containerView.addSubview(countDownView)
         label.constrain(to: containerView, topInset: 0, trailingInset: 0, leadingInset: 0)
-        countDownView.constrain(to: containerView, trailingInset: 0, bottomInset: 0, leadingInset: 0)
-        label.bottomAnchor.constraint(equalTo: countDownView.topAnchor).isActive = true
+        countDownView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        countDownView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -4).isActive = true
 
         return containerView
     }
@@ -161,6 +193,10 @@ extension HICountdownViewController {
         hours.text = String(format: "%02d", (hoursRemaining))
         minutes.text = String(format: "%02d", (minutesRemaining))
         seconds.text = String(format: "%02d", (secondsRemaining))
+        days.textAlignment = .center
+        hours.textAlignment = .center
+        minutes.textAlignment = .center
+        seconds.textAlignment = .center
     }
 
     @objc func updateCountdown() {

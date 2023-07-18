@@ -21,4 +21,8 @@ public final class UserService: BaseService {
     public static func getUser() -> APIRequest<User> {
         return APIRequest<User>(service: self, endpoint: "", headers: headers, method: .GET)
     }
+
+    public static func getQR() -> APIRequest<QRData> {
+        return APIRequest<QRData>(service: self, endpoint: "qr/", method: .GET)
+    }
 }

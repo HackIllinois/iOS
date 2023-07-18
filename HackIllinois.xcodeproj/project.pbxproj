@@ -119,7 +119,7 @@
 		AC3B621625E8611C002386A2 /* HIProfileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B621525E8611C002386A2 /* HIProfileDataSource.swift */; };
 		AC5E9FE326195CCF00674FCF /* HIEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5E9FE226195CCF00674FCF /* HIEventType.swift */; };
 		AC607EF0261CD6E300B88798 /* Stickers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC607EEF261CD6E300B88798 /* Stickers.xcassets */; };
-		AC607EF4261CD6E300B88798 /* Stickers.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AC607EED261CD6E100B88798 /* Stickers.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AC607EF4261CD6E300B88798 /* Stickers.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AC607EED261CD6E100B88798 /* Stickers.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AC6F15A6261BB1B400422192 /* HIErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6F15A5261BB1B400422192 /* HIErrorView.swift */; };
 		ACA63C8B25E7394D00A00D83 /* HIProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA63C8A25E7394D00A00D83 /* HIProfile.swift */; };
 		ACAA717626017EC4000F42B0 /* HICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA717526017EC4000F42B0 /* HICollectionViewFlowLayout.swift */; };
@@ -132,7 +132,36 @@
 		BCEBD2DA23DE995700D32F5A /* HIPopupAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEBD2D923DE995700D32F5A /* HIPopupAnimator.swift */; };
 		BF0FDA3925F4DCCD003B5DB1 /* HIScheduleSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0FDA3825F4DCCD003B5DB1 /* HIScheduleSegmentedControl.swift */; };
 		BFB1FD3E26105EA400500008 /* HIEditProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB1FD3D26105EA400500008 /* HIEditProfileCell.swift */; };
+		D134D30F296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D134D30E296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf */; };
+		D14D3AE3295FBDA200EB7995 /* HIBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */; };
 		D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A309BB2211175200CBA351 /* PassKit.framework */; };
+		DF3706382925DDAA000B4278 /* GoogleMapsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706372925DDAA000B4278 /* GoogleMapsBase.framework */; };
+		DF37063B2925DDB8000B4278 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706392925DDB7000B4278 /* GoogleMaps.framework */; };
+		DF37063C2925DDB8000B4278 /* GoogleMapsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37063A2925DDB8000B4278 /* GoogleMapsCore.framework */; };
+		DF37063E2925DDE7000B4278 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DF37063D2925DDE7000B4278 /* GoogleMaps.bundle */; };
+		DF3706402925DE08000B4278 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37063F2925DE08000B4278 /* Accelerate.framework */; };
+		DF3706422925DE0F000B4278 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706412925DE0F000B4278 /* CoreData.framework */; };
+		DF3706442925DE15000B4278 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706432925DE15000B4278 /* CoreGraphics.framework */; };
+		DF3706462925DE1B000B4278 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706452925DE1B000B4278 /* CoreImage.framework */; };
+		DF3706482925DE22000B4278 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706472925DE22000B4278 /* CoreLocation.framework */; };
+		DF37064A2925DE27000B4278 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706492925DE27000B4278 /* CoreTelephony.framework */; };
+		DF37064C2925DE2F000B4278 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37064B2925DE2F000B4278 /* CoreText.framework */; };
+		DF37064E2925DE34000B4278 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37064D2925DE34000B4278 /* GLKit.framework */; };
+		DF3706502925DE38000B4278 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37064F2925DE38000B4278 /* ImageIO.framework */; };
+		DF3706522925DE42000B4278 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706512925DE42000B4278 /* libc++.tbd */; };
+		DF3706542925DE47000B4278 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706532925DE47000B4278 /* libz.tbd */; };
+		DF3706562925DE4C000B4278 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706552925DE4C000B4278 /* Metal.framework */; };
+		DF3706582925DE50000B4278 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706572925DE50000B4278 /* OpenGLES.framework */; };
+		DF37065A2925DE57000B4278 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706592925DE57000B4278 /* QuartzCore.framework */; };
+		DF37065C2925DE5D000B4278 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37065B2925DE5D000B4278 /* SystemConfiguration.framework */; };
+		DF37065E2925DE66000B4278 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37065D2925DE66000B4278 /* UIKit.framework */; };
+		E1BF5E7A298B462F00A98390 /* HIStaffButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BF5E79298B462F00A98390 /* HIStaffButtonView.swift */; };
+		DF5B27C5299197E80034A8B9 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5B27C4299197E80034A8B9 /* Array.swift */; };
+		DF5B27C7299372AE0034A8B9 /* Hack_PopcornCart_Text.json in Resources */ = {isa = PBXBuildFile; fileRef = DF5B27C6299372AE0034A8B9 /* Hack_PopcornCart_Text.json */; };
+		E170038A29679D08009B99A8 /* HIProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E170038929679D08009B99A8 /* HIProfileCardView.swift */; };
+		E1E4A5D9291C9BF800780BA1 /* HICarouselSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E4A5D6291C9BF700780BA1 /* HICarouselSwiftUIView.swift */; };
+		E1E4A5DA291C9BF800780BA1 /* HIOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E4A5D7291C9BF700780BA1 /* HIOnboardingView.swift */; };
+		E1E4A5DB291C9BF800780BA1 /* HIOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E4A5D8291C9BF700780BA1 /* HIOnboardingViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,15 +182,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		35D7CE9F20380ACF00654E28 /* Embed App Extensions */ = {
+		35D7CE9F20380ACF00654E28 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				AC607EF4261CD6E300B88798 /* Stickers.appex in Embed App Extensions */,
+				AC607EF4261CD6E300B88798 /* Stickers.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		95E3143621FAD5B40092C22E /* Embed Frameworks */ = {
@@ -304,8 +333,37 @@
 		BCEBD2D923DE995700D32F5A /* HIPopupAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HIPopupAnimator.swift; path = HackIllinois/UI/Animations/HIPopupAnimator.swift; sourceTree = SOURCE_ROOT; };
 		BF0FDA3825F4DCCD003B5DB1 /* HIScheduleSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScheduleSegmentedControl.swift; sourceTree = "<group>"; };
 		BFB1FD3D26105EA400500008 /* HIEditProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEditProfileCell.swift; sourceTree = "<group>"; };
+		D134D30E296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIBannerViewController.swift; sourceTree = "<group>"; };
 		D3A309BA221116A600CBA351 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };
 		D3A309BB2211175200CBA351 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
+		DF3706372925DDAA000B4278 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsBase.framework; sourceTree = "<group>"; };
+		DF3706392925DDB7000B4278 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
+		DF37063A2925DDB8000B4278 /* GoogleMapsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsCore.framework; sourceTree = "<group>"; };
+		DF37063D2925DDE7000B4278 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = HackIllinois/GoogleMaps.framework/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
+		DF37063F2925DE08000B4278 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		DF3706412925DE0F000B4278 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		DF3706432925DE15000B4278 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DF3706452925DE1B000B4278 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		DF3706472925DE22000B4278 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		DF3706492925DE27000B4278 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		DF37064B2925DE2F000B4278 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		DF37064D2925DE34000B4278 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		DF37064F2925DE38000B4278 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		DF3706512925DE42000B4278 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		DF3706532925DE47000B4278 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		DF3706552925DE4C000B4278 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		DF3706572925DE50000B4278 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		DF3706592925DE57000B4278 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		DF37065B2925DE5D000B4278 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		DF37065D2925DE66000B4278 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E1BF5E79298B462F00A98390 /* HIStaffButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIStaffButtonView.swift; sourceTree = "<group>"; };
+		DF5B27C4299197E80034A8B9 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		DF5B27C6299372AE0034A8B9 /* Hack_PopcornCart_Text.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Hack_PopcornCart_Text.json; sourceTree = "<group>"; };
+		E170038929679D08009B99A8 /* HIProfileCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIProfileCardView.swift; sourceTree = "<group>"; };
+		E1E4A5D6291C9BF700780BA1 /* HICarouselSwiftUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HICarouselSwiftUIView.swift; sourceTree = "<group>"; };
+		E1E4A5D7291C9BF700780BA1 /* HIOnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIOnboardingView.swift; sourceTree = "<group>"; };
+		E1E4A5D8291C9BF700780BA1 /* HIOnboardingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIOnboardingViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,7 +371,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF37065E2925DE66000B4278 /* UIKit.framework in Frameworks */,
+				DF37065C2925DE5D000B4278 /* SystemConfiguration.framework in Frameworks */,
+				DF37065A2925DE57000B4278 /* QuartzCore.framework in Frameworks */,
+				DF3706582925DE50000B4278 /* OpenGLES.framework in Frameworks */,
+				DF3706562925DE4C000B4278 /* Metal.framework in Frameworks */,
+				DF3706542925DE47000B4278 /* libz.tbd in Frameworks */,
+				DF3706522925DE42000B4278 /* libc++.tbd in Frameworks */,
+				DF3706502925DE38000B4278 /* ImageIO.framework in Frameworks */,
+				DF37064E2925DE34000B4278 /* GLKit.framework in Frameworks */,
+				DF37064C2925DE2F000B4278 /* CoreText.framework in Frameworks */,
+				DF37064A2925DE27000B4278 /* CoreTelephony.framework in Frameworks */,
+				DF3706482925DE22000B4278 /* CoreLocation.framework in Frameworks */,
+				DF3706462925DE1B000B4278 /* CoreImage.framework in Frameworks */,
+				DF3706442925DE15000B4278 /* CoreGraphics.framework in Frameworks */,
+				DF3706422925DE0F000B4278 /* CoreData.framework in Frameworks */,
+				DF3706402925DE08000B4278 /* Accelerate.framework in Frameworks */,
+				DF37063B2925DDB8000B4278 /* GoogleMaps.framework in Frameworks */,
+				DF3706382925DDAA000B4278 /* GoogleMapsBase.framework in Frameworks */,
 				951E67F923C1C88200477703 /* Lottie in Frameworks */,
+				DF37063C2925DDB8000B4278 /* GoogleMapsCore.framework in Frameworks */,
 				951E67F623C1C83B00477703 /* Keychain in Frameworks */,
 				D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */,
 				95E3143121FAD5B40092C22E /* HIAPI.framework in Frameworks */,
@@ -372,6 +449,7 @@
 		951827761EA35AF100049F79 = {
 			isa = PBXGroup;
 			children = (
+				DF37063D2925DDE7000B4278 /* GoogleMaps.bundle */,
 				951827971EA35DB800049F79 /* HackIllinois */,
 				95E3142B21FAD5B40092C22E /* HIAPI */,
 				AC607EEE261CD6E100B88798 /* Stickers */,
@@ -393,6 +471,11 @@
 		951827971EA35DB800049F79 /* HackIllinois */ = {
 			isa = PBXGroup;
 			children = (
+				D134D30D296B3F40006EA589 /* Fonts */,
+				DF3706392925DDB7000B4278 /* GoogleMaps.framework */,
+				DF37063A2925DDB8000B4278 /* GoogleMapsCore.framework */,
+				DF3706372925DDAA000B4278 /* GoogleMapsBase.framework */,
+				E1E4A5D4291C9BF700780BA1 /* SwiftUI */,
 				D3A309BA221116A600CBA351 /* HackIllinois.entitlements */,
 				957DB2E41FC2435100F8C45E /* ViewControllers */,
 				957DB2E91FC2453100F8C45E /* FlowControllers */,
@@ -479,6 +562,7 @@
 				9510F6A61FCB7E53007D19DB /* HIBaseScannerViewController.swift */,
 				95C3BE2F2008B99C0008ED79 /* HIBaseViewController.swift */,
 				35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */,
+				D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */,
 				95C18DC720096539004784B5 /* HIEventDetailViewController.swift */,
 				95C18DC920096539004784B5 /* HIEventListViewController.swift */,
 				9515E43622093E1300BCAF92 /* HIEventScannerViewController.swift */,
@@ -487,7 +571,9 @@
 				95CCEA1E203D6B3600E3E28C /* HINavigationController.swift */,
 				95C18DC820096539004784B5 /* HIScheduleViewController.swift */,
 				98CA2A3D25C899CF003E842A /* HIProfileViewController.swift */,
+				E170038929679D08009B99A8 /* HIProfileCardView.swift */,
 				60EAF98A273B1AC4002CD205 /* HIScanQRCodeViewController.swift */,
+				E1BF5E79298B462F00A98390 /* HIStaffButtonView.swift */,
 				1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */,
 				3FBFA7AA27335554001FFF28 /* HILeaderboardListViewController.swift */,
 				3FBFA7B427335ABC001FFF28 /* HILeaderboardViewController.swift */,
@@ -512,6 +598,7 @@
 				9552D92721758E4C00A8C869 /* UIView+AutoLayout.swift */,
 				95CA922F201E60D300C46037 /* UIImage+QRCode.swift */,
 				1C63EE6827680DF500D60653 /* CIImage.swift */,
+				DF5B27C4299197E80034A8B9 /* Array.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -673,9 +760,53 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		D134D30D296B3F40006EA589 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D134D30E296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		E1E4A5D4291C9BF700780BA1 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				E1E4A5D5291C9BF700780BA1 /* UI */,
+				E1E4A5D7291C9BF700780BA1 /* HIOnboardingView.swift */,
+				E1E4A5D8291C9BF700780BA1 /* HIOnboardingViewModel.swift */,
+			);
+			name = SwiftUI;
+			path = HackIllinois/SwiftUI;
+			sourceTree = SOURCE_ROOT;
+		};
+		E1E4A5D5291C9BF700780BA1 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				DF5B27C6299372AE0034A8B9 /* Hack_PopcornCart_Text.json */,
+				E1E4A5D6291C9BF700780BA1 /* HICarouselSwiftUIView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		EAE6D26341C3ACE27256067A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DF37065D2925DE66000B4278 /* UIKit.framework */,
+				DF37065B2925DE5D000B4278 /* SystemConfiguration.framework */,
+				DF3706592925DE57000B4278 /* QuartzCore.framework */,
+				DF3706572925DE50000B4278 /* OpenGLES.framework */,
+				DF3706552925DE4C000B4278 /* Metal.framework */,
+				DF3706532925DE47000B4278 /* libz.tbd */,
+				DF3706512925DE42000B4278 /* libc++.tbd */,
+				DF37064F2925DE38000B4278 /* ImageIO.framework */,
+				DF37064D2925DE34000B4278 /* GLKit.framework */,
+				DF37064B2925DE2F000B4278 /* CoreText.framework */,
+				DF3706492925DE27000B4278 /* CoreTelephony.framework */,
+				DF3706472925DE22000B4278 /* CoreLocation.framework */,
+				DF3706452925DE1B000B4278 /* CoreImage.framework */,
+				DF3706432925DE15000B4278 /* CoreGraphics.framework */,
+				DF3706412925DE0F000B4278 /* CoreData.framework */,
+				DF37063F2925DE08000B4278 /* Accelerate.framework */,
 				D3A309BB2211175200CBA351 /* PassKit.framework */,
 			);
 			name = Frameworks;
@@ -703,7 +834,7 @@
 				9518277C1EA35AF100049F79 /* Frameworks */,
 				9518277D1EA35AF100049F79 /* Resources */,
 				1C4BDBAA2744A032003BB3BB /* ShellScript */,
-				35D7CE9F20380ACF00654E28 /* Embed App Extensions */,
+				35D7CE9F20380ACF00654E28 /* Embed Foundation Extensions */,
 				95E3143621FAD5B40092C22E /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -764,12 +895,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1420;
 				ORGANIZATIONNAME = HackIllinois;
 				TargetAttributes = {
 					9518277E1EA35AF100049F79 = {
 						CreatedOnToolsVersion = 8.3;
-						DevelopmentTeam = 8VNQTQM2L6;
 						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -800,7 +930,6 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -833,6 +962,9 @@
 				952D1542220D453D0041383A /* countdown-60.json in Resources */,
 				951827B41EA35E8B00049F79 /* LaunchScreen.storyboard in Resources */,
 				1C7561A5278E96750004D739 /* LightVespaText.json in Resources */,
+				D134D30F296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf in Resources */,
+				DF37063E2925DDE7000B4278 /* GoogleMaps.bundle in Resources */,
+				DF5B27C7299372AE0034A8B9 /* Hack_PopcornCart_Text.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -902,13 +1034,17 @@
 				957D7CAC1FC2940800C4332A /* HackIllinois.xcdatamodeld in Sources */,
 				3FBFA7AB27335554001FFF28 /* HILeaderboardListViewController.swift in Sources */,
 				9510F6A71FCB7E53007D19DB /* HIBaseScannerViewController.swift in Sources */,
+				E1E4A5DA291C9BF800780BA1 /* HIOnboardingView.swift in Sources */,
 				95A7D290203D4F54005EAEAF /* HIAnnouncementCell.swift in Sources */,
 				9515E43722093E1300BCAF92 /* HIEventScannerViewController.swift in Sources */,
 				95A7D28F203D4F54005EAEAF /* HIEventCell.swift in Sources */,
 				ACAA717626017EC4000F42B0 /* HICollectionViewFlowLayout.swift in Sources */,
+				DF5B27C5299197E80034A8B9 /* Array.swift in Sources */,
+				E170038A29679D08009B99A8 /* HIProfileCardView.swift in Sources */,
 				95C3BE302008B99C0008ED79 /* HIBaseViewController.swift in Sources */,
 				BFB1FD3E26105EA400500008 /* HIEditProfileCell.swift in Sources */,
 				95CD0ED52015217E00D79DCC /* HIApplicationStateController.swift in Sources */,
+				E1E4A5DB291C9BF800780BA1 /* HIOnboardingViewModel.swift in Sources */,
 				AC0DDDDC261111B60086BDE0 /* HITextView.swift in Sources */,
 				95A7D292203D4F54005EAEAF /* HILoginSelectionCell.swift in Sources */,
 				3C26401923ADE7AA004E1DBE /* Project+CoreDataProperties.swift in Sources */,
@@ -931,11 +1067,14 @@
 				95C18DC52009618C004784B5 /* HIHomeViewController.swift in Sources */,
 				35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */,
 				3C7E552723AA199900213E1F /* HITimeDataSource.swift in Sources */,
+				D14D3AE3295FBDA200EB7995 /* HIBannerViewController.swift in Sources */,
 				9510F6A11FCB7D6E007D19DB /* Event+CoreDataClass.swift in Sources */,
+				E1E4A5D9291C9BF800780BA1 /* HICarouselSwiftUIView.swift in Sources */,
 				951827A81EA35DB800049F79 /* AppDelegate.swift in Sources */,
 				AC5E9FE326195CCF00674FCF /* HIEventType.swift in Sources */,
 				AC3B621425E86053002386A2 /* Profile+CoreDataProperties.swift in Sources */,
 				9564E02F2218CE6F003A8EEB /* HIMapsDataSource.swift in Sources */,
+				E1BF5E7A298B462F00A98390 /* HIStaffButtonView.swift in Sources */,
 				953199C91FC25CA0009F2AA1 /* HICoreDataController.swift in Sources */,
 				95A7D28D203D4F54005EAEAF /* Identifiable.swift in Sources */,
 				9521A6A820191590009059C6 /* HIEventDataSource.swift in Sources */,
@@ -1039,6 +1178,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1049,6 +1189,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1063,9 +1204,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1098,6 +1240,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1108,6 +1251,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1116,8 +1260,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1134,8 +1279,13 @@
 				CODE_SIGN_ENTITLEMENTS = HackIllinois/HackIllinois.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8VNQTQM2L6;
+				DEVELOPMENT_TEAM = 88CYB22L6D;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HackIllinois",
+				);
 				INFOPLIST_FILE = HackIllinois/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1157,8 +1307,13 @@
 				CODE_SIGN_ENTITLEMENTS = HackIllinois/HackIllinois.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8VNQTQM2L6;
+				DEVELOPMENT_TEAM = 88CYB22L6D;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HackIllinois",
+				);
 				INFOPLIST_FILE = HackIllinois/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1259,8 +1414,8 @@
 				DEVELOPMENT_TEAM = 8VNQTQM2L6;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Stickers/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 2021.1.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 2022.1.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios.Stickers;
@@ -1284,8 +1439,8 @@
 				DEVELOPMENT_TEAM = 8VNQTQM2L6;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Stickers/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 2021.1.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 2022.1.2;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios.Stickers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1357,7 +1512,7 @@
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
 			requirement = {
 				kind = exactVersion;
-				version = 3.1.5;
+				version = 4.0.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

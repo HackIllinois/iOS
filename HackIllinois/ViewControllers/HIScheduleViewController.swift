@@ -70,6 +70,9 @@ class HIScheduleViewController: HIEventListViewController {
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
         backgroundView.image = #imageLiteral(resourceName: "ScheduleBackground")
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            backgroundView.image = #imageLiteral(resourceName: "BackgroundPad")
+        }
     }
 }
 
@@ -84,6 +87,9 @@ extension HIScheduleViewController {
     @objc func didSelectFavoritesIcon(_ sender: UIBarButtonItem) {
         onlyFavorites = !onlyFavorites
         sender.image = onlyFavorites ? #imageLiteral(resourceName: "MenuFavorited") : #imageLiteral(resourceName: "MenuUnfavorited")
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            sender.image = onlyFavorites ? #imageLiteral(resourceName: "FavoritedPad") : #imageLiteral(resourceName: "UnFavoritedPad")
+        }
         updatePredicate()
         animateReload()
     }
@@ -117,19 +123,22 @@ extension HIScheduleViewController {
         super.loadView()
 
         let items = dataStore.map { $0.displayText }
-        let segmentedControl = HIScheduleSegmentedControl(titles: items, nums: [25, 26, 27])
+        let segmentedControl = HIScheduleSegmentedControl(titles: items, nums: [24, 25, 26])
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
+        var segmentedControlConstant: CGFloat = 0.0
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            segmentedControlConstant = 40.0
+        }
 
-        segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
-        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12).isActive = true
-        segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12).isActive = true
-        segmentedControl.heightAnchor.constraint(equalToConstant: 66).isActive = true
-
+        segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8 + segmentedControlConstant).isActive = true
+        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: -34).isActive = true
+        segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 34).isActive = true
+        segmentedControl.heightAnchor.constraint(equalToConstant: 66 + segmentedControlConstant).isActive = true
         let tableView = HITableView()
         view.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10).isActive = true
+        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 20).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
@@ -142,7 +151,7 @@ extension HIScheduleViewController {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         setupRefreshControl()
         super.viewDidLoad()
-        super.setCustomTitle(customTitle: "Schedule")
+        super.setCustomTitle(customTitle: "SCHEDULE")
     }
 }
 
@@ -152,6 +161,9 @@ extension HIScheduleViewController {
         super.setupNavigationItem()
         if !HIApplicationStateController.shared.isGuest {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuUnfavorited"), style: .plain, target: self, action: #selector(didSelectFavoritesIcon(_:)))
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "UnFavoritedPad"), style: .plain, target: self, action: #selector(didSelectFavoritesIcon(_:)))
+            }
         }
     }
 
@@ -172,7 +184,11 @@ extension HIScheduleViewController {
 // MARK: - UITableViewDelegate
 extension HIScheduleViewController {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 25
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return 60
+        } else {
+            return 30
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -192,9 +208,15 @@ extension HIScheduleViewController {
             let sections = fetchedResultsController.sections,
             section < sections.count,
             let date = Formatter.coreData.date(from: sections[section].name) {
-
             header.titleLabel.text = Formatter.simpleTime.string(from: date)
+            header.titleLabel.textColor = .white
             header.titleLabel.textAlignment = .center
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                header.titleLabel.font = HIAppearance.Font.timeIndicator
+            } else {
+                header.titleLabel.font = HIAppearance.Font.glyph
+            }
+
         }
         return header
     }

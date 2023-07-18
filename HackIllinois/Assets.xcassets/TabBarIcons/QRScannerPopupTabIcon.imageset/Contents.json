@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "QRScannerPopupTabIcon@1x.png",
+      "filename" : "qr-code@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "QRScannerPopupTabIcon@2x.png",
+      "filename" : "qr-code@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "QRScannerPopupTabIcon@3x.png",
+      "filename" : "qr-code@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

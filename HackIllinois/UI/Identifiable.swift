@@ -13,14 +13,14 @@
 import Foundation
 import UIKit
 
-protocol Identifiable {
-    static var identifier: String { get }
-}
+//protocol Identifiable {
+//    static var identifier: String { get }
+//}
 
 extension UITableViewCell: Identifiable {
-    static var identifier: String = String(describing: self)
+    static var identifier: String = String(describing: UITableViewCell.self)
 }
 
 extension UITableViewHeaderFooterView: Identifiable {
-    static var identifier: String = String(describing: self)
+    static var identifier: String = String(describing: UITableViewHeaderFooterView.self)
 }
