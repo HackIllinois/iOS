@@ -136,7 +136,7 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.contentTitle
 
-        case .viewTitle: // "What's cooking"
+        case .viewTitle: // "What's cooking, from 2022"
             textHIColor = \.whiteText
             backgroundHIColor = \.clear
             textAlignment = .center
