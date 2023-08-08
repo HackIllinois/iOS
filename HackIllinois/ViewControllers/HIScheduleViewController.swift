@@ -136,6 +136,16 @@ extension HIScheduleViewController {
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: -34).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 34).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 66 + segmentedControlConstant).isActive = true
+        
+        // Start the segmented control on the current day
+        let now = Date()
+        if now > HITimeDataSource.shared.eventTimes.sundayStart {
+            segmentedControl.selectedIndex = 2
+        }
+        else if now > HITimeDataSource.shared.eventTimes.saturdayStart {
+            segmentedControl.selectedIndex = 1
+        }
+        
         let tableView = HITableView()
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 20).isActive = true
@@ -145,6 +155,11 @@ extension HIScheduleViewController {
         tableView.contentInset = UIEdgeInsets(top: 17, left: 0, bottom: 0, right: 0)
         tableView.scrollIndicatorInsets = UIEdgeInsets(top: 17, left: 0, bottom: 0, right: 0)
         self.tableView = tableView
+        
+        tableView.addLeftAndRightSwipeGestureRecognizers(
+            target: segmentedControl,
+            selector: #selector(segmentedControl.handleSwipeGesture(_:))
+        )
     }
 
     override func viewDidLoad() {
