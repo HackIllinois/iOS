@@ -73,7 +73,6 @@ struct HIAppearance: Equatable {
     let profileCardOther: UIColor
     let profileCardNone: UIColor
 
-
     let profileBaseText: UIColor
 
     let clear: UIColor = .clear
@@ -263,46 +262,48 @@ struct HIAppearance: Equatable {
         
         // Schedule fonts
         static let timeIndicator = UIFont(name: "MontserratRoman-Bold", size: 32)
+        static let happeningEventTitle = UIFont(name: "MontserratRoman-Bold", size: 25)
+        
+        // Main header for each page (Profile, Schedule, etc)
         static let viewTitlePad = UIFont(name: "MontserratRoman-Bold", size: 48)
         static let viewTitle = UIFont(name: "MontserratRoman-Bold", size: 24)
-        static let happeningEventTitle = UIFont(name: "MontserratRoman-Bold", size: 25)
         
         // Event cell fonts
         static let eventTitlePad = UIFont(name: "MontserratRoman-Bold", size: 36)
-        static let timeTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 28)
+        static let eventTitle = UIFont(name: "MontserratRoman-SemiBold", size: 18)
+        
         static let locationTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 24)
+        static let locationText = UIFont(name: "MontserratRoman-SemiBold", size: 12)
+        
         static let sponsorTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 24)
-        static let detailTextPad = UIFont(name: "MontserratRoman-Regular", size: 24)
+        static let bubbleSponsorText = UIFont(name: "MontserratRoman-SemiBold", size: 12)
+        static let sponsorText = UIFont(name: "MontserratRoman-Regular", size: 16)
+        
         static let descriptionTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 18)
         static let contentSubtitle = UIFont(name: "MontserratRoman-Light", size: 13)
         static let contentText = UIFont(name: "MontserratRoman-Regular", size: 14)
         static let contentTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 18)
         static let contentTitle = UIFont(name: "MontserratRoman-Medium", size: 18)
         static let detailTitle = UIFont(name: "MontserratRoman-SemiBold", size: 24)
+        static let detailTextPad = UIFont(name: "MontserratRoman-Regular", size: 24)
         static let detailSubtitle = UIFont(name: "MontserratRoman-Medium", size: 16)
         static let detailText = UIFont(name: "MontserratRoman-Regular", size: UIDevice.current.userInterfaceIdiom == .pad ? 19 : 16)
-        static let eventTitle = UIFont(name: "MontserratRoman-SemiBold", size: 18)
-        static let eventTime = UIFont(name: "MontserratRoman-Regular", size: 15)
+
+        static let timeText = UIFont(name: "MontserratRoman-SemiBold", size: 14)
+        static let timeTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 28)
         static let eventDetails = UIFont(name: "MontserratRoman-Regular", size: 14)
         static let eventButtonText = UIFont(name: "MontserratRoman-SemiBold", size: UIDevice.current.userInterfaceIdiom == .pad ? 18 : 14)
         static let eventCategoryText = UIFont(name: "MontserratRoman-Regular", size: 16)
         static let clockText = UIFont(name: "MontserratRoman-SemiBold", size: 48)
         static let descriptionText = UIFont(name: "MontserratRoman-Regular", size: 16)
-        static let timeText = UIFont(name: "MontserratRoman-SemiBold", size: 14)
-        static let locationText = UIFont(name: "MontserratRoman-SemiBold", size: 12)
-        static let bubbleSponsorText = UIFont(name: "MontserratRoman-SemiBold", size: 12)
-        static let sponsorText = UIFont(name: "MontserratRoman-Regular", size: 16)
-        
         // Navigation fonts
         static let navigationSubtitle = UIFont(name: "MontserratRoman-Medium", size: 14)
         static let navigationTitle = UIFont(name: "MontserratRoman-SemiBold", size: 22)
         static let navigationInfoText = UIFont(name: "MontserratRoman-Regular", size: 12)
-        
         // Login fonts
         static let loginTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 32: 24)
         static let loginOrTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 20 : 16)
         static let loginSelection = UIFont(name: "MontserratRoman-SemiBold", size: UIDevice.current.userInterfaceIdiom == .pad ? 26: 16)
-        
         // Profile-related fonts
         static let profileName = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 40 : 20)
         static let profileSubtitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 12)
@@ -312,18 +313,14 @@ struct HIAppearance: Equatable {
         static let profileNumberFigure = UIFont(name: "MontserratRoman-SemiBold", size: 24)
         static let profileUsername = UIFont(name: "MontserratRoman-Bold", size: 16)
         static let profileInterests = UIFont(name: "MontserratRoman-SemiBold", size: 14)
-        
         // QR code fonts
         static let QRCheckInFont = UIFont(name: "MontserratRoman-SemiBold", size: 14)
-        
         // Countdown fonts
         static let newCountdownText = UIFont(name: "MontserratRoman-Bold", size: 48)
-        
         // Onboarding fonts
         static let onboardingGetStartedText = UIFont(name: "MontserratRoman-SemiBold", size: 25)
         static let onboardingTitle = UIFont(name: "MontserratRoman-Bold", size: 30)
         static let onboardingDescription = UIFont(name: "MontserratRoman-Regular", size: 20)
-        
         // Leaderboard fonts
         static let leaderboardPoints = UIFont(name: "MontserratRoman-Semibold", size: 12)
         static let leaderboardName = UIFont(name: "MontserratRoman-SemiBold", size: 16)
@@ -331,7 +328,6 @@ struct HIAppearance: Equatable {
         static let leaderboardPointsPad = UIFont(name: "MontserratRoman-Bold", size: 24)
         static let leaderboardNamePad = UIFont(name: "MontserratRoman-SemiBold", size: 32)
         static let leaderboardRankPad = UIFont(name: "MontserratRoman-Bold", size: 48)
-        
         // Misc
         static let sectionHeader = UIFont(name: "MontserratRoman-Bold", size: 13)
         static let button = UIFont(name: "MontserratRoman-Regular", size: 15)

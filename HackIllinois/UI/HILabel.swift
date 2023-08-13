@@ -18,7 +18,6 @@ class HILabel: UILabel {
     enum Style {
         case location
         case event
-        case eventTime
         case eventType
         case sponsor
         case project
@@ -96,11 +95,6 @@ class HILabel: UILabel {
             } else {
                 font = HIAppearance.Font.eventTitle
             }
-
-        case .eventTime:
-            textHIColor = \.baseText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.eventTime
 
         case .eventType:
             textHIColor = \.whiteText
