@@ -41,7 +41,6 @@ class HILabel: UILabel {
         case profileInterests
         case profileDietaryRestrictions
         case navigationInfo
-        case countdown
         case pointsText
         case error
         case codeError
@@ -243,11 +242,6 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.navigationInfoText
             textAlignment = .left
-
-        case .countdown:
-            textHIColor = \.titleText
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.countdownText
 
         case .pointsText:
             textHIColor = \.white
