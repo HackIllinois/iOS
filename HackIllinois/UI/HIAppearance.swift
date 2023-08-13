@@ -281,6 +281,7 @@ struct HIAppearance: Equatable {
         
         static let descriptionTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 18)
         static let contentSubtitle = UIFont(name: "MontserratRoman-Light", size: 13)
+        // Content Text specifies description
         static let contentText = UIFont(name: "MontserratRoman-Regular", size: 14)
         static let contentTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 18)
         static let contentTitle = UIFont(name: "MontserratRoman-Medium", size: 18)

@@ -309,7 +309,8 @@ class HILabel: UILabel {
             } else {
                 font = HIAppearance.Font.leaderboardPoints
             }
-
+            
+        // Case for event bubble cell time info
         case .newTime:
             textHIColor = \.black
             backgroundHIColor = \.clear
@@ -318,7 +319,8 @@ class HILabel: UILabel {
             } else {
                 font = HIAppearance.Font.timeText
             }
-
+            
+        // Case for event bubble cell sponsor info
         case .newSponsor:
             textHIColor = \.black
             backgroundHIColor = \.clear
@@ -328,7 +330,8 @@ class HILabel: UILabel {
             } else {
                 font = HIAppearance.Font.bubbleSponsorText
             }
-
+            
+        // Case for event bubble cell location info
         case .newLocation:
             textHIColor = \.black
             backgroundHIColor = \.clear
