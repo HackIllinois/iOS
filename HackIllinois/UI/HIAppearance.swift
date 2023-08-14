@@ -292,6 +292,7 @@ struct HIAppearance: Equatable {
 
         static let timeText = UIFont(name: "MontserratRoman-SemiBold", size: 14)
         static let timeTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 28)
+        static let eventTime = UIFont(name: "MontserratRoman-Regular", size: 15)
         static let eventDetails = UIFont(name: "MontserratRoman-Regular", size: 14)
         static let eventButtonText = UIFont(name: "MontserratRoman-SemiBold", size: UIDevice.current.userInterfaceIdiom == .pad ? 18 : 14)
         static let eventCategoryText = UIFont(name: "MontserratRoman-Regular", size: 16)
@@ -317,7 +318,8 @@ struct HIAppearance: Equatable {
         // QR code fonts
         static let QRCheckInFont = UIFont(name: "MontserratRoman-SemiBold", size: 14)
         // Countdown fonts
-        static let newCountdownText = UIFont(name: "MontserratRoman-Bold", size: 48)
+        static let newCountdownText = UIFont(name: "MontserratRoman-Bold", size: 48) // Hack 2023
+        static let countdownText = UIFont(name: "MontserratRoman-Bold", size: 25)
         // Onboarding fonts
         static let onboardingGetStartedText = UIFont(name: "MontserratRoman-SemiBold", size: 25)
         static let onboardingTitle = UIFont(name: "MontserratRoman-Bold", size: 30)

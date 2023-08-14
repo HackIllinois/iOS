@@ -18,6 +18,7 @@ class HILabel: UILabel {
     enum Style {
         case location
         case event
+        case eventTime
         case eventType
         case sponsor
         case project
@@ -39,6 +40,7 @@ class HILabel: UILabel {
         case profileUsername
         case profileInterests
         case profileDietaryRestrictions
+        case countdown
         case navigationInfo
         case pointsText
         case error
@@ -96,7 +98,12 @@ class HILabel: UILabel {
             } else {
                 font = HIAppearance.Font.eventTitle
             }
-
+            
+        case .eventTime:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.eventTime
+            
         case .eventType:
             textHIColor = \.whiteText
             backgroundHIColor = \.clear
@@ -237,6 +244,11 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.navigationInfoText
             textAlignment = .left
+            
+        case .countdown:
+            textHIColor = \.titleText
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.countdownText
 
         case .pointsText:
             textHIColor = \.white
