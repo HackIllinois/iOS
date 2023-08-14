@@ -170,7 +170,7 @@ extension HIEventCell {
         timeLabel.leadingAnchor.constraint(equalTo: timeImageView.trailingAnchor, constant: eventCellSpacing + 1).isActive = true
         timeLabel.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor).isActive = true
         if !rhs.sponsor.isEmpty {
-            let sponsorLabel = HILabel(style: .sponsor)
+            let sponsorLabel = HILabel(style: .newSponsor)
             middleContainerView.addSubview(sponsorImageView)
             middleContainerView.addSubview(sponsorLabel)
             sponsorImageView.translatesAutoresizingMaskIntoConstraints = false

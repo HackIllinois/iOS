@@ -50,6 +50,7 @@ class HILabel: UILabel {
         case leaderboardName
         case leaderboardPoints
         case neonCountdown
+        // Cases used on bubble event cell
         case newSponsor
         case newLocation
         case newTime
