@@ -18,6 +18,10 @@ public final class AuthService: BaseService {
     public override static var baseURL: String {
         return super.baseURL + "auth/"
     }
+    
+    public override static var baseURLv2: String {
+        return super.baseURLv2 + "auth/"
+    }
 
     public enum OAuthProvider: String, Codable {
         case github
@@ -38,7 +42,16 @@ public final class AuthService: BaseService {
     public static func oauthURL(provider: OAuthProvider) -> URL {
         guard let url = URL(string: AuthService.baseURL + "\(provider.rawValue)/?redirect_uri=https://hackillinois.org/auth/?isiOS=1") else {
             fatalError("Invalid configuration.")
+        
         }
+        return url
+    }
+    
+    public static func oauthURLv2(provider: OAuthProvider) -> URL {
+        guard let url = URL(string: AuthService.baseURLv2 + "\(provider.rawValue)") else {
+            fatalError("Invalid configuration.")
+        }
+        NSLog("using login URL" + "\(url)");
         return url
     }
 
@@ -46,6 +59,11 @@ public final class AuthService: BaseService {
         var body = HTTPParameters()
         body["code"] = code
         return APIRequest<Token>(service: self, endpoint: "code/\(provider.rawValue)/?redirect_uri=https://hackillinois.org/auth/?isiOS=1", body: body, method: .POST)
+    }
+    
+    public static func getAPITokenv2(provider: OAuthProvider) -> APIRequest<Token> {
+        var body = HTTPParameters()
+        return APIRequest<Token>(service: self, endpoint: AuthService.baseURL + "\(provider.rawValue)", body: body, method: .GET)
     }
 
     public static func getRoles() -> APIRequest<RolesContainer> {

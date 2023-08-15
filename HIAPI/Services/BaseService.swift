@@ -17,6 +17,10 @@ public class BaseService: APIService {
     public class var baseURL: String {
         return "https://api.hackillinois.org/"
     }
+    
+    public class var baseURLv2: String {
+        return "https://adonix.hackillinois.org/"
+    }
 
     public static var headers: HTTPHeaders? = ["Content-Type": "application/json"]
 
