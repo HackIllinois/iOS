@@ -40,8 +40,8 @@ class HILabel: UILabel {
         case profileUsername
         case profileInterests
         case profileDietaryRestrictions
-        case navigationInfo
         case countdown
+        case navigationInfo
         case pointsText
         case error
         case codeError
@@ -52,6 +52,7 @@ class HILabel: UILabel {
         case leaderboardName
         case leaderboardPoints
         case neonCountdown
+        // Cases used on bubble event cell
         case newSponsor
         case newLocation
         case newTime
@@ -97,12 +98,12 @@ class HILabel: UILabel {
             } else {
                 font = HIAppearance.Font.eventTitle
             }
-
+            
         case .eventTime:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
             font = HIAppearance.Font.eventTime
-
+            
         case .eventType:
             textHIColor = \.whiteText
             backgroundHIColor = \.clear
@@ -243,7 +244,7 @@ class HILabel: UILabel {
             backgroundHIColor = \.clear
             font = HIAppearance.Font.navigationInfoText
             textAlignment = .left
-
+            
         case .countdown:
             textHIColor = \.titleText
             backgroundHIColor = \.clear
@@ -321,7 +322,8 @@ class HILabel: UILabel {
             } else {
                 font = HIAppearance.Font.leaderboardPoints
             }
-
+            
+        // Case for event bubble cell time info
         case .newTime:
             textHIColor = \.black
             backgroundHIColor = \.clear
@@ -330,7 +332,8 @@ class HILabel: UILabel {
             } else {
                 font = HIAppearance.Font.timeText
             }
-
+            
+        // Case for event bubble cell sponsor info
         case .newSponsor:
             textHIColor = \.black
             backgroundHIColor = \.clear
@@ -340,7 +343,8 @@ class HILabel: UILabel {
             } else {
                 font = HIAppearance.Font.bubbleSponsorText
             }
-
+            
+        // Case for event bubble cell location info
         case .newLocation:
             textHIColor = \.black
             backgroundHIColor = \.clear

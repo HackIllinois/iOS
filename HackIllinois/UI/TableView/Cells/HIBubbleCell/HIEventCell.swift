@@ -180,8 +180,7 @@ extension HIEventCell {
             sponsorLabel.leadingAnchor.constraint(equalTo: sponsorImageView.trailingAnchor, constant: eventCellSpacing + 1).isActive = true
             sponsorLabel.centerYAnchor.constraint(equalTo: sponsorImageView.centerYAnchor).isActive = true
         }
-        let locationLabel = HILabel(style: .newLocation)
-        locationLabel.text = "Online"
+        let locationLabel = HILabel(style: .newLocation); locationLabel.text = "Online"
         if rhs.locations.count > 0 {
             locationLabel.text = rhs.locations.map({ ($0 as AnyObject).name }).joined(separator: ", ")
         }

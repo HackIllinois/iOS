@@ -46,7 +46,7 @@ struct HIAppearance: Equatable {
     let buttonDarkBlueGreen: UIColor
     let favoriteStarBackground: UIColor
     let segmentedBackground: UIColor
-    // New fonts added. Replace old ones?
+    
     let buttonViewBackground: UIColor
     let profile0: UIImage
     let profile1: UIImage
@@ -73,29 +73,18 @@ struct HIAppearance: Equatable {
     let profileCardOther: UIColor
     let profileCardNone: UIColor
 
-
     let profileBaseText: UIColor
 
     let clear: UIColor = .clear
     let black: UIColor = .black
     let white: UIColor = .white
 
-    //Hack 2022 color palette
-    private static let darkRed = #colorLiteral(red: 0.6039215686, green: 0.1411764706, blue: 0.168627451, alpha: 1)
+    // Hack 2023 color palette
+    private static let lightBlack = #colorLiteral(red: 0.03137254902, green: 0.08235294118, blue: 0.1058823529, alpha: 1)
+    private static let yellowWhite = #colorLiteral(red: 0.9647058824, green: 0.9568627451, blue: 0.831372549, alpha: 1)
+    private static let lightYellow = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1)
     private static let tan = #colorLiteral(red: 0.9098039216, green: 0.8431372549, blue: 0.6470588235, alpha: 1)
     private static let orange = #colorLiteral(red: 0.9294117647, green: 0.6078431373, blue: 0.1294117647, alpha: 1)
-    private static let darkOrange = #colorLiteral(red: 0.7882352941, green: 0.4117647059, blue: 0.1568627451, alpha: 1)
-    private static let lightBlueGreen = #colorLiteral(red: 0.8470588235, green: 0.9254901961, blue: 0.8470588235, alpha: 1)
-    private static let maroon = #colorLiteral(red: 0.6392156863, green: 0.2941176471, blue: 0.2588235294, alpha: 1)
-    private static let lightRed = #colorLiteral(red: 0.9019607843, green: 0.5960784314, blue: 0.5568627451, alpha: 1)
-    private static let yellowGreen = #colorLiteral(red: 0.7882352941, green: 0.8117647059, blue: 0.462745098, alpha: 1)
-    private static let green = #colorLiteral(red: 0.4705882353, green: 0.6745098039, blue: 0.2588235294, alpha: 1)
-    private static let lightBlack = #colorLiteral(red: 0.03137254902, green: 0.08235294118, blue: 0.1058823529, alpha: 1)
-    private static let salmon = #colorLiteral(red: 0.9490196078, green: 0.6078431373, blue: 0.4705882353, alpha: 1)
-    private static let yellowWhite = #colorLiteral(red: 0.9647058824, green: 0.9568627451, blue: 0.831372549, alpha: 1)
-
-    // Hack 2023 color palette
-    private static let lightYellow = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1)
     private static let blue = #colorLiteral(red: 0.03137254902, green: 0.5450980392, blue: 0.7568627451, alpha: 1)
     private static let pink = #colorLiteral(red: 0.9960784314, green: 0.4392156863, blue: 0.5960784314, alpha: 1)
     private static let mediumOrange = #colorLiteral(red: 0.9764705882, green: 0.5843137255, blue: 0.3411764706, alpha: 1)
@@ -114,6 +103,8 @@ struct HIAppearance: Equatable {
     private static let other = #colorLiteral(red: 0.9960784314, green: 0.6392156863, blue: 0.6666666667, alpha: 1)
     private static let none = #colorLiteral(red: 0.1137254902, green: 0.1490196078, blue: 0.2666666667, alpha: 1)
     private static let profileBaseText = #colorLiteral(red: 0.1137254902, green: 0.1490196078, blue: 0.2666666667, alpha: 1)
+    private static let yellowGreen = #colorLiteral(red: 0.7882352941, green: 0.8117647059, blue: 0.462745098, alpha: 1)
+    private static let green = #colorLiteral(red: 0.4705882353, green: 0.6745098039, blue: 0.2588235294, alpha: 1)
 
     private static let transparent2 = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     private static var statusBarWhite: UIStatusBarStyle {
@@ -256,77 +247,94 @@ struct HIAppearance: Equatable {
     }
 
     enum Font {
+        // Fonts ending with "Pad" correspond to the iPad
+        // Glyph fonts correspond to the point/event type label texts and "Memories Made" (2023 app) text
         static let glyphPad = UIFont(name: "MontserratRoman-Bold", size: 24)
-        static let timeIndicator = UIFont(name: "MontserratRoman-Bold", size: 32)
+        static let glyph = UIFont(name: "MontserratRoman-Bold", size: 16)
+        
+        // Segemented control fonts
         static let homeSegmentedTitlePad = UIFont(name: "MontserratRoman-Bold", size: 40)
-        static let viewTitlePad = UIFont(name: "MontserratRoman-Bold", size: 48)
+        static let homeSegmentedTitle = UIFont(name: "MontserratRoman-Bold", size: 24)
         static let scheduleSegmentedNumberPad = UIFont(name: "MontserratRoman-SemiBold", size: 36)
+        static let segmentedNumberText = UIFont(name: "MontserratRoman-SemiBold", size: 18)
         static let scheduleSegmentedPad = UIFont(name: "MontserratRoman-SemiBold", size: 32)
+        static let segmentedTitle = UIFont(name: "MontserratRoman-Bold", size: 16)
+        
+        // Schedule fonts
+        static let timeIndicator = UIFont(name: "MontserratRoman-Bold", size: 32)
+        static let happeningEventTitle = UIFont(name: "MontserratRoman-Bold", size: 25)
+        
+        // Main header for each page (Profile, Schedule, etc)
+        static let viewTitlePad = UIFont(name: "MontserratRoman-Bold", size: 48)
+        static let viewTitle = UIFont(name: "MontserratRoman-Bold", size: 24)
+        
+        // Event cell fonts
         static let eventTitlePad = UIFont(name: "MontserratRoman-Bold", size: 36)
-        static let timeTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 28)
+        static let eventTitle = UIFont(name: "MontserratRoman-SemiBold", size: 18)
+        
         static let locationTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 24)
+        static let locationText = UIFont(name: "MontserratRoman-SemiBold", size: 12)
+        
         static let sponsorTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 24)
-        static let detailTextPad = UIFont(name: "MontserratRoman-Regular", size: 24)
+        static let bubbleSponsorText = UIFont(name: "MontserratRoman-SemiBold", size: 12)
+        static let sponsorText = UIFont(name: "MontserratRoman-Regular", size: 16)
+        
         static let descriptionTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 18)
         static let contentSubtitle = UIFont(name: "MontserratRoman-Light", size: 13)
+        // Content Text specifies description
         static let contentText = UIFont(name: "MontserratRoman-Regular", size: 14)
         static let contentTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 18)
         static let contentTitle = UIFont(name: "MontserratRoman-Medium", size: 18)
         static let detailTitle = UIFont(name: "MontserratRoman-SemiBold", size: 24)
+        static let detailTextPad = UIFont(name: "MontserratRoman-Regular", size: 24)
         static let detailSubtitle = UIFont(name: "MontserratRoman-Medium", size: 16)
         static let detailText = UIFont(name: "MontserratRoman-Regular", size: UIDevice.current.userInterfaceIdiom == .pad ? 19 : 16)
-        static let viewTitle = UIFont(name: "MontserratRoman-Bold", size: 24)
-        static let happeningEventTitle = UIFont(name: "MontserratRoman-Bold", size: 25)
-        static let eventTitle = UIFont(name: "MontserratRoman-SemiBold", size: 18)
+
+        static let timeText = UIFont(name: "MontserratRoman-SemiBold", size: 14)
+        static let timeTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 28)
         static let eventTime = UIFont(name: "MontserratRoman-Regular", size: 15)
         static let eventDetails = UIFont(name: "MontserratRoman-Regular", size: 14)
         static let eventButtonText = UIFont(name: "MontserratRoman-SemiBold", size: UIDevice.current.userInterfaceIdiom == .pad ? 18 : 14)
         static let eventCategoryText = UIFont(name: "MontserratRoman-Regular", size: 16)
         static let clockText = UIFont(name: "MontserratRoman-SemiBold", size: 48)
+        static let descriptionText = UIFont(name: "MontserratRoman-Regular", size: 16)
+        // Navigation fonts
         static let navigationSubtitle = UIFont(name: "MontserratRoman-Medium", size: 14)
         static let navigationTitle = UIFont(name: "MontserratRoman-SemiBold", size: 22)
         static let navigationInfoText = UIFont(name: "MontserratRoman-Regular", size: 12)
-        static let descriptionText = UIFont(name: "MontserratRoman-Regular", size: 16)
-        static let timeText = UIFont(name: "MontserratRoman-SemiBold", size: 14)
-        static let locationText = UIFont(name: "MontserratRoman-SemiBold", size: 12)
-        static let bubbleSponsorText = UIFont(name: "MontserratRoman-SemiBold", size: 12)
-        static let sponsorText = UIFont(name: "MontserratRoman-Regular", size: 16)
-        static let welcomeTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 40: 24)
+        // Login fonts
         static let loginTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 32: 24)
         static let loginOrTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 20 : 16)
         static let loginSelection = UIFont(name: "MontserratRoman-SemiBold", size: UIDevice.current.userInterfaceIdiom == .pad ? 26: 16)
-
-        static let sectionHeader = UIFont(name: "MontserratRoman-Bold", size: 13)
-        static let button = UIFont(name: "MontserratRoman-Regular", size: 15)
-        static let glyph = UIFont(name: "MontserratRoman-Bold", size: 16)
-
+        // Profile-related fonts
         static let profileName = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 40 : 20)
         static let profileSubtitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 12)
         static let profileDietaryRestrictions = UIFont(name: "MontserratRoman-SemiBold", size: UIDevice.current.userInterfaceIdiom == .pad ? 32 : 16)
         static let profileDietaryRestrictionsLabel = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 12)
         static let profileTier = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 36 : 18)
-
-
         static let profileNumberFigure = UIFont(name: "MontserratRoman-SemiBold", size: 24)
         static let profileUsername = UIFont(name: "MontserratRoman-Bold", size: 16)
         static let profileInterests = UIFont(name: "MontserratRoman-SemiBold", size: 14)
-        static let segmentedTitle = UIFont(name: "MontserratRoman-Bold", size: 16)
-        static let homeSegmentedTitle = UIFont(name: "MontserratRoman-Bold", size: 24)
-        static let segmentedNumberText = UIFont(name: "MontserratRoman-SemiBold", size: 18)
-
+        // QR code fonts
         static let QRCheckInFont = UIFont(name: "MontserratRoman-SemiBold", size: 14)
-
+        // Countdown fonts
+        static let newCountdownText = UIFont(name: "MontserratRoman-Bold", size: 48) // Hack 2023
         static let countdownText = UIFont(name: "MontserratRoman-Bold", size: 25)
-        static let newCountdownText = UIFont(name: "MontserratRoman-Bold", size: 48)
+        // Onboarding fonts
         static let onboardingGetStartedText = UIFont(name: "MontserratRoman-SemiBold", size: 25)
         static let onboardingTitle = UIFont(name: "MontserratRoman-Bold", size: 30)
         static let onboardingDescription = UIFont(name: "MontserratRoman-Regular", size: 20)
+        // Leaderboard fonts
         static let leaderboardPoints = UIFont(name: "MontserratRoman-Semibold", size: 12)
         static let leaderboardName = UIFont(name: "MontserratRoman-SemiBold", size: 16)
         static let leaderboardRank = UIFont(name: "MontserratRoman-Bold", size: 24)
         static let leaderboardPointsPad = UIFont(name: "MontserratRoman-Bold", size: 24)
         static let leaderboardNamePad = UIFont(name: "MontserratRoman-SemiBold", size: 32)
         static let leaderboardRankPad = UIFont(name: "MontserratRoman-Bold", size: 48)
+        // Misc
+        static let sectionHeader = UIFont(name: "MontserratRoman-Bold", size: 13)
+        static let button = UIFont(name: "MontserratRoman-Regular", size: 15)
+        static let welcomeTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 40: 24)
     }
 }
 
