@@ -36,16 +36,22 @@ public final class AuthService: BaseService {
     }
 
     public static func oauthURL(provider: OAuthProvider) -> URL {
-        guard let url = URL(string: AuthService.baseURL + "\(provider.rawValue)/?redirect_uri=https://hackillinois.org/auth/?isiOS=1") else {
-            fatalError("Invalid configuration.")
+            guard let url = URL(string: AuthService.baseURL + "\(provider.rawValue)/?redirect_uri=hackillinois://") else {
+                    fatalError("Invalid configuration.")
+            }
+            //guard let url = URL(string: AuthService.baseURL + "\(provider.rawValue)") else {
+                //fatalError("Invalid configuration.")
+            //}
+            NSLog("using login URL" + "\(url)")
+            return url
         }
-        return url
-    }
 
-    public static func getAPIToken(provider: OAuthProvider, code: String) -> APIRequest<Token> {
-        var body = HTTPParameters()
-        body["code"] = code
-        return APIRequest<Token>(service: self, endpoint: "code/\(provider.rawValue)/?redirect_uri=https://hackillinois.org/auth/?isiOS=1", body: body, method: .POST)
+    public static func getAPIToken(provider: OAuthProvider) -> APIRequest<Token> {
+            var body = HTTPParameters()
+            let temp = APIRequest<Token>(service: self, endpoint: AuthService.baseURL + "\(provider.rawValue)/?redirect_uri=https://hackillinois.org/auth/?isiOS=1", body: body, method: .GET)
+            print("Testing to see if getAPIToken runs")
+            NSLog(temp.body?.description ?? "")
+            return temp
     }
 
     public static func getRoles() -> APIRequest<RolesContainer> {

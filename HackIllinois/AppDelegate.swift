@@ -41,6 +41,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .authorize(with: user)
             .launch()
     }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        // Handle the URL with your custom scheme
+        print("This is our url" + url.description)
+        if url.scheme == "hackillinois" {
+            // Extract and process the data from the URL, e.g., JWT token
+            // Perform the necessary actions based on the authentication result
+            return true
+        }
+        return false
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         setupNavigationBarAppearance()

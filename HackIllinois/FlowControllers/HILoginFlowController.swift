@@ -106,20 +106,37 @@ private extension HILoginFlowController {
         }
 
         let loginURL = HIAPI.AuthService.oauthURL(provider: user.provider)
-        loginSession = ASWebAuthenticationSession(url: loginURL, callbackURLScheme: nil) { [weak self] (url, error) in
+        print("Entering loginsession")
+        NSLog(loginURL.description)
+        loginSession = ASWebAuthenticationSession(url: loginURL, callbackURLScheme: "hackillinois", completionHandler: { [weak self] (url, error) in
+            print("Entering fr")
+            print("This is our url" + (url?.description ?? ""))
             if let url = url,
                 let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
-                let queryItems = components.queryItems,
-                let code = queryItems.first(where: { $0.name == "code" })?.value,
-                code.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
+                let queryItems = components.queryItems {
                 var user = user
                 var profile = profile
-                user.oauthCode = code
-                profile.oauthCode = code
-                self?.exchangeOAuthCodeForAPIToken(buildingUser: user, profile: profile, sender: sender)
+                print("Before exchange code")
+                HIAPI.AuthService.getAPIToken(provider: user.provider)
+                .onCompletion { [weak self] result in
+                    do {
+                        let (apiToken, _) = try result.get()
+                        var user = user
+                        var profile = profile
+                        user.token = apiToken.token
+                        profile.token = apiToken.token
+                        NSLog(apiToken.token) // Not being logged
+                        self?.populateUserData(buildingUser: user, profile: profile, sender: sender)
+                    } catch {
+                        self?.presentAuthenticationFailure(withError: error, sender: sender)
+                    }
+                }
+//                self?.exchangeOAuthCodeForAPIToken(buildingUser: user, profile: profile, sender: sender)
             } else if let error = error {
+                print(error)
                 if (error as? ASWebAuthenticationSessionError)?.code == ASWebAuthenticationSessionError.canceledLogin {
                     // do nothing
+                    
                 } else {
                     self?.presentAuthenticationFailure(withError: error, sender: sender)
                 }
@@ -127,13 +144,15 @@ private extension HILoginFlowController {
                 let error = HIError.unknownAuthenticationError
                 self?.presentAuthenticationFailure(withError: error, sender: sender)
             }
-        }
+        })
         loginSession?.presentationContextProvider = self
         loginSession?.start()
+        print("ended")
     }
 
     private func exchangeOAuthCodeForAPIToken(buildingUser user: HIUser, profile: HIProfile, sender: HIBaseViewController) {
-        HIAPI.AuthService.getAPIToken(provider: user.provider, code: user.oauthCode)
+        print("Entered exchangeOAuthCode")
+        HIAPI.AuthService.getAPIToken(provider: user.provider)
         .onCompletion { [weak self] result in
             do {
                 let (apiToken, _) = try result.get()
@@ -141,6 +160,7 @@ private extension HILoginFlowController {
                 var profile = profile
                 user.token = apiToken.token
                 profile.token = apiToken.token
+                NSLog(apiToken.token) // Not being logged
                 self?.populateUserData(buildingUser: user, profile: profile, sender: sender)
             } catch {
                 self?.presentAuthenticationFailure(withError: error, sender: sender)
