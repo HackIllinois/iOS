@@ -15,7 +15,7 @@ import APIManager
 
 public class BaseService: APIService {
     public class var baseURL: String {
-        return "https://api.hackillinois.org/"
+        return "https://adonix.hackillinois.org/"
     }
 
     public static var headers: HTTPHeaders? = ["Content-Type": "application/json"]

@@ -34,18 +34,20 @@ public final class AuthService: BaseService {
             }
         }
     }
-
+    // For HackIllinois 2024, we are only calling oauthURL because we do not make another call to get the token
     public static func oauthURL(provider: OAuthProvider) -> URL {
-        guard let url = URL(string: AuthService.baseURL + "\(provider.rawValue)/?redirect_uri=https://hackillinois.org/auth/?isiOS=1") else {
-            fatalError("Invalid configuration.")
-        }
-        return url
+            guard let url = URL(string: AuthService.baseURL + "login/\(provider.rawValue)?device=ios") else {
+                    fatalError("Invalid configuration.")
+            }
+            NSLog("using login URL" + "\(url)")
+            return url
     }
 
-    public static func getAPIToken(provider: OAuthProvider, code: String) -> APIRequest<Token> {
-        var body = HTTPParameters()
-        body["code"] = code
-        return APIRequest<Token>(service: self, endpoint: "code/\(provider.rawValue)/?redirect_uri=https://hackillinois.org/auth/?isiOS=1", body: body, method: .POST)
+    public static func getAPIToken(provider: OAuthProvider) -> APIRequest<Token> {
+            let body = HTTPParameters()
+            let temp = APIRequest<Token>(service: self, endpoint: AuthService.baseURL + "login/\(provider.rawValue)?device=ios", body: body, method: .GET)
+            NSLog(temp.body?.description ?? "")
+            return temp
     }
 
     public static func getRoles() -> APIRequest<RolesContainer> {
