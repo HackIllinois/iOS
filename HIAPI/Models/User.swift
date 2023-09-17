@@ -16,8 +16,8 @@ import Foundation
 public struct User: Codable, APIReturnable {
     public let id: String
     public let username: String
-    public let firstName: String
-    public let lastName: String
+    public let firstname: String
+    public let lastname: String
     public let email: String
 }
 

@@ -91,7 +91,6 @@ extension HILoginFlowController {
 // MARK: - Login Flow
 private extension HILoginFlowController {
     private func attemptOAuthLogin(buildingUser user: HIUser, profile: HIProfile, sender: HIBaseViewController) {
-
         //GUEST (bypass auth)
         if user.provider == .guest {
             var guestUser = HIUser()
@@ -104,42 +103,24 @@ private extension HILoginFlowController {
             }
             return
         }
-
         let loginURL = HIAPI.AuthService.oauthURL(provider: user.provider)
-        print("Entering loginsession")
         NSLog(loginURL.description)
         loginSession = ASWebAuthenticationSession(url: loginURL, callbackURLScheme: "hackillinois", completionHandler: { [weak self] (url, error) in
-            print("Entering fr")
-            print("This is our url" + (url?.description ?? ""))
             if let url = url,
                 let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
-                let queryItems = components.queryItems {
-                var user = user
-                var profile = profile
-                print("Before exchange code")
-                HIAPI.AuthService.getAPIToken(provider: user.provider)
-                .onCompletion { [weak self] result in
-                    do {
-                        let (apiToken, _) = try result.get()
-                        var user = user
-                        var profile = profile
-                        user.token = apiToken.token
-                        profile.token = apiToken.token
-                        NSLog(apiToken.token) // Not being logged
-                        self?.populateUserData(buildingUser: user, profile: profile, sender: sender)
-                    } catch {
-                        self?.presentAuthenticationFailure(withError: error, sender: sender)
-                    }
-                }
-//                self?.exchangeOAuthCodeForAPIToken(buildingUser: user, profile: profile, sender: sender)
+                let queryItems = components.queryItems,
+                let token = queryItems.first(where: { $0.name == "token" })?.value, // Get token
+                token.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
+                    var user = user
+                    var profile = profile
+                    user.token = token
+                    profile.token = token
+                    self?.populateUserData(buildingUser: user, profile: profile, sender: sender) // Populate user
             } else if let error = error {
-                print(error)
                 if (error as? ASWebAuthenticationSessionError)?.code == ASWebAuthenticationSessionError.canceledLogin {
                     // do nothing
-                    
                 } else {
-                    self?.presentAuthenticationFailure(withError: error, sender: sender)
-                }
+                    self?.presentAuthenticationFailure(withError: error, sender: sender)}
             } else {
                 let error = HIError.unknownAuthenticationError
                 self?.presentAuthenticationFailure(withError: error, sender: sender)
@@ -147,11 +128,10 @@ private extension HILoginFlowController {
         })
         loginSession?.presentationContextProvider = self
         loginSession?.start()
-        print("ended")
     }
 
+    // For HackIllinois 2024, this function is not being used
     private func exchangeOAuthCodeForAPIToken(buildingUser user: HIUser, profile: HIProfile, sender: HIBaseViewController) {
-        print("Entered exchangeOAuthCode")
         HIAPI.AuthService.getAPIToken(provider: user.provider)
         .onCompletion { [weak self] result in
             do {
@@ -160,7 +140,7 @@ private extension HILoginFlowController {
                 var profile = profile
                 user.token = apiToken.token
                 profile.token = apiToken.token
-                NSLog(apiToken.token) // Not being logged
+                NSLog(apiToken.token)
                 self?.populateUserData(buildingUser: user, profile: profile, sender: sender)
             } catch {
                 self?.presentAuthenticationFailure(withError: error, sender: sender)
@@ -178,8 +158,8 @@ private extension HILoginFlowController {
                 var user = user
                 user.id = apiUser.id
                 user.username = apiUser.username
-                user.firstName = apiUser.firstName
-                user.lastName = apiUser.lastName
+                user.firstName = apiUser.firstname
+                user.lastName = apiUser.lastname
                 user.email = apiUser.email
                 self?.populateRoleData(buildingUser: user, profile: profile, sender: sender)
             } catch {
