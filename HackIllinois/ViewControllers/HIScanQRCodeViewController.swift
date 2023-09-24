@@ -51,8 +51,9 @@ class HIScanQRCodeViewController: HIBaseViewController {
 extension HIScanQRCodeViewController {
     override func loadView() {
         super.loadView()
+        print("QR code test")
         guard let user = HIApplicationStateController.shared.user else { return }
-        if HIApplicationStateController.shared.isGuest &&  !user.roles.contains(.staff) {
+        if HIApplicationStateController.shared.isGuest && !user.roles.contains(.staff) {
             let background = #imageLiteral(resourceName: "ProfileBackground")
             let imageView: UIImageView = UIImageView(frame: view.bounds)
             view.addSubview(imageView)

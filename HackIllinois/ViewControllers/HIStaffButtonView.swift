@@ -2,7 +2,7 @@
 //  HIStaffButtonView.swift
 //  HackIllinois
 //
-//  Created by Vincent Nguyen on 2/1/23.
+//  Created by HackIllinois on 2/1/23.
 //  Copyright © 2023 HackIllinois. All rights reserved.
 //
 

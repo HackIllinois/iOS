@@ -56,6 +56,7 @@ class HILabel: UILabel {
         case newSponsor
         case newLocation
         case newTime
+        case QRSelection
     }
 
     // MARK: - Properties
@@ -353,6 +354,10 @@ class HILabel: UILabel {
             } else {
                 font = HIAppearance.Font.locationText
             }
+        case .QRSelection:
+            textHIColor = \.black
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.QRSelection
         }
         }
 

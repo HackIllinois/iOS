@@ -132,6 +132,7 @@
 		BCEBD2DA23DE995700D32F5A /* HIPopupAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEBD2D923DE995700D32F5A /* HIPopupAnimator.swift */; };
 		BF0FDA3925F4DCCD003B5DB1 /* HIScheduleSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0FDA3825F4DCCD003B5DB1 /* HIScheduleSegmentedControl.swift */; };
 		BFB1FD3E26105EA400500008 /* HIEditProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB1FD3D26105EA400500008 /* HIEditProfileCell.swift */; };
+		D128F2952ABFF93C0016D8CB /* HIQRScannerSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D128F2942ABFF93B0016D8CB /* HIQRScannerSelection.swift */; };
 		D134D30F296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D134D30E296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf */; };
 		D14D3AE3295FBDA200EB7995 /* HIBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */; };
 		D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A309BB2211175200CBA351 /* PassKit.framework */; };
@@ -333,6 +334,7 @@
 		BCEBD2D923DE995700D32F5A /* HIPopupAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HIPopupAnimator.swift; path = HackIllinois/UI/Animations/HIPopupAnimator.swift; sourceTree = SOURCE_ROOT; };
 		BF0FDA3825F4DCCD003B5DB1 /* HIScheduleSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScheduleSegmentedControl.swift; sourceTree = "<group>"; };
 		BFB1FD3D26105EA400500008 /* HIEditProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEditProfileCell.swift; sourceTree = "<group>"; };
+		D128F2942ABFF93B0016D8CB /* HIQRScannerSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIQRScannerSelection.swift; sourceTree = "<group>"; };
 		D134D30E296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIBannerViewController.swift; sourceTree = "<group>"; };
 		D3A309BA221116A600CBA351 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };
@@ -574,6 +576,7 @@
 				E170038929679D08009B99A8 /* HIProfileCardView.swift */,
 				60EAF98A273B1AC4002CD205 /* HIScanQRCodeViewController.swift */,
 				E1BF5E79298B462F00A98390 /* HIStaffButtonView.swift */,
+				D128F2942ABFF93B0016D8CB /* HIQRScannerSelection.swift */,
 				1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */,
 				3FBFA7AA27335554001FFF28 /* HILeaderboardListViewController.swift */,
 				3FBFA7B427335ABC001FFF28 /* HILeaderboardViewController.swift */,
@@ -1061,6 +1064,7 @@
 				95A7D28B203D4F54005EAEAF /* HISegmentedControl.swift in Sources */,
 				957A4D7D21FDA71F007FDE0E /* MixTypeComparable.swift in Sources */,
 				3CF8DB1123B4134C0035ECAE /* HIProjectDataSource.swift in Sources */,
+				D128F2952ABFF93C0016D8CB /* HIQRScannerSelection.swift in Sources */,
 				95A7D28C203D4F54005EAEAF /* HITextField.swift in Sources */,
 				95C18DCA20096539004784B5 /* HIEventDetailViewController.swift in Sources */,
 				9523A2902218BA2600341EBD /* HIImageView.swift in Sources */,

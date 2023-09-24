@@ -40,6 +40,7 @@ struct HIAppearance: Equatable {
     let interestBackground: UIColor
     let buttonGreen: UIColor
     let buttonPink: UIColor
+    let buttonLightPink: UIColor
     let buttonBlue: UIColor
     let buttonDarkBlue: UIColor
     let buttonMagenta: UIColor
@@ -146,6 +147,7 @@ struct HIAppearance: Equatable {
         interestBackground: orange,
         buttonGreen: yellowGreen,
         buttonPink: pink,
+        buttonLightPink: other,
         buttonBlue: blue,
         buttonDarkBlue: darkBlue,
         buttonMagenta: magenta,
@@ -206,6 +208,7 @@ struct HIAppearance: Equatable {
         interestBackground: orange,
         buttonGreen: yellowGreen,
         buttonPink: pink,
+        buttonLightPink: other,
         buttonBlue: blue,
         buttonDarkBlue: darkBlue,
         buttonMagenta: magenta,
@@ -335,6 +338,8 @@ struct HIAppearance: Equatable {
         static let sectionHeader = UIFont(name: "MontserratRoman-Bold", size: 13)
         static let button = UIFont(name: "MontserratRoman-Regular", size: 15)
         static let welcomeTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 40: 24)
+        // For Staff QR code selection
+        static let QRSelection = UIFont(name: "MontserratRoman-SemiBold", size: 20)
     }
 }
 

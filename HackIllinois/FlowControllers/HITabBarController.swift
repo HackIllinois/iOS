@@ -12,6 +12,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 class HITabBarController: UITabBarController {
     private var tabBarShapeLayer: CAShapeLayer?
@@ -41,7 +42,7 @@ class HITabBarController: UITabBarController {
     }
 
     @objc private func qrScannerPopupButtonPressed(_ sender: UIButton) {
-        let scanQRCodePopup = HIScanQRCodeViewController()
+        let scanQRCodePopup = HIQRScannerSelection()
         scanQRCodePopup.modalPresentationStyle = .overFullScreen
         scanQRCodePopup.modalTransitionStyle = .crossDissolve
         self.present(scanQRCodePopup, animated: true, completion: nil)
