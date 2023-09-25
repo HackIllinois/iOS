@@ -1,13 +1,9 @@
 //
-//  HIScanQRCodeViewController.swift
+//  HIScanAttendanceViewController.swift
 //  HackIllinois
 //
-//  Created by HackIllinois Team on 11/9/21.
-//  Copyright © 2021 HackIllinois. All rights reserved.
-//  This file is part of the Hackillinois iOS App.
-//  The Hackillinois iOS App is open source software, released under the University of
-//  Illinois/NCSA Open Source License. You should have received a copy of
-//  this license in a file with the distribution.
+//  Created by HackIllinois on 9/24/23.
+//  Copyright © 2023 HackIllinois. All rights reserved.
 //
 
 import Foundation
@@ -19,7 +15,7 @@ import APIManager
 import HIAPI
 import SwiftUI
 
-class HIScanQRCodeViewController: HIBaseViewController {
+class HIScanAttendanceViewController: HIBaseViewController {
     private var captureSession: AVCaptureSession?
     private let containerView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -42,19 +38,15 @@ class HIScanQRCodeViewController: HIBaseViewController {
     private let errorView = HIErrorView(style: .codePopup)
     private var selectedEventID = ""
     private var cancellables = Set<AnyCancellable>()
-    var currentUserID = ""
-    var currentUserName = ""
-    var dietaryString = ""
 }
 
 // MARK: - UIViewController
-extension HIScanQRCodeViewController {
+extension HIScanAttendanceViewController {
     override func loadView() {
         super.loadView()
-        print("General QR scanner")
+        print("Meeting Attendance QR Scanner")
         guard let user = HIApplicationStateController.shared.user else { return }
         if HIApplicationStateController.shared.isGuest && !user.roles.contains(.staff) {
-            let background = #imageLiteral(resourceName: "ProfileBackground")
             let imageView: UIImageView = UIImageView(frame: view.bounds)
             view.addSubview(imageView)
             view.sendSubviewToBack(imageView)
@@ -131,14 +123,14 @@ extension HIScanQRCodeViewController {
 }
 
 // MARK: - Actions
-extension HIScanQRCodeViewController {
+extension HIScanAttendanceViewController {
     @objc func didSelectCloseButton(_ sender: HIButton) {
         self.dismiss(animated: true, completion: nil)
     }
 }
 
 // MARK: - HIErrorViewDelegate
-extension HIScanQRCodeViewController: HIErrorViewDelegate {
+extension HIScanAttendanceViewController: HIErrorViewDelegate {
     func didSelectErrorLogout(_ sender: UIButton) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(
@@ -156,7 +148,7 @@ extension HIScanQRCodeViewController: HIErrorViewDelegate {
 }
 
 // MARK: AVCaptureMetadataOutputObjectsDelegate
-extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
+extension HIScanAttendanceViewController: AVCaptureMetadataOutputObjectsDelegate {
     func setupCaptureSession() {
         captureSession = AVCaptureSession()
         let metadataOutput = AVCaptureMetadataOutput()
@@ -251,7 +243,7 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         switch status {
         case "Success":
             alertTitle = "Success!"
-            alertMessage = "Name: \(currentUserName)\n Diet: \(dietaryString)"
+            alertMessage = "You have successfully checked in."
         case "InvalidEventId":
             alertTitle = "Error!"
             alertMessage = "Invalid Event ID"
@@ -294,13 +286,8 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                 do {
                     let (apiAttendeeContainer, _) = try result.get()
                     DispatchQueue.main.async { [self] in
-                        dietaryString = ""
-                        for diet in apiAttendeeContainer.dietary ?? [] {
-                            dietaryString += diet + ", "
-                        }
                         guard let first = apiAttendeeContainer.firstName else { return }
                         guard let last = apiAttendeeContainer.lastName else { return }
-                        currentUserName = first + " " + last
                         self.handleStaffCheckInAlert(status: status)
                     }
                 } catch {
@@ -328,8 +315,7 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                                 DispatchQueue.main.async { [self] in
                                     if let qrInfo = self.decode(code) {
                                         if let userId = qrInfo["userId"] {
-                                            currentUserID = userId as? String ?? ""
-                                            staffCheckIn(userID: currentUserID, status: codeResult.status)
+                                           
                                         }
                                     }
                                 }
@@ -384,3 +370,4 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
             return values
         }
 }
+

@@ -133,6 +133,7 @@
 		BF0FDA3925F4DCCD003B5DB1 /* HIScheduleSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0FDA3825F4DCCD003B5DB1 /* HIScheduleSegmentedControl.swift */; };
 		BFB1FD3E26105EA400500008 /* HIEditProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB1FD3D26105EA400500008 /* HIEditProfileCell.swift */; };
 		D128F2952ABFF93C0016D8CB /* HIQRScannerSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D128F2942ABFF93B0016D8CB /* HIQRScannerSelection.swift */; };
+		D12B40FF2AC0B0BD001BCB05 /* HIScanAttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12B40FE2AC0B0BD001BCB05 /* HIScanAttendanceViewController.swift */; };
 		D134D30F296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D134D30E296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf */; };
 		D14D3AE3295FBDA200EB7995 /* HIBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */; };
 		D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A309BB2211175200CBA351 /* PassKit.framework */; };
@@ -335,6 +336,7 @@
 		BF0FDA3825F4DCCD003B5DB1 /* HIScheduleSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScheduleSegmentedControl.swift; sourceTree = "<group>"; };
 		BFB1FD3D26105EA400500008 /* HIEditProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEditProfileCell.swift; sourceTree = "<group>"; };
 		D128F2942ABFF93B0016D8CB /* HIQRScannerSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIQRScannerSelection.swift; sourceTree = "<group>"; };
+		D12B40FE2AC0B0BD001BCB05 /* HIScanAttendanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScanAttendanceViewController.swift; sourceTree = "<group>"; };
 		D134D30E296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIBannerViewController.swift; sourceTree = "<group>"; };
 		D3A309BA221116A600CBA351 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };
@@ -575,6 +577,7 @@
 				98CA2A3D25C899CF003E842A /* HIProfileViewController.swift */,
 				E170038929679D08009B99A8 /* HIProfileCardView.swift */,
 				60EAF98A273B1AC4002CD205 /* HIScanQRCodeViewController.swift */,
+				D12B40FE2AC0B0BD001BCB05 /* HIScanAttendanceViewController.swift */,
 				E1BF5E79298B462F00A98390 /* HIStaffButtonView.swift */,
 				D128F2942ABFF93B0016D8CB /* HIQRScannerSelection.swift */,
 				1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */,
@@ -1066,6 +1069,7 @@
 				3CF8DB1123B4134C0035ECAE /* HIProjectDataSource.swift in Sources */,
 				D128F2952ABFF93C0016D8CB /* HIQRScannerSelection.swift in Sources */,
 				95A7D28C203D4F54005EAEAF /* HITextField.swift in Sources */,
+				D12B40FF2AC0B0BD001BCB05 /* HIScanAttendanceViewController.swift in Sources */,
 				95C18DCA20096539004784B5 /* HIEventDetailViewController.swift in Sources */,
 				9523A2902218BA2600341EBD /* HIImageView.swift in Sources */,
 				95C18DC52009618C004784B5 /* HIHomeViewController.swift in Sources */,
@@ -1283,7 +1287,7 @@
 				CODE_SIGN_ENTITLEMENTS = HackIllinois/HackIllinois.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 88CYB22L6D;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HackIllinois",
@@ -1311,7 +1315,7 @@
 				CODE_SIGN_ENTITLEMENTS = HackIllinois/HackIllinois.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 88CYB22L6D;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HackIllinois",
