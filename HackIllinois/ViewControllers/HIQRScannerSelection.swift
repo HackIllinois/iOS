@@ -11,7 +11,6 @@ import SwiftUI
 import UIKit
 import HIAPI
 
-// Make sure to only make this so this page appears for staff
 class HIQRScannerSelection: HIBaseViewController {
     private let backgroundHIColor: HIColor = \.clear
     private let containerView = HIView {
@@ -56,28 +55,22 @@ extension HIQRScannerSelection {
     override func loadView() {
         super.loadView()
         guard let user = HIApplicationStateController.shared.user else { return }
-        if HIApplicationStateController.shared.isGuest && !user.roles.contains(.staff) {
+        if HIApplicationStateController.shared.isGuest && !user.roles.contains(.STAFF) { // Guest
             // Guest handler
             let background = #imageLiteral(resourceName: "ProfileBackground")
             let imageView: UIImageView = UIImageView(frame: view.bounds)
             view.addSubview(imageView)
             view.sendSubviewToBack(imageView)
             layoutErrorView()
-        } else if !user.roles.contains(.staff) {
-            // Attendee handler
+        } else if !user.roles.contains(.STAFF) { // Attendee
             let scanQRCodePopup = HIScanQRCodeViewController()
             scanQRCodePopup.modalPresentationStyle = .overFullScreen
             scanQRCodePopup.modalTransitionStyle = .crossDissolve
             self.present(scanQRCodePopup, animated: true, completion: nil)
-        } else {
+        } else if user.roles.contains(.STAFF) {
             view.addSubview(meetingButton)
             view.addSubview(attendeeButton)
             view.addSubview(closeButton)
-            closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
-            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-            closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8).isActive = true
-            closeButton.constrain(width: 60, height: 60)
-            closeButton.imageView?.contentMode = .scaleToFill
             // Add constraints for meetingButton and attendeeButton here
             meetingButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 240).isActive = true
             meetingButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
@@ -101,6 +94,11 @@ extension HIQRScannerSelection {
             attendanceLabel.centerYAnchor.constraint(equalTo: attendeeButton.centerYAnchor).isActive = true
             attendanceLabel.centerXAnchor.constraint(equalTo: attendeeButton.centerXAnchor).isActive = true
         }
+        closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
+        closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8).isActive = true
+        closeButton.constrain(width: 60, height: 60)
+        closeButton.imageView?.contentMode = .scaleToFill
     }
     func layoutErrorView() {
         errorView.delegate = self
@@ -110,11 +108,6 @@ extension HIQRScannerSelection {
         errorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         errorView.heightAnchor.constraint(equalToConstant: 100).isActive = true
         errorView.addSubview(closeButton)
-        closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
-        closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8).isActive = true
-        closeButton.constrain(width: 60, height: 60)
-        closeButton.imageView?.contentMode = .scaleToFill
     }
     override func viewDidLoad() {
         setCustomTitle(customTitle: "ATTENDANCE")

@@ -35,6 +35,14 @@ public class EventService: BaseService {
         body["eventId"] = eventId
         return APIRequest<EventCheckInStatus>(service: self, endpoint: "staff/checkin/", body: body, method: .POST)
     }
+    
+    public static func staffMeetingAttendanceCheckIn(userToken: String, eventId: String) -> APIRequest<EventCheckInStatus> {
+        var body = HTTPBody()
+        body["eventId"] = eventId
+        var headers = HTTPHeaders()
+        headers["userToken"] = userToken
+        return APIRequest<EventCheckInStatus>(service: self, endpoint: "event/staff/attendance/", body: body, headers: headers, method: .POST)
+    }
 
     public static func getStaffCheckInEvents(authToken: String) -> APIRequest<StaffEventContainer> {
         var header = HTTPHeaders()

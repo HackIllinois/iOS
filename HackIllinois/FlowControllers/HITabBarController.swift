@@ -42,10 +42,18 @@ class HITabBarController: UITabBarController {
     }
 
     @objc private func qrScannerPopupButtonPressed(_ sender: UIButton) {
-        let scanQRCodePopup = HIQRScannerSelection()
-        scanQRCodePopup.modalPresentationStyle = .overFullScreen
-        scanQRCodePopup.modalTransitionStyle = .crossDissolve
-        self.present(scanQRCodePopup, animated: true, completion: nil)
+        guard let user = HIApplicationStateController.shared.user else { return }
+        if (HIApplicationStateController.shared.isGuest && !user.roles.contains(.STAFF)) || !user.roles.contains(.STAFF) {
+            let scanQRCodePopup = HIScanQRCodeViewController()
+            scanQRCodePopup.modalPresentationStyle = .overFullScreen
+            scanQRCodePopup.modalTransitionStyle = .crossDissolve
+            self.present(scanQRCodePopup, animated: true, completion: nil)
+        } else if user.roles.contains(.STAFF) {
+            let scanQRCodePopup = HIQRScannerSelection()
+            scanQRCodePopup.modalPresentationStyle = .overFullScreen
+            scanQRCodePopup.modalTransitionStyle = .crossDissolve
+            self.present(scanQRCodePopup, animated: true, completion: nil)
+        }
     }
 
     init() {

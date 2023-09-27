@@ -53,7 +53,7 @@ extension HIScanQRCodeViewController {
         super.loadView()
         print("General QR scanner")
         guard let user = HIApplicationStateController.shared.user else { return }
-        if HIApplicationStateController.shared.isGuest && !user.roles.contains(.staff) {
+        if HIApplicationStateController.shared.isGuest && !user.roles.contains(.STAFF) {
             let background = #imageLiteral(resourceName: "ProfileBackground")
             let imageView: UIImageView = UIImageView(frame: view.bounds)
             view.addSubview(imageView)
@@ -66,7 +66,7 @@ extension HIScanQRCodeViewController {
             containerView.constrain(to: view, trailingInset: 0, leadingInset: 0)
             containerView.addSubview(previewView)
             setupCaptureSession()
-            if user.roles.contains(.staff) {
+            if user.roles.contains(.STAFF) {
                 let observable = HIStaffButtonViewObservable()
                 observable.$selectedEventId.sink { eventID in
                     self.selectedEventID = eventID
@@ -316,7 +316,7 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         let meta = metadataObjects.first as? AVMetadataMachineReadableCodeObject
         let code = meta?.stringValue ?? ""
         guard let user = HIApplicationStateController.shared.user else { return }
-        if user.roles.contains(.staff) {
+        if user.roles.contains(.STAFF) {
             if selectedEventID != "" {
                 if let range = code.range(of: "userToken=") {
                     let userToken = code[range.upperBound...]
