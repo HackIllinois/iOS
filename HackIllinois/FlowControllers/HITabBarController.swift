@@ -69,7 +69,11 @@ class HITabBarController: UITabBarController {
         qrScannerPopupButton.frame.size = CGSize(width: 54, height: 54)
         qrScannerPopupButton.layer.cornerRadius = 28
         qrScannerPopupButton.center = CGPoint(x: view.center.x, y: 0)
-        qrScannerPopupButton.backgroundColor = (\HIAppearance.codePopupTab).value
+        if self.selectedViewController is HIQRScannerSelection {
+            qrScannerPopupButton.backgroundColor = (\HIAppearance.greenCodePopupTab).value
+        } else {
+            qrScannerPopupButton.backgroundColor = (\HIAppearance.codePopupTab).value
+        }
         qrScannerPopupButton.setImage(#imageLiteral(resourceName: "QRScannerPopupTabIcon"), for: .normal)
         qrScannerPopupButton.imageView?.contentMode = .scaleAspectFill
 

@@ -16,60 +16,60 @@ import APIManager
 public class EventService: BaseService {
 
     public override class var baseURL: String {
-        return super.baseURL + "event/"
+        // return super.baseURL + "event/"
+        return super.baseURL
     }
 
     public static func getAllEvents() -> APIRequest<EventContainer> {
-        return APIRequest<EventContainer>(service: self, endpoint: "", method: .GET)
+        return APIRequest<EventContainer>(service: self, endpoint: "event/", method: .GET)
     }
 
     public static func checkIn(code: String) -> APIRequest<EventCheckInStatus> {
         var body = HTTPBody()
         body["code"] = code
-        return APIRequest<EventCheckInStatus>(service: self, endpoint: "checkin/", body: body, method: .POST)
+        return APIRequest<EventCheckInStatus>(service: self, endpoint: "event/checkin/", body: body, method: .POST)
     }
 
     public static func staffCheckIn(userToken: String, eventId: String) -> APIRequest<EventCheckInStatus> {
         var body = HTTPBody()
         body["userToken"] = userToken
         body["eventId"] = eventId
-        return APIRequest<EventCheckInStatus>(service: self, endpoint: "staff/checkin/", body: body, method: .POST)
+        return APIRequest<EventCheckInStatus>(service: self, endpoint: "event/staff/checkin/", body: body, method: .POST)
     }
-    
-    public static func staffMeetingAttendanceCheckIn(userToken: String, eventId: String) -> APIRequest<EventCheckInStatus> {
+    public static func staffMeetingAttendanceCheckIn(userToken: String, eventId: String) -> APIRequest<Attendance> {
         var body = HTTPBody()
         body["eventId"] = eventId
         var headers = HTTPHeaders()
-        headers["userToken"] = userToken
-        return APIRequest<EventCheckInStatus>(service: self, endpoint: "event/staff/attendance/", body: body, headers: headers, method: .POST)
+        headers["Authorization"] = userToken
+        return APIRequest<Attendance>(service: self, endpoint: "staff/attendance/", body: body, headers: headers, method: .POST)
     }
 
     public static func getStaffCheckInEvents(authToken: String) -> APIRequest<StaffEventContainer> {
         var header = HTTPHeaders()
         header["Authorization"] = authToken
-        return APIRequest<StaffEventContainer>(service: self, endpoint: "filter/?displayOnStaffCheckin=true", headers: header, method: .GET)
+        return APIRequest<StaffEventContainer>(service: self, endpoint: "event/filter/?displayOnStaffCheckin=true", headers: header, method: .GET)
     }
 
     public static func create(event: Event) -> APIRequest<EventContainer> {
         let eventDict = [String: Any]()
         assert(false)
-        return APIRequest<EventContainer>(service: self, endpoint: "", body: eventDict, method: .POST)
+        return APIRequest<EventContainer>(service: self, endpoint: "event/", body: eventDict, method: .POST)
     }
 
     public static func getAllFavorites() -> APIRequest<EventFavorites> {
-        return APIRequest<EventFavorites>(service: self, endpoint: "favorite/", method: .GET)
+        return APIRequest<EventFavorites>(service: self, endpoint: "event/favorite/", method: .GET)
     }
 
     public static func favoriteBy(id: String) -> APIRequest<EventFavorites> {
         var body = HTTPBody()
         body["eventId"] = id
-        return APIRequest<EventFavorites>(service: self, endpoint: "favorite/", body: body, method: .POST)
+        return APIRequest<EventFavorites>(service: self, endpoint: "event/favorite/", body: body, method: .POST)
     }
 
     public static func unfavoriteBy(id: String) -> APIRequest<EventFavorites> {
         var body = HTTPBody()
         body["eventId"] = id
-        return APIRequest<EventFavorites>(service: self, endpoint: "favorite/", body: body, method: .DELETE)
+        return APIRequest<EventFavorites>(service: self, endpoint: "event/favorite/", body: body, method: .DELETE)
     }
 
 }

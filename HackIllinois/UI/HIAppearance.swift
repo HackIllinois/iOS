@@ -18,12 +18,14 @@ struct HIAppearance: Equatable {
     let whiteText: UIColor
     let baseText: UIColor
     let accent: UIColor
+    let viewTitleGreen: UIColor
     let action: UIColor
     let baseBackground: UIColor
     let contentBackground: UIColor
     let overlay: UIColor
     let frostedTint: UIColor
     let codePopupTab: UIColor
+    let greenCodePopupTab: UIColor
     let navbarBackground: UIColor
     let navbarTabTint: UIColor
     let profileContainerTint: UIColor
@@ -47,7 +49,7 @@ struct HIAppearance: Equatable {
     let buttonDarkBlueGreen: UIColor
     let favoriteStarBackground: UIColor
     let segmentedBackground: UIColor
-    
+    let buttonYellow: UIColor
     let buttonViewBackground: UIColor
     let profile0: UIImage
     let profile1: UIImage
@@ -106,6 +108,12 @@ struct HIAppearance: Equatable {
     private static let profileBaseText = #colorLiteral(red: 0.1137254902, green: 0.1490196078, blue: 0.2666666667, alpha: 1)
     private static let yellowGreen = #colorLiteral(red: 0.7882352941, green: 0.8117647059, blue: 0.462745098, alpha: 1)
     private static let green = #colorLiteral(red: 0.4705882353, green: 0.6745098039, blue: 0.2588235294, alpha: 1)
+    
+    // Hack 2024 color palette
+    private static let icyBlue = #colorLiteral(red: 0.8235294118, green: 0.968627451, blue: 1, alpha: 1)
+    private static let bLightYellow = #colorLiteral(red: 1, green: 0.9803921569, blue: 0.8, alpha: 1)
+    private static let bYellow = #colorLiteral(red: 1, green: 0.9568627451, blue: 0.5529411765, alpha: 1)
+    private static let darkGreen = #colorLiteral(red: 0.05098039216, green: 0.2470588235, blue: 0.2549019608, alpha: 1)
 
     private static let transparent2 = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     private static var statusBarWhite: UIStatusBarStyle {
@@ -125,12 +133,14 @@ struct HIAppearance: Equatable {
         whiteText: white,
         baseText: lightBlack,
         accent: orange,
+        viewTitleGreen: darkGreen,
         action: tan,
         baseBackground: white,
         contentBackground: lightBlue,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         codePopupTab: white,
+        greenCodePopupTab: darkGreen,
         navbarBackground: darkBlue,
         navbarTabTint: white,
         profileContainerTint: yellowWhite,
@@ -154,6 +164,7 @@ struct HIAppearance: Equatable {
         buttonDarkBlueGreen: darkBlueGreeen,
         favoriteStarBackground: yellowWhite,
         segmentedBackground: white,
+        buttonYellow: bLightYellow,
         buttonViewBackground: green,
         profile0: #imageLiteral(resourceName: "Profile0"),
         profile1: #imageLiteral(resourceName: "Profile1"),
@@ -186,12 +197,14 @@ struct HIAppearance: Equatable {
         whiteText: white,
         baseText: lightBlack,
         accent: orange,
+        viewTitleGreen: darkGreen,
         action: tan,
         baseBackground: white,
         contentBackground: lightBlue,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         codePopupTab: white,
+        greenCodePopupTab: darkGreen,
         navbarBackground: darkBlue,
         navbarTabTint: white,
         profileContainerTint: yellowWhite,
@@ -215,6 +228,7 @@ struct HIAppearance: Equatable {
         buttonDarkBlueGreen: darkBlueGreeen,
         favoriteStarBackground: yellowWhite,
         segmentedBackground: white,
+        buttonYellow: bLightYellow,
         buttonViewBackground: green,
         profile0: #imageLiteral(resourceName: "Profile0"),
         profile1: #imageLiteral(resourceName: "Profile1"),

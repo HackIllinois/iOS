@@ -159,6 +159,7 @@ extension HIScanAttendanceViewController: AVCaptureMetadataOutputObjectsDelegate
         self.previewLayer = previewLayer
         setFrameForPreviewLayer()
         previewView.layer.addSublayer(previewLayer)
+        print("All good")
     }
 
     func setFrameForPreviewLayer() {
@@ -228,33 +229,29 @@ extension HIScanAttendanceViewController: AVCaptureMetadataOutputObjectsDelegate
     // This function detects whether a QRCode has been found
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         guard respondingToQRCodeFound else { return }
+        print("QR code was found")
         let meta = metadataObjects.first as? AVMetadataMachineReadableCodeObject
         let code = meta?.stringValue ?? ""
         guard let user = HIApplicationStateController.shared.user else { return }
         if user.roles.contains(.STAFF) {
-            if let range = code.range(of: "eventId=") { // Extract eventID
-                let eventId = code[range.upperBound...]
-                respondingToQRCodeFound = false
-                HIAPI.EventService.staffMeetingAttendanceCheckIn(userToken: String(user.token), eventId: String(eventId))
-                    .onCompletion { result in
-                        do {
-                            let (codeResult, _) = try result.get()
-                            DispatchQueue.main.async { [self] in
-                                if let qrInfo = self.decode(code) {
-                                    if let userId = qrInfo["userId"] {
-                                        currentUserID = userId as? String ?? ""
-                                        self.handleStaffCheckInAlert(status: codeResult.status)
-                                    }
-                                }
-                            }
-                        } catch {
-                            print(error, error.localizedDescription)
+            let eventId = code.description
+            print(eventId)
+            respondingToQRCodeFound = false
+            print(user.token)
+            HIAPI.EventService.staffMeetingAttendanceCheckIn(userToken: String(user.token), eventId: eventId)
+                .onCompletion { result in
+                    do {
+                        let (codeResult, _) = try result.get()
+                        DispatchQueue.main.async { [self] in
+                                self.handleStaffCheckInAlert(status: codeResult.status)
                         }
-                        sleep(2)
+                    } catch {
+                        print(error, error.localizedDescription)
                     }
-                    .authorize(with: HIApplicationStateController.shared.user)
-                    .launch()
-            }
+                    sleep(2)
+                }
+                .authorize(with: HIApplicationStateController.shared.user)
+                .launch()
         }
     }
     func decode(_ token: String) -> [String: AnyObject]? {

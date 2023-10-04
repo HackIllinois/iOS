@@ -23,6 +23,7 @@ class HILabel: UILabel {
         case sponsor
         case project
         case viewTitle
+        case viewTitleGreen
         case detailTitle
         case subtitle
         case description
@@ -147,6 +148,12 @@ class HILabel: UILabel {
             } else {
                 font = HIAppearance.Font.viewTitle
             }
+        
+        case .viewTitleGreen:
+            textHIColor = \.viewTitleGreen
+            backgroundHIColor = \.clear
+            textAlignment = .center
+            font = HIAppearance.Font.viewTitle
 
         case .subtitle:
             textHIColor = \.accent

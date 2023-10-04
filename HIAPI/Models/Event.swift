@@ -118,3 +118,7 @@ public struct EventTracker: Codable {
     public let eventId: String
     public let users: [String]
 }
+
+public struct Attendance: Codable, APIReturnable {
+    public let status: String
+}
