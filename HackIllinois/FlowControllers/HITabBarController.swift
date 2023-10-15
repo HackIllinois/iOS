@@ -12,6 +12,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 class HITabBarController: UITabBarController {
     private var tabBarShapeLayer: CAShapeLayer?
@@ -41,10 +42,18 @@ class HITabBarController: UITabBarController {
     }
 
     @objc private func qrScannerPopupButtonPressed(_ sender: UIButton) {
-        let scanQRCodePopup = HIScanQRCodeViewController()
-        scanQRCodePopup.modalPresentationStyle = .overFullScreen
-        scanQRCodePopup.modalTransitionStyle = .crossDissolve
-        self.present(scanQRCodePopup, animated: true, completion: nil)
+        guard let user = HIApplicationStateController.shared.user else { return }
+        if (HIApplicationStateController.shared.isGuest && !user.roles.contains(.STAFF)) || !user.roles.contains(.STAFF) {
+            let scanQRCodePopup = HIScanQRCodeViewController()
+            scanQRCodePopup.modalPresentationStyle = .overFullScreen
+            scanQRCodePopup.modalTransitionStyle = .crossDissolve
+            self.present(scanQRCodePopup, animated: true, completion: nil)
+        } else if user.roles.contains(.STAFF) {
+            let scanQRCodePopup = HIQRScannerSelection()
+            scanQRCodePopup.modalPresentationStyle = .overFullScreen
+            scanQRCodePopup.modalTransitionStyle = .crossDissolve
+            self.present(scanQRCodePopup, animated: true, completion: nil)
+        }
     }
 
     init() {
@@ -60,7 +69,11 @@ class HITabBarController: UITabBarController {
         qrScannerPopupButton.frame.size = CGSize(width: 54, height: 54)
         qrScannerPopupButton.layer.cornerRadius = 28
         qrScannerPopupButton.center = CGPoint(x: view.center.x, y: 0)
-        qrScannerPopupButton.backgroundColor = (\HIAppearance.codePopupTab).value
+        if self.selectedViewController is HIQRScannerSelection {
+            qrScannerPopupButton.backgroundColor = (\HIAppearance.greenCodePopupTab).value
+        } else {
+            qrScannerPopupButton.backgroundColor = (\HIAppearance.codePopupTab).value
+        }
         qrScannerPopupButton.setImage(#imageLiteral(resourceName: "QRScannerPopupTabIcon"), for: .normal)
         qrScannerPopupButton.imageView?.contentMode = .scaleAspectFill
 

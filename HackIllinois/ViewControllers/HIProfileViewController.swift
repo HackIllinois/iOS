@@ -54,7 +54,7 @@ extension HIProfileViewController {
     override func loadView() {
         super.loadView()
         guard let user = HIApplicationStateController.shared.user else { return }
-        if HIApplicationStateController.shared.isGuest || user.roles.contains(.staff) {
+        if HIApplicationStateController.shared.isGuest || user.roles.contains(.STAFF) {
             layoutErrorView()
         } else {
             updateProfile()
@@ -106,7 +106,7 @@ extension HIProfileViewController {
 
     @objc func updateOnCheckin(_ notification: Notification) {
         guard let user = HIApplicationStateController.shared.user else { return }
-        if !HIApplicationStateController.shared.isGuest && !user.roles.contains(.staff) {
+        if !HIApplicationStateController.shared.isGuest && !user.roles.contains(.STAFF) {
             reloadProfile()
         }
     }
@@ -127,7 +127,7 @@ extension HIProfileViewController {
         super.viewWillAppear(animated)
         guard let user = HIApplicationStateController.shared.user else { return }
         layoutLogOutButton()
-        if !HIApplicationStateController.shared.isGuest && !user.roles.contains(.staff) {
+        if !HIApplicationStateController.shared.isGuest && !user.roles.contains(.STAFF) {
             reloadProfile()
         }
     }
@@ -169,7 +169,7 @@ extension HIProfileViewController {
                     self?.updateProfile()
                 }
             } catch {
-                print("Failed to reload profile with error: \(error)")
+                print("Failed to reload profile with the error: \(error)")
             }
         }
         .authorize(with: user)

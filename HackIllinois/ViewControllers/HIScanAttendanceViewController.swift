@@ -1,13 +1,9 @@
 //
-//  HIScanQRCodeViewController.swift
+//  HIScanAttendanceViewController.swift
 //  HackIllinois
 //
-//  Created by HackIllinois Team on 11/9/21.
-//  Copyright © 2021 HackIllinois. All rights reserved.
-//  This file is part of the Hackillinois iOS App.
-//  The Hackillinois iOS App is open source software, released under the University of
-//  Illinois/NCSA Open Source License. You should have received a copy of
-//  this license in a file with the distribution.
+//  Created by HackIllinois on 9/24/23.
+//  Copyright © 2023 HackIllinois. All rights reserved.
 //
 
 import Foundation
@@ -19,7 +15,7 @@ import APIManager
 import HIAPI
 import SwiftUI
 
-class HIScanQRCodeViewController: HIBaseViewController {
+class HIScanAttendanceViewController: HIBaseViewController {
     private var captureSession: AVCaptureSession?
     private let containerView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -40,43 +36,28 @@ class HIScanQRCodeViewController: HIBaseViewController {
         $0.baseImage = #imageLiteral(resourceName: "CloseButton")
     }
     private let errorView = HIErrorView(style: .codePopup)
-    private var selectedEventID = ""
-    private var cancellables = Set<AnyCancellable>()
     var currentUserID = ""
-    var currentUserName = ""
-    var dietaryString = ""
+    private var cancellables = Set<AnyCancellable>()
 }
 
 // MARK: - UIViewController
-extension HIScanQRCodeViewController {
+extension HIScanAttendanceViewController {
     override func loadView() {
         super.loadView()
-        print("General QR scanner")
+        print("Meeting Attendance QR Scanner")
         guard let user = HIApplicationStateController.shared.user else { return }
-        if HIApplicationStateController.shared.isGuest && !user.roles.contains(.STAFF) {
-            let background = #imageLiteral(resourceName: "ProfileBackground")
+        if (HIApplicationStateController.shared.isGuest && !user.roles.contains(.STAFF)) || !user.roles.contains(.STAFF) {
             let imageView: UIImageView = UIImageView(frame: view.bounds)
             view.addSubview(imageView)
             view.sendSubviewToBack(imageView)
             layoutErrorView()
-        } else {
+        } else if user.roles.contains(.STAFF) {
             view.addSubview(containerView)
             view.bringSubviewToFront(containerView)
             containerView.constrain(to: view, topInset: 0, bottomInset: 0)
             containerView.constrain(to: view, trailingInset: 0, leadingInset: 0)
             containerView.addSubview(previewView)
             setupCaptureSession()
-            if user.roles.contains(.STAFF) {
-                let observable = HIStaffButtonViewObservable()
-                observable.$selectedEventId.sink { eventID in
-                    self.selectedEventID = eventID
-                }.store(in: &cancellables)
-                let staffButtonController = UIHostingController(rootView: HIStaffButtonView(observable: observable))
-                addChild(staffButtonController)
-                staffButtonController.view.backgroundColor = .clear
-                staffButtonController.view.frame = CGRect(x: 0, y: 100, width: Int(view.frame.maxX), height: 600)
-                view.addSubview(staffButtonController.view)
-            }
         }
         view.addSubview(closeButton)
         closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
@@ -131,14 +112,14 @@ extension HIScanQRCodeViewController {
 }
 
 // MARK: - Actions
-extension HIScanQRCodeViewController {
+extension HIScanAttendanceViewController {
     @objc func didSelectCloseButton(_ sender: HIButton) {
         self.dismiss(animated: true, completion: nil)
     }
 }
 
 // MARK: - HIErrorViewDelegate
-extension HIScanQRCodeViewController: HIErrorViewDelegate {
+extension HIScanAttendanceViewController: HIErrorViewDelegate {
     func didSelectErrorLogout(_ sender: UIButton) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(
@@ -156,7 +137,7 @@ extension HIScanQRCodeViewController: HIErrorViewDelegate {
 }
 
 // MARK: AVCaptureMetadataOutputObjectsDelegate
-extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
+extension HIScanAttendanceViewController: AVCaptureMetadataOutputObjectsDelegate {
     func setupCaptureSession() {
         captureSession = AVCaptureSession()
         let metadataOutput = AVCaptureMetadataOutput()
@@ -178,6 +159,7 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         self.previewLayer = previewLayer
         setFrameForPreviewLayer()
         previewView.layer.addSublayer(previewLayer)
+        print("All good")
     }
 
     func setFrameForPreviewLayer() {
@@ -202,56 +184,13 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         }
     }
 
-    func handleCheckInAlert(status: String, newPoints: Int) {
-        var alertTitle = ""
-        var alertMessage = ""
-        switch status {
-        case "Success":
-            alertTitle = "Success!"
-            alertMessage = "You received \(newPoints) points!"
-        case "InvalidCode":
-            alertTitle = "Error!"
-            alertMessage = "This code doesn't seem to be correct."
-            self.respondingToQRCodeFound = true
-        case "InvalidTime":
-            alertTitle = "Error!"
-            alertMessage = "Make sure you have the right time."
-            self.respondingToQRCodeFound = true
-        case "AlreadyCheckedIn":
-            alertTitle = "Error!"
-            alertMessage = "Looks like you're already checked in."
-            self.respondingToQRCodeFound = true
-        default:
-            alertTitle = "Error!"
-            alertMessage = "Something isn't quite right."
-            self.respondingToQRCodeFound = true
-        }
-        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-        if alertTitle == "Success!" {
-            alert.addAction(
-                UIAlertAction(title: "OK", style: .default, handler: { _ in
-                    self.dismiss(animated: true, completion: nil)
-                    //Dismisses view controller
-                    self.didSelectCloseButton(self.closeButton)
-                    NotificationCenter.default.post(name: .qrCodeSuccessfulScan, object: nil)
-                }))
-        } else {
-            alert.addAction(
-                UIAlertAction(title: "OK", style: .default, handler: { _ in
-                    self.registerForKeyboardNotifications()
-                }))
-        }
-        self.present(alert, animated: true, completion: nil)
-
-    }
-
     func handleStaffCheckInAlert(status: String) {
         var alertTitle = ""
         var alertMessage = ""
         switch status {
         case "Success":
             alertTitle = "Success!"
-            alertMessage = "Name: \(currentUserName)\n Diet: \(dietaryString)"
+            alertMessage = "You have successfully checked in."
         case "InvalidEventId":
             alertTitle = "Error!"
             alertMessage = "Invalid Event ID"
@@ -287,70 +226,24 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         self.present(alert, animated: true, completion: nil)
     }
 
-    func staffCheckIn(userID: String, status: String) {
-        guard let user = HIApplicationStateController.shared.user else { return }
-        HIAPI.RegistrationService.getAttendeeRegistrationUserID(userID: userID)
-            .onCompletion { result in
-                do {
-                    let (apiAttendeeContainer, _) = try result.get()
-                    DispatchQueue.main.async { [self] in
-                        dietaryString = ""
-                        for diet in apiAttendeeContainer.dietary ?? [] {
-                            dietaryString += diet + ", "
-                        }
-                        guard let first = apiAttendeeContainer.firstName else { return }
-                        guard let last = apiAttendeeContainer.lastName else { return }
-                        currentUserName = first + " " + last
-                        self.handleStaffCheckInAlert(status: status)
-                    }
-                } catch {
-                    print("An error has occurred \(error)")
-                }
-            }
-            .authorize(with: user)
-            .launch()
-    }
-
+    // This function detects whether a QRCode has been found
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         guard respondingToQRCodeFound else { return }
+        print("QR code was found")
         let meta = metadataObjects.first as? AVMetadataMachineReadableCodeObject
         let code = meta?.stringValue ?? ""
         guard let user = HIApplicationStateController.shared.user else { return }
         if user.roles.contains(.STAFF) {
-            if selectedEventID != "" {
-                if let range = code.range(of: "userToken=") {
-                    let userToken = code[range.upperBound...]
-                    respondingToQRCodeFound = false
-                    HIAPI.EventService.staffCheckIn(userToken: String(userToken), eventId: selectedEventID)
-                        .onCompletion { result in
-                            do {
-                                let (codeResult, _) = try result.get()
-                                DispatchQueue.main.async { [self] in
-                                    if let qrInfo = self.decode(code) {
-                                        if let userId = qrInfo["userId"] {
-                                            currentUserID = userId as? String ?? ""
-                                            staffCheckIn(userID: currentUserID, status: codeResult.status)
-                                        }
-                                    }
-                                }
-                            } catch {
-                                print(error, error.localizedDescription)
-                            }
-                            sleep(2)
-                        }
-                        .authorize(with: HIApplicationStateController.shared.user)
-                        .launch()
-                }
-            }
-        } else {
+            let eventId = code.description
+            print(eventId)
             respondingToQRCodeFound = false
-            HIAPI.EventService.checkIn(code: code)
+            print(user.token)
+            HIAPI.EventService.staffMeetingAttendanceCheckIn(userToken: String(user.token), eventId: eventId)
                 .onCompletion { result in
                     do {
                         let (codeResult, _) = try result.get()
-                        let status = codeResult.status
-                        DispatchQueue.main.async {
-                            self.handleCheckInAlert(status: codeResult.status, newPoints: codeResult.newPoints)
+                        DispatchQueue.main.async { [self] in
+                                self.handleStaffCheckInAlert(status: codeResult.status)
                         }
                     } catch {
                         print(error, error.localizedDescription)

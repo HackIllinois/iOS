@@ -111,6 +111,7 @@ private extension HILoginFlowController {
                 let queryItems = components.queryItems,
                 let token = queryItems.first(where: { $0.name == "token" })?.value, // Get token
                 token.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
+                    NSLog(token)
                     var user = user
                     var profile = profile
                     user.token = token
@@ -158,8 +159,8 @@ private extension HILoginFlowController {
                 var user = user
                 user.id = apiUser.id
                 user.username = apiUser.username
-                user.firstName = apiUser.firstname
-                user.lastName = apiUser.lastname
+                user.firstName = apiUser.firstName
+                user.lastName = apiUser.lastName
                 user.email = apiUser.email
                 self?.populateRoleData(buildingUser: user, profile: profile, sender: sender)
             } catch {
@@ -185,10 +186,10 @@ private extension HILoginFlowController {
                 var profile = profile
                 user.roles = apiRolesContainer.roles
                 profile.roles = apiRolesContainer.roles
-                if user.provider == .github && user.roles.contains(.attendee) {
+                if user.provider == .github && user.roles.contains(.ATTENDEE) {
                     self?.populateRegistrationData(buildingUser: user, profile: profile, sender: sender)
                 } else if user.provider == .google {
-                    if user.roles.contains(.staff) {
+                    if user.roles.contains(.STAFF) {
                         DispatchQueue.main.async {
                             NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
                             NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": profile])

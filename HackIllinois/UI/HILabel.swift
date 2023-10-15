@@ -23,6 +23,7 @@ class HILabel: UILabel {
         case sponsor
         case project
         case viewTitle
+        case viewTitleGreen
         case detailTitle
         case subtitle
         case description
@@ -56,6 +57,7 @@ class HILabel: UILabel {
         case newSponsor
         case newLocation
         case newTime
+        case QRSelection
     }
 
     // MARK: - Properties
@@ -146,6 +148,12 @@ class HILabel: UILabel {
             } else {
                 font = HIAppearance.Font.viewTitle
             }
+        
+        case .viewTitleGreen:
+            textHIColor = \.viewTitleGreen
+            backgroundHIColor = \.clear
+            textAlignment = .center
+            font = HIAppearance.Font.viewTitle
 
         case .subtitle:
             textHIColor = \.accent
@@ -353,6 +361,10 @@ class HILabel: UILabel {
             } else {
                 font = HIAppearance.Font.locationText
             }
+        case .QRSelection:
+            textHIColor = \.black
+            backgroundHIColor = \.clear
+            font = HIAppearance.Font.QRSelection
         }
         }
 

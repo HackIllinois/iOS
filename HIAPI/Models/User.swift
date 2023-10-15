@@ -16,8 +16,8 @@ import Foundation
 public struct User: Codable, APIReturnable {
     public let id: String
     public let username: String
-    public let firstname: String
-    public let lastname: String
+    public let firstName: String
+    public let lastName: String
     public let email: String
 }
 
@@ -29,14 +29,14 @@ public struct Roles: OptionSet, Codable {
     public let rawValue: Int
 
     public static let null = Roles([])
-    public static let user = Roles(rawValue: 1 << 0)
-    public static let applicant = Roles(rawValue: 1 << 1)
-    public static let attendee = Roles(rawValue: 1 << 2)
-    public static let mentor = Roles(rawValue: 1 << 3)
-    public static let sponsor = Roles(rawValue: 1 << 4)
-    public static let staff = Roles(rawValue: 1 << 5)
-    public static let admin = Roles(rawValue: 1 << 6)
-    public static let allRoles = ["User", "Applicant", "Attendee", "Mentor", "Sponsor", "Staff", "Admin"]
+    public static let USER = Roles(rawValue: 1 << 0)
+    public static let APPLICANT = Roles(rawValue: 1 << 1)
+    public static let ATTENDEE = Roles(rawValue: 1 << 2)
+    public static let MENTOR = Roles(rawValue: 1 << 3)
+    public static let SPONSOR = Roles(rawValue: 1 << 4)
+    public static let STAFF = Roles(rawValue: 1 << 5)
+    public static let ADMIN = Roles(rawValue: 1 << 6)
+    public static let allRoles = ["USER", "APPLICANT", "ATTENDEE", "MENTOR", "SPONSOR", "STAFF", "ADMIN"]
 
     public init(rawValue: Int) {
         self.rawValue = rawValue
@@ -55,13 +55,13 @@ public struct Roles: OptionSet, Codable {
 
     public init(string: String) throws {
         switch string {
-        case "User": self = .user
-        case "Applicant": self = .applicant
-        case "Attendee": self = .attendee
-        case "Mentor": self = .mentor
-        case "Sponsor": self = .sponsor
-        case "Staff": self = .staff
-        case "Admin": self = .admin
+        case "USER": self = .USER
+        case "APPLICANT": self = .APPLICANT
+        case "ATTENDEE": self = .ATTENDEE
+        case "MENTOR": self = .MENTOR
+        case "SPONSOR": self = .SPONSOR
+        case "STAFF": self = .STAFF
+        case "ADMIN": self = .ADMIN
         default:
             #if DEBUG
                 throw DecodingError.unknownOption
@@ -73,13 +73,13 @@ public struct Roles: OptionSet, Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
-        if contains(.user) { try container.encode("User") }
-        if contains(.applicant) { try container.encode("Applicant") }
-        if contains(.attendee) { try container.encode("Attendee") }
-        if contains(.mentor) { try container.encode("Mentor") }
-        if contains(.sponsor) { try container.encode("Sponsor") }
-        if contains(.staff) { try container.encode("Staff") }
-        if contains(.admin) { try container.encode("Admin") }
+        if contains(.USER) { try container.encode("USER") }
+        if contains(.APPLICANT) { try container.encode("APPLICANT") }
+        if contains(.ATTENDEE) { try container.encode("ATTENDEE") }
+        if contains(.MENTOR) { try container.encode("MENTOR") }
+        if contains(.SPONSOR) { try container.encode("SPONSOR") }
+        if contains(.STAFF) { try container.encode("STAFF") }
+        if contains(.ADMIN) { try container.encode("ADMIN") }
     }
 }
 
