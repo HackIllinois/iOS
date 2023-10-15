@@ -28,7 +28,7 @@ class HIOnboardingViewController: HIBaseViewController {
         $0.titleLabel?.font = HIAppearance.Font.onboardingGetStartedText
         $0.backgroundHIColor = \.buttonViewBackground
         $0.titleHIColor = \.whiteText
-        $0.title = "Get Started"
+        $0.title = "Get Started!"
         $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
     }
     @objc dynamic override func setUpBackgroundView() {
