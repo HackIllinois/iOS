@@ -169,7 +169,7 @@ extension HIProfileViewController {
                     self?.updateProfile()
                 }
             } catch {
-                print("Failed to reload profile with error: \(error)")
+                print("Failed to reload profile with the error: \(error)")
             }
         }
         .authorize(with: user)
