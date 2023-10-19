@@ -66,6 +66,7 @@ class HIEventDetailViewController: HIBaseViewController {
         $0.activeImage = #imageLiteral(resourceName: "Favorited")
         $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
     }
+    
     private let closeButton = HIButton {
         $0.tintHIColor = \.baseText
         $0.backgroundHIColor = \.clear
