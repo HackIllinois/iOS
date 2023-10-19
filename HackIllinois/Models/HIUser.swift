@@ -21,14 +21,11 @@ struct HIUser: Codable {
     var attendee: HIAPI.Attendee?
     var token = ""
     var oauthCode = ""
-    var id = ""
-    var username = ""
-    var firstName = ""
-    var lastName = ""
+    var userId = ""
     var email = ""
 
     var qrURL: URL? {
-        return URL(string: "hackillinois://user?userId=\(id)")
+        return URL(string: "hackillinois://user?userId=\(userId)")
     }
 
     init(provider: HIAPI.AuthService.OAuthProvider) {

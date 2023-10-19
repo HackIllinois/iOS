@@ -14,10 +14,7 @@ import APIManager
 import Foundation
 
 public struct User: Codable, APIReturnable {
-    public let id: String
-    public let username: String
-    public let firstName: String
-    public let lastName: String
+    public let userId: String
     public let email: String
 }
 

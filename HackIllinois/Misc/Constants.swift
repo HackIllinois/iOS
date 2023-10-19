@@ -20,7 +20,7 @@ struct HIConstants {
     static let APPLICATION_INSTALLED_KEY = "org.hackillinois.ios.application_installed"
     static let SHOULD_SHOW_ONBOARDING_KEY = "org.hackillinois.ios.should_show_onboarding"
     static func PASS_PROMPTED_KEY(user: HIUser) -> String {
-        return "org.hackillinois.ios.pass_prompted_\(user.id)"
+        return "org.hackillinois.ios.pass_prompted_\(user.userId)"
     }
     // Images
     private static let url = "https://hackillinois-upload.s3.amazonaws.com/photos/profiles-2022/"
