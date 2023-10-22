@@ -185,28 +185,30 @@ extension HIScanAttendanceViewController: AVCaptureMetadataOutputObjectsDelegate
     }
 
     func handleStaffCheckInAlert(status: String) {
-        var alertTitle = ""
+        var alertTitle = "Error!"
         var alertMessage = ""
+        self.respondingToQRCodeFound = true
         switch status {
         case "Success":
             alertTitle = "Success!"
             alertMessage = "You have successfully checked in."
-        case "InvalidEventId":
-            alertTitle = "Error!"
-            alertMessage = "Invalid Event ID"
-            self.respondingToQRCodeFound = true
-        case "BadUserToken":
-            alertTitle = "Error!"
-            alertMessage = "BadUserToken"
-            self.respondingToQRCodeFound = true
-        case "AlreadyCheckedIn":
-            alertTitle = "Error!"
-            alertMessage = "Looks like you're already checked in."
-            self.respondingToQRCodeFound = true
+            self.respondingToQRCodeFound = false
+        case "InvalidPermission":
+            alertMessage = "Invalid permission."
+        case "TokenExpired":
+            alertMessage = "Token expired."
+        case "InvalidParams":
+            alertMessage = "Invalid parameters."
+        case "CodeExpired":
+            alertMessage = "Event expired."
+        case "InternalError":
+            alertMessage = "Internal error."
+        case "NoToken":
+            alertMessage = "No token."
+        case "InvalidToken":
+            alertMessage = "Invalid token."
         default:
-            alertTitle = "Error!"
             alertMessage = "Something isn't quite right."
-            self.respondingToQRCodeFound = true
         }
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         if alertTitle == "Success!" {
@@ -238,6 +240,7 @@ extension HIScanAttendanceViewController: AVCaptureMetadataOutputObjectsDelegate
             print(eventId)
             respondingToQRCodeFound = false
             print(user.token)
+            var codeResult = Attendance?.self
             HIAPI.EventService.staffMeetingAttendanceCheckIn(userToken: String(user.token), eventId: eventId)
                 .onCompletion { result in
                     do {
@@ -246,7 +249,8 @@ extension HIScanAttendanceViewController: AVCaptureMetadataOutputObjectsDelegate
                                 self.handleStaffCheckInAlert(status: codeResult.status)
                         }
                     } catch {
-                        print(error, error.localizedDescription)
+                        print(codeResult)
+                        //self.handleStaffCheckInAlert(status: codeResult.status)
                     }
                     sleep(2)
                 }
