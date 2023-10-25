@@ -127,6 +127,7 @@ private extension HILoginFlowController {
                 self?.presentAuthenticationFailure(withError: error, sender: sender)
             }
         })
+        loginSession?.prefersEphemeralWebBrowserSession = true
         loginSession?.presentationContextProvider = self
         loginSession?.start()
     }
