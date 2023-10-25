@@ -158,10 +158,7 @@ private extension HILoginFlowController {
             do {
                 let (apiUser, _) = try result.get()
                 var user = user
-                user.id = apiUser.id
-                user.username = apiUser.username
-                user.firstName = apiUser.firstName
-                user.lastName = apiUser.lastName
+                user.userId = apiUser.userId
                 user.email = apiUser.email
                 self?.populateRoleData(buildingUser: user, profile: profile, sender: sender)
             } catch {
