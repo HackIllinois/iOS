@@ -240,7 +240,7 @@ extension HIScanAttendanceViewController: AVCaptureMetadataOutputObjectsDelegate
             print(eventId)
             respondingToQRCodeFound = false
             print(user.token)
-            var codeResult = Attendance?.self
+            var codeResult: Attendance?
             HIAPI.EventService.staffMeetingAttendanceCheckIn(userToken: String(user.token), eventId: eventId)
                 .onCompletion { result in
                     do {
@@ -249,8 +249,16 @@ extension HIScanAttendanceViewController: AVCaptureMetadataOutputObjectsDelegate
                                 self.handleStaffCheckInAlert(status: codeResult.status)
                         }
                     } catch {
-                        print(codeResult)
-                        //self.handleStaffCheckInAlert(status: codeResult.status)
+                        print("Error info: \(error)")
+                        print(error.localizedDescription)
+                        if codeResult == nil {
+                            print("result is nil")
+                        } else {
+                            print(codeResult!.status)
+                        }
+                        DispatchQueue.main.async { [self] in
+                                self.handleStaffCheckInAlert(status: error.localizedDescription)
+                        }
                     }
                     sleep(2)
                 }
