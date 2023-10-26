@@ -193,19 +193,11 @@ extension HIScanAttendanceViewController: AVCaptureMetadataOutputObjectsDelegate
             alertTitle = "Success!"
             alertMessage = "You have successfully checked in."
             self.respondingToQRCodeFound = false
-        case "InvalidPermission":
-            alertMessage = "Invalid permission."
-        case "TokenExpired":
-            alertMessage = "Token expired."
-        case "InvalidParams":
-            alertMessage = "Invalid parameters."
-        case "CodeExpired":
-            alertMessage = "Event expired."
-        case "InternalError":
+        case "Error info: invalidHTTPReponse(code: 400, description: \"bad request\")":
+            alertMessage = "QR code expired."
+        case "Error info: invalidHTTPReponse(code: 500, description: \"internal error\")":
             alertMessage = "Internal error."
-        case "NoToken":
-            alertMessage = "No token."
-        case "InvalidToken":
+        case "Error info: invalidHTTPReponse(code: 401, description: \"unauthorized\")":
             alertMessage = "Invalid token."
         default:
             alertMessage = "Something isn't quite right."
@@ -249,16 +241,10 @@ extension HIScanAttendanceViewController: AVCaptureMetadataOutputObjectsDelegate
                                 self.handleStaffCheckInAlert(status: codeResult.status)
                         }
                     } catch {
-                        print("Error info: \(error)")
-                        print(error.localizedDescription)
-                        if codeResult == nil {
-                            print("result is nil")
-                        } else {
-                            print(codeResult!.status)
-                        }
                         DispatchQueue.main.async { [self] in
-                                self.handleStaffCheckInAlert(status: error.localizedDescription)
+                                self.handleStaffCheckInAlert(status: "Error info: \(error)")
                         }
+                        print("Error info: \(error)")
                     }
                     sleep(2)
                 }
