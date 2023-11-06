@@ -66,7 +66,7 @@ public struct StaffEvent: Codable {
 
 public struct Event: Codable {
     internal enum CodingKeys: String, CodingKey {
-        case id
+        case id = "eventId"
         case endTime
         case eventType
         case info = "description"
