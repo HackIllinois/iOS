@@ -24,6 +24,10 @@ public class EventService: BaseService {
         return APIRequest<EventContainer>(service: self, endpoint: "event/", method: .GET)
     }
 
+    public static func getStaffEvents() -> APIRequest<StaffEventContainer> {
+        return APIRequest<StaffEventContainer>(service: self, endpoint: "event/staff/", method: .GET)
+    }
+    
     public static func checkIn(code: String) -> APIRequest<EventCheckInStatus> {
         var body = HTTPBody()
         body["code"] = code
