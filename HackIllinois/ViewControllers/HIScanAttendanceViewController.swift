@@ -185,28 +185,22 @@ extension HIScanAttendanceViewController: AVCaptureMetadataOutputObjectsDelegate
     }
 
     func handleStaffCheckInAlert(status: String) {
-        var alertTitle = ""
+        var alertTitle = "Error!"
         var alertMessage = ""
+        self.respondingToQRCodeFound = true
         switch status {
         case "Success":
             alertTitle = "Success!"
             alertMessage = "You have successfully checked in."
-        case "InvalidEventId":
-            alertTitle = "Error!"
-            alertMessage = "Invalid Event ID"
-            self.respondingToQRCodeFound = true
-        case "BadUserToken":
-            alertTitle = "Error!"
-            alertMessage = "BadUserToken"
-            self.respondingToQRCodeFound = true
-        case "AlreadyCheckedIn":
-            alertTitle = "Error!"
-            alertMessage = "Looks like you're already checked in."
-            self.respondingToQRCodeFound = true
+            self.respondingToQRCodeFound = false
+        case "Error info: invalidHTTPReponse(code: 400, description: \"bad request\")":
+            alertMessage = "QR code expired."
+        case "Error info: invalidHTTPReponse(code: 500, description: \"internal error\")":
+            alertMessage = "Internal error."
+        case "Error info: invalidHTTPReponse(code: 401, description: \"unauthorized\")":
+            alertMessage = "Invalid token."
         default:
-            alertTitle = "Error!"
             alertMessage = "Something isn't quite right."
-            self.respondingToQRCodeFound = true
         }
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         if alertTitle == "Success!" {
@@ -238,6 +232,7 @@ extension HIScanAttendanceViewController: AVCaptureMetadataOutputObjectsDelegate
             print(eventId)
             respondingToQRCodeFound = false
             print(user.token)
+            var codeResult: Attendance?
             HIAPI.EventService.staffMeetingAttendanceCheckIn(userToken: String(user.token), eventId: eventId)
                 .onCompletion { result in
                     do {
@@ -246,7 +241,10 @@ extension HIScanAttendanceViewController: AVCaptureMetadataOutputObjectsDelegate
                                 self.handleStaffCheckInAlert(status: codeResult.status)
                         }
                     } catch {
-                        print(error, error.localizedDescription)
+                        DispatchQueue.main.async { [self] in
+                                self.handleStaffCheckInAlert(status: "Error info: \(error)")
+                        }
+                        print("Error info: \(error)")
                     }
                     sleep(2)
                 }
