@@ -185,7 +185,10 @@ private extension HILoginFlowController {
                 user.roles = apiRolesContainer.roles
                 profile.roles = apiRolesContainer.roles
                 if user.provider == .github && user.roles.contains(.ATTENDEE) {
-                    self?.populateRegistrationData(buildingUser: user, profile: profile, sender: sender)
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
+                    }
+                    self?.populateProfileData(buildingProfile: profile, sender: sender)
                 } else if user.provider == .google {
                     if user.roles.contains(.STAFF) {
                         DispatchQueue.main.async {
@@ -210,7 +213,7 @@ private extension HILoginFlowController {
         .launch()
     }
 
-    private func populateRegistrationData(buildingUser user: HIUser, profile: HIProfile, sender: HIBaseViewController) {
+    /*private func populateRegistrationData(buildingUser user: HIUser, profile: HIProfile, sender: HIBaseViewController) {
         HIAPI.RegistrationService.getAttendee()
         .onCompletion { [weak self] result in
             do {
@@ -229,7 +232,7 @@ private extension HILoginFlowController {
         }
         .authorize(with: user)
         .launch()
-    }
+    }*/
 
     private func populateProfileData(buildingProfile profile: HIProfile, sender: HIBaseViewController) {
         HIAPI.ProfileService.getUserProfile()
@@ -237,11 +240,10 @@ private extension HILoginFlowController {
             do {
                 let (apiProfile, _) = try result.get()
                 var profile = profile
-                profile.id = apiProfile.id
-                profile.firstName = apiProfile.firstName
-                profile.lastName = apiProfile.lastName
+                profile.userId = apiProfile.userId
+                profile.displayName = apiProfile.displayName
                 profile.points = apiProfile.points
-                profile.discord = apiProfile.discord
+                profile.discordTag = apiProfile.discordTag
                 profile.avatarUrl = apiProfile.avatarUrl
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": profile])

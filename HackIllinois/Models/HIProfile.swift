@@ -21,13 +21,12 @@ struct HIProfile: Codable {
     var attendee: HIAPI.Attendee?
     var token = ""
     var oauthCode = ""
-    var id = ""
-    var firstName = ""
-    var lastName = ""
+    var userId = ""
+    var displayName = ""
     var points = 0
-    var foodWave = 0
+    //var foodWave = 0
     var timezone = ""
-    var discord = ""
+    var discordTag = ""
     var avatarUrl = ""
 
     init(provider: HIAPI.AuthService.OAuthProvider) {

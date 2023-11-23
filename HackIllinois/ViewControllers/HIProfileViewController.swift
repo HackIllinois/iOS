@@ -73,13 +73,13 @@ extension HIProfileViewController {
             view.willRemoveSubview(profileCardController!.view)
             profileCardController?.removeFromParent()
         }
-        profileCardController = UIHostingController(rootView: HIProfileCardView(firstName: profile.firstName,
-                                                                                lastName: profile.lastName,
+        profileCardController = UIHostingController(rootView: HIProfileCardView(firstName: profile.displayName,
+                                                                                lastName: profile.displayName,
                                                                                 dietaryRestrictions: dietaryRestrictions,
                                                                                 points: profile.points,
                                                                                 tier: profileTier,
-                                                                                foodWave: profile.foodWave,
-                                                                                id: profile.id
+                                                                                foodWave: 1,//profile.foodWave,
+                                                                                id: profile.userId
                                                                                ))
 
         addChild(profileCardController!)
@@ -159,11 +159,10 @@ extension HIProfileViewController {
         .onCompletion { [weak self] result in
             do {
                 let (apiProfile, _) = try result.get()
-                self?.profile.id = apiProfile.id
-                self?.profile.firstName = apiProfile.firstName
-                self?.profile.lastName = apiProfile.lastName
+                self?.profile.userId = apiProfile.userId
+                self?.profile.displayName = apiProfile.discordTag
                 self?.profile.points = apiProfile.points
-                self?.profile.foodWave = apiProfile.foodWave
+                //self?.profile.foodWave = apiProfile.foodWave
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": self?.profile])
                     self?.updateProfile()
