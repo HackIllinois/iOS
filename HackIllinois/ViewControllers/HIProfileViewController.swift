@@ -73,13 +73,12 @@ extension HIProfileViewController {
             view.willRemoveSubview(profileCardController!.view)
             profileCardController?.removeFromParent()
         }
-        profileCardController = UIHostingController(rootView: HIProfileCardView(firstName: profile.displayName,
-                                                                                lastName: profile.displayName,
+        profileCardController = UIHostingController(rootView: HIProfileCardView(displayName: profile.displayName,
                                                                                 dietaryRestrictions: dietaryRestrictions,
                                                                                 points: profile.points,
                                                                                 tier: profileTier,
                                                                                 foodWave: 1,//profile.foodWave,
-                                                                                id: profile.userId
+                                                                                userId: profile.userId
                                                                                ))
 
         addChild(profileCardController!)

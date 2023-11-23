@@ -14,15 +14,14 @@ import SwiftUI
 import HIAPI
 
 struct HIProfileCardView: View {
-    let firstName: String
-    let lastName: String
+    let displayName: String
     let dietaryRestrictions: [String]
     let points: Int
     let tier: String
     let foodWave: Int
     let background = (\HIAppearance.profileCardBackground).value
     let baseText = (\HIAppearance.profileBaseText).value
-    let id: String
+    let userId: String
     let isIpad = UIDevice.current.userInterfaceIdiom == .pad
     @State var flipped: Bool = false
     @State var ticketRotation = 0.0
@@ -157,10 +156,18 @@ struct HIProfileCardView: View {
     }
 
     func formatName() -> String {
-        if lastName.count + firstName.count > 20 {
-            return firstName + " " + lastName.prefix(1) + "."
+        if displayName.count > 20 {
+            let names = displayName.split(separator: " ")
+            if names.count >= 2 {
+                let firstName = String(names[0])
+                let lastName = String(names[1])
+                let abbreviatedName = firstName + " " + String(lastName.prefix(1)) + "."
+                return abbreviatedName
+            } else {
+                return displayName
+            }
         } else {
-            return firstName + " " + lastName
+            return displayName
         }
     }
 
@@ -268,13 +275,12 @@ struct HIProfileCardView: View {
 
 struct HIProfileCardView_Previews: PreviewProvider {
     static var previews: some View {
-        HIProfileCardView(firstName: "first",
-                          lastName: "last",
+        HIProfileCardView(displayName: "first last",
                           dietaryRestrictions: ["Vegetarian", "Lactose-Intolerant", "None", "no beef"],
                           points: 100,
                           tier: "no tier",
                           foodWave: 1,
-                          id: "https://www.hackillinois.org"
+                          userId: "https://www.hackillinois.org"
         )
     }
 }
