@@ -185,10 +185,10 @@ private extension HILoginFlowController {
                 user.roles = apiRolesContainer.roles
                 profile.roles = apiRolesContainer.roles
                 if user.provider == .github && user.roles.contains(.ATTENDEE) {
+                    self?.populateProfileData(buildingProfile: profile, sender: sender)
                     DispatchQueue.main.async {
                         NotificationCenter.default.post(name: .loginUser, object: nil, userInfo: ["user": user])
                     }
-                    self?.populateProfileData(buildingProfile: profile, sender: sender)
                 } else if user.provider == .google {
                     if user.roles.contains(.STAFF) {
                         DispatchQueue.main.async {
@@ -213,7 +213,7 @@ private extension HILoginFlowController {
         .launch()
     }
 
-    /*private func populateRegistrationData(buildingUser user: HIUser, profile: HIProfile, sender: HIBaseViewController) {
+    private func populateRegistrationData(buildingUser user: HIUser, profile: HIProfile, sender: HIBaseViewController) {
         HIAPI.RegistrationService.getAttendee()
         .onCompletion { [weak self] result in
             do {
@@ -232,7 +232,7 @@ private extension HILoginFlowController {
         }
         .authorize(with: user)
         .launch()
-    }*/
+    }
 
     private func populateProfileData(buildingProfile profile: HIProfile, sender: HIBaseViewController) {
         HIAPI.ProfileService.getUserProfile()
