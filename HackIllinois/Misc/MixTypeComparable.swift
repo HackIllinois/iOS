@@ -121,7 +121,7 @@ extension Project: MixTypeComparable {
 }
 
 extension HIAPI.Profile: MixTypeComparable {
-    var comparable: String { return id }
+    var comparable: String { return userId }
 }
 
 extension Profile: MixTypeComparable {
@@ -129,7 +129,7 @@ extension Profile: MixTypeComparable {
 }
 
 extension HIAPI.LeaderboardProfile: MixTypeComparable {
-    var comparable: String { return id }
+    var comparable: String { return userId }
 }
 
 extension LeaderboardProfile: MixTypeComparable {
