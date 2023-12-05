@@ -38,6 +38,7 @@ class HILoginFlowController: UIViewController {
 
     // prevents the login session from going out of scope during presentation
     var loginSession: ASWebAuthenticationSession?
+    var eventsSession: ASWebAuthenticationSession?
 
     // MARK: ViewControllers
     lazy var loginSelectionViewController = HILoginSelectionViewController(delegate: self)
@@ -103,6 +104,7 @@ private extension HILoginFlowController {
             }
             return
         }
+        
         let loginURL = HIAPI.AuthService.oauthURL(provider: user.provider)
         NSLog(loginURL.description)
         loginSession = ASWebAuthenticationSession(url: loginURL, callbackURLScheme: "hackillinois", completionHandler: { [weak self] (url, error) in
