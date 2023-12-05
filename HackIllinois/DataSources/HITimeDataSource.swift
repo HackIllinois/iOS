@@ -18,16 +18,16 @@ final class HITimeDataSource {
     static var shared = HITimeDataSource()
 
     public static let defaultTimes = EventTimes(
-        eventStart: Date(timeIntervalSince1970: 1677272400), // Friday, February 25, 2023 6:00:00 PM CST
-        eventEnd: Date(timeIntervalSince1970: 1677445200), // Sunday, February 27, 2023 4:00:00 PM CST
-        hackStart: Date(timeIntervalSince1970: 1677286800), // Friday, February 25, 2023 7:00:00 PM CST
-        hackEnd: Date(timeIntervalSince1970: 1677423600), // Sunday, February 27, 2023 10:00:00 AM CST
-        fridayStart: Date(timeIntervalSince1970: 1677218400), // Friday, February 25, 2023 12:00:00 AM CST
-        fridayEnd: Date(timeIntervalSince1970: 1677304799), // Friday, February 25, 2023 11:59:59 PM CST
-        saturdayStart: Date(timeIntervalSince1970: 1677304800), // Saturday, February 26, 2023 12:00:00 AM CST
-        saturdayEnd: Date(timeIntervalSince1970: 1677391199), // Saturday, February 26, 2023 11:59:59 PM CST
-        sundayStart: Date(timeIntervalSince1970: 1677391200), // Sunday, February 27, 2023 12:00:00 AM CST
-        sundayEnd: Date(timeIntervalSince1970: 1677477599) // Sunday, February 27, 2023 11:59:59 PM CST
+        eventStart: Date(timeIntervalSince1970: 1708732800), // Friday, February 23, 2024 6:00:00 PM CST
+        eventEnd: Date(timeIntervalSince1970: 1708898400), // Sunday, February 25, 2024 4:00:00 PM CST
+        hackStart: Date(timeIntervalSince1970: 1708736400), // Friday, February 23, 2024 7:00:00 PM CST
+        hackEnd: Date(timeIntervalSince1970: 1708876800), // Sunday, February 25, 2024 10:00:00 AM CST
+        fridayStart: Date(timeIntervalSince1970: 1708668000), // Friday, February 23, 2024 12:00:00 AM CST
+        fridayEnd: Date(timeIntervalSince1970: 1708754399), // Friday, February 23, 2024 11:59:59 PM CST
+        saturdayStart: Date(timeIntervalSince1970: 1708754400), // Saturday, February 24, 2024 12:00:00 AM CST
+        saturdayEnd: Date(timeIntervalSince1970: 1708840799), // Saturday, February 24, 2024 11:59:59 PM CST
+        sundayStart: Date(timeIntervalSince1970: 1708840800), // Sunday, February 25, 2024 12:00:00 AM CST
+        sundayEnd: Date(timeIntervalSince1970: 1708927199) // Sunday, February 25, 2024 11:59:59 PM CST
     )
 
     var eventTimes = HITimeDataSource.defaultTimes
