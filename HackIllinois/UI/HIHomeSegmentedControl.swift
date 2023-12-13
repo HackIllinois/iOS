@@ -22,7 +22,6 @@ class HIHomeSegmentedControl: HISegmentedControl {
     private var titleLabels = [UILabel]()
 
     private let titleFont = HIAppearance.Font.homeSegmentedTitle
-    private let titleFontPad = HIAppearance.Font.homeSegmentedTitlePad
     private let numberFont = HIAppearance.Font.segmentedNumberText
 
     private var viewPadding: CGFloat = 35
@@ -100,11 +99,7 @@ class HIHomeSegmentedControl: HISegmentedControl {
     private func setupViewForItem(at index: Int) {
         let view = UIView()
         let titleLabel = UILabel()
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            titleLabel.font = titleFontPad
-        } else {
-            titleLabel.font = titleFont
-        }
+        titleLabel.font = titleFont
         titleLabel.textAlignment = .center
 
         titleLabel.text = items[index]

@@ -20,9 +20,6 @@ class HIBannerViewController: UIViewController {
         $0.backgroundHIColor = \.clear
         $0.textAlignment = .center
         $0.font = HIAppearance.Font.glyph
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            $0.font = HIAppearance.Font.glyphPad
-        }
     }
 }
 
