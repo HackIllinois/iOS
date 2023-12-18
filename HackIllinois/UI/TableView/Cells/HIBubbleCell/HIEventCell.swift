@@ -134,7 +134,7 @@ extension HIEventCell {
             lhs.contentStackView.addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        let timeLabel = HILabel(style: .newTime)
+        let timeLabel = HILabel(style: .time)
         // We can check for async events by checking if the event start and end time is 1970-01-01 00:00:00 +0000
         if rhs.startTime.timeIntervalSince1970 == 0 || rhs.endTime.timeIntervalSince1970 == 0 {
             timeLabel.text = HIConstants.ASYNC_EVENT_TIME_TEXT
@@ -170,7 +170,7 @@ extension HIEventCell {
         timeLabel.leadingAnchor.constraint(equalTo: timeImageView.trailingAnchor, constant: eventCellSpacing + 1).isActive = true
         timeLabel.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor).isActive = true
         if !rhs.sponsor.isEmpty {
-            let sponsorLabel = HILabel(style: .newSponsor)
+            let sponsorLabel = HILabel(style: .sponsor)
             middleContainerView.addSubview(sponsorImageView)
             middleContainerView.addSubview(sponsorLabel)
             sponsorImageView.translatesAutoresizingMaskIntoConstraints = false

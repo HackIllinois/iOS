@@ -54,9 +54,8 @@ class HILabel: UILabel {
         case leaderboardPoints
         case neonCountdown
         // Cases used on bubble event cell
-        case newSponsor
         case newLocation
-        case newTime
+        case time
         case QRSelection
     }
 
@@ -143,11 +142,7 @@ class HILabel: UILabel {
             textHIColor = \.whiteText
             backgroundHIColor = \.clear
             textAlignment = .center
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                font = HIAppearance.Font.viewTitlePad
-            } else {
-                font = HIAppearance.Font.viewTitle
-            }
+            font = HIAppearance.Font.viewTitle
         
         case .viewTitleGreen:
             textHIColor = \.viewTitleGreen
@@ -262,7 +257,7 @@ class HILabel: UILabel {
             textHIColor = \.white
             backgroundHIColor = \.clear
             if UIDevice.current.userInterfaceIdiom == .pad {
-                font = HIAppearance.Font.glyphPad
+                font = HIAppearance.Font.glyph
             } else {
                 font = HIAppearance.Font.eventButtonText
             }
@@ -332,35 +327,17 @@ class HILabel: UILabel {
             }
             
         // Case for event bubble cell time info
-        case .newTime:
+        case .time:
             textHIColor = \.black
             backgroundHIColor = \.clear
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                font = HIAppearance.Font.timeTextPad
-            } else {
-                font = HIAppearance.Font.timeText
-            }
-            
-        // Case for event bubble cell sponsor info
-        case .newSponsor:
-            textHIColor = \.black
-            backgroundHIColor = \.clear
-            font = HIAppearance.Font.bubbleSponsorText
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                font = HIAppearance.Font.sponsorTextPad
-            } else {
-                font = HIAppearance.Font.bubbleSponsorText
-            }
+            font = HIAppearance.Font.timeText
             
         // Case for event bubble cell location info
         case .newLocation:
             textHIColor = \.black
             backgroundHIColor = \.clear
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                font = HIAppearance.Font.locationTextPad
-            } else {
-                font = HIAppearance.Font.locationText
-            }
+            font = HIAppearance.Font.locationText
+            
         case .QRSelection:
             textHIColor = \.black
             backgroundHIColor = \.clear

@@ -25,7 +25,6 @@ class HIScheduleSegmentedControl: HISegmentedControl {
     private let titleFont = HIAppearance.Font.segmentedTitle
     private let titleFontPad = HIAppearance.Font.scheduleSegmentedPad
     private let numberFont = HIAppearance.Font.segmentedNumberText
-    private let numberFontPad = HIAppearance.Font.scheduleSegmentedNumberPad
 
     private let viewPadding: CGFloat = 65
     private let indicatorCornerRadiusProp: CGFloat = 0.15
@@ -112,11 +111,10 @@ class HIScheduleSegmentedControl: HISegmentedControl {
         titleLabel.textAlignment = .center
         if UIDevice.current.userInterfaceIdiom == .pad {
             titleLabel.font = titleFontPad
-            numberLabel.font = numberFontPad
         } else {
             titleLabel.font = titleFont
-            numberLabel.font = numberFont
         }
+        numberLabel.font = numberFont
         titleLabel.text = items[index]
         titleLabel.textColor <- \.whiteText
 
