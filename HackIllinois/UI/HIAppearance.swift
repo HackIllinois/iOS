@@ -87,18 +87,11 @@ struct HIAppearance: Equatable {
     private static let yellowWhite = #colorLiteral(red: 0.9647058824, green: 0.9568627451, blue: 0.831372549, alpha: 1)
     private static let lightYellow = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1)
     private static let tan = #colorLiteral(red: 0.9098039216, green: 0.8431372549, blue: 0.6470588235, alpha: 1)
-    private static let orange = #colorLiteral(red: 0.9294117647, green: 0.6078431373, blue: 0.1294117647, alpha: 1)
     private static let blue = #colorLiteral(red: 0.03137254902, green: 0.5450980392, blue: 0.7568627451, alpha: 1)
-    private static let pink = #colorLiteral(red: 0.9960784314, green: 0.4392156863, blue: 0.5960784314, alpha: 1)
     private static let mediumOrange = #colorLiteral(red: 0.9764705882, green: 0.5843137255, blue: 0.3411764706, alpha: 1)
-    private static let teal = #colorLiteral(red: 0.2156862745, green: 0.8705882353, blue: 0.8039215686, alpha: 1)
-    private static let lightBlue = #colorLiteral(red: 0.7921568627, green: 0.8235294118, blue: 0.8980392157, alpha: 1)
-    private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     private static let darkBlue = #colorLiteral(red: 0.05098039216, green: 0.2196078431, blue: 0.4862745098, alpha: 1)
-    private static let transparent = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     private static let magenta = #colorLiteral(red: 0.9960784314, green: 0.4392156863, blue: 0.5960784314, alpha: 1)
     private static let darkBlueGreeen = #colorLiteral(red: 0.03137254902, green: 0.5450980392, blue: 0.7568627451, alpha: 1)
-    private static let darknavy = #colorLiteral(red: 0.1137254902, green: 0.1490196078, blue: 0.2666666667, alpha: 1)
     private static let vegetarian = #colorLiteral(red: 0.2156862745, green: 0.8705882353, blue: 0.8039215686, alpha: 1)
     private static let vegan = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1)
     private static let glutenfree = #colorLiteral(red: 0.9764705882, green: 0.5843137255, blue: 0.3411764706, alpha: 1)
@@ -113,7 +106,26 @@ struct HIAppearance: Equatable {
     private static let icyBlue = #colorLiteral(red: 0.8235294118, green: 0.968627451, blue: 1, alpha: 1)
     private static let bLightYellow = #colorLiteral(red: 1, green: 0.9803921569, blue: 0.8, alpha: 1)
     private static let bYellow = #colorLiteral(red: 1, green: 0.9568627451, blue: 0.5529411765, alpha: 1)
+    private static let mediumYellow = #colorLiteral(red: 0.9607843137, green: 0.9176470588, blue: 0.5137254902, alpha: 1)
+    private static let orange = #colorLiteral(red: 1, green: 0.6980392157, blue: 0.2431372549, alpha: 1)
+    private static let darkOrange = #colorLiteral(red: 0.8705882353, green: 0.5568627451, blue: 0.2705882353, alpha: 1)
+    private static let red = #colorLiteral(red: 0.6509803922, green: 0.1176470588, blue: 0, alpha: 1)
+    private static let lightGreen = #colorLiteral(red: 0.7019607843, green: 0.8392156863, blue: 0.537254902, alpha: 1)
+    private static let lightBlue = #colorLiteral(red: 0.7176470588, green: 0.8392156863, blue: 0.8392156863, alpha: 1)
+    private static let teal = #colorLiteral(red: 0.537254902, green: 0.7450980392, blue: 0.6666666667, alpha: 1)
     private static let darkGreen = #colorLiteral(red: 0.05098039216, green: 0.2470588235, blue: 0.2549019608, alpha: 1)
+    private static let lightBrown = #colorLiteral(red: 0.5882352941, green: 0.2980392157, blue: 0.1019607843, alpha: 1)
+    private static let brown = #colorLiteral(red: 0.4, green: 0.168627451, blue: 0.07450980392, alpha: 1)
+    private static let darkBrown = #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
+    private static let lightPink = #colorLiteral(red: 0.9215686275, green: 0.8235294118, blue: 0.8235294118, alpha: 1)
+    private static let pink = #colorLiteral(red: 0.7921568627, green: 0.431372549, blue: 0.568627451, alpha: 1)
+    private static let darkPink = #colorLiteral(red: 0.7882352941, green: 0.2039215686, blue: 0.3529411765, alpha: 1)
+    private static let lightPurple = #colorLiteral(red: 0.662745098, green: 0.4666666667, blue: 0.6705882353, alpha: 1)
+    private static let indigo = #colorLiteral(red: 0.3568627451, green: 0.3803921569, blue: 0.6078431373, alpha: 1)
+    private static let darknavy = #colorLiteral(red: 0.1137254902, green: 0.1490196078, blue: 0.2666666667, alpha: 1)
+    private static let transparent = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+    private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    private static let black = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
 
     private static let transparent2 = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     private static var statusBarWhite: UIStatusBarStyle {
@@ -141,7 +153,7 @@ struct HIAppearance: Equatable {
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         codePopupTab: white,
         greenCodePopupTab: darkGreen,
-        navbarBackground: darkBlue,
+        navbarBackground: darkGreen,
         navbarTabTint: white,
         profileContainerTint: yellowWhite,
         preferredStatusBarStyle: statusBarBlack,
@@ -205,7 +217,7 @@ struct HIAppearance: Equatable {
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         codePopupTab: white,
         greenCodePopupTab: darkGreen,
-        navbarBackground: darkBlue,
+        navbarBackground: darkGreen,
         navbarTabTint: white,
         profileContainerTint: yellowWhite,
         preferredStatusBarStyle: statusBarBlack,
@@ -290,10 +302,6 @@ struct HIAppearance: Equatable {
         static let timeText = UIFont(name: "MontserratRoman-SemiBold", size: UIDevice.current.userInterfaceIdiom == .pad ? 28 : 14)
         static let descriptionTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 18)
         
-        // Not sure
-        static let contentSubtitle = UIFont(name: "MontserratRoman-Light", size: 13)
-        static let contentTitle = UIFont(name: "MontserratRoman-Medium", size: 18)
-        
         // Event card popup
         static let contentText = UIFont(name: "MontserratRoman-Regular", size: 14) // Location text
         static let contentTextPad = UIFont(name: "MontserratRoman-SemiBold", size: 18)
@@ -307,6 +315,8 @@ struct HIAppearance: Equatable {
         static let eventCategoryText = UIFont(name: "MontserratRoman-Regular", size: 16)
         static let clockText = UIFont(name: "MontserratRoman-SemiBold", size: 48)
         static let descriptionText = UIFont(name: "MontserratRoman-Regular", size: 16)
+        static let contentSubtitle = UIFont(name: "MontserratRoman-Light", size: 13)
+        static let contentTitle = UIFont(name: "MontserratRoman-Medium", size: 18)
         
         // Navigation fonts
         static let navigationSubtitle = UIFont(name: "MontserratRoman-Medium", size: 14)
