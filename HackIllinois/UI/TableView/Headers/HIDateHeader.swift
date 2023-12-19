@@ -33,9 +33,9 @@ class HIDateHeader: UITableViewHeaderFooterView {
         dateView.translatesAutoresizingMaskIntoConstraints = false
         var spaceConstant: CGFloat = 1.0
         dateView.addSubview(titleLabel)
-        dateView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: -8).isActive = true
+        dateView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: -7).isActive = true
         dateView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
-        dateView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
+        dateView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -7).isActive = true
         titleLabel.constrain(to: dateView, topInset: 3 * spaceConstant, trailingInset: -16 * spaceConstant, bottomInset: -3 * spaceConstant, leadingInset: 16 * spaceConstant)
     }
 
