@@ -36,7 +36,7 @@ class HIDateHeader: UITableViewHeaderFooterView {
         dateView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: -8).isActive = true
         dateView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
         dateView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
-        titleLabel.constrain(to: dateView, topInset: 4 * spaceConstant, trailingInset: -16 * spaceConstant, bottomInset: -4 * spaceConstant, leadingInset: 16 * spaceConstant)
+        titleLabel.constrain(to: dateView, topInset: 3 * spaceConstant, trailingInset: -16 * spaceConstant, bottomInset: -3 * spaceConstant, leadingInset: 16 * spaceConstant)
     }
 
     required init?(coder aDecoder: NSCoder) {

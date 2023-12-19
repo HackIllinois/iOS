@@ -150,7 +150,7 @@ struct HIAppearance: Equatable {
         darkGreenText: darkestGreen,
         lightYellowText: bLightYellow,
         baseText: lightBlack,
-        accent: orange,
+        accent: white,
         viewTitleGreen: darkGreen,
         action: tan,
         baseBackground: white,
@@ -217,7 +217,7 @@ struct HIAppearance: Equatable {
         darkGreenText: darkestGreen,
         lightYellowText: bLightYellow,
         baseText: lightBlack,
-        accent: orange,
+        accent: white,
         viewTitleGreen: darkGreen,
         action: tan,
         baseBackground: white,
@@ -287,7 +287,7 @@ struct HIAppearance: Equatable {
 
     enum Font {
         // Fonts ending with "Pad" correspond to the iPad font sizes
-        // Glyph font corresponds to the time texts that separate the event cells on the schedule page and the "Memories Made" (2023 app) text
+        // Glyph font corresponds to the time texts that separate the event cells on the schedule page (2023) and the "Memories Made" (2023 app) text
         static let glyph = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 16)
         
         // Home segemented control fonts
@@ -300,6 +300,7 @@ struct HIAppearance: Equatable {
         // More Schedule page fonts
         static let timeIndicator = UIFont(name: "MontserratRoman-Bold", size: 32)
         static let happeningEventTitle = UIFont(name: "MontserratRoman-Bold", size: 25)
+        static let dateHeader = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 14) // Date header event cell separators 2024
         
         // Main header title for each page (Profile, Schedule, etc)
         static let viewTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 48 : 24)

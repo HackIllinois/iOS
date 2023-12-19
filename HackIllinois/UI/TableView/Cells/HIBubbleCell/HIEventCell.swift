@@ -23,8 +23,8 @@ class HIEventCell: HIBubbleCell {
     let favoritedButton = HIButton {
         $0.tintHIColor = \.accent
         $0.backgroundHIColor = \.clear
-        $0.activeImage = #imageLiteral(resourceName: "Favorited")
-        $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
+        $0.activeImage = #imageLiteral(resourceName: "Selected Bookmark")
+        $0.baseImage = #imageLiteral(resourceName: "Unselected Bookmark")
         if UIDevice.current.userInterfaceIdiom == .pad {
             $0.activeImage = #imageLiteral(resourceName: "FavoritedPad")
             $0.baseImage = #imageLiteral(resourceName: "UnFavoritedPad")
@@ -136,6 +136,9 @@ extension HIEventCell {
         }
         let timeLabel = HILabel(style: .time)
         // We can check for async events by checking if the event start and end time is 1970-01-01 00:00:00 +0000
+        if rhs.startTime != Date() { let ongoingImage = UIImageView(image: #imageLiteral(resourceName: "Ongoing")) // Add the ongoing tab
+            lhs.bubbleView.addSubview(ongoingImage)
+        }
         if rhs.startTime.timeIntervalSince1970 == 0 || rhs.endTime.timeIntervalSince1970 == 0 {
             timeLabel.text = HIConstants.ASYNC_EVENT_TIME_TEXT
         } else {

@@ -86,7 +86,7 @@ extension HIScheduleViewController {
 
     @objc func didSelectFavoritesIcon(_ sender: UIBarButtonItem) {
         onlyFavorites = !onlyFavorites
-        sender.image = onlyFavorites ? #imageLiteral(resourceName: "MenuFavorited") : #imageLiteral(resourceName: "MenuUnfavorited")
+        sender.image = onlyFavorites ? #imageLiteral(resourceName: "Big Selected Bookmark") : #imageLiteral(resourceName: "Big Unselected Bookmark")
         if UIDevice.current.userInterfaceIdiom == .pad {
             sender.image = onlyFavorites ? #imageLiteral(resourceName: "FavoritedPad") : #imageLiteral(resourceName: "UnFavoritedPad")
         }
@@ -229,7 +229,7 @@ extension HIScheduleViewController {
             if UIDevice.current.userInterfaceIdiom == .pad {
                 header.titleLabel.font = HIAppearance.Font.timeIndicator
             } else {
-                header.titleLabel.font = HIAppearance.Font.glyph
+                header.titleLabel.font = HIAppearance.Font.dateHeader
             }
 
         }
