@@ -143,12 +143,12 @@ extension HIEventCell {
         }
         let pointsView = HIView { (view) in
             view.layer.cornerRadius = 10.5 * bubbleConstant
-            view.backgroundHIColor = \.buttonPink
+            view.backgroundHIColor = \.buttonBrown
             view.translatesAutoresizingMaskIntoConstraints = false
         }
         let eventTypeView = HIView { (view) in
             view.layer.cornerRadius = 10.5 * bubbleConstant
-            view.backgroundHIColor = \.buttonBlue
+            view.backgroundHIColor = \.buttonPurple
             view.translatesAutoresizingMaskIntoConstraints = false
         }
         let pointsLabel = HILabel(style: .pointsText)

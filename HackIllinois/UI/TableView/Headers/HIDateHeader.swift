@@ -20,8 +20,8 @@ class HIDateHeader: UITableViewHeaderFooterView {
         $0.font = HIAppearance.Font.sectionHeader
     }
     let dateView = HIView { (view) in
-        view.layer.cornerRadius = 10
-        view.backgroundHIColor = \.buttonDarkBlue
+        view.layer.cornerRadius = 15
+        view.backgroundHIColor = \.buttonDarkGreen
     }
 
     override init(reuseIdentifier: String?) {

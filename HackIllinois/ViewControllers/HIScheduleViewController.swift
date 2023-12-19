@@ -69,7 +69,7 @@ class HIScheduleViewController: HIEventListViewController {
 
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "ScheduleBackground")
+        backgroundView.image = #imageLiteral(resourceName: "PurpleBackground")
         if UIDevice.current.userInterfaceIdiom == .pad {
             backgroundView.image = #imageLiteral(resourceName: "BackgroundPad")
         }
@@ -123,7 +123,7 @@ extension HIScheduleViewController {
         super.loadView()
 
         let items = dataStore.map { $0.displayText }
-        let segmentedControl = HIScheduleSegmentedControl(titles: items, nums: [24, 25, 26])
+        let segmentedControl = HIScheduleSegmentedControl(titles: items, nums: [23, 24, 25])
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
@@ -132,8 +132,8 @@ extension HIScheduleViewController {
             segmentedControlConstant = 40.0
         }
 
-        segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8 + segmentedControlConstant).isActive = true
-        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: -34).isActive = true
+        segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20 + segmentedControlConstant).isActive = true
+        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: -50).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 34).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 66 + segmentedControlConstant).isActive = true
         
@@ -148,7 +148,7 @@ extension HIScheduleViewController {
         
         let tableView = HITableView()
         view.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 20).isActive = true
+        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 40).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
@@ -224,7 +224,7 @@ extension HIScheduleViewController {
             section < sections.count,
             let date = Formatter.coreData.date(from: sections[section].name) {
             header.titleLabel.text = Formatter.simpleTime.string(from: date)
-            header.titleLabel.textColor = .white
+            header.titleLabel.textColor <- \.lightYellowText
             header.titleLabel.textAlignment = .center
             if UIDevice.current.userInterfaceIdiom == .pad {
                 header.titleLabel.font = HIAppearance.Font.timeIndicator

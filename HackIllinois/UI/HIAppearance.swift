@@ -16,6 +16,8 @@ struct HIAppearance: Equatable {
     let neonCountdownText: UIColor
     let titleText: UIColor
     let whiteText: UIColor
+    let darkGreenText: UIColor
+    let lightYellowText: UIColor
     let baseText: UIColor
     let accent: UIColor
     let viewTitleGreen: UIColor
@@ -41,12 +43,13 @@ struct HIAppearance: Equatable {
     let whiteTagFont: UIColor
     let interestBackground: UIColor
     let buttonGreen: UIColor
-    let buttonPink: UIColor
+    let buttonBrown: UIColor
     let buttonLightPink: UIColor
-    let buttonBlue: UIColor
+    let buttonPurple: UIColor
     let buttonDarkBlue: UIColor
     let buttonMagenta: UIColor
     let buttonDarkBlueGreen: UIColor
+    let buttonDarkGreen: UIColor
     let favoriteStarBackground: UIColor
     let segmentedBackground: UIColor
     let buttonYellow: UIColor
@@ -114,6 +117,7 @@ struct HIAppearance: Equatable {
     private static let lightBlue = #colorLiteral(red: 0.7176470588, green: 0.8392156863, blue: 0.8392156863, alpha: 1)
     private static let teal = #colorLiteral(red: 0.537254902, green: 0.7450980392, blue: 0.6666666667, alpha: 1)
     private static let darkGreen = #colorLiteral(red: 0.05098039216, green: 0.2470588235, blue: 0.2549019608, alpha: 1)
+    private static let darkestGreen = #colorLiteral(red: 0.02745098039, green: 0.1725490196, blue: 0.1803921569, alpha: 1)
     private static let lightBrown = #colorLiteral(red: 0.5882352941, green: 0.2980392157, blue: 0.1019607843, alpha: 1)
     private static let brown = #colorLiteral(red: 0.4, green: 0.168627451, blue: 0.07450980392, alpha: 1)
     private static let darkBrown = #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
@@ -143,12 +147,14 @@ struct HIAppearance: Equatable {
         neonCountdownText: lightYellow,
         titleText: lightBlack,
         whiteText: white,
+        darkGreenText: darkestGreen,
+        lightYellowText: bLightYellow,
         baseText: lightBlack,
         accent: orange,
         viewTitleGreen: darkGreen,
         action: tan,
         baseBackground: white,
-        contentBackground: lightBlue,
+        contentBackground: white,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         codePopupTab: white,
@@ -168,12 +174,13 @@ struct HIAppearance: Equatable {
         whiteTagFont: white,
         interestBackground: orange,
         buttonGreen: yellowGreen,
-        buttonPink: pink,
+        buttonBrown: lightBrown,
         buttonLightPink: other,
-        buttonBlue: blue,
+        buttonPurple: indigo,
         buttonDarkBlue: darkBlue,
         buttonMagenta: magenta,
         buttonDarkBlueGreen: darkBlueGreeen,
+        buttonDarkGreen: darkGreen,
         favoriteStarBackground: yellowWhite,
         segmentedBackground: white,
         buttonYellow: bLightYellow,
@@ -207,12 +214,14 @@ struct HIAppearance: Equatable {
         neonCountdownText: lightYellow,
         titleText: lightBlack,
         whiteText: white,
+        darkGreenText: darkestGreen,
+        lightYellowText: bLightYellow,
         baseText: lightBlack,
         accent: orange,
         viewTitleGreen: darkGreen,
         action: tan,
         baseBackground: white,
-        contentBackground: lightBlue,
+        contentBackground: white,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         codePopupTab: white,
@@ -232,12 +241,13 @@ struct HIAppearance: Equatable {
         whiteTagFont: white,
         interestBackground: orange,
         buttonGreen: yellowGreen,
-        buttonPink: pink,
+        buttonBrown: lightBrown,
         buttonLightPink: other,
-        buttonBlue: blue,
+        buttonPurple: indigo,
         buttonDarkBlue: darkBlue,
         buttonMagenta: magenta,
         buttonDarkBlueGreen: darkBlueGreeen,
+        buttonDarkGreen: darkGreen,
         favoriteStarBackground: yellowWhite,
         segmentedBackground: white,
         buttonYellow: bLightYellow,
@@ -284,7 +294,7 @@ struct HIAppearance: Equatable {
         static let homeSegmentedTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 40 : 24)
         
         // Schedule page segmented control fonts
-        static let segmentedNumberText = UIFont(name: "MontserratRoman-SemiBold", size: UIDevice.current.userInterfaceIdiom == .pad ? 36 : 18) // Dates
+        static let segmentedNumberText = UIFont(name: "MontserratRoman-SemiBold", size: UIDevice.current.userInterfaceIdiom == .pad ? 64 : 32) // Dates
         static let scheduleSegmentedPad = UIFont(name: "MontserratRoman-SemiBold", size: 32)
         static let segmentedTitle = UIFont(name: "MontserratRoman-Bold", size: 16)
         // More Schedule page fonts
@@ -359,7 +369,7 @@ struct HIAppearance: Equatable {
         static let leaderboardRankPad = UIFont(name: "MontserratRoman-Bold", size: 48)
         
         // Misc
-        static let sectionHeader = UIFont(name: "MontserratRoman-Bold", size: 13)
+        static let sectionHeader = UIFont(name: "MontserratRoman-Bold", size: 12)
         static let button = UIFont(name: "MontserratRoman-Regular", size: 15)
         static let welcomeTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 40: 24)
         
