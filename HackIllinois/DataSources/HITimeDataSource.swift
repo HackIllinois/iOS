@@ -18,6 +18,17 @@ final class HITimeDataSource {
     static var shared = HITimeDataSource()
 
     public static let defaultTimes = EventTimes(
+        checkInStart: Date(timeIntervalSince1970: 1708732620), // Friday, February 23, 2024 3:00:00 PM CST
+        checkInEnd: Date(timeIntervalSince1970: 1708732800), // Friday, February 23, 2024 6:00:00 PM CST
+        scavengerHuntStart: Date(timeIntervalSince1970: 1708732620), // Friday, February 23, 2024 3:00:00 PM CST
+        scavengerHuntEnd: Date(timeIntervalSince1970: 1708732800), // Friday, February 23, 2024 6:00:00 PM CST
+        openingCeremonyStart: Date(timeIntervalSince1970: 1708732800), // Friday, February 23, 2024 6:00:00 PM CST
+        openingCeremonyEnd: Date(timeIntervalSince1970: 1708736400), // Friday, February 23, 2024 7:00:00 PM CST
+        projectShowcaseStart: Date(timeIntervalSince1970: 1708878600), // Sunday, February 25, 2024 10:30:00 AM CST
+        projectShowcaseEnd: Date(timeIntervalSince1970: 1708884000), // Sunday, February 25, 2024 12:00:00 PM CST
+        closingCeremonyStart: Date(timeIntervalSince1970: 1708894800), // Sunday, February 25, 2024 3:00:00 PM CST
+        closingCeremonyEnd: Date(timeIntervalSince1970: 1708898400), // Sunday, February 25, 2024 4:00:00 PM CST
+        
         eventStart: Date(timeIntervalSince1970: 1708732800), // Friday, February 23, 2024 6:00:00 PM CST
         eventEnd: Date(timeIntervalSince1970: 1708898400), // Sunday, February 25, 2024 4:00:00 PM CST
         hackStart: Date(timeIntervalSince1970: 1708736400), // Friday, February 23, 2024 7:00:00 PM CST

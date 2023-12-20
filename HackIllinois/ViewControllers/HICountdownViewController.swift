@@ -39,7 +39,7 @@ class HICountdownViewController: UIViewController {
     private var timer: Timer?
 
     private var timeDifference: TimeInterval = 0.0
-    private var daysRemaining: Int { return max(0, Int(timeDifference / Date.DAY_IN_SECONDS) % 60) }
+    private var daysRemaining: Int { return max(0, Int(timeDifference / Date.DAY_IN_SECONDS) % 365) }
     private var hoursRemaining: Int { return max(0, Int(timeDifference / Date.HOUR_IN_SECONDS) % 24) }
     private var minutesRemaining: Int { return max(0, Int(timeDifference / Date.MINUTE_IN_SECONDS) % 60) }
     private var secondsRemaining: Int { return max(0, Int(timeDifference) % 60) }
@@ -176,6 +176,9 @@ extension HICountdownViewController {
     func startUpCountdown() {
         countdownDate = delegate?.countdownToDateFor(countdownViewController: self)
         updateTimeDifference()
+        
+        print("TIME DIFFERENCE: \(timeDifference)")
+        
         setupCounters()
         let timer = Timer.scheduledTimer(
             timeInterval: 1,

@@ -19,32 +19,6 @@ import HIAPI
 
 class HIHomeViewController: HIEventListViewController {
     // MARK: - Properties
-    lazy var fetchedResultsController: NSFetchedResultsController<Event> = {
-        let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
-
-        fetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: "startTime", ascending: true),
-            NSSortDescriptor(key: "name", ascending: true)
-        ]
-
-        fetchRequest.predicate = currentPredicate()
-
-        let fetchedResultsController = NSFetchedResultsController(
-            fetchRequest: fetchRequest,
-            managedObjectContext: HICoreDataController.shared.viewContext,
-            sectionNameKeyPath: nil,
-            cacheName: nil
-        )
-
-        fetchedResultsController.delegate = self
-
-        return fetchedResultsController
-    }()
-
-    private var currentTab = 0
-
-    private var dataStore: [String] = ["CURRENT", "UPCOMING"]
-
     private lazy var countdownViewController = HICountdownViewController(delegate: self)
     private lazy var bannerViewController = HIBannerViewController()
     private let countdownFrameView = HIView {
@@ -63,7 +37,6 @@ class HIHomeViewController: HIEventListViewController {
     }
 
     private var countdownDataStoreIndex = 0
-    // changed to upper case for 2023 designs 
     private var staticDataStore: [(date: Date, displayText: String)] = [
         (HITimeDataSource.shared.eventTimes.eventStart, "HACKILLINOIS BEGINS IN"),
         (HITimeDataSource.shared.eventTimes.hackStart, "HACKING BEGINS IN"),
@@ -74,63 +47,12 @@ class HIHomeViewController: HIEventListViewController {
     private var timer: Timer?
 }
 
-// MARK: - Actions
-extension HIHomeViewController {
-
-    @objc func didSelectTab(_ sender: HISegmentedControl) {
-        currentTab = sender.selectedIndex
-        updatePredicate()
-        animateReload()
-    }
-
-    func updatePredicate() {
-        fetchedResultsController.fetchRequest.predicate = currentPredicate()
-    }
-
-    func currentPredicate() -> NSPredicate {
-        if currentTab == 0 {
-            return NSPredicate(format: "(startTime < now()) AND (endTime > now())")
-        } else if currentTab == 1 {
-            let inTwoHours = Date(timeIntervalSinceNow: 7200)
-            let upcomingPredicate = NSPredicate(format: "(startTime < %@) AND (startTime > now())", inTwoHours as NSDate)
-            return upcomingPredicate
-        } else {
-            let upcomingPredicate = NSPredicate(format: "isAsync == %@", NSNumber(value: true))
-            return upcomingPredicate
-        }
-    }
-
-    func animateReload() {
-        try? fetchedResultsController.performFetch()
-        animateTableViewReload()
-        if let tableView = tableView, !tableView.visibleCells.isEmpty {
-            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
-        }
-    }
-}
-
 // MARK: - UIViewController
 extension HIHomeViewController {
     override func loadView() {
         super.loadView()
         setUpBanner()
         setUpCountdown()
-        let items = dataStore.map { $0 }
-        let segmentedControl = HIHomeSegmentedControl(status: items)
-        view.addSubview(segmentedControl)
-        segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        var segmentedControlConstant = 1.0
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            segmentedControlConstant = 2.0
-        }  else if UIScreen.main.bounds.width < 375.0 {
-            segmentedControlConstant = 0.9
-        }
-        segmentedControl.topAnchor.constraint(equalTo: bannerFrameView.bottomAnchor, constant: 124 * segmentedControlConstant).isActive = true
-        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: -30).isActive = true
-        segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 20).isActive = true
-        //segmentedControl.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        segmentedControl.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
         let separator = UIView()
         self.view.addSubview(separator)
@@ -138,23 +60,10 @@ extension HIHomeViewController {
         separator.backgroundColor <- \.clear
         separator.constrain(height: 1 / (UIScreen.main.scale))
         separator.constrain(to: view, trailingInset: 0, leadingInset: 0)
-        separator.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10).isActive = true
-
-        let tableView = HITableView()
-        view.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 10).isActive = true
-        tableView.constrain(to: view.safeAreaLayoutGuide, trailingInset: 0, leadingInset: 0)
-        tableView.constrain(to: view, bottomInset: 0)
-        self.tableView = tableView
-        
-        tableView.addLeftAndRightSwipeGestureRecognizers(
-            target: segmentedControl,
-            selector: #selector(segmentedControl.handleSwipeGesture(_:))
-        )
+        separator.topAnchor.constraint(equalTo: countdownFrameView.bottomAnchor, constant: 10).isActive = true
     }
 
     override func viewDidLoad() {
-        _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         super.viewDidLoad()
         setupRefreshControl()
     }
@@ -162,7 +71,6 @@ extension HIHomeViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         countdownViewController.startUpCountdown()
-        setupPredicateRefreshTimer()
         setupPass()
     }
     func setUpCountdown() {
@@ -229,9 +137,64 @@ extension HIHomeViewController {
 extension HIHomeViewController {
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "HomeBackground")
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            backgroundView.image = #imageLiteral(resourceName: "BackgroundPad")
+        
+        // let now = Date()
+        let now = Date(timeIntervalSince1970: 1708927199)
+        
+        let checkedIn = true
+        let checkInStart = HITimeDataSource.shared.eventTimes.checkInStart
+        let checkInEnd = HITimeDataSource.shared.eventTimes.checkInEnd
+        let scavengerHuntEnd = HITimeDataSource.shared.eventTimes.scavengerHuntEnd
+        let openingCeremonyEnd = HITimeDataSource.shared.eventTimes.openingCeremonyEnd
+        let hackEnd = HITimeDataSource.shared.eventTimes.hackEnd
+        let projectShowcaseEnd = HITimeDataSource.shared.eventTimes.projectShowcaseEnd
+        let closingCeremonyEnd = HITimeDataSource.shared.eventTimes.closingCeremonyEnd
+        
+        if now < checkInStart {
+            backgroundView.image = #imageLiteral(resourceName: "Home_Start")
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                backgroundView.image = #imageLiteral(resourceName: "Home_Start")
+            }
+        } else if now < checkInEnd && !checkedIn {
+            backgroundView.image = #imageLiteral(resourceName: "Home_1")
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                backgroundView.image = #imageLiteral(resourceName: "Home_1")
+            }
+        } else if !checkedIn {
+            backgroundView.image = #imageLiteral(resourceName: "Home_Start")
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                backgroundView.image = #imageLiteral(resourceName: "Home_Start")
+            }
+        } else if now < scavengerHuntEnd {
+            backgroundView.image = #imageLiteral(resourceName: "Home_2")
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                backgroundView.image = #imageLiteral(resourceName: "Home_2")
+            }
+        } else if now < openingCeremonyEnd {
+            backgroundView.image = #imageLiteral(resourceName: "Home_3")
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                backgroundView.image = #imageLiteral(resourceName: "Home_3")
+            }
+        } else if now < hackEnd {
+            backgroundView.image = #imageLiteral(resourceName: "Home_4")
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                backgroundView.image = #imageLiteral(resourceName: "Home_4")
+            }
+        } else if now < projectShowcaseEnd {
+            backgroundView.image = #imageLiteral(resourceName: "Home_5")
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                backgroundView.image = #imageLiteral(resourceName: "Home_5")
+            }
+        } else if now < closingCeremonyEnd {
+            backgroundView.image = #imageLiteral(resourceName: "Home_6")
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                backgroundView.image = #imageLiteral(resourceName: "Home_6")
+            }
+        } else {
+            backgroundView.image = #imageLiteral(resourceName: "Home_Final")
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                backgroundView.image = #imageLiteral(resourceName: "Home_Final")
+            }
         }
     }
 }
@@ -302,22 +265,6 @@ extension HIHomeViewController {
 }
 
 extension HIHomeViewController {
-    func setupPredicateRefreshTimer() {
-        timer = Timer.scheduledTimer(
-            timeInterval: 30,
-            target: self,
-            selector: #selector(refreshPredicate),
-            userInfo: nil,
-            repeats: true
-        )
-    }
-
-    @objc func refreshPredicate() {
-        updatePredicate()
-        try? fetchedResultsController.performFetch()
-        animateTableViewReload()
-    }
-
     func teardownPredicateRefreshTimer() {
         timer?.invalidate()
         timer = nil

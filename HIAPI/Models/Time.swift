@@ -30,6 +30,18 @@ public struct TimeContainer: Decodable, APIReturnable {
 }
 
 public struct EventTimes: Codable {
+    
+    public let checkInStart: Date
+    public let checkInEnd: Date
+    public let scavengerHuntStart: Date
+    public let scavengerHuntEnd: Date
+    public let openingCeremonyStart: Date
+    public let openingCeremonyEnd: Date
+    public let projectShowcaseStart: Date
+    public let projectShowcaseEnd: Date
+    public let closingCeremonyStart: Date
+    public let closingCeremonyEnd: Date
+    
     public let eventStart: Date
     public let eventEnd: Date
     public let hackStart: Date
@@ -41,8 +53,20 @@ public struct EventTimes: Codable {
     public let sundayStart: Date
     public let sundayEnd: Date
 
-    public init(eventStart: Date, eventEnd: Date, hackStart: Date, hackEnd: Date, fridayStart: Date, fridayEnd: Date,
+    public init(checkInStart: Date, checkInEnd: Date, scavengerHuntStart: Date, scavengerHuntEnd: Date, openingCeremonyStart: Date, openingCeremonyEnd: Date,projectShowcaseStart: Date, projectShowcaseEnd: Date, closingCeremonyStart: Date, closingCeremonyEnd: Date,
+                eventStart: Date, eventEnd: Date, hackStart: Date, hackEnd: Date, fridayStart: Date, fridayEnd: Date,
                 saturdayStart: Date, saturdayEnd: Date, sundayStart: Date, sundayEnd: Date) {
+        self.checkInStart = checkInStart
+        self.checkInEnd = checkInEnd
+        self.scavengerHuntStart = scavengerHuntStart
+        self.scavengerHuntEnd = scavengerHuntEnd
+        self.openingCeremonyStart = openingCeremonyStart
+        self.openingCeremonyEnd = openingCeremonyEnd
+        self.projectShowcaseStart = projectShowcaseStart
+        self.projectShowcaseEnd = projectShowcaseEnd
+        self.closingCeremonyStart = closingCeremonyStart
+        self.closingCeremonyEnd = closingCeremonyEnd
+
         self.eventStart = eventStart
         self.eventEnd = eventEnd
         self.hackStart = hackStart
