@@ -17,9 +17,7 @@ import PassKit
 import os
 import HIAPI
 
-class HIHomeViewController: HIEventListViewController {
-    private let bannerBackground: HIColor = \.bannerBackground
-    
+class HIHomeViewController: HIEventListViewController {    
     // MARK: - Properties
     private lazy var countdownViewController = HICountdownViewController(delegate: self)
     private lazy var bannerViewController = HIBannerViewController()
@@ -29,6 +27,14 @@ class HIHomeViewController: HIEventListViewController {
     
     private let bannerFrameView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private var isLegendButtonSelected = false
+    private let legendButton = HIButton {
+        $0.tintHIColor = \.baseText
+        $0.backgroundHIColor = \.clear
+        $0.baseImage = #imageLiteral(resourceName: "Question Mark")
+        $0.activeImage = #imageLiteral(resourceName: "Question Mark Toggled")
     }
 
     private var countdownDataStoreIndex = 0
@@ -40,6 +46,7 @@ class HIHomeViewController: HIEventListViewController {
     ]
 
     private var timer: Timer?
+    var transparentImageView: UIImageView!
 }
 
 // MARK: - UIViewController
@@ -53,13 +60,36 @@ extension HIHomeViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupRefreshControl()
+        
+        // Initialize the UIImageView
+        transparentImageView = UIImageView(frame: view.bounds)
+        transparentImageView.contentMode = .scaleAspectFill
+        transparentImageView.alpha = 0
+        transparentImageView.image = UIImage(named: "Home_Tags_Transparent")
+
+        // Add the UIImageView to your view hierarchy
+        view.addSubview(transparentImageView)
+        view.bringSubviewToFront(transparentImageView)
     }
+    
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         countdownViewController.startUpCountdown()
+        layoutLegendButton()
         setupPass()
     }
+    
+    func layoutLegendButton() {
+        view.addSubview(legendButton)
+        
+        legendButton.constrain(width: 20, height: 20)
+        legendButton.addTarget(self, action: #selector(didSelectLegendButton(_:)), for: .touchUpInside)
+        
+        legendButton.topAnchor.constraint(equalTo: bannerViewController.view.topAnchor).isActive = true
+        legendButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -5).isActive = true
+    }
+    
     func setUpCountdown() {
         view.addSubview(countdownFrameView)
         countdownFrameView.translatesAutoresizingMaskIntoConstraints = false
@@ -215,6 +245,23 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
             countdownDataStoreIndex += 1
         }
         return nil
+    }
+}
+
+extension HIHomeViewController {
+    @objc func didSelectLegendButton(_ sender: UIButton) {
+        isLegendButtonSelected.toggle()
+        
+        if isLegendButtonSelected {
+            legendButton.isActive = true
+        } else {
+            legendButton.isActive = false
+        }
+        
+
+        UIView.animate(withDuration: 0.5) {
+            self.transparentImageView.alpha = self.transparentImageView.alpha == 0 ? 1 : 0
+        }
     }
 }
 
