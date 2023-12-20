@@ -15,8 +15,9 @@ import UIKit
 
 class HIBannerViewController: UIViewController {
     private let backgroundHIColor: HIColor = \.clear
+    private let bannerBackground: HIColor = \.bannerBackground
     private let label = HILabel {
-        $0.textHIColor = \.whiteText
+        $0.textHIColor = \.countdownTextColor
         $0.backgroundHIColor = \.clear
         $0.textAlignment = .center
         $0.font = HIAppearance.Font.glyph
@@ -41,9 +42,13 @@ extension HIBannerViewController {
     func bannerView(with label: HILabel) -> UIView {
         let bannerView = UIView()
         bannerView.addSubview(label)
-        label.constrain(to: bannerView, topInset: 0, trailingInset: 0, leadingInset: 0)
-        bannerView.constrain(to: bannerView, trailingInset: 0, bottomInset: 0, leadingInset: 0)
-        bannerView.bottomAnchor.constraint(equalTo: label.topAnchor).isActive = true
+        label.constrain(to: bannerView, topInset: 0, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        label.widthAnchor.constraint(equalTo: bannerView.widthAnchor).isActive = true
+
+        bannerView.layer.cornerRadius = 7.5
+        bannerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        bannerView.backgroundColor = bannerBackground.value
+        
         return bannerView
     }
     public func updateLabel(with text: String) {

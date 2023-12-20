@@ -25,11 +25,12 @@ class HICountdownViewController: UIViewController {
     private let FRAMES_PER_TICK = 8
 
     // MARK: - Properties
-    private let days = HILabel(style: .neonCountdown)
-    private let hours = HILabel(style: .neonCountdown)
-    private let minutes = HILabel(style: .neonCountdown)
-    private let seconds = HILabel(style: .neonCountdown)
+    private let days = HILabel(style: .newCountdown)
+    private let hours = HILabel(style: .newCountdown)
+    private let minutes = HILabel(style: .newCountdown)
+    private let seconds = HILabel(style: .newCountdown)
     private let backgroundHIColor: HIColor = \.clear
+    private let countdownBackground: HIColor = \.countdownBackground
 
     private var countdownDate: Date?
     private var dayFrame = 0
@@ -104,9 +105,9 @@ extension HICountdownViewController {
         countdownStackView.addArrangedSubview(hoursContent)
         let minutesContent = containerView(with: "MINUTES", and: minutes)
         countdownStackView.addArrangedSubview(minutesContent)
-        var countdownSpacingConstant: CGFloat = 30
+        var countdownSpacingConstant: CGFloat = 8
         if UIDevice.current.userInterfaceIdiom == .pad {
-            countdownSpacingConstant = 60
+            countdownSpacingConstant = 16
         }
         countdownStackView.setCustomSpacing(countdownSpacingConstant, after: daysContent)
         countdownStackView.setCustomSpacing(countdownSpacingConstant, after: hoursContent)
@@ -117,7 +118,7 @@ extension HICountdownViewController {
         countDownView.translatesAutoresizingMaskIntoConstraints = false
 
         let label = HILabel {
-            $0.textHIColor = \.whiteText
+            $0.textHIColor = \.countdownTextColor
             $0.backgroundHIColor = \.clear
             $0.textAlignment = .center
             if UIDevice.current.userInterfaceIdiom == .pad {
@@ -126,39 +127,21 @@ extension HICountdownViewController {
                 $0.font = HIAppearance.Font.glyph
             }
             $0.text = labelString
+            $0.text
         }
-        let yellowish = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1)
-        let strokeTextAttributes = [
-            NSAttributedString.Key.strokeColor: yellowish,
-            NSAttributedString.Key.foregroundColor: UIColor.clear,
-            NSAttributedString.Key.strokeWidth: 5.0,
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 48, weight: UIFont.Weight(rawValue: 900) )]
-            as [NSAttributedString.Key: Any]
-        let iPadStrokeTextAttributes = [
-            NSAttributedString.Key.strokeColor: yellowish,
-            NSAttributedString.Key.foregroundColor: UIColor.clear,
-            NSAttributedString.Key.strokeWidth: 5.0,
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 90, weight: UIFont.Weight(rawValue: 900) )]
-            as [NSAttributedString.Key: Any]
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            countDownView.attributedText = NSMutableAttributedString(string: "Test", attributes: iPadStrokeTextAttributes)
-        } else {
-            countDownView.attributedText = NSMutableAttributedString(string: "Test", attributes: strokeTextAttributes)
-        }
-        countDownView.layer.shadowColor = yellowish.cgColor
-        countDownView.layer.shadowRadius = 3.0
-        countDownView.layer.shadowOpacity = 100.0
-        countDownView.layer.masksToBounds = false
-        countDownView.layer.shouldRasterize = true
-        countDownView.layer.shadowOffset = .zero
 
         let containerView = UIView()
-        containerView.addSubview(label)
         containerView.addSubview(countDownView)
-        label.constrain(to: containerView, topInset: 0, trailingInset: 0, leadingInset: 0)
+        containerView.addSubview(label)
         countDownView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-        countDownView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -4).isActive = true
-
+        countDownView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 4).isActive = true
+        countDownView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: 4).isActive = true
+        countDownView.widthAnchor.constraint(equalTo: containerView.widthAnchor, constant: -8).isActive = true
+        label.widthAnchor.constraint(equalTo: containerView.widthAnchor, constant: -8).isActive = true
+        label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        containerView.layer.cornerRadius = 7.5
+        containerView.backgroundColor = countdownBackground.value
+        
         return containerView
     }
 
@@ -176,9 +159,6 @@ extension HICountdownViewController {
     func startUpCountdown() {
         countdownDate = delegate?.countdownToDateFor(countdownViewController: self)
         updateTimeDifference()
-        
-        print("TIME DIFFERENCE: \(timeDifference)")
-        
         setupCounters()
         let timer = Timer.scheduledTimer(
             timeInterval: 1,
