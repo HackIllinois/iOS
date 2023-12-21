@@ -19,8 +19,8 @@ final class HITimeDataSource {
 
     public static let defaultTimes = EventTimes(
         checkInStart: Date(timeIntervalSince1970: 1708732620), // Friday, February 23, 2024 3:00:00 PM CST
-        checkInEnd: Date(timeIntervalSince1970: 1708732800), // Friday, February 23, 2024 6:00:00 PM CST
-        scavengerHuntStart: Date(timeIntervalSince1970: 1708732620), // Friday, February 23, 2024 3:00:00 PM CST
+        checkInEnd: Date(timeIntervalSince1970: 1708734420), // Friday, February 23, 2024 3:30:00 PM CST
+        scavengerHuntStart: Date(timeIntervalSince1970: 1708734420), // Friday, February 23, 2024 3:30:00 PM CST
         scavengerHuntEnd: Date(timeIntervalSince1970: 1708732800), // Friday, February 23, 2024 6:00:00 PM CST
         openingCeremonyStart: Date(timeIntervalSince1970: 1708732800), // Friday, February 23, 2024 6:00:00 PM CST
         openingCeremonyEnd: Date(timeIntervalSince1970: 1708736400), // Friday, February 23, 2024 7:00:00 PM CST

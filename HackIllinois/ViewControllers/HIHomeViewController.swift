@@ -160,7 +160,6 @@ extension HIHomeViewController {
         // let now = Date()
         let now = Date(timeIntervalSince1970: 1708927199)
         
-        let checkedIn = true
         let checkInStart = HITimeDataSource.shared.eventTimes.checkInStart
         let checkInEnd = HITimeDataSource.shared.eventTimes.checkInEnd
         let scavengerHuntEnd = HITimeDataSource.shared.eventTimes.scavengerHuntEnd
@@ -174,15 +173,10 @@ extension HIHomeViewController {
             if UIDevice.current.userInterfaceIdiom == .pad {
                 backgroundView.image = #imageLiteral(resourceName: "Home_Start")
             }
-        } else if now < checkInEnd && !checkedIn {
+        } else if now < checkInEnd {
             backgroundView.image = #imageLiteral(resourceName: "Home_1")
             if UIDevice.current.userInterfaceIdiom == .pad {
                 backgroundView.image = #imageLiteral(resourceName: "Home_1")
-            }
-        } else if !checkedIn {
-            backgroundView.image = #imageLiteral(resourceName: "Home_Start")
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                backgroundView.image = #imageLiteral(resourceName: "Home_Start")
             }
         } else if now < scavengerHuntEnd {
             backgroundView.image = #imageLiteral(resourceName: "Home_2")
