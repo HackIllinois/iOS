@@ -101,9 +101,9 @@ private extension HIOnboardingViewController {
         getStartedButton.addTarget(self, action: #selector(didSelectGetStarted(_:)), for: .touchUpInside)
         view.addSubview(getStartedButton)
         getStartedButton.translatesAutoresizingMaskIntoConstraints = false
-        getStartedButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40).isActive = true
+        getStartedButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         getStartedButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        getStartedButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9).isActive = true
+        getStartedButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6).isActive = true
         getStartedButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         guard let carouselView = carouselView else { return }
         view.addSubview(carouselView)

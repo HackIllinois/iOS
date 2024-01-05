@@ -36,15 +36,16 @@ struct HIOnboardingView: View {
                     }label: {
                         Text("GET STARTED")
                             .font(.title2.bold())
-                            .tracking(3)
+                            .tracking(2)
                     }
                     .padding()
                     .font(.title3.bold())
-                    .frame(width: 350, height: 50)
+                    .frame(width: 215, height: 40)
                     .foregroundColor(.white)
                     .background(Color.clear)
-                    .overlay(RoundedRectangle(cornerRadius: 20)
-                        .stroke(.white, lineWidth: 5))
+                    .overlay(RoundedRectangle(cornerRadius: 50)
+                        .stroke(.white, lineWidth: 3))
+                    .offset(y: -70)
                     Spacer()
                 }
             }

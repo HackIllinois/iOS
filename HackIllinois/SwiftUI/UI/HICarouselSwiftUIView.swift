@@ -30,15 +30,17 @@ struct HICarouselSwiftUIView: View {
                         Image(uiImage: carouselData[index].image!)
                             .resizable()
                             .scaledToFit()
-                            .frame(height: UIDevice.current.userInterfaceIdiom == .pad ? 600: 360)
+                            .frame(height: UIDevice.current.userInterfaceIdiom == .pad ? 600: 400)
                             .padding()
+                            .offset(y: -20)
                         HILableSUI(text: carouselData[index].titleText, style: .onboardingTitle)
                             .frame(width: 20, height: 20)
+                            .offset(y: -30)
                         Text(carouselData[index].descriptionText)
                             .bold()
                             .foregroundColor(.white)
                             .multilineTextAlignment(.center)
-                            .padding(.top, 20)
+                            .offset(y: -20)
                     }
                     .tag(index)
                     .padding(.horizontal, horizontalCarouselPadding)
@@ -46,7 +48,7 @@ struct HICarouselSwiftUIView: View {
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             HITabIndicator(count: carouselData.count, current: $currentIndex)
-                .offset(y: -50)
+                .offset(y: -90)
         }
         .frame(width: UIScreen.main.bounds.width)
         .padding(.horizontal, -horizontalCarouselPadding)
@@ -58,7 +60,7 @@ struct HICarouselSwiftUIView: View {
         let carouselWidth = min(800, maxWidth)
         let padding = maxWidth - carouselWidth
         return max(
-            CGFloat(padding / 2.0),
+            CGFloat(padding / 3.0),
             60
         )
     }
