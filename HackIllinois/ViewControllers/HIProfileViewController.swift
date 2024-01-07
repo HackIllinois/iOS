@@ -36,7 +36,7 @@ class HIProfileViewController: HIBaseViewController {
 
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
+        backgroundView.image = #imageLiteral(resourceName: "PurpleBackground")
     }
     private var tiers: [Tier] = []
 }
@@ -74,10 +74,10 @@ extension HIProfileViewController {
             profileCardController?.removeFromParent()
         }
         profileCardController = UIHostingController(rootView: HIProfileCardView(displayName: profile.displayName,
-                                                                                dietaryRestrictions: dietaryRestrictions,
                                                                                 points: profile.points,
                                                                                 tier: profileTier,
-                                                                                foodWave: 1,//profile.foodWave,
+                                                                                foodWave: 1,
+                                                                                avatarUrl: profile.avatarUrl,
                                                                                 userId: profile.userId
                                                                                ))
 

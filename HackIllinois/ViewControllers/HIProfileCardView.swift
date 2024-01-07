@@ -15,29 +15,30 @@ import HIAPI
 
 struct HIProfileCardView: View {
     let displayName: String
-    let dietaryRestrictions: [String]
     let points: Int
     let tier: String
     let foodWave: Int
+    let avatarUrl: String
     let background = (\HIAppearance.profileCardBackground).value
     let baseText = (\HIAppearance.profileBaseText).value
     let userId: String
     let isIpad = UIDevice.current.userInterfaceIdiom == .pad
-    @State var flipped: Bool = false
-    @State var ticketRotation = 0.0
-    @State var contentRotation = 0.0
-    @State var flipping = false
     @State var startFetchingQR = false
     @State var qrInfo = ""
 
     var body: some View {
         ScrollView {
             ZStack {
-                Rectangle()
-                    .frame(width: isIpad ? UIScreen.main.bounds.width - 56 * 2 : UIScreen.main.bounds.width - 32 * 2,
-                           height: isIpad ? 978 + 80 : 569 + 40)
-                    .cornerRadius(UIDevice.current.userInterfaceIdiom == .pad ? 40 : 20)
-                    .foregroundColor(Color(background))
+                ZStack(alignment: .bottom) {
+                    Image("ProfileCardBackground")
+                    ZStack {
+                        Image("ProfileBanner")
+                        VStack {
+                            Text("Your Ranking")
+                                .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 20)))
+                        }
+                    }.alignmentGuide(.bottom) { dx in dx[.bottom] / 1.2 }
+                }
                 VStack(spacing: 0) {
                     Text(formatName())
                         .font(Font(HIAppearance.Font.profileName ?? .systemFont(ofSize: 20)))
@@ -45,18 +46,9 @@ struct HIProfileCardView: View {
                         .padding(isIpad ? 32 : 16)
                     HStack(spacing: isIpad ? 16 : 8) {
                         Rectangle()
-                            .frame(width: isIpad ? 146 : 73, height: isIpad ? 48 : 24)
-                            .cornerRadius(isIpad ? 40 : 20)
-                            .foregroundColor(.white)
-                            .overlay(
-                                Text("\(points) pts")
-                                    .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 12)))
-                                    .foregroundColor(Color(baseText))
-                            )
-                        Rectangle()
                             .frame(width: isIpad ? 204 : 102, height: isIpad ? 48 : 24)
                             .cornerRadius(isIpad ? 40 : 20)
-                            .foregroundColor(.white)
+                            .foregroundColor(Color((\HIAppearance.buttonPink).value))
                             .overlay(
                                 Text(tier)
                                     .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 12)))
@@ -66,81 +58,18 @@ struct HIProfileCardView: View {
                         Rectangle()
                             .frame(width: isIpad ? 136 : 68, height: isIpad ? 48 : 24)
                             .cornerRadius(isIpad ? 40 : 20)
-                            .foregroundColor(.white)
+                            .foregroundColor(
+                                Color((\HIAppearance.buttonPink).value))
                             .overlay(
                                 Text("Wave \(foodWave)")
                                     .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 12)))
-                                    .foregroundColor(Color(baseText))
+                                    .foregroundColor((Color((\HIAppearance.buttonLightPink).value)))
                             )
-                    }
-                    ZStack {
-                        if flipped {
-                            ZStack {
-                                Image("TicketFront")
-                                    .resizable()
-                                    .frame(width: isIpad ? 298 : 190.6, height: isIpad ? 544 : 347.67)
-                                    .padding(isIpad ? 48 : 24)
-                            }
-                        } else {
-                            Image("TicketBack")
-                                .resizable()
-                                .frame(width: isIpad ? 298 : 190.6, height: isIpad ? 544 : 347.67)
-                                .padding(isIpad ? 48 : 24)
-                            Image(uiImage: UIImage(data: getQRCodeDate(text: qrInfo)!)!)
-                                .resizable()
-                                .frame(width: isIpad ? 200 : 132, height: isIpad ? 200 : 132)
-                        }
-                    }
-                    .rotation3DEffect(.degrees(contentRotation), axis: (x: 0, y: 1, z: 0))
-                    .onTapGesture {
-                        if !flipping {
-                            flipFlashcard()
-                        }
-                    }
-                    .rotation3DEffect(.degrees(ticketRotation), axis: (x: 0, y: 1, z: 0))
-
-                    VStack(spacing: isIpad ? 32 : 16) {
-                        Text("Dietary Restrictions")
-                            .font(Font(HIAppearance.Font.profileDietaryRestrictions ?? .systemFont(ofSize: 16)))
-                            .foregroundColor(Color(baseText))
-                        
-                        
-                        VStack {
-                            HStack(spacing: 4) {
-                                ForEach(dietaryRestrictions, id: \.self) { diet in
-                                    let index = dietaryRestrictions.firstIndex(of: diet) ?? 0
-                                    if index < 3 {
-                                        Rectangle()
-                                            .frame(width: isIpad ? 204 : 92, height: isIpad ? 48 : 24)
-                                            .cornerRadius(isIpad ? 40 : 20)
-                                            .foregroundColor(Color(dietBackgroundColor(diet: diet)))
-                                            .overlay(
-                                                Text(dietString(diet: diet))
-                                                    .font(Font(HIAppearance.Font.profileDietaryRestrictionsLabel ?? .systemFont(ofSize: 12)))
-                                                    .foregroundColor(dietTextColor(diet: diet))
-                                            )
-                                    }
-                                }
-                            }
-                            HStack(spacing: 4) {
-                                ForEach(dietaryRestrictions, id: \.self) { diet in
-                                    let index = dietaryRestrictions.firstIndex(of: diet) ?? 0
-                                    if index > 2 {
-                                        Rectangle()
-                                            .frame(width: isIpad ? 204 : 92, height: isIpad ? 48 : 24)
-                                            .cornerRadius(isIpad ? 40 : 20)
-                                            .foregroundColor(Color(dietBackgroundColor(diet: diet)))
-                                            .overlay(
-                                                Text(dietString(diet: diet))
-                                                    .font(Font(HIAppearance.Font.profileDietaryRestrictionsLabel ?? .systemFont(ofSize: 12)))
-                                                    .foregroundColor(dietTextColor(diet: diet))
-                                            )
-                                    }
-                                }
-                            }
-                        }
-                        .frame(width: isIpad ? UIScreen.main.bounds.width - 56 * 3.5 : UIScreen.main.bounds.width - 32 * 3.5)
-                    }
+                    }.padding(.bottom)
+                    Image(uiImage: UIImage(data: getQRCodeDate(text: qrInfo)!)!)
+                                                    .resizable()
+                                                    .frame(width: isIpad ? 200 : 230, height: isIpad ? 200 : 230)
+                                                    .padding(.bottom, 20)
                 }
             }
             .padding(.top, 24)
@@ -182,70 +111,6 @@ struct HIProfileCardView: View {
         return uiimage.pngData()!
     }
 
-    func dietString(diet: String) -> String {
-        switch diet {
-        case "Vegetarian":
-            return "Vegetarian"
-        case "Vegan":
-            return "Vegan"
-        case "Gluten-Free":
-            return "Gluten-Free"
-        case "Lactose-Intolerant":
-            return "Dairy Free"
-        case "Other":
-            return "Other"
-        case "None":
-            return "None"
-        case "":
-            return "None"
-        default:
-            return "Custom"
-        }
-    }
-
-    func dietTextColor(diet: String) -> Color {
-        switch diet {
-        case "Vegetarian", "Vegan", "Gluten-Free", "Lactose-Intolerant", "Other":
-            return Color(baseText)
-        case "None", "":
-            return .white
-        default:
-            return .white
-        }
-    }
-
-    func dietBackgroundColor(diet: String) -> UIColor {
-        switch diet {
-        case "Vegetarian":
-            return (\HIAppearance.profileCardVegetarian).value
-        case "Vegan":
-            return (\HIAppearance.profileCardVegan).value
-        case "Gluten-Free":
-            return (\HIAppearance.profileCardGlutenFree).value
-        case "Lactose-Intolerant":
-            return (\HIAppearance.profileCardLactoseIntolerant).value
-        case "Other":
-            return (\HIAppearance.profileCardOther).value
-        case "None" , "":
-            return (\HIAppearance.profileCardNone).value
-        default:
-            return (\HIAppearance.profileCardNone).value
-        }
-    }
-
-    func flipFlashcard() {
-        let animationTime = 0.5
-        flipping = true
-        withAnimation(Animation.linear(duration: animationTime)) {
-            ticketRotation += 180
-            flipping = false
-        }
-        withAnimation(Animation.linear(duration: 0.001).delay(animationTime / 2)) {
-            contentRotation += 180
-            flipped.toggle()
-        }
-    }
-
     func QRFetchLoop() {
         if startFetchingQR {
             getQRInfo()
@@ -276,10 +141,10 @@ struct HIProfileCardView: View {
 struct HIProfileCardView_Previews: PreviewProvider {
     static var previews: some View {
         HIProfileCardView(displayName: "first last",
-                          dietaryRestrictions: ["Vegetarian", "Lactose-Intolerant", "None", "no beef"],
                           points: 100,
-                          tier: "no tier",
+                          tier: "Pro",
                           foodWave: 1,
+                          avatarUrl: "https://www.hackillinois.org",
                           userId: "https://www.hackillinois.org"
         )
     }
