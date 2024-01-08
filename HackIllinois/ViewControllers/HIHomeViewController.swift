@@ -83,11 +83,11 @@ extension HIHomeViewController {
     func layoutLegendButton() {
         view.addSubview(legendButton)
         
-        legendButton.constrain(width: 20, height: 20)
+        legendButton.constrain(width: 25, height: 25)
         legendButton.addTarget(self, action: #selector(didSelectLegendButton(_:)), for: .touchUpInside)
         
         legendButton.topAnchor.constraint(equalTo: bannerFrameView.topAnchor).isActive = true
-        legendButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -5).isActive = true
+        legendButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15).isActive = true
     }
     
     func setUpCountdown() {
