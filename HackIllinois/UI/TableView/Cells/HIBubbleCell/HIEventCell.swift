@@ -136,10 +136,6 @@ extension HIEventCell {
         }
         let timeLabel = HILabel(style: .time)
         // We can check for async events by checking if the event start and end time is 1970-01-01 00:00:00 +0000
-        if rhs.startTime != Date() { lhs.bubbleView.clipsToBounds = false
-            let ongoingImage = UIImageView(image: #imageLiteral(resourceName: "Ongoing")); ongoingImage.translatesAutoresizingMaskIntoConstraints = false; lhs.bubbleView.addSubview(ongoingImage); ongoingImage.bottomAnchor.constraint(equalTo: lhs.bubbleView.topAnchor).isActive = true
-            let rounded = UIImageView(image: #imageLiteral(resourceName: "Rounded")); rounded.translatesAutoresizingMaskIntoConstraints = false; lhs.bubbleView.addSubview(rounded); rounded.leadingAnchor.constraint(equalTo: lhs.bubbleView.leadingAnchor).isActive = true; lhs.bubbleView.topAnchor.constraint(equalTo: ongoingImage.topAnchor).isActive = true;
-        }
         if rhs.startTime.timeIntervalSince1970 == 0 || rhs.endTime.timeIntervalSince1970 == 0 {
             timeLabel.text = HIConstants.ASYNC_EVENT_TIME_TEXT
         } else {
