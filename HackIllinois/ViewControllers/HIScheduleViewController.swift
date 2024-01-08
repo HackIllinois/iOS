@@ -83,12 +83,23 @@ extension HIScheduleViewController {
         updatePredicate()
         animateReload()
     }
+    
+    /*@objc func didSelectShifts(_ sender: UIBarButtonItem) {
+        print("selected shifts")
+        updatePredicate()
+        animateReload()
+    }*/
 
     @objc func didSelectFavoritesIcon(_ sender: UIBarButtonItem) {
         onlyFavorites = !onlyFavorites
         sender.image = onlyFavorites ? #imageLiteral(resourceName: "Big Selected Bookmark") : #imageLiteral(resourceName: "Big Unselected Bookmark")
         if UIDevice.current.userInterfaceIdiom == .pad {
             sender.image = onlyFavorites ? #imageLiteral(resourceName: "FavoritedPad") : #imageLiteral(resourceName: "UnFavoritedPad")
+        }
+        if sender.image == #imageLiteral(resourceName: "Big Selected Bookmark") {
+            super.setCustomTitle(customTitle: "SAVED EVENTS")
+        } else {
+            super.setCustomTitle(customTitle: "SCHEDULE")
         }
         updatePredicate()
         animateReload()
@@ -166,9 +177,47 @@ extension HIScheduleViewController {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         setupRefreshControl()
         super.viewDidLoad()
-        super.setCustomTitle(customTitle: "SCHEDULE")
+        guard let user = HIApplicationStateController.shared.user else { return }
+        if !user.roles.contains(.STAFF) {
+            super.setCustomTitle(customTitle: "SCHEDULE")
+        } else {
+            // Display segmented control here
+        }
     }
 }
+
+
+// MARK: - Staff Shifts Control Setup
+/*extension HIScheduleViewController {
+    @objc func setStaffShiftsControl() {
+        let scheduleLabel = HILabel(style: .viewTitle)
+        let shiftsLabel = HILabel(style: .viewTitle)
+        scheduleLabel.text = "SCHEDULE"
+        shiftsLabel.text = "SHIFTS"
+
+        let scheduleView = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 30))
+        scheduleView.bounds = view.bounds.offsetBy(dx: -24, dy: 0)
+        scheduleView.addSubview(scheduleLabel)
+
+        let shiftsView = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 30))
+        shiftsView.bounds = view.bounds.offsetBy(dx: 100, dy: 0)
+        shiftsView.addSubview(shiftsLabel)
+        shiftsLabel.leadingAnchor.constraint(equalTo: shiftsView.leadingAnchor, constant: -12).isActive = true
+        shiftsLabel.centerYAnchor.constraint(equalTo: shiftsView.centerYAnchor, constant: -8).isActive = true
+        
+        // Set the leftBarButtonItem and rightBarButtonItem
+        let scheduleButton = UIBarButtonItem(customView: scheduleView)
+        let shiftsButton = UIBarButtonItem(customView: shiftsView)
+
+        scheduleButton.target = self
+        scheduleButton.action = #selector(didSelectShifts(_:))
+
+        self.navigationItem.leftBarButtonItem = scheduleButton
+        self.navigationItem.rightBarButtonItem = shiftsButton
+        self.navigationItem.leftItemsSupplementBackButton = true
+
+    }
+}*/
 
 // MARK: - UINavigationItem Setup
 extension HIScheduleViewController {
@@ -224,7 +273,7 @@ extension HIScheduleViewController {
             section < sections.count,
             let date = Formatter.coreData.date(from: sections[section].name) {
             header.titleLabel.text = Formatter.simpleTime.string(from: date)
-            header.titleLabel.textColor <- \.lightYellowText
+            header.titleLabel.textColor <- \.white
             header.titleLabel.textAlignment = .center
             if UIDevice.current.userInterfaceIdiom == .pad {
                 header.titleLabel.font = HIAppearance.Font.timeIndicator

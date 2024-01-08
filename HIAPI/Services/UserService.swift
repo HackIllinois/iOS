@@ -25,4 +25,12 @@ public final class UserService: BaseService {
     public static func getQR() -> APIRequest<QRData> {
         return APIRequest<QRData>(service: self, endpoint: "qr/", method: .GET)
     }
+    
+    public static func favoriteEvent() -> APIRequest<EventFavorites> {
+        return APIRequest<EventFavorites>(service: self, endpoint: "follow/:EVENTID/", method: .PUT)
+    }
+    
+    public static func unfavoriteEvent() -> APIRequest<EventFavorites> {
+        return APIRequest<EventFavorites>(service: self, endpoint: "unollow/:EVENTID/", method: .PUT)
+    }
 }
