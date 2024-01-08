@@ -7,7 +7,7 @@
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of
 //  Illinois/NCSA Open Source License. You should have received a copy of
-//  this license in a file with the distribution. 
+//  this license in a file with the distribution.
 //
 
 import Foundation
@@ -24,21 +24,23 @@ struct HICarouselSwiftUIView: View {
     @State private var currentIndex = 0
     var body: some View {
         VStack {
+            Spacer()
             TabView(selection: $currentIndex) {
                 ForEach(0..<carouselData.count, id: \.self) { index in
                     VStack {
+                        Spacer()
                         Image(uiImage: carouselData[index].image!)
                             .resizable()
                             .scaledToFit()
-                            .frame(height: UIDevice.current.userInterfaceIdiom == .pad ? 600: 360)
-                            .padding()
+                            .frame(height: UIDevice.current.userInterfaceIdiom == .pad ? 600: 400)
                         HILableSUI(text: carouselData[index].titleText, style: .onboardingTitle)
                             .frame(width: 20, height: 20)
+                            .padding(.top, 10)
                         Text(carouselData[index].descriptionText)
                             .bold()
                             .foregroundColor(.white)
                             .multilineTextAlignment(.center)
-                            .padding(.top, 20)
+                            .padding(.vertical, 10)
                     }
                     .tag(index)
                     .padding(.horizontal, horizontalCarouselPadding)
@@ -46,7 +48,6 @@ struct HICarouselSwiftUIView: View {
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             HITabIndicator(count: carouselData.count, current: $currentIndex)
-                .offset(y: -50)
         }
         .frame(width: UIScreen.main.bounds.width)
         .padding(.horizontal, -horizontalCarouselPadding)
@@ -58,7 +59,7 @@ struct HICarouselSwiftUIView: View {
         let carouselWidth = min(800, maxWidth)
         let padding = maxWidth - carouselWidth
         return max(
-            CGFloat(padding / 2.0),
+            CGFloat(padding / 3.0),
             60
         )
     }
