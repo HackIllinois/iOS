@@ -29,22 +29,26 @@ struct HIOnboardingView: View {
                 }
             } else {
                 VStack {
-                    Spacer()
                     HICarouselSwiftUIView(carouselData: viewModel.data)
                     Button {
                         NotificationCenter.default.post(name: .getStarted, object: nil)
                     }label: {
                         Text("GET STARTED")
                             .font(.title2.bold())
-                            .tracking(3)
+                            .tracking(2)
+//                            .onAppear {
+//                                print("The screen height is \(UIScreen.main.bounds.height)")
+//                            }
                     }
                     .padding()
                     .font(.title3.bold())
-                    .frame(width: 350, height: 50)
+                    .frame(width: 215, height: 40)
                     .foregroundColor(.white)
                     .background(Color.clear)
-                    .overlay(RoundedRectangle(cornerRadius: 20)
-                        .stroke(.white, lineWidth: 5))
+                    .overlay(RoundedRectangle(cornerRadius: 50)
+                        .stroke(.white, lineWidth: 3))
+                    .padding(.top, 20)
+                    .padding(.bottom, UIScreen.main.bounds.height < 750 ? 10 : 75)
                     Spacer()
                 }
             }
