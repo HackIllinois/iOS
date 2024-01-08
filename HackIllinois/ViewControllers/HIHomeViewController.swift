@@ -17,7 +17,7 @@ import PassKit
 import os
 import HIAPI
 
-class HIHomeViewController: HIEventListViewController {    
+class HIHomeViewController: HIEventListViewController {
     // MARK: - Properties
     private lazy var countdownViewController = HICountdownViewController(delegate: self)
     private lazy var bannerViewController = HIBannerViewController()
@@ -86,7 +86,7 @@ extension HIHomeViewController {
         legendButton.constrain(width: 20, height: 20)
         legendButton.addTarget(self, action: #selector(didSelectLegendButton(_:)), for: .touchUpInside)
         
-        legendButton.topAnchor.constraint(equalTo: bannerViewController.view.topAnchor).isActive = true
+        legendButton.topAnchor.constraint(equalTo: bannerFrameView.topAnchor).isActive = true
         legendButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -5).isActive = true
     }
     
@@ -99,7 +99,7 @@ extension HIHomeViewController {
         } else if UIScreen.main.bounds.width < 375.0 {
             countdownFrameConstant = 0.9
         }
-        countdownFrameView.topAnchor.constraint(equalTo: bannerFrameView.bottomAnchor, constant: -5).isActive = true
+        countdownFrameView.topAnchor.constraint(equalTo: bannerFrameView.bottomAnchor, constant: 7.5).isActive = true
         countdownFrameView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         let widthConstant: CGFloat = 329 * countdownFrameConstant
         let heightConstant: CGFloat = 263 * countdownFrameConstant
@@ -132,16 +132,15 @@ extension HIHomeViewController {
             bannerFrameTopAnchorConstant = 0.9
             bannerFrameHeightConstant = 0.9
         }
-        bannerFrameView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10 * bannerFrameTopAnchorConstant).isActive = true
+        bannerFrameView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -50 * bannerFrameTopAnchorConstant).isActive = true
         //let widthConstant: CGFloat = 290
-        let heightConstant: CGFloat = 84 * bannerFrameHeightConstant
+        let heightConstant: CGFloat = 20 * bannerFrameHeightConstant
         //bannerFrameView.widthAnchor.constraint(equalToConstant: widthConstant).isActive = true
         bannerFrameView.heightAnchor.constraint(equalToConstant: heightConstant).isActive = true
         bannerFrameView.addSubview(bannerViewController.view)
         bannerViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        bannerViewController.view.topAnchor.constraint(equalTo: bannerFrameView.centerYAnchor, constant: 10 * bannerFrameConstant).isActive = true
-        //bannerViewController.view.heightAnchor.constraint(equalTo: bannerFrameView.heightAnchor).isActive = true
-        //bannerViewController.view.heightAnchor.constraint(equalTo: bannerFrameView.heightAnchor, multiplier: 0.3).isActive = true
+        bannerViewController.view.topAnchor.constraint(equalTo: bannerFrameView.topAnchor).isActive = true
+        bannerViewController.view.heightAnchor.constraint(equalTo: bannerFrameView.heightAnchor).isActive = true
         bannerViewController.view.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         bannerViewController.didMove(toParent: self)
     }
@@ -157,9 +156,7 @@ extension HIHomeViewController {
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
         
-        // let now = Date()
-        let now = Date(timeIntervalSince1970: 1708927199)
-        
+        let now = Date()
         let checkInStart = HITimeDataSource.shared.eventTimes.checkInStart
         let checkInEnd = HITimeDataSource.shared.eventTimes.checkInEnd
         let scavengerHuntEnd = HITimeDataSource.shared.eventTimes.scavengerHuntEnd
