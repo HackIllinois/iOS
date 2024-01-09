@@ -19,32 +19,6 @@ import HIAPI
 
 class HIHomeViewController: HIEventListViewController {
     // MARK: - Properties
-    lazy var fetchedResultsController: NSFetchedResultsController<Event> = {
-        let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
-
-        fetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: "startTime", ascending: true),
-            NSSortDescriptor(key: "name", ascending: true)
-        ]
-
-        fetchRequest.predicate = currentPredicate()
-
-        let fetchedResultsController = NSFetchedResultsController(
-            fetchRequest: fetchRequest,
-            managedObjectContext: HICoreDataController.shared.viewContext,
-            sectionNameKeyPath: nil,
-            cacheName: nil
-        )
-
-        fetchedResultsController.delegate = self
-
-        return fetchedResultsController
-    }()
-
-    private var currentTab = 0
-
-    private var dataStore: [String] = ["CURRENT", "UPCOMING"]
-
     private lazy var countdownViewController = HICountdownViewController(delegate: self)
     private lazy var bannerViewController = HIBannerViewController()
     private let countdownFrameView = HIView {
@@ -53,17 +27,19 @@ class HIHomeViewController: HIEventListViewController {
     
     private let bannerFrameView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            let bannerImage = #imageLiteral(resourceName: "BannerPad")
-            $0.layer.contents = bannerImage.cgImage
-        } else {
-            let bannerImage = #imageLiteral(resourceName: "Banner")
-            $0.layer.contents = bannerImage.cgImage
-        }
     }
+    
+    private var isLegendButtonSelected = false
+    private let legendButton = HIButton {
+        $0.tintHIColor = \.baseText
+        $0.backgroundHIColor = \.clear
+        $0.baseImage = #imageLiteral(resourceName: "Question Mark")
+        $0.activeImage = #imageLiteral(resourceName: "Question Mark Toggled")
+    }
+    
+    private var timer: Timer?
 
     private var countdownDataStoreIndex = 0
-    // changed to upper case for 2023 designs 
     private var staticDataStore: [(date: Date, displayText: String)] = [
         (HITimeDataSource.shared.eventTimes.eventStart, "HACKILLINOIS BEGINS IN"),
         (HITimeDataSource.shared.eventTimes.hackStart, "HACKING BEGINS IN"),
@@ -71,42 +47,7 @@ class HIHomeViewController: HIEventListViewController {
         (HITimeDataSource.shared.eventTimes.eventEnd, "HACKILLINOIS ENDS IN")
     ]
 
-    private var timer: Timer?
-}
-
-// MARK: - Actions
-extension HIHomeViewController {
-
-    @objc func didSelectTab(_ sender: HISegmentedControl) {
-        currentTab = sender.selectedIndex
-        updatePredicate()
-        animateReload()
-    }
-
-    func updatePredicate() {
-        fetchedResultsController.fetchRequest.predicate = currentPredicate()
-    }
-
-    func currentPredicate() -> NSPredicate {
-        if currentTab == 0 {
-            return NSPredicate(format: "(startTime < now()) AND (endTime > now())")
-        } else if currentTab == 1 {
-            let inTwoHours = Date(timeIntervalSinceNow: 7200)
-            let upcomingPredicate = NSPredicate(format: "(startTime < %@) AND (startTime > now())", inTwoHours as NSDate)
-            return upcomingPredicate
-        } else {
-            let upcomingPredicate = NSPredicate(format: "isAsync == %@", NSNumber(value: true))
-            return upcomingPredicate
-        }
-    }
-
-    func animateReload() {
-        try? fetchedResultsController.performFetch()
-        animateTableViewReload()
-        if let tableView = tableView, !tableView.visibleCells.isEmpty {
-            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
-        }
-    }
+    var transparentImageView: UIImageView!
 }
 
 // MARK: - UIViewController
@@ -115,56 +56,41 @@ extension HIHomeViewController {
         super.loadView()
         setUpBanner()
         setUpCountdown()
-        let items = dataStore.map { $0 }
-        let segmentedControl = HIHomeSegmentedControl(status: items)
-        view.addSubview(segmentedControl)
-        segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        var segmentedControlConstant = 1.0
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            segmentedControlConstant = 2.0
-        }  else if UIScreen.main.bounds.width < 375.0 {
-            segmentedControlConstant = 0.9
-        }
-        segmentedControl.topAnchor.constraint(equalTo: bannerFrameView.bottomAnchor, constant: 124 * segmentedControlConstant).isActive = true
-        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: -30).isActive = true
-        segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 20).isActive = true
-        //segmentedControl.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        segmentedControl.heightAnchor.constraint(equalToConstant: 44).isActive = true
-
-        let separator = UIView()
-        self.view.addSubview(separator)
-        separator.translatesAutoresizingMaskIntoConstraints = false
-        separator.backgroundColor <- \.clear
-        separator.constrain(height: 1 / (UIScreen.main.scale))
-        separator.constrain(to: view, trailingInset: 0, leadingInset: 0)
-        separator.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10).isActive = true
-
-        let tableView = HITableView()
-        view.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 10).isActive = true
-        tableView.constrain(to: view.safeAreaLayoutGuide, trailingInset: 0, leadingInset: 0)
-        tableView.constrain(to: view, bottomInset: 0)
-        self.tableView = tableView
-        
-        tableView.addLeftAndRightSwipeGestureRecognizers(
-            target: segmentedControl,
-            selector: #selector(segmentedControl.handleSwipeGesture(_:))
-        )
     }
 
     override func viewDidLoad() {
-        _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         super.viewDidLoad()
         setupRefreshControl()
+        
+        // Initialize the UIImageView
+        transparentImageView = UIImageView(frame: view.bounds)
+        transparentImageView.contentMode = .scaleAspectFill
+        transparentImageView.alpha = 0
+        transparentImageView.image = UIImage(named: "Home_Tags_Transparent")
+
+        // Add the UIImageView to your view hierarchy
+        view.addSubview(transparentImageView)
+        view.bringSubviewToFront(transparentImageView)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         countdownViewController.startUpCountdown()
+        layoutLegendButton()
         setupPredicateRefreshTimer()
         setupPass()
     }
+    
+    func layoutLegendButton() {
+        view.addSubview(legendButton)
+        
+        legendButton.constrain(width: 25, height: 25)
+        legendButton.addTarget(self, action: #selector(didSelectLegendButton(_:)), for: .touchUpInside)
+        
+        legendButton.topAnchor.constraint(equalTo: bannerFrameView.topAnchor).isActive = true
+        legendButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15).isActive = true
+    }
+    
     func setUpCountdown() {
         view.addSubview(countdownFrameView)
         countdownFrameView.translatesAutoresizingMaskIntoConstraints = false
@@ -174,10 +100,10 @@ extension HIHomeViewController {
         } else if UIScreen.main.bounds.width < 375.0 {
             countdownFrameConstant = 0.9
         }
-        countdownFrameView.topAnchor.constraint(equalTo: bannerFrameView.bottomAnchor, constant: 77 * countdownFrameConstant).isActive = true
+        countdownFrameView.topAnchor.constraint(equalTo: bannerFrameView.bottomAnchor, constant: 7.5).isActive = true
         countdownFrameView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         let widthConstant: CGFloat = 329 * countdownFrameConstant
-        let heightConstant: CGFloat = 283 * countdownFrameConstant
+        let heightConstant: CGFloat = 263 * countdownFrameConstant
         countdownFrameView.widthAnchor.constraint(equalToConstant: widthConstant).isActive = true
         countdownFrameView.heightAnchor.constraint(equalToConstant: heightConstant).isActive = true
         countdownFrameView.addSubview(countdownViewController.view)
@@ -186,6 +112,8 @@ extension HIHomeViewController {
         countdownViewController.view.heightAnchor.constraint(equalTo: countdownFrameView.heightAnchor, multiplier: 0.3).isActive = true
         countdownViewController.view.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         countdownViewController.didMove(toParent: self)
+        
+        bannerViewController.view.widthAnchor.constraint(equalTo: countdownViewController.view.widthAnchor).isActive = true
     }
     func setUpBanner() {
         view.addSubview(bannerFrameView)
@@ -205,16 +133,15 @@ extension HIHomeViewController {
             bannerFrameTopAnchorConstant = 0.9
             bannerFrameHeightConstant = 0.9
         }
-        bannerFrameView.topAnchor.constraint(equalTo: view.topAnchor, constant: 31.5 * bannerFrameTopAnchorConstant).isActive = true
+        bannerFrameView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -50 * bannerFrameTopAnchorConstant).isActive = true
         //let widthConstant: CGFloat = 290
-        let heightConstant: CGFloat = 84 * bannerFrameHeightConstant
+        let heightConstant: CGFloat = 20 * bannerFrameHeightConstant
         //bannerFrameView.widthAnchor.constraint(equalToConstant: widthConstant).isActive = true
         bannerFrameView.heightAnchor.constraint(equalToConstant: heightConstant).isActive = true
         bannerFrameView.addSubview(bannerViewController.view)
         bannerViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        bannerViewController.view.topAnchor.constraint(equalTo: bannerFrameView.centerYAnchor, constant: 10.0 * bannerFrameConstant).isActive = true
-        //bannerViewController.view.heightAnchor.constraint(equalTo: bannerFrameView.heightAnchor).isActive = true
-        //bannerViewController.view.heightAnchor.constraint(equalTo: bannerFrameView.heightAnchor, multiplier: 0.3).isActive = true
+        bannerViewController.view.topAnchor.constraint(equalTo: bannerFrameView.topAnchor).isActive = true
+        bannerViewController.view.heightAnchor.constraint(equalTo: bannerFrameView.heightAnchor).isActive = true
         bannerViewController.view.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         bannerViewController.didMove(toParent: self)
     }
@@ -229,9 +156,56 @@ extension HIHomeViewController {
 extension HIHomeViewController {
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "HomeBackground")
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            backgroundView.image = #imageLiteral(resourceName: "BackgroundPad")
+        
+        let now = Date()
+        let checkInStart = HITimeDataSource.shared.eventTimes.checkInStart
+        let checkInEnd = HITimeDataSource.shared.eventTimes.checkInEnd
+        let scavengerHuntEnd = HITimeDataSource.shared.eventTimes.scavengerHuntEnd
+        let openingCeremonyEnd = HITimeDataSource.shared.eventTimes.openingCeremonyEnd
+        let hackEnd = HITimeDataSource.shared.eventTimes.hackEnd
+        let projectShowcaseEnd = HITimeDataSource.shared.eventTimes.projectShowcaseEnd
+        let closingCeremonyEnd = HITimeDataSource.shared.eventTimes.closingCeremonyEnd
+        
+        if now < checkInStart {
+            backgroundView.image = #imageLiteral(resourceName: "Home_Start")
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                backgroundView.image = #imageLiteral(resourceName: "Home_Start")
+            }
+        } else if now < checkInEnd {
+            backgroundView.image = #imageLiteral(resourceName: "Home_1")
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                backgroundView.image = #imageLiteral(resourceName: "Home_1")
+            }
+        } else if now < scavengerHuntEnd {
+            backgroundView.image = #imageLiteral(resourceName: "Home_2")
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                backgroundView.image = #imageLiteral(resourceName: "Home_2")
+            }
+        } else if now < openingCeremonyEnd {
+            backgroundView.image = #imageLiteral(resourceName: "Home_3")
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                backgroundView.image = #imageLiteral(resourceName: "Home_3")
+            }
+        } else if now < hackEnd {
+            backgroundView.image = #imageLiteral(resourceName: "Home_4")
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                backgroundView.image = #imageLiteral(resourceName: "Home_4")
+            }
+        } else if now < projectShowcaseEnd {
+            backgroundView.image = #imageLiteral(resourceName: "Home_5")
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                backgroundView.image = #imageLiteral(resourceName: "Home_5")
+            }
+        } else if now < closingCeremonyEnd {
+            backgroundView.image = #imageLiteral(resourceName: "Home_6")
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                backgroundView.image = #imageLiteral(resourceName: "Home_6")
+            }
+        } else {
+            backgroundView.image = #imageLiteral(resourceName: "Home_Final")
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                backgroundView.image = #imageLiteral(resourceName: "Home_Final")
+            }
         }
     }
 }
@@ -263,6 +237,23 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
             countdownDataStoreIndex += 1
         }
         return nil
+    }
+}
+
+extension HIHomeViewController {
+    @objc func didSelectLegendButton(_ sender: UIButton) {
+        isLegendButtonSelected.toggle()
+        
+        if isLegendButtonSelected {
+            legendButton.isActive = true
+        } else {
+            legendButton.isActive = false
+        }
+        
+
+        UIView.animate(withDuration: 0.5) {
+            self.transparentImageView.alpha = self.transparentImageView.alpha == 0 ? 1 : 0
+        }
     }
 }
 
@@ -304,7 +295,7 @@ extension HIHomeViewController {
 extension HIHomeViewController {
     func setupPredicateRefreshTimer() {
         timer = Timer.scheduledTimer(
-            timeInterval: 30,
+            timeInterval: 60, // Updates every minute
             target: self,
             selector: #selector(refreshPredicate),
             userInfo: nil,
@@ -313,9 +304,7 @@ extension HIHomeViewController {
     }
 
     @objc func refreshPredicate() {
-        updatePredicate()
-        try? fetchedResultsController.performFetch()
-        animateTableViewReload()
+        setUpBackgroundView()
     }
 
     func teardownPredicateRefreshTimer() {

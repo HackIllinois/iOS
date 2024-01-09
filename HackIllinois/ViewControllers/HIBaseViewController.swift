@@ -52,7 +52,7 @@ extension HIBaseViewController {
 extension HIBaseViewController {
     @objc dynamic func setUpBackgroundView() {
         view.layer.backgroundColor = UIColor.clear.cgColor
-        backgroundView.image = #imageLiteral(resourceName: "PurpleBackground")
+        backgroundView.image = #imageLiteral(resourceName: "Home_Start")
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.isUserInteractionEnabled = true
         backgroundView.contentMode = .scaleAspectFill

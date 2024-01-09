@@ -77,6 +77,10 @@ struct HIAppearance: Equatable {
     let profileCardNone: UIColor
 
     let profileBaseText: UIColor
+    
+    let countdownTextColor: UIColor
+    let countdownBackground: UIColor
+    let bannerBackground: UIColor
 
     let clear: UIColor = .clear
     let black: UIColor = .black
@@ -200,7 +204,10 @@ struct HIAppearance: Equatable {
         profileCardLactoseIntolerant: lactoseintolerant,
         profileCardOther: other,
         profileCardNone: none,
-        profileBaseText: profileBaseText
+        profileBaseText: profileBaseText,
+        countdownTextColor: brown,
+        countdownBackground: orange,
+        bannerBackground: lightYellow
     )
 
     fileprivate static let night = HIAppearance(
@@ -264,7 +271,10 @@ struct HIAppearance: Equatable {
         profileCardLactoseIntolerant: lactoseintolerant,
         profileCardOther: other,
         profileCardNone: none,
-        profileBaseText: profileBaseText
+        profileBaseText: profileBaseText,
+        countdownTextColor: brown,
+        countdownBackground: orange,
+        bannerBackground: lightYellow
     )
 
     fileprivate static var current = day
@@ -342,7 +352,8 @@ struct HIAppearance: Equatable {
         static let QRCheckInFont = UIFont(name: "MontserratRoman-SemiBold", size: 14)
         
         // Home page countdown fonts
-        static let newCountdownText = UIFont(name: "MontserratRoman-Bold", size: 48) // Hack 2023
+//        static let newCountdownText = UIFont(name: "MontserratRoman-Bold", size: 48) // Hack 2023
+        static let newCountdownText = UIFont(name: "MontserratRoman-Bold", size: 42) // Hack 2024
         static let countdownText = UIFont(name: "MontserratRoman-Bold", size: 25)
         
         // Onboarding fonts
