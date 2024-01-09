@@ -36,6 +36,8 @@ class HIHomeViewController: HIEventListViewController {
         $0.baseImage = #imageLiteral(resourceName: "Question Mark")
         $0.activeImage = #imageLiteral(resourceName: "Question Mark Toggled")
     }
+    
+    private var timer: Timer?
 
     private var countdownDataStoreIndex = 0
     private var staticDataStore: [(date: Date, displayText: String)] = [
@@ -45,7 +47,6 @@ class HIHomeViewController: HIEventListViewController {
         (HITimeDataSource.shared.eventTimes.eventEnd, "HACKILLINOIS ENDS IN")
     ]
 
-    private var timer: Timer?
     var transparentImageView: UIImageView!
 }
 
@@ -71,12 +72,12 @@ extension HIHomeViewController {
         view.addSubview(transparentImageView)
         view.bringSubviewToFront(transparentImageView)
     }
-    
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         countdownViewController.startUpCountdown()
         layoutLegendButton()
+        setupPredicateRefreshTimer()
         setupPass()
     }
     
@@ -292,6 +293,20 @@ extension HIHomeViewController {
 }
 
 extension HIHomeViewController {
+    func setupPredicateRefreshTimer() {
+        timer = Timer.scheduledTimer(
+            timeInterval: 60, // Updates every minute
+            target: self,
+            selector: #selector(refreshPredicate),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+
+    @objc func refreshPredicate() {
+        setUpBackgroundView()
+    }
+
     func teardownPredicateRefreshTimer() {
         timer?.invalidate()
         timer = nil
