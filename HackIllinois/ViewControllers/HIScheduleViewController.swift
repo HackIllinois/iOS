@@ -83,12 +83,6 @@ extension HIScheduleViewController {
         updatePredicate()
         animateReload()
     }
-    
-    /*@objc func didSelectShifts(_ sender: UIBarButtonItem) {
-        print("selected shifts")
-        updatePredicate()
-        animateReload()
-    }*/
 
     @objc func didSelectFavoritesIcon(_ sender: UIBarButtonItem) {
         onlyFavorites = !onlyFavorites
@@ -181,43 +175,58 @@ extension HIScheduleViewController {
         if !user.roles.contains(.STAFF) {
             super.setCustomTitle(customTitle: "SCHEDULE")
         } else {
-            // Display segmented control here
+            setStaffShiftsControl()
         }
     }
 }
 
-
 // MARK: - Staff Shifts Control Setup
-/*extension HIScheduleViewController {
+extension HIScheduleViewController {
     @objc func setStaffShiftsControl() {
         let scheduleLabel = HILabel(style: .viewTitle)
-        let shiftsLabel = HILabel(style: .viewTitle)
         scheduleLabel.text = "SCHEDULE"
-        shiftsLabel.text = "SHIFTS"
 
-        let scheduleView = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 30))
-        scheduleView.bounds = view.bounds.offsetBy(dx: -24, dy: 0)
+        let scheduleView = UIView(frame: CGRect(x: 0, y: 0, width: 160, height: 30))
         scheduleView.addSubview(scheduleLabel)
 
-        let shiftsView = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 30))
-        shiftsView.bounds = view.bounds.offsetBy(dx: 100, dy: 0)
-        shiftsView.addSubview(shiftsLabel)
-        shiftsLabel.leadingAnchor.constraint(equalTo: shiftsView.leadingAnchor, constant: -12).isActive = true
-        shiftsLabel.centerYAnchor.constraint(equalTo: shiftsView.centerYAnchor, constant: -8).isActive = true
-        
+        // Add invisible buttons over the custom views
+        let scheduleButton = createInvisibleButton(withTarget: self, action: #selector(scheduleButtonTapped(_:)))
+        scheduleButton.frame = scheduleView.bounds
+        scheduleView.addSubview(scheduleButton)
+        let shiftsButton = createInvisibleButton(withTarget: self, action: #selector(shiftsButtonTapped(_:)))
+        shiftsButton.frame = CGRect(x: view.bounds.width - 120, y: 70, width: 160, height: 30)
+        view.addSubview(shiftsButton)
         // Set the leftBarButtonItem and rightBarButtonItem
-        let scheduleButton = UIBarButtonItem(customView: scheduleView)
-        let shiftsButton = UIBarButtonItem(customView: shiftsView)
-
-        scheduleButton.target = self
-        scheduleButton.action = #selector(didSelectShifts(_:))
-
-        self.navigationItem.leftBarButtonItem = scheduleButton
-        self.navigationItem.rightBarButtonItem = shiftsButton
+        let scheduleBarButtonItem = UIBarButtonItem(customView: scheduleView)
+        let shiftsLabel = HILabel(style: .viewTitle)
+        shiftsLabel.text = "SHIFTS"
+        shiftsButton.addSubview(shiftsLabel)
+        self.navigationItem.leftBarButtonItem = scheduleBarButtonItem
+        //self.navigationItem.rightBarButtonItem = shiftsBarButtonItem
         self.navigationItem.leftItemsSupplementBackButton = true
-
     }
-}*/
+
+    // Helper method to create invisible buttons
+    private func createInvisibleButton(withTarget target: Any?, action: Selector) -> UIButton {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .clear
+        button.addTarget(target, action: action, for: .touchUpInside)
+        return button
+    }
+
+    // Actions for left and right buttons
+    @objc func scheduleButtonTapped(_ sender: UIButton) {
+        print("Schedule button tapped")
+        // Handle left button tap
+    }
+
+    @objc func shiftsButtonTapped(_ sender: UIButton) {
+        print("Shifts button tapped")
+        // Handle right button tap
+    }
+}
+
+
 
 // MARK: - UINavigationItem Setup
 extension HIScheduleViewController {
