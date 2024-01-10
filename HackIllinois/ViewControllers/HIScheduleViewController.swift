@@ -183,28 +183,33 @@ extension HIScheduleViewController {
 // MARK: - Staff Shifts Control Setup
 extension HIScheduleViewController {
     @objc func setStaffShiftsControl() {
-        let scheduleLabel = HILabel(style: .viewTitle)
-        scheduleLabel.text = "SCHEDULE"
+        let customFont = UIFont(name: "MontserratRoman-Bold", size: 24)
 
-        let scheduleView = UIView(frame: CGRect(x: 0, y: 0, width: 160, height: 30))
-        scheduleView.addSubview(scheduleLabel)
+        // Create flexible space items to add space to the left
+        let flexibleSpaceLeft1 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let flexibleSpaceLeft2 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let flexibleSpaceLeft3 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
-        // Add invisible buttons over the custom views
-        let scheduleButton = createInvisibleButton(withTarget: self, action: #selector(scheduleButtonTapped(_:)))
-        scheduleButton.frame = scheduleView.bounds
-        scheduleView.addSubview(scheduleButton)
-        let shiftsButton = createInvisibleButton(withTarget: self, action: #selector(shiftsButtonTapped(_:)))
-        shiftsButton.frame = CGRect(x: view.bounds.width - 120, y: 70, width: 160, height: 30)
-        view.addSubview(shiftsButton)
-        // Set the leftBarButtonItem and rightBarButtonItem
-        let scheduleBarButtonItem = UIBarButtonItem(customView: scheduleView)
-        let shiftsLabel = HILabel(style: .viewTitle)
-        shiftsLabel.text = "SHIFTS"
-        shiftsButton.addSubview(shiftsLabel)
-        self.navigationItem.leftBarButtonItem = scheduleBarButtonItem
-        //self.navigationItem.rightBarButtonItem = shiftsBarButtonItem
+        let scheduleButton = UIBarButtonItem(title: "SCHEDULE", style: .plain, target: self, action: #selector(scheduleButtonTapped(_:)))
+        scheduleButton.setTitleTextAttributes([NSAttributedString.Key.font: customFont], for: .normal)
+
+        // Add the flexible space items and custom button to the leftBarButtonItems array
+        navigationItem.leftBarButtonItems = [flexibleSpaceLeft1, flexibleSpaceLeft2, flexibleSpaceLeft3, scheduleButton]
+
+        // Create flexible space items to add space to the right
+        let flexibleSpaceRight1 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let flexibleSpaceRight2 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+
+        // Create your custom right bar button item
+        let customButton = UIBarButtonItem(title: "SHIFTS", style: .plain, target: self, action: #selector(shiftsButtonTapped(_:)))
+        customButton.setTitleTextAttributes([NSAttributedString.Key.font: customFont], for: .normal)
+
+        // Add the flexible space items and custom button to the rightBarButtonItems array
+        navigationItem.rightBarButtonItems = [flexibleSpaceRight1, flexibleSpaceRight2, customButton]
+
         self.navigationItem.leftItemsSupplementBackButton = true
     }
+
 
     // Helper method to create invisible buttons
     private func createInvisibleButton(withTarget target: Any?, action: Selector) -> UIButton {
