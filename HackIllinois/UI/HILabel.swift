@@ -52,7 +52,7 @@ class HILabel: UILabel {
         case leaderboardRank
         case leaderboardName
         case leaderboardPoints
-        case neonCountdown
+        case newCountdown
         // Cases used on bubble event cell
         case newLocation
         case time
@@ -77,9 +77,9 @@ class HILabel: UILabel {
         translatesAutoresizingMaskIntoConstraints = false
         if let style = style {
         switch style {
-        case .neonCountdown:
-            textHIColor = \.neonCountdownText
-            backgroundHIColor = \.clear
+        case .newCountdown:
+            textHIColor = \.countdownTextColor
+            backgroundHIColor = \.countdownBackground
             font = HIAppearance.Font.newCountdownText
 
         case .location:
