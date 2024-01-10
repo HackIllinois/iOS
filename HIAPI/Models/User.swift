@@ -181,3 +181,8 @@ public struct DietaryRestrictions: OptionSet, Codable, APIReturnable {
 public struct Token: Codable, APIReturnable {
     public let token: String
 }
+
+public struct FollowStatus: Codable, APIReturnable {
+    public let userId: String
+    public let following: [String]
+}

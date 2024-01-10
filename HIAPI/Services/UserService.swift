@@ -26,11 +26,19 @@ public final class UserService: BaseService {
         return APIRequest<QRData>(service: self, endpoint: "qr/", method: .GET)
     }
     
-    public static func favoriteEvent() -> APIRequest<EventFavorites> {
-        return APIRequest<EventFavorites>(service: self, endpoint: "follow/:EVENTID/", method: .PUT)
+    public static func favoriteEvent(userToken: String, eventID: String) -> APIRequest<FollowStatus> {
+        var authorizationHeaders = HTTPHeaders()
+        authorizationHeaders["Authorization"] = userToken
+        var body = HTTPBody()
+        body["eventId"] = eventID
+        return APIRequest<FollowStatus>(service: self, endpoint: "follow/", body: body, headers: authorizationHeaders, method: .PUT)
     }
     
-    public static func unfavoriteEvent() -> APIRequest<EventFavorites> {
-        return APIRequest<EventFavorites>(service: self, endpoint: "unollow/:EVENTID/", method: .PUT)
+    public static func unfavoriteEvent(userToken: String, eventID: String) -> APIRequest<FollowStatus> {
+        var authorizationHeaders = HTTPHeaders()
+        authorizationHeaders["Authorization"] = userToken
+        var body = HTTPBody()
+        body["eventId"] = eventID
+        return APIRequest<FollowStatus>(service: self, endpoint: "unfollow/", body: body, headers: authorizationHeaders, method: .PUT)
     }
 }
