@@ -200,7 +200,7 @@ extension HIScheduleViewController {
         let flexibleSpaceRight1 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let flexibleSpaceRight2 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
-        // Create your custom right bar button item
+        // Create custom right bar button item
         let customButton = UIBarButtonItem(title: "SHIFTS", style: .plain, target: self, action: #selector(shiftsButtonTapped(_:)))
         customButton.setTitleTextAttributes([NSAttributedString.Key.font: customFont], for: .normal)
 
