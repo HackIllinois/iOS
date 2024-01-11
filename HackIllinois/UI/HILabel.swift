@@ -80,7 +80,11 @@ class HILabel: UILabel {
         case .newCountdown:
             textHIColor = \.countdownTextColor
             backgroundHIColor = \.countdownBackground
-            font = HIAppearance.Font.newCountdownText
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                font = HIAppearance.Font.newCountdownTextPad
+            } else {
+                font = HIAppearance.Font.newCountdownText
+            }
 
         case .location:
             textHIColor = \.baseText
