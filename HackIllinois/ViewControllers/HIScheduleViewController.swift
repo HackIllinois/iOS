@@ -174,7 +174,7 @@ extension HIScheduleViewController {
         guard let user = HIApplicationStateController.shared.user else { return }
         if !user.roles.contains(.STAFF) {
             super.setCustomTitle(customTitle: "SCHEDULE")
-        } else {
+        } else if user.roles.contains(.STAFF) {
             setStaffShiftsControl()
         }
     }
