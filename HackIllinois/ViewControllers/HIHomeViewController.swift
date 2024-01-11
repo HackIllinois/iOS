@@ -66,8 +66,12 @@ extension HIHomeViewController {
         transparentImageView = UIImageView(frame: view.bounds)
         transparentImageView.contentMode = .scaleAspectFill
         transparentImageView.alpha = 0
-        transparentImageView.image = UIImage(named: "Home_Tags_Transparent")
-
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            transparentImageView.image = UIImage(named: "iPad_Tags_Transparent")
+        } else {
+            transparentImageView.image = UIImage(named: "Home_Tags_Transparent")
+        }
         // Add the UIImageView to your view hierarchy
         view.addSubview(transparentImageView)
         view.bringSubviewToFront(transparentImageView)
@@ -84,11 +88,15 @@ extension HIHomeViewController {
     func layoutLegendButton() {
         view.addSubview(legendButton)
         
-        legendButton.constrain(width: 25, height: 25)
-        legendButton.addTarget(self, action: #selector(didSelectLegendButton(_:)), for: .touchUpInside)
+        if UIDevice.current.userInterfaceIdiom != .pad {
+            legendButton.constrain(width: 20, height: 20)
+        }
         
-        legendButton.topAnchor.constraint(equalTo: bannerFrameView.topAnchor).isActive = true
+        legendButton.translatesAutoresizingMaskIntoConstraints = false
+        legendButton.topAnchor.constraint(equalTo: bannerFrameView.topAnchor, constant: -2).isActive = true
         legendButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15).isActive = true
+        
+        legendButton.addTarget(self, action: #selector(didSelectLegendButton(_:)), for: .touchUpInside)
     }
     
     func setUpCountdown() {
@@ -96,7 +104,7 @@ extension HIHomeViewController {
         countdownFrameView.translatesAutoresizingMaskIntoConstraints = false
         var countdownFrameConstant: CGFloat = 1.0
         if UIDevice.current.userInterfaceIdiom == .pad {
-            countdownFrameConstant = 1.7
+            countdownFrameConstant = 1.5
         } else if UIScreen.main.bounds.width < 375.0 {
             countdownFrameConstant = 0.9
         }
@@ -121,23 +129,23 @@ extension HIHomeViewController {
         bannerFrameView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
         bannerFrameView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
         bannerFrameView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        var bannerFrameConstant: CGFloat = 1.0
         var bannerFrameTopAnchorConstant: CGFloat = 1.0
         var bannerFrameHeightConstant: CGFloat = 1.0
         if UIDevice.current.userInterfaceIdiom == .pad {
-            bannerFrameConstant = -0.5
-            bannerFrameTopAnchorConstant = 1.9
-            bannerFrameHeightConstant = 1.2
+            bannerFrameTopAnchorConstant = 0.8
+            bannerFrameHeightConstant = 1.5
         } else if UIScreen.main.bounds.width < 375.0 {
-            bannerFrameConstant = 0.9
             bannerFrameTopAnchorConstant = 0.9
             bannerFrameHeightConstant = 0.9
         }
-        bannerFrameView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -50 * bannerFrameTopAnchorConstant).isActive = true
-        //let widthConstant: CGFloat = 290
-        let heightConstant: CGFloat = 20 * bannerFrameHeightConstant
-        //bannerFrameView.widthAnchor.constraint(equalToConstant: widthConstant).isActive = true
-        bannerFrameView.heightAnchor.constraint(equalToConstant: heightConstant).isActive = true
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            bannerFrameView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -20 * bannerFrameTopAnchorConstant).isActive = true
+        } else {
+            bannerFrameView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -50 * bannerFrameTopAnchorConstant).isActive = true
+        }
+
+        bannerFrameView.heightAnchor.constraint(equalToConstant: 20 * bannerFrameHeightConstant).isActive = true
         bannerFrameView.addSubview(bannerViewController.view)
         bannerViewController.view.translatesAutoresizingMaskIntoConstraints = false
         bannerViewController.view.topAnchor.constraint(equalTo: bannerFrameView.topAnchor).isActive = true
@@ -165,47 +173,55 @@ extension HIHomeViewController {
         let hackEnd = HITimeDataSource.shared.eventTimes.hackEnd
         let projectShowcaseEnd = HITimeDataSource.shared.eventTimes.projectShowcaseEnd
         let closingCeremonyEnd = HITimeDataSource.shared.eventTimes.closingCeremonyEnd
-        
+                
         if now < checkInStart {
-            backgroundView.image = #imageLiteral(resourceName: "Home_Start")
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                backgroundView.image = #imageLiteral(resourceName: "Home_Start")
-            }
+             if UIDevice.current.userInterfaceIdiom == .pad {
+                 backgroundView.image = #imageLiteral(resourceName: "iPad_Home_Start")
+             } else {
+                 backgroundView.image = #imageLiteral(resourceName: "Home_Start")
+             }
         } else if now < checkInEnd {
-            backgroundView.image = #imageLiteral(resourceName: "Home_1")
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                backgroundView.image = #imageLiteral(resourceName: "Home_1")
-            }
+             if UIDevice.current.userInterfaceIdiom == .pad {
+                 backgroundView.image = #imageLiteral(resourceName: "iPad_Home_1")
+             } else {
+                 backgroundView.image = #imageLiteral(resourceName: "Home_1")
+             }
         } else if now < scavengerHuntEnd {
-            backgroundView.image = #imageLiteral(resourceName: "Home_2")
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                backgroundView.image = #imageLiteral(resourceName: "Home_2")
-            }
+             if UIDevice.current.userInterfaceIdiom == .pad {
+                 backgroundView.image = #imageLiteral(resourceName: "iPad_Home_2")
+             } else {
+                 backgroundView.image = #imageLiteral(resourceName: "Home_2")
+             }
         } else if now < openingCeremonyEnd {
-            backgroundView.image = #imageLiteral(resourceName: "Home_3")
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                backgroundView.image = #imageLiteral(resourceName: "Home_3")
-            }
+             if UIDevice.current.userInterfaceIdiom == .pad {
+                 backgroundView.image = #imageLiteral(resourceName: "iPad_Home_3")
+             } else {
+                 backgroundView.image = #imageLiteral(resourceName: "Home_3")
+             }
         } else if now < hackEnd {
-            backgroundView.image = #imageLiteral(resourceName: "Home_4")
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                backgroundView.image = #imageLiteral(resourceName: "Home_4")
-            }
+             if UIDevice.current.userInterfaceIdiom == .pad {
+                 backgroundView.image = #imageLiteral(resourceName: "iPad_Home_4")
+             } else {
+                 backgroundView.image = #imageLiteral(resourceName: "Home_4")
+             }
         } else if now < projectShowcaseEnd {
-            backgroundView.image = #imageLiteral(resourceName: "Home_5")
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                backgroundView.image = #imageLiteral(resourceName: "Home_5")
-            }
+             if UIDevice.current.userInterfaceIdiom == .pad {
+                 backgroundView.image = #imageLiteral(resourceName: "iPad_Home_5")
+             } else {
+                 backgroundView.image = #imageLiteral(resourceName: "Home_5")
+             }
         } else if now < closingCeremonyEnd {
-            backgroundView.image = #imageLiteral(resourceName: "Home_6")
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                backgroundView.image = #imageLiteral(resourceName: "Home_6")
-            }
+             if UIDevice.current.userInterfaceIdiom == .pad {
+                 backgroundView.image = #imageLiteral(resourceName: "iPad_Home_6")
+             } else {
+                 backgroundView.image = #imageLiteral(resourceName: "Home_6")
+             }
         } else {
-            backgroundView.image = #imageLiteral(resourceName: "Home_Final")
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                backgroundView.image = #imageLiteral(resourceName: "Home_Final")
-            }
+             if UIDevice.current.userInterfaceIdiom == .pad {
+                 backgroundView.image = #imageLiteral(resourceName: "iPad_Home_Final")
+             } else {
+                 backgroundView.image = #imageLiteral(resourceName: "Home_Final")
+             }
         }
     }
 }
