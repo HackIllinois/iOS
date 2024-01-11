@@ -140,7 +140,7 @@ extension HIHomeViewController {
         }
         
         if UIDevice.current.userInterfaceIdiom == .pad {
-            bannerFrameView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+            bannerFrameView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -20 * bannerFrameTopAnchorConstant).isActive = true
         } else {
             bannerFrameView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -50 * bannerFrameTopAnchorConstant).isActive = true
         }
