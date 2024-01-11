@@ -144,12 +144,8 @@ extension HIHomeViewController {
         } else {
             bannerFrameView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -50 * bannerFrameTopAnchorConstant).isActive = true
         }
-        bannerFrameView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
 
-        //let widthConstant: CGFloat = 290
-        let heightConstant: CGFloat = 20 * bannerFrameHeightConstant
-        //bannerFrameView.widthAnchor.constraint(equalToConstant: widthConstant).isActive = true
-        bannerFrameView.heightAnchor.constraint(equalToConstant: heightConstant).isActive = true
+        bannerFrameView.heightAnchor.constraint(equalToConstant: 20 * bannerFrameHeightConstant).isActive = true
         bannerFrameView.addSubview(bannerViewController.view)
         bannerViewController.view.translatesAutoresizingMaskIntoConstraints = false
         bannerViewController.view.topAnchor.constraint(equalTo: bannerFrameView.topAnchor).isActive = true
