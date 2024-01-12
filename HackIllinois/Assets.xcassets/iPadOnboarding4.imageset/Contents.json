@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Group 11.png",
+      "filename" : "Profile_ipad 2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Group 11@2x.png",
+      "filename" : "Profile_ipad 2@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Group 11@3x.png",
+      "filename" : "Profile_ipad 2@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
