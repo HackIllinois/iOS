@@ -33,7 +33,12 @@ class HIOnboardingViewController: HIBaseViewController {
     }
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "Login")
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            backgroundView.image = #imageLiteral(resourceName: "iPadLogin")
+        } else {
+            backgroundView.image = #imageLiteral(resourceName: "Login")
+        }
     }
 }
 
@@ -44,12 +49,11 @@ extension HIOnboardingViewController {
         carouselView = HICarouselView(pages: 6)
         if UIDevice.current.userInterfaceIdiom == .pad {
             carouselData.append(.init(image: #imageLiteral(resourceName: "Onboarding0"), titleText: "Welcome", descriptionText: "Swipe to see what our app has to offer!"))
-            carouselData.append(.init(image: UIImage(named: "iPadOnboarding0"), titleText: "Countdown", descriptionText: "See how much time you have left to hack!"))
-            carouselData.append(.init(image: UIImage(named: "iPadOnboarding1"), titleText: "Schedule", descriptionText: "See the times and details of all of our events."))
-            carouselData.append(.init(image: UIImage(named: "iPadOnboarding2"), titleText: "Scanner", descriptionText: "Scan QR codes to obtain points and redeem items from the point shop."))
-            carouselData.append(.init(image: UIImage(named: "iPadOnboarding3"), titleText: "Profile", descriptionText: "View your QR code, food wave, and other personal information."))
-            carouselData.append(.init(image: UIImage(named: "iPadOnboarding4"), titleText: "Point Shop",
-                                          descriptionText: "View the available prizes you can redeem using your earned coins!"))
+            carouselData.append(.init(image: UIImage(named: "iPadOnboarding1"), titleText: "Countdown", descriptionText: "See how much time you have left to hack!"))
+            carouselData.append(.init(image: UIImage(named: "iPadOnboarding2"), titleText: "Schedule", descriptionText: "See the times and details of all of our events."))
+            carouselData.append(.init(image: UIImage(named: "iPadOnboarding3"), titleText: "Scanner", descriptionText: "Scan QR codes to obtain points and redeem items from the point shop."))
+            carouselData.append(.init(image: UIImage(named: "iPadOnboarding4"), titleText: "Profile", descriptionText: "View your QR code, food wave, and other personal information."))
+            carouselData.append(.init(image: UIImage(named: "iPadOnboarding5"), titleText: "Point Shop", descriptionText: "View the available prizes you can redeem using your earned coins!"))
         } else {
             carouselData.append(.init(image: #imageLiteral(resourceName: "Onboarding0"), titleText: "Welcome", descriptionText: "Swipe to see what our app has to offer!"))
             carouselData.append(.init(image: UIImage(named: "Onboarding1"), titleText: "Countdown", descriptionText: "See how much time you have left to hack!"))
