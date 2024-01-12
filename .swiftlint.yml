@@ -1,0 +1,44 @@
+disabled_rules:
+  - cyclomatic_complexity
+  - large_tuple
+  - comment_spacing
+
+opt_in_rules:
+  - file_header
+
+line_length:
+  warning: 180
+  error: 350
+  ignores_comments: true
+  ignores_urls: true
+
+identifier_name:
+  allowed_symbols: "_"
+  min_length: 2
+  max_length:
+    warning: 80
+    error: 160
+  excluded:
+    - id
+    - _fetchedResultsController
+    - _tabBarController
+
+nesting:
+  type_level: 2
+
+excluded:
+  - Pods
+
+file_header:
+   required_pattern: |
+                     \/\/
+                     \/\/  SWIFTLINT_CURRENT_FILENAME
+                     \/\/  HackIllinois
+                     \/\/
+                     \/\/  Created by HackIllinois Team on \d{1,2}\/\d{1,2}\/\d{2}\.
+                     \/\/  Copyright © \d{4} HackIllinois\. All rights reserved\.
+                     \/\/  This file is part of the Hackillinois iOS App.
+                     \/\/  The Hackillinois iOS App is open source software, released under the University of
+                     \/\/  Illinois/NCSA Open Source License. You should have received a copy of
+                     \/\/  this license in a file with the distribution.
+                     \/\/

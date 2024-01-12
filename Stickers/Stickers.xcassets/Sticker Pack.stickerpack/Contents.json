@@ -1,0 +1,35 @@
+{
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "grid-size" : "regular"
+  },
+  "stickers" : [
+    {
+      "filename" : "sticker-1.sticker"
+    },
+    {
+      "filename" : "sticker-2.sticker"
+    },
+    {
+      "filename" : "sticker-3.sticker"
+    },
+    {
+      "filename" : "sticker-4.sticker"
+    },
+    {
+      "filename" : "sticker-5.sticker"
+    },
+    {
+      "filename" : "sticker-6.sticker"
+    },
+    {
+      "filename" : "sticker-7.sticker"
+    },
+    {
+      "filename" : "sticker-8.sticker"
+    }
+  ]
+}
