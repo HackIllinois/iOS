@@ -61,7 +61,7 @@ struct LottieView: UIViewRepresentable {
     @Binding var shouldDisplayAnimationOnNextAppearance: Bool
     func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView(frame: .zero)
-        let animationView = LottieAnimationView(name: "Hack_PopcornCart_Text")
+        let animationView = LottieAnimationView(name: "Hack_Mushroom")
         animationView.contentMode = .scaleAspectFit
         animationView.frame = view.frame
         animationView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
