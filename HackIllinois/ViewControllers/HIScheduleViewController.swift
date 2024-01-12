@@ -66,6 +66,10 @@ class HIScheduleViewController: HIEventListViewController {
 
         return dataStore
     }()
+    
+    // Staff shifts functionality
+    private var onlyShifts = false
+    private let onlyShiftsPredicate = NSPredicate(format: "shift == YES")
 
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
@@ -108,6 +112,9 @@ extension HIScheduleViewController {
         if onlyFavorites {
             let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [currentTabPredicate, onlyFavoritesPredicate])
             return compoundPredicate
+        } else if onlyShifts {
+            let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [currentTabPredicate, onlyShiftsPredicate])
+                    return compoundPredicate
         } else {
             return currentTabPredicate
         }
@@ -210,24 +217,19 @@ extension HIScheduleViewController {
         self.navigationItem.leftItemsSupplementBackButton = true
     }
 
-
-    // Helper method to create invisible buttons
-    private func createInvisibleButton(withTarget target: Any?, action: Selector) -> UIButton {
-        let button = UIButton(type: .system)
-        button.backgroundColor = .clear
-        button.addTarget(target, action: action, for: .touchUpInside)
-        return button
-    }
-
     // Actions for left and right buttons
     @objc func scheduleButtonTapped(_ sender: UIButton) {
         print("Schedule button tapped")
-        // Handle left button tap
+        onlyShifts = !onlyShifts
+        updatePredicate()
+        animateReload()
     }
 
     @objc func shiftsButtonTapped(_ sender: UIButton) {
         print("Shifts button tapped")
-        // Handle right button tap
+        onlyShifts = !onlyShifts
+        updatePredicate()
+        animateReload()
     }
 }
 
