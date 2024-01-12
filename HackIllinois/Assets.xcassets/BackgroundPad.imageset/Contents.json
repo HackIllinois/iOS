@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "BackgroundPad@1x.png",
+      "filename" : "BackgroundPad.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "BackgroundPad@2x.png",
+      "filename" : "BackgroundPad2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "BackgroundPad@3x.png",
+      "filename" : "BackgroundPad3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
