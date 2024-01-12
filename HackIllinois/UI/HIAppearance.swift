@@ -365,6 +365,7 @@ struct HIAppearance: Equatable {
         // Home page countdown fonts
 //        static let newCountdownText = UIFont(name: "MontserratRoman-Bold", size: 48) // Hack 2023
         static let newCountdownText = UIFont(name: "MontserratRoman-Bold", size: 42) // Hack 2024
+        static let newCountdownTextPad = UIFont(name: "MontserratRoman-Bold", size: 56) // Hack 2024
         static let countdownText = UIFont(name: "MontserratRoman-Bold", size: 25)
         
         // Onboarding fonts
