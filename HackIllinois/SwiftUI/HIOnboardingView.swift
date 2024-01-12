@@ -19,7 +19,7 @@ struct HIOnboardingView: View {
     @StateObject private var viewModel = HIOnboardingViewModel()
     var body: some View {
         ZStack {
-            Image("Login")
+            Image(getBackgroundImageName())
                 .resizable()
                 .ignoresSafeArea()
                 .zIndex(-1)
@@ -52,6 +52,14 @@ struct HIOnboardingView: View {
                     Spacer()
                 }
             }
+        }
+    }
+    
+    func getBackgroundImageName() -> String {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return "iPadLogin"
+        } else {
+            return "Login"
         }
     }
 }
