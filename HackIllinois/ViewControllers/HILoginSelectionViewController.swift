@@ -56,7 +56,7 @@ class HILoginSelectionViewController: HIBaseViewController {
         if UIDevice.current.userInterfaceIdiom == .pad {
             backgroundView.image = UIImage(named: "LoginBackgroundPad")
         } else {
-            backgroundView.image = UIImage(named: "LoginBackgroundPhone")
+            backgroundView.image = UIImage(named: "Login")
         }
     }
 }

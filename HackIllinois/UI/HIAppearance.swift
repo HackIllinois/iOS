@@ -164,7 +164,7 @@ struct HIAppearance: Equatable {
         scrollViewIndicatorStyle: .black,
         loginDefault: white,
         loginTitleBackground: white,
-        loginLogo: #imageLiteral(resourceName: "HILogo"),
+        loginLogo: UIImage(named: "LoginLogo")!,
         loginLogoPad: UIImage(named: "LoginLogoPad")!,
         loginSelectionText: white,
         attendeeText: white,
