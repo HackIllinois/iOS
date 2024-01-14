@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "iPhone Settings 29x29pt @1x.png",
+      "filename" : "iPhone Settings 29x29pt @2x.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "29x29"
@@ -49,7 +49,7 @@
       "size" : "1024x1024"
     },
     {
-      "filename" : "Messages 27x20pt @2x (3).png",
+      "filename" : "Messages 27x20pt @2x.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",

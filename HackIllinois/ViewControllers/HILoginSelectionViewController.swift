@@ -54,9 +54,9 @@ class HILoginSelectionViewController: HIBaseViewController {
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
         if UIDevice.current.userInterfaceIdiom == .pad {
-            backgroundView.image = UIImage(named: "LoginBackgroundPad")
+            backgroundView.image = UIImage(named: "LoginBackgroundPadNew")
         } else {
-            backgroundView.image = UIImage(named: "LoginBackgroundPhone")
+            backgroundView.image = UIImage(named: "Login")
         }
     }
 }
