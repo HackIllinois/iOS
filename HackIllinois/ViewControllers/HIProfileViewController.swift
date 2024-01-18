@@ -161,6 +161,8 @@ extension HIProfileViewController {
                 self?.profile.userId = apiProfile.userId
                 self?.profile.displayName = apiProfile.discordTag
                 self?.profile.points = apiProfile.points
+                self?.profile.avatarUrl = apiProfile.avatarUrl
+                print(apiProfile.avatarUrl)
                 //self?.profile.foodWave = apiProfile.foodWave
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": self?.profile])

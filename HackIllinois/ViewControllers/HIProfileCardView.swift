@@ -11,6 +11,7 @@
 //
 
 import SwiftUI
+import URLImage
 import HIAPI
 
 // Loads url data and converts into image
@@ -64,6 +65,9 @@ struct HIProfileCardView: View {
                         .resizable()
                         .frame(width: isIpad ? 149 : 149, height: isIpad ? 170.75 : 170.75)
                         .alignmentGuide(.top) {dimensions in dimensions[VerticalAlignment.center] / 0.9 }
+                        .onTapGesture {
+                            print(avatarUrl)
+                        }
                 }
                 VStack(spacing: 0) {
                     Spacer().frame(height: 90)
@@ -178,7 +182,7 @@ struct HIProfileCardView_Previews: PreviewProvider {
                           points: 100,
                           tier: "Pro",
                           foodWave: 1,
-                          avatarUrl: "https://media.licdn.com/dms/image/C560BAQFNEU99O5H1IA/company-logo_200_200/0/1677090978124/hackillinois_logo?e=2147483647&v=beta&t=OnmvpPQVQC4S3nuMvkaH7cAGJao1jCzVm4oX6KbKd6o",
+                          avatarUrl: "https://raw.githubusercontent.com/HackIllinois/adonix-metadata/main/avatars/fishercat.png",
                           userId: "https://www.hackillinois.org"
         )
     }
