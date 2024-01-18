@@ -47,8 +47,12 @@ struct HIProfileCardView: View {
                 ZStack(alignment: .top) {
                     ZStack(alignment: .bottom) {
                         Image("ProfileCardBackground")
+                            .resizable()
+                            .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? 566.93 : 338, height: UIDevice.current.userInterfaceIdiom == .pad ? 777.2 : 463.36)
                         ZStack {
                             Image("ProfileBanner")
+                                .resizable()
+                                .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? 395.7 : 235.91, height: UIDevice.current.userInterfaceIdiom == .pad ? 137.71 : 82.1)
                             VStack(spacing: 0) {
                                 Text("Your Ranking")
                                     .foregroundColor(.white)
@@ -58,16 +62,13 @@ struct HIProfileCardView: View {
                                     Image("RankSymbol")
                                     Text("25").foregroundColor(.white).font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 20)))
                                 }
-                            }.padding(.bottom, 25)
+                            }.padding(.bottom, isIpad ? 40 : 25)
                         }.alignmentGuide(.bottom) {dimensions in dimensions[.bottom] / 1.2 }
                     }
                     Image(uiImage: avatarUrl.load())
                         .resizable()
-                        .frame(width: isIpad ? 149 : 149, height: isIpad ? 170.75 : 170.75)
+                        .frame(width: isIpad ? 249.92 : 149, height: isIpad ? 286.4 : 170.75)
                         .alignmentGuide(.top) {dimensions in dimensions[VerticalAlignment.center] / 0.9 }
-                        .onTapGesture {
-                            print(avatarUrl)
-                        }
                 }
                 VStack(spacing: 0) {
                     Spacer().frame(height: 90)
@@ -99,9 +100,10 @@ struct HIProfileCardView: View {
                     }.padding(.bottom)
                     Image(uiImage: UIImage(data: getQRCodeDate(text: qrInfo)!)!)
                                                     .resizable()
-                                                    .frame(width: isIpad ? 200 : 221, height: isIpad ? 200 : 221)
+                                                    .frame(width: isIpad ? 371 : 221, height: isIpad ? 371 : 221)
                                                     .padding(.bottom, 20)
                 }
+                .padding(.top, isIpad ? 50 : 0)
             }
             .padding(.top, 24)
         }
