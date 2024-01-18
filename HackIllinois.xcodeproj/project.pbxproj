@@ -14,6 +14,8 @@
 		1C9045CE274F03A200DDA74E /* HICarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9045CD274F03A200DDA74E /* HICarouselCell.swift */; };
 		1C9045D2274F048A00DDA74E /* HICarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9045D1274F048A00DDA74E /* HICarouselView.swift */; };
 		1C9045D4274F065F00DDA74E /* HIOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */; };
+		2FA73B4E2B58CAA0002658C0 /* ShopService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA73B4D2B58CAA0002658C0 /* ShopService.swift */; };
+		2FA73B502B58CAC3002658C0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA73B4F2B58CAC3002658C0 /* Item.swift */; };
 		3521FFA92207C03E00634A63 /* Attendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521FFA82207C03E00634A63 /* Attendee.swift */; };
 		35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */; };
 		35B4A44F21E091BA001B3AF0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4A44D21E091B9001B3AF0 /* Logger.swift */; };
@@ -217,6 +219,8 @@
 		1C9045CD274F03A200DDA74E /* HICarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICarouselCell.swift; sourceTree = "<group>"; };
 		1C9045D1274F048A00DDA74E /* HICarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICarouselView.swift; sourceTree = "<group>"; };
 		1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIOnboardingViewController.swift; sourceTree = "<group>"; };
+		2FA73B4D2B58CAA0002658C0 /* ShopService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopService.swift; sourceTree = "<group>"; };
+		2FA73B4F2B58CAC3002658C0 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		3521FFA82207C03E00634A63 /* Attendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendee.swift; sourceTree = "<group>"; };
 		35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HICountdownViewController.swift; sourceTree = "<group>"; };
 		35B4A44D21E091B9001B3AF0 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -696,6 +700,7 @@
 			children = (
 				95E3145B21FAF1740092C22E /* AnnouncementService.swift */,
 				95E3146221FAF1740092C22E /* AuthService.swift */,
+				2FA73B4D2B58CAA0002658C0 /* ShopService.swift */,
 				95E3146121FAF1740092C22E /* BaseService.swift */,
 				95B12042220BEA9D00E024BB /* CheckInService.swift */,
 				95E3145F21FAF1740092C22E /* EventService.swift */,
@@ -718,6 +723,7 @@
 				95E3146821FAF1740092C22E /* Announcement.swift */,
 				3521FFA82207C03E00634A63 /* Attendee.swift */,
 				95E3146521FAF1740092C22E /* Event.swift */,
+				2FA73B4F2B58CAC3002658C0 /* Item.swift */,
 				AC3B620D25E85CAD002386A2 /* Profile.swift */,
 				95E3146621FAF1740092C22E /* SimpleRequest.swift */,
 				95E3146721FAF1740092C22E /* User.swift */,
@@ -1122,6 +1128,7 @@
 			files = (
 				3521FFA92207C03E00634A63 /* Attendee.swift in Sources */,
 				95E3147521FAF1740092C22E /* User.swift in Sources */,
+				2FA73B4E2B58CAA0002658C0 /* ShopService.swift in Sources */,
 				ACB53AE7261B874A007B1643 /* Interest.swift in Sources */,
 				AC3B621025E85D18002386A2 /* ProfileService.swift in Sources */,
 				95E3147021FAF1740092C22E /* BaseService.swift in Sources */,
@@ -1139,6 +1146,7 @@
 				95E3146A21FAF1740092C22E /* AnnouncementService.swift in Sources */,
 				95E3147221FAF1740092C22E /* RegistrationService.swift in Sources */,
 				95E3147421FAF1740092C22E /* SimpleRequest.swift in Sources */,
+				2FA73B502B58CAC3002658C0 /* Item.swift in Sources */,
 				A5163FED221F283C003C543E /* StatsService.swift in Sources */,
 				95B12045220BEAD700E024BB /* TrackingService.swift in Sources */,
 				3C8F62D6238F9825001A5DAF /* TimeService.swift in Sources */,

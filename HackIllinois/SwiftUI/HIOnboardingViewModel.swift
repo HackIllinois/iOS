@@ -15,11 +15,11 @@ import SwiftUI
 class HIOnboardingViewModel: ObservableObject {
     @Published var data: [CarouselData] = UIDevice.current.userInterfaceIdiom == .pad ? [
         CarouselData(image: #imageLiteral(resourceName: "Onboarding0"), titleText: "Welcome", descriptionText: "Swipe to see what our app has to offer!"),
-        CarouselData(image: UIImage(named: "iPadOnboarding0"), titleText: "Countdown", descriptionText: "See how much time you have left to hack!"),
-        CarouselData(image: UIImage(named: "iPadOnboarding1"), titleText: "Schedule", descriptionText: "See the times and details of all of our events."),
-        CarouselData(image: UIImage(named: "iPadOnboarding2"), titleText: "Scanner", descriptionText: "Scan QR codes to obtain points and redeem items from the point shop."),
-        CarouselData(image: UIImage(named: "iPadOnboarding3"), titleText: "Profile", descriptionText: "View your QR code, food wave, and other personal information."),
-        CarouselData(image: UIImage(named: "iPadOnboarding4"), titleText: "Point Shop", descriptionText: "View the available prizes you can redeem using your earned coins!")
+        CarouselData(image: UIImage(named: "iPadOnboarding1"), titleText: "Countdown", descriptionText: "See how much time you have left to hack!"),
+        CarouselData(image: UIImage(named: "iPadOnboarding2"), titleText: "Schedule", descriptionText: "See the times and details of all of our events."),
+        CarouselData(image: UIImage(named: "iPadOnboarding3"), titleText: "Scanner", descriptionText: "Scan QR codes to obtain points and redeem items from the point shop."),
+        CarouselData(image: UIImage(named: "iPadOnboarding4"), titleText: "Profile", descriptionText: "View your QR code, food wave, and other personal information."),
+        CarouselData(image: UIImage(named: "iPadOnboarding5"), titleText: "Point Shop", descriptionText: "View the available prizes you can redeem using your earned coins!")
     ] : [
         CarouselData(image: #imageLiteral(resourceName: "Onboarding0"), titleText: "Welcome", descriptionText: "Swipe to see what our app has to offer!"),
         CarouselData(image: UIImage(named: "Onboarding1"), titleText: "Countdown", descriptionText: "See how much time you have left to hack!"),
