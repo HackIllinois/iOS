@@ -75,7 +75,7 @@ class HIScheduleViewController: HIEventListViewController {
         super.setUpBackgroundView()
         backgroundView.image = #imageLiteral(resourceName: "PurpleBackground")
         if UIDevice.current.userInterfaceIdiom == .pad {
-            backgroundView.image = #imageLiteral(resourceName: "BackgroundPad")
+            //backgroundView.image = #imageLiteral(resourceName: "Purple")
         }
     }
 }
@@ -145,8 +145,8 @@ extension HIScheduleViewController {
         }
 
         segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20 + segmentedControlConstant).isActive = true
-        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: -50).isActive = true
-        segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 34).isActive = true
+        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: -36).isActive = true
+        segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 40).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 66 + segmentedControlConstant).isActive = true
         
         // Start the segmented control on the current day

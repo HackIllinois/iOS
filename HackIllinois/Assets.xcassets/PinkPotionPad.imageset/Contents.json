@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Home1x.png",
+      "filename" : "PinkPotionPad.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Home2x.png",
+      "filename" : "PinkPotionPad2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Home3x.png",
+      "filename" : "PinkPotionPad3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

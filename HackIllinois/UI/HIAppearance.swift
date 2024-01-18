@@ -84,7 +84,9 @@ struct HIAppearance: Equatable {
     let countdownTextColor: UIColor
     let countdownBackground: UIColor
     let bannerBackground: UIColor
-
+    let proBackground: UIColor
+    let eventCard: UIColor
+    
     let clear: UIColor = .clear
     let black: UIColor = .black
     let white: UIColor = .white
@@ -120,6 +122,7 @@ struct HIAppearance: Equatable {
     private static let lightGreen = #colorLiteral(red: 0.7019607843, green: 0.8392156863, blue: 0.537254902, alpha: 1)
     private static let lightBlue = #colorLiteral(red: 0.7176470588, green: 0.8392156863, blue: 0.8392156863, alpha: 1)
     private static let teal = #colorLiteral(red: 0.537254902, green: 0.7450980392, blue: 0.6666666667, alpha: 1)
+    private static let medTeal = #colorLiteral(red: 0.4274509804, green: 0.6117647059, blue: 0.6274509804, alpha: 1)
     private static let darkGreen = #colorLiteral(red: 0.05098039216, green: 0.2470588235, blue: 0.2549019608, alpha: 1)
     private static let darkestGreen = #colorLiteral(red: 0.02745098039, green: 0.1725490196, blue: 0.1803921569, alpha: 1)
     private static let lightBrown = #colorLiteral(red: 0.5882352941, green: 0.2980392157, blue: 0.1019607843, alpha: 1)
@@ -134,6 +137,7 @@ struct HIAppearance: Equatable {
     private static let transparent = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     private static let black = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    private static let offWhite = #colorLiteral(red: 1, green: 0.9725490196, blue: 0.9607843137, alpha: 1)
 
     private static let transparent2 = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     private static var statusBarWhite: UIStatusBarStyle {
@@ -214,7 +218,9 @@ struct HIAppearance: Equatable {
         profileBaseText: profileBaseText,
         countdownTextColor: brown,
         countdownBackground: orange,
-        bannerBackground: lightYellow
+        bannerBackground: lightYellow,
+        proBackground: medTeal,
+        eventCard: offWhite
     )
 
     fileprivate static let night = HIAppearance(
@@ -284,7 +290,9 @@ struct HIAppearance: Equatable {
         profileBaseText: profileBaseText,
         countdownTextColor: brown,
         countdownBackground: orange,
-        bannerBackground: lightYellow
+        bannerBackground: lightYellow,
+        proBackground: medTeal,
+        eventCard: offWhite
     )
 
     fileprivate static var current = day
