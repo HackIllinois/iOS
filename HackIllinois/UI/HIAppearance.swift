@@ -18,7 +18,7 @@ struct HIAppearance: Equatable {
     let whiteText: UIColor
     let baseText: UIColor
     let accent: UIColor
-    let viewTitleGreen: UIColor
+    let viewTitleBrown: UIColor
     let action: UIColor
     let baseBackground: UIColor
     let contentBackground: UIColor
@@ -81,7 +81,13 @@ struct HIAppearance: Equatable {
     let countdownTextColor: UIColor
     let countdownBackground: UIColor
     let bannerBackground: UIColor
-
+    
+    let scannerButtonPink: UIColor
+    let scannerButtonTeal: UIColor
+    let scannerButtonYellow: UIColor
+    let scannerButtonBorder: UIColor
+    let scannerButtonShadow: UIColor
+    
     let clear: UIColor = .clear
     let black: UIColor = .black
     let white: UIColor = .white
@@ -119,6 +125,7 @@ struct HIAppearance: Equatable {
     private static let teal = #colorLiteral(red: 0.537254902, green: 0.7450980392, blue: 0.6666666667, alpha: 1)
     private static let darkGreen = #colorLiteral(red: 0.05098039216, green: 0.2470588235, blue: 0.2549019608, alpha: 1)
     private static let lightBrown = #colorLiteral(red: 0.5882352941, green: 0.2980392157, blue: 0.1019607843, alpha: 1)
+    private static let medBrown = #colorLiteral(red: 0.4588235294, green: 0.1960784314, blue: 0.07843137255, alpha: 1)
     private static let brown = #colorLiteral(red: 0.4, green: 0.168627451, blue: 0.07450980392, alpha: 1)
     private static let darkBrown = #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
     private static let lightPink = #colorLiteral(red: 0.9215686275, green: 0.8235294118, blue: 0.8235294118, alpha: 1)
@@ -130,7 +137,10 @@ struct HIAppearance: Equatable {
     private static let transparent = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     private static let black = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-
+    private static let buttonPink = #colorLiteral(red: 0.862745098, green: 0.5411764706, blue: 0.662745098, alpha: 1)
+    private static let buttonTeal = #colorLiteral(red: 0.6470588235, green: 0.8549019608, blue: 0.8352941176, alpha: 1)
+    private static let buttonYellow = #colorLiteral(red: 1, green: 0.7882352941, blue: 0.3568627451, alpha: 1)
+    
     private static let transparent2 = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     private static var statusBarWhite: UIStatusBarStyle {
         return .lightContent
@@ -149,7 +159,7 @@ struct HIAppearance: Equatable {
         whiteText: white,
         baseText: lightBlack,
         accent: orange,
-        viewTitleGreen: darkGreen,
+        viewTitleBrown: darkBrown,
         action: tan,
         baseBackground: white,
         contentBackground: lightBlue,
@@ -207,7 +217,12 @@ struct HIAppearance: Equatable {
         profileBaseText: profileBaseText,
         countdownTextColor: brown,
         countdownBackground: orange,
-        bannerBackground: lightYellow
+        bannerBackground: lightYellow,
+        scannerButtonPink: buttonPink,
+        scannerButtonTeal: buttonTeal,
+        scannerButtonYellow: buttonYellow,
+        scannerButtonBorder: medBrown,
+        scannerButtonShadow: darkBrown
     )
 
     fileprivate static let night = HIAppearance(
@@ -216,7 +231,7 @@ struct HIAppearance: Equatable {
         whiteText: white,
         baseText: lightBlack,
         accent: orange,
-        viewTitleGreen: darkGreen,
+        viewTitleBrown: darkBrown,
         action: tan,
         baseBackground: white,
         contentBackground: lightBlue,
@@ -274,7 +289,12 @@ struct HIAppearance: Equatable {
         profileBaseText: profileBaseText,
         countdownTextColor: brown,
         countdownBackground: orange,
-        bannerBackground: lightYellow
+        bannerBackground: lightYellow,
+        scannerButtonPink: buttonPink,
+        scannerButtonTeal: buttonTeal,
+        scannerButtonYellow: buttonYellow,
+        scannerButtonBorder: medBrown,
+        scannerButtonShadow: darkBrown
     )
 
     fileprivate static var current = day
@@ -376,7 +396,7 @@ struct HIAppearance: Equatable {
         static let welcomeTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 40: 24)
         
         // Font for Staff QR code selection
-        static let QRSelection = UIFont(name: "MontserratRoman-SemiBold", size: 20)
+        static let QRSelection = UIFont(name: "MontserratRoman-Bold", size: 24)
     }
 }
 

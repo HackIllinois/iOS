@@ -30,3 +30,8 @@ public struct Item: Codable {
     public let isRaffle: Bool
     public let quantity: Int
 }
+
+public struct RedeemItem: Codable, APIReturnable {
+    public let success: Bool
+    public let error: String?
+}
