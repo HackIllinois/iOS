@@ -68,14 +68,14 @@ class HIScheduleViewController: HIEventListViewController {
     }()
     
     // Staff shifts functionality
-    private var onlyShifts = false
-    private let onlyShiftsPredicate = NSPredicate(format: "shift == YES")
+    //private var onlyShifts = false
+    //private let onlyShiftsPredicate = NSPredicate(format: "shift == YES")
 
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
         backgroundView.image = #imageLiteral(resourceName: "PurpleBackground")
         if UIDevice.current.userInterfaceIdiom == .pad {
-            //backgroundView.image = #imageLiteral(resourceName: "Purple")
+            backgroundView.image = #imageLiteral(resourceName: "BackgroundPad")
         }
     }
 }
@@ -112,10 +112,10 @@ extension HIScheduleViewController {
         if onlyFavorites {
             let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [currentTabPredicate, onlyFavoritesPredicate])
             return compoundPredicate
-        } else if onlyShifts {
+        } /*else if onlyShifts {
             let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [currentTabPredicate, onlyShiftsPredicate])
                     return compoundPredicate
-        } else {
+        }*/ else {
             return currentTabPredicate
         }
     }
@@ -220,19 +220,18 @@ extension HIScheduleViewController {
     // Actions for left and right buttons
     @objc func scheduleButtonTapped(_ sender: UIButton) {
         print("Schedule button tapped")
-        onlyShifts = !onlyShifts
+        //onlyShifts = !onlyShifts
         updatePredicate()
         animateReload()
     }
 
     @objc func shiftsButtonTapped(_ sender: UIButton) {
         print("Shifts button tapped")
-        onlyShifts = !onlyShifts
+        //onlyShifts = !onlyShifts
         updatePredicate()
         animateReload()
     }
 }
-
 
 
 // MARK: - UINavigationItem Setup

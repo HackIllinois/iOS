@@ -166,12 +166,20 @@ class HIScheduleSegmentedControl: HISegmentedControl {
 
     override func didSetSelectedIndex(oldValue: Int) {
         if oldValue != selectedIndex {
-            let potionName = (UIDevice.current.userInterfaceIdiom == .pad) ? "PurplePotionPad" : "Purple Potion"
             selectedPotionView?.image = #imageLiteral(resourceName: "Purple Potion")
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                selectedPotionView?.image = #imageLiteral(resourceName: "PurplePotionPad")
+            } else {
+                selectedPotionView?.image = #imageLiteral(resourceName: "Purple Potion")
+            }
 
             // Update the color of the newly selected potion
             if let potionView = views[selectedIndex].subviews.first as? UIImageView {
-                potionView.image = #imageLiteral(resourceName: "Pink Potion")
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    potionView.image = #imageLiteral(resourceName: "PinkPotionPad")
+                } else {
+                    potionView.image = #imageLiteral(resourceName: "Pink Potion")
+                }
                 selectedPotionView = potionView
             }
             displayNewSelectedIndex()
@@ -181,7 +189,11 @@ class HIScheduleSegmentedControl: HISegmentedControl {
     
     private func highlightSelectedPotion() {
         if let potionView = views[selectedIndex].subviews.first as? UIImageView {
-            potionView.image = #imageLiteral(resourceName: "Pink Potion")
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                selectedPotionView?.image = #imageLiteral(resourceName: "PinkPotionPad")
+            } else {
+                potionView.image = #imageLiteral(resourceName: "Pink Potion")
+            }
             selectedPotionView = potionView
         }
     }
