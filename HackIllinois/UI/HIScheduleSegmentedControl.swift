@@ -32,6 +32,8 @@ class HIScheduleSegmentedControl: HISegmentedControl {
     private var indicatorView = UIImageView(image: #imageLiteral(resourceName: "Indicator"))
     
     private var selectedPotionView: UIImageView? // Keep track of the selected potion
+    
+    let padConstant = (UIDevice.current.userInterfaceIdiom == .pad) ? 2.0 : 1
     // MARK: - Init
     init(titles: [String], nums: [Int]? = nil) {
         self.nums = nums == nil ? [Int]() : nums!
@@ -146,9 +148,9 @@ class HIScheduleSegmentedControl: HISegmentedControl {
         potionView.translatesAutoresizingMaskIntoConstraints = false
         var segmentedControlConstant = -10.0
         if UIDevice.current.userInterfaceIdiom == .pad {
-            segmentedControlConstant = 24.0
+            segmentedControlConstant = 0
         }
-        numberLabel.constrain(to: potionView, topInset: 30, trailingInset: 0, leadingInset: 0)
+        numberLabel.constrain(to: potionView, topInset: 30 * padConstant, trailingInset: 0, leadingInset: 0)
         titleLabel.constrain(to: potionView, trailingInset: 0, bottomInset: 0, leadingInset: 0)
         titleLabel.topAnchor.constraint(equalTo: numberLabel.bottomAnchor, constant: segmentedControlConstant).isActive = true
         titleLabel.heightAnchor.constraint(equalTo: numberLabel.heightAnchor).isActive = true
@@ -217,15 +219,23 @@ class HIScheduleSegmentedControl: HISegmentedControl {
 
             // right
             if index == items.count - 1 {
-                view.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -viewPadding).isActive = true
+                view.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -viewPadding * padConstant).isActive = true
             }
 
             // left
             if index == 0 {
-                view.leftAnchor.constraint(equalTo: self.leftAnchor, constant: viewPadding).isActive = true
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    view.leftAnchor.constraint(equalTo: self.leftAnchor, constant: viewPadding + 30).isActive = true
+                } else {
+                    view.leftAnchor.constraint(equalTo: self.leftAnchor, constant: viewPadding).isActive = true
+                }
             } else {
                 let prevView = views[index - 1]
-                view.leftAnchor.constraint(equalTo: prevView.rightAnchor, constant: viewPadding - 30).isActive = true
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    view.leftAnchor.constraint(equalTo: prevView.rightAnchor, constant: (viewPadding - 10) * padConstant).isActive = true
+                } else {
+                    view.leftAnchor.constraint(equalTo: prevView.rightAnchor, constant: viewPadding - 30).isActive = true
+                }
             }
 
             // width
