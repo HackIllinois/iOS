@@ -29,7 +29,6 @@ extension HIPointsShopViewController {
 extension HIPointsShopViewController {
     override func loadView() {
         super.loadView()
-
         let swiftUIView = HIPointShopSwiftUIView()
             let hostingController = UIHostingController(rootView: swiftUIView)
         addChild(hostingController)
@@ -54,33 +53,21 @@ extension HIPointsShopViewController {
 // MARK: - API
 extension HIPointsShopViewController {
 //    @objc func reloadProfile () {
-//        HIAPI.ShopService.getAllItems()
-//            .onCompletion { [self] result in
-//                do {
-//                    let (containedItem, _) = try result.get()
-//                    let apiItems = containedItem.items
-//                    apiItems.forEach { apiItem in
-//                        let temp=Item(name: apiItem.name, price: apiItem.price, isRaffle: apiItem.isRaffle, quantity: apiItem.quantity)
-//                        items.append(temp)
-//                    }
-//                }catch {
-//                   print("Failed to reload points shop with the error: \(error)")
-//               }
-//            }
-//            .launch()
-//
 //        guard let user = HIApplicationStateController.shared.user else { return }
 //        HIAPI.ProfileService.getUserProfile()
 //        .onCompletion { [weak self] result in
 //            do {
 //                let (apiProfile, _) = try result.get()
-//                print("COINS:", apiProfile.points)
-//
+//                self?.profile.userId = apiProfile.userId
+//                self?.profile.displayName = apiProfile.discordTag
+//                self?.profile.points = apiProfile.points
+//                print(apiProfile.points)
+////                print("Coins: ", apiProfile.coins)
+//                //self?.profile.foodWave = apiProfile.foodWave
 //                DispatchQueue.main.async {
-//                    NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": self?.profile])
-//                }
+//                    NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": self?.profile])                }
 //            } catch {
-//                print("Failed to reload coins with the error: \(error)")
+//                print("Failed to reload profile with the error: \(error)")
 //            }
 //        }
 //        .authorize(with: user)

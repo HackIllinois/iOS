@@ -12,55 +12,85 @@ import HIAPI
 
 struct HIPointShopSwiftUIView: View {
     @State var items=[] as [Item]
-    private var profile = HIProfile()
+    @State private var profile = HIProfile()
     @State var coins = 0
     @State var tabIndex = 0
     var body: some View {
+        NavigationView{
+
         ZStack {
             Image("PurpleBackground")
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
-            VStack {
-                Image("KnickKnacks")
-                    .resizable()
-                    .frame(width: 370, height: 120)
-                VStack(spacing: 0) {
-                    CustomTopTabBar(tabIndex: $tabIndex)
-                    ScrollView(showsIndicators: false) {
-                        if tabIndex == 0 {
-                            VStack(spacing: 0) {
-                                ForEach(0 ..< items.count, id: \.self) {value in
-                                    if (items[value].isRaffle==false) {
-                                        PointShopItemCell(item: items[value])
-                                    }
-                                }
-                                Rectangle()
-                                    .foregroundColor(.clear)
-                                    .frame(width: 410, height: 10)
-                                    .background(Color(red: 0.4, green: 0.17, blue: 0.07))
-                                    .cornerRadius(1)
-                            }
-                            .onAppear {
-                                getItems()
-                            }
-                        } else {
-                            VStack(spacing: 0) {
-                                ForEach(0 ..< items.count, id: \.self) {value in
-                                    if (items[value].isRaffle==true) {
-                                        PointShopItemCell(item: items[value])
-                                    }
-                                }
-                                Rectangle()
-                                    .foregroundColor(.clear)
-                                    .frame(width: 410, height: 10)
-                                    .background(Color(red: 0.4, green: 0.17, blue: 0.07))
-                                    .cornerRadius(1)
-                            }
+                
+                VStack {
+                    HStack{
+                        
+                        HStack(alignment: .center, spacing: 7) {
+                            Image("Coin")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                            
+                            Text("\(coins)")
+                                .font(Font.custom("Montserrat", size: 16).weight(.bold))
+                                .foregroundColor(.white)
+
                         }
+                        .padding(.horizontal, 11)
+                        .padding(.vertical, 3)
+                        .background(Color(red: 0.05, green: 0.25, blue: 0.25).opacity(0.5))
+                        .cornerRadius(1000)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .offset(y: -35)
+                        
+                        
+                        
+
                         Spacer()
+
                     }
-                    .frame(width: UIScreen.main.bounds.width - 24, alignment: .center)
-                    .padding(.horizontal, 12)
+                    Image("KnickKnacks")
+                        .resizable()
+                        .frame(width: 370, height: 120)
+                    VStack(spacing: 0) {
+                        CustomTopTabBar(tabIndex: $tabIndex)
+                        ScrollView(showsIndicators: false) {
+                            if tabIndex == 0 {
+                                VStack(spacing: 0) {
+                                    ForEach(0 ..< items.count, id: \.self) {value in
+                                        if (items[value].isRaffle==false) {
+                                            PointShopItemCell(item: items[value])
+                                        }
+                                    }
+                                    Rectangle()
+                                        .foregroundColor(.clear)
+                                        .frame(width: 410, height: 10)
+                                        .background(Color(red: 0.4, green: 0.17, blue: 0.07))
+                                        .cornerRadius(1)
+                                }
+                                .onAppear {
+                                    getItems()
+                                    getCoins()
+                                }
+                            } else {
+                                VStack(spacing: 0) {
+                                    ForEach(0 ..< items.count, id: \.self) {value in
+                                        if (items[value].isRaffle==true) {
+                                            PointShopItemCell(item: items[value])
+                                        }
+                                    }
+                                    Rectangle()
+                                        .foregroundColor(.clear)
+                                        .frame(width: 410, height: 10)
+                                        .background(Color(red: 0.4, green: 0.17, blue: 0.07))
+                                        .cornerRadius(1)
+                                }
+                            }
+                            Spacer()
+                        }
+                        .frame(width: UIScreen.main.bounds.width - 24, alignment: .center)
+                        .padding(.horizontal, 12)
+                    }
                 }
             }
         }
@@ -87,8 +117,10 @@ struct HIPointShopSwiftUIView: View {
         .onCompletion { [self] result in
             do {
                 let (apiProfile, _) = try result.get()
-                print("COINS:", apiProfile.points)
-                coins=apiProfile.points
+                self.profile.userId = apiProfile.userId
+                self.profile.displayName = apiProfile.discordTag
+                self.profile.points = apiProfile.points
+                //self?.profile.foodWave = apiProfile.foodWave
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": self.profile])
                 }
@@ -108,14 +140,14 @@ struct PointShopItemCell: View {
             //brown bar
             Rectangle()
                 .foregroundColor(.clear)
-                .frame(width: 410, height: 10)
+                .frame(width: 380, height: 10)//TODO: Change width
                 .background(Color(red: 0.4, green: 0.17, blue: 0.07))
                 .cornerRadius(1)
             //transparent pane
             ZStack {
                 Rectangle()
                     .fill(.white)
-                    .frame(width: 400, height: 157)
+                    .frame(width: 370, height: 157)//TODO: Change width
                     .opacity(0.4)
                 HStack {
                     Spacer()
@@ -180,10 +212,11 @@ struct CustomTopTabBar: View {
             TabBarButton(text: "RAFFLE", isSelected: .constant(tabIndex == 1))
                 .onTapGesture { onButtonTapped(index: 1) }
         }
-        .frame(maxWidth: .infinity, alignment: .center)
+        .frame(maxWidth: .infinity)
     }
     private func onButtonTapped(index: Int) {
-        withAnimation { tabIndex = index }
+        tabIndex=index
+//        withAnimation { tabIndex = index }
     }
 }
 
@@ -195,14 +228,13 @@ struct TabBarButton: View {
             if isSelected {
                 Rectangle()
                     .fill(Color(red: 0.85, green: 0.25, blue: 0.47))
-                    .frame(width: 165, height: 50)
+                    .frame(width: 170, height: 50)//190
                     .cornerRadius(10, corners: [.topLeft, .topRight])
             }
             Text(text)
                 .foregroundColor(.white)
                 .fontWeight(.heavy)
                 .font(.custom("MontserratRoman-SemiBold", size: UIDevice.current.userInterfaceIdiom == .pad ? 36 : 18))
-                .padding(.bottom, 10)
         }
     }
 }

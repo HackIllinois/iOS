@@ -31,6 +31,7 @@ public struct Profile: Codable, APIReturnable {
         //case foodWave
         case discordTag
         case avatarUrl
+        case coins
     }
 
     public let userId: String
@@ -39,6 +40,7 @@ public struct Profile: Codable, APIReturnable {
     //public let foodWave: Int
     public let discordTag: String
     public let avatarUrl: String
+    public let coins: Int
 }
 
 public struct ProfileFavorites: Codable, APIReturnable {
