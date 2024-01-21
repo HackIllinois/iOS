@@ -162,12 +162,14 @@ struct HIProfileCardView: View {
 
     func getQRInfo() {
         guard let user = HIApplicationStateController.shared.user else { return }
-        HIAPI.UserService.getQR()
+        HIAPI.UserService.getQR(userToken: user.token)
             .onCompletion { result in
                 do {
                     let (qr, _) = try result.get()
                     DispatchQueue.main.async {
                         self.qrInfo = qr.qrInfo
+                        print("qrInfo is not empty:")
+                        print(qrInfo)
                     }
                 } catch {
                     print("An error has occurred \(error)")
