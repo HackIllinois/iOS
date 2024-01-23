@@ -103,6 +103,7 @@ extension HIEventCell {
         return height + 5
     }
     static func <- (lhs: HIEventCell, rhs: Event) {
+        print(rhs)
         lhs.favoritedButton.isActive = rhs.favorite
         var contentStackViewHeight: CGFloat = 0.0; var eventCellSpacing: CGFloat = 8.0
         var stackViewSpacing: CGFloat = 4.7; var bubbleConstant: CGFloat = 1.0

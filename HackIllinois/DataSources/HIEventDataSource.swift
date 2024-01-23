@@ -41,6 +41,7 @@ final class HIEventDataSource {
             do {
                 let (containedEvents, _) = try result.get()
                 let apiEvents = containedEvents.events
+                print(apiEvents)
                 HICoreDataController.shared.performBackgroundTask { context -> Void in
                     do {
                         // 2) Compute all the unique API locations.
@@ -121,6 +122,7 @@ final class HIEventDataSource {
                             coreDataEvent.startTime = apiEvent.startTime
                             coreDataEvent.points = Int32(apiEvent.points)
                             coreDataEvent.favorite = false
+                            coreDataEvent.mapImageURL = apiEvent.mapImageURL
                         }
 
                         apiEventsToInsert.forEach { apiEvent in
@@ -142,6 +144,7 @@ final class HIEventDataSource {
                             coreDataEvent.points = Int32(apiEvent.points)
                             coreDataEvent.favorite = false
                             coreDataEvent.isAsync = apiEvent.isAsync
+                            coreDataEvent.mapImageURL = apiEvent.mapImageURL
                         }
 
                         // 10) Save changes, call completion handler, unlock refresh
@@ -195,6 +198,7 @@ final class HIEventDataSource {
                                     coreDataEvent.startTime = apiEvent.startTime
                                     coreDataEvent.points = Int32(apiEvent.points)
                                     coreDataEvent.favorite = apiFavorites.contains(coreDataEvent.id)
+                                    coreDataEvent.mapImageURL = apiEvent.mapImageURL
                                 }
 
                                     try context.save()
