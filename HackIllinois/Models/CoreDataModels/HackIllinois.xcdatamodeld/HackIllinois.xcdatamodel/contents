@@ -18,7 +18,7 @@
         <attribute name="id" attributeType="String"/>
         <attribute name="info" attributeType="String"/>
         <attribute name="isAsync" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <attribute name="mapImageURL" optional="YES" attributeType="String"/>
+        <attribute name="mapImageUrl" optional="YES" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="points" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="sectionIdentifier" transient="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
