@@ -19,7 +19,7 @@ struct HIOnboardingView: View {
     @StateObject private var viewModel = HIOnboardingViewModel()
     var body: some View {
         ZStack {
-            Image("Login")
+            Image(getBackgroundImageName())
                 .resizable()
                 .ignoresSafeArea()
                 .zIndex(-1)
@@ -54,6 +54,14 @@ struct HIOnboardingView: View {
             }
         }
     }
+    
+    func getBackgroundImageName() -> String {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return "iPadLogin"
+        } else {
+            return "Login"
+        }
+    }
 }
 
 // MARK: - SwiftUI => LottieView
@@ -61,7 +69,7 @@ struct LottieView: UIViewRepresentable {
     @Binding var shouldDisplayAnimationOnNextAppearance: Bool
     func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView(frame: .zero)
-        let animationView = LottieAnimationView(name: "Hack_PopcornCart_Text")
+        let animationView = LottieAnimationView(name: "Hack_Mushroom_Loading")
         animationView.contentMode = .scaleAspectFit
         animationView.frame = view.frame
         animationView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
