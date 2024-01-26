@@ -40,7 +40,7 @@ class HIEventDetailViewController: HIBaseViewController {
         } else {
             view.layer.cornerRadius = 8
         }
-        view.backgroundHIColor = \.buttonDarkBlueGreen
+        view.backgroundHIColor = \.buttonPurple
         view.translatesAutoresizingMaskIntoConstraints = false
     }
     private let eventTypeLabel = HILabel(style: .eventType)
@@ -56,7 +56,7 @@ class HIEventDetailViewController: HIBaseViewController {
         } else {
             view.layer.cornerRadius = 8
         }
-        view.backgroundHIColor = \.buttonMagenta
+        view.backgroundHIColor = \.buttonBrown
         view.translatesAutoresizingMaskIntoConstraints = false
     }
     private let pointsLabel = HILabel(style: .eventType)
