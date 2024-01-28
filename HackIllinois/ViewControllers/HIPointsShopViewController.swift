@@ -52,27 +52,6 @@ extension HIPointsShopViewController {
 
 // MARK: - API
 extension HIPointsShopViewController {
-//    @objc func reloadProfile () {
-//        guard let user = HIApplicationStateController.shared.user else { return }
-//        HIAPI.ProfileService.getUserProfile()
-//        .onCompletion { [weak self] result in
-//            do {
-//                let (apiProfile, _) = try result.get()
-//                self?.profile.userId = apiProfile.userId
-//                self?.profile.displayName = apiProfile.discordTag
-//                self?.profile.points = apiProfile.points
-//                print(apiProfile.points)
-////                print("Coins: ", apiProfile.coins)
-//                //self?.profile.foodWave = apiProfile.foodWave
-//                DispatchQueue.main.async {
-//                    NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": self?.profile])                }
-//            } catch {
-//                print("Failed to reload profile with the error: \(error)")
-//            }
-//        }
-//        .authorize(with: user)
-//        .launch()
-//    }
 }
 
 // MARK: - UITableViewDelegate

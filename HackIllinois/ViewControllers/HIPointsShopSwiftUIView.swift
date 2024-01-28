@@ -70,7 +70,8 @@ struct HIPointShopSwiftUIView: View {
                                 }
                                 .onAppear {
                                     getItems()
-                                    getCoins()
+                                    getCoins{coins in
+                                             self.coins=coins}
                                 }
                             } else {
                                 VStack(spacing: 0) {
@@ -111,16 +112,13 @@ struct HIPointShopSwiftUIView: View {
             }
             .launch()
     }
-    func getCoins() {
+    func getCoins(completion: @escaping (Int) -> Void) {
         guard let user = HIApplicationStateController.shared.user else { return }
-        HIAPI.ProfileService.getUserProfile()
-        .onCompletion { [self] result in
+        HIAPI.ProfileService.getUserProfile(userToken: user.token)
+        .onCompletion { result in
             do {
                 let (apiProfile, _) = try result.get()
-                self.profile.userId = apiProfile.userId
-                self.profile.displayName = apiProfile.discordTag
-                self.profile.points = apiProfile.points
-                //self?.profile.foodWave = apiProfile.foodWave
+                completion(apiProfile.coins)
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": self.profile])
                 }
@@ -151,12 +149,13 @@ struct PointShopItemCell: View {
                     .opacity(0.4)
                 HStack {
                     Spacer()
+                        .frame(width:50)
                     //IMAGE
-                    Image("Profile0")
-                        .resizable()
-                        .frame(width: 145, height: 145)
-
+                        Image(systemName: "Profile0")
+                            .data(url: URL(string: item.imageURL)!)
+                            .frame(width: 145, height: 145)
                     Spacer()
+
                     //bubble-thing
                     VStack {
                         Text(item.name)
@@ -208,15 +207,14 @@ struct CustomTopTabBar: View {
             TabBarButton(text: "MERCH", isSelected: .constant(tabIndex == 0))
                 .onTapGesture { onButtonTapped(index: 0) }
             Spacer()
-                .frame(width: 100)
+                .frame(width: 40)
             TabBarButton(text: "RAFFLE", isSelected: .constant(tabIndex == 1))
                 .onTapGesture { onButtonTapped(index: 1) }
         }
         .frame(maxWidth: .infinity)
     }
     private func onButtonTapped(index: Int) {
-        tabIndex=index
-//        withAnimation { tabIndex = index }
+        withAnimation { tabIndex = index }
     }
 }
 
@@ -230,6 +228,12 @@ struct TabBarButton: View {
                     .fill(Color(red: 0.85, green: 0.25, blue: 0.47))
                     .frame(width: 170, height: 50)//190
                     .cornerRadius(10, corners: [.topLeft, .topRight])
+            }else{
+                Rectangle()
+                    .fill(Color(red: 0.85, green: 0.25, blue: 0.47))
+                    .frame(width: 170, height: 50)//190
+                    .cornerRadius(10, corners: [.topLeft, .topRight])
+                    .opacity(0)
             }
             Text(text)
                 .foregroundColor(.white)
@@ -251,5 +255,16 @@ struct RoundedCorner: Shape {
     func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         return Path(path.cgPath)
+    }
+}
+
+extension Image {
+    func data(url:URL) -> Self {
+            if let data = try? Data(contentsOf: url) {
+                return Image(uiImage: UIImage(data: data)!)
+                    .resizable()
+            }
+    return self
+    .resizable()
     }
 }
