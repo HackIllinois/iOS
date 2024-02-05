@@ -161,7 +161,7 @@ extension HIScheduleViewController {
         let tableView = HITableView()
         view.addSubview(tableView)
         let padConstant = (UIDevice.current.userInterfaceIdiom == .pad) ? 4.0 : 1
-        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 20 * padConstant).isActive = true
+        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 30 * padConstant).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true

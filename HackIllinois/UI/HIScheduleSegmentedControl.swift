@@ -225,7 +225,13 @@ class HIScheduleSegmentedControl: HISegmentedControl {
             // left
             if index == 0 {
                 if UIDevice.current.userInterfaceIdiom == .pad {
-                    view.leftAnchor.constraint(equalTo: self.leftAnchor, constant: viewPadding + 30).isActive = true
+                    if UIScreen.main.bounds.width >= 1024 {
+                        view.leftAnchor.constraint(equalTo: self.leftAnchor, constant: viewPadding + 70).isActive = true
+                    } else if UIScreen.main.bounds.width >= 800 {
+                        view.leftAnchor.constraint(equalTo: self.leftAnchor, constant: viewPadding + 30).isActive = true
+                    } else {
+                        view.leftAnchor.constraint(equalTo: self.leftAnchor, constant: viewPadding + 20).isActive = true
+                    }
                 } else {
                     view.leftAnchor.constraint(equalTo: self.leftAnchor, constant: viewPadding).isActive = true
                 }

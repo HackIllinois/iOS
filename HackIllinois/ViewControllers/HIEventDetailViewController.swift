@@ -234,10 +234,10 @@ extension HIEventDetailViewController {
         upperContainerView.addSubview(locationImageView)
         locationImageView.translatesAutoresizingMaskIntoConstraints = false
         locationImageView.topAnchor.constraint(equalTo: timeImageView.bottomAnchor, constant: 10).isActive = true
-        locationImageView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
+        locationImageView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: 2).isActive = true
         upperContainerView.addSubview(locationLabel)
         locationLabel.centerYAnchor.constraint(equalTo: locationImageView.centerYAnchor).isActive = true
-        locationLabel.leadingAnchor.constraint(equalTo: locationImageView.leadingAnchor, constant: 20).isActive = true
+        locationLabel.leadingAnchor.constraint(equalTo: locationImageView.leadingAnchor, constant: 18).isActive = true
     }
     func setupMap() {
         guard let event = event else { return }
@@ -253,6 +253,9 @@ extension HIEventDetailViewController {
                 if let data = data {
                     DispatchQueue.main.async {
                         self.mapView.image = UIImage(data: data)
+                        self.mapView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                        self.mapView.layer.borderColor = #colorLiteral(red: 0.9254901961, green: 0.8235294118, blue: 0.8235294118, alpha: 1)
+                        self.mapView.layer.borderWidth = 4.0
                     }
                 }
             }
