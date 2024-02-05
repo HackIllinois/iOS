@@ -33,7 +33,8 @@ public struct Roles: OptionSet, Codable {
     public static let SPONSOR = Roles(rawValue: 1 << 4)
     public static let STAFF = Roles(rawValue: 1 << 5)
     public static let ADMIN = Roles(rawValue: 1 << 6)
-    public static let allRoles = ["USER", "APPLICANT", "ATTENDEE", "MENTOR", "SPONSOR", "STAFF", "ADMIN"]
+    public static let PRO = Roles(rawValue: 1 << 7)
+    public static let allRoles = ["USER", "APPLICANT", "ATTENDEE", "MENTOR", "SPONSOR", "STAFF", "ADMIN", "PRO"]
 
     public init(rawValue: Int) {
         self.rawValue = rawValue
@@ -59,6 +60,7 @@ public struct Roles: OptionSet, Codable {
         case "SPONSOR": self = .SPONSOR
         case "STAFF": self = .STAFF
         case "ADMIN": self = .ADMIN
+        case "PRO": self = .PRO
         default:
             #if DEBUG
                 throw DecodingError.unknownOption
@@ -77,6 +79,7 @@ public struct Roles: OptionSet, Codable {
         if contains(.SPONSOR) { try container.encode("SPONSOR") }
         if contains(.STAFF) { try container.encode("STAFF") }
         if contains(.ADMIN) { try container.encode("ADMIN") }
+        if contains(.PRO) { try container.encode("PRO") }
     }
 }
 
