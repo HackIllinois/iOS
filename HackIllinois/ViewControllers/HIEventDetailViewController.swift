@@ -242,7 +242,14 @@ extension HIEventDetailViewController {
     func setupMap() {
         guard let event = event else { return }
         print(event.mapImageUrl)
-        if let mapUrl = URL(string: event.mapImageUrl) {
+        
+        // Check if the image URL ends with "svg" and replace it with "png"
+        var imageUrlString = event.mapImageUrl
+        if imageUrlString.lowercased().hasSuffix("svg") {
+            imageUrlString = imageUrlString.replacingOccurrences(of: "svg", with: "png")
+        }
+        
+        if let mapUrl = URL(string: imageUrlString) {
             let session = URLSession.shared
             self.mapView.image = nil
             let task = session.dataTask(with: mapUrl) { (data, response, error) in
@@ -267,7 +274,8 @@ extension HIEventDetailViewController {
         mapView.leadingAnchor.constraint(equalTo: eventDetailContainer.leadingAnchor).isActive = true
         mapView.trailingAnchor.constraint(equalTo: eventDetailContainer.trailingAnchor).isActive = true
         mapView.topAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: 15).isActive = true
-        mapView.constrain(height: 300)
+        let mapHeight: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 500 : 300
+        mapView.constrain(height: mapHeight)
         mapView.layer.cornerRadius = 20
     }
     func setupCloseButton() {

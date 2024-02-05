@@ -13,6 +13,7 @@
 import Foundation
 import UIKit
 import CoreData
+import HIAPI
 
 class HIScheduleViewController: HIEventListViewController {
     // MARK: - Properties
@@ -37,7 +38,7 @@ class HIScheduleViewController: HIEventListViewController {
 
         return fetchedResultsController
     }()
-
+    
     private var currentTab = 0
     private var onlyFavorites = false
     private let onlyFavoritesPredicate = NSPredicate(format: "favorite == YES" )
@@ -222,9 +223,8 @@ extension HIScheduleViewController {
     @objc func scheduleButtonTapped(_ sender: UIButton) {
         print("Schedule button tapped")
         //onlyShifts = !onlyShifts
-        updatePredicate()
-        animateReload()
     }
+
 
     @objc func shiftsButtonTapped(_ sender: UIButton) {
         print("Shifts button tapped")
