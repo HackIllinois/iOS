@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "iPad Pro 11_ - 1.png",
+      "filename" : "Home.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "iPad Pro 11_ - 1@2x.png",
+      "filename" : "Home2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "iPad Pro 11_ - 1@3x.png",
+      "filename" : "Home3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
