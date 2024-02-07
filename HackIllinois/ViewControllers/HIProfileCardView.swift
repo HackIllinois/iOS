@@ -15,6 +15,23 @@ import URLImage
 import HIAPI
 
 // Loads url data and converts into image
+//extension String {
+//    func loadImage(completion: @escaping (UIImage?) -> Void) {
+//            guard let url = URL(string: self) else {
+//                completion(nil)
+//                return
+//            }
+//
+//            URLSession.shared.dataTask(with: url) { data, _, error in
+//                if let data = data, let image = UIImage(data: data) {
+//                    completion(image)
+//                } else {
+//                    completion(nil)
+//                }
+//            }.resume()
+//        }
+//}
+
 extension String {
     func load() -> UIImage {
         do {
@@ -29,6 +46,7 @@ extension String {
 }
 
 struct HIProfileCardView: View {
+    @State private var rank: Int = 0
     let displayName: String
     let points: Int
     let tier: String
@@ -60,7 +78,15 @@ struct HIProfileCardView: View {
                                     .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 20)))
                                 HStack(alignment: .bottom, spacing: 5) {
                                     Image("RankSymbol")
-                                    Text("25").foregroundColor(.white).font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 20)))
+                                    Text("Rank: \(rank)")
+                                                    .foregroundColor(.white)
+                                                    .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 20)))
+                                                    .onAppear {
+                                                        // Call getRank and update the rank when it's available
+                                                        getRank { retrievedRank in
+                                                            self.rank = retrievedRank
+                                                        }
+                                                    }
                                 }
                             }.padding(.bottom, isIpad ? 40 : 25)
                         }.alignmentGuide(.bottom) {dimensions in dimensions[.bottom] / 1.2 }
@@ -168,8 +194,6 @@ struct HIProfileCardView: View {
                     let (qr, _) = try result.get()
                     DispatchQueue.main.async {
                         self.qrInfo = qr.qrInfo
-                        print("qrInfo is not empty:")
-                        print(qrInfo)
                     }
                 } catch {
                     print("An error has occurred \(error)")
@@ -178,6 +202,28 @@ struct HIProfileCardView: View {
             .authorize(with: user)
             .launch()
     }
+    
+    func getRank(completion: @escaping (Int) -> Void) {
+        guard let user = HIApplicationStateController.shared.user else {
+            completion(0)
+            return
+        }
+
+        var rank = 0
+
+        HIAPI.ProfileService.getUserRanking(userToken: user.token)
+            .onCompletion { result in
+                do {
+                    let (userRanking, _) = try result.get()
+                    rank = userRanking.ranking
+                    completion(rank)
+                } catch {
+                    print("An error has occurred in ranking \(error)")
+                    completion(0)
+                }
+            }
+    }
+
 }
 
 struct HIProfileCardView_Previews: PreviewProvider {
@@ -186,8 +232,7 @@ struct HIProfileCardView_Previews: PreviewProvider {
                           points: 100,
                           tier: "Pro",
                           foodWave: 1,
-                          avatarUrl: "https://raw.githubusercontent.com/HackIllinois/adonix-metadata/main/avatars/fishercat.png",
-                          userId: "https://www.hackillinois.org"
+                          avatarUrl: "https://raw.githubusercontent.com/HackIllinois/adonix-metadata/main/avatars/fishercat.png",                          userId: "https://www.hackillinois.org"
         )
     }
 }

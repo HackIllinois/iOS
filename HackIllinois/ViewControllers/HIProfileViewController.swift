@@ -39,6 +39,7 @@ class HIProfileViewController: HIBaseViewController {
         backgroundView.image = #imageLiteral(resourceName: "PurpleBackground")
     }
     private var tiers: [Tier] = []
+    private var ranking: Int = 0
 }
 
 // MARK: - UITabBarItem Setup
@@ -73,6 +74,20 @@ extension HIProfileViewController {
             view.willRemoveSubview(profileCardController!.view)
             profileCardController?.removeFromParent()
         }
+        var rank: Int = 0
+//        guard let user = HIApplicationStateController.shared.user else { return }
+//        HIAPI.ProfileService.getUserRanking(userToken: user.token)
+//            .onCompletion { [weak self] result in
+//                do {
+//                    let (userRanking, _) = try result.get()
+//                    self?.ranking = userRanking.ranking
+//                    rank = userRanking.ranking
+//                } catch {
+//                    print("An error has occurred in ranking \(error)")
+//                }
+//            }
+//            .launch()
+//        print("rank \(rank)")
         profileCardController = UIHostingController(rootView: HIProfileCardView(displayName: profile.displayName,
                                                                                 points: profile.points,
                                                                                 tier: profileTier,
@@ -158,11 +173,11 @@ extension HIProfileViewController {
         .onCompletion { [weak self] result in
             do {
                 let (apiProfile, _) = try result.get()
+                print(apiProfile)
                 self?.profile.userId = apiProfile.userId
                 self?.profile.displayName = apiProfile.discordTag
                 self?.profile.points = apiProfile.points
                 self?.profile.avatarUrl = apiProfile.avatarUrl
-                print(apiProfile.avatarUrl)
                 //self?.profile.foodWave = apiProfile.foodWave
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": self?.profile])
@@ -184,6 +199,20 @@ extension HIProfileViewController {
                     }
                 } catch {
                     print("An error has occurred \(error)")
+                }
+            }
+            .launch()
+        HIAPI.ProfileService.getUserRanking(userToken: user.token)
+            .onCompletion { [weak self] result in
+                do {
+                    let (userRanking, _) = try result.get()
+                    self?.ranking = userRanking.ranking
+                    print(userRanking.ranking)
+                    DispatchQueue.main.async {
+                        self?.updateProfile()
+                    }
+                } catch {
+                    print("An error has occurred in ranking \(error)")
                 }
             }
             .launch()
