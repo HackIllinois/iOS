@@ -15,8 +15,10 @@ struct HIPointShopSwiftUIView: View {
     @State private var profile = HIProfile()
     @State var coins = 0
     @State var tabIndex = 0
+    let isIpad = UIDevice.current.userInterfaceIdiom == .pad
+
     var body: some View {
-        NavigationView{
+      //  NavigationStack{
 
         ZStack {
             Image("PurpleBackground")
@@ -42,16 +44,14 @@ struct HIPointShopSwiftUIView: View {
                         .cornerRadius(1000)
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .offset(y: -35)
-                        
-                        
-                        
-
+    
                         Spacer()
-
                     }
                     Image("KnickKnacks")
                         .resizable()
-                        .frame(width: 370, height: 120)
+                        .frame(width: isIpad ? 590 : 370, height:isIpad ? 191 :  120)
+                    Spacer()
+                        .frame(height:50)
                     VStack(spacing: 0) {
                         CustomTopTabBar(tabIndex: $tabIndex)
                         ScrollView(showsIndicators: false) {
@@ -64,7 +64,7 @@ struct HIPointShopSwiftUIView: View {
                                     }
                                     Rectangle()
                                         .foregroundColor(.clear)
-                                        .frame(width: 410, height: 10)
+                                        .frame(width: isIpad ? 600 : 380, height: 10)
                                         .background(Color(red: 0.4, green: 0.17, blue: 0.07))
                                         .cornerRadius(1)
                                 }
@@ -82,7 +82,7 @@ struct HIPointShopSwiftUIView: View {
                                     }
                                     Rectangle()
                                         .foregroundColor(.clear)
-                                        .frame(width: 410, height: 10)
+                                        .frame(width: isIpad ? 600 : 380, height: 10)
                                         .background(Color(red: 0.4, green: 0.17, blue: 0.07))
                                         .cornerRadius(1)
                                 }
@@ -94,7 +94,7 @@ struct HIPointShopSwiftUIView: View {
                     }
                 }
             }
-        }
+        //}
     }
     func getItems() {
         HIAPI.ShopService.getAllItems()
@@ -133,40 +133,47 @@ struct HIPointShopSwiftUIView: View {
 
 struct PointShopItemCell: View {
     let item: Item
+    let isIpad = UIDevice.current.userInterfaceIdiom == .pad
     var body: some View {
         VStack(spacing: 0) {
             //brown bar
             Rectangle()
                 .foregroundColor(.clear)
-                .frame(width: 380, height: 10)//TODO: Change width
+                .frame(width: isIpad ? 600 : 380, height: 10)//TODO: Change width
                 .background(Color(red: 0.4, green: 0.17, blue: 0.07))
                 .cornerRadius(1)
             //transparent pane
             ZStack {
                 Rectangle()
                     .fill(.white)
-                    .frame(width: 370, height: 157)//TODO: Change width
+                    .frame(width: isIpad ? 590 : 370, height: 157)//TODO: Change width
                     .opacity(0.4)
                 HStack {
                     Spacer()
-                        .frame(width:50)
+                        .frame(width:isIpad ? 120 : 50)
                     //IMAGE
                         Image(systemName: "Profile0")
                             .data(url: URL(string: item.imageURL)!)
+                            .resizable()
+                            .scaledToFit()
                             .frame(width: 145, height: 145)
                     Spacer()
 
                     //bubble-thing
                     VStack {
-                        Text(item.name)
-                            .font(
-                                Font.custom("Montserrat", size: 16)
-                                    .weight(.semibold)
-                            )
-                            .foregroundColor(Color(red: 0.05, green: 0.25, blue: 0.25))
-//                            .frame(width: 130, height: 24)
-                            .multilineTextAlignment(.center)
-                            .lineLimit(nil)
+                        HStack{
+                            Text(item.name)
+                                .font(
+                                    Font.custom("Montserrat", size: 16)
+                                        .weight(.semibold)
+                                )
+                                .foregroundColor(Color(red: 0.05, green: 0.25, blue: 0.25))
+                            //                            .frame(width: 130, height: 24)
+                                .multilineTextAlignment(.center)
+                                .lineLimit(nil)
+                            Spacer()
+                                .frame(width:20)
+                        }
 
                         HStack(alignment: .center, spacing: 7) {
                             Image("Coin")
@@ -186,6 +193,8 @@ struct PointShopItemCell: View {
                                         .foregroundColor(.white)
                                 }
                             }
+//                            Spacer()
+//                                .frame(width:20)
 
                         }
                         .padding(.horizontal, 11)
@@ -202,12 +211,14 @@ struct PointShopItemCell: View {
 
 struct CustomTopTabBar: View {
     @Binding var tabIndex: Int
+    let isIpad = UIDevice.current.userInterfaceIdiom == .pad
+
     var body: some View {
         HStack {
             TabBarButton(text: "MERCH", isSelected: .constant(tabIndex == 0))
                 .onTapGesture { onButtonTapped(index: 0) }
             Spacer()
-                .frame(width: 40)
+                .frame(width: isIpad ? 100: 40)
             TabBarButton(text: "RAFFLE", isSelected: .constant(tabIndex == 1))
                 .onTapGesture { onButtonTapped(index: 1) }
         }
@@ -221,17 +232,18 @@ struct CustomTopTabBar: View {
 struct TabBarButton: View {
     let text: String
     @Binding var isSelected: Bool
+    let isIpad = UIDevice.current.userInterfaceIdiom == .pad
     var body: some View {
         ZStack(alignment: .center) {
             if isSelected {
                 Rectangle()
                     .fill(Color(red: 0.85, green: 0.25, blue: 0.47))
-                    .frame(width: 170, height: 50)//190
+                    .frame(width:  isIpad ? 250: 170, height: isIpad ? 90: 50)//190
                     .cornerRadius(10, corners: [.topLeft, .topRight])
             }else{
                 Rectangle()
                     .fill(Color(red: 0.85, green: 0.25, blue: 0.47))
-                    .frame(width: 170, height: 50)//190
+                    .frame(width:  isIpad ? 250: 170, height: isIpad ? 90: 50)//190
                     .cornerRadius(10, corners: [.topLeft, .topRight])
                     .opacity(0)
             }
