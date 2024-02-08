@@ -56,6 +56,7 @@ struct HIProfileCardView: View {
     let baseText = (\HIAppearance.profileBaseText).value
     let userId: String
     let isIpad = UIDevice.current.userInterfaceIdiom == .pad
+    let role: String
     @State var startFetchingQR = false
     @State var qrInfo = ""
 
@@ -108,7 +109,7 @@ struct HIProfileCardView: View {
                             .cornerRadius(isIpad ? 40 : 20)
                             .foregroundColor(Color(red: 226/255, green: 142/255, blue: 174/255))
                             .overlay(
-                                Text(tier)
+                                Text(role)
                                     .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 12)))
                                     .foregroundColor(Color(red: 1, green: 248/255, blue: 245/255))
                             )
@@ -232,7 +233,7 @@ struct HIProfileCardView_Previews: PreviewProvider {
                           points: 100,
                           tier: "Pro",
                           foodWave: 1,
-                          avatarUrl: "https://raw.githubusercontent.com/HackIllinois/adonix-metadata/main/avatars/fishercat.png",                          userId: "https://www.hackillinois.org"
+                          avatarUrl: "https://raw.githubusercontent.com/HackIllinois/adonix-metadata/main/avatars/fishercat.png",                          userId: "https://www.hackillinois.org", role: "Pro"
         )
     }
 }

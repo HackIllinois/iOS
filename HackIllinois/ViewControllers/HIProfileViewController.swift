@@ -40,6 +40,7 @@ class HIProfileViewController: HIBaseViewController {
     }
     private var tiers: [Tier] = []
     private var ranking: Int = 0
+    private var role: String = ""
 }
 
 // MARK: - UITabBarItem Setup
@@ -74,7 +75,7 @@ extension HIProfileViewController {
             view.willRemoveSubview(profileCardController!.view)
             profileCardController?.removeFromParent()
         }
-        var rank: Int = 0
+//        var rank: Int = 0
 //        guard let user = HIApplicationStateController.shared.user else { return }
 //        HIAPI.ProfileService.getUserRanking(userToken: user.token)
 //            .onCompletion { [weak self] result in
@@ -88,12 +89,19 @@ extension HIProfileViewController {
 //            }
 //            .launch()
 //        print("rank \(rank)")
+        guard let user = HIApplicationStateController.shared.user else { return }
+        var role = "General"
+        print(user.roles)
+        if user.roles.contains(.PRO) {
+            role = "Knight"
+        }
         profileCardController = UIHostingController(rootView: HIProfileCardView(displayName: profile.displayName,
                                                                                 points: profile.points,
                                                                                 tier: profileTier,
                                                                                 foodWave: 1,
                                                                                 avatarUrl: profile.avatarUrl,
-                                                                                userId: profile.userId
+                                                                                userId: profile.userId,
+                                                                                role: role
                                                                                ))
 
         addChild(profileCardController!)
