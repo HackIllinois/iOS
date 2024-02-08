@@ -79,14 +79,15 @@ struct HIProfileCardView: View {
                                     .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 20)))
                                 HStack(alignment: .bottom, spacing: 5) {
                                     Image("RankSymbol")
-                                    Text("Rank: \(rank)")
+                                    Text("Rank: \(rank != 0 ? "\(rank)" : "")")
                                                     .foregroundColor(.white)
                                                     .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 20)))
                                                     .onAppear {
                                                         // Call getRank and update the rank when it's available
-                                                        getRank { retrievedRank in
-                                                            self.rank = retrievedRank
+                                                        getRank { rank in
+                                                            self.rank = rank
                                                         }
+                                                        print(rank)
                                                     }
                                 }
                             }.padding(.bottom, isIpad ? 40 : 25)
@@ -205,24 +206,23 @@ struct HIProfileCardView: View {
     }
     
     func getRank(completion: @escaping (Int) -> Void) {
-        guard let user = HIApplicationStateController.shared.user else {
-            completion(0)
-            return
-        }
+        guard let user = HIApplicationStateController.shared.user else { return }
 
         var rank = 0
-
+        print("HELLO???????????????")
         HIAPI.ProfileService.getUserRanking(userToken: user.token)
             .onCompletion { result in
                 do {
                     let (userRanking, _) = try result.get()
                     rank = userRanking.ranking
+                    print("rank:", rank)
                     completion(rank)
                 } catch {
                     print("An error has occurred in ranking \(error)")
-                    completion(0)
                 }
             }
+            .authorize(with: user)
+            .launch()
     }
 
 }
@@ -233,7 +233,7 @@ struct HIProfileCardView_Previews: PreviewProvider {
                           points: 100,
                           tier: "Pro",
                           foodWave: 1,
-                          avatarUrl: "https://raw.githubusercontent.com/HackIllinois/adonix-metadata/main/avatars/fishercat.png",                          userId: "https://www.hackillinois.org", role: "Pro"
+                          avatarUrl: "https://raw.githubusercontent.com/HackIllinois/adonix-metadata/main/avatars/fishercat.png", userId: "https://www.hackillinois.org", role: "Pro"
         )
     }
 }
