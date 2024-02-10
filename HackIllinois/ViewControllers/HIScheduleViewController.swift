@@ -17,6 +17,8 @@ import HIAPI
 
 class HIScheduleViewController: HIEventListViewController {
     // MARK: - Properties
+    var staffShifts: [Staff] = []
+    
     lazy var fetchedResultsController: NSFetchedResultsController<Event> = {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
 
@@ -69,8 +71,7 @@ class HIScheduleViewController: HIEventListViewController {
     }()
     
     // Staff shifts functionality
-    //private var onlyShifts = false
-    //private let onlyShiftsPredicate = NSPredicate(format: "shift == YES")
+    private var onlyShifts = false
 
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
@@ -113,10 +114,10 @@ extension HIScheduleViewController {
         if onlyFavorites {
             let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [currentTabPredicate, onlyFavoritesPredicate])
             return compoundPredicate
-        } /*else if onlyShifts {
-            let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [currentTabPredicate, onlyShiftsPredicate])
-                    return compoundPredicate
-        }*/ else {
+        } else if onlyShifts {
+            let noEventsPredicate = NSPredicate(value: false)
+            return noEventsPredicate
+        } else {
             return currentTabPredicate
         }
     }
@@ -192,7 +193,8 @@ extension HIScheduleViewController {
 // MARK: - Staff Shifts Control Setup
 extension HIScheduleViewController {
     @objc func setStaffShiftsControl() {
-        let customFont = UIFont(name: "MontserratRoman-Bold", size: 24)
+        let customFontSize = UIDevice.current.userInterfaceIdiom == .pad ? 44 : 24
+        let customFont = UIFont(name: "MontserratRoman-Bold", size: CGFloat(customFontSize))
 
         // Create flexible space items to add space to the left
         let flexibleSpaceLeft1 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -221,16 +223,37 @@ extension HIScheduleViewController {
 
     // Actions for left and right buttons
     @objc func scheduleButtonTapped(_ sender: UIButton) {
-        print("Schedule button tapped")
-        //onlyShifts = !onlyShifts
+        if onlyShifts {
+            onlyShifts = false
+            updatePredicate()
+            animateReload()
+        }
     }
 
 
     @objc func shiftsButtonTapped(_ sender: UIButton) {
-        print("Shifts button tapped")
-        //onlyShifts = !onlyShifts
-        updatePredicate()
-        animateReload()
+        if !onlyShifts {
+            onlyShifts = !onlyShifts
+
+            guard let user = HIApplicationStateController.shared.user else { return }
+
+            HIAPI.StaffService.getStaffShift(userToken: user.token)
+                .onCompletion { result in
+                    do {
+                        let (staffShifts, _) = try result.get()
+                        self.staffShifts = staffShifts.shifts
+                        print("Staff shifts: ", self.staffShifts)
+
+                        DispatchQueue.main.async {
+                            self.updatePredicate()
+                            self.animateReload()
+                        }
+                    } catch {
+                        print("An error has occurred in getting staff shifts \(error)")
+                    }
+                }
+                .launch()
+        }
     }
 }
 

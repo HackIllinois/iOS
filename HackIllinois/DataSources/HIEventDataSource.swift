@@ -41,7 +41,6 @@ final class HIEventDataSource {
             do {
                 let (containedEvents, _) = try result.get()
                 let apiEvents = containedEvents.events
-                print(apiEvents)
                 HICoreDataController.shared.performBackgroundTask { context -> Void in
                     do {
                         // 2) Compute all the unique API locations.

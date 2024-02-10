@@ -274,7 +274,7 @@ extension HIEventDetailViewController {
         mapView.leadingAnchor.constraint(equalTo: eventDetailContainer.leadingAnchor).isActive = true
         mapView.trailingAnchor.constraint(equalTo: eventDetailContainer.trailingAnchor).isActive = true
         mapView.topAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: 15).isActive = true
-        let mapHeight: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 500 : 300
+        let mapHeight: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 450 : 250
         mapView.constrain(height: mapHeight)
         mapView.layer.cornerRadius = 20
     }
