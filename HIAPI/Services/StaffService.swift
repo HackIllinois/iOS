@@ -1,28 +1,34 @@
 //
-//  EventService.swift
-//  HackIllinois
+//  StaffService.swift
+//  HIAPI
 //
-//  Created by HackIllinois Team on 2/04/24.
+//  Created by Dev Patel on 2/7/24.
 //  Copyright © 2024 HackIllinois. All rights reserved.
-//  This file is part of the Hackillinois iOS App.
-//  The Hackillinois iOS App is open source software, released under the University of
-//  Illinois/NCSA Open Source License. You should have received a copy of
-//  this license in a file with the distribution.
 //
 
 import Foundation
 import APIManager
 
-public class StaffService: BaseService {
-    
-    public override class var baseURL: String {
-        return super.baseURL
+public final class StaffService: BaseService {
+    public override static var baseURL: String {
+        return super.baseURL + "staff/"
+    }
+
+    public static func getStaffShift(userToken: String) -> APIRequest<StaffContainer> {
+        var headers = HTTPHeaders()
+        headers["Authorization"] = userToken
+        return APIRequest<StaffContainer>(service: self, endpoint: "shift/", headers: headers, method: .GET)
     }
     
-    public static func getStaffShifts(authToken: String) -> APIRequest<ShiftContainer> {
-        var header = HTTPHeaders()
-        header["Authorization"] = authToken
-        return APIRequest<ShiftContainer>(service: self, endpoint: "staff/shift/", method: .GET)
+    public static func recordStaffAttendance(userToken: String) -> APIRequest<StaffAttendanceContainer> {
+        var headers = HTTPHeaders()
+        headers["Authorization"] = userToken
+        return APIRequest<StaffAttendanceContainer>(service: self, endpoint: "attendance/", headers: headers, method: .POST)
     }
     
+    public static func recordUserAttendance(userToken: String) -> APIRequest<UserAttendanceContainer> {
+        var headers = HTTPHeaders()
+        headers["Authorization"] = userToken
+        return APIRequest<UserAttendanceContainer>(service: self, endpoint: "scan-attendee/", headers: headers, method: .PUT)
+    }
 }

@@ -1,29 +1,22 @@
 //
-//  Event.swift
-//  HackIllinois
+//  Staff.swift
+//  HIAPI
 //
-//  Created by HackIllinois Team on 2/04/24.
+//  Created by Dev Patel on 2/7/24.
 //  Copyright © 2024 HackIllinois. All rights reserved.
-//  This file is part of the Hackillinois iOS App.
-//  The Hackillinois iOS App is open source software, released under the University of
-//  Illinois/NCSA Open Source License. You should have received a copy of
-//  this license in a file with the distribution.
 //
-
 import Foundation
 import APIManager
 
-public struct ShiftContainer: Decodable, APIReturnable {
-    public let shifts: [Shift]
-
-    public init(from data: Data) throws {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .secondsSince1970
-        self = try decoder.decode(ShiftContainer.self, from: data)
-    }
+public struct StaffContainer: Decodable, APIReturnable {
+    public let shifts: [Staff]
+//    public init(from decoder: Decoder) throws {
+//        let container = try decoder.singleValueContainer()
+//        self.items = try container.decode([Staff].self)
+//    }
 }
 
-public struct Shift: Codable {
+public struct Staff: Codable {
     internal enum CodingKeys: String, CodingKey {
         case isPro
         case eventId
@@ -41,32 +34,33 @@ public struct Shift: Codable {
         case isPrivate
         case displayOnStaffCheckIn
     }
-
-    public let isPro: Bool
+    public let isPro: String
     public let eventId: String
-    public let isStaff: String
-    public let name: String
+    public let isStaff: Bool
+    public let name: Int
     public let description: String
-    public let startTime: Int
-    public let endTime: Int
+    public let startTime: Date
+    public let endTime: Date
     public let eventType: String
     public let exp: Int
-    public let locations: [ShiftLocation]
+    public let locations: [Location]
     public let isAsync: Bool
-    public let mapImageUrl: String?
-    public let points: String?
+    public let mapImageUrl: String
+    public let points: Int
     public let isPrivate: Bool
     public let displayOnStaffCheckIn: Bool
+
+
 }
 
-public struct ShiftLocation: Codable {
+public struct UserAttendanceContainer: Codable, APIReturnable {
     internal enum CodingKeys: String, CodingKey {
-        case latitude
-        case longitude
-        case name = "description"
-    }
-
-    public let latitude: Double
-    public let longitude: Double
-    public let name: String
+            case sucess
+        }
+        public let sucess: Bool
 }
+
+public struct StaffAttendanceContainer: Codable, APIReturnable {
+
+}
+
