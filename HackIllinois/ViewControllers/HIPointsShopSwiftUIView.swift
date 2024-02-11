@@ -31,10 +31,10 @@ struct HIPointShopSwiftUIView: View {
                         HStack(alignment: .center, spacing: 7) {
                             Image("Coin")
                                 .resizable()
-                                .frame(width: 25, height: 25)
+                                .frame(width: isIpad ? 40 : 25, height:isIpad ? 40 : 25)
                             
                             Text("\(coins)")
-                                .font(Font.custom("Montserrat", size: 16).weight(.bold))
+                                .font(Font.custom("Montserrat", size: isIpad ? 26 : 16).weight(.bold))
                                 .foregroundColor(.white)
 
                         }
@@ -178,7 +178,7 @@ struct PointShopItemCell: View {
                         HStack(alignment: .center, spacing: 7) {
                             Image("Coin")
                                 .resizable()
-                                .frame(width: 25, height: 25)
+                                .frame(width:25, height: 25)
                             if(item.isRaffle) {
                                 Text("\(item.price)")
                                     .font(Font.custom("Montserrat", size: 16).weight(.bold))
