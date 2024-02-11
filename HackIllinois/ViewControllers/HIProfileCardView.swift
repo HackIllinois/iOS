@@ -58,10 +58,29 @@ struct HIProfileCardView: View {
     let isIpad = UIDevice.current.userInterfaceIdiom == .pad
     let role: String
     @State var startFetchingQR = false
-    @State var qrInfo = ""
+    @State var qrInfo = "hackillinois://user?userToken=111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
 //    Factors used to change frame to alter based on device
     let padFactor = UIScreen.main.bounds.height/1366
     let phoneFactor = UIScreen.main.bounds.height/844
+    
+    func getRank(completion: @escaping (Int) -> Void) {
+        guard let user = HIApplicationStateController.shared.user else { return }
+
+        var rank = 0
+        HIAPI.ProfileService.getUserRanking(userToken: user.token)
+            .onCompletion { result in
+                do {
+                    let (userRanking, _) = try result.get()
+                    rank = userRanking.ranking
+                    print("rank:", rank)
+                    completion(rank)
+                } catch {
+                    print("An error has occurred in ranking \(error)")
+                }
+            }
+            .authorize(with: user)
+            .launch()
+    }
 
     var body: some View {
         ScrollView {
@@ -197,31 +216,12 @@ struct HIProfileCardView: View {
             .onCompletion { result in
                 do {
                     let (qr, _) = try result.get()
+                    print("qrInfo ", qr.qrInfo)
                     DispatchQueue.main.async {
                         self.qrInfo = qr.qrInfo
                     }
                 } catch {
                     print("An error has occurred \(error)")
-                }
-            }
-            .authorize(with: user)
-            .launch()
-    }
-    
-    func getRank(completion: @escaping (Int) -> Void) {
-        guard let user = HIApplicationStateController.shared.user else { return }
-
-        var rank = 0
-        print("HELLO???????????????")
-        HIAPI.ProfileService.getUserRanking(userToken: user.token)
-            .onCompletion { result in
-                do {
-                    let (userRanking, _) = try result.get()
-                    rank = userRanking.ranking
-                    print("rank:", rank)
-                    completion(rank)
-                } catch {
-                    print("An error has occurred in ranking \(error)")
                 }
             }
             .authorize(with: user)

@@ -75,26 +75,27 @@ extension HIProfileViewController {
             view.willRemoveSubview(profileCardController!.view)
             profileCardController?.removeFromParent()
         }
-//        var rank: Int = 0
-//        guard let user = HIApplicationStateController.shared.user else { return }
-//        HIAPI.ProfileService.getUserRanking(userToken: user.token)
-//            .onCompletion { [weak self] result in
-//                do {
-//                    let (userRanking, _) = try result.get()
-//                    self?.ranking = userRanking.ranking
-//                    rank = userRanking.ranking
-//                } catch {
-//                    print("An error has occurred in ranking \(error)")
-//                }
-//            }
-//            .launch()
-//        print("rank \(rank)")
         guard let user = HIApplicationStateController.shared.user else { return }
         var role = "General"
         print(user.roles)
         if user.roles.contains(.PRO) {
             role = "Knight"
         }
+//        guard let user = HIApplicationStateController.shared.user else { return }
+//
+//        var rank = 0
+//        HIAPI.ProfileService.getUserRanking(userToken: user.token)
+//            .onCompletion { result in
+//                do {
+//                    let (userRanking, _) = try result.get()
+//                    rank = userRanking.ranking
+//                    print("rank:", rank)
+//                } catch {
+//                    print("An error has occurred in ranking \(error)")
+//                }
+//            }
+//            .authorize(with: user)
+//            .launch()
         profileCardController = UIHostingController(rootView: HIProfileCardView(displayName: profile.displayName,
                                                                                 points: profile.points,
                                                                                 tier: profileTier,
