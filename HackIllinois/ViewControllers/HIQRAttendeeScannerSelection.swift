@@ -198,7 +198,7 @@ extension HIQRAttendeeScannerSelection {
 
 extension HIQRAttendeeScannerSelection {
     @objc func didSelectMentorCheckInButton(_ sender: HIButton) {
-        let scanQRCodePopup = HIScanQRCodeViewController()
+        let scanQRCodePopup = HIScanMentorViewController()
         scanQRCodePopup.modalPresentationStyle = .overFullScreen
         scanQRCodePopup.modalTransitionStyle = .crossDissolve
         self.present(scanQRCodePopup, animated: true, completion: nil)

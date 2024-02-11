@@ -139,6 +139,7 @@
 		D158EC332B5A2DFE0003D799 /* HIScanPointsShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D158EC322B5A2DFE0003D799 /* HIScanPointsShopViewController.swift */; };
 		D187BF5A2B78317600AD7356 /* Mentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D187BF592B78317600AD7356 /* Mentor.swift */; };
 		D187BF5C2B78318000AD7356 /* MentorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D187BF5B2B78318000AD7356 /* MentorService.swift */; };
+		D19D4C932B794F9100376E1B /* HIScanMentorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19D4C922B794F9100376E1B /* HIScanMentorViewController.swift */; };
 		D1BE81172AC8FC680042C078 /* HIAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95E3142A21FAD5B30092C22E /* HIAPI.framework */; };
 		D1BE81182AC8FC690042C078 /* HIAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 95E3142A21FAD5B30092C22E /* HIAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D1C5B6582B732E44000E766D /* refresh.json in Resources */ = {isa = PBXBuildFile; fileRef = D1C5B6572B732E44000E766D /* refresh.json */; };
@@ -351,6 +352,7 @@
 		D158EC322B5A2DFE0003D799 /* HIScanPointsShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScanPointsShopViewController.swift; sourceTree = "<group>"; };
 		D187BF592B78317600AD7356 /* Mentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mentor.swift; sourceTree = "<group>"; };
 		D187BF5B2B78318000AD7356 /* MentorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentorService.swift; sourceTree = "<group>"; };
+		D19D4C922B794F9100376E1B /* HIScanMentorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScanMentorViewController.swift; sourceTree = "<group>"; };
 		D1C5B6572B732E44000E766D /* refresh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = refresh.json; sourceTree = "<group>"; };
 		D1F146392B605C57004E7FC9 /* Hack_Mushroom_Loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Hack_Mushroom_Loading.json; sourceTree = "<group>"; };
 		D3A309BA221116A600CBA351 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };
@@ -595,6 +597,7 @@
 				D12B40FE2AC0B0BD001BCB05 /* HIScanAttendanceViewController.swift */,
 				E1BF5E79298B462F00A98390 /* HIStaffButtonView.swift */,
 				D158EC322B5A2DFE0003D799 /* HIScanPointsShopViewController.swift */,
+				D19D4C922B794F9100376E1B /* HIScanMentorViewController.swift */,
 				D128F2942ABFF93B0016D8CB /* HIQRScannerSelection.swift */,
 				1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */,
 				3FBFA7AA27335554001FFF28 /* HILeaderboardListViewController.swift */,
@@ -1054,6 +1057,7 @@
 				95838AC921FDCB5C00BD8F71 /* Location+CoreDataProperties.swift in Sources */,
 				95838ACA21FDCB5C00BD8F71 /* Location+CoreDataClass.swift in Sources */,
 				9521A6AA20191737009059C6 /* HIAnnouncementDataSource.swift in Sources */,
+				D19D4C932B794F9100376E1B /* HIScanMentorViewController.swift in Sources */,
 				95C18DCB20096539004784B5 /* HIScheduleViewController.swift in Sources */,
 				ACCB199D25F56DF100F88379 /* HIInterestCell.swift in Sources */,
 				95CCEA1F203D6B3600E3E28C /* HINavigationController.swift in Sources */,

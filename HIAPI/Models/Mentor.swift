@@ -14,5 +14,5 @@ import Foundation
 import APIManager
 
 public struct MentorAttendanceContainer: Codable, APIReturnable {
-    public let status: String
+    public let status: String?
 }
