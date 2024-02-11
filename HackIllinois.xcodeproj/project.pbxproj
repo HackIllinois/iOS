@@ -135,6 +135,9 @@
 		D12B40FF2AC0B0BD001BCB05 /* HIScanAttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12B40FE2AC0B0BD001BCB05 /* HIScanAttendanceViewController.swift */; };
 		D134D30F296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D134D30E296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf */; };
 		D14D3AE3295FBDA200EB7995 /* HIBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */; };
+		D187BF582B781A1100AD7356 /* HIShiftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D187BF572B781A1100AD7356 /* HIShiftCell.swift */; };
+		D1BBA5682B70AB940017BD13 /* Staff.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BBA5672B70AB940017BD13 /* Staff.swift */; };
+		D1BBA56A2B70ACCC0017BD13 /* StaffService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BBA5692B70ACCC0017BD13 /* StaffService.swift */; };
 		D187BF5A2B78317600AD7356 /* Mentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D187BF592B78317600AD7356 /* Mentor.swift */; };
 		D187BF5C2B78318000AD7356 /* MentorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D187BF5B2B78318000AD7356 /* MentorService.swift */; };
 		D1BE81172AC8FC680042C078 /* HIAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95E3142A21FAD5B30092C22E /* HIAPI.framework */; };
@@ -345,6 +348,9 @@
 		D12B40FE2AC0B0BD001BCB05 /* HIScanAttendanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScanAttendanceViewController.swift; sourceTree = "<group>"; };
 		D134D30E296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIBannerViewController.swift; sourceTree = "<group>"; };
+		D187BF572B781A1100AD7356 /* HIShiftCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIShiftCell.swift; sourceTree = "<group>"; };
+		D1BBA5672B70AB940017BD13 /* Staff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Staff.swift; sourceTree = "<group>"; };
+		D1BBA5692B70ACCC0017BD13 /* StaffService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffService.swift; sourceTree = "<group>"; };
 		D187BF592B78317600AD7356 /* Mentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mentor.swift; sourceTree = "<group>"; };
 		D187BF5B2B78318000AD7356 /* MentorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentorService.swift; sourceTree = "<group>"; };
 		D1C5B6572B732E44000E766D /* refresh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = refresh.json; sourceTree = "<group>"; };
@@ -661,6 +667,7 @@
 				95A7D282203D4F54005EAEAF /* HIAnnouncementCell.swift */,
 				95A7D29F203D60E9005EAEAF /* HIBubbleCell.swift */,
 				95A7D281203D4F54005EAEAF /* HIEventCell.swift */,
+				D187BF572B781A1100AD7356 /* HIShiftCell.swift */,
 				3CF8DB1223B419980035ECAE /* HIProjectCell.swift */,
 			);
 			path = HIBubbleCell;
@@ -711,6 +718,7 @@
 				D187BF5B2B78318000AD7356 /* MentorService.swift */,
 				AC3B620F25E85D18002386A2 /* ProfileService.swift */,
 				95E3145C21FAF1740092C22E /* PassService.swift */,
+				D1BBA5692B70ACCC0017BD13 /* StaffService.swift */,
 				95E3146321FAF1740092C22E /* RegistrationService.swift */,
 				95B12044220BEAD700E024BB /* TrackingService.swift */,
 				95E3145D21FAF1740092C22E /* UserService.swift */,
@@ -728,6 +736,7 @@
 				95E3146821FAF1740092C22E /* Announcement.swift */,
 				3521FFA82207C03E00634A63 /* Attendee.swift */,
 				95E3146521FAF1740092C22E /* Event.swift */,
+				D1BBA5672B70AB940017BD13 /* Staff.swift */,
 				2FA73B4F2B58CAC3002658C0 /* Item.swift */,
 				AC3B620D25E85CAD002386A2 /* Profile.swift */,
 				95E3146621FAF1740092C22E /* SimpleRequest.swift */,
@@ -1057,6 +1066,7 @@
 				E1E4A5DA291C9BF800780BA1 /* HIOnboardingView.swift in Sources */,
 				95A7D290203D4F54005EAEAF /* HIAnnouncementCell.swift in Sources */,
 				9515E43722093E1300BCAF92 /* HIEventScannerViewController.swift in Sources */,
+				D187BF582B781A1100AD7356 /* HIShiftCell.swift in Sources */,
 				95A7D28F203D4F54005EAEAF /* HIEventCell.swift in Sources */,
 				ACAA717626017EC4000F42B0 /* HICollectionViewFlowLayout.swift in Sources */,
 				DF5B27C5299197E80034A8B9 /* Array.swift in Sources */,
@@ -1132,6 +1142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1BBA5682B70AB940017BD13 /* Staff.swift in Sources */,
 				3521FFA92207C03E00634A63 /* Attendee.swift in Sources */,
 				95E3147521FAF1740092C22E /* User.swift in Sources */,
 				2FA73B4E2B58CAA0002658C0 /* ShopService.swift in Sources */,
@@ -1154,6 +1165,7 @@
 				95E3147421FAF1740092C22E /* SimpleRequest.swift in Sources */,
 				D187BF5C2B78318000AD7356 /* MentorService.swift in Sources */,
 				2FA73B502B58CAC3002658C0 /* Item.swift in Sources */,
+				D1BBA56A2B70ACCC0017BD13 /* StaffService.swift in Sources */,
 				A5163FED221F283C003C543E /* StatsService.swift in Sources */,
 				95B12045220BEAD700E024BB /* TrackingService.swift in Sources */,
 				3C8F62D6238F9825001A5DAF /* TimeService.swift in Sources */,

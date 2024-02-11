@@ -1,8 +1,8 @@
 //
-//  HIEventCell.swift
+//  HIShiftCell.swift
 //  HackIllinois
 //
-//  Created by HackIllinois Team on 11/21/17.
+//  Created by HackIllinois Team on 2/10/24.
 //  Copyright © 2017 HackIllinois. All rights reserved.
 //  This file is part of the Hackillinois iOS App.
 //  The Hackillinois iOS App is open source software, released under the University of
@@ -14,22 +14,9 @@ import Foundation
 import UIKit
 import HIAPI
 
-protocol HIEventCellDelegate: AnyObject {
-    func eventCellDidSelectFavoriteButton(_ eventCell: HIEventCell)
-}
 
-class HIEventCell: HIBubbleCell {
+class HIShiftCell: HIBubbleCell {
     // MARK: - Properties
-    let favoritedButton = HIButton {
-        $0.tintHIColor = \.accent
-        $0.backgroundHIColor = \.clear
-        $0.activeImage = #imageLiteral(resourceName: "Selected Bookmark")
-        $0.baseImage = #imageLiteral(resourceName: "Unselected Bookmark")
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            $0.activeImage = #imageLiteral(resourceName: "FavoritedPad")
-            $0.baseImage = #imageLiteral(resourceName: "UnFavoritedPad")
-        }
-    }
     var headerView = UIStackView()
     var contentStackView = UIStackView()
     var contentStackViewHeight = NSLayoutConstraint()
@@ -45,7 +32,6 @@ class HIEventCell: HIBubbleCell {
             headerSpacingConstant = 2.0
         }
         backgroundColor = UIColor.clear
-        favoritedButton.addTarget(self, action: #selector(didSelectFavoriteButton(_:)), for: .touchUpInside)
         // add bubble view
         contentView.layer.backgroundColor = UIColor.clear.cgColor
         bubbleView.addSubview(headerView)
@@ -54,9 +40,6 @@ class HIEventCell: HIBubbleCell {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 17 * headerSpacingConstant).isActive = true
         headerView.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 16 * headerSpacingConstant).isActive = true
-        bubbleView.addSubview(favoritedButton)
-        favoritedButton.constrain(width: 58 * headerSpacingConstant, height: 50 * headerSpacingConstant)
-        favoritedButton.constrain(to: bubbleView, topInset: 0, trailingInset: 0)
         
         bubbleView.addSubview(contentStackView)
         contentStackView.axis = .vertical
@@ -66,10 +49,6 @@ class HIEventCell: HIBubbleCell {
         contentStackView.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -16).isActive = true
         contentStackView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 10 * headerSpacingConstant).isActive = true
         contentStackView.bottomAnchor.constraint(greaterThanOrEqualTo: bubbleView.bottomAnchor, constant: -16 * headerSpacingConstant).isActive = true
-        // Don't show favorite button for guests
-        if HIApplicationStateController.shared.isGuest {
-            favoritedButton.isHidden = true
-        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -77,16 +56,8 @@ class HIEventCell: HIBubbleCell {
     }
 }
 
-// MARK: - Actions
-extension HIEventCell {
-    @objc func didSelectFavoriteButton(_ sender: HIButton) {
-        delegate?.eventCellDidSelectFavoriteButton(self)
-    }
-    
-}
-
 // MARK: - Population
-extension HIEventCell {
+extension HIShiftCell {
     static func heightForCell(with event: Event, width: CGFloat) -> CGFloat {
         let heightFromEventName = HILabel.heightForView(text: event.name, font: HIAppearance.Font.eventTitle!, width: width - 137)
         var heightConstant: CGFloat = 1.6
@@ -94,20 +65,17 @@ extension HIEventCell {
             heightConstant = 11.0
         }
         let height = heightFromEventName + 160
-        if !event.sponsor.isEmpty {
-            return height + (20 * heightConstant)
-        }
         if UIDevice.current.userInterfaceIdiom == .pad {
             return height + (22 * (heightConstant / 1.45))
         }
         return height + 5
     }
-    static func <- (lhs: HIEventCell, rhs: Event) {
-        lhs.favoritedButton.isActive = rhs.favorite
+    static func <- (lhs: HIShiftCell, rhs: Event) {
+        print(rhs)
         var contentStackViewHeight: CGFloat = 0.0; var eventCellSpacing: CGFloat = 8.0
         var stackViewSpacing: CGFloat = 4.7; var bubbleConstant: CGFloat = 1.0
         var locationImageView = UIImageView(image: #imageLiteral(resourceName: "LocationSign")); var timeImageView = UIImageView(image: #imageLiteral(resourceName: "Clock"))
-        var sponsorImageView = UIImageView(image: #imageLiteral(resourceName: "Vector")); let titleLabel = HILabel(style: .event)
+        let titleLabel = HILabel(style: .event)
         titleLabel.numberOfLines = 2; titleLabel.text = rhs.name
         lhs.headerView.addArrangedSubview(titleLabel)
         lhs.headerView.setCustomSpacing(9, after: titleLabel)
@@ -115,7 +83,6 @@ extension HIEventCell {
             eventCellSpacing = 12.0; stackViewSpacing = 15.0; bubbleConstant = 2.0
             locationImageView = UIImageView(image: #imageLiteral(resourceName: "VectorPad"))
             timeImageView = UIImageView(image: #imageLiteral(resourceName: "TimePad"))
-            sponsorImageView = UIImageView(image: #imageLiteral(resourceName: "SponsorPad"))
             lhs.headerView.setCustomSpacing(18, after: titleLabel)
         }
         titleLabel.constrain(width: lhs.contentView.frame.width - 120, height: (HILabel.heightForView(text: rhs.name, font: HIAppearance.Font.eventTitle!, width: lhs.contentView.frame.width - 137)) * bubbleConstant)
@@ -134,60 +101,18 @@ extension HIEventCell {
         } else {
             timeLabel.text = Formatter.simpleTime.string(from: rhs.startTime) + " - " + Formatter.simpleTime.string(from: rhs.endTime)
         }
-        let pointsView = HIView { (view) in
-            view.layer.cornerRadius = 10.5 * bubbleConstant; view.backgroundHIColor = \.buttonBrown
-            view.translatesAutoresizingMaskIntoConstraints = false
-        }
-        let eventTypeView = HIView { (view) in
-            view.layer.cornerRadius = 10.5 * bubbleConstant; view.backgroundHIColor = \.buttonPurple
-            view.translatesAutoresizingMaskIntoConstraints = false
-        }
-        let proTypeView = HIView { (view) in
-            view.layer.cornerRadius = 10.5 * bubbleConstant; view.backgroundHIColor = \.proBackground
-            view.translatesAutoresizingMaskIntoConstraints = false
-        }
-        let proLabel = HILabel(style: .pointsText); proLabel.text = "Pro"
-        let pointsLabel = HILabel(style: .pointsText)
-        upperContainerView.addSubview(pointsView)
-        pointsView.addSubview(pointsLabel)
-        pointsLabel.constrain(to: pointsView, topInset: 4, trailingInset: -8 * bubbleConstant, bottomInset: -4, leadingInset: 8 * bubbleConstant)
-        pointsLabel.text = "+ \(rhs.points) pts"
-        let typeLabel = HILabel(style: .pointsText)
-        lhs.headerView.addArrangedSubview(eventTypeView)
-        eventTypeView.addSubview(typeLabel)
-        typeLabel.constrain(to: eventTypeView, topInset: 4, trailingInset: -8, bottomInset: -4, leadingInset: 8)
-        typeLabel.text = rhs.eventType.description.lowercased().capitalized
-        eventTypeView.constrain(height: 20 * bubbleConstant)
-        pointsView.constrain(height: 20 * bubbleConstant)
-        pointsView.leadingAnchor.constraint(equalTo: eventTypeView.trailingAnchor, constant: 8 * bubbleConstant).isActive = true
-        pointsView.centerYAnchor.constraint(equalTo: eventTypeView.centerYAnchor).isActive = true
         upperContainerView.addSubview(timeImageView)
         upperContainerView.addSubview(timeLabel)
         timeLabel.leadingAnchor.constraint(equalTo: timeImageView.trailingAnchor, constant: eventCellSpacing + 1).isActive = true
         timeLabel.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor).isActive = true
-        if !rhs.sponsor.isEmpty {
-            let sponsorLabel = HILabel(style: .sponsor)
-            middleContainerView.addSubview(sponsorImageView)
-            middleContainerView.addSubview(sponsorLabel)
-            sponsorImageView.translatesAutoresizingMaskIntoConstraints = false
-            sponsorLabel.text = "\(rhs.sponsor)"
-            contentStackViewHeight += sponsorLabel.intrinsicContentSize.height
-            sponsorImageView.bottomAnchor.constraint(equalTo: timeImageView.bottomAnchor, constant: (stackViewSpacing * 2.5) + 14).isActive = true
-            sponsorLabel.leadingAnchor.constraint(equalTo: sponsorImageView.trailingAnchor, constant: eventCellSpacing + 1).isActive = true
-            sponsorLabel.centerYAnchor.constraint(equalTo: sponsorImageView.centerYAnchor).isActive = true
-        }
-        let locationLabel = HILabel(style: .newLocation); locationLabel.text = "Online"
+        let locationLabel = HILabel(style: .newLocation)
         if rhs.locations.count > 0 {
             locationLabel.text = rhs.locations.map({ ($0 as AnyObject).name }).joined(separator: ", ")
         }
         middleContainerView.addSubview(locationImageView)
         locationImageView.translatesAutoresizingMaskIntoConstraints = false
         middleContainerView.addSubview(locationLabel)
-        if !rhs.sponsor.isEmpty {
-            locationImageView.centerYAnchor.constraint(equalTo: sponsorImageView.centerYAnchor, constant: (stackViewSpacing * 2.5) + 14).isActive = true
-        } else {
-            locationImageView.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor, constant: (stackViewSpacing * 2.5) + 14).isActive = true
-        }
+        locationImageView.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor, constant: (stackViewSpacing * 2.5) + 14).isActive = true
         locationImageView.centerXAnchor.constraint(equalTo: timeImageView.centerXAnchor).isActive = true
         locationLabel.leadingAnchor.constraint(equalTo: timeLabel.leadingAnchor).isActive = true
         locationLabel.centerYAnchor.constraint(equalTo: locationImageView.centerYAnchor).isActive = true
@@ -201,10 +126,9 @@ extension HIEventCell {
 }
 
 // MARK: - UITableViewCell
-extension HIEventCell {
+extension HIShiftCell {
     override func prepareForReuse() {
         super.prepareForReuse()
-        favoritedButton.isActive = false
         headerView.subviews.forEach {(view) in
             headerView.willRemoveSubview(view)
             view.removeFromSuperview()
