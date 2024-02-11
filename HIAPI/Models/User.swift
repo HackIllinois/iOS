@@ -25,16 +25,16 @@ public struct RolesContainer: Codable, APIReturnable {
 public struct Roles: OptionSet, Codable {
     public let rawValue: Int
 
+//    Mentor deprecated 2024
     public static let null = Roles([])
     public static let USER = Roles(rawValue: 1 << 0)
     public static let APPLICANT = Roles(rawValue: 1 << 1)
     public static let ATTENDEE = Roles(rawValue: 1 << 2)
-    public static let MENTOR = Roles(rawValue: 1 << 3)
+    public static let PRO = Roles(rawValue: 1 << 3)
     public static let SPONSOR = Roles(rawValue: 1 << 4)
     public static let STAFF = Roles(rawValue: 1 << 5)
     public static let ADMIN = Roles(rawValue: 1 << 6)
-    public static let PRO = Roles(rawValue: 1 << 7)
-    public static let allRoles = ["USER", "APPLICANT", "ATTENDEE", "MENTOR", "SPONSOR", "STAFF", "ADMIN", "PRO"]
+    public static let allRoles = ["USER", "APPLICANT", "ATTENDEE", "PRO", "SPONSOR", "STAFF", "ADMIN"]
 
     public init(rawValue: Int) {
         self.rawValue = rawValue
@@ -56,11 +56,10 @@ public struct Roles: OptionSet, Codable {
         case "USER": self = .USER
         case "APPLICANT": self = .APPLICANT
         case "ATTENDEE": self = .ATTENDEE
-        case "MENTOR": self = .MENTOR
+        case "PRO": self = .PRO
         case "SPONSOR": self = .SPONSOR
         case "STAFF": self = .STAFF
         case "ADMIN": self = .ADMIN
-        case "PRO": self = .PRO
         default:
             #if DEBUG
                 throw DecodingError.unknownOption
@@ -75,11 +74,10 @@ public struct Roles: OptionSet, Codable {
         if contains(.USER) { try container.encode("USER") }
         if contains(.APPLICANT) { try container.encode("APPLICANT") }
         if contains(.ATTENDEE) { try container.encode("ATTENDEE") }
-        if contains(.MENTOR) { try container.encode("MENTOR") }
+        if contains(.PRO) { try container.encode("PRO") }
         if contains(.SPONSOR) { try container.encode("SPONSOR") }
         if contains(.STAFF) { try container.encode("STAFF") }
         if contains(.ADMIN) { try container.encode("ADMIN") }
-        if contains(.PRO) { try container.encode("PRO") }
     }
 }
 
@@ -94,7 +92,7 @@ fileprivate extension Optional where Wrapped == String {
 }
 
 public struct QRData: Codable, APIReturnable {
-    public let id: String
+    public let userId: String
     public let qrInfo: String
 }
 
