@@ -51,7 +51,6 @@
 		9521A6AA20191737009059C6 /* HIAnnouncementDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521A6A920191737009059C6 /* HIAnnouncementDataSource.swift */; };
 		9523A2902218BA2600341EBD /* HIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9523A28F2218BA2600341EBD /* HIImageView.swift */; };
 		952831A4200F2B35002C9F3E /* HILoginFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952831A3200F2B35002C9F3E /* HILoginFlowController.swift */; };
-		952D153D220D37980041383A /* refresh.json in Resources */ = {isa = PBXBuildFile; fileRef = 952D153B220D37980041383A /* refresh.json */; };
 		952D1542220D453D0041383A /* countdown-60.json in Resources */ = {isa = PBXBuildFile; fileRef = 952D1540220D453D0041383A /* countdown-60.json */; };
 		952D1543220D453D0041383A /* countdown-24.json in Resources */ = {isa = PBXBuildFile; fileRef = 952D1541220D453D0041383A /* countdown-24.json */; };
 		953199C91FC25CA0009F2AA1 /* HICoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953199C81FC25CA0009F2AA1 /* HICoreDataController.swift */; };
@@ -138,6 +137,7 @@
 		D14D3AE3295FBDA200EB7995 /* HIBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */; };
 		D1BE81172AC8FC680042C078 /* HIAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95E3142A21FAD5B30092C22E /* HIAPI.framework */; };
 		D1BE81182AC8FC690042C078 /* HIAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 95E3142A21FAD5B30092C22E /* HIAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D1C5B6582B732E44000E766D /* refresh.json in Resources */ = {isa = PBXBuildFile; fileRef = D1C5B6572B732E44000E766D /* refresh.json */; };
 		D1F1463A2B605C57004E7FC9 /* Hack_Mushroom_Loading.json in Resources */ = {isa = PBXBuildFile; fileRef = D1F146392B605C57004E7FC9 /* Hack_Mushroom_Loading.json */; };
 		D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A309BB2211175200CBA351 /* PassKit.framework */; };
 		D7451BD22B54BCFB00D501D0 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = D7451BD12B54BCFB00D501D0 /* URLImage */; };
@@ -255,7 +255,6 @@
 		9521A6A920191737009059C6 /* HIAnnouncementDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAnnouncementDataSource.swift; sourceTree = "<group>"; };
 		9523A28F2218BA2600341EBD /* HIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIImageView.swift; sourceTree = "<group>"; };
 		952831A3200F2B35002C9F3E /* HILoginFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HILoginFlowController.swift; sourceTree = "<group>"; };
-		952D153B220D37980041383A /* refresh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = refresh.json; sourceTree = "<group>"; };
 		952D1540220D453D0041383A /* countdown-60.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countdown-60.json"; sourceTree = "<group>"; };
 		952D1541220D453D0041383A /* countdown-24.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countdown-24.json"; sourceTree = "<group>"; };
 		953199C81FC25CA0009F2AA1 /* HICoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICoreDataController.swift; sourceTree = "<group>"; };
@@ -344,6 +343,7 @@
 		D12B40FE2AC0B0BD001BCB05 /* HIScanAttendanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScanAttendanceViewController.swift; sourceTree = "<group>"; };
 		D134D30E296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIBannerViewController.swift; sourceTree = "<group>"; };
+		D1C5B6572B732E44000E766D /* refresh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = refresh.json; sourceTree = "<group>"; };
 		D1F146392B605C57004E7FC9 /* Hack_Mushroom_Loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Hack_Mushroom_Loading.json; sourceTree = "<group>"; };
 		D3A309BA221116A600CBA351 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };
 		D3A309BB2211175200CBA351 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
@@ -543,7 +543,7 @@
 		952D1538220D37980041383A /* Refresh */ = {
 			isa = PBXGroup;
 			children = (
-				952D153B220D37980041383A /* refresh.json */,
+				D1C5B6572B732E44000E766D /* refresh.json */,
 			);
 			path = Refresh;
 			sourceTree = "<group>";
@@ -969,7 +969,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				952D153D220D37980041383A /* refresh.json in Resources */,
 				952D1543220D453D0041383A /* countdown-24.json in Resources */,
 				1C7561A3278E96600004D739 /* DarkVespaText.json in Resources */,
 				951827A91EA35DB800049F79 /* Assets.xcassets in Resources */,
@@ -979,6 +978,7 @@
 				1C7561A5278E96750004D739 /* LightVespaText.json in Resources */,
 				D134D30F296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf in Resources */,
 				DF37063E2925DDE7000B4278 /* GoogleMaps.bundle in Resources */,
+				D1C5B6582B732E44000E766D /* refresh.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
