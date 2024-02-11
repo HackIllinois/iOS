@@ -59,6 +59,9 @@ struct HIProfileCardView: View {
     let role: String
     @State var startFetchingQR = false
     @State var qrInfo = ""
+//    Factors used to change frame to alter based on device
+    let padFactor = UIScreen.main.bounds.height/1366
+    let phoneFactor = UIScreen.main.bounds.height/844
 
     var body: some View {
         ScrollView {
@@ -67,17 +70,17 @@ struct HIProfileCardView: View {
                     ZStack(alignment: .bottom) {
                         Image("ProfileCardBackground")
                             .resizable()
-                            .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? 566.93 : ((338/844)*UIScreen.main.bounds.height), height: UIDevice.current.userInterfaceIdiom == .pad ? 777.2 : (463.36/844)*UIScreen.main.bounds.height)
+                            .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? 566.93*padFactor : 338*phoneFactor, height: UIDevice.current.userInterfaceIdiom == .pad ? 777.2*padFactor : 463.36*phoneFactor)
                         ZStack {
                             Image("ProfileBanner")
                                 .resizable()
-                                .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? 395.7 : ((235.91/844)*UIScreen.main.bounds.height), height: UIDevice.current.userInterfaceIdiom == .pad ? 137.71 : ((82.1/844)*UIScreen.main.bounds.height))
+                                .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? 395.7*padFactor : 235.91*phoneFactor, height: UIDevice.current.userInterfaceIdiom == .pad ? 137.71*padFactor : 82.1*phoneFactor)
                             VStack(spacing: 0) {
                                 Text("Your Ranking")
                                     .foregroundColor(.white)
                                 
                                     .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 20)))
-                                HStack(alignment: .bottom, spacing: (5/844)*UIScreen.main.bounds.height) {
+                                HStack(alignment: .bottom, spacing: UIDevice.current.userInterfaceIdiom == .pad ? 5*padFactor : 5*phoneFactor) {
                                     Image("RankSymbol")
                                     Text("Rank: \(rank != 0 ? "\(rank)" : "")")
                                                     .foregroundColor(.white)
@@ -90,24 +93,24 @@ struct HIProfileCardView: View {
                                                         print(rank)
                                                     }
                                 }
-                            }.padding(.bottom, isIpad ? 40 : (25/844)*UIScreen.main.bounds.height)
+                            }.padding(.bottom, isIpad ? 40*padFactor : 25*phoneFactor)
                         }.alignmentGuide(.bottom) {dimensions in dimensions[.bottom] / 1.2 }
                     }
                     Image(uiImage: avatarUrl.load())
                         .resizable()
-                        .frame(width: isIpad ? 249.92 : ((149/844)*UIScreen.main.bounds.height), height: isIpad ? 286.4 : ((170.75/844)*UIScreen.main.bounds.height))
+                        .frame(width: isIpad ? 249.92*padFactor : 149*phoneFactor, height: isIpad ? 286.4*padFactor : 170.75*phoneFactor)
                         .alignmentGuide(.top) {dimensions in dimensions[VerticalAlignment.center] / 0.9 }
                 }
                 VStack(spacing: 0) {
-                    Spacer().frame(height: ((90/844)*UIScreen.main.bounds.height))
+                    Spacer().frame(height: UIDevice.current.userInterfaceIdiom == .pad ? 90*padFactor : (90*phoneFactor))
                     Text(formatName())
                         .font(Font(HIAppearance.Font.profileName ?? .systemFont(ofSize: 24)))
                         .foregroundColor(Color((\HIAppearance.countdownTextColor).value))
-                        .padding(isIpad ? 32 : (16/844)*UIScreen.main.bounds.height)
-                    HStack(spacing: isIpad ? 16 : (8/844)*UIScreen.main.bounds.height) {
+                        .padding(isIpad ? 32*padFactor : 16*phoneFactor)
+                    HStack(spacing: isIpad ? 16*padFactor : 8*phoneFactor) {
                         Rectangle()
-                            .frame(width: isIpad ? 148 : (74/844)*UIScreen.main.bounds.height, height: isIpad ? 48 : (24/844)*UIScreen.main.bounds.height)
-                            .cornerRadius(isIpad ? 40 : (20/844)*UIScreen.main.bounds.height)
+                            .frame(width: isIpad ? 148*padFactor : 74*phoneFactor, height: isIpad ? 48*padFactor : 24*phoneFactor)
+                            .cornerRadius(isIpad ? 40*padFactor : 20*phoneFactor)
                             .foregroundColor(Color(red: 226/255, green: 142/255, blue: 174/255))
                             .overlay(
                                 Text(role)
@@ -116,8 +119,8 @@ struct HIProfileCardView: View {
                             )
 
                         Rectangle()
-                            .frame(width: isIpad ? 136 : (68/844)*UIScreen.main.bounds.height, height: isIpad ? 48 : (24/844)*UIScreen.main.bounds.height)
-                            .cornerRadius(isIpad ? 40 : (20/844)*UIScreen.main.bounds.height)
+                            .frame(width: isIpad ? 136*padFactor : 68*phoneFactor, height: isIpad ? 48*padFactor : 24*phoneFactor)
+                            .cornerRadius(isIpad ? 40*padFactor : 20*phoneFactor)
                             .foregroundColor(
                                 (Color(red: 226/255, green: 142/255, blue: 174/255)))
                             .overlay(
@@ -128,10 +131,10 @@ struct HIProfileCardView: View {
                     }.padding(.bottom)
                     Image(uiImage: UIImage(data: getQRCodeDate(text: qrInfo)!)!)
                                                     .resizable()
-                                                    .frame(width: isIpad ? 371 : (221/844)*UIScreen.main.bounds.height, height: isIpad ? 371 : ((221/844)*UIScreen.main.bounds.height))
-                                                    .padding(.bottom, (20/844)*UIScreen.main.bounds.height)
+                                                    .frame(width: isIpad ? 371*padFactor : 221*phoneFactor, height: isIpad ? 371*padFactor : 221*phoneFactor)
+                                                    .padding(.bottom, 20*phoneFactor)
                 }
-                .padding(.top, isIpad ? 50 : 0)
+                .padding(.top, isIpad ? 50*padFactor : 0)
             }
             .padding(.top, 24)
         }
