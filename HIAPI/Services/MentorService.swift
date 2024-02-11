@@ -18,10 +18,12 @@ public final class MentorService: BaseService {
         return super.baseURL + "mentor/"
     }
     
-    public static func recordMentorAttendance(userToken: String) -> APIRequest<MentorAttendanceContainer> {
+    public static func recordMentorAttendance(userToken: String, mentorId: String) -> APIRequest<MentorAttendanceContainer> {
         var headers = HTTPHeaders()
         headers["Authorization"] = userToken
-        return APIRequest<MentorAttendanceContainer>(service: self, endpoint: "attendance/", headers: headers, method: .POST)
+        var body = HTTPBody()
+        body["mentorId"] = userToken
+        return APIRequest<MentorAttendanceContainer>(service: self, endpoint: "attendance/", body: body, headers: headers, method: .POST)
     }
     
 }
