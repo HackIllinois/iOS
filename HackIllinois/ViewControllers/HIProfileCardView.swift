@@ -11,137 +11,130 @@
 //
 
 import SwiftUI
+import URLImage
 import HIAPI
 
+// Loads url data and converts into image
+//extension String {
+//    func loadImage(completion: @escaping (UIImage?) -> Void) {
+//            guard let url = URL(string: self) else {
+//                completion(nil)
+//                return
+//            }
+//
+//            URLSession.shared.dataTask(with: url) { data, _, error in
+//                if let data = data, let image = UIImage(data: data) {
+//                    completion(image)
+//                } else {
+//                    completion(nil)
+//                }
+//            }.resume()
+//        }
+//}
+
+extension String {
+    func load() -> UIImage {
+        do {
+            guard let url = URL(string: self) else {
+                return UIImage()
+            }
+            let data: Data = try Data(contentsOf: url)
+            return UIImage(data: data) ?? UIImage()
+        } catch {}
+        return UIImage()
+    }
+}
+
 struct HIProfileCardView: View {
+    @State private var rank: Int = 0
     let displayName: String
-    let dietaryRestrictions: [String]
     let points: Int
     let tier: String
     let foodWave: Int
+    let avatarUrl: String
     let background = (\HIAppearance.profileCardBackground).value
     let baseText = (\HIAppearance.profileBaseText).value
     let userId: String
     let isIpad = UIDevice.current.userInterfaceIdiom == .pad
-    @State var flipped: Bool = false
-    @State var ticketRotation = 0.0
-    @State var contentRotation = 0.0
-    @State var flipping = false
+    let role: String
     @State var startFetchingQR = false
     @State var qrInfo = ""
+//    Factors used to change frame to alter based on device
+    let padFactor = UIScreen.main.bounds.height/1366
+    let phoneFactor = UIScreen.main.bounds.height/844
 
     var body: some View {
         ScrollView {
             ZStack {
-                Rectangle()
-                    .frame(width: isIpad ? UIScreen.main.bounds.width - 56 * 2 : UIScreen.main.bounds.width - 32 * 2,
-                           height: isIpad ? 978 + 80 : 569 + 40)
-                    .cornerRadius(UIDevice.current.userInterfaceIdiom == .pad ? 40 : 20)
-                    .foregroundColor(Color(background))
+                ZStack(alignment: .top) {
+                    ZStack(alignment: .bottom) {
+                        Image("ProfileCardBackground")
+                            .resizable()
+                            .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? 566.93*padFactor : 338*phoneFactor, height: UIDevice.current.userInterfaceIdiom == .pad ? 777.2*padFactor : 463.36*phoneFactor)
+                        ZStack {
+                            Image("ProfileBanner")
+                                .resizable()
+                                .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? 395.7*padFactor : 235.91*phoneFactor, height: UIDevice.current.userInterfaceIdiom == .pad ? 137.71*padFactor : 82.1*phoneFactor)
+                            VStack(spacing: 0) {
+                                Text("Your Ranking")
+                                    .foregroundColor(.white)
+                                
+                                    .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 20)))
+                                HStack(alignment: .bottom, spacing: UIDevice.current.userInterfaceIdiom == .pad ? 5*padFactor : 5*phoneFactor) {
+                                    Image("RankSymbol")
+                                    Text("Rank: \(rank != 0 ? "\(rank)" : "")")
+                                                    .foregroundColor(.white)
+                                                    .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 20)))
+                                                    .onAppear {
+                                                        // Call getRank and update the rank when it's available
+                                                        getRank { rank in
+                                                            self.rank = rank
+                                                        }
+                                                        print(rank)
+                                                    }
+                                }
+                            }.padding(.bottom, isIpad ? 40*padFactor : 25*phoneFactor)
+                        }.alignmentGuide(.bottom) {dimensions in dimensions[.bottom] / 1.2 }
+                    }
+                    Image(uiImage: avatarUrl.load())
+                        .resizable()
+                        .frame(width: isIpad ? 249.92*padFactor : 149*phoneFactor, height: isIpad ? 286.4*padFactor : 170.75*phoneFactor)
+                        .alignmentGuide(.top) {dimensions in dimensions[VerticalAlignment.center] / 0.9 }
+                }
                 VStack(spacing: 0) {
+                    Spacer().frame(height: UIDevice.current.userInterfaceIdiom == .pad ? 90*padFactor : (90*phoneFactor))
                     Text(formatName())
-                        .font(Font(HIAppearance.Font.profileName ?? .systemFont(ofSize: 20)))
-                        .foregroundColor(Color(baseText))
-                        .padding(isIpad ? 32 : 16)
-                    HStack(spacing: isIpad ? 16 : 8) {
+                        .font(Font(HIAppearance.Font.profileName ?? .systemFont(ofSize: 24)))
+                        .foregroundColor(Color((\HIAppearance.countdownTextColor).value))
+                        .padding(isIpad ? 32*padFactor : 16*phoneFactor)
+                    HStack(spacing: isIpad ? 16*padFactor : 8*phoneFactor) {
                         Rectangle()
-                            .frame(width: isIpad ? 146 : 73, height: isIpad ? 48 : 24)
-                            .cornerRadius(isIpad ? 40 : 20)
-                            .foregroundColor(.white)
+                            .frame(width: isIpad ? 148*padFactor : 74*phoneFactor, height: isIpad ? 48*padFactor : 24*phoneFactor)
+                            .cornerRadius(isIpad ? 40*padFactor : 20*phoneFactor)
+                            .foregroundColor(Color(red: 226/255, green: 142/255, blue: 174/255))
                             .overlay(
-                                Text("\(points) pts")
+                                Text(role)
                                     .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 12)))
-                                    .foregroundColor(Color(baseText))
-                            )
-                        Rectangle()
-                            .frame(width: isIpad ? 204 : 102, height: isIpad ? 48 : 24)
-                            .cornerRadius(isIpad ? 40 : 20)
-                            .foregroundColor(.white)
-                            .overlay(
-                                Text(tier)
-                                    .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 12)))
-                                    .foregroundColor(Color(baseText))
+                                    .foregroundColor(Color(red: 1, green: 248/255, blue: 245/255))
                             )
 
                         Rectangle()
-                            .frame(width: isIpad ? 136 : 68, height: isIpad ? 48 : 24)
-                            .cornerRadius(isIpad ? 40 : 20)
-                            .foregroundColor(.white)
+                            .frame(width: isIpad ? 136*padFactor : 68*phoneFactor, height: isIpad ? 48*padFactor : 24*phoneFactor)
+                            .cornerRadius(isIpad ? 40*padFactor : 20*phoneFactor)
+                            .foregroundColor(
+                                (Color(red: 226/255, green: 142/255, blue: 174/255)))
                             .overlay(
                                 Text("Wave \(foodWave)")
                                     .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 12)))
-                                    .foregroundColor(Color(baseText))
+                                    .foregroundColor((Color(red: 1, green: 248/255, blue: 245/255)))
                             )
-                    }
-                    ZStack {
-                        if flipped {
-                            ZStack {
-                                Image("TicketFront")
-                                    .resizable()
-                                    .frame(width: isIpad ? 298 : 190.6, height: isIpad ? 544 : 347.67)
-                                    .padding(isIpad ? 48 : 24)
-                            }
-                        } else {
-                            Image("TicketBack")
-                                .resizable()
-                                .frame(width: isIpad ? 298 : 190.6, height: isIpad ? 544 : 347.67)
-                                .padding(isIpad ? 48 : 24)
-                            Image(uiImage: UIImage(data: getQRCodeDate(text: qrInfo)!)!)
-                                .resizable()
-                                .frame(width: isIpad ? 200 : 132, height: isIpad ? 200 : 132)
-                        }
-                    }
-                    .rotation3DEffect(.degrees(contentRotation), axis: (x: 0, y: 1, z: 0))
-                    .onTapGesture {
-                        if !flipping {
-                            flipFlashcard()
-                        }
-                    }
-                    .rotation3DEffect(.degrees(ticketRotation), axis: (x: 0, y: 1, z: 0))
-
-                    VStack(spacing: isIpad ? 32 : 16) {
-                        Text("Dietary Restrictions")
-                            .font(Font(HIAppearance.Font.profileDietaryRestrictions ?? .systemFont(ofSize: 16)))
-                            .foregroundColor(Color(baseText))
-                        
-                        
-                        VStack {
-                            HStack(spacing: 4) {
-                                ForEach(dietaryRestrictions, id: \.self) { diet in
-                                    let index = dietaryRestrictions.firstIndex(of: diet) ?? 0
-                                    if index < 3 {
-                                        Rectangle()
-                                            .frame(width: isIpad ? 204 : 92, height: isIpad ? 48 : 24)
-                                            .cornerRadius(isIpad ? 40 : 20)
-                                            .foregroundColor(Color(dietBackgroundColor(diet: diet)))
-                                            .overlay(
-                                                Text(dietString(diet: diet))
-                                                    .font(Font(HIAppearance.Font.profileDietaryRestrictionsLabel ?? .systemFont(ofSize: 12)))
-                                                    .foregroundColor(dietTextColor(diet: diet))
-                                            )
-                                    }
-                                }
-                            }
-                            HStack(spacing: 4) {
-                                ForEach(dietaryRestrictions, id: \.self) { diet in
-                                    let index = dietaryRestrictions.firstIndex(of: diet) ?? 0
-                                    if index > 2 {
-                                        Rectangle()
-                                            .frame(width: isIpad ? 204 : 92, height: isIpad ? 48 : 24)
-                                            .cornerRadius(isIpad ? 40 : 20)
-                                            .foregroundColor(Color(dietBackgroundColor(diet: diet)))
-                                            .overlay(
-                                                Text(dietString(diet: diet))
-                                                    .font(Font(HIAppearance.Font.profileDietaryRestrictionsLabel ?? .systemFont(ofSize: 12)))
-                                                    .foregroundColor(dietTextColor(diet: diet))
-                                            )
-                                    }
-                                }
-                            }
-                        }
-                        .frame(width: isIpad ? UIScreen.main.bounds.width - 56 * 3.5 : UIScreen.main.bounds.width - 32 * 3.5)
-                    }
+                    }.padding(.bottom)
+                    Image(uiImage: UIImage(data: getQRCodeDate(text: qrInfo)!)!)
+                                                    .resizable()
+                                                    .frame(width: isIpad ? 371*padFactor : 221*phoneFactor, height: isIpad ? 371*padFactor : 221*phoneFactor)
+                                                    .padding(.bottom, 20*phoneFactor)
                 }
+                .padding(.top, isIpad ? 50*padFactor : 0)
             }
             .padding(.top, 24)
         }
@@ -175,75 +168,18 @@ struct HIProfileCardView: View {
         guard let filter = CIFilter(name: "CIQRCodeGenerator") else { return nil }
         let data = text.data(using: .ascii, allowLossyConversion: false)
         filter.setValue(data, forKey: "inputMessage")
-        guard let ciimage = filter.outputImage else { return nil }
+        
+        // Change color of QR code
+        guard let colorFilter = CIFilter(name: "CIFalseColor") else { return nil }
+        colorFilter.setValue(filter.outputImage, forKey: "inputImage")
+        colorFilter.setValue(CIColor(red: 1, green: 248/255, blue: 245/255), forKey: "inputColor1") // Background off-white
+        colorFilter.setValue(CIColor(red: 102/255, green: 43/255, blue: 19/255), forKey: "inputColor0") // Barcode brown
+        
+        guard let ciimage = colorFilter.outputImage else { return nil }
         let transform = CGAffineTransform(scaleX: 10, y: 10)
         let scaledCIImage = ciimage.transformed(by: transform)
         let uiimage = UIImage(ciImage: scaledCIImage)
         return uiimage.pngData()!
-    }
-
-    func dietString(diet: String) -> String {
-        switch diet {
-        case "Vegetarian":
-            return "Vegetarian"
-        case "Vegan":
-            return "Vegan"
-        case "Gluten-Free":
-            return "Gluten-Free"
-        case "Lactose-Intolerant":
-            return "Dairy Free"
-        case "Other":
-            return "Other"
-        case "None":
-            return "None"
-        case "":
-            return "None"
-        default:
-            return "Custom"
-        }
-    }
-
-    func dietTextColor(diet: String) -> Color {
-        switch diet {
-        case "Vegetarian", "Vegan", "Gluten-Free", "Lactose-Intolerant", "Other":
-            return Color(baseText)
-        case "None", "":
-            return .white
-        default:
-            return .white
-        }
-    }
-
-    func dietBackgroundColor(diet: String) -> UIColor {
-        switch diet {
-        case "Vegetarian":
-            return (\HIAppearance.profileCardVegetarian).value
-        case "Vegan":
-            return (\HIAppearance.profileCardVegan).value
-        case "Gluten-Free":
-            return (\HIAppearance.profileCardGlutenFree).value
-        case "Lactose-Intolerant":
-            return (\HIAppearance.profileCardLactoseIntolerant).value
-        case "Other":
-            return (\HIAppearance.profileCardOther).value
-        case "None" , "":
-            return (\HIAppearance.profileCardNone).value
-        default:
-            return (\HIAppearance.profileCardNone).value
-        }
-    }
-
-    func flipFlashcard() {
-        let animationTime = 0.5
-        flipping = true
-        withAnimation(Animation.linear(duration: animationTime)) {
-            ticketRotation += 180
-            flipping = false
-        }
-        withAnimation(Animation.linear(duration: 0.001).delay(animationTime / 2)) {
-            contentRotation += 180
-            flipped.toggle()
-        }
     }
 
     func QRFetchLoop() {
@@ -257,7 +193,7 @@ struct HIProfileCardView: View {
 
     func getQRInfo() {
         guard let user = HIApplicationStateController.shared.user else { return }
-        HIAPI.UserService.getQR()
+        HIAPI.UserService.getQR(userToken: user.token)
             .onCompletion { result in
                 do {
                     let (qr, _) = try result.get()
@@ -271,16 +207,36 @@ struct HIProfileCardView: View {
             .authorize(with: user)
             .launch()
     }
+    
+    func getRank(completion: @escaping (Int) -> Void) {
+        guard let user = HIApplicationStateController.shared.user else { return }
+
+        var rank = 0
+        print("HELLO???????????????")
+        HIAPI.ProfileService.getUserRanking(userToken: user.token)
+            .onCompletion { result in
+                do {
+                    let (userRanking, _) = try result.get()
+                    rank = userRanking.ranking
+                    print("rank:", rank)
+                    completion(rank)
+                } catch {
+                    print("An error has occurred in ranking \(error)")
+                }
+            }
+            .authorize(with: user)
+            .launch()
+    }
+
 }
 
 struct HIProfileCardView_Previews: PreviewProvider {
     static var previews: some View {
         HIProfileCardView(displayName: "first last",
-                          dietaryRestrictions: ["Vegetarian", "Lactose-Intolerant", "None", "no beef"],
                           points: 100,
-                          tier: "no tier",
+                          tier: "Pro",
                           foodWave: 1,
-                          userId: "https://www.hackillinois.org"
+                          avatarUrl: "https://raw.githubusercontent.com/HackIllinois/adonix-metadata/main/avatars/fishercat.png", userId: "https://www.hackillinois.org", role: "Pro"
         )
     }
 }

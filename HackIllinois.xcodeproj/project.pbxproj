@@ -140,6 +140,7 @@
 		D1C5B6582B732E44000E766D /* refresh.json in Resources */ = {isa = PBXBuildFile; fileRef = D1C5B6572B732E44000E766D /* refresh.json */; };
 		D1F1463A2B605C57004E7FC9 /* Hack_Mushroom_Loading.json in Resources */ = {isa = PBXBuildFile; fileRef = D1F146392B605C57004E7FC9 /* Hack_Mushroom_Loading.json */; };
 		D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A309BB2211175200CBA351 /* PassKit.framework */; };
+		D7451BD22B54BCFB00D501D0 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = D7451BD12B54BCFB00D501D0 /* URLImage */; };
 		DF3706382925DDAA000B4278 /* GoogleMapsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706372925DDAA000B4278 /* GoogleMapsBase.framework */; };
 		DF37063B2925DDB8000B4278 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706392925DDB7000B4278 /* GoogleMaps.framework */; };
 		DF37063C2925DDB8000B4278 /* GoogleMapsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37063A2925DDB8000B4278 /* GoogleMapsCore.framework */; };
@@ -401,6 +402,7 @@
 				951E67F923C1C88200477703 /* Lottie in Frameworks */,
 				DF37063C2925DDB8000B4278 /* GoogleMapsCore.framework in Frameworks */,
 				951E67F623C1C83B00477703 /* Keychain in Frameworks */,
+				D7451BD22B54BCFB00D501D0 /* URLImage in Frameworks */,
 				D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -859,6 +861,7 @@
 			packageProductDependencies = (
 				951E67F523C1C83B00477703 /* Keychain */,
 				951E67F823C1C88200477703 /* Lottie */,
+				D7451BD12B54BCFB00D501D0 /* URLImage */,
 			);
 			productName = HackIllinois;
 			productReference = 9518277F1EA35AF100049F79 /* HackIllinois.app */;
@@ -948,6 +951,7 @@
 				951E67F123C1C7FD00477703 /* XCRemoteSwiftPackageReference "api-manager" */,
 				951E67F423C1C83B00477703 /* XCRemoteSwiftPackageReference "keychain" */,
 				951E67F723C1C88200477703 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				D7451BD02B54BCFB00D501D0 /* XCRemoteSwiftPackageReference "url-image" */,
 			);
 			productRefGroup = 951827801EA35AF100049F79 /* Products */;
 			projectDirPath = "";
@@ -1175,7 +1179,7 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_MODULES = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1239,7 +1243,7 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_MODULES = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1293,6 +1297,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = HackIllinois/HackIllinois.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -1324,6 +1329,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = HackIllinois/HackIllinois.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -1549,6 +1555,14 @@
 				version = 4.0.1;
 			};
 		};
+		D7451BD02B54BCFB00D501D0 /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1566,6 +1580,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 951E67F723C1C88200477703 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		D7451BD12B54BCFB00D501D0 /* URLImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7451BD02B54BCFB00D501D0 /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 

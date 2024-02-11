@@ -22,7 +22,9 @@ public final class UserService: BaseService {
         return APIRequest<User>(service: self, endpoint: "", headers: headers, method: .GET)
     }
 
-    public static func getQR() -> APIRequest<QRData> {
-        return APIRequest<QRData>(service: self, endpoint: "qr/", method: .GET)
+    public static func getQR(userToken: String) -> APIRequest<QRData> {
+        var authorizationHeaders = HTTPHeaders()
+        authorizationHeaders["Authorization"] = userToken
+        return APIRequest<QRData>(service: self, endpoint: "qr/", headers: authorizationHeaders, method: .GET)
     }
 }
