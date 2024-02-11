@@ -116,11 +116,12 @@ final class HIEventDataSource {
                                 coreDataEvent.addToLocations(coreDataLocation)
                             }
                             coreDataEvent.name = apiEvent.name
-                            coreDataEvent.sponsor = apiEvent.sponsor
+                            coreDataEvent.sponsor = apiEvent.sponsor ?? "None"
                             coreDataEvent.isAsync = apiEvent.isAsync
                             coreDataEvent.startTime = apiEvent.startTime
                             coreDataEvent.points = Int32(apiEvent.points)
                             coreDataEvent.favorite = false
+                            coreDataEvent.mapImageUrl = apiEvent.mapImageUrl ?? "None"
                         }
 
                         apiEventsToInsert.forEach { apiEvent in
@@ -137,11 +138,12 @@ final class HIEventDataSource {
                                 coreDataEvent.addToLocations(coreDataLocation)
                             }
                             coreDataEvent.name = apiEvent.name
-                            coreDataEvent.sponsor = apiEvent.sponsor
+                            coreDataEvent.sponsor = apiEvent.sponsor ?? "None"
                             coreDataEvent.startTime = apiEvent.startTime
                             coreDataEvent.points = Int32(apiEvent.points)
                             coreDataEvent.favorite = false
                             coreDataEvent.isAsync = apiEvent.isAsync
+                            coreDataEvent.mapImageUrl = apiEvent.mapImageUrl ?? "None"
                         }
 
                         // 10) Save changes, call completion handler, unlock refresh
@@ -191,10 +193,11 @@ final class HIEventDataSource {
                                     coreDataEvent.eventType = apiEvent.eventType
                                     coreDataEvent.info = apiEvent.info
                                     coreDataEvent.name = apiEvent.name
-                                    coreDataEvent.sponsor = apiEvent.sponsor
+                                    coreDataEvent.sponsor = apiEvent.sponsor ?? "None"
                                     coreDataEvent.startTime = apiEvent.startTime
                                     coreDataEvent.points = Int32(apiEvent.points)
                                     coreDataEvent.favorite = apiFavorites.contains(coreDataEvent.id)
+                                    coreDataEvent.mapImageUrl = apiEvent.mapImageUrl ?? "None"
                                 }
 
                                     try context.save()
@@ -221,6 +224,7 @@ final class HIEventDataSource {
                         .launch()
                 }
             } catch {
+                print(error)
                 completion?()
                 isRefreshing = false
             }

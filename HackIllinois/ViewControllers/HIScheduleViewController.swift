@@ -13,9 +13,12 @@
 import Foundation
 import UIKit
 import CoreData
+import HIAPI
 
 class HIScheduleViewController: HIEventListViewController {
     // MARK: - Properties
+    var staffShifts: [Staff] = []
+    
     lazy var fetchedResultsController: NSFetchedResultsController<Event> = {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
 
@@ -37,7 +40,7 @@ class HIScheduleViewController: HIEventListViewController {
 
         return fetchedResultsController
     }()
-
+    
     private var currentTab = 0
     private var onlyFavorites = false
     private let onlyFavoritesPredicate = NSPredicate(format: "favorite == YES" )
@@ -66,10 +69,13 @@ class HIScheduleViewController: HIEventListViewController {
 
         return dataStore
     }()
+    
+    // Staff shifts functionality
+    private var onlyShifts = false
 
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "ScheduleBackground")
+        backgroundView.image = #imageLiteral(resourceName: "PurpleBackground")
         if UIDevice.current.userInterfaceIdiom == .pad {
             backgroundView.image = #imageLiteral(resourceName: "BackgroundPad")
         }
@@ -86,9 +92,14 @@ extension HIScheduleViewController {
 
     @objc func didSelectFavoritesIcon(_ sender: UIBarButtonItem) {
         onlyFavorites = !onlyFavorites
-        sender.image = onlyFavorites ? #imageLiteral(resourceName: "MenuFavorited") : #imageLiteral(resourceName: "MenuUnfavorited")
+        sender.image = onlyFavorites ? #imageLiteral(resourceName: "Big Selected Bookmark") : #imageLiteral(resourceName: "Big Unselected Bookmark")
         if UIDevice.current.userInterfaceIdiom == .pad {
             sender.image = onlyFavorites ? #imageLiteral(resourceName: "FavoritedPad") : #imageLiteral(resourceName: "UnFavoritedPad")
+        }
+        if sender.image == #imageLiteral(resourceName: "Big Selected Bookmark") {
+            super.setCustomTitle(customTitle: "SAVED EVENTS")
+        } else {
+            super.setCustomTitle(customTitle: "SCHEDULE")
         }
         updatePredicate()
         animateReload()
@@ -103,6 +114,9 @@ extension HIScheduleViewController {
         if onlyFavorites {
             let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [currentTabPredicate, onlyFavoritesPredicate])
             return compoundPredicate
+        } else if onlyShifts {
+            let noEventsPredicate = NSPredicate(value: false)
+            return noEventsPredicate
         } else {
             return currentTabPredicate
         }
@@ -123,7 +137,7 @@ extension HIScheduleViewController {
         super.loadView()
 
         let items = dataStore.map { $0.displayText }
-        let segmentedControl = HIScheduleSegmentedControl(titles: items, nums: [24, 25, 26])
+        let segmentedControl = HIScheduleSegmentedControl(titles: items, nums: [23, 24, 25])
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
@@ -132,9 +146,9 @@ extension HIScheduleViewController {
             segmentedControlConstant = 40.0
         }
 
-        segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8 + segmentedControlConstant).isActive = true
-        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: -34).isActive = true
-        segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 34).isActive = true
+        segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20 + segmentedControlConstant).isActive = true
+        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: -36).isActive = true
+        segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 40).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 66 + segmentedControlConstant).isActive = true
         
         // Start the segmented control on the current day
@@ -148,11 +162,12 @@ extension HIScheduleViewController {
         
         let tableView = HITableView()
         view.addSubview(tableView)
-        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 20).isActive = true
+        let padConstant = (UIDevice.current.userInterfaceIdiom == .pad) ? 4.0 : 1
+        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 30 * padConstant).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        tableView.contentInset = UIEdgeInsets(top: 17, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 60, left: 0, bottom: 0, right: 0)
         tableView.scrollIndicatorInsets = UIEdgeInsets(top: 17, left: 0, bottom: 0, right: 0)
         self.tableView = tableView
         
@@ -166,9 +181,82 @@ extension HIScheduleViewController {
         _fetchedResultsController = fetchedResultsController as? NSFetchedResultsController<NSManagedObject>
         setupRefreshControl()
         super.viewDidLoad()
-        super.setCustomTitle(customTitle: "SCHEDULE")
+        guard let user = HIApplicationStateController.shared.user else { return }
+        if !user.roles.contains(.STAFF) {
+            super.setCustomTitle(customTitle: "SCHEDULE")
+        } else if user.roles.contains(.STAFF) {
+            setStaffShiftsControl()
+        }
     }
 }
+
+// MARK: - Staff Shifts Control Setup
+extension HIScheduleViewController {
+    @objc func setStaffShiftsControl() {
+        let customFontSize = UIDevice.current.userInterfaceIdiom == .pad ? 44 : 24
+        let customFont = UIFont(name: "MontserratRoman-Bold", size: CGFloat(customFontSize))
+
+        // Create flexible space items to add space to the left
+        let flexibleSpaceLeft1 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let flexibleSpaceLeft2 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let flexibleSpaceLeft3 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+
+        let scheduleButton = UIBarButtonItem(title: "SCHEDULE", style: .plain, target: self, action: #selector(scheduleButtonTapped(_:)))
+        scheduleButton.setTitleTextAttributes([NSAttributedString.Key.font: customFont], for: .normal)
+
+        // Add the flexible space items and custom button to the leftBarButtonItems array
+        navigationItem.leftBarButtonItems = [flexibleSpaceLeft1, flexibleSpaceLeft2, flexibleSpaceLeft3, scheduleButton]
+
+        // Create flexible space items to add space to the right
+        let flexibleSpaceRight1 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let flexibleSpaceRight2 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+
+        // Create custom right bar button item
+        let customButton = UIBarButtonItem(title: "SHIFTS", style: .plain, target: self, action: #selector(shiftsButtonTapped(_:)))
+        customButton.setTitleTextAttributes([NSAttributedString.Key.font: customFont], for: .normal)
+
+        // Add the flexible space items and custom button to the rightBarButtonItems array
+        navigationItem.rightBarButtonItems = [flexibleSpaceRight1, flexibleSpaceRight2, customButton]
+
+        self.navigationItem.leftItemsSupplementBackButton = true
+    }
+
+    // Actions for left and right buttons
+    @objc func scheduleButtonTapped(_ sender: UIButton) {
+        if onlyShifts {
+            onlyShifts = false
+            updatePredicate()
+            animateReload()
+        }
+    }
+
+
+    @objc func shiftsButtonTapped(_ sender: UIButton) {
+        if !onlyShifts {
+            onlyShifts = !onlyShifts
+
+            guard let user = HIApplicationStateController.shared.user else { return }
+
+            HIAPI.StaffService.getStaffShift(userToken: user.token)
+                .onCompletion { result in
+                    do {
+                        let (staffShifts, _) = try result.get()
+                        self.staffShifts = staffShifts.shifts
+                        print("Staff shifts: ", self.staffShifts)
+
+                        DispatchQueue.main.async {
+                            self.updatePredicate()
+                            self.animateReload()
+                        }
+                    } catch {
+                        print("An error has occurred in getting staff shifts \(error)")
+                    }
+                }
+                .launch()
+        }
+    }
+}
+
 
 // MARK: - UINavigationItem Setup
 extension HIScheduleViewController {
@@ -202,7 +290,7 @@ extension HIScheduleViewController {
         if UIDevice.current.userInterfaceIdiom == .pad {
             return 60
         } else {
-            return 30
+            return 30 // Changes height between event cells
         }
     }
 
@@ -224,12 +312,12 @@ extension HIScheduleViewController {
             section < sections.count,
             let date = Formatter.coreData.date(from: sections[section].name) {
             header.titleLabel.text = Formatter.simpleTime.string(from: date)
-            header.titleLabel.textColor = .white
+            header.titleLabel.textColor <- \.white
             header.titleLabel.textAlignment = .center
             if UIDevice.current.userInterfaceIdiom == .pad {
                 header.titleLabel.font = HIAppearance.Font.timeIndicator
             } else {
-                header.titleLabel.font = HIAppearance.Font.glyph
+                header.titleLabel.font = HIAppearance.Font.dateHeader
             }
 
         }

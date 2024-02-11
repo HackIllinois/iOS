@@ -43,6 +43,10 @@ public struct Profile: Codable, APIReturnable {
     public let coins: Int
 }
 
+public struct Ranking: Codable, APIReturnable {
+    public let ranking: Int
+}
+
 public struct ProfileFavorites: Codable, APIReturnable {
     public let userId: String
     public let profiles: Set<String>

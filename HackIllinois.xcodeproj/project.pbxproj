@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -53,7 +53,6 @@
 		9521A6AA20191737009059C6 /* HIAnnouncementDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521A6A920191737009059C6 /* HIAnnouncementDataSource.swift */; };
 		9523A2902218BA2600341EBD /* HIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9523A28F2218BA2600341EBD /* HIImageView.swift */; };
 		952831A4200F2B35002C9F3E /* HILoginFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952831A3200F2B35002C9F3E /* HILoginFlowController.swift */; };
-		952D153D220D37980041383A /* refresh.json in Resources */ = {isa = PBXBuildFile; fileRef = 952D153B220D37980041383A /* refresh.json */; };
 		952D1542220D453D0041383A /* countdown-60.json in Resources */ = {isa = PBXBuildFile; fileRef = 952D1540220D453D0041383A /* countdown-60.json */; };
 		952D1543220D453D0041383A /* countdown-24.json in Resources */ = {isa = PBXBuildFile; fileRef = 952D1541220D453D0041383A /* countdown-24.json */; };
 		953199C91FC25CA0009F2AA1 /* HICoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953199C81FC25CA0009F2AA1 /* HICoreDataController.swift */; };
@@ -138,9 +137,17 @@
 		D12B40FF2AC0B0BD001BCB05 /* HIScanAttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12B40FE2AC0B0BD001BCB05 /* HIScanAttendanceViewController.swift */; };
 		D134D30F296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D134D30E296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf */; };
 		D14D3AE3295FBDA200EB7995 /* HIBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */; };
+		D187BF582B781A1100AD7356 /* HIShiftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D187BF572B781A1100AD7356 /* HIShiftCell.swift */; };
+		D1BBA5682B70AB940017BD13 /* Staff.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BBA5672B70AB940017BD13 /* Staff.swift */; };
+		D1BBA56A2B70ACCC0017BD13 /* StaffService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BBA5692B70ACCC0017BD13 /* StaffService.swift */; };
+		D187BF5A2B78317600AD7356 /* Mentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D187BF592B78317600AD7356 /* Mentor.swift */; };
+		D187BF5C2B78318000AD7356 /* MentorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D187BF5B2B78318000AD7356 /* MentorService.swift */; };
 		D1BE81172AC8FC680042C078 /* HIAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95E3142A21FAD5B30092C22E /* HIAPI.framework */; };
 		D1BE81182AC8FC690042C078 /* HIAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 95E3142A21FAD5B30092C22E /* HIAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D1C5B6582B732E44000E766D /* refresh.json in Resources */ = {isa = PBXBuildFile; fileRef = D1C5B6572B732E44000E766D /* refresh.json */; };
+		D1F1463A2B605C57004E7FC9 /* Hack_Mushroom_Loading.json in Resources */ = {isa = PBXBuildFile; fileRef = D1F146392B605C57004E7FC9 /* Hack_Mushroom_Loading.json */; };
 		D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A309BB2211175200CBA351 /* PassKit.framework */; };
+		D7451BD22B54BCFB00D501D0 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = D7451BD12B54BCFB00D501D0 /* URLImage */; };
 		DF3706382925DDAA000B4278 /* GoogleMapsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706372925DDAA000B4278 /* GoogleMapsBase.framework */; };
 		DF37063B2925DDB8000B4278 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706392925DDB7000B4278 /* GoogleMaps.framework */; };
 		DF37063C2925DDB8000B4278 /* GoogleMapsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37063A2925DDB8000B4278 /* GoogleMapsCore.framework */; };
@@ -162,7 +169,6 @@
 		DF37065C2925DE5D000B4278 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37065B2925DE5D000B4278 /* SystemConfiguration.framework */; };
 		DF37065E2925DE66000B4278 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37065D2925DE66000B4278 /* UIKit.framework */; };
 		DF5B27C5299197E80034A8B9 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5B27C4299197E80034A8B9 /* Array.swift */; };
-		DF5B27C7299372AE0034A8B9 /* Hack_PopcornCart_Text.json in Resources */ = {isa = PBXBuildFile; fileRef = DF5B27C6299372AE0034A8B9 /* Hack_PopcornCart_Text.json */; };
 		E170038A29679D08009B99A8 /* HIProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E170038929679D08009B99A8 /* HIProfileCardView.swift */; };
 		E1BF5E7A298B462F00A98390 /* HIStaffButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BF5E79298B462F00A98390 /* HIStaffButtonView.swift */; };
 		E1E4A5D9291C9BF800780BA1 /* HICarouselSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E4A5D6291C9BF700780BA1 /* HICarouselSwiftUIView.swift */; };
@@ -258,7 +264,6 @@
 		9521A6A920191737009059C6 /* HIAnnouncementDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAnnouncementDataSource.swift; sourceTree = "<group>"; };
 		9523A28F2218BA2600341EBD /* HIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIImageView.swift; sourceTree = "<group>"; };
 		952831A3200F2B35002C9F3E /* HILoginFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HILoginFlowController.swift; sourceTree = "<group>"; };
-		952D153B220D37980041383A /* refresh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = refresh.json; sourceTree = "<group>"; };
 		952D1540220D453D0041383A /* countdown-60.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countdown-60.json"; sourceTree = "<group>"; };
 		952D1541220D453D0041383A /* countdown-24.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countdown-24.json"; sourceTree = "<group>"; };
 		953199C81FC25CA0009F2AA1 /* HICoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICoreDataController.swift; sourceTree = "<group>"; };
@@ -347,6 +352,13 @@
 		D12B40FE2AC0B0BD001BCB05 /* HIScanAttendanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScanAttendanceViewController.swift; sourceTree = "<group>"; };
 		D134D30E296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIBannerViewController.swift; sourceTree = "<group>"; };
+		D187BF572B781A1100AD7356 /* HIShiftCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIShiftCell.swift; sourceTree = "<group>"; };
+		D1BBA5672B70AB940017BD13 /* Staff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Staff.swift; sourceTree = "<group>"; };
+		D1BBA5692B70ACCC0017BD13 /* StaffService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffService.swift; sourceTree = "<group>"; };
+		D187BF592B78317600AD7356 /* Mentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mentor.swift; sourceTree = "<group>"; };
+		D187BF5B2B78318000AD7356 /* MentorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentorService.swift; sourceTree = "<group>"; };
+		D1C5B6572B732E44000E766D /* refresh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = refresh.json; sourceTree = "<group>"; };
+		D1F146392B605C57004E7FC9 /* Hack_Mushroom_Loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Hack_Mushroom_Loading.json; sourceTree = "<group>"; };
 		D3A309BA221116A600CBA351 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };
 		D3A309BB2211175200CBA351 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
 		DF3706372925DDAA000B4278 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsBase.framework; sourceTree = "<group>"; };
@@ -370,7 +382,6 @@
 		DF37065B2925DE5D000B4278 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DF37065D2925DE66000B4278 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DF5B27C4299197E80034A8B9 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		DF5B27C6299372AE0034A8B9 /* Hack_PopcornCart_Text.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Hack_PopcornCart_Text.json; sourceTree = "<group>"; };
 		E170038929679D08009B99A8 /* HIProfileCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIProfileCardView.swift; sourceTree = "<group>"; };
 		E1BF5E79298B462F00A98390 /* HIStaffButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIStaffButtonView.swift; sourceTree = "<group>"; };
 		E1E4A5D6291C9BF700780BA1 /* HICarouselSwiftUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HICarouselSwiftUIView.swift; sourceTree = "<group>"; };
@@ -405,6 +416,7 @@
 				951E67F923C1C88200477703 /* Lottie in Frameworks */,
 				DF37063C2925DDB8000B4278 /* GoogleMapsCore.framework in Frameworks */,
 				951E67F623C1C83B00477703 /* Keychain in Frameworks */,
+				D7451BD22B54BCFB00D501D0 /* URLImage in Frameworks */,
 				D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -545,7 +557,7 @@
 		952D1538220D37980041383A /* Refresh */ = {
 			isa = PBXGroup;
 			children = (
-				952D153B220D37980041383A /* refresh.json */,
+				D1C5B6572B732E44000E766D /* refresh.json */,
 			);
 			path = Refresh;
 			sourceTree = "<group>";
@@ -661,6 +673,7 @@
 				95A7D282203D4F54005EAEAF /* HIAnnouncementCell.swift */,
 				95A7D29F203D60E9005EAEAF /* HIBubbleCell.swift */,
 				95A7D281203D4F54005EAEAF /* HIEventCell.swift */,
+				D187BF572B781A1100AD7356 /* HIShiftCell.swift */,
 				3CF8DB1223B419980035ECAE /* HIProjectCell.swift */,
 			);
 			path = HIBubbleCell;
@@ -708,8 +721,10 @@
 				95E3146121FAF1740092C22E /* BaseService.swift */,
 				95B12042220BEA9D00E024BB /* CheckInService.swift */,
 				95E3145F21FAF1740092C22E /* EventService.swift */,
+				D187BF5B2B78318000AD7356 /* MentorService.swift */,
 				AC3B620F25E85D18002386A2 /* ProfileService.swift */,
 				95E3145C21FAF1740092C22E /* PassService.swift */,
+				D1BBA5692B70ACCC0017BD13 /* StaffService.swift */,
 				95E3146321FAF1740092C22E /* RegistrationService.swift */,
 				95B12044220BEAD700E024BB /* TrackingService.swift */,
 				95E3145D21FAF1740092C22E /* UserService.swift */,
@@ -727,10 +742,12 @@
 				95E3146821FAF1740092C22E /* Announcement.swift */,
 				3521FFA82207C03E00634A63 /* Attendee.swift */,
 				95E3146521FAF1740092C22E /* Event.swift */,
+				D1BBA5672B70AB940017BD13 /* Staff.swift */,
 				2FA73B4F2B58CAC3002658C0 /* Item.swift */,
 				AC3B620D25E85CAD002386A2 /* Profile.swift */,
 				95E3146621FAF1740092C22E /* SimpleRequest.swift */,
 				95E3146721FAF1740092C22E /* User.swift */,
+				D187BF592B78317600AD7356 /* Mentor.swift */,
 				3C26401C23ADE8A5004E1DBE /* Project.swift */,
 				3C8F62D3238F9639001A5DAF /* Time.swift */,
 				ACB53AE6261B874A007B1643 /* Interest.swift */,
@@ -800,7 +817,7 @@
 		E1E4A5D5291C9BF700780BA1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				DF5B27C6299372AE0034A8B9 /* Hack_PopcornCart_Text.json */,
+				D1F146392B605C57004E7FC9 /* Hack_Mushroom_Loading.json */,
 				E1E4A5D6291C9BF700780BA1 /* HICarouselSwiftUIView.swift */,
 			);
 			path = UI;
@@ -865,6 +882,7 @@
 			packageProductDependencies = (
 				951E67F523C1C83B00477703 /* Keychain */,
 				951E67F823C1C88200477703 /* Lottie */,
+				D7451BD12B54BCFB00D501D0 /* URLImage */,
 			);
 			productName = HackIllinois;
 			productReference = 9518277F1EA35AF100049F79 /* HackIllinois.app */;
@@ -954,6 +972,7 @@
 				951E67F123C1C7FD00477703 /* XCRemoteSwiftPackageReference "api-manager" */,
 				951E67F423C1C83B00477703 /* XCRemoteSwiftPackageReference "keychain" */,
 				951E67F723C1C88200477703 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				D7451BD02B54BCFB00D501D0 /* XCRemoteSwiftPackageReference "url-image" */,
 			);
 			productRefGroup = 951827801EA35AF100049F79 /* Products */;
 			projectDirPath = "";
@@ -971,16 +990,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				952D153D220D37980041383A /* refresh.json in Resources */,
 				952D1543220D453D0041383A /* countdown-24.json in Resources */,
 				1C7561A3278E96600004D739 /* DarkVespaText.json in Resources */,
 				951827A91EA35DB800049F79 /* Assets.xcassets in Resources */,
 				952D1542220D453D0041383A /* countdown-60.json in Resources */,
+				D1F1463A2B605C57004E7FC9 /* Hack_Mushroom_Loading.json in Resources */,
 				951827B41EA35E8B00049F79 /* LaunchScreen.storyboard in Resources */,
 				1C7561A5278E96750004D739 /* LightVespaText.json in Resources */,
 				D134D30F296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf in Resources */,
 				DF37063E2925DDE7000B4278 /* GoogleMaps.bundle in Resources */,
-				DF5B27C7299372AE0034A8B9 /* Hack_PopcornCart_Text.json in Resources */,
+				D1C5B6582B732E44000E766D /* refresh.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1053,6 +1072,7 @@
 				E1E4A5DA291C9BF800780BA1 /* HIOnboardingView.swift in Sources */,
 				95A7D290203D4F54005EAEAF /* HIAnnouncementCell.swift in Sources */,
 				9515E43722093E1300BCAF92 /* HIEventScannerViewController.swift in Sources */,
+				D187BF582B781A1100AD7356 /* HIShiftCell.swift in Sources */,
 				95A7D28F203D4F54005EAEAF /* HIEventCell.swift in Sources */,
 				ACAA717626017EC4000F42B0 /* HICollectionViewFlowLayout.swift in Sources */,
 				DF5B27C5299197E80034A8B9 /* Array.swift in Sources */,
@@ -1130,6 +1150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1BBA5682B70AB940017BD13 /* Staff.swift in Sources */,
 				3521FFA92207C03E00634A63 /* Attendee.swift in Sources */,
 				95E3147521FAF1740092C22E /* User.swift in Sources */,
 				2FA73B4E2B58CAA0002658C0 /* ShopService.swift in Sources */,
@@ -1150,10 +1171,13 @@
 				95E3146A21FAF1740092C22E /* AnnouncementService.swift in Sources */,
 				95E3147221FAF1740092C22E /* RegistrationService.swift in Sources */,
 				95E3147421FAF1740092C22E /* SimpleRequest.swift in Sources */,
+				D187BF5C2B78318000AD7356 /* MentorService.swift in Sources */,
 				2FA73B502B58CAC3002658C0 /* Item.swift in Sources */,
+				D1BBA56A2B70ACCC0017BD13 /* StaffService.swift in Sources */,
 				A5163FED221F283C003C543E /* StatsService.swift in Sources */,
 				95B12045220BEAD700E024BB /* TrackingService.swift in Sources */,
 				3C8F62D6238F9825001A5DAF /* TimeService.swift in Sources */,
+				D187BF5A2B78317600AD7356 /* Mentor.swift in Sources */,
 				95E3145921FAD71E0092C22E /* Error.swift in Sources */,
 				3C26401D23ADE8A5004E1DBE /* Project.swift in Sources */,
 			);
@@ -1183,7 +1207,7 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_MODULES = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1247,7 +1271,7 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_MODULES = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1301,6 +1325,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = HackIllinois/HackIllinois.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -1332,6 +1357,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = HackIllinois/HackIllinois.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -1557,6 +1583,14 @@
 				version = 4.0.1;
 			};
 		};
+		D7451BD02B54BCFB00D501D0 /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1574,6 +1608,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 951E67F723C1C88200477703 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		D7451BD12B54BCFB00D501D0 /* URLImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7451BD02B54BCFB00D501D0 /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 

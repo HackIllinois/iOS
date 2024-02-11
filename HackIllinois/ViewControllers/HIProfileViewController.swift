@@ -36,9 +36,11 @@ class HIProfileViewController: HIBaseViewController {
 
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "ProfileBackground")
+        backgroundView.image = #imageLiteral(resourceName: "PurpleBackground")
     }
     private var tiers: [Tier] = []
+    private var ranking: Int = 0
+    private var role: String = ""
 }
 
 // MARK: - UITabBarItem Setup
@@ -73,12 +75,33 @@ extension HIProfileViewController {
             view.willRemoveSubview(profileCardController!.view)
             profileCardController?.removeFromParent()
         }
+//        var rank: Int = 0
+//        guard let user = HIApplicationStateController.shared.user else { return }
+//        HIAPI.ProfileService.getUserRanking(userToken: user.token)
+//            .onCompletion { [weak self] result in
+//                do {
+//                    let (userRanking, _) = try result.get()
+//                    self?.ranking = userRanking.ranking
+//                    rank = userRanking.ranking
+//                } catch {
+//                    print("An error has occurred in ranking \(error)")
+//                }
+//            }
+//            .launch()
+//        print("rank \(rank)")
+        guard let user = HIApplicationStateController.shared.user else { return }
+        var role = "General"
+        print(user.roles)
+        if user.roles.contains(.PRO) {
+            role = "Knight"
+        }
         profileCardController = UIHostingController(rootView: HIProfileCardView(displayName: profile.displayName,
-                                                                                dietaryRestrictions: dietaryRestrictions,
                                                                                 points: profile.points,
                                                                                 tier: profileTier,
-                                                                                foodWave: 1,//profile.foodWave,
-                                                                                userId: profile.userId
+                                                                                foodWave: 1,
+                                                                                avatarUrl: profile.avatarUrl,
+                                                                                userId: profile.userId,
+                                                                                role: role
                                                                                ))
 
         addChild(profileCardController!)
@@ -158,9 +181,11 @@ extension HIProfileViewController {
         .onCompletion { [weak self] result in
             do {
                 let (apiProfile, _) = try result.get()
+                print(apiProfile)
                 self?.profile.userId = apiProfile.userId
                 self?.profile.displayName = apiProfile.discordTag
                 self?.profile.points = apiProfile.points
+                self?.profile.avatarUrl = apiProfile.avatarUrl
                 //self?.profile.foodWave = apiProfile.foodWave
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": self?.profile])
@@ -182,6 +207,20 @@ extension HIProfileViewController {
                     }
                 } catch {
                     print("An error has occurred \(error)")
+                }
+            }
+            .launch()
+        HIAPI.ProfileService.getUserRanking(userToken: user.token)
+            .onCompletion { [weak self] result in
+                do {
+                    let (userRanking, _) = try result.get()
+                    self?.ranking = userRanking.ranking
+                    print(userRanking.ranking)
+                    DispatchQueue.main.async {
+                        self?.updateProfile()
+                    }
+                } catch {
+                    print("An error has occurred in ranking \(error)")
                 }
             }
             .launch()

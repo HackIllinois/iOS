@@ -40,7 +40,7 @@ class HIEventDetailViewController: HIBaseViewController {
         } else {
             view.layer.cornerRadius = 8
         }
-        view.backgroundHIColor = \.buttonDarkBlueGreen
+        view.backgroundHIColor = \.buttonPurple
         view.translatesAutoresizingMaskIntoConstraints = false
     }
     private let eventTypeLabel = HILabel(style: .eventType)
@@ -56,7 +56,7 @@ class HIEventDetailViewController: HIBaseViewController {
         } else {
             view.layer.cornerRadius = 8
         }
-        view.backgroundHIColor = \.buttonMagenta
+        view.backgroundHIColor = \.buttonBrown
         view.translatesAutoresizingMaskIntoConstraints = false
     }
     private let pointsLabel = HILabel(style: .eventType)
@@ -72,12 +72,9 @@ class HIEventDetailViewController: HIBaseViewController {
         $0.activeImage = #imageLiteral(resourceName: "MenuClose")
         $0.baseImage = #imageLiteral(resourceName: "MenuClose")
     }
-    private var mapView: GMSMapView!
-    //    private let mapContainerView = HIView {
-    //        $0.translatesAutoresizingMaskIntoConstraints = false
-    //        $0.backgroundHIColor = \.clear
-    //    }
-
+    
+    private var mapView: UIImageView = UIImageView()
+    
     // MARK: Constraints
     private var descriptionLabelHeight = NSLayoutConstraint()
 
@@ -171,17 +168,7 @@ extension HIEventDetailViewController {
             // concatenate all location names
             locationLabel.text = event.locations.map { ($0 as AnyObject).name }.joined(separator: ", ")
         }
-        // MARK: GoogleMap Setup
-        for case let loc as Location in event.locations {
-            DispatchQueue.main.async { [self] in
-                let newcamera = GMSCameraPosition.camera(withLatitude: loc.latitude, longitude: loc.longitude, zoom: 18.0)
-                mapView.camera = newcamera
-                let marker = GMSMarker()
-                marker.title = loc.name
-                marker.position = CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude)
-                marker.map = mapView
-            }
-        }
+        setupMap()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -247,23 +234,48 @@ extension HIEventDetailViewController {
         upperContainerView.addSubview(locationImageView)
         locationImageView.translatesAutoresizingMaskIntoConstraints = false
         locationImageView.topAnchor.constraint(equalTo: timeImageView.bottomAnchor, constant: 10).isActive = true
-        locationImageView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
+        locationImageView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: 2).isActive = true
         upperContainerView.addSubview(locationLabel)
         locationLabel.centerYAnchor.constraint(equalTo: locationImageView.centerYAnchor).isActive = true
-        locationLabel.leadingAnchor.constraint(equalTo: locationImageView.leadingAnchor, constant: 20).isActive = true
+        locationLabel.leadingAnchor.constraint(equalTo: locationImageView.leadingAnchor, constant: 18).isActive = true
     }
     func setupMap() {
-        let camera = GMSCameraPosition.camera(withLatitude: 40.113882445333154, longitude: -88.22491715718857, zoom: 18.0)
-//        let mapID = GMSMapID(identifier: "66c463c9a421326e")
-//        mapView = GMSMapView(frame: .zero, mapID: mapID, camera: camera)
-        // Map without nightmode
-        mapView = GMSMapView(frame: .zero, camera: camera)
+        guard let event = event else { return }
+        print(event.mapImageUrl)
+        
+        // Check if the image URL ends with "svg" and replace it with "png"
+        var imageUrlString = event.mapImageUrl
+        if imageUrlString.lowercased().hasSuffix("svg") {
+            imageUrlString = imageUrlString.replacingOccurrences(of: "svg", with: "png")
+        }
+        
+        if let mapUrl = URL(string: imageUrlString) {
+            let session = URLSession.shared
+            self.mapView.image = nil
+            let task = session.dataTask(with: mapUrl) { (data, response, error) in
+                if let error = error {
+                    print("Error loading map image: \(error.localizedDescription)")
+                    return
+                }
+                if let data = data {
+                    DispatchQueue.main.async {
+                        self.mapView.image = UIImage(data: data)
+                        self.mapView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                        self.mapView.layer.borderColor = #colorLiteral(red: 0.9254901961, green: 0.8235294118, blue: 0.8235294118, alpha: 1)
+                        self.mapView.layer.borderWidth = 4.0
+                    }
+                }
+            }
+            task.resume()
+        }
+
         eventDetailContainer.addSubview(mapView)
         mapView.translatesAutoresizingMaskIntoConstraints = false
         mapView.leadingAnchor.constraint(equalTo: eventDetailContainer.leadingAnchor).isActive = true
         mapView.trailingAnchor.constraint(equalTo: eventDetailContainer.trailingAnchor).isActive = true
         mapView.topAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: 15).isActive = true
-        mapView.constrain(height: 300)
+        let mapHeight: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 450 : 250
+        mapView.constrain(height: mapHeight)
         mapView.layer.cornerRadius = 20
     }
     func setupCloseButton() {

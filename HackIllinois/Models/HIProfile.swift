@@ -29,7 +29,7 @@ struct HIProfile: Codable {
     var discordTag = ""
     var avatarUrl = ""
     var coins = 0
-    
+
     init(provider: HIAPI.AuthService.OAuthProvider) {
         self.provider = provider
     }
