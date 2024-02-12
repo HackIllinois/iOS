@@ -24,9 +24,12 @@ public struct Item: Codable {
         case price
         case isRaffle
         case quantity
+        case imageURL
     }
     public let name: String
     public let price: Int
     public let isRaffle: Bool
     public let quantity: Int
+    public let imageURL: String
+
 }

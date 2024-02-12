@@ -18,7 +18,9 @@ public final class ProfileService: BaseService {
         return super.baseURL + "profile/"
     }
 
-    public static func getUserProfile() -> APIRequest<Profile> {
+    public static func getUserProfile(userToken: String) -> APIRequest<Profile> {
+        var headers = HTTPHeaders()
+        headers["Authorization"] = userToken
         return APIRequest<Profile>(service: self, endpoint: "", headers: headers, method: .GET)
     }
 

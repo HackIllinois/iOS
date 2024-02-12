@@ -16,6 +16,8 @@
 		1C9045D4274F065F00DDA74E /* HIOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */; };
 		2FA73B4E2B58CAA0002658C0 /* ShopService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA73B4D2B58CAA0002658C0 /* ShopService.swift */; };
 		2FA73B502B58CAC3002658C0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA73B4F2B58CAC3002658C0 /* Item.swift */; };
+		2FF0F9302B58D56700017D08 /* HIPointsShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF0F92F2B58D56700017D08 /* HIPointsShopViewController.swift */; };
+		2FF0F9322B58D5A200017D08 /* HIPointsShopSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF0F9312B58D5A200017D08 /* HIPointsShopSwiftUIView.swift */; };
 		3521FFA92207C03E00634A63 /* Attendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521FFA82207C03E00634A63 /* Attendee.swift */; };
 		35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */; };
 		35B4A44F21E091BA001B3AF0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4A44D21E091B9001B3AF0 /* Logger.swift */; };
@@ -226,6 +228,8 @@
 		1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIOnboardingViewController.swift; sourceTree = "<group>"; };
 		2FA73B4D2B58CAA0002658C0 /* ShopService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopService.swift; sourceTree = "<group>"; };
 		2FA73B4F2B58CAC3002658C0 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		2FF0F92F2B58D56700017D08 /* HIPointsShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIPointsShopViewController.swift; sourceTree = "<group>"; };
+		2FF0F9312B58D5A200017D08 /* HIPointsShopSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIPointsShopSwiftUIView.swift; sourceTree = "<group>"; };
 		3521FFA82207C03E00634A63 /* Attendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendee.swift; sourceTree = "<group>"; };
 		35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HICountdownViewController.swift; sourceTree = "<group>"; };
 		35B4A44D21E091B9001B3AF0 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -589,8 +593,10 @@
 				95C18DC42009618C004784B5 /* HIHomeViewController.swift */,
 				954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */,
 				95CCEA1E203D6B3600E3E28C /* HINavigationController.swift */,
+				2FF0F9312B58D5A200017D08 /* HIPointsShopSwiftUIView.swift */,
 				95C18DC820096539004784B5 /* HIScheduleViewController.swift */,
 				98CA2A3D25C899CF003E842A /* HIProfileViewController.swift */,
+				2FF0F92F2B58D56700017D08 /* HIPointsShopViewController.swift */,
 				E170038929679D08009B99A8 /* HIProfileCardView.swift */,
 				60EAF98A273B1AC4002CD205 /* HIScanQRCodeViewController.swift */,
 				D12B40FE2AC0B0BD001BCB05 /* HIScanAttendanceViewController.swift */,
@@ -1076,6 +1082,7 @@
 				95CD0ED52015217E00D79DCC /* HIApplicationStateController.swift in Sources */,
 				E1E4A5DB291C9BF800780BA1 /* HIOnboardingViewModel.swift in Sources */,
 				AC0DDDDC261111B60086BDE0 /* HITextView.swift in Sources */,
+				2FF0F9302B58D56700017D08 /* HIPointsShopViewController.swift in Sources */,
 				95A7D292203D4F54005EAEAF /* HILoginSelectionCell.swift in Sources */,
 				3C26401923ADE7AA004E1DBE /* Project+CoreDataProperties.swift in Sources */,
 				1C9045D2274F048A00DDA74E /* HICarouselView.swift in Sources */,
@@ -1096,6 +1103,7 @@
 				D12B40FF2AC0B0BD001BCB05 /* HIScanAttendanceViewController.swift in Sources */,
 				95C18DCA20096539004784B5 /* HIEventDetailViewController.swift in Sources */,
 				9523A2902218BA2600341EBD /* HIImageView.swift in Sources */,
+				2FF0F9322B58D5A200017D08 /* HIPointsShopSwiftUIView.swift in Sources */,
 				95C18DC52009618C004784B5 /* HIHomeViewController.swift in Sources */,
 				35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */,
 				3C7E552723AA199900213E1F /* HITimeDataSource.swift in Sources */,
