@@ -23,8 +23,8 @@ class HIEventCell: HIBubbleCell {
     let favoritedButton = HIButton {
         $0.tintHIColor = \.accent
         $0.backgroundHIColor = \.clear
-        $0.activeImage = #imageLiteral(resourceName: "Favorited")
-        $0.baseImage = #imageLiteral(resourceName: "Unfavorited")
+        $0.activeImage = #imageLiteral(resourceName: "Selected Bookmark")
+        $0.baseImage = #imageLiteral(resourceName: "Unselected Bookmark")
         if UIDevice.current.userInterfaceIdiom == .pad {
             $0.activeImage = #imageLiteral(resourceName: "FavoritedPad")
             $0.baseImage = #imageLiteral(resourceName: "UnFavoritedPad")
@@ -104,22 +104,15 @@ extension HIEventCell {
     }
     static func <- (lhs: HIEventCell, rhs: Event) {
         lhs.favoritedButton.isActive = rhs.favorite
-        var contentStackViewHeight: CGFloat = 0.0
-        var eventCellSpacing: CGFloat = 8.0
-        var stackViewSpacing: CGFloat = 4.7
-        var bubbleConstant: CGFloat = 1.0
-        var locationImageView = UIImageView(image: #imageLiteral(resourceName: "LocationSign"))
-        var timeImageView = UIImageView(image: #imageLiteral(resourceName: "Clock"))
-        var sponsorImageView = UIImageView(image: #imageLiteral(resourceName: "Vector"))
-        let titleLabel = HILabel(style: .event)
-        titleLabel.numberOfLines = 2
+        var contentStackViewHeight: CGFloat = 0.0; var eventCellSpacing: CGFloat = 8.0
+        var stackViewSpacing: CGFloat = 4.7; var bubbleConstant: CGFloat = 1.0
+        var locationImageView = UIImageView(image: #imageLiteral(resourceName: "LocationSign")); var timeImageView = UIImageView(image: #imageLiteral(resourceName: "Clock"))
+        var sponsorImageView = UIImageView(image: #imageLiteral(resourceName: "Vector")); let titleLabel = HILabel(style: .event)
+        titleLabel.numberOfLines = 2; titleLabel.text = rhs.name
         lhs.headerView.addArrangedSubview(titleLabel)
-        titleLabel.text = rhs.name
         lhs.headerView.setCustomSpacing(9, after: titleLabel)
         if UIDevice.current.userInterfaceIdiom == .pad {
-            eventCellSpacing = 12.0
-            stackViewSpacing = 15.0
-            bubbleConstant = 2.0
+            eventCellSpacing = 12.0; stackViewSpacing = 15.0; bubbleConstant = 2.0
             locationImageView = UIImageView(image: #imageLiteral(resourceName: "VectorPad"))
             timeImageView = UIImageView(image: #imageLiteral(resourceName: "TimePad"))
             sponsorImageView = UIImageView(image: #imageLiteral(resourceName: "SponsorPad"))
@@ -142,15 +135,18 @@ extension HIEventCell {
             timeLabel.text = Formatter.simpleTime.string(from: rhs.startTime) + " - " + Formatter.simpleTime.string(from: rhs.endTime)
         }
         let pointsView = HIView { (view) in
-            view.layer.cornerRadius = 10.5 * bubbleConstant
-            view.backgroundHIColor = \.buttonPink
+            view.layer.cornerRadius = 10.5 * bubbleConstant; view.backgroundHIColor = \.buttonBrown
             view.translatesAutoresizingMaskIntoConstraints = false
         }
         let eventTypeView = HIView { (view) in
-            view.layer.cornerRadius = 10.5 * bubbleConstant
-            view.backgroundHIColor = \.buttonBlue
+            view.layer.cornerRadius = 10.5 * bubbleConstant; view.backgroundHIColor = \.buttonPurple
             view.translatesAutoresizingMaskIntoConstraints = false
         }
+        let proTypeView = HIView { (view) in
+            view.layer.cornerRadius = 10.5 * bubbleConstant; view.backgroundHIColor = \.proBackground
+            view.translatesAutoresizingMaskIntoConstraints = false
+        }
+        let proLabel = HILabel(style: .pointsText); proLabel.text = "Pro"
         let pointsLabel = HILabel(style: .pointsText)
         upperContainerView.addSubview(pointsView)
         pointsView.addSubview(pointsLabel)

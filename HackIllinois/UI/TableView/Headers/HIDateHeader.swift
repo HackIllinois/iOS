@@ -20,8 +20,8 @@ class HIDateHeader: UITableViewHeaderFooterView {
         $0.font = HIAppearance.Font.sectionHeader
     }
     let dateView = HIView { (view) in
-        view.layer.cornerRadius = 10
-        view.backgroundHIColor = \.buttonDarkBlue
+        view.layer.cornerRadius = 15
+        view.backgroundHIColor = \.buttonDarkGreen
     }
 
     override init(reuseIdentifier: String?) {
@@ -33,10 +33,10 @@ class HIDateHeader: UITableViewHeaderFooterView {
         dateView.translatesAutoresizingMaskIntoConstraints = false
         var spaceConstant: CGFloat = 1.0
         dateView.addSubview(titleLabel)
-        dateView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: -8).isActive = true
+        dateView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: -7).isActive = true
         dateView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
-        dateView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
-        titleLabel.constrain(to: dateView, topInset: 4 * spaceConstant, trailingInset: -16 * spaceConstant, bottomInset: -4 * spaceConstant, leadingInset: 16 * spaceConstant)
+        dateView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -7).isActive = true
+        titleLabel.constrain(to: dateView, topInset: 3 * spaceConstant, trailingInset: -16 * spaceConstant, bottomInset: -3 * spaceConstant, leadingInset: 16 * spaceConstant)
     }
 
     required init?(coder aDecoder: NSCoder) {

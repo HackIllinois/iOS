@@ -177,7 +177,7 @@ extension HIProfileViewController {
 extension HIProfileViewController {
     @objc func reloadProfile () {
         guard let user = HIApplicationStateController.shared.user else { return }
-        HIAPI.ProfileService.getUserProfile()
+        HIAPI.ProfileService.getUserProfile(userToken: user.token)
         .onCompletion { [weak self] result in
             do {
                 let (apiProfile, _) = try result.get()

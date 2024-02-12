@@ -15,7 +15,7 @@ public final class ShopService: BaseService {
     }
 
     public static func getAllItems() -> APIRequest<ItemContainer> {
-        return APIRequest<ItemContainer>(service: self, endpoint: "shop/", method: .GET)
+        return APIRequest<ItemContainer>(service: self, endpoint: "shop/", headers: headers, method: .GET)
     }
     
     public static func redeemPrize(itemId: String, itemInstance: String, userToken: String) -> APIRequest<RedeemItem> {

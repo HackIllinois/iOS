@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21279" systemVersion="22C65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="21G320" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Announcement" representedClassName="Announcement" syncable="YES">
         <attribute name="body" attributeType="String"/>
         <attribute name="time" attributeType="Date" usesScalarValueType="NO"/>
@@ -18,6 +18,7 @@
         <attribute name="id" attributeType="String"/>
         <attribute name="info" attributeType="String"/>
         <attribute name="isAsync" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="mapImageUrl" optional="YES" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="points" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="sectionIdentifier" transient="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>

@@ -16,6 +16,8 @@ struct HIAppearance: Equatable {
     let neonCountdownText: UIColor
     let titleText: UIColor
     let whiteText: UIColor
+    let darkGreenText: UIColor
+    let lightYellowText: UIColor
     let baseText: UIColor
     let accent: UIColor
     let viewTitleBrown: UIColor
@@ -41,12 +43,13 @@ struct HIAppearance: Equatable {
     let whiteTagFont: UIColor
     let interestBackground: UIColor
     let buttonGreen: UIColor
-    let buttonPink: UIColor
+    let buttonBrown: UIColor
     let buttonLightPink: UIColor
-    let buttonBlue: UIColor
+    let buttonPurple: UIColor
     let buttonDarkBlue: UIColor
     let buttonMagenta: UIColor
     let buttonDarkBlueGreen: UIColor
+    let buttonDarkGreen: UIColor
     let favoriteStarBackground: UIColor
     let segmentedBackground: UIColor
     let buttonYellow: UIColor
@@ -87,6 +90,9 @@ struct HIAppearance: Equatable {
     let scannerButtonYellow: UIColor
     let scannerButtonBorder: UIColor
     let scannerButtonShadow: UIColor
+
+    let proBackground: UIColor
+    let eventCard: UIColor
     
     let clear: UIColor = .clear
     let black: UIColor = .black
@@ -123,7 +129,9 @@ struct HIAppearance: Equatable {
     private static let lightGreen = #colorLiteral(red: 0.7019607843, green: 0.8392156863, blue: 0.537254902, alpha: 1)
     private static let lightBlue = #colorLiteral(red: 0.7176470588, green: 0.8392156863, blue: 0.8392156863, alpha: 1)
     private static let teal = #colorLiteral(red: 0.537254902, green: 0.7450980392, blue: 0.6666666667, alpha: 1)
+    private static let medTeal = #colorLiteral(red: 0.4274509804, green: 0.6117647059, blue: 0.6274509804, alpha: 1)
     private static let darkGreen = #colorLiteral(red: 0.05098039216, green: 0.2470588235, blue: 0.2549019608, alpha: 1)
+    private static let darkestGreen = #colorLiteral(red: 0.02745098039, green: 0.1725490196, blue: 0.1803921569, alpha: 1)
     private static let lightBrown = #colorLiteral(red: 0.5882352941, green: 0.2980392157, blue: 0.1019607843, alpha: 1)
     private static let medBrown = #colorLiteral(red: 0.4588235294, green: 0.1960784314, blue: 0.07843137255, alpha: 1)
     private static let brown = #colorLiteral(red: 0.4, green: 0.168627451, blue: 0.07450980392, alpha: 1)
@@ -140,7 +148,8 @@ struct HIAppearance: Equatable {
     private static let buttonPink = #colorLiteral(red: 0.862745098, green: 0.5411764706, blue: 0.662745098, alpha: 1)
     private static let buttonTeal = #colorLiteral(red: 0.6470588235, green: 0.8549019608, blue: 0.8352941176, alpha: 1)
     private static let buttonYellow = #colorLiteral(red: 1, green: 0.7882352941, blue: 0.3568627451, alpha: 1)
-    
+    private static let offWhite = #colorLiteral(red: 1, green: 0.9725490196, blue: 0.9607843137, alpha: 1)
+
     private static let transparent2 = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     private static var statusBarWhite: UIStatusBarStyle {
         return .lightContent
@@ -157,12 +166,14 @@ struct HIAppearance: Equatable {
         neonCountdownText: lightYellow,
         titleText: lightBlack,
         whiteText: white,
+        darkGreenText: darkestGreen,
+        lightYellowText: bLightYellow,
         baseText: lightBlack,
         accent: orange,
         viewTitleBrown: darkBrown,
         action: tan,
         baseBackground: white,
-        contentBackground: lightBlue,
+        contentBackground: offWhite,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         codePopupTab: white,
@@ -182,12 +193,13 @@ struct HIAppearance: Equatable {
         whiteTagFont: white,
         interestBackground: orange,
         buttonGreen: yellowGreen,
-        buttonPink: pink,
+        buttonBrown: lightBrown,
         buttonLightPink: other,
-        buttonBlue: blue,
+        buttonPurple: indigo,
         buttonDarkBlue: darkBlue,
         buttonMagenta: magenta,
         buttonDarkBlueGreen: darkBlueGreeen,
+        buttonDarkGreen: darkGreen,
         favoriteStarBackground: yellowWhite,
         segmentedBackground: white,
         buttonYellow: bLightYellow,
@@ -223,18 +235,22 @@ struct HIAppearance: Equatable {
         scannerButtonYellow: buttonYellow,
         scannerButtonBorder: medBrown,
         scannerButtonShadow: darkBrown
+        proBackground: medTeal,
+        eventCard: offWhite
     )
 
     fileprivate static let night = HIAppearance(
         neonCountdownText: lightYellow,
         titleText: lightBlack,
         whiteText: white,
+        darkGreenText: darkestGreen,
+        lightYellowText: bLightYellow,
         baseText: lightBlack,
         accent: orange,
         viewTitleBrown: darkBrown,
         action: tan,
         baseBackground: white,
-        contentBackground: lightBlue,
+        contentBackground: offWhite,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         codePopupTab: white,
@@ -254,12 +270,13 @@ struct HIAppearance: Equatable {
         whiteTagFont: white,
         interestBackground: orange,
         buttonGreen: yellowGreen,
-        buttonPink: pink,
+        buttonBrown: lightBrown,
         buttonLightPink: other,
-        buttonBlue: blue,
+        buttonPurple: indigo,
         buttonDarkBlue: darkBlue,
         buttonMagenta: magenta,
         buttonDarkBlueGreen: darkBlueGreeen,
+        buttonDarkGreen: darkGreen,
         favoriteStarBackground: yellowWhite,
         segmentedBackground: white,
         buttonYellow: bLightYellow,
@@ -295,6 +312,8 @@ struct HIAppearance: Equatable {
         scannerButtonYellow: buttonYellow,
         scannerButtonBorder: medBrown,
         scannerButtonShadow: darkBrown
+        proBackground: medTeal,
+        eventCard: offWhite
     )
 
     fileprivate static var current = day
@@ -307,19 +326,20 @@ struct HIAppearance: Equatable {
 
     enum Font {
         // Fonts ending with "Pad" correspond to the iPad font sizes
-        // Glyph font corresponds to the time texts that separate the event cells on the schedule page and the "Memories Made" (2023 app) text
+        // Glyph font corresponds to the time texts that separate the event cells on the schedule page (2023) and the "Memories Made" (2023 app) text
         static let glyph = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 16)
         
         // Home segemented control fonts
         static let homeSegmentedTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 40 : 24)
         
         // Schedule page segmented control fonts
-        static let segmentedNumberText = UIFont(name: "MontserratRoman-SemiBold", size: UIDevice.current.userInterfaceIdiom == .pad ? 36 : 18) // Dates
+        static let segmentedNumberText = UIFont(name: "MontserratRoman-SemiBold", size: UIDevice.current.userInterfaceIdiom == .pad ? 64 : 32) // Dates
         static let scheduleSegmentedPad = UIFont(name: "MontserratRoman-SemiBold", size: 32)
         static let segmentedTitle = UIFont(name: "MontserratRoman-Bold", size: 16)
         // More Schedule page fonts
         static let timeIndicator = UIFont(name: "MontserratRoman-Bold", size: 32)
         static let happeningEventTitle = UIFont(name: "MontserratRoman-Bold", size: 25)
+        static let dateHeader = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 14) // Date header event cell separators 2024
         
         // Main header title for each page (Profile, Schedule, etc)
         static let viewTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 48 : 24)
@@ -391,7 +411,7 @@ struct HIAppearance: Equatable {
         static let leaderboardRankPad = UIFont(name: "MontserratRoman-Bold", size: 48)
         
         // Misc
-        static let sectionHeader = UIFont(name: "MontserratRoman-Bold", size: 13)
+        static let sectionHeader = UIFont(name: "MontserratRoman-Bold", size: 12)
         static let button = UIFont(name: "MontserratRoman-Regular", size: 15)
         static let welcomeTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 40: 24)
         

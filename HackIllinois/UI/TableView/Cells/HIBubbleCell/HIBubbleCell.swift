@@ -65,7 +65,7 @@ class HIBubbleCell: UITableViewCell {
     }
 
     func setActive(_ active: Bool) {
-        let finalColor: HIColor = active ? \.action : \.contentBackground
+        let finalColor: HIColor = active ? \.action : \.eventCard
         animator?.stopAnimation(true)
         animator = UIViewPropertyAnimator(duration: 0.2, curve: .linear)
         animator?.addAnimations { [weak self] in

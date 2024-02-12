@@ -16,6 +16,8 @@
 		1C9045D4274F065F00DDA74E /* HIOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */; };
 		2FA73B4E2B58CAA0002658C0 /* ShopService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA73B4D2B58CAA0002658C0 /* ShopService.swift */; };
 		2FA73B502B58CAC3002658C0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA73B4F2B58CAC3002658C0 /* Item.swift */; };
+		2FF0F9302B58D56700017D08 /* HIPointsShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF0F92F2B58D56700017D08 /* HIPointsShopViewController.swift */; };
+		2FF0F9322B58D5A200017D08 /* HIPointsShopSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF0F9312B58D5A200017D08 /* HIPointsShopSwiftUIView.swift */; };
 		3521FFA92207C03E00634A63 /* Attendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521FFA82207C03E00634A63 /* Attendee.swift */; };
 		35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */; };
 		35B4A44F21E091BA001B3AF0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4A44D21E091B9001B3AF0 /* Logger.swift */; };
@@ -137,6 +139,9 @@
 		D14D3AE3295FBDA200EB7995 /* HIBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */; };
 		D158EC312B5A2D440003D799 /* HIQRAttendeeScannerSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D158EC302B5A2D440003D799 /* HIQRAttendeeScannerSelection.swift */; };
 		D158EC332B5A2DFE0003D799 /* HIScanPointsShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D158EC322B5A2DFE0003D799 /* HIScanPointsShopViewController.swift */; };
+		D187BF582B781A1100AD7356 /* HIShiftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D187BF572B781A1100AD7356 /* HIShiftCell.swift */; };
+		D1BBA5682B70AB940017BD13 /* Staff.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BBA5672B70AB940017BD13 /* Staff.swift */; };
+		D1BBA56A2B70ACCC0017BD13 /* StaffService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BBA5692B70ACCC0017BD13 /* StaffService.swift */; };
 		D187BF5A2B78317600AD7356 /* Mentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D187BF592B78317600AD7356 /* Mentor.swift */; };
 		D187BF5C2B78318000AD7356 /* MentorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D187BF5B2B78318000AD7356 /* MentorService.swift */; };
 		D19D4C932B794F9100376E1B /* HIScanMentorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19D4C922B794F9100376E1B /* HIScanMentorViewController.swift */; };
@@ -226,6 +231,8 @@
 		1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIOnboardingViewController.swift; sourceTree = "<group>"; };
 		2FA73B4D2B58CAA0002658C0 /* ShopService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopService.swift; sourceTree = "<group>"; };
 		2FA73B4F2B58CAC3002658C0 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		2FF0F92F2B58D56700017D08 /* HIPointsShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIPointsShopViewController.swift; sourceTree = "<group>"; };
+		2FF0F9312B58D5A200017D08 /* HIPointsShopSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIPointsShopSwiftUIView.swift; sourceTree = "<group>"; };
 		3521FFA82207C03E00634A63 /* Attendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendee.swift; sourceTree = "<group>"; };
 		35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HICountdownViewController.swift; sourceTree = "<group>"; };
 		35B4A44D21E091B9001B3AF0 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -350,6 +357,9 @@
 		D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIBannerViewController.swift; sourceTree = "<group>"; };
 		D158EC302B5A2D440003D799 /* HIQRAttendeeScannerSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIQRAttendeeScannerSelection.swift; sourceTree = "<group>"; };
 		D158EC322B5A2DFE0003D799 /* HIScanPointsShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScanPointsShopViewController.swift; sourceTree = "<group>"; };
+		D187BF572B781A1100AD7356 /* HIShiftCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIShiftCell.swift; sourceTree = "<group>"; };
+		D1BBA5672B70AB940017BD13 /* Staff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Staff.swift; sourceTree = "<group>"; };
+		D1BBA5692B70ACCC0017BD13 /* StaffService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffService.swift; sourceTree = "<group>"; };
 		D187BF592B78317600AD7356 /* Mentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mentor.swift; sourceTree = "<group>"; };
 		D187BF5B2B78318000AD7356 /* MentorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentorService.swift; sourceTree = "<group>"; };
 		D19D4C922B794F9100376E1B /* HIScanMentorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScanMentorViewController.swift; sourceTree = "<group>"; };
@@ -590,8 +600,10 @@
 				95C18DC42009618C004784B5 /* HIHomeViewController.swift */,
 				954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */,
 				95CCEA1E203D6B3600E3E28C /* HINavigationController.swift */,
+				2FF0F9312B58D5A200017D08 /* HIPointsShopSwiftUIView.swift */,
 				95C18DC820096539004784B5 /* HIScheduleViewController.swift */,
 				98CA2A3D25C899CF003E842A /* HIProfileViewController.swift */,
+				2FF0F92F2B58D56700017D08 /* HIPointsShopViewController.swift */,
 				E170038929679D08009B99A8 /* HIProfileCardView.swift */,
 				60EAF98A273B1AC4002CD205 /* HIScanQRCodeViewController.swift */,
 				D12B40FE2AC0B0BD001BCB05 /* HIScanAttendanceViewController.swift */,
@@ -670,6 +682,7 @@
 				95A7D282203D4F54005EAEAF /* HIAnnouncementCell.swift */,
 				95A7D29F203D60E9005EAEAF /* HIBubbleCell.swift */,
 				95A7D281203D4F54005EAEAF /* HIEventCell.swift */,
+				D187BF572B781A1100AD7356 /* HIShiftCell.swift */,
 				3CF8DB1223B419980035ECAE /* HIProjectCell.swift */,
 			);
 			path = HIBubbleCell;
@@ -720,6 +733,7 @@
 				D187BF5B2B78318000AD7356 /* MentorService.swift */,
 				AC3B620F25E85D18002386A2 /* ProfileService.swift */,
 				95E3145C21FAF1740092C22E /* PassService.swift */,
+				D1BBA5692B70ACCC0017BD13 /* StaffService.swift */,
 				95E3146321FAF1740092C22E /* RegistrationService.swift */,
 				95B12044220BEAD700E024BB /* TrackingService.swift */,
 				95E3145D21FAF1740092C22E /* UserService.swift */,
@@ -737,6 +751,7 @@
 				95E3146821FAF1740092C22E /* Announcement.swift */,
 				3521FFA82207C03E00634A63 /* Attendee.swift */,
 				95E3146521FAF1740092C22E /* Event.swift */,
+				D1BBA5672B70AB940017BD13 /* Staff.swift */,
 				2FA73B4F2B58CAC3002658C0 /* Item.swift */,
 				AC3B620D25E85CAD002386A2 /* Profile.swift */,
 				95E3146621FAF1740092C22E /* SimpleRequest.swift */,
@@ -1067,6 +1082,7 @@
 				E1E4A5DA291C9BF800780BA1 /* HIOnboardingView.swift in Sources */,
 				95A7D290203D4F54005EAEAF /* HIAnnouncementCell.swift in Sources */,
 				9515E43722093E1300BCAF92 /* HIEventScannerViewController.swift in Sources */,
+				D187BF582B781A1100AD7356 /* HIShiftCell.swift in Sources */,
 				95A7D28F203D4F54005EAEAF /* HIEventCell.swift in Sources */,
 				ACAA717626017EC4000F42B0 /* HICollectionViewFlowLayout.swift in Sources */,
 				DF5B27C5299197E80034A8B9 /* Array.swift in Sources */,
@@ -1076,6 +1092,7 @@
 				95CD0ED52015217E00D79DCC /* HIApplicationStateController.swift in Sources */,
 				E1E4A5DB291C9BF800780BA1 /* HIOnboardingViewModel.swift in Sources */,
 				AC0DDDDC261111B60086BDE0 /* HITextView.swift in Sources */,
+				2FF0F9302B58D56700017D08 /* HIPointsShopViewController.swift in Sources */,
 				95A7D292203D4F54005EAEAF /* HILoginSelectionCell.swift in Sources */,
 				3C26401923ADE7AA004E1DBE /* Project+CoreDataProperties.swift in Sources */,
 				1C9045D2274F048A00DDA74E /* HICarouselView.swift in Sources */,
@@ -1098,6 +1115,7 @@
 				95C18DCA20096539004784B5 /* HIEventDetailViewController.swift in Sources */,
 				D158EC312B5A2D440003D799 /* HIQRAttendeeScannerSelection.swift in Sources */,
 				9523A2902218BA2600341EBD /* HIImageView.swift in Sources */,
+				2FF0F9322B58D5A200017D08 /* HIPointsShopSwiftUIView.swift in Sources */,
 				95C18DC52009618C004784B5 /* HIHomeViewController.swift in Sources */,
 				35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */,
 				3C7E552723AA199900213E1F /* HITimeDataSource.swift in Sources */,
@@ -1144,6 +1162,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1BBA5682B70AB940017BD13 /* Staff.swift in Sources */,
 				3521FFA92207C03E00634A63 /* Attendee.swift in Sources */,
 				95E3147521FAF1740092C22E /* User.swift in Sources */,
 				2FA73B4E2B58CAA0002658C0 /* ShopService.swift in Sources */,
@@ -1166,6 +1185,7 @@
 				95E3147421FAF1740092C22E /* SimpleRequest.swift in Sources */,
 				D187BF5C2B78318000AD7356 /* MentorService.swift in Sources */,
 				2FA73B502B58CAC3002658C0 /* Item.swift in Sources */,
+				D1BBA56A2B70ACCC0017BD13 /* StaffService.swift in Sources */,
 				A5163FED221F283C003C543E /* StatsService.swift in Sources */,
 				95B12045220BEAD700E024BB /* TrackingService.swift in Sources */,
 				3C8F62D6238F9825001A5DAF /* TimeService.swift in Sources */,
