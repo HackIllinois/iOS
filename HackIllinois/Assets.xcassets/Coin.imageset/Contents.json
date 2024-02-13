@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Group 293.png",
+      "filename" : "coin.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Group 294.png",
+      "filename" : "coin2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Group 295.png",
+      "filename" : "coin3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -89,7 +89,7 @@ extension HIHomeViewController {
         view.addSubview(legendButton)
         
         if UIDevice.current.userInterfaceIdiom != .pad {
-            legendButton.constrain(width: 20, height: 20)
+            legendButton.constrain(width: 25, height: 25)
         }
         
         legendButton.translatesAutoresizingMaskIntoConstraints = false
