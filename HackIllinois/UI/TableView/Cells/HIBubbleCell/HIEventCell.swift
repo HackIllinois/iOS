@@ -26,8 +26,8 @@ class HIEventCell: HIBubbleCell {
         $0.activeImage = #imageLiteral(resourceName: "Selected Bookmark")
         $0.baseImage = #imageLiteral(resourceName: "Unselected Bookmark")
         if UIDevice.current.userInterfaceIdiom == .pad {
-            $0.activeImage = #imageLiteral(resourceName: "FavoritedPad")
-            $0.baseImage = #imageLiteral(resourceName: "UnFavoritedPad")
+            $0.activeImage = #imageLiteral(resourceName: "Big Selected Bookmark")
+            $0.baseImage = #imageLiteral(resourceName: "Big Unselected Bookmark")
         }
     }
     var headerView = UIStackView()
