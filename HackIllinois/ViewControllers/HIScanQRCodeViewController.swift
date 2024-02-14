@@ -247,9 +247,9 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         if alertTitle == "Success!" {
             alert.addAction(
                 UIAlertAction(title: "OK", style: .default, handler: { _ in
-                    self.dismiss(animated: true, completion: nil)
+                    //self.dismiss(animated: true, completion: nil)
                     //Dismisses view controller
-                    self.didSelectCloseButton(self.closeButton)
+                    //self.didSelectCloseButton(self.closeButton)
                     NotificationCenter.default.post(name: .qrCodeSuccessfulScan, object: nil)
                 }))
         } else {
@@ -372,6 +372,8 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                     } catch {
                         print(error, error.localizedDescription)
                     }
+                    // Set respondingToQRCodeFound back to true
+                    self.respondingToQRCodeFound = true
                     sleep(2)
                 }
                 .authorize(with: HIApplicationStateController.shared.user)
