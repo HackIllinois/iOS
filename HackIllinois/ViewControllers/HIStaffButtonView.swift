@@ -29,16 +29,16 @@ struct HIStaffButtonView: View {
                     }) {
                         VStack {
                             Text(event.name)
-                                .lineLimit(1) // Set lineLimit to 1
+                                .lineLimit(2) // Set lineLimit
                                 .foregroundColor(event.id == highlightedID ? .white : Color((\HIAppearance.profileBaseText).value))
                                 .font(Font(HIAppearance.Font.QRCheckInFont ?? .systemFont(ofSize: 14)))
-                                .padding(8)
+                                .padding(5)
                                 .frame(maxWidth: .infinity, minHeight: 50)
                                 .background(
-                                    RoundedRectangle(cornerRadius: 15)
+                                    RoundedRectangle(cornerRadius: 20)
                                         .stroke(Color.white, lineWidth: 2)
-                                        .background(event.id == highlightedID ? Color((\HIAppearance.profileBaseText).value) : Color.white)
-                                        .cornerRadius(10)
+                                        .background(event.id == highlightedID ? Color((\HIAppearance.profileBaseText).value) : Color.white.opacity(0.50))
+                                        .cornerRadius(20)
                                 )
                         }
                     }
