@@ -95,7 +95,7 @@ struct HIAppearance: Equatable {
     private static let lightYellow = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1); private static let tan = #colorLiteral(red: 0.9098039216, green: 0.8431372549, blue: 0.6470588235, alpha: 1)
     private static let blue = #colorLiteral(red: 0.03137254902, green: 0.5450980392, blue: 0.7568627451, alpha: 1); private static let mediumOrange = #colorLiteral(red: 0.9764705882, green: 0.5843137255, blue: 0.3411764706, alpha: 1)
     private static let darkBlue = #colorLiteral(red: 0.05098039216, green: 0.2196078431, blue: 0.4862745098, alpha: 1); private static let magenta = #colorLiteral(red: 0.9960784314, green: 0.4392156863, blue: 0.5960784314, alpha: 1)
-    private static let darkBlueGreeen = #colorLiteral(red: 0.03137254902, green: 0.5450980392, blue: 0.7568627451, alpha: 1); private static let vegetarian = #colorLiteral(red: 0.2156862745, green: 0.8705882353, blue: 0.8039215686, alpha: 1)
+    private static let darkBlueGreen = #colorLiteral(red: 0.03137254902, green: 0.5450980392, blue: 0.7568627451, alpha: 1); private static let vegetarian = #colorLiteral(red: 0.2156862745, green: 0.8705882353, blue: 0.8039215686, alpha: 1)
     private static let vegan = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1); private static let glutenfree = #colorLiteral(red: 0.9764705882, green: 0.5843137255, blue: 0.3411764706, alpha: 1)
     private static let lactoseintolerant = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     private static let other = #colorLiteral(red: 0.9960784314, green: 0.6392156863, blue: 0.6666666667, alpha: 1)
@@ -153,7 +153,7 @@ struct HIAppearance: Equatable {
         darkGreenText: darkestGreen,
         lightYellowText: bLightYellow,
         baseText: lightBlack,
-        accent: orange,
+        accent: white,
         viewTitleBrown: darkBrown,
         action: tan,
         baseBackground: white,
@@ -230,7 +230,7 @@ struct HIAppearance: Equatable {
         darkGreenText: darkestGreen,
         lightYellowText: bLightYellow,
         baseText: lightBlack,
-        accent: orange,
+        accent: white,
         viewTitleBrown: darkBrown,
         action: tan,
         baseBackground: white,

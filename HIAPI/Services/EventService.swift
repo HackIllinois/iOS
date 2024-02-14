@@ -51,7 +51,7 @@ public class EventService: BaseService {
     public static func getStaffCheckInEvents(authToken: String) -> APIRequest<StaffEventContainer> {
         var header = HTTPHeaders()
         header["Authorization"] = authToken
-        return APIRequest<StaffEventContainer>(service: self, endpoint: "event/filter/?displayOnStaffCheckin=true", headers: header, method: .GET)
+        return APIRequest<StaffEventContainer>(service: self, endpoint: "event/staff/", headers: header, method: .GET)
     }
 
     public static func create(event: Event) -> APIRequest<EventContainer> {

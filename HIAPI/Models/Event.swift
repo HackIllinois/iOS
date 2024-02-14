@@ -47,6 +47,8 @@ public struct StaffEvent: Codable {
         case isAsync
         case isPrivate
         case displayOnStaffCheckin
+        case isStaff
+        case mapImageUrl
     }
 
     public var id: String
@@ -61,6 +63,8 @@ public struct StaffEvent: Codable {
     public let isAsync: Bool
     public let isPrivate: Bool?
     public let displayOnStaffCheckin: Bool?
+    public let isStaff: Bool
+    public let mapImageUrl: String?
 }
 
 
