@@ -40,18 +40,18 @@ struct HIPointShopSwiftUIView: View {
                         }
                         .padding(.horizontal, 11)
                         .padding(.vertical, 3)
-                        .background(Color(red: 0.05, green: 0.25, blue: 0.25).opacity(0.5))
+                        .background(Color(red: 0.1647, green: 0.1647, blue: 0.1647))
                         .cornerRadius(1000)
                         .frame(maxWidth: .infinity, alignment: .trailing)
-                        .offset(y: -35)
-    
+                        .offset(y: -38)
                         Spacer()
                     }
                     Image("KnickKnacks")
                         .resizable()
-                        .frame(width: isIpad ? 590 : 370, height:isIpad ? 191 :  120)
-                    Spacer()
-                        .frame(height:50)
+                        .frame(width: isIpad ? 590 : 355, height:isIpad ? 185 :  105)
+                        .offset(y: -25)
+                    //Spacer()
+                        //.frame(height: 10)
                     VStack(spacing: 0) {
                         CustomTopTabBar(tabIndex: $tabIndex)
                         ScrollView(showsIndicators: false) {
@@ -64,7 +64,7 @@ struct HIPointShopSwiftUIView: View {
                                     }
                                     Rectangle()
                                         .foregroundColor(.clear)
-                                        .frame(width: isIpad ? 600 : 380, height: 10)
+                                        .frame(width: UIScreen.main.bounds.width > 850 ? 800 : (isIpad ? 700 : 360), height: 10)
                                         .background(Color(red: 0.4, green: 0.17, blue: 0.07))
                                         .cornerRadius(1)
                                 }
@@ -82,7 +82,7 @@ struct HIPointShopSwiftUIView: View {
                                     }
                                     Rectangle()
                                         .foregroundColor(.clear)
-                                        .frame(width: isIpad ? 600 : 380, height: 10)
+                                        .frame(width: UIScreen.main.bounds.width > 850 ? 800 : (isIpad ? 700 : 360), height: 10)
                                         .background(Color(red: 0.4, green: 0.17, blue: 0.07))
                                         .cornerRadius(1)
                                 }
@@ -139,18 +139,20 @@ struct PointShopItemCell: View {
             //brown bar
             Rectangle()
                 .foregroundColor(.clear)
-                .frame(width: isIpad ? 600 : 380, height: 10)//TODO: Change width
+                .frame(width: UIScreen.main.bounds.width > 850 ? 800 : (isIpad ? 700 : 360), height: 10)
+                //.frame(width: isIpad ? 600 : 360, height: 10)//TODO: Change width
                 .background(Color(red: 0.4, green: 0.17, blue: 0.07))
                 .cornerRadius(1)
             //transparent pane
             ZStack {
                 Rectangle()
                     .fill(.white)
-                    .frame(width: isIpad ? 590 : 370, height: 157)//TODO: Change width
+                    .frame(width: UIScreen.main.bounds.width > 850 ? 790 : (isIpad ? 690 : 350), height: 157)
+                    //.frame(width: isIpad ? 590 : 350, height: 157)//TODO: Change width
                     .opacity(0.4)
                 HStack {
                     Spacer()
-                        .frame(width:isIpad ? 120 : 50)
+                        .frame(width: UIScreen.main.bounds.width > 850 ? 210 : (isIpad ? 120 : 30))
                     //IMAGE
                         Image(systemName: "Profile0")
                             .data(url: URL(string: item.imageURL)!)
@@ -162,23 +164,28 @@ struct PointShopItemCell: View {
                     //bubble-thing
                     VStack {
                         HStack{
+                            Spacer()
+                                .frame(width:15)
                             Text(item.name)
                                 .font(
                                     Font.custom("Montserrat", size: 16)
                                         .weight(.semibold)
                                 )
                                 .foregroundColor(Color(red: 0.05, green: 0.25, blue: 0.25))
-                            //                            .frame(width: 130, height: 24)
                                 .multilineTextAlignment(.center)
                                 .lineLimit(nil)
-                            Spacer()
-                                .frame(width:20)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .frame(maxWidth: .infinity)
+                                .padding(.trailing, 20)
+
+                            /*Spacer()
+                                .frame(width:20)*/
                         }
 
                         HStack(alignment: .center, spacing: 7) {
                             Image("Coin")
                                 .resizable()
-                                .frame(width:25, height: 25)
+                                .frame(width: 25, height: 25)
                             if(item.isRaffle) {
                                 Text("\(item.price)")
                                     .font(Font.custom("Montserrat", size: 16).weight(.bold))
@@ -193,8 +200,6 @@ struct PointShopItemCell: View {
                                         .foregroundColor(.white)
                                 }
                             }
-//                            Spacer()
-//                                .frame(width:20)
 
                         }
                         .padding(.horizontal, 11)
@@ -238,12 +243,14 @@ struct TabBarButton: View {
             if isSelected {
                 Rectangle()
                     .fill(Color(red: 0.85, green: 0.25, blue: 0.47))
-                    .frame(width:  isIpad ? 250: 170, height: isIpad ? 90: 50)//190
+                    .frame(width: UIScreen.main.bounds.width > 850 ? 350 : (isIpad ? 295 : 155), height: isIpad ? 90: 50)
+                    //.frame(width:  isIpad ? 250: 155, height: isIpad ? 90: 50)//190
                     .cornerRadius(10, corners: [.topLeft, .topRight])
             }else{
                 Rectangle()
                     .fill(Color(red: 0.85, green: 0.25, blue: 0.47))
-                    .frame(width:  isIpad ? 250: 170, height: isIpad ? 90: 50)//190
+                    .frame(width: UIScreen.main.bounds.width > 850 ? 350 : (isIpad ? 295 : 155), height: isIpad ? 90: 50)
+                    //.frame(width:  isIpad ? 250: 155, height: isIpad ? 90: 50)//190
                     .cornerRadius(10, corners: [.topLeft, .topRight])
                     .opacity(0)
             }

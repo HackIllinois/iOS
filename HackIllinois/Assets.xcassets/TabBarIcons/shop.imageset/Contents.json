@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "coin.png",
+      "filename" : "PointShopIcon1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "coin2x.png",
+      "filename" : "PointShopIcon2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "coin3x.png",
+      "filename" : "PointShopIcon3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

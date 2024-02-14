@@ -100,7 +100,7 @@ struct HIAppearance: Equatable {
     private static let mediumOrange = #colorLiteral(red: 0.9764705882, green: 0.5843137255, blue: 0.3411764706, alpha: 1)
     private static let darkBlue = #colorLiteral(red: 0.05098039216, green: 0.2196078431, blue: 0.4862745098, alpha: 1)
     private static let magenta = #colorLiteral(red: 0.9960784314, green: 0.4392156863, blue: 0.5960784314, alpha: 1)
-    private static let darkBlueGreeen = #colorLiteral(red: 0.03137254902, green: 0.5450980392, blue: 0.7568627451, alpha: 1)
+    private static let darkBlueGreen = #colorLiteral(red: 0.03137254902, green: 0.5450980392, blue: 0.7568627451, alpha: 1)
     private static let vegetarian = #colorLiteral(red: 0.2156862745, green: 0.8705882353, blue: 0.8039215686, alpha: 1)
     private static let vegan = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1)
     private static let glutenfree = #colorLiteral(red: 0.9764705882, green: 0.5843137255, blue: 0.3411764706, alpha: 1)
@@ -166,7 +166,7 @@ struct HIAppearance: Equatable {
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         codePopupTab: white,
-        greenCodePopupTab: darkGreen,
+        greenCodePopupTab: darkestGreen,
         navbarBackground: darkGreen,
         navbarTabTint: white,
         profileContainerTint: yellowWhite,
@@ -187,7 +187,7 @@ struct HIAppearance: Equatable {
         buttonPurple: indigo,
         buttonDarkBlue: darkBlue,
         buttonMagenta: magenta,
-        buttonDarkBlueGreen: darkBlueGreeen,
+        buttonDarkBlueGreen: darkBlueGreen,
         buttonDarkGreen: darkGreen,
         favoriteStarBackground: yellowWhite,
         segmentedBackground: white,
@@ -238,7 +238,7 @@ struct HIAppearance: Equatable {
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         codePopupTab: white,
-        greenCodePopupTab: darkGreen,
+        greenCodePopupTab: darkestGreen,
         navbarBackground: darkGreen,
         navbarTabTint: white,
         profileContainerTint: yellowWhite,
@@ -259,7 +259,7 @@ struct HIAppearance: Equatable {
         buttonPurple: indigo,
         buttonDarkBlue: darkBlue,
         buttonMagenta: magenta,
-        buttonDarkBlueGreen: darkBlueGreeen,
+        buttonDarkBlueGreen: darkBlueGreen,
         buttonDarkGreen: darkGreen,
         favoriteStarBackground: yellowWhite,
         segmentedBackground: white,

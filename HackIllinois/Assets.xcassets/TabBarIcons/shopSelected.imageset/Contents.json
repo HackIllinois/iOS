@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "coin.png",
+      "filename" : "shop1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "coin2x.png",
+      "filename" : "shop2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "coin3x.png",
+      "filename" : "shop3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
