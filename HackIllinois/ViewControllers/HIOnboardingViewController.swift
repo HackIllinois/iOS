@@ -35,7 +35,7 @@ class HIOnboardingViewController: HIBaseViewController {
         super.setUpBackgroundView()
         
         if UIDevice.current.userInterfaceIdiom == .pad {
-            backgroundView.image = #imageLiteral(resourceName: "iPadLogin")
+            backgroundView.image = UIImage(named: "LoginBackgroundPadNew")
         } else {
             backgroundView.image = #imageLiteral(resourceName: "Login")
         }

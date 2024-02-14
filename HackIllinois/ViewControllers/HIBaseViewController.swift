@@ -52,7 +52,11 @@ extension HIBaseViewController {
 extension HIBaseViewController {
     @objc dynamic func setUpBackgroundView() {
         view.layer.backgroundColor = UIColor.clear.cgColor
-        backgroundView.image = #imageLiteral(resourceName: "PurpleBackground")
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            backgroundView.image = UIImage(named: "LoginBackgroundPadNew")
+        } else {
+            backgroundView.image = UIImage(named: "Login")
+        }
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.isUserInteractionEnabled = true
         backgroundView.contentMode = .scaleAspectFill

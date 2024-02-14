@@ -82,7 +82,7 @@ struct HIProfileCardView: View {
                                     .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 20)))
                                 HStack(alignment: .bottom, spacing: UIDevice.current.userInterfaceIdiom == .pad ? 5*padFactor : 5*phoneFactor) {
                                     Image("RankSymbol")
-                                    Text("Rank: \(rank != 0 ? "\(rank)" : "")")
+                                    Text("\(rank != 0 ? "\(rank)" : "")")
                                                     .foregroundColor(.white)
                                                     .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 20)))
                                                     .onAppear {
@@ -212,7 +212,6 @@ struct HIProfileCardView: View {
         guard let user = HIApplicationStateController.shared.user else { return }
 
         var rank = 0
-        print("HELLO???????????????")
         HIAPI.ProfileService.getUserRanking(userToken: user.token)
             .onCompletion { result in
                 do {
