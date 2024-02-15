@@ -58,7 +58,11 @@ class HIQRScannerSelection: HIBaseViewController {
     }
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "Staff")
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            backgroundView.image = UIImage(named: "BackgroundPad")
+        } else {
+            backgroundView.image = #imageLiteral(resourceName: "Staff")
+        }
     }
 }
 
@@ -88,14 +92,14 @@ extension HIQRScannerSelection {
             meetingButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 140).isActive = true
             meetingButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
             meetingButton.addTarget(self, action: #selector(didSelectMeetingButton(_:)), for: .touchUpInside)
-            meetingButton.layer.cornerRadius = 15
-            meetingButton.constrain(width: 290, height: 80)
+            meetingButton.layer.cornerRadius = (UIDevice.current.userInterfaceIdiom == .pad) ? 30 : 15
+            meetingButton.constrain(width: (UIDevice.current.userInterfaceIdiom == .pad) ? 500 : 290, height: (UIDevice.current.userInterfaceIdiom == .pad) ? 150 : 80)
             meetingButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-            attendeeButton.topAnchor.constraint(equalTo: meetingButton.bottomAnchor, constant: 50).isActive = true
+            attendeeButton.topAnchor.constraint(equalTo: meetingButton.bottomAnchor, constant: (UIDevice.current.userInterfaceIdiom == .pad) ? 100 : 50).isActive = true
             attendeeButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
             attendeeButton.addTarget(self, action: #selector(didSelectAttendeeButton(_:)), for: .touchUpInside)
-            attendeeButton.layer.cornerRadius = 15
-            attendeeButton.constrain(width: 290, height: 80)
+            attendeeButton.layer.cornerRadius = (UIDevice.current.userInterfaceIdiom == .pad) ? 30 : 15
+            attendeeButton.constrain(width: (UIDevice.current.userInterfaceIdiom == .pad) ? 500 : 290, height: (UIDevice.current.userInterfaceIdiom == .pad) ? 150 : 80)
             let meetingLabel = HILabel(style: .QRSelection)
             meetingLabel.text = "Meeting Attendance"
             meetingButton.addSubview(meetingLabel)

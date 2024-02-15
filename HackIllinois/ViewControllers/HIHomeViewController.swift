@@ -41,7 +41,7 @@ class HIHomeViewController: HIEventListViewController {
 
     private var countdownDataStoreIndex = 0
     private var staticDataStore: [(date: Date, displayText: String)] = [
-        (HITimeDataSource.shared.eventTimes.eventStart, "HACKILLINOIS BEGINS IN"),
+        (HITimeDataSource.shared.eventTimes.checkInStart, "HACKILLINOIS BEGINS IN"),
         (HITimeDataSource.shared.eventTimes.hackStart, "HACKING BEGINS IN"),
         (HITimeDataSource.shared.eventTimes.hackEnd, "HACKING ENDS IN"),
         (HITimeDataSource.shared.eventTimes.eventEnd, "HACKILLINOIS ENDS IN")

@@ -71,7 +71,11 @@ class HIQRAttendeeScannerSelection: HIBaseViewController {
     }
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "Attendee")
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            backgroundView.image = UIImage(named: "BackgroundPad")
+        } else {
+            backgroundView.image = #imageLiteral(resourceName: "Attendee")
+        }
     }
 }
 
@@ -98,21 +102,21 @@ extension HIQRAttendeeScannerSelection {
             eventCheckInButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 140).isActive = true
             eventCheckInButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
             eventCheckInButton.addTarget(self, action: #selector(didSelectEventCheckInButton(_:)), for: .touchUpInside)
-            eventCheckInButton.layer.cornerRadius = 15
-            eventCheckInButton.constrain(width: 290, height: 80)
+            eventCheckInButton.layer.cornerRadius = (UIDevice.current.userInterfaceIdiom == .pad) ? 30 : 15
+            eventCheckInButton.constrain(width: (UIDevice.current.userInterfaceIdiom == .pad) ? 500 : 290, height: (UIDevice.current.userInterfaceIdiom == .pad) ? 150 : 80)
             eventCheckInButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
 
-            mentorCheckInButton.topAnchor.constraint(equalTo: eventCheckInButton.bottomAnchor, constant: 50).isActive = true
+            mentorCheckInButton.topAnchor.constraint(equalTo: eventCheckInButton.bottomAnchor, constant: (UIDevice.current.userInterfaceIdiom == .pad) ? 100 : 50).isActive = true
             mentorCheckInButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
             mentorCheckInButton.addTarget(self, action: #selector(didSelectMentorCheckInButton(_:)), for: .touchUpInside)
-            mentorCheckInButton.layer.cornerRadius = 15
-            mentorCheckInButton.constrain(width: 290, height: 80)
+            mentorCheckInButton.layer.cornerRadius = (UIDevice.current.userInterfaceIdiom == .pad) ? 30 : 15
+            mentorCheckInButton.constrain(width: (UIDevice.current.userInterfaceIdiom == .pad) ? 500 : 290, height: (UIDevice.current.userInterfaceIdiom == .pad) ? 150 : 80)
 
-            pointShopScanButton.topAnchor.constraint(equalTo: mentorCheckInButton.bottomAnchor, constant: 50).isActive = true
+            pointShopScanButton.topAnchor.constraint(equalTo: mentorCheckInButton.bottomAnchor, constant: (UIDevice.current.userInterfaceIdiom == .pad) ? 100 : 50).isActive = true
             pointShopScanButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
             pointShopScanButton.addTarget(self, action: #selector(didSelectPointsShopButton(_:)), for: .touchUpInside)
-            pointShopScanButton.layer.cornerRadius = 15
-            pointShopScanButton.constrain(width: 290, height: 80)
+            pointShopScanButton.layer.cornerRadius = (UIDevice.current.userInterfaceIdiom == .pad) ? 30 : 15
+            pointShopScanButton.constrain(width: (UIDevice.current.userInterfaceIdiom == .pad) ? 500 : 290, height: (UIDevice.current.userInterfaceIdiom == .pad) ? 150 : 80)
 
             let eventCheckInLabel = HILabel(style: .QRSelection)
             eventCheckInLabel.text = "Event Check In"
