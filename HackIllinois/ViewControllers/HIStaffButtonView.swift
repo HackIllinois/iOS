@@ -10,7 +10,7 @@ import SwiftUI
 import HIAPI
 
 struct HIStaffButtonView: View {
-    @State var events = [HIAPI.StaffEvent]()
+    @State var events = [HIAPI.Event]()
     @State var highlightedID = ""
     @ObservedObject var observable: HIStaffButtonViewObservable
     
@@ -51,13 +51,13 @@ struct HIStaffButtonView: View {
     }
     
     func getStaffEvents() {
-        HIAPI.EventService.getStaffCheckInEvents(authToken: HIApplicationStateController.shared.user?.token ?? "")
+        guard let user = HIApplicationStateController.shared.user else { return }
+        HIAPI.EventService.getStaffCheckInEvents(authToken: user.token)
             .onCompletion { result in
                 do {
                     let (containedEvents, _) = try result.get()
                     DispatchQueue.main.async {
-                        self.events = containedEvents.events
-                        print(self.events)
+                        self.events = containedEvents.events.filter { $0.displayOnStaffCheckIn == true }
                     }
                 } catch {
                     print("An error has occurred \(error)")
