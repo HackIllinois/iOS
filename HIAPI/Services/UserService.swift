@@ -43,4 +43,12 @@ public final class UserService: BaseService {
         body["eventId"] = eventID
         return APIRequest<FollowStatus>(service: self, endpoint: "unfollow/", body: body, headers: authorizationHeaders, method: .PUT)
     }
+    
+    public static func userScanEvent(userToken: String, eventID: String) -> APIRequest<UserCheckInStatus> {
+        var authorizationHeaders = HTTPHeaders()
+        authorizationHeaders["Authorization"] = userToken
+        var body = HTTPBody()
+        body["eventId"] = eventID
+        return APIRequest<UserCheckInStatus>(service: self, endpoint: "scan-event/", body: body, headers: authorizationHeaders, method: .PUT)
+    }
 }

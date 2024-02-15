@@ -187,3 +187,8 @@ public struct FollowStatus: Codable, APIReturnable {
     public let userId: String
     public let following: [String]
 }
+
+public struct UserCheckInStatus: Codable, APIReturnable {
+    public let status: String
+    public let points: Int
+}

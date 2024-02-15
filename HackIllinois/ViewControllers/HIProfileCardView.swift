@@ -199,6 +199,7 @@ struct HIProfileCardView: View {
                     let (qr, _) = try result.get()
                     DispatchQueue.main.async {
                         self.qrInfo = qr.qrInfo
+                        print("qrinfo with attendee jwt", qrInfo)
                     }
                 } catch {
                     print("An error has occurred \(error)")

@@ -20,6 +20,7 @@ import HIAPI
 import SwiftUI
 
 class HIScanQRCodeViewController: HIBaseViewController {
+    private let cornerGuideLayer = CAShapeLayer()
     private var captureSession: AVCaptureSession?
     private let containerView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -101,7 +102,12 @@ extension HIScanQRCodeViewController {
             }
         }
     }
-
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupCornerGuides()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -127,6 +133,49 @@ extension HIScanQRCodeViewController {
         errorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         errorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         errorView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+    }
+    
+    // Add corner guides?
+    func setupCornerGuides() {
+        // Set up the layer for corner guides
+        cornerGuideLayer.strokeColor = UIColor.white.cgColor
+        cornerGuideLayer.lineWidth = 2.0
+        cornerGuideLayer.fillColor = UIColor.clear.cgColor
+
+        // Add the layer to the preview view's layer
+        previewView.layer.addSublayer(cornerGuideLayer)
+
+        // Update the corner guides when the preview view size changes
+        NotificationCenter.default.addObserver(self, selector: #selector(updateCornerGuides), name: UIDevice.orientationDidChangeNotification, object: nil)
+
+        // Initial update
+        updateCornerGuides()
+    }
+
+    @objc func updateCornerGuides() {
+        guard let previewLayer = previewLayer else { return }
+
+        // Calculate the corner guide size
+        let cornerGuideSize: CGFloat = 20.0
+        let cornerGuideLineWidth: CGFloat = 2.0
+
+        // Calculate the offset for corner guides to make them visible within the preview view
+        let offset: CGFloat = 10.0
+
+        // Create a rectangle path for each corner
+        let topLeftRect = CGRect(x: offset, y: offset, width: cornerGuideSize, height: cornerGuideLineWidth)
+        let topRightRect = CGRect(x: previewLayer.frame.width - cornerGuideSize - offset, y: offset, width: cornerGuideSize, height: cornerGuideLineWidth)
+        let bottomLeftRect = CGRect(x: offset, y: previewLayer.frame.height - cornerGuideLineWidth - offset, width: cornerGuideSize, height: cornerGuideLineWidth)
+        let bottomRightRect = CGRect(x: previewLayer.frame.width - cornerGuideSize - offset, y: previewLayer.frame.height - cornerGuideLineWidth - offset, width: cornerGuideSize, height: cornerGuideLineWidth)
+
+        // Create a path combining all four rectangles
+        let path = UIBezierPath(rect: topLeftRect)
+        path.append(UIBezierPath(rect: topRightRect))
+        path.append(UIBezierPath(rect: bottomLeftRect))
+        path.append(UIBezierPath(rect: bottomRightRect))
+
+        // Set the path to the layer
+        cornerGuideLayer.path = path.cgPath
     }
 }
 
@@ -203,8 +252,7 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
     }
 
     func handleCheckInAlert(status: String, newPoints: Int) {
-        var alertTitle = ""
-        var alertMessage = ""
+        var alertTitle = ""; var alertMessage = ""
         switch status {
         case "Success":
             alertTitle = "\n\nSuccess!"
@@ -261,10 +309,8 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         self.present(alert, animated: true, completion: nil)
 
     }
-
     func handleStaffCheckInAlert(status: String) {
-        var alertTitle = ""
-        var alertMessage = ""
+        var alertTitle = ""; var alertMessage = ""; print("status is", status)
         switch status {
         case "Success":
             alertTitle = "Success!"
@@ -281,6 +327,10 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
             alertTitle = "Error!"
             alertMessage = "Looks like you're already checked in."
             self.respondingToQRCodeFound = true
+        case "The operation couldn’t be completed. (APIManager.APIRequestError error 0.)":
+            alertTitle = "Error!"
+            alertMessage = "Invalid/expired QR code. Refresh your profile or verify you're checking into the correct event."
+            self.respondingToQRCodeFound = true
         default:
             alertTitle = "Error!"
             alertMessage = "Something isn't quite right."
@@ -290,9 +340,9 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         if alertTitle == "Success!" {
             alert.addAction(
                 UIAlertAction(title: "OK", style: .default, handler: { _ in
-                    self.dismiss(animated: true, completion: nil)
+                    //self.dismiss(animated: true, completion: nil)
                     //Dismisses view controller
-                    self.didSelectCloseButton(self.closeButton)
+                    //self.didSelectCloseButton(self.closeButton)
                     NotificationCenter.default.post(name: .qrCodeSuccessfulScan, object: nil)
                 }))
         } else {
@@ -334,10 +384,10 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         let code = meta?.stringValue ?? ""
         guard let user = HIApplicationStateController.shared.user else { return }
         let staffToken = user.token
-        print("staff token is:", staffToken)
+        print("staff token is:", staffToken, "event id is:", selectedEventId)
+        print("qr code info is", code)
         if user.roles.contains(.STAFF) {
             if selectedEventId != "" {
-                print("event id is", selectedEventId)
                 if let range = code.range(of: "userToken=") {
                     let userToken = code[range.upperBound...]
                     respondingToQRCodeFound = false
@@ -345,15 +395,17 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                         .onCompletion { result in
                             do {
                                 let (codeResult, _) = try result.get()
-                                print("code result", codeResult)
                                 DispatchQueue.main.async { [self] in
-                                    handleStaffCheckInAlert(status: "Success")
+                                    print(codeResult.dietaryRestrictions)
+                                    self.handleStaffCheckInAlert(status: "Success")
                                 }
                             } catch {
-                                print(error, error.localizedDescription)
-                                self.handleStaffCheckInAlert(status: error.localizedDescription)
+                                DispatchQueue.main.async { [self] in
+                                    self.handleStaffCheckInAlert(status: error.localizedDescription)
+                                }
                             }
                             sleep(2)
+                            self.respondingToQRCodeFound = true
                         }
                         .authorize(with: HIApplicationStateController.shared.user)
                         .launch()
@@ -371,10 +423,12 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                         }
                     } catch {
                         print(error, error.localizedDescription)
+                        DispatchQueue.main.async { [self] in
+                            self.handleCheckInAlert(status: error.localizedDescription, newPoints: 0)
+                        }
                     }
-                    // Set respondingToQRCodeFound back to true
-                    self.respondingToQRCodeFound = true
                     sleep(2)
+                    self.respondingToQRCodeFound = true // Set respondingToQRCodeFound back to true
                 }
                 .authorize(with: HIApplicationStateController.shared.user)
                 .launch()

@@ -116,7 +116,7 @@ extension HIQRScannerSelection {
         closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8).isActive = true
         closeButton.constrain(width: 60, height: 60)
         closeButton.imageView?.contentMode = .scaleToFill
-        let label = HILabel(style: .viewTitleBrown)
+        let label = HILabel(style: (UIDevice.current.userInterfaceIdiom == .pad) ? .viewTitle : .viewTitleBrown)
         label.text = "SCANNER"
         view.addSubview(label)
         label.centerYAnchor.constraint(equalTo: closeButton.centerYAnchor).isActive = true

@@ -259,7 +259,6 @@ extension HIScanMentorViewController: AVCaptureMetadataOutputObjectsDelegate {
             if instance.last == "\"" {
                 instance.removeLast()
             }
-            print(instance)
             respondingToQRCodeFound = false
             HIAPI.MentorService.recordMentorAttendance(userToken: user.token, mentorId: String(mentorId))
                 .onCompletion { result in
