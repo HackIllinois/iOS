@@ -35,6 +35,7 @@ public struct Item: Codable {
 }
 
 public struct RedeemItem: Codable, APIReturnable {
+    public let itemName: String? // Return itemName upon success
     public let success: Bool
     public let error: String?
 }

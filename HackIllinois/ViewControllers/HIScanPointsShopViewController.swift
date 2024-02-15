@@ -198,8 +198,7 @@ extension HIScanPointsShopViewController: AVCaptureMetadataOutputObjectsDelegate
         }
     }
 
-    func handlePointsShopAlert(status: String) {
-        print("hi")
+    func handlePointsShopAlert(status: String, itemName: String) {
         print(status)
         var alertTitle = ""
         var alertMessage = ""
@@ -207,7 +206,7 @@ extension HIScanPointsShopViewController: AVCaptureMetadataOutputObjectsDelegate
         switch status {
         case "Success":
             alertTitle = "\n\nPrize Obtained!"
-            alertMessage = "\nYou have successfully redeemed your points at the Points Shop!"
+            alertMessage = "\nYou have successfully redeemed \(itemName) at the Points Shop!"
             error = false
         case "invalidHTTPReponse(code: 404, description: \"forbidden\")":
             alertTitle = "\n\nError!"
@@ -282,14 +281,15 @@ extension HIScanPointsShopViewController: AVCaptureMetadataOutputObjectsDelegate
                     do {
                         let (codeResult, _) = try result.get()
                         let status = codeResult.error
+                        let itemName = codeResult.itemName
                         NSLog(status ?? "Success")
                         DispatchQueue.main.async {
-                            self.handlePointsShopAlert(status: status ?? "Success")
+                            self.handlePointsShopAlert(status: status ?? "Success", itemName: itemName ?? "")
                         }
                     } catch {
                         NSLog("Error info: \(error)")
                         DispatchQueue.main.async { [self] in
-                            self.handlePointsShopAlert(status: "\(error)")
+                            self.handlePointsShopAlert(status: "\(error)", itemName: "")
                         }
                     }
                     sleep(2)

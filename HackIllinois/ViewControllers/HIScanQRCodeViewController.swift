@@ -40,7 +40,7 @@ class HIScanQRCodeViewController: HIBaseViewController {
         $0.baseImage = #imageLiteral(resourceName: "CloseButton")
     }
     private let errorView = HIErrorView(style: .codePopup)
-    private var selectedEventID = ""
+    private var selectedEventId = ""
     private var cancellables = Set<AnyCancellable>()
     var currentUserID = ""
     var currentUserName = ""
@@ -68,8 +68,8 @@ extension HIScanQRCodeViewController {
             setupCaptureSession()
             if user.roles.contains(.STAFF) {
                 let observable = HIStaffButtonViewObservable()
-                observable.$selectedEventId.sink { eventID in
-                    self.selectedEventID = eventID
+                observable.$selectedEventId.sink { eventId in
+                    self.selectedEventId = eventId
                 }.store(in: &cancellables)
                 let staffButtonController = UIHostingController(rootView: HIStaffButtonView(observable: observable))
                 addChild(staffButtonController)
@@ -333,32 +333,32 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         let meta = metadataObjects.first as? AVMetadataMachineReadableCodeObject
         let code = meta?.stringValue ?? ""
         guard let user = HIApplicationStateController.shared.user else { return }
+        let staffToken = user.token
+        print("staff token is:", staffToken)
         if user.roles.contains(.STAFF) {
-            if selectedEventID != "" {
+            if selectedEventId != "" {
+                print("event id is", selectedEventId)
                 if let range = code.range(of: "userToken=") {
                     let userToken = code[range.upperBound...]
                     respondingToQRCodeFound = false
-                    HIAPI.EventService.staffCheckIn(userToken: String(userToken), eventId: selectedEventID)
+                    HIAPI.StaffService.recordUserAttendance(userToken: String(userToken), staffToken: String(staffToken), eventId: selectedEventId)
                         .onCompletion { result in
                             do {
                                 let (codeResult, _) = try result.get()
+                                print("code result", codeResult)
                                 DispatchQueue.main.async { [self] in
-                                    if let qrInfo = self.decode(code) {
-                                        if let userId = qrInfo["userId"] {
-                                            currentUserID = userId as? String ?? ""
-                                            staffCheckIn(userID: currentUserID, status: codeResult.status)
-                                        }
-                                    }
+                                    handleStaffCheckInAlert(status: "Success")
                                 }
                             } catch {
                                 print(error, error.localizedDescription)
+                                self.handleStaffCheckInAlert(status: error.localizedDescription)
                             }
                             sleep(2)
                         }
                         .authorize(with: HIApplicationStateController.shared.user)
                         .launch()
+                    }
                 }
-            }
         } else {
             respondingToQRCodeFound = false
             HIAPI.EventService.checkIn(code: code)

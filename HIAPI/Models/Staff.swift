@@ -58,12 +58,14 @@ public struct Staff: Codable {
 
 }
 
-public struct UserAttendanceContainer: Codable, APIReturnable {
+/*public struct UserAttendanceContainer: Codable, APIReturnable {
     internal enum CodingKeys: String, CodingKey {
-            case sucess
+            case success
+            case dietaryRestrictions
         }
-        public let sucess: Bool
-}
+        public let success: Bool?
+        public let dietaryRestrictions: [AnyObject]
+}*/
 
 public struct StaffAttendanceContainer: Codable, APIReturnable {
 

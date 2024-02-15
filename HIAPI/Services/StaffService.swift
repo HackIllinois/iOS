@@ -32,12 +32,12 @@ public final class StaffService: BaseService {
         return APIRequest<StaffAttendanceContainer>(service: self, endpoint: "attendance/", body: body, headers: headers, method: .POST)
     }
     
-    public static func recordUserAttendance(userToken: String, userId: String, eventId: String) -> APIRequest<UserAttendanceContainer> {
+    public static func recordUserAttendance(userToken: String, staffToken: String, eventId: String) -> APIRequest<DietaryRestrictions> {
         var body = HTTPBody()
-        body["userId"] = userId
+        body["attendeeJWT"] = userToken
         body["eventId"] = eventId
         var headers = HTTPHeaders()
         headers["Authorization"] = userToken
-        return APIRequest<UserAttendanceContainer>(service: self, endpoint: "scan-attendee/", body: body, headers: headers, method: .PUT)
+        return APIRequest<DietaryRestrictions>(service: self, endpoint: "scan-attendee/", body: body, headers: headers, method: .PUT)
     }
 }
