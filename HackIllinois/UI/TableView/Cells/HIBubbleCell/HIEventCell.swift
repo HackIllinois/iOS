@@ -161,6 +161,12 @@ extension HIEventCell {
         pointsView.constrain(height: 20 * bubbleConstant)
         pointsView.leadingAnchor.constraint(equalTo: eventTypeView.trailingAnchor, constant: 8 * bubbleConstant).isActive = true
         pointsView.centerYAnchor.constraint(equalTo: eventTypeView.centerYAnchor).isActive = true
+        if rhs.isPro {
+            upperContainerView.addSubview(proTypeView); proTypeView.addSubview(proLabel); proLabel.text = "Pro"
+            proTypeView.constrain(height: 20 * bubbleConstant); proTypeView.centerYAnchor.constraint(equalTo: pointsView.centerYAnchor).isActive = true
+            proTypeView.leadingAnchor.constraint(equalTo: pointsView.trailingAnchor, constant: 8 * bubbleConstant).isActive = true
+            proLabel.constrain(to: proTypeView, topInset: 4, trailingInset: -8, bottomInset: -4, leadingInset: 8)
+        }
         upperContainerView.addSubview(timeImageView)
         upperContainerView.addSubview(timeLabel)
         timeLabel.leadingAnchor.constraint(equalTo: timeImageView.trailingAnchor, constant: eventCellSpacing + 1).isActive = true

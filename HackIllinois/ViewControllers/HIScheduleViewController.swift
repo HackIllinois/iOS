@@ -225,6 +225,7 @@ extension HIScheduleViewController {
     @objc func scheduleButtonTapped(_ sender: UIButton) {
         if onlyShifts {
             onlyShifts = false
+            backgroundView.image = #imageLiteral(resourceName: "PurpleBackground")
             updatePredicate()
             animateReload()
         }
@@ -234,6 +235,8 @@ extension HIScheduleViewController {
     @objc func shiftsButtonTapped(_ sender: UIButton) {
         if !onlyShifts {
             onlyShifts = !onlyShifts
+            backgroundView.image = #imageLiteral(resourceName: "Pink Background")
+            //let label = HILabel(style: (UIDevice.current.userInterfaceIdiom == .pad) ? .viewTitle : .viewTitleBrown)
 
             guard let user = HIApplicationStateController.shared.user else { return }
 

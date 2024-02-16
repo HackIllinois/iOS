@@ -122,6 +122,7 @@ final class HIEventDataSource {
                             coreDataEvent.points = Int32(apiEvent.points)
                             coreDataEvent.favorite = false
                             coreDataEvent.mapImageUrl = apiEvent.mapImageUrl ?? "None"
+                            coreDataEvent.isPro = apiEvent.isPro ?? false
                         }
 
                         apiEventsToInsert.forEach { apiEvent in
@@ -144,6 +145,7 @@ final class HIEventDataSource {
                             coreDataEvent.favorite = false
                             coreDataEvent.isAsync = apiEvent.isAsync
                             coreDataEvent.mapImageUrl = apiEvent.mapImageUrl ?? "None"
+                            coreDataEvent.isPro = apiEvent.isPro ?? false
                         }
 
                         // 10) Save changes, call completion handler, unlock refresh
@@ -198,6 +200,7 @@ final class HIEventDataSource {
                                     coreDataEvent.points = Int32(apiEvent.points)
                                     coreDataEvent.favorite = apiFavorites.contains(coreDataEvent.id)
                                     coreDataEvent.mapImageUrl = apiEvent.mapImageUrl ?? "None"
+                                    coreDataEvent.isPro = apiEvent.isPro ?? false
                                 }
 
                                     try context.save()

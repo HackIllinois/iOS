@@ -82,6 +82,7 @@ public struct Event: Codable {
         case isAsync
         case mapImageUrl
         case displayOnStaffCheckIn
+        case isPro
     }
 
     public let id: String
@@ -97,6 +98,7 @@ public struct Event: Codable {
     public let isAsync: Bool
     public let mapImageUrl: String?
     public let displayOnStaffCheckIn: Bool?
+    public let isPro: Bool?
 }
 
 public struct Location: Codable {
