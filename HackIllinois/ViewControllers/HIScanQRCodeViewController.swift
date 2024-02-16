@@ -384,7 +384,7 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         let code = meta?.stringValue ?? ""
         guard let user = HIApplicationStateController.shared.user else { return }
         let staffToken = user.token
-        print("staff token is:", staffToken, "event id is:", selectedEventId)
+        //print("staff token is:", staffToken, "event id is:", selectedEventId)
         print("qr code info is", code)
         if user.roles.contains(.STAFF) {
             if selectedEventId != "" {
@@ -400,6 +400,7 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                                     self.handleStaffCheckInAlert(status: "Success")
                                 }
                             } catch {
+                                print(error, error.localizedDescription)
                                 DispatchQueue.main.async { [self] in
                                     self.handleStaffCheckInAlert(status: error.localizedDescription)
                                 }
@@ -413,13 +414,13 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                 }
         } else {
             respondingToQRCodeFound = false
-            HIAPI.EventService.checkIn(code: code)
+            HIAPI.UserService.userScanEvent(userToken: user.token, eventID: code)
                 .onCompletion { result in
                     do {
                         let (codeResult, _) = try result.get()
                         let status = codeResult.status
                         DispatchQueue.main.async {
-                            self.handleCheckInAlert(status: codeResult.status, newPoints: codeResult.newPoints)
+                            self.handleCheckInAlert(status: "Success", newPoints: codeResult.points ?? 0)
                         }
                     } catch {
                         print(error, error.localizedDescription)

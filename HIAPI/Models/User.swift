@@ -189,6 +189,6 @@ public struct FollowStatus: Codable, APIReturnable {
 }
 
 public struct UserCheckInStatus: Codable, APIReturnable {
-    public let status: String
-    public let points: Int
+    public let status: String?
+    public let points: Int?
 }
