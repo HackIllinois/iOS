@@ -245,10 +245,8 @@ extension HIScheduleViewController {
         if onlyShifts {
             onlyShifts = false
             backgroundView.image = #imageLiteral(resourceName: "PurpleBackground")
-            if UIDevice.current.userInterfaceIdiom != .pad {
-                labelColor = .white // Set label color to brown
-                setStaffShiftsControl()
-            }
+            labelColor = .white // Set label color to brown
+            setStaffShiftsControl()
             // Call removeStaffShiftContainerViews to remove container views for staff shifts
             hasSelectedShift = false
             removeStaffShiftContainerViews()
@@ -262,10 +260,8 @@ extension HIScheduleViewController {
             onlyShifts = !onlyShifts
             backgroundView.image = #imageLiteral(resourceName: "Pink Background")
             hasSelectedShift = true
-            if UIDevice.current.userInterfaceIdiom != .pad {
-                labelColor = #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1) // Set label color to brown
-                setStaffShiftsControl()
-            }
+            labelColor = #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1) // Set label color to brown
+            setStaffShiftsControl()
 
             guard let user = HIApplicationStateController.shared.user else { return }
 
@@ -296,8 +292,6 @@ extension HIScheduleViewController {
         // Get filtered events by date
         let sundayStart = HITimeDataSource.shared.eventTimes.sundayStart
         let saturdayStart = HITimeDataSource.shared.eventTimes.saturdayStart
-        
-        // Iterate through all subviews and remove container views for staff shifts
         var padding = 0.0
         // Iterate through each staff shift and add a label to the container view
         for (index, staffShift) in self.staffShifts.enumerated() {
@@ -307,8 +301,6 @@ extension HIScheduleViewController {
             let calendar = Calendar.current
             let dayComponent = calendar.component(.day, from: dateString)
             var curr_idx = segmentedControl.selectedIndex
-            print("Day:", dayComponent)
-            print("Current tab:", curr_idx)
             if curr_idx == 0 && dayComponent != 23 {
                 continue
             } else if curr_idx == 1 && dayComponent != 24 {
@@ -317,8 +309,8 @@ extension HIScheduleViewController {
                 continue
             }
             // Set fixed width and height for the container view
-            let containerViewWidth: CGFloat = 340.0
-            let containerViewHeight: CGFloat = 130.0
+            let containerViewWidth: CGFloat = (UIDevice.current.userInterfaceIdiom == .pad) ? 620 : 340.0
+            let containerViewHeight: CGFloat = (UIDevice.current.userInterfaceIdiom == .pad) ? 200 : 130.0
 
             // Create a container view with a yellow background
             let containerView = UIView()
@@ -335,11 +327,10 @@ extension HIScheduleViewController {
                 containerView.widthAnchor.constraint(equalToConstant: containerViewWidth),
                 containerView.heightAnchor.constraint(equalToConstant: containerViewHeight),
                 containerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-                containerView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 275 + padding)
+                containerView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: ((UIDevice.current.userInterfaceIdiom == .pad) ? 400 : 275) + padding)
             ])
-            let label = UILabel()
+            let label = HILabel(style: .event)
             label.text = staffShift.name
-            label.font = HIAppearance.Font.eventTitle!
             label.translatesAutoresizingMaskIntoConstraints = false
 
             // Add the label to the container view
@@ -354,13 +345,15 @@ extension HIScheduleViewController {
             // Add time, location, and description labels to shift cells
             // Time label set up
             var eventCellSpacing: CGFloat = 8.0
-            var locationImageView = UIImageView(image: #imageLiteral(resourceName: "LocationSign")); var timeImageView = UIImageView(image: #imageLiteral(resourceName: "Clock"))
+            let locationImageName = (UIDevice.current.userInterfaceIdiom == .pad) ? "VectorPad" : "LocationSign"
+            let timeImageName = (UIDevice.current.userInterfaceIdiom == .pad) ? "TimePad" : "Clock"
+            var locationImageView = UIImageView(image: #imageLiteral(resourceName: "\(locationImageName)")); var timeImageView = UIImageView(image: #imageLiteral(resourceName: "\(timeImageName)"))
             let timeLabel = HILabel(style: .time)
             timeLabel.text = Formatter.simpleTime.string(from: staffShift.startTime) + " - " + Formatter.simpleTime.string(from: staffShift.endTime)
             containerView.addSubview(timeImageView)
             timeImageView.translatesAutoresizingMaskIntoConstraints = false
             timeImageView.leadingAnchor.constraint(equalTo: label.leadingAnchor).isActive = true
-            timeImageView.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: 25.0).isActive = true
+            timeImageView.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: (UIDevice.current.userInterfaceIdiom == .pad ? 40.0 : 25.0)).isActive = true
             containerView.addSubview(timeLabel)
             timeLabel.leadingAnchor.constraint(equalTo: timeImageView.trailingAnchor, constant: eventCellSpacing + 1).isActive = true
             timeLabel.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor).isActive = true
@@ -375,8 +368,8 @@ extension HIScheduleViewController {
             containerView.addSubview(locationImageView)
             locationImageView.translatesAutoresizingMaskIntoConstraints = false
             containerView.addSubview(locationLabel)
-            locationImageView.leadingAnchor.constraint(equalTo: timeImageView.leadingAnchor, constant: 1.0).isActive = true
-            locationImageView.bottomAnchor.constraint(equalTo: timeImageView.bottomAnchor, constant: 25.0).isActive = true
+            locationImageView.leadingAnchor.constraint(equalTo: timeImageView.leadingAnchor, constant: (UIDevice.current.userInterfaceIdiom == .pad ? 2.0 : 1.0)).isActive = true
+            locationImageView.bottomAnchor.constraint(equalTo: timeImageView.bottomAnchor, constant: (UIDevice.current.userInterfaceIdiom == .pad ? 40.0 : 25.0)).isActive = true
             locationLabel.leadingAnchor.constraint(equalTo: timeLabel.leadingAnchor).isActive = true
             locationLabel.centerYAnchor.constraint(equalTo: locationImageView.centerYAnchor).isActive = true
             
@@ -387,8 +380,8 @@ extension HIScheduleViewController {
             containerView.addSubview(descriptionLabel)
             descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
             descriptionLabel.leadingAnchor.constraint(equalTo: locationImageView.leadingAnchor).isActive = true
-            descriptionLabel.bottomAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: 25.0).isActive = true
-            padding += 150.0
+            descriptionLabel.bottomAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: (UIDevice.current.userInterfaceIdiom == .pad ? 40.0 : 25.0)).isActive = true
+            padding += (UIDevice.current.userInterfaceIdiom == .pad ? 240.0 : 150.0)
         }
     }
 }
