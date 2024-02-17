@@ -43,7 +43,7 @@ struct HIPointShopSwiftUIView: View {
                         .background(Color(red: 0.1647, green: 0.1647, blue: 0.1647))
                         .cornerRadius(1000)
                         .frame(maxWidth: .infinity, alignment: .trailing)
-                        .offset(y: -38)
+                        .offset(y: isIpad ? -42 : -38)
                         Spacer()
                     }
                     Image("KnickKnacks")

@@ -296,6 +296,8 @@ extension HIScanPointsShopViewController: AVCaptureMetadataOutputObjectsDelegate
                 }
                 .authorize(with: HIApplicationStateController.shared.user)
                 .launch()
+        } else {
+            self.handlePointsShopAlert(status: "Error", itemName: "")
         }
     }
     func decode(_ token: String) -> [String: AnyObject]? {

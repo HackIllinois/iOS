@@ -279,6 +279,8 @@ extension HIScanMentorViewController: AVCaptureMetadataOutputObjectsDelegate {
                 }
                 .authorize(with: HIApplicationStateController.shared.user)
                 .launch()
+        } else {
+            self.handleMentorAlert(status: "Error")
         }
     }
     func decode(_ token: String) -> [String: AnyObject]? {

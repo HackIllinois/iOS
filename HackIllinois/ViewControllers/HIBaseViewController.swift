@@ -115,7 +115,7 @@ extension HIBaseViewController {
         label.text = customTitle
 
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 30))
-        view.bounds = view.bounds.offsetBy(dx: -24, dy: 0)
+        view.bounds = view.bounds.offsetBy(dx: -24, dy: (UIDevice.current.userInterfaceIdiom == .pad) ? 10 : 0)
         view.addSubview(label)
 
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: view)

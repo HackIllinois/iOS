@@ -101,7 +101,7 @@ extension HIScheduleViewController {
         onlyFavorites = !onlyFavorites
         sender.image = onlyFavorites ? #imageLiteral(resourceName: "Big Selected Bookmark") : #imageLiteral(resourceName: "Big Unselected Bookmark")
         if UIDevice.current.userInterfaceIdiom == .pad {
-            sender.image = onlyFavorites ? #imageLiteral(resourceName: "FavoritedPad") : #imageLiteral(resourceName: "UnFavoritedPad")
+            sender.image = onlyFavorites ? #imageLiteral(resourceName: "BookmarkSelected") : #imageLiteral(resourceName: "BookmarkUnselected")
         }
         if sender.image == #imageLiteral(resourceName: "Big Selected Bookmark") {
             super.setCustomTitle(customTitle: "SAVED EVENTS")
@@ -203,7 +203,7 @@ extension HIScheduleViewController {
 
 extension HIScheduleViewController {
     @objc func setStaffShiftsControl() {
-        let customFontSize = UIDevice.current.userInterfaceIdiom == .pad ? 44 : 24
+        let customFontSize = UIDevice.current.userInterfaceIdiom == .pad ? 48 : 24
         let customFont = UIFont(name: "MontserratRoman-Bold", size: CGFloat(customFontSize))
 
         // Create flexible space items to add space to the left
@@ -309,9 +309,9 @@ extension HIScheduleViewController {
                 continue
             }
             // Set fixed width and height for the container view
-            let containerViewWidth: CGFloat = (UIDevice.current.userInterfaceIdiom == .pad) ? 620 : 340.0
-            let containerViewHeight: CGFloat = (UIDevice.current.userInterfaceIdiom == .pad) ? 200 : 130.0
-
+            let containerViewWidth: CGFloat = UIScreen.main.bounds.width > 850 ? 820 : ((UIDevice.current.userInterfaceIdiom == .pad) ? 620 : 340.0)
+            let containerViewHeight: CGFloat = UIScreen.main.bounds.width > 850 ? 250 : ((UIDevice.current.userInterfaceIdiom == .pad) ? 200 : 130.0)
+    
             // Create a container view with a yellow background
             let containerView = UIView()
             containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -353,9 +353,9 @@ extension HIScheduleViewController {
             containerView.addSubview(timeImageView)
             timeImageView.translatesAutoresizingMaskIntoConstraints = false
             timeImageView.leadingAnchor.constraint(equalTo: label.leadingAnchor).isActive = true
-            timeImageView.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: (UIDevice.current.userInterfaceIdiom == .pad ? 40.0 : 25.0)).isActive = true
+            timeImageView.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant:  UIScreen.main.bounds.width > 850 ? 50 : ((UIDevice.current.userInterfaceIdiom == .pad) ? 40 : 25.0)).isActive = true
             containerView.addSubview(timeLabel)
-            timeLabel.leadingAnchor.constraint(equalTo: timeImageView.trailingAnchor, constant: eventCellSpacing + 1).isActive = true
+            timeLabel.leadingAnchor.constraint(equalTo: timeImageView.trailingAnchor, constant: eventCellSpacing).isActive = true
             timeLabel.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor).isActive = true
             
             // Location label set up
@@ -368,8 +368,8 @@ extension HIScheduleViewController {
             containerView.addSubview(locationImageView)
             locationImageView.translatesAutoresizingMaskIntoConstraints = false
             containerView.addSubview(locationLabel)
-            locationImageView.leadingAnchor.constraint(equalTo: timeImageView.leadingAnchor, constant: (UIDevice.current.userInterfaceIdiom == .pad ? 2.0 : 1.0)).isActive = true
-            locationImageView.bottomAnchor.constraint(equalTo: timeImageView.bottomAnchor, constant: (UIDevice.current.userInterfaceIdiom == .pad ? 40.0 : 25.0)).isActive = true
+            locationImageView.leadingAnchor.constraint(equalTo: timeImageView.leadingAnchor, constant: (UIDevice.current.userInterfaceIdiom == .pad ? 5.0 : 1.0)).isActive = true
+            locationImageView.bottomAnchor.constraint(equalTo: timeImageView.bottomAnchor, constant: UIScreen.main.bounds.width > 850 ? 50 : ((UIDevice.current.userInterfaceIdiom == .pad) ? 40 : 25.0)).isActive = true
             locationLabel.leadingAnchor.constraint(equalTo: timeLabel.leadingAnchor).isActive = true
             locationLabel.centerYAnchor.constraint(equalTo: locationImageView.centerYAnchor).isActive = true
             
@@ -380,8 +380,8 @@ extension HIScheduleViewController {
             containerView.addSubview(descriptionLabel)
             descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
             descriptionLabel.leadingAnchor.constraint(equalTo: locationImageView.leadingAnchor).isActive = true
-            descriptionLabel.bottomAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: (UIDevice.current.userInterfaceIdiom == .pad ? 40.0 : 25.0)).isActive = true
-            padding += (UIDevice.current.userInterfaceIdiom == .pad ? 240.0 : 150.0)
+            descriptionLabel.bottomAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: UIScreen.main.bounds.width > 850 ? 50 : ((UIDevice.current.userInterfaceIdiom == .pad) ? 40 : 25.0)).isActive = true
+            padding += UIScreen.main.bounds.width > 850 ? 300 : ((UIDevice.current.userInterfaceIdiom == .pad) ? 240 : 150.0)
         }
     }
 }
@@ -394,7 +394,7 @@ extension HIScheduleViewController {
         if !HIApplicationStateController.shared.isGuest {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "MenuUnfavorited"), style: .plain, target: self, action: #selector(didSelectFavoritesIcon(_:)))
             if UIDevice.current.userInterfaceIdiom == .pad {
-                navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "UnFavoritedPad"), style: .plain, target: self, action: #selector(didSelectFavoritesIcon(_:)))
+                navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "BookmarkUnselected"), style: .plain, target: self, action: #selector(didSelectFavoritesIcon(_:)))
             }
         }
     }
