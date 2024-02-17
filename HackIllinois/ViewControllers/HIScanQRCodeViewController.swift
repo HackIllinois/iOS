@@ -329,7 +329,7 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
             self.respondingToQRCodeFound = true
         case "The operation couldn’t be completed. (APIManager.APIRequestError error 0.)":
             alertTitle = "Error!"
-            alertMessage = "Invalid/expired QR code. Refresh your profile or verify you're checking into the correct event."
+            alertMessage = "Your QR code is either invalid/expired or you have already checked into this event."
             self.respondingToQRCodeFound = true
         default:
             alertTitle = "Error!"
