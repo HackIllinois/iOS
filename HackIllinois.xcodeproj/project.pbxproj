@@ -140,11 +140,11 @@
 		D158EC312B5A2D440003D799 /* HIQRAttendeeScannerSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D158EC302B5A2D440003D799 /* HIQRAttendeeScannerSelection.swift */; };
 		D158EC332B5A2DFE0003D799 /* HIScanPointsShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D158EC322B5A2DFE0003D799 /* HIScanPointsShopViewController.swift */; };
 		D187BF582B781A1100AD7356 /* HIShiftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D187BF572B781A1100AD7356 /* HIShiftCell.swift */; };
-		D1BBA5682B70AB940017BD13 /* Staff.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BBA5672B70AB940017BD13 /* Staff.swift */; };
-		D1BBA56A2B70ACCC0017BD13 /* StaffService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BBA5692B70ACCC0017BD13 /* StaffService.swift */; };
 		D187BF5A2B78317600AD7356 /* Mentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D187BF592B78317600AD7356 /* Mentor.swift */; };
 		D187BF5C2B78318000AD7356 /* MentorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D187BF5B2B78318000AD7356 /* MentorService.swift */; };
 		D19D4C932B794F9100376E1B /* HIScanMentorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19D4C922B794F9100376E1B /* HIScanMentorViewController.swift */; };
+		D1BBA5682B70AB940017BD13 /* Staff.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BBA5672B70AB940017BD13 /* Staff.swift */; };
+		D1BBA56A2B70ACCC0017BD13 /* StaffService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BBA5692B70ACCC0017BD13 /* StaffService.swift */; };
 		D1BE81172AC8FC680042C078 /* HIAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95E3142A21FAD5B30092C22E /* HIAPI.framework */; };
 		D1BE81182AC8FC690042C078 /* HIAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 95E3142A21FAD5B30092C22E /* HIAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D1C5B6582B732E44000E766D /* refresh.json in Resources */ = {isa = PBXBuildFile; fileRef = D1C5B6572B732E44000E766D /* refresh.json */; };
@@ -358,11 +358,11 @@
 		D158EC302B5A2D440003D799 /* HIQRAttendeeScannerSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIQRAttendeeScannerSelection.swift; sourceTree = "<group>"; };
 		D158EC322B5A2DFE0003D799 /* HIScanPointsShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScanPointsShopViewController.swift; sourceTree = "<group>"; };
 		D187BF572B781A1100AD7356 /* HIShiftCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIShiftCell.swift; sourceTree = "<group>"; };
-		D1BBA5672B70AB940017BD13 /* Staff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Staff.swift; sourceTree = "<group>"; };
-		D1BBA5692B70ACCC0017BD13 /* StaffService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffService.swift; sourceTree = "<group>"; };
 		D187BF592B78317600AD7356 /* Mentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mentor.swift; sourceTree = "<group>"; };
 		D187BF5B2B78318000AD7356 /* MentorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentorService.swift; sourceTree = "<group>"; };
 		D19D4C922B794F9100376E1B /* HIScanMentorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScanMentorViewController.swift; sourceTree = "<group>"; };
+		D1BBA5672B70AB940017BD13 /* Staff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Staff.swift; sourceTree = "<group>"; };
+		D1BBA5692B70ACCC0017BD13 /* StaffService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffService.swift; sourceTree = "<group>"; };
 		D1C5B6572B732E44000E766D /* refresh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = refresh.json; sourceTree = "<group>"; };
 		D1F146392B605C57004E7FC9 /* Hack_Mushroom_Loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Hack_Mushroom_Loading.json; sourceTree = "<group>"; };
 		D3A309BA221116A600CBA351 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };

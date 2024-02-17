@@ -39,10 +39,10 @@ public struct Staff: Codable {
         case isPrivate
         case displayOnStaffCheckIn
     }
-    public let isPro: String
+    public let isPro: Bool
     public let eventId: String
     public let isStaff: Bool
-    public let name: Int
+    public let name: String
     public let description: String
     public let startTime: Date
     public let endTime: Date

@@ -18,6 +18,9 @@ import HIAPI
 class HIScheduleViewController: HIEventListViewController {
     // MARK: - Properties
     var staffShifts: [Staff] = []
+    private var labelColor: UIColor = .white // Default color
+    var hasSelectedShift = false
+    var segmentedControl: HIScheduleSegmentedControl!
     
     lazy var fetchedResultsController: NSFetchedResultsController<Event> = {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
@@ -85,6 +88,10 @@ class HIScheduleViewController: HIEventListViewController {
 // MARK: - Actions
 extension HIScheduleViewController {
     @objc func didSelectTab(_ sender: HISegmentedControl) {
+        if hasSelectedShift {
+            removeStaffShiftContainerViews()
+            setUpShiftCells()
+        }
         currentTab = sender.selectedIndex
         updatePredicate()
         animateReload()
@@ -137,7 +144,7 @@ extension HIScheduleViewController {
         super.loadView()
 
         let items = dataStore.map { $0.displayText }
-        let segmentedControl = HIScheduleSegmentedControl(titles: items, nums: [23, 24, 25])
+        segmentedControl = HIScheduleSegmentedControl(titles: items, nums: [23, 24, 25])
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
@@ -155,9 +162,11 @@ extension HIScheduleViewController {
         let now = Date()
         if now > HITimeDataSource.shared.eventTimes.sundayStart {
             segmentedControl.selectedIndex = 2
+            currentTab = 2
         }
         else if now > HITimeDataSource.shared.eventTimes.saturdayStart {
             segmentedControl.selectedIndex = 1
+            currentTab = 1
         }
         
         let tableView = HITableView()
@@ -191,6 +200,7 @@ extension HIScheduleViewController {
 }
 
 // MARK: - Staff Shifts Control Setup
+
 extension HIScheduleViewController {
     @objc func setStaffShiftsControl() {
         let customFontSize = UIDevice.current.userInterfaceIdiom == .pad ? 44 : 24
@@ -202,7 +212,7 @@ extension HIScheduleViewController {
         let flexibleSpaceLeft3 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
         let scheduleButton = UIBarButtonItem(title: "SCHEDULE", style: .plain, target: self, action: #selector(scheduleButtonTapped(_:)))
-        scheduleButton.setTitleTextAttributes([NSAttributedString.Key.font: customFont], for: .normal)
+        scheduleButton.setTitleTextAttributes([NSAttributedString.Key.font: customFont, NSAttributedString.Key.foregroundColor: labelColor], for: .normal)
 
         // Add the flexible space items and custom button to the leftBarButtonItems array
         navigationItem.leftBarButtonItems = [flexibleSpaceLeft1, flexibleSpaceLeft2, flexibleSpaceLeft3, scheduleButton]
@@ -213,30 +223,49 @@ extension HIScheduleViewController {
 
         // Create custom right bar button item
         let customButton = UIBarButtonItem(title: "SHIFTS", style: .plain, target: self, action: #selector(shiftsButtonTapped(_:)))
-        customButton.setTitleTextAttributes([NSAttributedString.Key.font: customFont], for: .normal)
+        customButton.setTitleTextAttributes([NSAttributedString.Key.font: customFont, NSAttributedString.Key.foregroundColor: labelColor], for: .normal)
 
         // Add the flexible space items and custom button to the rightBarButtonItems array
         navigationItem.rightBarButtonItems = [flexibleSpaceRight1, flexibleSpaceRight2, customButton]
 
         self.navigationItem.leftItemsSupplementBackButton = true
     }
-
+    
+    func removeStaffShiftContainerViews() {
+        // Iterate through all subviews and remove container views for staff shifts
+        for subview in self.view.subviews {
+            if let containerView = subview as? UIView, containerView.backgroundColor == #colorLiteral(red: 1, green: 0.9803921569, blue: 0.8, alpha: 1) {
+                containerView.removeFromSuperview()
+            }
+        }
+    }
+    
     // Actions for left and right buttons
     @objc func scheduleButtonTapped(_ sender: UIButton) {
         if onlyShifts {
             onlyShifts = false
             backgroundView.image = #imageLiteral(resourceName: "PurpleBackground")
+            if UIDevice.current.userInterfaceIdiom != .pad {
+                labelColor = .white // Set label color to brown
+                setStaffShiftsControl()
+            }
+            // Call removeStaffShiftContainerViews to remove container views for staff shifts
+            hasSelectedShift = false
+            removeStaffShiftContainerViews()
             updatePredicate()
             animateReload()
         }
     }
 
-
     @objc func shiftsButtonTapped(_ sender: UIButton) {
         if !onlyShifts {
             onlyShifts = !onlyShifts
             backgroundView.image = #imageLiteral(resourceName: "Pink Background")
-            //let label = HILabel(style: (UIDevice.current.userInterfaceIdiom == .pad) ? .viewTitle : .viewTitleBrown)
+            hasSelectedShift = true
+            if UIDevice.current.userInterfaceIdiom != .pad {
+                labelColor = #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1) // Set label color to brown
+                setStaffShiftsControl()
+            }
 
             guard let user = HIApplicationStateController.shared.user else { return }
 
@@ -248,14 +277,118 @@ extension HIScheduleViewController {
                         print("Staff shifts: ", self.staffShifts)
 
                         DispatchQueue.main.async {
+                            // Set up shift cells
+                            self.setUpShiftCells()
+                            // Update predicate and animate reload
                             self.updatePredicate()
                             self.animateReload()
                         }
+
                     } catch {
                         print("An error has occurred in getting staff shifts \(error)")
                     }
                 }
                 .launch()
+        }
+    }
+    
+    func setUpShiftCells() {
+        // Get filtered events by date
+        let sundayStart = HITimeDataSource.shared.eventTimes.sundayStart
+        let saturdayStart = HITimeDataSource.shared.eventTimes.saturdayStart
+        
+        // Iterate through all subviews and remove container views for staff shifts
+        var padding = 0.0
+        // Iterate through each staff shift and add a label to the container view
+        for (index, staffShift) in self.staffShifts.enumerated() {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+            let dateString = staffShift.startTime
+            let calendar = Calendar.current
+            let dayComponent = calendar.component(.day, from: dateString)
+            var curr_idx = segmentedControl.selectedIndex
+            print("Day:", dayComponent)
+            print("Current tab:", curr_idx)
+            if curr_idx == 0 && dayComponent != 23 {
+                continue
+            } else if curr_idx == 1 && dayComponent != 24 {
+                continue
+            } else if curr_idx == 2 && dayComponent != 25 {
+                continue
+            }
+            // Set fixed width and height for the container view
+            let containerViewWidth: CGFloat = 340.0
+            let containerViewHeight: CGFloat = 130.0
+
+            // Create a container view with a yellow background
+            let containerView = UIView()
+            containerView.translatesAutoresizingMaskIntoConstraints = false
+            containerView.backgroundColor = #colorLiteral(red: 1, green: 0.9803921569, blue: 0.8, alpha: 1)
+            containerView.layer.cornerRadius = 20.0
+            containerView.layer.masksToBounds = true
+
+            // Add the container view to the main view
+            self.view.addSubview(containerView)
+
+            // Set up constraints for the fixed width and height
+            NSLayoutConstraint.activate([
+                containerView.widthAnchor.constraint(equalToConstant: containerViewWidth),
+                containerView.heightAnchor.constraint(equalToConstant: containerViewHeight),
+                containerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+                containerView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 275 + padding)
+            ])
+            let label = UILabel()
+            label.text = staffShift.name
+            label.font = HIAppearance.Font.eventTitle!
+            label.translatesAutoresizingMaskIntoConstraints = false
+
+            // Add the label to the container view
+            containerView.addSubview(label)
+
+            // Set up constraints for the labels within the container view
+            NSLayoutConstraint.activate([
+                label.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 15.0),
+                label.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20.0)
+            ])
+            
+            // Add time, location, and description labels to shift cells
+            // Time label set up
+            var eventCellSpacing: CGFloat = 8.0
+            var locationImageView = UIImageView(image: #imageLiteral(resourceName: "LocationSign")); var timeImageView = UIImageView(image: #imageLiteral(resourceName: "Clock"))
+            let timeLabel = HILabel(style: .time)
+            timeLabel.text = Formatter.simpleTime.string(from: staffShift.startTime) + " - " + Formatter.simpleTime.string(from: staffShift.endTime)
+            containerView.addSubview(timeImageView)
+            timeImageView.translatesAutoresizingMaskIntoConstraints = false
+            timeImageView.leadingAnchor.constraint(equalTo: label.leadingAnchor).isActive = true
+            timeImageView.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: 25.0).isActive = true
+            containerView.addSubview(timeLabel)
+            timeLabel.leadingAnchor.constraint(equalTo: timeImageView.trailingAnchor, constant: eventCellSpacing + 1).isActive = true
+            timeLabel.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor).isActive = true
+            
+            // Location label set up
+            let locationLabel = HILabel(style: .newLocation)
+            if staffShift.locations.count > 0 {
+                locationLabel.text = staffShift.locations.map { $0.name }.joined(separator: ", ")
+            } else {
+                locationLabel.text = "No Location"
+            }
+            containerView.addSubview(locationImageView)
+            locationImageView.translatesAutoresizingMaskIntoConstraints = false
+            containerView.addSubview(locationLabel)
+            locationImageView.leadingAnchor.constraint(equalTo: timeImageView.leadingAnchor, constant: 1.0).isActive = true
+            locationImageView.bottomAnchor.constraint(equalTo: timeImageView.bottomAnchor, constant: 25.0).isActive = true
+            locationLabel.leadingAnchor.constraint(equalTo: timeLabel.leadingAnchor).isActive = true
+            locationLabel.centerYAnchor.constraint(equalTo: locationImageView.centerYAnchor).isActive = true
+            
+            // Description label set up
+            let descriptionLabel = HILabel(style: .cellDescription)
+            descriptionLabel.numberOfLines = 1
+            descriptionLabel.text = "\(staffShift.description)"
+            containerView.addSubview(descriptionLabel)
+            descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+            descriptionLabel.leadingAnchor.constraint(equalTo: locationImageView.leadingAnchor).isActive = true
+            descriptionLabel.bottomAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: 25.0).isActive = true
+            padding += 150.0
         }
     }
 }
