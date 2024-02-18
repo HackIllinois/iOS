@@ -91,7 +91,6 @@ extension HIProfileViewController {
 //        print("rank \(rank)")
         guard let user = HIApplicationStateController.shared.user else { return }
         var role = "General"
-        print(user.roles)
         if user.roles.contains(.PRO) {
             role = "Knight"
         }

@@ -15,22 +15,27 @@ import CoreLocation
 import UserNotifications
 import HIAPI
 import GoogleMaps
+import Firebase
+import FirebaseMessaging
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
     private var obfuscatedApiKey: [UInt8] = [92, 213, 228, 193, 244, 27, 239, 139, 188, 14, 85, 191, 47, 237, 55, 13, 85, 89, 111, 212, 35, 80, 45, 104, 189, 229,
                                    33, 32, 70, 63, 90, 163, 173, 232, 167, 90, 203, 22, 169, 29, 156, 158, 160, 167, 98,
                                    174, 239, 247, 118, 96, 207, 104, 180, 14, 90, 58, 61, 89, 186, 89, 7, 114, 25, 255, 141,
                                    115, 113, 117, 78, 10, 150, 197, 161, 158, 98, 129, 87, 228]
+    var fcmToken: String?
     // Handle remote notification registration.
     func application(_ application: UIApplication,
                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         guard let user = HIApplicationStateController.shared.user else { return }
         let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+        
+        Messaging.messaging().apnsToken = deviceToken
+        Messaging.messaging().delegate = self
 
         // Send the token to notifications server
-        AnnouncementService.sendToken(deviceToken: token)
+        NotificationService.sendDeviceToken(deviceToken: fcmToken!)
             .onCompletion { result in
                 do {
                     _ = try result.get()
@@ -54,6 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
         setupNavigationBarAppearance()
         setupTableViewAppearance()
         _ = HIThemeEngine.shared
@@ -63,7 +69,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         HIApplicationStateController.shared.initalize()
         // Check the app version and prompt the user to update if needed
         checkAppVersion()
+        application.registerForRemoteNotifications()
+        Messaging.messaging().delegate = self
+        UNUserNotificationCenter.current().delegate = self
         return true
+    }
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+            // Called when the app has successfully registered with FCM and received a registration token
+            self.fcmToken = fcmToken
+            
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+               // Log the notification details
+        print(notification.request.content.userInfo)
+
+        completionHandler([.alert, .sound, .badge])
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

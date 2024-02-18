@@ -90,7 +90,6 @@ struct HIProfileCardView: View {
                                                         getRank { rank in
                                                             self.rank = rank
                                                         }
-                                                        print(rank)
                                                     }
                                 }
                             }.padding(.bottom, isIpad ? 40*padFactor : 25*phoneFactor)
@@ -199,7 +198,6 @@ struct HIProfileCardView: View {
                     let (qr, _) = try result.get()
                     DispatchQueue.main.async {
                         self.qrInfo = qr.qrInfo
-                        print("qrinfo with attendee jwt", qrInfo)
                     }
                 } catch {
                     print("An error has occurred \(error)")
@@ -218,7 +216,6 @@ struct HIProfileCardView: View {
                 do {
                     let (userRanking, _) = try result.get()
                     rank = userRanking.ranking
-                    print("rank:", rank)
                     completion(rank)
                 } catch {
                     print("An error has occurred in ranking \(error)")

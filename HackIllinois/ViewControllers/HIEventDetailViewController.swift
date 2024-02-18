@@ -241,7 +241,6 @@ extension HIEventDetailViewController {
     }
     func setupMap() {
         guard let event = event else { return }
-        print(event.mapImageUrl)
         
         // Check if the image URL ends with "svg" and replace it with "png"
         var imageUrlString = event.mapImageUrl

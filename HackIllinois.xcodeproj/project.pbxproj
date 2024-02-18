@@ -139,7 +139,6 @@
 		D14D3AE3295FBDA200EB7995 /* HIBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */; };
 		D158EC312B5A2D440003D799 /* HIQRAttendeeScannerSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D158EC302B5A2D440003D799 /* HIQRAttendeeScannerSelection.swift */; };
 		D158EC332B5A2DFE0003D799 /* HIScanPointsShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D158EC322B5A2DFE0003D799 /* HIScanPointsShopViewController.swift */; };
-		D187BF582B781A1100AD7356 /* HIShiftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D187BF572B781A1100AD7356 /* HIShiftCell.swift */; };
 		D187BF5A2B78317600AD7356 /* Mentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D187BF592B78317600AD7356 /* Mentor.swift */; };
 		D187BF5C2B78318000AD7356 /* MentorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D187BF5B2B78318000AD7356 /* MentorService.swift */; };
 		D19D4C932B794F9100376E1B /* HIScanMentorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19D4C922B794F9100376E1B /* HIScanMentorViewController.swift */; };
@@ -148,6 +147,12 @@
 		D1BE81172AC8FC680042C078 /* HIAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95E3142A21FAD5B30092C22E /* HIAPI.framework */; };
 		D1BE81182AC8FC690042C078 /* HIAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 95E3142A21FAD5B30092C22E /* HIAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D1C5B6582B732E44000E766D /* refresh.json in Resources */ = {isa = PBXBuildFile; fileRef = D1C5B6572B732E44000E766D /* refresh.json */; };
+		D1D335172B81DEBA00BBB596 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = D1D335162B81DEBA00BBB596 /* FirebaseMessaging */; };
+		D1D335192B81DEF600BBB596 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D335182B81DEF600BBB596 /* Notification.swift */; };
+		D1D3351B2B81DF0300BBB596 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D3351A2B81DF0300BBB596 /* NotificationService.swift */; };
+		D1D3351D2B81E11500BBB596 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1D3351C2B81E11500BBB596 /* GoogleService-Info.plist */; };
+		D1D3351E2B81E11500BBB596 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1D3351C2B81E11500BBB596 /* GoogleService-Info.plist */; };
+		D1D3351F2B81E11500BBB596 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1D3351C2B81E11500BBB596 /* GoogleService-Info.plist */; };
 		D1F1463A2B605C57004E7FC9 /* Hack_Mushroom_Loading.json in Resources */ = {isa = PBXBuildFile; fileRef = D1F146392B605C57004E7FC9 /* Hack_Mushroom_Loading.json */; };
 		D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A309BB2211175200CBA351 /* PassKit.framework */; };
 		D7451BD22B54BCFB00D501D0 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = D7451BD12B54BCFB00D501D0 /* URLImage */; };
@@ -357,13 +362,15 @@
 		D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIBannerViewController.swift; sourceTree = "<group>"; };
 		D158EC302B5A2D440003D799 /* HIQRAttendeeScannerSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIQRAttendeeScannerSelection.swift; sourceTree = "<group>"; };
 		D158EC322B5A2DFE0003D799 /* HIScanPointsShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScanPointsShopViewController.swift; sourceTree = "<group>"; };
-		D187BF572B781A1100AD7356 /* HIShiftCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIShiftCell.swift; sourceTree = "<group>"; };
 		D187BF592B78317600AD7356 /* Mentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mentor.swift; sourceTree = "<group>"; };
 		D187BF5B2B78318000AD7356 /* MentorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentorService.swift; sourceTree = "<group>"; };
 		D19D4C922B794F9100376E1B /* HIScanMentorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScanMentorViewController.swift; sourceTree = "<group>"; };
 		D1BBA5672B70AB940017BD13 /* Staff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Staff.swift; sourceTree = "<group>"; };
 		D1BBA5692B70ACCC0017BD13 /* StaffService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffService.swift; sourceTree = "<group>"; };
 		D1C5B6572B732E44000E766D /* refresh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = refresh.json; sourceTree = "<group>"; };
+		D1D335182B81DEF600BBB596 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		D1D3351A2B81DF0300BBB596 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		D1D3351C2B81E11500BBB596 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D1F146392B605C57004E7FC9 /* Hack_Mushroom_Loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Hack_Mushroom_Loading.json; sourceTree = "<group>"; };
 		D3A309BA221116A600CBA351 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };
 		D3A309BB2211175200CBA351 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
@@ -407,6 +414,7 @@
 				DF3706562925DE4C000B4278 /* Metal.framework in Frameworks */,
 				DF3706542925DE47000B4278 /* libz.tbd in Frameworks */,
 				DF3706522925DE42000B4278 /* libc++.tbd in Frameworks */,
+				D1D335172B81DEBA00BBB596 /* FirebaseMessaging in Frameworks */,
 				DF3706502925DE38000B4278 /* ImageIO.framework in Frameworks */,
 				DF37064E2925DE34000B4278 /* GLKit.framework in Frameworks */,
 				DF37064C2925DE2F000B4278 /* CoreText.framework in Frameworks */,
@@ -511,6 +519,7 @@
 				957DB2E91FC2453100F8C45E /* FlowControllers */,
 				951827981EA35DB800049F79 /* AppDelegate.swift */,
 				951827991EA35DB800049F79 /* Assets.xcassets */,
+				D1D3351C2B81E11500BBB596 /* GoogleService-Info.plist */,
 				9518279E1EA35DB800049F79 /* Controllers */,
 				9521A6A6201912B4009059C6 /* DataSources */,
 				958A33E421E143BF00F34C9E /* Extensions */,
@@ -682,7 +691,6 @@
 				95A7D282203D4F54005EAEAF /* HIAnnouncementCell.swift */,
 				95A7D29F203D60E9005EAEAF /* HIBubbleCell.swift */,
 				95A7D281203D4F54005EAEAF /* HIEventCell.swift */,
-				D187BF572B781A1100AD7356 /* HIShiftCell.swift */,
 				3CF8DB1223B419980035ECAE /* HIProjectCell.swift */,
 			);
 			path = HIBubbleCell;
@@ -728,6 +736,7 @@
 				95E3146221FAF1740092C22E /* AuthService.swift */,
 				2FA73B4D2B58CAA0002658C0 /* ShopService.swift */,
 				95E3146121FAF1740092C22E /* BaseService.swift */,
+				D1D3351A2B81DF0300BBB596 /* NotificationService.swift */,
 				95B12042220BEA9D00E024BB /* CheckInService.swift */,
 				95E3145F21FAF1740092C22E /* EventService.swift */,
 				D187BF5B2B78318000AD7356 /* MentorService.swift */,
@@ -751,6 +760,7 @@
 				95E3146821FAF1740092C22E /* Announcement.swift */,
 				3521FFA82207C03E00634A63 /* Attendee.swift */,
 				95E3146521FAF1740092C22E /* Event.swift */,
+				D1D335182B81DEF600BBB596 /* Notification.swift */,
 				D1BBA5672B70AB940017BD13 /* Staff.swift */,
 				2FA73B4F2B58CAC3002658C0 /* Item.swift */,
 				AC3B620D25E85CAD002386A2 /* Profile.swift */,
@@ -892,6 +902,7 @@
 				951E67F523C1C83B00477703 /* Keychain */,
 				951E67F823C1C88200477703 /* Lottie */,
 				D7451BD12B54BCFB00D501D0 /* URLImage */,
+				D1D335162B81DEBA00BBB596 /* FirebaseMessaging */,
 			);
 			productName = HackIllinois;
 			productReference = 9518277F1EA35AF100049F79 /* HackIllinois.app */;
@@ -982,6 +993,7 @@
 				951E67F423C1C83B00477703 /* XCRemoteSwiftPackageReference "keychain" */,
 				951E67F723C1C88200477703 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				D7451BD02B54BCFB00D501D0 /* XCRemoteSwiftPackageReference "url-image" */,
+				D1D335152B81DEBA00BBB596 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 951827801EA35AF100049F79 /* Products */;
 			projectDirPath = "";
@@ -1007,6 +1019,7 @@
 				951827B41EA35E8B00049F79 /* LaunchScreen.storyboard in Resources */,
 				1C7561A5278E96750004D739 /* LightVespaText.json in Resources */,
 				D134D30F296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf in Resources */,
+				D1D3351D2B81E11500BBB596 /* GoogleService-Info.plist in Resources */,
 				DF37063E2925DDE7000B4278 /* GoogleMaps.bundle in Resources */,
 				D1C5B6582B732E44000E766D /* refresh.json in Resources */,
 			);
@@ -1016,6 +1029,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1D3351F2B81E11500BBB596 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1024,6 +1038,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC607EF0261CD6E300B88798 /* Stickers.xcassets in Resources */,
+				D1D3351E2B81E11500BBB596 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1082,7 +1097,6 @@
 				E1E4A5DA291C9BF800780BA1 /* HIOnboardingView.swift in Sources */,
 				95A7D290203D4F54005EAEAF /* HIAnnouncementCell.swift in Sources */,
 				9515E43722093E1300BCAF92 /* HIEventScannerViewController.swift in Sources */,
-				D187BF582B781A1100AD7356 /* HIShiftCell.swift in Sources */,
 				95A7D28F203D4F54005EAEAF /* HIEventCell.swift in Sources */,
 				ACAA717626017EC4000F42B0 /* HICollectionViewFlowLayout.swift in Sources */,
 				DF5B27C5299197E80034A8B9 /* Array.swift in Sources */,
@@ -1174,6 +1188,7 @@
 				ACB53AEA261B8789007B1643 /* InterestService.swift in Sources */,
 				3C8F62D4238F9639001A5DAF /* Time.swift in Sources */,
 				95E3147621FAF1740092C22E /* Announcement.swift in Sources */,
+				D1D3351B2B81DF0300BBB596 /* NotificationService.swift in Sources */,
 				95E3146C21FAF1740092C22E /* UserService.swift in Sources */,
 				95B12043220BEA9D00E024BB /* CheckInService.swift in Sources */,
 				95E3147121FAF1740092C22E /* AuthService.swift in Sources */,
@@ -1191,6 +1206,7 @@
 				3C8F62D6238F9825001A5DAF /* TimeService.swift in Sources */,
 				D187BF5A2B78317600AD7356 /* Mentor.swift in Sources */,
 				95E3145921FAD71E0092C22E /* Error.swift in Sources */,
+				D1D335192B81DEF600BBB596 /* Notification.swift in Sources */,
 				3C26401D23ADE8A5004E1DBE /* Project.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1595,6 +1611,14 @@
 				version = 4.0.1;
 			};
 		};
+		D1D335152B81DEBA00BBB596 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 		D7451BD02B54BCFB00D501D0 /* XCRemoteSwiftPackageReference "url-image" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
@@ -1620,6 +1644,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 951E67F723C1C88200477703 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		D1D335162B81DEBA00BBB596 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D1D335152B81DEBA00BBB596 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 		D7451BD12B54BCFB00D501D0 /* URLImage */ = {
 			isa = XCSwiftPackageProductDependency;
