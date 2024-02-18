@@ -98,7 +98,7 @@ extension HIProfileViewController {
         profileCardController = UIHostingController(rootView: HIProfileCardView(displayName: profile.displayName,
                                                                                 points: profile.points,
                                                                                 tier: profileTier,
-                                                                                foodWave: 1,
+                                                                                foodWave: profile.foodWave,
                                                                                 avatarUrl: profile.avatarUrl,
                                                                                 userId: profile.userId,
                                                                                 role: role
@@ -186,7 +186,7 @@ extension HIProfileViewController {
                 self?.profile.displayName = apiProfile.discordTag
                 self?.profile.points = apiProfile.points
                 self?.profile.avatarUrl = apiProfile.avatarUrl
-                //self?.profile.foodWave = apiProfile.foodWave
+                self?.profile.foodWave = apiProfile.foodWave
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .loginProfile, object: nil, userInfo: ["profile": self?.profile])
                     self?.updateProfile()

@@ -24,7 +24,7 @@ struct HIProfile: Codable {
     var userId = ""
     var displayName = ""
     var points = 0
-    //var foodWave = 0
+    var foodWave = 0
     var timezone = ""
     var discordTag = ""
     var avatarUrl = ""
