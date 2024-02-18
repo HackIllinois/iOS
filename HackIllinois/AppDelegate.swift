@@ -35,16 +35,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         Messaging.messaging().delegate = self
 
         // Send the token to notifications server
-        NotificationService.sendDeviceToken(deviceToken: fcmToken!)
-            .onCompletion { result in
-                do {
-                    _ = try result.get()
-                } catch {
-                    print(error)
-                }
+        if let unwrappedToken = fcmToken {
+            NotificationService.sendDeviceToken(deviceToken: unwrappedToken)
+                    .onCompletion { result in
+                        do {
+                            _ = try result.get()
+                        } catch {
+                            print(error)
+                        }
+                    }
+                    .authorize(with: user)
+                    .launch()
+            } else {
+                NSLog("fcmToken is nil")
             }
-            .authorize(with: user)
-            .launch()
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
