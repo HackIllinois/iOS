@@ -17,4 +17,14 @@ public final class ShopService: BaseService {
     public static func getAllItems() -> APIRequest<ItemContainer> {
         return APIRequest<ItemContainer>(service: self, endpoint: "shop/", headers: headers, method: .GET)
     }
+    
+    public static func redeemPrize(itemId: String, itemInstance: String, userToken: String) -> APIRequest<RedeemItem> {
+        let jsonBody: [String: Any] = [
+            "itemId": itemId,
+            "instance": itemInstance
+        ]
+        let headers: HTTPParameters = ["Authorization": userToken]
+
+        return APIRequest<RedeemItem>(service: self, endpoint: "shop/item/buy/", body: jsonBody, headers: headers, method: .POST)
+    }
 }

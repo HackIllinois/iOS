@@ -278,6 +278,7 @@ extension HIEventDetailViewController {
         mapView.constrain(height: mapHeight)
         mapView.layer.cornerRadius = 20
     }
+    
     func setupCloseButton() {
         view.addSubview(closeButton)
         closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)

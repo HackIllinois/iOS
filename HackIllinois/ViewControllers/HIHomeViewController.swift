@@ -41,7 +41,7 @@ class HIHomeViewController: HIEventListViewController {
 
     private var countdownDataStoreIndex = 0
     private var staticDataStore: [(date: Date, displayText: String)] = [
-        (HITimeDataSource.shared.eventTimes.eventStart, "HACKILLINOIS BEGINS IN"),
+        (HITimeDataSource.shared.eventTimes.checkInStart, "HACKILLINOIS BEGINS IN"),
         (HITimeDataSource.shared.eventTimes.hackStart, "HACKING BEGINS IN"),
         (HITimeDataSource.shared.eventTimes.hackEnd, "HACKING ENDS IN"),
         (HITimeDataSource.shared.eventTimes.eventEnd, "HACKILLINOIS ENDS IN")
@@ -88,15 +88,15 @@ extension HIHomeViewController {
     func layoutLegendButton() {
         view.addSubview(legendButton)
         
-        if UIDevice.current.userInterfaceIdiom != .pad {
-            legendButton.constrain(width: 25, height: 25)
-        } else {
-            legendButton.constrain(width: 50, height: 50)
-        }
+        let buttonSize: CGFloat = UIDevice.current.userInterfaceIdiom != .pad ? 30 : 50
+        let padding: CGFloat = UIDevice.current.userInterfaceIdiom != .pad ? 16 : 50
         
+        legendButton.constrain(width: buttonSize, height: buttonSize)
         legendButton.translatesAutoresizingMaskIntoConstraints = false
-        legendButton.topAnchor.constraint(equalTo: bannerFrameView.topAnchor, constant: -2).isActive = true
-        legendButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15).isActive = true
+        
+        // Increase the hit target area by adding padding
+        legendButton.topAnchor.constraint(equalTo: bannerFrameView.topAnchor, constant: -5).isActive = true
+        legendButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -padding).isActive = true
         
         legendButton.addTarget(self, action: #selector(didSelectLegendButton(_:)), for: .touchUpInside)
     }

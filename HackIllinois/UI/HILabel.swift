@@ -23,7 +23,7 @@ class HILabel: UILabel {
         case sponsor
         case project
         case viewTitle
-        case viewTitleGreen
+        case viewTitleBrown
         case detailTitle
         case subtitle
         case description
@@ -148,8 +148,8 @@ class HILabel: UILabel {
             textAlignment = .center
             font = HIAppearance.Font.viewTitle
         
-        case .viewTitleGreen:
-            textHIColor = \.viewTitleGreen
+        case .viewTitleBrown:
+            textHIColor = \.viewTitleBrown
             backgroundHIColor = \.clear
             textAlignment = .center
             font = HIAppearance.Font.viewTitle
@@ -343,7 +343,7 @@ class HILabel: UILabel {
             font = HIAppearance.Font.locationText
             
         case .QRSelection:
-            textHIColor = \.black
+            textHIColor = \.viewTitleBrown
             backgroundHIColor = \.clear
             font = HIAppearance.Font.QRSelection
         }

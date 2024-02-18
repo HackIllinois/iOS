@@ -32,6 +32,7 @@ extension Event {
     @NSManaged public var points: Int32
     @NSManaged public var isAsync: Bool
     @NSManaged public var mapImageUrl: String
+    @NSManaged public var isPro: Bool
 
     @objc dynamic var sectionIdentifier: Date {
         let excessComponents: Set<Calendar.Component> = [.second, .nanosecond]

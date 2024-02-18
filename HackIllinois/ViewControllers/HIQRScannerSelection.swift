@@ -35,19 +35,34 @@ class HIQRScannerSelection: HIBaseViewController {
     }
     private let meetingButton = HIButton {
         $0.tintHIColor = \.action
-        $0.backgroundHIColor = \.white
-        $0.layer.borderWidth = 3.0
-        $0.layer.borderColor = #colorLiteral(red: 0.7859038711, green: 0.9741206765, blue: 1, alpha: 1)
+        $0.backgroundHIColor = \.scannerButtonPink
+        $0.layer.borderWidth = 4.0
+        $0.layer.borderColor = #colorLiteral(red: 0.4588235294, green: 0.1960784314, blue: 0.07843137255, alpha: 1)
+        // 3D Effect
+        $0.layer.masksToBounds = false
+        $0.layer.shadowColor = #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
+        $0.layer.shadowOpacity = 1
+        $0.layer.shadowOffset = CGSize(width: 0, height: 12)
+        $0.layer.shadowRadius = 0
     }
     private let attendeeButton = HIButton {
         $0.tintHIColor = \.action
-        $0.backgroundHIColor = \.buttonYellow
-        $0.layer.borderWidth = 3.0
-        $0.layer.borderColor = #colorLiteral(red: 1, green: 0.9568627451, blue: 0.5529411765, alpha: 1)
+        $0.backgroundHIColor = \.scannerButtonTeal
+        $0.layer.borderWidth = 4.0
+        $0.layer.borderColor = #colorLiteral(red: 0.4588235294, green: 0.1960784314, blue: 0.07843137255, alpha: 1)
+        $0.layer.masksToBounds = false
+        $0.layer.shadowColor = #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
+        $0.layer.shadowOpacity = 1
+        $0.layer.shadowOffset = CGSize(width: 0, height: 12)
+        $0.layer.shadowRadius = 0
     }
     @objc dynamic override func setUpBackgroundView() {
         super.setUpBackgroundView()
-        backgroundView.image = #imageLiteral(resourceName: "BackgroundNew")
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            backgroundView.image = #imageLiteral(resourceName: "Pink Background")
+        } else {
+            backgroundView.image = #imageLiteral(resourceName: "Staff")
+        }
     }
 }
 
@@ -58,7 +73,7 @@ extension HIQRScannerSelection {
         guard let user = HIApplicationStateController.shared.user else { return }
         if HIApplicationStateController.shared.isGuest && !user.roles.contains(.STAFF) { // Guest
             // Guest handler
-            let background = #imageLiteral(resourceName: "ProfileBackground")
+            let background = #imageLiteral(resourceName: "PurpleBackground")
             let imageView: UIImageView = UIImageView(frame: view.bounds)
             view.addSubview(imageView)
             view.sendSubviewToBack(imageView)
@@ -74,17 +89,17 @@ extension HIQRScannerSelection {
             view.addSubview(closeButton)
             view.addSubview(label)
             // Add constraints for meetingButton and attendeeButton here
-            meetingButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 150).isActive = true
+            meetingButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 140).isActive = true
             meetingButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
             meetingButton.addTarget(self, action: #selector(didSelectMeetingButton(_:)), for: .touchUpInside)
-            meetingButton.layer.cornerRadius = 15
-            meetingButton.constrain(width: 290, height: 90)
+            meetingButton.layer.cornerRadius = (UIDevice.current.userInterfaceIdiom == .pad) ? 30 : 15
+            meetingButton.constrain(width: (UIDevice.current.userInterfaceIdiom == .pad) ? 500 : 290, height: (UIDevice.current.userInterfaceIdiom == .pad) ? 150 : 80)
             meetingButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-            attendeeButton.topAnchor.constraint(equalTo: meetingButton.bottomAnchor, constant: 30).isActive = true
+            attendeeButton.topAnchor.constraint(equalTo: meetingButton.bottomAnchor, constant: (UIDevice.current.userInterfaceIdiom == .pad) ? 100 : 50).isActive = true
             attendeeButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
             attendeeButton.addTarget(self, action: #selector(didSelectAttendeeButton(_:)), for: .touchUpInside)
-            attendeeButton.layer.cornerRadius = 15
-            attendeeButton.constrain(width: 290, height: 90)
+            attendeeButton.layer.cornerRadius = (UIDevice.current.userInterfaceIdiom == .pad) ? 30 : 15
+            attendeeButton.constrain(width: (UIDevice.current.userInterfaceIdiom == .pad) ? 500 : 290, height: (UIDevice.current.userInterfaceIdiom == .pad) ? 150 : 80)
             let meetingLabel = HILabel(style: .QRSelection)
             meetingLabel.text = "Meeting Attendance"
             meetingButton.addSubview(meetingLabel)
@@ -101,14 +116,14 @@ extension HIQRScannerSelection {
         closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8).isActive = true
         closeButton.constrain(width: 60, height: 60)
         closeButton.imageView?.contentMode = .scaleToFill
-        let label = HILabel(style: .viewTitleGreen)
-        label.text = "ATTENDANCE"
+        let label = HILabel(style: (UIDevice.current.userInterfaceIdiom == .pad) ? .viewTitleBrown : .viewTitleBrown)
+        label.text = "SCANNER"
         view.addSubview(label)
         label.centerYAnchor.constraint(equalTo: closeButton.centerYAnchor).isActive = true
         label.leadingAnchor.constraint(equalTo: closeButton.trailingAnchor, constant: 3).isActive = true
     }
     override func viewDidLoad() {
-        setCustomTitle(customTitle: "ATTENDANCE")
+        setCustomTitle(customTitle: "SCANNER")
         super.viewDidLoad()
     }
     func layoutErrorView() {

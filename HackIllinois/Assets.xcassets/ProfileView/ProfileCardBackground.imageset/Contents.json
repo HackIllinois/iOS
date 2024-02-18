@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Group 344.png",
+      "filename" : "ProfileCard1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Group 344 (1).png",
+      "filename" : "ProfileCard2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Group 344 (2).png",
+      "filename" : "ProfileCard3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

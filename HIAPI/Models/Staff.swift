@@ -39,10 +39,10 @@ public struct Staff: Codable {
         case isPrivate
         case displayOnStaffCheckIn
     }
-    public let isPro: String
+    public let isPro: Bool
     public let eventId: String
     public let isStaff: Bool
-    public let name: Int
+    public let name: String
     public let description: String
     public let startTime: Date
     public let endTime: Date
@@ -55,14 +55,17 @@ public struct Staff: Codable {
     public let isPrivate: Bool
     public let displayOnStaffCheckIn: Bool
 
-
 }
 
 public struct UserAttendanceContainer: Codable, APIReturnable {
     internal enum CodingKeys: String, CodingKey {
-            case sucess
+            case success
+            case error
+            case dietaryRestrictions
         }
-        public let sucess: Bool
+        public let success: Bool
+        public let error: String?
+        public let dietaryRestrictions: [String]?
 }
 
 public struct StaffAttendanceContainer: Codable, APIReturnable {
