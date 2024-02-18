@@ -314,7 +314,8 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         switch status {
         case "Success":
             alertTitle = "Success!"
-            alertMessage = "Name: \(currentUserName)\n Diet: \(dietaryString)"
+            alertMessage = "Dietary Restrictions: \(dietaryString)"
+            //alertMessage = "Name: \(currentUserName)\n Diet: \(dietaryString)"
         case "InvalidEventId":
             alertTitle = "Error!"
             alertMessage = "Invalid Event ID"
@@ -397,6 +398,18 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                                 let (codeResult, _) = try result.get()
                                 DispatchQueue.main.async { [self] in
                                     print(codeResult.dietaryRestrictions)
+                                    // Parse dietary string
+                                    dietaryString = ""
+                                    if let dietaryRestrictions = codeResult.dietaryRestrictions, !dietaryRestrictions.isEmpty {
+                                        for (index, diet) in dietaryRestrictions.enumerated() {
+                                            dietaryString += diet
+                                            if index < dietaryRestrictions.count - 1 {
+                                                dietaryString += ", "
+                                            }
+                                        }
+                                    } else {
+                                        dietaryString = "None"
+                                    }
                                     self.handleStaffCheckInAlert(status: "Success")
                                 }
                             } catch {

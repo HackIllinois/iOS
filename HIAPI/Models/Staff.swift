@@ -55,7 +55,6 @@ public struct Staff: Codable {
     public let isPrivate: Bool
     public let displayOnStaffCheckIn: Bool
 
-
 }
 
 public struct UserAttendanceContainer: Codable, APIReturnable {
@@ -66,7 +65,7 @@ public struct UserAttendanceContainer: Codable, APIReturnable {
         }
         public let success: Bool
         public let error: String?
-        public let dietaryRestrictions: [String]
+        public let dietaryRestrictions: [String]?
 }
 
 public struct StaffAttendanceContainer: Codable, APIReturnable {
