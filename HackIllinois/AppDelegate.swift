@@ -78,13 +78,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
             // Called when the app has successfully registered with FCM and received a registration token
             self.fcmToken = fcmToken
-            print("FCM Token: \(fcmToken)")
             
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
                // Log the notification details
-        print("Received notification:")
         print(notification.request.content.userInfo)
 
         completionHandler([.alert, .sound, .badge])
