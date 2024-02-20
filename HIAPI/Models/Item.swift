@@ -18,7 +18,7 @@ public struct ItemContainer: Decodable, APIReturnable {
     }
 }
 
-public struct Item: Codable {
+public struct Item: Codable, Hashable {
     internal enum CodingKeys: String, CodingKey {
         case name
         case price

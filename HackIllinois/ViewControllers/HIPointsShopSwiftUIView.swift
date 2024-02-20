@@ -10,6 +10,30 @@ import Foundation
 import SwiftUI
 import HIAPI
 
+class PointShopManager {
+    static let shared = PointShopManager()
+
+    var items: [Item] = []
+
+    private init() {
+        // Private initializer to enforce singleton pattern
+    }
+
+    func preloadItems() {
+        // Fetch and populate items
+        HIAPI.ShopService.getAllItems()
+            .onCompletion { result in
+                do {
+                    let (containedItem, _) = try result.get()
+                    self.items = containedItem.items
+                } catch {
+                    print("Failed to preload point shop items with the error: \(error)")
+                }
+            }
+            .launch()
+    }
+}
+
 struct HIPointShopSwiftUIView: View {
     @State var items=[] as [Item]
     @State private var profile = HIProfile()
@@ -56,10 +80,8 @@ struct HIPointShopSwiftUIView: View {
                         ScrollView(showsIndicators: false) {
                             if tabIndex == 0 {
                                 VStack(spacing: 0) {
-                                    ForEach(0 ..< items.count, id: \.self) {value in
-                                        if (items[value].isRaffle==false) {
-                                            PointShopItemCell(item: items[value])
-                                        }
+                                    ForEach(PointShopManager.shared.items.filter { !$0.isRaffle }, id: \.self) { item in
+                                        PointShopItemCell(item: item)
                                     }
                                     Rectangle()
                                         .foregroundColor(.clear)
@@ -74,10 +96,8 @@ struct HIPointShopSwiftUIView: View {
                                 }
                             } else {
                                 VStack(spacing: 0) {
-                                    ForEach(0 ..< items.count, id: \.self) {value in
-                                        if (items[value].isRaffle==true) {
-                                            PointShopItemCell(item: items[value])
-                                        }
+                                    ForEach(PointShopManager.shared.items.filter { $0.isRaffle }, id: \.self) { item in
+                                        PointShopItemCell(item: item)
                                     }
                                     Rectangle()
                                         .foregroundColor(.clear)
