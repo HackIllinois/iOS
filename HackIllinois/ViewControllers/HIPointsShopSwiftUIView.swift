@@ -91,6 +91,7 @@ struct HIPointShopSwiftUIView: View {
                                 }
                                 .onAppear {
                                     getItems()
+                                    PointShopManager.shared.preloadItems()
                                     getCoins{coins in
                                              self.coins=coins}
                                 }
