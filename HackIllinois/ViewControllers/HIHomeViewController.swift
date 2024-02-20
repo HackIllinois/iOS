@@ -44,7 +44,7 @@ class HIHomeViewController: HIEventListViewController {
         (HITimeDataSource.shared.eventTimes.checkInStart, "HACKILLINOIS BEGINS IN"),
         (HITimeDataSource.shared.eventTimes.hackStart, "HACKING BEGINS IN"),
         (HITimeDataSource.shared.eventTimes.hackEnd, "HACKING ENDS IN"),
-        (HITimeDataSource.shared.eventTimes.eventEnd, "HACKILLINOIS ENDS IN")
+        (HITimeDataSource.shared.eventTimes.eventEnd, "QUEST COMPLETE")
     ]
 
     var transparentImageView: UIImageView!
