@@ -17,7 +17,7 @@ import HIAPI
 import APIManager
 import GoogleMaps
 
-class HIEventDetailViewController: HIBaseViewController {
+class HIEventDetailViewController: HIBaseViewController, UIGestureRecognizerDelegate {
     // MARK: - Properties
     var event: Event?
 
@@ -72,8 +72,19 @@ class HIEventDetailViewController: HIBaseViewController {
         $0.activeImage = #imageLiteral(resourceName: "MenuClose")
         $0.baseImage = #imageLiteral(resourceName: "MenuClose")
     }
+    private let mapContainer = HIView {
+        $0.layer.cornerRadius = 12
+        $0.layer.borderColor = #colorLiteral(red: 0.9254901961, green: 0.8235294118, blue: 0.8235294118, alpha: 1)
+        $0.layer.borderWidth = 4.0
+        $0.layer.masksToBounds = true
+        $0.layer.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundHIColor = \.white
+    }
     
     private var mapView: UIImageView = UIImageView()
+    var isZooming = false
+    var originalImageCenter:CGPoint?
     
     // MARK: Constraints
     private var descriptionLabelHeight = NSLayoutConstraint()
@@ -260,24 +271,93 @@ extension HIEventDetailViewController {
                     DispatchQueue.main.async {
                         self.mapView.image = UIImage(data: data)
                         self.mapView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-                        self.mapView.layer.borderColor = #colorLiteral(red: 0.9254901961, green: 0.8235294118, blue: 0.8235294118, alpha: 1)
-                        self.mapView.layer.borderWidth = 4.0
                     }
                 }
             }
             task.resume()
         }
-
-        eventDetailContainer.addSubview(mapView)
-        mapView.translatesAutoresizingMaskIntoConstraints = false
-        mapView.leadingAnchor.constraint(equalTo: eventDetailContainer.leadingAnchor).isActive = true
-        mapView.trailingAnchor.constraint(equalTo: eventDetailContainer.trailingAnchor).isActive = true
-        mapView.topAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: 15).isActive = true
+        eventDetailContainer.addSubview(mapContainer)
+        mapContainer.translatesAutoresizingMaskIntoConstraints = false
+        mapContainer.leadingAnchor.constraint(equalTo: eventDetailContainer.leadingAnchor).isActive = true
+        mapContainer.trailingAnchor.constraint(equalTo: eventDetailContainer.trailingAnchor).isActive = true
+        mapContainer.topAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: 15).isActive = true
         let mapHeight: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 450 : 250
-        mapView.constrain(height: mapHeight)
+        mapContainer.constrain(height: mapHeight)
+        
+        mapContainer.addSubview(mapView)
+        mapView.translatesAutoresizingMaskIntoConstraints = false
+        mapView.leadingAnchor.constraint(equalTo: mapContainer.leadingAnchor).isActive = true
+        mapView.trailingAnchor.constraint(equalTo: mapContainer.trailingAnchor).isActive = true
+        mapView.topAnchor.constraint(equalTo: mapContainer.topAnchor).isActive = true
+        mapView.bottomAnchor.constraint(equalTo: mapContainer.bottomAnchor).isActive = true
         mapView.layer.cornerRadius = 20
+        mapView.isUserInteractionEnabled = true
+        
+        // Add pinch gesture recognizer
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
+        mapView.addGestureRecognizer(pinchGesture)
+        
+        // Add pan gesture recognizer
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(self.pan(sender:)))
+        pan.delegate = self
+        self.mapView.addGestureRecognizer(pan)
+    }
+
+    @objc func pan(sender: UIPanGestureRecognizer) {
+        if self.isZooming && sender.state == .began {
+            self.originalImageCenter = sender.view?.center
+        } else if self.isZooming && sender.state == .changed {
+            let translation = sender.translation(in: self.mapView)
+        if let view = sender.view {
+            view.center = CGPoint(x: view.center.x + translation.x,
+                                  y: view.center.y + translation.y)
+        }
+        sender.setTranslation(CGPoint.zero, in: self.mapView.superview)
+        }
     }
     
+    @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
+        guard let view = gesture.view else {return}
+        self.originalImageCenter = gesture.view?.center
+        switch gesture.state {
+        case .began:
+            let currentScale = self.mapView.frame.size.width / self.mapView.bounds.size.width
+            let newScale = currentScale * gesture.scale
+            if newScale > 1 {
+                self.isZooming = true
+            }
+        case .changed:
+            let pinchCenter = CGPoint(x: gesture.location(in: view).x - view.bounds.midX,
+            y: gesture.location(in: view).y - view.bounds.midY)
+            let transform = view.transform.translatedBy(x: pinchCenter.x, y: pinchCenter.y)
+            .scaledBy(x: gesture.scale, y: gesture.scale)
+            .translatedBy(x: -pinchCenter.x, y: -pinchCenter.y)
+            let currentScale = self.mapView.frame.size.width / self.mapView.bounds.size.width
+            var newScale = currentScale*gesture.scale
+            if newScale < 1 {
+                newScale = 1
+                let transform = CGAffineTransform(scaleX: newScale, y: newScale)
+                self.mapView.transform = transform
+                gesture.scale = 1
+            } else {
+                view.transform = transform
+                gesture.scale = 1
+            }
+        case .ended:
+            guard let center = self.originalImageCenter else {return}
+            UIView.animate(withDuration: 0.3, animations: {
+                // Reset the transform to the original size
+                view.center = center
+                view.transform = .identity
+                view.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5) // Reset anchor point to center
+            }, completion: { _ in
+                self.isZooming = false
+                })
+        default:
+            break
+        }
+    }
+
     func setupCloseButton() {
         view.addSubview(closeButton)
         closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)

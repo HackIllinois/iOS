@@ -44,7 +44,7 @@ class HIHomeViewController: HIEventListViewController {
         (HITimeDataSource.shared.eventTimes.checkInStart, "HACKILLINOIS BEGINS IN"),
         (HITimeDataSource.shared.eventTimes.hackStart, "HACKING BEGINS IN"),
         (HITimeDataSource.shared.eventTimes.hackEnd, "HACKING ENDS IN"),
-        (HITimeDataSource.shared.eventTimes.eventEnd, "HACKILLINOIS ENDS IN")
+        (HITimeDataSource.shared.eventTimes.eventEnd, "QUEST COMPLETE")
     ]
 
     var transparentImageView: UIImageView!
@@ -87,6 +87,7 @@ extension HIHomeViewController {
     
     func layoutLegendButton() {
         view.addSubview(legendButton)
+        legendButton.isUserInteractionEnabled = true
         
         let buttonSize: CGFloat = UIDevice.current.userInterfaceIdiom != .pad ? 30 : 50
         let padding: CGFloat = UIDevice.current.userInterfaceIdiom != .pad ? 16 : 50
@@ -95,7 +96,7 @@ extension HIHomeViewController {
         legendButton.translatesAutoresizingMaskIntoConstraints = false
         
         // Increase the hit target area by adding padding
-        legendButton.topAnchor.constraint(equalTo: bannerFrameView.topAnchor, constant: -5).isActive = true
+        legendButton.topAnchor.constraint(equalTo: bannerFrameView.topAnchor, constant: (UIDevice.current.userInterfaceIdiom == .pad) ? 0 : -10).isActive = true
         legendButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -padding).isActive = true
         
         legendButton.addTarget(self, action: #selector(didSelectLegendButton(_:)), for: .touchUpInside)
@@ -250,7 +251,7 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
             } else {
                 // Displays after the event ends
 //                super.setCustomTitle(customTitle: "MEMORIES MADE")
-                bannerViewController.updateLabel(with: "MEMORIES MADE")
+                bannerViewController.updateLabel(with: "QUEST COMPLETE")
             }
             countdownDataStoreIndex += 1
         }

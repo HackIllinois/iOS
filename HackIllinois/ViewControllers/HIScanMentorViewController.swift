@@ -198,7 +198,7 @@ extension HIScanMentorViewController: AVCaptureMetadataOutputObjectsDelegate {
         }
     }
 
-    func handleMentorAlert(status: String) {
+    func handleMentorAlert(status: String, points: Int) {
         print(status)
         var alertTitle = ""
         var alertMessage = ""
@@ -206,7 +206,7 @@ extension HIScanMentorViewController: AVCaptureMetadataOutputObjectsDelegate {
         switch status {
         case "Success":
             alertTitle = "\n\nPoints Earned!"
-            alertMessage = "\nYou have obtained points from mentor office hours!"
+            alertMessage = "\nYou have obtained \(points) points from mentor office hours!"
             error = false
         default:
             alertTitle = "\n\nError!"
@@ -249,39 +249,30 @@ extension HIScanMentorViewController: AVCaptureMetadataOutputObjectsDelegate {
     }
 
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        guard respondingToQRCodeFound else { return }
-        let meta = metadataObjects.first as? AVMetadataMachineReadableCodeObject
-        let code = meta?.stringValue ?? ""
-        guard let user = HIApplicationStateController.shared.user else { return }
-        if let rangeItemId = code.range(of: "mentorId="), let rangeInstance = code.range(of: "&instance=") {
-            let mentorId = code[rangeItemId.upperBound..<rangeInstance.lowerBound]
-            var instance = code[rangeInstance.upperBound...]
-            if instance.last == "\"" {
-                instance.removeLast()
-            }
+            guard respondingToQRCodeFound else { return }
+            let meta = metadataObjects.first as? AVMetadataMachineReadableCodeObject
+            let code = meta?.stringValue ?? ""
+            guard let user = HIApplicationStateController.shared.user else { return }
             respondingToQRCodeFound = false
-            HIAPI.MentorService.recordMentorAttendance(userToken: user.token, mentorId: String(mentorId))
+            HIAPI.MentorService.recordMentorAttendance(userToken: user.token, mentorId: String(code))
                 .onCompletion { result in
                     do {
                         let (codeResult, _) = try result.get()
                         let status = codeResult.status
                         NSLog(status ?? "Success")
                         DispatchQueue.main.async {
-                            self.handleMentorAlert(status: status ?? "Success")
+                            self.handleMentorAlert(status: status ?? "Success", points: codeResult.points ?? 0)
                         }
                     } catch {
                         NSLog("Error info: \(error)")
                         DispatchQueue.main.async { [self] in
-                            self.handleMentorAlert(status: "\(error)")
+                            self.handleMentorAlert(status: "\(error)", points: 0)
                         }
                     }
                     sleep(2)
                 }
-                .authorize(with: HIApplicationStateController.shared.user)
-                .launch()
-        } else {
-            self.handleMentorAlert(status: "Error")
-        }
+            .authorize(with: HIApplicationStateController.shared.user)
+            .launch()
     }
     func decode(_ token: String) -> [String: AnyObject]? {
         let string = token.components(separatedBy: ".")

@@ -73,6 +73,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         HIApplicationStateController.shared.initalize()
         // Check the app version and prompt the user to update if needed
         checkAppVersion()
+        // Preload point shop items
+        PointShopManager.shared.preloadItems()
         application.registerForRemoteNotifications()
         Messaging.messaging().delegate = self
         UNUserNotificationCenter.current().delegate = self

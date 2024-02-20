@@ -58,7 +58,7 @@ struct HIProfileCardView: View {
     let isIpad = UIDevice.current.userInterfaceIdiom == .pad
     let role: String
     @State var startFetchingQR = false
-    @State var qrInfo = "hackillinois://user?userToken=111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+    @State var qrInfo = "hackillinois://user?userToken=11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
 //    Factors used to change frame to alter based on device
     let padFactor = UIScreen.main.bounds.height/1366
     let phoneFactor = UIScreen.main.bounds.height/844
@@ -82,7 +82,7 @@ struct HIProfileCardView: View {
                                     .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 20)))
                                 HStack(alignment: .bottom, spacing: UIDevice.current.userInterfaceIdiom == .pad ? 5*padFactor : 5*phoneFactor) {
                                     Image("RankSymbol")
-                                    Text("\(rank != 0 ? "\(rank)" : "")")
+                                    Text("\(rank != 0 ? "\(rank)" : "...")")
                                                     .foregroundColor(.white)
                                                     .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 20)))
                                                     .onAppear {

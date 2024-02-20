@@ -146,6 +146,7 @@
 		D1BBA56A2B70ACCC0017BD13 /* StaffService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BBA5692B70ACCC0017BD13 /* StaffService.swift */; };
 		D1BE81172AC8FC680042C078 /* HIAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95E3142A21FAD5B30092C22E /* HIAPI.framework */; };
 		D1BE81182AC8FC690042C078 /* HIAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 95E3142A21FAD5B30092C22E /* HIAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D1C268022B8470200001876B /* HIShiftDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C268012B8470200001876B /* HIShiftDetailViewController.swift */; };
 		D1C5B6582B732E44000E766D /* refresh.json in Resources */ = {isa = PBXBuildFile; fileRef = D1C5B6572B732E44000E766D /* refresh.json */; };
 		D1D335172B81DEBA00BBB596 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = D1D335162B81DEBA00BBB596 /* FirebaseMessaging */; };
 		D1D335192B81DEF600BBB596 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D335182B81DEF600BBB596 /* Notification.swift */; };
@@ -367,6 +368,7 @@
 		D19D4C922B794F9100376E1B /* HIScanMentorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScanMentorViewController.swift; sourceTree = "<group>"; };
 		D1BBA5672B70AB940017BD13 /* Staff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Staff.swift; sourceTree = "<group>"; };
 		D1BBA5692B70ACCC0017BD13 /* StaffService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffService.swift; sourceTree = "<group>"; };
+		D1C268012B8470200001876B /* HIShiftDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIShiftDetailViewController.swift; sourceTree = "<group>"; };
 		D1C5B6572B732E44000E766D /* refresh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = refresh.json; sourceTree = "<group>"; };
 		D1D335182B81DEF600BBB596 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		D1D3351A2B81DF0300BBB596 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
@@ -611,6 +613,7 @@
 				95CCEA1E203D6B3600E3E28C /* HINavigationController.swift */,
 				2FF0F9312B58D5A200017D08 /* HIPointsShopSwiftUIView.swift */,
 				95C18DC820096539004784B5 /* HIScheduleViewController.swift */,
+				D1C268012B8470200001876B /* HIShiftDetailViewController.swift */,
 				98CA2A3D25C899CF003E842A /* HIProfileViewController.swift */,
 				2FF0F92F2B58D56700017D08 /* HIPointsShopViewController.swift */,
 				E170038929679D08009B99A8 /* HIProfileCardView.swift */,
@@ -1140,6 +1143,7 @@
 				AC5E9FE326195CCF00674FCF /* HIEventType.swift in Sources */,
 				AC3B621425E86053002386A2 /* Profile+CoreDataProperties.swift in Sources */,
 				9564E02F2218CE6F003A8EEB /* HIMapsDataSource.swift in Sources */,
+				D1C268022B8470200001876B /* HIShiftDetailViewController.swift in Sources */,
 				E1BF5E7A298B462F00A98390 /* HIStaffButtonView.swift in Sources */,
 				953199C91FC25CA0009F2AA1 /* HICoreDataController.swift in Sources */,
 				95A7D28D203D4F54005EAEAF /* Identifiable.swift in Sources */,
@@ -1371,7 +1375,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2024.1.5;
+				MARKETING_VERSION = 2024.2.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios;
@@ -1403,7 +1407,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2024.1.5;
+				MARKETING_VERSION = 2024.2.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = org.hackillinois.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";

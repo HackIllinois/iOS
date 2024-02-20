@@ -270,7 +270,6 @@ extension HIScheduleViewController {
                     do {
                         let (staffShifts, _) = try result.get()
                         self.staffShifts = staffShifts.shifts
-                        print("Staff shifts: ", self.staffShifts)
 
                         DispatchQueue.main.async {
                             // Set up shift cells
@@ -329,7 +328,13 @@ extension HIScheduleViewController {
                 containerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
                 containerView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: ((UIDevice.current.userInterfaceIdiom == .pad) ? 400 : 275) + padding)
             ])
-            let label = HILabel(style: .event)
+            containerView.tag = index
+            
+            // Add UITapGestureRecognizer to the containerView
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(containerViewTapped(_:)))
+            containerView.addGestureRecognizer(tapGesture)
+            
+            let label = HILabel(style: .smallEvent)
             label.text = staffShift.name
             label.translatesAutoresizingMaskIntoConstraints = false
 
@@ -368,7 +373,7 @@ extension HIScheduleViewController {
             containerView.addSubview(locationImageView)
             locationImageView.translatesAutoresizingMaskIntoConstraints = false
             containerView.addSubview(locationLabel)
-            locationImageView.leadingAnchor.constraint(equalTo: timeImageView.leadingAnchor, constant: (UIDevice.current.userInterfaceIdiom == .pad ? 5.0 : 1.0)).isActive = true
+            locationImageView.leadingAnchor.constraint(equalTo: timeImageView.leadingAnchor, constant: (UIDevice.current.userInterfaceIdiom == .pad ? 5.0 : 2.0)).isActive = true
             locationImageView.bottomAnchor.constraint(equalTo: timeImageView.bottomAnchor, constant: UIScreen.main.bounds.width > 850 ? 50 : ((UIDevice.current.userInterfaceIdiom == .pad) ? 40 : 25.0)).isActive = true
             locationLabel.leadingAnchor.constraint(equalTo: timeLabel.leadingAnchor).isActive = true
             locationLabel.centerYAnchor.constraint(equalTo: locationImageView.centerYAnchor).isActive = true
@@ -381,8 +386,37 @@ extension HIScheduleViewController {
             descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
             descriptionLabel.leadingAnchor.constraint(equalTo: locationImageView.leadingAnchor).isActive = true
             descriptionLabel.bottomAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: UIScreen.main.bounds.width > 850 ? 50 : ((UIDevice.current.userInterfaceIdiom == .pad) ? 40 : 25.0)).isActive = true
-            padding += UIScreen.main.bounds.width > 850 ? 300 : ((UIDevice.current.userInterfaceIdiom == .pad) ? 240 : 150.0)
+            descriptionLabel.constrain(width: containerViewWidth - 40)
+            padding += UIScreen.main.bounds.width > 850 ? 300 : ((UIDevice.current.userInterfaceIdiom == .pad) ? 200 : 140.0)
         }
+    }
+    @objc func containerViewTapped(_ sender: UITapGestureRecognizer) {
+        guard let tappedIndex = sender.view?.tag else {
+                return
+            }
+
+            let selectedShift = self.staffShifts[tappedIndex]
+
+            let viewControllerToPresent = HIShiftDetailViewController()
+            viewControllerToPresent.modalPresentationStyle = .popover
+
+            // Pass data to HIShiftDetailViewController
+            viewControllerToPresent.shiftName = selectedShift.name
+            viewControllerToPresent.shiftTime = "\(Formatter.simpleTime.string(from: selectedShift.startTime)) - \(Formatter.simpleTime.string(from: selectedShift.endTime))"
+            
+            if selectedShift.locations.count > 0 {
+                viewControllerToPresent.shiftLocation = selectedShift.locations.map { $0.name }.joined(separator: ", ")
+            } else {
+                viewControllerToPresent.shiftLocation = "No Location"
+            }
+
+            viewControllerToPresent.shiftDescription = selectedShift.description
+            if let popoverPresentationController = viewControllerToPresent.popoverPresentationController {
+                popoverPresentationController.sourceView = sender.view
+                popoverPresentationController.sourceRect = sender.view?.bounds ?? CGRect.zero
+            }
+
+            self.present(viewControllerToPresent, animated: true, completion: nil)
     }
 }
 

@@ -22,7 +22,7 @@ public final class MentorService: BaseService {
         var headers = HTTPHeaders()
         headers["Authorization"] = userToken
         var body = HTTPBody()
-        body["mentorId"] = userToken
+        body["mentorId"] = mentorId
         return APIRequest<MentorAttendanceContainer>(service: self, endpoint: "attendance/", body: body, headers: headers, method: .POST)
     }
     
