@@ -270,7 +270,6 @@ extension HIScheduleViewController {
                     do {
                         let (staffShifts, _) = try result.get()
                         self.staffShifts = staffShifts.shifts
-                        print("Staff shifts: ", self.staffShifts)
 
                         DispatchQueue.main.async {
                             // Set up shift cells

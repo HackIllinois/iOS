@@ -72,6 +72,12 @@ class HIEventDetailViewController: HIBaseViewController {
         $0.activeImage = #imageLiteral(resourceName: "MenuClose")
         $0.baseImage = #imageLiteral(resourceName: "MenuClose")
     }
+    private let mapContainer = HIView {
+        $0.layer.cornerRadius = 8
+        $0.layer.masksToBounds = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundHIColor = \.clear
+    }
     
     private var mapView: UIImageView = UIImageView()
     
@@ -267,15 +273,40 @@ extension HIEventDetailViewController {
             }
             task.resume()
         }
-
-        eventDetailContainer.addSubview(mapView)
-        mapView.translatesAutoresizingMaskIntoConstraints = false
-        mapView.leadingAnchor.constraint(equalTo: eventDetailContainer.leadingAnchor).isActive = true
-        mapView.trailingAnchor.constraint(equalTo: eventDetailContainer.trailingAnchor).isActive = true
-        mapView.topAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: 15).isActive = true
+        eventDetailContainer.addSubview(mapContainer)
+        mapContainer.translatesAutoresizingMaskIntoConstraints = false
+        mapContainer.leadingAnchor.constraint(equalTo: eventDetailContainer.leadingAnchor).isActive = true
+        mapContainer.trailingAnchor.constraint(equalTo: eventDetailContainer.trailingAnchor).isActive = true
+        mapContainer.topAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: 15).isActive = true
         let mapHeight: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 450 : 250
-        mapView.constrain(height: mapHeight)
+        mapContainer.constrain(height: mapHeight)
+        
+        mapContainer.addSubview(mapView)
+        mapView.translatesAutoresizingMaskIntoConstraints = false
+        mapView.leadingAnchor.constraint(equalTo: mapContainer.leadingAnchor).isActive = true
+        mapView.trailingAnchor.constraint(equalTo: mapContainer.trailingAnchor).isActive = true
+        mapView.topAnchor.constraint(equalTo: mapContainer.topAnchor).isActive = true
+        mapView.bottomAnchor.constraint(equalTo: mapContainer.bottomAnchor).isActive = true
         mapView.layer.cornerRadius = 20
+        mapView.isUserInteractionEnabled = true
+        
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
+        mapView.addGestureRecognizer(pinchGesture)
+    }
+
+    @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
+        guard gesture.view != nil else { return }
+        if gesture.state == .changed {
+            let currentTransform = mapView.transform
+            let newScale = currentTransform.a * gesture.scale
+
+            if newScale > 1.0 && newScale < 3.0 {
+                mapView.transform = currentTransform.scaledBy(x: gesture.scale, y: gesture.scale)
+            }
+
+            // Reset the scale factor to 1.0 to avoid cumulative scaling
+            gesture.scale = 1.0
+        }
     }
     
     func setupCloseButton() {
