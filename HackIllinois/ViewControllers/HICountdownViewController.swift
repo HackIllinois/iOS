@@ -99,11 +99,11 @@ extension HICountdownViewController {
         countdownStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         countdownStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         countdownStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        let daysContent = containerView(with: "DAYS", and: days)
+        let daysContent = containerView(with: daysRemaining == 1 ? "DAY" : "DAYS", and: days)
         countdownStackView.addArrangedSubview(daysContent)
-        let hoursContent = containerView(with: "HOURS", and: hours)
+        let hoursContent = containerView(with: hoursRemaining == 1 ? "HOUR" : "HOURS", and: hours)
         countdownStackView.addArrangedSubview(hoursContent)
-        let minutesContent = containerView(with: "MINUTES", and: minutes)
+        let minutesContent = containerView(with: minutesRemaining == 1 ? "MINUTE" : "MINUTES", and: minutes)
         countdownStackView.addArrangedSubview(minutesContent)
         var countdownSpacingConstant: CGFloat = 8
         if UIDevice.current.userInterfaceIdiom == .pad {

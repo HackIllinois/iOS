@@ -141,9 +141,7 @@ struct HIAppearance: Equatable {
     private static var statusBarBlack: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
             return .lightContent
-        } else {
-            return .lightContent
-        }
+        } else { return .lightContent }
     }
 
     fileprivate static let day = HIAppearance(
@@ -401,6 +399,8 @@ struct HIAppearance: Equatable {
         
         // Font for Staff QR code selection
         static let QRSelection = UIFont(name: "MontserratRoman-Bold", size: 24)
+        static let smallEvent = UIFont(name: "MontserratRoman-SemiBold", size: 15)
+        static let smallEventPad = UIFont(name: "MontserratRoman-SemiBold", size: 30)
     }
 }
 

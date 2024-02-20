@@ -82,7 +82,7 @@ struct HIProfileCardView: View {
                                     .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 20)))
                                 HStack(alignment: .bottom, spacing: UIDevice.current.userInterfaceIdiom == .pad ? 5*padFactor : 5*phoneFactor) {
                                     Image("RankSymbol")
-                                    Text("\(rank != 0 ? "\(rank)" : "")")
+                                    Text("\(rank != 0 ? "\(rank)" : "...")")
                                                     .foregroundColor(.white)
                                                     .font(Font(HIAppearance.Font.profileSubtitle ?? .systemFont(ofSize: 20)))
                                                     .onAppear {

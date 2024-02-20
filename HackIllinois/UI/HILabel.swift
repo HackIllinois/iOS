@@ -18,6 +18,7 @@ class HILabel: UILabel {
     enum Style {
         case location
         case event
+        case smallEvent
         case eventTime
         case eventType
         case sponsor
@@ -102,6 +103,15 @@ class HILabel: UILabel {
                 font = HIAppearance.Font.eventTitlePad
             } else {
                 font = HIAppearance.Font.eventTitle
+            }
+            
+        case .smallEvent:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                font = HIAppearance.Font.smallEventPad
+            } else {
+                font = HIAppearance.Font.smallEvent
             }
             
         case .eventTime:
