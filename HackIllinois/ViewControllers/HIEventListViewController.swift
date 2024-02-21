@@ -71,10 +71,20 @@ extension HIEventListViewController {
 
 // MARK: - HIEventCellDelegate
 extension HIEventListViewController: HIEventCellDelegate {
+    // This method is necessary to refresh the indecies and sections in the table view controller
+    func fetchAndReloadData() {
+        try? _fetchedResultsController?.performFetch()
+        tableView?.reloadData()
+    }
+    
     func eventCellDidSelectFavoriteButton(_ eventCell: HIEventCell) {
-        guard let indexPath = eventCell.indexPath,
-            let event = _fetchedResultsController?.object(at: indexPath) as? Event else { return }
-        
+        guard let indexPath = eventCell.indexPath else { return }
+        // Ensure the section and item indices are within bounds
+        guard indexPath.section < _fetchedResultsController?.sections?.count ?? 0,
+            indexPath.item < _fetchedResultsController?.sections?[indexPath.section].numberOfObjects ?? 0 else {
+           return
+        }
+        guard let event = _fetchedResultsController?.object(at: indexPath) as? Event else { return }
         guard let user = HIApplicationStateController.shared.user else { return }
 
         let changeFavoriteStatusRequest: APIRequest<FollowStatus> =
@@ -93,6 +103,8 @@ extension HIEventListViewController: HIEventCellDelegate {
                     } else {
                         HILocalNotificationController.shared.unscheduleNotification(for: event)
                     }
+                    // Call the fetchAndReloadData method to update the fetched results controller and reload the table view, otherwise index and section of next events will be incorrect
+                    self.fetchAndReloadData()
                 }
             case .failure(let error):
                 print(error, error.localizedDescription)
