@@ -153,7 +153,7 @@ extension HIScheduleViewController {
             segmentedControlConstant = 40.0
         }
 
-        segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20 + segmentedControlConstant).isActive = true
+        segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15 + segmentedControlConstant).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: -36).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 40).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 66 + segmentedControlConstant).isActive = true
@@ -172,7 +172,7 @@ extension HIScheduleViewController {
         let tableView = HITableView()
         view.addSubview(tableView)
         let padConstant = (UIDevice.current.userInterfaceIdiom == .pad) ? 4.0 : 1
-        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 30 * padConstant).isActive = true
+        tableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 40 * padConstant).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
@@ -387,7 +387,7 @@ extension HIScheduleViewController {
             descriptionLabel.leadingAnchor.constraint(equalTo: locationImageView.leadingAnchor).isActive = true
             descriptionLabel.bottomAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: UIScreen.main.bounds.width > 850 ? 50 : ((UIDevice.current.userInterfaceIdiom == .pad) ? 40 : 25.0)).isActive = true
             descriptionLabel.constrain(width: containerViewWidth - 40)
-            padding += UIScreen.main.bounds.width > 850 ? 300 : ((UIDevice.current.userInterfaceIdiom == .pad) ? 200 : 140.0)
+            padding += UIScreen.main.bounds.width > 850 ? 300 : ((UIDevice.current.userInterfaceIdiom == .pad) ? 210 : 140.0)
         }
     }
     @objc func containerViewTapped(_ sender: UITapGestureRecognizer) {

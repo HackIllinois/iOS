@@ -15,7 +15,7 @@ import Foundation
 
 public struct User: Codable, APIReturnable {
     public let userId: String
-    public let email: String
+    public let email: String?
 }
 
 public struct RolesContainer: Codable, APIReturnable {

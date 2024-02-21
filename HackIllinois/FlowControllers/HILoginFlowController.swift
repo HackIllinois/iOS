@@ -161,7 +161,7 @@ private extension HILoginFlowController {
                 let (apiUser, _) = try result.get()
                 var user = user
                 user.userId = apiUser.userId
-                user.email = apiUser.email
+                user.email = apiUser.email ?? ""
                 self?.populateRoleData(buildingUser: user, profile: profile, sender: sender)
             } catch {
                 self?.presentAuthenticationFailure(withError: error, sender: sender)
