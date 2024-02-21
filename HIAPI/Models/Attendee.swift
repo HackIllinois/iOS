@@ -21,7 +21,7 @@ public struct Attendee: Codable, APIReturnable {
     public let id: String
     public let firstName: String?
     public let lastName: String?
-    public let email: String? // Email should be an optional field because not every GH account has their email set to public
+    public let email: String
     public let graduationYear: Int
     public let school: String
     public let major: String
