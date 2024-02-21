@@ -81,8 +81,8 @@ extension HIApplicationStateController {
         viewControllers.append(HIHomeViewController())
         viewControllers.append(HIScheduleViewController())
         viewControllers.append(HIScanQRCodeViewController())
+        viewControllers.append(HIPointsShopViewController())
         viewControllers.append(HIProfileViewController())
-        viewControllers.append(HILeaderboardViewController())
         return viewControllers
     }
     @objc func loginUser(_ notification: Notification) {

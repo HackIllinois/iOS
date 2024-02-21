@@ -30,7 +30,10 @@ class HIScheduleSegmentedControl: HISegmentedControl {
     private let indicatorCornerRadiusProp: CGFloat = 0.15
 
     private var indicatorView = UIImageView(image: #imageLiteral(resourceName: "Indicator"))
-
+    
+    private var selectedPotionView: UIImageView? // Keep track of the selected potion
+    
+    let padConstant = (UIDevice.current.userInterfaceIdiom == .pad) ? 2.0 : 1
     // MARK: - Init
     init(titles: [String], nums: [Int]? = nil) {
         self.nums = nums == nil ? [Int]() : nums!
@@ -54,12 +57,12 @@ class HIScheduleSegmentedControl: HISegmentedControl {
     @objc override func refreshForThemeChange() {
         backgroundColor <- \.clear
         titleLabels.forEach {
-            $0.textColor <- \.white
+            $0.textColor <- \.darkGreenText
             $0.backgroundColor <- \.clear
         }
 
         numberLabels.forEach {
-            $0.textColor <- \.white
+            $0.textColor <- \.darkGreenText
             $0.backgroundColor <- \.clear
         }
     }
@@ -93,7 +96,7 @@ class HIScheduleSegmentedControl: HISegmentedControl {
     // MARK: - View Setup
     override func setupView() {
         setupLabels()
-        addSubview(indicatorView)
+        // addSubview(indicatorView)
     }
 
     override func setupLabels() {
@@ -101,13 +104,32 @@ class HIScheduleSegmentedControl: HISegmentedControl {
         views.removeAll(keepingCapacity: true)
         items.indices.forEach { setupViewForItem(at: $0) }
         constrain(views: views)
+        
+        // Highlight the initially selected potion
+        highlightSelectedPotion()
     }
 
     private func setupViewForItem(at index: Int) {
         let view = UIView()
         let titleLabel = UILabel()
         let numberLabel = UILabel()
-
+        var potionView = UIImageView(image: #imageLiteral(resourceName: "Purple Potion"))
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            potionView = UIImageView(image: #imageLiteral(resourceName: "PurplePotionPad"))
+        }
+        if index == selectedIndex {
+            // If it's the selected index, set the potion view color to pink
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                potionView.image = #imageLiteral(resourceName: "PinkPotionPad")
+            } else {
+                potionView.image = #imageLiteral(resourceName: "Pink Potion")
+            }
+            selectedPotionView = potionView
+        }
+        // Set up titleLabel and numberLabel
+        potionView.addSubview(titleLabel)
+        potionView.addSubview(numberLabel)
+        view.addSubview(potionView)
         titleLabel.textAlignment = .center
         if UIDevice.current.userInterfaceIdiom == .pad {
             titleLabel.font = titleFontPad
@@ -116,23 +138,21 @@ class HIScheduleSegmentedControl: HISegmentedControl {
         }
         numberLabel.font = numberFont
         titleLabel.text = items[index]
-        titleLabel.textColor <- \.whiteText
+        titleLabel.textColor <- \.darkGreenText
 
         numberLabel.textAlignment = .center
         numberLabel.text = index < nums.count ? (nums[index] % 10 == nums[index] ? "0" : "") + "\(nums[index])" : "00"
-        numberLabel.textColor <- \.whiteText
-
-        view.addSubview(titleLabel)
-        view.addSubview(numberLabel)
+        numberLabel.textColor <- \.darkGreenText
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         numberLabel.translatesAutoresizingMaskIntoConstraints = false
-        var segmentedControlConstant = 0.0
+        potionView.translatesAutoresizingMaskIntoConstraints = false
+        var segmentedControlConstant = -10.0
         if UIDevice.current.userInterfaceIdiom == .pad {
-            segmentedControlConstant = 24.0
+            segmentedControlConstant = 0
         }
-        titleLabel.constrain(to: view, topInset: 5, trailingInset: 0, leadingInset: 0)
-        numberLabel.constrain(to: view, trailingInset: 0, bottomInset: -4, leadingInset: 0)
-        numberLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: segmentedControlConstant).isActive = true
+        numberLabel.constrain(to: potionView, topInset: 30 * padConstant, trailingInset: 0, leadingInset: 0)
+        titleLabel.constrain(to: potionView, trailingInset: 0, bottomInset: 0, leadingInset: 0)
+        titleLabel.topAnchor.constraint(equalTo: numberLabel.bottomAnchor, constant: segmentedControlConstant).isActive = true
         titleLabel.heightAnchor.constraint(equalTo: numberLabel.heightAnchor).isActive = true
 
         view.isUserInteractionEnabled = false
@@ -148,8 +168,35 @@ class HIScheduleSegmentedControl: HISegmentedControl {
 
     override func didSetSelectedIndex(oldValue: Int) {
         if oldValue != selectedIndex {
+            selectedPotionView?.image = #imageLiteral(resourceName: "Purple Potion")
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                selectedPotionView?.image = #imageLiteral(resourceName: "PurplePotionPad")
+            } else {
+                selectedPotionView?.image = #imageLiteral(resourceName: "Purple Potion")
+            }
+
+            // Update the color of the newly selected potion
+            if let potionView = views[selectedIndex].subviews.first as? UIImageView {
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    potionView.image = #imageLiteral(resourceName: "PinkPotionPad")
+                } else {
+                    potionView.image = #imageLiteral(resourceName: "Pink Potion")
+                }
+                selectedPotionView = potionView
+            }
             displayNewSelectedIndex()
             sendActions(for: .valueChanged)
+        }
+    }
+    
+    private func highlightSelectedPotion() {
+        if let potionView = views[selectedIndex].subviews.first as? UIImageView {
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                selectedPotionView?.image = #imageLiteral(resourceName: "PinkPotionPad")
+            } else {
+                potionView.image = #imageLiteral(resourceName: "Pink Potion")
+            }
+            selectedPotionView = potionView
         }
     }
 
@@ -172,15 +219,29 @@ class HIScheduleSegmentedControl: HISegmentedControl {
 
             // right
             if index == items.count - 1 {
-                view.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -viewPadding).isActive = true
+                view.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -viewPadding * padConstant).isActive = true
             }
 
             // left
             if index == 0 {
-                view.leftAnchor.constraint(equalTo: self.leftAnchor, constant: viewPadding).isActive = true
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    if UIScreen.main.bounds.width >= 1024 {
+                        view.leftAnchor.constraint(equalTo: self.leftAnchor, constant: viewPadding + 70).isActive = true
+                    } else if UIScreen.main.bounds.width >= 800 {
+                        view.leftAnchor.constraint(equalTo: self.leftAnchor, constant: viewPadding + 30).isActive = true
+                    } else {
+                        view.leftAnchor.constraint(equalTo: self.leftAnchor, constant: viewPadding + 20).isActive = true
+                    }
+                } else {
+                    view.leftAnchor.constraint(equalTo: self.leftAnchor, constant: viewPadding).isActive = true
+                }
             } else {
                 let prevView = views[index - 1]
-                view.leftAnchor.constraint(equalTo: prevView.rightAnchor, constant: viewPadding).isActive = true
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    view.leftAnchor.constraint(equalTo: prevView.rightAnchor, constant: (viewPadding - 10) * padConstant).isActive = true
+                } else {
+                    view.leftAnchor.constraint(equalTo: prevView.rightAnchor, constant: viewPadding - 30).isActive = true
+                }
             }
 
             // width

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>placeholder</string>
+	<key>GCM_SENDER_ID</key>
+	<string>848675954156</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.hackillinois.ios</string>
+	<key>PROJECT_ID</key>
+	<string>hackillinois-3787e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>hackillinois-3787e.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:848675954156:ios:d43e052424b30ef97f34c9</string>
+	<key>DATABASE_URL</key>
+	<string>https://hackillinois-3787e-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

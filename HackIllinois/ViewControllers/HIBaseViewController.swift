@@ -52,7 +52,11 @@ extension HIBaseViewController {
 extension HIBaseViewController {
     @objc dynamic func setUpBackgroundView() {
         view.layer.backgroundColor = UIColor.clear.cgColor
-        backgroundView.image = #imageLiteral(resourceName: "Home_Start")
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            backgroundView.image = UIImage(named: "LoginBackgroundPadNew")
+        } else {
+            backgroundView.image = UIImage(named: "Login")
+        }
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.isUserInteractionEnabled = true
         backgroundView.contentMode = .scaleAspectFill
@@ -111,7 +115,7 @@ extension HIBaseViewController {
         label.text = customTitle
 
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 30))
-        view.bounds = view.bounds.offsetBy(dx: -24, dy: 0)
+        view.bounds = view.bounds.offsetBy(dx: -24, dy: (UIDevice.current.userInterfaceIdiom == .pad) ? 10 : 0)
         view.addSubview(label)
 
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: view)

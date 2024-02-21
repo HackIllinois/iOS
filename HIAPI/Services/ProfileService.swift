@@ -18,7 +18,9 @@ public final class ProfileService: BaseService {
         return super.baseURL + "profile/"
     }
 
-    public static func getUserProfile() -> APIRequest<Profile> {
+    public static func getUserProfile(userToken: String) -> APIRequest<Profile> {
+        var headers = HTTPHeaders()
+        headers["Authorization"] = userToken
         return APIRequest<Profile>(service: self, endpoint: "", headers: headers, method: .GET)
     }
 
@@ -38,6 +40,12 @@ public final class ProfileService: BaseService {
 
     public static func updateUserProfile(profileData: [String: Any]) -> APIRequest<Profile> {
         return APIRequest<Profile>(service: self, endpoint: "", body: profileData, headers: headers, method: .PUT)
+    }
+    
+    public static func getUserRanking(userToken: String) -> APIRequest<Ranking> {
+        var authorizationHeaders = HTTPHeaders()
+        authorizationHeaders["Authorization"] = userToken
+        return APIRequest<Ranking>(service: self, endpoint: "ranking/", headers: authorizationHeaders, method: .GET)
     }
 
     public static func getAllFavorites() -> APIRequest<ProfileFavorites> {

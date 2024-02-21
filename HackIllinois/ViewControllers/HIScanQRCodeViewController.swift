@@ -20,6 +20,7 @@ import HIAPI
 import SwiftUI
 
 class HIScanQRCodeViewController: HIBaseViewController {
+    private let cornerGuideLayer = CAShapeLayer()
     private var captureSession: AVCaptureSession?
     private let containerView = HIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -40,7 +41,7 @@ class HIScanQRCodeViewController: HIBaseViewController {
         $0.baseImage = #imageLiteral(resourceName: "CloseButton")
     }
     private let errorView = HIErrorView(style: .codePopup)
-    private var selectedEventID = ""
+    private var selectedEventId = ""
     private var cancellables = Set<AnyCancellable>()
     var currentUserID = ""
     var currentUserName = ""
@@ -68,8 +69,8 @@ extension HIScanQRCodeViewController {
             setupCaptureSession()
             if user.roles.contains(.STAFF) {
                 let observable = HIStaffButtonViewObservable()
-                observable.$selectedEventId.sink { eventID in
-                    self.selectedEventID = eventID
+                observable.$selectedEventId.sink { eventId in
+                    self.selectedEventId = eventId
                 }.store(in: &cancellables)
                 let staffButtonController = UIHostingController(rootView: HIStaffButtonView(observable: observable))
                 addChild(staffButtonController)
@@ -101,7 +102,12 @@ extension HIScanQRCodeViewController {
             }
         }
     }
-
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupCornerGuides()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -127,6 +133,49 @@ extension HIScanQRCodeViewController {
         errorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         errorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         errorView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+    }
+    
+    // Add corner guides?
+    func setupCornerGuides() {
+        // Set up the layer for corner guides
+        cornerGuideLayer.strokeColor = UIColor.white.cgColor
+        cornerGuideLayer.lineWidth = 2.0
+        cornerGuideLayer.fillColor = UIColor.clear.cgColor
+
+        // Add the layer to the preview view's layer
+        previewView.layer.addSublayer(cornerGuideLayer)
+
+        // Update the corner guides when the preview view size changes
+        NotificationCenter.default.addObserver(self, selector: #selector(updateCornerGuides), name: UIDevice.orientationDidChangeNotification, object: nil)
+
+        // Initial update
+        updateCornerGuides()
+    }
+
+    @objc func updateCornerGuides() {
+        guard let previewLayer = previewLayer else { return }
+
+        // Calculate the corner guide size
+        let cornerGuideSize: CGFloat = 20.0
+        let cornerGuideLineWidth: CGFloat = 2.0
+
+        // Calculate the offset for corner guides to make them visible within the preview view
+        let offset: CGFloat = 10.0
+
+        // Create a rectangle path for each corner
+        let topLeftRect = CGRect(x: offset, y: offset, width: cornerGuideSize, height: cornerGuideLineWidth)
+        let topRightRect = CGRect(x: previewLayer.frame.width - cornerGuideSize - offset, y: offset, width: cornerGuideSize, height: cornerGuideLineWidth)
+        let bottomLeftRect = CGRect(x: offset, y: previewLayer.frame.height - cornerGuideLineWidth - offset, width: cornerGuideSize, height: cornerGuideLineWidth)
+        let bottomRightRect = CGRect(x: previewLayer.frame.width - cornerGuideSize - offset, y: previewLayer.frame.height - cornerGuideLineWidth - offset, width: cornerGuideSize, height: cornerGuideLineWidth)
+
+        // Create a path combining all four rectangles
+        let path = UIBezierPath(rect: topLeftRect)
+        path.append(UIBezierPath(rect: topRightRect))
+        path.append(UIBezierPath(rect: bottomLeftRect))
+        path.append(UIBezierPath(rect: bottomRightRect))
+
+        // Set the path to the layer
+        cornerGuideLayer.path = path.cgPath
     }
 }
 
@@ -203,36 +252,52 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
     }
 
     func handleCheckInAlert(status: String, newPoints: Int) {
-        var alertTitle = ""
-        var alertMessage = ""
+        var alertTitle = ""; var alertMessage = ""
         switch status {
         case "Success":
-            alertTitle = "Success!"
-            alertMessage = "You received \(newPoints) points!"
+            alertTitle = "\n\nSuccess!"
+            alertMessage = "\nYou received \(newPoints) points!"
         case "InvalidCode":
-            alertTitle = "Error!"
-            alertMessage = "This code doesn't seem to be correct."
+            alertTitle = "\n\nError!"
+            alertMessage = "\nThis code doesn't seem to be correct."
             self.respondingToQRCodeFound = true
         case "InvalidTime":
-            alertTitle = "Error!"
-            alertMessage = "Make sure you have the right time."
+            alertTitle = "\n\nError!"
+            alertMessage = "\nMake sure you have the right time."
             self.respondingToQRCodeFound = true
         case "AlreadyCheckedIn":
-            alertTitle = "Error!"
-            alertMessage = "Looks like you're already checked in."
+            alertTitle = "\n\nError!"
+            alertMessage = "\nLooks like you're already checked in."
             self.respondingToQRCodeFound = true
         default:
-            alertTitle = "Error!"
-            alertMessage = "Something isn't quite right."
+            alertTitle = "\n\nError!"
+            alertMessage = "\nSomething isn't quite right."
             self.respondingToQRCodeFound = true
         }
+        // Create custom alert for attendee check in functionality
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        let titleFont = UIFont(name: "MontserratRoman-Bold", size: 22)
+        let messageFont = UIFont(name: "MontserratRoman-Medium", size: 16)
+        let titleColor = #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
+        let messageColor = #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
+        let attributedTitle = NSAttributedString(string: alertTitle, attributes: [NSAttributedString.Key.font: titleFont as Any, NSAttributedString.Key.foregroundColor: titleColor])
+        let attributedMessage = NSAttributedString(string: alertMessage, attributes: [NSAttributedString.Key.font: messageFont as Any, NSAttributedString.Key.foregroundColor: messageColor])
+        alert.setValue(attributedTitle, forKey: "attributedTitle")
+        alert.setValue(attributedMessage, forKey: "attributedMessage")
+
+        // Create image view
+        let imageView = UIImageView(image: UIImage(named: "Treasure Chest"))
+        imageView.contentMode = .scaleAspectFit
+        alert.view.addSubview(imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.centerXAnchor.constraint(equalTo: alert.view.centerXAnchor).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: alert.view.topAnchor, constant: -5).isActive = true
         if alertTitle == "Success!" {
             alert.addAction(
                 UIAlertAction(title: "OK", style: .default, handler: { _ in
-                    self.dismiss(animated: true, completion: nil)
+                    //self.dismiss(animated: true, completion: nil)
                     //Dismisses view controller
-                    self.didSelectCloseButton(self.closeButton)
+                    //self.didSelectCloseButton(self.closeButton)
                     NotificationCenter.default.post(name: .qrCodeSuccessfulScan, object: nil)
                 }))
         } else {
@@ -244,14 +309,13 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         self.present(alert, animated: true, completion: nil)
 
     }
-
     func handleStaffCheckInAlert(status: String) {
-        var alertTitle = ""
-        var alertMessage = ""
+        var alertTitle = ""; var alertMessage = ""; print("status is", status)
         switch status {
         case "Success":
             alertTitle = "Success!"
-            alertMessage = "Name: \(currentUserName)\n Diet: \(dietaryString)"
+            alertMessage = "Dietary Restrictions: \(dietaryString)"
+            //alertMessage = "Name: \(currentUserName)\n Diet: \(dietaryString)"
         case "InvalidEventId":
             alertTitle = "Error!"
             alertMessage = "Invalid Event ID"
@@ -264,6 +328,10 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
             alertTitle = "Error!"
             alertMessage = "Looks like you're already checked in."
             self.respondingToQRCodeFound = true
+        case "The operation couldn’t be completed. (APIManager.APIRequestError error 0.)":
+            alertTitle = "Error!"
+            alertMessage = "Your QR code is either invalid/expired or you have already checked into this event."
+            self.respondingToQRCodeFound = true
         default:
             alertTitle = "Error!"
             alertMessage = "Something isn't quite right."
@@ -273,9 +341,9 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         if alertTitle == "Success!" {
             alert.addAction(
                 UIAlertAction(title: "OK", style: .default, handler: { _ in
-                    self.dismiss(animated: true, completion: nil)
+                    //self.dismiss(animated: true, completion: nil)
                     //Dismisses view controller
-                    self.didSelectCloseButton(self.closeButton)
+                    //self.didSelectCloseButton(self.closeButton)
                     NotificationCenter.default.post(name: .qrCodeSuccessfulScan, object: nil)
                 }))
         } else {
@@ -316,46 +384,65 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         let meta = metadataObjects.first as? AVMetadataMachineReadableCodeObject
         let code = meta?.stringValue ?? ""
         guard let user = HIApplicationStateController.shared.user else { return }
+        let staffToken = user.token
+        //print("staff token is:", staffToken, "event id is:", selectedEventId)
+        print("qr code info is", code)
         if user.roles.contains(.STAFF) {
-            if selectedEventID != "" {
+            if selectedEventId != "" {
                 if let range = code.range(of: "userToken=") {
                     let userToken = code[range.upperBound...]
                     respondingToQRCodeFound = false
-                    HIAPI.EventService.staffCheckIn(userToken: String(userToken), eventId: selectedEventID)
+                    HIAPI.StaffService.recordUserAttendance(userToken: String(userToken), staffToken: String(staffToken), eventId: selectedEventId)
                         .onCompletion { result in
                             do {
                                 let (codeResult, _) = try result.get()
                                 DispatchQueue.main.async { [self] in
-                                    if let qrInfo = self.decode(code) {
-                                        if let userId = qrInfo["userId"] {
-                                            currentUserID = userId as? String ?? ""
-                                            staffCheckIn(userID: currentUserID, status: codeResult.status)
+                                    print(codeResult.dietaryRestrictions)
+                                    // Parse dietary string
+                                    dietaryString = ""
+                                    if let dietaryRestrictions = codeResult.dietaryRestrictions, !dietaryRestrictions.isEmpty {
+                                        for (index, diet) in dietaryRestrictions.enumerated() {
+                                            dietaryString += diet
+                                            if index < dietaryRestrictions.count - 1 {
+                                                dietaryString += ", "
+                                            }
                                         }
+                                    } else {
+                                        dietaryString = "None"
                                     }
+                                    self.handleStaffCheckInAlert(status: "Success")
                                 }
                             } catch {
                                 print(error, error.localizedDescription)
+                                DispatchQueue.main.async { [self] in
+                                    self.handleStaffCheckInAlert(status: error.localizedDescription)
+                                }
                             }
                             sleep(2)
+                            self.respondingToQRCodeFound = true
                         }
                         .authorize(with: HIApplicationStateController.shared.user)
                         .launch()
+                    }
                 }
-            }
         } else {
             respondingToQRCodeFound = false
-            HIAPI.EventService.checkIn(code: code)
+            HIAPI.UserService.userScanEvent(userToken: user.token, eventID: code)
                 .onCompletion { result in
                     do {
                         let (codeResult, _) = try result.get()
                         let status = codeResult.status
                         DispatchQueue.main.async {
-                            self.handleCheckInAlert(status: codeResult.status, newPoints: codeResult.newPoints)
+                            self.handleCheckInAlert(status: "Success", newPoints: codeResult.points ?? 0)
                         }
                     } catch {
                         print(error, error.localizedDescription)
+                        DispatchQueue.main.async { [self] in
+                            self.handleCheckInAlert(status: error.localizedDescription, newPoints: 0)
+                        }
                     }
                     sleep(2)
+                    self.respondingToQRCodeFound = true // Set respondingToQRCodeFound back to true
                 }
                 .authorize(with: HIApplicationStateController.shared.user)
                 .launch()

@@ -16,6 +16,8 @@
 		1C9045D4274F065F00DDA74E /* HIOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */; };
 		2FA73B4E2B58CAA0002658C0 /* ShopService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA73B4D2B58CAA0002658C0 /* ShopService.swift */; };
 		2FA73B502B58CAC3002658C0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA73B4F2B58CAC3002658C0 /* Item.swift */; };
+		2FF0F9302B58D56700017D08 /* HIPointsShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF0F92F2B58D56700017D08 /* HIPointsShopViewController.swift */; };
+		2FF0F9322B58D5A200017D08 /* HIPointsShopSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF0F9312B58D5A200017D08 /* HIPointsShopSwiftUIView.swift */; };
 		3521FFA92207C03E00634A63 /* Attendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521FFA82207C03E00634A63 /* Attendee.swift */; };
 		35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */; };
 		35B4A44F21E091BA001B3AF0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4A44D21E091B9001B3AF0 /* Logger.swift */; };
@@ -51,7 +53,6 @@
 		9521A6AA20191737009059C6 /* HIAnnouncementDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521A6A920191737009059C6 /* HIAnnouncementDataSource.swift */; };
 		9523A2902218BA2600341EBD /* HIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9523A28F2218BA2600341EBD /* HIImageView.swift */; };
 		952831A4200F2B35002C9F3E /* HILoginFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952831A3200F2B35002C9F3E /* HILoginFlowController.swift */; };
-		952D153D220D37980041383A /* refresh.json in Resources */ = {isa = PBXBuildFile; fileRef = 952D153B220D37980041383A /* refresh.json */; };
 		952D1542220D453D0041383A /* countdown-60.json in Resources */ = {isa = PBXBuildFile; fileRef = 952D1540220D453D0041383A /* countdown-60.json */; };
 		952D1543220D453D0041383A /* countdown-24.json in Resources */ = {isa = PBXBuildFile; fileRef = 952D1541220D453D0041383A /* countdown-24.json */; };
 		953199C91FC25CA0009F2AA1 /* HICoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953199C81FC25CA0009F2AA1 /* HICoreDataController.swift */; };
@@ -136,10 +137,26 @@
 		D12B40FF2AC0B0BD001BCB05 /* HIScanAttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12B40FE2AC0B0BD001BCB05 /* HIScanAttendanceViewController.swift */; };
 		D134D30F296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D134D30E296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf */; };
 		D14D3AE3295FBDA200EB7995 /* HIBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */; };
+		D158EC312B5A2D440003D799 /* HIQRAttendeeScannerSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D158EC302B5A2D440003D799 /* HIQRAttendeeScannerSelection.swift */; };
+		D158EC332B5A2DFE0003D799 /* HIScanPointsShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D158EC322B5A2DFE0003D799 /* HIScanPointsShopViewController.swift */; };
+		D187BF5A2B78317600AD7356 /* Mentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D187BF592B78317600AD7356 /* Mentor.swift */; };
+		D187BF5C2B78318000AD7356 /* MentorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D187BF5B2B78318000AD7356 /* MentorService.swift */; };
+		D19D4C932B794F9100376E1B /* HIScanMentorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19D4C922B794F9100376E1B /* HIScanMentorViewController.swift */; };
+		D1BBA5682B70AB940017BD13 /* Staff.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BBA5672B70AB940017BD13 /* Staff.swift */; };
+		D1BBA56A2B70ACCC0017BD13 /* StaffService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BBA5692B70ACCC0017BD13 /* StaffService.swift */; };
 		D1BE81172AC8FC680042C078 /* HIAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95E3142A21FAD5B30092C22E /* HIAPI.framework */; };
 		D1BE81182AC8FC690042C078 /* HIAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 95E3142A21FAD5B30092C22E /* HIAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D1C268022B8470200001876B /* HIShiftDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C268012B8470200001876B /* HIShiftDetailViewController.swift */; };
+		D1C5B6582B732E44000E766D /* refresh.json in Resources */ = {isa = PBXBuildFile; fileRef = D1C5B6572B732E44000E766D /* refresh.json */; };
+		D1D335172B81DEBA00BBB596 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = D1D335162B81DEBA00BBB596 /* FirebaseMessaging */; };
+		D1D335192B81DEF600BBB596 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D335182B81DEF600BBB596 /* Notification.swift */; };
+		D1D3351B2B81DF0300BBB596 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D3351A2B81DF0300BBB596 /* NotificationService.swift */; };
+		D1D3351D2B81E11500BBB596 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1D3351C2B81E11500BBB596 /* GoogleService-Info.plist */; };
+		D1D3351E2B81E11500BBB596 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1D3351C2B81E11500BBB596 /* GoogleService-Info.plist */; };
+		D1D3351F2B81E11500BBB596 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1D3351C2B81E11500BBB596 /* GoogleService-Info.plist */; };
 		D1F1463A2B605C57004E7FC9 /* Hack_Mushroom_Loading.json in Resources */ = {isa = PBXBuildFile; fileRef = D1F146392B605C57004E7FC9 /* Hack_Mushroom_Loading.json */; };
 		D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A309BB2211175200CBA351 /* PassKit.framework */; };
+		D7451BD22B54BCFB00D501D0 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = D7451BD12B54BCFB00D501D0 /* URLImage */; };
 		DF3706382925DDAA000B4278 /* GoogleMapsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706372925DDAA000B4278 /* GoogleMapsBase.framework */; };
 		DF37063B2925DDB8000B4278 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706392925DDB7000B4278 /* GoogleMaps.framework */; };
 		DF37063C2925DDB8000B4278 /* GoogleMapsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37063A2925DDB8000B4278 /* GoogleMapsCore.framework */; };
@@ -220,6 +237,8 @@
 		1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIOnboardingViewController.swift; sourceTree = "<group>"; };
 		2FA73B4D2B58CAA0002658C0 /* ShopService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopService.swift; sourceTree = "<group>"; };
 		2FA73B4F2B58CAC3002658C0 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		2FF0F92F2B58D56700017D08 /* HIPointsShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIPointsShopViewController.swift; sourceTree = "<group>"; };
+		2FF0F9312B58D5A200017D08 /* HIPointsShopSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIPointsShopSwiftUIView.swift; sourceTree = "<group>"; };
 		3521FFA82207C03E00634A63 /* Attendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendee.swift; sourceTree = "<group>"; };
 		35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HICountdownViewController.swift; sourceTree = "<group>"; };
 		35B4A44D21E091B9001B3AF0 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -254,7 +273,6 @@
 		9521A6A920191737009059C6 /* HIAnnouncementDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIAnnouncementDataSource.swift; sourceTree = "<group>"; };
 		9523A28F2218BA2600341EBD /* HIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIImageView.swift; sourceTree = "<group>"; };
 		952831A3200F2B35002C9F3E /* HILoginFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HILoginFlowController.swift; sourceTree = "<group>"; };
-		952D153B220D37980041383A /* refresh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = refresh.json; sourceTree = "<group>"; };
 		952D1540220D453D0041383A /* countdown-60.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countdown-60.json"; sourceTree = "<group>"; };
 		952D1541220D453D0041383A /* countdown-24.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countdown-24.json"; sourceTree = "<group>"; };
 		953199C81FC25CA0009F2AA1 /* HICoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HICoreDataController.swift; sourceTree = "<group>"; };
@@ -343,6 +361,18 @@
 		D12B40FE2AC0B0BD001BCB05 /* HIScanAttendanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScanAttendanceViewController.swift; sourceTree = "<group>"; };
 		D134D30E296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIBannerViewController.swift; sourceTree = "<group>"; };
+		D158EC302B5A2D440003D799 /* HIQRAttendeeScannerSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIQRAttendeeScannerSelection.swift; sourceTree = "<group>"; };
+		D158EC322B5A2DFE0003D799 /* HIScanPointsShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScanPointsShopViewController.swift; sourceTree = "<group>"; };
+		D187BF592B78317600AD7356 /* Mentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mentor.swift; sourceTree = "<group>"; };
+		D187BF5B2B78318000AD7356 /* MentorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentorService.swift; sourceTree = "<group>"; };
+		D19D4C922B794F9100376E1B /* HIScanMentorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIScanMentorViewController.swift; sourceTree = "<group>"; };
+		D1BBA5672B70AB940017BD13 /* Staff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Staff.swift; sourceTree = "<group>"; };
+		D1BBA5692B70ACCC0017BD13 /* StaffService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffService.swift; sourceTree = "<group>"; };
+		D1C268012B8470200001876B /* HIShiftDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIShiftDetailViewController.swift; sourceTree = "<group>"; };
+		D1C5B6572B732E44000E766D /* refresh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = refresh.json; sourceTree = "<group>"; };
+		D1D335182B81DEF600BBB596 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		D1D3351A2B81DF0300BBB596 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		D1D3351C2B81E11500BBB596 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D1F146392B605C57004E7FC9 /* Hack_Mushroom_Loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Hack_Mushroom_Loading.json; sourceTree = "<group>"; };
 		D3A309BA221116A600CBA351 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };
 		D3A309BB2211175200CBA351 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
@@ -386,6 +416,7 @@
 				DF3706562925DE4C000B4278 /* Metal.framework in Frameworks */,
 				DF3706542925DE47000B4278 /* libz.tbd in Frameworks */,
 				DF3706522925DE42000B4278 /* libc++.tbd in Frameworks */,
+				D1D335172B81DEBA00BBB596 /* FirebaseMessaging in Frameworks */,
 				DF3706502925DE38000B4278 /* ImageIO.framework in Frameworks */,
 				DF37064E2925DE34000B4278 /* GLKit.framework in Frameworks */,
 				DF37064C2925DE2F000B4278 /* CoreText.framework in Frameworks */,
@@ -401,6 +432,7 @@
 				951E67F923C1C88200477703 /* Lottie in Frameworks */,
 				DF37063C2925DDB8000B4278 /* GoogleMapsCore.framework in Frameworks */,
 				951E67F623C1C83B00477703 /* Keychain in Frameworks */,
+				D7451BD22B54BCFB00D501D0 /* URLImage in Frameworks */,
 				D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -489,6 +521,7 @@
 				957DB2E91FC2453100F8C45E /* FlowControllers */,
 				951827981EA35DB800049F79 /* AppDelegate.swift */,
 				951827991EA35DB800049F79 /* Assets.xcassets */,
+				D1D3351C2B81E11500BBB596 /* GoogleService-Info.plist */,
 				9518279E1EA35DB800049F79 /* Controllers */,
 				9521A6A6201912B4009059C6 /* DataSources */,
 				958A33E421E143BF00F34C9E /* Extensions */,
@@ -541,7 +574,7 @@
 		952D1538220D37980041383A /* Refresh */ = {
 			isa = PBXGroup;
 			children = (
-				952D153B220D37980041383A /* refresh.json */,
+				D1C5B6572B732E44000E766D /* refresh.json */,
 			);
 			path = Refresh;
 			sourceTree = "<group>";
@@ -571,18 +604,24 @@
 				95C3BE2F2008B99C0008ED79 /* HIBaseViewController.swift */,
 				35240BD0201408DB00E0C0D8 /* HICountdownViewController.swift */,
 				D14D3AE2295FBDA100EB7995 /* HIBannerViewController.swift */,
+				D158EC302B5A2D440003D799 /* HIQRAttendeeScannerSelection.swift */,
 				95C18DC720096539004784B5 /* HIEventDetailViewController.swift */,
 				95C18DC920096539004784B5 /* HIEventListViewController.swift */,
 				9515E43622093E1300BCAF92 /* HIEventScannerViewController.swift */,
 				95C18DC42009618C004784B5 /* HIHomeViewController.swift */,
 				954EE1D21FD0F1680078F39E /* HILoginSelectionViewController.swift */,
 				95CCEA1E203D6B3600E3E28C /* HINavigationController.swift */,
+				2FF0F9312B58D5A200017D08 /* HIPointsShopSwiftUIView.swift */,
 				95C18DC820096539004784B5 /* HIScheduleViewController.swift */,
+				D1C268012B8470200001876B /* HIShiftDetailViewController.swift */,
 				98CA2A3D25C899CF003E842A /* HIProfileViewController.swift */,
+				2FF0F92F2B58D56700017D08 /* HIPointsShopViewController.swift */,
 				E170038929679D08009B99A8 /* HIProfileCardView.swift */,
 				60EAF98A273B1AC4002CD205 /* HIScanQRCodeViewController.swift */,
 				D12B40FE2AC0B0BD001BCB05 /* HIScanAttendanceViewController.swift */,
 				E1BF5E79298B462F00A98390 /* HIStaffButtonView.swift */,
+				D158EC322B5A2DFE0003D799 /* HIScanPointsShopViewController.swift */,
+				D19D4C922B794F9100376E1B /* HIScanMentorViewController.swift */,
 				D128F2942ABFF93B0016D8CB /* HIQRScannerSelection.swift */,
 				1C9045D3274F065F00DDA74E /* HIOnboardingViewController.swift */,
 				3FBFA7AA27335554001FFF28 /* HILeaderboardListViewController.swift */,
@@ -700,10 +739,13 @@
 				95E3146221FAF1740092C22E /* AuthService.swift */,
 				2FA73B4D2B58CAA0002658C0 /* ShopService.swift */,
 				95E3146121FAF1740092C22E /* BaseService.swift */,
+				D1D3351A2B81DF0300BBB596 /* NotificationService.swift */,
 				95B12042220BEA9D00E024BB /* CheckInService.swift */,
 				95E3145F21FAF1740092C22E /* EventService.swift */,
+				D187BF5B2B78318000AD7356 /* MentorService.swift */,
 				AC3B620F25E85D18002386A2 /* ProfileService.swift */,
 				95E3145C21FAF1740092C22E /* PassService.swift */,
+				D1BBA5692B70ACCC0017BD13 /* StaffService.swift */,
 				95E3146321FAF1740092C22E /* RegistrationService.swift */,
 				95B12044220BEAD700E024BB /* TrackingService.swift */,
 				95E3145D21FAF1740092C22E /* UserService.swift */,
@@ -721,10 +763,13 @@
 				95E3146821FAF1740092C22E /* Announcement.swift */,
 				3521FFA82207C03E00634A63 /* Attendee.swift */,
 				95E3146521FAF1740092C22E /* Event.swift */,
+				D1D335182B81DEF600BBB596 /* Notification.swift */,
+				D1BBA5672B70AB940017BD13 /* Staff.swift */,
 				2FA73B4F2B58CAC3002658C0 /* Item.swift */,
 				AC3B620D25E85CAD002386A2 /* Profile.swift */,
 				95E3146621FAF1740092C22E /* SimpleRequest.swift */,
 				95E3146721FAF1740092C22E /* User.swift */,
+				D187BF592B78317600AD7356 /* Mentor.swift */,
 				3C26401C23ADE8A5004E1DBE /* Project.swift */,
 				3C8F62D3238F9639001A5DAF /* Time.swift */,
 				ACB53AE6261B874A007B1643 /* Interest.swift */,
@@ -859,6 +904,8 @@
 			packageProductDependencies = (
 				951E67F523C1C83B00477703 /* Keychain */,
 				951E67F823C1C88200477703 /* Lottie */,
+				D7451BD12B54BCFB00D501D0 /* URLImage */,
+				D1D335162B81DEBA00BBB596 /* FirebaseMessaging */,
 			);
 			productName = HackIllinois;
 			productReference = 9518277F1EA35AF100049F79 /* HackIllinois.app */;
@@ -948,6 +995,8 @@
 				951E67F123C1C7FD00477703 /* XCRemoteSwiftPackageReference "api-manager" */,
 				951E67F423C1C83B00477703 /* XCRemoteSwiftPackageReference "keychain" */,
 				951E67F723C1C88200477703 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				D7451BD02B54BCFB00D501D0 /* XCRemoteSwiftPackageReference "url-image" */,
+				D1D335152B81DEBA00BBB596 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 951827801EA35AF100049F79 /* Products */;
 			projectDirPath = "";
@@ -965,7 +1014,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				952D153D220D37980041383A /* refresh.json in Resources */,
 				952D1543220D453D0041383A /* countdown-24.json in Resources */,
 				1C7561A3278E96600004D739 /* DarkVespaText.json in Resources */,
 				951827A91EA35DB800049F79 /* Assets.xcassets in Resources */,
@@ -974,7 +1022,9 @@
 				951827B41EA35E8B00049F79 /* LaunchScreen.storyboard in Resources */,
 				1C7561A5278E96750004D739 /* LightVespaText.json in Resources */,
 				D134D30F296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf in Resources */,
+				D1D3351D2B81E11500BBB596 /* GoogleService-Info.plist in Resources */,
 				DF37063E2925DDE7000B4278 /* GoogleMaps.bundle in Resources */,
+				D1C5B6582B732E44000E766D /* refresh.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -982,6 +1032,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1D3351F2B81E11500BBB596 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -990,6 +1041,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC607EF0261CD6E300B88798 /* Stickers.xcassets in Resources */,
+				D1D3351E2B81E11500BBB596 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1038,6 +1090,7 @@
 				95838AC921FDCB5C00BD8F71 /* Location+CoreDataProperties.swift in Sources */,
 				95838ACA21FDCB5C00BD8F71 /* Location+CoreDataClass.swift in Sources */,
 				9521A6AA20191737009059C6 /* HIAnnouncementDataSource.swift in Sources */,
+				D19D4C932B794F9100376E1B /* HIScanMentorViewController.swift in Sources */,
 				95C18DCB20096539004784B5 /* HIScheduleViewController.swift in Sources */,
 				ACCB199D25F56DF100F88379 /* HIInterestCell.swift in Sources */,
 				95CCEA1F203D6B3600E3E28C /* HINavigationController.swift in Sources */,
@@ -1056,6 +1109,7 @@
 				95CD0ED52015217E00D79DCC /* HIApplicationStateController.swift in Sources */,
 				E1E4A5DB291C9BF800780BA1 /* HIOnboardingViewModel.swift in Sources */,
 				AC0DDDDC261111B60086BDE0 /* HITextView.swift in Sources */,
+				2FF0F9302B58D56700017D08 /* HIPointsShopViewController.swift in Sources */,
 				95A7D292203D4F54005EAEAF /* HILoginSelectionCell.swift in Sources */,
 				3C26401923ADE7AA004E1DBE /* Project+CoreDataProperties.swift in Sources */,
 				1C9045D2274F048A00DDA74E /* HICarouselView.swift in Sources */,
@@ -1065,6 +1119,7 @@
 				95A7D28A203D4F54005EAEAF /* HIButton.swift in Sources */,
 				95A7D28E203D4F54005EAEAF /* HIView.swift in Sources */,
 				3CF8DB1323B419980035ECAE /* HIProjectCell.swift in Sources */,
+				D158EC332B5A2DFE0003D799 /* HIScanPointsShopViewController.swift in Sources */,
 				ACBFE29A25EB2C9700C94732 /* HIInterest.swift in Sources */,
 				35B4A44F21E091BA001B3AF0 /* Logger.swift in Sources */,
 				9544799C200C39870005408B /* HIUser.swift in Sources */,
@@ -1075,7 +1130,9 @@
 				95A7D28C203D4F54005EAEAF /* HITextField.swift in Sources */,
 				D12B40FF2AC0B0BD001BCB05 /* HIScanAttendanceViewController.swift in Sources */,
 				95C18DCA20096539004784B5 /* HIEventDetailViewController.swift in Sources */,
+				D158EC312B5A2D440003D799 /* HIQRAttendeeScannerSelection.swift in Sources */,
 				9523A2902218BA2600341EBD /* HIImageView.swift in Sources */,
+				2FF0F9322B58D5A200017D08 /* HIPointsShopSwiftUIView.swift in Sources */,
 				95C18DC52009618C004784B5 /* HIHomeViewController.swift in Sources */,
 				35240BD1201408DB00E0C0D8 /* HICountdownViewController.swift in Sources */,
 				3C7E552723AA199900213E1F /* HITimeDataSource.swift in Sources */,
@@ -1086,6 +1143,7 @@
 				AC5E9FE326195CCF00674FCF /* HIEventType.swift in Sources */,
 				AC3B621425E86053002386A2 /* Profile+CoreDataProperties.swift in Sources */,
 				9564E02F2218CE6F003A8EEB /* HIMapsDataSource.swift in Sources */,
+				D1C268022B8470200001876B /* HIShiftDetailViewController.swift in Sources */,
 				E1BF5E7A298B462F00A98390 /* HIStaffButtonView.swift in Sources */,
 				953199C91FC25CA0009F2AA1 /* HICoreDataController.swift in Sources */,
 				95A7D28D203D4F54005EAEAF /* Identifiable.swift in Sources */,
@@ -1122,6 +1180,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1BBA5682B70AB940017BD13 /* Staff.swift in Sources */,
 				3521FFA92207C03E00634A63 /* Attendee.swift in Sources */,
 				95E3147521FAF1740092C22E /* User.swift in Sources */,
 				2FA73B4E2B58CAA0002658C0 /* ShopService.swift in Sources */,
@@ -1133,6 +1192,7 @@
 				ACB53AEA261B8789007B1643 /* InterestService.swift in Sources */,
 				3C8F62D4238F9639001A5DAF /* Time.swift in Sources */,
 				95E3147621FAF1740092C22E /* Announcement.swift in Sources */,
+				D1D3351B2B81DF0300BBB596 /* NotificationService.swift in Sources */,
 				95E3146C21FAF1740092C22E /* UserService.swift in Sources */,
 				95B12043220BEA9D00E024BB /* CheckInService.swift in Sources */,
 				95E3147121FAF1740092C22E /* AuthService.swift in Sources */,
@@ -1142,11 +1202,15 @@
 				95E3146A21FAF1740092C22E /* AnnouncementService.swift in Sources */,
 				95E3147221FAF1740092C22E /* RegistrationService.swift in Sources */,
 				95E3147421FAF1740092C22E /* SimpleRequest.swift in Sources */,
+				D187BF5C2B78318000AD7356 /* MentorService.swift in Sources */,
 				2FA73B502B58CAC3002658C0 /* Item.swift in Sources */,
+				D1BBA56A2B70ACCC0017BD13 /* StaffService.swift in Sources */,
 				A5163FED221F283C003C543E /* StatsService.swift in Sources */,
 				95B12045220BEAD700E024BB /* TrackingService.swift in Sources */,
 				3C8F62D6238F9825001A5DAF /* TimeService.swift in Sources */,
+				D187BF5A2B78317600AD7356 /* Mentor.swift in Sources */,
 				95E3145921FAD71E0092C22E /* Error.swift in Sources */,
+				D1D335192B81DEF600BBB596 /* Notification.swift in Sources */,
 				3C26401D23ADE8A5004E1DBE /* Project.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1175,7 +1239,7 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_MODULES = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1239,7 +1303,7 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_MODULES = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1293,6 +1357,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = HackIllinois/HackIllinois.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -1310,7 +1375,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2024.1.5;
+				MARKETING_VERSION = 2024.2.2;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.hackillinois.ios-yasha";
@@ -1324,6 +1389,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = HackIllinois/HackIllinois.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -1341,7 +1407,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2024.1.5;
+				MARKETING_VERSION = 2024.2.2;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.hackillinois.ios-yasha";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1549,6 +1615,22 @@
 				version = 4.0.1;
 			};
 		};
+		D1D335152B81DEBA00BBB596 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+		D7451BD02B54BCFB00D501D0 /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1566,6 +1648,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 951E67F723C1C88200477703 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		D1D335162B81DEBA00BBB596 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D1D335152B81DEBA00BBB596 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		D7451BD12B54BCFB00D501D0 /* URLImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7451BD02B54BCFB00D501D0 /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 

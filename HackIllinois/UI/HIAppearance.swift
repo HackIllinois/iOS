@@ -16,9 +16,11 @@ struct HIAppearance: Equatable {
     let neonCountdownText: UIColor
     let titleText: UIColor
     let whiteText: UIColor
+    let darkGreenText: UIColor
+    let lightYellowText: UIColor
     let baseText: UIColor
     let accent: UIColor
-    let viewTitleGreen: UIColor
+    let viewTitleBrown: UIColor
     let action: UIColor
     let baseBackground: UIColor
     let contentBackground: UIColor
@@ -41,12 +43,13 @@ struct HIAppearance: Equatable {
     let whiteTagFont: UIColor
     let interestBackground: UIColor
     let buttonGreen: UIColor
-    let buttonPink: UIColor
+    let buttonBrown: UIColor
     let buttonLightPink: UIColor
-    let buttonBlue: UIColor
+    let buttonPurple: UIColor
     let buttonDarkBlue: UIColor
     let buttonMagenta: UIColor
     let buttonDarkBlueGreen: UIColor
+    let buttonDarkGreen: UIColor
     let favoriteStarBackground: UIColor
     let segmentedBackground: UIColor
     let buttonYellow: UIColor
@@ -62,12 +65,10 @@ struct HIAppearance: Equatable {
     let profile8: UIImage
     let profile9: UIImage
     let profile10: UIImage
-
     let leaderboardText: UIColor
     let leaderboardBackgroundOne: UIColor
     let leaderboardBackgroundTwo: UIColor
     let pointsBackground: UIColor
-
     let profileCardBackground: UIColor
     let profileCardVegetarian: UIColor
     let profileCardVegan: UIColor
@@ -75,37 +76,33 @@ struct HIAppearance: Equatable {
     let profileCardLactoseIntolerant: UIColor
     let profileCardOther: UIColor
     let profileCardNone: UIColor
-
     let profileBaseText: UIColor
-    
     let countdownTextColor: UIColor
     let countdownBackground: UIColor
     let bannerBackground: UIColor
-
+    let scannerButtonPink: UIColor
+    let scannerButtonTeal: UIColor
+    let scannerButtonYellow: UIColor
+    let scannerButtonBorder: UIColor
+    let scannerButtonShadow: UIColor
+    let proBackground: UIColor
+    let eventCard: UIColor
     let clear: UIColor = .clear
     let black: UIColor = .black
     let white: UIColor = .white
-
     // Hack 2023 color palette
-    private static let lightBlack = #colorLiteral(red: 0.03137254902, green: 0.08235294118, blue: 0.1058823529, alpha: 1)
-    private static let yellowWhite = #colorLiteral(red: 0.9647058824, green: 0.9568627451, blue: 0.831372549, alpha: 1)
-    private static let lightYellow = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1)
-    private static let tan = #colorLiteral(red: 0.9098039216, green: 0.8431372549, blue: 0.6470588235, alpha: 1)
-    private static let blue = #colorLiteral(red: 0.03137254902, green: 0.5450980392, blue: 0.7568627451, alpha: 1)
-    private static let mediumOrange = #colorLiteral(red: 0.9764705882, green: 0.5843137255, blue: 0.3411764706, alpha: 1)
-    private static let darkBlue = #colorLiteral(red: 0.05098039216, green: 0.2196078431, blue: 0.4862745098, alpha: 1)
-    private static let magenta = #colorLiteral(red: 0.9960784314, green: 0.4392156863, blue: 0.5960784314, alpha: 1)
-    private static let darkBlueGreeen = #colorLiteral(red: 0.03137254902, green: 0.5450980392, blue: 0.7568627451, alpha: 1)
-    private static let vegetarian = #colorLiteral(red: 0.2156862745, green: 0.8705882353, blue: 0.8039215686, alpha: 1)
-    private static let vegan = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1)
-    private static let glutenfree = #colorLiteral(red: 0.9764705882, green: 0.5843137255, blue: 0.3411764706, alpha: 1)
+    private static let lightBlack = #colorLiteral(red: 0.03137254902, green: 0.08235294118, blue: 0.1058823529, alpha: 1); private static let yellowWhite = #colorLiteral(red: 0.9647058824, green: 0.9568627451, blue: 0.831372549, alpha: 1)
+    private static let lightYellow = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1); private static let tan = #colorLiteral(red: 0.9098039216, green: 0.8431372549, blue: 0.6470588235, alpha: 1)
+    private static let blue = #colorLiteral(red: 0.03137254902, green: 0.5450980392, blue: 0.7568627451, alpha: 1); private static let mediumOrange = #colorLiteral(red: 0.9764705882, green: 0.5843137255, blue: 0.3411764706, alpha: 1)
+    private static let darkBlue = #colorLiteral(red: 0.05098039216, green: 0.2196078431, blue: 0.4862745098, alpha: 1); private static let magenta = #colorLiteral(red: 0.9960784314, green: 0.4392156863, blue: 0.5960784314, alpha: 1)
+    private static let darkBlueGreen = #colorLiteral(red: 0.03137254902, green: 0.5450980392, blue: 0.7568627451, alpha: 1); private static let vegetarian = #colorLiteral(red: 0.2156862745, green: 0.8705882353, blue: 0.8039215686, alpha: 1)
+    private static let vegan = #colorLiteral(red: 0.9882352941, green: 0.862745098, blue: 0.5607843137, alpha: 1); private static let glutenfree = #colorLiteral(red: 0.9764705882, green: 0.5843137255, blue: 0.3411764706, alpha: 1)
     private static let lactoseintolerant = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     private static let other = #colorLiteral(red: 0.9960784314, green: 0.6392156863, blue: 0.6666666667, alpha: 1)
     private static let none = #colorLiteral(red: 0.1137254902, green: 0.1490196078, blue: 0.2666666667, alpha: 1)
     private static let profileBaseText = #colorLiteral(red: 0.1137254902, green: 0.1490196078, blue: 0.2666666667, alpha: 1)
     private static let yellowGreen = #colorLiteral(red: 0.7882352941, green: 0.8117647059, blue: 0.462745098, alpha: 1)
     private static let green = #colorLiteral(red: 0.4705882353, green: 0.6745098039, blue: 0.2588235294, alpha: 1)
-    
     // Hack 2024 color palette
     private static let icyBlue = #colorLiteral(red: 0.8235294118, green: 0.968627451, blue: 1, alpha: 1)
     private static let bLightYellow = #colorLiteral(red: 1, green: 0.9803921569, blue: 0.8, alpha: 1)
@@ -117,8 +114,11 @@ struct HIAppearance: Equatable {
     private static let lightGreen = #colorLiteral(red: 0.7019607843, green: 0.8392156863, blue: 0.537254902, alpha: 1)
     private static let lightBlue = #colorLiteral(red: 0.7176470588, green: 0.8392156863, blue: 0.8392156863, alpha: 1)
     private static let teal = #colorLiteral(red: 0.537254902, green: 0.7450980392, blue: 0.6666666667, alpha: 1)
+    private static let medTeal = #colorLiteral(red: 0.4274509804, green: 0.6117647059, blue: 0.6274509804, alpha: 1)
     private static let darkGreen = #colorLiteral(red: 0.05098039216, green: 0.2470588235, blue: 0.2549019608, alpha: 1)
+    private static let darkestGreen = #colorLiteral(red: 0.02745098039, green: 0.1725490196, blue: 0.1803921569, alpha: 1)
     private static let lightBrown = #colorLiteral(red: 0.5882352941, green: 0.2980392157, blue: 0.1019607843, alpha: 1)
+    private static let medBrown = #colorLiteral(red: 0.4588235294, green: 0.1960784314, blue: 0.07843137255, alpha: 1)
     private static let brown = #colorLiteral(red: 0.4, green: 0.168627451, blue: 0.07450980392, alpha: 1)
     private static let darkBrown = #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
     private static let lightPink = #colorLiteral(red: 0.9215686275, green: 0.8235294118, blue: 0.8235294118, alpha: 1)
@@ -130,7 +130,10 @@ struct HIAppearance: Equatable {
     private static let transparent = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     private static let white = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     private static let black = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-
+    private static let buttonPink = #colorLiteral(red: 0.862745098, green: 0.5411764706, blue: 0.662745098, alpha: 1)
+    private static let buttonTeal = #colorLiteral(red: 0.6470588235, green: 0.8549019608, blue: 0.8352941176, alpha: 1)
+    private static let buttonYellow = #colorLiteral(red: 1, green: 0.7882352941, blue: 0.3568627451, alpha: 1)
+    private static let offWhite = #colorLiteral(red: 1, green: 0.9725490196, blue: 0.9607843137, alpha: 1)
     private static let transparent2 = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     private static var statusBarWhite: UIStatusBarStyle {
         return .lightContent
@@ -138,25 +141,25 @@ struct HIAppearance: Equatable {
     private static var statusBarBlack: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
             return .lightContent
-        } else {
-            return .lightContent
-        }
+        } else { return .lightContent }
     }
 
     fileprivate static let day = HIAppearance(
         neonCountdownText: lightYellow,
         titleText: lightBlack,
         whiteText: white,
+        darkGreenText: darkestGreen,
+        lightYellowText: bLightYellow,
         baseText: lightBlack,
-        accent: orange,
-        viewTitleGreen: darkGreen,
+        accent: white,
+        viewTitleBrown: darkBrown,
         action: tan,
         baseBackground: white,
-        contentBackground: lightBlue,
+        contentBackground: offWhite,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         codePopupTab: white,
-        greenCodePopupTab: darkGreen,
+        greenCodePopupTab: darkestGreen,
         navbarBackground: darkGreen,
         navbarTabTint: white,
         profileContainerTint: yellowWhite,
@@ -172,12 +175,13 @@ struct HIAppearance: Equatable {
         whiteTagFont: white,
         interestBackground: orange,
         buttonGreen: yellowGreen,
-        buttonPink: pink,
+        buttonBrown: lightBrown,
         buttonLightPink: other,
-        buttonBlue: blue,
+        buttonPurple: indigo,
         buttonDarkBlue: darkBlue,
         buttonMagenta: magenta,
-        buttonDarkBlueGreen: darkBlueGreeen,
+        buttonDarkBlueGreen: darkBlueGreen,
+        buttonDarkGreen: darkGreen,
         favoriteStarBackground: yellowWhite,
         segmentedBackground: white,
         buttonYellow: bLightYellow,
@@ -207,23 +211,32 @@ struct HIAppearance: Equatable {
         profileBaseText: profileBaseText,
         countdownTextColor: brown,
         countdownBackground: orange,
-        bannerBackground: lightYellow
+        bannerBackground: lightYellow,
+        scannerButtonPink: buttonPink,
+        scannerButtonTeal: buttonTeal,
+        scannerButtonYellow: buttonYellow,
+        scannerButtonBorder: medBrown,
+        scannerButtonShadow: darkBrown,
+        proBackground: medTeal,
+        eventCard: offWhite
     )
 
     fileprivate static let night = HIAppearance(
         neonCountdownText: lightYellow,
         titleText: lightBlack,
         whiteText: white,
+        darkGreenText: darkestGreen,
+        lightYellowText: bLightYellow,
         baseText: lightBlack,
-        accent: orange,
-        viewTitleGreen: darkGreen,
+        accent: white,
+        viewTitleBrown: darkBrown,
         action: tan,
         baseBackground: white,
-        contentBackground: lightBlue,
+        contentBackground: offWhite,
         overlay: #colorLiteral(red: 0.05882352941, green: 0.07058823529, blue: 0.1803921569, alpha: 0.33),
         frostedTint: #colorLiteral(red: 0, green: 0.3411764706, blue: 0.462745098, alpha: 0.6),
         codePopupTab: white,
-        greenCodePopupTab: darkGreen,
+        greenCodePopupTab: darkestGreen,
         navbarBackground: darkGreen,
         navbarTabTint: white,
         profileContainerTint: yellowWhite,
@@ -239,12 +252,13 @@ struct HIAppearance: Equatable {
         whiteTagFont: white,
         interestBackground: orange,
         buttonGreen: yellowGreen,
-        buttonPink: pink,
+        buttonBrown: lightBrown,
         buttonLightPink: other,
-        buttonBlue: blue,
+        buttonPurple: indigo,
         buttonDarkBlue: darkBlue,
         buttonMagenta: magenta,
-        buttonDarkBlueGreen: darkBlueGreeen,
+        buttonDarkBlueGreen: darkBlueGreen,
+        buttonDarkGreen: darkGreen,
         favoriteStarBackground: yellowWhite,
         segmentedBackground: white,
         buttonYellow: bLightYellow,
@@ -274,7 +288,14 @@ struct HIAppearance: Equatable {
         profileBaseText: profileBaseText,
         countdownTextColor: brown,
         countdownBackground: orange,
-        bannerBackground: lightYellow
+        bannerBackground: lightYellow,
+        scannerButtonPink: buttonPink,
+        scannerButtonTeal: buttonTeal,
+        scannerButtonYellow: buttonYellow,
+        scannerButtonBorder: medBrown,
+        scannerButtonShadow: darkBrown,
+        proBackground: medTeal,
+        eventCard: offWhite
     )
 
     fileprivate static var current = day
@@ -287,19 +308,20 @@ struct HIAppearance: Equatable {
 
     enum Font {
         // Fonts ending with "Pad" correspond to the iPad font sizes
-        // Glyph font corresponds to the time texts that separate the event cells on the schedule page and the "Memories Made" (2023 app) text
+        // Glyph font corresponds to the time texts that separate the event cells on the schedule page (2023) and the "Memories Made" (2023 app) text
         static let glyph = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 16)
         
         // Home segemented control fonts
         static let homeSegmentedTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 40 : 24)
         
         // Schedule page segmented control fonts
-        static let segmentedNumberText = UIFont(name: "MontserratRoman-SemiBold", size: UIDevice.current.userInterfaceIdiom == .pad ? 36 : 18) // Dates
+        static let segmentedNumberText = UIFont(name: "MontserratRoman-SemiBold", size: UIDevice.current.userInterfaceIdiom == .pad ? 64 : 32) // Dates
         static let scheduleSegmentedPad = UIFont(name: "MontserratRoman-SemiBold", size: 32)
         static let segmentedTitle = UIFont(name: "MontserratRoman-Bold", size: 16)
         // More Schedule page fonts
         static let timeIndicator = UIFont(name: "MontserratRoman-Bold", size: 32)
         static let happeningEventTitle = UIFont(name: "MontserratRoman-Bold", size: 25)
+        static let dateHeader = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 14) // Date header event cell separators 2024
         
         // Main header title for each page (Profile, Schedule, etc)
         static let viewTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 48 : 24)
@@ -371,12 +393,14 @@ struct HIAppearance: Equatable {
         static let leaderboardRankPad = UIFont(name: "MontserratRoman-Bold", size: 48)
         
         // Misc
-        static let sectionHeader = UIFont(name: "MontserratRoman-Bold", size: 13)
+        static let sectionHeader = UIFont(name: "MontserratRoman-Bold", size: 12)
         static let button = UIFont(name: "MontserratRoman-Regular", size: 15)
         static let welcomeTitle = UIFont(name: "MontserratRoman-Bold", size: UIDevice.current.userInterfaceIdiom == .pad ? 40: 24)
         
         // Font for Staff QR code selection
-        static let QRSelection = UIFont(name: "MontserratRoman-SemiBold", size: 20)
+        static let QRSelection = UIFont(name: "MontserratRoman-Bold", size: 24)
+        static let smallEvent = UIFont(name: "MontserratRoman-SemiBold", size: 15)
+        static let smallEventPad = UIFont(name: "MontserratRoman-SemiBold", size: 30)
     }
 }
 

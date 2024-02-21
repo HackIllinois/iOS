@@ -18,12 +18,13 @@ class HILabel: UILabel {
     enum Style {
         case location
         case event
+        case smallEvent
         case eventTime
         case eventType
         case sponsor
         case project
         case viewTitle
-        case viewTitleGreen
+        case viewTitleBrown
         case detailTitle
         case subtitle
         case description
@@ -104,6 +105,15 @@ class HILabel: UILabel {
                 font = HIAppearance.Font.eventTitle
             }
             
+        case .smallEvent:
+            textHIColor = \.baseText
+            backgroundHIColor = \.clear
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                font = HIAppearance.Font.smallEventPad
+            } else {
+                font = HIAppearance.Font.smallEvent
+            }
+            
         case .eventTime:
             textHIColor = \.baseText
             backgroundHIColor = \.clear
@@ -148,8 +158,8 @@ class HILabel: UILabel {
             textAlignment = .center
             font = HIAppearance.Font.viewTitle
         
-        case .viewTitleGreen:
-            textHIColor = \.viewTitleGreen
+        case .viewTitleBrown:
+            textHIColor = \.viewTitleBrown
             backgroundHIColor = \.clear
             textAlignment = .center
             font = HIAppearance.Font.viewTitle
@@ -343,7 +353,7 @@ class HILabel: UILabel {
             font = HIAppearance.Font.locationText
             
         case .QRSelection:
-            textHIColor = \.black
+            textHIColor = \.viewTitleBrown
             backgroundHIColor = \.clear
             font = HIAppearance.Font.QRSelection
         }

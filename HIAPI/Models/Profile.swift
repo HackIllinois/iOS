@@ -28,17 +28,23 @@ public struct Profile: Codable, APIReturnable {
         case userId
         case displayName
         case points
-        //case foodWave
+        case foodWave
         case discordTag
         case avatarUrl
+        case coins
     }
 
     public let userId: String
     public let displayName: String
     public let points: Int
-    //public let foodWave: Int
+    public let foodWave: Int
     public let discordTag: String
     public let avatarUrl: String
+    public let coins: Int
+}
+
+public struct Ranking: Codable, APIReturnable {
+    public let ranking: Int
 }
 
 public struct ProfileFavorites: Codable, APIReturnable {

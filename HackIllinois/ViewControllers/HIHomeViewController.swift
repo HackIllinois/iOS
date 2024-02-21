@@ -41,7 +41,7 @@ class HIHomeViewController: HIEventListViewController {
 
     private var countdownDataStoreIndex = 0
     private var staticDataStore: [(date: Date, displayText: String)] = [
-        (HITimeDataSource.shared.eventTimes.eventStart, "HACKILLINOIS BEGINS IN"),
+        (HITimeDataSource.shared.eventTimes.checkInStart, "HACKILLINOIS BEGINS IN"),
         (HITimeDataSource.shared.eventTimes.hackStart, "HACKING BEGINS IN"),
         (HITimeDataSource.shared.eventTimes.hackEnd, "HACKING ENDS IN"),
         (HITimeDataSource.shared.eventTimes.eventEnd, "HACKILLINOIS ENDS IN")
@@ -87,15 +87,17 @@ extension HIHomeViewController {
     
     func layoutLegendButton() {
         view.addSubview(legendButton)
+        legendButton.isUserInteractionEnabled = true
         
-        if UIDevice.current.userInterfaceIdiom != .pad {
-            legendButton.constrain(width: 20, height: 20)
-        }
+        let buttonSize: CGFloat = UIDevice.current.userInterfaceIdiom != .pad ? 35 : 50
+        let padding: CGFloat = UIDevice.current.userInterfaceIdiom != .pad ? 16 : 80
         
+        legendButton.constrain(width: buttonSize, height: buttonSize)
         legendButton.translatesAutoresizingMaskIntoConstraints = false
-        legendButton.topAnchor.constraint(equalTo: bannerFrameView.topAnchor, constant: -2).isActive = true
-        legendButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15).isActive = true
-        
+        view.bringSubviewToFront(legendButton)
+        // Increase the hit target area by adding padding
+        legendButton.topAnchor.constraint(equalTo: countdownFrameView.topAnchor, constant: (UIDevice.current.userInterfaceIdiom == .pad) ? 0 : 15).isActive = true
+        legendButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -padding).isActive = true
         legendButton.addTarget(self, action: #selector(didSelectLegendButton(_:)), for: .touchUpInside)
     }
     
@@ -248,7 +250,7 @@ extension HIHomeViewController: HICountdownViewControllerDelegate {
             } else {
                 // Displays after the event ends
 //                super.setCustomTitle(customTitle: "MEMORIES MADE")
-                bannerViewController.updateLabel(with: "MEMORIES MADE")
+                bannerViewController.updateLabel(with: "QUEST COMPLETE")
             }
             countdownDataStoreIndex += 1
         }

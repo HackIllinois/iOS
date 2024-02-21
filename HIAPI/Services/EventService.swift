@@ -48,10 +48,10 @@ public class EventService: BaseService {
         return APIRequest<Attendance>(service: self, endpoint: "staff/attendance/", body: body, headers: headers, method: .POST)
     }
 
-    public static func getStaffCheckInEvents(authToken: String) -> APIRequest<StaffEventContainer> {
+    public static func getStaffCheckInEvents(authToken: String) -> APIRequest<EventContainer> {
         var header = HTTPHeaders()
         header["Authorization"] = authToken
-        return APIRequest<StaffEventContainer>(service: self, endpoint: "event/filter/?displayOnStaffCheckin=true", headers: header, method: .GET)
+        return APIRequest<EventContainer>(service: self, endpoint: "event/", headers: header, method: .GET)
     }
 
     public static func create(event: Event) -> APIRequest<EventContainer> {
