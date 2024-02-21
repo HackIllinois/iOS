@@ -15,7 +15,7 @@ import Foundation
 
 public struct User: Codable, APIReturnable {
     public let userId: String
-    public let email: String?
+    public let email: String? // Email should be an optional field because not every GH account has their email set to public
 }
 
 public struct RolesContainer: Codable, APIReturnable {
