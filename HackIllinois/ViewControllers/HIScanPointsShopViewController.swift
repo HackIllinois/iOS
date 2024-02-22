@@ -222,15 +222,18 @@ extension HIScanPointsShopViewController: AVCaptureMetadataOutputObjectsDelegate
             self.respondingToQRCodeFound = true
         default:
             alertTitle = "\n\nError!"
-            alertMessage = "\nSomething isn't quite right."
+            alertMessage = "\nSomething isn't quite right. Double check your coins amount and make sure you have the correct QR code."
             self.respondingToQRCodeFound = true
         }
         // Create custom alert for points shop
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
         let titleFont = UIFont(name: "MontserratRoman-Bold", size: 22)
         let messageFont = UIFont(name: "MontserratRoman-Medium", size: 16)
-        let titleColor = #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
-        let messageColor = #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
+        
+        let userInterfaceStyle = traitCollection.userInterfaceStyle
+        let titleColor: UIColor = (userInterfaceStyle == .dark) ? UIColor.white : #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
+        let messageColor: UIColor = (userInterfaceStyle == .dark) ? UIColor.white : #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
         let attributedTitle = NSAttributedString(string: alertTitle, attributes: [NSAttributedString.Key.font: titleFont as Any, NSAttributedString.Key.foregroundColor: titleColor])
         let attributedMessage = NSAttributedString(string: alertMessage, attributes: [NSAttributedString.Key.font: messageFont as Any, NSAttributedString.Key.foregroundColor: messageColor])
         alert.setValue(attributedTitle, forKey: "attributedTitle")
