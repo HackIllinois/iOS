@@ -203,6 +203,7 @@ extension HIScanAttendanceViewController: AVCaptureMetadataOutputObjectsDelegate
             alertMessage = "Something isn't quite right."
         }
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        alert.view.backgroundColor = UIColor.white
         if alertTitle == "Success!" {
             alert.addAction(
                 UIAlertAction(title: "OK", style: .default, handler: { _ in

@@ -215,6 +215,7 @@ extension HIScanMentorViewController: AVCaptureMetadataOutputObjectsDelegate {
         }
         // Create custom alert for attendee check in functionality
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        alert.view.backgroundColor = UIColor.white
         let titleFont = UIFont(name: "MontserratRoman-Bold", size: 22)
         let messageFont = UIFont(name: "MontserratRoman-Medium", size: 16)
         let titleColor = #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
