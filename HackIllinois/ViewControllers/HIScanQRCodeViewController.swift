@@ -271,16 +271,19 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
             self.respondingToQRCodeFound = true
         default:
             alertTitle = "\n\nError!"
-            alertMessage = "\nSomething isn't quite right."
+            alertMessage = "\nYou may have the incorrect QR code or you have already checked into this event."
             self.respondingToQRCodeFound = true
         }
         // Create custom alert for attendee check in functionality
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-        alert.view.backgroundColor = UIColor.white
+        
         let titleFont = UIFont(name: "MontserratRoman-Bold", size: 22)
         let messageFont = UIFont(name: "MontserratRoman-Medium", size: 16)
-        let titleColor = #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
-        let messageColor = #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
+        
+        let userInterfaceStyle = traitCollection.userInterfaceStyle
+        let titleColor: UIColor = (userInterfaceStyle == .dark) ? UIColor.white : #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
+        let messageColor: UIColor = (userInterfaceStyle == .dark) ? UIColor.white : #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
+        
         let attributedTitle = NSAttributedString(string: alertTitle, attributes: [NSAttributedString.Key.font: titleFont as Any, NSAttributedString.Key.foregroundColor: titleColor])
         let attributedMessage = NSAttributedString(string: alertMessage, attributes: [NSAttributedString.Key.font: messageFont as Any, NSAttributedString.Key.foregroundColor: messageColor])
         alert.setValue(attributedTitle, forKey: "attributedTitle")
@@ -331,15 +334,19 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
             self.respondingToQRCodeFound = true
         case "The operation couldn’t be completed. (APIManager.APIRequestError error 0.)":
             alertTitle = "Error!"
-            alertMessage = "Your QR code is either invalid/expired or you have already checked into this event."
+            alertMessage = "The QR code is either invalid/expired or the user has already checked into this event."
+            self.respondingToQRCodeFound = true
+        case "Incorrect type of QR code":
+            alertTitle = "Error!"
+            alertMessage = "This is not a valid user QR code."
             self.respondingToQRCodeFound = true
         default:
             alertTitle = "Error!"
-            alertMessage = "Something isn't quite right."
+            alertMessage = "The QR code is either invalid/expired or the user has already checked into this event."
             self.respondingToQRCodeFound = true
         }
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-        alert.view.backgroundColor = UIColor.white
+        
         if alertTitle == "Success!" {
             alert.addAction(
                 UIAlertAction(title: "OK", style: .default, handler: { _ in
@@ -425,8 +432,10 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                         }
                         .authorize(with: HIApplicationStateController.shared.user)
                         .launch()
-                    }
+                } else {
+                    self.handleStaffCheckInAlert(status: "Incorrect type of QR code")
                 }
+            }
         } else {
             respondingToQRCodeFound = false
             HIAPI.UserService.userScanEvent(userToken: user.token, eventID: code)
