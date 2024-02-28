@@ -210,15 +210,19 @@ extension HIScanMentorViewController: AVCaptureMetadataOutputObjectsDelegate {
             error = false
         default:
             alertTitle = "\n\nError!"
-            alertMessage = "\nSomething isn't quite right."
+            alertMessage = "\nThis QR code is invalid or you have already checked in to this mentor's office hours."
             self.respondingToQRCodeFound = true
         }
         // Create custom alert for attendee check in functionality
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
         let titleFont = UIFont(name: "MontserratRoman-Bold", size: 22)
         let messageFont = UIFont(name: "MontserratRoman-Medium", size: 16)
-        let titleColor = #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
-        let messageColor = #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
+        
+        let userInterfaceStyle = traitCollection.userInterfaceStyle
+        let titleColor: UIColor = (userInterfaceStyle == .dark) ? UIColor.white : #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
+        let messageColor: UIColor = (userInterfaceStyle == .dark) ? UIColor.white : #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
+        
         let attributedTitle = NSAttributedString(string: alertTitle, attributes: [NSAttributedString.Key.font: titleFont as Any, NSAttributedString.Key.foregroundColor: titleColor])
         let attributedMessage = NSAttributedString(string: alertMessage, attributes: [NSAttributedString.Key.font: messageFont as Any, NSAttributedString.Key.foregroundColor: messageColor])
         alert.setValue(attributedTitle, forKey: "attributedTitle")

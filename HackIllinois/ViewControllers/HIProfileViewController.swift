@@ -182,7 +182,7 @@ extension HIProfileViewController {
                 let (apiProfile, _) = try result.get()
                 print(apiProfile)
                 self?.profile.userId = apiProfile.userId
-                self?.profile.displayName = apiProfile.discordTag
+                self?.profile.displayName = apiProfile.displayName
                 self?.profile.points = apiProfile.points
                 self?.profile.avatarUrl = apiProfile.avatarUrl
                 self?.profile.foodWave = apiProfile.foodWave
