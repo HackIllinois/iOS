@@ -156,7 +156,7 @@
 		D1D3351F2B81E11500BBB596 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1D3351C2B81E11500BBB596 /* GoogleService-Info.plist */; };
 		D1F1463A2B605C57004E7FC9 /* Hack_Mushroom_Loading.json in Resources */ = {isa = PBXBuildFile; fileRef = D1F146392B605C57004E7FC9 /* Hack_Mushroom_Loading.json */; };
 		D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A309BB2211175200CBA351 /* PassKit.framework */; };
-		D7451BD22B54BCFB00D501D0 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = D7451BD12B54BCFB00D501D0 /* URLImage */; };
+		D704DB322C73A8E200355019 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = D704DB312C73A8E200355019 /* URLImage */; };
 		DF3706382925DDAA000B4278 /* GoogleMapsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706372925DDAA000B4278 /* GoogleMapsBase.framework */; };
 		DF37063B2925DDB8000B4278 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706392925DDB7000B4278 /* GoogleMaps.framework */; };
 		DF37063C2925DDB8000B4278 /* GoogleMapsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF37063A2925DDB8000B4278 /* GoogleMapsCore.framework */; };
@@ -432,7 +432,7 @@
 				951E67F923C1C88200477703 /* Lottie in Frameworks */,
 				DF37063C2925DDB8000B4278 /* GoogleMapsCore.framework in Frameworks */,
 				951E67F623C1C83B00477703 /* Keychain in Frameworks */,
-				D7451BD22B54BCFB00D501D0 /* URLImage in Frameworks */,
+				D704DB322C73A8E200355019 /* URLImage in Frameworks */,
 				D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -904,8 +904,8 @@
 			packageProductDependencies = (
 				951E67F523C1C83B00477703 /* Keychain */,
 				951E67F823C1C88200477703 /* Lottie */,
-				D7451BD12B54BCFB00D501D0 /* URLImage */,
 				D1D335162B81DEBA00BBB596 /* FirebaseMessaging */,
+				D704DB312C73A8E200355019 /* URLImage */,
 			);
 			productName = HackIllinois;
 			productReference = 9518277F1EA35AF100049F79 /* HackIllinois.app */;
@@ -995,8 +995,8 @@
 				951E67F123C1C7FD00477703 /* XCRemoteSwiftPackageReference "api-manager" */,
 				951E67F423C1C83B00477703 /* XCRemoteSwiftPackageReference "keychain" */,
 				951E67F723C1C88200477703 /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				D7451BD02B54BCFB00D501D0 /* XCRemoteSwiftPackageReference "url-image" */,
 				D1D335152B81DEBA00BBB596 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				D704DB302C73A8E200355019 /* XCRemoteSwiftPackageReference "url-image" */,
 			);
 			productRefGroup = 951827801EA35AF100049F79 /* Products */;
 			projectDirPath = "";
@@ -1623,7 +1623,7 @@
 				minimumVersion = 9.0.0;
 			};
 		};
-		D7451BD02B54BCFB00D501D0 /* XCRemoteSwiftPackageReference "url-image" */ = {
+		D704DB302C73A8E200355019 /* XCRemoteSwiftPackageReference "url-image" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
 			requirement = {
@@ -1654,9 +1654,9 @@
 			package = D1D335152B81DEBA00BBB596 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
 		};
-		D7451BD12B54BCFB00D501D0 /* URLImage */ = {
+		D704DB312C73A8E200355019 /* URLImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D7451BD02B54BCFB00D501D0 /* XCRemoteSwiftPackageReference "url-image" */;
+			package = D704DB302C73A8E200355019 /* XCRemoteSwiftPackageReference "url-image" */;
 			productName = URLImage;
 		};
 /* End XCSwiftPackageProductDependency section */
