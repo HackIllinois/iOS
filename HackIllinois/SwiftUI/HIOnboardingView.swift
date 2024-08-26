@@ -15,6 +15,8 @@ import SwiftUI
 import UIKit
 import Lottie
 
+// TODO: Remove after testing dummy PR for build error
+
 struct HIOnboardingView: View {
     @StateObject private var viewModel = HIOnboardingViewModel()
     var body: some View {
