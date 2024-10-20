@@ -37,7 +37,7 @@ struct HIOnboardingView: View {
                             .font(.title2.bold())
                             .tracking(2)
 //                            .onAppear {
-//                                print("The screen height is \(UIScreen.main.bounds.height)")
+//                                print("This screen height is \(UIScreen.main.bounds.height)")
 //                            }
                     }
                     .padding()
