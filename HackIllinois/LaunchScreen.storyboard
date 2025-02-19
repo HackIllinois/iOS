@@ -10,10 +10,9 @@
         <scene sceneID="EHf-IW-A2E">
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
-                    <imageView key="view" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login" id="pHM-yB-ysD">
+                    <imageView key="view" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoadingBackground" id="bqw-zM-W9v">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <variation key="heightClass=regular-widthClass=regular" image="iPadLogin"/>
                     </imageView>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -22,7 +21,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Login" width="393" height="852"/>
-        <image name="iPadLogin" width="341.33334350585938" height="455.33334350585938"/>
+        <image name="LoadingBackground" width="393" height="852.33331298828125"/>
     </resources>
 </document>

@@ -19,18 +19,21 @@ struct HIOnboardingView: View {
     @StateObject private var viewModel = HIOnboardingViewModel()
     var body: some View {
         ZStack {
-            Image(getBackgroundImageName())
-                .resizable()
-                .ignoresSafeArea()
-                .zIndex(-1)
             if viewModel.shouldDisplayAnimationOnNextAppearance {
+                Image("LoadingBackground")
+                    .resizable()
+                    .ignoresSafeArea()
+                    .zIndex(-1)
                 VStack {
                     LottieView(shouldDisplayAnimationOnNextAppearance: $viewModel.shouldDisplayAnimationOnNextAppearance)
                 }
             } else {
+                Image(getBackgroundImageName())
+                    .resizable()
+                    .ignoresSafeArea()
+                    .zIndex(-1)
                 VStack {
                     HICarouselSwiftUIView(carouselData: viewModel.data)
-                    
                     Spacer()
                 }
             }
@@ -51,7 +54,7 @@ struct LottieView: UIViewRepresentable {
     @Binding var shouldDisplayAnimationOnNextAppearance: Bool
     func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView(frame: .zero)
-        let animationView = LottieAnimationView(name: "Hack_Mushroom_Loading")
+        let animationView = LottieAnimationView(name: "Hack25 Loading")
         animationView.contentMode = .scaleAspectFit
         animationView.frame = view.frame
         animationView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

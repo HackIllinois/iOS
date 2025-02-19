@@ -153,9 +153,9 @@
 		D1D3351D2B81E11500BBB596 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1D3351C2B81E11500BBB596 /* GoogleService-Info.plist */; };
 		D1D3351E2B81E11500BBB596 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1D3351C2B81E11500BBB596 /* GoogleService-Info.plist */; };
 		D1D3351F2B81E11500BBB596 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1D3351C2B81E11500BBB596 /* GoogleService-Info.plist */; };
-		D1F1463A2B605C57004E7FC9 /* Hack_Mushroom_Loading.json in Resources */ = {isa = PBXBuildFile; fileRef = D1F146392B605C57004E7FC9 /* Hack_Mushroom_Loading.json */; };
 		D3A309BC2211175200CBA351 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A309BB2211175200CBA351 /* PassKit.framework */; };
 		D704DB322C73A8E200355019 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = D704DB312C73A8E200355019 /* URLImage */; };
+		D7713B5F2D65959B00389128 /* Hack25 Loading.json in Resources */ = {isa = PBXBuildFile; fileRef = D7713B5E2D65959B00389128 /* Hack25 Loading.json */; };
 		DAACDC322D3B8F5E00D15118 /* HIEventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAACDC312D3B8F5E00D15118 /* HIEventListViewController.swift */; };
 		DF3706382925DDAA000B4278 /* GoogleMapsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706372925DDAA000B4278 /* GoogleMapsBase.framework */; };
 		DF37063B2925DDB8000B4278 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3706392925DDB7000B4278 /* GoogleMaps.framework */; };
@@ -372,9 +372,9 @@
 		D1D335182B81DEF600BBB596 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		D1D3351A2B81DF0300BBB596 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		D1D3351C2B81E11500BBB596 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		D1F146392B605C57004E7FC9 /* Hack_Mushroom_Loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Hack_Mushroom_Loading.json; sourceTree = "<group>"; };
 		D3A309BA221116A600CBA351 /* HackIllinois.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackIllinois.entitlements; sourceTree = "<group>"; };
 		D3A309BB2211175200CBA351 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
+		D7713B5E2D65959B00389128 /* Hack25 Loading.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Hack25 Loading.json"; sourceTree = "<group>"; };
 		DAACDC312D3B8F5E00D15118 /* HIEventListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIEventListViewController.swift; sourceTree = "<group>"; };
 		DF3706372925DDAA000B4278 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsBase.framework; sourceTree = "<group>"; };
 		DF3706392925DDB7000B4278 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
@@ -839,8 +839,8 @@
 		E1E4A5D5291C9BF700780BA1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				D1F146392B605C57004E7FC9 /* Hack_Mushroom_Loading.json */,
 				E1E4A5D6291C9BF700780BA1 /* HICarouselSwiftUIView.swift */,
+				D7713B5E2D65959B00389128 /* Hack25 Loading.json */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1018,8 +1018,8 @@
 				952D1543220D453D0041383A /* countdown-24.json in Resources */,
 				1C7561A3278E96600004D739 /* DarkVespaText.json in Resources */,
 				951827A91EA35DB800049F79 /* Assets.xcassets in Resources */,
+				D7713B5F2D65959B00389128 /* Hack25 Loading.json in Resources */,
 				952D1542220D453D0041383A /* countdown-60.json in Resources */,
-				D1F1463A2B605C57004E7FC9 /* Hack_Mushroom_Loading.json in Resources */,
 				951827B41EA35E8B00049F79 /* LaunchScreen.storyboard in Resources */,
 				1C7561A5278E96750004D739 /* LightVespaText.json in Resources */,
 				D134D30F296B3F56006EA589 /* Montserrat-VariableFont_wght.ttf in Resources */,
