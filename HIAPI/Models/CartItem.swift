@@ -24,9 +24,22 @@ public struct CartItemContainer: Decodable, APIReturnable {
     }
 }
 
-public struct CartReturnItem: Codable, APIReturnable {
-    public let items: [String: Int]? // Return items upon success
+public struct RedeemReturnItem: Codable, APIReturnable {
     public let userId: String?
+    public let items: [RedeemItem]? // Return items upon success
+    public let error: String?
+    public let message: String?
+}
+
+public struct RedeemItem: Codable, APIReturnable {
+    public let itemId: String
+    public let name: String
+    public let quantity: Int
+}
+
+public struct CartReturnItem: Codable, APIReturnable {
+    public let userId: String?
+    public let items: [String: Int]? // Return items upon success
     public let error: String?
     public let message: String?
 }

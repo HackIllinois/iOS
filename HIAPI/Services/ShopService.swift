@@ -22,23 +22,13 @@ public final class ShopService: BaseService {
         return APIRequest<CartItemContainer>(service: self, endpoint: "shop/cart/", headers: headers, method: .GET)
     }
     
-    public static func redeemPrize(itemId: String, itemInstance: String, userToken: String) -> APIRequest<RedeemItem> {
-        let jsonBody: [String: Any] = [
-            "itemId": itemId,
-            "instance": itemInstance
-        ]
-        let headers: HTTPParameters = ["Authorization": userToken]
-
-        return APIRequest<RedeemItem>(service: self, endpoint: "shop/item/buy/", body: jsonBody, headers: headers, method: .POST)
-    }
-    
-    public static func redeemCart(qrCode: String, userToken: String) -> APIRequest<CartReturnItem> {
+    public static func redeemCart(qrCode: String, userToken: String) -> APIRequest<RedeemReturnItem> {
         let jsonBody: [String: Any] = [
             "QRCode": qrCode
         ]
         let headers: HTTPParameters = ["Authorization": userToken]
 
-        return APIRequest<CartReturnItem>(service: self, endpoint: "shop/cart/redeem/", body: jsonBody, headers: headers, method: .POST)
+        return APIRequest<RedeemReturnItem>(service: self, endpoint: "shop/cart/redeem/", body: jsonBody, headers: headers, method: .POST)
     }
     
     public static func addToCart(itemId: String, userToken: String) -> APIRequest<CartReturnItem> {

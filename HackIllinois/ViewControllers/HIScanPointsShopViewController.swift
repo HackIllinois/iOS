@@ -303,9 +303,11 @@ extension HIScanPointsShopViewController: AVCaptureMetadataOutputObjectsDelegate
         guard respondingToQRCodeFound else { return }
         let meta = metadataObjects.first as? AVMetadataMachineReadableCodeObject
         let code = meta?.stringValue ?? ""
+        let query = extractQueryValue(from: code)
+        print(code, query)
         guard let user = HIApplicationStateController.shared.user else { return }
         respondingToQRCodeFound = false
-        HIAPI.ShopService.redeemCart(qrCode: code, userToken: user.token)
+        HIAPI.ShopService.redeemCart(qrCode: query ?? "", userToken: user.token)
             .onCompletion { result in
                 do {
                     let (codeResult, _) = try result.get()
@@ -325,6 +327,14 @@ extension HIScanPointsShopViewController: AVCaptureMetadataOutputObjectsDelegate
             }
             .authorize(with: HIApplicationStateController.shared.user)
             .launch()
+    }
+    
+    func extractQueryValue(from url: String) -> String? {
+        guard let components = URLComponents(string: url),
+              let queryItem = components.queryItems?.first(where: { $0.name == "qr" }) else {
+            return nil
+        }
+        return queryItem.value
     }
     
     func decode(_ token: String) -> [String: AnyObject]? {
