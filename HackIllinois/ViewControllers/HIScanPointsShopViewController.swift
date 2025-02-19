@@ -41,23 +41,6 @@ class HIScanPointsShopViewController: HIBaseViewController {
     var currentUserID = ""
     var currentUserName = ""
     var dietaryString = ""
-    // Store redeemed items
-    private var redeemedItems: [String] = []
-
-    // UI label to display redeemed items
-    private let redeemedItemsLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        label.textColor = .white
-        label.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        label.layer.cornerRadius = 10
-        label.clipsToBounds = true
-        label.isHidden = true // Initially hidden
-        return label
-    }()
 }
 
 // MARK: - UIViewController
@@ -90,15 +73,6 @@ extension HIScanPointsShopViewController {
                 staffButtonController.view.backgroundColor = .clear
                 staffButtonController.view.frame = CGRect(x: 0, y: 100, width: Int(view.frame.maxX), height: 600)
                 view.addSubview(staffButtonController.view)
-
-                // 🔹 Add label to the staff UI
-                view.addSubview(redeemedItemsLabel)
-                NSLayoutConstraint.activate([
-                    redeemedItemsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                    redeemedItemsLabel.topAnchor.constraint(equalTo: staffButtonController.view.bottomAnchor, constant: 20),
-                    redeemedItemsLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
-                    redeemedItemsLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 50)
-                ])
             }
         }
         view.addSubview(closeButton)
@@ -225,37 +199,38 @@ extension HIScanPointsShopViewController: AVCaptureMetadataOutputObjectsDelegate
         }
     }
 
-    func handlePointsShopAlert(status: String, itemName: String) {
-        print(status)
+    func handlePointsShopAlert(code: Int, description: String, items: [RedeemItem]) {
+        print("Shop alert with code: \(code)")
         var alertTitle = ""
         var alertMessage = ""
         var error = true
-        switch status {
-        case "Success":
-            
-            redeemedItems.append(itemName)  // Store redeemed ite
-                // 🔹 Update UI when an item is redeemed
-            DispatchQueue.main.async {
-                self.updateRedeemedItemsUI()
+        switch code {
+        case 0:
+            alertTitle = "\n\nSuccess!"
+            if items.isEmpty {
+                alertMessage += "\nAttendee cart is empty."
+            } else {
+                alertMessage = "\nAttendee has successfully redeemed:\n"
+                for item in items {
+                    alertMessage += "\n\(item.name): \(item.quantity)"
+                }
             }
-            alertTitle = "\n\nPrize Obtained!"
-            alertMessage = "\nYou have successfully redeemed \(itemName) at the Points Shop!"
             error = false
-        case "invalidHTTPReponse(code: 404, description: \"forbidden\")":
+        case 404:
             alertTitle = "\n\nError!"
-            alertMessage = "\nUser has no attendee profile."
+            alertMessage = "\nShop item is not found."
             self.respondingToQRCodeFound = true
-        case "invalidHTTPReponse(code: 404, description: \"not found\")":
-            alertTitle = "\n\nError!"
-            alertMessage = "\nItem with itemId not found or already purchased."
+        case 402:
+            alertTitle = "\n\nInsufficient Funds!"
+            alertMessage = "\nAttendee does not have enough points to purchase."
             self.respondingToQRCodeFound = true
-        case "invalidHTTPReponse(code: 400, description: \"bad request\")":
+        case 400:
             alertTitle = "\n\nError!"
-            alertMessage = "\nYou have insufficient funds."
+            alertMessage = "\nInsufficient quantity in shop or QR is invalid/expired. Have attendee go back to cart and regenrate QR code."
             self.respondingToQRCodeFound = true
         default:
             alertTitle = "\n\nError!"
-            alertMessage = "\nSomething isn't quite right. Double check your coins amount and make sure you have the correct QR code."
+            alertMessage = "\nSomething isn't quite right. API returned: \(description)"
             self.respondingToQRCodeFound = true
         }
         // Create custom alert for points shop
@@ -304,23 +279,24 @@ extension HIScanPointsShopViewController: AVCaptureMetadataOutputObjectsDelegate
         let meta = metadataObjects.first as? AVMetadataMachineReadableCodeObject
         let code = meta?.stringValue ?? ""
         let query = extractQueryValue(from: code)
-        print(code, query)
         guard let user = HIApplicationStateController.shared.user else { return }
         respondingToQRCodeFound = false
         HIAPI.ShopService.redeemCart(qrCode: query ?? "", userToken: user.token)
             .onCompletion { result in
                 do {
                     let (codeResult, _) = try result.get()
-                    let status = codeResult.error
-                    let itemName = "Hello"
-                    NSLog(status ?? "Success")
                     DispatchQueue.main.async {
-                        self.handlePointsShopAlert(status: status ?? "Success", itemName: itemName)
+                        self.handlePointsShopAlert(code: 0, description: "", items: codeResult.items ?? [])
+                    }
+                } catch APIRequestError.invalidHTTPReponse(code: let code, description: let description) {
+                    NSLog("Error info \(code): \(description)")
+                    DispatchQueue.main.async {
+                        self.handlePointsShopAlert(code: code, description: "", items: [])
                     }
                 } catch {
                     NSLog("Error info: \(error)")
                     DispatchQueue.main.async { [self] in
-                        self.handlePointsShopAlert(status: "\(error)", itemName: "")
+                        self.handlePointsShopAlert(code: -1, description: "unable to parse API error response", items: [])
                     }
                 }
                 sleep(2)
@@ -358,11 +334,5 @@ extension HIScanPointsShopViewController: AVCaptureMetadataOutputObjectsDelegate
             }
         }
         return values
-    }
-    func updateRedeemedItemsUI() {
-        let redeemedList = redeemedItems.enumerated().map { "\($0 + 1). \($1)" }.joined(separator: "\n")
-        
-        redeemedItemsLabel.text = "Redeemed Items:\n" + redeemedList
-        redeemedItemsLabel.isHidden = redeemedItems.isEmpty // Show label only if items exist
     }
 }
