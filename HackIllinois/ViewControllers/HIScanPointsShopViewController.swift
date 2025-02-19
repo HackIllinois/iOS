@@ -41,6 +41,23 @@ class HIScanPointsShopViewController: HIBaseViewController {
     var currentUserID = ""
     var currentUserName = ""
     var dietaryString = ""
+    // Store redeemed items
+    private var redeemedItems: [String] = []
+
+    // UI label to display redeemed items
+    private let redeemedItemsLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.textColor = .white
+        label.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        label.layer.cornerRadius = 10
+        label.clipsToBounds = true
+        label.isHidden = true // Initially hidden
+        return label
+    }()
 }
 
 // MARK: - UIViewController
@@ -67,11 +84,21 @@ extension HIScanPointsShopViewController {
                 observable.$selectedEventId.sink { eventID in
                     self.selectedEventID = eventID
                 }.store(in: &cancellables)
+
                 let staffButtonController = UIHostingController(rootView: HIStaffButtonView(observable: observable))
                 addChild(staffButtonController)
                 staffButtonController.view.backgroundColor = .clear
                 staffButtonController.view.frame = CGRect(x: 0, y: 100, width: Int(view.frame.maxX), height: 600)
                 view.addSubview(staffButtonController.view)
+
+                // 🔹 Add label to the staff UI
+                view.addSubview(redeemedItemsLabel)
+                NSLayoutConstraint.activate([
+                    redeemedItemsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                    redeemedItemsLabel.topAnchor.constraint(equalTo: staffButtonController.view.bottomAnchor, constant: 20),
+                    redeemedItemsLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
+                    redeemedItemsLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 50)
+                ])
             }
         }
         view.addSubview(closeButton)
@@ -205,6 +232,12 @@ extension HIScanPointsShopViewController: AVCaptureMetadataOutputObjectsDelegate
         var error = true
         switch status {
         case "Success":
+            
+            redeemedItems.append(itemName)  // Store redeemed ite
+                // 🔹 Update UI when an item is redeemed
+            DispatchQueue.main.async {
+                self.updateRedeemedItemsUI()
+            }
             alertTitle = "\n\nPrize Obtained!"
             alertMessage = "\nYou have successfully redeemed \(itemName) at the Points Shop!"
             error = false
@@ -315,5 +348,11 @@ extension HIScanPointsShopViewController: AVCaptureMetadataOutputObjectsDelegate
             }
         }
         return values
+    }
+    func updateRedeemedItemsUI() {
+        let redeemedList = redeemedItems.enumerated().map { "\($0 + 1). \($1)" }.joined(separator: "\n")
+        
+        redeemedItemsLabel.text = "Redeemed Items:\n" + redeemedList
+        redeemedItemsLabel.isHidden = redeemedItems.isEmpty // Show label only if items exist
     }
 }
