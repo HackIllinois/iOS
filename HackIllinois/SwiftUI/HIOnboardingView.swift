@@ -19,40 +19,32 @@ struct HIOnboardingView: View {
     @StateObject private var viewModel = HIOnboardingViewModel()
     var body: some View {
         ZStack {
-            Image(getBackgroundImageName())
-                .resizable()
-                .ignoresSafeArea()
-                .zIndex(-1)
             if viewModel.shouldDisplayAnimationOnNextAppearance {
+                Image("LoadingBackground")
+                    .resizable()
+                    .ignoresSafeArea()
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                    .offset(y: -0.5)
+                    .zIndex(-1)
                 VStack {
                     LottieView(shouldDisplayAnimationOnNextAppearance: $viewModel.shouldDisplayAnimationOnNextAppearance)
+                        .ignoresSafeArea()
                 }
             } else {
+                Image("Login")
+                    .resizable()
+                    .ignoresSafeArea()
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                    .offset(y: -0.5)
+                    .zIndex(-1)
                 VStack {
                     HICarouselSwiftUIView(carouselData: viewModel.data)
-                    Button {
-                        NotificationCenter.default.post(name: .getStarted, object: nil)
-                    }label: {
-                        Text("GET STARTED")
-                            .font(.title2.bold())
-                            .tracking(2)
-//                            .onAppear {
-//                                print("This screen height is \(UIScreen.main.bounds.height)")
-//                            }
-                    }
-                    .padding()
-                    .font(.title3.bold())
-                    .frame(width: 215, height: 40)
-                    .foregroundColor(.white)
-                    .background(Color.clear)
-                    .overlay(RoundedRectangle(cornerRadius: 50)
-                        .stroke(.white, lineWidth: 3))
-                    .padding(.top, 20)
-                    .padding(.bottom, UIScreen.main.bounds.height < 750 ? 10 : 75)
                     Spacer()
                 }
+                .padding(.bottom, 30 * (UIScreen.main.bounds.height/852))
             }
         }
+        .ignoresSafeArea(.all)
     }
     
     func getBackgroundImageName() -> String {
@@ -69,7 +61,7 @@ struct LottieView: UIViewRepresentable {
     @Binding var shouldDisplayAnimationOnNextAppearance: Bool
     func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView(frame: .zero)
-        let animationView = LottieAnimationView(name: "Hack_Mushroom_Loading")
+        let animationView = LottieAnimationView(name: "Hack25 Loading 2")
         animationView.contentMode = .scaleAspectFit
         animationView.frame = view.frame
         animationView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

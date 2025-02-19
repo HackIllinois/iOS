@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "INVENTORY QR- Finalized.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "INVENTORY QR- Finalized (1).png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "INVENTORY QR- Finalized (2).png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
