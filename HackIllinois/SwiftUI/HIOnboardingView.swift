@@ -23,21 +23,28 @@ struct HIOnboardingView: View {
                 Image("LoadingBackground")
                     .resizable()
                     .ignoresSafeArea()
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                    .offset(y: -0.5)
                     .zIndex(-1)
                 VStack {
                     LottieView(shouldDisplayAnimationOnNextAppearance: $viewModel.shouldDisplayAnimationOnNextAppearance)
+                        .ignoresSafeArea()
                 }
             } else {
-                Image(getBackgroundImageName())
+                Image("Login")
                     .resizable()
                     .ignoresSafeArea()
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                    .offset(y: -0.5)
                     .zIndex(-1)
                 VStack {
                     HICarouselSwiftUIView(carouselData: viewModel.data)
                     Spacer()
                 }
+                .padding(.bottom, 30 * (UIScreen.main.bounds.height/852))
             }
         }
+        .ignoresSafeArea(.all)
     }
     
     func getBackgroundImageName() -> String {
@@ -54,7 +61,7 @@ struct LottieView: UIViewRepresentable {
     @Binding var shouldDisplayAnimationOnNextAppearance: Bool
     func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView(frame: .zero)
-        let animationView = LottieAnimationView(name: "Hack25 Loading")
+        let animationView = LottieAnimationView(name: "Hack25 Loading 2")
         animationView.contentMode = .scaleAspectFit
         animationView.frame = view.frame
         animationView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

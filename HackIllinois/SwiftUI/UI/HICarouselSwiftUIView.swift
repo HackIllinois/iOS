@@ -30,9 +30,9 @@ struct HICarouselSwiftUIView: View {
                 Spacer()
                 RoundedRectangle(cornerRadius: 35)
                     .fill(Color(red: 255 / 255, green: 250 / 255, blue: 235 / 255))
-                    .frame(width: UIScreen.main.bounds.width, height: 325 * resizeFactor[1])
+                    .frame(width: UIScreen.main.bounds.width, height: 320 * resizeFactor[1])
                     .shadow(radius: 7)
-                    .padding(10)
+                    .padding(10 * resizeFactor[1])
             }
             .offset(y: 100)
             
@@ -56,7 +56,7 @@ struct HICarouselSwiftUIView: View {
                                         .foregroundColor(.black)
                                         .frame(width: UIScreen.main.bounds.width - 125 * resizeFactor[0])
                                         .multilineTextAlignment(.center)
-                                        .padding(.vertical, 10)
+                                        .padding(.vertical, 10 * resizeFactor[1])
                                 }
                                 .padding(.horizontal, 40 * resizeFactor[0])
                                 .padding(.top, 100 * resizeFactor[1])
