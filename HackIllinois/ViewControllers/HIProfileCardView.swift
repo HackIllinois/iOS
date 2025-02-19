@@ -100,19 +100,7 @@ struct HIProfileCardView: View {
 
 
         
-        ZStack(alignment: .bottom) {  // Stack elements and anchor to bottom
-//            Text("Debug Logs - Check Console")
-//                        .onAppear {
-//                            print("DEBUG: User Profile Information:")
-//                            print("Display Name: \(displayName)")
-//                            print("Points: \(points)")
-//                            print("Tier: \(tier)")
-//                            print("Food Wave: \(foodWave)")
-//                            print("Avatar URL: \(avatarUrl)")
-//                            print("Role: \(role)")
-//                        }
-            
-            
+        ZStack(alignment: .bottom) {
             Image("flame-vector")
                 .resizable()
                 .scaledToFit()
@@ -124,6 +112,7 @@ struct HIProfileCardView: View {
                     x: screenWidth / 2,
                     y: flame_y
                 ) // Position at the top of the pillar
+            
             // Pillar Image - Anchored at the bottom
             Image("pillar-vector")
                 .resizable()
@@ -239,6 +228,7 @@ struct HIProfileCardView: View {
             )
         }
         .edgesIgnoringSafeArea(.bottom) // Extend to the bottom edge
+        .offset(y: 30 * (UIScreen.main.bounds.height/926))
     }
 
     func formatName() -> String {
