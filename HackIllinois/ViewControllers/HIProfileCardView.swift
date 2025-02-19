@@ -214,7 +214,7 @@ struct HIProfileCardView: View {
                         .font(Font(HIAppearance.Font.profileTier ?? .systemFont(ofSize: 18)))
                         .foregroundColor(.white)
 
-                    Text("\(rank)")
+                    Text("\(rank != 0 ? "\(rank)" : "...")")
                         .font(Font(HIAppearance.Font.profileRank ?? .systemFont(ofSize: 16)))
                         .foregroundColor(Color(red: 97/255, green: 37/255, blue: 71/255)) // Updated color
                         .frame(width: screenWidth * (84.5 / 393), height: screenHeight * (27.26 / 841))
@@ -224,6 +224,12 @@ struct HIProfileCardView: View {
                                 .scaledToFit()
                                 .frame(width: screenWidth * (84.5 / 393), height: screenHeight * (27.26 / 841)) // Match dimensions
                         )
+                        .onAppear {
+                            // Call getRank and update the rank when it's available
+                            getRank { rank in
+                                self.rank = rank
+                            }
+                        }
                 }
 
             }
