@@ -62,18 +62,18 @@ extension HIScanPointsShopViewController {
             containerView.constrain(to: view, trailingInset: 0, leadingInset: 0)
             containerView.addSubview(previewView)
             setupCaptureSession()
-            if user.roles.contains(.STAFF) {
-                let observable = HIStaffButtonViewObservable()
-                observable.$selectedEventId.sink { eventID in
-                    self.selectedEventID = eventID
-                }.store(in: &cancellables)
-
-                let staffButtonController = UIHostingController(rootView: HIStaffButtonView(observable: observable))
-                addChild(staffButtonController)
-                staffButtonController.view.backgroundColor = .clear
-                staffButtonController.view.frame = CGRect(x: 0, y: 100, width: Int(view.frame.maxX), height: 600)
-                view.addSubview(staffButtonController.view)
-            }
+//            if user.roles.contains(.STAFF) {
+//                let observable = HIStaffButtonViewObservable()
+//                observable.$selectedEventId.sink { eventID in
+//                    self.selectedEventID = eventID
+//                }.store(in: &cancellables)
+//
+//                let staffButtonController = UIHostingController(rootView: HIStaffButtonView(observable: observable))
+//                addChild(staffButtonController)
+//                staffButtonController.view.backgroundColor = .clear
+//                staffButtonController.view.frame = CGRect(x: 0, y: 100, width: Int(view.frame.maxX), height: 600)
+//                view.addSubview(staffButtonController.view)
+//            }
         }
         view.addSubview(closeButton)
         closeButton.addTarget(self, action: #selector(didSelectCloseButton(_:)), for: .touchUpInside)
