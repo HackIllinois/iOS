@@ -392,49 +392,45 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         guard respondingToQRCodeFound else { return }
         let meta = metadataObjects.first as? AVMetadataMachineReadableCodeObject
         let code = meta?.stringValue ?? ""
+        let query = extractQueryValue(from: code)
         guard let user = HIApplicationStateController.shared.user else { return }
         let staffToken = user.token
         //print("staff token is:", staffToken, "event id is:", selectedEventId)
         print("qr code info is", code)
         if user.roles.contains(.STAFF) {
             if selectedEventId != "" {
-                if let range = code.range(of: "userToken=") {
-                    let userToken = code[range.upperBound...]
-                    respondingToQRCodeFound = false
-                    HIAPI.StaffService.recordUserAttendance(userToken: String(userToken), staffToken: String(staffToken), eventId: selectedEventId)
-                        .onCompletion { result in
-                            do {
-                                let (codeResult, _) = try result.get()
-                                DispatchQueue.main.async { [self] in
-                                    print(codeResult.dietaryRestrictions)
-                                    // Parse dietary string
-                                    dietaryString = ""
-                                    if let dietaryRestrictions = codeResult.dietaryRestrictions, !dietaryRestrictions.isEmpty {
-                                        for (index, diet) in dietaryRestrictions.enumerated() {
-                                            dietaryString += diet
-                                            if index < dietaryRestrictions.count - 1 {
-                                                dietaryString += ", "
-                                            }
+                respondingToQRCodeFound = false
+                HIAPI.StaffService.recordUserAttendance(userQR: query ?? "", staffToken: String(staffToken), eventId: selectedEventId)
+                    .onCompletion { result in
+                        do {
+                            let (codeResult, _) = try result.get()
+                            DispatchQueue.main.async { [self] in
+                                print(codeResult.dietaryRestrictions)
+                                // Parse dietary string
+                                dietaryString = ""
+                                if let dietaryRestrictions = codeResult.dietaryRestrictions, !dietaryRestrictions.isEmpty {
+                                    for (index, diet) in dietaryRestrictions.enumerated() {
+                                        dietaryString += diet
+                                        if index < dietaryRestrictions.count - 1 {
+                                            dietaryString += ", "
                                         }
-                                    } else {
-                                        dietaryString = "None"
                                     }
-                                    self.handleStaffCheckInAlert(status: "Success")
+                                } else {
+                                    dietaryString = "None"
                                 }
-                            } catch {
-                                print(error, error.localizedDescription)
-                                DispatchQueue.main.async { [self] in
-                                    self.handleStaffCheckInAlert(status: error.localizedDescription)
-                                }
+                                self.handleStaffCheckInAlert(status: "Success")
                             }
-                            sleep(2)
-                            self.respondingToQRCodeFound = true
+                        } catch {
+                            print(error, error.localizedDescription)
+                            DispatchQueue.main.async { [self] in
+                                self.handleStaffCheckInAlert(status: error.localizedDescription)
+                            }
                         }
-                        .authorize(with: HIApplicationStateController.shared.user)
-                        .launch()
-                } else {
-                    self.handleStaffCheckInAlert(status: "Incorrect type of QR code")
-                }
+                        sleep(2)
+                        self.respondingToQRCodeFound = true
+                    }
+                    .authorize(with: HIApplicationStateController.shared.user)
+                    .launch()
             }
         } else {
             respondingToQRCodeFound = false
@@ -459,6 +455,15 @@ extension HIScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                 .launch()
         }
     }
+    
+    func extractQueryValue(from url: String) -> String? {
+        guard let components = URLComponents(string: url),
+              let queryItem = components.queryItems?.first(where: { $0.name == "qr" }) else {
+            return nil
+        }
+        return queryItem.value
+    }
+    
     func decode(_ token: String) -> [String: AnyObject]? {
             let string = token.components(separatedBy: ".")
             if string.count == 1 { return nil }
