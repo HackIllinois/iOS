@@ -156,7 +156,7 @@ extension HIScheduleViewController {
         super.loadView()
 
         let items = dataStore.map { $0.displayText }
-        segmentedControl = HIScheduleSegmentedControl(titles: items, nums: [23, 24, 25])
+        segmentedControl = HIScheduleSegmentedControl(titles: items, nums: [28, 1, 2])
         segmentedControl.addTarget(self, action: #selector(didSelectTab(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
@@ -443,11 +443,11 @@ extension HIScheduleViewController {
             let calendar = Calendar.current
             let dayComponent = calendar.component(.day, from: dateString)
             var curr_idx = segmentedControl.selectedIndex
-            if curr_idx == 0 && dayComponent != 23 {
+            if curr_idx == 0 && dayComponent != 28 {
                 continue
-            } else if curr_idx == 1 && dayComponent != 24 {
+            } else if curr_idx == 1 && dayComponent != 1 {
                 continue
-            } else if curr_idx == 2 && dayComponent != 25 {
+            } else if curr_idx == 2 && dayComponent != 2 {
                 continue
             }
             // Set fixed width and height for the container view
