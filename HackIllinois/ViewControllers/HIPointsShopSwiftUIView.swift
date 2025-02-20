@@ -32,6 +32,7 @@ class PointShopManager: ObservableObject {
                     do {
                         let (containedItem, _) = try result.get()
                         self.items = containedItem.items
+                        print("Loaded point shop items")
                     } catch {
                         print("Failed to preload point shop items with error: \(error)")
                     }
@@ -290,7 +291,6 @@ struct HIPointShopSwiftUIView: View {
                 DispatchQueue.main.async {
                     do {
                         let (containedItem, _) = try result.get()
-                        // ✅ Update the manager’s items
                         shopManager.items = containedItem.items
                     } catch {
                         print("Failed to reload points shop: \(error)")
@@ -411,6 +411,7 @@ struct PointShopItemCell: View {
     let item: Item
     @Binding var showError: Bool
     @Binding var errorMessage: [String]
+    @State private var image: UIImage? = nil
 
     var body: some View {
         ZStack {
@@ -427,12 +428,19 @@ struct PointShopItemCell: View {
                     .frame(width: 75 * (UIScreen.main.bounds.width/428))
                 
                 // Item image
-                Image(systemName: "Profile0")
-                    .data(url: URL(string: item.imageURL)!)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 60 * (UIScreen.main.bounds.width/428), height: 60 * (UIScreen.main.bounds.width/428))
-
+                if let image = image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 60 * (UIScreen.main.bounds.width/428), height: 60 * (UIScreen.main.bounds.width/428))
+                } else {
+                    ProgressView() // Placeholder while loading
+                        .frame(width: 60 * (UIScreen.main.bounds.width/428), height: 60 * (UIScreen.main.bounds.width/428))
+                        .onAppear {
+                            loadImage()
+                        }
+                }
+                
                 // Price + quantity
                 HStack(spacing: 4) {
                     Image("Coin")
@@ -477,6 +485,18 @@ struct PointShopItemCell: View {
             alignment: .topTrailing
         )
     }
+    
+    private func loadImage() {
+        guard let url = URL(string: item.imageURL) else { return }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data, let loadedImage = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    self.image = loadedImage
+                }
+            }
+        }.resume()
+    }
 }
 
 struct CartItemCell: View {
@@ -484,6 +504,7 @@ struct CartItemCell: View {
     let item: Item
     @Binding var showError: Bool
     @Binding var errorMessage: [String]
+    @State private var image: UIImage? = nil
 
     var body: some View {
         ZStack {
@@ -500,11 +521,18 @@ struct CartItemCell: View {
                     .frame(width: 75 * (UIScreen.main.bounds.width/428))
                 
                 // Item image
-                Image(systemName: "Profile0")
-                    .data(url: URL(string: item.imageURL)!)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 60 * (UIScreen.main.bounds.width/428), height: 60 * (UIScreen.main.bounds.width/428))
+                if let image = image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 60 * (UIScreen.main.bounds.width/428), height: 60 * (UIScreen.main.bounds.width/428))
+                } else {
+                    ProgressView() // Placeholder while loading
+                        .frame(width: 60 * (UIScreen.main.bounds.width/428), height: 60 * (UIScreen.main.bounds.width/428))
+                        .onAppear {
+                            loadImage()
+                        }
+                }
 
                 // Price + quantity
                 HStack(spacing: 4) {
@@ -552,6 +580,18 @@ struct CartItemCell: View {
         // Force a square cell
         .frame(width: 140 * (UIScreen.main.bounds.width/428), height: 140 * (UIScreen.main.bounds.width/428))
         .cornerRadius(12)
+    }
+    
+    private func loadImage() {
+        guard let url = URL(string: item.imageURL) else { return }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data, let loadedImage = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    self.image = loadedImage
+                }
+            }
+        }.resume()
     }
 }
 
