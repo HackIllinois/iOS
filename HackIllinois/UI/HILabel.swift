@@ -84,7 +84,7 @@ class HILabel: UILabel {
             if UIDevice.current.userInterfaceIdiom == .pad {
                 font = HIAppearance.Font.newCountdownTextPad
             } else {
-                font = HIAppearance.Font.newCountdownText
+                font = UIFont(name: "MontserratRoman-Bold", size: 30)
             }
 
         case .location:

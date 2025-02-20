@@ -138,7 +138,7 @@ extension HICountdownViewController {
             if UIDevice.current.userInterfaceIdiom == .pad {
                 $0.font = HIAppearance.Font.timeIndicator
             } else {
-                $0.font = HIAppearance.Font.glyph
+                $0.font = UIFont(name: "MontserratRoman-Bold", size: 10.5)
             }
             $0.text = labelString
         }
