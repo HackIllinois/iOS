@@ -229,6 +229,13 @@ struct HIProfileCardView: View {
         }
         .edgesIgnoringSafeArea(.bottom) // Extend to the bottom edge
         .offset(y: 30 * (UIScreen.main.bounds.height/926))
+        .onAppear {
+            startFetchingQR = true
+            QRFetchLoop()
+        }
+        .onDisappear {
+            startFetchingQR = false
+        }
     }
 
     func formatName() -> String {
