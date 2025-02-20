@@ -433,7 +433,9 @@ struct PointShopItemCell: View {
                     .font(.caption)
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
-                    .frame(width: 75 * (UIScreen.main.bounds.width/428))
+                    .frame(width: 100 * (UIScreen.main.bounds.width / 428))
+                    .lineLimit(2) // Allows up to two lines
+                    .fixedSize(horizontal: false, vertical: true)
                 
                 // Item image
                 if let image = image {
@@ -526,7 +528,9 @@ struct CartItemCell: View {
                     .font(.caption)
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
-                    .frame(width: 75 * (UIScreen.main.bounds.width/428))
+                    .frame(width: 100 * (UIScreen.main.bounds.width / 428))
+                    .lineLimit(2) // Allows up to two lines
+                    .fixedSize(horizontal: false, vertical: true)
                 
                 // Item image
                 if let image = image {
