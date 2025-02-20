@@ -265,7 +265,7 @@ struct HIPointShopSwiftUIView: View {
                     }
                     Spacer()
                 }
-                if startFetchingQR {
+                if startFetchingQR && !cartManager.items.isEmpty {
                     VStack {
                         Text("SCAN HERE TO COMPLETE PURCHASE")
                             .padding(.bottom, 50)
@@ -277,6 +277,14 @@ struct HIPointShopSwiftUIView: View {
                             .scaledToFit()
                             .frame(width: 250 * resizeFactor[0], height: 250 * resizeFactor[0])
                     }
+                } else if cartManager.items.isEmpty {
+                    Text("CART IS EMPTY")
+                        .font(Font.custom("Montserrat", size: 24).weight(.bold))
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color(red: 255 / 255, green: 247 / 255, blue: 240 / 255))
+                        )
                 }
             }
             .overlay(showError ? ErrorPopup(title: errorMessage[0], description: errorMessage[1], show: $showError) : nil)
