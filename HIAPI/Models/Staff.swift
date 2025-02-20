@@ -60,11 +60,11 @@ public struct Staff: Codable {
 public struct UserAttendanceContainer: Codable, APIReturnable {
     internal enum CodingKeys: String, CodingKey {
             case success
-            case error
+            case userId
             case dietaryRestrictions
         }
         public let success: Bool
-        public let error: String?
+        public let userId: String?
         public let dietaryRestrictions: [String]?
 }
 
