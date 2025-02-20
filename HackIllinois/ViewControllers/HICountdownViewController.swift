@@ -127,7 +127,7 @@ extension HICountdownViewController {
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         backgroundImageView.contentMode = .scaleToFill
         
-        // Set up views
+        // Set up countdown view
         countDownView.backgroundColor = .clear  // Since we're using image background
         countDownView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -138,19 +138,24 @@ extension HICountdownViewController {
             if UIDevice.current.userInterfaceIdiom == .pad {
                 $0.font = HIAppearance.Font.timeIndicator
             } else {
-                $0.font = HIAppearance.Font.glyph
+                $0.font = UIFont(name: "MontserratRoman-Bold", size: 10.5)
             }
             $0.text = labelString
         }
         
+        // Create a vertical stack view for proper alignment
+        let stackView = UIStackView(arrangedSubviews: [countDownView, label])
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.spacing = -2
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
         // Add subviews
         containerView.addSubview(backgroundImageView)
-        containerView.addSubview(countDownView)
-        containerView.addSubview(label)
+        containerView.addSubview(stackView)
         
         // Set up constraints
         NSLayoutConstraint.activate([
-            
             containerView.heightAnchor.constraint(equalToConstant: 150),
             containerView.widthAnchor.constraint(equalToConstant: 90),
             
@@ -160,19 +165,15 @@ extension HICountdownViewController {
             backgroundImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             backgroundImageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             
-            // CountDownView constraints
-            countDownView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            countDownView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 4),
-            countDownView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: 4),
-            countDownView.widthAnchor.constraint(equalTo: containerView.widthAnchor, constant: -8),
-            
-            // Label constraints
-            label.widthAnchor.constraint(equalTo: containerView.widthAnchor, constant: -8),
-            label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
+            // Stack view constraints (centering the countdown view and label)
+            stackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
+            stackView.widthAnchor.constraint(equalTo: containerView.widthAnchor, constant: -8)
         ])
         
         return containerView
     }
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
