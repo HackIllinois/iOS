@@ -1,67 +1,67 @@
 {
   "images" : [
     {
-      "filename" : "iPhone Notifications 20pt @2x.png",
+      "filename" : "favicon.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "20x20"
     },
     {
-      "filename" : "iPhone Notifications 20pt @3x.png",
+      "filename" : "favicon 1.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "20x20"
     },
     {
-      "filename" : "iPhone Settings 29x29pt @1x.png",
+      "filename" : "favicon (1).png",
       "idiom" : "iphone",
       "scale" : "1x",
       "size" : "29x29"
     },
     {
-      "filename" : "iPhone Settings 29x29pt @2x.png",
+      "filename" : "favicon 2.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "29x29"
     },
     {
-      "filename" : "iPhone Settings 29x29pt @ 3x.png",
+      "filename" : "favicon (1) 1.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "29x29"
     },
     {
-      "filename" : "iPhone Spotlight 40pt @ 2x.png",
+      "filename" : "favicon 3.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "40x40"
     },
     {
-      "filename" : "iPhone Spotlight 40pt @ 3x.png",
+      "filename" : "favicon (1) 2.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "40x40"
     },
     {
-      "filename" : "iPhone App iOS 5,6 57pt @ 1x.png",
+      "filename" : "favicon 4.png",
       "idiom" : "iphone",
       "scale" : "1x",
       "size" : "57x57"
     },
     {
-      "filename" : "iPhone App iOS 5,6 57pt @ 2x.png",
+      "filename" : "favicon (1) 3.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "57x57"
     },
     {
-      "filename" : "iPhone App 60pt @ 2x.png",
+      "filename" : "favicon 5.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "60x60"
     },
     {
-      "filename" : "iPhone App 60pt @ 3x.png",
+      "filename" : "favicon (1) 4.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "60x60"
@@ -145,7 +145,7 @@
       "size" : "83.5x83.5"
     },
     {
-      "filename" : "App Store iOS.png",
+      "filename" : "favicon 6.png",
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"
