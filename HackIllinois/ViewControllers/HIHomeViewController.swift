@@ -63,25 +63,18 @@ extension HIHomeViewController {
         setupRefreshControl()
         
         // Initialize the UIImageView
-        transparentImageView = UIImageView()
-        transparentImageView.translatesAutoresizingMaskIntoConstraints = false // Enable Auto Layout
-        transparentImageView.contentMode = .scaleAspectFit
+        transparentImageView = UIImageView(frame: view.bounds)
+        transparentImageView.contentMode = .scaleAspectFill
         transparentImageView.alpha = 0
-//        #imageLiteral(resourceName: "HomeTagsToggle")
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            transparentImageView.image = #imageLiteral(resourceName:"HomeTagsToggle1")
-        } else {
-            transparentImageView.image = #imageLiteral(resourceName:"HomeTagsToggle1")
-        }
-
-        // Add the UIImageView to the view hierarchy
-        view.addSubview(transparentImageView)
         
-        // Set Auto Layout constraints for desired size and position
-        NSLayoutConstraint.activate([
-            transparentImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            transparentImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60)
-        ])
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            transparentImageView.image = UIImage(named: "HomepageTags")
+        } else {
+            transparentImageView.image = UIImage(named: "HomepageTags")
+        }
+        // Add the UIImageView to your view hierarchy
+        view.addSubview(transparentImageView)
+        view.bringSubviewToFront(transparentImageView)
     }
 
 

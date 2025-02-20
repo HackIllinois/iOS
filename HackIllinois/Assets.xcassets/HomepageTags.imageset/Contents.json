@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "FINAL design profile mobile- initial start (5).png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "FINAL design profile mobile- initial start (4).png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "FINAL design profile mobile- initial start (3).png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
