@@ -261,6 +261,8 @@ extension HIEventDetailViewController {
             imageUrlString = imageUrlString.replacingOccurrences(of: "svg", with: "png")
         }
         
+        self.mapView.image = nil
+        
         if let mapUrl = URL(string: imageUrlString) {
             let session = URLSession.shared
             self.mapView.image = nil
