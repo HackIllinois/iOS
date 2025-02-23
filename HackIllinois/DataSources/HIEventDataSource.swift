@@ -113,6 +113,7 @@ final class HIEventDataSource {
                             coreDataEvent.info = apiEvent.info
                             apiEvent.locations.forEach { apiLocation in
                                 guard let coreDataLocation = coreDataLocationsDicionary[apiLocation.name] else { fatalError("Event Location Error") }
+                                coreDataEvent.removeFromLocations(coreDataLocation)
                                 coreDataEvent.addToLocations(coreDataLocation)
                             }
                             coreDataEvent.name = apiEvent.name
