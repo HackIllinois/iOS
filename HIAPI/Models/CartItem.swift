@@ -10,8 +10,8 @@ import Foundation
 import APIManager
 
 public struct CartItemContainer: Decodable, APIReturnable {
-    public let items: [String: Int]
     public let userId: String
+    public let items: [String: Int]
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -20,7 +20,7 @@ public struct CartItemContainer: Decodable, APIReturnable {
     }
     
     private enum CodingKeys: String, CodingKey {
-        case items, userId
+        case userId, items
     }
 }
 
