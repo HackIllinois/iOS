@@ -23,7 +23,7 @@ public struct StaffContainer: Decodable, APIReturnable {
 
 public struct Staff: Codable {
     internal enum CodingKeys: String, CodingKey {
-        case isPro
+        case _id
         case eventId
         case isStaff
         case name
@@ -31,15 +31,14 @@ public struct Staff: Codable {
         case startTime
         case endTime
         case eventType
-        case exp
         case locations
         case isAsync
-        case mapImageUrl
         case points
         case isPrivate
         case displayOnStaffCheckIn
+        case isPro
     }
-    public let isPro: Bool
+    public let _id: String
     public let eventId: String
     public let isStaff: Bool
     public let name: String
@@ -47,13 +46,12 @@ public struct Staff: Codable {
     public let startTime: Date
     public let endTime: Date
     public let eventType: String
-    public let exp: Int
     public let locations: [Location]
     public let isAsync: Bool
-    public let mapImageUrl: String
     public let points: Int
     public let isPrivate: Bool
     public let displayOnStaffCheckIn: Bool
+    public let isPro: Bool
 
 }
 
