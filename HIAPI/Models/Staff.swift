@@ -36,6 +36,7 @@ public struct Staff: Codable {
         case points
         case isPrivate
         case displayOnStaffCheckIn
+        case mapImageUrl
         case isPro
     }
     public let _id: String
@@ -51,6 +52,7 @@ public struct Staff: Codable {
     public let points: Int
     public let isPrivate: Bool
     public let displayOnStaffCheckIn: Bool
+    public let mapImageUrl: String?
     public let isPro: Bool
 
 }
