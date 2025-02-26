@@ -29,8 +29,8 @@ class HITabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupQRScanButton()
         if !(UIDevice.current.userInterfaceIdiom == .pad) {
+            setupQRScanButton()
             setupTabBar()
         }
     }
