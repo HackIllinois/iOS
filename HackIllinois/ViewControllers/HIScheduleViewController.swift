@@ -117,35 +117,23 @@ extension HIScheduleViewController {
     }
 
     func currentPredicate() -> NSPredicate {
-        if onlyShifts {
-            // Return a predicate that matches no events when in shifts view
-            return NSPredicate(value: false)
-        } else if onlyFavorites {
-            let currentTabPredicate = dataStore[currentTab].predicate
-            return NSCompoundPredicate(andPredicateWithSubpredicates: [currentTabPredicate, onlyFavoritesPredicate])
+        let currentTabPredicate = dataStore[currentTab].predicate
+        if onlyFavorites {
+            let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [currentTabPredicate, onlyFavoritesPredicate])
+            return compoundPredicate
+        } else if onlyShifts {
+            let noEventsPredicate = NSPredicate(value: false)
+            return noEventsPredicate
         } else {
-            return dataStore[currentTab].predicate
+            return currentTabPredicate
         }
     }
 
     func animateReload() {
         try? fetchedResultsController.performFetch()
-        
-        if onlyShifts {
-            // Clear schedule events
-            tableView?.reloadData()
-            
-            // Make sure shifts are displayed if we have them
-            if hasSelectedShift && !staffShifts.isEmpty {
-                removeStaffShiftContainerViews()  // Clear old shift views
-                setUpShiftCells()  // Re-display current shifts
-            }
-        } else {
-            // Normal reload for schedule view
-            animateTableViewReload()
-            if let tableView = tableView, !tableView.visibleCells.isEmpty {
-                tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
-            }
+        animateTableViewReload()
+        if let tableView = tableView, !tableView.visibleCells.isEmpty {
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
     }
 }
@@ -382,7 +370,7 @@ extension HIScheduleViewController {
     
     @objc func shiftsButtonTapped(_ sender: UIButton) {
         if !onlyShifts {
-            onlyShifts = true
+            onlyShifts = !onlyShifts
             backgroundView.image = #imageLiteral(resourceName: "BackgroundShifts")
             hasSelectedShift = true
             labelColor = #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
@@ -404,6 +392,8 @@ extension HIScheduleViewController {
                         
                         DispatchQueue.main.async {
                             self.setUpShiftCells()
+                            self.updatePredicate()
+                            self.animateReload()
                         }
                     } catch {
                         print("An error has occurred in getting staff shifts \(error)")
@@ -443,7 +433,7 @@ extension HIScheduleViewController {
             let calendar = Calendar.current
             let dayComponent = calendar.component(.day, from: dateString)
             var curr_idx = segmentedControl.selectedIndex
-            if curr_idx == 0 && dayComponent != 28 {
+            if curr_idx == 0 && dayComponent != 29 {
                 continue
             } else if curr_idx == 1 && dayComponent != 1 {
                 continue
