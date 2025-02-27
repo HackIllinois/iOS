@@ -683,7 +683,9 @@ func findItem(by itemId: String, in shopItems: [Item]) -> Item? {
 }
 
 func filterShopItems(shopItems: [Item], index: Int) -> [Item] {
-    return shopItems.filter { $0.isRaffle == (index == 1) }
+    return shopItems
+        .filter { $0.isRaffle == (index == 1) }
+        .sorted { $0.quantity > $1.quantity }
 }
 
 struct TabBarButton: View {
