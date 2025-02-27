@@ -285,7 +285,7 @@ class HILabel: UILabel {
             numberOfLines = 0
 
         case .codeError:
-            textHIColor = \.white
+            textHIColor = \.black
             backgroundHIColor = \.clear
             font = HIAppearance.Font.detailSubtitle
             textAlignment = .center

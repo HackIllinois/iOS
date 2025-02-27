@@ -349,7 +349,7 @@ struct HIPointShopSwiftUIView: View {
                         let errorDescription = "\(error)"
                         if let codeString = errorDescription.split(separator: ":").dropFirst().first?.trimmingCharacters(in: .whitespaces).prefix(3) {
                             print("Error code: \(codeString)")
-                            if codeString == "404" {
+                            if codeString == "404" || codeString == "401" {
                                 errorMessage = ["INVALID USER", "Please sign out and login with an attendee account."]
                             } else {
                                 errorMessage = ["ERROR: \(codeString)", "Something has gone wrong."]
