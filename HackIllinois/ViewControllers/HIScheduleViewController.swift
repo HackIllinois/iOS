@@ -117,14 +117,15 @@ extension HIScheduleViewController {
     }
 
     func currentPredicate() -> NSPredicate {
-        if onlyShifts {
-            // Return a predicate that matches no events when in shifts view
-            return NSPredicate(value: false)
-        } else if onlyFavorites {
-            let currentTabPredicate = dataStore[currentTab].predicate
-            return NSCompoundPredicate(andPredicateWithSubpredicates: [currentTabPredicate, onlyFavoritesPredicate])
+        let currentTabPredicate = dataStore[currentTab].predicate
+        if onlyFavorites {
+            let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [currentTabPredicate, onlyFavoritesPredicate])
+            return compoundPredicate
+        } else if onlyShifts {
+            let noEventsPredicate = NSPredicate(value: false)
+            return noEventsPredicate
         } else {
-            return dataStore[currentTab].predicate
+            return currentTabPredicate
         }
     }
 
