@@ -731,6 +731,7 @@ struct ErrorPopup: View {
                     .padding(.bottom, 10)
                 Text(description)
                     .font(Font.custom("Montserrat", size: 15).weight(.medium))
+                    .foregroundColor(.black)
                     .frame(width: 275)
                     .multilineTextAlignment(.center)
                 Text("OK")
