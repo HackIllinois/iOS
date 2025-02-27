@@ -370,7 +370,7 @@ extension HIScheduleViewController {
     
     @objc func shiftsButtonTapped(_ sender: UIButton) {
         if !onlyShifts {
-            onlyShifts = true
+            onlyShifts = !onlyShifts
             backgroundView.image = #imageLiteral(resourceName: "BackgroundShifts")
             hasSelectedShift = true
             labelColor = #colorLiteral(red: 0.337254902, green: 0.1411764706, blue: 0.06666666667, alpha: 1)
@@ -392,6 +392,8 @@ extension HIScheduleViewController {
                         
                         DispatchQueue.main.async {
                             self.setUpShiftCells()
+                            self.updatePredicate()
+                            self.animateReload()
                         }
                     } catch {
                         print("An error has occurred in getting staff shifts \(error)")
@@ -431,7 +433,7 @@ extension HIScheduleViewController {
             let calendar = Calendar.current
             let dayComponent = calendar.component(.day, from: dateString)
             var curr_idx = segmentedControl.selectedIndex
-            if curr_idx == 0 && dayComponent != 28 {
+            if curr_idx == 0 && dayComponent != 29 {
                 continue
             } else if curr_idx == 1 && dayComponent != 1 {
                 continue
